@@ -8,3 +8,9 @@ Right now the only implemented modules are the docummentation of services, where
 The docummentation and the database are already prepared to the other modules that are not yet implemented, that are troubleticketing and monitoring. The goal is to have register of services and applications, monitored by the System, and in case clients need to contact about a service, the troubleticket module would fit.
 The Base folder contains files that can be used from a generic perspective to other projects, there you will find a lot of generic implementations, configuration files, images and docummentation.
 The InfraTools folder is the actual System with only the specific application being developed.
+
+Requirements:
+		- PHP 7
+		- MySql 5.7
+		- Pear Module Package for PHP
+		- Apache 2.4
