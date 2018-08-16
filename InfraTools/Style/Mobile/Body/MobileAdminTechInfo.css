@@ -1,0 +1,15 @@
+.DivContentBodySummary{width:320px;height:35px;position:relative;top:5px;}
+.DivContentBodySummaryTitle{width:200px;height:auto;}
+.DivContentBodySummaryTitle label{float:left;}
+.DivContentBodySummaryValue{width:200px;height:auto;}
+.DivContentBodySummaryValue label{position:relative;top:3.5px;left:8px;}
+.DivContentBodyInfo{width:320px;height:100px;}
+.DivContentBodyInfoField{width:320px;height:30px;}
+.DivContentBodyInfoFieldTitle{width:200px;height:auto;float:left;}
+.DivContentBodyInfoFieldTitle label, .DivContentBodySummaryTitle Label{font-size:14px;font-weight:bold;}
+.DivContentBodyInfoFieldValue{width:200px;height:auto;float:left;}
+.TableTechInfo{min-width:320px;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x:scroll;}
+.TableTechInfo th, .TableTechInfo th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;background-color:#f5821f;word-wrap: break-word;}
+.TableTechInfo th{width:auto;height:35px;word-wrap: break-word;}
+.TableTechInfo th div{width:auto;height:26px;border:none;position:relative;top:6px;word-wrap: break-word;}
+.TableTechInfo td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;background-color:#e8e8e8;word-wrap: break-word;}

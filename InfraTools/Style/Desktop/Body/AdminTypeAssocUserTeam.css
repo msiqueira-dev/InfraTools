@@ -1,0 +1,13 @@
+.TableTypeAssocUserTeam{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;margin-left:23%}
+.TableTypeAssocUserTeam th, .TableTypeAssocUserTeam th div{width:150px;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableTypeAssocUserTeam th{width:266px;height:35px;}
+.TableTypeAssocUserTeam th div{width:110px;height:26px;border:none;position:relative;top:6px;}
+.TableTypeAssocUserTeamInputLeft{position:relative;right:5px;}
+.TableTypeAssocUserTeamInputRight{position:relative;left:5px;}
+.TableTypeAssocUserTeamThLeft{float:left;}
+.TableTypeAssocUserTeamThRight{float:right;position:relative;right:12px;}
+.TableTypeAssocUserTeam td{width:150px;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
+.TableTypeAssocUserTeamThId{width:150px!important;}
+.TableTypeAssocUserTeamThId input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
+.TableTypeAssocUserTeamThDescription{width:250px!important;}
+.TableTypeAssocUserTeamThRegisterDate{width:150px!important;}

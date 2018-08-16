@@ -1,0 +1,23 @@
+.Wrapper {min-height:100%;height:auto !important;height:100%;margin:0 auto -130px !important;}
+.DivBody{width:100%;max-width:1000px;height:auto;margin:0 auto;position:relative;background-color:#FFFFFF;}
+.DivContentBody{width:100%;max-width:1000px;height:auto;min-height:200px;}
+.DivContentBodyContainers{width:auto;min-width:300px;max-width:625px;height:100%;margin:0 auto; display:block;text-align:center;margin-top:30px;}
+.DivContentBodyContainersBox{width:250px;height:220px;display:inline-block;margin-left:30px;margin-right:30px;}
+.DivContentBodyContainersBoxBackground{width:250px;height:135px;margin-top:0px;text-align:left;}
+.DivContentBodyContainersBoxIcon{width:48px;height:48px;margin-top:-100px;margin-left:100px;}
+.DivContentBodyContainersBoxText{width:230px;height:80px;position:relative;top:5px;margin-left:10px;}
+.DivContentBodyContainersBoxText1{width:230px;height:20px;text-align:center;}
+.DivContentBodyContainersBoxText2{width:210px;height:20px;position:relative;left:15px;text-align:center;}
+.DivContentBodyContainersBoxText3{width:190px;height:20px;position:relative;left:26px;text-align:center;}
+.DivContentBodyContainersBoxLink{width:80px;height:30px;background-color:#f5821f;margin-left:80px;}
+.DivContentBodyContainersBoxLink a{color:white;font-size:14px;text-decoration:none;}
+.DivContentBodyContainersBoxLink a span{width:auto;height:24px;display:block;color:white;font-size:14px;text-align:center;}
+.DivContentBodyContainersBoxLinkSpace{height:6px !important;}
+.DivBodyPush{height:130px;}
+.DivContentBodyCertification{width:100%;max-width:1000px;height:80px;margin:0 auto;}
+.DivContentBodyCertificationTitle{width:100%;margin-left:60px;margin-bottom:15px;color:#f5821f;}
+.DivContentBodyCertificationTitleLine{width:89%;height:2px;position:relative;top:2px;background-color:#211f5e;}
+.DivContentBodyCertificationTitle h3{color:#211f5e;position:relative;z-index:0;}
+.DivContentBodyCertificationHtml{width:88px;height:31px;float:left;margin-left:60px;position:relative;z-index:0;}
+.DivContentBodyCertificationCss{width:88px;height:31px;float:left;margin-left:20px;position:relative;z-index:0;}
+.DivContentBodyCertificationValidRobots{width:88px;height:31px;float:left;margin-left:20px;position:relative;z-index:0;}

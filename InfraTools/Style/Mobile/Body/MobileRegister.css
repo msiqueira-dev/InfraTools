@@ -1,0 +1,12 @@
+.DivBody{max-width:320px !important;}
+.DivContentBody{max-width:320px !important;min-height:420px !important;}
+.DivContentBodyContainerLabelBig{width:39% !important;}
+.DivContentBodyContainerLabel{width:39% !important;}
+.DivContentBodyContainer input[type="text"]{width:58% !important;}
+.DivContentBodyContainer input[type="password"]{width:58% !important;}
+.DivContentBodyContainerCaptcha input[type="text"]{width:21% !important;}
+.SelectBirthDateDay{width:17% !important;}
+.SelectBirthDateMonth{width:17% !important;margin-left:2% !important;}
+.SelectBirthDateYear{width:20% !important;margin-left:2% !important;}
+.DivContentBodySubmit{left:38% !important;}
+#RegisterGender{width:60% !important;}

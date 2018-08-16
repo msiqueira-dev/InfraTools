@@ -1,0 +1,49 @@
+.DivHeader{width:100%;height:100%;background-color:#192650;background-repeat:repeat-x;}
+.DivHeaderContainer{width:100%;height:100%;margin:0 auto;}
+.DivHeaderContainerLogo{max-width:300px;max-height:55px;margin:0 auto;}
+.DivHeaderContainerMenu{min-width:80px;max-width:100%;width:auto;height:100%;display:table;margin:0 auto;margin-top:15px;}
+.DivHeaderContainerMenu a{width:auto;text-align:left;letter-spacing:0;text-decoration:none;color:#FFFFFF;font-size:100%;}
+.DivHeaderContainerMenu span{width:auto;text-align:left;display:block;font-size:100%;color:#FFFFFF;font-weight:bold;}
+.DivHeaderContainerMenuLink{width:auto;height:auto;max-width:140px;max-height:32px;margin:0 auto;}
+.DivHeaderContainerMenuPageCheck{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageCheckHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageCheckTop{width:0px;height:0px;}
+.DivHeaderContainerMenuPageCheckTopOrange{width:0px;height:0px;}
+.DivHeaderContainerMenuPageDiagnosticTools{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageDiagnosticToolsHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageDiagnosticToolsTop{width:0px;height:0px;}
+.DivHeaderContainerMenuPageDiagnosticToolsTopOrange{width:0px;height:0px;}
+.DivHeaderContainerMenuPageContact{max-width:100px;max-height:32px;min-height:32px;display:table;}
+.DivHeaderContainerMenuPageContactHover{max-width:100px;max-height:32px;min-height:32px;display:table;}
+.DivHeaderContainerMenuPageContactTop{width:0px;height:0px;}
+.DivHeaderContainerMenuPageContactTopOrange{width:0px;height:0px;}
+.DivHeaderContainerMenuPageGet{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageGetHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageGetTop{width:0px;height:0px;}
+.DivHeaderContainerMenuPageGetTopOrange{width:0px;height:0px;}
+.DivHeaderContainerMenuPageService{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageServiceHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageServiceTop{width:0px;height:0px;}
+.DivHeaderContainerMenuPageServiceTopOrange{width:0px;height:0px;}
+.DivHeaderDivision{width:auto;height:100%;background-color:#061437;background-repeat:repeat-x;}
+.DivHeaderDivisionContainer{width:100%;height:100%;margin:0 auto;}
+.DivHeaderDivisionContainerInfos{min-width:320px;min-height:55px;margin:0 auto;display:table;position:relative;top:5px;}
+.DivHeaderDivisionContainerInfos form{max-width:60px;margin-top:-15px;position:relative;top:-8px;left:150px;}
+.DivHeaderDivisionContainerInfo{width:auto;min-height:20px;max-height:22px;max-width:250px;position:relative;left:2%;}
+.DivHeaderDivisionContainerInfo label{color:white;}
+.DivHeaderDivisionContainerLogin{min-width:320px;min-height:30px;max-height:30px;}
+.DivHeaderDivisionContainerLoginElements{min-width:320px;min-height:30px;max-height:30px;display:table;text-align:center;margin:0 auto;}
+.DivHeaderDivisionContainerLoginElement{width:auto;min-height:30px;max-height:30px;float:left;display:inline;display:table-cell;vertical-align:middle;padding-right:5px;margin-left:2%;}
+.DivHeaderDivisionContainerLoginElement a{text-decoration:underline;color:#FFFFFF;font-size:100%;position:relative;top:5px;}
+.DivHeaderDivisionContainerLoginElement span, .DivHeaderDivisionContainerLoginElement h2{font-size:100%;color:#FFFFFF;font-weight:bold;}
+.DivHeaderDivisionContainerLoginSeparator{display:none;width:0px;height:0px;}
+.DivHeaderDivisionContainerLoginSeparator label {display:none;width:0px;height:0px;}
+.DivHeaderDivisionContainerLanguage{max-width:320px;min-height:30px;max-height:30px;margin:0 auto;}
+.DivHeaderDivisionContainerLanguage form{max-width:75px;position:relative;left:2%;}
+.DivHeaderDivisionContainerLanguage div{max-width:36px;min-width:36px;float:left;}
+.DivHeaderDivisionContainerLanguage div img{position:relative;top:5px;}
+.DivHeaderPageTitle{width:auto;min-height:60px;background-color:#FFFFFF;background-repeat:repeat-x;}
+.DivHeaderPageTitleContent{width:100%;min-height:50px;margin:0 auto;}
+.DivHeaderPageTitleContentText{max-width:320px;min-width:150px;min-height:20px;margin:0 auto;}
+.DivHeaderPageTitleContentText h1{min-height:20px;color:#211f5e;font-family:sans-serif;font-size:150%;font-weight:bold;text-decoration:none;text-shadow:none;position:relative;left:6px}
+.DivHeaderPageTitleContentLine{width:100%;max-height:3px;min-height:3px;background-color:#192650;}

@@ -1,0 +1,29 @@
+.DivContentBody{width:550px;height:auto;min-height:125px !important;}
+.DivContentBodyOptions{width:100%;min-height:65px;height:100%;margin-bottom:20px;display:inline-block;}
+.DivContentBodyOptionsBox{width:auto;height:auto;}
+.DivContentBodySubmitOption{width:165px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-right:20px;}
+.DivContentBodySubmitOption:hover{background-color:#ef4e22;}
+.DivContentBodyContainer{width:100% !important;display:inline;}
+.DivContentBodyContainerLabel{width:22% !important;}
+.DivContentBodyContainer input{width:70% !important;}
+.DivContentBodyContainersBox{width:70px;height:50px;float:left;margin-right:2px;margin-left:2px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
+.DivContentBodyContainersBox input{position:relative;top:2px;}
+.DivContentBody form{min-height:35px !important;}
+.DivContentBodyContainerLabel label{top:1px !important;}
+.DivContentBodyContainerValue{width:66% !important;}
+.DivContentBodyContainerValue label{position:relative;top:2px;}
+.DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
+.TableTypeUser{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x: scroll;}
+.TableTypeUser th, .TableTypeUser th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableTypeUser th{width:auto;height:35px;}
+.TableTypeUser th div{width:auto;height:26px;border:none;position:relative;top:6px;}
+.TableTypeUserInputLeft{position:relative;right:5px;float:right;}
+.TableTypeUserInputRight{position:relative;left:5px;}
+.TableTypeUserThLeft{float:left;}
+.TableTypeUserThRight{float:right;position:relative;right:12px;}
+.TableTypeUser td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
+.TableTypeUserThId{width:auto!important;}
+.TableTypeUserThId input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
+.TableTypeUserThDescription{width:auto!important;}
+.TableTypeUserThRegisterDate{width:auto!important;}
+#FormUserList {overflow-x:scroll;}

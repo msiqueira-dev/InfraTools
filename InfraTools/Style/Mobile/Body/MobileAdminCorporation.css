@@ -1,0 +1,19 @@
+.DivContentBodyContainerLabel label{top:0px !important;}
+.DivContentBodyContainerValue{width:68% !important;}
+.DivContentBodyContainerValue label{position:relative;top:2px;}
+.DivContentBodyContainerValueContent img{position:relative;top:-4px;display:block;}
+.DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
+.DivContentBodyContainerGoogleMaps{margin-top:0px !important;}
+.DivContentBodyContainer{width:100% !important;	}
+.DivContentBodyContainerLabel{width:17% !important;}
+.DivContentBodyContainer input{width:70% !important;}
+.TableCorporation, .TableCorporationUser{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x:scroll;}
+.TableCorporation th, .TableCorporation th div, .TableCorporationUser th, .TableCorporationUser th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableCorporation th, .TableCorporationUser th{width:auto;height:35px;}
+.TableCorporation th div, .TableCorporationUser th div{width:auto;height:25px;border:none;position:relative;top:6px;}
+.TableCorporationInputLeft{position:relative;right:5px;float:right;}
+.TableCorporationInputRight{position:relative;left:5px;}
+.TableCorporationThRight{float:right;}
+.TableCorporation td, .TableCorporationUser td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;word-wrap:break-word;}
+.TableCorporation td img, .TableCorporationUser td img{position:relative;left:40%;top:2px;}
+.TdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}

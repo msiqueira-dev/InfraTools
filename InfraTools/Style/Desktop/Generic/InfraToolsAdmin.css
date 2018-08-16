@@ -1,0 +1,11 @@
+.DivContentBody{width:1000px;min-height:120px;height:auto;}
+.DivContentBodyOptions{width:100%;height:65px;margin-top:-10px;}
+.DivContentBodyOptionsBox{width:auto;height:auto;margin-left:30%;}
+.DivContentBodySubmitOption{width:165px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-right:20px;}
+.DivContentBodySubmitOption:hover{background-color:#ef4e22;}
+.DivContentBodyContainersBox{width:70px;height:50px;float:left;margin-right:10px;margin-left:10px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
+.DivContentBodyContainersBox input{position:relative; top:2px;}
+.DivContentBody form{min-height:20px !important;}
+.DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
+.DivContentBodyContainer{width:1000px !important;}
+.DivContentBodyContainerGoogleMaps{margin-top:0px !important;}

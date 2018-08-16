@@ -1,0 +1,13 @@
+.DivPush{min-height:50px;max-height:50px;}
+.DivFooter{width:auto;min-height:150px;background-color:#e9e9eb;}
+.DivFooterContent{width:100%;min-height:150px;margin:0 auto;}
+.DivFooterContentDualDevelopers{max-width:240px;min-height:50px;max-height:50px;margin:0 auto;}
+.DivFooterContentDualDevelopers img{float:left;position:relative;top:10px;}
+.DivFooterContentDualDevelopersText{max-width:200px;height:100%;float:left;position:relative;top:8px;}
+.DivFooterContentDualDevelopersText label{font-weight:bold;position:relative;left:10px;}
+.DivFooterContentDualDevelopersText a{color:#06C;text-decoration:none;font-weight:bold;position:relative;left:10px;}
+.DivFooterContentCopyright{max-width:245px;min-height:50px;max-height:50px;margin:0 auto;}
+.DivFooterContentCopyright label{font-size:100%;font-weight:bold;position:relative;top:20px;}
+.DivFooterContentSocial{max-width:165px;min-height:50px;max-height:50px;margin:0 auto;}
+.DivFooterContentSocialImage{min-width:55px;max-height:36px;min-height:36px;float:left;position:relative;right:5px;}
+.DivFooterContentSocialImage img{position:relative;left:7px;}

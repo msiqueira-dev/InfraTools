@@ -1,0 +1,14 @@
+.TableTeam{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x: scroll;}
+.TableTeam th, .TableTeam th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableTeam th{width:auto;height:35px;}
+.TableTeam th div{width:auto;height:26px;border:none;position:relative;top:6px;}
+.TableTeamInputLeft{position:relative;right:5px;float:right;}
+.TableTeamInputRight{position:relative;left:5px;}
+.TableTeamThLeft{float:left;}
+.TableTeamThRight{float:right;position:relative;right:12px;}
+.TableTeam td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
+.TableTeamThId{width:auto!important;}
+.TableTeamThId input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
+.TableTeamThDescription{width:auto!important;}
+.TableTeamThRegisterDate{width:auto!important;}
+#FormTicketList {overflow-x:scroll;}

@@ -1,0 +1,14 @@
+.TableTypeStatusTicket{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x: scroll;}
+.TableTypeStatusTicket th, .TableTypeStatusTicket th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableTypeStatusTicket th{width:auto;height:35px;}
+.TableTypeStatusTicket th div{width:auto;height:26px;border:none;position:relative;top:6px;}
+.TableTypeStatusTicketInputLeft{position:relative;right:5px;float:right;}
+.TableTypeStatusTicketInputRight{position:relative;left:5px;}
+.TableTypeStatusTicketThLeft{float:left;}
+.TableTypeStatusTicketThRight{float:right;position:relative;right:12px;}
+.TableTypeStatusTicket td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
+.TableTypeStatusTicketThId{width:auto!important;}
+.TableTypeStatusTicketThId input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
+.TableTypeStatusTicketThDescription{width:auto!important;}
+.TableTypeStatusTicketThRegisterDate{width:auto!important;}
+#FormTicketList {overflow-x:scroll;}

@@ -1,0 +1,142 @@
+<?php
+/************************************************************************
+Class: PageAdminTicket.php
+Creation: 07/11/2017
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			Base       - Php/Controller/Session.php
+			Base       - Php/Model/FormValidator.php
+			InfraTools - Php/Controller/FacedePersistenceInfraTools.php
+			InfraTools - Php/View/AdminInfraTools.php
+Description: 
+			Class for the page AdminTicket
+Functions: 
+			protected function ExecuteTicketDelete();
+			protected function ExecuteTicketInsert();
+			protected function ExecuteTicketSelectById($Id);
+			protected function ExecuteTicketSelectByRequestingUser($RequestingUserEmail);
+			protected function ExecuteTicketSelectByResponsibleUser($ResponsibleUserEmail);
+			protected function ExecuteTicketUpdate();
+			protected function ExecuteTicketUpdateService();
+			protected function ExecuteTicketUpdateStatus();
+			protected function ExecuteTicketUpdateUser();
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
+if (!class_exists("InfraToolsFactory"))
+{
+	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
+		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
+}
+if (!class_exists("Ticket"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "Ticket.php"))
+		include_once(BASE_PATH_PHP_MODEL . "Ticket.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Ticket');
+}
+if (!class_exists("PageInfraTools"))
+{
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+}
+
+class PageAdminTicket extends PageInfraTools
+{
+	public $ArrayTicket  = NULL;
+	
+	/* Constructor */
+	public function __construct() 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct();
+	}
+
+	/* Clone */
+	public function __clone()
+	{
+		exit(get_class($this) . ": Error! Clone Not Allowed!");
+	}
+
+	public function GetCurrentPage()
+	{
+		return ConfigInfraTools::GetPageConstant(get_class($this));
+	}
+	
+	protected function ExecuteTicketDelete()
+	{
+	}
+	
+	protected function ExecuteTicketInsert()
+	{
+	}
+	
+	protected function ExecuteTicketSelectById($Id)
+	{
+	}
+	
+	protected function ExecuteTicketSelectByRequestingUser($RequestingUserEmail)
+	{	
+	}
+	
+	protected function ExecuteTicketSelectByResponsibleUser($ResponsibleUserEmail)
+	{
+	}
+	
+	protected function ExecuteTicketUpdate()
+	{		
+	}
+	protected function ExecuteTicketUpdateService()
+	{
+	}
+	
+	protected function ExecuteTicketUpdateStatus()
+	{
+	}
+	
+	protected function ExecuteTicketUpdateUser()
+	{
+	}
+
+	protected function LoadHtml()
+	{
+		$return = NULL;
+		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
+		echo ConfigInfraTools::HTML_TAG_START;
+		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
+		if ($return == ConfigInfraTools::SUCCESS)
+		{
+			echo ConfigInfraTools::HTML_TAG_BODY_START;
+			echo "<div class='Wrapper'>";
+			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
+			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
+			echo "<div class='DivPush'></div>";
+			echo "</div>";
+			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
+			echo ConfigInfraTools::HTML_TAG_BODY_END;
+			echo ConfigInfraTools::HTML_TAG_END;
+		}
+		else return ConfigInfraTools::ERROR;
+	}
+
+	public function LoadPage()
+	{
+		$PageFormBack = FALSE;
+		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
+		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		//FORM SUBMIT BACK
+		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		{
+			$this->PageFormLoad();
+			$PageFormBack = TRUE;
+		}
+		if(!$PageFormBack != FALSE)
+			$this->PageFormSave();
+		$this->LoadHtml();
+	}
+}
+?>

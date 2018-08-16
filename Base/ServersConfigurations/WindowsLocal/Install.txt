@@ -1,0 +1,52 @@
+1 - INSTALANDO APACHE_2.4.25 e PHP_7.1.1
+
+	1.1. Criar pastas C:\Softwares
+	1.2. Descompactar Apache_2.4.25.rar em C:\Softwares\Apache_2.4.25
+	1.3. Descompactar Php_7.1.1.rar em C:\Softwares\Php_7.1.1
+	1.4. Copiar as seguintes DLLs libssh2.dll, libeay32.dll, SSLeay32.dll de C:\Softwares\Php_7.1.1 para C:\Windows\System32
+	1.5. Baixar o pacote necessário com a dll usada pelo Php http://www.microsoft.com/en-us/download/details.aspx?id=30679
+	
+2 - CONFIGURANDO VARIÁVEIS AMBIENTES DO WINDOWS
+	
+	2.1 - Ir nas variaveis ambientes do windows (Usuário e Sistema) e adicionar
+		  Variable Name: PATH
+		  Variable Value: C:\Softwares\Php_7.1.1\;C:\Softwares\Php_7.1.1\php.exe;C:\Softwares\Apache_2.4.25;C:\Softwares\Apache_2.4.25\bin;C:\Softwares\Curl;C:\Softwares\Curl\bin;C:\Softwares\Curl\bin\curl.exe
+	
+3 - INSTALANDO O PEAR
+	
+	3.1. Copiar arquivo go-pear.phar para C:\Softwares\Php_7.1.1\
+	3.2. CMD -> cd C:\Softwares\Php_7.1.1
+	3.3. CMD -> php C:\Softwares\Php_7.1.1\go-pear.phar
+	3.4. CMD -> Type local
+	3.5. CMD -> Type yes
+	3.6. CMD -> Conferir caminhos, que devem conter o prfixo C:\Softwares\Php_7.1.1, Pressionar Enter, se estiver errado, selecionar 1 e corrigir
+	3.7. CMD -> Y
+	3.8. CMD -> Press Enter
+
+4 - INSTALANDO O NET_WHOIS (PACOTE DO PEAR)
+		
+	4.1. CMD -> pear install Net_Whois
+	
+	
+5 - INSTALANDO O PROCESSO DO APACHE
+
+	5.1. CMD -> C:\Softwares\Apache_2.4.25\bin\httpd.exe -k install
+	5.2. regedit -> HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\Apache2.4
+		5.2.3 ImagePath -> "C:\Softwares\Apache_2.4.25\bin\httpd.exe" -d "C:\Web\Sites\Base\ServersConfigurations\WindowsLocal" -k runservice
+	5.3 Copiar executavel C:\Softwares\Apache_2.4.25\bin\ApacheMonitor.exe para C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\
+		5.3.1 Verificar com msconfig, após reboot.
+		
+6 - INSTALL MYSQL
+	6.1.
+	6.2. Edit my.ini -> C:\ProgramData\MySQL\MySQL Server 5.7
+		6.2.1. -> slow_query_log_file="C:/Web/Logs/MySqlSlowQueries.log"
+		6.2.2. -> log-error="C:/Web/Logs/MySqlErrorLog.log"
+*******************************************************************************************
+
+
+Para iniciando o Apache:
+	CMD -> httpd -k start
+Para parar o Apache:
+	CMD -> httpd -k stop
+Para Testar o Sistema InfraTools:
+	http://localhost/

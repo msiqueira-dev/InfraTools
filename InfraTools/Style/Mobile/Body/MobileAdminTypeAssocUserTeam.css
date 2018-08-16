@@ -1,0 +1,14 @@
+.TableTypeAssocUserTeam{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x: scroll;}
+.TableTypeAssocUserTeam th, .TableTypeAssocUserTeam th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableTypeAssocUserTeam th{width:auto;height:35px;}
+.TableTypeAssocUserTeam th div{width:auto;height:26px;border:none;position:relative;top:6px;}
+.TableTypeAssocUserTeamInputLeft{position:relative;right:5px;float:right;}
+.TableTypeAssocUserTeamInputRight{position:relative;left:5px;}
+.TableTypeAssocUserTeamThLeft{float:left;}
+.TableTypeAssocUserTeamThRight{float:right;position:relative;right:12px;}
+.TableTypeAssocUserTeam td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
+.TableTypeAssocUserTeamThId{width:auto!important;}
+.TableTypeAssocUserTeamThId input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
+.TableTypeAssocUserTeamThDescription{width:auto!important;}
+.TableTypeAssocUserTeamThRegisterDate{width:auto!important;}
+#FormAssocUserTeamList {overflow-x:scroll;}

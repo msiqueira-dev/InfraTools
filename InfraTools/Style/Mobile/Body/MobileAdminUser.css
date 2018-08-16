@@ -1,0 +1,47 @@
+.DivContentBody{width:550px;height:auto;min-height:125px !important;}
+.DivContentBodyOptions{width:100%;min-height:65px;height:100%;margin-bottom:20px;display:inline-block;}
+.DivContentBodyOptionsBox{width:auto;height:auto;}
+.DivContentBodySubmitOption{width:165px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-right:20px;}
+.DivContentBodySubmitOption:hover{background-color:#ef4e22;}
+.DivContentBodyContainer{height:auto !important;min-height:35px;margin-bottom:30px;display:inline;}
+.DivContentBodyContainerSided{height:auto !important;min-height:20px;margin-bottom:10px;display:inline-block;}
+.DivContentBodyContainersBox{width:70px;height:50px;float:left;margin-right:2px;margin-left:2px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
+.DivContentBodyContainersBox input{position:relative; top:2px;}
+.DivContentBody form{min-height:35px !important;}
+.DivContentBodyContainerLabel label{top:0 !important;}
+.DivContentBodyContainerLabelSided label{top:0 !important;}
+.DivContentBodyContainerValue{width:58% !important;}
+.DivContentBodyContainerValueContent{width:58% !important;word-wrap: break-word;}
+.DivContentBodyContainerValueContent img{position:relative;top:-2px;}
+.DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
+.DivContentBodyContainerGoogleMaps{margin-top:0px !important;}
+.DivContentBodyContainer{width:100% !important;}
+.DivContentBodyContainerSided{width:100% !important;}
+.DivContentBodyContainerLabel{width:39% !important;}
+.DivContentBodyContainerLabelBig{width:39% !important;}
+.DivContentBodyContainerValueSided div{float:left;}
+.DivContentBodyContainerValue div{float:left;}
+.DivContentBodyContainerSubmitImage{float:left;position:relative;top:-4px;height:20px !important;}
+.DivContentBodyContainer input[type="text"]{width:58% !important;}
+.DivContentBodyContainerValue input[type="checkbox"]{position:relative;top:2px;}
+.DivReturnMessageSuccess{margin-top:15px !important;}
+.DivReturnMessageError{margin-top:15px !important;}
+.DivReturnMessageWarning{margin-top:15px !important;}
+.TableUser{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;overflow-x:scroll;}
+.TableUser th, .TableUser th div{width:auto;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableUser th{width:auto;height:35px;}
+.TableUser th div{width:auto;height:26px;border:none;position:relative;top:6px;}
+.TableUserInputLeft{position:relative;right:5px;float:right;}
+.TableUserInputRight{position:relative;left:5px;}
+.TableUserThLeft{float:left;}
+.TableUserThRight{float:right;position:relative;right:12px;}
+.TableUser td{width:auto;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;word-wrap:break-word;}
+.TableUser td img{position:relative;left:50%;}
+.TdLink{width:auto!important;}
+.TdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
+.SelectBirthDateDay, .SelectBirthDateMonth, .SelectBirthDateYear {width:19% !important;}
+#DivContentBodyContainerValueSidedFloat{float:left;}
+#BodyUserViewEmailLabel{display: inline-block;width:70% !important;}
+#RegisterGender, #AccountUpdateGender{width:60% !important;}
+#RegisterNewPassword, #RegisterRepeatPassword{width:58% !important;}
+#FormUserList {overflow-x:scroll;}

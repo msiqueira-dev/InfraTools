@@ -1,0 +1,9 @@
+.TableCountry{width:800px;height:auto;margin-top:10px;margin-bottom:20px;margin-left:7%;}
+.TableCountry th, .TableCountry th div{width:150px;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableCountry th{width:266px;height:35px;}
+.TableCountry th div{width:120px;height:26px;border:none;position:relative;top:6px;}
+.TableCountryInputLeft{position:relative;right:5px;}
+.TableCountryInputRight{position:relative;left:5px;}
+.TableCountryThLeft{float:left;}
+.TableCountryThRight{float:right;position:relative;right:12px;}
+.TableCountry td{width:150px;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}

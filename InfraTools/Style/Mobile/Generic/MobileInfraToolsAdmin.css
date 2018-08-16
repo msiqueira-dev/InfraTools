@@ -1,0 +1,20 @@
+.DivContentBody{width:550px;height:auto;min-height:125px !important;}
+.DivContentBodyOptions{width:100%;min-height:65px;height:100%;margin-bottom:20px;display:inline-block;}
+.DivContentBodyOptionsBox{width:auto;height:auto;}
+.DivContentBodySubmitOption{width:165px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-right:20px;}
+.DivContentBodySubmitOption:hover{background-color:#ef4e22;}
+.DivContentBodyContainer{width:100% !important;display:inline;}
+.DivContentBodyContainerLabel{width:22% !important;}
+.DivContentBodyContainer input{width:70% !important;}
+.DivContentBodyContainersBox{width:70px;height:50px;float:left;margin-right:2px;margin-left:2px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
+.DivContentBodyContainersBox input{position:relative;top:2px;}
+.DivContentBody form{min-height:35px !important;}
+.DivContentBodyContainerLabel label{top:1px !important;}
+.DivContentBodyContainerValue{width:66% !important;}
+.DivContentBodyContainerValue label{position:relative;top:2px;}
+.DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
+.DivContentBodySection{width:320px;height:auto;}
+.DivContentBodySectionTitle{width:100%;height:auto;margin-bottom:5px;}
+.DivContentBodySectionTitleText{width:auto;height:16px;}
+.DivContentBodySectionTitleText h2{height:16px;color:#f5821f;font-family:sans-serif;font-size:16px;font-weight:bold;text-decoration:none;text-shadow: none;}
+.DivContentBodySectionTitleLine{width:100%;height:3px;background-color:#f4780b;}

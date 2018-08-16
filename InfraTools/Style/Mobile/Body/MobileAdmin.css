@@ -1,0 +1,11 @@
+.DivBody{max-width:320px !important;}
+.DivFooterContent{max-width:320px !important;}
+.DivContentBody{width:100%;height:auto;min-height:530px;}
+.DivContentBodyContainersBox{width:150px;height:100px;border:3px solid #f5821f;border-radius:10px;text-align:center;margin-left:22%;margin-bottom:10px;}
+.DivContentBodyContainersBoxIcon{width:50px;height:50px;position:relative;left:50px;margin-top:5px;}
+.DivContentBodyContainersBoxText{width:150px;height:40px;}
+.DivContentBodyOptions{width:100%;min-height:65px;height:100%;margin-top:12px;display:inline-block;}
+.DivContentBodySectionTitle{width:100%;height:auto;margin-top:35px;margin-bottom:5px;position:relative;left:0.3%;}
+.DivContentBodySectionTitleText{width:auto;height:16px;margin-left:16%;}
+.DivContentBodySectionTitleText h2{height:16px;color:#f5821f;font-family:sans-serif;font-size:16px;font-weight:bold;text-decoration:none;text-shadow: none;}
+.DivContentBodySectionTitleLine{width:68%;height:3px;background-color:#f4780b;margin-left:13%;}
