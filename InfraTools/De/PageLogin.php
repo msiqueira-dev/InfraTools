@@ -11,7 +11,7 @@
 	if(get_class ($pageObj) != basename(__FILE__, '.php'))
 		exit("PageObject: " . get_class ($pageObj) . "<br>" . "Expected: " . basename(__FILE__, '.php'));
 	$Session = $InfraToolsFactory->CreateSession();
-	$Session->SetSessionValue(ConfigInfraTools::SESSION_LANGUAGE, $pageObj->GetPageFileDefaultLanguageByDir(dirname(__FILE__)));
+	$Session->SetSessionValue(ConfigInfraTools::SESSION_LANGUAGE, $pageObj->GetPageFileDefaultLanguageByDir(basename(__DIR__)));
 	if (strpos($_SERVER['REQUEST_URI'],'Login') == TRUE)
 	{
 		$pageObj->DisableGenericHtml = FALSE;

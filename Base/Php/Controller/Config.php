@@ -230,10 +230,11 @@ class Config
 	const TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL                        = "AssocUserTeamUserEmail";
 	const TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE                         = "AssocUserTeamUserType";
 	const TABLE_SYSTEM_CONFIGURATION                                    = "SYSTEM_CONFIGURATION";
+	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE                = "SystemConfigurationOptionActive";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION           = "SystemConfigurationOptionDescription";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME                  = "SystemConfigurationOptionName";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER                = "SystemConfigurationOptionNumber";
-	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE                 = "SystemConfigurationValue";
+	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE                 = "SystemConfigurationOptionValue";
 	const TABLE_CORPORATION                                             = "CORPORATION";
 	const TABLE_CORPORATION_FIELD_ACTIVE                                = "CorporationActive";
 	const TABLE_CORPORATION_FIELD_NAME                                  = "CorporationName";
@@ -372,34 +373,33 @@ class Config
 	
 	public function SetApplication()
 	{
-		if(file_exists(PROJECT_PATH . "SystemConfiguration.php"))
+		if(class_exists("ProjectConfig"))
 		{
-			include_once(PROJECT_PATH . "SystemConfiguration.php");
-			ini_set("display_errors", SystemConfiguration::$DisplayErrors);
+			ini_set("display_errors", ProjectConfig::$DisplayErrors);
 			error_reporting(E_ALL);
-			date_default_timezone_set(SystemConfiguration::$TimeZone);
+			date_default_timezone_set(ProjectConfig::$TimeZone);
 			setlocale(LC_ALL, 'UTF8');
 			$this->Session = $this->Factory->CreateSession();
-			$this->DefaultApplicationAddress       = SystemConfiguration::$AddressApplication;
-			$this->DefaultMySqlAddress             = SystemConfiguration::$MySqlDataBaseAddress;
-			$this->DefaultMySqlPort                = SystemConfiguration::$MySqlDataBasePort;
-			$this->DefaultMySqlDataBase            = SystemConfiguration::$MySqlDataBaseName;
-			$this->DefaultMySqlUser                = SystemConfiguration::$MySqlDataBaseUser;
-			$this->DefaultMySqlPassword            = SystemConfiguration::$MySqlDataBasePassword;
-			$this->DefaultServerFile               = SystemConfiguration::$AddressFileServer;
-			$this->DefaultServerImage              = SystemConfiguration::$AddressImageServer;
-			$this->DefaultServerJavaScript         = SystemConfiguration::$AddressJavaScriptServer;
-			$this->DefaultEmailNoReplyFormPassword = SystemConfiguration::$EmailAccount;
-			$this->DefaultEmailSupportFormPassword = SystemConfiguration::$EmailPassword;
-			$this->DefaultGoogleMapsApiKey         = SystemConfiguration::$GoogleMapsApiKey;
-			$this->DefaultLanguage                 = SystemConfiguration::$DefaultLanguage;
-			$this->DefaultLogPath                  = SystemConfiguration::$LogApplication;
+			$this->DefaultApplicationAddress       = ProjectConfig::$AddressApplication;
+			$this->DefaultMySqlAddress             = ProjectConfig::$MySqlDataBaseAddress;
+			$this->DefaultMySqlPort                = ProjectConfig::$MySqlDataBasePort;
+			$this->DefaultMySqlDataBase            = ProjectConfig::$MySqlDataBaseName;
+			$this->DefaultMySqlUser                = ProjectConfig::$MySqlDataBaseUser;
+			$this->DefaultMySqlPassword            = ProjectConfig::$MySqlDataBasePassword;
+			$this->DefaultServerFile               = ProjectConfig::$AddressFileServer;
+			$this->DefaultServerImage              = ProjectConfig::$AddressImageServer;
+			$this->DefaultServerJavaScript         = ProjectConfig::$AddressJavaScriptServer;
+			$this->DefaultEmailNoReplyFormPassword = ProjectConfig::$EmailAccount;
+			$this->DefaultEmailSupportFormPassword = ProjectConfig::$EmailPassword;
+			$this->DefaultGoogleMapsApiKey         = ProjectConfig::$GoogleMapsApiKey;
+			$this->DefaultLanguage                 = ProjectConfig::$DefaultLanguage;
+			$this->DefaultLogPath                  = ProjectConfig::$LogApplication;
 			$this->Session->CreateBasic($this->DefaultApplicationName, $this->SessionTime);
 			return $this->Session->CheckActivity(self::SESSION_LAST_ACTIVITY, self::SESSION_USER, 
 												 $this->SessionTime, self::SESSION_UNLIMITED);
 			
 		}
-		else exit ("System Configuration Not found");
+		else exit ("Config: Project Config Class Not found");
 	}
 }
 ?>

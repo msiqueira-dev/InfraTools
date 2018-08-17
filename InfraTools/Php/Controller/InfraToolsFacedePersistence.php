@@ -54,7 +54,8 @@ Methods:
 			public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, 
 			                                                            &$ArrayInstanceInfraToolsDepartment, $Debug,
 																		$MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function InfraToolsCreateDataBase($Debug));
+			public function InfraToolsCheckDataBase($Debug);
+			public function InfraToolsCreateDataBase($Debug);
 			public function ServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			public function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug,);
 			public function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -454,6 +455,17 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																								  $Debug, $MySqlConnection);
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;
+	}
+	
+	public function InfraToolsCheckDataBase($Debug)
+	{
+		$mySqlConnection;
+		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
+		
+		$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
+		$return = $InfraToolsFacedePersistenceDataBase->InfraToolsCheckDataBase($Debug, $mySqlConnection);
+		$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 		return $return;
 	}
 	

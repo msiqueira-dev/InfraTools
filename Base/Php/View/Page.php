@@ -130,7 +130,7 @@ abstract class Page
 				$_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_PORTUGUESE ||
 				$_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_SPANISH)
 			{
-				if($_SERVER['SERVER_NAME'] == Config::APPLICATION_HOSTNAME_PRODUCTION)
+				if(ProjectConfig::$EnableSSL)
 				{
 					header("Location: https://" . $_SERVER['HTTP_HOST'] . "/" . str_replace('Language/', '', 
 												  $_POST[Config::POST_BACK_FORM]) . "/" 
@@ -154,15 +154,15 @@ abstract class Page
 		else FALSE;
 	}
 	
-	public function GetPageFileDefaultLanguageByDir($DirPath)
+	public function GetPageFileDefaultLanguageByDir($PageDirName)
 	{
-		if (strpos($DirPath, str_replace('Language/', '', Config::LANGUAGE_GERMAN)) !== false) 
+		if (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_GERMAN)) !== false) 
 			return Config::LANGUAGE_GERMAN;
-		elseif (strpos($DirPath, str_replace('Language/', '', Config::LANGUAGE_ENGLISH)) !== false) 
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_ENGLISH)) !== false) 
 			return Config::LANGUAGE_ENGLISH;
-		elseif (strpos($DirPath, str_replace('Language/', '', Config::LANGUAGE_SPANISH)) !== false) 
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_SPANISH)) !== false) 
 			return Config::LANGUAGE_SPANISH;
-		elseif (strpos($DirPath, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
 			return Config::LANGUAGE_PORTUGUESE;
 		else return Config::ERROR;
 	}

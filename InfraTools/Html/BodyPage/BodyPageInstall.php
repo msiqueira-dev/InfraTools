@@ -2,8 +2,10 @@
 <div class="DivBody">
     <div class="DivContentBody">
     	<?php
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->InfraToolsCreateDataBase(ConfigInfraTools::CHECKBOX_CHECKED);
+			if($this->Install)
+			{
+				$return = $this->FacedePersistenceInfraTools->InfraToolsCreateDataBase(ConfigInfraTools::CHECKBOX_CHECKED);	
+			}
 		?>
 	</div>
 </div>

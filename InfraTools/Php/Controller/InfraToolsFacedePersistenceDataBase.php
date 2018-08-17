@@ -66,6 +66,7 @@ Functions:
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug, $MySqlConnection);
 			public function DropInfraToolsDataBase($Debug, $MySqlConnection);
+			public function InfraToolsCheckDataBase($Debug $$MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -126,7 +127,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBase($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBase)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -145,7 +145,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertCountry($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertCountry)</b>";
 		if($MySqlConnection != NULL)
 		{	
@@ -674,7 +673,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertPreference($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertPreference)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -691,7 +689,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertRole($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertRole)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -708,7 +705,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertSystemConfiguration($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertSystemConfiguration)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -731,7 +727,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertTypeAssocUserTeam($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeAssocUserTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -752,7 +747,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertTypeAssocUserService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeAssocUserService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -775,7 +769,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertTypeService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -837,7 +830,6 @@ class InfraToolsFacedePersistenceDataBase
 	}
 	public function CreateInfraToolsDataBaseInsertTypeStatusTicket($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -868,7 +860,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertTypeTicket($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -904,7 +895,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseInsertTypeUser($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeUser)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -923,7 +913,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocTicketUserResponsible($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocTicketUserResponsible)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -942,7 +931,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocTicketUserRequesting($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocTicketUserRequesting)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -961,7 +949,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocIpAddressService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocIpAddressService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -980,7 +967,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocUrlAddressService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUrlAddressService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -999,7 +985,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocUserCorporation($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserCorporation)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1018,7 +1003,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocUserPreference($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserPreference)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1037,7 +1021,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocUserRole($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserRole)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1056,7 +1039,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocUserService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1075,7 +1057,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableAssocUserTeam($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1094,7 +1075,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableCorporation($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableCorporation)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1113,7 +1093,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableDepartment($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableDepartment)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1132,7 +1111,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableCountry($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableCountry)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1151,7 +1129,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableHistoryMonitoring($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1170,7 +1147,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableHistoryService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1189,7 +1165,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableHistoryTicket($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1208,7 +1183,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableInformationService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableInformationService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1227,7 +1201,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableIpAddress($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableIpAddress)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1246,7 +1219,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableMonitoring($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1265,7 +1237,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableNotification($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableNotification)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1284,7 +1255,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTablePreference($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTablePreference)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1303,7 +1273,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableRole($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableRole)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1322,7 +1291,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1341,7 +1309,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableStatusMonitoring($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableStatusMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1360,7 +1327,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableSystemConfiguration($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableSystemConfiguration)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1379,7 +1345,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTeam($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1398,7 +1363,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTicket($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1417,7 +1381,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeAssocUserRequesting($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserRequesting)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1436,7 +1399,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeAssocUserService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1455,7 +1417,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeAssocUserTeam($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1474,7 +1435,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeMonitoring($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1493,7 +1453,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeService($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeService)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1512,7 +1471,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeStatusMonitoring($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeStatusMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1531,7 +1489,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeStatusTicket($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeStatusTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1550,7 +1507,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeTimeMonitoring($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeTimeMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1569,7 +1525,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeTicket($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1588,7 +1543,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableTypeUser($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeUser)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1607,7 +1561,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableUrlAddress($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableUrlAddress)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1626,7 +1579,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTableUser($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTableUser)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1645,7 +1597,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTriggerServiceAfterInsert($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1665,7 +1616,6 @@ class InfraToolsFacedePersistenceDataBase
 		
 	public function CreateInfraToolsDataBaseTriggerServiceAfterUpdate($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1685,7 +1635,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1705,7 +1654,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1725,7 +1673,6 @@ class InfraToolsFacedePersistenceDataBase
 	
 	public function DropInfraToolsDataBase($Debug, $MySqlConnection)
 	{
-		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		echo "<b>Query (SqlDropInfraToolsDataBase)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -1740,5 +1687,36 @@ class InfraToolsFacedePersistenceDataBase
 			}
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function InfraToolsCheckDataBase($Debug, $MySqlConnection)
+	{
+		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				echo "Query: " . InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase() . "<br>";
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase());
+			if($stmt != NULL)
+			{
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if ($stmt->fetch())
+					return Config::SUCCESS;
+				else 
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					$return = Config::ERROR;
+				}
+				return $return;
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 }

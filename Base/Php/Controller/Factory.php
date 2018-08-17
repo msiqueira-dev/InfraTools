@@ -63,45 +63,46 @@ Methods:
 /* BASE PATH CONSTANTS */
 if(!defined('BASE_PATH'))
 {
-	if (file_exists("C:/Web/Sites/"))
-	{
-		if(!defined('PROJECT_PATH'))             define("PROJECT_PATH", "C:/Web/Sites/");
-		if(!defined('BASE_PATH'))                define("BASE_PATH", "C:/Web/Sites/Base");
-		if(!defined('BASE_PATH_IMAGE'))          define("BASE_PATH_IMAGE", "C:/Web/Sites/Base/Images/");
-		if(!defined('BASE_PATH_PAGE'))           define("BASE_PATH_PAGE", "C:/Web/Sites/Base/Pages/");
-		if(!defined('BASE_PATH_PHP'))            define("BASE_PATH_PHP", "C:/Web/Sites/Base/Php/");
-		if(!defined('BASE_PATH_PHP_MODEL'))      define("BASE_PATH_PHP_MODEL", "C:/Web/Sites/Base/Php/Model/");
-		if(!defined('BASE_PATH_PHP_VIEW'))       define("BASE_PATH_PHP_VIEW", "C:/Web/Sites/Base/Php/View/");
-		if(!defined('BASE_PATH_PHP_CONTROLLER')) define('BASE_PATH_PHP_CONTROLLER', 'C:/Web/Sites/Base/Php/Controller/'); 
-		if(!defined('SESSION_PATH'))             define("SESSION_PATH", "C:/Web/Session/");
-		if(!defined('PEAR_PATH'))                define("PEAR_PATH", "C:/Softwares/Php_7.1.1/pear/");
-	}
-	elseif (file_exists("/var/Web/Sites/"))
-	{
-		if(!defined('PROJECT_PATH'))             define("PROJECT_PATH", "/var/Web/Sites/");
-		if(!defined('BASE_PATH'))                define("BASE_PATH", "/var/Web/Sites/Base");
-		if(!defined('BASE_PATH_IMAGE'))          define("BASE_PATH_IMAGE", "/var/Web/Sites/Base/Images/");
-		if(!defined('BASE_PATH_PAGE'))           define("BASE_PATH_PAGE", "/var/Web/Sites/Base/Pages/");
-		if(!defined('BASE_PATH_PHP'))            define("BASE_PATH_PHP", "/var/Web/Sites/Base/Php/");
-		if(!defined('BASE_PATH_PHP_MODEL'))      define("BASE_PATH_PHP_MODEL", "/var/Web/Sites/Base/Php/Model/");
-		if(!defined('BASE_PATH_PHP_VIEW'))       define("BASE_PATH_PHP_VIEW", "/var/Web/Sites/Base/Php/View/");
-		if(!defined('BASE_PATH_PHP_CONTROLLER')) define('BASE_PATH_PHP_CONTROLLER', '/var/Web/Sites/Base/Php/Controller/');
-		if(!defined('SESSION_PATH'))             define("SESSION_PATH", "var/Web/Session/");
-		if(!defined('PEAR_PATH'))                define("PEAR_PATH", "/etc/php5/lib/php/");
-	}
-}
-if(!defined('REL_PATH'))
-{
 	if (file_exists("Php"))
 	{
+		include_once("../ProjectConfig.php");
+		if(!defined('BASE_PATH'))                define("BASE_PATH", "../Base");
+		if(!defined('BASE_PATH_IMAGE'))          define("BASE_PATH_IMAGE", "../Base/Images/");
+		if(!defined('BASE_PATH_PAGE'))           define("BASE_PATH_PAGE", "../Base/Pages/");
+		if(!defined('BASE_PATH_PHP'))            define("BASE_PATH_PHP", "../Base/Php/");
+		if(!defined('BASE_PATH_PHP_MODEL'))      define("BASE_PATH_PHP_MODEL", "../Base/Php/Model/");
+		if(!defined('BASE_PATH_PHP_VIEW'))       define("BASE_PATH_PHP_VIEW", "../Base/Php/View/");
+		if(!defined('BASE_PATH_PHP_CONTROLLER')) define('BASE_PATH_PHP_CONTROLLER', "../Base/Php/Controller/"); 
+		if(!defined('SESSION_PATH'))             define("SESSION_PATH", ProjectConfig::$SessionFolder);
+		if(!defined('PEAR_PATH'))                define("PEAR_PATH", ProjectConfig::$PearFolder);
 		if(!defined('REL_PATH')) define("REL_PATH" , "");
 	}
-	elseif(file_exists("../Php"))
+	elseif (file_exists("../Php"))
 	{
+		include_once("../../ProjectConfig.php");
+		if(!defined('BASE_PATH'))                define("BASE_PATH", "../../Base");
+		if(!defined('BASE_PATH_IMAGE'))          define("BASE_PATH_IMAGE", "../../Base/Images/");
+		if(!defined('BASE_PATH_PAGE'))           define("BASE_PATH_PAGE", "../../Base/Pages/");
+		if(!defined('BASE_PATH_PHP'))            define("BASE_PATH_PHP", "../../Base/Php/");
+		if(!defined('BASE_PATH_PHP_MODEL'))      define("BASE_PATH_PHP_MODEL", "../../Base/Php/Model/");
+		if(!defined('BASE_PATH_PHP_VIEW'))       define("BASE_PATH_PHP_VIEW", "../../Base/Php/View/");
+		if(!defined('BASE_PATH_PHP_CONTROLLER')) define('BASE_PATH_PHP_CONTROLLER', "../Base/Php/Controller/"); 
+		if(!defined('SESSION_PATH'))             define("SESSION_PATH", ProjectConfig::$SessionFolder);
+		if(!defined('PEAR_PATH'))                define("PEAR_PATH", ProjectConfig::$PearFolder);
 		if(!defined('REL_PATH')) define("REL_PATH" , "../");
 	}
 	else
 	{
+		include_once("../../../ProjectConfig.php");
+		if(!defined('BASE_PATH'))                define("BASE_PATH", "../../../Base");
+		if(!defined('BASE_PATH_IMAGE'))          define("BASE_PATH_IMAGE", "../../../Base/Images/");
+		if(!defined('BASE_PATH_PAGE'))           define("BASE_PATH_PAGE", "../../../Base/Pages/");
+		if(!defined('BASE_PATH_PHP'))            define("BASE_PATH_PHP", "../../../Base/Php/");
+		if(!defined('BASE_PATH_PHP_MODEL'))      define("BASE_PATH_PHP_MODEL", "../../../Base/Php/Model/");
+		if(!defined('BASE_PATH_PHP_VIEW'))       define("BASE_PATH_PHP_VIEW", "../../../Base/Php/View/");
+		if(!defined('BASE_PATH_PHP_CONTROLLER')) define('BASE_PATH_PHP_CONTROLLER', "../../Base/Php/Controller/"); 
+		if(!defined('SESSION_PATH'))             define("SESSION_PATH", ProjectConfig::$SessionFolder);
+		if(!defined('PEAR_PATH'))                define("PEAR_PATH", ProjectConfig::$PearFolder);
 		if(!defined('REL_PATH')) define("REL_PATH" , "../../");
 	}
 }

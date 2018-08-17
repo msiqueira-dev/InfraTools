@@ -104,6 +104,7 @@ Methods:
 /* SITE PATH CONSTANTS */
 if (file_exists("Php"))
 {
+	include_once("../ProjectConfig.php");
 	if(!defined('BASE_PATH_PHP_CONTROLLER')) define("BASE_PATH_PHP_CONTROLLER", "../Base/Php/Controller/");
 	if(!defined('SITE_PATH_CAPTCHA'))	     define("SITE_PATH_CAPTCHA", "Captcha");
 	if(!defined('SITE_PATH_DE'))             define("SITE_PATH_DE", "De");
@@ -120,6 +121,7 @@ if (file_exists("Php"))
 }
 elseif(file_exists("../Php"))
 {
+	include_once("../../ProjectConfig.php");
 	if(!defined('BASE_PATH_PHP_CONTROLLER')) define("BASE_PATH_PHP_CONTROLLER", "../../Base/Php/Controller/");
 	if(!defined('SITE_PATH_CAPTCHA'))        define("SITE_PATH_CAPTCHA", "../Captcha");
 	if(!defined('SITE_PATH_DE'))             define("SITE_PATH_DE", "../De");
@@ -136,6 +138,7 @@ elseif(file_exists("../Php"))
 }
 else
 {
+	include_once("../../../ProjectConfig.php");
 	if(!defined('BASE_PATH_PHP_CONTROLLER')) define("BASE_PATH_PHP_CONTROLLER", "../../../Base/Php/Controller/");
 	if(!defined('SITE_PATH_CAPTCHA'))        define("SITE_PATH_CAPTCHA", "../../Captcha");
 	if(!defined('SITE_PATH_DE'))             define("SITE_PATH_DE", "../../De");

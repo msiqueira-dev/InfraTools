@@ -7,7 +7,8 @@
 	$InfraToolsFactory = InfraToolsFactory::__create();
 	$pageObj = $InfraToolsFactory->CreatePage(str_replace("_", "",ConfigInfraTools::PAGE_HOME));
 	$Session = $InfraToolsFactory->CreateSession();
-	$Session->SetSessionValue(ConfigInfraTools::SESSION_LANGUAGE, ConfigInfraTools::LANGUAGE_PORTUGUESE);
+    if(!$Session->GetSessionValue(ConfigInfraTools::SESSION_LANGUAGE, $language) == ConfigInfraTools::SUCCESS)
+		$Session->SetSessionValue(ConfigInfraTools::SESSION_LANGUAGE, ConfigInfraTools::LANGUAGE_PORTUGUESE);
 	$pageObj->LoadPageInfraToolsDependencies();
 	$pageObj->LoadPage();
 ?>

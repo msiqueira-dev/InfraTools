@@ -14,6 +14,7 @@ if (!class_exists("PageInfraTools"))
 
 class PageInstall extends PageInfraTools
 {	
+	protected $Install = NULL;
 	/* Singleton */
 	protected static $Instance;
 
@@ -70,6 +71,11 @@ class PageInstall extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase(NULL);
+		if($return == ConfigInfraTools::SUCCESS)
+			$this->Install = TRUE;
+		else $this->Install = FALSE;
 		$this->LoadHtml();
 	}
 }

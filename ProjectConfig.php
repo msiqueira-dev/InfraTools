@@ -1,6 +1,6 @@
 <?php
 /************************************************************************
-Class: SystemConfiguration
+Class: ProjectConfig
 Creation: 2018-08-15
 Creator: Marcus Siqueira
 Dependencies:
@@ -8,9 +8,29 @@ Dependencies:
 Description: Main Configuration System file
 **************************************************************************/
 
-class SystemConfiguration
-{
+class ProjectConfig
+{	
 	/*
+		SESSION_FOLDER
+		Description: The default location of the session folder, you may define any. 
+		             I don't recommend using a folder visiable to the web.
+		Examples:
+			$SessionFolder = "C:/Web/Session/";
+			$SessionFolder = "/var/Web/Session/";
+	*/
+	public static $SessionFolder = "";
+	
+	/*
+		PEAR_FOLDER
+		Description: The location of the pear installation that is usually inside the php folder
+		Examples:
+			$PearFolder = "C:/Softwares/Php_7.1.1/pear/";
+			$PearFolder = "/etc/php/pear/";
+	*/
+	public static $PearFolder = "";
+	
+	/*
+		ADDRESS_APPLICATION
 		Description: The default URL or IP address of the application
 		Can either be an ip address or a URL, with a different port boung to it or not.
 		Examples:
@@ -19,6 +39,7 @@ class SystemConfiguration
 			AddressApplication = "139.82.1.2";
 	*/
 	public static $AddressApplication = "";
+	
 	/*
 		IMAGE_SERVER
 		Description: The default URL for an image server or IP address of the image server.
@@ -33,6 +54,7 @@ class SystemConfiguration
 			$AddressImageServer = "139.82.1.2:8002";
 	*/
 	public static $AddressImageServer = "";
+	
 	/*
 		FILE_SERVER
 		Description: The default URL for an file server or IP address of the file server.
@@ -48,6 +70,7 @@ class SystemConfiguration
 			$AddressFileServer = "139.82.1.2:8002";
 	*/
 	public static $AddressFileServer = "";
+	
 	/*
 		JAVASCRIPT_SERVER
 		Description: The default URL for an JavaScript server or IP address of the JavaScript server.
@@ -63,6 +86,7 @@ class SystemConfiguration
 			$AddressJavaScriptServer = "139.82.1.2:8003";
 	*/
 	public static $AddressJavaScriptServer = "";
+	
 	/*
 		MYSQL_DATABASE_ADDRESS
 		Description: The address of the MySql DataBase
@@ -73,6 +97,7 @@ class SystemConfiguration
 			$MySqlDataBaseAddress = "139.82.1.2";
 	*/
 	public static $MySqlDataBaseAddress = "";
+	
 	/*
 		MYSQL_DATABASE_PORT
 		Description: The port of the MySql DataBase
@@ -80,6 +105,7 @@ class SystemConfiguration
 			$MySqlDataBasePort = "3306";
 	*/
 	public static $MySqlDataBasePort = "";
+	
 	/*
 		MYSQL_DATABASE_NAME
 		Description: The database name of the system
@@ -87,6 +113,7 @@ class SystemConfiguration
 			$MySqlDataBaseName = "INFRATOOLS";
 	*/
 	public static $MySqlDataBaseName = "";
+	
 	/*
 		MYSQL_DATABASE_USER
 		Description: The database user
@@ -94,6 +121,7 @@ class SystemConfiguration
 			$MySqlDataBaseUser = "infratools_application";
 	*/
 	public static $MySqlDataBaseUser = "";
+	
 	/*
 		MYSQL_DATABASE_PASSWORD
 		Description: The database user's password
@@ -101,13 +129,15 @@ class SystemConfiguration
 			$MySqlDataBasePassword = "infratools_application_password";
 	*/
 	public static $MySqlDataBasePassword = "";
+	
 	/*
 		E-MAIL ACCOUNT
 		Description: The e-mail account to send system e-mails
 		Examples:
-			$EmailAccount = "infratools_application_password";
+			$EmailAccount = "account@domain.com";
 	*/
 	public static $EmailAccount = "";
+	
 	/*
 		E-MAIL PASSWORD
 		Description: The e-mail account's password to send system e-mails.
@@ -115,9 +145,10 @@ class SystemConfiguration
 					 and for that you will need enable a 2 step verification before you can do that.
 					 Check this URL from google: https://myaccount.google.com/security
 		Examples:
-			$EmailPassword = "infratools_application_password";
+			$EmailPassword = "e-mail password";
 	*/
 	public static $EmailPassword = "";
+	
 	
 	/*
 		DEFAULT_LANGUAGE
@@ -129,6 +160,7 @@ class SystemConfiguration
 			$DefaultLanguage = "Language/Pt";
 	*/
 	public static $DefaultLanguage = "";
+	
 	/*
 		GOOGLE_MAPS_API_KEY
 		Description: The google maps api key used to load the googlemaps. 
@@ -143,6 +175,7 @@ class SystemConfiguration
 			$GoogleMapsApiKey = "/var/log/InfraTools";
 	*/
 	public static $GoogleMapsApiKey = "";
+	
 	/*
 		LOG_FOLDER
 		Description: The InfraTools log folder
@@ -151,6 +184,7 @@ class SystemConfiguration
 			$LogApplication = "/var/log/InfraTools";
 	*/
 	public static $LogApplication = "";
+	
 	/*
 		TIMEZONE
 		Description: The e-mail account to send system e-mails
@@ -158,12 +192,21 @@ class SystemConfiguration
 			$TimeZone = "America/Sao_Paulo";
 	*/
 	public static $TimeZone = "";
+	
+	/*
+		ENALB_SSL
+		Description: The e-mail account to send system e-mails
+		Examples:
+			$TimeZone = "America/Sao_Paulo";
+	*/
+	public static $EnableSSL = FALSE;
+	
 	/*
 		DISPLAY_ERRORS
 		Description: Tells if the application should display warning and errors or not.
 		Examples:
 			$DisplayErrors = "1";
 	*/
-	public static $DisplayErrors = "";
+	public static $DisplayErrors = "0";
 }
 ?>
