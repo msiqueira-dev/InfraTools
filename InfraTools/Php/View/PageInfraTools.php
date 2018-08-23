@@ -17,15 +17,12 @@ Methods:
 			private function ExecuteLoginSecondPhaseVerirication();
 			private function ExecuteLogOut();
 			private function SendTwoStepVerificationCode($Email, $Name);
-			protected function CorporationDelete();
-			protected function CorporationLoadData();
-			protected function CorporationSelectByName($Name);f
 			protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
-			protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug);
+			protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation,
+			                                                                $Debug);
 			protected function CorporationSelectUsers($Limit1, $Limit2, &$RowCount);
-			protected function CorporationUpdate();
 			protected function DepartmentLoadData();
 			protected function DepartmentSelectByDepartmentName($DepartmentName);
 			protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName);
@@ -197,14 +194,7 @@ abstract class PageInfraTools extends Page
 	public $InputValueBirthDateYear                              = "";
 	public $InputValueCaptcha                                    = "";
 	public $InputValueCode                                       = "";
-	public $InputValueCorporationActive                          = "";
-	public $InputValueCorporationName                            = "";
 	public $InputValueCountry                                    = "";
-	public $InputValueDepartmentActive                           = "";
-	public $InputValueDepartmentInitials                         = "";
-	public $InputValueDepartmentName                             = "";
-	public $InputValueDepartmentNameAndCorporationNameRadio      = "";
-	public $InputValueDepartmentNameRadio                        = "";
 	public $InputValueGender                                     = "";
 	public $InputValueHeaderDebug                                = ConfigInfraTools::CHECKBOX_UNCHECKED;
 	public $InputValueHeaderLayout                               = ConfigInfraTools::CHECKBOX_UNCHECKED;
@@ -274,18 +264,10 @@ abstract class PageInfraTools extends Page
 	public $ReturnBirthDateYearClass                             = "";
 	public $ReturnCaptchaClass                                   = "";
 	public $ReturnCaptchaText                                    = "";
-	public $ReturnCorporationClass                               = "";
-	public $ReturnCorporationText                                = "";
 	public $ReturnCodeClass                                      = "";
 	public $ReturnCodeText                                       = "";
-	public $ReturnCorporationNameClass                           = "";
-	public $ReturnCorporationNameText                            = "";
 	public $ReturnCountryClass                                   = "";
 	public $ReturnCountryText                                    = "";
-	public $ReturnDepartmentInitialsClass                        = "";
-	public $ReturnDepartmentInitialsText                         = "";
-	public $ReturnDepartmentNameClass                            = "";
-	public $ReturnDepartmentNameText                             = "";
 	public $ReturnEmailClass                                     = "";
 	public $ReturnEmailText                                      = "";
 	public $ReturnEmptyText                                      = "";
@@ -564,112 +546,6 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 	}
 	
-	protected function ExecuteCorporationDelete()
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->CorporationDelete(
-				$this->InstanceInfraToolsCorporation->GetCorporationName(), 
-				$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_DELETE_SUCCESS', $this->Language); 
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							           ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			else
-			{
-				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT', 
-																				 $this->Language);	
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-	}
-	
-	protected function CorporationLoadData()
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			if($this->InstanceInfraToolsCorporation->GetCorporationActive())
-			{
-				$this->InputValueCorporationActive     = "checked"; 
-				$this->InputValueCorporationActiveIcon = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			}
-			else 
-			{
-				$this->InputValueCorporationActive = "";
-				$this->InputValueCorporationActiveIcon = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
-			}
-			$this->InputValueCorporationName       = $this->InstanceInfraToolsCorporation->GetCorporationName();
-			$this->InputValueRegisterDate          = $this->InstanceInfraToolsCorporation->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	protected function CorporationSelectByName($Name)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueCorporationName = $Name;
-		$arrayConstants = array(); $matrixConstants = array();
-			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 80; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->CorporationInfraToolsSelectByName($this->InputValueCorporationName, 
-																			          $this->InstanceInfraToolsCorporation, 
-																					  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceInfraToolsCorporation);
-				return $return;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
 	protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, 
 	                                                         &$RowCount, $Debug)
 	{
@@ -720,97 +596,6 @@ abstract class PageInfraTools extends Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	protected function CorporationSelectUsers($Limit1, $Limit2, &$RowCount)
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			$this->ArrayInstanceInfraToolsCorporationUsers = NULL;
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByCorporation(
-				$this->InstanceInfraToolsCorporation->GetCorporationName(),
-				$Limit1, $Limit2,
-				$this->ArrayInstanceInfraToolsCorporationUsers, $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-				return ConfigInfraTools::SUCCESS;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_SELECT_USERS_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-	}
-	
-	protected function CorporationUpdate()
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			$PageForm = $this->Factory->CreatePageForm();
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$this->InputValueCorporationName       = $_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME];
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE]))
-				$this->InputValueCorporationActive = TRUE;
-			else $this->InputValueCorporationActive = FALSE;
-			$arrayConstants = array(); $matrixConstants = array();
-			
-			//VALIDA NOME DE CORPORAÇÃO
-			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
-			$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
-			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-			$arrayElementsInput[0]        = $this->InputValueCorporationName; 
-			$arrayElementsMinValue[0]     = 0; 
-			$arrayElementsMaxValue[0]     = 80; 
-			$arrayElementsNullable[0]     = FALSE;
-			$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-			array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-
-			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-													$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-													$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-													$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-													$matrixConstants, $arrayOptions);
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $FacedePersistenceInfraTools->CorporationUpdateByName($this->InputValueCorporationActive,
-																	$this->InputValueCorporationName,
-																	$this->InstanceInfraToolsCorporation->GetCorporationName(),
-																	$this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->InstanceInfraToolsCorporation->SetCorporationActive($this->InputValueCorporationActive);
-					$this->InstanceInfraToolsCorporation->SetCorporationName($this->InputValueCorporationName);
-					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-															 $this->InstanceInfraToolsCorporation);
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					return $return;
-				}
-				else
-				{
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					return ConfigInfraTools::ERROR;
-				}
-			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_FIELD_ERROR;
-			}
 		}
 	}
 	

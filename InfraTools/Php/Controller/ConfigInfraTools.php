@@ -328,13 +328,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_BIRTH_DATE_DAY                                     = "FormFieldBirthDateDay";
 	const FORM_FIELD_BIRTH_DATE_MONTH                                   = "FormFieldBirthDateMonth";
 	const FORM_FIELD_BIRTH_DATE_YEAR                                    = "FormFieldBirthDateYear";
-	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
-	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
-	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
-	const FORM_FIELD_DESCRIPTION                                        = "FormFieldTypeUserDescription";
-	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
-	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
-	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
 	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_GENDER                                             = "FormFieldGender";
 	const FORM_FIELD_ID                                                 = "FormInputId";
@@ -397,7 +390,6 @@ class ConfigInfraTools extends Config
 	const FORM_GOOGLE_MAPS_REGION_HIDDEN                                = "FormGoogleMapsRegionHidden";
 	const FORM_HEADER_LANGUAGE                                          = "FormHeaderLanguage";
 	const FORM_HEADER_PAGES                                             = "PostBackForm";
-	const FORM_IMAGE_ERROR                                              = "Icons/IconInfraToolsError.png";
 	const FORM_HEADER_LAYOUT                                            = "FormHeaderLayout";
 	const FORM_HEADER_DEBUG                                             = "FormHeaderDebug";
 	const FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT                  = "FormLoginTwoStepVerificationCodeSubmit";
@@ -747,8 +739,6 @@ class ConfigInfraTools extends Config
 	const MYSQL_TYPE_ASSOC_USER_SERVICE_SELECT_FETCH_FAILED             = "RetMySqlTypeAssocUserServiceSelectFetchFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FAILED                              = "RetMySqlTypeServiceSelectFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED                        = "RetMySqlTypeServiceSelectFetchFailed";
-	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
-	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
 	const SESS_ADMIN_SERVICE                                            = "SessionAdminService";
 	const SESS_ADMIN_TEAM                                               = "SessionAdminTeam";
 	const SESS_ADMIN_TICKET                                             = "SessionAdminTicket";
@@ -1119,7 +1109,7 @@ class ConfigInfraTools extends Config
 	public $FunctionGetWhoisEnabled                                 = TRUE;
 	
 	/* Páginas Habilitadas / Desabilitadas */
-	public $PageAboutEnabled                                        = FALSE;
+	public $PageAboutEnabled                                        = TRUE;
 	public $PageAccountEnabled                                      = TRUE;
 	public $PageCorporationEnabled                                  = FALSE;
 	public $PageAdminEnabled                                        = TRUE;

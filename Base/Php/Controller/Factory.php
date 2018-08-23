@@ -23,6 +23,8 @@ Methods:
 			public function CreateEmail();
 			public function CreateFacedeBusiness();
 			public function CreateFacedePersistence();
+			public function CreateFacedePersistenceAssocTicketUserRequesting();
+			public function CreateFacedePersistenceAssocTicketUserResponsible();
 			public function CreateFacedePersistenceAssocUserCorporation();
 			public function CreateFacedePersistenceAssocUserTeam();
 			public function CreateFacedePersistenceCorporation();
@@ -228,8 +230,45 @@ class Factory
 		return FacedePersistence::__create();
 	}
 	
+	public function CreateFacedePersistenceAssocTicketUserRequesting()
+	{
+		if (!class_exists("AssocTicketUserRequesting"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocTicketUserRequesting.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocTicketUserRequesting.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class AssocTicketUserRequesting');
+		}
+		
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocTicketUserRequesting.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocTicketUserRequesting');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocTicketUserRequesting.php");
+		return FacedePersistenceAssocTicketUserRequesting::__create();
+	}
+	
+	public function CreateFacedePersistenceAssocTicketUserResponsible()
+	{
+		if (!class_exists("AssocTicketUserResponsible"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocTicketUserResponsible.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocTicketUserResponsible.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class AssocTicketUserResponsible');
+		}
+		
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocTicketUserResponsible.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocTicketUserResponsible');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocTicketUserResponsible.php");
+		return FacedePersistenceAssocTicketUserResponsible::__create();
+	}
+	
 	public function CreateFacedePersistenceAssocUserCorporation()
 	{
+		if (!class_exists("AssocUserCorporation"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserCorporation.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocUserCorporation.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserCorporation');
+		}
+		
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserCorporation.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserCorporation');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserCorporation.php");
@@ -246,6 +285,13 @@ class Factory
 	
 	public function CreateFacedePersistenceCorporation()
 	{
+		if (!class_exists("Corporation"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Corporation.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Corporation.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Corporation');
+		}
+		
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCorporation.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceCorporation');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCorporation.php");

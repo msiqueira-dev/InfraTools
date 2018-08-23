@@ -714,7 +714,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAbout();
+		return PageAbout::__create();
 	}
 	
 	private function CreatePageAccount()

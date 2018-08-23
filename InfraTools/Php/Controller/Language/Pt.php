@@ -53,6 +53,9 @@ class Pt
 	const CORPORATION                                             = "Corporação";
 	const CORPORATION_NAME                                        = "Nome da corporação";
 	const CORPORATION_NOT_FOUND                                   = "Corporação não encontrada";
+	const CORPORATION_UPDATE_ERROR                                = "Erro ao alterar corporação";
+	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                  = "Corporação com o mesmo nome já existe";
+	const CORPORATION_UPDATE_SUCCESS                              = "Corporação atualizada com sucesso";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS      = "Corporações obtidas com sucesso";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "Erro ao obter corporações";
 	const COUNTRY                                                 = "País";
@@ -257,7 +260,7 @@ class Pt
 	const PAGE_ADMIN_CORPORATION_TITLE                            = "InfraTools - Gerência de corporações";
 	const PAGE_ADMIN_CORPORATION_UPDATE                           = "Gerência de Corporações - Atualizar";
 	const PAGE_ADMIN_CORPORATION_UPDATE_ROBOTS                    = "noindex";
-	const PAGE_ADMIN_CORPORATION_UPDATE_TITLE                     = "noindex";
+	const PAGE_ADMIN_CORPORATION_UPDATE_TITLE                     = "InfraTools - Gerência de Corporações";
 	const PAGE_ADMIN_CORPORATION_VIEW                             = "Gerência de Corporações - Vizulizar";
 	const PAGE_ADMIN_CORPORATION_VIEW_ROBOTS                      = "noindex";
 	const PAGE_ADMIN_CORPORATION_VIEW_TITLE                       = "InfraTools - Gerência de corporações";

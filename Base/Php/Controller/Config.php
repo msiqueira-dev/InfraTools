@@ -52,6 +52,14 @@ class Config
 	const FORM_FIELD_ERROR                                              = "InputAlertText";
 	const FORM_IMAGE_SUCCESS                                            = "Icons/IconInfraToolsSuccess.png";
 	const FORM_IMAGE_WARNING                                            = "Icons/IconInfraToolsWarning.png";
+	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
+	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
+	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
+	const FORM_FIELD_DESCRIPTION                                        = "FormFieldTypeUserDescription";
+	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
+	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
+	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
+	const FORM_IMAGE_ERROR                                              = "Icons/IconInfraToolsError.png";
 	const FORM_VALIDATE_FUNCTION_BOOL                                   = "VALIDATE_BOOL";
 	const FORM_VALIDATE_FUNCTION_CORPORATION_NAME                       = "VALIDATE_CORPORATION_NAME";
 	const FORM_VALIDATE_FUNCTION_COUNTRY_NAME                           = "VALIDATE_COUNTRY_NAME";
@@ -105,6 +113,8 @@ class Config
 	const PAGE_LOGIN                                                    = "Page_Login";
 	const PAGE_NOT_FOUND                                                = "Page_Not_Found";
 	const POST_BACK_FORM                                                = "HiddenTextForm";
+	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
+	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
 	const SESSION_LAST_ACTIVITY                                         = "SessionLastActivity";
 	const SESSION_LANGUAGE                                              = "SessionLanguage";
 	const SESSION_DEBUG                                                 = "SessionDebug";

@@ -14,7 +14,6 @@ Functions:
 			public function GetCorporationActiveIcon();
 			public function GetDepartmentActiveIcon();
 			public function GetUserActiveImage();
-			public function GetUserConfirmedImage();
 			public function GetUserUniqueIdImage();
 			public function SetArrayAssocUserService($ArrayAssocUserService)
 **************************************************************************/
@@ -113,14 +112,6 @@ class InfraToolsUser extends User
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->UserActive)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
-	}
-	
-	public function GetUserConfirmedImage()
-	{
-		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
-		if($this->UserConfirmed)
 			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
 		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
 	}

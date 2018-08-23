@@ -53,6 +53,9 @@ class En
 	const CORPORATION                                             = "Corporation";
 	const CORPORATION_NAME                                        = "Corporation name";
 	const CORPORATION_NOT_FOUND                                   = "Corporation not found";
+	const CORPORATION_UPDATE_ERROR                                = "Error updating corporation";
+	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                  = "A corporation with the same name exists";
+	const CORPORATION_UPDATE_SUCCESS                              = "Corporation updated successfully";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS      = "Corporations obtained successfully";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "Error obtaing corporations";
 	const COUNTRY                                                 = "Country";

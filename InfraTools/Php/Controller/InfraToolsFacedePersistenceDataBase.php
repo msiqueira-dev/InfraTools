@@ -66,7 +66,7 @@ Functions:
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug, $MySqlConnection);
 			public function DropInfraToolsDataBase($Debug, $MySqlConnection);
-			public function InfraToolsCheckDataBase($Debug $$MySqlConnection);
+			public function InfraToolsCheckDataBase($Debug $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -898,14 +898,14 @@ class InfraToolsFacedePersistenceDataBase
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeUser)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'User', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'Administrator Attendant', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'Administrator Technician', DEFAULT)");
 			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
 			                                (now(), 'Super Administrator', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
+			                                (now(), 'Administrator Technician', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
+			                                (now(), 'Administrator Attendant', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
+			                                (now(), 'User', DEFAULT)");
 			return ConfigInfraTools::SUCCESS;			 
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;

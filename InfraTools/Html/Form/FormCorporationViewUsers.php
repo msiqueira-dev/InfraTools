@@ -27,9 +27,7 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 		 "<div class='TableCorporationThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
 	echo "<th>"                                  . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
 	echo "<th>"                                  . $this->InstanceLanguageText->GetText('NAME') . "</th>";
-	echo "<th>"                                  . $this->InstanceLanguageText->GetText('COUNTRY') . "</th>";
 	echo "<th>"                                  . $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION') . "</th>";
-	echo "<th>"                                  . $this->InstanceLanguageText->GetText('CONFIRMED') . "</th>";
 	echo "<th>"                                  .
 	     "<div  class='TableCorporationThLeft'>" . $this->InstanceLanguageText->GetText('ACTIVE') . "</div>" .
 		 "<input  type='image'
@@ -63,19 +61,22 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 								     title='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' />
 		      </td>";
 		echo "<td>" . $user->GetName()      . "</td>";
-		echo "<td>" . $user->GetCountry()      . "</td>";
 		echo "<td class='TdLink'>
 		        <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
 		                             id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
 							         value='" . $user->GetUserTypeDescription() . "' 
 								     title='" . $user->GetUserTypeDescription() . "' />
 		      </td>";
-		echo "<td> 
-				<img   src='"   . $user->GetUserConfirmedImage() . "' alt='CorporationVerification' width='20' height='20' />
-			 </td>";
-		echo "<td> 
-				<img   src='"   . $user->GetUserActiveImage() . "' alt='CorporationVerification' width='20' height='20' />
-			 </td>";
+		if($user->GetUserActive())
+			echo "<td> 
+					<img   src='".$this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png' 
+			                     . "' alt='CorporationVerification' width='20' height='20' />
+				 </td>";
+		else
+			echo "<td> 
+					<img   src='".$this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png' 
+			                     . "' alt='CorporationVerification' width='20' height='20' />
+				 </td>";
 		echo "</tr>";
 	}
 	echo "</table>";

@@ -13,14 +13,14 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about type of association betweeen a user and a team.
 Functions: 
-			public function TypeAssocUserRequestingDelete($TypeAssocUserTeamId, $Debug);
-			public function TypeAssocUserRequestingInsert($TypeAssocUserTeamDescription, $Debug);
-			public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, 
-			                                              &$RowCount, $Debug);
-			public function TypeAssocUserRequestingSelectByDescription($TypeAssocUserTeamDescription,
-			                                                           &$TypeAssocUserTeam, $Debug);
-			public function TypeAssocUserRequestingSelectById($TypeAssocUserTeamId, &$TypeAssocUserTeam, $Debug);
-			public function TypeAssocUserRequestingUpdateByUserTeamId($TypeAssocUserTeamId, $TypeAssocUserTeam, $Debug);
+			public function TypeAssocUserRequestingDelete($TypeAssocUserRequestingBond, $Debug, $MySqlConnection);
+			public function TypeAssocUserRequestingInsert($TypeAssocUserRequestingBond, $Debug, $MySqlConnection);
+			public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &&ArrayAssocUserRequesting, 
+			                                              &$RowCount, $Debug, $MySqlConnection);
+			public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond,
+			                                                        &$TypeAssocUserRequesting, $Debug, $MySqlConnection);
+			public function TypeAssocUserRequestingUpdateByTypeBond($TypeAssocUserRequestingTypeBond,
+			                                                        $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -42,13 +42,6 @@ if (!class_exists("Persistence"))
 	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
 		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("TypeAssocUserRequesting"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "TypeAssocUserRequesting.php"))
-		include_once(BASE_PATH_PHP_MODEL . "TypeAssocUserRequesting.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeAssocUserRequesting');
 }
 
 class FacedePersistenceTypeAssocUserRequesting
@@ -93,11 +86,10 @@ class FacedePersistenceTypeAssocUserRequesting
         return self::$Instance;
     }
 	
-	public function TypeAssocUserRequestingDelete($TypeAssocUserTeamId, $Debug)
+	public function TypeAssocUserRequestingDelete($TypeAssocUserRequestingBond, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Query: " . Persistence::SqlTypeAssocUserTeamDelete() . "<br>";
@@ -107,22 +99,17 @@ class FacedePersistenceTypeAssocUserRequesting
 				$stmt->bind_param("i", $TypeAssocUserTeamId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED_NOT_FOUND;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED;
@@ -132,7 +119,6 @@ class FacedePersistenceTypeAssocUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 
@@ -140,11 +126,10 @@ class FacedePersistenceTypeAssocUserRequesting
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserRequestingInsert($TypeAssocUserTeamDescription, $Debug)
+	public function TypeAssocUserRequestingInsert($TypeAssocUserRequestingBond, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Query: " . Persistence::SqlTypeAssocUserTeamInsert() . "<br>";
@@ -154,15 +139,11 @@ class FacedePersistenceTypeAssocUserRequesting
 				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_CORPORATION_INSERT_FAILED;
 				}
 			}
@@ -170,22 +151,22 @@ class FacedePersistenceTypeAssocUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug)
+	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocUserRequesting,  &$RowCount, 
+												  $Debug, $MySqlConnection)
 	{
+		$errorStr = NULL; $errorCode = NULL;
 		$ArrayTypeAssocUserTeam = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamSelect() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelect());
+				echo "Query: " . Persistence::SqlTypeAssocUserRequestingSelect() . "<br>";
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
@@ -202,7 +183,6 @@ class FacedePersistenceTypeAssocUserRequesting
 						                                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID]);	
 						array_push($ArrayTypeAssocUserTeam, $InstanceTypeAssocUserTeam);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayTypeAssocUserTeam))
 						return Config::SUCCESS;
 					else 
@@ -218,28 +198,27 @@ class FacedePersistenceTypeAssocUserRequesting
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function TypeAssocUserRequestingSelectByDescription($TypeAssocUserTeamDescription, 
-															   &$TypeAssocUserTeam, $Debug)
+	
+	public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond, &$TypeAssocUserRequesting, 
+															$Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamSelectByUserTeamDescription() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByUserTeamDescription());
+				echo "Query: " . Persistence::SqlTypeAssocUserRequestingSelectByTypeBond() . "<br>";
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelectByTypeBond());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $TypeAssocUserTeam);
@@ -266,97 +245,42 @@ class FacedePersistenceTypeAssocUserRequesting
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return Config::MYSQL_CONNECTION_FAILED;
-	}
-	public function TypeAssocUserRequestingSelectById($TypeAssocUserTeamId, &$TypeAssocUserTeam, $Debug)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamSelectByUserTeamId() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByUserTeamId());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("i", $TypeAssocUserTeamId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
-				{
-					$stmt->bind_result($registerDate, $typeAssocUserTeamDescritpion, $TypeAssocUserTeamId);
-					if ($stmt->fetch())
-					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescritpion,
-																			  $TypeAssocUserTeamId);
-						return Config::SUCCESS;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FETCH_FAILED;
-					}
-				}
-				else 
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FAILED;
-				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserRequestingUpdateById($TypeAssocUserTeamDescription, $TypeAssocUserTeamId, $Debug)
+	public function TypeAssocUserRequestingUpdateByTypeBond($TypeAssocUserRequestingTypeBond, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamUpdateById() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamUpdateById());
+				echo "Query: " . Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond() . "<br>";
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond());
 			if ($stmt)
 			{
 				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserTeamId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_UPDATE_FAILED;
 				}
 			}
@@ -364,7 +288,6 @@ class FacedePersistenceTypeAssocUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

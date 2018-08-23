@@ -53,6 +53,9 @@ class De
 	const CORPORATION                                             = "";
 	const CORPORATION_NAME                                        = "";
 	const CORPORATION_NOT_FOUND                                   = "";
+	const CORPORATION_UPDATE_ERROR                                = "";
+	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                  = "";
+	const CORPORATION_UPDATE_SUCCESS                              = "";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS      = "";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "";
 	const COUNTRY                                                 = "";

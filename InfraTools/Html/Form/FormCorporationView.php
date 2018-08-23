@@ -17,7 +17,13 @@
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent">
-				<?php echo "<img   src='"   . $this->InputValueCorporationActiveIcon . "' 
+				<?php
+						if($this->InstanceInfraToolsCorporation->GetCorporationActive())
+							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png' . "' 
+                                   name='"  . ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION . "'
+                                   alt='CorporationVerification' width='20' height='20' />";
+						else
+							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png' . "' 
                                    name='"  . ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION . "'
                                    alt='CorporationVerification' width='20' height='20' />";
 				?>

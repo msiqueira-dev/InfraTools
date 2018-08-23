@@ -17,15 +17,43 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database.
 Functions: 
-			public function AssocUserCorporationDelete($CorporationName, $Email, $Debug);
-			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, $Debug);
-			public function CorporationDelete($Name, $Debug);
-			public function CorporationInsert($CorporationActive, $Name, $Debug);
-			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug);
-			public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug);
-			public function CorporationSelectByName($Name, &$CorporationInstance, $Debug);
-			public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
-			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug);
+			public function AssocTicketUserRequestingDeleteByTicketId($AssocTicketUserRequestingTicketId, $Debug, 
+			                                                          $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocTicketUserRequestingInsert($AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
+			                                                $AssocUserRequestingTicketId, $Debug, 
+															$MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocTicketUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocTicketUserRequesting, 
+			                                                &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocTicketUserRequestingSelectByUserEmail($Limit1, $Limit2, $AssocTicketUserRequestingUserEmail,
+			                                                          &$ArrayAssocTicketUserRequesting, &$RowCount,
+			                                                          $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocTicketUserRequestingSelectByTicketId($AssocTicketUserRequestingTicketId,
+			                                                          &$AssocTicketUserRequesting, 
+			                                                          $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocTicketUserRequestingUpdateByTicketId($AssocTicketUserRequestingUserBond,
+			                                                          $AssocTicketUserRequestingUserEmail, 
+			                                                          $AssocUserRequestingTicketId, $Debug, 
+																	  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocUserCorporationDelete($CorporationName, $Email, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug, 
+										        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationDelete($Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationInsert($CorporationActive, $Name, $Debug, 
+			                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
+			                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug,
+			                                               $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationSelectByName($CorporationName, &$CorporationInstance, $Debug,
+			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug,
+			                                         $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug,
+			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
 			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
@@ -48,8 +76,10 @@ Functions:
 			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug);
 			public function TeamSelectByTeamName($TeamName, &$TeamInstance, $Debug);
 			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug);
-			public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug);
-			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug);
+			public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug,
+			                                       $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug, 
+			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug);
 			public function TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeam, &$TypeAssocUserTeam, $Debug);
 			public function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$TypeAssocUserTeam, $Debug);
@@ -177,71 +207,256 @@ class FacedePersistence
         return self::$Instance;
     }
 	
-	public function AssocUserCorporationDelete($CorporationName, $Email, $Debug)
+	public function AssocTicketUserRequestingDeleteByTicketId($AssocTicketUserRequestingTicketId, $Debug, 
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$FacedePersistenceAssocTicketUserRequesting = 
+			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingDeleteByTicketId(
+			                                                                                $AssocUserServiceServiceId,
+																							$AssocUserServiceUserEmail,
+			                                                                                $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;
+	}
+	
+	public function AssocTicketUserRequestingInsert($AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
+													$AssocUserRequestingTicketId, $Debug, 
+													$MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$IFacedePersistenceAssocTicketUserRequesting = 
+			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+		$return = $IFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingInsert(
+			                                                                                $AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
+													                                        $AssocUserRequestingTicketId, 
+			                                                                                $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;
+	}
+	
+	public function AssocTicketUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocTicketUserRequesting, 
+													&$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$IFacedePersistenceAssocTicketUserRequesting = 
+			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+		$return = $IFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelect(
+			                                                                                $Limit1, $Limit2, $ArrayAssocTicketUserRequesting, 
+			                                                                                $RowCount, $Debug, 
+			                                                                                $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;
+	}
+	
+	public function AssocTicketUserRequestingSelectByUserEmail($Limit1, $Limit2, $AssocTicketUserRequestingUserEmail,
+															  &$ArrayAssocTicketUserRequesting, &$RowCount,
+															  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$FacedePersistenceAssocTicketUserRequesting = 
+			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByUserEmail(
+			                                                                                $Limit1, $Limit2,
+			                                                                                $AssocTicketUserRequestingUserEmail,
+			                                                                                $ArrayAssocTicketUserRequesting, 
+			                                                                                $RowCount, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
+	}
+	
+	public function AssocTicketUserRequestingSelectByTicketId($AssocTicketUserRequestingTicketId,
+															  &$AssocTicketUserRequesting, $Debug, 
+															  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$FacedePersistenceAssocTicketUserRequesting = 
+			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByTicketId(
+			                                                                                $AssocTicketUserRequestingTicketId,
+			                                                                                $AssocTicketUserRequesting, 
+			                                                                                $RowCount, $Debug, 
+			                                                                                $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
+	}
+	
+	public function AssocTicketUserRequestingUpdateByTicketId($AssocTicketUserRequestingUserBond,
+															  $AssocTicketUserRequestingUserEmail, 
+															  $AssocUserRequestingTicketId, $Debug, 
+															  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$FacedePersistenceAssocTicketUserRequesting = 
+			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingUpdateByTicketId(
+			                                                                                $AssocTicketUserRequestingUserBond,
+			                                                                                $AssocTicketUserRequestingUserEmail, 
+			                                                                                $AssocUserRequestingTicketId, 
+			                                                                                $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
+	}
+	
+	public function AssocUserCorporationDelete($CorporationName, $Email, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-		return $FacedePersistenceAssocUserCorporation->AssocUserCorporationDelete($CorporationName, $Email, $Debug);
+		$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationDelete($CorporationName, $Email, 
+																				  $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, $Debug)
+	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, $Debug,
+											   $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-		return $FacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
-																		          $RegistrationId, $Email, $Debug);
+		$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
+																		          $RegistrationId, $Email, $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug)
+	public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
-		return $FacedePersistenceAssocUserTeam->AssocUserTeamDelete($TeamId, $UserEmail, $Debug);
+		$return = $FacedePersistenceAssocUserTeam->AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug)
+	public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug, 
+										$MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
-		return $FacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug);
+		$return = $FacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, 
+		     														   $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationDelete($Name, $Debug)
+	public function CorporationDelete($Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationDelete($Name, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationDelete($Name, $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationInsert($CorporationActive, $Name, $Debug)
+	public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationInsert($CorporationActive, $Name, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
+	public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
+									  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation, $RowCount, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation, $RowCount, 
+																   $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
+	public function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
+											$MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationSelectActive($Limit1, $Limit2, 
+																		 $ArrayInstanceCorporation, $RowCount,
+																		 $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationSelectByName($Name, &$CorporationInstance, $Debug)
+	public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug,
+												   $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationSelectByName($Name, $CorporationInstance, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, $Debug,
+																			   $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
+	public function CorporationSelectByName($CorporationName, &$CorporationInstance, $Debug, 
+											$MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationSelectNoLimit($ArrayInstanceCorporation, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationSelectByName($CorporationName, $CorporationInstance, 
+																		 $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
-	public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug)
+	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-		return $FacedePersistenceCorporation->CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug);
+		$return = $FacedePersistenceCorporation->CorporationSelectNoLimit($ArrayInstanceCorporation, $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
+	}
+	
+	public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug,
+											$MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$FacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
+		$return = $FacedePersistenceCorporation->CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, 
+																		 $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
 	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug)
