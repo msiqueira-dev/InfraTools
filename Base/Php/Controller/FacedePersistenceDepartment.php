@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about a corporation's department.
 Functions: 
-			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug);
+			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
 			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
 			public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
@@ -101,36 +101,30 @@ class FacedePersistenceDepartment
         return self::$Instance;
     }
 	
-	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug)
+	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Query: " . Persistence::SqlDepartmentDelete() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentDelete());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_DEPARTMENT_DELETE_FAILED;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_DEPARTMENT_DELETE_FAILED;
@@ -139,7 +133,7 @@ class FacedePersistenceDepartment
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

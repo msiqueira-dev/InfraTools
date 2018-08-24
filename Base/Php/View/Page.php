@@ -339,7 +339,7 @@ abstract class Page
 	protected function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $FacedePersistence->CorporationSelectNoLimit($ArrayInstanceCorporation, 
+		return $instanceFacedePersistence->CorporationSelectNoLimit($ArrayInstanceCorporation, 
 															          $Debug);
 	}
 	

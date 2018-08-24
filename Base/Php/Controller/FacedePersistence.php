@@ -54,7 +54,8 @@ Functions:
 			                                         $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug,
 			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug);
+			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug,
+			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
 			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
 			public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
@@ -459,10 +460,16 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug)
+	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$FacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-		return $FacedePersistenceDepartment->DepartmentDelete($CorporationName, $DepartmentName, $Debug);
+		$return = $FacedePersistenceDepartment->DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection);
+		
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;	
 	}
 	
 	public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug)

@@ -337,33 +337,36 @@ function ValidateEmail(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId,
 	var $submit = document.getElementsByName(SubmitId)[0];
     var $filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	
-	if($input.className == "Hidden ")
-		return false;
-	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
+	if($input != null)
 	{
-		if (!$filter.test($input.value)) 
-		{
-			$input.focus;
-			if(HighlightInput == true)
-				$input.className = DefaultInputClass + " InputAlertText";
-			$submit.className = DefaultSubmitClass + " SubmitDisabled";
-			$submit.disabled = true;
+		if($input.className == "Hidden ")
 			return false;
+		if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
+		{
+			if (!$filter.test($input.value)) 
+			{
+				$input.focus;
+				if(HighlightInput == true)
+					$input.className = DefaultInputClass + " InputAlertText";
+				$submit.className = DefaultSubmitClass + " SubmitDisabled";
+				$submit.disabled = true;
+				return false;
+			}
+			else
+			{
+				$input.className = DefaultInputClass + " InputAfterText";
+				$submit.className = DefaultSubmitClass + " SubmitEnabled";
+				$submit.disabled = false;
+				return true;
+			}
 		}
 		else
 		{
 			$input.className = DefaultInputClass + " InputAfterText";
-			$submit.className = DefaultSubmitClass + " SubmitEnabled";
-			$submit.disabled = false;
-			return true;
+			$submit.className = DefaultSubmitClass + " SubmitDisabled";
+			$submit.disabled = true;
+			return false;
 		}
-	}
-	else
-	{
-		$input.className = DefaultInputClass + " InputAfterText";
-		$submit.className = DefaultSubmitClass + " SubmitDisabled";
-		$submit.disabled = true;
-		return false;
 	}
 }
 
