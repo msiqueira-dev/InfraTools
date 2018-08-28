@@ -12,7 +12,6 @@ Dependencies:
 Description: 
 			Classe que trata da administração dos tipos de usuários.
 Functions: 
-			protected function ExecuteDepartmentDelete();
 			protected function ExecuteDepartmentInsert();
 			protected function ExecuteDepartmentSelectUsers($Limit1, $Limit2, &$RowCount);
 			protected function DepartmentUpdateDepartmentByDepartmentAndCorporation();
@@ -51,37 +50,6 @@ class PageAdminDepartment extends PageInfraTools
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	protected function ExecuteDepartmentDelete()
-	{
-		if($this->InstanceDepartment != NULL)
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->DepartmentDelete(
-				$this->InstanceDepartment->GetDepartmentCorporationName(),
-				$this->InstanceDepartment->GetDepartmentName(), 
-				$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_DELETE_SUCCESS', $this->Language); 
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			else
-			{
-				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS', 
-																				 $this->Language);	
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
 	}
 	
 	protected function ExecuteDepartmentInsert()
@@ -529,7 +497,9 @@ class PageAdminDepartment extends PageInfraTools
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
 														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteDepartmentDelete() == ConfigInfraTools::SUCCESS)
+				if($this->DepartmentDelete($this->InstanceDepartment->GetDepartmentName(),
+					                       $this->InstanceDepartment->GetDepartmentCorporationName(),
+										   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_DEPARTMENT);

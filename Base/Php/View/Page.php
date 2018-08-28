@@ -14,31 +14,46 @@ Description:
             dentre outras funcionalidades ligadas a uma página Web.
 			Padroes: Singleton.
 Methods: 
-				abstract protected function GetCurrentPage();
-				abstract protected function LoadHtml();
-				private       function        CheckPostLanguage();
-				protected     function        CorporationDelete($CorporationName, $Debug);
-				protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
-				protected     function        CorporationLoadData(&$InstanceCorporation);
-				protected     function        CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug);
-				protected     function        CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, 
-				                                                      &$RowCount, $Debug)
-				protected     function        CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
-				protected     function        CorporationSelectByName($CorporationName, &$InstanceCorporation, $Debug);
-				protected     function        CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
-				protected     function        CorporationUpdate($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug);
-				public        function        CheckInputImage($Input);
-				public        function        GetPageFileDefaultLanguageByDir($DirPath);
-				public        function        IncludeHeadAll($Page);
-				public        function        IncludeHeadGeneric();
-				public        function        IncludeHeadJavaScript();
-				public        function        LoadPageDependencies(&$InstanceLanguage, &$Language)
-				public        function        RedirectPage($Page);
-				public static function        AlertMessage($Message);
-				public static function        GetCurrentDomain(&$currentDomain);
-				public static function        GetCurrentDomainWithPort(&$currentDomain);
-				public static function        GetCurrentURL(&$pageUrl);
-				public static function        TagOnloadFocusField($Form, $Field)
+		abstract protected function GetCurrentPage();
+		abstract protected function LoadHtml();
+		private       function        CheckPostLanguage();
+		protected     function        CorporationDelete($CorporationName, $Debug);
+		protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
+		protected     function        CorporationLoadData(&$InstanceCorporation);
+		protected     function        CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug);
+		protected     function        CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, 
+															  &$RowCount, $Debug)
+		protected     function        CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
+		protected     function        CorporationSelectByName($CorporationName, &$InstanceCorporation, $Debug);
+		protected     function        CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
+		protected     function        CorporationUpdate($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug);
+		protected     function        CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug);
+		protected     function        DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
+		protected     function        DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
+		protected     function        DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
+		protected     function        DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
+													                &$ArrayInstanceDepartment, &$RowCount, $Debug);
+		protected     function        DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug);
+		protected     function        DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug);
+		protected     function        DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
+																		                 &$DepartmentInstance, $Debug);
+		protected     function        DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug);
+		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName,$DepartmentInitaisl,
+																			        $DepartmentNameNew, $DepartmentNameOld, $Debug);
+		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
+																			         $CorporationNameOld, $Debug);
+		public        function        CheckInputImage($Input);
+		public        function        GetPageFileDefaultLanguageByDir($DirPath);
+		public        function        IncludeHeadAll($Page);
+		public        function        IncludeHeadGeneric();
+		public        function        IncludeHeadJavaScript();
+		public        function        LoadPageDependencies(&$InstanceLanguage, &$Language)
+		public        function        RedirectPage($Page);
+		public static function        AlertMessage($Message);
+		public static function        GetCurrentDomain(&$currentDomain);
+		public static function        GetCurrentDomainWithPort(&$currentDomain);
+		public static function        GetCurrentURL(&$pageUrl);
+		public static function        TagOnloadFocusField($Form, $Field);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -266,21 +281,21 @@ abstract class Page
 	protected function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $FacedePersistence->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation, 
+		return $instanceFacedePersistence->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation, 
 															   $RowCount, $Debug);
 	}
 	
 	protected function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $FacedePersistence->CorporationSelectActive($Limit1, $Limit2, $ArrayInstanceCorporation, 
+		return $instanceFacedePersistence->CorporationSelectActive($Limit1, $Limit2, $ArrayInstanceCorporation, 
 															         $RowCount, $Debug);
 	}
 	
 	protected function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $FacedePersistence->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, 
+		return $instanceFacedePersistence->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, 
 															                $Debug);
 	}
 	
@@ -430,6 +445,38 @@ abstract class Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							                      Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return Config::FORM_FIELD_ERROR;
+		}
+	}
+	
+	protected function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		return $instanceFacedePersistence->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, 
+													     $RowCount, $Debug);
+	}
+	
+	protected function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_DELETE_SUCCESS', $this->Language); 
+			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			return $return;
+		}
+		else
+		{
+			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS', 
+																			 $this->Language);	
+			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_DELETE_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
 		}
 	}
 	

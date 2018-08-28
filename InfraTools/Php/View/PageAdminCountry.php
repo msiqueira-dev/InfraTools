@@ -71,7 +71,6 @@ class PageAdminCountry extends PageInfraTools
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->Page = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
@@ -88,7 +87,7 @@ class PageAdminCountry extends PageInfraTools
 				$this->InputLimitOne = 0;
 			if($this->InputLimitTwo <= 0)
 				$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
@@ -98,7 +97,7 @@ class PageAdminCountry extends PageInfraTools
 		{
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
@@ -114,7 +113,7 @@ class PageAdminCountry extends PageInfraTools
 					$this->InputLimitOne = $rowCount - 25;
 					$this->InputLimitTwo = $rowCount;
 				}
-				$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+				$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
@@ -125,7 +124,7 @@ class PageAdminCountry extends PageInfraTools
 		{
 			$this->InputLimitOne = 0;
 			$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
