@@ -13,19 +13,12 @@ Dependencies:
 Description: 
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
-			private function ExecuteLoginFirstPhaseVerification();
-			private function ExecuteLoginSecondPhaseVerirication();
-			private function ExecuteLogOut();
-			private function SendTwoStepVerificationCode($Email, $Name);
-			protected function CorporationDelete();
-			protected function CorporationLoadData();
-			protected function CorporationSelectByName($Name);f
 			protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
-			protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug);
+			protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation,
+			                                                                $Debug);
 			protected function CorporationSelectUsers($Limit1, $Limit2, &$RowCount);
-			protected function CorporationUpdate();
 			protected function DepartmentLoadData();
 			protected function DepartmentSelectByDepartmentName($DepartmentName);
 			protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName);
@@ -153,8 +146,6 @@ Methods:
 			protected function UserUpdateCorporationInformation($SelectedUser);
 			public function CheckInstanceUser();
 			public function CheckLogin();
-			public function CheckPageRequiresLogin();
-			public function LoadPageInfraToolsDependencies();
 			public function LoadPageInfraToolsDependenciesDebug();
 			public function LoadPageInfraToolsDependenciesDevice();
 **************************************************************************/
@@ -176,8 +167,6 @@ abstract class PageInfraTools extends Page
 	/* Instância usadas nessa classe */
 	public    $ArrayInstanceDepartment          = NULL;
 	protected $FacedeBusinessInfraTools         = NULL;
-	protected $InstanceInfraToolsUser           = NULL;
-	protected $InstanceLanguageText             = NULL;
 	protected $InstanceMobileDetectInfraTools   = NULL;
 	protected $Session                          = NULL;
 	public    $InstanceInfraToolsUserAdmin      = NULL;
@@ -197,20 +186,11 @@ abstract class PageInfraTools extends Page
 	public $InputValueBirthDateYear                              = "";
 	public $InputValueCaptcha                                    = "";
 	public $InputValueCode                                       = "";
-	public $InputValueCorporationActive                          = "";
-	public $InputValueCorporationName                            = "";
 	public $InputValueCountry                                    = "";
-	public $InputValueDepartmentActive                           = "";
-	public $InputValueDepartmentInitials                         = "";
-	public $InputValueDepartmentName                             = "";
-	public $InputValueDepartmentNameAndCorporationNameRadio      = "";
-	public $InputValueDepartmentNameRadio                        = "";
 	public $InputValueGender                                     = "";
 	public $InputValueHeaderDebug                                = ConfigInfraTools::CHECKBOX_UNCHECKED;
 	public $InputValueHeaderLayout                               = ConfigInfraTools::CHECKBOX_UNCHECKED;
 	public $InputValueId                                         = "";
-	public $InputValueLoginEmail                                 = "";
-	public $InputValueLoginPassword                              = "";
 	public $InputValueNewPassword                                = "";
 	public $InputValueRegion                                     = "";
 	public $InputValueRegisterDate                               = "";
@@ -238,6 +218,7 @@ abstract class PageInfraTools extends Page
 	public $InputValueTeamName                                   = "";
 	public $InputValueTicketDescription                          = "";
 	public $InputValueTicketTitle                                = "";
+	public $InputValueTicketType                                 = "";
 	public $InputValueTwoStepVerification                        = "";
 	public $InputValueTypeAssocUserServiceDescription            = "";
 	public $InputValueTypeAssocUserServiceId                     = "";
@@ -274,18 +255,10 @@ abstract class PageInfraTools extends Page
 	public $ReturnBirthDateYearClass                             = "";
 	public $ReturnCaptchaClass                                   = "";
 	public $ReturnCaptchaText                                    = "";
-	public $ReturnCorporationClass                               = "";
-	public $ReturnCorporationText                                = "";
 	public $ReturnCodeClass                                      = "";
 	public $ReturnCodeText                                       = "";
-	public $ReturnCorporationNameClass                           = "";
-	public $ReturnCorporationNameText                            = "";
 	public $ReturnCountryClass                                   = "";
 	public $ReturnCountryText                                    = "";
-	public $ReturnDepartmentInitialsClass                        = "";
-	public $ReturnDepartmentInitialsText                         = "";
-	public $ReturnDepartmentNameClass                            = "";
-	public $ReturnDepartmentNameText                             = "";
 	public $ReturnEmailClass                                     = "";
 	public $ReturnEmailText                                      = "";
 	public $ReturnEmptyText                                      = "";
@@ -340,6 +313,8 @@ abstract class PageInfraTools extends Page
 	public $ReturnTicketDescriptionText                          = "";
 	public $ReturnTicketTitleClass                               = "";
 	public $ReturnTicketTitleText                                = "";
+	public $ReturnTicketTypeClass                                = "";
+	public $ReturnTicketTypeText                                 = "";
 	public $ReturnText                                           = "";
 	public $ReturnTypeAssocUserServiceDescriptionClass           = "";
 	public $ReturnTypeAssocUserServiceDescriptionText            = "";
@@ -393,7 +368,7 @@ abstract class PageInfraTools extends Page
 	protected static $Instance;
 	
 	/* Get Instance */
-	public static function __create()
+	public static function __create($Language)
 	{
 		if (!isset(self::$Instance)) 
 		{
@@ -404,270 +379,19 @@ abstract class PageInfraTools extends Page
 	}
 
 	/* Constructor */
-	protected function __construct() 
+	protected function __construct($Language) 
 	{
 		$this->Factory = InfraToolsFactory::__create();
-		$this->Session = $this->Factory->CreateSession();
 		$this->Config  = $this->Factory->CreateConfigInfraTools();
+		parent::__construct($Language);
+		$this->LoadPageInfraToolsDependenciesDevice();
+		$this->LoadPageInfraToolsDependenciesDebug();
 	}
 	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	private function ExecuteLoginFirstPhaseVerification()
-	{
-		$this->InstanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
-		if (strpos($this->InputValueLoginEmail, '@') !== false) 
-		{
-			$return = $this->InstanceInfraToolsFacedePersistence->UserCheckPasswordByEmail($this->InputValueLoginEmail, 
-					                                                            $this->InputValueLoginPassword, 
-																				$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $this->InstanceInfraToolsFacedePersistence->UserInfraToolsSelectByEmail(
-					                                                          $this->InputValueLoginEmail, 
-																			  $userInfraTools, $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-					$return = $this->InstanceInfraToolsFacedePersistence->UserSelectTeamByUserEmail($userInfraTools,
-																				 	  $this->InputValueHeaderDebug);
-			}
-		}
-		else
-		{
-			$return = $this->InstanceInfraToolsFacedePersistence->UserCheckPasswordByUserUniqueId(
-			                                                                    $this->InputValueLoginEmail, 
-					                                                            $this->InputValueLoginPassword, 
-																				$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $this->InstanceInfraToolsFacedePersistence->UserInfraToolsSelectByUserUniqueId(
-					                                                          $this->InputValueLoginEmail, 
-																			  $userInfraTools, $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-					$return = $this->InstanceInfraToolsFacedePersistence->UserSelectTeamByUserEmail($userInfraTools,
-																				 	  $this->InputValueHeaderDebug);
-			}
-		}
-		if($return == ConfigInfraTools::SUCCESS || $return == ConfigInfraTools::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
-		{
-			$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness(
-																						   $this->InstanceLanguageText);
-			$this->InstanceInfraToolsFacedeBusiness->GetIpAddressClient(true, $ip);
-			$this->InstanceInfraToolsFacedeBusiness->GetOperationalSystem(true, $operationalSystem);
-			$this->InstanceInfraToolsFacedeBusiness->GetBrowserClient(true, $browser);
-			$sessionId = $userInfraTools->GetHashCode() . "-" .		
-						 $ip . "-" .
-						 $operationalSystem . "-" .
-						 $browser;
-			$this->InstanceBaseSession->CreatePersonalized($this->Config->DefaultApplicationName,
-														  $sessionId,
-														  $this->Config->SessionTime);
-			$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESSION_DEVICE_LAYOUT, 
-														   $this->InputValueHeaderLayout);
-			$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION);
-			if($userInfraTools->GetUserActive())
-			{
-				if($userInfraTools->GetUserConfirmed())
-				{	
-					$this->InstanceInfraToolsUser = $userInfraTools;
-					if($this->InstanceInfraToolsUser->GetSessionExpires() == FALSE)
-						$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESSION_LAST_ACTIVITY,
-																	ConfigInfraTools::SESSION_UNLIMITED);
-					$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESSION_USER, 
-																$this->InstanceInfraToolsUser);
-					if($userInfraTools->GetTwoStepVerification()) 
-					{
-						if($this->SendTwoStepVerificationCode($userInfraTools->GetEmail(),
-															  $userInfraTools->GetName()) 
-															  == ConfigInfraTools::SUCCESS)
-							return ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
-						else
-						{
-							$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																		  'LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED', 
-																		  $this->Language);
-							$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-							$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-							return ConfigInfraTools::ERROR;
-						}
-					}
-					return ConfigInfraTools::SUCCESS;
-				}
-				else
-				{	
-					$this->InstanceInfraToolsUser = $userInfraTools;
-					$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESSION_USER, 
-															   $this->InstanceInfraToolsUser);
-					$this->LoadNotConfirmedToolTip();
-					return ConfigInfraTools::WARNING;
-				}
-			}
-			else
-			{
-				$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																		  'USER_INACTIVE', 
-																		  $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
-		}
-		else
-		{
-			$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																		  'LOGIN_INVALID_LOGIN', 
-																		  $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}		
-	}
-	
-	private function ExecuteLoginSecondPhaseVerirication()
-	{
-		if (isset($_POST[ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
-		{
-			$this->InputValueCode = $_POST[ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_CODE];
-			$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION, $value);
-			if($this->InputValueCode == $value)
-				return ConfigInfraTools::SUCCESS;
-			else return ConfigInfraTools::ERROR;
-		}
-		else
-		{
-			$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::SESSION_USER);
-			$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::SESSION_DEBUG);
-		}
-	}
-	
-	private function ExecuteLogOut()
-	{
-		$this->InstanceBaseSession->DestroyCustomSession();
-		$this->InstanceInfraToolsUser = NULL;
-	}
-	
-	private function SendTwoStepVerificationCode($Email, $Name)
-	{
-		$FacedeBusinessInfraTools = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
-		$code = $FacedeBusinessInfraTools->GenerateRandomCode();
-		$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION,
-													$code);
-		if($FacedeBusinessInfraTools->SendEmailLoginTwoStepVerificationCode($Email,
-																					$Name,
-																					$code,
-																					$this->InputValueHeaderDebug) 
-		                                                                            == ConfigInfraTools::SUCCESS)
-			return ConfigInfraTools::SUCCESS;
-	}
-	
-	protected function ExecuteCorporationDelete()
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->CorporationDelete(
-				$this->InstanceInfraToolsCorporation->GetCorporationName(), 
-				$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_DELETE_SUCCESS', $this->Language); 
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							           ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			else
-			{
-				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT', 
-																				 $this->Language);	
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-	}
-	
-	protected function CorporationLoadData()
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			if($this->InstanceInfraToolsCorporation->GetCorporationActive())
-			{
-				$this->InputValueCorporationActive     = "checked"; 
-				$this->InputValueCorporationActiveIcon = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			}
-			else 
-			{
-				$this->InputValueCorporationActive = "";
-				$this->InputValueCorporationActiveIcon = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
-			}
-			$this->InputValueCorporationName       = $this->InstanceInfraToolsCorporation->GetCorporationName();
-			$this->InputValueRegisterDate          = $this->InstanceInfraToolsCorporation->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	protected function CorporationSelectByName($Name)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueCorporationName = $Name;
-		$arrayConstants = array(); $matrixConstants = array();
-			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 80; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->CorporationInfraToolsSelectByName($this->InputValueCorporationName, 
-																			          $this->InstanceInfraToolsCorporation, 
-																					  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceInfraToolsCorporation);
-				return $return;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
 	}
 	
 	protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, 
@@ -720,97 +444,6 @@ abstract class PageInfraTools extends Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	protected function CorporationSelectUsers($Limit1, $Limit2, &$RowCount)
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			$this->ArrayInstanceInfraToolsCorporationUsers = NULL;
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByCorporation(
-				$this->InstanceInfraToolsCorporation->GetCorporationName(),
-				$Limit1, $Limit2,
-				$this->ArrayInstanceInfraToolsCorporationUsers, $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-				return ConfigInfraTools::SUCCESS;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_CORPORATION_SELECT_USERS_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-	}
-	
-	protected function CorporationUpdate()
-	{
-		if($this->InstanceInfraToolsCorporation != NULL)
-		{
-			$PageForm = $this->Factory->CreatePageForm();
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$this->InputValueCorporationName       = $_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME];
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE]))
-				$this->InputValueCorporationActive = TRUE;
-			else $this->InputValueCorporationActive = FALSE;
-			$arrayConstants = array(); $matrixConstants = array();
-			
-			//VALIDA NOME DE CORPORAÇÃO
-			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
-			$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
-			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-			$arrayElementsInput[0]        = $this->InputValueCorporationName; 
-			$arrayElementsMinValue[0]     = 0; 
-			$arrayElementsMaxValue[0]     = 80; 
-			$arrayElementsNullable[0]     = FALSE;
-			$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-			array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-
-			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-													$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-													$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-													$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-													$matrixConstants, $arrayOptions);
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $FacedePersistenceInfraTools->CorporationUpdateByName($this->InputValueCorporationActive,
-																	$this->InputValueCorporationName,
-																	$this->InstanceInfraToolsCorporation->GetCorporationName(),
-																	$this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->InstanceInfraToolsCorporation->SetCorporationActive($this->InputValueCorporationActive);
-					$this->InstanceInfraToolsCorporation->SetCorporationName($this->InputValueCorporationName);
-					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-															 $this->InstanceInfraToolsCorporation);
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					return $return;
-				}
-				else
-				{
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					return ConfigInfraTools::ERROR;
-				}
-			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_FIELD_ERROR;
-			}
 		}
 	}
 	
@@ -1062,10 +695,10 @@ abstract class PageInfraTools extends Page
 	protected function PageFormLoad()
 	{
 		$arrayPageForm = array();
-		if($this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber) 
+		if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber) 
 		                                               == ConfigInfraTools::SUCCESS)
 		{
-			if($this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm) 
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm) 
 			                                               == ConfigInfraTools::SUCCESS)
 			{
 				if(isset($arrayPageForm[$pageFormNumber-1]))
@@ -1074,8 +707,8 @@ abstract class PageInfraTools extends Page
 					array_pop($arrayPageForm);
 					$pageFormNumber--;
 				}
-				$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
-				$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
 			}
 		}
 	}
@@ -1083,10 +716,10 @@ abstract class PageInfraTools extends Page
 	protected function PageFormRemoveLast()
 	{
 		$arrayPageForm = array();
-		if($this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber) 
+		if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber) 
 		                                               == ConfigInfraTools::SUCCESS)
 		{
-			if($this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm) 
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm) 
 			                                               == ConfigInfraTools::SUCCESS)
 			{
 				if(isset($arrayPageForm[$pageFormNumber-1]))
@@ -1094,19 +727,19 @@ abstract class PageInfraTools extends Page
 					array_pop($arrayPageForm);
 					$pageFormNumber--;
 				}
-				$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
-				$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
 			}
 		}
 	}
 	
 	protected function PageFormSave()
 	{
-		$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
+		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
 		if(isset($pageFormNumber)) 
 			$pageFormNumber++;
 		else $pageFormNumber = 0;
-		$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
+		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
 		if(isset($arrayPageForm)) 
 			array_push($arrayPageForm, $_POST);
 		else 
@@ -1114,8 +747,8 @@ abstract class PageInfraTools extends Page
 			$arrayPageForm = array();
 			array_push($arrayPageForm, $_POST);
 		}
- 		$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
-		$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
+ 		$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
+		$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
 	}
 	
 	protected function ServiceDeleteById($ServiceId, $UserEmail, $Debug)
@@ -3844,7 +3477,7 @@ abstract class PageInfraTools extends Page
 	protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification)
 	{
 		if($InstanceUserInfraTools == NULL)
-			$InstanceUserInfraTools = $this->InstanceInfraToolsUser;
+			$InstanceUserInfraTools = $this->User;
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$return = $FacedePersistenceInfraTools->UserUpdateTwoStepVerificationByEmail(
 																				   $InstanceUserInfraTools->GetEmail(), 
@@ -3884,7 +3517,7 @@ abstract class PageInfraTools extends Page
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $Email;
-		if($Email != $this->InstanceInfraToolsUser->GetEmail())
+		if($Email != $this->User->GetEmail())
 		{
 			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->InputValueUserEmail, 
 																			    $this->InstanceInfraToolsUserAdmin, 
@@ -3966,7 +3599,7 @@ abstract class PageInfraTools extends Page
 				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationId();
 			if($this->InstanceInfraToolsUserAdmin->GetArrayAssocUserTeam() != NULL)
 			{
-				foreach ($this->InstanceInfraToolsUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
+				foreach ($this->User->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
 				{
 					if($index == 0)
 						$this->InputValueUserTeam = $assocUserTeam->GetTeamName();
@@ -4249,7 +3882,7 @@ abstract class PageInfraTools extends Page
 		{
 			//VALIDA CAPTCHA
 			$this->InputValueCaptcha       = $_POST[ConfigInfraTools::FORM_CAPTCHA_REGISTER];
-			$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_REGISTER, $captcha);
+			$this->Session->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_REGISTER, $captcha);
 			//FORM_CAPTCHA_REGISTER
 			$arrayElements[14]             = ConfigInfraTools::FORM_CAPTCHA_REGISTER;
 			$arrayElementsClass[14]        = &$this->ReturnCaptchaClass;
@@ -4825,457 +4458,20 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	public function CheckInstanceUser()
-	{
-		if($this->InstanceInfraToolsUser != NULL)
-		{
-			if($this->InstanceInfraToolsUser->GetUserConfirmed())
-			{
-				if($this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION, 
-															   $value) != ConfigInfraTools::SUCCESS)
-					return ConfigInfraTools::SUCCESS;
-				else return ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
-			}
-			else return ConfigInfraTools::USER_NOT_CONFIRMED;
-		}
-		else return ConfigInfraTools::USER_NOT_LOGGED_IN;
-	}
-	
-	
-	public function CheckLogin()
-	{
-		if (isset($_POST[ConfigInfraTools::LOGIN_FORM_SUBMIT]))
-		{
-			$this->InputValueLoginEmail     = $_POST[ConfigInfraTools::LOGIN_USER];
-			$this->InputValueLoginPassword  = $_POST[ConfigInfraTools::LOGIN_PASSWORD];
-			//VALIDA LOGIN
-			if(!empty($this->InputValueLoginEmail) && !empty($this->InputValueLoginPassword))
-			{
-				if(strlen($this->InputValueLoginEmail) < 45 && strlen($this->InputValueLoginPassword) < 20)
-					return $this->ExecuteLoginFirstPhaseVerification();
-				else
-				{
-					$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																				  'LOGIN_INVALID_LOGIN', 
-																				  $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-			}
-			else
-			{
-				$this->ReturnEmptyText = $this->InstanceLanguageText->GetConstant('FILL_REQUIRED_FIELDS', 
-																					  $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
-		}
-		elseif(isset($_POST[ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
-		{
-			if($this->ExecuteLoginSecondPhaseVerirication() == ConfigInfraTools::SUCCESS)
-			{
-				$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION);
-				return ConfigInfraTools::SUCCESS;	
-			}
-			else 
-			{
-				$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																			  'LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR', 
-																			  $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-				$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION);	
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		elseif(isset($_POST[ConfigInfraTools::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD]))
-		{
-			$this->InputValueLoginEmail     = $_POST[ConfigInfraTools::LOGIN_USER];
-			Page::GetCurrentDomain($domain);
-			if($this->InputValueLoginEmail != "")
-				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
-				                              str_replace('_', '', ConfigInfraTools::PAGE_PASSWORD_RECOVERY) . '?=' . 
-									                               $this->InputValueLoginEmail);
-			else $this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
-				                              str_replace('_', '', ConfigInfraTools::PAGE_PASSWORD_RECOVERY));
-		}
-	}
-	
-	public function CheckPageRequiresLogin()
-	{
-		if($this->Page == ConfigInfraTools::PAGE_ACCOUNT ||
-		   $this->Page == ConfigInfraTools::PAGE_ADMIN ||
-		   $this->Page == ConfigInfraTools::PAGE_ADMIN_CORPORATION || 
-		   $this->Page == ConfigInfraTools::PAGE_ADMIN_COUNTRY ||
-		   $this->Page == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT ||
-		   $this->Page == ConfigInfraTools::PAGE_ADMIN_USER ||
-		   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_USER ||
-	  	   $this->Page == ConfigInfraTools::PAGE_CORPORATION || 
-		   $this->Page == ConfigInfraTools::PAGE_CHECK || 
-		   $this->Page == ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS || 
-		   $this->Page == ConfigInfraTools::PAGE_GET ||
-		   $this->Page == ConfigInfraTools::PAGE_NOTIFICATION || 
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_CORPORATION ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_DEPARTMENT ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_TYPE_SERVICE ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_USER ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_REGISTER ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_SELECT ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_UPDATE ||
-		   $this->Page == ConfigInfraTools::PAGE_SERVICE_VIEW ||
-		   $this->Page == ConfigInfraTools::PAGE_SUPPORT ||
-		   $this->Page == ConfigInfraTools::PAGE_TEAM)
-				return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	public function LoadPageInfraToolsDependencies()
-	{
-		$loadPage = TRUE;
-		$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_NOT_FOUND);
-		$this->InstanceBaseSession = $this->Factory->CreateSession();
-		$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_LANGUAGE, $this->Language);
-		$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, $this->InstanceInfraToolsUser);
-		$this->LoadPageDependencies($this->Language);
-		if($this->CheckInstanceUser() != ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::SESS_LOGIN_TWO_STEP_VERIFICATION);
-		//LOG OUT
-		if(isset($_POST[ConfigInfraTools::POST_BACK_FORM]))
-		{
-			if ($_POST[ConfigInfraTools::POST_BACK_FORM] == ConfigInfraTools::LOG_OUT && $this->InstanceInfraToolsUser != NULL)
-				$this->ExecuteLogOut();
-		}
-		//PAGE ABOUT
-		if($this->Page == ConfigInfraTools::PAGE_ABOUT)
-		{
-			if(!$this->Config->PageAboutEnabled)
-				$loadPage = FALSE;
-		}
-		//PAGE ACCOUNT
-		elseif($this->Page == ConfigInfraTools::PAGE_ACCOUNT)
-		{
-			if(!$this->Config->PageAccountEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$return = $this->CheckInstanceUser();
-				if($return == ConfigInfraTools::USER_NOT_LOGGED_IN)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-				
-			}
-		}
-		//PAGE ADMIN
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN || $this->Page == ConfigInfraTools::PAGE_ADMIN_CORPORATION ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_COUNTRY ||  $this->Page == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_MONITORING || $this->Page == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_SERVICE || 
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TEAM || $this->Page == ConfigInfraTools::PAGE_ADMIN_TECH_INFO ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TICKET ||  
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET || 
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET ||
-			   $this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_USER || $this->Page == ConfigInfraTools::PAGE_ADMIN_USER)
-		{
-			if(!$this->Config->PageAdminEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$loginStatus = $this->CheckInstanceUser();
-				
-				if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-				   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-				if(!isset($this->InstanceInfraToolsUser))
-					$loadPage = FALSE;
-				elseif(!$this->InstanceInfraToolsUser->CheckSuperUser())
-					$loadPage = FALSE;
-			}
-		}
-		//PAGE CHECK
-		elseif($this->Page == ConfigInfraTools::PAGE_CHECK)
-		{
-			if(!$this->Config->PageCheckEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$return = $this->CheckInstanceUser();
-				if($return == ConfigInfraTools::USER_NOT_LOGGED_IN || $return == ConfigInfraTools::USER_NOT_CONFIRMED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, $this->InstanceInfraToolsUser);
-					if($return == ConfigInfraTools::USER_NOT_CONFIRMED)
-						$this->LoadNotConfirmedToolTip();
-				}
-			}
-		}
-		//PAGE CONTACT
-		elseif($this->Page == ConfigInfraTools::PAGE_CONTACT)
-		{
-			if(!$this->Config->PageContactEnabled)
-				$loadPage = FALSE;
-		}
-		//PAGE COPORATION
-		elseif($this->Page == ConfigInfraTools::PAGE_CORPORATION)
-		{
-			if(!$this->Config->PageCorporationEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$loginStatus = $this->CheckInstanceUser();
-				if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-				   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-			}
-		}
-		//PAGE DIAGNOSTIC TOOLS
-		elseif($this->Page == ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS)
-		{
-			if(!$this->Config->PageDiagnosticToolsEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$loginStatus = $this->CheckInstanceUser();
-				if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-				   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-			}
-		}
-		//PAGE GET
-		elseif($this->Page == ConfigInfraTools::PAGE_GET)
-		{
-			if(!$this->Config->PageGetEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$return = $this->CheckInstanceUser();
-				if($return == ConfigInfraTools::USER_NOT_LOGGED_IN || $return == ConfigInfraTools::USER_NOT_CONFIRMED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-					if($return == ConfigInfraTools::USER_NOT_CONFIRMED)
-						$this->LoadNotConfirmedToolTip();
-				}
-			}
-		}
-		//PAGE HOME
-		elseif($this->Page == ConfigInfraTools::PAGE_HOME)
-		{
-			if(!$this->Config->PageHomeEnabled)
-				$loadPage = FALSE;
-		}
-		//PAGE INSTALL
-		elseif($this->Page == ConfigInfraTools::PAGE_INSTALL)
-		{
-			if(!$this->Config->PageInstallEnabled)
-				$loadPage = FALSE;
-		}
-		//PAGE LOGIN
-		elseif($this->Page == ConfigInfraTools::PAGE_LOGIN)
-		{
-			if(!$this->Config->PageLoginEnabled)
-				$loadPage = FALSE;
-			else
-			{	
-				$return = $this->CheckInstanceUser();
-				if($return == ConfigInfraTools::SUCCESS)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_HOME);
-				elseif($return == ConfigInfraTools::USER_NOT_CONFIRMED) $this->LoadNotConfirmedToolTip();
-			}
-		}
-		//PAGE NOT FOUND
-		elseif($this->Page == ConfigInfraTools::PAGE_NOT_FOUND)
-		{
-			if(!$this->Config->PageNotFoundEnabled)
-				$loadPage = FALSE;
-		}
-		//PAGE NOTIFICAION
-		elseif($this->Page == ConfigInfraTools::PAGE_NOTIFICATION)
-		{
-			if(!$this->Config->PageNotificationEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$loginStatus = $this->CheckInstanceUser();
-				if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-				   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-			}
-		}
-		//PAGE PASSWORD RECOVERY
-		elseif($this->Page == ConfigInfraTools::PAGE_PASSWORD_RECOVERY)
-		{
-			if(!$this->Config->PagePasswordRecoveryEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_HOME);
-			}
-		}
-		//PAGE PASSWORD RESET
-		elseif($this->Page == ConfigInfraTools::PAGE_PASSWORD_RESET)
-		{
-			if(!$this->Config->PagePasswordResetEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_HOME);
-			}
-		}
-		//PAGE REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_REGISTER)
-		{
-			if(!$this->Config->PageRegisterEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$return = $this->CheckInstanceUser();
-				if($return == ConfigInfraTools::SUCCESS)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_HOME);
-				elseif($return == ConfigInfraTools::USER_NOT_CONFIRMED)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_LOGIN);
-			}
-		}
-		//PAGE REGISTER CONFIRMATION
-		elseif($this->Page == ConfigInfraTools::PAGE_REGISTER_CONFIRMATION)
-		{
-			if(!$this->Config->PageRegisterConfirmationEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_HOME);
-			}
-		}
-		//PAGE RESEND CONFIRMATION LINK
-		elseif($this->Page == ConfigInfraTools::PAGE_RESEND_CONFIRMATION_LINK)
-		{
-			if(!$this->Config->PageResendConfirmationLinkEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
-					$redirectPage = str_replace("_","",ConfigInfraTools::PAGE_HOME);
-			}
-		}
-		//PAGE SERVICE
-		elseif($this->Page == ConfigInfraTools::PAGE_SERVICE || $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_CORPORATION ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_DEPARTMENT ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_TYPE_SERVICE ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_LIST_BY_USER ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_REGISTER ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_SELECT ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_UPDATE ||
-			   $this->Page == ConfigInfraTools::PAGE_SERVICE_VIEW)
-		{
-			if(!$this->Config->PageServiceEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$return = $this->CheckInstanceUser();
-				if($return == ConfigInfraTools::USER_NOT_LOGGED_IN || $return == ConfigInfraTools::USER_NOT_CONFIRMED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, $this->InstanceInfraToolsUser);
-				}
-			}
-		}
-		//PAGE SUPPORT
-		elseif($this->Page == ConfigInfraTools::PAGE_SUPPORT)
-		{
-			if(!$this->Config->PageSupportEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$loginStatus = $this->CheckInstanceUser();
-				if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-				   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-			}
-		}
-		//PAGE TEAM
-		elseif($this->Page == ConfigInfraTools::PAGE_TEAM)
-		{
-			if(!$this->Config->PageTeamEnabled)
-				$loadPage = FALSE;
-			else
-			{
-				$loginStatus = $this->CheckInstanceUser();
-				if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-				   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-				{
-					if($this->CheckLogin())
-						$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_USER, 
-																	   $this->InstanceInfraToolsUser);
-				}
-			}
-		}
-		if(!$loadPage)
-		{
-			Page::GetCurrentDomain($domain);
-			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" . $redirectPage);
-			exit(ConfigInfraTools::ERROR);
-		}
-		else
-		{
-			$this->LoadPageInfraToolsDependenciesDevice();
-			$this->LoadPageInfraToolsDependenciesDebug();
-		}
-	}
-	
 	public function LoadPageInfraToolsDependenciesDebug()
 	{
-		if(isset($this->InstanceInfraToolsUser))
+		if(isset($this->User))
 		{
-			if($this->InstanceInfraToolsUser->CheckSuperUser())
+			if($this->User->CheckSuperUser())
 			{
 				if(!isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG]) && !isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG_HIDDEN]))
-					$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_DEBUG, $this->InputValueHeaderDebug);
+					$this->Session->GetSessionValue(ConfigInfraTools::SESS_DEBUG, $this->InputValueHeaderDebug);
 				if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG]))
 				{
 					$this->InputValueHeaderDebug = ConfigInfraTools::CHECKBOX_CHECKED;
 					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
 				}
-				$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESSION_DEBUG, $this->InputValueHeaderDebug);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_DEBUG, $this->InputValueHeaderDebug);
 				if($this->InputValueHeaderDebug == ConfigInfraTools::CHECKBOX_CHECKED)
 				{
 					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
@@ -5297,7 +4493,7 @@ abstract class PageInfraTools extends Page
 		else $this->Device = Page::DEVICE_DESKTOP;
 		
 		if(!isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]) && !isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN]))
-			$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::SESSION_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
 		if($this->Device == Page::DEVICE_DESKTOP)
 		{
 			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
@@ -5359,7 +4555,7 @@ abstract class PageInfraTools extends Page
 				else $this->Device = Page::DEVICE_TABLET;
 			}
 		}
-		$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::SESSION_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
+		$this->Session->SetSessionValue(ConfigInfraTools::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
 	}
 }
 ?>

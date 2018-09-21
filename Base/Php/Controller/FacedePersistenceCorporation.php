@@ -13,13 +13,15 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about corporation.
 Functions: 
-			public function CorporationDelete($Name, $Debug);
-			public function CorporationInsert($CorporationActive, $Name, $Debug);
-			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug);
-			public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug);
-			public function CorporationSelectByName($Name, &$CorporationInstance, $Debug);
-			public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
-			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug);
+			public function CorporationDelete($Name, $Debug, $MySqlConnection);
+			public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection);
+			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection);
+			public function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount,
+			                                        $Debug, $MySqlConnection);
+			public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
+			public function CorporationSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection);
+			public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
+			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -34,13 +36,6 @@ if (!class_exists("Factory"))
 	if(file_exists(BASE_PATH_PHP_CONTROLLER . "Factory.php"))
 		include_once(BASE_PATH_PHP_CONTROLLER . "Factory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
-}
-
-if (!class_exists("Corporation"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Corporation.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Corporation.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Corporation');
 }
 
 if (!class_exists("Persistence"))
@@ -92,36 +87,31 @@ class FacedePersistenceCorporation
         return self::$Instance;
     }
 	
-	public function CorporationDelete($Name, $Debug)
+	public function CorporationDelete($Name, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationDelete() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCorporationDelete());
+				echo "<b>Query (SqlCorporationDelete)</b> : " . 
+						 Persistence::SqlCorporationDelete() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $Name);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_CORPORATION_DELETE_FAILED;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_CORPORATION_DELETE_FAILED;
@@ -130,63 +120,59 @@ class FacedePersistenceCorporation
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationInsert($CorporationActive, $Name, $Debug)
+	public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;		
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationInsert() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCorporationInsert());
+				echo "<b>Query (SqlCorporationInsert)</b> : " . 
+						 Persistence::SqlCorporationInsert() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $CorporationActive, $Name);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_CORPORATION_INSERT_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
+	public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
+		$errorStr = NULL; $errorCode = NULL;	
 		$ArrayInstanceCorporation = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationSelect() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCorporationSelect());
+				echo "<b>Query (SqlCorporationSelect)</b> : " . 
+						 Persistence::SqlCorporationSelect() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -199,7 +185,6 @@ class FacedePersistenceCorporation
 											              $row[Config::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceCorporation, $InstanceCorporation);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceCorporation))
 						return Config::SUCCESS;
 					else 
@@ -212,32 +197,84 @@ class FacedePersistenceCorporation
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "Prepare Error: " . $mySqlConnection->error;
+						echo "Prepare Error: " . $MySqlConnection->error;
 					$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
+	public function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
+		$errorStr = NULL; $errorCode = NULL;	
 		$ArrayInstanceCorporation = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationSelectActiveNoLimit() . "<br>";
-			if($result = $mySqlConnection->query(Persistence::SqlCorporationSelectActiveNoLimit()))
+				echo "<b>Query (SqlCorporationSelectActive)</b> : " . 
+						 Persistence::SqlCorporationSelectActive() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelectActive());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::SUCCESS)
+				{
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$RowCount = $row['COUNT'];
+						$InstanceCorporation = $this->Factory->CreateCorporation
+							                             (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
+						                                  $row[Config::TABLE_CORPORATION_FIELD_NAME], 
+											              $row[Config::TABLE_FIELD_REGISTER_DATE]);
+						array_push($ArrayInstanceCorporation, $InstanceCorporation);
+					}
+					if(!empty($ArrayInstanceCorporation))
+						return Config::SUCCESS;
+					else 
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
+				}
+				return $return;
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
+	{
+		$errorStr = NULL; $errorCode = NULL;	
+		$ArrayInstanceCorporation = array();
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				echo "<b>Query (SqlCorporationSelectActiveNoLimit)</b> : " . 
+						 Persistence::SqlCorporationSelectActiveNoLimit() . "<br>";
+			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectActiveNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
@@ -247,7 +284,6 @@ class FacedePersistenceCorporation
 										                     $row[Config::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceCorporation, $InstanceCorporation);
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				if(!empty($ArrayInstanceCorporation))
 					return Config::SUCCESS;
 				else return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
@@ -258,31 +294,31 @@ class FacedePersistenceCorporation
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 				$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
 			}
-			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 			return $return;
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelectByName($Name, &$CorporationInstance, $Debug)
+	public function CorporationSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError = NULL; $errorStr = NULL; $errorCode = NULL;	
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationSelectByName() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCorporationSelectByName());
+				echo "<b>Query (SqlCorporationSelectByName)</b> : " . 
+						 Persistence::SqlCorporationSelectByName() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelectByName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $Name);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$stmt->bind_param("s", $CorporationName);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($corpActive, $Name, $registerDate);
+					$stmt->bind_result($corpActive, $CorporationName, $registerDate);
 					if ($stmt->fetch())
 					{
 						$CorporationInstance = $this->Factory->CreateCorporation(NULL, $corpActive, 
-																				 $Name, $registerDate);
+																				 $CorporationName, $registerDate);
 						return Config::SUCCESS;
 					}
 					else
@@ -298,29 +334,28 @@ class FacedePersistenceCorporation
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_CORPORATION_SELECT_BY_NAME_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
+	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
+		$errorStr = NULL; $errorCode = NULL;	
 		$ArrayInstanceCorporation = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationSelectNoLimit() . "<br>";
-			if($result = $mySqlConnection->query(Persistence::SqlCorporationSelectNoLimit()))
+				echo "<b>Query (SqlCorporationSelectNoLimit)</b> : " . 
+						 Persistence::SqlCorporationSelectNoLimit() . "<br>";
+			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
@@ -329,7 +364,6 @@ class FacedePersistenceCorporation
 										                                     $row[Config::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceCorporation, $InstanceCorporation);
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				if(!empty($ArrayInstanceCorporation))
 					return Config::SUCCESS;
 				else return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
@@ -340,50 +374,45 @@ class FacedePersistenceCorporation
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 				$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
 			}
-			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 			return $return;
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug)
+	public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationUpdateByName() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCorporationUpdateByName());
+				echo "<b>Query (SqlCorporationUpdateByName)</b> : " . 
+						 Persistence::SqlCorporationUpdateByName() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationUpdateByName());
 			if ($stmt)
 			{
 				$stmt->bind_param("iss", $CorporationActive, $NameNew, $NameOld);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_UPDATE_SAME_VALUE;
 				}
 				else
 				{
+					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_CORPORATION_UPDATE_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

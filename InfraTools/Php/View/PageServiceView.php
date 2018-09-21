@@ -33,30 +33,19 @@ class PageServiceView extends PageInfraTools
 	public $ArrayInstanceInfraToolsCorporation = NULL;
 	public $ArrayInstanceInfraToolsDepartment  = NULL;
 	public $ArrayInstanceInfraToolsTypeService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
-	}
-	
-	/* Singleton */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 
 	public function GetCurrentPage()
 	{
@@ -108,7 +97,7 @@ class PageServiceView extends PageInfraTools
 		{
 			$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
 			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->InstanceInfraToolsUser->GetEmail(), 
+														           $this->User->GetEmail(), 
 														           $this->InstanceInfraToolsService,
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);
@@ -125,7 +114,7 @@ class PageServiceView extends PageInfraTools
 			  isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID]))
 		{
 			$return = $this->ServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
-											   $this->InstanceInfraToolsUser->GetEmail(), 
+											   $this->User->GetEmail(), 
 											   $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -142,7 +131,7 @@ class PageServiceView extends PageInfraTools
 				$retText  = $this->ReturnText;
 				$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
 				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-															           $this->InstanceInfraToolsUser->GetEmail(), 
+															           $this->User->GetEmail(), 
 															           $this->InstanceInfraToolsService, 
 																	   $this->InputValueTypeAssocUserServiceId,
 															           $this->InputValueHeaderDebug);
@@ -161,7 +150,7 @@ class PageServiceView extends PageInfraTools
 			$this->Page = ConfigInfraTools::PAGE_SERVICE_UPDATE;
 			$this->InputValueServiceId = $_POST[ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_HIDDEN_ID];
 			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->InstanceInfraToolsUser->GetEmail(), 
+														           $this->User->GetEmail(), 
 														           $this->InstanceInfraToolsService, 
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);
@@ -197,7 +186,7 @@ class PageServiceView extends PageInfraTools
 		{
 			$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
 			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->InstanceInfraToolsUser->GetEmail(), 
+														           $this->User->GetEmail(), 
 														           $this->InstanceInfraToolsService,
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);
@@ -234,7 +223,7 @@ class PageServiceView extends PageInfraTools
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->InstanceInfraToolsUser->GetEmail(), 
+														               $this->User->GetEmail(), 
 														           $this->InstanceInfraToolsService,
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);

@@ -93,17 +93,24 @@ class PageDiagnosticTools extends PageInfraTools
 	private $VisibilityFunctionGetWhoisIp                                = "Hidden";
 	private $VisibilityFunctionGetWhoisSubmit                            = "HiddenTab";
 	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		$this->PageCheckLogin = TRUE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 
 	public function GetCurrentPage()

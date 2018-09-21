@@ -19,6 +19,7 @@ Methods:
 			public static function SqlCorporationDelete();
 			public static function SqlCorporationInsert();
 			public static function SqlCorporationSelect();
+			public static function SqlCorporationSelectActive();
 			public static function SqlCorporationSelectActiveNoLimit();
 			public static function SqlCorporationSelectByName();
 			public static function SqlCorporationSelectNoLimit();
@@ -209,6 +210,13 @@ class Persistence
 		return "SELECT *,  (SELECT COUNT(*) FROM   " . Config::TABLE_CORPORATION . ") AS COUNT "
 			 . "FROM "                               . Config::TABLE_CORPORATION . " ORDER BY " 
 			 . Config::TABLE_CORPORATION_FIELD_NAME . " LIMIT ?,?";
+	}
+	
+	public static function SqlCorporationSelectActive()
+	{
+		return "SELECT * FROM " . Config::TABLE_CORPORATION                          . " " 
+			 . "WHERE "         . Config::TABLE_CORPORATION_FIELD_ACTIVE . " = TRUE "
+			 . "ORDER BY "      . Config::TABLE_CORPORATION_FIELD_NAME . " LIMIT ?,?";
 	}
 	
 	public static function SqlCorporationSelectActiveNoLimit()

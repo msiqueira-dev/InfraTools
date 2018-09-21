@@ -19,21 +19,21 @@ class PageAbout extends PageInfraTools
 	protected static $Instance;
 
 	/* Get Instance */
-	public static function __create()
+	public static function __create($Language)
 	{
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class;
+			self::$Instance = new $class($Language);
 		}
 		return self::$Instance;
 	}
 
 	/* Constructor */
-	protected function __construct() 
+	protected function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		parent::__construct($Language);
 	}
 
 	/* Clone */
@@ -70,6 +70,7 @@ class PageAbout extends PageInfraTools
 
 	public function LoadPage()
 	{	
+		if(!$this->PageEnabled) return ConfigInfraTools::ERROR;
 		$this->LoadHtml();
 	}
 }

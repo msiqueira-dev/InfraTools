@@ -15,10 +15,17 @@ if (!class_exists("PageInfraTools"))
 class PageRegisterConfirmation extends PageInfraTools
 {	
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = FALSE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
 	}
 
 	/* Clone */
@@ -77,13 +84,12 @@ class PageRegisterConfirmation extends PageInfraTools
 					$return = $FacedePersistenceInfraTools->UserUpdateConfirmedByHash($hashCode, $this->InputValueHeaderDebug);
 					if ($return == ConfigInfraTools::SUCCESS)
 					{
-						if($this->InstanceInfraToolsUser != NULL)
+						if($this->User != NULL)
 						{
-							$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail(
-								                                                         $this->InstanceInfraToolsUser->GetEmail(), 
-																					     $this->InstanceInfraToolsUser, 
-																					     $this->InputValueHeaderDebug);
-							$this->Session->SetSessionValue(ConfigInfraTools::SESSION_USER, $this->InstanceInfraToolsUser);
+							$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->User->GetEmail(), 
+																					            $this->User, 
+																					            $this->InputValueHeaderDebug);
+							$this->Session->SetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
 						}
 						if ($return == ConfigInfraTools::SUCCESS)
 						{

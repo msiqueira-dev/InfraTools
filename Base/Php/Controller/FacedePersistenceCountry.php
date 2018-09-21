@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about country.
 Functions: 
-			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug);
+			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -86,19 +86,19 @@ class FacedePersistenceCountry
         return self::$Instance;
     }
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug)
+	public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayCountry = array(); $errorStr = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$errorStr = NULL; $mySqlError = NULL;
+		$ArrayCountry = array();
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Query: " . Persistence::SqlCountrySelect() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCountrySelect());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCountrySelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -112,7 +112,6 @@ class FacedePersistenceCountry
 														   $row[Config::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayCountry, $Country);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayCountry))
 						return Config::SUCCESS;
 					else 
@@ -128,14 +127,12 @@ class FacedePersistenceCountry
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_COUNTRY_SELECT_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

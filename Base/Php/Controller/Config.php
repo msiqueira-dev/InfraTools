@@ -34,6 +34,7 @@ class Config
 	/* Constantes gerais usadas pelo site */
 	const CHECKBOX_CHECKED                                              = "checked";
 	const CHECKBOX_UNCHECKED                                            = "";
+	const ENABLED                                                       = "Enabled";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TICKET                 = "ExceptionAssocTicketUserRequestingTicket";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE                   = "ExceptionAssocTicketUserRequestingType";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_USER                   = "ExceptionAssocTicketUserRequestingUser";
@@ -52,6 +53,15 @@ class Config
 	const FORM_FIELD_ERROR                                              = "InputAlertText";
 	const FORM_IMAGE_SUCCESS                                            = "Icons/IconInfraToolsSuccess.png";
 	const FORM_IMAGE_WARNING                                            = "Icons/IconInfraToolsWarning.png";
+	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
+	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
+	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
+	const FORM_FIELD_DESCRIPTION                                        = "FormFieldTypeUserDescription";
+	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
+	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
+	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
+	const FORM_IMAGE_ERROR                                              = "Icons/IconInfraToolsError.png";
+	const FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT                  = "FormLoginTwoStepVerificationCodeSubmit";
 	const FORM_VALIDATE_FUNCTION_BOOL                                   = "VALIDATE_BOOL";
 	const FORM_VALIDATE_FUNCTION_CORPORATION_NAME                       = "VALIDATE_CORPORATION_NAME";
 	const FORM_VALIDATE_FUNCTION_COUNTRY_NAME                           = "VALIDATE_COUNTRY_NAME";
@@ -85,6 +95,8 @@ class Config
 	const FORM_VALIDATE_FUNCTION_TYPE_SERVICE                           = "VALIDATE_TYPE_SERVICE";
 	const FORM_VALIDATE_FUNCTION_URL                                    = "VALIDATE_URL";
 	const FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID                         = "VALIDATE_USER_UNIQUE_ID";
+	const GET_IP_ADDRESS_CLIENT_FAILED                                  = "ReturnGetIpAddressClientFailed";
+	const GET_OPERATIONAL_SYSTEM_INVALID_OS                             = "ReturnGetOperationalSystemInvalidOs";
 	const HEAD_GENERIC                                                  = "HeadGeneric.php";
 	const HEAD_JAVASCRIPT                                               = "HeadJavaScript.php";
 	const HTML_TAG_BODY_START                                           = "<body>";
@@ -98,6 +110,14 @@ class Config
 	const LANGUAGE_GERMAN                                               = "Language/De";
 	const LANGUAGE_PORTUGUESE                                           = "Language/Pt";
 	const LANGUAGE_SPANISH                                              = "Language/Es";
+	const LOGIN_FORM                                                    = "LoginForm";
+	const LOGIN_FORM_SUBMIT                                             = "LoginFormSubmit";
+	const LOGIN_FORM_SUBMIT_FORGOT_PASSWORD                             = "LoginFormSubmitForgotPassword";
+	const LOGIN_PASSWORD                                                = "LoginPassword";
+	const LOGIN_TWO_STEP_VERIFICATION_ACTIVATED                         = "LoginTwoStepVerificationActivated";
+	const LOGIN_TWO_STEP_VERIFICATION_CODE                              = "LoginTwoStepVerificationCode";
+	const LOGIN_TWO_STEP_VERIFICATION_FORM                              = "LoginTwoStepVerificationForm";
+	const LOGIN_USER                                                    = "LoginUser";
 	const PAGE_ABOUT                                                    = "Page_About";
 	const PAGE_ADMIN                                                    = "Page_Admin";
 	const PAGE_CONTACT                                                  = "Page_Contact";
@@ -105,12 +125,15 @@ class Config
 	const PAGE_LOGIN                                                    = "Page_Login";
 	const PAGE_NOT_FOUND                                                = "Page_Not_Found";
 	const POST_BACK_FORM                                                = "HiddenTextForm";
-	const SESSION_LAST_ACTIVITY                                         = "SessionLastActivity";
-	const SESSION_LANGUAGE                                              = "SessionLanguage";
-	const SESSION_DEBUG                                                 = "SessionDebug";
-	const SESSION_DEVICE_LAYOUT                                         = "SessionDeviceLayout";
-	const SESSION_UNLIMITED                                             = "SessionUnlimited";
-	const SESSION_USER                                                  = "SessionUser";
+	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
+	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
+	const SESS_LAST_ACTIVITY                                            = "SessionLastActivity";
+	const SESS_LANGUAGE                                                 = "SessionLanguage";
+	const SESS_LOGIN_TWO_STEP_VERIFICATION                              = "SessionLoginTwoStepVerification";
+	const SESS_DEBUG                                                    = "SessionDebug";
+	const SESS_DEVICE_LAYOUT                                            = "SessionDeviceLayout";
+	const SESS_UNLIMITED                                                = "SessionUnlimited";
+	const SESS_USER                                                     = "SessionUser";
 	const TYPE_USER_SUPER                                               = "Super Administrator";
 	const USER_ACTIVE                                                   = 1;
 	const USER_NOT_CONFIRMED                                            = "UserNotConfirmed";
@@ -230,10 +253,11 @@ class Config
 	const TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL                        = "AssocUserTeamUserEmail";
 	const TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE                         = "AssocUserTeamUserType";
 	const TABLE_SYSTEM_CONFIGURATION                                    = "SYSTEM_CONFIGURATION";
+	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE                = "SystemConfigurationOptionActive";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION           = "SystemConfigurationOptionDescription";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME                  = "SystemConfigurationOptionName";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER                = "SystemConfigurationOptionNumber";
-	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE                 = "SystemConfigurationValue";
+	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE                 = "SystemConfigurationOptionValue";
 	const TABLE_CORPORATION                                             = "CORPORATION";
 	const TABLE_CORPORATION_FIELD_ACTIVE                                = "CorporationActive";
 	const TABLE_CORPORATION_FIELD_NAME                                  = "CorporationName";
@@ -319,22 +343,25 @@ class Config
 	public           $Session = NULL;
 	
 	/* Propriedades de Classe */
-	public $DefaultApplicationAddress    = NULL;
-	public $DefaultApplicationName       = "Base";
-	public $DefaultGoogleMapsApiKey      = NULL;
-	public $DefaultLanguage              = NULL;
-	public $DefaultLogPath               = NULL;
-	public $DefaultMySqlAddress          = NULL;
-	public $DefaultMySqlPort             = NULL;
-	public $DefaultMySqlDataBase         = NULL;
-	public $DefaultMySqlUser             = NULL;
-	public $DefaultMySqlPassword         = NULL;
-	public $DefaultServerFile            = NULL;
-	public $DefaultServerImage           = NULL;
-	public $DefaultServerJavaScript      = NULL;
-	public $EnableLogMySqlQuery          = FALSE;
-	public $EnableLogMySqlError          = FALSE;
-	public $SessionTime                  = 3600;
+	public $DefaultApplicationAddress        = NULL;
+	public $DefaultApplicationName           = "Base";
+	public $DefaultGoogleMapsApiKey          = NULL;
+	public $DefaultEmailNoReplyFormAddress   = NULL;
+	public $DefaultEmailNoReplyFormPassword  = NULL;
+	public $DefaultEmailSupportFormAddress   = NULL;
+	public $DefaultLanguage                  = NULL;
+	public $DefaultLogPath                   = NULL;
+	public $DefaultMySqlAddress              = NULL;
+	public $DefaultMySqlPort                 = NULL;
+	public $DefaultMySqlDataBase             = NULL;
+	public $DefaultMySqlUser                 = NULL;
+	public $DefaultMySqlPassword             = NULL;
+	public $DefaultServerFile                = NULL;
+	public $DefaultServerImage               = NULL;
+	public $DefaultServerJavaScript          = NULL;
+	public $EnableLogMySqlQuery              = FALSE;
+	public $EnableLogMySqlError              = FALSE;
+	public $SessionTime                      = 3600;
 	
 	/* Linguas Habilitadas / Desabilitadas */
 	public $LanguageEnglishEnabled       = TRUE;
@@ -372,34 +399,35 @@ class Config
 	
 	public function SetApplication()
 	{
-		if(file_exists(PROJECT_PATH . "SystemConfiguration.php"))
+		if(class_exists("ProjectConfig"))
 		{
-			include_once(PROJECT_PATH . "SystemConfiguration.php");
-			ini_set("display_errors", SystemConfiguration::$DisplayErrors);
+			ini_set("display_errors", ProjectConfig::$DisplayErrors);
 			error_reporting(E_ALL);
-			date_default_timezone_set(SystemConfiguration::$TimeZone);
+			date_default_timezone_set(ProjectConfig::$TimeZone);
 			setlocale(LC_ALL, 'UTF8');
 			$this->Session = $this->Factory->CreateSession();
-			$this->DefaultApplicationAddress       = SystemConfiguration::$AddressApplication;
-			$this->DefaultMySqlAddress             = SystemConfiguration::$MySqlDataBaseAddress;
-			$this->DefaultMySqlPort                = SystemConfiguration::$MySqlDataBasePort;
-			$this->DefaultMySqlDataBase            = SystemConfiguration::$MySqlDataBaseName;
-			$this->DefaultMySqlUser                = SystemConfiguration::$MySqlDataBaseUser;
-			$this->DefaultMySqlPassword            = SystemConfiguration::$MySqlDataBasePassword;
-			$this->DefaultServerFile               = SystemConfiguration::$AddressFileServer;
-			$this->DefaultServerImage              = SystemConfiguration::$AddressImageServer;
-			$this->DefaultServerJavaScript         = SystemConfiguration::$AddressJavaScriptServer;
-			$this->DefaultEmailNoReplyFormPassword = SystemConfiguration::$EmailAccount;
-			$this->DefaultEmailSupportFormPassword = SystemConfiguration::$EmailPassword;
-			$this->DefaultGoogleMapsApiKey         = SystemConfiguration::$GoogleMapsApiKey;
-			$this->DefaultLanguage                 = SystemConfiguration::$DefaultLanguage;
-			$this->DefaultLogPath                  = SystemConfiguration::$LogApplication;
+			$this->DefaultApplicationAddress       = ProjectConfig::$AddressApplication;
+			$this->DefaultApplicationName          = ProjectConfig::$ApplicationName;
+			$this->DefaultMySqlAddress             = ProjectConfig::$MySqlDataBaseAddress;
+			$this->DefaultMySqlPort                = ProjectConfig::$MySqlDataBasePort;
+			$this->DefaultMySqlDataBase            = ProjectConfig::$MySqlDataBaseName;
+			$this->DefaultMySqlUser                = ProjectConfig::$MySqlDataBaseUser;
+			$this->DefaultMySqlPassword            = ProjectConfig::$MySqlDataBasePassword;
+			$this->DefaultServerFile               = ProjectConfig::$AddressFileServer;
+			$this->DefaultServerImage              = ProjectConfig::$AddressImageServer;
+			$this->DefaultServerJavaScript         = ProjectConfig::$AddressJavaScriptServer;
+			$this->DefaultEmailNoReplyFormAddress  = ProjectConfig::$EmailNoReplyAccount;
+			$this->DefaultEmailNoReplyFormPassword = ProjectConfig::$EmailNoReplyPassword;
+			$this->DefaultEmailSupportFormAddress  = ProjectConfig::$EmailSupportAccount;
+			$this->DefaultGoogleMapsApiKey         = ProjectConfig::$GoogleMapsApiKey;
+			$this->DefaultLanguage                 = ProjectConfig::$DefaultLanguage;
+			$this->DefaultLogPath                  = ProjectConfig::$LogApplication;
 			$this->Session->CreateBasic($this->DefaultApplicationName, $this->SessionTime);
-			return $this->Session->CheckActivity(self::SESSION_LAST_ACTIVITY, self::SESSION_USER, 
-												 $this->SessionTime, self::SESSION_UNLIMITED);
+			return $this->Session->CheckActivity(self::SESS_LAST_ACTIVITY, self::SESS_USER, 
+												 $this->SessionTime, self::SESS_UNLIMITED);
 			
 		}
-		else exit ("System Configuration Not found");
+		else exit ("Config: Project Config Class Not found");
 	}
 }
 ?>

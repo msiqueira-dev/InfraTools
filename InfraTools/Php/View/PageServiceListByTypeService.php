@@ -5,7 +5,7 @@ Creation: 10/07/2018
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
@@ -20,29 +20,29 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 
 class PageServiceListByTypeService extends PageInfraTools
 {
 	public $ArrayInfraToolsService = NULL;
 	public $ArrayInstanceInfraToolsTypeService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 
 	public function GetCurrentPage()
@@ -89,7 +89,7 @@ class PageServiceListByTypeService extends PageInfraTools
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->TypeServiceSelectOnUserContextNoLimit($this->InstanceInfraToolsUser->GetEmail(),
+			$return = $this->TypeServiceSelectOnUserContextNoLimit($this->User->GetEmail(),
 				                                                   $this->ArrayInstanceInfraToolsTypeService, 
 														           $this->InputValueHeaderDebug);
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT]))
@@ -106,7 +106,7 @@ class PageServiceListByTypeService extends PageInfraTools
 				if($this->InputLimitTwo <= 0)
 					$this->InputLimitTwo = 25;
 				$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-															   $this->InstanceInfraToolsUser->GetEmail(),
+															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
 															   $this->ArrayInfraToolsService,
@@ -119,7 +119,7 @@ class PageServiceListByTypeService extends PageInfraTools
 				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 				$this->this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-																	  $this->InstanceInfraToolsUser->GetEmail(),
+																	  $this->User->GetEmail(),
 																	  $this->InputLimitOne, 
 																	  $this->InputLimitTwo, 
 																	  $this->ArrayInfraToolsService,
@@ -138,7 +138,7 @@ class PageServiceListByTypeService extends PageInfraTools
 						$this->InputLimitTwo = $rowCount;
 					}
 					$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-																   $this->InstanceInfraToolsUser->GetEmail(),
+																   $this->User->GetEmail(),
 																   $this->InputLimitOne, 
 																   $this->InputLimitTwo, 
 																   $this->ArrayInfraToolsService,
@@ -162,7 +162,7 @@ class PageServiceListByTypeService extends PageInfraTools
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-															   $this->InstanceInfraToolsUser->GetEmail(),
+															   $this->User->GetEmail(),
 															   $this->InputLimitOne, $this->InputLimitTwo, 
 															   $this->ArrayInfraToolsService,
 															   $rowCount,

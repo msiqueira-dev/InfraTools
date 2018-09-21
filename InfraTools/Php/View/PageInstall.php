@@ -14,25 +14,33 @@ if (!class_exists("PageInfraTools"))
 
 class PageInstall extends PageInfraTools
 {	
+	protected $Install = NULL;
 	/* Singleton */
 	protected static $Instance;
 
 	/* Get Instance */
-	public static function __create()
+	public static function __create($Language)
 	{
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class;
+			self::$Instance = new $class($Language);
 		}
 		return self::$Instance;
 	}
 	
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = FALSE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
+		}
 	}
 
 	/* Clone */
@@ -70,6 +78,11 @@ class PageInstall extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase(NULL);
+		if($return == ConfigInfraTools::SUCCESS)
+			$this->Install = TRUE;
+		else $this->Install = FALSE;
 		$this->LoadHtml();
 	}
 }

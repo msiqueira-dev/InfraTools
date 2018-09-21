@@ -22,24 +22,24 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageAdmin"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageAdmin.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
 
-class PageAdminUser extends PageInfraTools
+class PageAdminUser extends PageAdmin
 {
 	/* Instance */
 	public $FacedeBusinessInfraTools    = NULL;
 	public $ArrayInstanceInfraToolsUser = NULL;
 	
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		parent::__construct($Language);
 	}
 	
 	/**                               **/
@@ -82,20 +82,20 @@ class PageAdminUser extends PageInfraTools
 				$return = $FacedePersistenceInfraTools->AssocUserCorporationDelete(
 					                                     $InstanceInfraToolsUser->GetCorporationName(),
 			                                             $InstanceInfraToolsUser->GetEmail(),
-														 $this->InputValueHeaderDebug);
+														 $this->InputValueHeaderDebug, NULL, TRUE);
 				if($return == ConfigInfraTools::SUCCESS && $this->InputValueUserCorporationName != NULL)
 					$FacedePersistenceInfraTools->AssocUserCorporationInsert(
 					                                     $this->InputValueUserCorporationName,
 														 NULL, NULL,
 			                                             $InstanceInfraToolsUser->GetEmail(),
-														 $this->InputValueHeaderDebug);
+														 $this->InputValueHeaderDebug, NULL, TRUE);
 			}	
 			else if($return == ConfigInfraTools::SUCCESS && $InstanceInfraToolsUser->GetCorporationName() == NULL)
 				$return = $FacedePersistenceInfraTools->AssocUserCorporationInsert(
 					                                     $this->InputValueUserCorporationName,
 														 NULL, NULL,
 			                                             $InstanceInfraToolsUser->GetEmail(),
-														 $this->InputValueHeaderDebug);
+														 $this->InputValueHeaderDebug, NULL, TRUE);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$return = $FacedePersistenceInfraTools->UserUpdateDepartmentByEmailAndCorporation(
@@ -472,10 +472,12 @@ class PageAdminUser extends PageInfraTools
 		//USER LIST SELECT CORPORATION SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION]))
 		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION]) 
+			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION],
+											  $this->InstanceInfraToolsCorporation,
+											  $this->InputValueHeaderDebug) 
 			   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->CorporationLoadData() == ConfigInfraTools::SUCCESS)
+				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 			}
 			if($this->Page != ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)

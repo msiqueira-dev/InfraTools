@@ -53,6 +53,9 @@ class De
 	const CORPORATION                                             = "";
 	const CORPORATION_NAME                                        = "";
 	const CORPORATION_NOT_FOUND                                   = "";
+	const CORPORATION_UPDATE_ERROR                                = "";
+	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                  = "";
+	const CORPORATION_UPDATE_SUCCESS                              = "";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS      = "";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "";
 	const COUNTRY                                                 = "";
@@ -101,6 +104,12 @@ class De
 	const FORM_INVALID_TEAM_ID                                    = "";
 	const FORM_INVALID_TEAM_NAME                                  = "";
 	const FORM_INVALID_TEAM_NAME_SIZE                             = "";
+	const FORM_INVALID_TICKET_DESCRIPTION                         = "";
+	const FORM_INVALID_TICKET_DESCRIPTION_SIZE                    = "";
+	const FORM_INVALID_TICKET_TITLE                               = "";
+	const FORM_INVALID_TICKET_TITLE_SIZE                          = "";
+	const FORM_INVALID_TICKET_TYPE                                = "";
+	const FORM_INVALID_TICKET_TYPE_SIZE                           = "";
 	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION        = "";
 	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE   = "";
 	const FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION           = "";

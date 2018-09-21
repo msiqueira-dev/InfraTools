@@ -18,10 +18,17 @@ class PagePasswordRecovery extends PageInfraTools
 	protected $FacedeBusinessInfraTools = NULL;
 
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = FALSE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
 	}
 
 	/* Clone */
@@ -66,11 +73,11 @@ class PagePasswordRecovery extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputFocus = ConfigInfraTools::FORM_FIELD_EMAIL;
 		Page::GetCurrentURL($pageUrl);
 		if(strstr($pageUrl, "?="))
 		{
-			$PageForm = $this->Factory->CreatePageForm();
 			$email = substr($pageUrl, strrpos($pageUrl, "=")+1);
 			if($PageForm->ValidateSpecificField(ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL, $email, NULL, NULL) 
 			                                    == ConfigInfraTools::SUCCESS)
@@ -80,8 +87,8 @@ class PagePasswordRecovery extends PageInfraTools
 		{
 			$this->InputValueUserEmail     = $_POST[ConfigInfraTools::FORM_FIELD_EMAIL];
 			$this->InputValueCaptcha   = $_POST[ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY];
-			$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $captcha);
-			$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array();
+			$this->Session->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $captcha);
+			$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array(); $matrixOptions = array();
 			
 			//EMAIL
 			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_EMAIL;
@@ -97,6 +104,7 @@ class PagePasswordRecovery extends PageInfraTools
 										'PASSWORD_RECOVERY_INVALID_EMAIL_SIZE');
 			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
+			array_push($matrixOptions, $arrayOptions);
 			
 			//CAPTCHA
 			$arrayElements[1]             = ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY;
@@ -112,11 +120,12 @@ class PagePasswordRecovery extends PageInfraTools
 			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($arrayOptions, $captcha);
+			array_push($matrixOptions, $arrayOptions);
 			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $arrayOptions);
+												$matrixConstants, $matrixOptions);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -131,8 +140,8 @@ class PagePasswordRecovery extends PageInfraTools
 															  $code, $this->InputValueHeaderDebug);
 					if ($this->ReturnText == ConfigInfraTools::SUCCESS)
 					{
-						$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::PASSWORD_RESET_CODE, $code);
-						$this->InstanceBaseSession->SetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, 
+						$this->Session->SetSessionValue(ConfigInfraTools::PASSWORD_RESET_CODE, $code);
+						$this->Session->SetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, 
 																 $this->InputValueUserEmail);
 						Page::GetCurrentDomain($domain);
 						$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .

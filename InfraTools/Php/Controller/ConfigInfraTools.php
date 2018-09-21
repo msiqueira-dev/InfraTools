@@ -249,7 +249,6 @@ class ConfigInfraTools extends Config
 	const DIV_RETURN                                                    = "DivReturn";
 	const DIV_RADIO                                                     = "DivRadio";
 	const DIV_RADIO_CORPORATION                                         = "DivRadioCorporation";
-	const EMAIL_INFRATOOLS_BOT_ADDRESS                                  = "";
 	const EMAIL_INFRATOOLS_LOCAL_PASSWORD                               = "";
 	const EMAIL_INFRATOOLS_TEST_PASSWORD                                = "";
 	const EMAIL_INFRATOOLS_PRODUCTION_PASSWORD                          = "";
@@ -328,13 +327,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_BIRTH_DATE_DAY                                     = "FormFieldBirthDateDay";
 	const FORM_FIELD_BIRTH_DATE_MONTH                                   = "FormFieldBirthDateMonth";
 	const FORM_FIELD_BIRTH_DATE_YEAR                                    = "FormFieldBirthDateYear";
-	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
-	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
-	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
-	const FORM_FIELD_DESCRIPTION                                        = "FormFieldTypeUserDescription";
-	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
-	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
-	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
 	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_GENDER                                             = "FormFieldGender";
 	const FORM_FIELD_ID                                                 = "FormInputId";
@@ -370,6 +362,7 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_TICKET_DESCRIPTION                                 = "FormFieldTicketDescription";
 	const FORM_FIELD_TICKET_ID                                          = "FormFieldTicketId";
 	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
+	const FORM_FIELD_TICKET_TYPE                                        = "FormFieldTicketType";
 	const FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                = "FormFieldTypeAssocUserServiceDescription";
 	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID                       = "FormFieldTypeAssocUserTeamTeamId";
 	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION              = "FormFieldTypeAssocUserTeamTeamDescription";
@@ -397,10 +390,8 @@ class ConfigInfraTools extends Config
 	const FORM_GOOGLE_MAPS_REGION_HIDDEN                                = "FormGoogleMapsRegionHidden";
 	const FORM_HEADER_LANGUAGE                                          = "FormHeaderLanguage";
 	const FORM_HEADER_PAGES                                             = "PostBackForm";
-	const FORM_IMAGE_ERROR                                              = "Icons/IconInfraToolsError.png";
 	const FORM_HEADER_LAYOUT                                            = "FormHeaderLayout";
 	const FORM_HEADER_DEBUG                                             = "FormHeaderDebug";
-	const FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT                  = "FormLoginTwoStepVerificationCodeSubmit";
 	const FORM_LIST_INPUT_LIMIT_ONE                                     = "FormListInputLimitOne";
 	const FORM_LIST_INPUT_LIMIT_TWO                                     = "FormListInputLimitTwo";
 	const FORM_SELECT_NONE                                              = "None";
@@ -747,8 +738,6 @@ class ConfigInfraTools extends Config
 	const MYSQL_TYPE_ASSOC_USER_SERVICE_SELECT_FETCH_FAILED             = "RetMySqlTypeAssocUserServiceSelectFetchFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FAILED                              = "RetMySqlTypeServiceSelectFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED                        = "RetMySqlTypeServiceSelectFetchFailed";
-	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
-	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
 	const SESS_ADMIN_SERVICE                                            = "SessionAdminService";
 	const SESS_ADMIN_TEAM                                               = "SessionAdminTeam";
 	const SESS_ADMIN_TICKET                                             = "SessionAdminTicket";
@@ -759,7 +748,6 @@ class ConfigInfraTools extends Config
 	const SESS_ADMIN_USER                                               = "SessionAdminUser";
 	const SESS_PAGE_FORM                                                = "SessionPageForm";
 	const SESS_PAGE_FORM_NUMBER                                         = "SessionPageFormNumber";
-	const SESS_LOGIN_TWO_STEP_VERIFICATION                              = "SessionLoginTwoStepVerification";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE                                = "ASSOC_IP_ADDRESS_SERVICE";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE_FIELD_SERVICE_ID               = "AssocIpAddressServiceServiceId";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE_FIELD_IP                       = "AssocIpAddressServiceIp";
@@ -1013,16 +1001,8 @@ class ConfigInfraTools extends Config
 	const CONTACT_TITLE                                             = "ContactTitle";
 	
 	/* Constantes de Formulário da Página Login */
-	const LOGIN_PASSWORD                                            = "LoginPassword";
-	const LOGIN_FORM                                                = "LoginForm";
-	const LOGIN_FORM_SUBMIT                                         = "LoginFormSubmit";
-	const LOGIN_FORM_SUBMIT_FORGOT_PASSWORD                         = "LoginFormSubmitForgotPassword";
-	const LOGIN_USER                                                = "LoginUser";
 	
 	/* Constantes de Formulário da Página LoginTwoStepVerification */
-	const LOGIN_TWO_STEP_VERIFICATION_ACTIVATED                     = "LoginTwoStepVerificationActivated";
-	const LOGIN_TWO_STEP_VERIFICATION_CODE                          = "LoginTwoStepVerificationCode";
-	const LOGIN_TWO_STEP_VERIFICATION_FORM                          = "LoginTwoStepVerificationForm";
   
 	/* Constantes de Formulário da Página PasswordRecovery */
 	const PASSWORD_RECOVERY_EMAIL_SESSION                           = "PasswordRecoveryEmailSession";
@@ -1084,10 +1064,8 @@ class ConfigInfraTools extends Config
 	const GET_DNS_RECORDS_FAILED                                    = "ReturnGetDnsRecordsFailed";
 	const GET_HOSTNAME_FAILED                                       = "ReturnGetHostNameFaileds";
 	const GET_HOST_IP_ADDRESS_FAILED                                = "ReturnGetHostIpAddressFailed";
-	const GET_IP_ADDRESS_CLIENT_FAILED                              = "ReturnGetIpAddressClientFailed";
 	const GET_LOCATION_BY_IP_ADDRESS_FAILED                         = "ReturnGetLocationByIpAddressFailed";
 	const GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS            = "ReturnGetLocationByIpAddressFailedGetContents";
-	const GET_OPERATIONAL_SYSTEM_INVALID_OS                         = "ReturnGetOperationalSystemInvalidOs";
 	const GET_PROTOCOL_FAILED                                       = "ReturnGEtProtocolFailed";
 	const GET_SERVICE_FAILED                                        = "ReturnGetServiceFailed";
 	const GET_WEBSITE_CONTENT_FAILED                                = "ReturnGetWebSiteContentFailed";
@@ -1117,12 +1095,29 @@ class ConfigInfraTools extends Config
 	public $FunctionGetServiceEnabled                               = TRUE;
 	public $FunctionGetWebSiteEnabled                               = TRUE;
 	public $FunctionGetWhoisEnabled                                 = TRUE;
-	
+
 	/* Páginas Habilitadas / Desabilitadas */
-	public $PageAboutEnabled                                        = FALSE;
+	public $PageAboutEnabled                                        = TRUE;
 	public $PageAccountEnabled                                      = TRUE;
 	public $PageCorporationEnabled                                  = FALSE;
 	public $PageAdminEnabled                                        = TRUE;
+	public $PageAdminCorporationEnabled                             = TRUE;
+	public $PageAdminCountryEnabled                                 = TRUE;
+	public $PageAdminDepartmentEnabled                              = TRUE;
+	public $PageAdminMonitoringEnabled                              = TRUE;
+	public $PageAdminNotificationEnabled                            = TRUE;
+	public $PageAdminServiceEnabled                                 = TRUE;
+	public $PageAdminSystemConfigurationEnabled                     = TRUE;
+	public $PageAdminTechInfoEnabled                                = TRUE;
+	public $PageAdminTicketEnabled                                  = TRUE;
+	public $PageAdminTypeAssocUserTeamEnabled                       = TRUE;
+	public $PageAdminTypeMonitoringEnabled                          = TRUE;
+	public $PageAdminTypeServiceEnabled                             = TRUE;
+	public $PageAdminTypeStatusMonitoringEnabled                    = TRUE;
+	public $PageAdminTypeStatusTicketEnabled                        = TRUE;
+	public $PageAdminTypeTicketEnabled                              = TRUE;
+	public $PageAdminTypeUserEnabled                                = TRUE;
+	public $PageAdminUserEnabled                                    = TRUE;
 	public $PageCheckEnabled                                        = TRUE;
 	public $PageContactEnabled                                      = TRUE;
 	public $PageDiagnosticToolsEnabled                              = TRUE;
@@ -1154,10 +1149,6 @@ class ConfigInfraTools extends Config
 	public $PageTeamSelectEnabled                                   = TRUE;
 	public $PageTeamUpdateEnabled                                   = TRUE;
 	public $PageTeamViewEnabled                                     = TRUE;
-		  
-	/* E-mails utilizados pelo Sistema */
-	public $DefaultEmailNoReplyFormPassword                         = "";
-	public $DefaultEmailSupportFormPassword                         = "";
 	
 	/**                               **/
 	/************* METODOS *************/

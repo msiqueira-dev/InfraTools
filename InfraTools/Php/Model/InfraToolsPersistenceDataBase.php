@@ -54,6 +54,7 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert();
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate();
 		public static function SqlDropInfraToolsDataBase();
+		public static function SqlInfraToolsCheckDataBase();
 **************************************************************************/
 
 class InfraToolsPersistenceDataBase
@@ -582,10 +583,11 @@ class InfraToolsPersistenceDataBase
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.SYSTEM_CONFIGURATION (
                 RegisterDate DATETIME NOT NULL,
-                SystemConfigurationActive TINYINT(1) NOT NULL,
+                SystemConfigurationOptionActive TINYINT(1) NOT NULL,
                 SystemConfigurationOptionDescription VARCHAR(100) NOT NULL,
                 SystemConfigurationOptionName VARCHAR(45) NOT NULL,
                 SystemConfigurationOptionNumber INT NOT NULL AUTO_INCREMENT,
+				SystemConfigurationOptionValue VARCHAR(45) NULL,
                 PRIMARY KEY (SystemConfigurationOptionNumber),
                 UNIQUE INDEX UniqueSystemConfigurationSystemConfigurationOptionDescription 
 				(SystemConfigurationOptionDescription ASC),
@@ -948,6 +950,25 @@ class InfraToolsPersistenceDataBase
 	public static function SqlDropInfraToolsDataBase()
 	{
 		return "DROP SCHEMA IF EXISTS INFRATOOLS";
+	}
+	
+	public static function SqlInfraToolsCheckDataBase()
+	{
+		return "SELECT " . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE        .", "
+					     . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION   .", "
+						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME          .", "
+						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER        .", "
+						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE         ."  "
+			 . "FROM  "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            ."  "
+ 			 . "WHERE "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME   . "= 'ENABLE_PAGE_INSTALL' "
+             . "AND "    . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE . "= 1";
 	}
 }
 ?>

@@ -7,7 +7,7 @@
        var $image = document.getElementById('DivHeaderContainerMenuPageAbout').className = 'DivHeaderContainerMenuPageAbout';" >
     <div id="DivHeaderContainerMenuPageAboutTop" class="DivHeaderContainerMenuPageAboutTop"></div>
     <div class="DivHeaderContainerMenuLink">
-        <a href="<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_ABOUT_HREF'); ?>" id="PageAbout" 
+        <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ABOUT'); ?>" id="PageAbout" 
            title="<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_ABOUT_TITLE'); ?>">
             <span class="HeaderSpace">
             </span>

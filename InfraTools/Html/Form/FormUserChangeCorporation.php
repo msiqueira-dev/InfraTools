@@ -249,7 +249,7 @@
     </div>
 </div>
 <label>
-    <?php if(isset($this->ReturnEmptyText))       echo $this->ReturnEmptyText; ?>
-    <?php if(isset($this->ReturnCorporationText)) echo $this->ReturnCorporationText; ?>
-    <?php if(isset($this->ReturnText))            echo $this->ReturnText; ?>
+    <?php if(isset($this->ReturnEmptyText))           echo $this->ReturnEmptyText; ?>
+    <?php if(isset($this->ReturnCorporationNameText)) echo $this->ReturnCorporationNameText; ?>
+    <?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 </label>

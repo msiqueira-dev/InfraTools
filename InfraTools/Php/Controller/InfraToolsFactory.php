@@ -53,57 +53,58 @@ Methods:
 			public function CreateLanguageEs();
 			public function CreateLanguagePt();
 			public function CreatePage($Page);
-			private function CreatePageAbout();
-			private function CreatePageAccount();
-			private function CreatePageAdmin();
-			private function CreatePageAdminCorporation();
-			private function CreatePageAdminCountry();
-			private function CreatePageAdminDepartment();
-			private function CreatePageAdminNofication();
-			private function CreatePageAdminService();
-			private function CreatePageAdminTeam();
-			private function CreatePageAdminTechInfo();
-			private function CreatePageAdminTicket();
-			private function CreatePageAdminTypeAssocUserTeam()
-			private function CreatePageAdminTypeMonitoring();
-			private function CreatePageAdminTypeService();
-			private function CreatePageAdminTypeStatusMonitoring();
-			private function CreatePageAdminTypeStatusTicket();
-			private function CreatePageAdminTypeTicket();
-			private function CreatePageAdminTypeUser();
-			private function CreatePageAdminUser();
-			private function CreatePageCheck();
-			private function CreatePageContact();
-			private function CreatePageCorporation();
-			private function CreatePageDiagnosticTools();
-			private function CreatePageGet();
-			private function CreatePageHome();
-			private function CreatePageInstall();
-			private function CreatePageLogin();
-			private function CreatePageNotFound();
-			private function CreatePageNotification();
-			private function CreatePagePasswordRecovery();
-			private function CreatePagePasswordReset();
-			private function CreatePageRegister();
-			private function CreatePageRegisterConfirmation();
-			private function CreatePageResendConfirmationLink();
-			private function CreatePageService();
-			private function CreatePageServiceList();
-			private function CreatePageServiceListByCorporation();
-			private function CreatePageServiceListByDepartment();
-			private function CreatePageServiceListByTypeAssocUserService();
-			private function CreatePageServiceListByTypeService();
-			private function CreatePageServiceListByUser();
-			private function CreatePageServiceRegister();
-			private function CreatePageServiceSelect();
-			private function CreatePageServiceView();
-			private function CreatePageSupport();
-			private function CreatePageTeam();
+			private function CreatePageAbout($Language);
+			private function CreatePageAccount($Language);
+			private function CreatePageAdmin($Language);
+			private function CreatePageAdminCorporation($Language);
+			private function CreatePageAdminCountry($Language);
+			private function CreatePageAdminDepartment($Language);
+			private function CreatePageAdminNofication($Language);
+			private function CreatePageAdminService($Language);
+			private function CreatePageAdminTeam($Language);
+			private function CreatePageAdminTechInfo($Language);
+			private function CreatePageAdminTicket($Language);
+			private function CreatePageAdminTypeAssocUserTeam($Language)
+			private function CreatePageAdminTypeMonitoring($Language);
+			private function CreatePageAdminTypeService($Language);
+			private function CreatePageAdminTypeStatusMonitoring($Language);
+			private function CreatePageAdminTypeStatusTicket($Language);
+			private function CreatePageAdminTypeTicket($Language);
+			private function CreatePageAdminTypeUser($Language);
+			private function CreatePageAdminUser($Language);
+			private function CreatePageCheck($Language);
+			private function CreatePageContact($Language);
+			private function CreatePageCorporation($Language);
+			private function CreatePageDiagnosticTools($Language);
+			private function CreatePageGet($Language);
+			private function CreatePageHome($Language);
+			private function CreatePageInstall($Language);
+			private function CreatePageLogin($Language);
+			private function CreatePageNotFound($Language);
+			private function CreatePageNotification($Language);
+			private function CreatePagePasswordRecovery($Language);
+			private function CreatePagePasswordReset($Language);
+			private function CreatePageRegister($Language);
+			private function CreatePageRegisterConfirmation($Language);
+			private function CreatePageResendConfirmationLink($Language);
+			private function CreatePageService($Language);
+			private function CreatePageServiceList($Language);
+			private function CreatePageServiceListByCorporation($Language);
+			private function CreatePageServiceListByDepartment($Language);
+			private function CreatePageServiceListByTypeAssocUserService($Language);
+			private function CreatePageServiceListByTypeService($Language);
+			private function CreatePageServiceListByUser($Language);
+			private function CreatePageServiceRegister($Language);
+			private function CreatePageServiceSelect($Language);
+			private function CreatePageServiceView($Language);
+			private function CreatePageSupport($Language);
+			private function CreatePageTeam($Language);
 **************************************************************************/
 
 /* SITE PATH CONSTANTS */
 if (file_exists("Php"))
 {
+	include_once("../ProjectConfig.php");
 	if(!defined('BASE_PATH_PHP_CONTROLLER')) define("BASE_PATH_PHP_CONTROLLER", "../Base/Php/Controller/");
 	if(!defined('SITE_PATH_CAPTCHA'))	     define("SITE_PATH_CAPTCHA", "Captcha");
 	if(!defined('SITE_PATH_DE'))             define("SITE_PATH_DE", "De");
@@ -120,6 +121,7 @@ if (file_exists("Php"))
 }
 elseif(file_exists("../Php"))
 {
+	include_once("../../ProjectConfig.php");
 	if(!defined('BASE_PATH_PHP_CONTROLLER')) define("BASE_PATH_PHP_CONTROLLER", "../../Base/Php/Controller/");
 	if(!defined('SITE_PATH_CAPTCHA'))        define("SITE_PATH_CAPTCHA", "../Captcha");
 	if(!defined('SITE_PATH_DE'))             define("SITE_PATH_DE", "../De");
@@ -136,6 +138,7 @@ elseif(file_exists("../Php"))
 }
 else
 {
+	include_once("../../../ProjectConfig.php");
 	if(!defined('BASE_PATH_PHP_CONTROLLER')) define("BASE_PATH_PHP_CONTROLLER", "../../../Base/Php/Controller/");
 	if(!defined('SITE_PATH_CAPTCHA'))        define("SITE_PATH_CAPTCHA", "../../Captcha");
 	if(!defined('SITE_PATH_DE'))             define("SITE_PATH_DE", "../../De");
@@ -479,6 +482,9 @@ class InfraToolsFactory extends Factory
 	
 	public function CreateInfraToolsNetwork()
 	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Network.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class Network');
+		else include_once(BASE_PATH_PHP_MODEL . "Network.php");
 		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsNetwork.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsNetwork');
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsNetwork.php");
@@ -611,318 +617,318 @@ class InfraToolsFactory extends Factory
 		return Pt::__create();
 	}
 	
-	public function CreatePage($Page)
+	public function CreatePage($Page, $Language)
 	{
 		if($Page == str_replace("_", "",ConfigInfraTools::PAGE_ABOUT))
-			return $this->CreatePageAbout();
+			return $this->CreatePageAbout($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ACCOUNT))
-			return $this->CreatePageAccount();
+			return $this->CreatePageAccount($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN))
-			return $this->CreatePageAdmin();
+			return $this->CreatePageAdmin($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_CORPORATION))
-			return $this->CreatePageAdminCorporation();
+			return $this->CreatePageAdminCorporation($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_COUNTRY))
-			return $this->CreatePageAdminCountry();
+			return $this->CreatePageAdminCountry($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_DEPARTMENT))
-			return $this->CreatePageAdminDepartment();
+			return $this->CreatePageAdminDepartment($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_NOTIFICATION))
-			return $this->CreatePageAdminNotification();
+			return $this->CreatePageAdminNotification($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_SERVICE))
-			return $this->CreatePageAdminService();
+			return $this->CreatePageAdminService($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TEAM))
-			return $this->CreatePageAdminTeam();
+			return $this->CreatePageAdminTeam($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TECH_INFO))
-			return $this->CreatePageAdminTechInfo();
+			return $this->CreatePageAdminTechInfo($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TICKET))
-			return $this->CreatePageAdminTicket();
+			return $this->CreatePageAdminTicket($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM))
-			return $this->CreatePageAdminTypeAssocUserTeam();
+			return $this->CreatePageAdminTypeAssocUserTeam($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING))
-			return $this->CreatePageAdminTypeMonitoring();
+			return $this->CreatePageAdminTypeMonitoring($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE))
-			return $this->CreatePageAdminTypeService();
+			return $this->CreatePageAdminTypeService($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING))
-			return $this->CreatePageAdminTypeStatusMonitoring();
+			return $this->CreatePageAdminTypeStatusMonitoring($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET))
-			return $this->CreatePageAdminTypeStatusTicket();
+			return $this->CreatePageAdminTypeStatusTicket($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET))
-			return $this->CreatePageAdminTypeTicket();
+			return $this->CreatePageAdminTypeTicket($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_TYPE_USER))
-			return $this->CreatePageAdminTypeUser();
+			return $this->CreatePageAdminTypeUser($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_ADMIN_USER))
-			return $this->CreatePageAdminUser();
+			return $this->CreatePageAdminUser($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_CHECK))
-			return $this->CreatePageCheck();
+			return $this->CreatePageCheck($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_CONTACT))
-			return $this->CreatePageContact();
+			return $this->CreatePageContact($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_CORPORATION))
-			return $this->CreatePageCorporation();
+			return $this->CreatePageCorporation($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS))
-			return $this->CreatePageDiagnosticTools();
+			return $this->CreatePageDiagnosticTools($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_GET))
-			return $this->CreatePageGet();
+			return $this->CreatePageGet($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_INSTALL))
-			return $this->CreatePageInstall();
+			return $this->CreatePageInstall($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_HOME))
-			return $this->CreatePageHome();
+			return $this->CreatePageHome($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_LOGIN))
-			return $this->CreatePageLogin();
+			return $this->CreatePageLogin($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_NOTIFICATION))
-			return $this->CreatePageNotification();
+			return $this->CreatePageNotification($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_PASSWORD_RECOVERY))
-			return $this->CreatePagePasswordRecovery();
+			return $this->CreatePagePasswordRecovery($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_PASSWORD_RESET))
-			return $this->CreatePagePasswordReset();
+			return $this->CreatePagePasswordReset($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_REGISTER))
-			return $this->CreatePageRegister();
+			return $this->CreatePageRegister($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_REGISTER_CONFIRMATION))
-			return $this->CreatePageRegisterConfirmation();
+			return $this->CreatePageRegisterConfirmation($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_RESEND_CONFIRMATION_LINK))
-			return $this->CreatePageResendConfirmationLink();
+			return $this->CreatePageResendConfirmationLink($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE))
-			return $this->CreatePageService();
+			return $this->CreatePageService($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_LIST))
-			return $this->CreatePageServiceList();
+			return $this->CreatePageServiceList($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_LIST_BY_CORPORATION))
-			return $this->CreatePageServiceListByCorporation();
+			return $this->CreatePageServiceListByCorporation($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_LIST_BY_DEPARTMENT))
-			return $this->CreatePageServiceListByDepartment();
+			return $this->CreatePageServiceListByDepartment($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE))
-			return $this->CreatePageServiceListByTypeAssocUserService();
+			return $this->CreatePageServiceListByTypeAssocUserService($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_LIST_BY_TYPE_SERVICE))
-			return $this->CreatePageServiceListByTypeService();
+			return $this->CreatePageServiceListByTypeService($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_LIST_BY_USER))
-			return $this->CreatePageServiceListByUser();
+			return $this->CreatePageServiceListByUser($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_REGISTER))
-			return $this->CreatePageServiceRegister();
+			return $this->CreatePageServiceRegister($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_SELECT))
-			return $this->CreatePageServiceSelect();
+			return $this->CreatePageServiceSelect($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SERVICE_VIEW))
-			return $this->CreatePageServiceView();
+			return $this->CreatePageServiceView($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SUPPORT))
-			return $this->CreatePageSupport();
+			return $this->CreatePageSupport($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_TEAM))
 			return $this->CreatePageTeam();
-		else return $this->CreatePageNotFound();
+		else return $this->CreatePageNotFound($Language);
 	}
 	
-	private function CreatePageAbout()
+	private function CreatePageAbout($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAbout();
+		return PageAbout::__create($Language)->LoadPage();
 	}
 	
-	private function CreatePageAccount()
+	private function CreatePageAccount($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAccount();
+		return (new PageAccount($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdmin()
+	private function CreatePageAdmin($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdmin();
+		return (new PageAdmin($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminCorporation()
+	private function CreatePageAdminCorporation($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminCorporation();
+		return (new PageAdminCorporation($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminCountry()
+	private function CreatePageAdminCountry($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageAdminCountry::__create();
+		return PageAdminCountry::__create($Language)->LoadPage();
 	}
 	
-	private function CreatePageAdminDepartment()
+	private function CreatePageAdminDepartment($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminDepartment();
+		return (new PageAdminDepartment())->LoadPage();
 	}
 	
-	private function CreatePageAdminNotification()
+	private function CreatePageAdminNotification($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminNotification();
+		return (new PageAdminNotification($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminService()
+	private function CreatePageAdminService($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminService();
+		return (new PageAdminService($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminTeam()
+	private function CreatePageAdminTeam($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTeam();
+		return (new PageAdminTeam())->LoadPage();
 	}
 	
-	private function CreatePageAdminTechInfo()
+	private function CreatePageAdminTechInfo($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTechInfo();
+		return (new PageAdminTechInfo())->LoadPage();
 	}
 	
-	private function CreatePageAdminTicket()
+	private function CreatePageAdminTicket($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTicket();
+		return (new PageAdminTicket($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminTypeAssocUserTeam()
+	private function CreatePageAdminTypeAssocUserTeam($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeAssocUserTeam();	
+		return (new PageAdminTypeAssocUserTeam())->LoadPage();	
 	}
 	
-	private function CreatePageAdminTypeMonitoring()
+	private function CreatePageAdminTypeMonitoring($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeMonitoring();
+		return (new PageAdminTypeMonitoring())->LoadPage();
 	}
 	
-	private function CreatePageAdminTypeService()
+	private function CreatePageAdminTypeService($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeService();
+		return (new PageAdminTypeService($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminTypeStatusMonitoring()
+	private function CreatePageAdminTypeStatusMonitoring($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeStatusMonitoring();
+		return (new PageAdminTypeStatusMonitoring())->LoadPage();
 	}
 	
-	private function CreatePageAdminTypeStatusTicket()
+	private function CreatePageAdminTypeStatusTicket($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeStatusTicket();
+		return (new PageAdminTypeStatusTicket())->LoadPage();
 	}
 	
-	private function CreatePageAdminTypeTicket()
+	private function CreatePageAdminTypeTicket($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeTicket();
+		return (new PageAdminTypeTicket($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminTypeUser()
+	private function CreatePageAdminTypeUser($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminTypeUser();
+		return (new PageAdminTypeUser($Language))->LoadPage();
 	}
 	
-	private function CreatePageAdminUser()
+	private function CreatePageAdminUser($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageAdminUser();
+		return (new PageAdminUser($Language))->LoadPage();
 	}
 	
-	private function CreatePageCheck()
+	private function CreatePageCheck($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageCheck();
+		return (new PageCheck($Language))->LoadPage();
 	}
 	
-	private function CreatePageContact()
+	private function CreatePageContact($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageContact();
+		return (new PageContact($Language))->LoadPage();
 	}
 	
-	private function CreatePageCorporation()
+	private function CreatePageCorporation($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageCorporation();
+		return (new PageCorporation($Language))->LoadPage();
 	}
 	
-	private function CreatePageDiagnosticTools()
+	private function CreatePageDiagnosticTools($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageDiagnosticTools();
+		return (new PageDiagnosticTools($Language))->LoadPage();
 	}
 	
-	private function CreatePageGet()
+	private function CreatePageGet($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageGet();
+		return (new PageGet($Language))->LoadPage();
 	}
 	
-	private function CreatePageInstall()
+	private function CreatePageInstall($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageInstall::__create();
+		return PageInstall::__create($Language)->LoadPage();
 	}
 	
-	private function CreatePageHome()
+	private function CreatePageHome($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageHome::__create();
+		return PageHome::__create($Language)->LoadPage();
 	}
 	
-	private function CreatePageLogin()
+	private function CreatePageLogin($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageLogin();
+		return (new PageLogin($Language))->LoadPage();
 	}
 	
-	private function CreatePageNotFound()
+	private function CreatePageNotFound($Language)
 	{
 		if(!file_exists(SITE_PATH_PHP_VIEW . "PageNotFound.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class PageNotFound');
@@ -930,151 +936,151 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageNotFound::__create();
+		return PageNotFound::__create($Language)->LoadPage();
 	}
 	
-	private function CreatePageNotification()
+	private function CreatePageNotification($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageNotification();
+		return (new PageNotification($Language))->LoadPage();
 	}
 	
-	private function CreatePagePasswordRecovery()
+	private function CreatePagePasswordRecovery($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PagePasswordRecovery();
+		return (new PagePasswordRecovery($Language))->LoadPage();
 	}
 	
-	private function CreatePagePasswordReset()
+	private function CreatePagePasswordReset($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PagePasswordReset();
+		return (new PagePasswordReset($Language))->LoadPage();
 	}
 	
-	private function CreatePageRegister()
+	private function CreatePageRegister($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageRegister();
+		return (new PageRegister($Language))->LoadPage();
 	}
 	
-	private function CreatePageRegisterConfirmation()
+	private function CreatePageRegisterConfirmation($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageRegisterConfirmation();
+		return (new PageRegisterConfirmation($Language))->LoadPage();
 	}
 	
-	private function CreatePageResendConfirmationLink()
+	private function CreatePageResendConfirmationLink($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageResendConfirmationLink();
+		return (new PageResendConfirmationLink($Language))->LoadPage();
 	}
 	
-	private function CreatePageService()
+	private function CreatePageService($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageService();
+		return (new PageService($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceList()
+	private function CreatePageServiceList($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceList();
+		return (new PageServiceList($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceListByCorporation()
+	private function CreatePageServiceListByCorporation($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceListByCorporation();
+		return (new PageServiceListByCorporation($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceListByDepartment()
+	private function CreatePageServiceListByDepartment($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceListByDepartment();
+		return (new PageServiceListByDepartment($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceListByTypeAssocUserService()
+	private function CreatePageServiceListByTypeAssocUserService($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceListByTypeAssocUserService();
+		return (new PageServiceListByTypeAssocUserService($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceListByTypeService()
+	private function CreatePageServiceListByTypeService($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceListByTypeService();
+		return (new PageServiceListByTypeService($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceListByUser()
+	private function CreatePageServiceListByUser($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceListByUser();
+		return (new PageServiceListByUser($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceRegister()
+	private function CreatePageServiceRegister($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceRegister();
+		return (new PageServiceRegister($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceSelect()
+	private function CreatePageServiceSelect($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceSelect();
+		return (new PageServiceSelect($Language))->LoadPage();
 	}
 	
-	private function CreatePageServiceView()
+	private function CreatePageServiceView($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageServiceView();
+		return (new PageServiceView($Language))->LoadPage();
 	}
 	
-	private function CreatePageSupport()
+	private function CreatePageSupport($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageSupport();
+		return (new PageSupport($Language))->LoadPage();
 	}
 	
-	private function CreatePageTeam()
+	private function CreatePageTeam($Language)
 	{
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return new PageTeam();
+		return (new PageTeam($Language))->LoadPage();
 	}
 }
 ?>

@@ -108,7 +108,7 @@ class PageForm
 							       $ArrayElementsMinValue, $ArrayElementsMaxValue, $ArrayElementsNullable, 
 							       $ArrayFormFunction, $InstanceLanguageText, $Language, 
 								   &$ArrayElementsClass, &$ArrayElementsText, &$ElementEmptyText, &$MatrixConstants,
-								   &$ArrayOptions = NULL, &$ArrayExtraFieldSameValue = NULL)
+								   &$MatrixOptions = NULL, &$ArrayExtraFieldSameValue = NULL)
 	{
 		$arrayReturn = array();
 		if(count($ArrayElements) > 0 && count($ArrayElementsInput) > 0 && count($ArrayElementsClass) > 0 &&
@@ -127,6 +127,12 @@ class PageForm
 					$elementText         = $ArrayElementsText[$index];
 				$formFunction        = $ArrayFormFunction[$index];
 				$arrayConstants      = $MatrixConstants[$index];
+				if(isset($MatrixOptions[$index]))
+				{
+					if(isset($MatrixOptions[$index][0]))
+						$arrayOptions        = $MatrixOptions[$index];
+				}
+				else $arrayOptions = NULL;
 				if($ArrayExtraFieldSameValue != NULL)
 				{
 					if(count($ArrayExtraFieldSameValue) > 0)
@@ -140,7 +146,7 @@ class PageForm
 											   $InstanceLanguageText, $Language, $elementMinValue, $elementMaxValue, 
 											   $elementNullable, $ArrayElementsText[$index], $ElementEmptyText, 
 											   $elementClass, $arrayConstants,
-											   $ArrayOptions, $elementExtraFieldSameValue);
+											   $arrayOptions, $elementExtraFieldSameValue);
 				if($return != Config::SUCCESS)
 					$ArrayElementsText[$index] = $ArrayElementsText[$index] . "<br>"; 
 				array_push($arrayReturn, $return);

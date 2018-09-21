@@ -13,22 +13,23 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about a corporation's department.
 Functions: 
-			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug);
-			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
-			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
+			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection);
+			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug, $MySqlConnection);
+			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection);
 			public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
-			                                              &$ArrayInstanceDepartment, &$RowCount, $Debug);
+			                                              &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection);
 			public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, 
-			                                                     $Debug);
-			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug);
+			                                                     $Debug, $MySqlConnection);
+			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-			                                                                   &$DepartmentInstance, $Debug);
-			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug);
+			                                                                   &$DepartmentInstance, $Debug, $MySqlConnection);
+			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitials,
-			                                                                     $DepartmentNameNew, $DepartmentNameOld, $Debug);
+			                                                                     $DepartmentNameNew, $DepartmentNameOld, 
+																				 $Debug, $MySqlConnection);
 			public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName,
 			                                                                      $CorporationNameNew,
-																				  $CorporationNameOld, $Debug);
+																				  $CorporationNameOld, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -101,36 +102,31 @@ class FacedePersistenceDepartment
         return self::$Instance;
     }
 	
-	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug)
+	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentDelete() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentDelete());
+				echo "<b>Query (SqlDepartmentDelete)</b> : " . 
+						 Persistence::SqlDepartmentDelete() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_DEPARTMENT_DELETE_FAILED;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_DEPARTMENT_DELETE_FAILED;
@@ -139,36 +135,32 @@ class FacedePersistenceDepartment
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug)
+	public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;		
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentInsert() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentInsert());
+				echo "<b>Query (SqlDepartmentInsert)</b> : " . 
+						 Persistence::SqlDepartmentInsert() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("sss", $CorporationName, $DepartmentInitials, $DepartmentName);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
 					else return Config::MYSQL_DEPARTMENT_INSERT_FAILED;
@@ -177,27 +169,27 @@ class FacedePersistenceDepartment
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug)
+	public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
 	{
+		$errorStr = NULL; $mySqlError = NULL;
 		$ArrayInstanceDepartment = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentSelect() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentSelect());
+				echo "<b>Query (SqlDepartmentSelect)</b> : " . 
+						 Persistence::SqlDepartmentSelect() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -214,7 +206,6 @@ class FacedePersistenceDepartment
 																	        $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceDepartment))
 						return Config::SUCCESS;
 					else 
@@ -227,17 +218,15 @@ class FacedePersistenceDepartment
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "Prepare Error: " . $mySqlConnection->error;
+						echo "Prepare Error: " . $MySqlConnection->error;
 					$return = Config::MYSQL_DEPARTMENT_SELECT_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -245,18 +234,19 @@ class FacedePersistenceDepartment
 	}
 		
 	public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
-			                                      &$ArrayInstanceDepartment, &$RowCount, $Debug)
+			                                      &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$errorStr = NULL; $mySqlError = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentSelectByCorporation() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporation());
+				echo "<b>Query (SqlDepartmentSelectByCorporation)</b> : " . 
+						 Persistence::SqlDepartmentSelectByCorporation() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporation());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $CorporationName);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$stmt->bind_result($CorporationName, $depIni, $depName, $depRegDate, $corpActive, $corpName, $corpRegDate);
@@ -279,33 +269,32 @@ class FacedePersistenceDepartment
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_NAME_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug)
+	public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
+		$mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceDepartment = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentSelectByCorporationNoLimit() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationNoLimit());
+				echo "<b>Query (SqlDepartmentSelectByCorporationNoLimit)</b> : " . 
+						 Persistence::SqlDepartmentSelectByCorporationNoLimit() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationNoLimit());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $CorporationName);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -328,32 +317,31 @@ class FacedePersistenceDepartment
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				if(!empty($ArrayInstanceDepartment))
 					return Config::SUCCESS;
 				else return Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_FETCH_FAILED;
 			}
 			if($Debug == Config::CHECKBOX_CHECKED) 
-				echo "Prepare Error: " . $mySqlConnection->error;
-			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+				echo "Prepare Error: " . $MySqlConnection->error;
 			return Config::MYSQL_QUERY_PREPARE_FAILED;
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
+	public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
+		$mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceDepartment = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentSelectByDepartmentName() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentName());
+				echo "<b>Query (SqlDepartmentSelectByDepartmentName)</b> : " . 
+						 Persistence::SqlDepartmentSelectByDepartmentName() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentName());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $DepartmentName);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -370,7 +358,6 @@ class FacedePersistenceDepartment
 											                                $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceDepartment))
 						return Config::SUCCESS;
 					else 
@@ -383,17 +370,15 @@ class FacedePersistenceDepartment
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "Prepare Error: " . $mySqlConnection->error;
+						echo "Prepare Error: " . $MySqlConnection->error;
 					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -401,18 +386,19 @@ class FacedePersistenceDepartment
 	}
 	
 	public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-																	   &$DepartmentInstance, $Debug)
+																	   &$DepartmentInstance, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$errorStr = NULL; $mySqlError = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName());
+				echo "<b>Query (SqlDepartmentSelectByDepartmentNameAndCorporationName)</b> : " . 
+						 Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$stmt->bind_result($CorporationName, $depIni, $depName, $depRegDate, $corpActive, $corpName, $corpRegDate);
@@ -435,29 +421,28 @@ class FacedePersistenceDepartment
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug)
+	public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
+		$errorStr = NULL; $mySqlError = NULL;
 		$ArrayInstanceDepartment = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentSelectNoLimit() . "<br>";
-			if($result = $mySqlConnection->query(Persistence::SqlDepartmentSelectNoLimit()))
+				echo "<b>Query (SqlDepartmentSelectNoLimit)</b> : " . 
+						 Persistence::SqlDepartmentSelectNoLimit() . "<br>";
+			if($result = $MySqlConnection->query(Persistence::SqlDepartmentSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
@@ -471,7 +456,6 @@ class FacedePersistenceDepartment
 										                                $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceDepartment, $InstanceDepartment);
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				if(!empty($ArrayInstanceDepartment))
 					return Config::SUCCESS;
 				else return Config::MYSQL_DEPARTMENT_SELECT_FETCH_FAILED;
@@ -482,51 +466,46 @@ class FacedePersistenceDepartment
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 				$return = Config::MYSQL_DEPARTMENT_SELECT_FAILED;
 			}
-			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 			return $return;
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
 	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitials, $DepartmentNameNew, 
-																		 $DepartmentNameOld, $Debug)
+																		 $DepartmentNameOld, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{ 
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation());
+				echo "<b>Query (SqlDepartmentUpdateDepartmentByDepartmentAndCorporation)</b> : " . 
+						 Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation());
 			if ($stmt)
 			{
 				$stmt->bind_param("ssss", $DepartmentInitials, $DepartmentNameNew, $DepartmentNameOld, $CorporationName);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
 				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_DEPARTMENT_UPDATE_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -534,44 +513,38 @@ class FacedePersistenceDepartment
 	}
 	
 	public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
-																          $CorporationNameOld, $Debug)
+																          $CorporationNameOld, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCorporationUpdateByName() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlCorporationUpdateByName());
+				echo "<b>Query (SqlCorporationUpdateByName)</b> : " . 
+						 Persistence::SqlCorporationUpdateByName() . "<br>";
+			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationUpdateByName());
 			if ($stmt)
 			{
 				$stmt->bind_param("sss", $DepartmentName, $CorporationNameNew, $CorporationNameOld);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_DEPARTMENT_UPDATE_CORPORATION_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

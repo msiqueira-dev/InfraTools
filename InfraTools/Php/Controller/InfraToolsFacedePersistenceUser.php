@@ -468,7 +468,6 @@ class InfraToolsFacedePersistenceUser
 		$InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
-		echo InfraToolsPersistence::SqlUserSelectByUserUniqueId();
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 				echo "<b>Query (SqlUserSelectByUserUniqueId)</b>  : " . 
 				             InfraToolsPersistence::SqlUserSelectByUserUniqueId() . "<br>";

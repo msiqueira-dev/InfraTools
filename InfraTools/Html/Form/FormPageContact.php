@@ -7,7 +7,7 @@
 			<label><?php echo $this->InstanceLanguageText->GetText('CONTACT_TEXT_NAME').":"; ?></label>
 		</div>
 		<?php 
-		if($this->InstanceInfraToolsUser != NULL) 
+		if($this->User != NULL) 
 		{
 		?>
 			<div class="DivContentBodyContainerValue">
@@ -56,12 +56,12 @@
 			<label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
 		</div>
 		<?php 
-		if($this->InstanceInfraToolsUser != NULL) 
+		if($this->User != NULL) 
 		{
 		?>
-		<div class="DivContentBodyContainerValue">
-				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
-		</div>
+			<div class="DivContentBodyContainerValue">
+					<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
+			</div>
 		<?php
 		}
 		else
@@ -103,41 +103,42 @@
 		}
 		?>
 	</div>
-	<!-- FORM_FIELD_TYPE_TICKET_DESCRIPTION -->
+	
+	<!-- FORM_FIELD_TICKET_TYPE -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label> <?php echo $this->InstanceLanguageText->GetText('CONTACT_TEXT_SUBJECT'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<select name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>"
-				class="<?php echo $this->ReturnSubjectClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>');
+		<select name="<?php echo ConfigInfraTools::FORM_FIELD_TICKET_TYPE; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_TICKET_TYPE; ?>"
+				class="<?php echo $this->ReturnTicketTypeClass; ?>"
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_TICKET_TYPE; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::CONTACT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											 '');"
-				style=" <?php if($this->InputValueSubject != ConfigInfraTools::FORM_SELECT_NONE
-								 && $this->InputValueSubject != "") 
+				style=" <?php if($this->InputValueTicketType != ConfigInfraTools::FORM_SELECT_NONE
+								 && $this->InputValueTicketType != "") 
 							echo 'color:black;'
 						?> " >
-			<option <?php if ($this->InputValueSubject == "" 
-							  || $this->InputValueSubject == ConfigInfraTools::FORM_SELECT_NONE) 
+			<option <?php if ($this->InputValueTicketType == "" 
+							  || $this->InputValueTicketType == ConfigInfraTools::FORM_SELECT_NONE) 
 				echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_DEFAULT'); ?> 
 			</option>
-			<option <?php if ($this->InputValueSubject == ConfigInfraTools::CONTACT_SELECT_COMMERCIAL) 
+			<option <?php if ($this->InputValueTicketType == ConfigInfraTools::CONTACT_SELECT_COMMERCIAL) 
 				echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::CONTACT_SELECT_COMMERCIAL; ?>"> 
 					<?php echo $this->InstanceLanguageText->GetText('CONTACT_SELECT_COMMERCIAL'); ?> 
 			</option>
-			<option <?php if ($this->InputValueSubject == ConfigInfraTools::CONTACT_SELECT_DOUBT) 
+			<option <?php if ($this->InputValueTicketType == ConfigInfraTools::CONTACT_SELECT_DOUBT) 
 				echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::CONTACT_SELECT_DOUBT; ?>"> 
 					<?php echo $this->InstanceLanguageText->GetText('CONTACT_SELECT_DOUBT'); ?> 
 			</option>
-			<option <?php if ($this->InputValueSubject == ConfigInfraTools::CONTACT_SELECT_SUGGESTION) 
+			<option <?php if ($this->InputValueTicketType == ConfigInfraTools::CONTACT_SELECT_SUGGESTION) 
 				echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::CONTACT_SELECT_SUGGESTION; ?>"> 
 					<?php echo $this->InstanceLanguageText->GetText('CONTACT_SELECT_SUGGESTION'); ?> 
 			</option>
@@ -210,7 +211,7 @@
 											 '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											 '');"
 				  title="<?php echo $this->InstanceLanguageText->GetText('CONTACT_TEXT_MESSAGE'); ?>"
-				  ><?php echo $this->InputValueTicketDescription; ?></textarea>
+				  	><?php echo $this->InputValueTicketDescription; ?></textarea>
 	</div>
 	<!-- FORM_CAPTCHA_CONTACT -->
 	<div class="DivContentBodyContainerCaptcha">
@@ -271,11 +272,11 @@
 	</div>
 	<label>
 		<?php if(isset($this->ReturnEmptyText))                     echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnUserNameText))                  echo $this->ReturnNameText; ?>
-		<?php if(isset($this->ReturnUserEmailText))                 echo $this->ReturnEmailText; ?>
-		<?php if(isset($this->ReturnTickeTypeTickeDescriptionText)) echo $this->ReturnSubjectText; ?>
-		<?php if(isset($this->ReturnTickeTitleText))                echo $this->ReturnTitleText; ?>
-		<?php if(isset($this->ReturnTicketDescriptionText))         echo $this->ReturnMessageText; ?>
+		<?php if(isset($this->ReturnUserNameText))                  echo $this->ReturnUserNameText; ?>
+		<?php if(isset($this->ReturnUserEmailText))                 echo $this->ReturnUserEmailText; ?>
+		<?php if(isset($this->ReturnTicketTypeText))                echo $this->ReturnTicketTypeText; ?>
+		<?php if(isset($this->ReturnTickeTitleText))                echo $this->ReturnTickeTitleText; ?>
+		<?php if(isset($this->ReturnTicketDescriptionText))         echo $this->ReturnTicketDescriptionText; ?>
 		<?php if(isset($this->ReturnCaptchaText))                   echo $this->ReturnCaptchaText; ?>
 		<?php if(isset($this->ReturnEmptyText))                     echo $this->ReturnText; ?>
 	</label>

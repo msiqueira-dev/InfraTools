@@ -5,16 +5,15 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageAdmin"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageAdmin.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
 
-class PageAdminCountry extends PageInfraTools
+class PageAdminCountry extends PageAdmin
 {
-	protected static $Instance;
 	public $ArrayCountry = NULL;
 
 	/* Clone */
@@ -24,22 +23,11 @@ class PageAdminCountry extends PageInfraTools
 	}
 	
 	/* Constructor */
-	protected function __construct() 
+	protected function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		parent::__construct($Language);
 	}
-	
-	/* Singleton */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 
 	public function GetCurrentPage()
 	{
@@ -71,7 +59,6 @@ class PageAdminCountry extends PageInfraTools
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->Page = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
@@ -88,7 +75,7 @@ class PageAdminCountry extends PageInfraTools
 				$this->InputLimitOne = 0;
 			if($this->InputLimitTwo <= 0)
 				$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
@@ -98,7 +85,7 @@ class PageAdminCountry extends PageInfraTools
 		{
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
@@ -114,7 +101,7 @@ class PageAdminCountry extends PageInfraTools
 					$this->InputLimitOne = $rowCount - 25;
 					$this->InputLimitTwo = $rowCount;
 				}
-				$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+				$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);
@@ -125,7 +112,7 @@ class PageAdminCountry extends PageInfraTools
 		{
 			$this->InputLimitOne = 0;
 			$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
 																$this->ArrayCountry,
 																$rowCount,
 															    $this->InputValueHeaderDebug);

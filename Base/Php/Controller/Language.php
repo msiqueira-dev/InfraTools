@@ -28,7 +28,7 @@ abstract class Language
 {
 	/* Instances */
 	protected static $Instance             = NULL;
-	protected        $Factory      = NULL;
+	protected        $Factory              = NULL;
 	protected        $InstanceLanguageText = NULL;
 	
 	

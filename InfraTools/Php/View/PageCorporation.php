@@ -17,8 +17,15 @@ class PageCorporation extends PageInfraTools
 	/* Constructor */
 	public function __construct() 
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->Page = $this->GetCurrentPage($Language);
+		$this->PageCheckLogin = TRUE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
 	}
 
 	/* Clone */

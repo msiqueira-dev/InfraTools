@@ -20,7 +20,7 @@ Get / Set:
 			public function SetAssocTicketUserRequestingUser($User);
 			public function SetRegisterDate($RegisterDate);
 Methods:
-			public function UpdateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
+			public function UpdateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User);
 **************************************************************************/
 
 class AssocTicketUserRequesting
@@ -63,7 +63,14 @@ class AssocTicketUserRequesting
 	public function GetAssocTicketUserRequestingTicketId()
 	{
 		if($this->Ticket != NULL)
-			return $this->Ticket->GetTicketId();
+		{
+			if(is_object($this->Ticket))
+			{
+				return $this->Ticket->GetTicketId();	
+			}
+			else return $this->Ticket;
+		}
+		else return NULL;
 	}
 	
 	public function GetAssocTicketUserRequestingTicketTypeAssocUserRequesting()
@@ -74,7 +81,14 @@ class AssocTicketUserRequesting
 	public function GetAssocTicketUserRequestingTicketTypeAssocUserRequestingBond()
 	{
 		if($this->TypeAssocUserRequesting != NULL)
-			return $this->TypeAssocUserRequesting->GetTypeAssocUserRequestingBond();
+		{
+			if(is_object($this->TypeAssocUserRequesting))
+			{
+				return $this->TypeAssocUserRequesting->GetTypeAssocUserRequestingBond();	
+			}
+			else return $this->TypeAssocUserRequesting;
+		}
+		else return NULL;
 	}
 	
 	public function GetAssocTicketUserRequestingUser()
@@ -85,7 +99,14 @@ class AssocTicketUserRequesting
 	public function GetAssocTicketUserRequestingUserEmail()
 	{
 		if($this->User != NULL)
-			return $this->User->GetEmail();
+		{
+			if(is_object($this->TypeAssocUserRequesting))
+			{
+				return $this->User->GetEmail();	
+			}
+			else return $this->User;
+		}
+		else return NULL;
 	}
 	
 	public function GetRegisterDate()
@@ -115,7 +136,7 @@ class AssocTicketUserRequesting
 	}
 	
 	/* METHODS */
-	public function UpdateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate) 
+	public function UpdateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User) 
 	{
 		if($Ticket != NULL)
 			$this->Ticket  = $Ticket;
@@ -123,8 +144,6 @@ class AssocTicketUserRequesting
 			$this->TypeAssocUserRequesting = $TypeAssocUserRequesting;
 		if($User != NULL)
 			$this->User = $User;
-		if($RegisterDate != NULL)
-			$this->RegisterDate = $RegisterDate;
 	}
 }
 ?>

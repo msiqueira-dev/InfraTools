@@ -37,7 +37,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
 											 '');"
-						   value="<?php echo $this->InputValueCode; ?>" maxlength="16" />
+						   value="<?php echo $this->InputValueLoginTwoStepVerificationCode; ?>" maxlength="16" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainer"

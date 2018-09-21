@@ -53,6 +53,9 @@ class Pt
 	const CORPORATION                                             = "Corporação";
 	const CORPORATION_NAME                                        = "Nome da corporação";
 	const CORPORATION_NOT_FOUND                                   = "Corporação não encontrada";
+	const CORPORATION_UPDATE_ERROR                                = "Erro ao alterar corporação";
+	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                  = "Corporação com o mesmo nome já existe";
+	const CORPORATION_UPDATE_SUCCESS                              = "Corporação atualizada com sucesso";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS      = "Corporações obtidas com sucesso";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "Erro ao obter corporações";
 	const COUNTRY                                                 = "País";
@@ -73,15 +76,15 @@ class Pt
 	const FORM_FIELD_EDIT                                         = "Editar";
 	const FORM_INVALID_CAPTCHA                                    = "O valor catpcha não confere";
 	const FORM_INVALID_CORPORATION_NAME                           = "Nome de corporação inválida";
-	const FORM_INVALID_CORPORATION_NAME_SIZE                      = "Quantidade de caracteres excede o tamanho máximo para o nome da " 
-	                                                              . "corporação";
+	const FORM_INVALID_CORPORATION_NAME_SIZE                      = "Quantidade de caracteres excede o tamanho máximo para " 
+	                                                              . "o nome da corporação";
 	const FORM_INVALID_COUNTRY                                    = "País inválido, use o Google Maps";
 	const FORM_INVALID_DATE_DAY                                   = "Dia inválido";
 	const FORM_INVALID_DATE_MONTH                                 = "Mês inválido";
 	const FORM_INVALID_DATE_YEAR                                  = "Ano inválido";
 	const FORM_INVALID_DEPARTMENT_INITIALS                        = "Código do departamento inválido";
-	const FORM_INVALID_DEPARTMENT_INITIALS_SIZE                   = "Quantidade de caracteres excede o tamanho máximo para código de " 
-	                                                              . "departamento";
+	const FORM_INVALID_DEPARTMENT_INITIALS_SIZE                   = "Quantidade de caracteres excede o tamanho máximo para  " 
+	                                                              . "código de departamento";
 	const FORM_INVALID_DEPARTMENT_NAME                            = "Nome de departamento inválido";
 	const FORM_INVALID_DEPARTMENT_NAME_SIZE                       = "Quantidade de caracteres excede o tamanho máximo para nome "
 	                                                              . "de departamento";
@@ -92,8 +95,8 @@ class Pt
 	const FORM_INVALID_SERVICE_ACTIVE                             = "Valor inválido para checkbox de serviço ativo";
 	const FORM_INVALID_SERVICE_CORPORATION_CAN_CHANGE             = "Valor inválido para checkbox de corporação pode ser alterada";
 	const FORM_INVALID_SERVICE_DESCRIPTION                        = "Descrição de serviço inválida";
-	const FORM_INVALID_SERVICE_DESCRIPTION_SIZE                   = "Quantidade de caracteres excede o tamanho máximo para descrição "
-	                                                              . "de serviço";
+	const FORM_INVALID_SERVICE_DESCRIPTION_SIZE                   = "Quantidade de caracteres excede o tamanho máximo para "
+	                                                              . "descrição de serviço";
 	const FORM_INVALID_SERVICE_DEPARTMENT_CAN_CHANGE              = "Valor inválido para checkbox de departamento pode ser alterado";
 	const FORM_INVALID_SERVICE_ID                                 = "Id de serviço inválido";
 	const FORM_INVALID_SERVICE_NAME                               = "Nome de serviço inválido";
@@ -109,6 +112,15 @@ class Pt
 	const FORM_INVALID_TEAM_NAME                                  = "Nome de equipe inválido";
 	const FORM_INVALID_TEAM_NAME_SIZE                             = "Quantidade de caracteres excede o tamanho máximo no nome de " 
 	                                                              . " equipe";
+	const FORM_INVALID_TICKET_DESCRIPTION                         = "Descrição de solicitação inválida";
+	const FORM_INVALID_TICKET_DESCRIPTION_SIZE                    = "Quantidade de caracteres excede o tamanho máximo para "
+		                                                          . "descrição de solicitação";
+	const FORM_INVALID_TICKET_TITLE                               = "Título de solicitação inválida";
+	const FORM_INVALID_TICKET_TITLE_SIZE                          = "Quantidade de caracteres excede o tamanho máximo para "
+		                                                          . "tipo de solicitação";
+	const FORM_INVALID_TICKET_TYPE                                = "Tipo de solicitação inválida";
+	const FORM_INVALID_TICKET_TYPE_SIZE                           = "Quantidade de caracteres excede o tamanho máximo para "
+		                                                          . "tipo de solicitação";
 	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION        = "Descrição de tipo de associação entre usuário e serviço "
 	                                                              . "inválida";
 	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE   = "Quantidade de caracteres excede o tamanho máximo na descrição "
@@ -257,7 +269,7 @@ class Pt
 	const PAGE_ADMIN_CORPORATION_TITLE                            = "InfraTools - Gerência de corporações";
 	const PAGE_ADMIN_CORPORATION_UPDATE                           = "Gerência de Corporações - Atualizar";
 	const PAGE_ADMIN_CORPORATION_UPDATE_ROBOTS                    = "noindex";
-	const PAGE_ADMIN_CORPORATION_UPDATE_TITLE                     = "noindex";
+	const PAGE_ADMIN_CORPORATION_UPDATE_TITLE                     = "InfraTools - Gerência de Corporações";
 	const PAGE_ADMIN_CORPORATION_VIEW                             = "Gerência de Corporações - Vizulizar";
 	const PAGE_ADMIN_CORPORATION_VIEW_ROBOTS                      = "noindex";
 	const PAGE_ADMIN_CORPORATION_VIEW_TITLE                       = "InfraTools - Gerência de corporações";

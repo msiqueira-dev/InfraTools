@@ -29,34 +29,23 @@ if (!class_exists("PageInfraTools"))
 
 class PageServiceRegister extends PageInfraTools
 {
-	protected static $Instance;
 	public $ArrayInstanceInfraToolsCorporation = NULL;
 	public $ArrayInstanceInfraToolsDepartment  = NULL;
 	public $ArrayInstanceInfraToolsTypeService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		$this->PageCheckLogin = TRUE;
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
-	}
-	
-	/* Singleton */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 
 	public function GetCurrentPage()
 	{
@@ -145,7 +134,7 @@ class PageServiceRegister extends PageInfraTools
 									           $this->InputValueServiceDescription, 
 											   $this->InputValueServiceName, 
 											   $this->InputValueServiceType,
-											   $this->InstanceInfraToolsUser->GetEmail(),
+											   $this->User->GetEmail(),
 											   $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -165,14 +154,14 @@ class PageServiceRegister extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$return = $this->CorporationSelectOnUserServiceContextNoLimit(
-						                     $this->InstanceInfraToolsUser->GetEmail(),
+						                     $this->User->GetEmail(),
 											 $this->ArrayInstanceInfraToolsCorporation, 
 											 $this->InputValueHeaderDebug);
 					if($return == ConfigInfraTools::SUCCESS)
 					{
 						$return = $this->DepartmentSelectOnUserServiceContextNoLimit(
-							             $this->InstanceInfraToolsUser->GetCorporationName(),
-										 $this->InstanceInfraToolsUser->GetEmail(),
+							             $this->User->GetCorporationName(),
+										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 
 										 $this->InputValueHeaderDebug);
 					}

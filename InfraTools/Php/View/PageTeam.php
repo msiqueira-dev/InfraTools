@@ -31,30 +31,31 @@ class PageTeam extends PageInfraTools
 {
 	protected static $Instance;
 	public $ArrayCountry = NULL;
+	
+	/* Singleton */
+	public static function __create($Language)
+    {
+        if (!isset(self::$Instance)) 
+		{
+            $class = __CLASS__;
+            self::$Instance = new $class($Language);
+        }
+        return self::$Instance;
+    }
 
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
 	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
-	}
-	
-	/* Singleton */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 
 	public function GetCurrentPage()
 	{

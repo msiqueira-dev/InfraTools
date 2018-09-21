@@ -5,7 +5,7 @@ Creation: 21/06/2018
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
@@ -20,29 +20,29 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 
-class PageServiceListByCorporation extends PageInfraTools
+class PageServiceListByCorporation extends PageService
 {
 	public $ArrayInstanceInfraToolsCorporation = NULL;
 	public $ArrayInfraToolsService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 
 	public function GetCurrentPage()
@@ -89,7 +89,7 @@ class PageServiceListByCorporation extends PageInfraTools
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->InstanceInfraToolsUser->GetEmail(),
+			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
 											 $this->ArrayInstanceInfraToolsCorporation, 
 											 $this->InputValueHeaderDebug);
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
@@ -110,12 +110,12 @@ class PageServiceListByCorporation extends PageInfraTools
 				if($this->InputLimitTwo <= 0)
 					$this->InputLimitTwo = 25;
 				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																	  $this->InstanceInfraToolsUser->GetEmail(),
-																	  $this->InputLimitOne, 
-																	  $this->InputLimitTwo, 
-																	  $this->ArrayInfraToolsService,
-																	  $rowCount,
-																	  $this->InputValueHeaderDebug);
+																	            $this->User->GetEmail(),
+																	            $this->InputLimitOne, 
+																	            $this->InputLimitTwo, 
+																	            $this->ArrayInfraToolsService,
+																	            $rowCount,
+																	            $this->InputValueHeaderDebug);
 			}
 			//SERVICE LIST BY CORPORATION FORWARD SUBMIT
 			elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_FORWARD))
@@ -123,12 +123,12 @@ class PageServiceListByCorporation extends PageInfraTools
 				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																	  $this->InstanceInfraToolsUser->GetEmail(),
-																	  $this->InputLimitOne, 
-																	  $this->InputLimitTwo, 
-																	  $this->ArrayInfraToolsService,
-																	  $rowCount,
-																	  $this->InputValueHeaderDebug);
+																	            $this->User->GetEmail(),
+																	            $this->InputLimitOne, 
+																	            $this->InputLimitTwo, 
+																	            $this->ArrayInfraToolsService,
+																	            $rowCount,
+																	            $this->InputValueHeaderDebug);
 				if($this->InputLimitTwo > $rowCount)
 				{
 					if(!is_numeric($rowCount))
@@ -142,7 +142,7 @@ class PageServiceListByCorporation extends PageInfraTools
 						$this->InputLimitTwo = $rowCount;
 					}
 					$this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																		  $this->InstanceInfraToolsUser->GetEmail(),
+																		  $this->User->GetEmail(),
 																		  $this->InputLimitOne, 
 																		  $this->InputLimitTwo, 
 																		  $this->ArrayInfraToolsService,
@@ -166,11 +166,11 @@ class PageServiceListByCorporation extends PageInfraTools
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																	  $this->InstanceInfraToolsUser->GetEmail(),
-																	  $this->InputLimitOne, $this->InputLimitTwo, 
-																	  $this->ArrayInfraToolsService,
-																	  $rowCount,
-																	  $this->InputValueHeaderDebug);
+																	            $this->User->GetEmail(),
+																	            $this->InputLimitOne, $this->InputLimitTwo, 
+																	            $this->ArrayInfraToolsService,
+																	            $rowCount,
+																	            $this->InputValueHeaderDebug);
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "_x"] = "1";
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "_y"] = "1";
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION] = ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION;

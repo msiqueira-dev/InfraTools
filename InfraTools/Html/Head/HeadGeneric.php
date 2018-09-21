@@ -42,7 +42,7 @@
 <meta name="DC.Description" content="<?php echo $this->InstanceLanguageText->GetPageName($this->Page); ?>" />
 <title> <?php echo $this->InstanceLanguageText->GetPageTitle($this->Page); ?></title>
 <link href="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" rel="canonical" />
-<link href="<?php echo $this->Config->DefaultServerImage. 'Icons/FavIconInfraTools.ico'; ?>" rel="icon" type="image/x-icon"/>
+<link href="<?php echo $this->Config->DefaultServerImage. 'Icons/FavIconInfraTools32x32.ico'; ?>" rel="icon" type="image/x-icon"/>
 <?php
 if($this->Device == Page::DEVICE_TABLET) 
 {
@@ -83,7 +83,7 @@ else
 }
 if($this->CheckInstanceUser() != ConfigInfraTools::SUCCESS)
 {
-	if($this->CheckPageRequiresLogin() == ConfigInfraTools::SUCCESS)
+	if($this->PageCheckLogin == ConfigInfraTools::SUCCESS)
 	{
 		if(!($this->Page == ConfigInfraTools::PAGE_ACCOUNT && $this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED))
 		{

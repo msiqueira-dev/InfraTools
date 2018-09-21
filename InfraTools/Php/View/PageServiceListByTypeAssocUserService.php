@@ -5,7 +5,7 @@ Creation: 21/06/2018
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
@@ -20,29 +20,29 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 
-class PageServiceListByTypeAssocUserService extends PageInfraTools
+class PageServiceListByTypeAssocUserService extends PageService
 {
 	public $ArrayInstanceInfraToolService = NULL;
 	public $ArrayInstanceInfraToolsTypeAssocUserService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 
 	public function GetCurrentPage()
@@ -90,7 +90,7 @@ class PageServiceListByTypeAssocUserService extends PageInfraTools
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
 			$return = $this->TypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 
-														 $this->InstanceInfraToolsUser->GetEmail(), 
+														 $this->User->GetEmail(), 
 														 $this->InputValueHeaderDebug);
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT]))
 			{
@@ -113,7 +113,7 @@ class PageServiceListByTypeAssocUserService extends PageInfraTools
 					$this->InputLimitTwo = 25;
 				$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
 															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->InstanceInfraToolsUser->GetEmail(),
+															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
 															   $this->ArrayInfraToolsService,
@@ -127,7 +127,7 @@ class PageServiceListByTypeAssocUserService extends PageInfraTools
 				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 				$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
 															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->InstanceInfraToolsUser->GetEmail(),
+															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
 															   $this->ArrayInfraToolsService,
@@ -147,7 +147,7 @@ class PageServiceListByTypeAssocUserService extends PageInfraTools
 					}
 					$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
 																   $this->InputValueTypeAssocUserServiceDescription,
-																   $this->InstanceInfraToolsUser->GetEmail(),
+																   $this->User->GetEmail(),
 																   $this->InputLimitOne, 
 																   $this->InputLimitTwo, 
 																   $this->ArrayInfraToolsService,
@@ -172,7 +172,7 @@ class PageServiceListByTypeAssocUserService extends PageInfraTools
 				$this->InputLimitTwo = 25;
 				$return = $this->ServiceSelectByTypeAssocUserServiceOnUserContext(
 															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->InstanceInfraToolsUser->GetEmail(),
+															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
 															   $this->ArrayInfraToolsService,
