@@ -29,6 +29,28 @@ class PageLogin extends PageInfraTools
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
 		}
+		else
+		{
+			if (strpos($_SERVER['REQUEST_URI'],'Login') == TRUE)
+			{
+				$this->DisableGenericHtml = FALSE;
+				if($this->CheckInstanceUser() != ConfigInfraTools::SUCCESS)
+				{
+					if($this->CheckLogin() == ConfigInfraTools::SUCCESS)
+					{
+						Page::GetCurrentDomain($domain);
+						$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .
+												      str_replace("_","",ConfigInfraTools::PAGE_HOME));
+					}
+				}
+				else
+				{
+					Page::GetCurrentDomain($domain);
+					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .
+												  str_replace("_","",ConfigInfraTools::PAGE_HOME));
+				}
+			}
+		}
 	}
 
 	/* Clone */

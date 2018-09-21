@@ -5,9 +5,8 @@
 	include_once(SITE_PATH_PHP_VIEW . "PageHome.php");
 
 	$InfraToolsFactory = InfraToolsFactory::__create();
-	$pageObj = $InfraToolsFactory->CreatePage(str_replace("_", "",ConfigInfraTools::PAGE_HOME));
 	$Session = $InfraToolsFactory->CreateSession();
     if(!$Session->GetSessionValue(ConfigInfraTools::SESS_LANGUAGE, $language) == ConfigInfraTools::SUCCESS)
 		$Session->SetSessionValue(ConfigInfraTools::SESS_LANGUAGE, ConfigInfraTools::LANGUAGE_PORTUGUESE);
-	$pageObj->LoadPage();
+	$pageObj = $InfraToolsFactory->CreatePage(str_replace("_", "",ConfigInfraTools::PAGE_HOME), $language);
 ?>

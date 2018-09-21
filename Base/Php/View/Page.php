@@ -162,10 +162,7 @@ abstract class Page
 				if($this->PageCheckLogin == TRUE)
 				{
 					if($this->CheckInstanceUser() == Config::USER_NOT_LOGGED_IN)
-					{
-						if($this->CheckLogin() != Config::SUCCESS)
-							$this->PageEnabled = FALSE;
-					}
+						$this->CheckLogin();
 				}
 			}
 		}
