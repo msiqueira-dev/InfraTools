@@ -15,21 +15,19 @@ if (!class_exists("PageInfraTools"))
 class PageContact extends PageInfraTools
 {	
 	/* Propiedades de página */
-	public $InputValueMessage            = "";
-	public $InputValueSubject            = "";
-	public $InputValueTitle              = "";
-	public $ReturnMessageClass           = "";
-	public $ReturnMessageText            = "";
-	public $ReturnSubjectClass           = "";
-	public $ReturnSubjectText            = "";
-	public $ReturnTitleClass             = "";
-	public $ReturnTitleText              = "";
 
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = FALSE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
 	}
 
 	/* Clone */
@@ -77,9 +75,9 @@ class PageContact extends PageInfraTools
 		$PageForm = $this->Factory->CreatePageForm();
 		if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN)
 		{
-			$this->InputFocus      = ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
-			$this->InputValueUserName  = $this->InstanceInfraToolsUser->GetName();
-			$this->InputValueUserEmail = $this->InstanceInfraToolsUser->GetEmail();
+			$this->InputFocus      = ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION;
+			$this->InputValueUserName  = $this->User->GetName();
+			$this->InputValueUserEmail = $this->User->GetEmail();
 		}
 		else $this->InputFocus      = ConfigInfraTools::FORM_FIELD_USER_NAME;
 		if (isset($_POST[ConfigInfraTools::CONTACT_FORM_SUBMIT]))
@@ -87,28 +85,29 @@ class PageContact extends PageInfraTools
 			$this->InputFocus = NULL;
 			if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN)
 			{
-				$this->InputValueUserName = $this->InstanceInfraToolsUser->GetName();
+				$this->InputValueUserName = $this->User->GetName();
 				if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL]))
 				{
-					if($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL] != $this->InstanceInfraToolsUser->GetEmail())
+					if($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL] != $this->User->GetEmail())
 						$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL];
-					else $this->InputValueUserEmail  = $this->InstanceInfraToolsUser->GetEmail();
+					else $this->InputValueUserEmail  = $this->User->GetEmail();
 				}
-				else $this->InputValueUserEmail  = $this->InstanceInfraToolsUser->GetEmail();
+				else $this->InputValueUserEmail  = $this->User->GetEmail();
 			}
 			else
 			{
 				$this->InputValueUserName    = $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME];
 				$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL];
 			}
-			if (isset($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION]))
-				$this->InputValueTypeTickeDescription = $_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION];
-			$this->InputValueTickeTitle   = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_TITLE];
-			$this->InputValueTickeDescription = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION];
+			if (isset($_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION]))
+				$this->InputValueTicketDescription = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION];
+			$this->InputValueTicketType    = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_TYPE];
+			$this->InputValueTicketTitle   = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_TITLE];
+			$this->InputValueTicketDescription = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION];
 			$this->InputValueCaptcha = $_POST[ConfigInfraTools::FORM_CAPTCHA_CONTACT];
-			$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_CONTACT, $captcha);
+			$this->Session->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_CONTACT, $captcha);
 			$FormValidator = $this->Factory->CreateFormValidator();
-			$arrayConstants = array(); $matrixConstants = array(); $arrayOptions = array();
+			$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array(); $matrixOptions = array();
 			
 			//FORM_FIELD_USER_NAME
 			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_NAME;
@@ -122,6 +121,7 @@ class PageContact extends PageInfraTools
 			$arrayElementsText[0]         = &$this->ReturnUserNameText;
 			array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
+			array_push($matrixOptions, $arrayOptions);
 			
 			//FORM_FIELD_USER_EMAIL
 			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
@@ -135,37 +135,43 @@ class PageContact extends PageInfraTools
 			$arrayElementsText[1]         = &$this->ReturnUserEmailText;
 			array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
+			array_push($matrixOptions, $arrayOptions);
 			
-			//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-			$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
-			$arrayElementsClass[2]        = &$this->ReturnTypeTickeDescriptionClass;
+			//FORM_FIELD_TICKET_TYPE
+			$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_TICKET_TYPE;
+			$arrayElementsClass[2]        = &$this->ReturnTicketTypeClass;
 			$arrayElementsDefaultValue[2] = ""; 
-			$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TITLE;
-			$arrayElementsInput[2]        = $this->InputValueTypeTickeDescription; 
+			$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SUBJECT;
+			$arrayElementsInput[2]        = $this->InputValueTicketType; 
 			$arrayElementsMinValue[2]     = 0; 
 			$arrayElementsMaxValue[2]     = 45; 
 			$arrayElementsNullable[2]     = FALSE;
-			$arrayElementsText[2]         = &$this->ReturnTickeTypeTickeDescriptionText;
-			array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 
-					                    'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+			$arrayElementsText[2]         = &$this->ReturnTicketTypeText;
+			array_push($arrayConstants, 'FORM_INVALID_TICKET_TYPE', 'FORM_INVALID_TICKET_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
+			array_push($arrayOptions, ConfigInfraTools::CONTACT_SELECT_COMMERCIAL);
+			array_push($arrayOptions, ConfigInfraTools::CONTACT_SELECT_DOUBT);
+			array_push($arrayOptions, ConfigInfraTools::CONTACT_SELECT_SUGGESTION);
+			array_push($matrixOptions, $arrayOptions);
+			$arrayOptions = array();
 			
 			//FORM_FIELD_TICKET_TITLE
 			$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_TICKET_TITLE;
-			$arrayElementsClass[3]        = &$this->ReturnTypeTickeTitleClass;
+			$arrayElementsClass[3]        = &$this->ReturnTickeTitleClass;
 			$arrayElementsDefaultValue[3] = ""; 
 			$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TITLE;
-			$arrayElementsInput[3]        = $this->InputValueTickeTitle; 
+			$arrayElementsInput[3]        = $this->InputValueTicketTitle; 
 			$arrayElementsMinValue[3]     = 0; 
 			$arrayElementsMaxValue[3]     = 90; 
 			$arrayElementsNullable[3]     = FALSE;
 			$arrayElementsText[3]         = &$this->ReturnTickeTitleText;
 			array_push($arrayConstants, 'FORM_INVALID_TICKET_TITLE', 'FORM_INVALID_TICKET_TITLE_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
+			array_push($matrixOptions, $arrayOptions);
 			
 			//FORM_FIELD_TICKET_DESCRIPTION
 			$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION;
-			$arrayElementsClass[4]        = &$this->ReturnTypeTicketDescriptionClass;
+			$arrayElementsClass[4]        = &$this->ReturnTicketDescriptionClass;
 			$arrayElementsDefaultValue[4] = ""; 
 			$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_MESSAGE;
 			$arrayElementsInput[4]        = $this->InputValueTicketDescription; 
@@ -176,6 +182,7 @@ class PageContact extends PageInfraTools
 			array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE',
 					                    'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
+			array_push($matrixOptions, $arrayOptions);
 			
 			//FORM_CAPTCHA_CONTACT
 			$arrayElements[5]             = ConfigInfraTools::FORM_CAPTCHA_CONTACT;
@@ -191,20 +198,22 @@ class PageContact extends PageInfraTools
 			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($arrayOptions, $captcha);
+			array_push($matrixOptions, $arrayOptions);
+			$arrayOptions = array();
 			
 			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $arrayOptions);
+												$matrixConstants, $matrixOptions);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
 				$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailContact($this->InputValueUserEmail,
-																							  $this->InputValueTickeDescription,
+																							  $this->InputValueTicketDescription,
 																							  $this->InputValueUserName, 
-																							  $this->InputValueTypeTickeDescription, 
+																							  $this->InputValueTicketDescription, 
 																 							  $this->InputValueTicketTitle,
 																 							  $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)

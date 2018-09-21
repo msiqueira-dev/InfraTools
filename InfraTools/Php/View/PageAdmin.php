@@ -22,10 +22,23 @@ class PageAdmin extends PageInfraTools
 	public $ArrayInstanceInfraToolsTypeUser                              = "";
 
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = TRUE;
+		parent::__construct($Language);
+		if($this->User != NULL)
+		{
+			if(!$this->User->CheckSuperUser())
+				$this->PageEnabled = FALSE;
+		}
+		else $this->PageEnabled = FALSE;
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
+		}
 	}
 
 	/* Clone */

@@ -14,17 +14,17 @@ if (!class_exists("PageInfraTools"))
 
 class PageSupport extends PageInfraTools
 {	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 
 	public function GetCurrentPage()

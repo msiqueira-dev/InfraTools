@@ -57,10 +57,23 @@ class PageGet extends PageInfraTools
 	private $VisibilityFunctionGetWhoisSubmit                            = "HiddenTab";
 	
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = TRUE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
+	}
+	
+	/* Clone */
+	public function __clone()
+	{
+		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
 	
 	private function CheckPostBack()
@@ -322,12 +335,6 @@ class PageGet extends PageInfraTools
 			echo ConfigInfraTools::HTML_TAG_END;
 		}
 		else return ConfigInfraTools::ERROR;
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
 
 	public function GetCurrentPage()

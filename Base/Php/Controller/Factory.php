@@ -21,7 +21,7 @@ Methods:
 			public function CreateCountry($CountryAbbreviation, $Name, $RegionCode, $RegisterDate);
 			public function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
 			public function CreateEmail();
-			public function CreateFacedeBusiness();
+			public function CreateFacedeBusiness($LanguageText);
 			public function CreateFacedePersistence();
 			public function CreateFacedePersistenceAssocTicketUserRequesting();
 			public function CreateFacedePersistenceAssocTicketUserResponsible();
@@ -47,6 +47,7 @@ Methods:
 			public function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword);
 			public function CreateMobileDetect();
 			public function CreateNetWhois();
+			public function CreateNetwork();
 			public function CreatePersistence();
 			public function CreateSession();
 			public function CreateSessionHandlerCustom();
@@ -214,12 +215,12 @@ class Factory
 		return new Email();
 	}
 	
-	public function CreateFacedeBusiness()
+	public function CreateFacedeBusiness($LanguageText)
 	{
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedeBusiness.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedeBusiness');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedeBusiness.php");
-		return FacedeBusiness::__create();
+		return FacedeBusiness::__create($LanguageText);
 	}
 	
 	public function CreateFacedePersistence()
@@ -448,6 +449,14 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading PEAR Class Net_Whois');
 		else include_once(PEAR_PATH . "Net/Whois.php");
 		return new Net_Whois;
+	}
+	
+	public function CreateNetwork()
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Network.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Network');
+		else include_once(BASE_PATH_PHP_MODEL . "Network.php");
+		return Network::__create();	
 	}
 	
 	public function CreatePageForm()

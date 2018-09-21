@@ -17,6 +17,9 @@ Methods:
 		abstract protected function GetCurrentPage();
 		abstract protected function LoadHtml();
 		private       function        CheckPostLanguage();
+		private       function        ExecuteLoginFirstPhaseVerification();
+		private       function        ExecuteLoginSecondPhaseVerirication();
+		private       function        SendTwoStepVerificationCode($Email, $Name);
 		protected     function        CorporationDelete($CorporationName, $Debug);
 		protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
 		protected     function        CorporationLoadData(&$InstanceCorporation);
@@ -43,16 +46,17 @@ Methods:
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
 																			         $CorporationNameOld, $Debug);
 		public        function        CheckInputImage($Input);
-		public        function        GetPageFileDefaultLanguageByDir($DirPath);
+		public        function        CheckInstanceUser();
 		public        function        IncludeHeadAll($Page);
 		public        function        IncludeHeadGeneric();
 		public        function        IncludeHeadJavaScript();
-		public        function        LoadPageDependencies(&$InstanceLanguage, &$Language)
+		public        function        LoadPageDependencies();
 		public        function        RedirectPage($Page);
 		public static function        AlertMessage($Message);
 		public static function        GetCurrentDomain(&$currentDomain);
 		public static function        GetCurrentDomainWithPort(&$currentDomain);
 		public static function        GetCurrentURL(&$pageUrl);
+		public static function        GetPageFileDefaultLanguageByDir($PageDirName);
 		public static function        TagOnloadFocusField($Form, $Field);
 **************************************************************************/
 
@@ -102,8 +106,11 @@ abstract class Page
 	protected $Session              = NULL;
 	protected $Factory              = NULL;
 	protected $Config               = NULL;
+	protected $User                 = NULL;
 	
 	/* Properties */
+	protected $PageEnabled                                          = NULL;
+	protected $PageCheckLogin                                       = NULL;
 	protected $Language                                             = NULL;
 	public    $InputValueCorporationActive                          = "";
 	public    $InputValueCorporationName                            = "";
@@ -112,6 +119,9 @@ abstract class Page
 	public    $InputValueDepartmentName                             = "";
 	public    $InputValueDepartmentNameAndCorporationNameRadio      = "";
 	public    $InputValueDepartmentNameRadio                        = "";
+	public    $InputValueLoginEmail                                 = "";
+	public    $InputValueLoginPassword                              = "";
+	public    $InputValueLoginTwoStepVerificationCode               = "";
 	public    $ReturnClass                                          = "DivHidden";
 	public    $ReturnCorporationNameClass                           = "";
 	public    $ReturnCorporationNameText                            = "";
@@ -123,12 +133,52 @@ abstract class Page
 	public    $ReturnLoginClass                                     = "";
 	public    $ReturnLoginText                                      = "";
 	
+	/* Singleton */
+	private static $Instance;
+	
+	/* Get Instance */
+	public static function __create($Language)
+    {
+        if (!isset(self::$Instance)) 
+		{
+            $class = __CLASS__;
+            self::$Instance = new $class;
+        }
+        return self::$Instance;
+    }
+	
 	/* Constructor */
-	protected function __construct() 
+	protected function __construct($Language) 
     {
 		$this->Factory = Factory::__create();
 		$this->Session = $this->Factory->CreateSession();
 		$this->Config = $this->Factory->CreateConfig();
+		if(get_object_vars($this->Config)[get_class($this).Config::ENABLED])
+		{
+			$this->PageEnabled = TRUE;
+			$this->Session->SetSessionValue(Config::SESS_LANGUAGE, $Language);
+			if($this->LoadPageDependencies() == Config::SUCCESS)
+			{
+				if($this->PageCheckLogin == TRUE)
+				{
+					if($this->CheckInstanceUser() == Config::USER_NOT_LOGGED_IN)
+					{
+						if($this->CheckLogin() != Config::SUCCESS)
+							$this->PageEnabled = FALSE;
+					}
+				}
+			}
+		}
+		else $this->PageEnabled = FALSE;
+		//LOG OUT
+		if(isset($_POST[ConfigInfraTools::POST_BACK_FORM]))
+		{
+			if ($_POST[ConfigInfraTools::POST_BACK_FORM] == ConfigInfraTools::LOG_OUT)
+			{
+				$this->Session->DestroyCustomSession();
+			$this->User = NULL;
+			}
+		}
     }
 	
 	/* Clone */
@@ -140,20 +190,6 @@ abstract class Page
 	/* Variaveis de classe */
 	protected $ArrayHeadText   = NULL;
 	protected $Device          = NULL;
-	
-	/* Singleton */
-	private static $Instance;
-	
-	/* Get Instance */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 	
 	/* Métodos */
 	abstract protected function GetCurrentPage();
@@ -168,21 +204,140 @@ abstract class Page
 				$_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_PORTUGUESE ||
 				$_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_SPANISH)
 			{
-				if(ProjectConfig::$EnableSSL)
-				{
-					header("Location: https://" . $_SERVER['HTTP_HOST'] . "/" . str_replace('Language/', '', 
-												  $_POST[Config::POST_BACK_FORM]) . "/" 
-						                        . str_replace("_", "",  $this->GetCurrentPage())); 
-				}
-				else
-				{
-					$this->Session->SetSessionValue(Config::SESSION_LANGUAGE, $_POST[Config::POST_BACK_FORM]);
-					header("Location: http://$_SERVER[HTTP_HOST]" . "/" . str_replace('Language/', '', 
-											 $_POST[Config::POST_BACK_FORM]) . "/" . 
-						                     str_replace("_", "", $this->GetCurrentPage()));
-				}
+				header("Location: "  . ProjectConfig::$AddressApplication . "/" . str_replace('Language/', '', 
+									   $_POST[Config::POST_BACK_FORM]) . "/"
+									 . str_replace("_", "", $this->GetCurrentPage()));
 			}
 		}
+	}
+	
+	private function ExecuteLoginFirstPhaseVerification()
+	{
+		$this->InstanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		if (strpos($this->InputValueLoginEmail, '@') !== false) 
+		{
+			$return = $this->InstanceFacedePersistence->UserCheckPasswordByEmail($this->InputValueLoginEmail, 
+					                                                             $this->InputValueLoginPassword, 
+																				 $this->InputValueHeaderDebug);
+			if($return == Config::SUCCESS)
+			{
+				$return = $this->InstanceFacedePersistence->UserSelectByEmail($this->InputValueLoginEmail, 
+																			  $user, $this->InputValueHeaderDebug);
+				if($return == Config::SUCCESS)
+					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $this->InputValueHeaderDebug);
+			}
+		}
+		else
+		{
+			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserUniqueId($this->InputValueLoginEmail, 
+					                                                                    $this->InputValueLoginPassword, 
+																				        $this->InputValueHeaderDebug);
+			if($return == Config::SUCCESS)
+			{
+				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, 
+																			         $user, $this->InputValueHeaderDebug);
+				if($return == Config::SUCCESS)
+					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,
+																				 	  $this->InputValueHeaderDebug);
+			}
+		}
+		if($return == Config::SUCCESS || $return == Config::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
+		{
+			$this->InstanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
+			$this->InstanceFacedeBusiness->GetIpAddressClient(true, $ip);
+			$this->InstanceFacedeBusiness->GetOperationalSystem(true, $operationalSystem);
+			$this->InstanceFacedeBusiness->GetBrowserClient(true, $browser);
+			$sessionId = $user->GetHashCode() . "-" .		
+						 $ip . "-" .
+						 $operationalSystem . "-" .
+						 $browser;
+			$this->Session->CreatePersonalized($this->Config->DefaultApplicationName,
+														  $sessionId,
+														  $this->Config->SessionTime);
+			$this->Session->SetSessionValue(Config::SESS_DEVICE_LAYOUT, 
+														   $this->InputValueHeaderLayout);
+			$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);
+			if($user->GetUserActive())
+			{
+				if($user->GetUserConfirmed())
+				{	
+					$this->User = $user;
+					if($this->User->GetSessionExpires() == FALSE)
+						$this->Session->SetSessionValue(Config::SESS_LAST_ACTIVITY,
+																	Config::SESS_UNLIMITED);
+					$this->Session->SetSessionValue(Config::SESS_USER, 
+																$this->User);
+					if($user->GetTwoStepVerification()) 
+					{
+						if($this->SendTwoStepVerificationCode($user->GetEmail(),$user->GetName()) == Config::SUCCESS)
+							return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
+						else
+						{
+							$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
+																		  'LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED', 
+																		  $this->Language);
+							$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+							$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								                                  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+							return Config::ERROR;
+						}
+					}
+					return Config::SUCCESS;
+				}
+				else
+				{	
+					$this->User = $user;
+					$this->Session->SetSessionValue(Config::SESS_USER, $this->User);
+					$this->LoadNotConfirmedToolTip();
+					return Config::WARNING;
+				}
+			}
+			else
+			{
+				$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant('USER_INACTIVE', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						                              Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			}
+		}
+		else
+		{
+			$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
+																		  'LOGIN_INVALID_LOGIN', 
+																		  $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							                      Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}		
+	}
+	
+	private function ExecuteLoginSecondPhaseVerirication()
+	{
+		if (isset($_POST[Config::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
+		{
+			$this->InputValueLoginTwoStepVerificationCode = $_POST[Config::LOGIN_TWO_STEP_VERIFICATION_CODE];
+			$this->Session->GetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION, $value);
+			if($this->InputValueLoginTwoStepVerificationCode == $value)
+				return Config::SUCCESS;
+			else return Config::ERROR;
+		}
+		else
+		{
+			$this->Session->RemoveSessionVariable(Config::SESS_USER);
+			$this->Session->RemoveSessionVariable(Config::SESS_DEBUG);
+		}
+	}
+	
+	private function SendTwoStepVerificationCode($Email, $Name)
+	{
+		$FacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
+		$code = $FacedeBusiness->GenerateRandomCode();
+		$this->Session->SetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION,
+													$code);
+		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Email, $Name, $code, $this->InputValueHeaderDebug) 
+		                                                          == Config::SUCCESS)
+			return Config::SUCCESS;
+		else return Config::ERROR;
 	}
 	
 	protected function CorporationDelete($CorporationName, $Debug)
@@ -487,17 +642,91 @@ abstract class Page
 		else FALSE;
 	}
 	
-	public function GetPageFileDefaultLanguageByDir($PageDirName)
+	public function CheckInstanceUser()
 	{
-		if (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_GERMAN)) !== false) 
-			return Config::LANGUAGE_GERMAN;
-		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_ENGLISH)) !== false) 
-			return Config::LANGUAGE_ENGLISH;
-		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_SPANISH)) !== false) 
-			return Config::LANGUAGE_SPANISH;
-		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
-			return Config::LANGUAGE_PORTUGUESE;
-		else return Config::ERROR;
+		if($this->User != NULL)
+		{
+			if($this->User->GetUserConfirmed())
+			{
+				if($this->Session->GetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION, 
+															   $value) != Config::SUCCESS)
+					return Config::SUCCESS;
+				else return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
+			}
+			else return Config::USER_NOT_CONFIRMED;
+		}
+		else
+		{
+			if($this->Session->GetSessionValue(Config::SESS_USER, $user) == Config::SUCCESS)
+			{
+				$this->User = $user;
+				return Config::SUCCESS;
+			}
+			else return Config::USER_NOT_LOGGED_IN;
+		}
+	}
+	
+	public function CheckLogin()
+	{
+		if (isset($_POST[Config::LOGIN_FORM_SUBMIT]))
+		{
+			$this->InputValueLoginEmail     = $_POST[Config::LOGIN_USER];
+			$this->InputValueLoginPassword  = $_POST[Config::LOGIN_PASSWORD];
+			//VALIDA LOGIN
+			if(!empty($this->InputValueLoginEmail) && !empty($this->InputValueLoginPassword))
+			{
+				if(strlen($this->InputValueLoginEmail) < 45 && strlen($this->InputValueLoginPassword) < 20)
+					return $this->ExecuteLoginFirstPhaseVerification();
+				else
+				{
+					$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
+																				  'LOGIN_INVALID_LOGIN', 
+																				  $this->Language);
+					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				}
+			}
+			else
+			{
+				$this->ReturnEmptyText = $this->InstanceLanguageText->GetConstant('FILL_REQUIRED_FIELDS', 
+																					  $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			}
+		}
+		elseif(isset($_POST[Config::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
+		{
+			if($this->ExecuteLoginSecondPhaseVerirication() == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);
+				return Config::SUCCESS;	
+			}
+			else 
+			{
+				$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
+																			  'LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR', 
+																			  $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::ERROR;
+				$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);	
+				return Config::ERROR;
+			}
+		}
+		elseif(isset($_POST[Config::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD]))
+		{
+			$this->InputValueLoginEmail     = $_POST[Config::LOGIN_USER];
+			Page::GetCurrentDomain($domain);
+			if($this->InputValueLoginEmail != "")
+				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
+				                              str_replace('_', '', Config::PAGE_PASSWORD_RECOVERY) . '?=' . 
+									                               $this->InputValueLoginEmail);
+			else $this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
+				                              str_replace('_', '', Config::PAGE_PASSWORD_RECOVERY));
+		}
 	}
 	
 	public function IncludeHeadAll($Page)
@@ -570,12 +799,12 @@ abstract class Page
 		else return self::ERROR_HEAD_JAVASCRIPT_NOT_EXISTS;
 	}
 	
-	public function LoadPageDependencies(&$Language)
+	public function LoadPageDependencies()
 	{
 		$return = NULL; $currentDomain = NULL; $language = NULL; $instanceLanguage = NULL;
 		$this->CheckPostLanguage();
-		$this->Session->GetSessionValue(Config::SESSION_LANGUAGE, $Language);
-		$this->InstanceLanguageText = LanguageInfraTools::__create($Language);
+		$this->Session->GetSessionValue(Config::SESS_LANGUAGE, $this->Language);
+		$this->InstanceLanguageText = LanguageInfraTools::__create($this->Language);
 		if($this->InstanceLanguageText != NULL)
 			return Config::SUCCESS;
 		else return self::ERROR_LANGUAGE_INSTANCE_NOT_CREATED;
@@ -608,16 +837,6 @@ abstract class Page
 	public static function AlertMessage($Message)
 	{
 		echo '<script type="text/javascript">alert("' . $Message . '")</script>';
-	}
-	
-	public static function TagOnloadFocusField($Form, $Field)
-	{
-		if(isset($Form) && isset($Field))
-		{
-			if($Form != NULL && $Field != NULL)
-				return "<script>document.forms['" .$Form . "'].elements['". $Field ."'].focus();</script>";
-		}
-		return NULL;
 	}
 	
 	public static function GetCurrentURL(&$pageUrl) 
@@ -687,6 +906,29 @@ abstract class Page
 			return Config::SUCCESS;
 		}
 		else return Config::EMPTY_AMBIENT_VARIABLE;
+	}
+	
+	public static function GetPageFileDefaultLanguageByDir($PageDirName)
+	{
+		if (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_GERMAN)) !== false) 
+			return Config::LANGUAGE_GERMAN;
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_ENGLISH)) !== false) 
+			return Config::LANGUAGE_ENGLISH;
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_SPANISH)) !== false) 
+			return Config::LANGUAGE_SPANISH;
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
+			return Config::LANGUAGE_PORTUGUESE;
+		else return Config::ERROR;
+	}
+	
+	public static function TagOnloadFocusField($Form, $Field)
+	{
+		if(isset($Form) && isset($Field))
+		{
+			if($Form != NULL && $Field != NULL)
+				return "<script>document.forms['" .$Form . "'].elements['". $Field ."'].focus();</script>";
+		}
+		return NULL;
 	}
 }
 ?>

@@ -33,24 +33,24 @@ if (!class_exists("TypeTicket"))
 		include_once(BASE_PATH_PHP_MODEL . "TypeTicket.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeTicket');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageAdmin"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageAdmin.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
 
 
-class PageAdminTypeTicket extends PageInfraTools
+class PageAdminTypeTicket extends PageAdmin
 {
 	protected $TypeTicket      = NULL;
 	public    $ArrayTypeTicket = NULL;
 
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		parent::__construct($Language);
 	}
 
 	/* Clone */

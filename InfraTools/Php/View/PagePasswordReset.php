@@ -15,10 +15,17 @@ if (!class_exists("PageInfraTools"))
 class PagePasswordReset extends PageInfraTools
 {
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = FALSE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
 	}
 
 	/* Clone */
@@ -57,8 +64,8 @@ class PagePasswordReset extends PageInfraTools
 	public function LoadPage()
 	{
 		$this->InputFocus = ConfigInfraTools::PASSWORD_RESET_CODE;
-		$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, $this->SessionUserEmail);
-		$this->InstanceBaseSession->GetSessionValue(ConfigInfraTools::PASSWORD_RESET_CODE, $code);
+		$this->Session->GetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, $this->SessionUserEmail);
+		$this->Session->GetSessionValue(ConfigInfraTools::PASSWORD_RESET_CODE, $code);
 		if($this->SessionUserEmail == NULL || $code == NULL)
 		{
 			Page::GetCurrentDomain($domain);
@@ -118,7 +125,7 @@ class PagePasswordReset extends PageInfraTools
 																						  $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->InstanceBaseSession->RemoveSessionVariable(ConfigInfraTools::PASSWORD_RESET_CODE);
+					$this->Session->RemoveSessionVariable(ConfigInfraTools::PASSWORD_RESET_CODE);
 					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 										   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";

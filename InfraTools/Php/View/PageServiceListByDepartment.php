@@ -5,7 +5,7 @@ Creation: 21/06/2018
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
@@ -20,30 +20,30 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 
-class PageServiceListByDepartment extends PageInfraTools
+class PageServiceListByDepartment extends PageService
 {
 	public $ArrayInstanceInfraToolsCorporation = NULL;
 	public $ArrayInstanceInfraToolsDepartment = NULL;
 	public $ArrayInfraToolsService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 	
 	public function GetCurrentPage()
@@ -90,7 +90,7 @@ class PageServiceListByDepartment extends PageInfraTools
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->InstanceInfraToolsUser->GetEmail(),
+			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
 											 $this->ArrayInstanceInfraToolsCorporation, 
 											 $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -100,14 +100,14 @@ class PageServiceListByDepartment extends PageInfraTools
 					if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] 
 					   != ConfigInfraTools::FORM_SELECT_NONE)
 						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT];	
-					else if($this->InstanceInfraToolsUser->GetCorporationName() != NULL)
-						$this->InputValueServiceCorporation = $this->InstanceInfraToolsUser->GetCorporationName();
+					else if($this->User->GetCorporationName() != NULL)
+						$this->InputValueServiceCorporation = $this->User->GetCorporationName();
 				}
-				elseif($this->InstanceInfraToolsUser->GetCorporationName() != NULL)
-					$this->InputValueServiceCorporation = $this->InstanceInfraToolsUser->GetCorporationName();
+				elseif($this->User->GetCorporationName() != NULL)
+					$this->InputValueServiceCorporation = $this->User->GetCorporationName();
 
 				$return = $this->DepartmentSelectOnUserServiceContextNoLimit($this->InputValueServiceCorporation,
-										 $this->InstanceInfraToolsUser->GetEmail(),
+										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 
 										 $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
@@ -129,7 +129,7 @@ class PageServiceListByDepartment extends PageInfraTools
 							$this->InputLimitTwo = 25;
 						$this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
 																			 $this->InputValueServiceDepartment,
-																			 $this->InstanceInfraToolsUser->GetEmail(),
+																			 $this->User->GetEmail(),
 																			 $this->InputLimitOne, 
 																			 $this->InputLimitTwo, 
 																			 $this->ArrayInfraToolsService,
@@ -143,7 +143,7 @@ class PageServiceListByDepartment extends PageInfraTools
 						$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 						$this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
 																			 $this->InputValueServiceDepartment,
-																			 $this->InstanceInfraToolsUser->GetEmail(),
+																			 $this->User->GetEmail(),
 																			 $this->InputLimitOne, 
 																			 $this->InputLimitTwo, 
 																			 $this->ArrayInfraToolsService,
@@ -163,7 +163,7 @@ class PageServiceListByDepartment extends PageInfraTools
 							}
 							$this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
 																			     $this->InputValueServiceDepartment,
-																				 $this->InstanceInfraToolsUser->GetEmail(),
+																				 $this->User->GetEmail(),
 																				 $this->InputLimitOne, 
 																				 $this->InputLimitTwo, 
 																				 $this->ArrayInfraToolsService,
@@ -188,7 +188,7 @@ class PageServiceListByDepartment extends PageInfraTools
 						$this->InputLimitTwo = 25;
 						$return = $this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
 																			           $this->InputValueServiceDepartment,
-																					   $this->InstanceInfraToolsUser->GetEmail(),
+																					   $this->User->GetEmail(),
 																					   $this->InputLimitOne, $this->InputLimitTwo, 
 																					   $this->ArrayInfraToolsService,
 																					   $rowCount,

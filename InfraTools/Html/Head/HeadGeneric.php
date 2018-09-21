@@ -83,7 +83,7 @@ else
 }
 if($this->CheckInstanceUser() != ConfigInfraTools::SUCCESS)
 {
-	if($this->CheckPageRequiresLogin() == ConfigInfraTools::SUCCESS)
+	if($this->PageCheckLogin == ConfigInfraTools::SUCCESS)
 	{
 		if(!($this->Page == ConfigInfraTools::PAGE_ACCOUNT && $this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED))
 		{

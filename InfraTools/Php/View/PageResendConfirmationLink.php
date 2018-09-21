@@ -15,10 +15,17 @@ if (!class_exists("PageInfraTools"))
 class PageResendConfirmationLink extends PageInfraTools
 {	
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		$this->PageCheckLogin = FALSE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
 	}
 
 	/* Clone */
@@ -57,10 +64,10 @@ class PageResendConfirmationLink extends PageInfraTools
 	{
 		$FacedeBusinessInfraTools = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		if(isset($this->InstanceInfraToolsUser))
+		if(isset($this->User))
 		{
-			$return = $FacedePersistenceInfraTools->UserSelectHashCodeByEmail($this->InstanceInfraToolsUser->GetEmail(), 
-																					  $UniqueHash, $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->UserSelectHashCodeByEmail($this->User->GetEmail(), 
+																			  $UniqueHash, $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				Page::GetCurrentDomain($domain);
@@ -68,9 +75,9 @@ class PageResendConfirmationLink extends PageInfraTools
 								  str_replace("_", "",ConfigInfraTools::PAGE_REGISTER_CONFIRMATION) . "?=" . $UniqueHash;
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$return = $FacedeBusinessInfraTools->SendEmailResendConfirmationLink($this->InstanceInfraToolsUser->GetName(),
-																							 $this->InstanceInfraToolsUser->GetEmail(),
-																							 $link, $this->InputValueHeaderDebug);
+				$return = $FacedeBusinessInfraTools->SendEmailResendConfirmationLink($this->User->GetName(),
+																					 $this->User->GetEmail(),
+																					 $link, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('RESEND_CONFIRMATION_LINK_SUCCESS', 

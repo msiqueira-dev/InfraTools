@@ -76,17 +76,17 @@ class En
 	const FORM_FIELD_EDIT                                         = "Edit";
 	const FORM_INVALID_CAPTCHA                                    = "The captcha value does not match";
 	const FORM_INVALID_CORPORATION_NAME                           = "Invalid Corporation Name";
-	const FORM_INVALID_CORPORATION_NAME_SIZE                      = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_CORPORATION_NAME_SIZE                      = "Quantity of characters exceeds the maximum allowed for "
 	                                                              . "corporation name";
 	const FORM_INVALID_COUNTRY                                    = "Invalid country, use the Google Maps";
 	const FORM_INVALID_DATE_DAY                                   = "Invalid day";
 	const FORM_INVALID_DATE_MONTH                                 = "Invalid month";
 	const FORM_INVALID_DATE_YEAR                                  = "Invalid year";
 	const FORM_INVALID_DEPARTMENT_INITIALS                        = "Invalid department initials";
-	const FORM_INVALID_DEPARTMENT_INITIALS_SIZE                   = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_DEPARTMENT_INITIALS_SIZE                   = "Quantity of characters exceeds the maximum allowed for "
 	                                                              . "department initials";
 	const FORM_INVALID_DEPARTMENT_NAME                            = "Invalid department name";
-	const FORM_INVALID_DEPARTMENT_NAME_SIZE                       = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_DEPARTMENT_NAME_SIZE                       = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "department name" ;
 	const FORM_INVALID_DESCRIPTION                                = "Invalid description";
 	const FORM_INVALID_HOSTNAME                                   = "Invalid domain";
@@ -95,73 +95,83 @@ class En
 	const FORM_INVALID_SERVICE_ACTIVE                             = "Invalid value for checkbox service active service";
 	const FORM_INVALID_SERVICE_CORPORATION_CAN_CHANGE             = "Invalid value for checkbox corporation can change";
 	const FORM_INVALID_SERVICE_DESCRIPTION                        = "Inválid service description";
-	const FORM_INVALID_SERVICE_DESCRIPTION_SIZE                   = "Quantity of characters exceeds the maximum allowed on service "
+	const FORM_INVALID_SERVICE_DESCRIPTION_SIZE                   = "Quantity of characters exceeds the maximum allowed for service "
 	                                                              . "description";
 	const FORM_INVALID_SERVICE_DEPARTMENT_CAN_CHANGE              = "Invalid value for checkbox department can change";
 	const FORM_INVALID_SERVICE_ID                                 = "Invalid service id";
 	const FORM_INVALID_SERVICE_NAME                               = "Invalid service name";
-	const FORM_INVALID_SERVICE_NAME_SIZE                          = "Quantity of characters exceeds the maximum allowed on service "
+	const FORM_INVALID_SERVICE_NAME_SIZE                          = "Quantity of characters exceeds the maximum allowed for service "
 	                                                              . "name";
 	const FORM_INVALID_SERVICE_TYPE                               = "Invalid service type";
-	const FORM_INVALID_SERVICE_TYPE_SIZE                          = "Quantity of characters exceeds the maximum allowed on service "
+	const FORM_INVALID_SERVICE_TYPE_SIZE                          = "Quantity of characters exceeds the maximum allowed for service "
 		                                                          . "description";
 	const FORM_INVALID_TEAM_DESCRIPTION                           = "Invalid team descritpion";
-	const FORM_INVALID_TEAM_DESCRIPTION_SIZE                      = "Quantity of characters exceeds the maximum allowed on team "
+	const FORM_INVALID_TEAM_DESCRIPTION_SIZE                      = "Quantity of characters exceeds the maximum allowed for team "
 	                                                              . "description";
 	const FORM_INVALID_TEAM_ID                                    = "Team id";
 	const FORM_INVALID_TEAM_NAME                                  = "Invalid team name";
-	const FORM_INVALID_TEAM_NAME_SIZE                             = "Quantity of characters exceeds the maximum allowed on team name";
+	const FORM_INVALID_TEAM_NAME_SIZE                             = "Quantity of characters exceeds the maximum allowed for team "
+		                                                          . "name";
+	const FORM_INVALID_TICKET_DESCRIPTION                         = "Invalid ticket description";
+	const FORM_INVALID_TICKET_DESCRIPTION_SIZE                    = "Quantity of characters exceeds the maximum allowed for "
+		                                                          . "ticket description";
+	const FORM_INVALID_TICKET_TITLE                               = "Invalid ticket title";
+	const FORM_INVALID_TICKET_TITLE_SIZE                          = "Quantity of characters exceeds the maximum allowed for "
+		                                                          . "ticket title";
+	const FORM_INVALID_TICKET_TYPE                                = "Invalid ticket type";
+	const FORM_INVALID_TICKET_TYPE_SIZE                           = "Quantity of characters exceeds the maximum allowed for"
+		                                                          . "ticket type";
 	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION        = "Invalid description for type of association between user "
 	                                                              . "and service";
-	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE   = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE   = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "type association description";
 	const FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION           = "Invalid type assoc user team description";
-	const FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE      = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE      = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "type association user team description";
 	const FORM_INVALID_TYPE_ASSOC_USER_TEAM_ID                    = "Invalid team id for association between user and team";
 	const FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION             = "Invalid type status ticket description";
-	const FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE        = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE        = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "type status ticket description";
 	const FORM_INVALID_TYPE_STATUS_TICKET_ID                      = "Invalid type status ticket id";
 	const FORM_INVALID_TYPE_TICKET_DESCRIPTION                    = "Invalid type ticket description";
-	const FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE               = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE               = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "type ticket description";
 	const FORM_INVALID_TYPE_TICKET_ID                             = "Invalid type ticket id";
 	const FORM_INVALID_TYPE_USER_DESCRIPTION                      = "Invalid type user description";
-	const FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE                 = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE                 = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "type user description";
 	const FORM_INVALID_TYPE_USER_ID                               = "Invalid type user id";
 	const FORM_INVALID_USER_BIRTH_DATE_DAY                        = "Invalid day of birth";
 	const FORM_INVALID_USER_BIRTH_DATE_MONTH                      = "Invalid month of birth";
 	const FORM_INVALID_USER_BIRTH_DATE_YEAR                       = "Invalid year of birth";
 	const FORM_INVALID_USER_EMAIL                                 = "Invalid user e-mail";
-	const FORM_INVALID_USER_EMAIL_SIZE                            = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_EMAIL_SIZE                            = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user e-mail";
 	const FORM_INVALID_USER_GENDER                                = "Invalid gender";
 	const FORM_INVALID_USER_NAME                                  = "Invalid user name";
-	const FORM_INVALID_USER_NAME_SIZE                             = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_NAME_SIZE                             = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user name";
 	const FORM_INVALID_USER_PASSWORD                              = "Password does not match the criteria";
 	const FORM_INVALID_USER_PASSWORD_MATCH                        = "Passwords does not match";
-	const FORM_INVALID_USER_PASSWORD_SIZE                         = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_PASSWORD_SIZE                         = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user password";
 	const FORM_INVALID_USER_PHONE_PREFIX_PRIMARY                  = "Invalid user phone prefix primary";
-	const FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE             = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE             = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user phone prefix primary";
 	const FORM_INVALID_USER_PHONE_PREFIX_SECONDARY                = "Invalid user phone prefix secondary";
-	const FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE           = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE           = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user phone prefix secondary";
 	const FORM_INVALID_USER_PHONE_PRIMARY                         = "Invalid user phone primary";
-	const FORM_INVALID_USER_PHONE_PRIMARY_SIZE                    = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_PHONE_PRIMARY_SIZE                    = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user phone primary";
 	const FORM_INVALID_USER_PHONE_SECONDARY                       = "Invalid user phone secondary";
-	const FORM_INVALID_USER_PHONE_SECONDARY_SIZE                  = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_PHONE_SECONDARY_SIZE                  = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user phone secondary";
 	const FORM_INVALID_USER_REGION                                = "Invalid user region";
-	const FORM_INVALID_USER_REGION_SIZE                           = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_REGION_SIZE                           = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user region";
 	const FORM_INVALID_USER_UNIQUE_ID                             = "Invalid user unique id";
-	const FORM_INVALID_USER_UNIQUE_ID_SIZE                        = "Quantity of characters exceeds the maximum allowed on "
+	const FORM_INVALID_USER_UNIQUE_ID_SIZE                        = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user unique id";
 	const FORM_SELECT_DEFAULT                                     = "Select";
 	const FORM_SELECT_NONE                                        = "None";             

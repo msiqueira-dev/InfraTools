@@ -28,32 +28,37 @@ if (!class_exists("PageInfraTools"))
 }
 
 class PageService extends PageInfraTools
-{
-	protected static $Instance;
-
+{	
+	/* Singleton */
+	public static function __create($Language)
+    {
+        if (!isset(self::$Instance)) 
+		{
+            $class = __CLASS__;
+            self::$Instance = new $class($Language);
+        }
+        return self::$Instance;
+    }
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		$this->PageCheckLogin = TRUE;
+		parent::__construct($Language);
+		if(!$this->PageEnabled)
+		{
+			Page::GetCurrentDomain($domain);
+			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
+		}
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
-	}
-	
-	/* Singleton */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 
 	public function GetCurrentPage()
 	{
@@ -97,112 +102,6 @@ class PageService extends PageInfraTools
 
 	public function LoadPage()
 	{
-		/*
-		$Limit1 = 0;
-		$Limit2 = 5;
-		$ServiceActive = TRUE;
-		$ServiceName = "INFRATOOLS";
-		$ServiceCorporation = "PUC-Rio";
-		$ServiceDepartment = "Rio Data Centro";
-		$ServiceId = 1;
-		$ServiceType = "WEB_SYSTEM";
-		$return = $this->ServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolService, $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelect: " . $return . "<br>";
-	    $return = $this->ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-			                                $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceActive: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceActiveNoLimit($ServiceActive, $ArrayInstanceInfraToolService, 
-			                                       $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceActiveNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceActiveOnUserContext($ServiceActive, $this->InstanceInfraToolsUser->GetEmail(), 
-																   $Limit1, $Limit2,
-			                                                       $ArrayInstanceInfraToolService, 
-			                                                       $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceActiveOnUserContext: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $this->InstanceInfraToolsUser->GetEmail(),
-			                                                              $ArrayInstanceInfraToolService, 
-			                                                              $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceActiveOnUserContextNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2,
-			                                               $ArrayInstanceInfraToolService, 
-											               $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceCorporation: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, $ArrayInstanceInfraToolService, 
-			                                                      $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceCorporationNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, 
-																		$this->InstanceInfraToolsUser->GetEmail(), 
-			                                                            $Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-			                                                            $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceCorporationOnUserContext: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, 
-																			   $this->InstanceInfraToolsUser->GetEmail(), 
-			                                                                   $ArrayInstanceInfraToolService, 
-			                                                                   $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceCorporationOnUserContextNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2,
-														  $ArrayInstanceInfraToolService, $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceDepartment: " . $return . "<br>";
-	    $return = $this->ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
-																 $ArrayInstanceInfraToolService, 
-																 $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceDepartmentNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, 
-																	   $ServiceDepartment, $this->InstanceInfraToolsUser->GetEmail(), 
-			                                                           $Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-			                                                           $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceDepartmentOnUserContext: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, 
-																			  $this->InstanceInfraToolsUser->GetEmail(), 
-			                                                                  $ArrayInstanceInfraToolService, 
-			                                                                  $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceDepartmentOnUserContextNoLimit: " . $return . "<br>";
-	    $return = $this->ServiceSelectByServiceId($ServiceId, $InstanceInfraToolsService, $RowCount, $this->InputValueHeaderDebug);	
-		echo "ServiceSelectByServiceId: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceIdOnUserContext($ServiceId, $this->InstanceInfraToolsUser->GetEmail(),
-													           $InstanceInfraToolsService,
-															   $TypeAssocUserServiceId,
-			                                                   $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceIdOnUserContext: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-			                                        $RowCount, $this->InputValueHeaderDebug);	
-		echo "ServiceSelectByServiceName: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceNameNoLimit($ServiceName, $ArrayInstanceInfraToolService, 
-			                                               $RowCount, $this->InputValueHeaderDebug);	
-		echo "ServiceSelectByServiceNameNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceNameOnUserContext($ServiceName, $this->InstanceInfraToolsUser->GetEmail(), 
-			                                                     $Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-			                                                     $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceNameOnUserContext: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $this->InstanceInfraToolsUser->GetEmail(), 
-			                                                            $ArrayInstanceInfraToolService, 
-			                                                            $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceNameOnUserContextNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-			                                        $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceType: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceTypeNoLimit($ServiceType, $ArrayInstanceInfraToolService, $RowCount, 
-												           $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceTypeNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceTypeOnUserContext($ServiceType, $this->InstanceInfraToolsUser->GetEmail(), 
-																 $Limit1, $Limit2, 
-			                                                     $ArrayInstanceInfraToolService, 
-																 $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceTypeOnUserContext: " . $return . "<br>";
-		$return = $this->ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $this->InstanceInfraToolsUser->GetEmail(),
-			                                                            $ArrayInstanceInfraToolService, 
-																		$RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByServiceTypeOnUserContextNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectByUser($this->InstanceInfraToolsUser->GetEmail(), $Limit1, $Limit2, 
-								             $ArrayInstanceInfraToolService, $RowCount, 
-								             $this->InputValueHeaderDebug);
-		echo "ServiceSelectByUser: " . $return . "<br>";
-		$return = $this->ServiceSelectByUserNoLimit($this->InstanceInfraToolsUser->GetEmail(), $ArrayInstanceInfraToolService, 
-										            $RowCount, $this->InputValueHeaderDebug);
-		echo "ServiceSelectByUserNoLimit: " . $return . "<br>";
-		$return = $this->ServiceSelectNoLimit($ArrayInstanceInfraToolService, $this->InputValueHeaderDebug);
-		echo "ServiceSelectNoLimit: " . $return . "<br>";
-		*/
 		$this->LoadHtml();
 	}
 }

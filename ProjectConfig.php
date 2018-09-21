@@ -88,6 +88,14 @@ class ProjectConfig
 	public static $AddressJavaScriptServer = "";
 	
 	/*
+		APPLICATION_NAME
+		Description: The name of the application, used by logs and e-mail messages.
+		Examples:
+			$ApplicationName = "InfraTools";
+	*/
+	public static $ApplicationName = "";
+	
+	/*
 		MYSQL_DATABASE_ADDRESS
 		Description: The address of the MySql DataBase
 		Examples:
@@ -131,23 +139,34 @@ class ProjectConfig
 	public static $MySqlDataBasePassword = "";
 	
 	/*
-		E-MAIL ACCOUNT
-		Description: The e-mail account to send system e-mails
+		E-MAIL NO REPLY ACCOUNT
+		Description: The no replye-mail account to send system e-mails. It is meant to be automated e-mails that the end 
+		             user should not reply
 		Examples:
-			$EmailAccount = "account@domain.com";
+			EmailNoReplyAccount = "account@domain.com";
 	*/
-	public static $EmailAccount = "";
+	public static $EmailNoReplyAccount = "";
 	
 	/*
-		E-MAIL PASSWORD
-		Description: The e-mail account's password to send system e-mails.
+		E-MAIL NO REPLY PASSWORD
+		Description: The no reply e-mail account's password to send system e-mails.
 		             If you are using gmail, for example, i would recommend you to claim an app password,
 					 and for that you will need enable a 2 step verification before you can do that.
 					 Check this URL from google: https://myaccount.google.com/security
 		Examples:
-			$EmailPassword = "e-mail password";
+			EmailNoReplyPassword = "e-mail password";
 	*/
-	public static $EmailPassword = "";
+	public static $EmailNoReplyPassword = "";
+	
+	/*
+		E-MAIL SUPPORT ACCOUNT
+		Description: The support e-mail account used to notify the team responsible for this application.
+		             This is usually a group that contain more than one e-mail account, the system will use the 
+					 no reply e-mail account to send e-mails to that group.
+		Examples:
+			EmailSupportAccount = "account@domain.com";
+	*/
+	public static $EmailSupportAccount = "";
 	
 	
 	/*
@@ -207,6 +226,6 @@ class ProjectConfig
 		Examples:
 			$DisplayErrors = "1";
 	*/
-	public static $DisplayErrors = "0";
+	public static $DisplayErrors = "1";
 }
 ?>

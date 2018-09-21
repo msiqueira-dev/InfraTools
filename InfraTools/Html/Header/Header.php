@@ -59,9 +59,9 @@
             	<label> | </label>
             </div>
 			<?php
-				if(isset($this->InstanceInfraToolsUser))
+				if(isset($this->User))
 				{
-					if($this->InstanceInfraToolsUser->CheckSuperUser())
+					if($this->User->CheckSuperUser())
 					{
 						if($ConfigInfraTools->LanguagePortugueseEnabled == true)
 						{
@@ -131,7 +131,7 @@
 					if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN && 
 					   $this->CheckInstanceUser() != ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
 					{
-						if( $this->InstanceInfraToolsUser->CheckSuperUser())
+						if( $this->User->CheckSuperUser())
             			{
 							?>
                                 <div class="DivHeaderDivisionContainerLoginElement">

@@ -22,24 +22,24 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageAdmin"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageAdmin.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
 
-class PageAdminUser extends PageInfraTools
+class PageAdminUser extends PageAdmin
 {
 	/* Instance */
 	public $FacedeBusinessInfraTools    = NULL;
 	public $ArrayInstanceInfraToolsUser = NULL;
 	
 	/* Constructor */
-	public function __construct() 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
+		parent::__construct($Language);
 	}
 	
 	/**                               **/

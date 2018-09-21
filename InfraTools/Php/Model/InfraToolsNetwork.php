@@ -16,14 +16,12 @@ Functions:
 			public function CheckDnsRecord($Host, $RecordType);
 			public function CheckPingServer($HostOrIp);
 			public function CheckPortStatus($HostOrIp, $Port);
-			public function GetBrowserClient(&$Browser);
-			public function GetCalculationNetMask($IpAddress, $Mask, $SubNetworkIp, $NetMask, $BroadCastAddress, $AvaliableNetworkIps);
+			public function GetCalculationNetMask($IpAddress, $Mask, $SubNetworkIp, $NetMask, 
+			                                      $BroadCastAddress, $AvaliableNetworkIps);
 			public function GetDnsMxRecords($Host, &$ArrayDnsMxRecords);
 			public function GetDnsRecords($Host, &$ArrayDnsRecords);
-			public function GetIpAddressClient(&$IpAddress);
 			public function GetIpAddresses($Host, &$ArrayIpAddress);
-			public function GetLocation($IpAddress, &$ArrayLocationInformation);
-			public function GetOperationalSystem(&$OsPlatform); 
+			public function GetLocation($IpAddress, &$ArrayLocationInformation); 
 			public function GetProtocol($Number, &$Protocol);
 			public function GetRoute($IpAddress, $TimeOut, &$ArrayRoute);
 			public function GetService($Port, $Protocol, &$Service);
@@ -38,7 +36,7 @@ if (!class_exists("InfraToolsFactory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
 
-class InfraToolsNetwork
+class InfraToolsNetwork extends Network
 {	
 	/* Constantes de Tipos de registros de DNS */
 	const DnsTypeA     = "A";
@@ -260,37 +258,6 @@ class InfraToolsNetwork
 		}
 	}
 	
-	public function GetBrowserClient(&$Browser) 
-	{
-		$Browser   = "";
-		if(empty($_SERVER['HTTP_USER_AGENT'])) 
-		{
-			$Browser = 'unrecognized';
-			return ConfigInfraTools::GET_BROWSER_CLIENT_INVALID_BROWSER;
-		}
-
-		$userAgent = $_SERVER['HTTP_USER_AGENT'];
-        $browserArray  =   array(
-                            '/msie/i'       	      =>  'IE',
-							'/7.0; rv:11.0/i'         =>  'IE 11',
-                            '/firefox/i'              =>  'Firefox',
-                            '/safari/i'               =>  'Safari',
-                            '/chrome/i'               =>  'Chrome',
-                            '/opera/i'                =>  'Opera',
-							'/OPR/i'                  =>  'Opera',
-                            '/netscape/i'             =>  'Netscape',
-                            '/maxthon/i'              =>  'Maxthon',
-                            '/konqueror/i'            =>  'Konqueror',
-                            '/mobile/i'               =>  'Handheld Browser');
-		foreach ($browserArray as $regex => $value) 
-		{ 
-			if (preg_match($regex, $userAgent)) 
-				$Browser = $value;
-		}
-		if($Browser != "")
-			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_BROWSER_CLIENT_INVALID_BROWSER;
-	}
 	
 	/**
 	- Recebe um endereço de ip conjunto a uma mascara e calcula todos os dados de rede a partir desta informação. 
@@ -381,37 +348,6 @@ class InfraToolsNetwork
 	}
 	
 	/**
-	- Retornar por referência o endereço de ip do cliente, caso o mesmo seja encontrado nas opções abaixo.
-	Retornos:
-		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOST_IP_ADDRESS_FAILED - Falha ao obter o hostname com o dado endereço de IP.
-	Data:
-	**/
-	function GetIpAddressClient(&$IpAddress) 
-	{
-		$IpAddress = "";
-		if (isset($_SERVER['HTTP_CLIENT_IP']))
-			$IpAddress = $_SERVER['HTTP_CLIENT_IP'];
-		else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
-			$IpAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		else if(isset($_SERVER['HTTP_X_FORWARDED']))
-			$IpAddress = $_SERVER['HTTP_X_FORWARDED'];
-		else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
-			$IpAddress = $_SERVER['HTTP_FORWARDED_FOR'];
-		else if(isset($_SERVER['HTTP_FORWARDED']))
-			$IpAddress = $_SERVER['HTTP_FORWARDED'];
-		else if(isset($_SERVER['REMOTE_ADDR']))
-			$IpAddress = $_SERVER['REMOTE_ADDR'];
-		if($IpAddress != "")
-		{
-			if($IpAddress == "::1")
-				$IpAddress = "127.0.0.1";
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::GET_IP_ADDRESS_CLIENT_FAILED;
-	}
-	
-	/**
 	- Recebe um host e através deste tenta obter todos os endereços de IP associados ao mesmo, 
 	onde, em caso de sucesso retorna por referência todos os endereços de IP armazenados em formato
     de Array na variável arrayIpAddress.
@@ -464,54 +400,6 @@ class InfraToolsNetwork
 			else return ConfigInfraTools::GET_LOCATION_BY_IP_ADDRESS_FAILED;
 		}
 		else return ConfigInfraTools::GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS;
-	}
-	
-	public function GetOperationalSystem(&$OsPlatform) 
-	{ 
-		$OsPlatform     =   "";
-		if(empty($_SERVER['HTTP_USER_AGENT'])) 
-		{
-			$OsPlatform = 'unrecognized';
-			return ConfigInfraTools::GET_OPERATIONAL_SYSTEM_INVALID_OS;
-		}
-	    $userAgent      = $_SERVER['HTTP_USER_AGENT'];
-    	$osArray        =   array(
-                            '/windows nt 10/i'      =>  'Windows 10',
-                            '/windows nt 6.3/i'     =>  'Windows 8.1',
-                            '/windows nt 6.2/i'     =>  'Windows 8',
-                            '/windows nt 6.1/i'     =>  'Windows 7',
-                            '/windows nt 6.0/i'     =>  'Windows Vista',
-                            '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
-                            '/windows nt 5.1/i'     =>  'Windows XP',
-                            '/windows xp/i'         =>  'Windows XP',
-                            '/windows nt 5.0/i'     =>  'Windows 2000',
-                            '/windows me/i'         =>  'Windows ME',
-                            '/win98/i'              =>  'Windows 98',
-                            '/win95/i'              =>  'Windows 95',
-                            '/win16/i'              =>  'Windows 3.11',
-							'/Windows Phone 8.0/i'  =>  'Windows Phone 8.0',
-                            '/Windows Phone 8.1/i'  =>  'Windows Phone 8.1',
-							'/macintosh|mac os x/i' =>  'Mac OS X',
-                            '/mac_powerpc/i'        =>  'Mac OS 9',
-                            '/linux/i'              =>  'Linux',
-                            '/ubuntu/i'             =>  'Ubuntu',
-                            '/iphone/i'             =>  'iPhone',
-                            '/ipod/i'               =>  'iPod',
-                            '/ipad/i'               =>  'iPad',
-                            '/android/i'            =>  'Android',
-                            '/blackberry/i'         =>  'BlackBerry',
-                            '/webos/i'              =>  'Mobile');
-	    foreach ($osArray as $regex => $value) 
-		{ 
-	        if (preg_match($regex, $userAgent))
-			{
-            	$OsPlatform =  $value;
-				break;
-			}
-	    }
-   	 	if($OsPlatform != "")
-			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_OPERATIONAL_SYSTEM_INVALID_OS;
 	}
 
 	

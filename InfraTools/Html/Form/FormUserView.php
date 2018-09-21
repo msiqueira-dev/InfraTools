@@ -334,7 +334,7 @@
 			}
 			if(isset($this->InstanceInfraToolsUserAdmin))
 				$ret = $this->InstanceInfraToolsUserAdmin->GetTwoStepVerification();
-			else $ret = $this->InstanceInfraToolsUser->GetTwoStepVerification();
+			else $ret = $this->User->GetTwoStepVerification();
 			if($ret)
 			{
 			?>
@@ -357,7 +357,7 @@
 					   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 			<?php
 			}	
-			if(!isset($this->InstanceInfraToolsUserAdmin) && $this->InstanceInfraToolsUser->CheckSuperUser())
+			if(!isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
 				<!-- HREF_PAGE_ADMIN -->
@@ -370,7 +370,7 @@
 				</div>
 				<?php
 			}
-			if(isset($this->InstanceInfraToolsUserAdmin) && $this->InstanceInfraToolsUser->CheckSuperUser())
+			if(isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
 				<!-- FORM_USER_VIEW_CHANGE_USER_TYPE_SUBMIT -->

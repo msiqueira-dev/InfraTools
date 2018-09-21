@@ -5,7 +5,7 @@ Creation: 19/06/2018
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
@@ -20,28 +20,28 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 
-class PageServiceList extends PageInfraTools
+class PageServiceList extends PageService
 {
 	public $ArrayInfraToolsService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
 	}
 
 	public function GetCurrentPage()
@@ -97,7 +97,7 @@ class PageServiceList extends PageInfraTools
 					$this->InputLimitOne = 0;
 				if($this->InputLimitTwo <= 0)
 					$this->InputLimitTwo = 25;
-				$this->ServiceSelectOnUserContext($this->InstanceInfraToolsUser->GetEmail(),
+				$this->ServiceSelectOnUserContext($this->User->GetEmail(),
 												  $this->InputLimitOne, $this->InputLimitTwo, 
 												  $this->ArrayInfraToolsService,
 												  $rowCount,
@@ -108,7 +108,7 @@ class PageServiceList extends PageInfraTools
 			{
 				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$this->ServiceSelectOnUserContext($this->InstanceInfraToolsUser->GetEmail(), 
+				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
 												  $this->InputLimitOne, $this->InputLimitTwo, 
 												  $this->ArrayInfraToolsService,
 												  $rowCount,
@@ -125,7 +125,7 @@ class PageServiceList extends PageInfraTools
 						$this->InputLimitOne = $rowCount - 25;
 						$this->InputLimitTwo = $rowCount;
 					}
-					$this->ServiceSelectOnUserContext($this->InstanceInfraToolsUser->GetEmail(),
+					$this->ServiceSelectOnUserContext($this->User->GetEmail(),
 													  $this->InputLimitOne, $this->InputLimitTwo, 
 													  $this->ArrayInfraToolsService,
 													  $rowCount,
@@ -147,7 +147,7 @@ class PageServiceList extends PageInfraTools
 			{
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				$this->ServiceSelectOnUserContext($this->InstanceInfraToolsUser->GetEmail(), 
+				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
 												  $this->InputLimitOne, $this->InputLimitTwo, 
 												  $this->ArrayInfraToolsService,
 												  $rowCount,

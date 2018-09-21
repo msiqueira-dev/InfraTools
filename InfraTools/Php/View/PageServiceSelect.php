@@ -32,30 +32,19 @@ class PageServiceSelect extends PageInfraTools
 	protected static $Instance;
 	public $ArrayInfraToolsService     = NULL;
 	public $InstanceInfraToolsService = NULL;
-
+	
+	/* Constructor */
+	public function __construct($Language) 
+	{
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Language);
+	}
+	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
-	
-	/* Constructor */
-	public function __construct() 
-	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct();
-	}
-	
-	/* Singleton */
-	public static function __create()
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class;
-        }
-        return self::$Instance;
-    }
 
 	public function GetCurrentPage()
 	{
@@ -105,7 +94,7 @@ class PageServiceSelect extends PageInfraTools
 				  isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID]))
 			{
 				$return = $this->ServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
-												   $this->InstanceInfraToolsUser->GetEmail(), 
+												   $this->User->GetEmail(), 
 												   $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -120,7 +109,7 @@ class PageServiceSelect extends PageInfraTools
 					$retText  = $this->ReturnText;
 					$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
 					$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-																		   $this->InstanceInfraToolsUser->GetEmail(),
+																		   $this->User->GetEmail(),
 																		   $this->InstanceInfraToolsService,
 																		   $this->InputValueTypeAssocUserServiceId,
 																		   $this->InputValueHeaderDebug);
@@ -141,7 +130,7 @@ class PageServiceSelect extends PageInfraTools
 				$this->ReturnServiceIdRadioClass = "NotHidden";
 				$this->ReturnServiceNameRadioClass = "Hidden";
 				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-																	   $this->InstanceInfraToolsUser->GetEmail(), 
+																	   $this->User->GetEmail(), 
 																	   $this->InstanceInfraToolsService,
 																	   $this->InputValueTypeAssocUserServiceId,
 																	   $this->InputValueHeaderDebug);
@@ -169,7 +158,7 @@ class PageServiceSelect extends PageInfraTools
 					if($this->InputLimitTwo <= 0)
 						$this->InputLimitTwo = 25;
 					$return = $this->ServiceSelectByServiceNameOnUserContext($this->InputValueServiceName,
-																			 $this->InstanceInfraToolsUser->GetEmail(),
+																			 $this->User->GetEmail(),
 																			 $this->InputLimitOne, 
 																			 $this->InputLimitTwo, 
 																			 $this->ArrayInfraToolsService,
@@ -182,7 +171,7 @@ class PageServiceSelect extends PageInfraTools
 					$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 					$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 					$return = $this->ServiceSelectByServiceNameOnUserContext($this->InputValueServiceName,
-																			 $this->InstanceInfraToolsUser->GetEmail(),
+																			 $this->User->GetEmail(),
 																			 $this->InputLimitOne, 
 																			 $this->InputLimitTwo, 
 																			 $this->ArrayInfraToolsService,
@@ -201,7 +190,7 @@ class PageServiceSelect extends PageInfraTools
 							$this->InputLimitTwo = $rowCount;
 						}
 						$this->ServiceSelectByServiceNameOnUserContext($this->InputValueServiceName,
-																	   $this->InstanceInfraToolsUser->GetEmail(),
+																	   $this->User->GetEmail(),
 																	   $this->InputLimitOne, 
 																	   $this->InputLimitTwo, 
 																	   $this->ArrayInfraToolsService,
@@ -225,7 +214,7 @@ class PageServiceSelect extends PageInfraTools
 					$this->InputLimitOne = 0;
 					$this->InputLimitTwo = 25;
 					$return = $this->ServiceSelectByServiceNameOnUserContext($this->InputValueServiceName,
-																		  $this->InstanceInfraToolsUser->GetEmail(),
+																		  $this->User->GetEmail(),
 																		  $this->InputLimitOne, $this->InputLimitTwo, 
 																		  $this->ArrayInfraToolsService,
 																		  $rowCount,
@@ -248,7 +237,7 @@ class PageServiceSelect extends PageInfraTools
 				$this->ReturnServiceIdRadioClass = "NotHidden";
 				$this->ReturnServiceNameRadioClass = "Hidden";
 				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-																	   $this->InstanceInfraToolsUser->GetEmail(), 
+																	   $this->User->GetEmail(), 
 																	   $this->InstanceInfraToolsService,
 																	   $this->InputValueTypeAssocUserServiceId,
 																	   $this->InputValueHeaderDebug);
