@@ -36,20 +36,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("Team"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Team.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Team.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Team');
-}
-
 class FacedePersistenceTeam
 {	
 	/* Instance */
@@ -99,7 +85,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamDeleteByTeamDescription() . "<br>";
+				Persistence::ShowQuery('SqlTeamDeleteByTeamDescription');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamDeleteByTeamDescription());
 			if ($stmt)
 			{
@@ -146,7 +132,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamDeleteByTeamId() . "<br>";
+				Persistence::ShowQuery('SqlTeamDeleteByTeamId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamDeleteByTeamId());
 			if ($stmt)
 			{
@@ -193,7 +179,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamInsert() . "<br>";
+				Persistence::ShowQuery('SqlTeamInsert');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamInsert());
 			if ($stmt)
 			{
@@ -230,7 +216,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamSelect() . "<br>";
+				Persistence::ShowQuery('SqlTeamSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelect());
 			if($stmt != NULL)
 			{
@@ -286,7 +272,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamSelectNoLimit() . "<br>";
+				Persistence::ShowQuery('SqlTeamSelectNoLimit');
 			if($result = $mySqlConnection->query(Persistence::SqlTeamSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
@@ -321,7 +307,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamSelectByTeamId() . "<br>";
+				Persistence::ShowQuery('SqlTeamSelectByTeamId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelectByTeamId());
 			if($stmt != NULL)
 			{
@@ -368,7 +354,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamSelectByTeamName() . "<br>";
+				Persistence::ShowQuery('SqlTeamSelectByTeamName');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelectByTeamName());
 			if($stmt != NULL)
 			{
@@ -416,7 +402,7 @@ class FacedePersistenceTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTeamUpdateByTeamId() . "<br>";
+				Persistence::ShowQuery('SqlTeamUpdateByTeamId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamUpdateByTeamId());
 			if ($stmt)
 			{

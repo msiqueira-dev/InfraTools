@@ -5,13 +5,16 @@ Class: Email.php
 Creation: 29/01/2015
 Creator: Marcus Siqueira
 Dependencies:
-			Php/ConfigInfraTools.php
+			Base       - Php/Controller/Config.php
+			Base       - Php/API/PHPMailer/class.phpmailer.php
+			Base       - Php/API/PHPMailer/class.smtp.php
+			Base       - Php/API/PHPMailer/class.pop3.php
 Description: 
 			Classe que serve para utilizar funcionalidades ligadas a
 			corrêio eletrônico
 Functions:
-			public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailPassword, 
-	                                      $UserName, $UserEmail, $Subject, $Title, $Body)
+			public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailUserReplyTo,
+			                              $ApplicationEmailPassword, $UserName, $UserEmail, $Subject, $Title, $Body);
 			public function ValidateEmail($RecipientEmail, $SenderEmail, $debug);
 			private function _SendMessage($message, $debug = FALSE, &$returnCode = NULL);
 **************************************************************************/
@@ -59,7 +62,8 @@ class Email
 	/* Properties */
 	private $sock;
 	
-	public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailPassword, $UserEmail, $Subject, $Body)
+	public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailUserReplyTo, 
+								  $ApplicationEmailPassword, $UserEmail, $Subject, $Body)
 	{
 		$mail = new PHPMailer;
 		$mail->isSMTP();
@@ -73,7 +77,7 @@ class Email
 		$mail->From = $ApplicationEmailUser;
 		$mail->FromName = $Application;
 		$mail->addAddress($UserEmail, $UserEmail);
-		$mail->addReplyTo($ApplicationEmailUser, 'Support InfraTools');
+		$mail->addReplyTo($ApplicationEmailUser, $ApplicationEmailUserReplyTo);
 		$mail->isHTML(true);
 		$mail->Subject = $Subject;
 		$mail->Body    = $Body;

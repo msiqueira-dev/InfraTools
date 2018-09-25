@@ -58,20 +58,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("User"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "User.php"))
-		include_once(BASE_PATH_PHP_MODEL . "User.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
-}
-
 class FacedePersistenceUser
 {	
 	/* Instance */
@@ -120,7 +106,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserCheckEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserCheckEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserCheckEmail());
 			if($stmt != NULL)
 			{
@@ -154,7 +140,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserCheckPasswordByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserCheckPasswordByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserCheckPasswordByEmail());
 			if($stmt != NULL)
 			{
@@ -188,7 +174,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserCheckPasswordByUserUniqueId() . "<br>";
+				Persistence::ShowQuery('SqlUserCheckPasswordByUserUniqueId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserCheckPasswordByUserUniqueId());
 			if($stmt != NULL)
 			{
@@ -223,7 +209,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserDeleteByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserDeleteByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserDeleteByEmail());
 			if ($stmt)
 			{
@@ -270,7 +256,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserInsert() . "<br>";
+				Persistence::ShowQuery('SqlUserInsert');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserInsert());
 			if ($stmt)
 			{
@@ -331,7 +317,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelect() . "<br>";
+				Persistence::ShowQuery('SqlUserSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelect());
 			if($stmt != NULL)
 			{
@@ -437,7 +423,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectByCorporation() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectByCorporation');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByCorporation());
 			if($stmt != NULL)
 			{
@@ -544,7 +530,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectByDepartment() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectByDepartment');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByDepartment());
 			if($stmt != NULL)
 			{
@@ -650,7 +636,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByEmail());
 			if($stmt != NULL)
 			{
@@ -731,7 +717,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectByTeamId() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectByTeamId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByTeamId());
 			if($stmt != NULL)
 			{
@@ -851,7 +837,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectByUserUniqueId() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectByUserUniqueId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByUserUniqueId());
 			if($stmt != NULL)
 			{
@@ -927,7 +913,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectConfirmedByHashCode() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectConfirmedByHashCode');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectConfirmedByHashCode());
 			if($stmt != NULL)
 			{
@@ -971,7 +957,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectHashCodeByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectHashCodeByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectHashCodeByEmail());
 			if($stmt != NULL)
 			{
@@ -1019,7 +1005,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserSelectTeamByUserEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserSelectTeamByUserEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectTeamByUserEmail());
 			if($stmt != NULL)
 			{ 
@@ -1090,7 +1076,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateActiveByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateActiveByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateActiveByEmail());
 			if ($stmt)
 			{
@@ -1135,8 +1121,8 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlAssocUserCorporationUpdate() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlAssocUserCorporationUpdate());
+				Persistence::ShowQuery('SqlUserUpdateAssocUserCorporationByEmailAndCorporation');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateAssocUserCorporationByEmailAndCorporation());
 			if ($stmt)
 			{
 				$stmt->bind_param("ssss", $RegistrationDate, $RegistrationId, $Corporation, $Email);
@@ -1180,7 +1166,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateByEmail());
 			if ($stmt)
 			{
@@ -1228,7 +1214,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateConfirmedByHash() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateConfirmedByHash');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateConfirmedByHash());
 			if ($stmt)
 			{
@@ -1272,7 +1258,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateCorporationByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateCorporationByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateCorporationByEmail());
 			if ($stmt)
 			{
@@ -1316,7 +1302,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateDepartmentByEmailAndCorporation() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateDepartmentByEmailAndCorporation');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateDepartmentByEmailAndCorporation());
 			if ($stmt)
 			{
@@ -1360,7 +1346,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdatePasswordByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdatePasswordByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdatePasswordByEmail());
 			if ($stmt)
 			{
@@ -1404,7 +1390,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateTwoStepVerificationByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateTwoStepVerificationByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateTwoStepVerificationByEmail());
 			if ($stmt)
 			{
@@ -1448,7 +1434,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateUserTypeByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateUserTypeByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateUserTypeByEmail());
 			if ($stmt)
 			{
@@ -1492,7 +1478,7 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlUserUpdateUniqueIdByEmail() . "<br>";
+				Persistence::ShowQuery('SqlUserUpdateUniqueIdByEmail');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateUniqueIdByEmail());
 			if ($stmt)
 			{

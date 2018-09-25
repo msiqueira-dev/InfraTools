@@ -708,7 +708,7 @@ class InfraToolsFactory extends Factory
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_SUPPORT))
 			return $this->CreatePageSupport($Language);
 		elseif($Page == str_replace("_", "",ConfigInfraTools::PAGE_TEAM))
-			return $this->CreatePageTeam();
+			return $this->CreatePageTeam($Language);
 		else return $this->CreatePageNotFound($Language);
 	}
 	
@@ -717,7 +717,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageAbout::__create($Language)->LoadPage();
+		return $this->LoadPage(PageAbout::__create($Language));
 	}
 	
 	private function CreatePageAccount($Language)
@@ -725,7 +725,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAccount($Language))->LoadPage();
+		return $this->LoadPage(new PageAccount($Language));
 	}
 	
 	private function CreatePageAdmin($Language)
@@ -733,7 +733,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdmin($Language))->LoadPage();
+		return $this->LoadPage(new PageAdmin($Language));
 	}
 	
 	private function CreatePageAdminCorporation($Language)
@@ -741,7 +741,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminCorporation($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminCorporation($Language));
 	}
 	
 	private function CreatePageAdminCountry($Language)
@@ -749,7 +749,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageAdminCountry::__create($Language)->LoadPage();
+		return $this->LoadPage(new PageAdminCountry($Language));
 	}
 	
 	private function CreatePageAdminDepartment($Language)
@@ -757,7 +757,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminDepartment())->LoadPage();
+		return $this->LoadPage(new PageAdminDepartment($Language));
 	}
 	
 	private function CreatePageAdminNotification($Language)
@@ -765,7 +765,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminNotification($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminNotification($Language));
 	}
 	
 	private function CreatePageAdminService($Language)
@@ -773,7 +773,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminService($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminService($Language));
 	}
 	
 	private function CreatePageAdminTeam($Language)
@@ -781,7 +781,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTeam())->LoadPage();
+		return $this->LoadPage(new PageAdminTeam($Language));
 	}
 	
 	private function CreatePageAdminTechInfo($Language)
@@ -789,7 +789,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTechInfo())->LoadPage();
+		return $this->LoadPage(new PageAdminTechInfo($Language));
 	}
 	
 	private function CreatePageAdminTicket($Language)
@@ -797,7 +797,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTicket($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminTicket($Language));
 	}
 	
 	private function CreatePageAdminTypeAssocUserTeam($Language)
@@ -805,7 +805,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeAssocUserTeam())->LoadPage();	
+		return $this->LoadPage(new PageAdminTypeAssocUserTeam($Language));
 	}
 	
 	private function CreatePageAdminTypeMonitoring($Language)
@@ -813,7 +813,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeMonitoring())->LoadPage();
+		return $this->LoadPage(new PageAdminTypeMonitoring());
 	}
 	
 	private function CreatePageAdminTypeService($Language)
@@ -821,7 +821,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeService($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminTypeService($Language));
 	}
 	
 	private function CreatePageAdminTypeStatusMonitoring($Language)
@@ -829,7 +829,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeStatusMonitoring())->LoadPage();
+		return $this->LoadPage(new PageAdminTypeStatusMonitoring($Language));
 	}
 	
 	private function CreatePageAdminTypeStatusTicket($Language)
@@ -837,7 +837,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeStatusTicket())->LoadPage();
+		return $this->LoadPage(new PageAdminTypeStatusTicket($Language));
 	}
 	
 	private function CreatePageAdminTypeTicket($Language)
@@ -845,7 +845,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeTicket($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminTypeTicket($Language));
 	}
 	
 	private function CreatePageAdminTypeUser($Language)
@@ -853,7 +853,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminTypeUser($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminTypeUser($Language));
 	}
 	
 	private function CreatePageAdminUser($Language)
@@ -861,7 +861,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageAdminUser($Language))->LoadPage();
+		return $this->LoadPage(new PageAdminUser($Language));
 	}
 	
 	private function CreatePageCheck($Language)
@@ -869,7 +869,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageCheck($Language))->LoadPage();
+		return $this->LoadPage(new PageCheck($Language));
 	}
 	
 	private function CreatePageContact($Language)
@@ -877,7 +877,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageContact($Language))->LoadPage();
+		return $this->LoadPage(new PageContact($Language));
 	}
 	
 	private function CreatePageCorporation($Language)
@@ -885,7 +885,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageCorporation($Language))->LoadPage();
+		return $this->LoadPage(new PageCorporation($Language));
 	}
 	
 	private function CreatePageDiagnosticTools($Language)
@@ -893,7 +893,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageDiagnosticTools($Language))->LoadPage();
+		return $this->LoadPage(new PageDiagnosticTools($Language));
 	}
 	
 	private function CreatePageGet($Language)
@@ -901,7 +901,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageGet($Language))->LoadPage();
+		return $this->LoadPage(new PageGet($Language));
 	}
 	
 	private function CreatePageInstall($Language)
@@ -909,7 +909,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageInstall::__create($Language)->LoadPage();
+		return $this->LoadPage(PageInstall::__create($Language));
 	}
 	
 	private function CreatePageHome($Language)
@@ -917,7 +917,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageHome::__create($Language)->LoadPage();
+		return $this->LoadPage(PageHome::__create($Language));
 	}
 	
 	private function CreatePageLogin($Language)
@@ -925,7 +925,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageLogin($Language))->LoadPage();
+		return $this->LoadPage(new PageLogin($Language));
 	}
 	
 	private function CreatePageNotFound($Language)
@@ -936,7 +936,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return PageNotFound::__create($Language)->LoadPage();
+		return $this->LoadPage(PageNotFound::__create($Language));
 	}
 	
 	private function CreatePageNotification($Language)
@@ -944,7 +944,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageNotification($Language))->LoadPage();
+		return $this->LoadPage(new PageNotification($Language));
 	}
 	
 	private function CreatePagePasswordRecovery($Language)
@@ -952,7 +952,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PagePasswordRecovery($Language))->LoadPage();
+		return $this->LoadPage(new PagePasswordRecovery($Language));
 	}
 	
 	private function CreatePagePasswordReset($Language)
@@ -960,7 +960,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PagePasswordReset($Language))->LoadPage();
+		return $this->LoadPage(new PagePasswordReset($Language));
 	}
 	
 	private function CreatePageRegister($Language)
@@ -968,7 +968,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageRegister($Language))->LoadPage();
+		return $this->LoadPage(new PageRegister($Language));
 	}
 	
 	private function CreatePageRegisterConfirmation($Language)
@@ -976,7 +976,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageRegisterConfirmation($Language))->LoadPage();
+		return $this->LoadPage(new PageRegisterConfirmation($Language));
 	}
 	
 	private function CreatePageResendConfirmationLink($Language)
@@ -984,7 +984,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageResendConfirmationLink($Language))->LoadPage();
+		return $this->LoadPage(new PageResendConfirmationLink($Language));
 	}
 	
 	private function CreatePageService($Language)
@@ -992,7 +992,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageService($Language))->LoadPage();
+		return $this->LoadPage(new PageService($Language));
 	}
 	
 	private function CreatePageServiceList($Language)
@@ -1000,7 +1000,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceList($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceList($Language));
 	}
 	
 	private function CreatePageServiceListByCorporation($Language)
@@ -1008,7 +1008,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceListByCorporation($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceListByCorporation($Language));
 	}
 	
 	private function CreatePageServiceListByDepartment($Language)
@@ -1016,7 +1016,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceListByDepartment($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceListByDepartment($Language));
 	}
 	
 	private function CreatePageServiceListByTypeAssocUserService($Language)
@@ -1024,7 +1024,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceListByTypeAssocUserService($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceListByTypeAssocUserService($Language));
 	}
 	
 	private function CreatePageServiceListByTypeService($Language)
@@ -1032,7 +1032,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceListByTypeService($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceListByTypeService($Language));
 	}
 	
 	private function CreatePageServiceListByUser($Language)
@@ -1040,7 +1040,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceListByUser($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceListByUser($Language));
 	}
 	
 	private function CreatePageServiceRegister($Language)
@@ -1048,7 +1048,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceRegister($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceRegister($Language));
 	}
 	
 	private function CreatePageServiceSelect($Language)
@@ -1056,7 +1056,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceSelect($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceSelect($Language));
 	}
 	
 	private function CreatePageServiceView($Language)
@@ -1064,7 +1064,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageServiceView($Language))->LoadPage();
+		return $this->LoadPage(new PageServiceView($Language));
 	}
 	
 	private function CreatePageSupport($Language)
@@ -1072,7 +1072,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageSupport($Language))->LoadPage();
+		return $this->LoadPage(new PageSupport($Language));
 	}
 	
 	private function CreatePageTeam($Language)
@@ -1080,7 +1080,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
-		return (new PageTeam($Language))->LoadPage();
+		return $this->LoadPage(new PageTeam($Language));
 	}
 }
 ?>

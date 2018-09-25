@@ -57,7 +57,7 @@ class Network
 		if(empty($_SERVER['HTTP_USER_AGENT'])) 
 		{
 			$Browser = 'unrecognized';
-			return ConfigInfraTools::GET_BROWSER_CLIENT_INVALID_BROWSER;
+			return Config::GET_BROWSER_CLIENT_INVALID_BROWSER;
 		}
 
 		$userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -79,8 +79,8 @@ class Network
 				$Browser = $value;
 		}
 		if($Browser != "")
-			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_BROWSER_CLIENT_INVALID_BROWSER;
+			return Config::SUCCESS;
+		else return Config::GET_BROWSER_CLIENT_INVALID_BROWSER;
 	}
 	
 	public function GetIpAddressClient(&$IpAddress) 

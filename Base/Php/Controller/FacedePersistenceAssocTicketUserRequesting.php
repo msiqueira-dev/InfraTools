@@ -98,8 +98,7 @@ class FacedePersistenceAssocTicketUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserRequestingDeleteByTicketId)</b> : " . 
-						 Persistence::SqlAssocTicketUserRequestingDeleteByTicketId() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserRequestingDeleteByTicketId');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingDeleteByTicketId());
 			if ($stmt)
 			{
@@ -140,8 +139,7 @@ class FacedePersistenceAssocTicketUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserRequestingInsert)</b> : " . 
-						 Persistence::SqlAssocTicketUserRequestingInsert() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserRequestingInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingInsert());
 			if ($stmt)
 			{
@@ -176,8 +174,7 @@ class FacedePersistenceAssocTicketUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserRequestingSelect)</b> : " . 
-						 Persistence::SqlAssocTicketUserRequestingSelect() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserRequestingSelect');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelect());
 			if($stmt != NULL)
 			{
@@ -232,8 +229,7 @@ class FacedePersistenceAssocTicketUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserRequestingSelectByUserEmail)</b> : " . 
-						 Persistence::SqlAssocTicketUserRequestingSelectByUserEmail() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserRequestingSelectByUserEmail');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelectByUserEmail());
 			if($stmt != NULL)
 			{
@@ -287,8 +283,7 @@ class FacedePersistenceAssocTicketUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserRequestingSelectByTicketId)</b> : " . 
-						 Persistence::SqlAssocTicketUserRequestingSelectByTicketId() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserRequestingSelectByTicketId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelectByTicketId());
 			if($stmt != NULL)
 			{
@@ -340,8 +335,7 @@ class FacedePersistenceAssocTicketUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (AssocTicketUserRequestingUpdateByTicketId)</b> : " . 
-						 Persistence::AssocTicketUserRequestingUpdateByTicketId() . "<br>";
+				Persistence::ShowQuery('AssocTicketUserRequestingUpdateByTicketId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingUpdateByTicketId());
 			if ($stmt)
 			{

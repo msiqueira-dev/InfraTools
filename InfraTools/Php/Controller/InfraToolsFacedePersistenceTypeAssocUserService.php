@@ -89,8 +89,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (TypeAssocUserServiceSelect)</b>  : " . 
-				             InfraToolsPersistence::TypeAssocUserServiceSelect() . "<br>";
+				InfraToolsPersistence::ShowQueryInfraTools('TypeAssocUserServiceSelect');
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::TypeAssocUserServiceSelect());
 			if($stmt != NULL)
 			{ 
@@ -146,8 +145,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlTypeAssocUserServiceSelectOnUserContextNoLimit)</b>  : " . 
-				             InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContextNoLimit() . "<br>";
+				InfraToolsPersistence::ShowQueryInfraTools('SqlTypeAssocUserServiceSelectOnUserContextNoLimit');
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
@@ -203,8 +201,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlTypeAssocUserServiceSelectOnUserContext)</b>  : " . 
-				             InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContext() . "<br>";
+				InfraToolsPersistence::ShowQueryInfraTools('SqlTypeAssocUserServiceSelectOnUserContext');
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContext());
 			if($stmt != NULL)
 			{ 
@@ -262,8 +259,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlTypeAssocUserServiceSelectOnUserContextNoLimit)</b>  : " . 
-				             InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContextNoLimit() . "<br>";
+				InfraToolsPersistence::ShowQueryInfraTools('SqlTypeAssocUserServiceSelectOnUserContextNoLimit');
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 

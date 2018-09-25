@@ -35,20 +35,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("TypeAssocUserTeam"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php"))
-		include_once(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeAssocUserTeam');
-}
-
 class FacedePersistenceTypeAssocUserTeam
 {	
 	/* Instance */
@@ -98,7 +84,7 @@ class FacedePersistenceTypeAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamDelete() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserTeamDelete');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamDelete());
 			if ($stmt)
 			{
@@ -145,7 +131,7 @@ class FacedePersistenceTypeAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamInsert() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserTeamInsert');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamInsert());
 			if ($stmt)
 			{
@@ -182,7 +168,7 @@ class FacedePersistenceTypeAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamSelect() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserTeamSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelect());
 			if($stmt != NULL)
 			{
@@ -235,7 +221,7 @@ class FacedePersistenceTypeAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamSelectByTeamDescription() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserTeamSelectByTeamDescription');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByTeamDescription());
 			if($stmt != NULL)
 			{
@@ -282,7 +268,7 @@ class FacedePersistenceTypeAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamSelectByTeamId() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserTeamSelectByTeamId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByTeamId());
 			if($stmt != NULL)
 			{
@@ -331,7 +317,7 @@ class FacedePersistenceTypeAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamUpdateByTeamId() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserTeamUpdateByTeamId');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamUpdateByTeamId());
 			if ($stmt)
 			{

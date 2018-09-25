@@ -96,8 +96,7 @@ class InfraToolsFacedePersistenceAssocUserService
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceCheckUserTypeAdministrator)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceCheckUserTypeAdministrator() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceCheckUserTypeAdministrator');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceCheckUserTypeAdministrator());
@@ -133,8 +132,7 @@ class InfraToolsFacedePersistenceAssocUserService
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceDeleteByAssocUserServiceServiceId)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceId() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceDeleteByAssocUserServiceServiceId');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceId());
@@ -175,8 +173,7 @@ class InfraToolsFacedePersistenceAssocUserService
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail)</b> : " . 
-				                InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail());
@@ -219,8 +216,7 @@ class InfraToolsFacedePersistenceAssocUserService
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceInsert)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceInsert() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceInsert');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceInsert());
@@ -256,8 +252,7 @@ class InfraToolsFacedePersistenceAssocUserService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolAssocUserService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceSelectByAssocUserServiceServiceId)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceSelectByAssocUserServiceServiceId');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId());
@@ -312,8 +307,7 @@ class InfraToolsFacedePersistenceAssocUserService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolAssocUserService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit());

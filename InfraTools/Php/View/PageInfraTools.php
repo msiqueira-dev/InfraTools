@@ -13,6 +13,7 @@ Dependencies:
 Description: 
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
+			private   function LoadInstanceInfraToolsUser();
 			protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
@@ -146,8 +147,6 @@ Methods:
 			protected function UserUpdateCorporationInformation($SelectedUser);
 			public function CheckInstanceUser();
 			public function CheckLogin();
-			public function LoadPageInfraToolsDependenciesDebug();
-			public function LoadPageInfraToolsDependenciesDevice();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -383,15 +382,36 @@ abstract class PageInfraTools extends Page
 	{
 		$this->Factory = InfraToolsFactory::__create();
 		$this->Config  = $this->Factory->CreateConfigInfraTools();
+		$this->LoadInstanceInfraToolsUser();
 		parent::__construct($Language);
-		$this->LoadPageInfraToolsDependenciesDevice();
-		$this->LoadPageInfraToolsDependenciesDebug();
 	}
 	
 	/* Clone */
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
+	}
+	
+	private function LoadInstanceInfraToolsUser()
+	{
+		if (!class_exists("User"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "User.php"))
+				include_once(BASE_PATH_PHP_MODEL . "User.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
+		}
+		if(!class_exists("InfraToolsUser"))
+		{
+			if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsUser.php"))
+				exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsUser');
+			else include_once(SITE_PATH_PHP_MODEL . "InfraToolsUser.php");
+		}
+		if($this->User==NULL) 
+		{
+			$this->Session = $this->Factory->CreateSession();
+			$this->Session->GetSessionValue(Config::SESS_USER, $this->User);
+			return Config::SUCCESS;
+		}
 	}
 	
 	protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, 
@@ -4456,106 +4476,6 @@ abstract class PageInfraTools extends Page
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::FORM_FIELD_ERROR;
 		}
-	}
-	
-	public function LoadPageInfraToolsDependenciesDebug()
-	{
-		if(isset($this->User))
-		{
-			if($this->User->CheckSuperUser())
-			{
-				if(!isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG]) && !isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG_HIDDEN]))
-					$this->Session->GetSessionValue(ConfigInfraTools::SESS_DEBUG, $this->InputValueHeaderDebug);
-				if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG]))
-				{
-					$this->InputValueHeaderDebug = ConfigInfraTools::CHECKBOX_CHECKED;
-					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_DEBUG, $this->InputValueHeaderDebug);
-				if($this->InputValueHeaderDebug == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
-					echo "<b>GET</b>: "; print_r($_GET); echo "<br>";
-					echo "<b>POST</b>: "; print_r($_POST); echo "<br>";
-					echo "<div class='DivClearFloat'></div>";
-				}
-			}
-		}
-	}
-	
-	public function LoadPageInfraToolsDependenciesDevice()
-	{
-		$this->InstanceMobileDetectInfraTools = $this->Factory->CreateMobileDetect();
-		if($this->InstanceMobileDetectInfraTools->isTablet()) 
-			$this->Device = Page::DEVICE_TABLET;
-		elseif ($this->InstanceMobileDetectInfraTools->isMobile())			
-			$this->Device = Page::DEVICE_MOBILE;
-		else $this->Device = Page::DEVICE_DESKTOP;
-		
-		if(!isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]) && !isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN]))
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
-		if($this->Device == Page::DEVICE_DESKTOP)
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
-			{
-				$this->Device = Page::DEVICE_MOBILE;
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_CHECKED;
-				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				
-			}
-			elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_UNCHECKED;
-			else
-			{
-				if($this->InputValueHeaderLayout == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->Device = Page::DEVICE_MOBILE;
-					$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				else $this->Device = Page::DEVICE_DESKTOP;
-			}
-		}
-		elseif($this->Device == Page::DEVICE_MOBILE)
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
-			{
-				$this->Device = Page::DEVICE_DESKTOP;
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_CHECKED;
-				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-			}
-			elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_UNCHECKED;
-			else
-			{
-				if($this->InputValueHeaderLayout == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->Device = Page::DEVICE_DESKTOP;
-					$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				else $this->Device = Page::DEVICE_MOBILE;
-			}
-		}
-		else
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
-			{
-				$this->Device = Page::DEVICE_DESKTOP;
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_CHECKED;
-				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-			}
-			elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_UNCHECKED;
-			else
-			{
-				if($this->InputValueHeaderLayout == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->Device = Page::DEVICE_DESKTOP;
-					$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				else $this->Device = Page::DEVICE_TABLET;
-			}
-		}
-		$this->Session->SetSessionValue(ConfigInfraTools::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
 	}
 }
 ?>

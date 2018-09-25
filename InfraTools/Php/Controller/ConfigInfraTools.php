@@ -330,10 +330,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_GENDER                                             = "FormFieldGender";
 	const FORM_FIELD_ID                                                 = "FormInputId";
-	const FORM_FIELD_HEADER_LAYOUT                                      = "FormFieldHeaderLayout";
-	const FORM_FIELD_HEADER_LAYOUT_HIDDEN                               = "FormFieldHeaderLayoutHidden";
-	const FORM_FIELD_HEADER_DEBUG                                       = "FormFieldHeaderDebug";
-	const FORM_FIELD_HEADER_DEBUG_HIDDEN                                = "FormFieldHeaderDebugHidden";
 	const FORM_FIELD_NEW_PASSWORD                                       = "FormFieldNewPassword";
 	const FORM_FIELD_RADIO_DEPARTMENT                                   = "FormFieldRadioDepartment";
 	const FORM_FIELD_RADIO_DEPARTMENT_NAME                              = "FormFieldRadioDepartmentName";
@@ -686,7 +682,6 @@ class ConfigInfraTools extends Config
 	const FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE                 = "FormUserViewTwoStepVerificationActivate";
 	const FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE               = "FormUserViewTwoStepVerificationDeactivate";
 	const FORM_USER_VIEW_UPDATE_SUBMIT                                  = "FormUserViewUpdateSubmit";
-	const LOG_OUT                                                       = "LogOut";
 	const MYSQL_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FAILED 
 		  = "RetMySqlAssocUserServiceCheckUserTypeAdministratorFailed";
 	const MYSQL_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FETCH_FAILED 
@@ -1137,6 +1132,8 @@ class ConfigInfraTools extends Config
 	public $PageServiceListEnabled                                  = TRUE;
 	public $PageServiceListByCorporationEnabled                     = TRUE;
 	public $PageServiceListByDepartmentEnabled                      = TRUE;
+	public $PageServiceListByTypeAssocUserServiceEnabled            = TRUE;
+	public $PageServiceListByTypeServiceEnabled                     = TRUE;
 	public $PageServiceListByUserEnabled                            = TRUE;
 	public $PageServiceRegisterEnabled                              = TRUE;
 	public $PageServiceSelectEnabled                                = TRUE;

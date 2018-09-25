@@ -77,8 +77,7 @@ class InfraToolsFacedePersistenceDepartment
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsDepartment = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectOnUserServiceContext)</b>  : " . 
-				             InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlDepartmentSelectOnUserServiceContext');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext());
@@ -132,8 +131,7 @@ class InfraToolsFacedePersistenceDepartment
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsDepartment = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectOnUserServiceContextNoLimit)</b>  : " . 
-				             InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlDepartmentSelectOnUserServiceContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContextNoLimit());

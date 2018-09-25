@@ -23,7 +23,7 @@ class PageAdminCountry extends PageAdmin
 	}
 	
 	/* Constructor */
-	protected function __construct($Language) 
+	public function __construct($Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		parent::__construct($Language);

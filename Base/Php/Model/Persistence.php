@@ -10,6 +10,7 @@ Dependencies:
 Description: 
 			Classe para armazenar queries a serem executadas no banco de dados.
 Methods: 
+			public static function ShowQuery$Query)
 			public static function SqlAssocUserCorporationDelete();
 			public static function SqlAssocUserCorporationInsert();
 			public static function SqlAssocUserCorporationUpdate();
@@ -128,6 +129,11 @@ class Persistence
 	private function __construct() 
     {
     }
+	
+	public static function ShowQuery($Query)
+	{
+		echo "<div class='DivPageDebugQuery'>Query ($Query):" . Persistence::$Query() . "</div>";
+	}
 	
 	public static function SqlAssocUserCorporationDelete()
 	{

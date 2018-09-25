@@ -1695,7 +1695,8 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase() . "<br>";
+				echo "<div class='DivPageDebugQuery'>Query: " 
+				       . InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase() . "</div>";
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase());
 			if($stmt != NULL)
 			{

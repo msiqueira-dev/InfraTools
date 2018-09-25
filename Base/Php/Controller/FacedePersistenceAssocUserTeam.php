@@ -32,20 +32,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("AssocUserTeam"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
-		include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserTeam');
-}
-
 class FacedePersistenceAssocUserTeam
 {	
 	/* Instance */
@@ -94,8 +80,7 @@ class FacedePersistenceAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserTeamDelete)</b> : " . 
-						 Persistence::SqlAssocUserTeamDelete() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserTeamDelete');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserTeamDelete());
 			if ($stmt)
 			{
@@ -134,8 +119,7 @@ class FacedePersistenceAssocUserTeam
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserTeamInsert)</b> : " . 
-						 Persistence::SqlAssocUserTeamInsert() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserTeamInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserTeamInsert());
 			if ($stmt)
 			{

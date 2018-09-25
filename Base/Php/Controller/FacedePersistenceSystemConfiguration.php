@@ -36,20 +36,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("SystemConfiguration"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
-		include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class SystemConfiguration');
-}
-
 class FacedePersistenceAssocUserResponsible
 {	
 	/* Instance */
@@ -99,7 +85,7 @@ class FacedePersistenceAssocUserResponsible
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlSystemConfigurationDeleteByOptionNumber() . "<br>";
+				Persistence::ShowQuery('SqlSystemConfigurationDeleteByOptionNumber');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlSystemConfigurationDeleteByOptionNumber());
 			if ($stmt)
 			{
@@ -146,8 +132,8 @@ class FacedePersistenceAssocUserResponsible
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlSystemConfigurationInsert() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlSqlTypeAssocUserTeamInsert());
+				Persistence::ShowQuery('SqlSystemConfigurationInsert');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlSystemConfigurationInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
@@ -183,7 +169,7 @@ class FacedePersistenceAssocUserResponsible
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlSystemConfigurationSelect() . "<br>";
+				Persistence::ShowQuery('SqlSystemConfigurationSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlSystemConfigurationSelect());
 			if($stmt != NULL)
 			{
@@ -236,7 +222,7 @@ class FacedePersistenceAssocUserResponsible
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlSystemConfigurationSelectByOptionDescription() . "<br>";
+				Persistence::ShowQuery('SqlSystemConfigurationSelectByOptionDescription');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlSystemConfigurationSelectByOptionDescription());
 			if($stmt != NULL)
 			{
@@ -283,7 +269,7 @@ class FacedePersistenceAssocUserResponsible
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlSystemConfigurationSelectByOptionNumber() . "<br>";
+				Persistence::ShowQuery('SqlSystemConfigurationSelectByOptionNumber');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlSystemConfigurationSelectByOptionNumber());
 			if($stmt != NULL)
 			{
@@ -332,7 +318,7 @@ class FacedePersistenceAssocUserResponsible
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlSystemConfigurationUpdateByOptionNumber() . "<br>";
+				Persistence::ShowQuery('SqlSystemConfigurationUpdateByOptionNumber');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlSystemConfigurationUpdateByOptionNumber());
 			if ($stmt)
 			{

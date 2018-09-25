@@ -35,20 +35,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("TypeTicket"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "TypeTicket.php"))
-		include_once(BASE_PATH_PHP_MODEL . "TypeTicket.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeTicket');
-}
-
 class FacedePersistenceTypeTicket
 {	
 	/* Instance */
@@ -98,7 +84,7 @@ class FacedePersistenceTypeTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketDelete() . "<br>";
+				Persistence::ShowQuery('SqlTypeTicketDelete');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketDelete());
 			if ($stmt)
 			{
@@ -145,7 +131,7 @@ class FacedePersistenceTypeTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketInsert() . "<br>";
+				Persistence::ShowQuery('SqlTypeTicketInsert');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketInsert());
 			if ($stmt)
 			{
@@ -182,7 +168,7 @@ class FacedePersistenceTypeTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketSelect() . "<br>";
+				Persistence::ShowQuery('SqlTypeTicketSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketSelect());
 			if($stmt != NULL)
 			{
@@ -235,7 +221,7 @@ class FacedePersistenceTypeTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketSelectByDescription() . "<br>";
+				Persistence::ShowQuery('SqlTypeTicketSelectByDescription');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketSelectByDescription());
 			if($stmt != NULL)
 			{
@@ -281,7 +267,7 @@ class FacedePersistenceTypeTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketSelectById() . "<br>";
+				Persistence::ShowQuery('SqlTypeTicketSelectById');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketSelectById());
 			if($stmt != NULL)
 			{
@@ -329,7 +315,7 @@ class FacedePersistenceTypeTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketUpdateById() . "<br>";
+				Persistence::ShowQuery('SqlTypeTicketUpdateById');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketUpdateById());
 			if ($stmt)
 			{

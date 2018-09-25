@@ -37,13 +37,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
 class FacedePersistenceTypeAssocUserRequesting
 {	
 	/* Instance */
@@ -92,8 +85,8 @@ class FacedePersistenceTypeAssocUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamDelete() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamDelete());
+				Persistence::ShowQuery('SqlTypeAssocUserRequestingDelete');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $TypeAssocUserTeamId);
@@ -132,8 +125,8 @@ class FacedePersistenceTypeAssocUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserTeamInsert() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamInsert());
+				Persistence::ShowQuery('SqlTypeAssocUserRequestingInsert');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
@@ -165,7 +158,7 @@ class FacedePersistenceTypeAssocUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserRequestingSelect() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserRequestingSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelect());
 			if($stmt != NULL)
 			{
@@ -217,7 +210,7 @@ class FacedePersistenceTypeAssocUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserRequestingSelectByTypeBond() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserRequestingSelectByTypeBond');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelectByTypeBond());
 			if($stmt != NULL)
 			{
@@ -263,7 +256,7 @@ class FacedePersistenceTypeAssocUserRequesting
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond() . "<br>";
+				Persistence::ShowQuery('SqlTypeAssocUserRequestingUpdateByTypeBond');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond());
 			if ($stmt)
 			{

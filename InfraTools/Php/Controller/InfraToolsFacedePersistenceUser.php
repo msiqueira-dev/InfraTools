@@ -81,8 +81,7 @@ class InfraToolsFacedePersistenceUser
 		$ArrayInstanceUser = array();
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlUserSelect)</b>  : " . 
-				             InfraToolsPersistence::SqlUserSelect() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelect');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelect());
@@ -185,8 +184,7 @@ class InfraToolsFacedePersistenceUser
 		$ArrayInstanceUser = array();
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlUserSelectByCorporation)</b>  : " . 
-				             InfraToolsPersistence::SqlUserSelectByCorporation() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByCorporation');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporation());
@@ -287,8 +285,7 @@ class InfraToolsFacedePersistenceUser
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlUserSelectByEmail)</b>  : " . 
-				             InfraToolsPersistence::SqlUserSelectByEmail() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByEmail');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByEmail());
@@ -368,8 +365,7 @@ class InfraToolsFacedePersistenceUser
 		$ArrayInstanceUser = array();
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlUserSelectByTypeUser)</b>  : " . 
-				             InfraToolsPersistence::SqlUserSelectByTypeUser() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeUser');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTypeUser());
@@ -469,8 +465,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlUserSelectByUserUniqueId)</b>  : " . 
-				             InfraToolsPersistence::SqlUserSelectByUserUniqueId() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByUserUniqueId');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByUserUniqueId());

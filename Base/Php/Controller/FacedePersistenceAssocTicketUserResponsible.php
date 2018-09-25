@@ -86,8 +86,7 @@ class FacedePersistenceAssocUserResponsible
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserResponsibleDeleteByTicketId)</b> : " . 
-						 Persistence::SqlAssocTicketUserResponsibleDeleteByTicketId() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserResponsibleDeleteByTicketId');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleDeleteByTicketId());
 			if ($stmt)
 			{
@@ -127,8 +126,7 @@ class FacedePersistenceAssocUserResponsible
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserResponsibleInsert)</b> : " . 
-						 Persistence::SqlAssocTicketUserResponsibleInsert() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserResponsibleInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleInsert());
 			if ($stmt)
 			{
@@ -161,8 +159,7 @@ class FacedePersistenceAssocUserResponsible
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserResponsibleSelect)</b> : " . 
-						 Persistence::SqlAssocTicketUserResponsibleSelect() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserResponsibleSelect');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleSelect());
 			if($stmt != NULL)
 			{
@@ -214,8 +211,7 @@ class FacedePersistenceAssocUserResponsible
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocTicketUserResponsibleSelectByTicketId)</b> : " . 
-						 Persistence::SqlAssocTicketUserResponsibleSelectByTicketId() . "<br>";
+				Persistence::ShowQuery('SqlAssocTicketUserResponsibleSelectByTicketId');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleSelectByTicketId());
 			if($stmt != NULL)
 			{
@@ -262,9 +258,8 @@ class FacedePersistenceAssocUserResponsible
 		if($MySqlConnection  != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlTypeAssocUserTeamUpdateById)</b> : " . 
-						 Persistence::SqlTypeAssocUserTeamUpdateById() . "<br>";
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamUpdateById());
+				Persistence::ShowQuery('SqlAssocTicketUserResponsibleUpdateByTicketId');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleUpdateByTicketId());
 			if ($stmt)
 			{
 				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserTeamId);

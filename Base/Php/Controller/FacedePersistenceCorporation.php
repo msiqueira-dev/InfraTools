@@ -38,13 +38,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
 class FacedePersistenceCorporation
 {	
 	/* Instance */
@@ -93,8 +86,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationDelete)</b> : " . 
-						 Persistence::SqlCorporationDelete() . "<br>";
+				Persistence::ShowQuery('SqlCorporationDelete');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationDelete());
 			if ($stmt)
 			{
@@ -133,8 +125,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationInsert)</b> : " . 
-						 Persistence::SqlCorporationInsert() . "<br>";
+				Persistence::ShowQuery('SqlCorporationInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationInsert());
 			if ($stmt)
 			{
@@ -166,8 +157,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationSelect)</b> : " . 
-						 Persistence::SqlCorporationSelect() . "<br>";
+				Persistence::ShowQuery('SqlCorporationSelect');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelect());
 			if($stmt != NULL)
 			{
@@ -219,8 +209,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationSelectActive)</b> : " . 
-						 Persistence::SqlCorporationSelectActive() . "<br>";
+				Persistence::ShowQuery('SqlCorporationSelectActive');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelectActive());
 			if($stmt != NULL)
 			{
@@ -272,8 +261,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationSelectActiveNoLimit)</b> : " . 
-						 Persistence::SqlCorporationSelectActiveNoLimit() . "<br>";
+				Persistence::ShowQuery('SqlCorporationSelectActiveNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectActiveNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
@@ -305,8 +293,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationSelectByName)</b> : " . 
-						 Persistence::SqlCorporationSelectByName() . "<br>";
+				Persistence::ShowQuery('SqlCorporationSelectByName');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelectByName());
 			if($stmt != NULL)
 			{
@@ -353,8 +340,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationSelectNoLimit)</b> : " . 
-						 Persistence::SqlCorporationSelectNoLimit() . "<br>";
+				Persistence::ShowQuery('SqlCorporationSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
@@ -385,8 +371,7 @@ class FacedePersistenceCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationUpdateByName)</b> : " . 
-						 Persistence::SqlCorporationUpdateByName() . "<br>";
+				Persistence::ShowQuery('SqlCorporationUpdateByName');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationUpdateByName());
 			if ($stmt)
 			{

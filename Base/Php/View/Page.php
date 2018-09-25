@@ -13,12 +13,15 @@ Description:
 			Classe que lida com páginas, transição de páginas, URL, Domínios
             dentre outras funcionalidades ligadas a uma página Web.
 			Padroes: Singleton.
+Get / Set:		
+			public function GetPageLoadTime();
 Methods: 
 		abstract protected function GetCurrentPage();
 		abstract protected function LoadHtml();
 		private       function        CheckPostLanguage();
 		private       function        ExecuteLoginFirstPhaseVerification();
 		private       function        ExecuteLoginSecondPhaseVerirication();
+		private       function        LoadInstanceUser();
 		private       function        SendTwoStepVerificationCode($Email, $Name);
 		protected     function        CorporationDelete($CorporationName, $Debug);
 		protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
@@ -51,7 +54,11 @@ Methods:
 		public        function        IncludeHeadGeneric();
 		public        function        IncludeHeadJavaScript();
 		public        function        LoadPageDependencies();
+		public        function        LoadPageDependenciesDebug();
+		public        function        LoadPageDependenciesDevice();
 		public        function        RedirectPage($Page);
+		public        function        StartPageLoadTime();
+		public        function        StopPageLoadTime();
 		public static function        AlertMessage($Message);
 		public static function        GetCurrentDomain(&$currentDomain);
 		public static function        GetCurrentDomainWithPort(&$currentDomain);
@@ -109,9 +116,10 @@ abstract class Page
 	protected $User                 = NULL;
 	
 	/* Properties */
+	protected $Language                                             = NULL;
 	protected $PageEnabled                                          = NULL;
 	protected $PageCheckLogin                                       = NULL;
-	protected $Language                                             = NULL;
+	protected $PageLoadTime                                         = NULL;
 	public    $InputValueCorporationActive                          = "";
 	public    $InputValueCorporationName                            = "";
 	public    $InputValueDepartmentActive                           = "";
@@ -142,7 +150,7 @@ abstract class Page
         if (!isset(self::$Instance)) 
 		{
             $class = __CLASS__;
-            self::$Instance = new $class;
+            self::$Instance = new $class($Language);
         }
         return self::$Instance;
     }
@@ -168,12 +176,12 @@ abstract class Page
 		}
 		else $this->PageEnabled = FALSE;
 		//LOG OUT
-		if(isset($_POST[ConfigInfraTools::POST_BACK_FORM]))
+		if(isset($_POST[Config::POST_BACK_FORM]))
 		{
-			if ($_POST[ConfigInfraTools::POST_BACK_FORM] == ConfigInfraTools::LOG_OUT)
+			if ($_POST[Config::POST_BACK_FORM] == Config::FORM_FIELD_HEADER_LOG_OUT)
 			{
 				$this->Session->DestroyCustomSession();
-			$this->User = NULL;
+				$this->User = NULL;
 			}
 		}
     }
@@ -187,6 +195,12 @@ abstract class Page
 	/* Variaveis de classe */
 	protected $ArrayHeadText   = NULL;
 	protected $Device          = NULL;
+	
+	/* GET */
+	public function GetPageLoadTime()
+	{
+		return $this->PageLoadTime;
+	}
 	
 	/* Métodos */
 	abstract protected function GetCurrentPage();
@@ -323,6 +337,23 @@ abstract class Page
 			$this->Session->RemoveSessionVariable(Config::SESS_USER);
 			$this->Session->RemoveSessionVariable(Config::SESS_DEBUG);
 		}
+	}
+	
+	private function LoadInstanceUser()
+	{
+		if($this->User==NULL) 
+		{
+			if (!class_exists("User"))
+			{
+				if(file_exists(BASE_PATH_PHP_MODEL . "User.php"))
+					include_once(BASE_PATH_PHP_MODEL . "User.php");
+				else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
+			}
+			if($this->Session->GetSessionValue(Config::SESS_USER, $this->User) == Config::SUCCESS)
+				return Config::SUCCESS;
+			else return Config::ERROR;
+		}
+		else return Config::SUCCESS;
 	}
 	
 	private function SendTwoStepVerificationCode($Email, $Name)
@@ -652,15 +683,7 @@ abstract class Page
 			}
 			else return Config::USER_NOT_CONFIRMED;
 		}
-		else
-		{
-			if($this->Session->GetSessionValue(Config::SESS_USER, $user) == Config::SUCCESS)
-			{
-				$this->User = $user;
-				return Config::SUCCESS;
-			}
-			else return Config::USER_NOT_LOGGED_IN;
-		}
+		else return Config::USER_NOT_LOGGED_IN;
 	}
 	
 	public function CheckLogin()
@@ -803,8 +826,69 @@ abstract class Page
 		$this->Session->GetSessionValue(Config::SESS_LANGUAGE, $this->Language);
 		$this->InstanceLanguageText = LanguageInfraTools::__create($this->Language);
 		if($this->InstanceLanguageText != NULL)
+		{
+			$this->LoadInstanceUser();
+			$this->LoadPageDependenciesDevice();
+			$this->LoadPageDependenciesDebug();
 			return Config::SUCCESS;
+		}
 		else return self::ERROR_LANGUAGE_INSTANCE_NOT_CREATED;
+	}
+	
+	public function LoadPageDependenciesDebug()
+	{
+		if(isset($this->User))
+		{
+			if($this->User->CheckSuperUser())
+			{
+				if(!isset($_POST[Config::FORM_FIELD_HEADER_DEBUG]) && !isset($_POST[Config::FORM_FIELD_HEADER_DEBUG_HIDDEN]))
+					$this->Session->GetSessionValue(Config::SESS_DEBUG, $this->InputValueHeaderDebug);
+				if($this->InputValueHeaderDebug == Config::CHECKBOX_CHECKED || isset($_POST[Config::FORM_FIELD_HEADER_DEBUG]))
+				{
+					$this->StartPageLoadTime();
+					$this->InputValueHeaderDebug = Config::CHECKBOX_CHECKED;
+					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
+					echo "<div class='DivPageDebug'>";
+					echo "<div class='DivPageDebugContent'><b>GET</b>: "; print_r($_GET);  echo "</div>";
+					echo "<div class='DivPageDebugContent'><b>POST</b>: "; print_r($_POST); echo "</div></div>";
+					echo "<div class='DivClearFloat'></div>";
+				}
+				$this->Session->SetSessionValue(Config::SESS_DEBUG, $this->InputValueHeaderDebug);
+			}
+		}
+	}
+	
+	public function LoadPageDependenciesDevice()
+	{
+		$this->InstanceMobileDetect = $this->Factory->CreateMobileDetect();
+		if($this->InstanceMobileDetect->isTablet()) 
+			$this->Device = Page::DEVICE_TABLET;
+		elseif ($this->InstanceMobileDetect->isMobile())			
+			$this->Device = Page::DEVICE_MOBILE;
+		else $this->Device = Page::DEVICE_DESKTOP;
+		
+		if(!isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT]) && !isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT_HIDDEN]))
+			$this->Session->GetSessionValue(Config::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
+		
+		if(isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT]))
+		{
+			$this->Device = Page::DEVICE_MOBILE;
+			$this->InputValueHeaderLayout = Config::CHECKBOX_CHECKED;
+			$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
+
+		}
+		elseif(isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
+			$this->InputValueHeaderLayout = Config::CHECKBOX_UNCHECKED;
+		else
+		{
+			if($this->InputValueHeaderLayout == Config::CHECKBOX_CHECKED)
+			{
+				$this->Device = Page::DEVICE_MOBILE;
+				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
+			}
+			else $this->Device = Page::DEVICE_DESKTOP;
+		}
+		$this->Session->SetSessionValue(Config::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
 	}
 	
 	public function LoadNotConfirmedToolTip()
@@ -829,6 +913,21 @@ abstract class Page
 			else return Config::EMPTY_AMBIENT_VARIABLE;
 		}
 		else header("Location: $Page");
+	}
+	
+	public function StartPageLoadTime()
+	{
+		$time = microtime();
+		$time = explode(' ', $time);
+		$this->PageLoadTime = $time[1] + $time[0];
+	}
+	
+	public function StopPageLoadTime()
+	{
+		$time = microtime();
+		$time = explode(' ', $time);
+		$time = $time[1] + $time[0];
+		$this->PageLoadTime = round(($time - $this->PageLoadTime), 4);
 	}
 	
 	public static function AlertMessage($Message)

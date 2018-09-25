@@ -36,20 +36,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("TypeUser"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "TypeUser.php"))
-		include_once(BASE_PATH_PHP_MODEL . "TypeUser.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeUser');
-}
-
 class FacedePersistenceTypeUser
 {	
 	/* Instance */
@@ -99,7 +85,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserDelete() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserDelete');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserDelete());
 			if ($stmt)
 			{
@@ -146,7 +132,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserInsert() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserInsert');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserInsert());
 			if ($stmt)
 			{
@@ -183,7 +169,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserSelect() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserSelect');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelect());
 			if($stmt != NULL)
 			{
@@ -238,7 +224,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserSelectNoLimit() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserSelectNoLimit');
 			if($result = $mySqlConnection->query(Persistence::SqlTypeUserSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
@@ -271,7 +257,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserSelectByDescription() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserSelectByDescription');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelectByDescription());
 			if($stmt != NULL)
 			{
@@ -318,7 +304,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserSelectById() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserSelectById');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelectById());
 			if($stmt != NULL)
 			{
@@ -366,7 +352,7 @@ class FacedePersistenceTypeUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeUserUpdateById() . "<br>";
+				Persistence::ShowQuery('SqlTypeUserUpdateById');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserUpdateById());
 			if ($stmt)
 			{

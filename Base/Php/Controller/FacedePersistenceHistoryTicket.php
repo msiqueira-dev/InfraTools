@@ -35,20 +35,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("HistoryTicket"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Ticket.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Ticket.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Ticket');
-}
-
 class FacedePersistenceHistoryTicket
 {	
 	/* Instance */
@@ -98,8 +84,8 @@ class FacedePersistenceHistoryTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketDelete() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketDelete());
+				Persistence::ShowQuery('SqlHistoryTicketDelete');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $TypeTicketId);
@@ -145,8 +131,8 @@ class FacedePersistenceHistoryTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketInsert() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketInsert());
+				Persistence::ShowQuery('SqlHistoryTicketInsert');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TypeTicketDescription);
@@ -182,8 +168,8 @@ class FacedePersistenceHistoryTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketSelect() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketSelect());
+				Persistence::ShowQuery('SqlHistoryTicketSelect');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
@@ -235,8 +221,8 @@ class FacedePersistenceHistoryTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketSelectByDescription() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketSelectByDescription());
+				Persistence::ShowQuery('SqlHistoryTicketSelectByDescription');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketSelectByDescription());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $TypeTicketDescription);
@@ -281,8 +267,8 @@ class FacedePersistenceHistoryTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketSelectById() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketSelectById());
+				Persistence::ShowQuery('SqlHistoryTicketSelectById');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketSelectById());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("i", $TypeTicketId);
@@ -329,8 +315,8 @@ class FacedePersistenceHistoryTicket
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlTypeTicketUpdateById() . "<br>";
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketUpdateById());
+				Persistence::ShowQuery('SqlHistoryTicketUpdateById');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketUpdateById());
 			if ($stmt)
 			{
 				$stmt->bind_param("si", $TypeTicketDescription, $TypeTicketId);

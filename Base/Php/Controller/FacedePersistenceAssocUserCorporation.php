@@ -81,8 +81,7 @@ class FacedePersistenceAssocUserCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserCorporationDelete)</b> : " . 
-						 Persistence::SqlAssocUserCorporationDelete() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserCorporationDelete');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationDelete());
 			if ($stmt)
 			{
@@ -122,8 +121,7 @@ class FacedePersistenceAssocUserCorporation
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserCorporationInsert)</b> : " . 
-						 Persistence::SqlAssocUserCorporationInsert() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserCorporationInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationInsert());
 			if ($stmt)
 			{

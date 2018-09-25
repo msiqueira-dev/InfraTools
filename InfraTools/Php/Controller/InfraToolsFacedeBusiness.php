@@ -1102,7 +1102,8 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		                 . "</br><b> " 
 			             . $Password . "</b>";
 		$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-						                $configInfraTools->DefaultEmailNoReplyFormAddress, 
+						                $configInfraTools->DefaultEmailNoReplyFormAddress,
+										$configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
 						                $configInfraTools->DefaultEmailNoReplyFormPassword, 
 	                                    $EmailAddress, $subject, $body);
 		if($return == ConfigInfraTools::SUCCESS)
@@ -1145,7 +1146,8 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				       $EmailAddress . "<br><br><br><b>Content</b>:<br>" . 
 				       $Message;
 			$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-							                $configInfraTools->DefaultEmailNoReplyFormAddress, 
+							                $configInfraTools->DefaultEmailNoReplyFormAddress,
+											$configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
 							                $configInfraTools->DefaultEmailNoReplyFormPassword, 
 							                $EmailAddress, $subject, $body);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -1189,7 +1191,8 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			$body    = $this->Language->GetText('PASSWORD_RECOVERY_EMAIL_TEXT') . "</br><b> " . 
 				       $ResetCode . "</b>";
 			$return = $InstanceBaseEmail->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-							 $configInfraTools->DefaultEmailNoReplyFormAddress, 
+							 $configInfraTools->DefaultEmailNoReplyFormAddress,
+							 $configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
 							 $configInfraTools->DefaultEmailNoReplyFormPassword, 
 							 $EmailAddress, $subject, $body);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -1216,7 +1219,8 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			       $this->Language->GetText('REGISTER_EMAIL_TEXT') . "</br><b> " .
 			       $Link . "</b>";
 		$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-						 $configInfraTools->DefaultEmailNoReplyFormAddress, 
+						 $configInfraTools->DefaultEmailNoReplyFormAddress,
+						 $configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
 						 $configInfraTools->DefaultEmailNoReplyFormPassword, 
 	                     $EmailAddress, $subject, $body);
 		if($return == ConfigInfraTools::SUCCESS)

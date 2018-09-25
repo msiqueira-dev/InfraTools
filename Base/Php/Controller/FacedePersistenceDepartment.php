@@ -46,20 +46,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Department"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Department.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Department.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Department');
-}
-
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
 class FacedePersistenceDepartment
 {	
 	/* Instance */
@@ -108,8 +94,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentDelete)</b> : " . 
-						 Persistence::SqlDepartmentDelete() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentDelete');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentDelete());
 			if ($stmt)
 			{
@@ -148,8 +133,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentInsert)</b> : " . 
-						 Persistence::SqlDepartmentInsert() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentInsert());
 			if ($stmt)
 			{
@@ -183,8 +167,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelect)</b> : " . 
-						 Persistence::SqlDepartmentSelect() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentSelect');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelect());
 			if($stmt != NULL)
 			{
@@ -240,8 +223,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectByCorporation)</b> : " . 
-						 Persistence::SqlDepartmentSelectByCorporation() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentSelectByCorporation');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporation());
 			if($stmt != NULL)
 			{
@@ -288,8 +270,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectByCorporationNoLimit)</b> : " . 
-						 Persistence::SqlDepartmentSelectByCorporationNoLimit() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentSelectByCorporationNoLimit');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationNoLimit());
 			if($stmt != NULL)
 			{
@@ -335,8 +316,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectByDepartmentName)</b> : " . 
-						 Persistence::SqlDepartmentSelectByDepartmentName() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentSelectByDepartmentName');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentName());
 			if($stmt != NULL)
 			{
@@ -392,8 +372,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectByDepartmentNameAndCorporationName)</b> : " . 
-						 Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentSelectByDepartmentNameAndCorporationName');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName());
 			if($stmt != NULL)
 			{
@@ -440,8 +419,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectNoLimit)</b> : " . 
-						 Persistence::SqlDepartmentSelectNoLimit() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlDepartmentSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
@@ -478,8 +456,7 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{ 
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentUpdateDepartmentByDepartmentAndCorporation)</b> : " . 
-						 Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation() . "<br>";
+				Persistence::ShowQuery('SqlDepartmentUpdateDepartmentByDepartmentAndCorporation');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation());
 			if ($stmt)
 			{
@@ -519,9 +496,8 @@ class FacedePersistenceDepartment
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlCorporationUpdateByName)</b> : " . 
-						 Persistence::SqlCorporationUpdateByName() . "<br>";
-			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationUpdateByName());
+				Persistence::ShowQuery('SqlDepartmentUpdateCorporationByCorporationAndDepartment');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentUpdateCorporationByCorporationAndDepartment());
 			if ($stmt)
 			{
 				$stmt->bind_param("sss", $DepartmentName, $CorporationNameNew, $CorporationNameOld);

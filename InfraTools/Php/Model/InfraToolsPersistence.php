@@ -10,6 +10,7 @@ Dependencies:
 Description: 
 			Classe para armazenar queries a serem executadas no banco de dados.
 Methods:
+		public static function ShowQueryInfraTools($Query);
 		public static function SqlAssocUserServiceCheckUserTypeAdministrator();
 		public static function SqlAssocUserServiceDeleteByAssocUserServiceServiceId();
 		public static function SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail();
@@ -87,6 +88,11 @@ class InfraToolsPersistence extends Persistence
 	private function __construct() 
     {
     }
+	
+	public static function ShowQueryInfraTools($Query)
+	{
+		echo "<div class='DivPageDebugQuery'>Query ($Query):" . InfraToolsPersistence::$Query() . "</div>";
+	}
 	
 	public static function SqlAssocUserServiceCheckUserTypeAdministrator()
 	{

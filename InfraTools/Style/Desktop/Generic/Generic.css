@@ -18,6 +18,10 @@ textarea{resize:none;}
 .DivClearFloat{width:0px;height:0px;clear:both;}
 .DivDisplayNone{display:none;}
 .DivContentBody{width:950px;min-height:200px;}
+.DivPageDebug{height:auto;position:static;top:15px;left:0;;width:100%;}
+.DivPageDebugContent{height:auto;position:static;top:0;left:0;;width:100%;color:black;}
+.DivPageDebugQuery{height:auto;position:static;top:45px;left:0;width:100%;color:black;}
+.DivPageLoadTime{height:45px;position:fixed;top:97.5%;left:87%;width:100%;color:orangered;font-size:16px;}
 .Hidden{display:none;}
 .InputBeforeText{color:#CCC;}
 .InputAfterText{color:#000000;}

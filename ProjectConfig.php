@@ -148,6 +148,14 @@ class ProjectConfig
 	public static $EmailNoReplyAccount = "";
 	
 	/*
+		E-MAIL NO REPLY ACCOUNT REPLY TO
+		Description: The default account name for the e-mails sent by the system automatic messages
+		Examples:
+			EmailNoReplyAccount = "Support InfraTools";
+	*/
+	public static $EmailNoReplyAccountReplyTo = "";
+	
+	/*
 		E-MAIL NO REPLY PASSWORD
 		Description: The no reply e-mail account's password to send system e-mails.
 		             If you are using gmail, for example, i would recommend you to claim an app password,

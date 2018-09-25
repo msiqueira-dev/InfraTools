@@ -37,20 +37,6 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("Notification"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Notification.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
-}
-
 class FacedePersistenceNotification
 {	
 	/* Instance */
@@ -100,7 +86,7 @@ class FacedePersistenceNotification
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlNotificationDeleteByText() . "<br>";
+				Persistence::ShowQuery('SqlNotificationDeleteByText');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlNotificationDeleteByText());
 			if ($stmt)
 			{
