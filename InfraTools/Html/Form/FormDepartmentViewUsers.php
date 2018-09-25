@@ -1,6 +1,6 @@
 <!-- FORM DEPARTMENT VIEW USERS -->
 <?php
-if(is_array($this->ArrayInstanceInfraToolsDepartmentUsers))
+if(is_array($this->ArrayInstanceDepartmentUsers))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -47,7 +47,7 @@ if(is_array($this->ArrayInstanceInfraToolsDepartmentUsers))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceInfraToolsDepartmentUsers as $key=>$user)
+	foreach($this->ArrayInstanceDepartmentUsers as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
@@ -69,8 +69,8 @@ if(is_array($this->ArrayInstanceInfraToolsDepartmentUsers))
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-										 id='"   . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
+						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION . "' 
+										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION . "' 
 										 value='" . $user->GetCorporationName() . "' 
 										 title='" . $user->GetCorporationName() . "' />
 					</form>

@@ -32,20 +32,23 @@ Methods:
 		protected     function        CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
 		protected     function        CorporationSelectByName($CorporationName, &$InstanceCorporation, $Debug);
 		protected     function        CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
+		protected     function        CorporationSelectUsers($Limit1, $Limit2, &$RowCount);
 		protected     function        CorporationUpdate($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug);
 		protected     function        CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug);
 		protected     function        DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
 		protected     function        DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
+		protected     function        DepartmentLoadData();
 		protected     function        DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
 		protected     function        DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
 													                &$ArrayInstanceDepartment, &$RowCount, $Debug);
 		protected     function        DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-																		                 &$DepartmentInstance, $Debug);
+																		                 &$InstanceDepartment, $Debug);
 		protected     function        DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug);
-		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName,$DepartmentInitaisl,
-																			        $DepartmentNameNew, $DepartmentNameOld, $Debug);
+		protected     function        DepartmentSelectUsers($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
+		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew,$DepartmentNameNew, 
+		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
 																			         $CorporationNameOld, $Debug);
 		public        function        CheckInputImage($Input);
@@ -109,11 +112,11 @@ abstract class Page
 	const REQUEST_URI = "REQUEST_URI";
 	
 	/* Instância usadas nessa classe */
-	protected $InstanceLanguageText = NULL;
-	protected $Session              = NULL;
-	protected $Factory              = NULL;
-	protected $Config               = NULL;
-	protected $User                 = NULL;
+	protected $InstanceLanguageText                   = NULL;
+	protected $Session                                = NULL;
+	protected $Factory                                = NULL;
+	protected $Config                                 = NULL;
+	protected $User                                   = NULL;
 	
 	/* Properties */
 	protected $Language                                             = NULL;
@@ -661,6 +664,336 @@ abstract class Page
 							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return Config::ERROR;
 		}
+	}
+	
+	protected function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug)
+	{
+		$this->InputValueDepartmentName = $DepartmentName;
+		$this->InputValueDepartmentInitials = $DepartmentInitials;
+		$this->InputValueCorporationName = $CorporationName;
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$arrayElements = array(); $arrayElementsClass = array(); $arrayElementsDefaultValue = array(); $arrayElementsForm = array();
+		$arrayElementsInput = array(); $arrayElementsMinValue = array(); $arrayElementsMaxValue = array();
+		$arrayElementsNullable = array(); $arrayElementsText = array(); $arrayConstants = array(); $matrixConstants = array();
+		
+		//VALIDATE DEPARTMENT_INITIALS
+		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_INITIALS;
+		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
+		$arrayElementsInput[0]        = $this->InputValueDepartmentInitials; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 8; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnDepartmentInitialsText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_INITIALS', 'FORM_INVALID_DEPARTMENT_INITIALS_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//VALIDATE DEPARTMENT_NAME
+		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[1] = "";
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME; 
+		$arrayElementsInput[1]        = $this->InputValueDepartmentName;
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 80; 
+		$arrayElementsNullable[1]     = FALSE; 
+		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+        //VALIDATE CORPORATION_NAME
+		$arrayElements[2]             = Config::FORM_FIELD_CORPORATION_NAME;
+		$arrayElementsClass[2]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[2]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 45; 
+		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsText[2]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->DepartmentInsert($this->InputValueCorporationName,
+														   $this->InputValueDepartmentInitials,
+														   $this->InputValueDepartmentName, 
+														   $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_REGISTER_SUCCESS', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS',
+																			$this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				return Config::WARNING;
+			}
+		}
+		if($return != Config::SUCCESS)
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_REGISTER_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+	}
+	
+	protected function DepartmentLoadData($InstanceDepartment)
+	{
+		if($InstanceDepartment != NULL)
+		{
+			$this->InputValueCorporationName     = $InstanceDepartment->GetDepartmentCorporationName();
+			$this->InputValueDepartmentInitials  = $InstanceDepartment->GetDepartmentInitials();
+			$this->InputValueDepartmentName      = $InstanceDepartment->GetDepartmentName();
+			$this->InputValueRegisterDate        = $InstanceDepartment->GetRegisterDate();
+			return Config::SUCCESS;
+		}
+		else return Config::ERROR;
+	}
+	
+	protected function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueDepartmentName = $DepartmentName;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_DEPARTMENT_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $arrayOptions);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
+																		   $ArrayInstanceDepartment, 
+																		   $Debug);
+			if($return == Config::SUCCESS)
+				return $return;
+			else
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::FORM_FIELD_ERROR;
+		}
+	}
+	
+	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
+																		  &$InstanceDepartment, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueCorporationName = $CorporationName;
+		$this->InputValueDepartmentName = $DepartmentName;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_CORPORATION_SELECT
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_DEPARTMENT_NAME
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 80; 
+		$arrayElementsNullable[1]     = TRUE;
+		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants);
+		
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$return = $FacedePersistenceInfraTools->DepartmentSelectByDepartmentNameAndCorporationName(
+				                                                                     $this->InputValueCorporationName, 
+																				     $this->InputValueDepartmentName,
+																		             $InstanceDepartment, 
+																		             $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+				return $return;
+			}
+			else
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
+				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return ConfigInfraTools::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return ConfigInfraTools::FORM_FIELD_ERROR;
+		}
+	}
+	
+	protected function DepartmentSelectUsers($CorporationName, $DepartmentName, $Limit1, $Limit2, 
+											 &$ArrayInstanceDepartmentUsers, &$RowCount, $Debug)
+	{
+		$ArrayInstanceDepartmentUsers = NULL;
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $FacedePersistence->UserSelectByDepartment($DepartmentName, $Limit1, $Limit2,
+			                                                 $ArrayInstanceDepartmentUsers, $RowCount, 
+															 $Debug);
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		else
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_SELECT_USERS_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+	}
+	
+	protected function DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew, $DepartmentNameNew, 
+																			&$InstanceDepartment, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueDepartmentInitials = $DepartmentInitialsNew;
+		$this->InputValueDepartmentName  = $DepartmentNameNew;
+		$this->InputFocus = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//DEPARTMENT_INITIALS
+		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_INITIALS;
+		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
+		$arrayElementsInput[0]        = $this->InputValueDepartmentInitials; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 8; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnDepartmentInitialsText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_INITIALS', 'FORM_INVALID_DEPARTMENT_INITIALS_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//DEPARTMENT_NAME
+		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 80; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'ADMIN_DEPARTMENT_INVALID_NAME', 'ADMIN_DEPARTMENT_INVALID_NAME_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->DepartmentUpdateDepartmentByDepartmentAndCorporation(
+															   $InstanceDepartment->GetDepartmentCorporationName(),
+															   $this->InputValueDepartmentInitials,
+															   $this->InputValueDepartmentName,
+															   $InstanceDepartment->GetDepartmentName(), 
+															   $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$InstanceDepartment->SetDepartmentInitials($this->InputValueDepartmentInitials);
+				$InstanceDepartment->SetDepartmentName($this->InputValueDepartmentName);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_UPDATE_SUCCESS', 
+																				$this->Language);
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
+			}
+			else
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_UPDATE_ERROR', 
+																				$this->Language);
+				return Config::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}	
 	}
 	
 	public function CheckInputImage($Input)

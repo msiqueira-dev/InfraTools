@@ -19,10 +19,6 @@ Methods:
 	                                                                 &$RowCount, $Debug)
 			protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation,
 			                                                                $Debug);
-			protected function CorporationSelectUsers($Limit1, $Limit2, &$RowCount);
-			protected function DepartmentLoadData();
-			protected function DepartmentSelectByDepartmentName($DepartmentName);
-			protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName);
 			protected function DepartmentSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
@@ -164,7 +160,6 @@ if (!class_exists("Page"))
 abstract class PageInfraTools extends Page
 {
 	/* Instância usadas nessa classe */
-	public    $ArrayInstanceDepartment          = NULL;
 	protected $FacedeBusinessInfraTools         = NULL;
 	protected $InstanceMobileDetectInfraTools   = NULL;
 	protected $Session                          = NULL;
@@ -464,138 +459,6 @@ abstract class PageInfraTools extends Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	protected function DepartmentLoadData()
-	{
-		if($this->InstanceDepartment != NULL)
-		{
-			$this->InputValueCorporationName     = $this->InstanceDepartment->GetDepartmentCorporationName();
-			$this->InputValueDepartmentInitials  = $this->InstanceDepartment->GetDepartmentInitials();
-			$this->InputValueDepartmentName      = $this->InstanceDepartment->GetDepartmentName();
-			$this->InputValueRegisterDate        = $this->InstanceDepartment->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	protected function DepartmentSelectByDepartmentName($DepartmentName)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueDepartmentName = $DepartmentName;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 80; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
-																		             $this->ArrayInstanceDepartment, 
-																		             $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-				return $return;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueCorporationName = $CorporationName;
-		$this->InputValueDepartmentName = $DepartmentName;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_CORPORATION_SELECT
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT;
-		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 80; 
-		$arrayElementsNullable[0]     = TRUE;
-		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
-		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 80; 
-		$arrayElementsNullable[1]     = TRUE;
-		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
-		
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->DepartmentSelectByDepartmentNameAndCorporationName(
-				                                                                     $this->InputValueCorporationName, 
-																				     $this->InputValueDepartmentName,
-																		             $this->InstanceDepartment, 
-																		             $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, $this->InstanceDepartment);
-				return $return;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
 		}
 	}
 	

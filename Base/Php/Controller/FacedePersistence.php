@@ -72,7 +72,7 @@ Functions:
 																			   $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug,
 			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName,$DepartmentInitaisl,
+			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
 			                                                                     $DepartmentNameNew, $DepartmentNameOld, $Debug,
 																				 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
@@ -629,9 +629,8 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitials, $DepartmentNameNew, 
-																		 $DepartmentNameOld, $Debug, $MySqlConnection = NULL,
-																		 $CloseConnectaion = FALSE)
+	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
+																		 $DepartmentNameNew, $DepartmentNameOld, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
@@ -639,7 +638,7 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName,
-																								         $DepartmentInitials,
+																								         $DepartmentInitialsNew,
 																								         $DepartmentNameNew, 
 																										 $DepartmentNameOld, 
 																		                                 $Debug,

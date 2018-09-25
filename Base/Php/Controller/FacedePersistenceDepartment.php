@@ -24,7 +24,7 @@ Functions:
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
 			                                                                   &$DepartmentInstance, $Debug, $MySqlConnection);
 			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection);
-			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitials,
+			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
 			                                                                     $DepartmentNameNew, $DepartmentNameOld, 
 																				 $Debug, $MySqlConnection);
 			public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName,
@@ -449,8 +449,9 @@ class FacedePersistenceDepartment
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitials, $DepartmentNameNew, 
-																		 $DepartmentNameOld, $Debug, $MySqlConnection)
+	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
+																		 $DepartmentNameNew, $DepartmentNameOld, $Debug,
+																		 $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -460,7 +461,7 @@ class FacedePersistenceDepartment
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentUpdateDepartmentByDepartmentAndCorporation());
 			if ($stmt)
 			{
-				$stmt->bind_param("ssss", $DepartmentInitials, $DepartmentNameNew, $DepartmentNameOld, $CorporationName);
+				$stmt->bind_param("ssss", $DepartmentInitialsNew, $DepartmentNameNew, $DepartmentNameOld, $CorporationName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{

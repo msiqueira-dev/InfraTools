@@ -69,8 +69,8 @@ if(is_array($this->ArrayInstanceInfraToolsTypeUserUsers))
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-										 id='"   . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
+						<input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_SELECT_CORPORATION . "' 
+										 id='"   . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_SELECT_CORPORATION . "' 
 										 value='" . $user->GetCorporationName() . "' 
 										 title='" . $user->GetCorporationName() . "' />
 					</form>

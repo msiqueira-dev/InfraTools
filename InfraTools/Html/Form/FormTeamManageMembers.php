@@ -81,8 +81,8 @@ if(is_array($this->ArrayTeamMembers))
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS . "' method='post' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-										 id='"   . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
+						<input type='submit' name='" . ConfigInfraTools::FORM_TEAM_VIEW_USERS_SELECT_CORPORATION . "' 
+										 id='"   . ConfigInfraTools::FORM_TEAM_VIEW_USERS_SELECT_CORPORATION . "' 
 										 value='" . $user->GetCorporationName() . "' 
 										 title='" . $user->GetCorporationName() . "' />
 					</form>
