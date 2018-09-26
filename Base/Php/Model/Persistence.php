@@ -29,8 +29,8 @@ Methods:
 			public static function SqlDepartmentDelete();
 			public static function SqlDepartmentInsert();
 			public static function SqlDepartmentSelect();
-			public static function SqlDepartmentSelectByCorporation();
-			public static function SqlDepartmentSelectByCorporationNoLimit();
+			public static function SqlDepartmentSelectByCorporationName();
+			public static function SqlDepartmentSelectByCorporationNameNoLimit();
 			public static function SqlDepartmentSelectByDepartmentName();
 			public static function SqlDepartmentSelectByDepartmentNameAndCorporationName();
 			public static function SqlDepartmentSelectNoLimit();
@@ -299,7 +299,7 @@ class Persistence
 			 . "    "        . Config::TABLE_DEPARTMENT_FIELD_NAME . " LIMIT ?,?";
 	}
 	
-	public static function SqlDepartmentSelectByCorporation()
+	public static function SqlDepartmentSelectByCorporationName()
 	{
 		return "SELECT "     . Config::TABLE_DEPARTMENT  . "." . Config::TABLE_DEPARTMENT_FIELD_CORPORATION . ", "
 			                 . Config::TABLE_DEPARTMENT  . "." . Config::TABLE_DEPARTMENT_FIELD_INITIALS    . ", "
@@ -318,7 +318,7 @@ class Persistence
 			 . "ORDER BY "   . Config::TABLE_DEPARTMENT  . "." . Config::TABLE_DEPARTMENT_FIELD_NAME        . " LIMIT ?,?";
 	}
 	
-	public static function SqlDepartmentSelectByCorporationNoLimit()
+	public static function SqlDepartmentSelectByCorporationNameNoLimit()
 	{
 		return "SELECT "     . Config::TABLE_DEPARTMENT  . "." . Config::TABLE_DEPARTMENT_FIELD_CORPORATION . ", "
 			                 . Config::TABLE_DEPARTMENT  . "." . Config::TABLE_DEPARTMENT_FIELD_INITIALS    . ", "

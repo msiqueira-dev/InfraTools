@@ -1103,6 +1103,7 @@ class ConfigInfraTools extends Config
 	public $PageAdminNotificationEnabled                            = TRUE;
 	public $PageAdminServiceEnabled                                 = TRUE;
 	public $PageAdminSystemConfigurationEnabled                     = TRUE;
+	public $PageAdminTeamEnabled                                    = TRUE;
 	public $PageAdminTechInfoEnabled                                = TRUE;
 	public $PageAdminTicketEnabled                                  = TRUE;
 	public $PageAdminTypeAssocUserTeamEnabled                       = TRUE;

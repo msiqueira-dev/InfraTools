@@ -450,23 +450,20 @@ class PageAdminUser extends PageAdmin
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 			$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-															 $this->ArrayInstanceInfraToolsUser, $rowCount,
-															 $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+															   $this->ArrayInstanceInfraToolsUser, $rowCount,
+															   $this->InputValueHeaderDebug);
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-															 $this->ArrayInstanceInfraToolsUser, $rowCount,
-															 $this->InputValueHeaderDebug);
+															       $this->ArrayInstanceInfraToolsUser, $rowCount,
+															       $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//USER LIST SELECT CORPORATION SUBMIT
@@ -636,16 +633,15 @@ class PageAdminUser extends PageAdmin
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
 		//USER VIEW CHANGE ASSOC USER CORPORATION 
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData();
-				$FacedePersistenceInfraTools->DepartmentSelectByCorporationNoLimit(
-					                                                     $this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
-					                                                     $this->ArrayInstanceDepartment,
-																		 $this->InputValueHeaderDebug);
+				$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(),
+					                                            $this->ArrayInstanceDepartment,
+																$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = '';
 				$this->SubmitClass = 'SubmitEnabled';
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
@@ -659,7 +655,6 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				
 				if($this->UserUpdateCorporationInformation($this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::SUCCESS)
 				{
 					if($this->UserInfraToolsSelectByEmail($this->InstanceInfraToolsUserAdmin->GetEmail()) == ConfigInfraTools::SUCCESS)
@@ -671,10 +666,9 @@ class PageAdminUser extends PageAdmin
 				else 
 				{
 					$this->UserLoadData();
-					$FacedePersistenceInfraTools->DepartmentSelectByCorporationNoLimit(
-					                                                     $this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
-					                                                     $this->ArrayInstanceDepartment,
-																		 $this->InputValueHeaderDebug);
+					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
+					                                                $this->ArrayInstanceDepartment,
+																    $this->InputValueHeaderDebug);
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
 				}
 			}

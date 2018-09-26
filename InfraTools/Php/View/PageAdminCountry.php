@@ -85,26 +85,19 @@ class PageAdminCountry extends PageAdmin
 		{
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
-																$this->ArrayCountry,
-																$rowCount,
-															    $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayCountry, 
+								 $rowCount, $this->InputValueHeaderDebug);
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
-				$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
-																$this->ArrayCountry,
-																$rowCount,
-															    $this->InputValueHeaderDebug);
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
+				$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayCountry,
+									 $rowCount, $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//COUNTRY LIST

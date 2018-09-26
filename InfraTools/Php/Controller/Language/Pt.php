@@ -846,9 +846,6 @@ class Pt
 	const ADMIN_DEPARTMENT_DELETE_ERROR                           = "Erro ao excluir departamento";
 	const ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Departamento possui usuários associados, remova-os antes";
 	const ADMIN_DEPARTMENT_DELETE_SUCCESS                         = "Departamento excluido com sucesso";
-	const ADMIN_DEPARTMENT_INVALID_NAME                           = "Nome do departamento inválido";
-	const ADMIN_DEPARTMENT_INVALID_NAME_SIZE                      = "Quantidade de caracteres excede o tamanho máximo no " 
-		                                                          . "nome do departamento";
 	const ADMIN_DEPARTMENT_REGISTER_ERROR                         = "Erro ao cadastrar departamento";
 	const ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS       = "Departamento já existe para esta corporação";
 	const ADMIN_DEPARTMENT_REGISTER_SUCCESS                       = "Departamento cadastrado com sucesso";

@@ -386,9 +386,9 @@
 				<?php if($this->InstanceInfraToolsUserAdmin->GetCorporation() != NULL)
 						{
 						?>
-						<!-- FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT -->
-						<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>"
+						<!-- FORM_FIELD_CORPORATION_NAME -->
+						<input type="submit" name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
+							   id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
 							   class="DivContentBodySubmitBigger"
 							   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_ASSOC_USER_CORPORATION'); ?>"/>
 						<?php 

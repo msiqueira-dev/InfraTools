@@ -80,6 +80,7 @@ class PageAdminDepartment extends PageAdmin
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
@@ -99,12 +100,12 @@ class PageAdminDepartment extends PageAdmin
 			if($this->Page != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 			{
 				if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-															$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+												   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
 				{
 					$this->InputLimitOne = 0;
 					$this->InputLimitTwo = 25;
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-					$this->DepartmentSelectUsers($this->InstanceDepartment->GetDepartmentCorporationName(),
+					$this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
 						                         $this->InstanceDepartment->GetDepartmentName(), 
 												 $this->InputLimitOne, $this->InputLimitTwo, 
 												 $this->ArrayInstanceDepartmentUsers, $rowCount,
@@ -119,10 +120,8 @@ class PageAdminDepartment extends PageAdmin
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
 			$this->InputLimitOne = 0;
 			$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceDepartment,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
+			$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
+									$rowCount, $this->InputValueHeaderDebug);
 		}
 		//DEPARTMENT LIST BACK SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_LIST_BACK))
@@ -134,10 +133,8 @@ class PageAdminDepartment extends PageAdmin
 				$this->InputLimitOne = 0;
 			if($this->InputLimitTwo <= 0)
 				$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, 
-														   $this->ArrayInstanceDepartment,
-														   $rowCount,
-														   $this->InputValueHeaderDebug);
+			$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
+									$rowCount, $this->InputValueHeaderDebug);
 		}
 		//DEPARTMENT LIST FORWARD SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_LIST_FORWARD))
@@ -145,26 +142,19 @@ class PageAdminDepartment extends PageAdmin
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$FacedePersistenceInfraTools->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceDepartment,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+			$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
+									$rowCount, $this->InputValueHeaderDebug);
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
-				$FacedePersistenceInfraTools->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceDepartment,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
+				$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
+									    $rowCount, $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//DEPARTMENT LIST SELECT SUBMIT
@@ -180,17 +170,15 @@ class PageAdminDepartment extends PageAdmin
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 				else
 				{
-					$return = $this->CorporationSelectNoLimit(
-				                                              $this->ArrayInstanceInfraToolsCorporation, 
+					$return = $this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
 															  $this->InputValueHeaderDebug);
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 				}
 			} 
 			else 
 			{
-				$return = $this->CorporationSelectNoLimit(
-				                                              $this->ArrayInstanceInfraToolsCorporation, 
-															  $this->InputValueHeaderDebug);
+				$return = $this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
+														  $this->InputValueHeaderDebug);
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 			}
 		}
@@ -376,7 +364,7 @@ class PageAdminDepartment extends PageAdmin
 			{
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				if($this->DepartmentSelectUsers($this->InstanceDepartment->GetDepartmentCorporationName(),
+				if($this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
 						                        $this->InstanceDepartment->GetDepartmentName(), 
 												$this->InputLimitOne, $this->InputLimitTwo, 
 												$this->ArrayInstanceDepartmentUsers, 
@@ -403,10 +391,10 @@ class PageAdminDepartment extends PageAdmin
 					$this->InputLimitOne = 0;
 				if($this->InputLimitTwo <= 0)
 					$this->InputLimitTwo = 25;
-				if($this->DepartmentSelectUsers($this->InstanceDepartment->GetDepartmentCorporationName(),
+				if($this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
 						                        $this->InstanceDepartment->GetDepartmentName(), 
 												$this->InputLimitOne, $this->InputLimitTwo, 
-												$this->ArrayInstanceDepartmentUsers, $rowCount)
+												$this->ArrayInstanceDepartmentUsers, $rowCount, $this->InputValueHeaderDebug)
 				                                == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
@@ -416,41 +404,32 @@ class PageAdminDepartment extends PageAdmin
 		//DEPARTMENT VIEW USERS LIST FORWARD SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_FORWARD))
 		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE];
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO];
+			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] +25;
+			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] +25;
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+											   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->DepartmentSelectUsers($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                        $this->InstanceDepartment->GetDepartmentName(), 
-												$this->InputLimitOne, $this->InputLimitTwo, 
-												$this->ArrayInstanceDepartmentUsers, 
-												$rowCount, $this->InputValueHeaderDebug)
-				                                == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-				else 
+				$this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
+						                     $this->InstanceDepartment->GetDepartmentName(), 
+											 $this->InputLimitOne, $this->InputLimitTwo, 
+											 $this->ArrayInstanceDepartmentUsers, 
+											 $rowCount, $this->InputValueHeaderDebug);
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
+				if($this->InputLimitOne > $rowCount)
 				{
-					if($this->InputLimitTwo > $rowCount)
-					{
-						if(!is_numeric($rowCount))
-						{
-							$this->InputLimitOne = $this->InputLimitOne - 25;
-							$this->InputLimitTwo = $this->InputLimitTwo - 25;
-						}
-						else
-						{
-							$this->InputLimitOne = $rowCount - 25;
-							$this->InputLimitTwo = $rowCount;
-						}
-						if($this->DepartmentSelectUsers($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                        $this->InstanceDepartment->GetDepartmentName(), 
-												$this->InputLimitOne, $this->InputLimitTwo, 
-												$this->ArrayInstanceDepartmentUsers, 
-												$rowCount, $this->InputValueHeaderDebug)
-				                                == ConfigInfraTools::SUCCESS)
-							$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-						else $this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-					} else $this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					if($this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
+						                            $this->InstanceDepartment->GetDepartmentName(), 
+												    $this->InputLimitOne, $this->InputLimitTwo, 
+												    $this->ArrayInstanceDepartmentUsers, 
+												    $rowCount, $this->InputValueHeaderDebug) != ConfigInfraTools::SUCCESS)
+						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
+				}
+				elseif($this->InputLimitTwo > $rowCount)
+				{
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				}
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 		}
@@ -482,7 +461,7 @@ class PageAdminDepartment extends PageAdmin
 					$this->InputLimitOne = 0;
 					$this->InputLimitTwo = 25;
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-					$this->DepartmentSelectUsers($this->InstanceDepartment->GetDepartmentCorporationName(),
+					$this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
 						                         $this->InstanceDepartment->GetDepartmentName(), 
 												 $this->InputLimitOne, $this->InputLimitTwo, 
 												 $this->ArrayInstanceDepartmentUsers, 

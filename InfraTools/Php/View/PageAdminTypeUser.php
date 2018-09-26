@@ -328,28 +328,21 @@ class PageAdminTypeUser extends PageAdmin
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			if($this->InputLimitOne > 250)
-				$this->InputLimitOne = 250;
-			if($this->InputLimitTwo > 275)
-				$this->InputLimitTwo = 275;
 			$FacedePersistenceInfraTools->TypeUserSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayInstanceTypeUser, $rowCount,
-																 $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+														 $this->ArrayInstanceTypeUser, $rowCount,
+														 $this->InputValueHeaderDebug);
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				$FacedePersistenceInfraTools->TypeUserSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayInstanceTypeUser, $rowCount,
-																 $this->InputValueHeaderDebug);
+														     $this->ArrayInstanceTypeUser, $rowCount,
+														     $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//TYPE USER LIST SELECT SUBMIT

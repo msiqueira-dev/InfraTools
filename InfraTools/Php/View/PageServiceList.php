@@ -113,24 +113,21 @@ class PageServiceList extends PageService
 												  $this->ArrayInfraToolsService,
 												  $rowCount,
 												  $this->InputValueHeaderDebug);
-				if($this->InputLimitTwo > $rowCount)
-				{
-					if(!is_numeric($rowCount))
-					{
-						$this->InputLimitOne = $this->InputLimitOne - 25;
-						$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					}
-					else
-					{
-						$this->InputLimitOne = $rowCount - 25;
-						$this->InputLimitTwo = $rowCount;
-					}
-					$this->ServiceSelectOnUserContext($this->User->GetEmail(),
-													  $this->InputLimitOne, $this->InputLimitTwo, 
-													  $this->ArrayInfraToolsService,
-													  $rowCount,
-													  $this->InputValueHeaderDebug);
-				}
+				if($this->InputLimitOne > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
+				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
+												  $this->InputLimitOne, $this->InputLimitTwo, 
+												  $this->ArrayInfraToolsService,
+												  $rowCount,
+												  $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
+			}
 			}
 			//SERVICE LIST SELECT SUBMIT
 			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]))

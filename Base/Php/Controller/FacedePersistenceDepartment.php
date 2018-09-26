@@ -16,10 +16,10 @@ Functions:
 			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug, $MySqlConnection);
 			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection);
-			public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
-			                                              &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection);
-			public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, 
-			                                                     $Debug, $MySqlConnection);
+			public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
+			                                                  &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection);
+			public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, 
+			                                                         $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
 			                                                                   &$DepartmentInstance, $Debug, $MySqlConnection);
@@ -27,9 +27,8 @@ Functions:
 			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
 			                                                                     $DepartmentNameNew, $DepartmentNameOld, 
 																				 $Debug, $MySqlConnection);
-			public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName,
-			                                                                      $CorporationNameNew,
-																				  $CorporationNameOld, $Debug, $MySqlConnection);
+			public function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, $CorporationNameOld, 
+																				  $DepartmentName, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -216,42 +215,45 @@ class FacedePersistenceDepartment
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 		
-	public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
-			                                      &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
+	public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
+			                                          &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
+		$ArrayInstanceDepartment = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlDepartmentSelectByCorporation');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporation());
+				Persistence::ShowQuery('SqlDepartmentSelectByCorporationName');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $CorporationName);
+				$stmt->bind_param("sii", $CorporationName, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($CorporationName, $depIni, $depName, $depRegDate, $corpActive, $corpName, $corpRegDate);
-					if ($stmt->fetch())
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc())
 					{
-						$CorporationInstance = $this->Factory->CreateCorporation(NULL, $corpActive, $corpName, $corpRegDate);
-						$DepartmentInstance = $this->Factory->CreateDepartment($CorporationInstance, $depIni, $depName, $depRegDate);
-						return Config::SUCCESS;
-					}
-					else
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_DEPARTMENT_SELECT_BY_NAME_FETCH_FAILED;
+						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
+																		  $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
+						                                                  $row[Config::TABLE_CORPORATION_FIELD_NAME], 
+											                              $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation, 
+																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
+																		    $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
+																		    $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
 				}
-				else
+				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_NAME_FAILED;
+					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED;
 				}
-				return $return;
+				if(!empty($ArrayInstanceDepartment))
+					return Config::SUCCESS;
+				else return Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED;
 			}
 			else
 			{
@@ -263,15 +265,15 @@ class FacedePersistenceDepartment
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
+	public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceDepartment = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlDepartmentSelectByCorporationNoLimit');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationNoLimit());
+				Persistence::ShowQuery('SqlDepartmentSelectByCorporationNameNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationNameNoLimit());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $CorporationName);
@@ -296,11 +298,11 @@ class FacedePersistenceDepartment
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_FAILED;
+					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED;
 				}
 				if(!empty($ArrayInstanceDepartment))
 					return Config::SUCCESS;
-				else return Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_FETCH_FAILED;
+				else return Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED;
 			}
 			if($Debug == Config::CHECKBOX_CHECKED) 
 				echo "Prepare Error: " . $MySqlConnection->error;

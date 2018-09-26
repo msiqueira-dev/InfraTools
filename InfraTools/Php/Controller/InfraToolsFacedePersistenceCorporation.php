@@ -78,6 +78,7 @@ class InfraToolsFacedePersistenceCorporation
 	
 	public function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
+		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceCorporation = array();
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelect');
@@ -129,6 +130,7 @@ class InfraToolsFacedePersistenceCorporation
 	
 	public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
+		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceCorporation = array();
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelectActiveNoLimit');
@@ -161,6 +163,7 @@ class InfraToolsFacedePersistenceCorporation
 	
 	public function CorporationInfraToolsSelectByName($Name, &$CorporationInstance, $Debug, $MySqlConnection)
 	{
+		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelectByName');
 		if($MySqlConnection != NULL)
@@ -206,6 +209,7 @@ class InfraToolsFacedePersistenceCorporation
 	
 	public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
+		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceCorporation = array();
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelectNoLimit');

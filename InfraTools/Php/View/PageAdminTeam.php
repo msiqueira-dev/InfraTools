@@ -399,23 +399,20 @@ class PageAdminTeam extends PageAdmin
 			if($this->InputLimitTwo > 275)
 				$this->InputLimitTwo = 275;
 			$FacedePersistenceInfraTools->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayTeam, $rowCount,
-																 $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+													 $this->ArrayTeam, $rowCount,
+													 $this->InputValueHeaderDebug);
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				$FacedePersistenceInfraTools->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																      $this->ArrayTeam, $rowCount,
-																 $this->InputValueHeaderDebug);
+													     $this->ArrayTeam, $rowCount,
+													     $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//TEAM LIST SELECT SUBMIT
@@ -424,7 +421,7 @@ class PageAdminTeam extends PageAdmin
 		{
 			if($this->ExecuteTeamSelectByTeamId($_POST[ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT]) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
@@ -447,7 +444,7 @@ class PageAdminTeam extends PageAdmin
 		{
 			if($this->ExecuteTeamSelectByTeamId($_POST[ConfigInfraTools::FORM_FIELD_TEAM_ID]) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;	
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
@@ -468,7 +465,7 @@ class PageAdminTeam extends PageAdmin
 					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  
 					                                    == ConfigInfraTools::SUCCESS)
 					{
-						if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+						if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 							$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 						else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 					}
@@ -488,7 +485,7 @@ class PageAdminTeam extends PageAdmin
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_MANAGE_MEMBERS;
 				else
 				{
-					if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 					else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 				}
@@ -521,7 +518,7 @@ class PageAdminTeam extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_UPDATE;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
@@ -531,7 +528,7 @@ class PageAdminTeam extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
@@ -543,13 +540,13 @@ class PageAdminTeam extends PageAdmin
 			{
 				if($this->ExecuteTeamUpdate() == ConfigInfraTools::SUCCESS)
 				{
-					if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 					else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_UPDATE;
 				} 
 				else 
 				{
-					if($this->TeamLoadData() == ConfigInfraTools::SUCCESS)
+					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 				}
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;

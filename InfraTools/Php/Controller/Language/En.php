@@ -843,9 +843,6 @@ class En
 	const ADMIN_DEPARTMENT_DELETE_ERROR                           = "Error deleting department";
 	const ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Department has users associated, remove them first";
 	const ADMIN_DEPARTMENT_DELETE_SUCCESS                         = "Department deleted succesfully";
-	const ADMIN_DEPARTMENT_INVALID_NAME                           = "Invalid department name";
-	const ADMIN_DEPARTMENT_INVALID_NAME_SIZE                      = "Quantity of characters exceeds the maximum allowed on " 
-		                                                          . "department name";
 	const ADMIN_DEPARTMENT_REGISTER_ERROR                         = "Error while trying to register department";
 	const ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS       = "Department already exists for that corporation";
 	const ADMIN_DEPARTMENT_REGISTER_SUCCESS                       = "Department registered succesfully";

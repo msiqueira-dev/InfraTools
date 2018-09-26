@@ -122,22 +122,19 @@ class PageAdminCorporation extends PageAdmin
 																	$this->ArrayInstanceInfraToolsCorporation,
 																	$rowCount,
 																    $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				$FacedePersistenceInfraTools->CorporationInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
 																	$this->ArrayInstanceInfraToolsCorporation,
 																	$rowCount,
 																    $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//CORPORATION LIST SELECT SUBMIT
@@ -310,36 +307,29 @@ class PageAdminCorporation extends PageAdmin
 		//CORPORATION VIEW USERS LIST FORWARD SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_FORWARD))
 		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE];
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO];
+			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
+			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
 														$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceInfraToolsCorporation,
-												 $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-				else 
+				$this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceInfraToolsCorporation,
+											  $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
+											  $this->InputValueHeaderDebug);
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
+				if($this->InputLimitOne > $rowCount)
 				{
-					if($this->InputLimitTwo > $rowCount)
-					{
-						if(!is_numeric($rowCount))
-						{
-							$this->InputLimitOne = $this->InputLimitOne - 25;
-							$this->InputLimitTwo = $this->InputLimitTwo - 25;
-						}
-						else
-						{
-							$this->InputLimitOne = $rowCount - 25;
-							$this->InputLimitTwo = $rowCount;
-						}
-						if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, 
-														 $this->InstanceInfraToolsCorporation,
-												         $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												         $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-							$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-						else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, 
+													 $this->InstanceInfraToolsCorporation,
+											         $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
+											         $this->InputValueHeaderDebug) != ConfigInfraTools::SUCCESS)
+						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
+				}
+				elseif($this->InputLimitTwo > $rowCount)
+				{
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				}
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
 		}

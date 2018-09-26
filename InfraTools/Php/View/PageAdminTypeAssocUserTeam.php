@@ -346,21 +346,18 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 			$FacedePersistenceInfraTools->TypeAssocUserTeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
 																 $this->ArrayTypeAssocUserTeam, $rowCount,
 																 $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				$FacedePersistenceInfraTools->TypeAssocUserTeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
 																      $this->ArrayTypeAssocUserTeam, $rowCount,
-																 $this->InputValueHeaderDebug);
+																      $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//TYPE ASSOC USER TEAM LIST SELECT SUBMIT

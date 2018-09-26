@@ -78,7 +78,7 @@ class Department
 	}
 	
 	/* SET */
-	public function SetDerpartmentCorporation($DepartmentCorporation)
+	public function SetDepartmentCorporation($DepartmentCorporation)
 	{
 		$this->DepartmentCorporation = $DepartmentCorporation;
 	}

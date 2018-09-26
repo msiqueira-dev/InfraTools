@@ -60,11 +60,11 @@ Functions:
 			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug,
 			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
-			                                              &$ArrayInstanceDepartment, &$RowCount, $Debug,
-														  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
-			                                                    $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
+			                                                  &$ArrayInstanceDepartment, &$RowCount, $Debug,
+														      $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
+			                                                         $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug,
 			                                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
@@ -75,8 +75,8 @@ Functions:
 			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
 			                                                                     $DepartmentNameNew, $DepartmentNameOld, $Debug,
 																				 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
-																				  $CorporationNameOld, $Debug,
+			public function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, $CorporationNameOld,
+																				  $DepartmentName, $Debug,
 																				  $MySqlConnection = NULL, 
 																				  $CloseConnectaion = FALSE);
 			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug);
@@ -544,34 +544,34 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, &$ArrayInstanceDepartment, &$RowCount, $Debug,
-												  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount,
+													  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName,
-		    																              $ArrayInstanceDepartment, $RowCount, 
-																				          $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2,
+		    																                  $ArrayInstanceDepartment, $RowCount, 
+																				              $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
-														 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
+														     $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporationNoLimit($CorporationName, 
-			   																		             $ArrayInstanceDepartment, 
-																					             $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporationNameNoLimit($CorporationName, 
+			   																		                 $ArrayInstanceDepartment, 
+																					                 $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -649,8 +649,8 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew, 
-																		  $CorporationNameOld, $Debug,
+	public function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, $CorporationNameOld, 
+																		  $DepartmentName, $Debug,
 																		  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
@@ -658,9 +658,10 @@ class FacedePersistence
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-			$return = $instanceFacedePersistenceDepartment->DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName,
+			$return = $instanceFacedePersistenceDepartment->DepartmentUpdateCorporationByCorporationAndDepartment(
 																											$CorporationNameNew,
 																								            $CorporationNameOld,
+				                                                                                            $DepartmentName,
 																								            $Debug,
 																										    $MySqlConnection);
 			if($CloseConnectaion)

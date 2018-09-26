@@ -161,8 +161,8 @@ class Config
 	const MYSQL_DEPARTMENT_INSERT_FAILED                                = "RetMySqlDepartmentInsertFailed";
 	const MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FAILED                    = "RetMySqlDepartmentSelectByCorpDepFailed";
 	const MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FETCH_FAILED              = "RetMySqlDepartmentSelectByCorpDepFetchFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_FAILED                 = "RetMySqlDepartmentSelectByCorporationFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_FETCH_FAILED           = "RetMySqlDepartmentSelectByCorporationFetchFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED            = "RetMySqlDepartmentSelectByCorporationFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED      = "RetMySqlDepartmentSelectByCorporationFetchFailed";
 	const MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FAILED             = "RetMySqlDepartmentSelectByDepartmentNameFailed";
 	const MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FETCH_FAILED       = "RetMySqlDepartmentSelectByDepartmentNameFetchFailed";
 	const MYSQL_DEPARTMENT_SELECT_FAILED                                = "RetMySqlDepartmentSelectFailed";

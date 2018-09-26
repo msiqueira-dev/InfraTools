@@ -802,8 +802,6 @@ class De
 	const ADMIN_DEPARTMENT_DELETE_ERROR                           = "";
 	const ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "";
 	const ADMIN_DEPARTMENT_DELETE_SUCCESS                         = "";
-	const ADMIN_DEPARTMENT_INVALID_NAME                           = "";
-	const ADMIN_DEPARTMENT_INVALID_NAME_SIZE                      = "";
 	const ADMIN_DEPARTMENT_REGISTER_ERROR                         = "";
 	const ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS       = "";
 	const ADMIN_DEPARTMENT_REGISTER_SUCCESS                       = "";

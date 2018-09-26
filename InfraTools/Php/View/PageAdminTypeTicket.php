@@ -341,23 +341,20 @@ class PageAdminTypeTicket extends PageAdmin
 			if($this->InputLimitTwo > 275)
 				$this->InputLimitTwo = 275;
 			$FacedePersistenceInfraTools->TypeTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayTypeTicket, $rowCount,
-																 $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+														   $this->ArrayTypeTicket, $rowCount,
+														   $this->InputValueHeaderDebug);
+			if($this->InputLimitOne > $rowCount)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 				$FacedePersistenceInfraTools->TypeTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayTypeTicket, $rowCount,
-																 $this->InputValueHeaderDebug);
+														       $this->ArrayTypeTicket, $rowCount,
+														       $this->InputValueHeaderDebug);
+			}
+			elseif($this->InputLimitTwo > $rowCount)
+			{
+				$this->InputLimitOne = $this->InputLimitOne - 25;
+				$this->InputLimitTwo = $this->InputLimitTwo - 25;
 			}
 		}
 		//TYPE TICKET LIST SELECT SUBMIT

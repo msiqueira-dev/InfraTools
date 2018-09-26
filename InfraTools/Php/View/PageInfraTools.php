@@ -112,7 +112,6 @@ Methods:
 			protected function ServiceUpdateRestrictByServiceId($ServiceActiveNew,$ServiceNameNew, 
 			                                                    $ServiceTypeNew, $ServiceId, 
 											                    $Debug);
-			protected function TeamLoadData();
 			protected function TicketLoadData();
 			protected function TypeAssocUserServiceSelect(&$ArrayInstanceInfraToolsTypeService, &$RowCount,
 			                                              $Limit1, $Limit2, $Debug);
@@ -512,7 +511,8 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment, $Debug)
+	protected function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment,
+																   $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -2932,19 +2932,6 @@ abstract class PageInfraTools extends Page
 		}	
 	}
 	
-	protected function TeamLoadData()
-	{
-		if($this->InstanceTeam != NULL)
-		{
-			$this->InputValueTeamId           = $this->InstanceTeam->GetTeamId();
-			$this->InputValueTeamDescription  = $this->InstanceTeam->GetTeamDescription();
-			$this->InputValueTeamName         = $this->InstanceTeam->GetTeamName();
-			$this->InputValueRegisterDate     = $this->InstanceTeam->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
 	protected function TicketLoadData()
 	{
 		if($this->Ticket != NULL)
@@ -4203,7 +4190,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsInput[1]        = $this->InputValueRegistrationDateMonth; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 0; 
-		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnRegistrationDateMonthText;
 		array_push($arrayConstants, 'FORM_INVALID_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
@@ -4216,7 +4203,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsInput[2]        = $this->InputValueRegistrationDateYear; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 0; 
-		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsNullable[2]     = TRUE;
 		$arrayElementsText[2]         = &$this->ReturnRegistrationDateYearText;
 		array_push($arrayConstants, 'FORM_INVALID_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
@@ -4229,7 +4216,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsInput[3]        = $this->InputValueRegistrationId; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 12; 
-		$arrayElementsNullable[3]     = FALSE;
+		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnRegistrationIdText;
 		array_push($arrayConstants, 'FORM_INVALID_REGISTRATION_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
