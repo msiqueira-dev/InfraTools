@@ -1,8 +1,8 @@
 <!-- FORM TYPE_USER_VIEW_USERS -->
 <?php
-if(is_array($this->ArrayInstanceInfraToolsTypeUserUsers))
+if(is_array($this->ArrayInstanceUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -47,38 +47,50 @@ if(is_array($this->ArrayInstanceInfraToolsTypeUserUsers))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceInfraToolsTypeUserUsers as $key=>$user)
+	foreach($this->ArrayInstanceUser as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-		                           id='"   . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-							       value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
+				<form  name='" . ConfigInfraTools::FORM_USER_LIST . "' method='post' />
+					<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
+							 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
+							 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
+		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+		                                 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+							             value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
 				</form>
 		      </td>";
 		echo "<td>"     . $user->GetName()             . "</td>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-		        	<input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-		                             id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+					<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+		        	<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+		                             id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 							         value='" . $user->GetUserTypeDescription() . "' 
 								     title='" . $user->GetUserTypeDescription() . "' />
-					</form>
+				</form>
 		      </td>";
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_SELECT_CORPORATION . "' 
-										 id='"   . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_SELECT_CORPORATION . "' 
-										 value='" . $user->GetCorporationName() . "' 
-										 title='" . $user->GetCorporationName() . "' />
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_CORPORATION_LIST . "' 
+							 id='"     . ConfigInfraTools::FORM_CORPORATION_LIST . "'
+							 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     value='" . $user->GetCorporationName() . "' 
+										     title='" . $user->GetCorporationName() . "' />
 					</form>
 				  </td>";
 		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
 		if($user->GetDepartmentName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />
 						<input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
 							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "'

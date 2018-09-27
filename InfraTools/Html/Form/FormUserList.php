@@ -51,24 +51,42 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-		      <input type='submit' name='" . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-		                           id='"   . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-							       value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
+				<form  name='" . ConfigInfraTools::FORM_USER_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
+					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+										   id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+										   value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
+				</form>
 		      </td>";
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<input type='submit' name='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-										 id='"   . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-										 value='" . $user->GetCorporationName() . "' 
-										 title='" . $user->GetCorporationName() . "' />
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST . "' method='post' />
+						<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_CORPORATION_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_CORPORATION_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+											 id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+											 value='" . $user->GetCorporationName() . "' 
+											 title='" . $user->GetCorporationName() . "' />
+					</form>
 				  </td>";
 		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
 		echo "<td>"     . $user->GetName()             . "</td>";
 		echo "<td class='TableGenericTdLink'>
-		        <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-		                             id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-							         value='" . $user->GetUserTypeDescription() . "' 
-								     title='" . $user->GetUserTypeDescription() . "' />
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+										 value='" . $user->GetUserTypeDescription() . "' 
+										 title='" . $user->GetUserTypeDescription() . "' />
+				</form>
 		      </td>";
 		echo "<td> 
 				<img   src='"   . $user->GetUserActiveImage() . "' alt='CorporationVerification' width='20' height='20' />

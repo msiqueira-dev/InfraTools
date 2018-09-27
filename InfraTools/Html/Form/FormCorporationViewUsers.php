@@ -49,23 +49,41 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 	{
 		echo "<tr>";
 		echo "<td class='TdLink'>
-		        <input type='submit' name='" . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-		                             id='"   . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-							         value='" . $user->GetEmail() . "' 
-								     title='" . $user->GetEmail() . "' />
+				<form  name='" . ConfigInfraTools::FORM_USER_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+										 value='" . $user->GetEmail() . "' 
+										 title='" . $user->GetEmail() . "' />
+				</form>
 		      </td>";
 		echo "<td class='TdLink'>
-		        <input type='submit' name='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-		                             id='"   . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION . "' 
-							         value='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' 
-								     title='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' />
+				<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_CORPORATION_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_CORPORATION_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										 value='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' 
+										 title='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' />
+				</form>
 		      </td>";
 		echo "<td>" . $user->GetName()      . "</td>";
 		echo "<td class='TdLink'>
-		        <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-		                             id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-							         value='" . $user->GetUserTypeDescription() . "' 
-								     title='" . $user->GetUserTypeDescription() . "' />
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+										 value='" . $user->GetUserTypeDescription() . "' 
+										 title='" . $user->GetUserTypeDescription() . "' />
+				</form>
 		      </td>";
 		if($user->GetUserActive())
 			echo "<td> 

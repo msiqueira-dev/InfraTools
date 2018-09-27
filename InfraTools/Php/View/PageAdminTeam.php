@@ -7,11 +7,8 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da administração dos equipes.
+			Class for team management.
 Functions: 
-			protected function ExecuteTeamDelete();
-			protected function ExecuteTeamInsert();
-			protected function ExecuteTeamSelectByTeamId($TeamId);
 			protected function ExecuteTeamSelectUsers(($Limit1, $Limit2, &$RowCount);
 			protected function ExecuteTeamUpdate();
 			protected function ExecuteUserSelectByTeamId($Limit1, $Limit2, &$RowCount);
@@ -25,12 +22,6 @@ if (!class_exists("InfraToolsFactory"))
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
-}
-if (!class_exists("Team"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Team.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Team.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Team');
 }
 if (!class_exists("PageAdmin"))
 {
@@ -56,164 +47,6 @@ class PageAdminTeam extends PageAdmin
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	protected function ExecuteTeamDelete()
-	{
-		if($this->InstanceTeam != NULL)
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->TeamDeleteByTeamId($this->InstanceTeam->GetTeamId(), 
-															           $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_SUCCESS', 
-																				$this->Language); 
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			else
-			{
-				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant
-					                           ('ADMIN_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
-												$this->Language);
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_ERROR', 
-																				  $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-	}
-	
-	protected function ExecuteTeamInsert()
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueTeamDescription = $_POST[ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION];
-		$this->InputValueTeamName = $_POST[ConfigInfraTools::FORM_FIELD_TEAM_NAME];
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//TEAM_DESCRIPTION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION;
-		$arrayElementsClass[0]        = &$this->ReturnTeamDescriptionClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[0]        = $this->InputValueTeamDescription; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 120; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_DESCRIPTION', 'FORM_INVALID_TEAM_DESCRIPTION_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//TEAM_NAME
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_TEAM_NAME;
-		$arrayElementsClass[1]        = &$this->ReturnTeamNameClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TEAM_NAME;
-		$arrayElementsInput[1]        = $this->InputValueTeamName; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 45; 
-		$arrayElementsNullable[1]     = FALSE;
-		$arrayElementsText[1]         = &$this->ReturnTeamNameText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_NAME', 'FORM_INVALID_TEAM_NAME_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->TeamInsert($this->InputValueTeamName,
-														       $this->InputValueTeamDescription, 
-															   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_REGISTER_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_REGISTER_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function ExecuteTeamSelectByTeamId($TeamId)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueTeamId = $TeamId;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//TEAM_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TEAM_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTeamIdClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTeamId; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 2; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTeamIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->TeamSelectByTeamId($this->InputValueTeamId, 
-																       $this->InstanceTeam,
-																       $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam);
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnTeamIdText = $this->InstanceLanguageText->GetConstant('TEAM_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_TEAM_RETURN_NOT_FOUND;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
 	}
 	
 	protected function ExecuteTeamSelectUsers($Limit1, $Limit2, &$RowCount)
@@ -419,7 +252,8 @@ class PageAdminTeam extends PageAdmin
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT]) || 
 			   isset($_POST[ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT_NAME]))
 		{
-			if($this->ExecuteTeamSelectByTeamId($_POST[ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT]) == ConfigInfraTools::SUCCESS)
+			if($this->TeamSelectByTeamId($_POST[ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT],
+										 $this->InstanceTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
@@ -435,14 +269,17 @@ class PageAdminTeam extends PageAdmin
 		//TEAM REGISTER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT]))
 		{
-			if($this->ExecuteTeamInsert() == ConfigInfraTools::SUCCESS)
+			if($this->TeamInsert($_POST[ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION],
+								 $_POST[ConfigInfraTools::FORM_FIELD_TEAM_NAME],
+								 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 			else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_REGISTER;
 		}
 		//TEAM SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT]))
 		{
-			if($this->ExecuteTeamSelectByTeamId($_POST[ConfigInfraTools::FORM_FIELD_TEAM_ID]) == ConfigInfraTools::SUCCESS)
+			if($this->TeamSelectByTeamId($_POST[ConfigInfraTools::FORM_FIELD_TEAM_ID],
+										 $this->InstanceTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;	
@@ -452,10 +289,9 @@ class PageAdminTeam extends PageAdmin
 		//TEAM VIEW DELETE SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_VIEW_DELETE_SUBMIT]))
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) 
-			                                   == ConfigInfraTools::SUCCESS)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteTeamDelete() == ConfigInfraTools::SUCCESS)
+				if($this->TeamDeleteByTeamId($this->InstanceTeam->GetTeamId(), $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TEAM);
@@ -492,10 +328,9 @@ class PageAdminTeam extends PageAdmin
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		}
 		//TEAM VIEW MANAGE MEMBERS SELECT USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			$this->InputValueUserEmail = $_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT];
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT]) 
+			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL]) 
 			                                      == ConfigInfraTools::SUCCESS)
 			{
 				$this->UserLoadData();

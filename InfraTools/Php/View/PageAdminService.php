@@ -7,7 +7,7 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da administração dos equipes.
+			Class for service management.
 Functions: 
 			protected function LoadHtml();
 			public    function GetCurrentPage();
@@ -73,8 +73,6 @@ class PageAdminService extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{

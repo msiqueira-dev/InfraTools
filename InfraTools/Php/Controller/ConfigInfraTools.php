@@ -294,7 +294,6 @@ class ConfigInfraTools extends Config
 	const FORM_CORPORATION_VIEW_SELECT_USERS_SUBMIT                     = "FormCorporationViewSelectUsersSubmit";
 	const FORM_CORPORATION_VIEW_UPDATE_SUBMIT                           = "FormCorporationViewUpdateSubmit";
 	const FORM_CORPORATION_VIEW_USERS                                   = "FormCorporationViewUsers";
-	const FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION                = "FormCorporationViewUsersSelectCorporation";
 	const FORM_CORPORATION_VIEW_USERS_LIST_BACK                         = "FormCorporationViewUsersListBack";
 	const FORM_CORPORATION_VIEW_USERS_LIST_FORWARD                      = "FormCorporationViewUsersListForward";
 	const FORM_COUNTRY                                                  = "FormCountry";
@@ -352,9 +351,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_NAME_RADIO_DIV                             = "FormFieldServiceNameRadioDiv";
 	const FORM_FIELD_SERVICE_RADIO                                      = "FormFieldServiceRadio";
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
-	const FORM_FIELD_TEAM_DESCRIPTION                                   = "FormFieldTeamDescription";
-	const FORM_FIELD_TEAM_ID                                            = "FormFieldTeamId";
-	const FORM_FIELD_TEAM_NAME                                          = "FormFieldTeamName";
 	const FORM_FIELD_TICKET_DESCRIPTION                                 = "FormFieldTicketDescription";
 	const FORM_FIELD_TICKET_ID                                          = "FormFieldTicketId";
 	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
@@ -367,8 +363,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                              = "FormFieldTypeStatusTicketId";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                            = "FormFieldTypeTicketDescription";
 	const FORM_FIELD_TYPE_TICKET_ID                                     = "FormFieldTypeTicketId";
-	const FORM_FIELD_TYPE_USER_DESCRIPTION                              = "FormFieldTypeUserDescription";
-	const FORM_FIELD_TYPE_USER_ID                                       = "FormFieldTypeUserId";
 	const FORM_FIELD_USER_CORPORATION_SELECT                            = "FormFieldUserCorporationSelect";
 	const FORM_FIELD_USER_EMAIL                                         = "FormFieldUserEmail";
 	const FORM_FIELD_USER_GENDER                                        = "FormFieldUserGender";
@@ -494,7 +488,6 @@ class ConfigInfraTools extends Config
 	const FORM_TEAM_REGISTER                                            = "FormTeamRegister";
 	const FORM_TEAM_REGISTER_CANCEL                                     = "FormTeamRegisterCancel";
 	const FORM_TEAM_REGISTER_SUBMIT                                     = "FormTeamRegisterSubmit";
-	const FORM_TEAM_RETURN_NOT_FOUND                                    = "FormTeamReturnNotFound";
 	const FORM_TEAM_SELECT                                              = "FormTeamSelect";
 	const FORM_TEAM_SELECT_SUBMIT                                       = "FormTeamSelectSubmit";
 	const FORM_TEAM_UPDATE                                              = "FormTeamUpdate";
@@ -629,8 +622,6 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_USER_LIST                                           = "FormTypeUserList";
 	const FORM_TYPE_USER_LIST_BACK                                      = "FormTypeUserListBack";
 	const FORM_TYPE_USER_LIST_FORWARD                                   = "FormTypeUserListForward";
-	const FORM_TYPE_USER_LIST_SELECT                                    = "FormTypeUserListSelect";
-	const FORM_TYPE_USER_LIST_SELECT_ID                                 = "FormTypeUserListSelectId";
 	const FORM_TYPE_USER_REGISTER                                       = "FormTypeUserReturnRegister";
 	const FORM_TYPE_USER_REGISTER_CANCEL                                = "FormTypeUserReturnCancel";
 	const FORM_TYPE_USER_REGISTER_SUBMIT                                = "FormTypeUserReturnSubmit";
@@ -661,7 +652,6 @@ class ConfigInfraTools extends Config
 	const FORM_USER_LIST                                                = "FormUserList";
 	const FORM_USER_LIST_BACK                                           = "FormUserListBack";
 	const FORM_USER_LIST_FORWARD                                        = "FormUserListForward";
-	const FORM_USER_LIST_SELECT_SUBMIT                                  = "FormUserListSelectSubmit";
 	const FORM_USER_REGISTER                                            = "FormUserRegister";
 	const FORM_USER_REGISTER_SUBMIT                                     = "FormUserRegisterSubmit";
 	const FORM_USER_RETURN_NOT_FOUND                                    = "FormUserReturnNotFound";
@@ -734,13 +724,6 @@ class ConfigInfraTools extends Config
 	const MYSQL_TYPE_SERVICE_SELECT_FAILED                              = "RetMySqlTypeServiceSelectFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED                        = "RetMySqlTypeServiceSelectFetchFailed";
 	const SESS_ADMIN_SERVICE                                            = "SessionAdminService";
-	const SESS_ADMIN_TEAM                                               = "SessionAdminTeam";
-	const SESS_ADMIN_TICKET                                             = "SessionAdminTicket";
-	const SESS_ADMIN_TYPE_ASSOC_USER_TEAM                               = "SessionAdminTypeAssocUserTeam";
-	const SESS_ADMIN_TYPE_STATUS_TICKET                                 = "SessionAdminTypeStatusTicket";
-	const SESS_ADMIN_TYPE_TICKET                                        = "SessionAdminTypeTicket";
-	const SESS_ADMIN_TYPE_USER                                          = "SessionAdminTypeUser";
-	const SESS_ADMIN_USER                                               = "SessionAdminUser";
 	const SESS_PAGE_FORM                                                = "SessionPageForm";
 	const SESS_PAGE_FORM_NUMBER                                         = "SessionPageFormNumber";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE                                = "ASSOC_IP_ADDRESS_SERVICE";

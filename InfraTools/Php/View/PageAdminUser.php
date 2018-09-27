@@ -32,8 +32,9 @@ if (!class_exists("PageAdmin"))
 class PageAdminUser extends PageAdmin
 {
 	/* Instance */
-	public $FacedeBusinessInfraTools    = NULL;
-	public $ArrayInstanceInfraToolsUser = NULL;
+	public    $FacedeBusinessInfraTools    = NULL;
+	public    $ArrayInstanceInfraToolsUser = NULL;
+	protected $InstanceTypeUser            = NULL;
 	
 	/* Constructor */
 	public function __construct($Language) 
@@ -467,12 +468,11 @@ class PageAdminUser extends PageAdmin
 			}
 		}
 		//USER LIST SELECT CORPORATION SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_LIST]))
 		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION],
+			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
 											  $this->InstanceInfraToolsCorporation,
-											  $this->InputValueHeaderDebug) 
-			   == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
@@ -488,12 +488,13 @@ class PageAdminUser extends PageAdmin
 			}
 		}
 		//USER LIST SELECT TYPE USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION]))
 		{
-			if($this->TypeUserSelectByDescription($_POST[ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT]) 
-			                                      == ConfigInfraTools::SUCCESS)
+			if($this->TypeUserSelectByTypeUserDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION], 
+														  $this->InstanceTypeUser,
+														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeUserLoadData() == ConfigInfraTools::SUCCESS)
+				if($this->TypeUserLoadData($this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 			}
 			if($this->Page != ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
@@ -507,11 +508,9 @@ class PageAdminUser extends PageAdmin
 			}
 		}
 		//USER LIST SELECT USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			$this->InputValueUserEmail = $_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT];
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT]) 
-			                                      == ConfigInfraTools::SUCCESS)
+			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL]) == ConfigInfraTools::SUCCESS)
 			{
 				$this->UserLoadData();
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
@@ -624,8 +623,7 @@ class PageAdminUser extends PageAdmin
 				else 
 				{
 					$this->UserLoadData();
-					$FacedePersistenceInfraTools->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation,
-																				   $this->InputValueHeaderDebug);
+					$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
 				}
 			}

@@ -50,12 +50,16 @@ if(is_array($this->ArrayInstanceTypeUser))
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+					<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
 		      		<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT_ID . "'
+							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
 							 value='"  . $typeUser->GetTypeUserId()               . "' />
-					  <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-		                           id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
+					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
+		                           id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
 							       value='" . $typeUser->GetTypeUserId() . "' 
 								   title='" . $typeUser->GetTypeUserId() . "' />
 				</form>
@@ -63,11 +67,15 @@ if(is_array($this->ArrayInstanceTypeUser))
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
 					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT_ID . "'
+							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+					  <input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
 							 value='"  . $typeUser->GetTypeUserId()               . "' />
-					  <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-		                           id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
+					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+		                           id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 							       value='" . $typeUser->GetTypeUserDescription() . "' 
 								   title='" . $typeUser->GetTypeUserDescription() . "' />
 				</form>

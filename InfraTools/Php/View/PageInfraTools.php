@@ -14,6 +14,7 @@ Description:
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
 			private   function LoadInstanceInfraToolsUser();
+			protected function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
 			protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
@@ -131,9 +132,6 @@ Methods:
 			protected function TypeStatusTicketLoadData();
 			protected function TypeTicketLoadData();
 			protected function TypeTicketSelectById($TypeTicketId);
-			protected function TypeUserLoadData();
-			protected function TypeUserSelectByDescription($Description);
-			protected function TypeUserSelectUsers($Limit1, $Limit2, &$RowCount);
 			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification);
 			protected function UserInfraToolsSelectByEmail($Email);
 			protected function UserLoadData();
@@ -403,8 +401,27 @@ abstract class PageInfraTools extends Page
 		if($this->User==NULL) 
 		{
 			$this->Session = $this->Factory->CreateSession();
-			$this->Session->GetSessionValue(Config::SESS_USER, $this->User);
-			return Config::SUCCESS;
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
+			return ConfigInfraTools::SUCCESS;
+		}
+	}
+	
+	protected function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->CorporationInfraToolsSelect($Limit1, $Limit2, $ArrayInstanceCorporationInfraTools, 
+															                        $RowCount, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			return $return;
+		}
+		else
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
+			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return ConfigInfraTools::ERROR;
 		}
 	}
 	
@@ -3252,95 +3269,6 @@ abstract class PageInfraTools extends Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function TypeUserLoadData()
-	{
-		if($this->InstanceInfraToolsTypeUser != NULL)
-		{
-			$this->InputValueTypeUserDescription  = $this->InstanceInfraToolsTypeUser->GetTypeUserDescription();
-			$this->InputValueTypeUserId           = $this->InstanceInfraToolsTypeUser->GetTypeUserId();
-			$this->InputValueRegisterDate         = $this->InstanceInfraToolsTypeUser->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	protected function TypeUserSelectByDescription($TypeUserDescription)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueTypeUserDescription = $TypeUserDescription;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_TYPE_USER_LIST_SELECT
-		$arrayElements[0]             = ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT;
-		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->TypeUserSelectByDescription($this->InputValueTypeUserDescription, 
-																			    $this->InstanceInfraToolsTypeUser,
-																			    $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceInfraToolsTypeUser);
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnTypeUserDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', 
-																								$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_TYPE_USER_RETURN_NOT_FOUND;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function TypeUserSelectUsers($Limit1, $Limit2, &$RowCount)
-	{
-		if($this->InstanceInfraToolsTypeUser != NULL)
-		{
-			$this->ArrayInstanceInfraToolsTypeUserUsers = NULL;
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByTypeUser(
-				$this->InstanceInfraToolsTypeUser->GetTypeUserId(),
-				$Limit1, $Limit2,
-				$this->ArrayInstanceInfraToolsTypeUserUsers, $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-				return ConfigInfraTools::SUCCESS;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_SELECT_USERS_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
 	}
 	

@@ -110,6 +110,12 @@
 						 str_replace("PageAdmin", "", str_replace("_", "", 
 													 ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS)) . ".php");
 		}
+		//FORM_CORPORATION_LIST
+		if($this->Page == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
+		}
 		?>
     </div>
 </div>

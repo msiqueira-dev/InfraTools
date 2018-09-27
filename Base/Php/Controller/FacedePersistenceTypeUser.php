@@ -17,9 +17,9 @@ Functions:
 			public function TypeUserInsert($Description, $Debug);
 			public function TypeUserSelect($Limit1, $Limit2, &ArrayInstanceTypeUser, &$RowCount, $Debug);
 			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
-			public function TypeUserSelectByDescription($Description, &$TypeUser, $Debug);
-			public function TypeUserSelectById($Id, &$TypeUser, $Debug);
-			public function TypeUserUpdateById($Id, $Description, $Debug);
+			public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug);
+			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug);
+			public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -237,7 +237,7 @@ class FacedePersistenceTypeUser
 				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				if(!empty($ArrayInstanceTypeUser))
 					return Config::SUCCESS;
-				else return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
+				else return Config::MYSQL_TYPE_USER_SELECT_FETCH_FAILED;
 			}
 			else 
 			{
@@ -251,7 +251,7 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelectByDescription($Description, &$TypeUser, $Debug)
+	public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
@@ -298,14 +298,14 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelectById($Id, &$TypeUser, $Debug)
+	public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeUserSelectById');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelectById());
+				Persistence::ShowQuery('SqlTypeUserSelectByTypeUserId');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelectByTypeUserId());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("i", $Id);
@@ -345,15 +345,15 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserUpdateById($Id, $Description, $Debug)
+	public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeUserUpdateById');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserUpdateById());
+				Persistence::ShowQuery('SqlTypeUserUpdateByTypeUserId');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserUpdateByTypeUserId());
 			if ($stmt)
 			{
 				$stmt->bind_param("si", $Description, $Id);

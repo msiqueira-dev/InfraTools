@@ -85,7 +85,7 @@ Functions:
 			public function TeamInsert($TeamDescription, $TeamName, $Debug);
 			public function TeamSelect($Limit1, $Limit2, &A$rrayInstanceTeam, &$RowCount, $Debug);
 			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug);
-			public function TeamSelectByTeamName($TeamName, &$TeamInstance, $Debug);
+			public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
 			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug);
 			public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug,
 			                                       $MySqlConnection = NULL, $CloseConnectaion = FALSE);
@@ -118,9 +118,9 @@ Functions:
 			public function TypeUserInsert($Description, $Debug);
 			public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
 			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
-			public function TypeUserSelectByDescription($Description, &$TypeUser, $Debug);
-			public function TypeUserSelectById($Id, &$TypeUser, $Debug);
-			public function TypeUserUpdateById($Id, $Description, $Debug);
+			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug);
+			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug);
+			public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
 			public function UserCheckEmail($Email, $Debug);
 			public function UserCheckPasswordByEmail($Email, $Password, $Debug);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
@@ -133,6 +133,8 @@ Functions:
 			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
+			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			                                       &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
 			public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug);
 			public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug);
@@ -717,10 +719,10 @@ class FacedePersistence
 		return $FacedePersistenceTeam->TeamSelectByTeamId($TeamId, $TeamInstance, $Debug);
 	}
 	
-	public function TeamSelectByTeamName($TeamName, &$TeamInstance, $Debug)
+	public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug)
 	{
 		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamSelectByTeamName($TeamName, $TeamInstance, $Debug);
+		return $FacedePersistenceTeam->TeamSelectByTeamName($TeamName, $ArrayInstanceTeam, $Debug);
 	}
 	
 	public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug)
@@ -900,22 +902,22 @@ class FacedePersistence
 		return $FacedePersistenceUser->TypeUserSelectNoLimit($ArrayInstanceTypeUser, $Debug);
 	}
 	
-	public function TypeUserSelectByDescription($Description, &$TypeUser, $Debug)
+	public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserSelectByDescription($Description, $TypeUser, $Debug);
+		return $FacedePersistenceUser->TypeUserSelectByTypeUserDescription($Description, $TypeUser, $Debug);
 	}
 	
-	public function TypeUserSelectById($Id, &$TypeUser, $Debug)
+	public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserSelectById($Id, $TypeUser, $Debug);
+		return $FacedePersistenceUser->TypeUserSelectByTypeUserId($Id, $TypeUser, $Debug);
 	}
 	
-	public function TypeUserUpdateById($Id, $Description, $Debug)
+	public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserUpdateById($Id, $Description, $Debug);
+		return $FacedePersistenceUser->TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
 	}
 	
 	public function UserCheckEmail($Email, $Debug)
@@ -986,6 +988,19 @@ class FacedePersistence
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 		return $FacedePersistenceUser->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+	}
+	
+	public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+										   $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		$FacedePersistenceuser = $this->Factory->CreateFacedePersistenceUser();
+		$return = $FacedePersistenceuser->UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, $ArrayInstanceUser,
+																				   $RowCount, $Debug, $MySqlConnection);
+		if($CloseConnectaion)
+			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		return $return;
 	}
 	
 	public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug)

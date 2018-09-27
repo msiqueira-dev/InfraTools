@@ -1,4 +1,19 @@
 <?php
+/************************************************************************
+Class: PageAdminCountry.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/AdminInfraTools.php
+Description: 
+			Class for countries management.
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))

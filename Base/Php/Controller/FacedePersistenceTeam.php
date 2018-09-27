@@ -18,7 +18,7 @@ Functions:
 			public function TeamInsert($TeamName, $TeamDescription, $Debug);
 			public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug);
 			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug);
-			public function TeamSelectByTeamName($TeamName, &$TeamInstance, $Debug);
+			public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
 			public function TeamUpdateByTeamId($TeamDescription, $TeamId, $TeamName, $Debug);
 **************************************************************************/
 
@@ -228,11 +228,10 @@ class FacedePersistenceTeam
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTeam = $this->Factory->CreateTeam
-							                            ($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
-						                                 $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
-														 $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
-														 $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
+						                                           $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
+														           $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
+														           $row[Config::TABLE_FIELD_REGISTER_DATE]);	
 						array_push($ArrayInstanceTeam, $InstanceTeam);
 					}
 					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
@@ -277,11 +276,10 @@ class FacedePersistenceTeam
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceTeam = $this->Factory->CreateTeam
-							                            ($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
-						                                 $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
-														 $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
-														 $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+					$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
+						                                       $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
+														       $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
+														       $row[Config::TABLE_FIELD_REGISTER_DATE]);	
 					array_push($ArrayInstanceTeam, $InstanceTeam);
 				}
 				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
@@ -348,40 +346,44 @@ class FacedePersistenceTeam
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TeamSelectByTeamName($TeamName, &$InstanceTeam, $Debug)
+	public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug)
 	{
+		$mySqlError = NULL; $errorStr = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamSelectByTeamName');
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelectByTeamName());
-			if($stmt != NULL)
+			if($stmt)
 			{
+				$TeamName = "%".$TeamName."%";  
 				$stmt->bind_param("s", $TeamName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$stmt->bind_result($teamDescription, $teamId, $TeamName, $registerDate);
-					if ($stmt->fetch())
+					$ArrayInstanceTeam = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc())  
 					{
-						$InstanceTeam = $this->Factory->CreateTeam($teamDescription, $TeamId, $TeamName, $registerDate);
+						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
+																   $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
+																   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
+																   $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+						array_push($ArrayInstanceTeam, $InstanceTeam);
+					}
+					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					if(!empty($ArrayInstanceTeam))
 						return Config::SUCCESS;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TEAM_SELECT_BY_TEAM_DESCRIPTION_FETCH_FAILED;
-					}
+					else return Config::MYSQL_TEAM_SELECT_BY_TEAM_NAME_FETCH_FAILED;
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TEAM_SELECT_BY_TEAM_DESCRIPTION_FAILED;
+					$return = Config::MYSQL_TEAM_SELECT_BY_TEAM_NAME_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
+				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				return $return;
 			}
 			else

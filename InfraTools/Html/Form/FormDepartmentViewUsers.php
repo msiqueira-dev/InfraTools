@@ -51,24 +51,36 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-		                           id='"   . ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT . "' 
-							       value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
+				<form  name='" . ConfigInfraTools::FORM_USER_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
+		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+		                                 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+							             value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
 				</form>
 		      </td>";
 		echo "<td>"     . $user->GetName()             . "</td>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
-		        	<input type='submit' name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-		                             id='"   . ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT . "' 
-							         value='" . $user->GetUserTypeDescription() . "' 
-								     title='" . $user->GetUserTypeDescription() . "' />
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
+								 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
+								 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+		        	<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+		                                 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+							             value='" . $user->GetUserTypeDescription() . "' 
+								         title='" . $user->GetUserTypeDescription() . "' />
 					</form>
 		      </td>";
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST . "' method='post' />
+						<input type='hidden'
+									 name='"   . ConfigInfraTools::FORM_CORPORATION_LIST . "' 
+									 id='"     . ConfigInfraTools::FORM_CORPORATION_LIST . "'
+									 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
 						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION . "' 
 										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION . "' 
 										 value='" . $user->GetCorporationName() . "' 
@@ -78,16 +90,20 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
 		if($user->GetDepartmentName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
-							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "'
-							 value='"  . $user->GetCorporationName() . "' />
+							   name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' 
+							   id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST . "'
+							   value='"  . $user->GetCorporationName() . "' />
+						<input type='hidden'
+							   name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
+							   id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "'
+							   value='"  . $user->GetCorporationName() . "' />
 						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
 										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
 										 value='" . $user->GetDepartmentName() . "' 
 										 title='" . $user->GetDepartmentName() . "' />
-						</form>
+					</form>
 				  </td>";
 		else echo "<td>" . "<img src='" . $user->GetDepartmentActiveIcon() . "'/>" . "</td>";
 		echo "</tr>";

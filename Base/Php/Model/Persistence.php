@@ -10,7 +10,7 @@ Dependencies:
 Description: 
 			Classe para armazenar queries a serem executadas no banco de dados.
 Methods: 
-			public static function ShowQuery$Query)
+			public static function ShowQuery($Query);
 			public static function SqlAssocUserCorporationDelete();
 			public static function SqlAssocUserCorporationInsert();
 			public static function SqlAssocUserCorporationUpdate();
@@ -87,8 +87,8 @@ Methods:
 			public static function SqlTypeUserSelect();
 			public static function SqlTypeUserSelectNoLimit();
 			public static function SqlTypeUserSelectByDescription();
-			public static function SqlTypeUserSelectById();
-			public static function SqlTypeUserUpdateById();
+			public static function SqlTypeUserSelectByTypeUserId();
+			public static function SqlTypeUserUpdateByTypeUserId();
 			public static function SqlUserCheckEmail();
 			public static function SqlUserCheckPasswordByEmail();
 			public static function SqlUserCheckPasswordByUserUniqueId();
@@ -132,7 +132,7 @@ class Persistence
 	
 	public static function ShowQuery($Query)
 	{
-		echo "<div class='DivPageDebugQuery'>Query ($Query):" . Persistence::$Query() . "</div>";
+		echo "<div class='DivPageDebugQuery'><b>Query ($Query)</b>:" . Persistence::$Query() . "</div>";
 	}
 	
 	public static function SqlAssocUserCorporationDelete()
@@ -560,7 +560,7 @@ class Persistence
 						 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME         . ", "
 					     . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE          . "  " 
 		     . "FROM  "  . Config::TABLE_TEAM . " "
-	         . "WHERE "  . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME  . "=?";
+	         . "WHERE "  . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME         . " LIKE ?";
 	}
 	
 	public static function SqlTeamUpdateByTeamId()
@@ -826,7 +826,7 @@ class Persistence
 	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . " = ?";
 	}
 	
-	public static function SqlTypeUserSelectById()
+	public static function SqlTypeUserSelectByTypeUserId()
 	{
 		return "SELECT " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ", "
 		                 . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . ", "
@@ -835,7 +835,7 @@ class Persistence
 	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . " = ?";
 	}
 	
-	public static function SqlTypeUserUpdateById()
+	public static function SqlTypeUserUpdateByTypeUserId()
 	{
 		return "UPDATE " . Config::TABLE_TYPE_USER . " "  
 		     . "SET    " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " =UPPER(?) "
@@ -1328,10 +1328,10 @@ class Persistence
 		. "LEFT JOIN  " . Config::TABLE_ASSOC_USER_TEAM        ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                             ." "
 		. "= "          . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL             ." "
-		. "INNER JOIN " . Config::TABLE_TEAM                   ." "
+		. "LEFT JOIN  " . Config::TABLE_TEAM                   ." "
 		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID                ." "
 		. "= "          . Config::TABLE_TEAM                   .".". Config::TABLE_TEAM_FIELD_TEAM_ID                           ." "
-		. "INNER JOIN " . Config::TABLE_TYPE_ASSOC_USER_TEAM   ." "
+		. "LEFT JOIN  " . Config::TABLE_TYPE_ASSOC_USER_TEAM   ." "
 		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE              ." "
 		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID                ." "
 		. "WHERE "      . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                        . "=? "
