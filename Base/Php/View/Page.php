@@ -63,9 +63,10 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($InstanceTypeUser, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
-		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $InstanceTypeUser, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
+		public        function        CheckPostContainsKey($Key);
 		public        function        IncludeHeadAll($Page);
 		public        function        IncludeHeadGeneric();
 		public        function        IncludeHeadJavaScript();
@@ -1778,25 +1779,22 @@ abstract class Page
 		}
 	}
 	
-	protected function UserSelectByTypeUserId($Limit1, $Limit2, $InstanceTypeUser, &$ArrayInstanceUser, &$RowCount, $Debug)
+	protected function UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
-		if($InstanceTypeUser != NULL)
+		$ArrayInstanceUser = NULL;
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $FacedePersistence->UserSelectByTypeUserId($TypeUserId,
+															 $Limit1, $Limit2,
+															 $ArrayInstanceUser, $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		else
 		{
-			$ArrayInstanceUser = NULL;
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->UserSelectByTypeUserId($InstanceTypeUser->GetTypeUserId(),
-				                                                 $Limit1, $Limit2,
-				                                                 $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
-				return Config::SUCCESS;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_SELECT_USERS_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_SELECT_USERS_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
 		}
 	}
 	
@@ -1884,6 +1882,25 @@ abstract class Page
 			else $this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
 				                              str_replace('_', '', Config::PAGE_PASSWORD_RECOVERY));
 		}
+	}
+	
+	public function CheckPostContainsKey($Key)
+	{
+		foreach($_POST as $postElementKey=>$postElementValue)
+		{
+			if(strpos($postElementKey, $Key) !== false)
+			{
+				if($postElementKey == $Key) 
+					return Config::SUCCESS;
+				elseif($postElementKey == $Key."_x")
+					return Config::SUCCESS;
+				elseif($postElementKey == $Key."Back_x")
+					return Config::SUCCESS;
+				elseif($postElementKey == $Key."Forward_x")
+					return Config::SUCCESS;
+			}
+		}
+		return Config::ERROR;
 	}
 	
 	public function IncludeHeadAll($Page)

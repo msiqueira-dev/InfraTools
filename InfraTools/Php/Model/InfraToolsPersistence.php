@@ -91,7 +91,7 @@ class InfraToolsPersistence extends Persistence
 	
 	public static function ShowQueryInfraTools($Query)
 	{
-		echo "<div class='DivPageDebugQuery'>Query ($Query):" . InfraToolsPersistence::$Query() . "</div>";
+		echo "<div class='DivPageDebugQuery'><b>Query ($Query)</b>:" . InfraToolsPersistence::$Query() . "</div>";
 	}
 	
 	public static function SqlAssocUserServiceCheckUserTypeAdministrator()

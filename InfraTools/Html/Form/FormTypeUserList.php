@@ -49,11 +49,11 @@ if(is_array($this->ArrayInstanceTypeUser))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT . "' method='post' />
 					<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
-							 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+							 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT . "' />
 		      		<input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
 							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
@@ -65,11 +65,11 @@ if(is_array($this->ArrayInstanceTypeUser))
 				</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT . "' method='post' />
 					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
-							 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+							 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT . "' />
 					  <input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
 							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'

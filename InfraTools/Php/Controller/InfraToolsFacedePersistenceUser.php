@@ -282,7 +282,7 @@ class InfraToolsFacedePersistenceUser
 	{
 		$InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
-		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
+		$dateNow = NULL; $mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByEmail');

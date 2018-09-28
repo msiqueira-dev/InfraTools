@@ -622,6 +622,9 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_USER_LIST                                           = "FormTypeUserList";
 	const FORM_TYPE_USER_LIST_BACK                                      = "FormTypeUserListBack";
 	const FORM_TYPE_USER_LIST_FORWARD                                   = "FormTypeUserListForward";
+	const FORM_TYPE_USER_LIST_VIEW_USERS                                = "FormTypeUserListViewUsers";
+	const FORM_TYPE_USER_LIST_VIEW_USERS_BACK                           = "FormTypeUserListViewUsersBack";
+	const FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD                        = "FormTypeUserListViewUsersForward";
 	const FORM_TYPE_USER_REGISTER                                       = "FormTypeUserReturnRegister";
 	const FORM_TYPE_USER_REGISTER_CANCEL                                = "FormTypeUserReturnCancel";
 	const FORM_TYPE_USER_REGISTER_SUBMIT                                = "FormTypeUserReturnSubmit";
@@ -633,10 +636,7 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_USER_UPDATE_SUBMIT                                  = "FormTypeUserUpdateSubmit";
 	const FORM_TYPE_USER_VIEW                                           = "FormTypeUserView";
 	const FORM_TYPE_USER_VIEW_DELETE_SUBMIT                             = "FormTypeUserViewDeleteSubmit";
-	const FORM_TYPE_USER_VIEW_SELECT_USERS_SUBMIT                       = "FormTypeUserViewSelectUsersSubmit";
 	const FORM_TYPE_USER_VIEW_UPDATE_SUBMIT                             = "FormTypeUserViewUpdateSubmit";
-	const FORM_TYPE_USER_VIEW_USERS_LIST_BACK                           = "FormTypeUserViewUsersListBack";
-	const FORM_TYPE_USER_VIEW_USERS_LIST_FORWARD                        = "FormTypeUserViewUsersListForward";
 	const FORM_USER                                                     = "FormUser";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION                       = "FormUserChangeAssocUserCorporation";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL                = "FormUserChangeAssocUserCorporationCancel";

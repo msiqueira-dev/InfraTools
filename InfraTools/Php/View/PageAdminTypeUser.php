@@ -78,67 +78,83 @@ class PageAdminTypeUser extends PageAdmin
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+	
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
 			$this->PageFormLoad();
 			$PageFormBack = TRUE;
 		}
-		//TYPE USER LIST
-		if($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_LIST))
+		
+		//FORM_TYPE_USER_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->TypeUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceTypeUser, 
-								  $rowCount, $this->InputValueHeaderDebug);
+			if($this->ExecuteAdminFunction($_POST, 'TypeUserSelect', NULL, $this->ArrayInstanceTypeUser, $this->InputValueHeaderDebug)
+			                               == ConfigInfraTools::SUCCESS)
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
 		}
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_SELECT))
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-		//TYPE USER LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_LIST_BACK))
+		//FORM_TYPE_USER_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT) == ConfigInfraTools::SUCCESS)
 		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->TypeUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceTypeUser, 
-								  $rowCount, $this->InputValueHeaderDebug);
-		}
-		//TYPE USER LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_LIST_FORWARD))
-		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$this->TypeUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceTypeUser, 
-								  $rowCount, $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->TypeUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceTypeUser, 
-									  $rowCount, $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
-		}
-		//TYPE USER LIST SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_LIST]))
-		{
-			if($this->TypeUserSelectByTypeUserId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID], $this->InstanceTypeUser, 
-										         $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			$return = $this->ExecuteAdminFunction($_POST, 'TypeUserSelectByTypeUserId', $_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID],
+												  $this->InstanceTypeUser,  $this->InputValueHeaderDebug);
+			if($return == ConfigInfraTools::SUCCESS)
 			{
 				if($this->TypeUserLoadData($this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
+			}
+		}
+		//FORM_TYPE_USER_LIST_VIEW_USERS
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteAdminFunction($_POST, 'UserSelectByTypeUserId', $this->InstanceTypeUser->GetTypeUserId(), 
+											   $this->ArrayInstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
+			}
+		}
+		//FORM_CORPORATION_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											  $this->InstanceInfraToolsCorporation, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			{
+				$this->CorporationLoadData($this->InstanceInfraToolsCorporation);
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+			}
+		}
+		//FORM_DEPARMENT_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->DepartmentSelectByDepartmentNameAndCorporationName
+			                                  ($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
+											   $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+											   $this->InstanceInfraToolsDepartment, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			{
+				$this->DepartmentLoadData($this->InstanceInfraToolsDepartment);
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+			}
+		}
+		//FORM_TYPE_USER_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			$return = $this->ExecuteAdminFunction($_POST, 'TypeUserSelectByTypeUserId', $_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID],
+												  $this->InstanceTypeUser,  $this->InputValueHeaderDebug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				if($this->TypeUserLoadData($this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
+					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+			}
+		}
+		//FORM_USER_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL]) == ConfigInfraTools::SUCCESS)
+			{
+				$this->UserLoadData();
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			}
 		}
 		//TYPE USER REGISTER
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_REGISTER))
@@ -153,17 +169,6 @@ class PageAdminTypeUser extends PageAdmin
 			                         == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 			else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_REGISTER;
-		}
-		//TYPE USER SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT]))
-		{
-			if($this->TypeUserSelectByTypeUserId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID], $this->InstanceTypeUser, 
-										         $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->TypeUserLoadData($this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 		}
 		//TYPE USER VIEW DELETE SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_VIEW_DELETE_SUBMIT]))
@@ -223,106 +228,6 @@ class PageAdminTypeUser extends PageAdmin
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 					else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE;
 				} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-		}
-		//TYPE USER VIEW USERS
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_VIEW_SELECT_USERS_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->UserSelectByTypeUserId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTypeUser, $this->ArrayInstanceUser,
-											   $rowCount, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
-				else
-				{
-					if($this->TypeUserLoadData($this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-				}
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-		}
-		//TYPE USER VIEW USERS LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_BACK))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				if($this->UserSelectByTypeUserId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTypeUser, $this->ArrayInstanceUser,
-											   $rowCount, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-			}
-			else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-		}
-		//TYPE USER VIEW USERS FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_FORWARD))
-		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE];
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO];
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->UserSelectByTypeUserId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTypeUser, $this->ArrayInstanceUser,
-											   $rowCount, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
-				else 
-				{
-					if($this->InputLimitTwo > $rowCount)
-					{
-						if(!is_numeric($rowCount))
-						{
-							$this->InputLimitOne = $this->InputLimitOne - 25;
-							$this->InputLimitTwo = $this->InputLimitTwo - 25;
-						}
-						else
-						{
-							$this->InputLimitOne = $rowCount - 25;
-							$this->InputLimitTwo = $rowCount;
-						}
-						if($this->UserSelectByTypeUserId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTypeUser, 
-													   $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
-						                               == ConfigInfraTools::SUCCESS)
-							$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
-						else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-					} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-				}
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-		}
-		//TYPE USER VIEW USERS SELECT CORPORATION
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_LIST]))
-		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
-											  $this->InstanceInfraToolsCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-			}
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
-			{
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayInstanceInfraToolsUser, $rowCount,
-																 $this->InputValueHeaderDebug);
-			}
-		}
-		//TYPE USER VIEW USERS SELECT TYPE USER
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_LIST]))
-		{
-			if($this->TypeUserSelectByTypeUserId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID], $this->InstanceTypeUser, 
-										         $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->TypeUserLoadData($this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 		}
 		else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;

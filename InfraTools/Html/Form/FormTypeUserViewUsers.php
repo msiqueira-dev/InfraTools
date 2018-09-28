@@ -2,7 +2,7 @@
 <?php
 if(is_array($this->ArrayInstanceUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -13,9 +13,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -33,9 +33,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_USERS_LIST_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -92,11 +92,15 @@ if(is_array($this->ArrayInstanceUser))
 			echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
-							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "'
+							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' 
+							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST . "'
+							 value='"  . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "'
 							 value='"  . $user->GetCorporationName() . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
-										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
 										 value='" . $user->GetDepartmentName() . "' 
 										 title='" . $user->GetDepartmentName() . "' />
 						</form>

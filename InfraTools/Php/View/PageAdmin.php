@@ -51,6 +51,54 @@ class PageAdmin extends PageInfraTools
 	{
 		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
+	
+	protected function ExecuteAdminFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug)
+	{
+		foreach($PostForm as $postElementKey=>$postElementValue)
+		{
+			$postElementKey = strtoupper($postElementKey);
+			if(strpos($postElementKey, 'LIST') !== false)
+			{
+				$this->InputLimitOne = 0;
+				$this->InputLimitTwo = 25;
+				if(strpos($postElementKey, 'BACK') !== false)
+				{
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					if($this->InputLimitOne < 0)
+						$this->InputLimitOne = 0;
+					if($this->InputLimitTwo <= 0)
+						$this->InputLimitTwo = 25;
+				}
+				elseif (strpos($postElementKey, 'FORWARD') !== false) 
+				{
+					$this->InputLimitOne = $this->InputLimitOne + 25;
+					$this->InputLimitTwo = $this->InputLimitTwo + 25;	
+					$Function($this->InputLimitOne, $this->InputLimitTwo, $ObjectToFill, 
+							  $rowCount, $Debug);
+					if($this->InputLimitOne > $rowCount)
+					{
+						$this->InputLimitOne = $this->InputLimitOne - 25;
+						$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					}
+					elseif($this->InputLimitTwo > $rowCount)
+					{
+						$this->InputLimitOne = $this->InputLimitOne - 25;
+						$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					}
+				}
+				if($Parameter != NULL)
+					return $this->$Function($this->InputLimitOne, $this->InputLimitTwo, $Parameter, $ObjectToFill, 
+											$rowCount, $this->InputValueHeaderDebug);
+				else return $this->$Function($this->InputLimitOne, $this->InputLimitTwo, $ObjectToFill, 
+											 $rowCount, $this->InputValueHeaderDebug);
+			}
+			elseif(strpos($postElementKey, 'SELECT') !== false)
+			{
+				return $this->$Function($Parameter, $ObjectToFill, $this->InputValueHeaderDebug);
+			}
+		}
+	}
 
 	protected function LoadHtml()
 	{
