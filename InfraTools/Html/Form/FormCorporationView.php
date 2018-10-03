@@ -18,7 +18,7 @@
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent">
 				<?php
-						if($this->InstanceInfraToolsCorporation->GetCorporationActive())
+						if($this->InstanceCorporation->GetCorporationActive())
 							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png' . "' 
                                    name='"  . ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION . "'
                                    alt='CorporationVerification' width='20' height='20' />";

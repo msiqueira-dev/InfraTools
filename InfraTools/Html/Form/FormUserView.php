@@ -99,40 +99,8 @@
 				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhoneSecondary; ?></label>
 			</div>
 		</div>
-		<?php 
-		if($this->GetCurrentPage() == ConfigInfraTools::PAGE_ADMIN_USER)
-		{ 
-		?>
-			<!-- TEAM -->
-			<div class="DivContentBodyContainerSided">
-				<div class="DivContentBodyContainerLabelSided">
-					<label><?php echo $this->InstanceLanguageText->GetText('TEAMS').":"; ?></label>
-				</div>
-				<div class="DivContentBodyContainerValueSided">
-					<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserTeam; ?></label>
-				</div>
-			</div>
-		<?php
-		}
-		?>
 	</div>
     <div class="DivContentBodySided">
-    	<?php 
-		if($this->GetCurrentPage() == ConfigInfraTools::PAGE_ACCOUNT)
-		{ 
-		?>
-			<!-- TEAM -->
-			<div class="DivContentBodyContainerSided">
-				<div class="DivContentBodyContainerLabelSided">
-					<label><?php echo $this->InstanceLanguageText->GetText('TEAMS').":"; ?></label>
-				</div>
-				<div class="DivContentBodyContainerValueSided">
-					<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserTeam; ?></label>
-				</div>
-			</div>
-		<?php
-		}
-		?>
 		<!-- CORPORATION -->
 		<div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided">
@@ -195,6 +163,15 @@
 						   name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_DEPARTMENT; ?>"
 						   alt="DepartmentVerification" width="20" height="20" />
 				</div>
+			</div>
+		</div>
+		<!-- TEAM -->
+		<div class="DivContentBodyContainerSided">
+			<div class="DivContentBodyContainerLabelSided">
+				<label><?php echo $this->InstanceLanguageText->GetText('TEAMS').":"; ?></label>
+			</div>
+			<div class="DivContentBodyContainerValueSided">
+				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserTeam; ?></label>
 			</div>
 		</div>
 		<?php

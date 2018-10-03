@@ -680,7 +680,7 @@ class InfraToolsFacedePersistenceService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -691,7 +691,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -748,7 +748,7 @@ class InfraToolsFacedePersistenceService
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -759,7 +759,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -818,7 +818,7 @@ class InfraToolsFacedePersistenceService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -829,7 +829,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -887,7 +887,7 @@ class InfraToolsFacedePersistenceService
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -898,7 +898,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -957,12 +957,12 @@ class InfraToolsFacedePersistenceService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
+									                                  $InstanceCorporation, 
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -973,7 +973,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 																$InstanceDepartment, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -1030,12 +1030,12 @@ class InfraToolsFacedePersistenceService
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
+									                                  $InstanceCorporation, 
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -1046,7 +1046,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 																$InstanceDepartment, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -1106,12 +1106,12 @@ class InfraToolsFacedePersistenceService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
+									                                  $InstanceCorporation, 
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -1122,7 +1122,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
+																$InstanceCorporation, 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 							                                    $InstanceDepartment,  
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
@@ -1179,12 +1179,12 @@ class InfraToolsFacedePersistenceService
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
+									                                  $InstanceCorporation, 
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
@@ -1195,7 +1195,7 @@ class InfraToolsFacedePersistenceService
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
 							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation,
+																$InstanceCorporation,
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
 																$InstanceDepartment, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],

@@ -1,4 +1,22 @@
 <?php
+/************************************************************************
+Class: PageAdminTypeUser.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			Base       - Php/Controller/Session.php
+			Base       - Php/Model/FormValidator.php
+Description: 
+			Classe que trata da administração dos tipos de usuários.
+Functions: 
+			protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug);
+			protected function LoadDataFromSession($SessionKey, &$Instance);
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 
 if (!class_exists("InfraToolsFactory"))
 {
@@ -46,13 +64,8 @@ class PageAdmin extends PageInfraTools
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
 	
-	protected function ExecuteAdminFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug)
+	protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug)
 	{
 		foreach($PostForm as $postElementKey=>$postElementValue)
 		{
@@ -99,6 +112,16 @@ class PageAdmin extends PageInfraTools
 			}
 		}
 	}
+	
+	protected function LoadDataFromSession($SessionKey, $Function, &$Instance)
+	{
+		if(isset($Function) && isset($Sessionkey))
+		{
+			if($this->Session->GetSessionValue($SessionKey, $Instance) == ConfigInfraTools::SUCCESS)
+				return $this->$Function($Instance);
+		}
+		else return ConfigInfraTools::ERROR;
+	}
 
 	protected function LoadHtml()
 	{
@@ -119,6 +142,11 @@ class PageAdmin extends PageInfraTools
 			echo ConfigInfraTools::HTML_TAG_END;
 		}
 		else return ConfigInfraTools::ERROR;
+	}
+	
+	public function GetCurrentPage()
+	{
+		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 
 	public function LoadPage()

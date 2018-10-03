@@ -54,7 +54,6 @@ class Config
 	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
 	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
 	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
-	const FORM_FIELD_DESCRIPTION                                        = "FormFieldTypeUserDescription";
 	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
 	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
 	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
@@ -72,6 +71,7 @@ class Config
 	const FORM_IMAGE_SUCCESS                                            = "Icons/IconFormSuccess.png";
 	const FORM_IMAGE_WARNING                                            = "Icons/IconFormWarning.png";
 	const FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT                  = "FormLoginTwoStepVerificationCodeSubmit";
+	const FORM_TYPE_USER_RETURN_NOT_FOUND                               = "FormTypeUserReturnNotFound";
 	const FORM_TEAM_RETURN_NOT_FOUND                                    = "FormTeamReturnNotFound";
 	const FORM_VALIDATE_FUNCTION_BOOL                                   = "VALIDATE_BOOL";
 	const FORM_VALIDATE_FUNCTION_CORPORATION_NAME                       = "VALIDATE_CORPORATION_NAME";

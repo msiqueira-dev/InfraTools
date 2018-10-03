@@ -134,7 +134,7 @@ Methods:
 			protected function TypeTicketSelectById($TypeTicketId);
 			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification);
 			protected function UserInfraToolsSelectByEmail($Email);
-			protected function UserLoadData();
+			protected function UserLoadData($InstanceUser);
 			protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed);
 			protected function UserUpdate($OnAdmin, $SelectedUser);
 			protected function UserUpdateCorporationInformation($SelectedUser);
@@ -160,7 +160,6 @@ abstract class PageInfraTools extends Page
 	protected $FacedeBusinessInfraTools         = NULL;
 	protected $InstanceMobileDetectInfraTools   = NULL;
 	protected $Session                          = NULL;
-	public    $InstanceInfraToolsUserAdmin      = NULL;
 	
 	/* Propiedades de página */
 	public $EnableFieldSessionExpires                            = "";
@@ -258,7 +257,6 @@ abstract class PageInfraTools extends Page
 	public $ReturnHeaderDebugClass                               = "SwitchToggleSlider";
 	public $ReturnHeaderLayoutClass                              = "SwitchToggleSlider";
 	public $ReturnIdClass                                        = "";
-	public $ReturnIdText                                         = "";
 	public $ReturnNameClass                                      = "";
 	public $ReturnNameText                                       = "";
 	public $ReturnPasswordClass                                  = "";
@@ -3256,11 +3254,11 @@ abstract class PageInfraTools extends Page
 			}
 			else
 			{
-				$this->ReturnIdText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
+				$this->ReturnTypeTicketIdText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
 				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_TYPE_USER_RETURN_NOT_FOUND;
+				return ConfigInfraTools::FORM_TYPE_TICKET_RETURN_NOT_FOUND;
 			}
 		}
 		else
@@ -3311,22 +3309,20 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserInfraToolsSelectByEmail($Email)
+	protected function UserInfraToolsSelectByEmail($Email, &$InstanceUser, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $Email;
 		if($Email != $this->User->GetEmail())
 		{
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->InputValueUserEmail, 
-																			    $this->InstanceInfraToolsUserAdmin, 
-																			    $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->InputValueUserEmail, $InstanceUser, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($this->InstanceInfraToolsUserAdmin,
-																				 $this->InputValueHeaderDebug);
+				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($InstanceUser, $Debug);
 				if($return == ConfigInfraTools::SUCCESS || $return == ConfigInfraTools::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
 				{
-					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
+					$this->UserLoadData($InstanceUser);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $InstanceUser);
 					return ConfigInfraTools::SUCCESS;	
 				}
 				else
@@ -3357,91 +3353,88 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserLoadData()
+	protected function UserLoadData($InstanceUser)
 	{
-		if($this->InstanceInfraToolsUserAdmin != NULL)
+		$this->InputValueAssocUserCorporationRegistrationDate = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
+		$this->InputValueAssocUserCorporationRegistrationId = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
+		$this->InputValueBirthDateDay             = $InstanceUser->GetBirthDateDay();
+		$this->InputValueBirthDateMonth           = $InstanceUser->GetBirthDateMonth();
+		$this->InputValueBirthDateYear            = $InstanceUser->GetBirthDateYear();
+		$this->InputValueUserCorporationName      = $InstanceUser->GetCorporationName();
+		$this->InputValueCountry                  = $InstanceUser->GetCountry();
+		if($InstanceUser->GetDepartmentInitials() != NULL)
+			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentInitials() 
+													  . " - " . $InstanceUser->GetDepartmentName();
+		elseif($InstanceUser->GetDepartmentName() != NULL)
+			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentName();
+		else $this->InputValueDepartmentName = NULL;
+		$this->InputValueGender                   = $InstanceUser->GetGender();
+		$this->InputValueUserName                 = $InstanceUser->GetName();
+		$this->InputValueUserEmail                = $InstanceUser->GetEmail();
+		$this->InputValueUserPhonePrimary         = $InstanceUser->GetUserPhonePrimary();
+		$this->InputValueUserPhonePrimaryPrefix   = $InstanceUser->GetUserPhonePrimaryPrefix();
+		$this->InputValueUserPhoneSecondary       = $InstanceUser->GetUserPhoneSecondary();
+		$this->InputValueUserPhoneSecondaryPrefix = $InstanceUser->GetUserPhoneSecondaryPrefix();
+		$this->InputValueRegion                   = $InstanceUser->GetRegion();
+		$this->InputValueRegisterDate             = $InstanceUser->GetRegisterDate();
+		$this->InputValueRegistrationDate         = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
+		$this->InputValueRegistrationDateDay      = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDateDay();
+		$this->InputValueRegistrationDateMonth    = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDateMonth();
+		$this->InputValueRegistrationDateYear     = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDateYear();
+		$this->InputValueRegistrationId           = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
+		if($InstanceUser->GetArrayAssocUserTeam() != NULL)
 		{
-			$this->InputValueAssocUserCorporationRegistrationDate = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDate();
-			$this->InputValueAssocUserCorporationRegistrationId = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationId();
-			$this->InputValueBirthDateDay             = $this->InstanceInfraToolsUserAdmin->GetBirthDateDay();
-			$this->InputValueBirthDateMonth           = $this->InstanceInfraToolsUserAdmin->GetBirthDateMonth();
-			$this->InputValueBirthDateYear            = $this->InstanceInfraToolsUserAdmin->GetBirthDateYear();
-			$this->InputValueUserCorporationName      = $this->InstanceInfraToolsUserAdmin->GetCorporationName();
-			$this->InputValueCountry                  = $this->InstanceInfraToolsUserAdmin->GetCountry();
-			if($this->InstanceInfraToolsUserAdmin->GetDepartmentInitials() != NULL)
-				$this->InputValueDepartmentName       = $this->InstanceInfraToolsUserAdmin->GetDepartmentInitials() 
-				                                          . " - " . $this->InstanceInfraToolsUserAdmin->GetDepartmentName();
-			elseif($this->InstanceInfraToolsUserAdmin->GetDepartmentName() != NULL)
-				$this->InputValueDepartmentName       = $this->InstanceInfraToolsUserAdmin->GetDepartmentName();
-			else $this->InputValueDepartmentName = NULL;
-			$this->InputValueGender                   = $this->InstanceInfraToolsUserAdmin->GetGender();
-			$this->InputValueUserName                 = $this->InstanceInfraToolsUserAdmin->GetName();
-			$this->InputValueUserEmail                = $this->InstanceInfraToolsUserAdmin->GetEmail();
-			$this->InputValueUserPhonePrimary         = $this->InstanceInfraToolsUserAdmin->GetUserPhonePrimary();
-			$this->InputValueUserPhonePrimaryPrefix   = $this->InstanceInfraToolsUserAdmin->GetUserPhonePrimaryPrefix();
-			$this->InputValueUserPhoneSecondary       = $this->InstanceInfraToolsUserAdmin->GetUserPhoneSecondary();
-			$this->InputValueUserPhoneSecondaryPrefix = $this->InstanceInfraToolsUserAdmin->GetUserPhoneSecondaryPrefix();
-			$this->InputValueRegion                   = $this->InstanceInfraToolsUserAdmin->GetRegion();
-			$this->InputValueRegisterDate             = $this->InstanceInfraToolsUserAdmin->GetRegisterDate();
-			$this->InputValueRegistrationDate         = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDate();
-			$this->InputValueRegistrationDateDay      = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDateDay();
-			$this->InputValueRegistrationDateMonth    = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDateMonth();
-			$this->InputValueRegistrationDateYear     = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDateYear();
-			$this->InputValueRegistrationId           = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationId();
-			if($this->InstanceInfraToolsUserAdmin->GetArrayAssocUserTeam() != NULL)
+			foreach ($InstanceUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
 			{
-				foreach ($this->User->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
-				{
-					if($index == 0)
-						$this->InputValueUserTeam = $assocUserTeam->GetTeamName();
-					else $this->InputValueUserTeam .= ", " . $assocUserTeam->GetTeamName();
-				}
+				if($index == 0)
+					$this->InputValueUserTeam = $assocUserTeam->GetTeamName();
+				else $this->InputValueUserTeam .= ", " . $assocUserTeam->GetTeamName();
 			}
-			$this->InputValueUserUniqueId             = $this->InstanceInfraToolsUserAdmin->GetUserUniqueId();
-			if($this->InstanceInfraToolsUserAdmin->GetSessionExpires())
-				$this->InputValueSessionExpires = "checked";
-			if($this->InstanceInfraToolsUserAdmin->GetTwoStepVerification())
-				$this->InputValueTwoStepVerification = "checked";
-			if($this->InstanceInfraToolsUserAdmin->GetUserActive())
-				$this->InputValueUserActive = "checked";
-			if($this->InstanceInfraToolsUserAdmin->GetUserConfirmed())
-				$this->InputValueUserConfirmed = "checked";
-			$this->InputValueTypeUserDescription = $this->InstanceInfraToolsUserAdmin->GetUserTypeDescription();
-			$this->InputValueTypeUserId = $this->InstanceInfraToolsUserAdmin->GetUserTypeId();
-			
-			if($this->InstanceInfraToolsUserAdmin->CheckAssocUserCorporationRegistrationDateActive())
-				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InstanceInfraToolsUserAdmin->CheckAssocUserCorporationRegistrationIdActive())
-				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InstanceInfraToolsUserAdmin->CheckCorporationActive())
-				$this->InputValueCorporationActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InstanceInfraToolsUserAdmin->CheckDepartmentExists())
-				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InputValueUserUniqueId != NULL)
-				$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-				                                   'Icons/IconInfraToolsNotVerified.png';
 		}
+		$this->InputValueUserUniqueId             = $InstanceUser->GetUserUniqueId();
+		if($InstanceUser->GetSessionExpires())
+			$this->InputValueSessionExpires = "checked";
+		if($InstanceUser->GetTwoStepVerification())
+			$this->InputValueTwoStepVerification = "checked";
+		if($InstanceUser->GetUserActive())
+			$this->InputValueUserActive = "checked";
+		if($InstanceUser->GetUserConfirmed())
+			$this->InputValueUserConfirmed = "checked";
+		$this->InputValueTypeUserDescription = $InstanceUser->GetUserTypeDescription();
+		$this->InputValueTypeUserId = $InstanceUser->GetUserTypeId();
+
+		if($InstanceUser->CheckAssocUserCorporationRegistrationDateActive())
+			$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsVerified.png';
+		else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsNotVerified.png';
+		if($InstanceUser->CheckAssocUserCorporationRegistrationIdActive())
+			$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsVerified.png';
+		else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsNotVerified.png';
+		if($InstanceUser->CheckCorporationActive())
+			$this->InputValueCorporationActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsVerified.png';
+		else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsNotVerified.png';
+		if($InstanceUser->CheckDepartmentExists())
+			$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsVerified.png';
+		else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsNotVerified.png';
+		if($this->InputValueUserUniqueId != NULL)
+			$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
+															'Icons/IconInfraToolsVerified.png';
+		else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
+											   'Icons/IconInfraToolsNotVerified.png';
 	}
 	
 	protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed)

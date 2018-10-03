@@ -628,7 +628,6 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_USER_REGISTER                                       = "FormTypeUserReturnRegister";
 	const FORM_TYPE_USER_REGISTER_CANCEL                                = "FormTypeUserReturnCancel";
 	const FORM_TYPE_USER_REGISTER_SUBMIT                                = "FormTypeUserReturnSubmit";
-	const FORM_TYPE_USER_RETURN_NOT_FOUND                               = "FormTypeUserReturnNotFound";
 	const FORM_TYPE_USER_SELECT                                         = "FormTypeUserSelect";
 	const FORM_TYPE_USER_SELECT_SUBMIT                                  = "FormTypeUserSelectSubmit";
 	const FORM_TYPE_USER_UPDATE                                         = "FormTypeUserUpdate";	

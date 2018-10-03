@@ -63,6 +63,7 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($InstanceTypeUser, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
+		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
@@ -465,7 +466,7 @@ abstract class Page
 	
 	protected function CorporationLoadData(&$InstanceCorporation)
 	{
-		if($InstanceCorporation != NULL)
+		if(isset($InstanceCorporation) && $InstanceCorporation != NULL)
 		{
 			if($InstanceCorporation->GetCorporationActive())
 				$this->InputValueCorporationActive     = "checked"; 
@@ -540,8 +541,20 @@ abstract class Page
 																		  $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
-				return $return;
+				$return = $this->CorporationLoadData($InstanceCorporation);
+				if($return == Config::SUCCESS)
+				{
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
+					return Config::SUCCESS;
+				}
+				else
+				{
+					$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
+					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+					return Config::ERROR;
+				}
 			}
 			else
 			{
@@ -789,7 +802,7 @@ abstract class Page
 	
 	protected function DepartmentLoadData($InstanceDepartment)
 	{
-		if($InstanceDepartment != NULL)
+		if(isset($InstanceDepartment) && $InstanceDepartment != NULL)
 		{
 			$this->InputValueCorporationName     = $InstanceDepartment->GetDepartmentCorporationName();
 			$this->InputValueDepartmentInitials  = $InstanceDepartment->GetDepartmentInitials();
@@ -1025,8 +1038,20 @@ abstract class Page
 																		             $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
-				return $return;
+				$return = $this->DepartmentLoadData($InstanceDepartment);
+				if($return == Config::SUCCESS)
+				{
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+					return Config::SUCCESS;
+				}
+				else
+				{
+					$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
+					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+					return Config::ERROR;
+				}
 			}
 			else
 			{
@@ -1206,14 +1231,26 @@ abstract class Page
 				$return = $this->CorporationSelectByName($this->InputValueCorporationName, $InstanceCorporation, $Debug);
 				if($return == Config::SUCCESS)
 				{
-					$InstanceDepartment->SetDepartmentCorporation($InstanceCorporation);
-					$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
-					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_UPDATE_SUCCESS', 
-																					$this->Language);
-					return Config::SUCCESS;
+					$return = $this->DepartmentLoadData($InstanceDepartment);
+					if($return == Config::SUCCESS)
+					{
+						$InstanceDepartment->SetDepartmentCorporation($InstanceCorporation);
+						$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+						$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+											   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+						$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_DEPARTMENT_UPDATE_SUCCESS', 
+																						$this->Language);
+						return Config::SUCCESS;
+					}
+					else
+					{
+						$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
+						$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+						return Config::ERROR;
+					}
 				}
 				else
 				{
@@ -1612,6 +1649,7 @@ abstract class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
+				$this->TypeUserLoadData($InstanceTypeUser); 
 				return Config::SUCCESS;
 			}
 			else
@@ -1663,11 +1701,12 @@ abstract class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
+				$this->TypeUserLoadData($InstanceTypeUser);
 				return Config::SUCCESS;
 			}
 			else
 			{
-				$this->ReturnIdText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
+				$this->ReturnTypeUserIdText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
 				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
@@ -1689,7 +1728,7 @@ abstract class Page
 		{
 			$PageForm = $this->Factory->CreatePageForm();
 			$this->InputValueTypeUserDescription  = $_POST[Config::FORM_FIELD_TYPE_USER_DESCRIPTION];
-			$this->InputFocus = Config::FORM_FIELD_DESCRIPTION;
+			$this->InputFocus = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
 			$arrayConstants = array(); $matrixConstants = array();
 			
 			//TYPE_USER_DESCRIPTION
@@ -1720,6 +1759,7 @@ abstract class Page
 				{
 					$InstanceTypeUser->SetTypeUserDescription($this->InputValueTypeUserDescription);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
+					$this->TypeUserLoadData($InstanceTypeUser);
 					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 										   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
@@ -1751,6 +1791,23 @@ abstract class Page
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			}	
+		}
+	}
+	
+	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	{
+		$ArrayInstanceUser = NULL;
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $FacedePersistence->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		else
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_SELECT_USERS_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
 		}
 	}
 	

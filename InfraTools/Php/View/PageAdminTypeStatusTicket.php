@@ -191,7 +191,8 @@ class PageAdminTypeStatusTicket extends PageAdmin
 			}
 			else
 			{
-				$this->ReturnIdText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', $this->Language);
+				$this->ReturnTypeStatusTicketDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', 
+																										$this->Language);
 				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
@@ -244,7 +245,7 @@ class PageAdminTypeStatusTicket extends PageAdmin
 			}
 			else
 			{
-				$this->ReturnIdText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', $this->Language);
+				$this->ReturnTypeStatusTicketIdText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', $this->Language);
 				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";

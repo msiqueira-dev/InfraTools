@@ -68,8 +68,8 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 								 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
 					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
 										 id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
-										 value='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' 
-										 title='" . $this->InstanceInfraToolsCorporation->GetCorporationName() . "' />
+										 value='" . $this->InstanceCorporation->GetCorporationName() . "' 
+										 title='" . $this->InstanceCorporation->GetCorporationName() . "' />
 				</form>
 		      </td>";
 		echo "<td>" . $user->GetName()      . "</td>";

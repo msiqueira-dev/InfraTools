@@ -651,7 +651,7 @@ class FacedePersistenceUser
 									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
 									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate,
-									   $assocUsrCorpCorpName, $assocUsrCorpRegistrationDate,
+									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
 									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
 									   $depCorp, $depIni, $depName, $depRegDate);					
 					if ($stmt->fetch()) 
