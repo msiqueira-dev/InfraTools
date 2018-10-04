@@ -59,7 +59,7 @@ class PageAccount extends PageInfraTools
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT]))
 		{
 			$this->Page = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-			$this->InputFocus = ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD;
+			$this->InputFocus = ConfigInfraTools::FORM_FIELD_PASSWORD_NEW;
 			$this->SubmitEnabled = 'disabled="disabled"';
 		}
 		//PAGE_ACCOUNT_UPDATE
@@ -72,76 +72,12 @@ class PageAccount extends PageInfraTools
 		//PAGE_ACCOUNT_CHANGE_PASSWORD
 		elseif(isset($_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT]))
 		{
-			$PageForm = $this->Factory->CreatePageForm();
-			$this->Page = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-			$this->InputValueNewPassword     = $_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD];
-			$this->InputValueRepeatPassword  = $_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD];
-			$arrayConstants = array(); $arrayExtraField = array(); $arrayOptions = array(); $matrixConstants = array();
-			
-			//PASSWORD
-			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_NEW_PASSWORD;
-			$arrayElementsClass[0]        = &$this->ReturnPasswordClass;
-			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_PASSWORD;
-			$arrayElementsInput[0]        = $this->InputValueNewPassword; 
-			$arrayElementsMinValue[0]     = 8; 
-			$arrayElementsMaxValue[0]     = 18; 
-			$arrayElementsNullable[0]     = FALSE;
-			$arrayElementsText[0]         = &$this->ReturnPasswordText;
-			$arrayExtraField[0]           = &$this->InputValueRepeatPassword;
-			array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD', 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_MATCH');
-			array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			
-			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $arrayOptions,
-											    $arrayExtraField);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-				$return = $FacedePersistenceInfraTools->UserUpdatePasswordByEmail(
-																			$this->User->GetEmail(),
-																			$this->InputValueNewPassword,
-																			$this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->Page          = ConfigInfraTools::PAGE_ACCOUNT;
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																					 'ACCOUNT_CHANGE_PASSWORD_SUCCESS', 
-																					  $this->Language);
-				}
-				elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-				{
-					$this->Page          = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-				}
-				else
-				{
-					$this->Page               = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-					$this->ReturnPasswordText = $this->InstanceLanguageText->
-												   GetConstant('ACCOUNT_CHANGE_PASSWORD_ERROR', 
-																						  $this->Language);
-					$this->ReturnPasswordClass = ConfigInfraTools::FORM_FIELD_ERROR;
-					$this->ReturnClass         = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";			
-			}
+			if($this->UserUpdatePasswordByUserEmail($this->User->GetEmail(), 
+												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW], 
+												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
+												    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->Page= Config::PAGE_ACCOUNT;
+			else $this->Page = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
 		}
 		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_ACTIVATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE]))
@@ -191,18 +127,14 @@ class PageAccount extends PageInfraTools
 	{
 		if(isset($this->User))
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$this->InputValueAssocUserCorporationRegistrationDate = 
-				$this->User->GetAssocUserCorporationUserRegistrationDate();
-			$this->InputValueAssocUserCorporationRegistrationId = 
-				$this->User->GetAssocUserCorporationUserRegistrationId();
+			$this->InputValueAssocUserCorporationRegistrationDate = $this->User->GetAssocUserCorporationUserRegistrationDate();
+			$this->InputValueAssocUserCorporationRegistrationId = $this->User->GetAssocUserCorporationUserRegistrationId();
 			$this->InputValueBirthDateDay = $this->User->GetBirthDateDay();
 			$this->InputValueBirthDateMonth = $this->User->GetBirthDateMonth();
 			$this->InputValueBirthDateYear = $this->User->GetBirthDateYear();
 			$this->InputValueUserCorporationName = $this->User->GetCorporationName();
 			if($this->User->GetDepartmentInitials() != NULL)
-				$this->InputValueDepartmentName = $this->User->GetDepartmentInitials() 
-				                                . " - " . $this->User->GetDepartmentName();
+				$this->InputValueDepartmentName = $this->User->GetDepartmentInitials() . " - " . $this->User->GetDepartmentName();
 			else
 				$this->InputValueDepartmentName       = $this->User->GetDepartmentName();
 			$this->InputValueCountry = $this->User->GetCountry();

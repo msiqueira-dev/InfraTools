@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about type of association betweeen a user and a team.
 Functions: 
-			public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug);
+			public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug);
 			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug);
 			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug);
 			public function TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug);
@@ -77,15 +77,15 @@ class FacedePersistenceTypeAssocUserTeam
         return self::$Instance;
     }
 	
-	public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug)
+	public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeAssocUserTeamDelete');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamDelete());
+				Persistence::ShowQuery('SqlTypeAssocUserTeamDeleteByTeamId');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamDeleteByTeamId());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $TypeAssocUserTeamTeamId);

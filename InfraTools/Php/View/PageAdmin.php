@@ -11,7 +11,7 @@ Description:
 			Classe que trata da administração dos tipos de usuários.
 Functions: 
 			protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug);
-			protected function LoadDataFromSession($SessionKey, &$Instance);
+			protected function LoadDataFromSession($SessionKey, $Function, &$Instance);
 			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
@@ -115,10 +115,12 @@ class PageAdmin extends PageInfraTools
 	
 	protected function LoadDataFromSession($SessionKey, $Function, &$Instance)
 	{
-		if(isset($Function) && isset($Sessionkey))
+		if(isset($Function) && isset($SessionKey))
 		{
 			if($this->Session->GetSessionValue($SessionKey, $Instance) == ConfigInfraTools::SUCCESS)
+			{	
 				return $this->$Function($Instance);
+			}
 		}
 		else return ConfigInfraTools::ERROR;
 	}

@@ -87,8 +87,8 @@ Functions:
 			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug);
 			public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
 			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug);
-			public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug,
-			                                       $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug,
+			                                                $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug, 
 			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug);
@@ -701,10 +701,10 @@ class FacedePersistence
 		return $FacedePersistenceTeam->TeamDeleteByTeamId($TeamId, $Debug);
 	}
 	
-	public function TeamInsert($TeamName, $TeamDescription, $Debug)
+	public function TeamInsert($TeamDescription, $TeamName, $Debug)
 	{
 		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamInsert($TeamName, $TeamDescription, $Debug);
+		return $FacedePersistenceTeam->TeamInsert($TeamDescription, $TeamName, $Debug);
 	}
 	
 	public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug)
@@ -731,10 +731,10 @@ class FacedePersistence
 		return $FacedePersistenceTeam->TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug);
 	}
 	
-	public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug)
+	public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug)
 	{
 		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug);
+		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug);
 	}
 	
 	public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug)

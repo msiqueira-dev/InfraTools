@@ -141,13 +141,10 @@ class InfraToolsTechInfo extends TechInfo
 		array_push($arrayBaseDir, BASE_PATH       . "/Files");
 		array_push($arrayBaseDir, BASE_PATH       . "/Illustrator");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript");
-		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Async");
-		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Facebook");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Form");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Google");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/InternetExplorer");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Tabs");
-		array_push($arrayBaseDir, BASE_PATH       . "/Programs");
 		array_push($arrayBaseDir, BASE_PATH       . "/Photoshop");
 		array_push($arrayBaseDir, BASE_PATH       . "/Photoshop/Icons");
 		array_push($arrayBaseDir, BASE_PATH       . "/Photoshop/Logos");

@@ -53,18 +53,21 @@ Methods:
 		protected     function        TeamDeleteByTeamId($TeamId, $Debug);
 		protected     function        TeamInsert($TeamDescription, $TeamName, $Debug);
 		protected     function        TeamLoadData(&$InstanceTeam);
+		protected     function        TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug);
 		protected     function        TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug);
 		protected     function        TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
+		protected     function        TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug)
 		protected     function        TypeUserDelete($InstanceTypeUser, $Debug);
 		protected     function        TypeUserInsert($TypeUserDescription, $Debug);
 		protected     function        TypeUserLoadData(&$InstanceTypeUser);
 		protected     function        TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
 		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
-		protected     function        TypeUserUpdateByTypeUserId($InstanceTypeUser, $Debug);
+		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserUpdatePasswordByUserEmail($UserEmail, $UserPasswordNew, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
 		public        function        CheckPostContainsKey($Key);
@@ -1288,115 +1291,32 @@ abstract class Page
 		}	
 	}
 	
-	protected function TypeUserDelete($InstanceTypeUser, $Debug)
+	protected function TeamDeleteByTeamId($InstanceTeam, $Debug)
 	{
-		if($InstanceTypeUser != NULL)
+		if($InstanceTeam != NULL)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeUserDelete($InstanceTypeUser->GetTypeUserId(), 
-														 $Debug);
+			$return = $FacedePersistence->TeamDeleteByTeamId($InstanceTeam->GetTeamId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_DELETE_SUCCESS', $this->Language); 
+				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam);
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_SUCCESS', 
+																				$this->Language); 
 				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							           Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			else
-			{
-				if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_DELETE_ERROR_DEPENDENCY_USER', 
-																				 $this->Language);
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
-		}
-	}
-	
-	protected function TypeUserInsert($TypeUserDescription, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeUserDescription = $TypeUserDescription;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
-		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_ID', 'FORM_INVALID_TYPE_USER_ID_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == Config::SUCCESS)
-		{
-			$return = $FacedePersistence->TypeUserInsert($this->InputValueTypeUserDescription, 
-														 $Debug);
-			if($return == Config::SUCCESS)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_REGISTER_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_REGISTER_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function TeamDeleteByTeamId($TeamId, $Debug)
-	{
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->TeamDeleteByTeamId($TeamId, $Debug);
-		if($return == Config::SUCCESS)
-		{
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_SUCCESS', 
-																			$this->Language); 
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						           Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return $return;
-		}
-		else
-		{
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
-											                                 $this->Language);
-			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_ERROR', 
-																			  $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
+																		 $this->Language);
+		else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_ERROR', 
+																		  $this->Language);
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::ERROR;
 	}
 	
 	protected function TeamInsert($TeamDescription, $TeamName, $Debug)
@@ -1441,8 +1361,8 @@ abstract class Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TeamInsert($this->InputValueTeamName,
-												     $this->InputValueTeamDescription, 
+			$return = $FacedePersistence->TeamInsert($this->InputValueTeamDescription,
+												     $this->InputValueTeamName, 
 													 $Debug);
 			if($return == Config::SUCCESS)
 			{
@@ -1483,6 +1403,24 @@ abstract class Page
 			return Config::SUCCESS;
 		}
 		else return Config::ERROR;
+	}
+	
+	protected function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->TeamSelect($Limit1, $Limit2,
+															 $ArrayInstanceTeam,
+															 $RowCount,
+															 $Debug);
+		if($return != Config::SUCCESS)
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_NOT_FOUND', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+		else return Config::SUCCESS;
 	}
 	
 	protected function TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug)
@@ -1585,6 +1523,199 @@ abstract class Page
 		}
 	}
 	
+	protected function TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTeamDescription  = $TeamDescriptionNew;
+		$this->InputValueTeamName = $TeamNameNew;
+		$this->InputFocus = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTeamDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTeamDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 120; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TEAM_DESCRIPTION', 'FORM_INVALID_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//TEAM_NAME
+		$arrayElements[1]             = Config::FORM_FIELD_TEAM_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnTeamNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_TEAM_NAME;
+		$arrayElementsInput[1]        = $this->InputValueTeamName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 45; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnTeamNameText;
+		array_push($arrayConstants, 'FORM_INVALID_TEAM_NAME', 'FORM_INVALID_TEAM_NAME_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->TeamUpdateByTeamId($this->InputValueTeamDescription,
+															 $InstanceTeam->GetTeamId(),
+															 $this->InputValueTeamName,
+															 $this->InputValueHeaderDebug);
+			if($return == Config::SUCCESS)
+			{
+				if($this->TeamLoadData($InstanceTeam) == Config::SUCCESS)
+				{
+					$InstanceTeam->SetTeamDescription($this->InputValueTeamDescription);
+					$InstanceTeam->SetTeamName($this->InputValueTeamName);
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
+					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+										   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_UPDATE_SUCCESS', 
+																					$this->Language);
+					return Config::SUCCESS;
+				}
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
+			}
+		}
+		$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_UPDATE_ERROR', 
+																		$this->Language);
+		return Config::ERROR;
+	}
+	
+	protected function TypeAssocUserTeamDeleteByTeamId($InstanceTypeAssocUserTeam, $Debug)
+	{
+		if($InstanceTypeAssocUserTeam != NULL)
+		{
+			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $FacedePersistenceInfraTools->TypeAssocUserTeamDeleteByTeamId($this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(), 
+																	                $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS', 
+																				$this->Language); 
+				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return $return;
+			}
+			else
+			{
+				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+					$this->ReturnText = $this->InstanceLanguageText->GetConstant
+					                           ('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
+												$this->Language);
+				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR', 
+																				  $this->Language);
+				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return ConfigInfraTools::ERROR;
+			}
+		}
+	}
+	
+	protected function TypeUserDeleteByTeamId($InstanceTypeUser, $Debug)
+	{
+		if($InstanceTypeUser != NULL)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->TypeUserDelete($InstanceTypeUser->GetTypeUserId(), 
+														 $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_DELETE_SUCCESS', $this->Language); 
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							           Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return $return;
+			}
+		}
+		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_DELETE_ERROR_DEPENDENCY_USER', 
+																		 $this->Language);
+		else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_DELETE_ERROR', $this->Language);
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::ERROR;
+	}
+	
+	protected function TypeUserInsert($TypeUserDescription, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueTypeUserDescription = $TypeUserDescription;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_ID', 'FORM_INVALID_TYPE_USER_ID_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->TypeUserInsert($this->InputValueTypeUserDescription, 
+														 $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_REGISTER_SUCCESS', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
+			else
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_REGISTER_ERROR', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::FORM_FIELD_ERROR;
+		}
+	}
+	
 	protected function TypeUserLoadData(&$InstanceTypeUser)
 	{
 		if($InstanceTypeUser != NULL)
@@ -1604,9 +1735,7 @@ abstract class Page
 															 $ArrayInstanceTypeUser,
 															 $RowCount,
 															 $Debug);
-		if($return == Config::SUCCESS)
-			return $return;
-		else
+		if($return != Config::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
 			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
@@ -1614,6 +1743,7 @@ abstract class Page
 							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return Config::ERROR;
 		}
+		else return Config::SUCCESS;
 	}
 	
 	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug)
@@ -1722,12 +1852,12 @@ abstract class Page
 		}
 	}
 	
-	protected function TypeUserUpdateByTypeUserId($InstanceTypeUser, $Debug)
+	protected function TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug)
 	{
 		if($InstanceTypeUser != NULL)
 		{
 			$PageForm = $this->Factory->CreatePageForm();
-			$this->InputValueTypeUserDescription  = $_POST[Config::FORM_FIELD_TYPE_USER_DESCRIPTION];
+			$this->InputValueTypeUserDescription  = $TypeUserDescription;
 			$this->InputFocus = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
 			$arrayConstants = array(); $matrixConstants = array();
 			
@@ -1853,6 +1983,65 @@ abstract class Page
 							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return Config::ERROR;
 		}
+	}
+	
+	protected function UserUpdatePasswordByUserEmail($UserEmail, $UserPasswordNew, $UserPasswordNewRepeat, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueNewPassword     = $UserPasswordNew;
+		$this->InputValueRepeatPassword  = $UserPasswordNewRepeat;
+		$arrayConstants = array(); $arrayExtraField = array(); $arrayOptions = array(); $matrixConstants = array();
+
+		//FORM_FIELD_PASSWORD_NEW
+		$arrayElements[0]             = Config::FORM_FIELD_PASSWORD_NEW;
+		$arrayElementsClass[0]        = &$this->ReturnPasswordClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_PASSWORD;
+		$arrayElementsInput[0]        = $this->InputValueNewPassword; 
+		$arrayElementsMinValue[0]     = 8; 
+		$arrayElementsMaxValue[0]     = 18; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnPasswordText;
+		$arrayExtraField[0]           = &$this->InputValueRepeatPassword;
+		array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD', 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_MATCH');
+		array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $arrayOptions,
+											$arrayExtraField);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->UserUpdatePasswordByEmail($UserEmail, $this->InputValueNewPassword, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
+																				 'ACCOUNT_CHANGE_PASSWORD_SUCCESS', 
+																				  $this->Language);
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->Page          = Config::PAGE_ACCOUNT_CHANGE_PASSWORD;
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							                          Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::ERROR;
+			}
+		}			                        Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";			
+		$this->ReturnPasswordText = $this->InstanceLanguageText->GetConstant('ACCOUNT_CHANGE_PASSWORD_ERROR', $this->Language);
+		$this->ReturnPasswordClass = Config::FORM_FIELD_ERROR;
+		$this->ReturnClass         = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::ERROR;
 	}
 	
 	public function CheckInputImage($Input)

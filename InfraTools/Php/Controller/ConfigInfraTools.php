@@ -72,9 +72,6 @@ if (!class_exists("InfraToolsUser"))
 class ConfigInfraTools extends Config
 {	
 	/* Constantes de Páginas */
-	const PAGE_ACCOUNT                                                  = "Page_Account";
-	const PAGE_ACCOUNT_CHANGE_PASSWORD                                  = "Page_Account_Change_Password";
-	const PAGE_ACCOUNT_UPDATE                                           = "Page_Account_Update";
 	const PAGE_ADMIN                                                    = "Page_Admin";
 	const PAGE_ADMIN_CORPORATION                                        = "Page_Admin_Corporation";
 	const PAGE_ADMIN_CORPORATION_LIST                                   = "Page_Admin_Corporation_List";
@@ -329,7 +326,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_GENDER                                             = "FormFieldGender";
 	const FORM_FIELD_ID                                                 = "FormInputId";
-	const FORM_FIELD_NEW_PASSWORD                                       = "FormFieldNewPassword";
 	const FORM_FIELD_RADIO_DEPARTMENT                                   = "FormFieldRadioDepartment";
 	const FORM_FIELD_RADIO_DEPARTMENT_NAME                              = "FormFieldRadioDepartmentName";
 	const FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME         = "FormFieldRadioDepartmentNameAndCorporationName";
@@ -961,8 +957,6 @@ class ConfigInfraTools extends Config
 	const ACCOUNT_CHANGE_PASSWORD_FORM                              = "AccountChangePasswordForm";
 	const ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT                       = "AccountChangePasswordFormSubmit";
 	const ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT_CANCEL                = "AccountChangePasswordFormSubmitCancel";
-	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD                      = "AccountChangePasswordNewPassword";
-	const ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD                   = "AccountChangePasswordRepeatPassword";
 	
 	/* Constantes de Formulário da Página Contact */
 	const CONTACT_EMAIL_LABEL                                       = "ContactEmailLabel";
@@ -976,10 +970,6 @@ class ConfigInfraTools extends Config
 	const CONTACT_SELECT_SUGGESTION                                 = "Suggestion";
 	const CONTACT_SUBJECT                                           = "ContactSubject";
 	const CONTACT_TITLE                                             = "ContactTitle";
-	
-	/* Constantes de Formulário da Página Login */
-	
-	/* Constantes de Formulário da Página LoginTwoStepVerification */
   
 	/* Constantes de Formulário da Página PasswordRecovery */
 	const PASSWORD_RECOVERY_EMAIL_SESSION                           = "PasswordRecoveryEmailSession";
@@ -990,15 +980,12 @@ class ConfigInfraTools extends Config
 	const PASSWORD_RESET_CODE                                       = "PasswordResetCode";
 	const PASSWORD_RESET_FORM                                       = "PasswordResetForm";
 	const PASSWORD_RESET_FORM_SUBMIT                                = "PasswordResetFormSubmit";
-	const PASSWORD_RESET_NEW_PASSWORD                               = "PasswordResetNewPassword";
-	const PASSWORD_RESET_REPEAT_PASSWORD                            = "PasswordResetRepeatPasssword";
 
 	/* Constantes de Formulário da Página Register */
 	const REGISTER_BIRTH_DATE_DAY                                   = "RegisterBirthDateDay";
 	const REGISTER_BIRTH_DATE_MONTH                                 = "RegisterBirthDateMonth";
 	const REGISTER_BIRTH_DATE_YEAR                                  = "RegisterBirthDateYear";
 	const REGISTER_CODE                                             = "RegisterCode";
-	const REGISTER_REPEAT_PASSWORD                                  = "RegisterRepeatPassword";
 	const REGISTER_SELECT_GENDER_FEMALE                             = "F";
 	const REGISTER_SELECT_GENDER_MALE                               = "M";
 	const REGISTER_SELECT_GENDER_OTHER                              = "O";

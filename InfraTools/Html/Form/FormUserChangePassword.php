@@ -109,12 +109,12 @@
                 </label>
             </div>
         </div>
-        <input type="password" name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD; ?>"
-                           id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD; ?>"
+        <input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
+                           id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
                            class=" <?php echo $this->ReturnPasswordClass; ?>"
                            style="margin-right:0px !important;margin-left:23px;"
                            onblur="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                                '', false);
@@ -129,7 +129,7 @@
                                                '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                                '');"
                            onchange="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                                '', false);
@@ -153,12 +153,12 @@
                 </label>
             </div>
         </div>
-        <input type="password" name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD; ?>" 
-                           id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD; ?>"
+        <input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>" 
+                           id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>"
                            class="DivContentBodyContainerPassword <?php echo $this->ReturnPasswordClass; ?>"
                            style="margin-right:0px !important;margin-left:23px;"
                            onblur="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                                '', false);
@@ -173,7 +173,7 @@
                                                '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                                '');"
                            onchange="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                                '', false);
@@ -187,11 +187,11 @@
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidatePassword(null, '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD; ?>',
+         onmouseover="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                    '', false);
-                      ValidatePassword(null, '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD; ?>',
+                      ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
                                    '', false);

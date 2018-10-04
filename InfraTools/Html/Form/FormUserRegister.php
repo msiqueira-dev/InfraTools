@@ -471,10 +471,10 @@
 				</label>
 			</div>
 		</div>
-		<input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_NEW_PASSWORD; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_NEW_PASSWORD; ?>"
+		<input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
 						   class="<?php echo $this->ReturnPasswordClass; ?>"
-						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_NEW_PASSWORD; ?>',
+						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
@@ -488,7 +488,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_NEW_PASSWORD; ?>',
+						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
@@ -513,10 +513,10 @@
 				</label>
 			</div>
 		</div>
-		<input type="password" name="<?php echo ConfigInfraTools::REGISTER_REPEAT_PASSWORD; ?>" 
-						   id="<?php echo ConfigInfraTools::REGISTER_REPEAT_PASSWORD; ?>"
+		<input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>"
 						   class="<?php echo $this->ReturnPasswordClass; ?>"
-						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::REGISTER_REPEAT_PASSWORD; ?>',
+						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
@@ -530,7 +530,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::REGISTER_REPEAT_PASSWORD; ?>',
+						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
@@ -677,11 +677,11 @@
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', true);
-					 ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_NEW_PASSWORD; ?>',
+					 ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', false);
-					 ValidatePassword(null, '<?php echo ConfigInfraTools::REGISTER_REPEAT_PASSWORD; ?>',
+					 ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', false);

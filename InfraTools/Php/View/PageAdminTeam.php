@@ -9,8 +9,6 @@ Dependencies:
 Description: 
 			Class for team management.
 Functions: 
-			protected function ExecuteTeamUpdate();
-			protected function ExecuteUserSelectByTeamId($Limit1, $Limit2, &$RowCount);
 			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
@@ -47,94 +45,6 @@ class PageAdminTeam extends PageAdmin
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
-	
-	protected function ExecuteTeamUpdate()
-	{
-		if($this->InstanceTeam != NULL)
-		{
-			$PageForm = $this->Factory->CreatePageForm();
-			$this->InputValueTeamDescription  = $_POST[ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION];
-			$this->InputValueTeamName = $_POST[ConfigInfraTools::FORM_FIELD_TEAM_NAME];
-			$this->InputFocus = ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION;
-			$arrayConstants = array(); $matrixConstants = array();
-			
-			//TEAM_DESCRIPTION
-			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION;
-			$arrayElementsClass[0]        = &$this->ReturnTeamDescriptionClass;
-			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-			$arrayElementsInput[0]        = $this->InputValueTeamDescription; 
-			$arrayElementsMinValue[0]     = 0; 
-			$arrayElementsMaxValue[0]     = 120; 
-			$arrayElementsNullable[0]     = FALSE;
-			$arrayElementsText[0]         = &$this->ReturnTeamDescriptionText;
-			array_push($arrayConstants, 'FORM_INVALID_TEAM_DESCRIPTION', 'FORM_INVALID_TEAM_DESCRIPTION_SIZE');
-			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			
-			//TEAM_NAME
-			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_TEAM_NAME;
-			$arrayElementsClass[1]        = &$this->ReturnTeamNameClass;
-			$arrayElementsDefaultValue[1] = ""; 
-			$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TEAM_NAME;
-			$arrayElementsInput[1]        = $this->InputValueTeamName; 
-			$arrayElementsMinValue[1]     = 0; 
-			$arrayElementsMaxValue[1]     = 120; 
-			$arrayElementsNullable[1]     = FALSE;
-			$arrayElementsText[1]         = &$this->ReturnTeamNameText;
-			array_push($arrayConstants, 'FORM_INVALID_TEAM_NAME', 'FORM_INVALID_TEAM_NAME_SIZE');
-			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			
-			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-											    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-				$return = $FacedePersistenceInfraTools->TeamUpdateByTeamId($this->InputValueTeamDescription,
-					                                                       $this->InstanceTeam->GetTeamId(),
-																		   $this->InputValueTeamName,
-																	       $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->InstanceTeam->SetTeamDescription($this->InputValueTeamDescription);
-					$this->InstanceTeam->SetTeamName($this->InputValueTeamName);
-					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam);
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_UPDATE_SUCCESS', 
-																					$this->Language);
-					return ConfigInfraTools::SUCCESS;
-				}
-				elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-				{
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-					return ConfigInfraTools::WARNING;
-				}
-				else
-				{
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_UPDATE_ERROR', 
-																					$this->Language);
-					return ConfigInfraTools::ERROR;
-				}
-			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}	
-		}
-	}
 
 	protected function LoadHtml()
 	{
@@ -165,8 +75,6 @@ class PageAdminTeam extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
 			$this->PageFormLoad();
@@ -178,9 +86,7 @@ class PageAdminTeam extends PageAdmin
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_LIST;
 			$this->InputLimitOne = 0;
 			$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-													 $this->ArrayTeam, $rowCount,
-													 $this->InputValueHeaderDebug);
+			$this->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayTeam, $rowCount, $this->InputValueHeaderDebug);
 		}
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TEAM_SELECT))
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
@@ -194,9 +100,7 @@ class PageAdminTeam extends PageAdmin
 				$this->InputLimitOne = 0;
 			if($this->InputLimitTwo <= 0)
 				$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayTeam, $rowCount,
-																 $this->InputValueHeaderDebug);
+			$this->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayTeam, $rowCount, $this->InputValueHeaderDebug);
 		}
 		//TEAM LIST FORWARD SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TEAM_LIST_FORWARD))
@@ -208,16 +112,12 @@ class PageAdminTeam extends PageAdmin
 				$this->InputLimitOne = 250;
 			if($this->InputLimitTwo > 275)
 				$this->InputLimitTwo = 275;
-			$FacedePersistenceInfraTools->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-													 $this->ArrayTeam, $rowCount,
-													 $this->InputValueHeaderDebug);
+			$this->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayTeam, $rowCount, $this->InputValueHeaderDebug);
 			if($this->InputLimitOne > $rowCount)
 			{
 				$this->InputLimitOne = $this->InputLimitOne - 25;
 				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$FacedePersistenceInfraTools->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-													     $this->ArrayTeam, $rowCount,
-													     $this->InputValueHeaderDebug);
+				$this->TeamSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayTeam, $rowCount, $this->InputValueHeaderDebug);
 			}
 			elseif($this->InputLimitTwo > $rowCount)
 			{
@@ -268,11 +168,8 @@ class PageAdminTeam extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TeamDeleteByTeamId($this->InstanceTeam->GetTeamId(), $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				{
+				if($this->TeamDeleteByTeamId($this->InstanceTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
-					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TEAM);
-				}
 				else
 				{
 					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  
@@ -371,16 +268,14 @@ class PageAdminTeam extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteTeamUpdate() == ConfigInfraTools::SUCCESS)
+				if($this->TeamUpdateByTeamId($_POST[ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION],
+											 $_POST[ConfigInfraTools::FORM_FIELD_TEAM_NAME],
+									         $this->InstanceTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
+				else
 				{
 					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_UPDATE;
-				} 
-				else 
-				{
-					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
+						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_UPDATE;
 				}
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;

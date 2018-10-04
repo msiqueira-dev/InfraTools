@@ -74,8 +74,6 @@ class PageAdminTechInfo extends PageAdmin
 		$InstanceInfraToolsTechInfo->ProcessTechInfoInfraTools();
 		$InstanceInfraToolsTechInfo->ProccessTechLanguage();
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{

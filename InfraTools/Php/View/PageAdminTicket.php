@@ -7,7 +7,6 @@ Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
 			Base       - Php/Controller/Session.php
 			Base       - Php/Model/FormValidator.php
-			InfraTools - Php/Controller/FacedePersistenceInfraTools.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
 			Class for the page AdminTicket
@@ -126,8 +125,6 @@ class PageAdminTicket extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{

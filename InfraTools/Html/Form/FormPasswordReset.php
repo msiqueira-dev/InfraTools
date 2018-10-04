@@ -60,10 +60,10 @@
 				</label>
 			</div>
 		</div>
-		<input type="password" name="<?php echo ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD; ?>" 
-						   id="<?php echo ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD; ?>"
+		<input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
 						   class="<?php echo $this->ReturnPasswordClass; ?>"
-						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD; ?>',
+						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 												   '', false);
@@ -77,7 +77,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD; ?>',
+						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 												   '', false);
@@ -102,10 +102,10 @@
 				</label>
 			</div>
 		</div>
-		<input type="password" name="<?php echo ConfigInfraTools::PASSWORD_RESET_REPEAT_PASSWORD; ?>" 
-						   id="<?php echo ConfigInfraTools::PASSWORD_RESET_REPEAT_PASSWORD; ?>"
+		<input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>"
 						   class="<?php echo $this->ReturnPasswordClass; ?>"
-						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_REPEAT_PASSWORD; ?>',
+						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 												   '', false);
@@ -119,7 +119,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_REPEAT_PASSWORD; ?>',
+						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 												   '', false);
@@ -134,11 +134,11 @@
 	<div class="DivClearFloat"></div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainer"
-		 onmouseover="ValidatePassword(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD; ?>',
+		 onmouseover="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 								   '', false);
-					  ValidatePassword(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_REPEAT_PASSWORD; ?>',
+					  ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 								   '', false);       

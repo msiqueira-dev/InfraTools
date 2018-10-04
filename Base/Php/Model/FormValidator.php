@@ -13,7 +13,7 @@ Description:
 Functions: 
 			public function ExecuteValidation($FunctionName, $Value, $DefaultValue, $ArrayOption = NULL);
 			public function ValidateBool($Bool);
-			public function ValidateCorporation($Corporation, $DefaultValue);
+			public function ValidateCorporationName($CorporationName, $DefaultValue);
 			public function ValidateCompareString($StringToCompare, $DefaultValue, $String);
 			public function ValidateCountryName($Country, $DefaultValue);
 			public function ValidateCountryRegionCode($RegionCode, $DefaultValue);
@@ -120,7 +120,7 @@ class FormValidator
 		if($FunctionName == "VALIDATE_BOOL")
 			return $this->ValidateBool($Value);
 		elseif($FunctionName == "VALIDATE_CORPORATION_NAME")
-			return $this->ValidateCorporation($Value, $DefaultValue);
+			return $this->ValidateCorporationName($Value, $DefaultValue);
 		elseif($FunctionName == "VALIDATE_COMPARE_STRING")
 			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption[0]);
 		elseif($FunctionName == "VALIDATE_COUNTRY_NAME")
@@ -201,15 +201,15 @@ class FormValidator
 		else return self::INVALID_NULL;
 	}
 	
-	public function ValidateCorporation($Corporation, $DefaultValue)
+	public function ValidateCorporationName($CorporationName, $DefaultValue)
 	{
-		if(isset($Corporation))
+		if(isset($CorporationName))
 		{
-			if($Corporation != NULL && !empty($Corporation) && $Corporation != $DefaultValue)
+			if($CorporationName != NULL && !empty($CorporationName) && $Corporation != $DefaultValue)
 			{
 				if(preg_match(
-	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
-				   $Corporation) > 0)
+	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])*)*$)/', 
+				   $CorporationName) > 0)
 					return self::SUCCESS;
 				else return self::INVALID_CORPORATION;
 			}
@@ -706,8 +706,9 @@ class FormValidator
 		{
 			if($TeamName != NULL && !empty($TeamName))
 			{
+				
 				if(preg_match(
-	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
+	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])*)*$)/', 
 				   $TeamName) > 0)
 					return self::SUCCESS;
 				else return self::INVALID_TEAM_NAME;

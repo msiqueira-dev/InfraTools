@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe que trata da administração dos tipos de vínculos com equipes.
 Functions: 
-			protected function ExecuteTypeAssocUserTeamDelete();
 			protected function ExecuteTypeAssocUserTeamInsert();
 			protected function ExecuteTypeAssocUserTeamtSelectById($Id);
 			protected function ExecuteTypeAssocUserTeamUpdate();
@@ -53,39 +52,6 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 	public function __clone()
 	{
 		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	protected function ExecuteTypeAssocUserTeamDelete()
-	{
-		if($this->TypeAssocUserTeam != NULL)
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->TypeAssocUserTeamDelete($this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(), 
-																	        $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS', 
-																				$this->Language); 
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			else
-			{
-				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant
-					                           ('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
-												$this->Language);
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR', 
-																				  $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
 	}
 	
 	protected function ExecuteTypeAssocUserTeamInsert()
@@ -401,11 +367,9 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteTypeAssocUserTeamDelete() == ConfigInfraTools::SUCCESS)
-				{
+				if($this->TypeAssocUserTeamDeleteByTeamId($this->TypeAssocUserTeam, 
+														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
-					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM);
-				}
 				else
 				{
 					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam)  

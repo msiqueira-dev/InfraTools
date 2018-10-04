@@ -61,6 +61,8 @@ class Config
 	const FORM_FIELD_HEADER_DEBUG_HIDDEN                                = "FormFieldHeaderDebugHidden";
 	const FORM_FIELD_HEADER_LAYOUT                                      = "FormFieldHeaderLayout";
 	const FORM_FIELD_HEADER_LAYOUT_HIDDEN                               = "FormFieldHeaderLayoutHidden";
+	const FORM_FIELD_PASSWORD_NEW                                       = "FormFieldPasswordNew";
+	const FORM_FIELD_PASSWORD_REPEAT                                    = "FormFieldPasswordRepeat";
 	const FORM_FIELD_HEADER_LOG_OUT                                     = "FormFieldHeaderLogOut";
 	const FORM_FIELD_TEAM_DESCRIPTION                                   = "FormFieldTeamDescription";
 	const FORM_FIELD_TEAM_ID                                            = "FormFieldTeamId";
@@ -130,6 +132,9 @@ class Config
 	const LOGIN_TWO_STEP_VERIFICATION_FORM                              = "LoginTwoStepVerificationForm";
 	const LOGIN_USER                                                    = "LoginUser";
 	const PAGE_ABOUT                                                    = "Page_About";
+	const PAGE_ACCOUNT                                                  = "Page_Account";
+	const PAGE_ACCOUNT_CHANGE_PASSWORD                                  = "Page_Account_Change_Password";
+	const PAGE_ACCOUNT_UPDATE                                           = "Page_Account_Update";
 	const PAGE_ADMIN                                                    = "Page_Admin";
 	const PAGE_CONTACT                                                  = "Page_Contact";
 	const PAGE_HOME                                                     = "Page_Home";

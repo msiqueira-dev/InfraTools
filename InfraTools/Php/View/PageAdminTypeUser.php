@@ -160,34 +160,35 @@ class PageAdminTypeUser extends PageAdmin
 		{				
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeUserDelete($this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeUserDeleteByTeamId($this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 												  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 			} 
 		}
-		//TYPE USER VIEW UPDATE
+		//FORM_TYPE_USER_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 										  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE;
 		}
-		///TYPE USER VIEW UPDATE CANCEL
+		//FORM_TYPE_USER_UPDATE_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 										  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}
-		///TYPE USER VIEW UPDATE SUBMIT
+		//FORM_TYPE_USER_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeUserUpdateByTypeUserId($this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeUserUpdateByTypeUserId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+					                                 $this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE;
 			}

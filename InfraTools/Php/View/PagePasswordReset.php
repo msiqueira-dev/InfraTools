@@ -76,8 +76,8 @@ class PagePasswordReset extends PageInfraTools
 		if (isset($_POST[ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT]))
 		{
 			$this->InputValueCode              = $_POST[ConfigInfraTools::PASSWORD_RESET_CODE];
-			$this->InputValueNewPassword       = $_POST[ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD];
-			$this->InputValueRepeatPassword    = $_POST[ConfigInfraTools::PASSWORD_RESET_REPEAT_PASSWORD];
+			$this->InputValueNewPassword       = $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW];
+			$this->InputValueRepeatPassword    = $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT];
 			$arrayConstants = array(); $arrayExtraField = array(); $arrayOptions = array(); $matrixConstants = array();
 			
 			//RESET_CODE
@@ -96,7 +96,7 @@ class PagePasswordReset extends PageInfraTools
 			array_push($arrayOptions, $code);
 			
 			//PASSWORD
-			$arrayElements[1]             = ConfigInfraTools::PASSWORD_RESET_NEW_PASSWORD;
+			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_PASSWORD_NEW;
 			$arrayElementsClass[1]        = &$this->ReturnPasswordClass;
 			$arrayElementsDefaultValue[1] = ""; 
 			$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_PASSWORD;

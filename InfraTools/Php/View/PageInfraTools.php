@@ -3456,8 +3456,8 @@ abstract class PageInfraTools extends Page
 		$this->InputValueUserPhoneSecondaryPrefix = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX];
 		$this->InputValueCountry                  = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN];
 		$this->InputValueRegion                   = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN];
-		$this->InputValueNewPassword              = $_POST[ConfigInfraTools::FORM_FIELD_NEW_PASSWORD];
-		$this->InputValueRepeatPassword           = $_POST[ConfigInfraTools::REGISTER_REPEAT_PASSWORD];
+		$this->InputValueNewPassword              = $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW];
+		$this->InputValueRepeatPassword           = $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT];
 		if(isset($_POST[ConfigInfraTools::REGISTER_SESSION_EXPIRES]))
 			$this->InputValueSessionExpires = TRUE;
 		else $this->InputValueSessionExpires = FALSE;
@@ -3655,8 +3655,8 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_NEW_PASSWORD
-		$arrayElements[13]             = ConfigInfraTools::FORM_FIELD_NEW_PASSWORD;
+		//FORM_FIELD_PASSWORD_NEW
+		$arrayElements[13]             = ConfigInfraTools::FORM_FIELD_PASSWORD_NEW;
 		$arrayElementsClass[13]        = &$this->ReturnPasswordClass;
 		$arrayElementsDefaultValue[13] = ""; 
 		$arrayElementsForm[13]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_PASSWORD;

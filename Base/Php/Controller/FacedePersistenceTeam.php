@@ -15,7 +15,7 @@ Description:
 Functions: 
 			public function TeamDeleteByTeamDescription($TeamDescription, $Debug)
 			public function TeamDeleteByTeamId($TeamId, $Debug)
-			public function TeamInsert($TeamName, $TeamDescription, $Debug);
+			public function TeamInsert($TeamDescription, $TeamName, $Debug);
 			public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug);
 			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug);
 			public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
@@ -172,7 +172,7 @@ class FacedePersistenceTeam
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TeamInsert($TeamName, $TeamDescription, $Debug)
+	public function TeamInsert($TeamDescription, $TeamName, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
@@ -183,7 +183,7 @@ class FacedePersistenceTeam
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("ss", $TeamName, $TeamDescription);
+				$stmt->bind_param("ss", $TeamDescription, $TeamName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{

@@ -79,7 +79,7 @@
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEAM_DESCRIPTION'); ?>"
-                               value="<?php echo $this->InputValueTeamDescription; ?>" maxlength="45" />
+                               value="<?php echo $this->InputValueTeamDescription; ?>" maxlength="120" />
         </div>
     </div>
     <!-- REGISTER_DATE -->

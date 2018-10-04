@@ -64,7 +64,7 @@ Methods:
 			public static function SqlTicketTakeOverById();
 			public static function SqlTicketUpdateById();
 			public static function SqlTicketUpdateStatusById();
-			public static function SqlTypeAssocUserTeamDelete();
+			public static function SqlTypeAssocUserTeamDeleteByTeamId();
 			public static function SqlTypeAssocUserTeamInsert();
 			public static function SqlTypeAssocUserTeamSelect();
 			public static function SqlTypeAssocUserTeamSelectByTeamDescription();
@@ -626,7 +626,7 @@ class Persistence
 	{
 	}
 	
-	public static function SqlTypeAssocUserTeamDelete()
+	public static function SqlTypeAssocUserTeamDeleteByTeamId()
 	{
 		return "DELETE FROM " . Config::TABLE_TYPE_ASSOC_USER_TEAM . " "  
 		     . "WHERE "       . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID." = ?";	
