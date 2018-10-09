@@ -56,8 +56,14 @@ Methods:
 		protected     function        TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug);
 		protected     function        TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug);
 		protected     function        TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
-		protected     function        TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug)
-		protected     function        TypeUserDelete($InstanceTypeUser, $Debug);
+		protected     function        TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug);
+		protected     function        TypeAssocUserTeamDeleteByTeamId($InstanceTypeAssocUserTeam, $Debug);
+		protected     function        TypeAssocUserTeamInsert($InputValueTypeAssocUserTeamTeamDescription, $Debug);
+		protected     function        TypeAssocUserTeamLoadData(&$InstanceTypeAssocUserTeam);
+		protected     function        TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug);
+		protected     function        TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$InstanceTypeAssocUserTeam, $Debug);
+		protected     function        TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug);
+		protected     function        TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug);
 		protected     function        TypeUserInsert($TypeUserDescription, $Debug);
 		protected     function        TypeUserLoadData(&$InstanceTypeUser);
 		protected     function        TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
@@ -1299,7 +1305,7 @@ abstract class Page
 			$return = $FacedePersistence->TeamDeleteByTeamId($InstanceTeam->GetTeamId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam);
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TEAM, $InstanceTeam);
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_DELETE_SUCCESS', 
 																				$this->Language); 
 				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
@@ -1394,6 +1400,8 @@ abstract class Page
 	
 	protected function TeamLoadData(&$InstanceTeam)
 	{
+		if($this->InstanceTeam == NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $InstanceTeam);
 		if($InstanceTeam != NULL)
 		{
 			$this->InputValueTeamId           = $InstanceTeam->GetTeamId();
@@ -1606,36 +1614,214 @@ abstract class Page
 	{
 		if($InstanceTypeAssocUserTeam != NULL)
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->TypeAssocUserTeamDeleteByTeamId($this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(), 
-																	                $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->TypeAssocUserTeamDeleteByTeamId($this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(), $Debug);
+			if($return == Config::SUCCESS)
 			{
-				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS', 
 																				$this->Language); 
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 				return $return;
 			}
 			else
 			{
-				if($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+				if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 					$this->ReturnText = $this->InstanceLanguageText->GetConstant
 					                           ('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
 												$this->Language);
 				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR', 
 																				  $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::ERROR;
 			}
 		}
 	}
 	
-	protected function TypeUserDeleteByTeamId($InstanceTypeUser, $Debug)
+	protected function TypeAssocUserTeamInsert($InputValueTypeAssocUserTeamTeamDescription, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueTypeAssocUserTeamTeamDescription = $InputValueTypeAssocUserTeamTeamDescription;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamTeamDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamTeamDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamTeamDescription, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_SUCCESS', 
+																			 $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+								                      Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
+		}
+		$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_ERROR', $this->Language);
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::ERROR;
+	}
+	
+	protected function TypeAssocUserTeamLoadData(&$InstanceTypeAssocUserTeam)
+	{
+		if($InstanceTypeAssocUserTeam == NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
+		if($InstanceTypeAssocUserTeam != NULL)
+		{
+			$this->InputValueTypeAssocUserTeamTeamDescription  = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
+			$this->InputValueTypeAssocUserTeamTeamId           = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamTeamId();
+			$this->InputValueRegisterDate                      = $InstanceTypeAssocUserTeam->GetRegisterDate();
+			return Config::SUCCESS;
+		}
+		else return Config::ERROR;
+	}
+	
+	protected function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->TypeAssocUserTeamSelect($Limit1, $Limit2,
+															          $ArrayInstanceTypeAssocUserTeam,
+															          $RowCount,
+															          $Debug);
+		if($return != Config::SUCCESS)
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_NOT_FOUND', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+		else return Config::SUCCESS;
+	}
+	
+	protected function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$InstanceTypeAssocUserTeam, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueTypeAssocUserTeamTeamId = $TypeAssocUserTeamTeamId;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamTeamIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamTeamId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamTeamIdText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->TypeAssocUserTeamSelectByTeamId($this->InputValueTypeAssocUserTeamTeamId, 
+																		  $InstanceTypeAssocUserTeam,
+																		  $Debug);
+			if($return == Config::SUCCESS)
+			{
+				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::SUCCESS)
+				{
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
+					return Config::SUCCESS;
+				}	
+			}
+		}
+		$this->ReturnTypeAssocUserTeamTeamIdText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_NOT_FOUND', $this->Language);
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::FORM_TYPE_ASSOC_USER_TEAM_RETURN_NOT_FOUND;
+	}
+	
+	protected function TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeAssocUserTeamTeamDescription = $TypeAssocUserTeamTeamDescription;
+		$this->InputFocus = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamTeamDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamTeamDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION','FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->TypeAssocUserTeamUpdateByTeamId($this->InputValueTypeAssocUserTeamTeamDescription,
+																		  $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(),
+																		  $this->InputValueHeaderDebug);
+			if($return == Config::SUCCESS)
+			{
+				$this->TypeAssocUserTeam->SetTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamTeamDescription);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
+				if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+				{
+					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS 
+						                                . "' alt='ReturnImage'/>";
+					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS', 
+																					$this->Language);
+				}
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
+			}
+		}
+		$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_ERROR', 
+																		$this->Language);
+		return Config::ERROR;	
+	}
+	
+	protected function TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug)
 	{
 		if($InstanceTypeUser != NULL)
 		{

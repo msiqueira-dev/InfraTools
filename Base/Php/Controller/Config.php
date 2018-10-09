@@ -67,12 +67,16 @@ class Config
 	const FORM_FIELD_TEAM_DESCRIPTION                                   = "FormFieldTeamDescription";
 	const FORM_FIELD_TEAM_ID                                            = "FormFieldTeamId";
 	const FORM_FIELD_TEAM_NAME                                          = "FormFieldTeamName";
+	const FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                = "FormFieldTypeAssocUserServiceDescription";
+	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID                       = "FormFieldTypeAssocUserTeamTeamId";
+	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION              = "FormFieldTypeAssocUserTeamTeamDescription";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                              = "FormFieldTypeUserDescription";
 	const FORM_FIELD_TYPE_USER_ID                                       = "FormFieldTypeUserId";
 	const FORM_IMAGE_ERROR                                              = "Icons/IconFormError.png";
 	const FORM_IMAGE_SUCCESS                                            = "Icons/IconFormSuccess.png";
 	const FORM_IMAGE_WARNING                                            = "Icons/IconFormWarning.png";
 	const FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT                  = "FormLoginTwoStepVerificationCodeSubmit";
+	const FORM_TYPE_ASSOC_USER_TEAM_RETURN_NOT_FOUND                    = "FormTypeAssocUserTeamReturnNotFound";
 	const FORM_TYPE_USER_RETURN_NOT_FOUND                               = "FormTypeUserReturnNotFound";
 	const FORM_TEAM_RETURN_NOT_FOUND                                    = "FormTeamReturnNotFound";
 	const FORM_VALIDATE_FUNCTION_BOOL                                   = "VALIDATE_BOOL";

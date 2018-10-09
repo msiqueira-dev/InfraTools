@@ -75,6 +75,7 @@ class PageAdminTeam extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
+		$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
 			$this->PageFormLoad();
@@ -172,13 +173,8 @@ class PageAdminTeam extends PageAdmin
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 				else
 				{
-					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  
-					                                    == ConfigInfraTools::SUCCESS)
-					{
-						if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-							$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-						else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
-					}
+					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
+						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
 					else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 				}
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
@@ -246,22 +242,16 @@ class PageAdminTeam extends PageAdmin
 		//TEAM VIEW UPDATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_VIEW_UPDATE_SUBMIT]))
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  == ConfigInfraTools::SUCCESS)
-			{
-				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_UPDATE;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
+			if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_UPDATE;
+			else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		}
 		//TEAM VIEW UPDATE CANCEL
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_UPDATE_CANCEL]))
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
+			if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
+				$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
+			else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		}
 		//TEAM VIEW UPDATE SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT]))

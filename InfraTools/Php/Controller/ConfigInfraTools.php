@@ -351,9 +351,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_TICKET_ID                                          = "FormFieldTicketId";
 	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
 	const FORM_FIELD_TICKET_TYPE                                        = "FormFieldTicketType";
-	const FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                = "FormFieldTypeAssocUserServiceDescription";
-	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID                       = "FormFieldTypeAssocUserTeamTeamId";
-	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION              = "FormFieldTypeAssocUserTeamTeamDescription";
 	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
 	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                     = "FormFieldTypeStatusTicketDescription";
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                              = "FormFieldTypeStatusTicketId";
@@ -520,7 +517,6 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_ASSOC_USER_TEAM_REGISTER                            = "FormTypeAssocUserTeamReturnRegister";
 	const FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL                     = "FormTypeAssocUserTeamReturnCancel";
 	const FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT                     = "FormTypeAssocUserTeamReturnSubmit";
-	const FORM_TYPE_ASSOC_USER_TEAM_RETURN_NOT_FOUND                    = "FormTypeAssocUserTeamReturnNotFound";
 	const FORM_TYPE_ASSOC_USER_TEAM_SELECT                              = "FormTypeAssocUserTeamSelect";
 	const FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT                       = "FormTypeAssocUserTeamSelectSubmit";
 	const FORM_TYPE_ASSOC_USER_TEAM_UPDATE                              = "FormTypeAssocUserTeamUpdate";	

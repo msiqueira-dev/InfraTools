@@ -122,7 +122,6 @@ Methods:
 			                                                           $Limit1, $Limit2, $Debug);
 			protected function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, 
 			                                                                  $UserEmail, $Debug);
-			protected function TypeAssocUserTeamLoadData();
 			protected function TypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, 
 			                                     &$RowCount, $Debug);
 			protected function TypeServiceSelectNoLimit(&ArrayInstanceInfraToolsTypeService, $Debug);
@@ -3072,18 +3071,6 @@ abstract class PageInfraTools extends Page
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
 		}
-	}
-	
-	protected function TypeAssocUserTeamLoadData()
-	{
-		if($this->TypeAssocUserTeam != NULL)
-		{
-			$this->InputValueTypeAssocUserTeamTeamDescription  = $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
-			$this->InputValueTypeAssocUserTeamTeamId           = $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId();
-			$this->InputValueRegisterDate                      = $this->TypeAssocUserTeam->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, 

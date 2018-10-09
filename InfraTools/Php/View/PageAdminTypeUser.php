@@ -160,7 +160,7 @@ class PageAdminTypeUser extends PageAdmin
 		{				
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeUserDeleteByTeamId($this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeUserDeleteByTypeUserId($this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 												  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
