@@ -76,6 +76,7 @@ class Config
 	const FORM_IMAGE_SUCCESS                                            = "Icons/IconFormSuccess.png";
 	const FORM_IMAGE_WARNING                                            = "Icons/IconFormWarning.png";
 	const FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT                  = "FormLoginTwoStepVerificationCodeSubmit";
+	const FORM_SELECT_NONE                                              = "None";
 	const FORM_TYPE_ASSOC_USER_TEAM_RETURN_NOT_FOUND                    = "FormTypeAssocUserTeamReturnNotFound";
 	const FORM_TYPE_USER_RETURN_NOT_FOUND                               = "FormTypeUserReturnNotFound";
 	const FORM_TEAM_RETURN_NOT_FOUND                                    = "FormTeamReturnNotFound";

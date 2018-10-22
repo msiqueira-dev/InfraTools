@@ -73,6 +73,7 @@ Methods:
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserUpdateCorporationByEmail($CorporationName, $UserEmail, $Debug);
 		protected     function        UserUpdatePasswordByUserEmail($UserEmail, $UserPasswordNew, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
@@ -1401,7 +1402,7 @@ abstract class Page
 	protected function TeamLoadData(&$InstanceTeam)
 	{
 		if($this->InstanceTeam == NULL)
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $InstanceTeam);
+			$this->Session->GetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
 		if($InstanceTeam != NULL)
 		{
 			$this->InputValueTeamId           = $InstanceTeam->GetTeamId();
@@ -1689,7 +1690,7 @@ abstract class Page
 	protected function TypeAssocUserTeamLoadData(&$InstanceTypeAssocUserTeam)
 	{
 		if($InstanceTypeAssocUserTeam == NULL)
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
+			$this->Session->GetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
 		if($InstanceTypeAssocUserTeam != NULL)
 		{
 			$this->InputValueTypeAssocUserTeamTeamDescription  = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
@@ -1795,7 +1796,7 @@ abstract class Page
 			{
 				$this->TypeAssocUserTeam->SetTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamTeamDescription);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
-				if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+				if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == Config::SUCCESS)
 				{
 					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS 
@@ -2168,6 +2169,105 @@ abstract class Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return Config::ERROR;
+		}
+	}
+	
+	protected function UserUpdateCorporationByEmail($CorporationNameNew, &$InstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationNameNew;
+		$arrayConstants = array(); $matrixConstants = array();
+		//FORM_FIELD_USER_CORPORATION_SELECT
+		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnUserCorporationClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserCorporationText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME',
+				                    'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+		if($return == Config::SUCCESS)
+		{
+			if($this->InputValueCorporationName == Config::FORM_SELECT_NONE)
+				$this->InputValueCorporationName = NULL;
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserUpdateCorporationByEmail($this->InputValueCorporationName,
+			                                                                     $InstanceUser->GetEmail(),
+																				 $this->InputValueHeaderDebug);
+			if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() != NULL)
+			{
+				$return = $instanceFacedePersistence->AssocUserCorporationDelete(
+					                                     $InstanceUser->GetCorporationName(),
+			                                             $InstanceUser->GetEmail(),
+														 $this->InputValueHeaderDebug, NULL, TRUE);
+				if($return == Config::SUCCESS && $this->InputValueCorporationName != NULL)
+					$instanceFacedePersistence->AssocUserCorporationInsert(
+					                                     $this->InputValueCorporationName,
+														 NULL, NULL,
+			                                             $InstanceUser->GetEmail(),
+														 $this->InputValueHeaderDebug, NULL, TRUE);
+			}	
+			else if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() == NULL)
+				$return = $instanceFacedePersistence->AssocUserCorporationInsert(
+					                                     $this->InputValueCorporationName,
+														 NULL, NULL,
+			                                             $InstanceUser->GetEmail(),
+														 $this->InputValueHeaderDebug, NULL, TRUE);
+			if($return == Config::SUCCESS)
+			{
+				$return = $instanceFacedePersistence->UserUpdateDepartmentByEmailAndCorporation(
+					                                                         $this->InputValueCorporationName, 
+																			 NULL, 
+																			 $InstanceUser->GetEmail(), 
+																			 $this->InputValueHeaderDebug);
+				if($return == Config::MYSQL_UPDATE_SAME_VALUE)
+					$return = Config::SUCCESS;
+			}
+			if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() != NULL)
+			{
+				$instanceFacedePersistence->CorporationSelectByName($this->InputValueCorporationName, $instanceCorporation, $Debug);
+				if($return == Config::SUCCESS)
+				{
+					$InstanceUser->SetCorporation($instanceCorporation);
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
+					$this->UserLoadData($InstanceUser);
+					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS 
+						                                . "' alt='ReturnImage'/>";
+					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_CHANGE_CORPORATION_SUCCESS', $this->Language);
+				}
+			}
+			if($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
+													. "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+			}
+			elseif($return != Config::SUCCESS)
+			{
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR 
+													. "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_CHANGE_CORPORATION_ERROR', 
+																				$this->Language);			
+			}
+			return $return;
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return $return;
 		}
 	}
 	

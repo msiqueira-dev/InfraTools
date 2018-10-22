@@ -205,7 +205,7 @@ class FormValidator
 	{
 		if(isset($CorporationName))
 		{
-			if($CorporationName != NULL && !empty($CorporationName) && $Corporation != $DefaultValue)
+			if($CorporationName != NULL && !empty($CorporationName) && $CorporationName != $DefaultValue)
 			{
 				if(preg_match(
 	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])*)*$)/', 

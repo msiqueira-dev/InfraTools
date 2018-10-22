@@ -377,7 +377,6 @@ class ConfigInfraTools extends Config
 	const FORM_HEADER_DEBUG                                             = "FormHeaderDebug";
 	const FORM_LIST_INPUT_LIMIT_ONE                                     = "FormListInputLimitOne";
 	const FORM_LIST_INPUT_LIMIT_TWO                                     = "FormListInputLimitTwo";
-	const FORM_SELECT_NONE                                              = "None";
 	const FORM_SERVICE_LIST                                             = "FormServiceList";
 	const FORM_SERVICE_LIST_BACK                                        = "FormServiceListBack";
 	const FORM_SERVICE_LIST_FORWARD                                     = "FormServiceListForward";

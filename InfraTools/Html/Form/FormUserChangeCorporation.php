@@ -64,8 +64,8 @@
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FORM_FIELD_USER_CORPORATION_SELECT; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_USER_CORPORATION_SELECT; ?>"
+                name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
+                id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
                 class="SelectCorporation"
                 onchange="document.getElementById('<?php echo ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_SUBMIT; ?>')
                                          .disabled = false;
