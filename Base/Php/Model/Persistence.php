@@ -74,8 +74,8 @@ Methods:
 			public static function SqlTypeStatusTicketInsert();
 			public static function SqlTypeStatusTicketSelect();
 			public static function SqlTypeStatusTicketSelectByDescription();
-			public static function SqlTypeStatusTicketSelectById();
-			public static function SqlTypeStatusTicketUpdateById();
+			public static function SqlTypeStatusTicketSelectByTypeStatusTicketId();
+			public static function SqlTypeStatusTicketUpdateByTypeStatusTicketId();
 			public static function SqlTypeTicketDelete();
 			public static function SqlTypeTicketInsert();
 			public static function SqlTypeTicketSelect();
@@ -713,7 +713,7 @@ class Persistence
 	         . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=?";
 	}
 	
-	public static function SqlTypeStatusTicketSelectById()
+	public static function SqlTypeStatusTicketSelectByTypeStatusTicketId()
 	{
 		return "SELECT " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
 		                 . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ", "
@@ -722,7 +722,7 @@ class Persistence
 	         . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "=?";
 	}
 	
-	public static function SqlTypeStatusTicketUpdateById()
+	public static function SqlTypeStatusTicketUpdateByTypeStatusTicketId()
 	{
 		return "UPDATE " . Config::TABLE_TYPE_STATUS_TICKET . " "  
 		     . "SET    " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=UPPER(?) "

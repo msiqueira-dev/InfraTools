@@ -11,15 +11,6 @@ Dependencies:
 Description: 
 			Class for the page AdminTicket
 Functions: 
-			protected function ExecuteTicketDelete();
-			protected function ExecuteTicketInsert();
-			protected function ExecuteTicketSelectById($Id);
-			protected function ExecuteTicketSelectByRequestingUser($RequestingUserEmail);
-			protected function ExecuteTicketSelectByResponsibleUser($ResponsibleUserEmail);
-			protected function ExecuteTicketUpdate();
-			protected function ExecuteTicketUpdateService();
-			protected function ExecuteTicketUpdateStatus();
-			protected function ExecuteTicketUpdateUser();
 			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
@@ -66,41 +57,6 @@ class PageAdminTicket extends PageAdmin
 		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 	
-	protected function ExecuteTicketDelete()
-	{
-	}
-	
-	protected function ExecuteTicketInsert()
-	{
-	}
-	
-	protected function ExecuteTicketSelectById($Id)
-	{
-	}
-	
-	protected function ExecuteTicketSelectByRequestingUser($RequestingUserEmail)
-	{	
-	}
-	
-	protected function ExecuteTicketSelectByResponsibleUser($ResponsibleUserEmail)
-	{
-	}
-	
-	protected function ExecuteTicketUpdate()
-	{		
-	}
-	protected function ExecuteTicketUpdateService()
-	{
-	}
-	
-	protected function ExecuteTicketUpdateStatus()
-	{
-	}
-	
-	protected function ExecuteTicketUpdateUser()
-	{
-	}
-
 	protected function LoadHtml()
 	{
 		$return = NULL;

@@ -69,9 +69,17 @@ class Config
 	const FORM_FIELD_TEAM_DESCRIPTION                                   = "FormFieldTeamDescription";
 	const FORM_FIELD_TEAM_ID                                            = "FormFieldTeamId";
 	const FORM_FIELD_TEAM_NAME                                          = "FormFieldTeamName";
+	const FORM_FIELD_TICKET_DESCRIPTION                                 = "FormFieldTicketDescription";
+	const FORM_FIELD_TICKET_ID                                          = "FormFieldTicketId";
+	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
+	const FORM_FIELD_TICKET_TYPE                                        = "FormFieldTicketType";
 	const FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                = "FormFieldTypeAssocUserServiceDescription";
 	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID                       = "FormFieldTypeAssocUserTeamTeamId";
 	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION              = "FormFieldTypeAssocUserTeamTeamDescription";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                     = "FormFieldTypeStatusTicketDescription";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                              = "FormFieldTypeStatusTicketId";
+	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                            = "FormFieldTypeTicketDescription";
+	const FORM_FIELD_TYPE_TICKET_ID                                     = "FormFieldTypeTicketId";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                              = "FormFieldTypeUserDescription";
 	const FORM_FIELD_TYPE_USER_ID                                       = "FormFieldTypeUserId";
 	const FORM_IMAGE_ERROR                                              = "Icons/IconFormError.png";

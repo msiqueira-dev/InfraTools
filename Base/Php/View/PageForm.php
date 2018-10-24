@@ -160,7 +160,10 @@ class PageForm
 				array_push($arrayReturn, $return);
 			}
 			if(isset($ElementEmptyText))
-						$ElementEmptyText = $ElementEmptyText . "<br>";
+			{
+				if($ElementEmptyText != "")
+					$ElementEmptyText = $ElementEmptyText . "<br>";
+			}
 			if(count($arrayReturn) > 0)
 			{
 				for($index = 0; $index < count($arrayReturn); $index++)

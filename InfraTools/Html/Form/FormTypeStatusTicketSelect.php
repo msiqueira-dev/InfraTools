@@ -1,7 +1,7 @@
 <!-- FORM TYPE STATUS TICKET SELECT -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT; ?>" method="post" >
-	<!-- TYPE_STATUS_TICKET_ID -->
+	<!-- FORM_FIELD_TYPE_STATUS_TICKET_ID -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_ID'); ?> </label>

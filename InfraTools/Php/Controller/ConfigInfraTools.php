@@ -345,15 +345,7 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_NAME_RADIO_DIV                             = "FormFieldServiceNameRadioDiv";
 	const FORM_FIELD_SERVICE_RADIO                                      = "FormFieldServiceRadio";
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
-	const FORM_FIELD_TICKET_DESCRIPTION                                 = "FormFieldTicketDescription";
-	const FORM_FIELD_TICKET_ID                                          = "FormFieldTicketId";
-	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
-	const FORM_FIELD_TICKET_TYPE                                        = "FormFieldTicketType";
 	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
-	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                     = "FormFieldTypeStatusTicketDescription";
-	const FORM_FIELD_TYPE_STATUS_TICKET_ID                              = "FormFieldTypeStatusTicketId";
-	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                            = "FormFieldTypeTicketDescription";
-	const FORM_FIELD_TYPE_TICKET_ID                                     = "FormFieldTypeTicketId";
 	const FORM_FIELD_USER_CORPORATION_SELECT                            = "FormFieldUserCorporationSelect";
 	const FORM_FIELD_USER_EMAIL                                         = "FormFieldUserEmail";
 	const FORM_FIELD_USER_GENDER                                        = "FormFieldUserGender";

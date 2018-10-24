@@ -29,7 +29,7 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTypeService extends PageAdmin
 {
-	public $ArrayCountry = NULL;
+	public $InstanceTypeService = NULL;
 	
 	/* Constructor */
 	public function __construct($Language) 

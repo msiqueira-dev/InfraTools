@@ -1,4 +1,19 @@
 <?php
+/************************************************************************
+Class: PageAdminTechInfo.php
+Creation: 04/06/2018
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class for technical details of the system.
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))

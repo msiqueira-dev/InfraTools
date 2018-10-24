@@ -113,7 +113,7 @@ Methods:
 			protected function ServiceUpdateRestrictByServiceId($ServiceActiveNew,$ServiceNameNew, 
 			                                                    $ServiceTypeNew, $ServiceId, 
 											                    $Debug);
-			protected function TicketLoadData();
+			protected function TicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug);
 			protected function TypeAssocUserServiceSelect(&$ArrayInstanceInfraToolsTypeService, &$RowCount,
 			                                              $Limit1, $Limit2, $Debug);
 			protected function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug);
@@ -128,7 +128,6 @@ Methods:
 			protected function TypeServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeService, $UserEmail, &$RowCount
 			                                                  $Limit1, $Limit2, $Debug);
 			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
-			protected function TypeStatusTicketLoadData();
 			protected function TypeTicketLoadData();
 			protected function TypeTicketSelectById($TypeTicketId);
 			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug);
@@ -2944,21 +2943,8 @@ abstract class PageInfraTools extends Page
 		}	
 	}
 	
-	protected function TicketLoadData()
+	protected function TicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug)
 	{
-		if($this->Ticket != NULL)
-		{
-			$this->InputValueId                = $this->Ticket->GetTicketId();
-			$this->InputValueRegisterDate      = $this->Ticket->GetRegisterDate();
-			$this->InputValueServiceName       = $this->Ticket->GetTicketServiceName();
-			$this->InputValueStatusName        = $this->Ticket->GetTicketStatusName();
-			$this->InputValueSuggestion        = $this->Ticket->GetTicketSuggestion();
-			$this->InputValueTicketDescription = $this->Ticket->GetTicketDescription();
-			$this->InputValueTitle             = $this->Ticket->GetTicketTitle();
-			$this->InputValueType              = $this->Ticket->GetTicketTypeName();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelect(&$ArrayInstanceInfraToolsTypeService, &$RowCount,
@@ -3176,18 +3162,6 @@ abstract class PageInfraTools extends Page
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
 		}
-	}
-	
-	protected function TypeStatusTicketLoadData()
-	{
-		if($this->TypeStatusTicket != NULL)
-		{
-			$this->InputValueTypeStatusTicketDescription  = $this->TypeStatusTicket->GetTypeStatusTicketDescription();
-			$this->InputValueTypeStatusTicketId           = $this->TypeStatusTicket->GetTypeStatusTicketId();
-			$this->InputValueRegisterDate                 = $this->TypeStatusTicket->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeTicketLoadData()

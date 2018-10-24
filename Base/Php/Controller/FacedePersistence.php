@@ -102,12 +102,12 @@ Functions:
 			public function TypeServiceSelectByName($TypeServiceName, &$TypeService, $Debug);
 			public function TypeServiceSelectBySLA($TypeServiceSLA, &$TypeService, $Debug);
 			public function TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug);
-			public function TypeStatusTicketDelete($TypeStatusTicketId, $Debug);
+			public function TypeStatusTicketDeleteByTypeStatusTicketId($TypeStatusTicketId, $Debug);
 			public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug);
-			public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayTypeStatusTicket, &$RowCount, $Debug);
-			public function TypeStatusTicketSelectByDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug);
-			public function TypeStatusTicketSelectById($TypeStatusTicketId, &$TypeStatusTicket, $Debug);
-			public function TypeStatusTicketUpdateById($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug);
+			public function TypeStatusTicketSelect($Limit1, $Limit2, &ArrayInstanceTypeStatusTicket, &$RowCount, $Debug);
+			public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug);
+			public function TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$TypeStatusTicket, $Debug);
+			public function TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug);
 			public function TypeTicketDelete($TypeTicketId, $Debug);
 			public function TypeTicketInsert($TypeTicketDescription, $Debug);
 			public function TypeTicketSelect($Limit1, $Limit2, &$ArrayTypeTicket, &$RowCount, $Debug);
@@ -805,10 +805,10 @@ class FacedePersistence
 		return $FacedePersistenceTypeService->TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug);
 	}
 	
-	public function TypeStatusTicketDelete($TypeStatusTicketId, $Debug)
+	public function TypeStatusTicketDeleteByTypeStatusTicketId($TypeStatusTicketId, $Debug)
 	{
 		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketDelete($TypeStatusTicketId, $Debug);
+		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketDeleteByTypeStatusTicketId($TypeStatusTicketId, $Debug);
 	}
 	
 	public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug)
@@ -816,30 +816,30 @@ class FacedePersistence
 		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
 		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug);
 	}
-	public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayTypeStatusTicket, &$RowCount, $Debug)
+	public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug)
 	{
 		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelect($Limit1, $Limit2, $ArrayTypeStatusTicket, 
+		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeStatusTicket, 
 																		  $RowCount, $Debug);
 	}
 	
-	public function TypeStatusTicketSelectByDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug)
+	public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug)
 	{
 		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByDescription($TypeStatusTicketDescription,
+		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription,
 																					   $TypeStatusTicket, $Debug);
 	}
 	
-	public function TypeStatusTicketSelectById($TypeStatusTicketId, &$TypeStatusTicket, $Debug)
+	public function TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$TypeStatusTicket, $Debug)
 	{	
 		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectById($TypeStatusTicketId, $TypeStatusTicket, $Debug);
+		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, $TypeStatusTicket, $Debug);
 	}
 	
-	public function TypeStatusTicketUpdateById($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug)
+	public function TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug)
 	{
 		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketUpdateById($TypeStatusTicketDescription, 
+		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescription, 
 																			  $TypeStatusTicketId, $Debug);
 	}
 

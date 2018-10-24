@@ -29,7 +29,7 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTypeStatusMonitoring extends PageAdmin
 {
-	public $ArrayCountry = NULL;
+	public $InstanceTypeStatusMonitoring = NULL;
 	
 	/* Constructor */
 	protected function __construct($Language) 
