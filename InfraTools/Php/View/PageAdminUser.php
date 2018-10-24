@@ -9,10 +9,6 @@ Dependencies:
 Description: 
 			Classe existente para a página de administração de usuário
 Functions: 
-			private function UserChangeUserType($InstanceInfraToolsUser);
-			private function UserDelete(&$InstanceInfraToolsUser);
-			private function UserResetPassword($InstanceSelectedUser);
-			private function UserUpdateActive(&$InstanceSelectedUser, $UserActive);
 
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -45,232 +41,6 @@ class PageAdminUser extends PageAdmin
 	/**                               **/
 	/************* METODOS *************/
 	/**                               **/
-	
-	private function UserChangeUserType($InstanceInfraToolsUser)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueTypeUserId = $_POST[ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SELECT];	
-		$arrayConstants = array(); $matrixConstants = array();
-			
-		//USER_TYPE_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SELECT;
-		$arrayElementsClass[0]        = &$this->ReturnTypeUserIdClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeUserId; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeUserIdText;
-		array_push($arrayConstants, 'FORM_INVALID_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			if($this->InputValueTypeUserId == ConfigInfraTools::FORM_SELECT_NONE)
-				$this->InputValueTypeUserId = NULL;
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserUpdateUserTypeByEmail($InstanceInfraToolsUser->GetEmail(),
-																			  $this->InputValueTypeUserId,
-																			  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_CHANGE_USER_TYPE_SUCCESS', 
-																				 $this->Language);
-			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_CHANGE_USER_TYPE_ERROR', 
-																				$this->Language);			
-			}
-			return $return;
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return $return;
-		}
-	}
-	
-	private function UserDelete(&$InstanceInfraToolsUser)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueUserEmail  = $InstanceInfraToolsUser->GetEmail();
-		$arrayConstants = array(); $matrixConstants = array();
-			
-		//VALIDA E-MAIL
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
-		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 60; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserDelete($this->InputValueUserEmail, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				unset($InstanceInfraToolsUser);
-				$this->InputValueUserEmail = "";
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('ADMIN_USER_DELETE_SUCCESS', 
-																$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			elseif($return == ConfigInfraTools::MYSQL_USER_DELETE_FAILED_NOT_FOUND)
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', 
-																$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
-			}
-			else
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('ADMIN_USER_DELETE_ERROR', 
-																$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return $return;
-		}
-	}
-	
-	private function UserResetPassword($InstanceSelectedUser)
-	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
-		$newPassword = $this->InstanceInfraToolsFacedeBusiness->GenerateRandomPassword();
-		$return = $FacedePersistenceInfraTools->UserUpdatePasswordByEmail($InstanceSelectedUser->GetEmail(), 
-		                                                                          $newPassword,
-																				  $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailPasswordReset(
-										  $InstanceSelectedUser->GetName(),
-										  $InstanceSelectedUser->GetEmail(),
-										  $newPassword, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('PASSWORD_RESET_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			}
-			else
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('SEND_EMAIL_ERROR', 
-																		                $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
-		}
-		else
-		{
-			$this->ReturnText  = $this->InstanceLanguageText->GetConstant('PASSWORD_RESET_SUCCESS', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}
-	}
-	
-	private function UserUpdateActive(&$InstanceSelectedUser, $UserActive)
-	{
-		if(isset($InstanceSelectedUser))
-		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserUpdateActiveByEmail($InstanceSelectedUser->GetEmail(),
-																					$UserActive,
-																				    $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$InstanceSelectedUser->SetUserActive($UserActive);
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				if($UserActive)
-					$this->ReturnText =	str_replace('[0]',  
-								    strtolower($this->InstanceLanguageText->GetConstant('ACTIVATED', $this->Language)), 
-									$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
-				else 
-					$this->ReturnText = str_replace('[0]', 
-								    strtolower($this->InstanceLanguageText->GetConstant('DEACTIVATED', $this->Language)), 
-									$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
-					
-				$this->InputFocus = ConfigInfraTools::DIV_RETURN;
-				return ConfigInfraTools::SUCCESS;
-			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																				 'ADMIN_USER_ACTIVATE_ERROR', 
-																				  $this->Language);		
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else 
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																			 'ADMIN_USER_ACTIVATE_ERROR_NO_USER_SELECTED', 
-																			  $this->Language);		
-			return ConfigInfraTools::ERROR;
-		}
-	}
 	
 	protected function LoadHtml()
 	{
@@ -410,9 +180,9 @@ class PageAdminUser extends PageAdmin
 		//USER LIST SELECT USER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
-												  $this->InstanceInfraToolsUserAdmin, 
-												  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+												      $this->InstanceInfraToolsUserAdmin, 
+												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			if($this->Page != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 			{
@@ -430,7 +200,7 @@ class PageAdminUser extends PageAdmin
 		//USER REGISTER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
-			if($this->UserRegister(NULL, NULL, FALSE, NULL, NULL) == ConfigInfraTools::SUCCESS)
+			if($this->UserRegister(NULL, NULL, FALSE, NULL, NULL, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 			else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
 		}
@@ -440,9 +210,9 @@ class PageAdminUser extends PageAdmin
 		//USER SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_SELECT_SUBMIT]))
 		{
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
-												  $this->InstanceInfraToolsUserAdmin, 
-												  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+												      $this->InstanceInfraToolsUserAdmin, 
+												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		//USER VIEW ACTIVATE SUBMIT
@@ -451,7 +221,7 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				$this->UserUpdateActive($this->InstanceInfraToolsUserAdmin, true);
+				$this->UserUpdateActiveByUserEmail(true, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug);
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
@@ -462,7 +232,7 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				$this->UserUpdateActive($this->InstanceInfraToolsUserAdmin, false);
+				$this->UserUpdateActiveByUserEmail(false, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug);
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
@@ -473,7 +243,8 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserDelete($this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::SUCCESS)
+				if($this->UserDeleteByUserEmail($this->InstanceInfraToolsUserAdmin, 
+												$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
@@ -485,8 +256,9 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->UserResetPassword($this->InstanceInfraToolsUserAdmin);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				if($this->UserUpdatePasswordRandomByUserEmail($this->InstanceInfraToolsUserAdmin, 
+															  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW CHANGE CORPORATION
@@ -510,13 +282,13 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserUpdateCorporationByEmail($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+				if($this->UserUpdateCorporationByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
 					                                   $this->InstanceInfraToolsUserAdmin, 
 													   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					if($this->UserInfraToolsSelectByEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
-												          $this->InstanceInfraToolsUserAdmin, 
-														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					if($this->UserInfraToolsSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
+												              $this->InstanceInfraToolsUserAdmin, 
+														      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
@@ -552,11 +324,12 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserUpdateCorporationInformation($this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::SUCCESS)
+				if($this->UserUpdateCorporationInformation($this->InstanceInfraToolsUserAdmin, 
+														   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
-												          $this->InstanceInfraToolsUserAdmin, 
-														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+												              $this->InstanceInfraToolsUserAdmin, 
+														      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
@@ -592,9 +365,11 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserChangeUserType($this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::SUCCESS)
+				if($this->UserUpdateUserTypeByUserEmail($_POST[Config::FORM_FIELD_TYPE_USER_ID],
+											        $this->InstanceInfraToolsUserAdmin,
+											        $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+					if($this->UserInfraToolsSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
 												          $this->InstanceInfraToolsUserAdmin, 
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
@@ -617,7 +392,7 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, TRUE);
+				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, TRUE, $this->InputValueHeaderDebug);
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
@@ -628,7 +403,7 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, FALSE);
+				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, FALSE, $this->InputValueHeaderDebug);
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
@@ -659,7 +434,7 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserUpdate(TRUE, $this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::SUCCESS)
+				if($this->UserUpdate(TRUE, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_UPDATE;
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);

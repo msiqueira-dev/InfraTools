@@ -243,7 +243,6 @@ class ConfigInfraTools extends Config
 	/* Constantes gerais usadas pelo site */
 	const ADDRESS_INFRATOOLS_DOMAIN                                     = "";
 	const APPLICATION_INFRATOOLS                                        = "InfraTools";
-	const DIV_RETURN                                                    = "DivReturn";
 	const DIV_RADIO                                                     = "DivRadio";
 	const DIV_RADIO_CORPORATION                                         = "DivRadioCorporation";
 	const EMAIL_INFRATOOLS_LOCAL_PASSWORD                               = "";
@@ -323,7 +322,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_BIRTH_DATE_DAY                                     = "FormFieldBirthDateDay";
 	const FORM_FIELD_BIRTH_DATE_MONTH                                   = "FormFieldBirthDateMonth";
 	const FORM_FIELD_BIRTH_DATE_YEAR                                    = "FormFieldBirthDateYear";
-	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_GENDER                                             = "FormFieldGender";
 	const FORM_FIELD_ID                                                 = "FormInputId";
 	const FORM_FIELD_RADIO_DEPARTMENT                                   = "FormFieldRadioDepartment";

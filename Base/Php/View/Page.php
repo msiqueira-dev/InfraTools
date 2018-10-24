@@ -19,10 +19,10 @@ Methods:
 		abstract protected function GetCurrentPage();
 		abstract protected function LoadHtml();
 		private       function        CheckPostLanguage();
-		private       function        ExecuteLoginFirstPhaseVerification();
+		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
 		private       function        LoadInstanceUser();
-		private       function        SendTwoStepVerificationCode($Email, $Name);
+		private       function        SendTwoStepVerificationCode($Email, $Name, $Debug);
 		protected     function        CorporationDelete($CorporationName, $Debug);
 		protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
 		protected     function        CorporationLoadData(&$InstanceCorporation);
@@ -70,11 +70,15 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
+		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
-		protected     function        UserUpdateCorporationByEmail($CorporationName, $UserEmail, $Debug);
-		protected     function        UserUpdatePasswordByUserEmail($UserEmail, $UserPasswordNew, $Debug);
+		protected     function        UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug);
+		protected     function        UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug);
+		protected     function        UserUpdatePasswordByUserEmail($UserPasswordNew, $UserPasswordNewRepeat, $InstanceUser, $Debug);
+		protected     function        UserUpdatePasswordRandomByUserEmail(&$InstanceUser, $Debug);
+		protected     function        UserUpdateUserTypeByUserEmail($TypeUserIdNew, &$InstanceUser, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
 		public        function        CheckPostContainsKey($Key);
@@ -198,7 +202,7 @@ abstract class Page
 				if($this->PageCheckLogin == TRUE)
 				{
 					if($this->CheckInstanceUser() == Config::USER_NOT_LOGGED_IN)
-						$this->CheckLogin();
+						$this->CheckLogin($Debug);
 				}
 			}
 		}
@@ -250,34 +254,34 @@ abstract class Page
 		}
 	}
 	
-	private function ExecuteLoginFirstPhaseVerification()
+	private function ExecuteLoginFirstPhaseVerification($Debug)
 	{
 		$this->InstanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		if (strpos($this->InputValueLoginEmail, '@') !== false) 
 		{
-			$return = $this->InstanceFacedePersistence->UserCheckPasswordByEmail($this->InputValueLoginEmail, 
-					                                                             $this->InputValueLoginPassword, 
-																				 $this->InputValueHeaderDebug);
+			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserEmail($this->InputValueLoginEmail, 
+					                                                                 $this->InputValueLoginPassword, 
+																				     $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$return = $this->InstanceFacedePersistence->UserSelectByEmail($this->InputValueLoginEmail, 
-																			  $user, $this->InputValueHeaderDebug);
+				$return = $this->InstanceFacedePersistence->UserSelectByUserEmail($this->InputValueLoginEmail, 
+																			  $user, $Debug);
 				if($return == Config::SUCCESS)
-					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $this->InputValueHeaderDebug);
+					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $Debug);
 			}
 		}
 		else
 		{
 			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserUniqueId($this->InputValueLoginEmail, 
 					                                                                    $this->InputValueLoginPassword, 
-																				        $this->InputValueHeaderDebug);
+																				        $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, 
-																			         $user, $this->InputValueHeaderDebug);
+																			         $user, $Debug);
 				if($return == Config::SUCCESS)
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,
-																				 	  $this->InputValueHeaderDebug);
+																				 	      $Debug);
 			}
 		}
 		if($return == Config::SUCCESS || $return == Config::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
@@ -308,7 +312,7 @@ abstract class Page
 																$this->User);
 					if($user->GetTwoStepVerification()) 
 					{
-						if($this->SendTwoStepVerificationCode($user->GetEmail(),$user->GetName()) == Config::SUCCESS)
+						if($this->SendTwoStepVerificationCode($user->GetEmail(),$user->GetName(), $Debug) == Config::SUCCESS)
 							return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
 						else
 						{
@@ -384,14 +388,13 @@ abstract class Page
 		else return Config::SUCCESS;
 	}
 	
-	private function SendTwoStepVerificationCode($Email, $Name)
+	private function SendTwoStepVerificationCode($Email, $Name, $Debug)
 	{
 		$FacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 		$code = $FacedeBusiness->GenerateRandomCode();
 		$this->Session->SetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION,
 													$code);
-		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Email, $Name, $code, $this->InputValueHeaderDebug) 
-		                                                          == Config::SUCCESS)
+		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Email, $Name, $code, $Debug) == Config::SUCCESS)
 			return Config::SUCCESS;
 		else return Config::ERROR;
 	}
@@ -442,7 +445,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $instanceFacedePersistence->CorporationInsert($CorporationActive, 
@@ -543,7 +546,7 @@ abstract class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
+											$matrixConstants, $Debug, $arrayOptions);
 		if($return == Config::SUCCESS)
 		{
 			$return = $instanceFacedePersistence->CorporationSelectByName($CorporationName,
@@ -643,7 +646,7 @@ abstract class Page
 												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $arrayOptions);
+												$matrixConstants, $Debug, $arrayOptions);
 
 		if($return == Config::SUCCESS)
 		{
@@ -775,7 +778,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->DepartmentInsert($this->InputValueCorporationName,
@@ -866,7 +869,7 @@ abstract class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
+											$matrixConstants, $Debug, $arrayOptions);
 		if($return == Config::SUCCESS)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByCorporationName($CorporationName,
@@ -920,7 +923,7 @@ abstract class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
+											$matrixConstants, $Debug, $arrayOptions);
 		if($return == Config::SUCCESS)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByCorporationNameNoLimit($CorporationName,
@@ -972,7 +975,7 @@ abstract class Page
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
+											$matrixConstants, $Debug, $arrayOptions);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
@@ -1037,7 +1040,7 @@ abstract class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants);
+											$matrixConstants, $Debug);
 		
 		if($return == Config::SUCCESS)
 		{
@@ -1141,7 +1144,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -1228,7 +1231,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -1365,7 +1368,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TeamInsert($this->InputValueTeamDescription,
@@ -1455,7 +1458,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TeamSelectByTeamId($this->InputValueTeamId, $InstanceTeam, $Debug);
@@ -1505,7 +1508,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		$return = Config::SUCCESS;
 		if($return == Config::SUCCESS)
 		{
@@ -1571,14 +1574,14 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $FacedePersistence->TeamUpdateByTeamId($this->InputValueTeamDescription,
 															 $InstanceTeam->GetTeamId(),
 															 $this->InputValueTeamName,
-															 $this->InputValueHeaderDebug);
+															 $Debug);
 			if($return == Config::SUCCESS)
 			{
 				if($this->TeamLoadData($InstanceTeam) == Config::SUCCESS)
@@ -1666,7 +1669,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamTeamDescription, $Debug);
@@ -1741,7 +1744,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TypeAssocUserTeamSelectByTeamId($this->InputValueTypeAssocUserTeamTeamId, 
@@ -1785,13 +1788,13 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $FacedePersistence->TypeAssocUserTeamUpdateByTeamId($this->InputValueTypeAssocUserTeamTeamDescription,
 																		  $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(),
-																		  $this->InputValueHeaderDebug);
+																		  $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->TypeAssocUserTeam->SetTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamTeamDescription);
@@ -1872,7 +1875,7 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TypeUserInsert($this->InputValueTypeUserDescription, 
@@ -1957,7 +1960,7 @@ abstract class Page
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
+												$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
@@ -2009,12 +2012,12 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TypeUserSelectByTypeUserId($this->InputValueTypeUserId, 
-																	   $InstanceTypeUser,
-																	   $Debug);
+																	 $InstanceTypeUser,
+																	 $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
@@ -2065,7 +2068,7 @@ abstract class Page
 			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);			
+												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$FacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -2108,6 +2111,70 @@ abstract class Page
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			}	
+		}
+	}
+	
+	protected function UserDeleteByUserEmail(&$InstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail  = $InstanceUser->GetEmail();
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//VALIDA E-MAIL
+		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnEmailText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_USER);
+				unset($InstanceUser);
+				$this->InputValueUserEmail = "";
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('ADMIN_USER_DELETE_SUCCESS', 
+																$this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_USER_DELETE_FAILED_NOT_FOUND)
+			{
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', 
+																$this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::FORM_USER_RETURN_NOT_FOUND;
+			}
+			else
+			{
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('ADMIN_USER_DELETE_ERROR', 
+																$this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return $return;
 		}
 	}
 	
@@ -2172,7 +2239,46 @@ abstract class Page
 		}
 	}
 	
-	protected function UserUpdateCorporationByEmail($CorporationNameNew, &$InstanceUser, $Debug)
+	protected function UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceFacedePersistence->UserUpdateActiveByUserEmail($InstanceUser->GetEmail(),
+																	      $UserActiveNew,
+																		  $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$InstanceUser->SetUserActive($UserActiveNew);
+			$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
+			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			if($UserActiveNew)
+				$this->ReturnText =	str_replace('[0]',  
+								strtolower($this->InstanceLanguageText->GetConstant('ACTIVATED', $this->Language)), 
+								$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
+			else 
+				$this->ReturnText = str_replace('[0]', 
+								strtolower($this->InstanceLanguageText->GetConstant('DEACTIVATED', $this->Language)), 
+								$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
+
+			$this->InputFocus = Config::DIV_RETURN;
+			return Config::SUCCESS;
+		}
+		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+		{
+			$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_ERROR', $this->Language);		
+			return Config::ERROR;
+		}
+	}
+	
+	protected function UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueCorporationName = $CorporationNameNew;
@@ -2193,41 +2299,41 @@ abstract class Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			if($this->InputValueCorporationName == Config::FORM_SELECT_NONE)
 				$this->InputValueCorporationName = NULL;
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserUpdateCorporationByEmail($this->InputValueCorporationName,
+			$return = $instanceFacedePersistence->UserUpdateCorporationByUserEmail($this->InputValueCorporationName,
 			                                                                     $InstanceUser->GetEmail(),
-																				 $this->InputValueHeaderDebug);
+																				 $Debug);
 			if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() != NULL)
 			{
 				$return = $instanceFacedePersistence->AssocUserCorporationDelete(
 					                                     $InstanceUser->GetCorporationName(),
 			                                             $InstanceUser->GetEmail(),
-														 $this->InputValueHeaderDebug, NULL, TRUE);
+														 $Debug, NULL, TRUE);
 				if($return == Config::SUCCESS && $this->InputValueCorporationName != NULL)
 					$instanceFacedePersistence->AssocUserCorporationInsert(
 					                                     $this->InputValueCorporationName,
 														 NULL, NULL,
 			                                             $InstanceUser->GetEmail(),
-														 $this->InputValueHeaderDebug, NULL, TRUE);
+														 $Debug, NULL, TRUE);
 			}	
 			else if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() == NULL)
 				$return = $instanceFacedePersistence->AssocUserCorporationInsert(
 					                                     $this->InputValueCorporationName,
 														 NULL, NULL,
 			                                             $InstanceUser->GetEmail(),
-														 $this->InputValueHeaderDebug, NULL, TRUE);
+														 $Debug, NULL, TRUE);
 			if($return == Config::SUCCESS)
 			{
-				$return = $instanceFacedePersistence->UserUpdateDepartmentByEmailAndCorporation(
+				$return = $instanceFacedePersistence->UserUpdateDepartmentByUserEmailAndCorporation(
 					                                                         $this->InputValueCorporationName, 
 																			 NULL, 
 																			 $InstanceUser->GetEmail(), 
-																			 $this->InputValueHeaderDebug);
+																			 $Debug);
 				if($return == Config::MYSQL_UPDATE_SAME_VALUE)
 					$return = Config::SUCCESS;
 			}
@@ -2271,7 +2377,7 @@ abstract class Page
 		}
 	}
 	
-	protected function UserUpdatePasswordByUserEmail($UserEmail, $UserPasswordNew, $UserPasswordNewRepeat, $Debug)
+	protected function UserUpdatePasswordByUserEmail($UserPasswordNew, $UserPasswordNewRepeat, $InstanceUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueNewPassword     = $UserPasswordNew;
@@ -2297,20 +2403,19 @@ abstract class Page
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions,
+											$matrixConstants, $Debug, $arrayOptions,
 											$arrayExtraField);
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->UserUpdatePasswordByEmail($UserEmail, $this->InputValueNewPassword, $Debug);
+			$return = $FacedePersistence->UserUpdatePasswordByUserEmail($InstanceUser->GetEmail(), $this->InputValueNewPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																				 'ACCOUNT_CHANGE_PASSWORD_SUCCESS', 
-																				  $this->Language);
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ACCOUNT_CHANGE_PASSWORD_SUCCESS', 
+																				$this->Language);
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -2328,6 +2433,110 @@ abstract class Page
 		$this->ReturnClass         = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		return Config::ERROR;
+	}
+	
+	protected function UserUpdatePasswordRandomByUserEmail(&$InstanceUser, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
+		$newRandomPassword = $instanceFacedeBusiness->GenerateRandomPassword();
+		$return = $instanceFacedePersistence->UserUpdatePasswordByUserEmail($InstanceUser->GetEmail(), 
+		                                                                    $newRandomPassword,
+																		    $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $instanceFacedeBusiness->SendEmailPasswordReset($InstanceUser->GetName(),
+										                              $InstanceUser->GetEmail(),
+										                              $newRandomPassword, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('PASSWORD_RESET_SUCCESS', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			}
+			else
+			{
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('SEND_EMAIL_ERROR', 
+																		                $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			}
+		}
+		else
+		{
+			$this->ReturnText  = $this->InstanceLanguageText->GetConstant('PASSWORD_RESET_SUCCESS', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}
+	}
+	
+	protected function UserUpdateUserTypeByUserEmail($TypeUserIdNew, $InstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeUserId = $TypeUserIdNew;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TYPE_USER_ID
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTypeUserIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTypeUserId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeUserIdText;
+		array_push($arrayConstants, 'FORM_INVALID_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			if($this->InputValueTypeUserId == Config::FORM_SELECT_NONE)
+				$this->InputValueTypeUserId = NULL;
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserUpdateUserTypeByUserEmail($InstanceUser->GetEmail(),
+																			$this->InputValueTypeUserId,
+																			$Debug);
+			if($return == Config::SUCCESS)
+			{
+				$instanceFacedePersistence->TypeUserSelectByTypeUserId($this->InputValueTypeUserId, $instanceTypeUser, $Debug);
+				if($return == Config::SUCCESS)
+				{
+					$InstanceUser->SetUserType($instanceTypeUser);
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
+					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
+						                                . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_CHANGE_USER_TYPE_SUCCESS', $this->Language);
+				}
+			}
+			if($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
+													. "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+			}
+			elseif($return != Config::SUCCESS)
+			{
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR 
+													. "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_CHANGE_CORPORATION_ERROR', 
+																				$this->Language);			
+			}
+			return $return;
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return $return;
+		}
 	}
 	
 	public function CheckInputImage($Input)
@@ -2353,7 +2562,7 @@ abstract class Page
 		else return Config::USER_NOT_LOGGED_IN;
 	}
 	
-	public function CheckLogin()
+	public function CheckLogin($Debug)
 	{
 		if (isset($_POST[Config::LOGIN_FORM_SUBMIT]))
 		{
@@ -2363,12 +2572,11 @@ abstract class Page
 			if(!empty($this->InputValueLoginEmail) && !empty($this->InputValueLoginPassword))
 			{
 				if(strlen($this->InputValueLoginEmail) < 45 && strlen($this->InputValueLoginPassword) < 20)
-					return $this->ExecuteLoginFirstPhaseVerification();
+					return $this->ExecuteLoginFirstPhaseVerification($Debug);
 				else
 				{
-					$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																				  'LOGIN_INVALID_LOGIN', 
-																				  $this->Language);
+					$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant('LOGIN_INVALID_LOGIN', 
+																				      $this->Language);
 					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";

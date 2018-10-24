@@ -75,7 +75,7 @@ class PageRegister extends PageInfraTools
 		if (isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
 			$this->ValidateCaptcha = TRUE;
-			$this->UserRegister(TRUE, TRUE, FALSE, TRUE, FALSE);	
+			$this->UserRegister(TRUE, TRUE, FALSE, TRUE, FALSE, $this->InputValueHeaderDebug);	
 		}
 		$this->LoadCaptcha();
 		$this->LoadHtml();

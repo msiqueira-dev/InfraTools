@@ -14,9 +14,9 @@ Description:
 			Classe used to access and deal with information of the database about user.
 Functions: 
 			public function UserCheckEmail($Email, $Debug);
-			public function UserCheckPasswordByEmail($Email, $Password, $Debug);
+			public function UserCheckPasswordByUserEmail($Email, $Password, $Debug);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
-			public function UserDelete($Email, $Debug);
+			public function UserDeleteByUserEmail($Email, $Debug);
 			public function UserInsert($BirthDate, $Corporation, $Country, $Email, $Gender, $HashCode, 
 			                           $Name, $Password, $Region, $SessionExpires, $TwoStepVerification, 
 									   $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
@@ -24,26 +24,27 @@ Functions:
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByEmail($Email, &$InstanceUser, $Debug);
+			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                       &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
 			public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug);
-			public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug);
+			public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
-			public function UserUpdateActiveByEmail($Email, $UserActive, $Debug);
-			public function UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		$Email, $Debug);
-			public function UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									          $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
+			public function UserUpdateActiveByUserEmail($Email, $UserActive, $Debug);
+			public function UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
+																		            $Email, $Debug);
+			public function UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
+									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
 			public function UserUpdateConfirmedByHash($HashCode, $Debug);
-			public function UserUpdateCorporationByEmail($Corporation, $Email, $Debug);
-			public function UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug);
-			public function UserUpdatePasswordByEmail($Email, $Password, $Debug);
-			public function UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug);
-			public function UserUpdateUserTypeByEmail($Email, $TypeId, $Debug);
-			public function UserUpdateUniqueIdByEmail($Email, $UniqueId, $Debug);
+			public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug);
+			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug);
+			public function UserUpdatePasswordByUserEmail($Email, $Password, $Debug);
+			public function UserUpdateTwoStepVerificationByUserEmail($Email, $TwoStepVerification, $Debug);
+			public function UserUpdateUserTypeByUserEmail($Email, $TypeId, $Debug);
+			public function UserUpdateUniqueIdByUserEmail($Email, $UniqueId, $Debug);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -136,14 +137,14 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserCheckPasswordByEmail($Email, $Password, $Debug)
+	public function UserCheckPasswordByUserEmail($Email, $Password, $Debug)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserCheckPasswordByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserCheckPasswordByEmail());
+				Persistence::ShowQuery('SqlUserCheckPasswordByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserCheckPasswordByUserEmail());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ss", $Email, $Password);
@@ -204,15 +205,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserDelete($Email, $Debug)
+	public function UserDeleteByUserEmail($Email, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserDeleteByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserDeleteByEmail());
+				Persistence::ShowQuery('SqlUserDeleteByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserDeleteByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $Email);
@@ -628,7 +629,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectByEmail($Email, &$InstanceUser, $Debug)
+	public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug)
 	{
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceDepartment = NULL;
@@ -638,8 +639,8 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserSelectByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByEmail());
+				Persistence::ShowQuery('SqlUserSelectByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByUserEmail());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $Email);
@@ -1057,14 +1058,14 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug)
+	public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserSelectHashCodeByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectHashCodeByEmail());
+				Persistence::ShowQuery('SqlUserSelectHashCodeByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectHashCodeByUserEmail());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $Email);
@@ -1175,15 +1176,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateActiveByEmail($Email, $UserActive, $Debug)
+	public function UserUpdateActiveByUserEmail($Email, $UserActive, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateActiveByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateActiveByEmail());
+				Persistence::ShowQuery('SqlUserUpdateActiveByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateActiveByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $UserActive, $Email);
@@ -1219,16 +1220,16 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		$Email, $Debug)
+	public function UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
+																		    $Email, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateAssocUserCorporationByEmailAndCorporation');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateAssocUserCorporationByEmailAndCorporation());
+				Persistence::ShowQuery('SqlUserUpdateAssocUserCorporationByUserEmailAndCorporation');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateAssocUserCorporationByUserEmailAndCorporation());
 			if ($stmt)
 			{
 				$stmt->bind_param("ssss", $RegistrationDate, $RegistrationId, $Corporation, $Email);
@@ -1264,16 +1265,17 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									  $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
+	public function UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
+									      $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+										  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateByEmail());
+				Persistence::ShowQuery('SqlUserUpdateByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("sssssiiiissssss", $BirthDate, $Country, $Gender, $Name, $Region, $SessionExpires, 
@@ -1357,15 +1359,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateCorporationByEmail($Corporation, $Email, $Debug)
+	public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateCorporationByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateCorporationByEmail());
+				Persistence::ShowQuery('SqlUserUpdateCorporationByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateCorporationByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $Corporation, $Email);
@@ -1401,15 +1403,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug)
+	public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateDepartmentByEmailAndCorporation');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateDepartmentByEmailAndCorporation());
+				Persistence::ShowQuery('SqlUserUpdateDepartmentByUserEmailAndCorporation');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateDepartmentByUserEmailAndCorporation());
 			if ($stmt)
 			{
 				$stmt->bind_param("sss", $Department, $Email, $Corporation);
@@ -1445,15 +1447,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdatePasswordByEmail($Email, $Password, $Debug)
+	public function UserUpdatePasswordByUserEmail($Email, $Password, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdatePasswordByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdatePasswordByEmail());
+				Persistence::ShowQuery('SqlUserUpdatePasswordByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdatePasswordByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $Password, $Email);
@@ -1489,15 +1491,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug)
+	public function UserUpdateTwoStepVerificationByUserEmail($Email, $TwoStepVerification, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateTwoStepVerificationByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateTwoStepVerificationByEmail());
+				Persistence::ShowQuery('SqlUserUpdateTwoStepVerificationByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateTwoStepVerificationByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $TwoStepVerification, $Email);
@@ -1533,15 +1535,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateUserTypeByEmail($Email, $TypeId, $Debug)
+	public function UserUpdateUserTypeByUserEmail($Email, $TypeId, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateUserTypeByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateUserTypeByEmail());
+				Persistence::ShowQuery('SqlUserUpdateUserTypeByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateUserTypeByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $TypeId, $Email);
@@ -1577,15 +1579,15 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateUniqueIdByEmail($Email, $UniqueId, $Debug)
+	public function UserUpdateUniqueIdByUserEmail($Email, $UniqueId, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateUniqueIdByEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateUniqueIdByEmail());
+				Persistence::ShowQuery('SqlUserUpdateUniqueIdByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateUniqueIdByUserEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $UniqueId, $Email);

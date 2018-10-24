@@ -86,9 +86,9 @@ class PageRegisterConfirmation extends PageInfraTools
 					{
 						if($this->User != NULL)
 						{
-							$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->User->GetEmail(), 
-																					            $this->User, 
-																					            $this->InputValueHeaderDebug);
+							$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByUserEmail($this->User->GetEmail(), 
+																					                $this->User, 
+																					                $this->InputValueHeaderDebug);
 							$this->Session->SetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
 						}
 						if ($return == ConfigInfraTools::SUCCESS)

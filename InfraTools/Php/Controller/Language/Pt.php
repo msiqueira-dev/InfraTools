@@ -147,7 +147,7 @@ class Pt
 	const FORM_INVALID_USER_EMAIL                                 = "E-mail de usuário inválido";
 	const FORM_INVALID_USER_EMAIL_SIZE                            = "Quantidade de caracteres excede o tamanho máximo para a "
 	                                                              . "e-mail de usuário";
-	const FORM_INVALID_USER_GENDER                                = "E-mail inválido";
+	const FORM_INVALID_USER_GENDER                                = "Gênero inválido";
 	const FORM_INVALID_USER_NAME                                  = "Nome de usuário inválido";
 	const FORM_INVALID_USER_NAME_SIZE                             = "Quantidade de caracteres excede o tamanho máximo para a "
 	                                                              . "nome de usuário";

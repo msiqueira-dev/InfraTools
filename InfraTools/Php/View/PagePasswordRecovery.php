@@ -125,7 +125,7 @@ class PagePasswordRecovery extends PageInfraTools
 												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $matrixOptions);
+												$matrixConstants, $Debug, $matrixOptions);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();

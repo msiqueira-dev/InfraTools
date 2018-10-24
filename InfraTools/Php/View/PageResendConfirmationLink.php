@@ -66,8 +66,8 @@ class PageResendConfirmationLink extends PageInfraTools
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		if(isset($this->User))
 		{
-			$return = $FacedePersistenceInfraTools->UserSelectHashCodeByEmail($this->User->GetEmail(), 
-																			  $UniqueHash, $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->UserSelectHashCodeByUserEmail($this->User->GetEmail(), 
+																			      $UniqueHash, $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				Page::GetCurrentDomain($domain);

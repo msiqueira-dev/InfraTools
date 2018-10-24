@@ -65,14 +65,14 @@ class PageAccount extends PageInfraTools
 		//PAGE_ACCOUNT_UPDATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_SUBMIT]))
 		{
-			 if($this->UserUpdate(FALSE, $this->User) == ConfigInfraTools::SUCCESS)
+			 if($this->UserUpdate(FALSE, $this->User, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			 	$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
 			 else $this->Page = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
 		}
 		//PAGE_ACCOUNT_CHANGE_PASSWORD
 		elseif(isset($_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT]))
 		{
-			if($this->UserUpdatePasswordByUserEmail($this->User->GetEmail(), 
+			if($this->UserUpdatePasswordByUserEmail($this->User, 
 												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW], 
 												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
 												    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
@@ -82,13 +82,13 @@ class PageAccount extends PageInfraTools
 		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_ACTIVATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE]))
 		{
-			$this->UserChangeTwoStepVerification(NULL, TRUE);
+			$this->UserChangeTwoStepVerification(NULL, TRUE, $this->InputValueHeaderDebug);
 			$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
 		}
 		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_DEACTIVATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE]))
 		{
-			$this->UserChangeTwoStepVerification(NULL, FALSE);
+			$this->UserChangeTwoStepVerification(NULL, FALSE, $this->InputValueHeaderDebug);
 			$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
 		}
 	}

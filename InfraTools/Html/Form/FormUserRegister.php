@@ -371,9 +371,11 @@
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>" 
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>"/>
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>"/>
+							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>"
+							 value="<?php $this->InputValueCountry ?>"/>
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>"/>
+							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>"
+							 value="<?php $this->InputValueRegion ?>"/>
 	</div>
 	<div id="GoogleMapsDiv" class="DivContentBodyContainerGoogleMaps">
 		<input type="text"   id="GoogleMapsSearch" name="searchInput" class="GoogleMapsSearch GoogleMapsSearchControls" value=""/>
@@ -420,7 +422,8 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
-												   '');" disabled="disabled" />
+												   '');" disabled="disabled" 
+									   value="<?php echo $this->InputValueCountry; ?>"/>
 		</div>
 		<div class="DivContentBodyContainerLabelMapsEstate">
 			<div class="DivContentBodyContainerLabel DivContentBodyContainerLabelMapsLabel">
@@ -455,7 +458,8 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
-												   '');" disabled="disabled"/>
+												   '');" disabled="disabled"
+								   value="<?php echo $this->InputValueRegion; ?>"/>
 		</div>                
 	</div>
 	<div class="DivClearFloat"></div>
@@ -704,9 +708,9 @@
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->EmptyText))                          echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnEmptyText))                    echo $this->ReturnEmptyText; ?>
 		<?php if(isset($this->ReturnNameText))                     echo $this->ReturnNameText; ?>
-		<?php if(isset($this->ReturnEmailText))                    echo $this->ReturnEmailText; ?>
+		<?php if(isset($this->ReturnUserEmailText))                echo $this->ReturnUserEmailText; ?>
 		<?php if(isset($this->ReturnBirthDateDayText))             echo $this->ReturnBirthDateDayText; ?>
 		<?php if(isset($this->ReturnBirthDateMonthText))           echo $this->ReturnBirthDateMonthText; ?>
 		<?php if(isset($this->ReturnBirthDateYearText))            echo $this->ReturnBirthDateYearText; ?>

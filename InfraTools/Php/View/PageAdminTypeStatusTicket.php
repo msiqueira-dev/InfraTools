@@ -117,7 +117,7 @@ class PageAdminTypeStatusTicket extends PageAdmin
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->TypeStatusTicketInsert($this->InputValueTypeStatusTicketDescription, 
@@ -178,7 +178,7 @@ class PageAdminTypeStatusTicket extends PageAdmin
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->TypeStatusTicketSelectByDescription($this->InputValueTypeStatusTicketDescription, 
@@ -232,7 +232,7 @@ class PageAdminTypeStatusTicket extends PageAdmin
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->TypeStatusTicketSelectById($this->InputValueTypeStatusTicketId, 
@@ -287,7 +287,7 @@ class PageAdminTypeStatusTicket extends PageAdmin
 			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 
 			if($return == ConfigInfraTools::SUCCESS)
 			{

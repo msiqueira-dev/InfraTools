@@ -86,8 +86,8 @@ class PageAdminDepartment extends PageAdmin
 		//DEPARTMENT VIEW USERS SELECT USER SUBMIT
 		if(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
-												  $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+												      $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			if($this->Page != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 			{

@@ -378,7 +378,7 @@ class PageAdminCorporation extends PageAdmin
 		//CORPORATION VIEW USERS SELECT USER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
 												  $this->InstanceInfraToolsUserAdmin, 
 												  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;

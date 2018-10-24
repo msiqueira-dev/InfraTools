@@ -36,7 +36,7 @@ class PageLogin extends PageInfraTools
 				$this->DisableGenericHtml = FALSE;
 				if($this->CheckInstanceUser() != ConfigInfraTools::SUCCESS)
 				{
-					if($this->CheckLogin() == ConfigInfraTools::SUCCESS)
+					if($this->CheckLogin($this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					{
 						Page::GetCurrentDomain($domain);
 						$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .

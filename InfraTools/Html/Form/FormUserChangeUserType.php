@@ -128,8 +128,8 @@
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SELECT; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SELECT; ?>"
+                name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_ID; ?>" 
+                id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_ID; ?>"
                 class="SelectCorporation"
                 onchange="document.getElementById('<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SUBMIT; ?>')
                                          .disabled = false;

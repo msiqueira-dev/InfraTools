@@ -34,6 +34,7 @@ class Config
 	/* Constantes gerais usadas pelo site */
 	const CHECKBOX_CHECKED                                              = "checked";
 	const CHECKBOX_UNCHECKED                                            = "";
+	const DIV_RETURN                                                    = "DivReturn";
 	const ENABLED                                                       = "Enabled";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TICKET                 = "ExceptionAssocTicketUserRequestingTicket";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE                   = "ExceptionAssocTicketUserRequestingType";
@@ -57,6 +58,7 @@ class Config
 	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
 	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
 	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
+	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_HEADER_DEBUG                                       = "FormFieldHeaderDebug";
 	const FORM_FIELD_HEADER_DEBUG_HIDDEN                                = "FormFieldHeaderDebugHidden";
 	const FORM_FIELD_HEADER_LAYOUT                                      = "FormFieldHeaderLayout";

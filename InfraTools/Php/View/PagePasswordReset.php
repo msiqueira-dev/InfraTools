@@ -115,14 +115,14 @@ class PagePasswordReset extends PageInfraTools
 												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, 
-												$arrayOptions, $arrayExtraField);
+												$arrayOptions, $this->InputValueHeaderDebug, $arrayExtraField);
 			//VALIDAÇÂO FORMULÁRIO DE ERRO
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-				$return = $FacedePersistenceInfraTools->UserUpdatePasswordByEmail($this->SessionUserEmail, 
-																						  $this->InputValueNewPassword,
-																						  $this->InputValueHeaderDebug);
+				$return = $FacedePersistenceInfraTools->UserUpdatePasswordByUserEmail($this->SessionUserEmail, 
+																					  $this->InputValueNewPassword,
+																					  $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Session->RemoveSessionVariable(ConfigInfraTools::PASSWORD_RESET_CODE);

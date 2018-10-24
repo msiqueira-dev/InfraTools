@@ -122,39 +122,38 @@ Functions:
 			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug);
 			public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
 			public function UserCheckEmail($Email, $Debug);
-			public function UserCheckPasswordByEmail($Email, $Password, $Debug);
+			public function UserCheckPasswordByUserEmail($Email, $Password, $Debug);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
-			public function UserDelete($Email, $Debug);
+			public function UserDeleteByUserEmail($Email, $Debug);
 			public function UserInsert($BirthDate, $Corporation, $Country, $Department, $Email, $Gender, $HashCode, 
 			                           $Name, $Password, $Region, $SessionExpires, $TwoStepVerification, 
 									   $UserActive, $UserConfirmed, $UserType, $UserUniqueId $Debug);
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByEmail($Email, &$InstanceUser, $Debug);
+			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                       &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
 			public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug);
-			public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug);
+			public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
-			public function UserUpdateActiveByEmail($Email, $UserActive, $Debug);
-			public function UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		        $Email, $Debug);
-			public function UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, $RegistrationDate, 
+			public function UserUpdateActiveByUserEmail($Email, $UserActive, $Debug);
+			public function UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
+																		            $Email, $Debug);
+			public function UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation($Corporation, $RegistrationId, 
 																		                        $Email, $Debug);
-			public function UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, $RegistrationId, 
-																		                        $Email, $Debug);
-			public function UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									          $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
+			public function UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
+									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
 			public function UserUpdateConfirmedByHash($HashCode, $Debug);
-			public function UserUpdateCorporationByEmail($Corporation, $Email, $Debug);
-			public function UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug);
-			public function UserUpdatePasswordByEmail($Email, $Password, $Debug);
-			public function UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug);
-			public function UserUpdateUserTypeByEmail($Email, $TypeId, $Debug);
-			public function UserUpdateUniqueIdByEmail($Email, $UniqueId, $Debug);
+			public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug);
+			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug);
+			public function UserUpdatePasswordByUserEmail($Email, $Password, $Debug);
+			public function UserUpdateTwoStepVerificationByUserEmail($Email, $TwoStepVerification, $Debug);
+			public function UserUpdateUserTypeByUserEmail($Email, $TypeId, $Debug);
+			public function UserUpdateUniqueIdByUserEmail($Email, $UniqueId, $Debug);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -927,10 +926,10 @@ class FacedePersistence
 		
 	}
 	
-	public function UserCheckPasswordByEmail($Email, $Password, $Debug)
+	public function UserCheckPasswordByUserEmail($Email, $Password, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserCheckPasswordByEmail($Email, $Password, $Debug);
+		return $FacedePersistenceUser->UserCheckPasswordByUserEmail($Email, $Password, $Debug);
 	}
 	
 	public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug)
@@ -939,10 +938,10 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
 	}
 	
-	public function UserDelete($Email, $Debug)
+	public function UserDeleteByUserEmail($Email, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserDelete($Email, $Debug);
+		return $FacedePersistenceUser->UserDeleteByUserEmail($Email, $Debug);
 	}
 	
 	public function UserInsert($BirthDate, $Corporation, $Country, $Email, $Gender, $HashCode, $Name, $Password, 
@@ -978,10 +977,10 @@ class FacedePersistence
 															  $RowCount, $Debug);
 	}
 	
-	public function UserSelectByEmail($Email, &$InstanceUser, $Debug)
+	public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectByEmail($Email, $InstanceUser, $Debug);
+		return $FacedePersistenceUser->UserSelectByUserEmail($Email, $InstanceUser, $Debug);
 	}
 	
 	public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -1015,10 +1014,10 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserSelectConfirmedByHashCode($UserActive, $HashCode, $Debug);
 	}
 	
-	public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug)
+	public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectHashCodeByEmail($Email, $HashCode, $Debug);
+		return $FacedePersistenceUser->UserSelectHashCodeByUserEmail($Email, $HashCode, $Debug);
 	}
 	
 	public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug)
@@ -1027,42 +1026,45 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserSelectTeamByUserEmail($InstanceUser, $Debug);
 	}
 	
-	public function UserUpdateActiveByEmail($Email, $UserActive, $Debug)
+	public function UserUpdateActiveByUserEmail($Email, $UserActive, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateActiveByEmail($Email, $UserActive, $Debug);
+		return $FacedePersistenceUser->UserUpdateActiveByUserEmail($Email, $UserActive, $Debug);
 	}
 	
-	public function UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
+	public function UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
 																		$Email, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, 
-																						   $RegistrationId, $Email, $Debug);
+		return $FacedePersistenceUser->UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, 
+																						       $RegistrationId, $Email, $Debug);
 	}
 	
-	public function UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		$Email, $Debug)
+	public function UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
+																		                    $Email, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, 
-																										   $RegistrationDate, $Email, $Debug);
+		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation($Corporation, 
+																										       $RegistrationDate, 
+																											   $Email, $Debug);
 	}
 	
-	public function UserUpdateAssocUserCorporationRegistrationIdByEmailAndCorporation($Corporation, $RegistrationId, 
+	public function UserUpdateAssocUserCorporationRegistrationIdByUserEmailAndCorporation($Corporation, $RegistrationId, 
 																					  $Email, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationIdByEmailAndCorporation($Corporation,
-																						                 $RegistrationId, $Email, $Debug);
+		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationIdByUserEmailAndCorporation($Corporation,
+																						                     $RegistrationId, $Email, $Debug);
 	}
 	
-	public function UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
+	public function UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
 									  $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									                     $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug);
+		return $FacedePersistenceUser->UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
+									                         $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary,
+															 $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
+															 $UserUniqueId, $Debug);
 	}
 	
 	public function UserUpdateConfirmedByHash($HashCode, $Debug)
@@ -1071,39 +1073,39 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserUpdateConfirmedByHash($HashCode, $Debug);
 	}
 	
-	public function UserUpdateCorporationByEmail($Corporation, $Email, $Debug)
+	public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateCorporationByEmail($Corporation, $Email, $Debug);
+		return $FacedePersistenceUser->UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug);
 	}
 	
-	public function UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug)
+	public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug);
+		return $FacedePersistenceUser->UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug);
 	}
 	
-	public function UserUpdatePasswordByEmail($Email, $Password, $Debug)
+	public function UserUpdatePasswordByUserEmail($Email, $Password, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdatePasswordByEmail($Email, $Password, $Debug);
+		return $FacedePersistenceUser->UserUpdatePasswordByUserEmail($Email, $Password, $Debug);
 	}
 	
-	public function UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug)
+	public function UserUpdateTwoStepVerificationByUserEmail($Email, $TwoStepVerification, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug);
+		return $FacedePersistenceUser->UserUpdateTwoStepVerificationByUserEmail($Email, $TwoStepVerification, $Debug);
 	}
 	
-	public function UserUpdateUserTypeByEmail($Email, $TypeId, $Debug)
+	public function UserUpdateUserTypeByUserEmail($Email, $TypeId, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateUserTypeByEmail($Email, $TypeId, $Debug);
+		return $FacedePersistenceUser->UserUpdateUserTypeByUserEmail($Email, $TypeId, $Debug);
 	}
 	
-	public function UserUpdateUniqueIdByEmail($Email, $UniqueId, $Debug)
+	public function UserUpdateUniqueIdByUserEmail($Email, $UniqueId, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateUserTypeByEmail($Email, $UniqueId, $Debug);
+		return $FacedePersistenceUser->UserUpdateUserTypeByUserEmail($Email, $UniqueId, $Debug);
 	}
 }

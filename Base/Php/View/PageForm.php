@@ -16,7 +16,7 @@ Functions:
 			public function ValidateFields($ArrayElements, $ArrayElementsDefaultValue, $ArrayElementsInput, 
 							               $ArrayElementsMinValue, $ArrayElementsMaxValue, $ArrayElementsNullable, 
 							               ArrayFormFunction, InstanceLanguageText, $Language,
-										   &$ArrayElementsClass, &$ArrayElementsText, &$ElementEmptyText, &$MatrixConstants
+										   &$ArrayElementsClass, &$ArrayElementsText, &$ElementEmptyText, &$MatrixConstants, $Debug
 										   &$ArrayOptions = NULL, &$ArrayExtraFieldSameValue = NULL);
 **************************************************************************/
 
@@ -107,13 +107,15 @@ class PageForm
 	public function ValidateFields($ArrayElements, $ArrayElementsDefaultValue, $ArrayElementsInput, 
 							       $ArrayElementsMinValue, $ArrayElementsMaxValue, $ArrayElementsNullable, 
 							       $ArrayFormFunction, $InstanceLanguageText, $Language, 
-								   &$ArrayElementsClass, &$ArrayElementsText, &$ElementEmptyText, &$MatrixConstants,
+								   &$ArrayElementsClass, &$ArrayElementsText, &$ElementEmptyText, &$MatrixConstants, $Debug,
 								   &$MatrixOptions = NULL, &$ArrayExtraFieldSameValue = NULL)
 	{
 		$arrayReturn = array();
 		if(count($ArrayElements) > 0 && count($ArrayElementsInput) > 0 && count($ArrayElementsClass) > 0 &&
 		   count($ArrayElementsText) > 0 && count($ArrayFormFunction) > 0 && count($MatrixConstants) > 0)
 		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+					echo "<b>ValidateFields</b>:<br>";
 			for($index = 0; $index < count($ArrayElements); $index++)
 			{
 				$element             = $ArrayElements[$index];
@@ -147,10 +149,18 @@ class PageForm
 											   $elementNullable, $ArrayElementsText[$index], $ElementEmptyText, 
 											   $elementClass, $arrayConstants,
 											   $arrayOptions, $elementExtraFieldSameValue);
+				if($Debug == Config::CHECKBOX_CHECKED)
+				{
+					if(isset($ArrayElementsText[$index]))
+						echo "&#8195;&#8195;<b>$element</b>: $elementInput - $return - $ArrayElementsText[$index] - $ElementEmptyText<br>";
+					else echo "&#8195;&#8195;<b>$element</b>: $elementInput - $return - $ElementEmptyText<br>";
+				}
 				if($return != Config::SUCCESS)
 					$ArrayElementsText[$index] = $ArrayElementsText[$index] . "<br>"; 
 				array_push($arrayReturn, $return);
 			}
+			if(isset($ElementEmptyText))
+						$ElementEmptyText = $ElementEmptyText . "<br>";
 			if(count($arrayReturn) > 0)
 			{
 				for($index = 0; $index < count($arrayReturn); $index++)
@@ -160,9 +170,9 @@ class PageForm
 				}
 				return Config::SUCCESS;
 			}
-			else Config::ERROR;
+			else return Config::ERROR;
 		}
-		else Config::ERROR;
+		else return Config::ERROR;
 	}
 	
 	public function ValidateSpecificField($FunctionName, $FieldValue, $FieldDefaultValue, $ArrayOptions)

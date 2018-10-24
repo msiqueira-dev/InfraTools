@@ -90,31 +90,31 @@ Methods:
 			public static function SqlTypeUserSelectByTypeUserId();
 			public static function SqlTypeUserUpdateByTypeUserId();
 			public static function SqlUserCheckEmail();
-			public static function SqlUserCheckPasswordByEmail();
+			public static function SqlUserCheckPasswordByUserEmail();
 			public static function SqlUserCheckPasswordByUserUniqueId();
-			public static function SqlUserDeleteByEmail();
+			public static function SqlUserDeleteByUserEmail();
 			public static function SqlUserInsert();
 			public static function SqlUserSelect();
 			public static function SqlUserSelectByCorporation();
 			public static function SqlUserSelectByDepartment();
-			public static function SqlUserSelectByEmail();
+			public static function SqlUserSelectByUserEmail();
 			public static function SqlUserSelectByTeamId();
 			public static function SqlUserSelectByTypeUser();
 			public static function SqlUserSelectByUserUniqueId();
 			public static function SqlUserSelectConfirmedByHashCode();
-			public static function SqlUserSelectHashCodeByEmail();
+			public static function SqlUserSelectHashCodeByUserEmail();
 			public static function SqlUserSelectServiceByUserEmail();
 			public static function SqlUserSelectTeamByUserEmail();
-			public static function SqlUserUpdateActiveByEmail();
-			public static function SqlUserUpdateAssocUserCorporationByEmail();
-			public static function SqlUserUpdateByEmail();
+			public static function SqlUserUpdateActiveByUserEmail();
+			public static function SqlUserUpdateAssocUserCorporationByUserEmail();
+			public static function SqlUserUpdateByUserEmail();
 			public static function SqlUserUpdateConfirmedByHash();
-			public static function SqlUserUpdateCorporationByEmail();
-			public static function SqlUserUpdateDepartmentByEmailAndCorporation();
-			public static function SqlUserUpdatePasswordByEmail();
-			public static function SqlUserUpdateTwoStepVerificationByEmail();
-			public static function SqlUserUpdateUserTypeByEmail();
-			public static function SqlUserUpdateUniqueIdByEmail();
+			public static function SqlUserUpdateCorporationByUserEmail();
+			public static function SqlUserUpdateDepartmentByUserEmailAndCorporation();
+			public static function SqlUserUpdatePasswordByUserEmail();
+			public static function SqlUserUpdateTwoStepVerificationByUserEmail();
+			public static function SqlUserUpdateUserTypeByUserEmail();
+			public static function SqlUserUpdateUniqueIdByUserEmail();
 **************************************************************************/
 if (!class_exists("Config"))
 {
@@ -849,7 +849,7 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL   . " =UPPER(?)";
 	}
 	
-	public static function SqlUserCheckPasswordByEmail()
+	public static function SqlUserCheckPasswordByUserEmail()
 	{
 		return "SELECT * FROM  " . Config::TABLE_USER . " " 
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL    . " = UPPER(?) "
@@ -863,7 +863,7 @@ class Persistence
 		     . "AND   "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_PASSWORD       . " = SHA2(?, 512)";
 	}
 	
-	public static function SqlUserDeleteByEmail()
+	public static function SqlUserDeleteByUserEmail()
 	{
 		return "DELETE FROM " . Config::TABLE_USER . " "
 			 . "WHERE "       . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL   . " =UPPER(?)";
@@ -1100,7 +1100,7 @@ class Persistence
 		. "LIMIT ?, ?";	
 	}
 	
-	public static function SqlUserSelectByEmail()
+	public static function SqlUserSelectByUserEmail()
 	{
 		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                          . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                             . ", "
@@ -1405,7 +1405,7 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_HASH_CODE      . " = ?";
 	}
 	
-	public static function SqlUserSelectHashCodeByEmail()
+	public static function SqlUserSelectHashCodeByUserEmail()
 	{
 		return "SELECT " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_HASH_CODE . " " 
 		     . "FROM  "  . Config::TABLE_USER . " " 
@@ -1441,14 +1441,14 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_ASSOC_USER_TEAM . "."            . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL    ." = ?";
 	}
 	
-	public static function SqlUserUpdateActiveByEmail()
+	public static function SqlUserUpdateActiveByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_USER_ACTIVE  . " = ? "
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL        . " =UPPER(?)";
 	}
 	
-	public static function SqlUserUpdateAssocUserCorporationByEmail()
+	public static function SqlUserUpdateAssocUserCorporationByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_ASSOC_USER_CORPORATION                         . "     "  
 		. "SET "         . Config::TABLE_ASSOC_USER_CORPORATION                         .   "." . 
@@ -1463,7 +1463,7 @@ class Persistence
 			               Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL;
 	}
 	
-	public static function SqlUserUpdateByEmail()
+	public static function SqlUserUpdateByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_BIRTH_DATE                  . " = ?, "
@@ -1490,14 +1490,14 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_HASH_CODE      . " = ?";
 	}
 	
-	public static function SqlUserUpdateCorporationByEmail()
+	public static function SqlUserUpdateCorporationByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_CORPORATION  . " = UPPER(?) "
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL        . " = UPPER(?)";
 	}
 	
-	public static function SqlUserUpdateDepartmentByEmailAndCorporation()
+	public static function SqlUserUpdateDepartmentByUserEmailAndCorporation()
 	{
 		return "UPDATE " . Config::TABLE_ASSOC_USER_CORPORATION                            . " "  
 		     . "SET    " . Config::TABLE_ASSOC_USER_CORPORATION                            . "." .
@@ -1508,28 +1508,28 @@ class Persistence
 				           Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME     . " = UPPER(?) ";
 	}
 	
-	public static function SqlUserUpdatePasswordByEmail()
+	public static function SqlUserUpdatePasswordByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_PASSWORD    . " = SHA2(?, 512) "
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL       . " = UPPER(?)";
 	}
 	
-	public static function SqlUserUpdateTwoStepVerificationByEmail()
+	public static function SqlUserUpdateTwoStepVerificationByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION  . " = ? "
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL                  . " = UPPER(?)";
 	}
 	
-	public static function SqlUserUpdateUserTypeByEmail()
+	public static function SqlUserUpdateUserTypeByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_TYPE  . " = UPPER(?) "
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL . " = UPPER(?)";
 	}
 	
-	public static function SqlUserUpdateUniqueIdByEmail()
+	public static function SqlUserUpdateUniqueIdByUserEmail()
 	{
 		return "UPDATE " . Config::TABLE_USER . " "  
 		     . "SET    " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_USER_UNIQUE_ID  . " = UPPER(?) "

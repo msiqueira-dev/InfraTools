@@ -17,7 +17,7 @@ Functions:
 			                                     $Debug, $MySqlConnection);
 			public function UserInfraToolsSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                                  $Debug, $MySqlConnection);
-			public function UserInfraToolsSelectByEmail($Email, &$InstanceUser, $Debug, $MySqlConnection);
+			public function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserInfraToolsSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                               &$RowCount, $Debug, $MySqlConnection);
 			public function UserInfraToolsSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection);
@@ -278,17 +278,17 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserInfraToolsSelectByEmail($Email, &$InstanceUser, $Debug, $MySqlConnection)
+	public function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
 		$dateNow = NULL; $mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByEmail');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByUserEmail');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByEmail());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByUserEmail());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $Email);

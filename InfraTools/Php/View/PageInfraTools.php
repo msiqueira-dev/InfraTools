@@ -24,7 +24,7 @@ Methods:
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
 			protected function DepartmentSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug);
-			protected function MessageSelectByUserEmail($Email);
+			protected function MessageSelectByUserEmail($Email, $Debug);
 			protected function PageFormLoad();
 			protected function PageFormRemoveLast();
 			protected function PageFormSave();
@@ -131,14 +131,14 @@ Methods:
 			protected function TypeStatusTicketLoadData();
 			protected function TypeTicketLoadData();
 			protected function TypeTicketSelectById($TypeTicketId);
-			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification);
-			protected function UserInfraToolsSelectByEmail($Email);
+			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug);
+			protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			protected function UserLoadData($InstanceUser);
-			protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed);
-			protected function UserUpdate($OnAdmin, $SelectedUser);
-			protected function UserUpdateCorporationInformation($SelectedUser);
+			protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, $Debug);
+			protected function UserUpdate($OnAdmin, $SelectedUser, $Debug);
+			protected function UserUpdateCorporationInformation($SelectedUser, $Debug);
 			public function CheckInstanceUser();
-			public function CheckLogin();
+			public function CheckLogin($Debug);
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -454,7 +454,7 @@ abstract class PageInfraTools extends Page
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->CorporationSelectOnUserServiceContextNoLimit($UserEmail,
 																			                 $ArrayInstanceInfraToolsCorporation,
-																			                 $this->InputValueHeaderDebug);
+																			                 $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
@@ -498,12 +498,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2,
 																				   $ArrayInstanceInfraToolsCorporation,
-																				   $RowCount, $this->InputValueHeaderDebug);
+																				   $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
@@ -547,12 +547,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
 																				   $ArrayInstanceInfraToolsDepartment,
-																				   $this->InputValueHeaderDebug);
+																				   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
@@ -574,13 +574,13 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function MessageSelectByUserEmail($Email)
+	protected function MessageSelectByUserEmail($Email, $Debug)
 	{
 		if($Email != NULL)
 		{
 			$return = $this->InstanceInfraToolsFacedePersistence->MessageSelectByUserEmail($this->InputValueLoginEmail, 
 																			               $userInfraTools, 
-																						   $this->InputValueHeaderDebug);
+																						   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 					
@@ -669,10 +669,10 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceDeleteById($ServiceId, $UserEmail, $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->ServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
@@ -721,10 +721,10 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
@@ -882,14 +882,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 																  $ServiceDepartment, $ServiceDepartmentCanChange,
 									                              $ServiceDescription, $ServiceName, $ServiceType, 
 																  $UserEmail,
-																  $this->InputValueHeaderDebug);
+																  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_INSERT_SUCCESS', $this->Language);
@@ -986,12 +986,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2,
 																				 $ArrayInstanceInfraToolService,
-																				 $RowCount, $this->InputValueHeaderDebug);
+																				 $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
@@ -1042,12 +1042,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActiveNoLimit($ServiceActive,
 																				        $ArrayInstanceInfraToolService,
-																				        $RowCount, $this->InputValueHeaderDebug);
+																				        $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
@@ -1098,14 +1098,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail,
 																							  $Limit1, $Limit2,
 																				              $ArrayInstanceInfraToolService,
 																				              $RowCount, 
-																							  $this->InputValueHeaderDebug);
+																							  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
@@ -1156,13 +1156,13 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
 																				                     $ArrayInstanceInfraToolService,
 																				                     $RowCount, 
-																									 $this->InputValueHeaderDebug);
+																									 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
@@ -1213,12 +1213,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActive($ServiceCorporation, $Limit1, $Limit2,
 																				 $ArrayInstanceInfraToolService,
-																				 $RowCount, $this->InputValueHeaderDebug);
+																				 $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
@@ -1269,12 +1269,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationNoLimit($ServiceCorporation,
 																				             $ArrayInstanceInfraToolService,
-																				             $RowCount, $this->InputValueHeaderDebug);
+																				             $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
@@ -1326,14 +1326,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail,
 																							       $Limit1, $Limit2,
 																				                   $ArrayInstanceInfraToolService,
 																				                   $RowCount, 
-																							       $this->InputValueHeaderDebug);
+																							       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
@@ -1385,14 +1385,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation,
 																								   $UserEmail,
 																				                   $ArrayInstanceInfraToolService,
 																				                   $RowCount, 
-																							       $this->InputValueHeaderDebug);
+																							       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
@@ -1456,7 +1456,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartment($ServiceCorporation, 
@@ -1464,7 +1464,7 @@ abstract class PageInfraTools extends Page
 																					 $Limit1, $Limit2,
 																				     $ArrayInstanceInfraToolService,
 																				     $RowCount, 
-																					 $this->InputValueHeaderDebug);
+																					 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
@@ -1528,13 +1528,13 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, 
 																							$ServiceDepartment,
 																				            $ArrayInstanceInfraToolService,
-																					        $this->InputValueHeaderDebug);
+																					        $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
@@ -1599,7 +1599,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation,
@@ -1607,7 +1607,7 @@ abstract class PageInfraTools extends Page
 																							      $Limit1, $Limit2,
 																				                  $ArrayInstanceInfraToolService,
 																								  $RowCount,
-																					              $this->InputValueHeaderDebug);
+																					              $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
@@ -1672,14 +1672,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation,
 				                                                                                  $ServiceDepartment,
 																								  $UserEmail,
 																				                  $ArrayInstanceInfraToolService,
-																					              $this->InputValueHeaderDebug);
+																					              $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
@@ -1729,11 +1729,10 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceId($ServiceId, $InstanceInfraToolsService,
-																			 $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceId($ServiceId, $InstanceInfraToolsService, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_SUCCESS', 
@@ -1784,13 +1783,13 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail,
 																						  $InstanceInfraToolsService,
 																						  $TypeAssocUserServiceId,
-																						  $this->InputValueHeaderDebug);
+																						  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_SUCCESS', 
@@ -1841,14 +1840,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceName($ServiceName,  
 																			   $Limit1, $Limit2,
 																			   $ArrayInstanceInfraToolService,
 																			   $RowCount, 
-																			   $this->InputValueHeaderDebug);
+																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
@@ -1898,12 +1897,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameNoLimit($ServiceName,
 																			   $ArrayInstanceInfraToolService,
-																			   $this->InputValueHeaderDebug);
+																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
@@ -1955,14 +1954,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
 																							$Limit1, $Limit2,
 																			                $ArrayInstanceInfraToolService,
 																							$RowCount,
-																			                $this->InputValueHeaderDebug);
+																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
@@ -2014,12 +2013,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail,
 																			                $ArrayInstanceInfraToolService,
-																			                $this->InputValueHeaderDebug);
+																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
@@ -2070,12 +2069,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2,
 											     							   $ArrayInstanceInfraToolService, $RowCount,
-																			   $this->InputValueHeaderDebug);
+																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -2125,12 +2124,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceTypeNoLimit($ServiceType,
 											     							          $ArrayInstanceInfraToolService,
-																			          $this->InputValueHeaderDebug);
+																			          $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -2181,14 +2180,14 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail,
 																					        $Limit1, $Limit2,
 											     							                $ArrayInstanceInfraToolService,
 																					        $RowCount,
-																			                $this->InputValueHeaderDebug);
+																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -2239,12 +2238,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
 											     							                $ArrayInstanceInfraToolService,
-																			                $this->InputValueHeaderDebug);
+																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -2298,7 +2297,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
@@ -2357,7 +2356,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceNoLimit(
@@ -2417,7 +2416,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceOnUserContext(
@@ -2480,13 +2479,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceNoLimit(
-				                                                                        $TypeAssocUserService, 
-			                                                                            $ArrayInstanceInfraToolService, 
-			                                                                            $Debug);
+			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
+			                                                                                   $ArrayInstanceInfraToolService, 
+			                                                                                   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
@@ -2536,13 +2534,13 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByUser($UserEmail, $Limit1, $Limit2,
 											     						$ArrayInstanceInfraToolService,
 																		$RowCount,
-																		$this->InputValueHeaderDebug);
+																		$Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_SUCCESS', 
@@ -2592,12 +2590,12 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->ServiceSelectByUserNoLimit($UserEmail,
 											     						       $ArrayInstanceInfraToolService,
-																		       $this->InputValueHeaderDebug);
+																		       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_SUCCESS', 
@@ -2631,7 +2629,7 @@ abstract class PageInfraTools extends Page
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 
 		$return = $FacedePersistenceInfraTools->ServiceSelectNoLimit($ArrayInstanceInfraToolService,
-																	 $this->InputValueHeaderDebug);
+																	 $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_SUCCESS', 
@@ -2783,7 +2781,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -2796,7 +2794,7 @@ abstract class PageInfraTools extends Page
 																			 $ServiceNameNew, 
 																			 $ServiceTypeNew, 
 																			 $ServiceId,
-															                 $this->InputValueHeaderDebug);
+															                 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
@@ -2901,7 +2899,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -2910,7 +2908,7 @@ abstract class PageInfraTools extends Page
 																			         $ServiceNameNew, 
 																			         $ServiceTypeNew, 
 																			         $ServiceId,
-															                         $this->InputValueHeaderDebug);
+															                         $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
@@ -2969,7 +2967,7 @@ abstract class PageInfraTools extends Page
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelect($ArrayInstanceInfraToolsTypeAssocUserService,
 																			$Limit1, $Limit2, $RowCount,
-																			$this->InputValueHeaderDebug);
+																			$Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
@@ -2994,7 +2992,7 @@ abstract class PageInfraTools extends Page
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectNoLimit($ArrayInstanceInfraToolsTypeAssocUserService,
-																			      $this->InputValueHeaderDebug);
+																			      $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
@@ -3019,9 +3017,10 @@ abstract class PageInfraTools extends Page
 			                                                   $Limit1, $Limit2, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectOnUserContext($ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail,
+        $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectOnUserContext($ArrayInstanceInfraToolsTypeAssocUserService, 
+																						$UserEmail,
 																			            $Limit1, $Limit2, $RowCount,
-																			            $this->InputValueHeaderDebug);
+																			            $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
@@ -3050,7 +3049,7 @@ abstract class PageInfraTools extends Page
         $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectOnUserContextNoLimit(
 			                                                                   $ArrayInstanceInfraToolsTypeAssocUserService, 
 																			   $UserEmail,
-																			   $this->InputValueHeaderDebug);
+																			   $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
@@ -3073,13 +3072,12 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, 
-			                             &$RowCount, $Debug)
+	protected function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->TypeServiceSelect($Limit1, $Limit2,
 																  $ArrayInstanceInfraToolsTypeService,
-																  $RowCount, $this->InputValueHeaderDebug);
+																  $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -3104,7 +3102,7 @@ abstract class PageInfraTools extends Page
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->TypeServiceSelectNoLimit($ArrayInstanceInfraToolsTypeService,
-																	     $this->InputValueHeaderDebug);
+																	     $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -3133,7 +3131,7 @@ abstract class PageInfraTools extends Page
         $return = $FacedePersistenceInfraTools->TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
 			                                                                   $ArrayInstanceInfraToolsTypeService,
 																			   $RowCount,
-																			   $this->InputValueHeaderDebug);
+																			   $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -3159,7 +3157,7 @@ abstract class PageInfraTools extends Page
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->TypeServiceSelectOnUserContextNoLimit($UserEmail,
 			                                                                          $ArrayInstanceInfraToolsTypeService,
-																					  $this->InputValueHeaderDebug);
+																					  $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
@@ -3228,12 +3226,12 @@ abstract class PageInfraTools extends Page
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
+												$matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $FacedePersistenceInfraTools->TypeTicketSelectById($this->InputValueTypeTicketId, 
 																	     $this->InstanceInfraToolsTypeTicket,
-																		 $this->InputValueHeaderDebug);
+																		 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->TypeTicket);
@@ -3257,15 +3255,14 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification)
+	protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug)
 	{
 		if($InstanceUserInfraTools == NULL)
 			$InstanceUserInfraTools = $this->User;
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $FacedePersistenceInfraTools->UserUpdateTwoStepVerificationByEmail(
-																				   $InstanceUserInfraTools->GetEmail(), 
-																				   $TwoStepVerification, 
-																				   $this->InputValueHeaderDebug);
+		$return = $FacedePersistenceInfraTools->UserUpdateTwoStepVerificationByUserEmail($InstanceUserInfraTools->GetEmail(), 
+																				         $TwoStepVerification, 
+																				         $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$InstanceUserInfraTools->SetTwoStepVerification($TwoStepVerification);
@@ -3296,13 +3293,13 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserInfraToolsSelectByEmail($Email, &$InstanceUser, $Debug)
+	protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $Email;
 		if($Email != $this->User->GetEmail())
 		{
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->InputValueUserEmail, $InstanceUser, $Debug);
+			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByUserEmail($this->InputValueUserEmail, $InstanceUser, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($InstanceUser, $Debug);
@@ -3424,7 +3421,7 @@ abstract class PageInfraTools extends Page
 											   'Icons/IconInfraToolsNotVerified.png';
 	}
 	
-	protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed)
+	protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueUserName           = $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME];
@@ -3470,6 +3467,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array(); $arrayOptions = array();
 		
 		//FORM_FIELD_USER_NAME
+		$arrayConstants = array();
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -3483,6 +3481,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_EMAIL
+		$arrayConstants = array();
 		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
 		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[1] = ""; 
@@ -3496,6 +3495,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_UNIQUE_ID
+		$arrayConstants = array();
 		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID;
 		$arrayElementsClass[2]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[2] = ""; 
@@ -3509,6 +3509,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
+		$arrayConstants = array();
 		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
 		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryPrefixClass;
 		$arrayElementsDefaultValue[3] = ""; 
@@ -3523,6 +3524,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_PHONE_PRIMARY
+		$arrayConstants = array();
 		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY;
 		$arrayElementsClass[4]        = &$this->ReturnUserPhonePrimaryClass;
 		$arrayElementsDefaultValue[4] = ""; 
@@ -3537,6 +3539,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
+		$arrayConstants = array();
 		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
 		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
 		$arrayElementsDefaultValue[5] = ""; 
@@ -3551,6 +3554,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_PHONE_SECONDARY
+		$arrayConstants = array();
 		$arrayElements[6]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY;
 		$arrayElementsClass[6]        = &$this->ReturnUserPhoneSecondaryClass;
 		$arrayElementsDefaultValue[6] = ""; 
@@ -3565,6 +3569,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_BIRTH_DATE_DAY
+		$arrayConstants = array();
 		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY;
 		$arrayElementsClass[7]        = &$this->ReturnBirthDateDayClass;
 		$arrayElementsDefaultValue[7] = ""; 
@@ -3578,6 +3583,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_BIRTH_DATE_MONTH
+		$arrayConstants = array();
 		$arrayElements[8]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH;
 		$arrayElementsClass[8]        = &$this->ReturnBirthDateMonthClass;
 		$arrayElementsDefaultValue[8] = ""; 
@@ -3591,6 +3597,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_BIRTH_DATE_YEAR
+		$arrayConstants = array();
 		$arrayElements[9]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR;
 		$arrayElementsClass[9]        = &$this->ReturnBirthDateYearClass;
 		$arrayElementsDefaultValue[9] = ""; 
@@ -3604,6 +3611,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_USER_GENDER
+		$arrayConstants = array();
 		$arrayElements[10]             = ConfigInfraTools::FORM_FIELD_USER_GENDER;
 		$arrayElementsClass[10]        = &$this->ReturnGenderClass;
 		$arrayElementsDefaultValue[10] = ""; 
@@ -3617,6 +3625,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_GOOGLE_MAPS_COUNTRY
+		$arrayConstants = array();
 		$arrayElements[11]             = ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY;
 		$arrayElementsClass[11]        = &$this->ReturnCountryClass;
 		$arrayElementsDefaultValue[11] = ""; 
@@ -3630,6 +3639,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_GOOGLE_MAPS_REGION
+		$arrayConstants = array();
 		$arrayElements[12]             = ConfigInfraTools::FORM_GOOGLE_MAPS_REGION;
 		$arrayElementsClass[12]        = &$this->ReturnRegionClass;
 		$arrayElementsDefaultValue[12] = ""; 
@@ -3643,6 +3653,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_PASSWORD_NEW
+		$arrayConstants = array();
 		$arrayElements[13]             = ConfigInfraTools::FORM_FIELD_PASSWORD_NEW;
 		$arrayElementsClass[13]        = &$this->ReturnPasswordClass;
 		$arrayElementsDefaultValue[13] = ""; 
@@ -3675,17 +3686,16 @@ abstract class PageInfraTools extends Page
 			array_push($matrixConstants, $arrayConstants);
 			array_push($arrayOptions, $captcha);
 		}
-		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions, $arrayExtraField);
+											$matrixConstants, $Debug, $Debug, $arrayOptions, $arrayExtraField);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			//CHECA SE E-MAIL JÁ É CADASTRADO
 			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserCheckEmail($this->InputValueUserEmail, $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->UserCheckEmail($this->InputValueUserEmail, $Debug);
 			if($return != ConfigInfraTools::SUCCESS)
 			{
 				$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth
@@ -3715,7 +3725,7 @@ abstract class PageInfraTools extends Page
 																   $this->InputValueUserPhoneSecondaryPrefix,
 																   ConfigInfraTools::TYPE_USER_DEFAULT_ID,
 																   $this->InputValueUserUniqueId,
-																   $this->InputValueHeaderDebug);
+																   $Debug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					if($SendEmail)
@@ -3729,7 +3739,7 @@ abstract class PageInfraTools extends Page
 						$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailRegister($this->InputValueUserName,
 														                                     $this->InputValueUserEmail,
 														                                     $link, 
-																							 $this->InputValueHeaderDebug);
+																							 $Debug);
 					}
 					if($return == ConfigInfraTools::SUCCESS)
 					{
@@ -3750,7 +3760,7 @@ abstract class PageInfraTools extends Page
 						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-						$FacedePersistenceInfraTools->UserDelete($this->InputValueUserEmail, $this->InputValueHeaderDebug);
+						$FacedePersistenceInfraTools->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
 					}
 				}
 				else
@@ -3782,7 +3792,7 @@ abstract class PageInfraTools extends Page
 		return $return;
 	}
 	
-	protected function UserUpdate($OnAdmin, $SelectedUser)
+	protected function UserUpdate($OnAdmin, $SelectedUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueBirthDateDay             = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY];
@@ -3986,29 +3996,29 @@ abstract class PageInfraTools extends Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions, $arrayExtraField);
+											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth . "-" 
 			 . $this->InputValueBirthDateDay;
 			$this->InputValueUserName = ucwords($this->InputValueUserName);
 			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserUpdateByEmail($birthDate,
-																	  $this->InputValueCountry,
-																	  $SelectedUser->GetEmail(),
-																	  $this->InputValueGender,
-																	  $this->InputValueUserName,
-																	  $this->InputValueRegion,
-																	  $this->InputValueSessionExpires,
-																	  $this->InputValueTwoStepVerification,
-																	  $this->InputValueUserActive,
-																	  $this->InputValueUserConfirmed,
-																	  $this->InputValueUserPhonePrimary,
-																	  $this->InputValueUserPhonePrimaryPrefix,
-																	  $this->InputValueUserPhoneSecondary,
-																	  $this->InputValueUserPhoneSecondaryPrefix,
-																	  $this->InputValueUserUniqueId,
-																	  $this->InputValueHeaderDebug);
+			$return = $FacedePersistenceInfraTools->UserUpdateByUserEmail($birthDate,
+																	      $this->InputValueCountry,
+																	      $SelectedUser->GetEmail(),
+																	      $this->InputValueGender,
+																	      $this->InputValueUserName,
+																	      $this->InputValueRegion,
+																	      $this->InputValueSessionExpires,
+																	      $this->InputValueTwoStepVerification,
+																	      $this->InputValueUserActive,
+																	      $this->InputValueUserConfirmed,
+																	      $this->InputValueUserPhonePrimary,
+																	      $this->InputValueUserPhonePrimaryPrefix,
+																	      $this->InputValueUserPhoneSecondary,
+																	      $this->InputValueUserPhoneSecondaryPrefix,
+																	      $this->InputValueUserUniqueId,
+																	      $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$SelectedUser->UpdateUser(NULL, NULL, NULL, $birthDate, NULL, $this->InputValueCountry, NULL, NULL,
@@ -4059,7 +4069,7 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserUpdateCorporationInformation($SelectedUser)
+	protected function UserUpdateCorporationInformation($SelectedUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -4146,7 +4156,7 @@ abstract class PageInfraTools extends Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions, $arrayExtraField);
+											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			if($this->InputValueRegistrationDateYear != "" && $this->InputValueRegistrationDateMonth != "" 
@@ -4158,32 +4168,32 @@ abstract class PageInfraTools extends Page
 			//ATUALIZA DATA DE INGRESSO E MATRÍCULA
 			if($registrationDate != NULL && $this->InputValueRegistrationId != NULL)
 			{
-				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationByEmailAndCorporation
+				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationByUserEmailAndCorporation
 															 ($SelectedUser->GetCorporationName(),
 															  $registrationDate,
 															  $this->InputValueRegistrationId,
 															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
+															  $Debug);
 			}
 			//ATUALIZA SOMENTE DATA DE INGRESSO
 			elseif($registrationDate != NULL && $this->InputValueRegistrationId == NULL)
 			{
-				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation
+				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation
 															 ($SelectedUser->GetCorporationName(),
 															  $registrationDate,
 															  $this->InputValueRegistrationId,
 															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
+															  $Debug);
 			}
 			//ATUALIZA SOMENTE MATRICULA
 			elseif($registrationDate == NULL && $this->InputValueRegistrationId != NULL)
 			{
-				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationRegistrationIdByEmailAndCorporation
+				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationRegistrationIdByUserEmailAndCorporation
 															 ($SelectedUser->GetCorporationName(),
 															  $registrationDate,
 															  $this->InputValueRegistrationId,
 															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
+															  $Debug);
 			}
 			elseif($this->InputValueDepartmentName != NULL) 
 				$return = ConfigInfraTools::SUCCESS;
@@ -4195,11 +4205,11 @@ abstract class PageInfraTools extends Page
 				{
 					if($this->InputValueDepartmentName == ConfigInfraTools::FORM_SELECT_NONE)
 						$this->InputValueDepartmentName = NULL;	
-					$return = $FacedePersistenceInfraTools->UserUpdateDepartmentByEmailAndCorporation
+					$return = $FacedePersistenceInfraTools->UserUpdateDepartmentByUserEmailAndCorporation
 				                                             ($SelectedUser->GetCorporationName(),
 															  $this->InputValueDepartmentName,
 															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
+															  $Debug);
 				}
 			}
 			
