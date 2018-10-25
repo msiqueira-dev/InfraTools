@@ -128,8 +128,6 @@ Methods:
 			protected function TypeServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeService, $UserEmail, &$RowCount
 			                                                  $Limit1, $Limit2, $Debug);
 			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
-			protected function TypeTicketLoadData();
-			protected function TypeTicketSelectById($TypeTicketId);
 			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug);
 			protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			protected function UserLoadData($InstanceUser);
@@ -3161,71 +3159,6 @@ abstract class PageInfraTools extends Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	protected function TypeTicketLoadData()
-	{
-		if($this->TypeTicket != NULL)
-		{
-			$this->InputValueTypeTicketDescription  = $this->TypeTicket->GetTypeTicketDescription();
-			$this->InputValueTypeTicketId           = $this->TypeTicket->GetTypeTicketId();
-			$this->InputValueRegisterDate           = $this->TypeTicket->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	protected function TypeTicketSelectById($TypeTicketId)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueTypeTicketId = $TypeTicketId;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_TYPE_TICKET_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeTicketIdClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeTicketId; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 3; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $Debug);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->TypeTicketSelectById($this->InputValueTypeTicketId, 
-																	     $this->InstanceInfraToolsTypeTicket,
-																		 $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->TypeTicket);
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnTypeTicketIdText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_TYPE_TICKET_RETURN_NOT_FOUND;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
 		}
 	}
 	

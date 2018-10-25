@@ -15,7 +15,7 @@ Description:
 Functions: 
 			public function TicketDelete($TypeTicketId, $Debug);
 			public function TicketInsert($TypeTicketDescription, $Debug);
-			public function TicketSelect($Limit1, $Limit2, &$ArrayTypeTicket, &$RowCount, $Debug);
+			public function TicketSelect($Limit1, $Limit2, &ArrayInstanceTypeTicket, &$RowCount, $Debug);
 			public function TicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug);
 			public function TicketSelectById($TypeTicketId, &$TypeTicket, $Debug);
 			public function TicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug);
@@ -161,9 +161,9 @@ class FacedePersistenceTicket
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TicketSelect($Limit1, $Limit2, &$ArrayTypeTicket, &$RowCount, $Debug)
+	public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug)
 	{
-		$ArrayTypeTicket = array();
+		$ArrayInstanceTypeTicket = array();
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
@@ -184,10 +184,10 @@ class FacedePersistenceTicket
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
 														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION], 
 						                                 $row[Config::TABLE_TYPE_TICKET_FIELD_ID]);	
-						array_push($ArrayTypeTicket, $InstanceTypeTicket);
+						array_push($ArrayInstanceTypeTicket, $InstanceTypeTicket);
 					}
 					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
-					if(!empty($ArrayTypeTicket))
+					if(!empty($ArrayInstanceTypeTicket))
 						return Config::SUCCESS;
 					else 
 					{

@@ -2,7 +2,7 @@
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_LIST; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_LIST; ?>" method="post" >
 <?php
-if(is_array($this->ArrayTypeTicket))
+if(is_array($this->ArrayInstanceTypeTicket))
 {
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
@@ -43,7 +43,7 @@ if(is_array($this->ArrayTypeTicket))
 						   . "Icons/IconInfraToolsArrowForward28.png'\" />";
 	echo "</th>";
 	echo "</tr>";
-	foreach($this->ArrayTypeTicket as $key=>$typeTicket)
+	foreach($this->ArrayInstanceTypeTicket as $key=>$typeTicket)
 	{
 		echo "<tr>";
 		echo "<td class='TableTypeTicketThId'>

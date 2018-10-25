@@ -81,7 +81,13 @@ Methods:
 		                                                                                  &$InstanceTypeStatusTicket, $Debug);
 		protected     function        TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$InstanceTypeStatusTicket, $Debug);
 		protected     function        TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescriptionNew,
-		                                                                        &$InstanceTypeStatusTicket, $Debug)
+		                                                                        &$InstanceTypeStatusTicket, $Debug);
+		protected     function        TypeTicketDeleteByTypeTicketId(&$InstanceTypeTicket, $Debug);
+		protected     function        TypeTicketInsert($TypeTicketDescription, $Debug);
+		protected     function        TypeTicketLoadData($InstanceTypeTicket);
+		protected     function        TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug);
+		protected     function        TypeTicketSelectByTypeTicketId($TypeTicketId, &$InstanceTypeTicket, $Debug);
+		protected     function        TypeTicketUpdateByTypeTicketId($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug);
 		protected     function        TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug);
 		protected     function        TypeUserInsert($TypeUserDescription, $Debug);
 		protected     function        TypeUserLoadData(&$InstanceTypeUser);
@@ -2178,6 +2184,223 @@ abstract class Page
 		{
 			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}	
+	}
+	
+	protected function TypeTicketDeleteByTypeTicketId(&$InstanceTypeTicket, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->TypeTicketDeleteByTypeTicketId($InstanceTypeTicket->GetTypeTicketId(), $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
+			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_DELETE_SUCCESS', $this->Language); 
+			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			return $return;
+		}
+		else
+		{
+			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET', 
+																			 $this->Language);
+			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_DELETE_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+	}
+	
+	protected function TypeTicketInsert($TypeTicketDescription, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return = Config::SUCCESS)
+		{
+			$return = $instanceFacedePersistence->TypeTicketInsert($this->InputValueTypeTicketDescription, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_REGISTER_SUCCESS', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
+			else
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_REGISTER_ERROR', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::FORM_FIELD_ERROR;
+		}
+	}
+	
+	protected function TypeTicketLoadData($InstanceTypeTicket)
+	{
+		if($InstanceTypeTicket != NULL)
+		{
+			$this->InputValueTypeTicketDescription  = $InstanceTypeTicket->GetTypeTicketDescription();
+			$this->InputValueTypeTicketId           = $InstanceTypeTicket->GetTypeTicketId();
+			$this->InputValueRegisterDate           = $InstanceTypeTicket->GetRegisterDate();
+			return Config::SUCCESS;
+		}
+		else return Config::ERROR;
+	}
+	
+	protected function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->TypeTicketSelect($Limit1, $Limit2,
+															   $ArrayInstanceTypeTicket,
+															   $RowCount,
+															   $Debug);
+		if($return != Config::SUCCESS)
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+		else return Config::SUCCESS;
+	}
+	
+	protected function TypeTicketSelectByTypeTicketId($TypeTicketId, &$InstanceTypeTicket, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueTypeTicketId = $TypeTicketId;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_TYPE_TICKET_ID
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 8; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketIdText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $instanceFacedePersistence->TypeTicketSelectByTypeTicketId($this->InputValueTypeTicketId, $InstanceTypeTicket, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
+				$this->TypeTicketLoadData($InstanceTypeTicket);
+				return Config::SUCCESS;
+			}
+			else
+			{
+				$this->ReturnTypeTicketIdText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::FORM_TYPE_TICKET_RETURN_NOT_FOUND;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::FORM_FIELD_ERROR;
+		}
+	}
+	
+	protected function TypeTicketUpdateByTypeTicketId($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeTicketDescription  = $TypeTicketDescriptionNew;
+		$this->InputFocus = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION',
+									'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TypeTicketUpdateById($this->InputValueTypeTicketDescription,
+																	   $InstanceTypeTicket->GetTypeTicketId(),
+																	   $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$InstanceTypeTicket->SetTypeTicketDescription($this->InputValueTypeTicketDescription);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
+				$this->TypeTicketLoadData($InstanceTypeTicket);
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_UPDATE_SUCCESS', $this->Language);
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
+			}
+			else
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_TICKET_UPDATE_ERROR', $this->Language);
+				return Config::ERROR;
+			}
+		}
+		else
+		{
+			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		}	
 	}
 	
