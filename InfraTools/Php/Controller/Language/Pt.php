@@ -144,6 +144,7 @@ class Pt
 	const FORM_INVALID_USER_BIRTH_DATE_DAY                        = "Dia de nascimento inválido";
 	const FORM_INVALID_USER_BIRTH_DATE_MONTH                      = "Mês de nascimento inválido";
 	const FORM_INVALID_USER_BIRTH_DATE_YEAR                       = "Ano de nascimento inválido";
+	const FORM_INVALID_USER_CONFIRMED                             = "Valor inválido para usuário confirmado";
 	const FORM_INVALID_USER_EMAIL                                 = "E-mail de usuário inválido";
 	const FORM_INVALID_USER_EMAIL_SIZE                            = "Quantidade de caracteres excede o tamanho máximo para a "
 	                                                              . "e-mail de usuário";
@@ -716,11 +717,17 @@ class Pt
 	const USER_INACTIVE                                           = "Esta conta foi desativada por um administrador";
 	const USER_NOT_FOUND                                          = "Usuário não encontrado";  
 	const USER_SAME_AS_ADMIN                                      = "Usuário é o mesmo do administrador!";
+	const USER_SELECT_BY_HASH_CODE_ERROR                          = "Erro ao obter usuário com o código hash";
+	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "Usuário obtido com sucesso";
+	const USER_SELECT_BY_USER_EMAIL_ERROR                         = "Erro ao obter usuário com o endereço de e-mail";
+	const USER_SELECT_BY_USER_EMAIL_SUCCESS                       = "Usuário obtido com sucesso";
 	const USER_TEAM_SELECT_ERROR                                  = "Erro ao obter equipes do usuário";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "Erro ao modificar a verificação duas etapas";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "Verificação duas etapas modificada com sucesso";
 	const USER_UNIQUE_ID                                          = "ID Único";
 	const USER_UNIQUE_ID_TIP                                      = "(Login único)";
+	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "Campo usuário confirmado atualizado com sucesso";
+	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Erro ao tentar atualizar campoo de usuário confirmado";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "Requisitar Layout [0]:";

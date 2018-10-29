@@ -1,4 +1,20 @@
 <?php
+/************************************************************************
+Class: PageRegisterConfirmation.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFacedeBusiness.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for recoverying the user password where it will send a code to the user's email. 
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -62,75 +78,34 @@ class PageRegisterConfirmation extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		Page::GetCurrentURL($pageUrl);
 		$hashCode = substr(strstr($pageUrl,  "?="), 2);
 		if(!empty($hashCode))
 		{
-			$return = $FacedePersistenceInfraTools->UserSelectConfirmedByHashCode($active, $hashCode, 
-																						  $this->InputValueHeaderDebug);
+			$return = $this->UserSelectUserActiveByHashCode($hashCode, $active, $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				if ($active)
 				{		
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_ALREADY_CONFIRMED', 
-																						   $this->Language);
+					$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_ALREADY_CONFIRMED', $this->Language);
 					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+					$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . 
+										                ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 				}
 				else
 				{
-					$return = $FacedePersistenceInfraTools->UserUpdateConfirmedByHash($hashCode, $this->InputValueHeaderDebug);
+					$return = $this->UserUpdateUserConfirmedByHashCode(TRUE, $hashCode, $this->InputValueHeaderDebug);
 					if ($return == ConfigInfraTools::SUCCESS)
 					{
-						if($this->User != NULL)
-						{
-							$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByUserEmail($this->User->GetEmail(), 
-																					                $this->User, 
-																					                $this->InputValueHeaderDebug);
-							$this->Session->SetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
-						}
+						$return = $this->UserSelectByHashCode($hashCode, $this->User, $this->InputValueHeaderDebug);
 						if ($return == ConfigInfraTools::SUCCESS)
 						{
+							$this->Session->SetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
 							$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_SUCCESS', 
 																						 $this->Language);
-							$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;	
-							$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							        			   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 						}
-						else
-						{
-							$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_WARNING;	
-							$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										           ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";		
-						}
-					}
-					elseif ($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-					{
-						$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_WARNING', 
-																						$this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_WARNING;	
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";	
-					}
-					else
-					{
-						$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_UPDATE_ERROR', 
-																						$this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 					}
 				}
-			}
-			else 
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_SELECT_ERROR', 
-																						$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			}
 		}
 		else

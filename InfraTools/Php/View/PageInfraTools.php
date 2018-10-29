@@ -3386,10 +3386,11 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[0]         = &$this->ReturnUserNameText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_EMAIL
+		//FORM_FIELD_USER_USER_EMAIL
 		$arrayConstants = array();
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL;
 		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -3400,6 +3401,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[1]         = &$this->ReturnUserEmailText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_USER_UNIQUE_ID
 		$arrayConstants = array();
@@ -3414,6 +3416,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[2]         = &$this->ReturnUserUniqueIdText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
 		$arrayConstants = array();
@@ -3429,6 +3432,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_USER_PHONE_PRIMARY
 		$arrayConstants = array();
@@ -3444,6 +3448,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
 		$arrayConstants = array();
@@ -3459,6 +3464,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_USER_PHONE_SECONDARY
 		$arrayConstants = array();
@@ -3474,6 +3480,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_BIRTH_DATE_DAY
 		$arrayConstants = array();
@@ -3488,6 +3495,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[7]         = &$this->ReturnBirthDateDayText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_BIRTH_DATE_MONTH
 		$arrayConstants = array();
@@ -3502,6 +3510,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[8]         = &$this->ReturnBirthDateMonthText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_BIRTH_DATE_YEAR
 		$arrayConstants = array();
@@ -3516,6 +3525,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[9]         = &$this->ReturnBirthDateYearText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_USER_GENDER
 		$arrayConstants = array();
@@ -3530,6 +3540,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[10]         = &$this->ReturnGenderText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_GOOGLE_MAPS_COUNTRY
 		$arrayConstants = array();
@@ -3544,6 +3555,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[11]         = &$this->ReturnCountryText;
 		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_GOOGLE_MAPS_REGION
 		$arrayConstants = array();
@@ -3558,6 +3570,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsText[12]         = &$this->ReturnRegionText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		
 		//FORM_FIELD_PASSWORD_NEW
 		$arrayConstants = array();
@@ -3574,6 +3587,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_PASSWORD', 'FORM_INVALID_USER_PASSWORD_MATCH',
 				                    'FORM_INVALID_USER_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
 		if($this->ValidateCaptcha)
 		{
 			//VALIDA CAPTCHA
@@ -3597,7 +3611,7 @@ abstract class PageInfraTools extends Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $Debug, $Debug, $arrayOptions, $arrayExtraField);
+											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			//CHECA SE E-MAIL JÁ É CADASTRADO

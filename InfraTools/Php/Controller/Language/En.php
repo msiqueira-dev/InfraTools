@@ -144,6 +144,7 @@ class En
 	const FORM_INVALID_USER_BIRTH_DATE_DAY                        = "Invalid day of birth";
 	const FORM_INVALID_USER_BIRTH_DATE_MONTH                      = "Invalid month of birth";
 	const FORM_INVALID_USER_BIRTH_DATE_YEAR                       = "Invalid year of birth";
+	const FORM_INVALID_USER_CONFIRMED                             = "Invalid value for user confirmed";
 	const FORM_INVALID_USER_EMAIL                                 = "Invalid user e-mail";
 	const FORM_INVALID_USER_EMAIL_SIZE                            = "Quantity of characters exceeds the maximum allowed for "
 		                                                          . "user e-mail";
@@ -714,11 +715,17 @@ class En
 	const USER_INACTIVE                                           = "This account has been deactivated by an administrator";
 	const USER_NOT_FOUND                                          = "User not found";  
 	const USER_SAME_AS_ADMIN                                      = "User is the same as the Admin!";
+	const USER_SELECT_BY_HASH_CODE_ERROR                          = "Error trying to obtain user with the given hash code";
+	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "User obtained sucessfully";
+	const USER_SELECT_BY_USER_EMAIL_ERROR                         = "Error trying to obtain user with the given e-mail";
+	const USER_SELECT_BY_USER_EMAIL_SUCCESS                       = "User obtained sucessfully";
 	const USER_TEAM_SELECT_ERROR                                  = "Error trying to get the user teams";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "Error changing two step verification";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "Two step verification changed succesfully";
 	const USER_UNIQUE_ID                                          = "Unique ID";
 	const USER_UNIQUE_ID_TIP                                      = "(Unique login)";
+	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "User confirmed updated succesfully";
+	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Error trying to update value for user confirmed";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "Request [0] Layout:";

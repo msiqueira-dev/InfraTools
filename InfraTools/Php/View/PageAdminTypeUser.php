@@ -137,7 +137,7 @@ class PageAdminTypeUser extends PageAdmin
 		//FORM_USER_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL], 
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL], 
 												      $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}

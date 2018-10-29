@@ -24,12 +24,13 @@ Functions:
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
+			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug);
 			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                       &$RowCount, $Debug, $MySqlConnection);
+			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
-			public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug);
+			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 			public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
 			public function UserUpdateActiveByUserEmail($Email, $UserActive, $Debug);
@@ -38,7 +39,7 @@ Functions:
 			public function UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
 									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
-			public function UserUpdateConfirmedByHash($HashCode, $Debug);
+			public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug);
 			public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug);
 			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug);
 			public function UserUpdatePasswordByUserEmail($Email, $Password, $Debug);
@@ -629,7 +630,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug)
+	public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug)
 	{
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceDepartment = NULL;
@@ -639,11 +640,11 @@ class FacedePersistenceUser
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserSelectByUserEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByUserEmail());
+				Persistence::ShowQuery('SqlUserSelectByHashCode');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByHashCode());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $Email);
+				$stmt->bind_param("s", $HashCode);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
@@ -686,7 +687,7 @@ class FacedePersistenceUser
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 						$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
-						return Config::MYSQL_USER_SELECT_BY_EMAIL_FETCH_FAILED;
+						return Config::MYSQL_USER_SELECT_BY_HASH_CODE_FETCH_FAILED;
 					}
 				}
 				else
@@ -694,7 +695,7 @@ class FacedePersistenceUser
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
-					return Config::MYSQL_USER_SELECT_BY_EMAIL_FAILED;
+					return Config::MYSQL_USER_SELECT_BY_HASH_CODE_FAILED;
 				}
 			}
 			else
@@ -934,6 +935,85 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
+	public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug)
+	{
+		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceDepartment = NULL;
+		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
+		
+		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectByUserEmail());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("s", $Email);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				if($return == Config::SUCCESS)
+				{
+					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
+									   $usrGender, $usrHashCode, $usrName,
+									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
+									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
+									   $corpActive, $corpName, $corpRegDate,
+									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
+									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
+									   $depCorp, $depIni, $depName, $depRegDate);					
+					if ($stmt->fetch()) 
+					{
+						if($corpName != NULL && $corpActive != NULL && $corpRegDate != NULL)
+							$InstanceCorporation = $this->Factory->CreateCorporation(NULL, $corpActive, $corpName, $corpRegDate);
+						if($depCorp != NULL && $depName != NULL && $depRegDate != NULL)
+							$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation, $depIni, $depName,
+																				   $depRegDate);
+						$InstaceTypeUser = $this->Factory->CreateTypeUser
+							                               ($usrTypeDescription,
+						                                    $usrTypeId,
+														    $usrTypeRegDate);
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
+																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
+																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
+																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
+																   $twoStepVerification, $usrActive, $usrConfirmed,
+																   $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix,
+																   $InstaceTypeUser, $usrUniqueId);
+						if($assocUsrCorpRegistrationDate != NULL  && $assocUsrCorpRegistrationId != NULL &&
+						   $InstanceCorporation != NULL && $assocUsrCorpRegDate != NULL && $InstanceUser != NULL)
+							$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $assocUsrCorpRegistrationDate, $assocUsrCorpRegistrationId, $InstanceCorporation, $assocUsrCorpRegDate, $InstanceUser);
+						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
+						return Config::SUCCESS;
+					}
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
+						return Config::MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
+					return Config::MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $mySqlConnection->error;
+				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
 	public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug)
 	{
 		$InstanceArrayAssocUserTeam = NULL;
@@ -1014,14 +1094,14 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug)
+	public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserSelectConfirmedByHashCode');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectConfirmedByHashCode());
+				Persistence::ShowQuery('SqlUserSelectUserActiveByHashCode');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectUserActiveByHashCode());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $HashCode);
@@ -1315,18 +1395,18 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateConfirmedByHash($HashCode, $Debug)
+	public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserUpdateConfirmedByHash');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateConfirmedByHash());
+				Persistence::ShowQuery('SqlUserUpdateConfirmedByHashCode');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserUpdateConfirmedByHashCode());
 			if ($stmt)
 			{
-				$stmt->bind_param("s", $HashCode);
+				$stmt->bind_param("is", $UserConfirmedNew, $HashCode);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{

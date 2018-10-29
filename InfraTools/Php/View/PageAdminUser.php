@@ -9,7 +9,9 @@ Dependencies:
 Description: 
 			Classe existente para a página de administração de usuário
 Functions: 
-
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -180,7 +182,7 @@ class PageAdminUser extends PageAdmin
 		//USER LIST SELECT USER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL],
 												      $this->InstanceInfraToolsUserAdmin, 
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
@@ -210,7 +212,7 @@ class PageAdminUser extends PageAdmin
 		//USER SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_SELECT_SUBMIT]))
 		{
-			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL],
 												      $this->InstanceInfraToolsUserAdmin, 
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
@@ -327,7 +329,7 @@ class PageAdminUser extends PageAdmin
 				if($this->UserUpdateCorporationInformation($this->InstanceInfraToolsUserAdmin, 
 														   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+					if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL],
 												              $this->InstanceInfraToolsUserAdmin, 
 														      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;

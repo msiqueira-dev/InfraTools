@@ -200,7 +200,7 @@ class PageAdminTeam extends PageAdmin
 		//TEAM VIEW MANAGE MEMBERS SELECT USER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
 		{
-			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL],
 												  $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			if($this->Page != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
@@ -210,7 +210,7 @@ class PageAdminTeam extends PageAdmin
 				{
 					$this->InputLimitOne = 0;
 					$this->InputLimitTwo = 25;
-					if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+					if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL],
 												              $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_MANAGE_MEMBERS;
 				}
@@ -235,7 +235,7 @@ class PageAdminTeam extends PageAdmin
 		//FORM_USER_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL], 
+			if($this->UserInfraToolsSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL], 
 												      $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}

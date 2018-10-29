@@ -7,7 +7,7 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da administração dos equipes.
+			Class for notifications and alett for all system users.
 Functions: 
 			protected function LoadHtml();
 			public    function GetCurrentPage();

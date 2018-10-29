@@ -372,10 +372,10 @@
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>"/>
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>" 
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>"
-							 value="<?php $this->InputValueCountry ?>"/>
+							 value="<?php echo $this->InputValueCountry ?>"/>
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>" 
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>"
-							 value="<?php $this->InputValueRegion ?>"/>
+							 value="<?php echo $this->InputValueRegion ?>"/>
 	</div>
 	<div id="GoogleMapsDiv" class="DivContentBodyContainerGoogleMaps">
 		<input type="text"   id="GoogleMapsSearch" name="searchInput" class="GoogleMapsSearch GoogleMapsSearchControls" value=""/>

@@ -1,4 +1,20 @@
 <?php
+/************************************************************************
+Class: PageCheck.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFacedeBusiness.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for viewing and use the diagnostic functions of checking networking and such. 
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))

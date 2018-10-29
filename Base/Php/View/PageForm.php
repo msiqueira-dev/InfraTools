@@ -148,12 +148,15 @@ class PageForm
 											   $InstanceLanguageText, $Language, $elementMinValue, $elementMaxValue, 
 											   $elementNullable, $ArrayElementsText[$index], $ElementEmptyText, 
 											   $elementClass, $arrayConstants,
-											   $arrayOptions, $elementExtraFieldSameValue);
+											   $MatrixOptions[$index], $elementExtraFieldSameValue);
 				if($Debug == Config::CHECKBOX_CHECKED)
 				{
+					echo "&#8195;&#8195;<b>$element</b>: $elementInput - $formFunction - $return - $ArrayElementsText[$index]";
 					if(isset($ArrayElementsText[$index]))
-						echo "&#8195;&#8195;<b>$element</b>: $elementInput - $return - $ArrayElementsText[$index] - $ElementEmptyText<br>";
-					else echo "&#8195;&#8195;<b>$element</b>: $elementInput - $return - $ElementEmptyText<br>";
+						echo " - $ElementEmptyText";
+					if(isset($MatrixOptions[$index]))
+						echo " - $MatrixOptions[$index]";
+					echo "<br>";
 				}
 				if($return != Config::SUCCESS)
 					$ArrayElementsText[$index] = $ArrayElementsText[$index] . "<br>"; 

@@ -131,12 +131,13 @@ Functions:
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
+			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug);
 			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                       &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
-			public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug);
+			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 			public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
 			public function UserUpdateActiveByUserEmail($Email, $UserActive, $Debug);
@@ -147,7 +148,7 @@ Functions:
 			public function UserUpdateByUserEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
 									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
-			public function UserUpdateConfirmedByHash($HashCode, $Debug);
+			public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug);
 			public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug);
 			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $Email, $Debug);
 			public function UserUpdatePasswordByUserEmail($Email, $Password, $Debug);
@@ -970,6 +971,12 @@ class FacedePersistence
 															   $ArrayInstanceUser, $RowCount, $Debug);
 	}
 	
+	public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug)
+	{
+		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+		return $FacedePersistenceUser->UserSelectByHashCode($HashCode, $InstanceUser, $Debug);
+	}
+	
 	public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
@@ -1008,10 +1015,10 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserSelectByUserUniqueId($UserUniqueId, $InstanceUser, $Debug);
 	}
 		
-	public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug)
+	public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectConfirmedByHashCode($UserActive, $HashCode, $Debug);
+		return $FacedePersistenceUser->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
 	}
 	
 	public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug)
@@ -1067,10 +1074,10 @@ class FacedePersistence
 															 $UserUniqueId, $Debug);
 	}
 	
-	public function UserUpdateConfirmedByHash($HashCode, $Debug)
+	public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateConfirmedByHash($HashCode, $Debug);
+		return $FacedePersistenceUser->UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug);
 	}
 	
 	public function UserUpdateCorporationByUserEmail($Corporation, $Email, $Debug)

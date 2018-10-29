@@ -347,7 +347,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
 	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
 	const FORM_FIELD_USER_CORPORATION_SELECT                            = "FormFieldUserCorporationSelect";
-	const FORM_FIELD_USER_EMAIL                                         = "FormFieldUserEmail";
 	const FORM_FIELD_USER_GENDER                                        = "FormFieldUserGender";
 	const FORM_FIELD_USER_NAME                                          = "FormFieldUserName";
 	const FORM_FIELD_USER_PHONE_PRIMARY                                 = "FormFieldUserPhonePrimary";

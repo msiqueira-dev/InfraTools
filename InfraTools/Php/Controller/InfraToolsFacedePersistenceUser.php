@@ -335,14 +335,14 @@ class InfraToolsFacedePersistenceUser
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_BY_EMAIL_FETCH_FAILED;
+						return Config::MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_BY_EMAIL_FAILED;
+					return Config::MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED;
 				}
 			}
 			else

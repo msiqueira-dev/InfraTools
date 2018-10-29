@@ -127,6 +127,7 @@ class Es
 	const FORM_INVALID_USER_BIRTH_DATE_DAY                        = "";
 	const FORM_INVALID_USER_BIRTH_DATE_MONTH                      = "";
 	const FORM_INVALID_USER_BIRTH_DATE_YEAR                       = "";
+	const FORM_INVALID_USER_CONFIRMED                             = "";
 	const FORM_INVALID_USER_EMAIL                                 = "";
 	const FORM_INVALID_USER_EMAIL_SIZE                            = "";
 	const FORM_INVALID_USER_GENDER                                = "";
@@ -683,11 +684,17 @@ class Es
 	const USER_INACTIVE                                           = "";
 	const USER_NOT_FOUND                                          = "";
 	const USER_SAME_AS_ADMIN                                      = "";
+	const USER_SELECT_BY_HASH_CODE_ERROR                          = "";
+	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "";
+	const USER_SELECT_BY_USER_EMAIL_ERROR                         = "";
+	const USER_SELECT_BY_USER_EMAIL_SUCCESS                       = "";
 	const USER_TEAM_SELECT_ERROR                                  = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "";
 	const USER_UNIQUE_ID                                          = "";
 	const USER_UNIQUE_ID_TIP                                      = "";
+	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "";
+	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "";

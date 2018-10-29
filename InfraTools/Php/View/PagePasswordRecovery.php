@@ -1,4 +1,20 @@
 <?php
+/************************************************************************
+Class: PagePasswordRecovy.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFacedeBusiness.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for recoverying the user password where it will send a code to the user's email. 
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -40,13 +56,6 @@ class PagePasswordRecovery extends PageInfraTools
 	public function GetCurrentPage()
 	{
 		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-	
-	protected function LoadCaptcha()
-	{
-		$InstanceBaseCaptcha = $this->Factory->CreateCaptcha();
-		$stringCaptcha = $InstanceBaseCaptcha->GenerateRandomString();
-		$this->Session->SetSessionValue(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $stringCaptcha);
 	}
 
 	protected function LoadHtml()
@@ -184,7 +193,7 @@ class PagePasswordRecovery extends PageInfraTools
 										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			}
 		}
-		$this->LoadCaptcha();
+		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $this->InputValueHeaderDebug);
 		$this->LoadHtml();
 	}
 }

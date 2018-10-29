@@ -82,6 +82,10 @@ class Config
 	const FORM_FIELD_TYPE_TICKET_ID                                     = "FormFieldTypeTicketId";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                              = "FormFieldTypeUserDescription";
 	const FORM_FIELD_TYPE_USER_ID                                       = "FormFieldTypeUserId";
+	const FORM_FIELD_USER_HASH_CODE                                     = "FormFieldUserHashCode";
+	const FORM_FIELD_USER_USER_ACTIVE                                   = "FormFieldUserUserActive";
+	const FORM_FIELD_USER_USER_CONFIRMED                                = "FormFieldUserUserConfirmed";
+	const FORM_FIELD_USER_USER_EMAIL                                    = "FormFieldUserUserEmail";
 	const FORM_IMAGE_ERROR                                              = "Icons/IconFormError.png";
 	const FORM_IMAGE_SUCCESS                                            = "Icons/IconFormSuccess.png";
 	const FORM_IMAGE_WARNING                                            = "Icons/IconFormWarning.png";
@@ -255,8 +259,10 @@ class Config
 	const MYSQL_USER_DELETE_FAILED_NOT_FOUND                            = "RetMySqlUserDeleteFailedNotFound";
 	const MYSQL_USER_SELECT_FAILED                                      = "RetMySqlUserSelectFailed";
 	const MYSQL_USER_SELECT_FETCH_FAILED                                = "RetMySqlUserSelectFetchFailed";
-	const MYSQL_USER_SELECT_BY_EMAIL_FAILED                             = "RetMySqlUserSelectByEmailFailed";
-	const MYSQL_USER_SELECT_BY_EMAIL_FETCH_FAILED                       = "RetMySqlUserSelectByEmailFetchFailed";
+	const MYSQL_USER_SELECT_BY_HASH_CODE_FAILED                         = "RetMySqlUserSelectByHashCodeFailed";
+	const MYSQL_USER_SELECT_BY_HASH_CODE_FETCH_FAILED                   = "RetMySqlUserSelectByHashCodeFetchFailed";
+	const MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED                        = "RetMySqlUserSelectByUserEmailFailed";
+	const MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED                  = "RetMySqlUserSelectByUserEmailFetchFailed";
 	const MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FAILED                    = "RetMySqlUserSelectByUserUniqueIdFailed";
 	const MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FETCH_FAILED              = "RetMySqlUserSelectByUserUNiqueIdFetchFailed";
 	const MYSQL_USER_SELECT_HASH_BY_EMAIL_FAILED                  		= "RetMySqlUserSelectHashByEmailFailed";

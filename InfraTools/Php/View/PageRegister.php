@@ -1,4 +1,19 @@
 <?php
+/************************************************************************
+Class: PageRegister.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for registering a new user. 
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -39,13 +54,6 @@ class PageRegister extends PageInfraTools
 	{
 		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
-	
-	protected function LoadCaptcha()
-	{
-		$InstanceBaseCaptcha = $this->Factory->CreateCaptcha();
-		$stringCaptcha = $InstanceBaseCaptcha->GenerateRandomString();
-		$this->Session->SetSessionValue(ConfigInfraTools::FORM_CAPTCHA_REGISTER, $stringCaptcha);
-	}
 
 	protected function LoadHtml()
 	{
@@ -75,9 +83,9 @@ class PageRegister extends PageInfraTools
 		if (isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
 			$this->ValidateCaptcha = TRUE;
-			$this->UserRegister(TRUE, TRUE, FALSE, TRUE, FALSE, $this->InputValueHeaderDebug);	
+			$this->UserRegister(TRUE, TRUE, FALSE, TRUE, FALSE, FALSE);	
 		}
-		$this->LoadCaptcha();
+		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_REGISTER, FALSE);
 		$this->LoadHtml();
 	}
 }

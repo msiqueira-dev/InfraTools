@@ -1,4 +1,20 @@
 <?php
+/************************************************************************
+Class: PageContact.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFacedeBusiness.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for costumer contact. 
+Functions: 
+			protected function LoadHtml();
+			public    function GetCurrentPage();
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -40,13 +56,6 @@ class PageContact extends PageInfraTools
 	{
 		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
-	
-	protected function LoadCaptcha()
-	{
-		$InstanceBaseCaptcha = $this->Factory->CreateCaptcha();
-		$stringCaptcha = $InstanceBaseCaptcha->GenerateRandomString();
-		$this->Session->SetSessionValue(ConfigInfraTools::FORM_CAPTCHA_CONTACT, $stringCaptcha);
-	}
 
 	protected function LoadHtml()
 	{
@@ -86,10 +95,10 @@ class PageContact extends PageInfraTools
 			if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN)
 			{
 				$this->InputValueUserName = $this->User->GetName();
-				if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL]))
+				if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL]))
 				{
-					if($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL] != $this->User->GetEmail())
-						$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL];
+					if($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL] != $this->User->GetEmail())
+						$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL];
 					else $this->InputValueUserEmail  = $this->User->GetEmail();
 				}
 				else $this->InputValueUserEmail  = $this->User->GetEmail();
@@ -97,7 +106,7 @@ class PageContact extends PageInfraTools
 			else
 			{
 				$this->InputValueUserName    = $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME];
-				$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL];
+				$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL];
 			}
 			if (isset($_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION]))
 				$this->InputValueTicketDescription = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION];
@@ -123,8 +132,8 @@ class PageContact extends PageInfraTools
 			array_push($matrixConstants, $arrayConstants);
 			array_push($matrixOptions, $arrayOptions);
 			
-			//FORM_FIELD_USER_EMAIL
-			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
+			//FORM_FIELD_USER_USER_EMAIL
+			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL;
 			$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 			$arrayElementsDefaultValue[1] = ""; 
 			$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -250,7 +259,7 @@ class PageContact extends PageInfraTools
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			}
 		}
-		$this->LoadCaptcha();
+		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_CONTACT, $this->InputValueHeaderDebug);
 		$this->LoadHtml();
 	}
 }
