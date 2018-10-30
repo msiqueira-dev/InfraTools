@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Class for countries management.
 Functions: 
-			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
 			
@@ -30,12 +29,6 @@ if (!class_exists("PageAdmin"))
 class PageAdminCountry extends PageAdmin
 {
 	public $ArrayCountry = NULL;
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
 	
 	/* Constructor */
 	public function __construct($Language) 
@@ -48,29 +41,7 @@ class PageAdminCountry extends PageAdmin
 	{
 		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
-
-	protected function LoadHtml()
-	{
-		$PageFormBack = FALSE;
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-
+	
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
@@ -130,7 +101,7 @@ class PageAdminCountry extends PageAdmin
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageFormSave();
-		$this->LoadHtml();
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

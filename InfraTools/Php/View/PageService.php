@@ -7,9 +7,8 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da página de serviços.
+			Class that treats the main page of Service module.
 Functions: 
-			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
 			
@@ -53,56 +52,15 @@ class PageService extends PageInfraTools
 								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
 		}
 	}
-	
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
 
 	public function GetCurrentPage()
 	{
 		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			$loginStatus = $this->CheckInstanceUser();
-			if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-			   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_LOGGED_IN) . ".php");
-				$this->InputFocus = ConfigInfraTools::LOGIN_USER;
-				echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::LOGIN_FORM, $this->InputFocus);
-			}
-			elseif($this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_CONFIRMED) . ".php");
-			}
-			else include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-
 	public function LoadPage()
 	{
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

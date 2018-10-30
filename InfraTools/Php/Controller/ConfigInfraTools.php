@@ -197,8 +197,6 @@ class ConfigInfraTools extends Config
 	const PAGE_DIAGNOSTIC_TOOLS                                         = "Page_Diagnostic_Tools";
 	const PAGE_GET                                                      = "Page_Get";
 	const PAGE_INSTALL                                                  = "Page_Install";
-	const PAGE_NOT_CONFIRMED                                            = "Page_Not_Confirmed";
-	const PAGE_NOT_LOGGED_IN                                            = "Page_Not_Logged_In";
 	const PAGE_NOTIFICATION                                             = "Page_Notification";
 	const PAGE_NOTIFICATION_List                                        = "Page_Notification_List";
 	const PAGE_NOTIFICATION_VIEW                                        = "Page_Notification_View";

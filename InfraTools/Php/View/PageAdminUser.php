@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe existente para a página de administração de usuário
 Functions: 
-			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
 **************************************************************************/
@@ -43,33 +42,6 @@ class PageAdminUser extends PageAdmin
 	/**                               **/
 	/************* METODOS *************/
 	/**                               **/
-	
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
 
 	public function GetCurrentPage()
 	{
@@ -445,7 +417,7 @@ class PageAdminUser extends PageAdmin
 		else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		if(!$PageFormBack != FALSE)
 			$this->PageFormSave();
-		$this->LoadHtml();
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

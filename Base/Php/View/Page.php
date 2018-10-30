@@ -17,12 +17,12 @@ Get / Set:
 			public function GetPageLoadTime();
 Methods: 
 		abstract protected function GetCurrentPage();
-		abstract protected function LoadHtml();
 		private       function        CheckPostLanguage();
 		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
 		private       function        LoadInstanceUser();
 		private       function        SendTwoStepVerificationCode($Email, $Name, $Debug);
+		protected     function        TagOnloadFocusField($Form, $Field);
 		protected     function        CaptchaLoad(SessionCaptchaKey);
 		protected     function        CorporationDelete($CorporationName, $Debug);
 		protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
@@ -51,6 +51,7 @@ Methods:
 		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew,$DepartmentNameNew, 
 		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
+		protected     function        LoadHtml($HasLoginForm);
 		protected     function        TeamDeleteByTeamId($TeamId, $Debug);
 		protected     function        TeamInsert($TeamDescription, $TeamName, $Debug);
 		protected     function        TeamLoadData(&$InstanceTeam);
@@ -126,7 +127,6 @@ Methods:
 		public static function        GetCurrentDomainWithPort(&$currentDomain);
 		public static function        GetCurrentURL(&$pageUrl);
 		public static function        GetPageFileDefaultLanguageByDir($PageDirName);
-		public static function        TagOnloadFocusField($Form, $Field);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -232,7 +232,7 @@ abstract class Page
 				if($this->PageCheckLogin == TRUE)
 				{
 					if($this->CheckInstanceUser() == Config::USER_NOT_LOGGED_IN)
-						$this->CheckLogin($Debug);
+						$this->CheckLogin($this->InputValueHeaderDebug);
 				}
 			}
 		}
@@ -266,7 +266,6 @@ abstract class Page
 	
 	/* Métodos */
 	abstract protected function GetCurrentPage();
-	abstract protected function LoadHtml();
 	
 	private function CheckPostLanguage()
 	{
@@ -427,6 +426,16 @@ abstract class Page
 		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Email, $Name, $code, $Debug) == Config::SUCCESS)
 			return Config::SUCCESS;
 		else return Config::ERROR;
+	}
+	
+	public static function TagOnloadFocusField($Form, $Field)
+	{
+		if(isset($Form) && isset($Field))
+		{
+			if($Form != NULL && $Field != NULL)
+				return "<script>document.forms['" .$Form . "'].elements['". $Field ."'].focus();</script>";
+		}
+		return NULL;
 	}
 	
 	protected function CaptchaLoad($SessionCaptchaKey, $Debug)
@@ -1338,6 +1347,41 @@ abstract class Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		}	
+	}
+	
+	protected function LoadHtml($HasLoginForm)
+	{
+		$page = str_replace("_", "", $this->GetCurrentPage());
+		echo Config::HTML_TAG_DOCTYPE;
+		echo Config::HTML_TAG_START;
+		$return = $this->IncludeHeadAll($page);
+		if ($return == Config::SUCCESS)
+		{
+			echo Config::HTML_TAG_BODY_START;
+			echo "<div class='Wrapper'>";
+			include_once(REL_PATH . Config::PATH_HEADER . ".php");
+			if($HasLoginForm)
+			{
+				$loginStatus = $this->CheckInstanceUser();
+				if($loginStatus == Config::USER_NOT_LOGGED_IN || $loginStatus == Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
+				{
+					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_LOGGED_IN) . ".php");
+					$this->InputFocus = Config::LOGIN_USER;
+					echo $this->TagOnloadFocusField(Config::LOGIN_FORM, $this->InputFocus);
+				}
+				elseif($this->CheckInstanceUser() == Config::USER_NOT_CONFIRMED)
+					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_CONFIRMED) . ".php");
+				else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+			}
+			else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+			echo "<div class='DivPush'></div>";
+			echo "</div>";
+			include_once(REL_PATH . Config::PATH_FOOTER);
+			echo Config::HTML_TAG_BODY_END;
+			echo Config::HTML_TAG_END;
+			return Config::SUCCESS;
+		}
+		else return Config::ERROR;
 	}
 	
 	protected function TeamDeleteByTeamId($InstanceTeam, $Debug)
@@ -3636,16 +3680,6 @@ abstract class Page
 		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
 			return Config::LANGUAGE_PORTUGUESE;
 		else return Config::ERROR;
-	}
-	
-	public static function TagOnloadFocusField($Form, $Field)
-	{
-		if(isset($Form) && isset($Field))
-		{
-			if($Form != NULL && $Field != NULL)
-				return "<script>document.forms['" .$Form . "'].elements['". $Field ."'].focus();</script>";
-		}
-		return NULL;
 	}
 }
 ?>

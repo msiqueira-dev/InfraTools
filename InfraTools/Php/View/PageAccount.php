@@ -1,5 +1,18 @@
 <?php
-
+/************************************************************************
+Class: PageAccount.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			Base       - Php/Controller/Session.php
+			Base       - Php/Model/FormValidator.php
+Description: 
+			Class that deals about a user's account information.
+Functions: 
+			public    function GetCurrentPage();
+			public    function LoadPage();
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -12,8 +25,6 @@ if (!class_exists("PageInfraTools"))
 		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
 }
-
-
 
 class PageAccount extends PageInfraTools
 {
@@ -29,12 +40,6 @@ class PageAccount extends PageInfraTools
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
 		}
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
 
 	public function GetCurrentPage()
@@ -91,36 +96,6 @@ class PageAccount extends PageInfraTools
 			$this->UserChangeTwoStepVerification(NULL, FALSE, $this->InputValueHeaderDebug);
 			$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
 		}
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			$loginStatus = $this->CheckInstanceUser();
-			if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-			   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_LOGGED_IN) . ".php");
-				$this->InputFocus = ConfigInfraTools::LOGIN_USER;
-				echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::LOGIN_FORM, $this->InputFocus);
-			}
-			else include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
 	}
 
 	public function LoadPage()
@@ -186,7 +161,7 @@ class PageAccount extends PageInfraTools
 				                                   'Icons/IconInfraToolsNotVerified.png';
 			$this->CheckForm();
 		}
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

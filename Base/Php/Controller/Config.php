@@ -158,7 +158,9 @@ class Config
 	const PAGE_CONTACT                                                  = "Page_Contact";
 	const PAGE_HOME                                                     = "Page_Home";
 	const PAGE_LOGIN                                                    = "Page_Login";
+	const PAGE_NOT_CONFIRMED                                            = "Page_Not_Confirmed";
 	const PAGE_NOT_FOUND                                                = "Page_Not_Found";
+	const PAGE_NOT_LOGGED_IN                                            = "Page_Not_Logged_In";
 	const POST_BACK_FORM                                                = "HiddenTextForm";
 	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
 	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";

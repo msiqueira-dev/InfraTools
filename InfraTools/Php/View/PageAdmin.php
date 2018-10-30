@@ -12,7 +12,6 @@ Description:
 Functions: 
 			protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug);
 			protected function LoadDataFromSession($SessionKey, $Function, &$Instance);
-			protected function LoadHtml();
 			public    function GetCurrentPage();
 			public    function LoadPage();
 			
@@ -57,12 +56,6 @@ class PageAdmin extends PageInfraTools
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
 		}
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
 	}
 	
 	protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug)
@@ -124,27 +117,6 @@ class PageAdmin extends PageInfraTools
 		}
 		else return ConfigInfraTools::ERROR;
 	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
 	
 	public function GetCurrentPage()
 	{
@@ -155,7 +127,7 @@ class PageAdmin extends PageInfraTools
 	{
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_FORM);
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_FORM_NUMBER);
-		$this->LoadHtml();
+		$this->LoadHtml(FALSE);
 	} 
 }
 ?>

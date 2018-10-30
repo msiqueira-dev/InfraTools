@@ -372,12 +372,6 @@ abstract class PageInfraTools extends Page
 		parent::__construct($Language);
 	}
 	
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
 	private function LoadInstanceInfraToolsUser()
 	{
 		if (!class_exists("User"))
