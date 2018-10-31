@@ -77,9 +77,10 @@ class PageAccount extends PageInfraTools
 		//PAGE_ACCOUNT_CHANGE_PASSWORD
 		elseif(isset($_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT]))
 		{
-			if($this->UserUpdatePasswordByUserEmail($this->User, 
+			if($this->UserUpdatePasswordByUserEmail(NULL, 
 												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW], 
 												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
+													$this->User->GetEmail(),
 												    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page= Config::PAGE_ACCOUNT;
 			else $this->Page = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;

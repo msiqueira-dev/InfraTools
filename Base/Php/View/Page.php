@@ -21,7 +21,7 @@ Methods:
 		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
 		private       function        LoadInstanceUser();
-		private       function        SendTwoStepVerificationCode($Email, $Name, $Debug);
+		private       function        SendTwoStepVerificationCode($Application, $Email, $Name, $Debug);
 		protected     function        TagOnloadFocusField($Form, $Field);
 		protected     function        CaptchaLoad(SessionCaptchaKey);
 		protected     function        CorporationDelete($CorporationName, $Debug);
@@ -98,6 +98,7 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
+		protected     function        UserSelectHasCodeByUserEmail($UserEmail, &$HashCode, $Debug);
 		protected     function        UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
@@ -106,8 +107,9 @@ Methods:
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug);
 		protected     function        UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug);
-		protected     function        UserUpdatePasswordByUserEmail($UserPasswordNew, $UserPasswordNewRepeat, $InstanceUser, $Debug);
-		protected     function        UserUpdatePasswordRandomByUserEmail(&$InstanceUser, $Debug);
+		protected     function        UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, 
+		                                                            $UserEmail, $Debug);
+		protected     function        UserUpdatePasswordRandomByUserEmail($Application, &$InstanceUser, $Debug);
 		protected     function        UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug);
 		protected     function        UserUpdateUserTypeByUserEmail($TypeUserIdNew, &$InstanceUser, $Debug);
 		public        function        CheckInputImage($Input);
@@ -324,8 +326,8 @@ abstract class Page
 						 $operationalSystem . "-" .
 						 $browser;
 			$this->Session->CreatePersonalized($this->Config->DefaultApplicationName,
-														  $sessionId,
-														  $this->Config->SessionTime);
+											   $sessionId,
+											   $this->Config->SessionTime);
 			$this->Session->SetSessionValue(Config::SESS_DEVICE_LAYOUT, 
 														   $this->InputValueHeaderLayout);
 			$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);
@@ -341,7 +343,8 @@ abstract class Page
 																$this->User);
 					if($user->GetTwoStepVerification()) 
 					{
-						if($this->SendTwoStepVerificationCode($user->GetEmail(),$user->GetName(), $Debug) == Config::SUCCESS)
+						if($this->SendTwoStepVerificationCode($this->Config->DefaultApplicationName, 
+															  $user->GetEmail(),$user->GetName(), $Debug) == Config::SUCCESS)
 							return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
 						else
 						{
@@ -417,13 +420,14 @@ abstract class Page
 		else return Config::SUCCESS;
 	}
 	
-	private function SendTwoStepVerificationCode($Email, $Name, $Debug)
+	private function SendTwoStepVerificationCode($Application, $Email, $Name, $Debug)
 	{
 		$FacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 		$code = $FacedeBusiness->GenerateRandomCode();
 		$this->Session->SetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION,
 													$code);
-		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Email, $Name, $code, $Debug) == Config::SUCCESS)
+		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Application, 
+																  $Email, $Name, $code, $Debug) == Config::SUCCESS)
 			return Config::SUCCESS;
 		else return Config::ERROR;
 	}
@@ -2815,21 +2819,44 @@ abstract class Page
 		}
 	}
 	
-	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	protected function UserSelectHasCodeByUserEmail($UserEmail, &$HashCode, $Debug)
 	{
-		$ArrayInstanceUser = NULL;
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail  = $UserEmail;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//VALIDA E-MAIL
+		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnEmailText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
-		else
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_SELECT_USERS_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($this->InputValueUserEmail, $HashCode, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
 		}
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return $return;
 	}
 	
 	protected function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
@@ -2895,6 +2922,45 @@ abstract class Page
 		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		return $return;
+	}
+	
+	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTeamId = $TeamId;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TEAM_ID
+		$arrayElements[0]             = Config::FORM_FIELD_TEAM_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTeamIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTeamId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTeamIdText;
+		array_push($arrayConstants, 'FORM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+			if($return == Config::SUCCESS)
+				return Config::SUCCESS;
+		}
+		else
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_SELECT_USERS_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
 	}
 	
 	protected function UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug)
@@ -3099,7 +3165,7 @@ abstract class Page
 		}
 	}
 	
-	protected function UserUpdatePasswordByUserEmail($UserPasswordNew, $UserPasswordNewRepeat, $InstanceUser, $Debug)
+	protected function UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, $UserEmail, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueNewPassword     = $UserPasswordNew;
@@ -3117,9 +3183,24 @@ abstract class Page
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnPasswordText;
 		$arrayExtraField[0]           = &$this->InputValueRepeatPassword;
-		array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD', 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_MATCH');
-		array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'PASSWORD_RESET_INVALID_PASSWORD', 'PASSWORD_RESET_INVALID_PASSWORD_MATCH');
+		array_push($arrayConstants, 'PASSWORD_RESET_INVALID_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
+		
+		//RESET_CODE
+		$this->Session->GetSessionValue(Config::FORM_FIELD_PASSWORD_RESET_CODE, $code);
+		$arrayElements[1]             = Config::FORM_FIELD_PASSWORD_RESET_CODE;
+		$arrayElementsClass[1]        = &$this->ReturnCodeClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+		$arrayElementsInput[1]        = $this->InputValueCode; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 0; 
+		$arrayElementsNullable[1]     = TRUE;
+		$arrayElementsText[1]         = &$this->ReturnCodeText;
+		array_push($arrayConstants, 'PASSWORD_RESET_INVALID_CODE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, $code);
 
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
@@ -3130,14 +3211,13 @@ abstract class Page
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->UserUpdatePasswordByUserEmail($InstanceUser->GetEmail(), $this->InputValueNewPassword, $Debug);
+			$return = $FacedePersistence->UserUpdatePasswordByUserEmail($UserEmail, $this->InputValueNewPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ACCOUNT_CHANGE_PASSWORD_SUCCESS', 
-																				$this->Language);
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_SUCCESS', $this->Language);
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -3146,18 +3226,18 @@ abstract class Page
 				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							                          Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_WARNING', $this->Language);
 				return Config::ERROR;
 			}
 		}			                        Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";			
-		$this->ReturnPasswordText = $this->InstanceLanguageText->GetConstant('ACCOUNT_CHANGE_PASSWORD_ERROR', $this->Language);
+		$this->ReturnPasswordText = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_ERROR', $this->Language);
 		$this->ReturnPasswordClass = Config::FORM_FIELD_ERROR;
 		$this->ReturnClass         = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		return Config::ERROR;
 	}
 	
-	protected function UserUpdatePasswordRandomByUserEmail(&$InstanceUser, $Debug)
+	protected function UserUpdatePasswordRandomByUserEmail($Application, &$InstanceUser, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$instanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
@@ -3167,7 +3247,8 @@ abstract class Page
 																		    $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $instanceFacedeBusiness->SendEmailPasswordReset($InstanceUser->GetName(),
+			$return = $instanceFacedeBusiness->SendEmailPasswordReset($Application, 
+																	  $InstanceUser->GetName(),
 										                              $InstanceUser->GetEmail(),
 										                              $newRandomPassword, $Debug);
 			if($return == Config::SUCCESS)

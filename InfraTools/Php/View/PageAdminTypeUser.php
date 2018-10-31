@@ -49,7 +49,6 @@ class PageAdminTypeUser extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 	
 		//FORM SUBMIT BACK

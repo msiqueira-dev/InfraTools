@@ -36,11 +36,9 @@ class PageResendConfirmationLink extends PageInfraTools
 	public function LoadPage()
 	{
 		$FacedeBusinessInfraTools = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		if(isset($this->User))
 		{
-			$return = $FacedePersistenceInfraTools->UserSelectHashCodeByUserEmail($this->User->GetEmail(), 
-																			      $UniqueHash, $this->InputValueHeaderDebug);
+			$return = $this->UserSelectHasCodeByUserEmail($this->User->GetEmail(), $UniqueHash, $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				Page::GetCurrentDomain($domain);
@@ -48,7 +46,8 @@ class PageResendConfirmationLink extends PageInfraTools
 								  str_replace("_", "",ConfigInfraTools::PAGE_REGISTER_CONFIRMATION) . "?=" . $UniqueHash;
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$return = $FacedeBusinessInfraTools->SendEmailResendConfirmationLink($this->User->GetName(),
+				$return = $FacedeBusinessInfraTools->SendEmailResendConfirmationLink(ConfigInfraTools::APPLICATION_INFRATOOLS,
+																					 $this->User->GetName(),
 																					 $this->User->GetEmail(),
 																					 $link, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)

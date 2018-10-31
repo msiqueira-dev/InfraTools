@@ -24,7 +24,6 @@ Functions:
 			public function CheckPortStatusHost($HostName, $Port, &$ReturnMessage);
 			public function CheckPortStatusIpAddress($IpAddress, $Port, &$ReturnMessage);
 			public function CheckWebSiteExists($WebSite, &$ReturnMessage);
-			public function GenerateRandomPassword($length = 8);
 			public function GetCalculationNetMaskGetCalculationNetMask($IpAddress, $Mask, &$ReturnMessage);
 			public function GetDnsRecords($HostName, $DnsOption, &$ReturnMessage)
 			public function GetHostName($IpAddress, &$HostName);
@@ -36,11 +35,6 @@ Functions:
 			public function GetService($Port, $Protocol, &$Service);
 			public function GetWebSiteGetContent($WebSiteAddress, &$Content);
 			public function GetWebSiteGetHeaders($WebSiteAddress, &$ArrayHeaders);
-			public function SendEmailPasswordReset($Name, $Email, $Password, $Debug);
-			public function SendEmailContact($Email, $Message, $Name, $Subject, $Title, $Debug);
-			public function SendEmailPasswordRecovery($Email, $ResetCode, $Debug);
-			public function SendEmailRegister($Name, $Email, $Link, $Debug);
-			public function SendEmailResendConfirmationLink($Name, $Email, $Link, $Debug);
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -563,35 +557,6 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		}
 	}
 	
-	public function GenerateRandomPassword($length = 8) 
-	{
-		$upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-		$lowCaseChars = 'abcdefghijklmnopqrstuvwzyz';
-		$numberChars = '0123456789';
-		for ($i = 0, $result = ''; $i < $length; $i++) 
-		{
-			if($i % 3 == 0)      
-			{
-				$count = mb_strlen($upperCaseChars);
-				$index = rand(0, $count - 1);
-				$result .= mb_substr($upperCaseChars, $index, 1);
-			}
-			else if($i % 3 == 1) 
-			{
-				$count = mb_strlen($lowCaseChars);
-				$index = rand(0, $count - 1);
-				$result .= mb_substr($lowCaseChars, $index, 1);
-			}
-			else
-			{
-				$count = mb_strlen($numberChars);
-				$index = rand(0, $count - 1);
-				$result .= mb_substr($numberChars, $index, 1);
-			}
-		}
-		return $result;
-	}
-	
 	public function GetCalculationNetMask($IpAddress, $Mask, &$ReturnMessage)
 	{
 		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
@@ -1089,169 +1054,6 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
 			return $return = ConfigInfraTools::INVALID_NULL;
-		}
-	}
-	
-	public function SendEmailPasswordReset($Name, $EmailAddress, $Password, $Debug)
-	{
-		$configInfraTools = $this->Factory->CreateConfigInfraTools();
-		$Email = $this->Factory->CreateEmail();  		
-		$subject = $this->Language->GetText('FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG');
-		$body    = $Name . ",</br></br>" 
-			             . $this->Language->GetText('FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT')	 
-		                 . "</br><b> " 
-			             . $Password . "</b>";
-		$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-						                $configInfraTools->DefaultEmailNoReplyFormAddress,
-										$configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
-						                $configInfraTools->DefaultEmailNoReplyFormPassword, 
-	                                    $EmailAddress, $subject, $body);
-		if($return == ConfigInfraTools::SUCCESS)
-			return ConfigInfraTools::SUCCESS;
-		else
-		{
-			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "Email Error: " . $return;
-			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	public function SendEmailContact($EmailAddress, $Message, $Name, $Subject, $Title, $Debug)
-	{
-		$Session = $this->Factory->CreateSession();
-		$Session->GetSessionValue(ConfigInfraTools::CONTACT_EMAIL_SESSION, $emailSession);
-		$today = date("Ymd"); $hour = date("H"); $minute = date("i");
-		$emailHourMinute = $today . "_" . $hour . "_" . $minute;
-		if ($emailSession != NULL)
-		{
-			$emailSession = explode("_", $emailSession);
-			if ($emailSession[0] < $today)
-				$hour = $hour + 24;
-			if($emailSession[1] < $hour)
-				$minute = $minute + 60;
-			if($emailSession[2] + 15 < $minute)
-				$sendEmail = TRUE;
-			else $sendEmail = FALSE;
-		}
-		else $sendEmail = TRUE;
-		if ($sendEmail)
-		{
-			$configInfraTools = $this->Factory->CreateConfigInfraTools();
-			$Email = $this->Factory->CreateEmail();  		
-			$subject = "[" . ConfigInfraTools::APPLICATION_INFRATOOLS . "] " . 
-				             ConfigInfraTools::PAGE_CONTACT . " " . 
-				       $Subject . " - " . 
-				       $Title;
-			$body    = "<b>Name</b>: " . $Name . "<br><b>Email:</b> " . 
-				       $EmailAddress . "<br><br><br><b>Content</b>:<br>" . 
-				       $Message;
-			$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-							                $configInfraTools->DefaultEmailNoReplyFormAddress,
-											$configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
-							                $configInfraTools->DefaultEmailNoReplyFormPassword, 
-							                $EmailAddress, $subject, $body);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$Session->SetSessionValue(ConfigInfraTools::CONTACT_EMAIL_SESSION, $emailHourMinute);
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-					echo "Email Error: " . $return;
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else return ConfigInfraTools::SEND_EMAIL_ALREADY_SENT;
-	}
-	
-	public function SendEmailPasswordRecovery($EmailAddress, $ResetCode, $Debug)
-	{
-		$Session = $this->Factory->CreateSession();
-		$Session->GetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, $emailSession);
-		$today = date("Ymd"); $hour = date("H"); $minute = date("i");
-		$emailHourMinute = $today . "_" . $hour . "_" . $minute;
-		if ($emailSession != NULL)
-		{
-			$emailSession = explode("_", $emailSession);
-			if ($emailSession[0] < $today)
-				$hour = $hour + 24;
-			if($emailSession[1] < $hour)
-				$minute = $minute + 60;
-			if($emailSession[2] + 15 < $minute)
-				$sendEmail = TRUE;
-			else $sendEmail = FALSE;
-		}
-		else $sendEmail = TRUE;
-		if ($sendEmail)
-		{
-			$configInfraTools = $this->Factory->CreateConfigInfraTools();
-			$InstanceBaseEmail = $this->Factory->CreateEmail();  		
-			$subject = $this->Language->GetText('PASSWORD_RECOVERY_EMAIL_TAG');
-			$body    = $this->Language->GetText('PASSWORD_RECOVERY_EMAIL_TEXT') . "</br><b> " . 
-				       $ResetCode . "</b>";
-			$return = $InstanceBaseEmail->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-							 $configInfraTools->DefaultEmailNoReplyFormAddress,
-							 $configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
-							 $configInfraTools->DefaultEmailNoReplyFormPassword, 
-							 $EmailAddress, $subject, $body);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$Session->SetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, $emailHourMinute);
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-					echo "Email Error: " . $return;
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else return ConfigInfraTools::SEND_EMAIL_ALREADY_SENT;
-	}
-	
-	public function SendEmailRegister($Name, $EmailAddress, $Link, $Debug)
-	{
-		$configInfraTools = $this->Factory->CreateConfigInfraTools();
-		$Email = $this->Factory->CreateEmail(); 		
-		$subject = $this->Language->GetText('REGISTER_EMAIL_TAG');
-		$body    = $Name . ",</br></br>" .
-			       $this->Language->GetText('REGISTER_EMAIL_TEXT') . "</br><b> " .
-			       $Link . "</b>";
-		$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-						 $configInfraTools->DefaultEmailNoReplyFormAddress,
-						 $configInfraTools->DefaultEmailNoReplyFormAddressReplyTo,
-						 $configInfraTools->DefaultEmailNoReplyFormPassword, 
-	                     $EmailAddress, $subject, $body);
-		if($return == ConfigInfraTools::SUCCESS)
-			return ConfigInfraTools::SUCCESS;
-		else
-		{
-			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "Email Error: " . $return;
-			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	public function SendEmailResendConfirmationLink($Name, $EmailAddress, $Link, $Debug)
-	{
-		$configInfraTools = $this->Factory->CreateConfigInfraTools();
-		$Email = $this->Factory->CreateEmail();  		
-		$subject = $this->Language->GetText('RESEND_CONFIRMATION_EMAIL_TAG');
-		$body    = $Name . ",</br></br>" .
-			       $this->Language->GetText('RESEND_CONFIRMATION_EMAIL_TEXT') . "</br><b> " .
-			       $Link . "</b>";
-		$return = $Email->SendFormEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-						 $configInfraTools->DefaultEmailNoReplyFormAddress, 
-						 $configInfraTools->DefaultEmailNoReplyFormPassword, 
-	                     $EmailAddress, $subject, $body);
-		if($return == ConfigInfraTools::SUCCESS)
-			return ConfigInfraTools::SUCCESS;
-		else
-		{
-			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "Email Error: " . $return;
-			return ConfigInfraTools::ERROR;
 		}
 	}
 }

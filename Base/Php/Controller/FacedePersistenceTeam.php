@@ -360,7 +360,7 @@ class FacedePersistenceTeam
 				$TeamName = "%".$TeamName."%";  
 				$stmt->bind_param("s", $TeamName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == Config::SUCCESS)
 				{
 					$ArrayInstanceTeam = array();
 					$result = $stmt->get_result();

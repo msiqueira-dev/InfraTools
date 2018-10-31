@@ -727,7 +727,10 @@ class Pt
 	const USER_UNIQUE_ID                                          = "ID Único";
 	const USER_UNIQUE_ID_TIP                                      = "(Login único)";
 	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "Campo usuário confirmado atualizado com sucesso";
-	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Erro ao tentar atualizar campoo de usuário confirmado";
+	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Erro ao tentar atualizar campo de usuário confirmado";
+	const USER_UPDATE_USER_PASSWORD_ERROR                         = "Senha de usuário atualizada com sucesso";
+	const USER_UPDATE_USER_PASSWORD_SUCCESS                       = "Erro ao tentar atualizar a senha do usuário";
+	const USER_UPDATE_USER_PASSWORD_WARNING                       = "";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "Requisitar Layout [0]:";

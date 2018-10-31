@@ -230,7 +230,8 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-				if($this->UserUpdatePasswordRandomByUserEmail($this->InstanceInfraToolsUserAdmin, 
+				if($this->UserUpdatePasswordRandomByUserEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
+															  $this->InstanceInfraToolsUserAdmin, 
 															  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;

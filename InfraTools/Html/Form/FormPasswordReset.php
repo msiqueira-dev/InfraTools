@@ -14,11 +14,11 @@
 		<div class="DivContentBodyContainerLabel">
 			<label> <?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_CODE').":"; ?> </label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::PASSWORD_RESET_CODE; ?>" 
-						   id="<?php echo ConfigInfraTools::PASSWORD_RESET_CODE; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE; ?>"
 						   class="<?php echo $this->ReturnCodeClass; ?>"
 						   title="<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_CODE'); ?>" 
-						   onblur="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_CODE; ?>',
+						   onblur="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '', false);
@@ -27,7 +27,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '');"
-						   onkeyup="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_CODE; ?>',
+						   onkeyup="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '', false);
@@ -36,7 +36,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::PASSWORD_RESET_CODE; ?>',
+						   onchange="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT; ?>',
 											 '', false);

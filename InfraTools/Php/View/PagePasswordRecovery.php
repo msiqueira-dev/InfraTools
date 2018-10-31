@@ -120,7 +120,7 @@ class PagePasswordRecovery extends PageInfraTools
 															  $code, $this->InputValueHeaderDebug);
 					if ($this->ReturnText == ConfigInfraTools::SUCCESS)
 					{
-						$this->Session->SetSessionValue(ConfigInfraTools::PASSWORD_RESET_CODE, $code);
+						$this->Session->SetSessionValue(ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE, $code);
 						$this->Session->SetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, 
 																 $this->InputValueUserEmail);
 						Page::GetCurrentDomain($domain);

@@ -3651,7 +3651,8 @@ abstract class PageInfraTools extends Page
 						$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 							                                                                        ($this->InstanceLanguageText);
 						$return = FALSE;
-						$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailRegister($this->InputValueUserName,
+						$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailRegister(Config::APPLICATION_INFRATOOLS,
+																							 $this->InputValueUserName,
 														                                     $this->InputValueUserEmail,
 														                                     $link, 
 																							 $Debug);

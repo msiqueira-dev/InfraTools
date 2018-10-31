@@ -959,7 +959,6 @@ class ConfigInfraTools extends Config
 	const PASSWORD_RECOVERY_FORM_SUBMIT                             = "PasswordRecoveryFormSubmit";
 	  
 	/* Constantes de Formulário da Página PasswordReset */
-	const PASSWORD_RESET_CODE                                       = "PasswordResetCode";
 	const PASSWORD_RESET_FORM                                       = "PasswordResetForm";
 	const PASSWORD_RESET_FORM_SUBMIT                                = "PasswordResetFormSubmit";
 

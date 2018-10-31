@@ -726,6 +726,9 @@ class En
 	const USER_UNIQUE_ID_TIP                                      = "(Unique login)";
 	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "User confirmed updated succesfully";
 	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Error trying to update value for user confirmed";
+	const USER_UPDATE_USER_PASSWORD_ERROR                         = "User password updated succesfully";
+	const USER_UPDATE_USER_PASSWORD_SUCCESS                       = "Error trying to update value for user password";
+	const USER_UPDATE_USER_PASSWORD_WARNING                       = "Password not changed, the typed password is the current one";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "Request [0] Layout:";
@@ -1177,7 +1180,6 @@ class En
 	const PASSWORD_RESET_TEXT_REPEAT_PASSWORD                    = "Repeat new Password";
 	const PASSWORD_RESET_TEXT_REPEAT_PASSWORD_TIP                = "(At least 1 number and 1 capital letter, between 8 and 18 digits)";
 	const PASSWORD_RESET_TEXT_SEND                               = "CHANGE";
-	const PASSWORD_RESET_WARNING                                 = "Password not changed, the typed password is the current one";
 	
 	/* Body Page Register */
 	const REGISTER_EMAIL_ALREADY_REGISTERED                      = "E-mail already registered";

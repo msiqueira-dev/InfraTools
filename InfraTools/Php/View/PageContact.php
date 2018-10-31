@@ -190,12 +190,13 @@ class PageContact extends PageInfraTools
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailContact($this->InputValueUserEmail,
-																							  $this->InputValueTicketDescription,
-																							  $this->InputValueUserName, 
-																							  $this->InputValueTicketDescription, 
-																 							  $this->InputValueTicketTitle,
-																 							  $this->InputValueHeaderDebug);
+				$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailContact(ConfigInfraTools::APPLICATION_INFRATOOLS,
+					                                                                $this->InputValueUserEmail,
+																					$this->InputValueTicketDescription,
+																					$this->InputValueUserName, 
+																					$this->InputValueTicketDescription, 
+																 					$this->InputValueTicketTitle,
+																 					$this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{ 
 					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;

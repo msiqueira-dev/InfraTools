@@ -695,6 +695,9 @@ class Es
 	const USER_UNIQUE_ID_TIP                                      = "";
 	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "";
 	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "";
+	const USER_UPDATE_USER_PASSWORD_ERROR                         = "";
+	const USER_UPDATE_USER_PASSWORD_SUCCESS                       = "";
+	const USER_UPDATE_USER_PASSWORD_WARNING                       = "";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "";

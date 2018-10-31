@@ -65,6 +65,7 @@ class Config
 	const FORM_FIELD_HEADER_LAYOUT_HIDDEN                               = "FormFieldHeaderLayoutHidden";
 	const FORM_FIELD_PASSWORD_NEW                                       = "FormFieldPasswordNew";
 	const FORM_FIELD_PASSWORD_REPEAT                                    = "FormFieldPasswordRepeat";
+	const FORM_FIELD_PASSWORD_RESET_CODE                                = "FormFieldPasswordResetCode";
 	const FORM_FIELD_HEADER_LOG_OUT                                     = "FormFieldHeaderLogOut";
 	const FORM_FIELD_TEAM_DESCRIPTION                                   = "FormFieldTeamDescription";
 	const FORM_FIELD_TEAM_ID                                            = "FormFieldTeamId";
