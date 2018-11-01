@@ -719,6 +719,10 @@ class En
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "User obtained sucessfully";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                         = "Error trying to obtain user with the given e-mail";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                       = "User obtained sucessfully";
+	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                     = "Error trying to obtain user with the given unique id";
+	const USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS                   = "User obtained sucessfully";
+	const USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR                  = "User with specified e-mail does not exists";
+	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                = "User exists";
 	const USER_TEAM_SELECT_ERROR                                  = "Error trying to get the user teams";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "Error changing two step verification";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "Two step verification changed succesfully";

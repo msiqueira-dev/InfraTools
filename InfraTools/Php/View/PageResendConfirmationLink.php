@@ -38,7 +38,7 @@ class PageResendConfirmationLink extends PageInfraTools
 		$FacedeBusinessInfraTools = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
 		if(isset($this->User))
 		{
-			$return = $this->UserSelectHasCodeByUserEmail($this->User->GetEmail(), $UniqueHash, $this->InputValueHeaderDebug);
+			$return = $this->UserSelectHashCodeByUserEmail($this->User->GetEmail(), $UniqueHash, $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				Page::GetCurrentDomain($domain);

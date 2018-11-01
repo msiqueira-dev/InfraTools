@@ -129,6 +129,7 @@ Methods:
 			                                                  $Limit1, $Limit2, $Debug);
 			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
 			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug);
+			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 			protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			protected function UserLoadData($InstanceUser);
 			protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, $Debug);
@@ -3194,6 +3195,21 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
+	protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->UserInfraToolsSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
+		if($return != ConfigInfraTools::SUCCESS)
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
+			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->ConfigInfraTools->DefaultServerImage . 
+							       ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return ConfigInfraTools::ERROR;
+		}
+		else return ConfigInfraTools::SUCCESS;
+	}
+	
 	protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -3397,9 +3413,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_UNIQUE_ID
+		//FORM_FIELD_USER_USER_UNIQUE_ID
 		$arrayConstants = array();
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID;
+		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID;
 		$arrayElementsClass[2]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[2] = ""; 
 		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
@@ -3610,7 +3626,7 @@ abstract class PageInfraTools extends Page
 		{
 			//CHECA SE E-MAIL JÁ É CADASTRADO
 			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserCheckEmail($this->InputValueUserEmail, $Debug);
+			$return = $FacedePersistenceInfraTools->SqlUserSelectExistsByUserEmail($this->InputValueUserEmail, $Debug);
 			if($return != ConfigInfraTools::SUCCESS)
 			{
 				$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth
@@ -3722,7 +3738,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueUserPhonePrimaryPrefix   = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX];
 		$this->InputValueUserPhoneSecondary       = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY];
 		$this->InputValueUserPhoneSecondaryPrefix = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX];
-		$this->InputValueUserUniqueId             = $_POST[ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID];
+		$this->InputValueUserUniqueId             = $_POST[ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID];
 		if($OnAdmin)
 		{
 			if(isset($_POST[ConfigInfraTools::ACCOUNT_UPDATE_SESSION_EXPIRES]))
@@ -3761,8 +3777,8 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_UNIQUE_ID
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID;
+		//FORM_FIELD_USER_USER_UNIQUE_ID
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID;
 		$arrayElementsClass[1]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;

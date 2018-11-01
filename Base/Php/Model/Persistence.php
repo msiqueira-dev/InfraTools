@@ -89,7 +89,7 @@ Methods:
 			public static function SqlTypeUserSelectByDescription();
 			public static function SqlTypeUserSelectByTypeUserId();
 			public static function SqlTypeUserUpdateByTypeUserId();
-			public static function SqlUserCheckEmail();
+			public static function SqlUserSelectExistsByUserEmail();
 			public static function SqlUserCheckPasswordByUserEmail();
 			public static function SqlUserCheckPasswordByUserUniqueId();
 			public static function SqlUserDeleteByUserEmail();
@@ -843,7 +843,7 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID          . " = ?";
 	}
 	
-	public static function SqlUserCheckEmail()
+	public static function SqlUserSelectExistsByUserEmail()
 	{
 		return "SELECT " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL   . " " 
 		     . "FROM  "  . Config::TABLE_USER . " " 

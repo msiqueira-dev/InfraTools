@@ -29,7 +29,7 @@
             <ul id="tabsUl" class="ui-tabs-nav ui-widget-header">
             	<!-- CHECK AVAILABILITY -->
             	<?php
-					if($ConfigInfraTools->FunctionCheckAvailabilityEnabled == true)
+					if($this->Config->FunctionCheckAvailabilityEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-1');
 						                  SetFunctionUrl('" . ConfigInfraTools::CHECK_AVAILABILITY . "#tabs1');
@@ -49,7 +49,7 @@
                 </li>
                 <!-- CHECK BLACKLIST -->
                 <?php
-					if($ConfigInfraTools->FunctionCheckBlacklistEnabled == true)
+					if($this->Config->FunctionCheckBlacklistEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-2');
 						                  SetFunctionUrl('" . ConfigInfraTools::CHECK_BLACKLIST . "#tabs2');
@@ -69,7 +69,7 @@
                 </li>
                 <!-- CHECK PING -->
                 <?php
-					if($ConfigInfraTools->FunctionCheckDnsRecordEnabled == true)
+					if($this->Config->FunctionCheckDnsRecordEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-3');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_DNS_RECORD . "#tabs3');
@@ -89,7 +89,7 @@
                 </li>
                 <!-- CHECK E-MAIL EXISTS -->
                 <?php
-					if($ConfigInfraTools->FunctionCheckEmailExistsEnabled == true)
+					if($this->Config->FunctionCheckEmailExistsEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-4');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_EMAIL_EXISTS . "#tabs4');
@@ -109,7 +109,7 @@
                 </li>
                 <!-- CHECK IP ADDRESS IS IN NETWORK -->
                 <?php
-					if($ConfigInfraTools->FunctionCheckIpAddresIsInNetworkEnabled == true)
+					if($this->Config->FunctionCheckIpAddresIsInNetworkEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-5');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK . "#tabs5');
@@ -129,7 +129,7 @@
                 </li>
                 <!-- CHECK PING -->
                 <?php
-					if($ConfigInfraTools->FunctionCheckPingServerEnabled == true)
+					if($this->Config->FunctionCheckPingServerEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-6');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_PING_SERVER . "#tabs6');
@@ -149,7 +149,7 @@
                 </li>
                 <!-- CHECK PORT STATUS -->
                 <?php
-					if($ConfigInfraTools->FunctionCheckPortStatusEnabled == true)
+					if($this->Config->FunctionCheckPortStatusEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-7');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_PORT_STATUS . "#tabs7');
@@ -169,7 +169,7 @@
                 </li>
      			<!-- GET CALCULATION NETMAST -->
 				<?php
-					if($ConfigInfraTools->FunctionGetCalculationNetMaskEnabled == true)
+					if($this->Config->FunctionGetCalculationNetMaskEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-8');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_CALCULATION_NETMASK . "#tabs8');
@@ -189,7 +189,7 @@
                 </li>
                 <!-- GET DNS RECORDS -->
                 <?php
-					if($ConfigInfraTools->FunctionGetDnsRecordsEnabled == true)
+					if($this->Config->FunctionGetDnsRecordsEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-9');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_DNS_RECORDS . "#tabs9');
@@ -209,7 +209,7 @@
                 </li>
                 <!-- GET HOSTNAME -->
                 <?php
-					if($ConfigInfraTools->FunctionGetHostNameEnabled == true)
+					if($this->Config->FunctionGetHostNameEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-10');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_HOSTNAME . "#tabs10');
@@ -229,7 +229,7 @@
                 </li>
                 <!-- GET IP ADDRESS -->
                 <?php
-					if($ConfigInfraTools->FunctionGetIpAddressesEnabled == true)
+					if($this->Config->FunctionGetIpAddressesEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-11');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_IP_ADDRESSES . "#tabs11');
@@ -249,7 +249,7 @@
                 </li>
                 <!-- GET LOCATION -->
                 <?php
-					if($ConfigInfraTools->FunctionGetLocationEnabled == true)
+					if($this->Config->FunctionGetLocationEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-12');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_LOCATION . "#tabs12');
@@ -269,7 +269,7 @@
                 </li>
                 <!-- GET PROTOCOL -->
                 <?php
-					if($ConfigInfraTools->FunctionGetProtocolEnabled == true)
+					if($this->Config->FunctionGetProtocolEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-13');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_PROTOCOL . "#tabs13');
@@ -289,7 +289,7 @@
                 </li>
                 <!-- GET ROUTE -->
                 <?php
-					if($ConfigInfraTools->FunctionGetRouteEnabled == true)
+					if($this->Config->FunctionGetRouteEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-14');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_ROUTE . "#tabs14');
@@ -309,7 +309,7 @@
                 </li>
                 <!-- GET SERVICE -->
                 <?php
-					if($ConfigInfraTools->FunctionGetServiceEnabled == true)
+					if($this->Config->FunctionGetServiceEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-15');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_SERVICE . "#tabs15');
@@ -329,7 +329,7 @@
                 </li>
                 <!-- GET WEB SITE -->
                 <?php
-					if($ConfigInfraTools->FunctionGetWebSiteEnabled == true)
+					if($this->Config->FunctionGetWebSiteEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-16');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_WEBSITE . "#tabs16');
@@ -349,7 +349,7 @@
                 </li>
                 <!-- GET WHOIS -->
                 <?php
-					if($ConfigInfraTools->FunctionGetWhoisEnabled == true)
+					if($this->Config->FunctionGetWhoisEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-17');
 						                  SetFunctionUrl('" . ConfigInfraTools::GET_WHOIS . "#tabs17');
@@ -369,40 +369,40 @@
                 </li>
 			</ul>
 			<?php
-				if($ConfigInfraTools->FunctionCheckAvailabilityEnabled == true)
+				if($this->Config->FunctionCheckAvailabilityEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_AVAILABILITY . ".php");
-				if($ConfigInfraTools->FunctionCheckBlacklistEnabled == true)
+				if($this->Config->FunctionCheckBlacklistEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_BLACKLIST . ".php");
-                if($ConfigInfraTools->FunctionCheckDnsRecordEnabled == true)
+                if($this->Config->FunctionCheckDnsRecordEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_DNS_RECORD . ".php");
-				if($ConfigInfraTools->FunctionCheckEmailExistsEnabled == true)
+				if($this->Config->FunctionCheckEmailExistsEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_EMAIL_EXISTS . ".php");
-				if($ConfigInfraTools->FunctionCheckIpAddresIsInNetworkEnabled == true)
+				if($this->Config->FunctionCheckIpAddresIsInNetworkEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM 
 								               . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK . ".php");
-				if($ConfigInfraTools->FunctionCheckPingServerEnabled == true)
+				if($this->Config->FunctionCheckPingServerEnabled)
 				    include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_PING_SERVER . ".php");
-				if($ConfigInfraTools->FunctionCheckPortStatusEnabled == true)
+				if($this->Config->FunctionCheckPortStatusEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_PORT_STATUS . ".php");
-				if($ConfigInfraTools->FunctionGetCalculationNetMaskEnabled == true)
+				if($this->Config->FunctionGetCalculationNetMaskEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_CALCULATION_NETMASK . ".php");
-				if($ConfigInfraTools->FunctionGetDnsRecordsEnabled == true)
+				if($this->Config->FunctionGetDnsRecordsEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_DNS_RECORDS . ".php");
-				if($ConfigInfraTools->FunctionGetHostNameEnabled == true)
+				if($this->Config->FunctionGetHostNameEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_HOSTNAME . ".php");
-				if($ConfigInfraTools->FunctionGetIpAddressesEnabled == true)
+				if($this->Config->FunctionGetIpAddressesEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_IP_ADDRESSES . ".php");
-				if($ConfigInfraTools->FunctionGetLocationEnabled == true)
+				if($this->Config->FunctionGetLocationEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_LOCATION . ".php");
-				if($ConfigInfraTools->FunctionGetProtocolEnabled == true)
+				if($this->Config->FunctionGetProtocolEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_PROTOCOL . ".php");
-				if($ConfigInfraTools->FunctionGetRouteEnabled == true)
+				if($this->Config->FunctionGetRouteEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_ROUTE . ".php");
-				if($ConfigInfraTools->FunctionGetServiceEnabled == true)
+				if($this->Config->FunctionGetServiceEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_SERVICE . ".php");
-				if($ConfigInfraTools->FunctionGetWebSiteEnabled == true)
+				if($this->Config->FunctionGetWebSiteEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_WEBSITE . ".php");
-				if($ConfigInfraTools->FunctionGetWhoisEnabled == true)
+				if($this->Config->FunctionGetWhoisEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_WHOIS . ".php");
 			?>
             <div class="DivClearFloat"></div>

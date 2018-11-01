@@ -13,7 +13,6 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about user.
 Functions: 
-			public function UserCheckEmail($Email, $Debug);
 			public function UserCheckPasswordByUserEmail($Email, $Password, $Debug);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
 			public function UserDeleteByUserEmail($Email, $Debug);
@@ -30,6 +29,7 @@ Functions:
 			                                       &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
+			public function UserSelectExistsByUserEmail($Email, $Debug);
 			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 			public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
@@ -103,40 +103,6 @@ class FacedePersistenceUser
         }
         return self::$Instance;
     }
-	
-	public function UserCheckEmail($Email, $Debug)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserCheckEmail');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlUserCheckEmail());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("s", $Email);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if ($stmt->fetch())
-					return Config::SUCCESS;
-				else
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_USER_CHECK_EMAIL_FAILED;
-				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return Config::MYSQL_CONNECTION_FAILED;
-	}
 	
 	public function UserCheckPasswordByUserEmail($Email, $Password, $Debug)
 	{
@@ -334,7 +300,7 @@ class FacedePersistenceUser
 					{
 						$RowCount = $row['COUNT'];
 						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL && $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row[Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						   && $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateCorporation
 								                                       (NULL, 
@@ -1082,6 +1048,40 @@ class FacedePersistenceUser
 					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FAILED;
 				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $mySqlConnection->error;
+				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function UserSelectExistsByUserEmail($Email, $Debug)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectExistsByUserEmail');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlUserSelectExistsByUserEmail());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("s", $Email);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				if ($stmt->fetch())
+					return Config::SUCCESS;
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					$return = Config::MYSQL_USER_SELECT_EXISTS_BY_USER_EMAIL_FAILED;
+				}
+				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
+				return $return;
 			}
 			else
 			{

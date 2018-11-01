@@ -12,6 +12,6 @@ $InfraToolsFactory = InfraToolsFactory::__create();
 $ConfigInfraTools = $InfraToolsFactory->CreateConfigInfraTools();
 $InstanceBaseCaptcha = $InfraToolsFactory->CreateCaptcha();
 $Session = $InfraToolsFactory->CreateSession();
-$Session->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $stringCaptcha);
+$Session->GetSessionValue(ConfigInfraTools::FORM_FIELD_CAPTCHA, $stringCaptcha);
 $InstanceBaseCaptcha->CreateAndWriteCaptchaImage($stringCaptcha); 
 ?>

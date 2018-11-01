@@ -65,95 +65,44 @@ class PagePasswordRecovery extends PageInfraTools
 		}
 		if (isset($_POST[ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT]))
 		{
-			$this->InputValueUserEmail     = $_POST[ConfigInfraTools::FORM_FIELD_EMAIL];
-			$this->InputValueCaptcha   = $_POST[ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY];
-			$this->Session->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $captcha);
-			$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array(); $matrixOptions = array();
-			
-			//EMAIL
-			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_EMAIL;
-			$arrayElementsClass[0]        = &$this->ReturnEmailClass;
-			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
-			$arrayElementsInput[0]        = $this->InputValueUserEmail; 
-			$arrayElementsMinValue[0]     = 0; 
-			$arrayElementsMaxValue[0]     = 45; 
-			$arrayElementsNullable[0]     = FALSE;
-			$arrayElementsText[0]         = &$this->ReturnEmailText;
-			array_push($arrayConstants, 'PASSWORD_RECOVERY_INVALID_EMAIL',
-										'PASSWORD_RECOVERY_INVALID_EMAIL_SIZE');
-			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			array_push($matrixOptions, $arrayOptions);
-			
-			//CAPTCHA
-			$arrayElements[1]             = ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY;
-			$arrayElementsClass[1]        = &$this->ReturnCaptchaClass;
-			$arrayElementsDefaultValue[1] = ""; 
-			$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
-			$arrayElementsInput[1]        = $this->InputValueCaptcha; 
-			$arrayElementsMinValue[1]     = 0; 
-			$arrayElementsMaxValue[1]     = 0; 
-			$arrayElementsNullable[1]     = FALSE;
-			$arrayElementsText[1]         = &$this->ReturnCaptchaText;
-			array_push($arrayConstants, 'PASSWORD_RECOVERY_INVALID_CAPTCHA');
-			array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			array_push($arrayOptions, $captcha);
-			array_push($matrixOptions, $arrayOptions);
-			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $Debug, $matrixOptions);
+			$return = $this->UserSelectExistsByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_CAPTCHA],
+														 $_POST[ConfigInfraTools::FORM_FIELD_EMAIL], 
+														 $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-				$return = $FacedePersistenceInfraTools->UserCheckEmail($this->InputValueUserEmail, $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
+				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
+																							($this->InstanceLanguageText);
+				$code = $this->InstanceInfraToolsFacedeBusiness->GenerateRandomCode();
+				$this->ReturnText = $this->InstanceInfraToolsFacedeBusiness->SendEmailPasswordRecovery(
+					                                      ConfigInfraTools::APPLICATION_INFRATOOLS,
+														  $this->InputValueUserEmail,
+														  $code, $this->InputValueHeaderDebug);
+				if ($this->ReturnText == ConfigInfraTools::SUCCESS)
 				{
-					$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
-						                                                                        ($this->InstanceLanguageText);
-					$code = $this->InstanceInfraToolsFacedeBusiness->GenerateRandomCode();
-					$this->ReturnText = $this->InstanceInfraToolsFacedeBusiness->SendEmailPasswordRecovery(
-															  $this->InputValueUserEmail,
-															  $code, $this->InputValueHeaderDebug);
-					if ($this->ReturnText == ConfigInfraTools::SUCCESS)
-					{
-						$this->Session->SetSessionValue(ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE, $code);
-						$this->Session->SetSessionValue(ConfigInfraTools::PASSWORD_RECOVERY_EMAIL_SESSION, 
-																 $this->InputValueUserEmail);
-						Page::GetCurrentDomain($domain);
-						$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .
-											          str_replace("_", "", ConfigInfraTools::PAGE_PASSWORD_RESET));
-					}
-					elseif($this->ReturnText == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
-					{
-						$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																	   'PASSWORD_RECOVERY_EMAIL_ALREADY_SENT', 
-																		$this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					}
-					else
-					{
-						$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-																	   'PASSWORD_RECOVERY_EMAIL_ERROR', 
-																		$this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					}
+					$this->Session->SetSessionValue(ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE, $code);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_PASSWORD_RECOVERY, 
+															 $this->InputValueUserEmail);
+					Page::GetCurrentDomain($domain);
+					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .
+												  str_replace("_", "", ConfigInfraTools::PAGE_PASSWORD_RESET));
+				}
+				elseif($this->ReturnText == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
+				{
+					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
+																   'PASSWORD_RECOVERY_EMAIL_ALREADY_SENT', 
+																	$this->Language);
+					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 				}
 				else
 				{
 					$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-																			'PASSWORD_RECOVERY_EMAIL_NOT_FOUND', 
-																			 $this->Language);
+																   'PASSWORD_RECOVERY_EMAIL_ERROR', 
+																	$this->Language);
 					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 				}
 			}
 			else
@@ -164,7 +113,7 @@ class PagePasswordRecovery extends PageInfraTools
 										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			}
 		}
-		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY, $this->InputValueHeaderDebug);
+		$this->CaptchaLoad(ConfigInfraTools::FORM_FIELD_CAPTCHA, $this->InputValueHeaderDebug);
 		$this->LoadHtml(FALSE);
 	}
 }

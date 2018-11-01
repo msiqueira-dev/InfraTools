@@ -28,7 +28,7 @@
         <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-tabs-vertical">
             <ul id="tabsUl" class="ui-tabs-nav ui-widget-header">
             	<?php
-					if($ConfigInfraTools->FunctionCheckAvailabilityEnabled == true)
+					if($this->Config->FunctionCheckAvailabilityEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-1');
 						                  SetFunctionUrl('" . ConfigInfraTools::CHECK_AVAILABILITY . "#tabs1');
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <?php
-					if($ConfigInfraTools->FunctionCheckBlacklistEnabled == true)
+					if($this->Config->FunctionCheckBlacklistEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-2');
 						                  SetFunctionUrl('" . ConfigInfraTools::CHECK_BLACKLIST . "#tabs2');
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <?php
-					if($ConfigInfraTools->FunctionCheckDnsRecordEnabled == true)
+					if($this->Config->FunctionCheckDnsRecordEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-3');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_DNS_RECORD . "#tabs3');
@@ -85,7 +85,7 @@
                     </a>
                 </li>
                 <?php
-					if($ConfigInfraTools->FunctionCheckEmailExistsEnabled == true)
+					if($this->Config->FunctionCheckEmailExistsEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-4');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_EMAIL_EXISTS . "#tabs4');
@@ -104,7 +104,7 @@
                     </a>
                 </li>
                 <?php
-					if($ConfigInfraTools->FunctionCheckIpAddresIsInNetworkEnabled == true)
+					if($this->Config->FunctionCheckIpAddresIsInNetworkEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-5');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK . "#tabs5');
@@ -123,7 +123,7 @@
                     </a>
                 </li>
                 <?php
-					if($ConfigInfraTools->FunctionCheckPingServerEnabled == true)
+					if($this->Config->FunctionCheckPingServerEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-6');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_PING_SERVER . "#tabs6');
@@ -142,7 +142,7 @@
                     </a>
                 </li>
                 <?php
-					if($ConfigInfraTools->FunctionCheckPortStatusEnabled == true)
+					if($this->Config->FunctionCheckPortStatusEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-7');
 										  SetFunctionUrl('" . ConfigInfraTools::CHECK_PORT_STATUS . "#tabs7');
@@ -162,20 +162,20 @@
                 </li>
 			</ul>
 			<?php
-				if($ConfigInfraTools->FunctionCheckAvailabilityEnabled == true)
+				if($this->Config->FunctionCheckAvailabilityEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_AVAILABILITY . ".php");
-				if($ConfigInfraTools->FunctionCheckBlacklistEnabled == true)
+				if($this->Config->FunctionCheckBlacklistEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_BLACKLIST . ".php");
-                if($ConfigInfraTools->FunctionCheckDnsRecordEnabled == true)
+                if($this->Config->FunctionCheckDnsRecordEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_DNS_RECORD . ".php");
-				if($ConfigInfraTools->FunctionCheckEmailExistsEnabled == true)
+				if($this->Config->FunctionCheckEmailExistsEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_EMAIL_EXISTS . ".php");
-				if($ConfigInfraTools->FunctionCheckIpAddresIsInNetworkEnabled == true)
+				if($this->Config->FunctionCheckIpAddresIsInNetworkEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM 
 								               . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK . ".php");
-				if($ConfigInfraTools->FunctionCheckPingServerEnabled == true)
+				if($this->Config->FunctionCheckPingServerEnabled)
 				    include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_PING_SERVER . ".php");
-				if($ConfigInfraTools->FunctionCheckPortStatusEnabled == true)
+				if($this->Config->FunctionCheckPortStatusEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_PORT_STATUS . ".php");
 			?>
             <div class="DivClearFloat"></div>

@@ -18,7 +18,7 @@ Methods:
 			public function SendEmailContact($Application, $Email, $Message, $Name, $Subject, $Title, $Debug);
 			public function SendEmailLoginTwoStepVerificationCode($Application, $Email, $Name, $TwoStepVerificationCode, $Debug);
 			public function SendEmailPasswordReset($Application, $Name, $Email, $Password, $Debug);
-			public function SendEmailPasswordRecovery($Application, $Email, $ResetCode, $Debug);
+			public function SendEmailPasswordRecovery($Application, $EmailAddress, $ResetCode, $Debug);
 			public function SendEmailRegister($Application, $Name, $Email, $Link, $Debug);
 			public function SendEmailResendConfirmationLink($Application, $Name, $Email, $Link, $Debug);
 **************************************************************************/
@@ -250,7 +250,7 @@ class FacedeBusiness
 	public function SendEmailPasswordRecovery($Application, $EmailAddress, $ResetCode, $Debug)
 	{
 		$Session = $this->Factory->CreateSession();
-		$Session->GetSessionValue(Config::PASSWORD_RECOVERY_EMAIL_SESSION, $emailSession);
+		$Session->GetSessionValue(Config::SESS_PASSWORD_RECOVERY, $emailSession);
 		$today = date("Ymd"); $hour = date("H"); $minute = date("i");
 		$emailHourMinute = $today . "_" . $hour . "_" . $minute;
 		if ($emailSession != NULL)
@@ -279,7 +279,7 @@ class FacedeBusiness
 							 $EmailAddress, $subject, $body);
 			if($return == Config::SUCCESS)
 			{
-				$Session->SetSessionValue(Config::PASSWORD_RECOVERY_EMAIL_SESSION, $emailHourMinute);
+				$Session->SetSessionValue(Config::SESS_PASSWORD_RECOVERY, $emailHourMinute);
 				return Config::SUCCESS;
 			}
 			else

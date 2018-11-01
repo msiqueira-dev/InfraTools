@@ -1,6 +1,6 @@
 <!-- FORM CHECK AVAILABILITY -->
 <a name="tabs1" id="tabs1"></a>
-<div id="tabs-1" class=" ui-tabs-panel ui-widget-content <?php echo $this->VisibilityFunctionCheckAvailability; ?>">
+<div id="tabs-1" class="ui-tabs-panel ui-widget-content <?php echo $this->VisibilityFunctionCheckAvailability; ?>">
 	<h2><?php echo $this->InstanceLanguageText->GetText('CHECK_AVAILABILITY_TEXT'); ?></h2>
 	<div class="DivContentBodyContainerLabelTipTabs">
     	<label>

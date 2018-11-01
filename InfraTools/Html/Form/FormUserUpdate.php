@@ -64,10 +64,10 @@
                 </label>
             </div>
         </div>
-        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>" 
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>" 
+        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID; ?>" 
+                           id="<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID; ?>" 
                            class="<?php echo $this->ReturnUserUniqueIdClass; ?>"
-                           onblur="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>',
+                           onblur="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                '', true);
@@ -81,7 +81,7 @@
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
-                           onclick="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>',
+                           onclick="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                '', true);

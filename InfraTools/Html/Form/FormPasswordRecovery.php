@@ -48,12 +48,12 @@
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_CAPTCHA; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_CAPTCHA; ?>"
 						   class="<?php echo $this->ReturnCaptchaClass; ?>"
 						   title="<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RECOVERY_TEXT_CAPTCHA'); ?>" 
 						   onblur="ValidateHasCharacters(null, 
-											 '<?php echo ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY; ?>',
+											 '<?php echo ConfigInfraTools::FORM_FIELD_CAPTCHA; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT; ?>',
 											 '', false);
@@ -63,7 +63,7 @@
 											 '<?php echo ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT; ?>',
 											 '');"
 						   onkeyup="ValidateHasCharacters(null, 
-											 '<?php echo ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY; ?>',
+											 '<?php echo ConfigInfraTools::FORM_FIELD_CAPTCHA; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT; ?>',
 											 '', false);
@@ -73,7 +73,7 @@
 											 '<?php echo ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT; ?>',
 											 '');"
 						   onchange="ValidateHasCharacters(null, 
-											 '<?php echo ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY; ?>',
+											 '<?php echo ConfigInfraTools::FORM_FIELD_CAPTCHA; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT; ?>',
 											 '', false);
@@ -83,7 +83,7 @@
 											 '<?php echo ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT; ?>',
 											 '');"
 						   value="<?php echo $this->InputValueCaptcha; ?>" maxlength="8" />
-		<img src="<?php echo REL_PATH . "Captcha/" . ConfigInfraTools::FORM_CAPTCHA_PASSWORD_RECOVERY ?>" 
+		<img src="<?php echo REL_PATH . "Captcha/" . ConfigInfraTools::FORM_FIELD_CAPTCHA ?>" 
 			 id="PasswordRecoveryCapcha" alt="Captcha" 
 			 class="DivContentBodyContainerCaptchaImage" />
 	</div>

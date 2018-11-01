@@ -721,6 +721,10 @@ class Pt
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "Usuário obtido com sucesso";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                         = "Erro ao obter usuário com o endereço de e-mail";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                       = "Usuário obtido com sucesso";
+	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                     = "Erro ao obter usuário com o id único de usuário";
+	const USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS                   = "Usuário obtido com sucesso";
+	const USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR                  = "Não existe usuário com o e-mail especificado";
+	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                = "Usuário existe";
 	const USER_TEAM_SELECT_ERROR                                  = "Erro ao obter equipes do usuário";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "Erro ao modificar a verificação duas etapas";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "Verificação duas etapas modificada com sucesso";
@@ -730,7 +734,7 @@ class Pt
 	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Erro ao tentar atualizar campo de usuário confirmado";
 	const USER_UPDATE_USER_PASSWORD_ERROR                         = "Senha de usuário atualizada com sucesso";
 	const USER_UPDATE_USER_PASSWORD_SUCCESS                       = "Erro ao tentar atualizar a senha do usuário";
-	const USER_UPDATE_USER_PASSWORD_WARNING                       = "";
+	const USER_UPDATE_USER_PASSWORD_WARNING                       = "Senha fornecida é a mesma da atual";
 	
 	/* Header */
 	const HEADER_CHANGE_LAYOUT                                    = "Requisitar Layout [0]:";

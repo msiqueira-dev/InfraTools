@@ -688,6 +688,10 @@ class Es
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                         = "";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                       = "";
+	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                     = "";
+	const USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS                   = "";
+	const USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR                  = "";
+	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                = "";
 	const USER_TEAM_SELECT_ERROR                                  = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "";

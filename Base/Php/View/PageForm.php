@@ -152,10 +152,15 @@ class PageForm
 				if($Debug == Config::CHECKBOX_CHECKED)
 				{
 					echo "&#8195;&#8195;<b>$element</b>: $elementInput - $formFunction - $return - $ArrayElementsText[$index]";
-					if(isset($ArrayElementsText[$index]))
-						echo " - $ElementEmptyText";
-					if(isset($MatrixOptions[$index]))
-						echo " - $MatrixOptions[$index]";
+					if(isset($ElementEmptyText))
+					{
+						if($ElementEmptyText != NULL)
+							echo " - $ElementEmptyText";
+					}
+					if($MatrixOptions[$index] != NULL)
+					{
+							echo " - $MatrixOptions[$index]";	
+					}
 					echo "<br>";
 				}
 				if($return != Config::SUCCESS)

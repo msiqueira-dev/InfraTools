@@ -51,7 +51,6 @@ class PageAdminUser extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputFocus = ConfigInfraTools::FORM_FIELD_USER_NAME;
 		$this->ValidateCaptcha = FALSE;
 		$this->EnableFieldSessionExpires = TRUE;
@@ -73,9 +72,8 @@ class PageAdminUser extends PageAdmin
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 			$this->InputLimitOne = 0;
 			$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-															 $this->ArrayInstanceInfraToolsUser, $rowCount,
-															 $this->InputValueHeaderDebug);
+			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+							            $rowCount, $this->InputValueHeaderDebug);
 		}
 		//USER LIST BACK SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST_BACK))
@@ -87,9 +85,8 @@ class PageAdminUser extends PageAdmin
 				$this->InputLimitOne = 0;
 			if($this->InputLimitTwo <= 0)
 				$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-															 $this->ArrayInstanceInfraToolsUser, $rowCount,
-															 $this->InputValueHeaderDebug);
+			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+							            $rowCount, $this->InputValueHeaderDebug);
 		}
 		//USER LIST FORWARD SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST_FORWARD))
@@ -97,16 +94,14 @@ class PageAdminUser extends PageAdmin
 			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-															   $this->ArrayInstanceInfraToolsUser, $rowCount,
-															   $this->InputValueHeaderDebug);
+			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+							            $rowCount, $this->InputValueHeaderDebug);
 			if($this->InputLimitOne > $rowCount)
 			{
 				$this->InputLimitOne = $this->InputLimitOne - 25;
 				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-															       $this->ArrayInstanceInfraToolsUser, $rowCount,
-															       $this->InputValueHeaderDebug);
+				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+								            $rowCount, $this->InputValueHeaderDebug);
 			}
 			elseif($this->InputLimitTwo > $rowCount)
 			{
@@ -129,9 +124,8 @@ class PageAdminUser extends PageAdmin
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayInstanceInfraToolsUser, $rowCount,
-																 $this->InputValueHeaderDebug);
+				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+								            $rowCount, $this->InputValueHeaderDebug);
 			}
 		}
 		//USER LIST SELECT TYPE USER SUBMIT
@@ -146,9 +140,8 @@ class PageAdminUser extends PageAdmin
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayInstanceInfraToolsUser, $rowCount,
-																 $this->InputValueHeaderDebug);
+				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+								            $rowCount, $this->InputValueHeaderDebug);
 			}
 		}
 		//USER LIST SELECT USER SUBMIT
@@ -163,9 +156,8 @@ class PageAdminUser extends PageAdmin
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				$FacedePersistenceInfraTools->UserInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																 $this->ArrayInstanceInfraToolsUser, $rowCount,
-																 $this->InputValueHeaderDebug);
+				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
+								            $rowCount, $this->InputValueHeaderDebug);
 			}
 		}
 		//USER REGISTER
@@ -243,8 +235,7 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-				$FacedePersistenceInfraTools->CorporationSelectActiveNoLimit($this->ArrayInstanceInfraToolsCorporation,
-																			   $this->InputValueHeaderDebug);
+				$this->CorporationSelectActiveNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
 			}
@@ -326,8 +317,7 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-				$FacedePersistenceInfraTools->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser,
-																	$this->InputValueHeaderDebug);
+				$this->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser,$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
 			}
@@ -352,8 +342,7 @@ class PageAdminUser extends PageAdmin
 				else 
 				{
 					$this->UserLoadData($this->InstanceInfraToolsUserAdmin);
-					$FacedePersistenceInfraTools->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser,
-																	    $this->InputValueHeaderDebug);
+					$this->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser, $this->InputValueHeaderDebug);
 					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
 				}
 			}

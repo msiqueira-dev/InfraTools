@@ -96,15 +96,19 @@ Methods:
 		protected     function        TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
 		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
+		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
-		protected     function        UserSelectHasCodeByUserEmail($UserEmail, &$HashCode, $Debug);
-		protected     function        UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
+		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
-		protected     function        UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug);
+		protected     function        UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug);
+		protected     function        UserSelectExistsByUserEmail($$Capcha, $UserEmail, $Debug);
+		protected     function        UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug);
+		protected     function        UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 		protected     function        UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug);
 		protected     function        UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug);
 		protected     function        UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, 
@@ -2683,6 +2687,21 @@ abstract class Page
 		}
 	}
 	
+	protected function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->TypeUserSelectNoLimit($ArrayInstanceTypeUser, $Debug);
+		if($return != Config::SUCCESS)
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+		else return Config::SUCCESS;
+	}
+	
 	protected function TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug)
 	{
 		if($InstanceTypeUser != NULL)
@@ -2819,57 +2838,19 @@ abstract class Page
 		}
 	}
 	
-	protected function UserSelectHasCodeByUserEmail($UserEmail, &$HashCode, $Debug)
+	protected function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueUserEmail  = $UserEmail;
-		$arrayConstants = array(); $matrixConstants = array();
-			
-		//VALIDA E-MAIL
-		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
-		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 60; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+		if($return != Config::SUCCESS)
 		{
-			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($this->InputValueUserEmail, $HashCode, $Debug);
-			if($return == Config::SUCCESS)
-			{
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return Config::SUCCESS;
-			}
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
 		}
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return $return;
-	}
-	
-	protected function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
-	{
-		if(isset($HashCode))
-		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			return $FacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
-		}
-		$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_SELECT_ERROR', $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage .  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return Config::ERROR;
+		else return Config::SUCCESS;
 	}
 	
 	protected function UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, 
@@ -2963,6 +2944,25 @@ abstract class Page
 		}
 	}
 	
+	protected function UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	{
+		$ArrayInstanceUser = NULL;
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $FacedePersistence->UserSelectByTypeUserId($TypeUserId,
+															 $Limit1, $Limit2,
+															 $ArrayInstanceUser, $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		else
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_SELECT_USERS_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+	}
+	
 	protected function UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
@@ -3007,23 +3007,46 @@ abstract class Page
 		return $return;
 	}
 	
-	protected function UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	protected function UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug)
 	{
-		$ArrayInstanceUser = NULL;
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->UserSelectByTypeUserId($TypeUserId,
-															 $Limit1, $Limit2,
-															 $ArrayInstanceUser, $RowCount, $Debug);
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail = $UserEmail;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_USER_USER_UNIQUE_ID
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID;
+		$arrayElementsClass[0]        = &$this->ReturnUserUniqueIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsInput[0]        = $this->InputValueUserUniqueId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 25; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserUniqueIdText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
-		else
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_SELECT_USERS_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueUserEmail, $InstanceUser, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
+													. Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_USER_EMAIL_SUCCESS', $this->Language);
+				return $return;
+			}
 		}
+		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_USER_EMAIL_ERROR', $this->Language);	
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return $return;
 	}
 	
 	protected function UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug)
@@ -3063,6 +3086,124 @@ abstract class Page
 			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_ERROR', $this->Language);		
 			return Config::ERROR;
 		}
+	}
+	
+	protected function  UserSelectExistsByUserEmail($Captcha, $UserEmail, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCaptcha    = $Captcha;
+		$this->InputValueUserEmail  = $UserEmail;
+		$this->Session->GetSessionValue(ConfigInfraTools::FORM_FIELD_CAPTCHA, $captcha);
+		$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array();
+			
+		//VALIDA E-MAIL
+		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnEmailText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, NULL);
+		
+		//CAPTCHA
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_CAPTCHA;
+		$arrayElementsClass[1]        = &$this->ReturnCaptchaClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+		$arrayElementsInput[1]        = $this->InputValueCaptcha; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 0; 
+		$arrayElementsNullable[1]     = TRUE;
+		$arrayElementsText[1]         = &$this->ReturnCaptchaText;
+		array_push($arrayConstants, 'PASSWORD_RECOVERY_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, $captcha);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug, $arrayOptions);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectExistsByUserEmail($this->InputValueUserEmail, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS', $this->Language);
+				return Config::SUCCESS;
+			}
+			else
+			{
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR', $this->Language);
+			}
+		}
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return $return;
+	}
+	
+	protected function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail  = $UserEmail;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//VALIDA E-MAIL
+		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnEmailText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($this->InputValueUserEmail, $HashCode, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				return Config::SUCCESS;
+			}
+		}
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return $return;
+	}
+	
+	protected function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
+	{
+		if(isset($HashCode))
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			return $FacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
+		}
+		$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_SELECT_ERROR', $this->Language);
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage .  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::ERROR;
 	}
 	
 	protected function UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug)

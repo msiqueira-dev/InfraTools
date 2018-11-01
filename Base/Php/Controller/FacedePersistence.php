@@ -121,7 +121,6 @@ Functions:
 			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug);
 			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug);
 			public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
-			public function UserCheckEmail($Email, $Debug);
 			public function UserCheckPasswordByUserEmail($Email, $Password, $Debug);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
 			public function UserDeleteByUserEmail($Email, $Debug);
@@ -137,6 +136,7 @@ Functions:
 			                                       &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function UserSelectByUserEmail($Email, &$InstanceUser, $Debug);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
+			public function UserSelectExistsByUserEmail($Email, $Debug);
 			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 			public function UserSelectHashCodeByUserEmail($Email, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
@@ -920,13 +920,6 @@ class FacedePersistence
 		return $FacedePersistenceUser->TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
 	}
 	
-	public function UserCheckEmail($Email, $Debug)
-	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserCheckEmail($Email, $Debug);
-		
-	}
-	
 	public function UserCheckPasswordByUserEmail($Email, $Password, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
@@ -963,7 +956,7 @@ class FacedePersistence
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 		return $FacedePersistenceUser->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
 	}
-			
+	
 	public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 	 	$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
@@ -1013,6 +1006,13 @@ class FacedePersistence
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 		return $FacedePersistenceUser->UserSelectByUserUniqueId($UserUniqueId, $InstanceUser, $Debug);
+	}
+	
+	public function UserSelectExistsByUserEmail($Email, $Debug)
+	{
+		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+		return $FacedePersistenceUser->UserSelectExistsByUserEmail($Email, $Debug);
+		
 	}
 		
 	public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
