@@ -25,7 +25,7 @@ Functions:
 			public function ValidateDepartmentInitials($DepartmentInitials, $DefaultValue);
 			public function ValidateDepartmentName($DepartmentName, $DefaultValue);
 			public function ValidateDescription($Description, $DefaultValue);
-			public function ValidateEmail($Email, $DefaultValue);
+			public function ValidateEmail($EmailAddress, $DefaultValue);
 			public function ValidateGender($Gender, $DefaultValue);
 			public function ValidateHost($Host);
 			public function ValidateIsNotNumericValue($NonNumeric, $DefaultValue);
@@ -437,17 +437,17 @@ class FormValidator
 		else return self::INVALID_NULL;
 	}
 	
-	public function ValidateEmail($Email, $DefaultValue)
+	public function ValidateEmail($EmailAddress, $DefaultValue)
 	{
-		if(isset($Email))
+		if(isset($EmailAddress))
 		{
-			if ($Email != NULL && !empty($Email))
+			if ($EmailAddress != NULL && !empty($EmailAddress))
 			{
-				if ($Email != "")
+				if ($EmailAddress != "")
 				{
-					if ($Email != $DefaultValue)
+					if ($EmailAddress != $DefaultValue)
 					{
-						if(filter_var($Email, FILTER_VALIDATE_EMAIL))
+						if(filter_var($EmailAddress, FILTER_VALIDATE_EMAIL))
 							return self::SUCCESS;
 						else return self::INVALID_EMAIL_ADDRESS;
 					}

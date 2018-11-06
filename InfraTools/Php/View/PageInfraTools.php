@@ -14,7 +14,7 @@ Description:
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
 			private   function LoadInstanceInfraToolsUser();
-			protected function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
+			protected function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
 			protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
@@ -24,7 +24,7 @@ Methods:
 			                                                         &$ArrayInstanceInfraToolsCorporation, 
 	                                                                 &$RowCount, $Debug)
 			protected function DepartmentSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug);
-			protected function MessageSelectByUserEmail($Email, $Debug);
+			protected function MessageSelectByUserEmail($UserEmail, $Debug);
 			protected function PageFormLoad();
 			protected function PageFormRemoveLast();
 			protected function PageFormSave();
@@ -128,14 +128,12 @@ Methods:
 			protected function TypeServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeService, $UserEmail, &$RowCount
 			                                                  $Limit1, $Limit2, $Debug);
 			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
-			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug);
+			protected function UserChangeTwoStepVerification($InstanceInfraToolsUser, $TwoStepVerification, $Debug);
 			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
-			protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug);
-			protected function UserLoadData($InstanceUser);
+			protected function InfraToolsUserSelectByUserEmail($UserEmail, &InstanceInfraToolsUser, $Debug);
+			protected function InfraToolsUserLoadData($InstanceInfraToolsUser);
 			protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, $Debug);
-			protected function UserUpdate($OnAdmin, $SelectedUser, $Debug);
 			protected function UserUpdateCorporationInformation($SelectedUser, $Debug);
-			public function CheckInstanceUser();
 			public function CheckLogin($Debug);
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -159,33 +157,6 @@ abstract class PageInfraTools extends Page
 	protected $Session                          = NULL;
 	
 	/* Propiedades de página */
-	public $EnableFieldSessionExpires                            = "";
-	public $EnableFieldTwoStepVerification                       = "";                    
-	public $EnableFieldUserActive                                = "";
-	public $EnableFieldUserConfirmed                             = "";
-	public $InputFocus                                           = "";
-	public $InputValueAssocUserCorporationRegistrationDate       = "";
-	public $InputValueAssocUserCorporationRegistrationDateActive = "";
-	public $InputValueAssocUserCorporationRegistrationId         = "";
-	public $InputValueAssocUserCorporationRegistrationIdActive   = "";
-	public $InputValueBirthDateDay                               = "";
-	public $InputValueBirthDateMonth                             = "";
-	public $InputValueBirthDateYear                              = "";
-	public $InputValueCaptcha                                    = "";
-	public $InputValueCode                                       = "";
-	public $InputValueCountry                                    = "";
-	public $InputValueGender                                     = "";
-	public $InputValueHeaderDebug                                = ConfigInfraTools::CHECKBOX_UNCHECKED;
-	public $InputValueHeaderLayout                               = ConfigInfraTools::CHECKBOX_UNCHECKED;
-	public $InputValueId                                         = "";
-	public $InputValueNewPassword                                = "";
-	public $InputValueRegion                                     = "";
-	public $InputValueRegisterDate                               = "";
-	public $InputValueRegistrationDateDay                        = "";
-	public $InputValueRegistrationDateMonth                      = "";
-	public $InputValueRegistrationDateYear                       = "";
-	public $InputValueRegistrationId                             = "";
-	public $InputValueRepeatPassword                             = "";
 	public $InputValueServiceActive                              = "";
 	public $InputValueServiceCorporation                         = "";
 	public $InputValueServiceCorporationActive                   = "";
@@ -200,75 +171,7 @@ abstract class PageInfraTools extends Page
 	public $InputValueServiceNameRadio                           = "";
 	public $InputValueServiceType                                = "";
 	public $InputValueSessionExpires                             = "";
-	public $InputValueTeamDescription                            = "";
-	public $InputValueTeamId                                     = "";
-	public $InputValueTeamName                                   = "";
-	public $InputValueTicketDescription                          = "";
-	public $InputValueTicketTitle                                = "";
-	public $InputValueTicketType                                 = "";
-	public $InputValueTwoStepVerification                        = "";
-	public $InputValueTypeAssocUserServiceDescription            = "";
-	public $InputValueTypeAssocUserServiceId                     = "";
-	public $InputValueTypeAssocUserTeamTeamDescription           = "";
-	public $InputValueTypeAssocUserTeamTeamId                    = "";
-	public $InputValueTypeServiceName                            = "";
-	public $InputValueTypeStatusTicketDescription                = "";
-	public $InputValueTypeStatusTicketId                         = "";
-	public $InputValueTypeTicketDescription                      = "";
-	public $InputValueTypeTicketId                               = "";
-	public $InputValueTypeUserDescription                        = "";
-	public $InputValueTypeUserId                                 = "";
-	public $InputValueUserActive                                 = "";
-	public $InputValueUserConfirmed                              = "";
-	public $InputValueUserCorporationName                        = "";
-	public $InputValueUserEmail                                  = "";
-	public $InputValueUserName                                   = "";
-	public $InputValueUserPhonePrimary                           = "";
-	public $InputValueUserPhonePrimaryPrefix                     = "";
-	public $InputValueUserPhoneSecondary                         = "";
-	public $InputValueUserPhoneSecondaryPrefix                   = "";
-	public $InputValueUserTeam                                   = ""; 
-	public $InputValueUserUniqueId                               = "";
-	public $InputValueUserUniqueIdActive                         = "";
 	public $Language                                             = "";
-	public $LinkTarget                                           = "target='_blank'";
-	public $LoginStatus                                          = "";
-	public $Page                                                 = "";
-	public $ReturnBirthDateDayClass                              = "";
-	public $ReturnBirthDateDayText                               = "";
-	public $ReturnBirthDateMonthClass                            = "";
-	public $ReturnBirthDateMonthText                             = "";
-	public $ReturnBirthDateYearText                              = "";
-	public $ReturnBirthDateYearClass                             = "";
-	public $ReturnCaptchaClass                                   = "";
-	public $ReturnCaptchaText                                    = "";
-	public $ReturnCodeClass                                      = "";
-	public $ReturnCodeText                                       = "";
-	public $ReturnCountryClass                                   = "";
-	public $ReturnCountryText                                    = "";
-	public $ReturnEmailClass                                     = "";
-	public $ReturnEmailText                                      = "";
-	public $ReturnEmptyText                                      = "";
-	public $ReturnGenderClass                                    = "";
-	public $ReturnGenderText                                     = "";
-	public $ReturnHeaderDebugClass                               = "SwitchToggleSlider";
-	public $ReturnHeaderLayoutClass                              = "SwitchToggleSlider";
-	public $ReturnIdClass                                        = "";
-	public $ReturnNameClass                                      = "";
-	public $ReturnNameText                                       = "";
-	public $ReturnPasswordClass                                  = "";
-	public $ReturnPasswordText                                   = "";
-	public $ReturnRegionClass                                    = "";
-	public $ReturnRegionText                                     = "";
-	public $ReturnRegistrationDateText                           = "";
-	public $ReturnRegistrationDateDayText                        = "";
-	public $ReturnRegistrationDateDayClass                       = "";
-	public $ReturnRegistrationDateMonthText                      = "";
-	public $ReturnRegistrationDateMonthClass                     = "";
-	public $ReturnRegistrationDateYearText                       = "";
-	public $ReturnRegistrationDateYearClass                      = "";
-	public $ReturnRegistrationIdClass                            = "";
-	public $ReturnRegistrationIdText                             = "";
 	public $ReturnServiceActiveClass                             = "";
 	public $ReturnServiceActiveText                              = "";
 	public $ReturnServiceCorporationClass                        = "";
@@ -289,66 +192,12 @@ abstract class PageInfraTools extends Page
 	public $ReturnServiceNameText                                = "";
 	public $ReturnServiceTypeClass                               = "";
 	public $ReturnServiceTypeText                                = "";
-	public $ReturnTeamDescriptionClass                           = "";
-	public $ReturnTeamDescriptionText                            = "";
-	public $ReturnTeamIdClass                                    = "";
-	public $ReturnTeamIdText                                     = "";
-	public $ReturnTeamNameClass                                  = "";
-	public $ReturnTeamNameText                                   = "";
-	public $ReturnTicketDescriptionClass                         = "";
-	public $ReturnTicketDescriptionText                          = "";
-	public $ReturnTicketTitleClass                               = "";
-	public $ReturnTicketTitleText                                = "";
-	public $ReturnTicketTypeClass                                = "";
-	public $ReturnTicketTypeText                                 = "";
-	public $ReturnText                                           = "";
 	public $ReturnTypeAssocUserServiceDescriptionClass           = "";
 	public $ReturnTypeAssocUserServiceDescriptionText            = "";
 	public $ReturnTypeAssocUserServiceIdClass                    = "";
 	public $ReturnTypeAssocUserServiceIdText                     = "";
-	public $ReturnTypeAssocUserTeamDescriptionClass              = "";
-	public $ReturnTypeAssocUserTeamDescriptionText               = "";
-	public $ReturnTypeAssocUserTeamTeamDescriptionClass          = "";
-	public $ReturnTypeAssocUserTeamTeamDescriptionText           = "";
-	public $ReturnTypeAssocUserTeamTeamIdClass                   = "";
-	public $ReturnTypeAssocUserTeamTeamIdText                    = "";
 	public $ReturnTypeServiceNameClass                           = "";
 	public $ReturnTypeServiceNameText                            = "";
-	public $ReturnTypeStatusTicketDescriptionClass               = "";
-	public $ReturnTypeStatusTicketDescriptionText                = "";
-	public $ReturnTypeStatusTicketIdClass                        = "";
-	public $ReturnTypeStatusTicketIdText                         = "";
-	public $ReturnTypeTicketDescriptionClass                     = "";
-	public $ReturnTypeTicketDescriptionText                      = "";
-	public $ReturnTypeTicketIdClass                              = "";
-	public $ReturnTypeTicketIdText                               = "";
-	public $ReturnTypeUserDescritpionClass                       = "";
-	public $ReturnTypeUserDescriptionText                        = "";
-	public $ReturnTypeUserIdClass                                = "";
-	public $ReturnTypeUserIdText                                 = "";
-	public $ReturnUserCorporationClass                           = "";
-	public $ReturnUserCorporationText                            = "";
-	public $ReturnUserEmailClass                                 = "";
-	public $ReturnUserEmailText                                  = "";
-	public $ReturnUserNameClass                                  = "";
-	public $ReturnUserNameText                                   = "";
-	public $ReturnUserPhonePrimaryClass                          = "";
-	public $ReturnUserPhonePrimaryText                           = "";
-	public $ReturnUserPhonePrimaryPrefixClass                    = "";
-	public $ReturnUserPhonePrimaryPrefixText                     = "";
-	public $ReturnUserPhoneSecondaryClass                        = "";
-	public $ReturnUserPhoneSecondaryText                         = "";
-	public $ReturnUserPhoneSecondaryPrefixClass                  = "";
-	public $ReturnUserPhoneSecondaryPrefixText                   = "";
-	public $ReturnUserTeamClass                                  = "";
-	public $ReturnUserTeamText                                   = "";
-	public $ReturnUserUniqueIdClass                              = "";
-	public $ReturnUserUniqueIdText                               = "";
-	public $SessionUserEmail                                     = "";
-	public $ShowTypeUserDescription                              = FALSE;
-	public $SubmitClass                                          = "SubmitDisabled";
-	public $SubmitEnabled                                        = 'disabled="disabled"';
-	public $ValidateCaptcha                                      = TRUE;
 	
 	/* Singleton */
 	protected static $Instance;
@@ -395,10 +244,10 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
+	protected function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
 	{
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $instanceInfraToolsFacedePersistence->CorporationInfraToolsSelect($Limit1, $Limit2, $ArrayInstanceCorporationInfraTools, 
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsCorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporationInfraTools, 
 															                        $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
@@ -566,12 +415,12 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function MessageSelectByUserEmail($Email, $Debug)
+	protected function MessageSelectByUserEmail($UserEmail, $Debug)
 	{
-		if($Email != NULL)
+		if($UserEmail != NULL)
 		{
 			$return = $this->InstanceInfraToolsFacedePersistence->MessageSelectByUserEmail($this->InputValueLoginEmail, 
-																			               $userInfraTools, 
+																			               $infraToolsUser, 
 																						   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -3157,18 +3006,18 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification, $Debug)
+	protected function UserChangeTwoStepVerification($InstanceInfraToolsUser, $TwoStepVerification, $Debug)
 	{
-		if($InstanceUserInfraTools == NULL)
-			$InstanceUserInfraTools = $this->User;
+		if($InstanceInfraToolsUser == NULL)
+			$InstanceInfraToolsUser = $this->User;
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $FacedePersistenceInfraTools->UserUpdateTwoStepVerificationByUserEmail($InstanceUserInfraTools->GetEmail(), 
+		$return = $FacedePersistenceInfraTools->UserUpdateTwoStepVerificationByUserEmail($InstanceInfraToolsUser->GetEmail(), 
 																				         $TwoStepVerification, 
 																				         $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$InstanceUserInfraTools->SetTwoStepVerification($TwoStepVerification);
-			$this->InputValueTwoStepVerification = $InstanceUserInfraTools->GetTwoStepVerification();
+			$InstanceInfraToolsUser->SetTwoStepVerification($TwoStepVerification);
+			$this->InputValueTwoStepVerification = $InstanceInfraToolsUser->GetTwoStepVerification();
 			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 						   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
@@ -3198,7 +3047,7 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 	{
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $instanceInfraToolsFacedePersistence->UserInfraToolsSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
 		if($return != ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
@@ -3210,20 +3059,21 @@ abstract class PageInfraTools extends Page
 		else return ConfigInfraTools::SUCCESS;
 	}
 	
-	protected function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug)
+	protected function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueUserEmail = $Email;
-		if($Email != $this->User->GetEmail())
+		$this->InputValueUserEmail = $UserEmail;
+		if($UserEmail != $this->User->GetEmail())
 		{
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByUserEmail($this->InputValueUserEmail, $InstanceUser, $Debug);
+			$return = $FacedePersistenceInfraTools->InfraToolsUserSelectByUserEmail($this->InputValueUserEmail, 
+																					$InstanceInfraToolsUser, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($InstanceUser, $Debug);
+				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($InstanceInfraToolsUser, $Debug);
 				if($return == ConfigInfraTools::SUCCESS || $return == ConfigInfraTools::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
 				{
-					$this->UserLoadData($InstanceUser);
-					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $InstanceUser);
+					$this->InfraToolsUserLoadData($InstanceInfraToolsUser);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $InstanceInfraToolsUser);
 					return ConfigInfraTools::SUCCESS;	
 				}
 				else
@@ -3254,79 +3104,74 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function UserLoadData($InstanceUser)
+	protected function InfraToolsUserLoadData($InstanceInfraToolsUser)
 	{
 		$this->InputValueAssocUserCorporationRegistrationDate = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
+			$InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDate();
 		$this->InputValueAssocUserCorporationRegistrationId = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
-		$this->InputValueBirthDateDay             = $InstanceUser->GetBirthDateDay();
-		$this->InputValueBirthDateMonth           = $InstanceUser->GetBirthDateMonth();
-		$this->InputValueBirthDateYear            = $InstanceUser->GetBirthDateYear();
-		$this->InputValueUserCorporationName      = $InstanceUser->GetCorporationName();
-		$this->InputValueCountry                  = $InstanceUser->GetCountry();
-		if($InstanceUser->GetDepartmentInitials() != NULL)
-			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentInitials() 
-													  . " - " . $InstanceUser->GetDepartmentName();
-		elseif($InstanceUser->GetDepartmentName() != NULL)
-			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentName();
+			$InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationId();
+		$this->InputValueBirthDateDay             = $InstanceInfraToolsUser->GetBirthDateDay();
+		$this->InputValueBirthDateMonth           = $InstanceInfraToolsUser->GetBirthDateMonth();
+		$this->InputValueBirthDateYear            = $InstanceInfraToolsUser->GetBirthDateYear();
+		$this->InputValueUserCorporationName      = $InstanceInfraToolsUser->GetCorporationName();
+		$this->InputValueCountry                  = $InstanceInfraToolsUser->GetCountry();
+		if($InstanceInfraToolsUser->GetDepartmentInitials() != NULL)
+			$this->InputValueDepartmentName       = $InstanceInfraToolsUser->GetDepartmentInitials() 
+													  . " - " . $InstanceInfraToolsUser->GetDepartmentName();
+		elseif($InstanceInfraToolsUser->GetDepartmentName() != NULL)
+			$this->InputValueDepartmentName       = $InstanceInfraToolsUser->GetDepartmentName();
 		else $this->InputValueDepartmentName = NULL;
-		$this->InputValueGender                   = $InstanceUser->GetGender();
-		$this->InputValueUserName                 = $InstanceUser->GetName();
-		$this->InputValueUserEmail                = $InstanceUser->GetEmail();
-		$this->InputValueUserPhonePrimary         = $InstanceUser->GetUserPhonePrimary();
-		$this->InputValueUserPhonePrimaryPrefix   = $InstanceUser->GetUserPhonePrimaryPrefix();
-		$this->InputValueUserPhoneSecondary       = $InstanceUser->GetUserPhoneSecondary();
-		$this->InputValueUserPhoneSecondaryPrefix = $InstanceUser->GetUserPhoneSecondaryPrefix();
-		$this->InputValueRegion                   = $InstanceUser->GetRegion();
-		$this->InputValueRegisterDate             = $InstanceUser->GetRegisterDate();
-		$this->InputValueRegistrationDate         = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
-		$this->InputValueRegistrationDateDay      = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDateDay();
-		$this->InputValueRegistrationDateMonth    = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDateMonth();
-		$this->InputValueRegistrationDateYear     = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDateYear();
-		$this->InputValueRegistrationId           = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
-		if($InstanceUser->GetArrayAssocUserTeam() != NULL)
+		$this->InputValueGender                   = $InstanceInfraToolsUser->GetGender();
+		$this->InputValueUserName                 = $InstanceInfraToolsUser->GetName();
+		$this->InputValueUserEmail                = $InstanceInfraToolsUser->GetEmail();
+		$this->InputValueUserPhonePrimary         = $InstanceInfraToolsUser->GetUserPhonePrimary();
+		$this->InputValueUserPhonePrimaryPrefix   = $InstanceInfraToolsUser->GetUserPhonePrimaryPrefix();
+		$this->InputValueUserPhoneSecondary       = $InstanceInfraToolsUser->GetUserPhoneSecondary();
+		$this->InputValueUserPhoneSecondaryPrefix = $InstanceInfraToolsUser->GetUserPhoneSecondaryPrefix();
+		$this->InputValueRegion                   = $InstanceInfraToolsUser->GetRegion();
+		$this->InputValueRegisterDate             = $InstanceInfraToolsUser->GetRegisterDate();
+		$this->InputValueRegistrationDate         = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDate();
+		$this->InputValueRegistrationDateDay      = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateDay();
+		$this->InputValueRegistrationDateMonth    = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateMonth();
+		$this->InputValueRegistrationDateYear     = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateYear();
+		$this->InputValueRegistrationId           = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationId();
+		if($InstanceInfraToolsUser->GetArrayAssocUserTeam() != NULL)
 		{
-			foreach ($InstanceUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
+			foreach ($InstanceInfraToolsUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
 			{
 				if($index == 0)
 					$this->InputValueUserTeam = $assocUserTeam->GetTeamName();
 				else $this->InputValueUserTeam .= ", " . $assocUserTeam->GetTeamName();
 			}
 		}
-		$this->InputValueUserUniqueId             = $InstanceUser->GetUserUniqueId();
-		if($InstanceUser->GetSessionExpires())
+		$this->InputValueUserUniqueId             = $InstanceInfraToolsUser->GetUserUniqueId();
+		if($InstanceInfraToolsUser->GetSessionExpires())
 			$this->InputValueSessionExpires = "checked";
-		if($InstanceUser->GetTwoStepVerification())
+		if($InstanceInfraToolsUser->GetTwoStepVerification())
 			$this->InputValueTwoStepVerification = "checked";
-		if($InstanceUser->GetUserActive())
+		if($InstanceInfraToolsUser->GetUserActive())
 			$this->InputValueUserActive = "checked";
-		if($InstanceUser->GetUserConfirmed())
+		if($InstanceInfraToolsUser->GetUserConfirmed())
 			$this->InputValueUserConfirmed = "checked";
-		$this->InputValueTypeUserDescription = $InstanceUser->GetUserTypeDescription();
-		$this->InputValueTypeUserId = $InstanceUser->GetUserTypeId();
+		$this->InputValueTypeUserDescription = $InstanceInfraToolsUser->GetUserTypeDescription();
+		$this->InputValueTypeUserId = $InstanceInfraToolsUser->GetUserTypeId();
 
-		if($InstanceUser->CheckAssocUserCorporationRegistrationDateActive())
+		if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationDateActive())
 			$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsVerified.png';
 		else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsNotVerified.png';
-		if($InstanceUser->CheckAssocUserCorporationRegistrationIdActive())
+		if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationIdActive())
 			$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsVerified.png';
 		else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsNotVerified.png';
-		if($InstanceUser->CheckCorporationActive())
+		if($InstanceInfraToolsUser->CheckCorporationActive())
 			$this->InputValueCorporationActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsVerified.png';
 		else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsNotVerified.png';
-		if($InstanceUser->CheckDepartmentExists())
+		if($InstanceInfraToolsUser->CheckDepartmentExists())
 			$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsVerified.png';
 		else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
@@ -3343,32 +3188,32 @@ abstract class PageInfraTools extends Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueUserName           = $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME];
 		$this->InputValueUserEmail          = $_POST[ConfigInfraTools::FORM_FIELD_EMAIL];
-		if (isset($_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_DAY]))
-			$this->InputValueBirthDateDay = $_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_DAY];
-		if (isset($_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH]))
-			$this->InputValueBirthDateMonth = $_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH];
-		if (isset($_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR]))
-			$this->InputValueBirthDateYear = $_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR];
+		if (isset($_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY]))
+			$this->InputValueBirthDateDay = $_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY];
+		if (isset($_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH]))
+			$this->InputValueBirthDateMonth = $_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH];
+		if (isset($_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH]))
+			$this->InputValueBirthDateYear = $_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH];
 		if (isset($_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER]))
 			$this->InputValueGender               = $_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER];
 		$this->InputValueUserPhonePrimary         = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY];
 		$this->InputValueUserPhonePrimaryPrefix   = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX];
 		$this->InputValueUserPhoneSecondary       = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY];
 		$this->InputValueUserPhoneSecondaryPrefix = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX];
-		$this->InputValueCountry                  = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN];
-		$this->InputValueRegion                   = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN];
+		$this->InputValueCountry                  = $_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY];
+		$this->InputValueRegion                   = $_POST[ConfigInfraTools::FORM_FIELD_USER_REGION];
 		$this->InputValueNewPassword              = $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW];
 		$this->InputValueRepeatPassword           = $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT];
-		if(isset($_POST[ConfigInfraTools::REGISTER_SESSION_EXPIRES]))
+		if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES]))
 			$this->InputValueSessionExpires = TRUE;
 		else $this->InputValueSessionExpires = FALSE;
-		if(isset($_POST[ConfigInfraTools::REGISTER_TWO_STEP_VERIFICATION]))
+		if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION]))
 			$this->InputValueTwoStepVerification = TRUE;
 		else $this->InputValueTwoStepVerification = FALSE;
-		if(isset($_POST[ConfigInfraTools::REGISTER_USER_ACTIVE]))
+		if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_ACTIVE]))
 			$this->InputValueUserActive = TRUE;
 		else $this->InputValueUserActive = FALSE;
-		if(isset($_POST[ConfigInfraTools::REGISTER_USER_CONFIRMED]))
+		if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_CONFIRMED]))
 			$this->InputValueUserConfirmed = TRUE;
 		else $this->InputValueUserConfirmed = FALSE;
 		if ($SessionExpires == NULL)
@@ -3398,9 +3243,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_USER_EMAIL
+		//FORM_FIELD_USER_EMAIL
 		$arrayConstants = array();
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
 		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -3413,9 +3258,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_USER_UNIQUE_ID
+		//FORM_FIELD_USER_UNIQUE_ID
 		$arrayConstants = array();
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID;
+		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID;
 		$arrayElementsClass[2]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[2] = ""; 
 		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
@@ -3492,9 +3337,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_BIRTH_DATE_DAY
+		//FORM_FIELD_USER_BIRTH_DATE_DAY
 		$arrayConstants = array();
-		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY;
+		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY;
 		$arrayElementsClass[7]        = &$this->ReturnBirthDateDayClass;
 		$arrayElementsDefaultValue[7] = ""; 
 		$arrayElementsForm[7]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_DAY;
@@ -3507,9 +3352,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_BIRTH_DATE_MONTH
+		//FORM_FIELD_USER_BIRTH_DATE_MONTH
 		$arrayConstants = array();
-		$arrayElements[8]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH;
+		$arrayElements[8]             = ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH;
 		$arrayElementsClass[8]        = &$this->ReturnBirthDateMonthClass;
 		$arrayElementsDefaultValue[8] = ""; 
 		$arrayElementsForm[8]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_MONTH;
@@ -3522,9 +3367,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_BIRTH_DATE_YEAR
+		//FORM_FIELD_USER_BIRTH_DATE_YEAR
 		$arrayConstants = array();
-		$arrayElements[9]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR;
+		$arrayElements[9]             = ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR;
 		$arrayElementsClass[9]        = &$this->ReturnBirthDateYearClass;
 		$arrayElementsDefaultValue[9] = ""; 
 		$arrayElementsForm[9]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_YEAR;
@@ -3552,9 +3397,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_GOOGLE_MAPS_COUNTRY
+		//FORM_FIELD_USER_COUNTRY
 		$arrayConstants = array();
-		$arrayElements[11]             = ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY;
+		$arrayElements[11]             = ConfigInfraTools::FORM_FIELD_USER_COUNTRY;
 		$arrayElementsClass[11]        = &$this->ReturnCountryClass;
 		$arrayElementsDefaultValue[11] = ""; 
 		$arrayElementsForm[11]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
@@ -3567,9 +3412,9 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_GOOGLE_MAPS_REGION
+		//FORM_FIELD_USER_REGION
 		$arrayConstants = array();
-		$arrayElements[12]             = ConfigInfraTools::FORM_GOOGLE_MAPS_REGION;
+		$arrayElements[12]             = ConfigInfraTools::FORM_FIELD_USER_REGION;
 		$arrayElementsClass[12]        = &$this->ReturnRegionClass;
 		$arrayElementsDefaultValue[12] = ""; 
 		$arrayElementsForm[12]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
@@ -3722,283 +3567,6 @@ abstract class PageInfraTools extends Page
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		}
 		return $return;
-	}
-	
-	protected function UserUpdate($OnAdmin, $SelectedUser, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueBirthDateDay             = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY];
-		$this->InputValueBirthDateMonth           = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH];
-		$this->InputValueBirthDateYear            = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR];
-		$this->InputValueGender                   = $_POST[ConfigInfraTools::FORM_FIELD_GENDER];
-		$this->InputValueCountry                  = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN];
-		$this->InputValueRegion                   = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN];
-		$this->InputValueUserName                 = $_POST[ConfigInfraTools::ACCOUNT_UPDATE_NAME];
-		$this->InputValueUserPhonePrimary         = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY];
-		$this->InputValueUserPhonePrimaryPrefix   = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX];
-		$this->InputValueUserPhoneSecondary       = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY];
-		$this->InputValueUserPhoneSecondaryPrefix = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX];
-		$this->InputValueUserUniqueId             = $_POST[ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID];
-		if($OnAdmin)
-		{
-			if(isset($_POST[ConfigInfraTools::ACCOUNT_UPDATE_SESSION_EXPIRES]))
-				$this->InputValueSessionExpires = TRUE;
-			else $this->InputValueSessionExpires = FALSE;
-			if(isset($_POST[ConfigInfraTools::REGISTER_USER_ACTIVE]))
-				$this->InputValueUserActive = TRUE;
-			else $this->InputValueUserActive = FALSE;
-			if(isset($_POST[ConfigInfraTools::REGISTER_USER_CONFIRMED]))
-				$this->InputValueUserConfirmed = TRUE;
-			else $this->InputValueUserConfirmed = FALSE;
-		}
-		else
-		{
-			$this->InputValueSessionExpires = $SelectedUser->GetSessionExpires();
-			$this->InputValueUserActive = $SelectedUser->GetUserActive();
-			$this->InputValueUserConfirmed = $SelectedUser->GetUserConfirmed();
-		}
-		if(isset($_POST[ConfigInfraTools::REGISTER_TWO_STEP_VERIFICATION]))
-				$this->InputValueTwoStepVerification = TRUE;
-			else $this->InputValueTwoStepVerification = FALSE;
-		
-		$this->InputFocus = ConfigInfraTools::ACCOUNT_UPDATE_NAME;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_USER_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueUserName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnUserNameText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_USER_UNIQUE_ID
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID;
-		$arrayElementsClass[1]        = &$this->ReturnUserUniqueIdClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
-		$arrayElementsInput[1]        = $this->InputValueUserUniqueId; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 25; 
-		$arrayElementsNullable[1]     = FALSE;
-		$arrayElementsText[1]         = &$this->ReturnUserUniqueIdText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
-		$arrayElementsClass[2]        = &$this->ReturnUserPhonePrimaryPrefixClass;
-		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[2]        = $this->InputValueUserPhonePrimaryPrefix; 
-		$arrayElementsMinValue[2]     = 0; 
-		$arrayElementsMaxValue[2]     = 3; 
-		$arrayElementsNullable[2]     = TRUE;
-		$arrayElementsText[2]         = &$this->ReturnUserPhonePrimaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_PRIMARY
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY;
-		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryClass;
-		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimary; 
-		$arrayElementsMinValue[3]     = 0; 
-		$arrayElementsMaxValue[3]     = 9; 
-		$arrayElementsNullable[3]     = TRUE;
-		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
-		$arrayElementsClass[4]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
-		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[4]        = $this->InputValueUserPhoneSecondaryPrefix; 
-		$arrayElementsMinValue[4]     = 0; 
-		$arrayElementsMaxValue[4]     = 3; 
-		$arrayElementsNullable[4]     = TRUE;
-		$arrayElementsText[4]         = &$this->ReturnUserPhoneSecondaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_SECONDARY
-		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY;
-		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryClass;
-		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondary; 
-		$arrayElementsMinValue[5]     = 0; 
-		$arrayElementsMaxValue[5]     = 9; 
-		$arrayElementsNullable[5]     = TRUE;
-		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_DAY
-		$arrayElements[6]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY;
-		$arrayElementsClass[6]        = &$this->ReturnBirthDateDayClass;
-		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_DAY;
-		$arrayElementsInput[6]        = $this->InputValueBirthDateDay; 
-		$arrayElementsMinValue[6]     = 0; 
-		$arrayElementsMaxValue[6]     = 0; 
-		$arrayElementsNullable[6]     = FALSE;
-		$arrayElementsText[6]         = &$this->ReturnBirthDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_MONTH
-		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH;
-		$arrayElementsClass[7]        = &$this->ReturnBirthDateMonthClass;
-		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_MONTH;
-		$arrayElementsInput[7]        = $this->InputValueBirthDateMonth; 
-		$arrayElementsMinValue[7]     = 0; 
-		$arrayElementsMaxValue[7]     = 0; 
-		$arrayElementsNullable[7]     = FALSE;
-		$arrayElementsText[7]         = &$this->ReturnBirthDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_YEAR
-		$arrayElements[8]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR;
-		$arrayElementsClass[8]        = &$this->ReturnBirthDateYearClass;
-		$arrayElementsDefaultValue[8] = ""; 
-		$arrayElementsForm[8]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_YEAR;
-		$arrayElementsInput[8]        = $this->InputValueBirthDateYear; 
-		$arrayElementsMinValue[8]     = 0; 
-		$arrayElementsMaxValue[8]     = 0; 
-		$arrayElementsNullable[8]     = FALSE;
-		$arrayElementsText[8]         = &$this->ReturnBirthDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_GENDER
-		$arrayElements[9]             = ConfigInfraTools::FORM_FIELD_USER_GENDER;
-		$arrayElementsClass[9]        = &$this->ReturnGenderClass;
-		$arrayElementsDefaultValue[9] = ""; 
-		$arrayElementsForm[9]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_GENDER;
-		$arrayElementsInput[9]        = $this->InputValueGender; 
-		$arrayElementsMinValue[9]     = 0; 
-		$arrayElementsMaxValue[9]     = 0; 
-		$arrayElementsNullable[9]     = FALSE;
-		$arrayElementsText[9]         = &$this->ReturnGenderText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-							 
-		//FORM_GOOGLE_MAPS_COUNTRY
-		$arrayElements[10]             = ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY;
-		$arrayElementsClass[10]        = &$this->ReturnCountryClass;
-		$arrayElementsDefaultValue[10] = ""; 
-		$arrayElementsForm[10]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
-		$arrayElementsInput[10]        = $this->InputValueCountry; 
-		$arrayElementsMinValue[10]     = 0; 
-		$arrayElementsMaxValue[10]     = 45; 
-		$arrayElementsNullable[10]     = FALSE;
-		$arrayElementsText[10]         = &$this->ReturnCountryText;
-		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_GOOGLE_MAPS_REGION
-		$arrayElements[11]             = ConfigInfraTools::FORM_GOOGLE_MAPS_REGION;
-		$arrayElementsClass[11]        = &$this->ReturnRegionClass;
-		$arrayElementsDefaultValue[11] = ""; 
-		$arrayElementsForm[11]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
-		$arrayElementsInput[11]        = $this->InputValueRegion; 
-		$arrayElementsMinValue[11]     = 0; 
-		$arrayElementsMaxValue[11]     = 45; 
-		$arrayElementsNullable[11]     = TRUE;
-		$arrayElementsText[11]         = &$this->ReturnRegionText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth . "-" 
-			 . $this->InputValueBirthDateDay;
-			$this->InputValueUserName = ucwords($this->InputValueUserName);
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserUpdateByUserEmail($birthDate,
-																	      $this->InputValueCountry,
-																	      $SelectedUser->GetEmail(),
-																	      $this->InputValueGender,
-																	      $this->InputValueUserName,
-																	      $this->InputValueRegion,
-																	      $this->InputValueSessionExpires,
-																	      $this->InputValueTwoStepVerification,
-																	      $this->InputValueUserActive,
-																	      $this->InputValueUserConfirmed,
-																	      $this->InputValueUserPhonePrimary,
-																	      $this->InputValueUserPhonePrimaryPrefix,
-																	      $this->InputValueUserPhoneSecondary,
-																	      $this->InputValueUserPhoneSecondaryPrefix,
-																	      $this->InputValueUserUniqueId,
-																	      $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$SelectedUser->UpdateUser(NULL, NULL, NULL, $birthDate, NULL, $this->InputValueCountry, NULL, NULL,
-										  $this->InputValueGender, NULL, NULL, $this->InputValueUserName, $this->InputValueRegion, 
-										  NULL, $this->InputValueSessionExpires, $this->InputValueTwoStepVerification, 
-										  $this->InputValueUserActive, 
-										  $this->InputValueUserConfirmed, $this->InputValueUserPhonePrimary,
-										  $this->InputValueUserPhonePrimaryPrefix, $this->InputValueUserPhoneSecondary,
-										  $this->InputValueUserPhoneSecondaryPrefix, NULL, $this->InputValueUserUniqueId);
-				$this->Page          = ConfigInfraTools::PAGE_ACCOUNT;
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);															  
-			}
-			elseif($return == ConfigInfraTools::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_USER_UNIQUE_ID', 
-																				$this->Language);
-			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ACCOUNT_UPDATE_ERROR', 
-																					  $this->Language);
-			}
-			return $return;
-		}
-		else
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			$this->SubmitEnabled = 'disabled="disabled"';
-			return ConfigInfraTools::ERROR;
-		}
 	}
 	
 	protected function UserUpdateCorporationInformation($SelectedUser, $Debug)

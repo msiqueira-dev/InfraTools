@@ -21,7 +21,7 @@ Methods:
 		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
 		private       function        LoadInstanceUser();
-		private       function        SendTwoStepVerificationCode($Application, $Email, $Name, $Debug);
+		private       function        SendTwoStepVerificationCode($Application, $UserEmail, $Name, $Debug);
 		protected     function        TagOnloadFocusField($Form, $Field);
 		protected     function        CaptchaLoad(SessionCaptchaKey);
 		protected     function        CorporationDelete($CorporationName, $Debug);
@@ -99,6 +99,7 @@ Methods:
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
+		protected     function        UserLoadData($InstanceUser);
 		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
@@ -110,6 +111,11 @@ Methods:
 		protected     function        UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug);
 		protected     function        UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 		protected     function        UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug);
+		protected     function        UserUpdateByUserEmail($BirthDateDayNew, $BirthDateMonthNew, $BirthDateYearNew, $CountryNew, 
+		                                                    $GenderNew, $OnAdmin, $UserNameNew, $RegionNew,
+					  						                $SessionExpiresNew, $TwoStepVerificationNew, $UserActiveNew, $UserConfirmedNew,
+   										                    $UserPhonePrimaryNew, $UserPhonePrimaryPrefixNew, $UserPhoneSecondaryNew,
+											                $UserPhoneSecondaryPrefixNew, $ValueUserUniqueIdNew, &$InstanceUser, $Debug);
 		protected     function        UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug);
 		protected     function        UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, 
 		                                                            $UserEmail, $Debug);
@@ -188,26 +194,171 @@ abstract class Page
 	protected $PageEnabled                                          = NULL;
 	protected $PageCheckLogin                                       = NULL;
 	protected $PageLoadTime                                         = NULL;
+	public    $EnableFieldSessionExpires                            = "";
+	public    $EnableFieldTwoStepVerification                       = "";                    
+	public    $EnableFieldUserActive                                = "";
+	public    $EnableFieldUserConfirmed                             = "";
+	public    $InputFocus                                           = "";
+	public    $InputValueAssocUserCorporationRegistrationDate       = "";
+	public    $InputValueAssocUserCorporationRegistrationDateActive = "";
+	public    $InputValueAssocUserCorporationRegistrationId         = "";
+	public    $InputValueAssocUserCorporationRegistrationIdActive   = "";
+	public    $InputValueBirthDateDay                               = "";
+	public    $InputValueBirthDateMonth                             = "";
+	public    $InputValueBirthDateYear                              = "";
+	public    $InputValueCaptcha                                    = "";
+	public    $InputValueCode                                       = "";
 	public    $InputValueCorporationActive                          = "";
 	public    $InputValueCorporationName                            = "";
+	public    $InputValueCountry                                    = "";
 	public    $InputValueDepartmentActive                           = "";
 	public    $InputValueDepartmentInitials                         = "";
 	public    $InputValueDepartmentName                             = "";
 	public    $InputValueDepartmentNameAndCorporationNameRadio      = "";
 	public    $InputValueDepartmentNameRadio                        = "";
+	public    $InputValueGender                                     = "";
+	public    $InputValueHeaderDebug                                = Config::CHECKBOX_UNCHECKED;
+	public    $InputValueHeaderLayout                               = Config::CHECKBOX_UNCHECKED;
 	public    $InputValueLoginEmail                                 = "";
 	public    $InputValueLoginPassword                              = "";
 	public    $InputValueLoginTwoStepVerificationCode               = "";
+	public    $InputValueNewPassword                                = "";
+	public    $InputValueRegion                                     = "";
+	public    $InputValueRegisterDate                               = "";
+	public    $InputValueRegistrationDateDay                        = "";
+	public    $InputValueRegistrationDateMonth                      = "";
+	public    $InputValueRegistrationDateYear                       = "";
+	public    $InputValueRegistrationId                             = "";
+	public    $InputValueRepeatPassword                             = "";
+	public    $InputValueTeamDescription                            = "";
+	public    $InputValueTeamId                                     = "";
+	public    $InputValueTeamName                                   = "";
+	public    $InputValueTicketDescription                          = "";
+	public    $InputValueTicketTitle                                = "";
+	public    $InputValueTicketType                                 = "";
+	public    $InputValueTwoStepVerification                        = "";
+	public    $InputValueTypeAssocUserServiceDescription            = "";
+	public    $InputValueTypeAssocUserServiceId                     = "";
+	public    $InputValueTypeAssocUserTeamTeamDescription           = "";
+	public    $InputValueTypeAssocUserTeamTeamId                    = "";
+	public    $InputValueTypeServiceName                            = "";
+	public    $InputValueTypeStatusTicketDescription                = "";
+	public    $InputValueTypeStatusTicketId                         = "";
+	public    $InputValueTypeTicketDescription                      = "";
+	public    $InputValueTypeTicketId                               = "";
+	public    $InputValueTypeUserDescription                        = "";
+	public    $InputValueTypeUserId                                 = "";
+	public    $InputValueUserActive                                 = "";
+	public    $InputValueUserConfirmed                              = "";
+	public    $InputValueUserCorporationName                        = "";
+	public    $InputValueUserEmail                                  = "";
+	public    $InputValueUserName                                   = "";
+	public    $InputValueUserPhonePrimary                           = "";
+	public    $InputValueUserPhonePrimaryPrefix                     = "";
+	public    $InputValueUserPhoneSecondary                         = "";
+	public    $InputValueUserPhoneSecondaryPrefix                   = "";
+	public    $InputValueUserTeam                                   = ""; 
+	public    $InputValueUserUniqueId                               = "";
+	public    $InputValueUserUniqueIdActive                         = "";
+	public    $Page                                                 = "";
+	public    $ReturnBirthDateDayClass                              = "";
+	public    $ReturnBirthDateDayText                               = "";
+	public    $ReturnBirthDateMonthClass                            = "";
+	public    $ReturnBirthDateMonthText                             = "";
+	public    $ReturnBirthDateYearText                              = "";
+	public    $ReturnBirthDateYearClass                             = "";
+	public    $ReturnCaptchaClass                                   = "";
+	public    $ReturnCaptchaText                                    = "";
 	public    $ReturnClass                                          = "DivHidden";
+	public    $ReturnCodeClass                                      = "";
+	public    $ReturnCodeText                                       = "";
 	public    $ReturnCorporationNameClass                           = "";
 	public    $ReturnCorporationNameText                            = "";
+	public    $ReturnCountryClass                                   = "";
+	public    $ReturnCountryText                                    = "";
 	public    $ReturnDepartmentInitialsClass                        = "";
 	public    $ReturnDepartmentInitialsText                         = "";
 	public    $ReturnDepartmentNameClass                            = "";
 	public    $ReturnDepartmentNameText                             = "";
+	public    $ReturnEmailClass                                     = "";
+	public    $ReturnEmailText                                      = "";
+	public    $ReturnEmptyText                                      = "";
+	public    $ReturnGenderClass                                    = "";
+	public    $ReturnGenderText                                     = "";
+	public    $ReturnHeaderDebugClass                               = "SwitchToggleSlider";
+	public    $ReturnHeaderLayoutClass                              = "SwitchToggleSlider";
+	public    $ReturnIdClass                                        = "";
 	public    $ReturnImage                                          = "";
 	public    $ReturnLoginClass                                     = "";
 	public    $ReturnLoginText                                      = "";
+	public    $ReturnNameClass                                      = "";
+	public    $ReturnNameText                                       = "";
+	public    $ReturnPasswordClass                                  = "";
+	public    $ReturnPasswordText                                   = "";
+	public    $ReturnRegionClass                                    = "";
+	public    $ReturnRegionText                                     = "";
+	public    $ReturnRegistrationDateText                           = "";
+	public    $ReturnRegistrationDateDayText                        = "";
+	public    $ReturnRegistrationDateDayClass                       = "";
+	public    $ReturnRegistrationDateMonthText                      = "";
+	public    $ReturnRegistrationDateMonthClass                     = "";
+	public    $ReturnRegistrationDateYearText                       = "";
+	public    $ReturnRegistrationDateYearClass                      = "";
+	public    $ReturnRegistrationIdClass                            = "";
+	public    $ReturnRegistrationIdText                             = "";
+	public    $ReturnTeamDescriptionClass                           = "";
+	public    $ReturnTeamDescriptionText                            = "";
+	public    $ReturnTeamIdClass                                    = "";
+	public    $ReturnTeamIdText                                     = "";
+	public    $ReturnTeamNameClass                                  = "";
+	public    $ReturnTeamNameText                                   = "";
+	public    $ReturnText                                           = "";
+	public    $ReturnTicketDescriptionClass                         = "";
+	public    $ReturnTicketDescriptionText                          = "";
+	public    $ReturnTicketTitleClass                               = "";
+	public    $ReturnTicketTitleText                                = "";
+	public    $ReturnTicketTypeClass                                = "";
+	public    $ReturnTicketTypeText                                 = "";
+	public    $ReturnTypeAssocUserTeamDescriptionClass              = "";
+	public    $ReturnTypeAssocUserTeamDescriptionText               = "";
+	public    $ReturnTypeAssocUserTeamTeamDescriptionClass          = "";
+	public    $ReturnTypeAssocUserTeamTeamDescriptionText           = "";
+	public    $ReturnTypeAssocUserTeamTeamIdClass                   = "";
+	public    $ReturnTypeAssocUserTeamTeamIdText                    = "";
+	public    $ReturnTypeStatusTicketDescriptionClass               = "";
+	public    $ReturnTypeStatusTicketDescriptionText                = "";
+	public    $ReturnTypeStatusTicketIdClass                        = "";
+	public    $ReturnTypeStatusTicketIdText                         = "";
+	public    $ReturnTypeTicketDescriptionClass                     = "";
+	public    $ReturnTypeTicketDescriptionText                      = "";
+	public    $ReturnTypeTicketIdClass                              = "";
+	public    $ReturnTypeTicketIdText                               = "";
+	public    $ReturnTypeUserDescritpionClass                       = "";
+	public    $ReturnTypeUserDescriptionText                        = "";
+	public    $ReturnTypeUserIdClass                                = "";
+	public    $ReturnTypeUserIdText                                 = "";
+	public    $ReturnUserCorporationClass                           = "";
+	public    $ReturnUserCorporationText                            = "";
+	public    $ReturnUserEmailClass                                 = "";
+	public    $ReturnUserEmailText                                  = "";
+	public    $ReturnUserNameClass                                  = "";
+	public    $ReturnUserNameText                                   = "";
+	public    $ReturnUserPhonePrimaryClass                          = "";
+	public    $ReturnUserPhonePrimaryText                           = "";
+	public    $ReturnUserPhonePrimaryPrefixClass                    = "";
+	public    $ReturnUserPhonePrimaryPrefixText                     = "";
+	public    $ReturnUserPhoneSecondaryClass                        = "";
+	public    $ReturnUserPhoneSecondaryText                         = "";
+	public    $ReturnUserPhoneSecondaryPrefixClass                  = "";
+	public    $ReturnUserPhoneSecondaryPrefixText                   = "";
+	public    $ReturnUserTeamClass                                  = "";
+	public    $ReturnUserTeamText                                   = "";
+	public    $ReturnUserUniqueIdClass                              = "";
+	public    $ReturnUserUniqueIdText                               = "";
+	public    $ShowTypeUserDescription                              = FALSE;
+	public    $SubmitClass                                          = "SubmitDisabled";
+	public    $SubmitEnabled                                        = 'disabled="disabled"';
+	public    $ValidateCaptcha                                      = TRUE;
 	
 	/* Singleton */
 	private static $Instance;
@@ -424,14 +575,14 @@ abstract class Page
 		else return Config::SUCCESS;
 	}
 	
-	private function SendTwoStepVerificationCode($Application, $Email, $Name, $Debug)
+	private function SendTwoStepVerificationCode($Application, $UserEmail, $Name, $Debug)
 	{
 		$FacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 		$code = $FacedeBusiness->GenerateRandomCode();
 		$this->Session->SetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION,
 													$code);
 		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Application, 
-																  $Email, $Name, $code, $Debug) == Config::SUCCESS)
+																  $UserEmail, $Name, $code, $Debug) == Config::SUCCESS)
 			return Config::SUCCESS;
 		else return Config::ERROR;
 	}
@@ -1717,7 +1868,7 @@ abstract class Page
 	{
 		if($InstanceTicket != NULL)
 		{
-			$this->InputValueId                = $InstanceTypeStatusTicket->GetTicketId();
+			$this->InputValueTicketId          = $InstanceTypeStatusTicket->GetTicketId();
 			$this->InputValueRegisterDate      = $InstanceTypeStatusTicket->GetRegisterDate();
 			$this->InputValueServiceName       = $InstanceTypeStatusTicket->GetTicketServiceName();
 			$this->InputValueStatusName        = $InstanceTypeStatusTicket->GetTicketStatusName();
@@ -2838,6 +2989,80 @@ abstract class Page
 		}
 	}
 	
+	protected function UserLoadData($InstanceUser)
+	{
+		$this->InputValueAssocUserCorporationRegistrationDate = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
+		$this->InputValueAssocUserCorporationRegistrationId = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
+		$this->InputValueBirthDateDay             = $InstanceUser->GetBirthDateDay();
+		$this->InputValueBirthDateMonth           = $InstanceUser->GetBirthDateMonth();
+		$this->InputValueBirthDateYear            = $InstanceUser->GetBirthDateYear();
+		$this->InputValueUserCorporationName      = $InstanceUser->GetCorporationName();
+		$this->InputValueCountry                  = $InstanceUser->GetCountry();
+		if($InstanceUser->GetDepartmentInitials() != NULL)
+			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentInitials() 
+													  . " - " . $InstanceUser->GetDepartmentName();
+		elseif($InstanceUser->GetDepartmentName() != NULL)
+			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentName();
+		else $this->InputValueDepartmentName = NULL;
+		$this->InputValueGender                   = $InstanceUser->GetGender();
+		$this->InputValueUserName                 = $InstanceUser->GetName();
+		$this->InputValueUserEmail                = $InstanceUser->GetEmail();
+		$this->InputValueUserPhonePrimary         = $InstanceUser->GetUserPhonePrimary();
+		$this->InputValueUserPhonePrimaryPrefix   = $InstanceUser->GetUserPhonePrimaryPrefix();
+		$this->InputValueUserPhoneSecondary       = $InstanceUser->GetUserPhoneSecondary();
+		$this->InputValueUserPhoneSecondaryPrefix = $InstanceUser->GetUserPhoneSecondaryPrefix();
+		$this->InputValueRegion                   = $InstanceUser->GetRegion();
+		$this->InputValueRegisterDate             = $InstanceUser->GetRegisterDate();
+		$this->InputValueRegistrationDate         = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
+		$this->InputValueRegistrationDateDay      = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDateDay();
+		$this->InputValueRegistrationDateMonth    = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDateMonth();
+		$this->InputValueRegistrationDateYear     = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationDateYear();
+		$this->InputValueRegistrationId           = 
+			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
+		if($InstanceUser->GetArrayAssocUserTeam() != NULL)
+		{
+			foreach ($InstanceUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
+			{
+				if($index == 0)
+					$this->InputValueUserTeam = $assocUserTeam->GetTeamName();
+				else $this->InputValueUserTeam .= ", " . $assocUserTeam->GetTeamName();
+			}
+		}
+		$this->InputValueUserUniqueId             = $InstanceUser->GetUserUniqueId();
+		if($InstanceUser->GetSessionExpires())
+			$this->InputValueSessionExpires = "checked";
+		if($InstanceUser->GetTwoStepVerification())
+			$this->InputValueTwoStepVerification = "checked";
+		if($InstanceUser->GetUserActive())
+			$this->InputValueUserActive = "checked";
+		if($InstanceUser->GetUserConfirmed())
+			$this->InputValueUserConfirmed = "checked";
+		$this->InputValueTypeUserDescription = $InstanceUser->GetUserTypeDescription();
+		$this->InputValueTypeUserId = $InstanceUser->GetUserTypeId();
+
+		if($InstanceUser->CheckAssocUserCorporationRegistrationDateActive())
+			$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+		else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+		if($InstanceUser->CheckAssocUserCorporationRegistrationIdActive())
+			$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+		else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
+		if($InstanceUser->CheckCorporationActive())
+			$this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+		else $this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+		if($InstanceUser->CheckDepartmentExists())
+			$this->InputValueDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+		else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+		if($this->InputValueUserUniqueId != NULL)
+			$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+		else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+	}
+	
 	protected function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -2969,8 +3194,8 @@ abstract class Page
 		$this->InputValueUserEmail = $UserEmail;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_USER_EMAIL;
+		//FORM_FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -3013,11 +3238,11 @@ abstract class Page
 		$this->InputValueUserEmail = $UserEmail;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_USER_UNIQUE_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_USER_UNIQUE_ID;
+		//FORM_FIELD_USER_UNIQUE_ID
+		$arrayElements[0]             = Config::FORM_FIELD_USER_UNIQUE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
 		$arrayElementsInput[0]        = $this->InputValueUserUniqueId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 25; 
@@ -3049,51 +3274,12 @@ abstract class Page
 		return $return;
 	}
 	
-	protected function UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug)
-	{
-		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->UserUpdateActiveByUserEmail($InstanceUser->GetEmail(),
-																	      $UserActiveNew,
-																		  $Debug);
-		if($return == Config::SUCCESS)
-		{
-			$InstanceUser->SetUserActive($UserActiveNew);
-			$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			if($UserActiveNew)
-				$this->ReturnText =	str_replace('[0]',  
-								strtolower($this->InstanceLanguageText->GetConstant('ACTIVATED', $this->Language)), 
-								$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
-			else 
-				$this->ReturnText = str_replace('[0]', 
-								strtolower($this->InstanceLanguageText->GetConstant('DEACTIVATED', $this->Language)), 
-								$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
-
-			$this->InputFocus = Config::DIV_RETURN;
-			return Config::SUCCESS;
-		}
-		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
-		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_ERROR', $this->Language);		
-			return Config::ERROR;
-		}
-	}
-	
 	protected function  UserSelectExistsByUserEmail($Captcha, $UserEmail, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueCaptcha    = $Captcha;
 		$this->InputValueUserEmail  = $UserEmail;
-		$this->Session->GetSessionValue(ConfigInfraTools::FORM_FIELD_CAPTCHA, $captcha);
+		$this->Session->GetSessionValue(Config::FORM_FIELD_CAPTCHA, $captcha);
 		$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array();
 			
 		//VALIDA E-MAIL
@@ -3111,10 +3297,10 @@ abstract class Page
 		array_push($arrayOptions, NULL);
 		
 		//CAPTCHA
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_CAPTCHA;
+		$arrayElements[1]             = Config::FORM_FIELD_CAPTCHA;
 		$arrayElementsClass[1]        = &$this->ReturnCaptchaClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
 		$arrayElementsInput[1]        = $this->InputValueCaptcha; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 0; 
@@ -3204,6 +3390,318 @@ abstract class Page
 		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage .  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		return Config::ERROR;
+	}
+	
+	protected function UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->UserUpdateActiveByUserEmail($InstanceUser->GetEmail(),
+																	      $UserActiveNew,
+																		  $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$InstanceUser->SetUserActive($UserActiveNew);
+			$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
+			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			if($UserActiveNew)
+				$this->ReturnText =	str_replace('[0]',  
+								strtolower($this->InstanceLanguageText->GetConstant('ACTIVATED', $this->Language)), 
+								$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
+			else 
+				$this->ReturnText = str_replace('[0]', 
+								strtolower($this->InstanceLanguageText->GetConstant('DEACTIVATED', $this->Language)), 
+								$this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_SUCCESS', $this->Language));
+
+			$this->InputFocus = Config::DIV_RETURN;
+			return Config::SUCCESS;
+		}
+		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+		{
+			$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_ERROR', $this->Language);		
+			return Config::ERROR;
+		}
+	}
+	
+	protected function UserUpdateByUserEmail($BirthDateDayNew, $BirthDateMonthNew, $BirthDateYearNew, 
+											 $CountryNew, $GenderNew, $UserNameNew, $RegionNew,
+					  						 $SessionExpiresNew, $TwoStepVerificationNew, $UserActiveNew, $UserConfirmedNew,
+											 $UserPhonePrimaryNew, $UserPhonePrimaryPrefixNew, $UserPhoneSecondaryNew,
+											 $UserPhoneSecondaryPrefixNew, $ValueUserUniqueIdNew, $OnAdmin, &$InstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueBirthDateDay             = $BirthDateDayNew;
+		$this->InputValueBirthDateMonth           = $BirthDateMonthNew;
+		$this->InputValueBirthDateYear            = $BirthDateYearNew;
+		$this->InputValueCountry                  = $CountryNew;
+		$this->InputValueGender                   = $GenderNew;
+		$this->InputValueRegion                   = $RegionNew;
+		$this->InputValueUserName                 = $UserNameNew;
+		$this->InputValueUserPhonePrimary         = $UserPhonePrimaryNew;
+		$this->InputValueUserPhonePrimaryPrefix   = $UserPhonePrimaryPrefixNew;
+		$this->InputValueUserPhoneSecondary       = $UserPhoneSecondaryNew;
+		$this->InputValueUserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefixNew;
+		$this->InputValueUserUniqueId             = $ValueUserUniqueIdNew;
+		if($OnAdmin)
+		{
+			if(isset($SessionExpiresNew))
+				$this->InputValueSessionExpires = TRUE;
+			else $this->InputValueSessionExpires = FALSE;
+			if(isset($UserActiveNew))
+				$this->InputValueUserActive = TRUE;
+			else $this->InputValueUserActive = FALSE;
+			if(isset($UserConfirmedNew))
+				$this->InputValueUserConfirmed = TRUE;
+			else $this->InputValueUserConfirmed = FALSE;
+		}
+		else
+		{
+			$this->InputValueSessionExpires = $InstanceUser->GetSessionExpires();
+			$this->InputValueUserActive = $InstanceUser->GetUserActive();
+			$this->InputValueUserConfirmed = $InstanceUser->GetUserConfirmed();
+		}
+		if(isset($TwoStepVerificationNew))
+				$this->InputValueTwoStepVerification = TRUE;
+			else $this->InputValueTwoStepVerification = FALSE;
+		
+		$this->InputFocus = Config::FORM_FIELD_USER_NAME;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_USER_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_USER_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueUserName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserNameText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_UNIQUE_ID
+		$arrayElements[1]             = Config::FORM_FIELD_USER_UNIQUE_ID;
+		$arrayElementsClass[1]        = &$this->ReturnUserUniqueIdClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsInput[1]        = $this->InputValueUserUniqueId; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 25; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnUserUniqueIdText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
+		$arrayElements[2]             = Config::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
+		$arrayElementsClass[2]        = &$this->ReturnUserPhonePrimaryPrefixClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[2]        = $this->InputValueUserPhonePrimaryPrefix; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 3; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnUserPhonePrimaryPrefixText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_PHONE_PRIMARY
+		$arrayElements[3]             = Config::FORM_FIELD_USER_PHONE_PRIMARY;
+		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimary; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 9; 
+		$arrayElementsNullable[3]     = TRUE;
+		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
+		$arrayElements[4]             = Config::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
+		$arrayElementsClass[4]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
+		$arrayElementsDefaultValue[4] = ""; 
+		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[4]        = $this->InputValueUserPhoneSecondaryPrefix; 
+		$arrayElementsMinValue[4]     = 0; 
+		$arrayElementsMaxValue[4]     = 3; 
+		$arrayElementsNullable[4]     = TRUE;
+		$arrayElementsText[4]         = &$this->ReturnUserPhoneSecondaryPrefixText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_PHONE_SECONDARY
+		$arrayElements[5]             = Config::FORM_FIELD_USER_PHONE_SECONDARY;
+		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryClass;
+		$arrayElementsDefaultValue[5] = ""; 
+		$arrayElementsForm[5]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondary; 
+		$arrayElementsMinValue[5]     = 0; 
+		$arrayElementsMaxValue[5]     = 9; 
+		$arrayElementsNullable[5]     = TRUE;
+		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_BIRTH_DATE_DAY
+		$arrayElements[6]             = Config::FORM_FIELD_USER_BIRTH_DATE_DAY;
+		$arrayElementsClass[6]        = &$this->ReturnBirthDateDayClass;
+		$arrayElementsDefaultValue[6] = ""; 
+		$arrayElementsForm[6]         = Config::FORM_VALIDATE_FUNCTION_DATE_DAY;
+		$arrayElementsInput[6]        = $this->InputValueBirthDateDay; 
+		$arrayElementsMinValue[6]     = 0; 
+		$arrayElementsMaxValue[6]     = 0; 
+		$arrayElementsNullable[6]     = FALSE;
+		$arrayElementsText[6]         = &$this->ReturnBirthDateDayText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_BIRTH_DATE_MONTH
+		$arrayElements[7]             = Config::FORM_FIELD_USER_BIRTH_DATE_MONTH;
+		$arrayElementsClass[7]        = &$this->ReturnBirthDateMonthClass;
+		$arrayElementsDefaultValue[7] = ""; 
+		$arrayElementsForm[7]         = Config::FORM_VALIDATE_FUNCTION_DATE_MONTH;
+		$arrayElementsInput[7]        = $this->InputValueBirthDateMonth; 
+		$arrayElementsMinValue[7]     = 0; 
+		$arrayElementsMaxValue[7]     = 0; 
+		$arrayElementsNullable[7]     = FALSE;
+		$arrayElementsText[7]         = &$this->ReturnBirthDateMonthText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_BIRTH_DATE_YEAR
+		$arrayElements[8]             = Config::FORM_FIELD_USER_BIRTH_DATE_YEAR;
+		$arrayElementsClass[8]        = &$this->ReturnBirthDateYearClass;
+		$arrayElementsDefaultValue[8] = ""; 
+		$arrayElementsForm[8]         = Config::FORM_VALIDATE_FUNCTION_DATE_YEAR;
+		$arrayElementsInput[8]        = $this->InputValueBirthDateYear; 
+		$arrayElementsMinValue[8]     = 0; 
+		$arrayElementsMaxValue[8]     = 0; 
+		$arrayElementsNullable[8]     = FALSE;
+		$arrayElementsText[8]         = &$this->ReturnBirthDateYearText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_GENDER
+		$arrayElements[9]             = Config::FORM_FIELD_USER_GENDER;
+		$arrayElementsClass[9]        = &$this->ReturnGenderClass;
+		$arrayElementsDefaultValue[9] = ""; 
+		$arrayElementsForm[9]         = Config::FORM_VALIDATE_FUNCTION_GENDER;
+		$arrayElementsInput[9]        = $this->InputValueGender; 
+		$arrayElementsMinValue[9]     = 0; 
+		$arrayElementsMaxValue[9]     = 0; 
+		$arrayElementsNullable[9]     = FALSE;
+		$arrayElementsText[9]         = &$this->ReturnGenderText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+							 
+		//FORM_FIELD_USER_COUNTRY
+		$arrayElements[10]             = Config::FORM_FIELD_USER_COUNTRY;
+		$arrayElementsClass[10]        = &$this->ReturnCountryClass;
+		$arrayElementsDefaultValue[10] = ""; 
+		$arrayElementsForm[10]         = Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
+		$arrayElementsInput[10]        = $this->InputValueCountry; 
+		$arrayElementsMinValue[10]     = 0; 
+		$arrayElementsMaxValue[10]     = 45; 
+		$arrayElementsNullable[10]     = FALSE;
+		$arrayElementsText[10]         = &$this->ReturnCountryText;
+		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_USER_REGION
+		$arrayElements[11]             = Config::FORM_FIELD_USER_REGION;
+		$arrayElementsClass[11]        = &$this->ReturnRegionClass;
+		$arrayElementsDefaultValue[11] = ""; 
+		$arrayElementsForm[11]         = Config::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
+		$arrayElementsInput[11]        = $this->InputValueRegion; 
+		$arrayElementsMinValue[11]     = 0; 
+		$arrayElementsMaxValue[11]     = 45; 
+		$arrayElementsNullable[11]     = TRUE;
+		$arrayElementsText[11]         = &$this->ReturnRegionText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
+		if($return == Config::SUCCESS)
+		{
+			$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth . "-" 
+			 . $this->InputValueBirthDateDay;
+			$this->InputValueUserName = ucwords($this->InputValueUserName);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserUpdateByUserEmail($birthDate,
+																	    $this->InputValueCountry,
+																	    $InstanceUser->GetEmail(),
+																	    $this->InputValueGender,
+																	    $this->InputValueUserName,
+																	    $this->InputValueRegion,
+																	    $this->InputValueSessionExpires,
+																	    $this->InputValueTwoStepVerification,
+																	    $this->InputValueUserActive,
+																	    $this->InputValueUserConfirmed,
+																	    $this->InputValueUserPhonePrimary,
+																	    $this->InputValueUserPhonePrimaryPrefix,
+																	    $this->InputValueUserPhoneSecondary,
+																	    $this->InputValueUserPhoneSecondaryPrefix,
+																	    $this->InputValueUserUniqueId,
+																	    $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$InstanceUser->UpdateUser(NULL, NULL, NULL, $birthDate, NULL, $this->InputValueCountry, NULL, NULL,
+										  $this->InputValueGender, NULL, NULL, $this->InputValueUserName, $this->InputValueRegion, 
+										  NULL, $this->InputValueSessionExpires, $this->InputValueTwoStepVerification, 
+										  $this->InputValueUserActive, 
+										  $this->InputValueUserConfirmed, $this->InputValueUserPhonePrimary,
+										  $this->InputValueUserPhonePrimaryPrefix, $this->InputValueUserPhoneSecondary,
+										  $this->InputValueUserPhoneSecondaryPrefix, NULL, $this->InputValueUserUniqueId);
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
+			}
+			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);															  
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_USER_UNIQUE_ID', $this->Language);
+			}
+			else
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage .  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ACCOUNT_UPDATE_ERROR', $this->Language);
+			}
+			return $return;
+		}
+		else
+		{
+			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			$this->SubmitEnabled = 'disabled="disabled"';
+			return Config::ERROR;
+		}
 	}
 	
 	protected function UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug)
@@ -3420,8 +3918,8 @@ abstract class Page
 		$this->InputValueUserConfirmed = $UserConfirmedNew;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_USER_CONFIRMED
-		$arrayElements[0]             = Config::FORM_FIELD_USER_USER_CONFIRMED;
+		//FORM_FIELD_USER_CONFIRMED
+		$arrayElements[0]             = Config::FORM_FIELD_USER_CONFIRMED;
 		$arrayElementsClass[0]        = &$this->ReturnUserConfirmedClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;

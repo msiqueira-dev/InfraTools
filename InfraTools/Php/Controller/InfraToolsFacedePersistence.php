@@ -34,7 +34,7 @@ Methods:
 			                                                                         $Debug,
 																					 $MySqlConnection = NULL, 
 																					 $CloseConnectaion = FALSE);
-			public function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
+			public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
 			                                            $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, 
 			                                                         $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
@@ -180,13 +180,13 @@ Methods:
 			public function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, 
 			                                                      $UserEmail, $Debug,
 																  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function UserInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
+			public function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
 			                                     $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function UserInfraToolsSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+			public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                                  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug, 
+			public function InfraToolUsersSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, 
 			                                                $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function UserInfraToolsSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, 
+			public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, 
 			                                                   $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 **************************************************************************/
 
@@ -342,13 +342,13 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
+	public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
 												$Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
-		$return = $InfraToolsFacedePersistenceCorporation->CorporationInfraToolsSelect($Limit1, $Limit2, 
+		$return = $InfraToolsFacedePersistenceCorporation->InfraToolsCorporationSelect($Limit1, $Limit2, 
 																					$ArrayInstanceCorporation, $RowCount,
 																					$Debug, $MySqlConnection);
 		if($CloseConnectaion)
@@ -1646,26 +1646,26 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function UserInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
+	public function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
 										 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$InfraToolsFacedePersistenceuser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
-		$return = $InfraToolsFacedePersistenceuser->UserInfraToolsSelect($Limit1, $Limit2, $ArrayInstanceUser, 
+		$return = $InfraToolsFacedePersistenceuser->InfraToolsUserSelect($Limit1, $Limit2, $ArrayInstanceUser, 
 																		 $RowCount, $Debug, $MySqlConnection);
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		return $return;
 	}
 	
-	public function UserInfraToolsSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, 
+	public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, 
 													  &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$InfraToolsFacedePersistenceuser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
-		$return = $InfraToolsFacedePersistenceuser->UserInfraToolsSelectByCorporation($CorporationName, $Limit1, $Limit2,
+		$return = $InfraToolsFacedePersistenceuser->InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2,
 																				      $ArrayInstanceUser, $RowCount, 
 																					  $Debug, $MySqlConnection);
 		if($CloseConnectaion)
@@ -1673,26 +1673,26 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, 
+	public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceUser, 
 												    $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$InfraToolsFacedePersistenceuser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
-		$return = $InfraToolsFacedePersistenceuser->UserInfraToolsSelectByUserEmail($Email, $InstanceUser, 
+		$return = $InfraToolsFacedePersistenceuser->InfraToolsUserSelectByUserEmail($UserEmail, $InstanceUser, 
 																				$Debug, $MySqlConnection);
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		return $return;
 	}
 	
-	public function UserInfraToolsSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, 
+	public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, 
 													   $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$InfraToolsFacedePersistenceuser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
-		$return = $InfraToolsFacedePersistenceuser->UserInfraToolsSelectByUserUniqueId($UserUniqueId, $InstanceUser,
+		$return = $InfraToolsFacedePersistenceuser->InfraToolsUserSelectByUserUniqueId($UserUniqueId, $InstanceUser,
 																					   $Debug, $MySqlConnection);
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);

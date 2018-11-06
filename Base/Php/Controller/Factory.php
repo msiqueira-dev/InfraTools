@@ -61,7 +61,7 @@ Methods:
 			public function     CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
 			public function     CreateTypeUser($Description, $Id, $RegisterDate);
 			public function     CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-			                               $BirthDate, $CorporationInstance, $Country, $Department, $Email, 
+			                               $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
 							               $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
 							               $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
 **************************************************************************/
@@ -555,7 +555,7 @@ class Factory
 	}
 	
 	public function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 							   $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
@@ -565,7 +565,7 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
 		else include_once(BASE_PATH_PHP_MODEL . "User.php");
 		return new User($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 						$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 						$TwoStepVerification, $UserActive, $UserConfirmed, 
 						$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 

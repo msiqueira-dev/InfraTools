@@ -13,14 +13,14 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about group user.
 Functions: 
-			public function UserInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+			public function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                     $Debug, $MySqlConnection);
-			public function UserInfraToolsSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+			public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                                  $Debug, $MySqlConnection);
-			public function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug, $MySqlConnection);
-			public function UserInfraToolsSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection);
+			public function InfraToolsUserSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                               &$RowCount, $Debug, $MySqlConnection);
-			public function UserInfraToolsSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection);
+			public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("InfraToolsFactory"))
@@ -72,7 +72,7 @@ class InfraToolsFacedePersistenceUser
         return self::$Instance;
     }
 	
-	public function UserInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL;
@@ -174,7 +174,7 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserInfraToolsSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, 
+	public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, 
 													  &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; 
@@ -278,7 +278,7 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserInfraToolsSelectByUserEmail($Email, &$InstanceUser, $Debug, $MySqlConnection)
+	public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
@@ -291,7 +291,7 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByUserEmail());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $Email);
+				$stmt->bind_param("s", $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
@@ -355,7 +355,7 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserInfraToolsSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
+	public function InfraToolsUserSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 												   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; 
@@ -459,7 +459,7 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserInfraToolsSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection)
+	public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;

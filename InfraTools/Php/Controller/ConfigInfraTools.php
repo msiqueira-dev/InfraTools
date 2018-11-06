@@ -215,10 +215,6 @@ class ConfigInfraTools extends Config
 	const FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION                 = "FormDepartmentViewUsersSelectCorporation";
 	const FORM_DEPARTMENT_VIEW_USERS_LIST_BACK                          = "FormDepartmentViewUsersListBack";
 	const FORM_DEPARTMENT_VIEW_USERS_LIST_FORWARD                       = "FormDepartmentViewUsersListForward";
-	const FORM_FIELD_BIRTH_DATE_DAY                                     = "FormFieldBirthDateDay";
-	const FORM_FIELD_BIRTH_DATE_MONTH                                   = "FormFieldBirthDateMonth";
-	const FORM_FIELD_BIRTH_DATE_YEAR                                    = "FormFieldBirthDateYear";
-	const FORM_FIELD_GENDER                                             = "FormFieldGender";
 	const FORM_FIELD_ID                                                 = "FormInputId";
 	const FORM_FIELD_RADIO_DEPARTMENT                                   = "FormFieldRadioDepartment";
 	const FORM_FIELD_RADIO_DEPARTMENT_NAME                              = "FormFieldRadioDepartmentName";
@@ -243,19 +239,8 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
 	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
 	const FORM_FIELD_USER_CORPORATION_SELECT                            = "FormFieldUserCorporationSelect";
-	const FORM_FIELD_USER_GENDER                                        = "FormFieldUserGender";
-	const FORM_FIELD_USER_NAME                                          = "FormFieldUserName";
-	const FORM_FIELD_USER_PHONE_PRIMARY                                 = "FormFieldUserPhonePrimary";
-	const FORM_FIELD_USER_PHONE_PRIMARY_PREFIX                          = "FormFieldUserPhonePrimaryPrefix";
-	const FORM_FIELD_USER_PHONE_SECONDARY                               = "FormFieldUserPhoneSecondary";
-	const FORM_FIELD_USER_PHONE_SECONDARY_PREFIX                        = "FormFieldUserPhoneSecondaryPrefix";
-	const FORM_FIELD_USER_USER_UNIQUE_ID                                = "FormFieldUserUserUniqueId";
-	const FORM_GOOGLE_MAPS_COUNTRY                                      = "FormGoogleMapsCountry";
-	const FORM_GOOGLE_MAPS_COUNTRY_HIDDEN                               = "FormGoogleMapsCountryHidden";
 	const FORM_GOOGLE_MAPS_LATITUDE                                     = "RegisterGoogleMapsLatitude";
 	const FORM_GOOGLE_MAPS_LONGITUDE                                    = "RegisterGoogleMapsLongitude";
-	const FORM_GOOGLE_MAPS_REGION                                       = "FormGoogleMapsRegion";
-	const FORM_GOOGLE_MAPS_REGION_HIDDEN                                = "FormGoogleMapsRegionHidden";
 	const FORM_HEADER_LANGUAGE                                          = "FormHeaderLanguage";
 	const FORM_HEADER_PAGES                                             = "PostBackForm";
 	const FORM_HEADER_LAYOUT                                            = "FormHeaderLayout";
@@ -828,10 +813,8 @@ class ConfigInfraTools extends Config
 	/* Constantes de Formulário da Página AccountUpdate */
 	const ACCOUNT_UPDATE_CORPORATION                                = "AccountUpdateCorporation";
 	const ACCOUNT_UPDATE_FORM                                       = "AccountUpdateForm";
-	const ACCOUNT_UPDATE_NAME                                       = "AccountUpdateName";
 	const ACCOUNT_UPDATE_SELECT_GENDER_FEMALE                       = "F";
 	const ACCOUNT_UPDATE_SELECT_GENDER_MALE                         = "M";
-	const ACCOUNT_UPDATE_SESSION_EXPIRES                            = "AccountUpdateSessionExpires";
 	
 	/* Constantes de formulário da Página AccountChangePassword */
 	const ACCOUNT_CHANGE_PASSWORD_FORM                              = "AccountChangePasswordForm";
@@ -860,17 +843,10 @@ class ConfigInfraTools extends Config
 	const PASSWORD_RESET_FORM_SUBMIT                                = "PasswordResetFormSubmit";
 
 	/* Constantes de Formulário da Página Register */
-	const REGISTER_BIRTH_DATE_DAY                                   = "RegisterBirthDateDay";
-	const REGISTER_BIRTH_DATE_MONTH                                 = "RegisterBirthDateMonth";
-	const REGISTER_BIRTH_DATE_YEAR                                  = "RegisterBirthDateYear";
 	const REGISTER_CODE                                             = "RegisterCode";
 	const REGISTER_SELECT_GENDER_FEMALE                             = "F";
 	const REGISTER_SELECT_GENDER_MALE                               = "M";
 	const REGISTER_SELECT_GENDER_OTHER                              = "O";
-	const REGISTER_SESSION_EXPIRES                                  = "RegisterSessionExpires";
-	const REGISTER_TWO_STEP_VERIFICATION                            = "RegisterTwoStepVerification";
-	const REGISTER_USER_ACTIVE                                      = "RegisterUserActive";
-	const REGISTER_USER_CONFIRMED                                   = "RegisterUserConfirmed";
 	
 	/* Constantes de Formulário da Página ResendConfirmationLink */
 	const RESEND_CONFIRMATION_LINK_USER                             = "ResendConfirmationLinkUser";

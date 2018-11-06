@@ -58,7 +58,6 @@ if($this->Device == Page::DEVICE_TABLET)
 }
 elseif ($this->Device == Page::DEVICE_MOBILE)
 {
-	$this->LinkTarget = "target='_self'";
 	echo '<style>';
 	include_once(REL_PATH . "Style/Mobile/Generic/MobileGeneric.css"); 
 	echo '</style>';

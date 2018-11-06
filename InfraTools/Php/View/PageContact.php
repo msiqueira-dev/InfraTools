@@ -66,10 +66,10 @@ class PageContact extends PageInfraTools
 			if($this->CheckInstanceUser() != ConfigInfraTools::USER_NOT_LOGGED_IN)
 			{
 				$this->InputValueUserName = $this->User->GetName();
-				if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL]))
+				if(isset($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL]))
 				{
-					if($_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL] != $this->User->GetEmail())
-						$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL];
+					if($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL] != $this->User->GetEmail())
+						$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL];
 					else $this->InputValueUserEmail  = $this->User->GetEmail();
 				}
 				else $this->InputValueUserEmail  = $this->User->GetEmail();
@@ -77,7 +77,7 @@ class PageContact extends PageInfraTools
 			else
 			{
 				$this->InputValueUserName    = $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME];
-				$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL];
+				$this->InputValueUserEmail   = $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL];
 			}
 			if (isset($_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION]))
 				$this->InputValueTicketDescription = $_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION];
@@ -103,8 +103,8 @@ class PageContact extends PageInfraTools
 			array_push($matrixConstants, $arrayConstants);
 			array_push($matrixOptions, $arrayOptions);
 			
-			//FORM_FIELD_USER_USER_EMAIL
-			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL;
+			//FORM_FIELD_USER_EMAIL
+			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
 			$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 			$arrayElementsDefaultValue[1] = ""; 
 			$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;

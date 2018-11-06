@@ -18,7 +18,7 @@ Functions:
 			public function CheckBlackListHost($HostName, &$ReturnMessage);
 			public function CheckBlackListIpAddress($IpAddress, &$ReturnMessage);
 			public function CheckDnsRecord($HostName, $RecordType, &$ReturnMessage);
-			public function CheckEmailExists($Email, &$ReturnMessage);
+			public function CheckEmailExists($EmailAddress, &$ReturnMessage);
 			public function CheckPingServerHost($HostName, &$ReturnMessage);
 			public function CheckPingServerIpAddress($IpAddress, &$ReturnMessage);
 			public function CheckPortStatusHost($HostName, $Port, &$ReturnMessage);
@@ -234,19 +234,19 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		}
 	}
 	
-	public function CheckEmailExists($Email, &$ReturnMessage)
+	public function CheckEmailExists($EmailAddress, &$ReturnMessage)
 	{
 		$configInfraTools = $this->Factory->CreateConfigInfraTools();
 		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
 		$FormValidator = $this->Factory->CreateFormValidator();
-		$return = $FormValidator->ValidateEmail($Email, "email@email.com");
+		$return = $FormValidator->ValidateEmail($EmailAddress, "email@email.com");
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if($return != FormValidator::INVALID_DEFAULT_VALUE)
 			{
 				if ($this->InstanceBaseEmail == NULL)
 					$this->InstanceBaseEmail = $this->Factory->CreateEmail();
-				$return = $this->InstanceBaseEmail->ValidateEmail($Email, 
+				$return = $this->InstanceBaseEmail->ValidateEmail($EmailAddress, 
 																  $configInfraTools->DefaultEmailNoReplyFormAddress, 
 																  FALSE);
 				if ($return != Email::ReturnDomainDoesNotHaveEmailRecordsOrNotExist)
@@ -255,16 +255,16 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					{
 						if ($return != Email::ReturnEmailDoesNotExist)
 						{
-							$ReturnMessage = str_replace('[0]', $Email, 
+							$ReturnMessage = str_replace('[0]', $EmailAddress, 
 												$this->Language->GetText('CHECK_EMAIL_EXISTS_SUCCESS'));
 						}
-						else $ReturnMessage = str_replace('[0]', $Email, 
+						else $ReturnMessage = str_replace('[0]', $EmailAddress, 
 												$this->Language->GetText('CHECK_EMAIL_EXISTS_FAILED'));
 					}
-					else $ReturnMessage = str_replace('[0]', $Email, 
+					else $ReturnMessage = str_replace('[0]', $EmailAddress, 
 												$this->Language->GetText('CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE'));
 				}
-				else $ReturnMessage = str_replace('[0]', $Email, 
+				else $ReturnMessage = str_replace('[0]', $EmailAddress, 
 												$this->Language->GetText('CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS'));
 			}
 			else

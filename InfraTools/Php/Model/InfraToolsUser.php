@@ -41,7 +41,7 @@ class InfraToolsUser extends User
 
 	/* Constructor */
 	public function __construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
-								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 								$TwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
@@ -55,7 +55,7 @@ class InfraToolsUser extends User
 		$this->Corporation              = $CorporationInstance;
 		$this->Country                  = $Country;
 		$this->Department               = $DepartmentInstance;
-		$this->Email                    = $Email;
+		$this->UserEmail                = $UserEmail;
 		$this->Gender                   = $Gender;
 		$this->HashCode                 = $HashCode;
 		$this->Name                     = $Name;

@@ -43,7 +43,7 @@ Methods:
 			public function CreateInfraToolsTypeService($RegisterDate, $TypeServiceName, $TypeServiceSLA);
 			public function CreateInfraToolsTypeTimeMonitoring();
 			public function CreateInfraToolsUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-								                 $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+								                 $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
          								         $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 								                 $TwoStepVerification, $UserActive, $UserConfirmed, 
 								                 $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
@@ -562,7 +562,7 @@ class InfraToolsFactory extends Factory
 	}
 	
 	public function CreateInfraToolsUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-								         $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+								         $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								         $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 								         $TwoStepVerification, $UserActive, $UserConfirmed, 
 								         $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
@@ -578,7 +578,7 @@ class InfraToolsFactory extends Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsUser');
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsUser.php");
 		return new InfraToolsUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-								  $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+								  $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								  $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 								  $TwoStepVerification, $UserActive, $UserConfirmed, 
 								  $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 

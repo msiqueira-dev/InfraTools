@@ -55,7 +55,7 @@ Get / Set:
 			public function SetCorporation($CorporationInstance);
 			public function SetCountry($Country);
 			public function SetDepartment($DepartmentInstance);
-			public function SetEmail($Email);
+			public function SetEmail($UserEmail);
 			public function SetGender($Gender);
 			public function SetHashCode($HashCode);
 			public function SetLoggedIn($LoggedIn);
@@ -79,7 +79,7 @@ Methods:
 			public function CheckDepartmentExists();
 			public function CheckSuperUser();
 			public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, $Gender, 
+									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
 									   $HashCode, $LoggedIn, $Name, $Region, $RegisterDate, $SessionExpires, 
 									   $TwoStepVerification, $UserActive, $UserConfirmed, 
 									   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
@@ -96,7 +96,7 @@ class User
 	protected $Corporation                 = NULL;
 	protected $Country                     = NULL;
 	protected $Department                  = NULL;
-	protected $Email                       = NULL;
+	protected $UserEmail                   = NULL;
 	protected $Gender                      = NULL;
 	protected $HashCode                    = NULL;
 	protected $LoggedIn                    = NULL;
@@ -116,7 +116,7 @@ class User
 	
 	/* Constructor */
 	public function __construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
-								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
+								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
 								$TwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
@@ -129,7 +129,7 @@ class User
 		$this->Corporation              = $CorporationInstance;
 		$this->Country                  = $Country;
 		$this->Department               = $DepartmentInstance;
-		$this->Email                    = $Email;
+		$this->UserEmail                = $UserEmail;
 		$this->Gender                   = $Gender;
 		$this->HashCode                 = $HashCode;
 		$this->Name                     = $Name;
@@ -298,7 +298,7 @@ class User
 	
 	public function GetEmail()
 	{
-		return $this->Email;
+		return $this->UserEmail;
 	}
 	
 	public function GetGender()
@@ -428,9 +428,9 @@ class User
 		$this->UserDepartment = $UserDepartment;
 	}
 	
-	public function SetEmail($Email)
+	public function SetEmail($UserEmail)
 	{
-		$this->Email = $Email;
+		$this->UserEmail = $UserEmail;
 	}
 	
 	public function SetGender($Gender)
@@ -553,7 +553,7 @@ class User
 	}
 	
 	public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, $Gender, 
+							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
 							   $HashCode, $LoggedIn, $Name, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
@@ -562,19 +562,18 @@ class User
 		if($ArrayAssocUserTeam != NULL)
 			$this->ArrayAssocUserTeam          = $ArrayAssocUserTeam;
 		if($ArrayNotification != NULL)
-			$this->ArrayNotification                = $ArrayNotification;
-		if($AssocUserCorporation != NULL)
-			$this->AssocUserCorporation        = $AssocUserCorporation;
+			$this->ArrayNotification           = $ArrayNotification;
+		$this->AssocUserCorporation            = $AssocUserCorporation;
 		if($BirthDate != NULL)
 			$this->BirthDate                   = $BirthDate;
-		if($CorporationInstance != NULL)
-			$this->Corporation                 = $CorporationInstance;
+		
+		$this->Corporation                     = $CorporationInstance;
 		if($Country != NULL)
 			$this->Country                     = $Country;
 		if($DepartmentInstance != NULL)
 			$this->Department                  = $DepartmentInstance;
-		if($Email != NULL)
-			$this->Email                       = $Email;
+		if($UserEmail != NULL)
+			$this->UserEmail                   = $UserEmail;
 		if($Gender != NULL)
 			$this->Gender                      = $Gender;
 		if($HashCode != NULL)
@@ -583,8 +582,7 @@ class User
 			$this->LoggedIn                    = $LoggedIn;
 		if($Name != NULL)
 			$this->Name                        = $Name;
-		if($Region != NULL)
-			$this->Region                      = $Region;
+		$this->Region                          = $Region;
 		if($RegisterDate != NULL)
 			$this->RegisterDate                = $RegisterDate;
 		if(is_bool($SessionExpires))
@@ -595,14 +593,10 @@ class User
 			$this->UserActive                  = $UserActive;
 		if(is_bool($UserConfirmed))
 			$this->UserConfirmed               = $UserConfirmed;
-		if($UserPhonePrimary != NULL)
-			$this->UserPhonePrimary            = $UserPhonePrimary;
-		if($UserPhonePrimaryPrefix != NULL)
-			$this->UserPhonePrimaryPrefix      = $UserPhonePrimaryPrefix;
-		if($UserPhoneSecondary != NULL)
-			$this->UserPhoneSecondary          = $UserPhoneSecondary;
-		if($UserPhoneSecondaryPrefix != NULL)
-			$this->UserPhoneSecondaryPrefix    = $UserPhoneSecondaryPrefix;
+		$this->UserPhonePrimary                = $UserPhonePrimary;
+		$this->UserPhonePrimaryPrefix          = $UserPhonePrimaryPrefix;
+		$this->UserPhoneSecondary              = $UserPhoneSecondary;
+		$this->UserPhoneSecondaryPrefix        = $UserPhoneSecondaryPrefix;
 		if($UserTypeInstance != NULL)
 			$this->UserType                    = $UserTypeInstance;
 		if($UserUniqueId != NULL)

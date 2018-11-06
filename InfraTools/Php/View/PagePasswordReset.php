@@ -50,9 +50,9 @@ class PagePasswordReset extends PageInfraTools
 	public function LoadPage()
 	{
 		$this->InputFocus = ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE;
-		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PASSWORD_RECOVERY, $this->SessionUserEmail);
+		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PASSWORD_RECOVERY, $this->InputValueUserEmail);
 		$this->Session->GetSessionValue(ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE, $code);
-		if($this->SessionUserEmail == NULL || $code == NULL)
+		if($this->InputValueUserEmail == NULL || $code == NULL)
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
@@ -64,7 +64,7 @@ class PagePasswordReset extends PageInfraTools
 			$this->UserUpdatePasswordByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE], 
 												 $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW], 
 												 $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT], 
-												 $this->SessionUserEmail, 
+												 $this->InputValueUserEmail, 
 												 $this->InputValueHeaderDebug);
 		}
 		$this->LoadHtml(FALSE);

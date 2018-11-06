@@ -68,8 +68,8 @@ if(is_array($this->ArrayTeamMembers))
 						   name='"   . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' 
 						   id='"     . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "'
 						   value='"  . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' />
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL . "' 
-		                                 id='"   . ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL . "' 
+		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+		                                 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
 							             value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
 				</form>
 		      </td>";

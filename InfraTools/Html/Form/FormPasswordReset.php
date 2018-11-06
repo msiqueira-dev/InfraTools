@@ -6,7 +6,7 @@
 		<div class="DivContentBodyContainerLabel">
 			<label> <?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?> </label>
 		</div>
-		<label class="DivContentBodyContainerLabelValue"> <?php echo $this->SessionUserEmail; ?> </label>
+		<label class="DivContentBodyContainerLabelValue"> <?php echo $this->InputValueUserEmail; ?> </label>
 	</div>
 	<!-- CODE -->
 	<div class="DivClearFloat"></div>

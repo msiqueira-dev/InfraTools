@@ -91,24 +91,24 @@
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<!-- REGISTER_BIRTH_DATE_DAY -->
+		<!-- FORM_FIELD_USER_BIRTH_DATE_DAY -->
 		<select style="
-					   <?php if($this->InputValueBirthDateDay != ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY
+					   <?php if($this->InputValueBirthDateDay != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY
 								 && $this->InputValueBirthDateDay != "") 
 							echo 'color:black;'
 						?> " 
-				name="<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_DAY; ?>" 
-				id="<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_DAY; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>"
 				class="SelectBirthDateDay <?php echo $this->ReturnBirthDateDayClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_DAY; ?>');
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');">
 			<option <?php if ($this->InputValueBirthDateDay == "" 
-							  || $this->InputValueBirthDateDay == ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY; ?>" 
+							  || $this->InputValueBirthDateDay == ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
 			</option>
@@ -121,24 +121,24 @@
 				  }
 			?>
 		</select>
-		<!-- REGISTER_BIRTH_DATE_MONTH -->
+		<!-- FORM_FIELD_USER_BIRTH_DATE_MONTH -->
 		<select style="
-						<?php if($this->InputValueBirthDateMonth != ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY
+						<?php if($this->InputValueBirthDateMonth != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY
 								 && $this->InputValueBirthDateMonth != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH; ?>" 
-				id="<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>"
 				class="SelectBirthDateMonth <?php echo $this->ReturnBirthDateMonthClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH; ?>');
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');">
 			<option <?php if ($this->InputValueBirthDateMonth == "" 
-							  || $this->InputValueBirthDateMonth == ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY; ?>" 
+							  || $this->InputValueBirthDateMonth == ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
 			</option>
@@ -151,24 +151,24 @@
 				  }
 			?>
 		</select>
-		<!-- REGISTER_BIRTH_DATE_YEAR -->
+		<!-- FORM_FIELD_USER_BIRTH_DATE_MONTH -->
 		<select style=";
-					   <?php if($this->InputValueBirthDateYear != ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY
+					   <?php if($this->InputValueBirthDateYear != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY
 								 && $this->InputValueBirthDateYear != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR; ?>" 
-				id="<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>"
 				class="SelectBirthDateYear <?php echo $this->ReturnBirthDateYearClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR; ?>');
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');">
 			<option <?php if ($this->InputValueBirthDateYear == "" 
-							  || $this->InputValueBirthDateYear == ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY; ?>" 
+							  || $this->InputValueBirthDateYear == ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
 			</option>
@@ -370,11 +370,11 @@
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LATITUDE; ?>"/>
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>" 
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>"/>
-		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN; ?>"
+		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>" 
+							 id="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"
 							 value="<?php echo $this->InputValueCountry ?>"/>
-		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN; ?>"
+		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>" 
+							 id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
 							 value="<?php echo $this->InputValueRegion ?>"/>
 	</div>
 	<div id="GoogleMapsDiv" class="DivContentBodyContainerGoogleMaps">
@@ -395,11 +395,11 @@
 				<label> <?php echo $this->InstanceLanguageText->GetText('COUNTRY'); ?> </label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY; ?>"  
-							   id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"  
+							   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"
 							   class="<?php echo $this->ReturnCountryClass; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('COUNTRY'); ?>"
-							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY; ?>',
+							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>',
 													  'DivContentBodySubmit',
 													  '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													  '', true);
@@ -414,7 +414,7 @@
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													 '');"
 									   onchange="ValidateNotNull(null, 
-													'<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY; ?>',
+													'<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>',
 													'DivContentBodySubmit',
 													'<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													'', true);
@@ -431,11 +431,11 @@
 					<?php echo $this->InstanceLanguageText->GetText('REGION') . ":"; ?> 
 				</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION; ?>"  
-						   id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"  
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
 						   class="<?php echo $this->ReturnRegionClass; ?>"
 						   title="<?php echo $this->InstanceLanguageText->GetText('REGION'); ?>"
-						   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION; ?>',
+						   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>',
 													  'DivContentBodySubmit',
 													  '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													  '', true);
@@ -450,7 +450,7 @@
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													 '');"
 								   onchange="ValidateNotNull(null, 
-													'<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_REGION; ?>',
+													'<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>',
 													'DivContentBodySubmit',
 													'<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													'', true);
@@ -595,8 +595,8 @@
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::REGISTER_SESSION_EXPIRES; ?>" 
-					   value="<?php echo ConfigInfraTools::REGISTER_SESSION_EXPIRES; ?>" <?php echo $this->InputValueSessionExpires; ?>
+					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES; ?>" 
+					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES; ?>" <?php echo $this->InputValueSessionExpires; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 									   'DivContentBodySubmitBigger',
@@ -608,7 +608,7 @@
 	<?php } ?>
 	<?php if($this->EnableFieldTwoStepVerification)
 	{?>
-		 <!-- TWO_STEP_VERIFICATION -->
+		 <!-- FORM_FIELD_USER_TWO_STEP_VERIFICATION -->
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
@@ -616,8 +616,8 @@
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::REGISTER_TWO_STEP_VERIFICATION; ?>" 
-					   value="<?php echo ConfigInfraTools::REGISTER_TWO_STEP_VERIFICATION; ?>" 
+					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
+					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
 					          <?php echo $this->InputValueTwoStepVerification; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
@@ -630,7 +630,7 @@
 	<?php } ?>
 	<?php if($this->EnableFieldUserActive)
 	{?>
-		 <!-- USER_ACTIVE -->
+		 <!-- FORM_FIELD_USER_ACTIVE -->
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
@@ -638,8 +638,9 @@
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::REGISTER_USER_ACTIVE; ?>" 
-					   value="<?php echo ConfigInfraTools::REGISTER_USER_ACTIVE; ?>" <?php echo $this->InputValueUserActive; ?>
+					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_ACTIVE; ?>" 
+					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_ACTIVE; ?>" 
+					          <?php echo $this->InputValueUserActive; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 									   'DivContentBodySubmitBigger',
@@ -659,8 +660,8 @@
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::REGISTER_USER_CONFIRMED; ?>" 
-					   value="<?php echo ConfigInfraTools::REGISTER_USER_CONFIRMED; ?>" <?php echo $this->InputValueUserConfirmed; ?>
+					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_CONFIRMED; ?>" 
+					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_CONFIRMED; ?>" <?php echo $this->InputValueUserConfirmed; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 									   'DivContentBodySubmitBigger',

@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about group user.
 Functions: 
-			public function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
+			public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
 			                                            $Debug, $MySqlConnection);
 			public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, 
 			                                                         $Debug, $MySqlConnection);
@@ -76,7 +76,7 @@ class InfraToolsFacedePersistenceCorporation
         return self::$Instance;
     }
 	
-	public function CorporationInfraToolsSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceCorporation = array();

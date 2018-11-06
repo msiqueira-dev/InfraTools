@@ -39,7 +39,7 @@
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
 						   title="<?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME'); ?>" 
-						   value="<?php echo $this->InputValueId; ?>" maxlength="45" />
+						   value="<?php echo $this->InputValueCorporationName; ?>" maxlength="45" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"

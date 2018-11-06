@@ -213,17 +213,15 @@
 		<?php } ?>
 	   <?php if($this->EnableFieldTwoStepVerification)
 		{?>
-			 <!-- TWO_STEP_VERIFICATION -->
+			 <!-- FORM_FIELD_USER_TWO_STEP_VERIFICATION -->
 			 <div class="DivContentBodyContainerSided">
 				<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
 					<label><?php echo $this->InstanceLanguageText->GetText('TWO_STEP_VERIFICATION').":"; ?></label>
 				</div>
 				<div class="DivContentBodyContainerSubmitImage">
 					<?php  if($this->InputValueTwoStepVerification)
-								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage .
-																			'Icons/IconInfraToolsVerified.png';
-								else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage .
-																			'Icons/IconInfraToolsNotVerified.png';
+								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
+							else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueTwoStepVerification; ?>"
 								alt="TwoStepVerification" width="20" height="20" />
@@ -240,13 +238,10 @@
 				<div class="DivContentBodyContainerValueSided">
 					<label class="DivContentBodyContainerValueContent">
 						<?php  if($this->InputValueUserActive)
-									$this->InputValueUserActive = $this->Config->DefaultServerImage .
-																			'Icons/IconInfraToolsVerified.png';
-								else $this->InputValueUserActive = $this->Config->DefaultServerImage .
-																			'Icons/IconInfraToolsNotVerified.png';
+									$this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
+								else $this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
 						?>
-						<img	src="<?php echo $this->InputValueUserActive; ?>"
-								alt="UserActive" width="20" height="20" />
+						<img src="<?php echo $this->InputValueUserActive; ?>" alt="UserActive" width="20" height="20" />
 					</label>
 				</div>
 			</div>

@@ -13,9 +13,9 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about the association with user and a corporation.
 Functions: 
-			public function AssocUserCorporationDelete($CorporationName, $Email, $Debug, $MySqlConnection);
+			public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug, $MySqlConnection);
 			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, 
-			                                           $Email, $Debug, $MySqlConnection);
+			                                           $UserEmail, $Debug, $MySqlConnection);
 			
 **************************************************************************/
 
@@ -75,7 +75,7 @@ class FacedePersistenceAssocUserCorporation
         return self::$Instance;
     }
 	
-	public function AssocUserCorporationDelete($CorporationName, $Email, $Debug, $MySqlConnection)
+	public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -85,7 +85,7 @@ class FacedePersistenceAssocUserCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationDelete());
 			if ($stmt)
 			{
-				$stmt->bind_param("ss", $CorporationName, $Email);
+				$stmt->bind_param("ss", $CorporationName, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -114,7 +114,7 @@ class FacedePersistenceAssocUserCorporation
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, 
+	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $UserEmail, 
 											   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;		
@@ -125,7 +125,7 @@ class FacedePersistenceAssocUserCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("ssss", $CorporationName, $RegistrationDate, $RegistrationId, $Email);
+				$stmt->bind_param("ssss", $CorporationName, $RegistrationDate, $RegistrationId, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
 					return Config::SUCCESS;

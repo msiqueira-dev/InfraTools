@@ -50,7 +50,7 @@
 		}
 		?>
 	</div>
-	<!-- FORM_FIELD_USER_USER_EMAIL -->
+	<!-- FORM_FIELD_USER_EMAIL -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
@@ -67,10 +67,10 @@
 		else
 		{
 		?>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>"
 						   class="<?php echo $this->ReturnUserEmailClass; ?>"
-						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL; ?>',
+						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											   '', false);
@@ -79,7 +79,7 @@
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											   '');"
-						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL; ?>',
+						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											   '', true);
@@ -88,7 +88,7 @@
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											   '');"
-						  onclick="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL; ?>',
+						  onclick="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											   '', true);

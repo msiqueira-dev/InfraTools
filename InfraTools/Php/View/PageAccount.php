@@ -59,7 +59,7 @@ class PageAccount extends PageInfraTools
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT]))
 		{
 			$this->Page       = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
-			$this->InputFocus = ConfigInfraTools::ACCOUNT_UPDATE_NAME;
+			$this->InputFocus = ConfigInfraTools::FORM_FIELD_USER_NAME;
 		}
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT]))
 		{
@@ -70,7 +70,25 @@ class PageAccount extends PageInfraTools
 		//PAGE_ACCOUNT_UPDATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_SUBMIT]))
 		{
-			 if($this->UserUpdate(FALSE, $this->User, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			 if($this->UserUpdateByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],
+					  						    @$_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES], 
+												@$_POST[ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION], 
+												@$_POST[ConfigInfraTools::FORM_FIELD_USER_ACTIVE], 
+												@$_POST[ConfigInfraTools::FORM_FIELD_USER_CONFIRMED],
+   										        $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY], 
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX], 
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY],
+											    $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX], 
+												$_POST[ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID], 
+												FALSE,
+												$this->User, 
+												$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			 	$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
 			 else $this->Page = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
 		}

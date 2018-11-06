@@ -15,12 +15,12 @@ Methods:
 			public function GetBrowserClient($TrueValue, &$ReturnMessage);
 			public function GetIpAddressClient($TrueValue, &$ReturnMessage);
 			public function GetOperationalSystem($TrueValue &$ReturnMessage);
-			public function SendEmailContact($Application, $Email, $Message, $Name, $Subject, $Title, $Debug);
-			public function SendEmailLoginTwoStepVerificationCode($Application, $Email, $Name, $TwoStepVerificationCode, $Debug);
-			public function SendEmailPasswordReset($Application, $Name, $Email, $Password, $Debug);
+			public function SendEmailContact($Application, $EmailAddress, $Message, $Name, $Subject, $Title, $Debug);
+			public function SendEmailLoginTwoStepVerificationCode($Application, $EmailAddress, $Name, $TwoStepVerificationCode, $Debug);
+			public function SendEmailPasswordReset($Application, $Name, $EmailAddress, $Password, $Debug);
 			public function SendEmailPasswordRecovery($Application, $EmailAddress, $ResetCode, $Debug);
-			public function SendEmailRegister($Application, $Name, $Email, $Link, $Debug);
-			public function SendEmailResendConfirmationLink($Application, $Name, $Email, $Link, $Debug);
+			public function SendEmailRegister($Application, $Name, $EmailAddress, $Link, $Debug);
+			public function SendEmailResendConfirmationLink($Application, $Name, E$mailAddress, $Link, $Debug);
 **************************************************************************/
 if (!class_exists("Factory"))
 {
@@ -171,7 +171,7 @@ class FacedeBusiness
 		if ($sendEmail)
 		{
 			$config = $this->Factory->CreateConfig();
-			$Email = $this->Factory->CreateEmail();  		
+			$instanceEmail = $this->Factory->CreateEmail();  		
 			$subject = "[" . $Application . "] " . 
 				             Config::PAGE_CONTACT . " " . 
 				       $Subject . " - " . 
@@ -179,7 +179,7 @@ class FacedeBusiness
 			$body    = "<b>Name</b>: " . $Name . "<br><b>Email:</b> " . 
 				       $EmailAddress . "<br><br><br><b>Content</b>:<br>" . 
 				       $Message;
-			$return = $Email->SendFormEmail($Application,
+			$return = $instanceEmail->SendFormEmail($Application,
 							                $config->DefaultEmailNoReplyFormAddress,
 											$config->DefaultEmailNoReplyFormAddressReplyTo,
 							                $config->DefaultEmailNoReplyFormPassword, 
@@ -202,13 +202,13 @@ class FacedeBusiness
 	public function SendEmailLoginTwoStepVerificationCode($Application, $EmailAddress, $Name, $TwoStepVerificationCode, $Debug)
 	{
 		$config = $this->Factory->CreateConfig();
-		$Email = $this->Factory->CreateEmail();  		
+		$instanceEmail = $this->Factory->CreateEmail();  		
 		$subject = $this->Language->GetText('LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG');
 		$body    = $Name . ",</br></br>" 
 			             . $this->Language->GetText('LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT')
 		                 . "</br><b> " 
 			             . $TwoStepVerificationCode . "</b>";
-		$return = $Email->SendFormEmail($config->DefaultApplicationName,
+		$return = $instanceEmail->SendFormEmail($config->DefaultApplicationName,
 						 $config->DefaultEmailNoReplyFormAddress, 
 						 $config->DefaultEmailNoReplyFormAddressReplyTo,
 						 $config->DefaultEmailNoReplyFormPassword, 
@@ -226,13 +226,13 @@ class FacedeBusiness
 	public function SendEmailPasswordReset($Application, $Name, $EmailAddress, $Password, $Debug)
 	{
 		$config = $this->Factory->CreateConfig();
-		$Email = $this->Factory->CreateEmail();  		
+		$instanceEmail = $this->Factory->CreateEmail();  		
 		$subject = $this->Language->GetText('FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG');
 		$body    = $Name . ",</br></br>" 
 			             . $this->Language->GetText('FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT')	 
 		                 . "</br><b> " 
 			             . $Password . "</b>";
-		$return = $Email->SendFormEmail($Application,
+		$return = $instanceEmail->SendFormEmail($Application,
 						                $config->DefaultEmailNoReplyFormAddress,
 										$config->DefaultEmailNoReplyFormAddressReplyTo,
 						                $config->DefaultEmailNoReplyFormPassword, 
@@ -268,11 +268,11 @@ class FacedeBusiness
 		if ($sendEmail)
 		{
 			$config = $this->Factory->CreateConfig();
-			$InstanceBaseEmail = $this->Factory->CreateEmail();  		
+			$instanceEmail = $this->Factory->CreateEmail();  		
 			$subject = $this->Language->GetText('PASSWORD_RECOVERY_EMAIL_TAG');
 			$body    = $this->Language->GetText('PASSWORD_RECOVERY_EMAIL_TEXT') . "</br><b> " . 
 				       $ResetCode . "</b>";
-			$return = $InstanceBaseEmail->SendFormEmail($Application,
+			$return = $instanceEmail->SendFormEmail($Application,
 							 $config->DefaultEmailNoReplyFormAddress,
 							 $config->DefaultEmailNoReplyFormAddressReplyTo,
 							 $config->DefaultEmailNoReplyFormPassword, 
@@ -295,12 +295,12 @@ class FacedeBusiness
 	public function SendEmailRegister($Application, $Name, $EmailAddress, $Link, $Debug)
 	{
 		$config = $this->Factory->CreateConfig();
-		$Email = $this->Factory->CreateEmail(); 		
+		$instanceEmail = $this->Factory->CreateEmail(); 		
 		$subject = $this->Language->GetText('REGISTER_EMAIL_TAG');
 		$body    = $Name . ",</br></br>" .
 			       $this->Language->GetText('REGISTER_EMAIL_TEXT') . "</br><b> " .
 			       $Link . "</b>";
-		$return = $Email->SendFormEmail($Application,
+		$return = $instanceEmail->SendFormEmail($Application,
 						 $config->DefaultEmailNoReplyFormAddress,
 						 $config->DefaultEmailNoReplyFormAddressReplyTo,
 						 $config->DefaultEmailNoReplyFormPassword, 
@@ -318,12 +318,12 @@ class FacedeBusiness
 	public function SendEmailResendConfirmationLink($Application, $Name, $EmailAddress, $Link, $Debug)
 	{
 		$config = $this->Factory->CreateConfig();
-		$Email = $this->Factory->CreateEmail();  		
+		$instanceEmail = $this->Factory->CreateEmail();  		
 		$subject = $this->Language->GetText('RESEND_CONFIRMATION_EMAIL_TAG');
 		$body    = $Name . ",</br></br>" .
 			       $this->Language->GetText('RESEND_CONFIRMATION_EMAIL_TEXT') . "</br><b> " .
 			       $Link . "</b>";
-		$return = $Email->SendFormEmail($Application,
+		$return = $instanceEmail->SendFormEmail($Application,
 						 $config->DefaultEmailNoReplyFormAddress,
 						 $config->DefaultEmailNoReplyFormAddressReplyTo,
 						 $config->DefaultEmailNoReplyFormPassword, 

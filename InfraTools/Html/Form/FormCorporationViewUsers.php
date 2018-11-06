@@ -54,8 +54,8 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 								 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
 								 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
 								 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL . "' 
-										 id='"   . ConfigInfraTools::FORM_FIELD_USER_USER_EMAIL . "' 
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
 										 value='" . $user->GetEmail() . "' 
 										 title='" . $user->GetEmail() . "' />
 				</form>
