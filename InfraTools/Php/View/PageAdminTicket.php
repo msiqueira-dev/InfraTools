@@ -56,11 +56,11 @@ class PageAdminTicket extends PageAdmin
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

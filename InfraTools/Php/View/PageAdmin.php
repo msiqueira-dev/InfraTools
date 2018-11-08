@@ -125,8 +125,8 @@ class PageAdmin extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_FORM);
-		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_FORM_NUMBER);
+		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_SACK);
+		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_STACK_NUMBER);
 		$this->LoadHtml(FALSE);
 	} 
 }

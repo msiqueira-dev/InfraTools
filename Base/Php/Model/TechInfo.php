@@ -97,13 +97,13 @@ abstract class TechInfo
 		return $this->TotalFileCount;
 	}
 	
-	protected function CreateFile($Directory, $Extension, $Name, $Type, &$File)
+	protected function CreateFile($Directory, $Extension, $FileName, $Type, &$File)
 	{
 		$File = $this->Factory->CreateFile();
 		$File->SetDirectory($Directory);
 		$File->SetExtension($Extension);
-		$File->SetName($Name);
-		$File->SetPath($Directory . "/" . $Name . "." . $Extension);
+		$File->SetName($FileName);
+		$File->SetPath($Directory . "/" . $FileName . "." . $Extension);
 		$File->SetType($Type);
 		return Config::SUCCESS;
 	}

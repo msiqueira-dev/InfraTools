@@ -248,7 +248,7 @@
 			 class="DivContentBodyContainerCaptchaImage" />
 	</div>
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>',
+		 onmouseover="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 								   '', true);

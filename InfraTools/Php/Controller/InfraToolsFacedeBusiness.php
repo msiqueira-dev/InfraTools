@@ -73,12 +73,12 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			$this->Language = $InstanceInfraToolsLanguage;
     }
 	
-	/* Get Instance */
+	/* Create */
 	public static function __create($InstanceInfraToolsLanguage)
     {
 		if(!file_exists(SITE_PATH_PHP_CONTROLLER . "LanguageInfraTools.php"))
 			exit('FacedeBusinessInfraTools: No language loaded!');
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || self::$Instance != __CLASS__) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class($InstanceInfraToolsLanguage);

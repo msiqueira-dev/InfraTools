@@ -41,8 +41,8 @@ Functions:
 			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug, 
 										        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function CorporationDelete($Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function CorporationInsert($CorporationActive, $Name, $Debug, 
+			public function CorporationDelete($CorporationName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function CorporationInsert($CorporationActive, $CorporationName, $Debug, 
 			                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
 			                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
@@ -125,8 +125,8 @@ Functions:
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
 			public function UserDeleteByUserEmail($UserEmail, $Debug);
 			public function UserInsert($BirthDate, $Corporation, $Country, $Department, $UserEmail, $Gender, $HashCode, 
-			                           $Name, $Password, $Region, $SessionExpires, $TwoStepVerification, 
-									   $UserActive, $UserConfirmed, $UserType, $UserUniqueId $Debug);
+			                           $UserName, $Password, $Region, $SessionExpires, $TwoStepVerification, 
+									   $UserActive, $UserConfirmed, $UserType, $UserUniqueId, $Debug);
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
@@ -141,11 +141,11 @@ Functions:
 			public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
 			public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug);
-			public function UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		            $UserEmail, $Debug);
-			public function UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation($Corporation, $RegistrationId, 
-																		                        $UserEmail, $Debug);
-			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $Name, $Region, $SessionExpires, 
+			public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+			                                                                        $AssocUserCorporationRegistrationDateNew, 
+			                                                                        $AssocUserCorporationRegistrationIdNew, 
+																					$CorporationName, $UserEmail, $Debug);
+			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
 									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
 			public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug);
@@ -373,28 +373,28 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function CorporationDelete($Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function CorporationDelete($CorporationName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-			$return = $instanceFacedePersistenceCorporation->CorporationDelete($Name, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceCorporation->CorporationDelete($CorporationName, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-			$return = $instanceFacedePersistenceCorporation->CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceCorporation->CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -938,14 +938,14 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserDeleteByUserEmail($UserEmail, $Debug);
 	}
 	
-	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $Gender, $HashCode, $Name, $Password, 
+	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $Gender, $HashCode, $UserName, $Password, 
 							   $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
 							   $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 							   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 		return $FacedePersistenceUser->UserInsert($BirthDate, $Corporation, $Country, 
-												  $UserEmail, $Gender, $HashCode, $Name, $Password, 
+												  $UserEmail, $Gender, $HashCode, $UserName, $Password, 
 							                      $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
 												  $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 												  $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug);
@@ -1039,37 +1039,23 @@ class FacedePersistence
 		return $FacedePersistenceUser->UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug);
 	}
 	
-	public function UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		    $UserEmail, $Debug)
+	public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+																			$AssocUserCorporationRegistrationDateNew,
+																			$AssocUserCorporationRegistrationIdNew, 
+																			$CorporationName, $UserEmail, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationByUserEmailAndCorporation($Corporation, $RegistrationDate, 
-																						       $RegistrationId, $UserEmail, $Debug);
+		return $FacedePersistenceUser->AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+																							   $AssocUserCorporationRegistrationDateNew,
+																							   $AssocUserCorporationRegistrationIdNew, 
+																						       $CorporationName, $UserEmail, $Debug);
 	}
 	
-	public function UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		                    $UserEmail, $Debug)
-	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationDateByUserEmailAndCorporation($Corporation, 
-																										       $RegistrationDate, 
-																											   $UserEmail, $Debug);
-	}
-	
-	public function UserUpdateAssocUserCorporationRegistrationIdByUserEmailAndCorporation($Corporation, $RegistrationId, 
-																					      $UserEmail, $Debug)
-	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationIdByUserEmailAndCorporation($Corporation,
-																						                     $RegistrationId, $UserEmail,
-																											 $Debug);
-	}
-	
-	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $Name, $Region, $SessionExpires, 
+	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
 									  $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
 	{
 		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $Name, $Region, $SessionExpires, 
+		return $FacedePersistenceUser->UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
 									                         $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary,
 															 $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 															 $UserUniqueId, $Debug);

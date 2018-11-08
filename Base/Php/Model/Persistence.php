@@ -13,7 +13,7 @@ Methods:
 			public static function ShowQuery($Query);
 			public static function SqlAssocUserCorporationDelete();
 			public static function SqlAssocUserCorporationInsert();
-			public static function SqlAssocUserCorporationUpdate();
+			public static function SqlAssocUserCorporationUpdateByUserEmailAndCorporationName();
 			public static function SqlAssocUserCorporationUpdateCorporation();
 			public static function SqlAssocUserTeamDelete();
 			public static function SqlAssocUserTeamInsert();
@@ -154,10 +154,12 @@ class Persistence
 			 . " VALUES (NOW(), UPPER(?), ?, ?, UPPER(?))";
 	}
 	
-	public static function SqlAssocUserCorporationUpdate()
+	public static function SqlAssocUserCorporationUpdateByUserEmailAndCorporationName()
 	{
 		return "UPDATE " . Config::TABLE_ASSOC_USER_CORPORATION                 . "    "  
 		. "SET " . Config::TABLE_ASSOC_USER_CORPORATION                         .   ".". 
+    	           Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME   ." =?, "
+		. " "    . Config::TABLE_ASSOC_USER_CORPORATION                         .   ".". 
     	           Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE ." =?, "
 		. " "    . Config::TABLE_ASSOC_USER_CORPORATION                         .   ".". 
 		           Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID   ."=?   "
@@ -172,12 +174,9 @@ class Persistence
 	public static function SqlAssocUserCorporationUpdateCorporation()
 	{
 		return "UPDATE " . Config::TABLE_ASSOC_USER_CORPORATION . " "  
-		. "SET " 
-			. Config::TABLE_ASSOC_USER_CORPORATION . "." . Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME . " =? "
-		. "WHERE " 
-			. Config::TABLE_ASSOC_USER_CORPORATION . "." . Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME. " =? "
-		. "AND "   
-			. Config::TABLE_ASSOC_USER_CORPORATION . "." . Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL      . " =? ";
+		. "SET "   . Config::TABLE_ASSOC_USER_CORPORATION . "." . Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME . " =? "
+		. "WHERE " . Config::TABLE_ASSOC_USER_CORPORATION . "." . Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME. " =? "
+		. "AND "   . Config::TABLE_ASSOC_USER_CORPORATION . "." . Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL      . " =? ";
 	}
 	
 	public static function SqlAssocUserTeamDelete()

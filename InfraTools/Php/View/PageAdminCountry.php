@@ -49,7 +49,7 @@ class PageAdminCountry extends PageAdmin
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		//COUNTRY LIST BACK SUBMIT
@@ -100,7 +100,7 @@ class PageAdminCountry extends PageAdmin
 			$_POST[ConfigInfraTools::FORM_COUNTRY_LIST] = ConfigInfraTools::FORM_COUNTRY_LIST;
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

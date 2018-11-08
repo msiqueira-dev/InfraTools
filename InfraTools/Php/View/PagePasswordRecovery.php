@@ -54,7 +54,7 @@ class PagePasswordRecovery extends PageInfraTools
 	public function LoadPage()
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_EMAIL;
+		$this->InputFocus = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
 		Page::GetCurrentURL($pageUrl);
 		if(strstr($pageUrl, "?="))
 		{
@@ -66,7 +66,7 @@ class PagePasswordRecovery extends PageInfraTools
 		if (isset($_POST[ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT]))
 		{
 			$return = $this->UserSelectExistsByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_CAPTCHA],
-														 $_POST[ConfigInfraTools::FORM_FIELD_EMAIL], 
+														 $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL], 
 														 $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{

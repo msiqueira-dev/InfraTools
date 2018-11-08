@@ -13,8 +13,8 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about corporation.
 Functions: 
-			public function CorporationDelete($Name, $Debug, $MySqlConnection);
-			public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection);
+			public function CorporationDelete($CorporationName, $Debug, $MySqlConnection);
+			public function CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection);
 			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection);
 			public function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount,
 			                                        $Debug, $MySqlConnection);
@@ -80,7 +80,7 @@ class FacedePersistenceCorporation
         return self::$Instance;
     }
 	
-	public function CorporationDelete($Name, $Debug, $MySqlConnection)
+	public function CorporationDelete($CorporationName, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -90,7 +90,7 @@ class FacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationDelete());
 			if ($stmt)
 			{
-				$stmt->bind_param("s", $Name);
+				$stmt->bind_param("s", $CorporationName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -119,7 +119,7 @@ class FacedePersistenceCorporation
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection)
+	public function CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;		
 		if($MySqlConnection != NULL)
@@ -129,7 +129,7 @@ class FacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("is", $CorporationActive, $Name);
+				$stmt->bind_param("is", $CorporationActive, $CorporationName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
 					return Config::SUCCESS;

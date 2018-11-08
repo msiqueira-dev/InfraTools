@@ -61,7 +61,7 @@ class PageAdminUser extends PageAdmin
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		//USER LIST
@@ -166,7 +166,31 @@ class PageAdminUser extends PageAdmin
 		//USER REGISTER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
-			if($this->UserRegister(NULL, NULL, FALSE, NULL, NULL, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->UserInsert(ConfigInfraTools::APPLICATION_INFRATOOLS,
+								 FALSE,
+				                 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
+								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
+								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
+								 NULL,
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
+								 NULL,
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
+								 $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW],
+								 $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],
+					  			 @$_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES], 
+								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION], 
+								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_ACTIVE], 
+								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_CONFIRMED],
+   								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY], 
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX], 
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY],
+								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX], 
+								 ConfigInfraTools::TYPE_USER_DEFAULT_ID, 
+								 NULL,
+								 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 			else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
 		}
@@ -290,13 +314,25 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserUpdateCorporationInformation($this->InstanceInfraToolsUserAdmin, 
-														   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->AssocUserCorporationUpdateByUserEmailAndCorporationName(
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+														  @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY],
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH],
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR],
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID],
+					                                      $this->InstanceInfraToolsUserAdmin, 
+														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
 												              $this->InstanceInfraToolsUserAdmin, 
 														      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					{
+						$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
+						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
+						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
+							                                . ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+					}
 				}
 				else 
 				{
@@ -398,11 +434,11 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserUpdateByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
-												$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
-												$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
+				if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
+												@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
+												@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
 												$_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
-												$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
+												@$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
 												$_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
 												$_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],
 					  						    @$_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES], 
@@ -424,7 +460,7 @@ class PageAdminUser extends PageAdmin
 		}
 		else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

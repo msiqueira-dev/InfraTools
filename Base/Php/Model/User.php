@@ -59,7 +59,7 @@ Get / Set:
 			public function SetGender($Gender);
 			public function SetHashCode($HashCode);
 			public function SetLoggedIn($LoggedIn);
-			public function SetName($Name);
+			public function SetName($UserName);
 			public function SetRegion($Region);
 			public function SetRegisterDate($RegisterDate);
 			public function SetSessionExpires($SessionExpires);
@@ -80,7 +80,7 @@ Methods:
 			public function CheckSuperUser();
 			public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
-									   $HashCode, $LoggedIn, $Name, $Region, $RegisterDate, $SessionExpires, 
+									   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
 									   $TwoStepVerification, $UserActive, $UserConfirmed, 
 									   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 									   $UserTypeInstance, $UserUniqueId);
@@ -100,7 +100,7 @@ class User
 	protected $Gender                      = NULL;
 	protected $HashCode                    = NULL;
 	protected $LoggedIn                    = NULL;
-	protected $Name                        = NULL;
+	protected $UserName                    = NULL;
 	protected $Region                      = NULL;
 	protected $RegisterDate                = NULL;
 	protected $SessionExpires              = NULL;
@@ -117,7 +117,7 @@ class User
 	/* Constructor */
 	public function __construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
 								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-								$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
+								$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								$TwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
@@ -132,7 +132,7 @@ class User
 		$this->UserEmail                = $UserEmail;
 		$this->Gender                   = $Gender;
 		$this->HashCode                 = $HashCode;
-		$this->Name                     = $Name;
+		$this->UserName                 = $UserName;
 		$this->Region                   = $Region;
 		$this->RegisterDate             = $RegisterDate;
 		$this->SessionExpires           = $SessionExpires;
@@ -318,7 +318,7 @@ class User
 	
 	public function GetName()
 	{
-		return $this->Name;
+		return $this->UserName;
 	}
 	
 	public function GetRegion()
@@ -448,9 +448,9 @@ class User
 		$this->LoggedIn = $LoggedIn;
 	}
 	
-	public function SetName($Name)
+	public function SetName($UserName)
 	{
-		$this->Name = $Name;
+		$this->UserName = $UserName;
 	}
 	
 	public function SetRegion($Region)
@@ -554,24 +554,20 @@ class User
 	
 	public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
-							   $HashCode, $LoggedIn, $Name, $Region, $RegisterDate, $SessionExpires, 
+							   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 							   $UserTypeInstance, $UserUniqueId)
 	{
-		if($ArrayAssocUserTeam != NULL)
-			$this->ArrayAssocUserTeam          = $ArrayAssocUserTeam;
-		if($ArrayNotification != NULL)
-			$this->ArrayNotification           = $ArrayNotification;
+		$this->ArrayAssocUserTeam          = $ArrayAssocUserTeam;
+		$this->ArrayNotification           = $ArrayNotification;
 		$this->AssocUserCorporation            = $AssocUserCorporation;
 		if($BirthDate != NULL)
-			$this->BirthDate                   = $BirthDate;
-		
+			$this->BirthDate                   = $BirthDate;	
 		$this->Corporation                     = $CorporationInstance;
 		if($Country != NULL)
 			$this->Country                     = $Country;
-		if($DepartmentInstance != NULL)
-			$this->Department                  = $DepartmentInstance;
+		$this->Department                  = $DepartmentInstance;
 		if($UserEmail != NULL)
 			$this->UserEmail                   = $UserEmail;
 		if($Gender != NULL)
@@ -580,8 +576,8 @@ class User
 			$this->HashCode                    = $HashCode;
 		if($LoggedIn != NULL)
 			$this->LoggedIn                    = $LoggedIn;
-		if($Name != NULL)
-			$this->Name                        = $Name;
+		if($UserName != NULL)
+			$this->UserName                    = $UserName;
 		$this->Region                          = $Region;
 		if($RegisterDate != NULL)
 			$this->RegisterDate                = $RegisterDate;

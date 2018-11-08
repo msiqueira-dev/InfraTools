@@ -52,6 +52,10 @@ class Config
 	const FORM_BACKGROUND_SUCCESS                                       = "DivReturnMessageSuccess";
 	const FORM_BACKGROUND_WARNING                                       = "DivReturnMessageWarning";
 	const FORM_FIELD_ERROR                                              = "InputAlertText";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY       = "FormFieldAssocUserCorporationRegistrationDateDay";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH     = "FormFieldAssocUserCorporationRegistrationDateMonth";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR      = "FormFieldAssocUserCorporationRegistrationDateYear";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID             = "FormFieldAssocUserCorporationRegistrationId";
 	const FORM_FIELD_CAPTCHA                                            = "FormFieldCaptcha";
 	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
 	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
@@ -59,7 +63,6 @@ class Config
 	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
 	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
 	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
-	const FORM_FIELD_EMAIL                                              = "FormInputEmail";
 	const FORM_FIELD_HEADER_DEBUG                                       = "FormFieldHeaderDebug";
 	const FORM_FIELD_HEADER_DEBUG_HIDDEN                                = "FormFieldHeaderDebugHidden";
 	const FORM_FIELD_HEADER_LAYOUT                                      = "FormFieldHeaderLayout";
@@ -88,7 +91,7 @@ class Config
 	const FORM_FIELD_USER_BIRTH_DATE_DAY                                = "FormFieldUserBirthDateDay";
 	const FORM_FIELD_USER_BIRTH_DATE_MONTH                              = "FormFieldUserBirthDateMonth";
 	const FORM_FIELD_USER_BIRTH_DATE_YEAR                               = "FormFieldUserBirthDateYear";
-	const FORM_FIELD_USER_COUNTRY                                       = "FormFieldUserCountryHidden";
+	const FORM_FIELD_USER_COUNTRY                                       = "FormFieldUserCountry";
 	const FORM_FIELD_USER_CONFIRMED                                     = "FormFieldUserConfirmed";
 	const FORM_FIELD_USER_EMAIL                                         = "FormFieldUserEmail";
 	const FORM_FIELD_USER_GENDER                                        = "FormFieldGender";
@@ -98,7 +101,7 @@ class Config
 	const FORM_FIELD_USER_PHONE_PRIMARY_PREFIX                          = "FormFieldUserPhonePrimaryPrefix";
 	const FORM_FIELD_USER_PHONE_SECONDARY                               = "FormFieldUserPhoneSecondary";
 	const FORM_FIELD_USER_PHONE_SECONDARY_PREFIX                        = "FormFieldUserPhoneSecondaryPrefix";
-	const FORM_FIELD_USER_REGION                                        = "FormFieldUserRegionHidden";
+	const FORM_FIELD_USER_REGION                                        = "FormFieldUserRegion";
 	const FORM_FIELD_USER_SESSION_EXPIRES                               = "FormFieldUserSessionExpires";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                         = "FormFieldUserTwoStepVerification";
 	const FORM_FIELD_USER_UNIQUE_ID                                     = "FormFieldUserUniqueId";
@@ -292,6 +295,8 @@ class Config
 	const SESS_LAST_ACTIVITY                                            = "SessionLastActivity";
 	const SESS_LANGUAGE                                                 = "SessionLanguage";
 	const SESS_LOGIN_TWO_STEP_VERIFICATION                              = "SessionLoginTwoStepVerification";
+	const SESS_PAGE_SACK                                                = "SessionPageStack";
+	const SESS_PAGE_STACK_NUMBER                                        = "SessionPageStackNumber";
 	const SESS_PASSWORD_RECOVERY                                        = "SessionPasswordRecovery";
 	const SESS_UNLIMITED                                                = "SessionUnlimited";
 	const SESS_USER                                                     = "SessionUser";

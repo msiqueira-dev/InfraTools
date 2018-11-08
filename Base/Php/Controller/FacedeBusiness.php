@@ -56,7 +56,7 @@ class FacedeBusiness
     {
 		if($InstanceLanguage == NULL)
 			exit('FacedeBusiness: No language loaded!');
-        if (!isset(self::$Instance))
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0)
 		{
             $class = __CLASS__;
             self::$Instance = new $class($InstanceLanguage);

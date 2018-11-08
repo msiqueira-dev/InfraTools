@@ -117,7 +117,7 @@ class FacedePersistenceAssocUserCorporation
 	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $UserEmail, 
 											   $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;		
+		$errorCode = NULL; $errorStr = NULL; $mySqlError = NULL; $queryResult = NULL;		
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)

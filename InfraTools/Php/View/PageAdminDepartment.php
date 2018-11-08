@@ -52,7 +52,7 @@ class PageAdminDepartment extends PageAdmin
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		//DEPARTMENT VIEW USERS SELECT USER SUBMIT
@@ -433,7 +433,7 @@ class PageAdminDepartment extends PageAdmin
 			$_POST[ConfigInfraTools::FORM_DEPARTMENT_SELECT] = ConfigInfraTools::FORM_DEPARTMENT_SELECT;
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

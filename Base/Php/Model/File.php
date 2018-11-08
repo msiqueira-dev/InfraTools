@@ -29,7 +29,7 @@ class File
 	/* Properties */
 	private $Directory          = NULL;
 	private $Extension          = NULL;
-	private $Name               = NULL;
+	private $FileName           = NULL;
 	private $OptionRead         = 'r';
 	private $OptionWrite        = 'w';
 	private $OptionReadWrite    = 'w+';
@@ -55,7 +55,7 @@ class File
 	
 	public function GetName()
 	{
-		return $this->Name;
+		return $this->FileName;
 	}
 	
 	public function GetPath()
@@ -79,9 +79,9 @@ class File
 		$this->Extension = $Extension;
 	}
 	
-	public function SetName($Name)
+	public function SetName($FileName)
 	{
-		$this->Name = $Name;
+		$this->FileName = $FileName;
 	}
 	
 	public function SetPath($Path)

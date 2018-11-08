@@ -17,7 +17,7 @@ Functions:
 			                                            $Debug, $MySqlConnection);
 			public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, 
 			                                                         $Debug, $MySqlConnection);
-			public function CorporationInfraToolsSelectByName($Name, &$CorporationInstance, 
+			public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, 
 			                                                  $Debug, $MySqlConnection);
 			public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
 			public function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
@@ -65,10 +65,10 @@ class InfraToolsFacedePersistenceCorporation
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -161,7 +161,7 @@ class InfraToolsFacedePersistenceCorporation
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationInfraToolsSelectByName($Name, &$CorporationInstance, $Debug, $MySqlConnection)
+	public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -171,15 +171,15 @@ class InfraToolsFacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelectByName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $Name);
+				$stmt->bind_param("s", $CorporationName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($corpActive, $Name, $registerDate);
+					$stmt->bind_result($corpActive, $CorporationName, $registerDate);
 					if ($stmt->fetch())
 					{
 						$CorporationInstance = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL, $corpActive, 
-																						             $Name, $registerDate);
+																						             $CorporationName, $registerDate);
 						return Config::SUCCESS;
 					}
 					else

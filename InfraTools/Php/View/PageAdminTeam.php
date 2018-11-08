@@ -50,7 +50,7 @@ class PageAdminTeam extends PageAdmin
 		$this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		//TEAM LIST
@@ -242,7 +242,7 @@ class PageAdminTeam extends PageAdmin
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

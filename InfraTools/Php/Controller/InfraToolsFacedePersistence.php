@@ -38,7 +38,7 @@ Methods:
 			                                            $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, 
 			                                                         $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function CorporationInfraToolsSelectByName($Name, &$CorporationInstance, 
+			public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, 
 			                                                  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, 
 			                                                   $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
@@ -184,7 +184,7 @@ Methods:
 			                                     $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                                  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function InfraToolUsersSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, 
+			public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, 
 			                                                $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, 
 			                                                   $MySqlConnection = NULL, $CloseConnectaion = FALSE);
@@ -235,10 +235,10 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -369,13 +369,13 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function CorporationInfraToolsSelectByName($Name, &$CorporationInstance, 
+	public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, 
 													  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
-		$return = $InfraToolsFacedePersistenceCorporation->CorporationInfraToolsSelectByName($Name, $CorporationInstance, 
+		$return = $InfraToolsFacedePersistenceCorporation->CorporationInfraToolsSelectByName($CorporationName, $CorporationInstance, 
 																							 $Debug, $MySqlConnection);
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);

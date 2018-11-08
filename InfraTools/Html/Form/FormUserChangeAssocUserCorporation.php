@@ -105,17 +105,17 @@
 		</div>
 		<!-- REGISTRATION_DATE_BIRTH_DATE_DAY -->
 		<select style="
-					   <?php if($this->InputValueRegistrationDateDay != ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY
+					   <?php if($this->InputValueRegistrationDateDay != ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateDay != "") 
 							echo 'color:black;'
 						?> " 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>"
 				class="SelectBirthDateDay <?php echo $this->ReturnRegistrationDateDayClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY; ?>');">
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>');">
 			<option <?php if ($this->InputValueRegistrationDateDay == "" 
-							  || $this->InputValueRegistrationDateDay == ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY; ?>" 
+							  || $this->InputValueRegistrationDateDay == ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
 			</option>
@@ -130,17 +130,17 @@
 		</select>
 		<!-- REGISTRATION_DATE_DATE_MONTH -->
 		<select style="
-						<?php if($this->InputValueRegistrationDateMonth != ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY
+						<?php if($this->InputValueRegistrationDateMonth != ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateMonth != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>"
 				class="SelectBirthDateMonth <?php echo $this->ReturnRegistrationDateMonthClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH; ?>');">
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>');">
 			<option <?php if ($this->InputValueRegistrationDateMonth == "" 
-							  || $this->InputValueRegistrationDateMonth == ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY; ?>" 
+							  || $this->InputValueRegistrationDateMonth == ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
 			</option>
@@ -155,17 +155,17 @@
 		</select>
 		<!-- REGISTRATION_DATE_DATE_YEAR -->
 		<select style=";
-					   <?php if($this->InputValueRegistrationDateYear != ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY
+					   <?php if($this->InputValueRegistrationDateYear != ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateYear != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>"
 				class="SelectBirthDateYear <?php echo $this->ReturnRegistrationDateYearClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR; ?>');">
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>');">
 			<option <?php if ($this->InputValueRegistrationDateYear == "" 
-							  || $this->InputValueRegistrationDateYear == ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY; ?>" 
+							  || $this->InputValueRegistrationDateYear == ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
 			</option>
@@ -185,14 +185,14 @@
             <label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID'); ?></label>
             <label>:</label>
         </div>
-        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_ID; ?>" 
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_ID; ?>" 
+        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
+                           id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
                            class="<?php echo $this->ReturnRegistrationIdClass; ?>"
-                           onblur="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_ID; ?>',
+                           onblur="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>',
                                                '', true);"
-                           onclick="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FORM_FIELD_REGISTRATION_ID; ?>',
+                           onclick="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>',
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>',
                                                '', true);"
@@ -206,8 +206,8 @@
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_DEPARTMENT_SELECT; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_DEPARTMENT_SELECT; ?>"
+                name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
+                id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
                 class="SelectCorporation"
                 onchange="document.getElementById(
                                         '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>')

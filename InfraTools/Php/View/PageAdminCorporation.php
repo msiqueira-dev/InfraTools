@@ -51,7 +51,7 @@ class PageAdminCorporation extends PageAdmin
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		//CORPORATION LIST
@@ -380,7 +380,7 @@ class PageAdminCorporation extends PageAdmin
 			$_POST[ConfigInfraTools::FORM_CORPORATION_SELECT] = ConfigInfraTools::FORM_CORPORATION_SELECT;
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

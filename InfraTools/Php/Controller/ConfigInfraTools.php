@@ -219,10 +219,6 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_RADIO_DEPARTMENT                                   = "FormFieldRadioDepartment";
 	const FORM_FIELD_RADIO_DEPARTMENT_NAME                              = "FormFieldRadioDepartmentName";
 	const FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME         = "FormFieldRadioDepartmentNameAndCorporationName";
-	const FORM_FIELD_REGISTRATION_DATE_SELECT_DAY                       = "FormFieldRegistrationDateSelectDay";
-	const FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH                     = "FormFieldRegistrationDateSelectMonth";
-	const FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR                      = "FormFieldRegistrationDateSelectYear";
-	const FORM_FIELD_REGISTRATION_ID                                    = "FormFieldRegistrationId";
 	const FORM_FIELD_SERVICE_ACTIVE                                     = "FormFieldServiceActive";
 	const FORM_FIELD_SERVICE_CORPORATION                                = "FormFieldServiceCorporation";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                     = "FormFieldServiceCorporationCanChange";
@@ -500,7 +496,6 @@ class ConfigInfraTools extends Config
 	const FORM_USER                                                     = "FormUser";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION                       = "FormUserChangeAssocUserCorporation";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL                = "FormUserChangeAssocUserCorporationCancel";
-	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION_DEPARTMENT_SELECT     = "FormUserChangeAssocUserCorporationDepartmentSelect";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT                = "FormUserChangeAssocUserCorporationSubmit";
 	const FORM_USER_CHANGE_CORPORATION                                  = "FormUserChangeCorporation";
 	const FORM_USER_CHANGE_CORPORATION_CANCEL                           = "FormUserChangeCorporationCancel";
@@ -584,8 +579,6 @@ class ConfigInfraTools extends Config
 	const MYSQL_TYPE_SERVICE_SELECT_FAILED                              = "RetMySqlTypeServiceSelectFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED                        = "RetMySqlTypeServiceSelectFetchFailed";
 	const SESS_ADMIN_SERVICE                                            = "SessionAdminService";
-	const SESS_PAGE_FORM                                                = "SessionPageForm";
-	const SESS_PAGE_FORM_NUMBER                                         = "SessionPageFormNumber";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE                                = "ASSOC_IP_ADDRESS_SERVICE";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE_FIELD_SERVICE_ID               = "AssocIpAddressServiceServiceId";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE_FIELD_IP                       = "AssocIpAddressServiceIp";
@@ -994,14 +987,14 @@ class ConfigInfraTools extends Config
 			echo '<script type="text/javascript">alert("A sessão terminou devido ao tempo inativo!");</script>';
     }
 	
-	/* Create */
+	//* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
-		}
+        }
         return self::$Instance;
     }
 }

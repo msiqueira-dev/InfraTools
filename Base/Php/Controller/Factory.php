@@ -20,7 +20,7 @@ Methods:
 			public function     CreateCaptcha();
 			public function     CreateConfig();
 			public function     CreateCorporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
-			public function     CreateCountry($CountryAbbreviation, $Name, $RegionCode, $RegisterDate);
+			public function     CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
 			public function     CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
 			public function     CreateEmail();
 			public function     CreateFacedeBusiness($LanguageText);
@@ -62,7 +62,7 @@ Methods:
 			public function     CreateTypeUser($Description, $Id, $RegisterDate);
 			public function     CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 			                               $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
-							               $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
+							               $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
 							               $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
 **************************************************************************/
 
@@ -209,12 +209,12 @@ class Factory
 		return new Corporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
 	}
 	
-	public function CreateCountry($CountryAbbreviation, $Name, $RegionCode, $RegisterDate) 
+	public function CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate) 
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
 		else include_once(BASE_PATH_PHP_MODEL . "Country.php");
-		return new Country($CountryAbbreviation, $Name, $RegionCode, $RegisterDate);
+		return new Country($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
 	}
 	
 	public function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate) 
@@ -556,7 +556,7 @@ class Factory
 	
 	public function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-							   $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
+							   $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 							   $UserTypeInstance, $UserUniqueId)
@@ -566,7 +566,7 @@ class Factory
 		else include_once(BASE_PATH_PHP_MODEL . "User.php");
 		return new User($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-						$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
+						$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 						$TwoStepVerification, $UserActive, $UserConfirmed, 
 						$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 						$UserTypeInstance, $UserUniqueId);

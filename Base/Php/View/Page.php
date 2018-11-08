@@ -21,11 +21,11 @@ Methods:
 		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
 		private       function        LoadInstanceUser();
-		private       function        SendTwoStepVerificationCode($Application, $UserEmail, $Name, $Debug);
+		private       function        SendTwoStepVerificationCode($Application, $UserEmail, $UserName, $Debug);
 		protected     function        TagOnloadFocusField($Form, $Field);
 		protected     function        CaptchaLoad(SessionCaptchaKey);
 		protected     function        CorporationDelete($CorporationName, $Debug);
-		protected     function        CorporationInsert($CorporationActive, $Name, $Debug);
+		protected     function        CorporationInsert($CorporationActive, $CorporationName, $Debug);
 		protected     function        CorporationLoadData(&$InstanceCorporation);
 		protected     function        CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug);
 		protected     function        CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, 
@@ -52,6 +52,9 @@ Methods:
 		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
 		protected     function        LoadHtml($HasLoginForm);
+		protected     function        PageStackSessionLoad();
+		protected     function        PageStackSessionRemoveAll();
+		protected     function        PageStackSessionSave();
 		protected     function        TeamDeleteByTeamId($TeamId, $Debug);
 		protected     function        TeamInsert($TeamDescription, $TeamName, $Debug);
 		protected     function        TeamLoadData(&$InstanceTeam);
@@ -99,6 +102,12 @@ Methods:
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
+		protected     function        UserInsert($Application, $SendEmail, 
+		                                         $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, 
+		                                         $UserEmail, $Gender, $HashCode, $UserName, $PasswordNew, $PasswordRepeat, 
+												 $Region, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, 
+												 $UserPhonePrimary, UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
+												 $UserType, $UserUniqueId, $Debug);
 		protected     function        UserLoadData($InstanceUser);
 		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
@@ -111,6 +120,12 @@ Methods:
 		protected     function        UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug);
 		protected     function        UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 		protected     function        UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug);
+		protected     function        AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentName,
+		                                                                                      $AssocUserCorporationRegistrationDateDay, 
+		                                                                                      $AssocUserCorporationRegistrationDateMonth, 
+		                                                                                      $AssocUserCorporationRegistrationDateYear,
+																							  $AssocUserCorporationRegistrationId,
+																							  &$InstanceUser, $Debug);
 		protected     function        UserUpdateByUserEmail($BirthDateDayNew, $BirthDateMonthNew, $BirthDateYearNew, $CountryNew, 
 		                                                    $GenderNew, $OnAdmin, $UserNameNew, $RegionNew,
 					  						                $SessionExpiresNew, $TwoStepVerificationNew, $UserActiveNew, $UserConfirmedNew,
@@ -575,14 +590,14 @@ abstract class Page
 		else return Config::SUCCESS;
 	}
 	
-	private function SendTwoStepVerificationCode($Application, $UserEmail, $Name, $Debug)
+	private function SendTwoStepVerificationCode($Application, $UserEmail, $UserName, $Debug)
 	{
 		$FacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 		$code = $FacedeBusiness->GenerateRandomCode();
 		$this->Session->SetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION,
 													$code);
 		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Application, 
-																  $UserEmail, $Name, $code, $Debug) == Config::SUCCESS)
+																  $UserEmail, $UserName, $code, $Debug) == Config::SUCCESS)
 			return Config::SUCCESS;
 		else return Config::ERROR;
 	}
@@ -1541,6 +1556,57 @@ abstract class Page
 			return Config::SUCCESS;
 		}
 		else return Config::ERROR;
+	}
+	
+	protected function PageStackSessionLoad()
+	{
+		$arrayPageForm = array();
+		if($this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber) == Config::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm) == Config::SUCCESS)
+			{
+				if(isset($arrayPageForm[$pageFormNumber-1]))
+				{
+					$_POST = $arrayPageForm[$pageFormNumber-1];
+					array_pop($arrayPageForm);
+					$pageFormNumber--;
+				}
+				$this->Session->SetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
+				$this->Session->SetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm);
+			}
+		}
+	}
+	
+	protected function PageStackSessionRemoveAll()
+	{
+		$arrayPageForm = array();
+		if($this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber) == Config::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm) == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_PAGE_STACK_NUMBER);
+				$this->Session->RemoveSessionVariable(Config::SESS_PAGE_SACK);
+				return Config::SUCCESS;
+			}
+		}
+	}
+	
+	protected function PageStackSessionSave()
+	{
+		$this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
+		if(isset($pageFormNumber)) 
+			$pageFormNumber++;
+		else $pageFormNumber = 0;
+		$this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm);
+		if(isset($arrayPageForm)) 
+			array_push($arrayPageForm, $_POST);
+		else 
+		{	
+			$arrayPageForm = array();
+			array_push($arrayPageForm, $_POST);
+		}
+ 		$this->Session->SetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm);
+		$this->Session->SetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
 	}
 	
 	protected function TeamDeleteByTeamId($InstanceTeam, $Debug)
@@ -2932,7 +2998,7 @@ abstract class Page
 		$arrayConstants = array(); $matrixConstants = array();
 			
 		//VALIDA E-MAIL
-		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -2951,7 +3017,12 @@ abstract class Page
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
+			$return = $instanceFacedePersistence->AssocUserCorporationDelete(
+					                                     $InstanceUser->GetCorporationName(),
+			                                             $this->InputValueUserEmail,
+														 $Debug, NULL, TRUE);
+			if($return == Config::SUCCESS)
+				$return = $instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_USER);
@@ -2987,6 +3058,388 @@ abstract class Page
 							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return $return;
 		}
+	}
+	
+	protected function UserInsert($Application, $SendEmail, 
+								  $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, $UserEmail, $Gender, 
+								  $HashCode, $UserName, $PasswordNew, $PasswordRepeat, $Region, $SessionExpires, $TwoStepVerification, 
+								  $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
+								  $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserName                 = $UserName;
+		$this->InputValueUserEmail                = $UserEmail;
+		$this->InputValueBirthDateDay             = $BirthDateDay;
+		$this->InputValueBirthDateMonth           = $BirthDateMonth;
+		$this->InputValueBirthDateYear            = $BirthDateYear;
+		$this->InputValueGender                   = $Gender;
+		$this->InputValueUserPhonePrimary         = $UserPhonePrimary;
+		$this->InputValueUserPhonePrimaryPrefix   = $UserPhonePrimaryprefix;
+		$this->InputValueUserPhoneSecondary       = $UserPhoneSecondary;
+		$this->InputValueUserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefix;
+		$this->InputValueCountry                  = $Country;
+		$this->InputValueRegion                   = $Region;
+		$this->InputValueNewPassword              = $PasswordNew;
+		$this->InputValueRepeatPassword           = $PasswordRepeat;
+		if(isset($_POST[Config::FORM_FIELD_USER_SESSION_EXPIRES]))
+			$this->InputValueSessionExpires = TRUE;
+		else $this->InputValueSessionExpires = FALSE;
+		if(isset($_POST[Config::FORM_FIELD_USER_TWO_STEP_VERIFICATION]))
+			$this->InputValueTwoStepVerification = TRUE;
+		else $this->InputValueTwoStepVerification = FALSE;
+		if(isset($_POST[Config::FORM_FIELD_USER_ACTIVE]))
+			$this->InputValueUserActive = TRUE;
+		else $this->InputValueUserActive = FALSE;
+		if(isset($_POST[Config::FORM_FIELD_USER_CONFIRMED]))
+			$this->InputValueUserConfirmed = TRUE;
+		else $this->InputValueUserConfirmed = FALSE;
+		if ($SessionExpires == NULL)
+			$SessionExpires = $this->InputValueSessionExpires;
+		if($TwoStepVerification == NULL)
+			$TwoStepVerification = $this->InputValueTwoStepVerification;
+		if($UserActive == NULL)
+			$UserActive = $this->InputValueUserActive;
+		if($UserConfirmed == NULL)
+			$UserConfirmed = $this->InputValueUserConfirmed;
+		$this->InputValueUserUniqueId = explode("@", $this->InputValueUserEmail)[0];
+		$FormValidator      = $this->Factory->CreateFormValidator();
+		$arrayConstants = array(); $matrixConstants = array(); $arrayOptions = array();
+		
+		//FORM_FIELD_USER_NAME
+		$arrayConstants = array();
+		$arrayElements[0]             = Config::FORM_FIELD_USER_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueUserName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserNameText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_EMAIL
+		$arrayConstants = array();
+		$arrayElements[1]             = Config::FORM_FIELD_USER_EMAIL;
+		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[1]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 60; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnUserEmailText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_UNIQUE_ID
+		$arrayConstants = array();
+		$arrayElements[2]             = Config::FORM_FIELD_USER_UNIQUE_ID;
+		$arrayElementsClass[2]        = &$this->ReturnUserUniqueIdClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsInput[2]        = $this->InputValueUserUniqueId; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 25; 
+		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsText[2]         = &$this->ReturnUserUniqueIdText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
+		$arrayConstants = array();
+		$arrayElements[3]             = Config::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
+		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryPrefixClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimaryPrefix; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 3; 
+		$arrayElementsNullable[3]     = TRUE;
+		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryPrefixText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_PHONE_PRIMARY
+		$arrayConstants = array();
+		$arrayElements[4]             = Config::FORM_FIELD_USER_PHONE_PRIMARY;
+		$arrayElementsClass[4]        = &$this->ReturnUserPhonePrimaryClass;
+		$arrayElementsDefaultValue[4] = ""; 
+		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[4]        = $this->InputValueUserPhonePrimary; 
+		$arrayElementsMinValue[4]     = 0; 
+		$arrayElementsMaxValue[4]     = 9; 
+		$arrayElementsNullable[4]     = TRUE;
+		$arrayElementsText[4]         = &$this->ReturnUserPhonePrimaryText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
+		$arrayConstants = array();
+		$arrayElements[5]             = Config::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
+		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
+		$arrayElementsDefaultValue[5] = ""; 
+		$arrayElementsForm[5]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondaryPrefix; 
+		$arrayElementsMinValue[5]     = 0; 
+		$arrayElementsMaxValue[5]     = 3; 
+		$arrayElementsNullable[5]     = TRUE;
+		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryPrefixText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_PHONE_SECONDARY
+		$arrayConstants = array();
+		$arrayElements[6]             = Config::FORM_FIELD_USER_PHONE_SECONDARY;
+		$arrayElementsClass[6]        = &$this->ReturnUserPhoneSecondaryClass;
+		$arrayElementsDefaultValue[6] = ""; 
+		$arrayElementsForm[6]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[6]        = $this->InputValueUserPhoneSecondary; 
+		$arrayElementsMinValue[6]     = 0; 
+		$arrayElementsMaxValue[6]     = 9; 
+		$arrayElementsNullable[6]     = TRUE;
+		$arrayElementsText[6]         = &$this->ReturnUserPhoneSecondaryText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_BIRTH_DATE_DAY
+		$arrayConstants = array();
+		$arrayElements[7]             = Config::FORM_FIELD_USER_BIRTH_DATE_DAY;
+		$arrayElementsClass[7]        = &$this->ReturnBirthDateDayClass;
+		$arrayElementsDefaultValue[7] = ""; 
+		$arrayElementsForm[7]         = Config::FORM_VALIDATE_FUNCTION_DATE_DAY;
+		$arrayElementsInput[7]        = $this->InputValueBirthDateDay; 
+		$arrayElementsMinValue[7]     = 0; 
+		$arrayElementsMaxValue[7]     = 0; 
+		$arrayElementsNullable[7]     = FALSE;
+		$arrayElementsText[7]         = &$this->ReturnBirthDateDayText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_BIRTH_DATE_MONTH
+		$arrayConstants = array();
+		$arrayElements[8]             = Config::FORM_FIELD_USER_BIRTH_DATE_MONTH;
+		$arrayElementsClass[8]        = &$this->ReturnBirthDateMonthClass;
+		$arrayElementsDefaultValue[8] = ""; 
+		$arrayElementsForm[8]         = Config::FORM_VALIDATE_FUNCTION_DATE_MONTH;
+		$arrayElementsInput[8]        = $this->InputValueBirthDateMonth; 
+		$arrayElementsMinValue[8]     = 0; 
+		$arrayElementsMaxValue[8]     = 0; 
+		$arrayElementsNullable[8]     = FALSE;
+		$arrayElementsText[8]         = &$this->ReturnBirthDateMonthText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_BIRTH_DATE_YEAR
+		$arrayConstants = array();
+		$arrayElements[9]             = Config::FORM_FIELD_USER_BIRTH_DATE_YEAR;
+		$arrayElementsClass[9]        = &$this->ReturnBirthDateYearClass;
+		$arrayElementsDefaultValue[9] = ""; 
+		$arrayElementsForm[9]         = Config::FORM_VALIDATE_FUNCTION_DATE_YEAR;
+		$arrayElementsInput[9]        = $this->InputValueBirthDateYear; 
+		$arrayElementsMinValue[9]     = 0; 
+		$arrayElementsMaxValue[9]     = 0; 
+		$arrayElementsNullable[9]     = FALSE;
+		$arrayElementsText[9]         = &$this->ReturnBirthDateYearText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_GENDER
+		$arrayConstants = array();
+		$arrayElements[10]             = Config::FORM_FIELD_USER_GENDER;
+		$arrayElementsClass[10]        = &$this->ReturnGenderClass;
+		$arrayElementsDefaultValue[10] = ""; 
+		$arrayElementsForm[10]         = Config::FORM_VALIDATE_FUNCTION_GENDER;
+		$arrayElementsInput[10]        = $this->InputValueGender; 
+		$arrayElementsMinValue[10]     = 0; 
+		$arrayElementsMaxValue[10]     = 0; 
+		$arrayElementsNullable[10]     = FALSE;
+		$arrayElementsText[10]         = &$this->ReturnGenderText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_COUNTRY
+		$arrayConstants = array();
+		$arrayElements[11]             = Config::FORM_FIELD_USER_COUNTRY;
+		$arrayElementsClass[11]        = &$this->ReturnCountryClass;
+		$arrayElementsDefaultValue[11] = ""; 
+		$arrayElementsForm[11]         = Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
+		$arrayElementsInput[11]        = $this->InputValueCountry; 
+		$arrayElementsMinValue[11]     = 0; 
+		$arrayElementsMaxValue[11]     = 3; 
+		$arrayElementsNullable[11]     = FALSE;
+		$arrayElementsText[11]         = &$this->ReturnCountryText;
+		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_USER_REGION
+		$arrayConstants = array();
+		$arrayElements[12]             = Config::FORM_FIELD_USER_REGION;
+		$arrayElementsClass[12]        = &$this->ReturnRegionClass;
+		$arrayElementsDefaultValue[12] = ""; 
+		$arrayElementsForm[12]         = Config::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
+		$arrayElementsInput[12]        = $this->InputValueRegion; 
+		$arrayElementsMinValue[12]     = 0; 
+		$arrayElementsMaxValue[12]     = 45; 
+		$arrayElementsNullable[12]     = TRUE;
+		$arrayElementsText[12]         = &$this->ReturnRegionText;
+		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		
+		//FORM_FIELD_PASSWORD_NEW
+		$arrayConstants = array();
+		$arrayElements[13]             = Config::FORM_FIELD_PASSWORD_NEW;
+		$arrayElementsClass[13]        = &$this->ReturnPasswordClass;
+		$arrayElementsDefaultValue[13] = ""; 
+		$arrayElementsForm[13]         = Config::FORM_VALIDATE_FUNCTION_PASSWORD;
+		$arrayElementsInput[13]        = $this->InputValueNewPassword; 
+		$arrayElementsMinValue[13]     = 8; 
+		$arrayElementsMaxValue[13]     = 18; 
+		$arrayElementsNullable[13]     = TRUE;
+		$arrayElementsText[13]         = &$this->ReturnPasswordText;
+		$arrayExtraField[13]           = &$this->InputValueRepeatPassword;
+		array_push($arrayConstants, 'FORM_INVALID_USER_PASSWORD', 'FORM_INVALID_USER_PASSWORD_MATCH',
+				                    'FORM_INVALID_USER_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		array_push($arrayOptions, "");
+		if($this->ValidateCaptcha)
+		{
+			//VALIDA CAPTCHA
+			$this->InputValueCaptcha       = $_POST[Config::FORM_CAPTCHA_REGISTER];
+			$this->Session->GetSessionValue(Config::FORM_CAPTCHA_REGISTER, $captcha);
+			//FORM_CAPTCHA_REGISTER
+			$arrayElements[14]             = Config::FORM_CAPTCHA_REGISTER;
+			$arrayElementsClass[14]        = &$this->ReturnCaptchaClass;
+			$arrayElementsDefaultValue[14] = ""; 
+			$arrayElementsForm[14]         = Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+			$arrayElementsInput[14]        = $this->InputValueCaptcha; 
+			$arrayElementsMinValue[14]     = 0; 
+			$arrayElementsMaxValue[14]     = 0; 
+			$arrayElementsNullable[14]     = TRUE;
+			$arrayElementsText[14]         = &$this->ReturnCaptchaText;
+			array_push($arrayConstants, 'FORM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
+			array_push($matrixConstants, $arrayConstants);
+			array_push($arrayOptions, $captcha);
+		}
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
+		if($return == Config::SUCCESS)
+		{
+			//CHECA SE E-MAIL JÁ É CADASTRADO
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectExistsByUserEmail($this->InputValueUserEmail, $Debug);
+			if($return != Config::SUCCESS)
+			{
+				$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth
+							 . "-" . $this->InputValueBirthDateDay;
+				$hashCode  = hash("sha512", $this->InputValueUserName . $this->InputValueUserEmail . 
+								   $this->InputValueGender . $birthDate);
+				$this->InputValueUserName = ucwords($this->InputValueUserName);
+				if($this->ReturnUserUniqueIdText != "")
+					$this->InputValueUserUniqueId = NULL;
+				//CADASTRA USUARIO NO BANCO
+				$return = $instanceFacedePersistence->UserInsert($birthDate,
+																 NULL,
+																 $this->InputValueCountry,
+																 $this->InputValueUserEmail, 
+																 $this->InputValueGender,
+																 $hashCode,
+																 $this->InputValueUserName,
+																 $this->InputValueNewPassword,
+																 $this->InputValueRegion,
+																 $SessionExpires,
+																 $TwoStepVerification,
+																 $UserActive,
+																 $UserConfirmed,
+																 $this->InputValueUserPhonePrimary, 
+																 $this->InputValueUserPhonePrimaryPrefix, 
+																 $this->InputValueUserPhoneSecondary, 
+																 $this->InputValueUserPhoneSecondaryPrefix,
+																 $UserType,
+																 $this->InputValueUserUniqueId,
+																 $Debug);
+				if($return == Config::SUCCESS)
+				{
+					if($SendEmail)
+					{
+						Page::GetCurrentDomain($domain);
+						$link = $domain . str_replace('Language/', '', $this->Language) . "/" . 
+								str_replace("_", "",Config::PAGE_REGISTER_CONFIRMATION) . "?=" . $hashCode;
+						$instanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
+						$return = $instanceFacedeBusiness->SendEmailRegister($Application,
+																			 $this->InputValueUserName,
+														                     $this->InputValueUserEmail,
+														                     $link, 
+																			 $Debug);
+					}
+					if($return == Config::SUCCESS)
+					{
+						if($SendEmail)
+							$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_SUCCESS', 
+																			$this->Language);
+						else
+							$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_SUCCESS_NO_LINK', 
+																			$this->Language);
+						$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									           Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+					}
+					else
+					{
+						$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_EMAIL_ERROR', 
+																		$this->Language);
+						$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									           Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+						$instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
+					}
+				}
+				else
+				{
+					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_INSERT_ERROR', 
+																		$this->Language);
+					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				}
+			}
+			else
+			{
+				$return = Config::ERROR;
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_EMAIL_ALREADY_REGISTERED', 
+																		 $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			}
+		}
+		else
+		{
+			$return = Config::ERROR;
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}
+		return $return;
 	}
 	
 	protected function UserLoadData($InstanceUser)
@@ -3283,7 +3736,7 @@ abstract class Page
 		$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array();
 			
 		//VALIDA E-MAIL
-		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -3346,7 +3799,7 @@ abstract class Page
 		$arrayConstants = array(); $matrixConstants = array();
 			
 		//VALIDA E-MAIL
-		$arrayElements[0]             = Config::FORM_FIELD_EMAIL;
+		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
@@ -3429,6 +3882,127 @@ abstract class Page
 			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_USER_ACTIVATE_ERROR', $this->Language);		
 			return Config::ERROR;
 		}
+	}
+	
+	protected function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+		                                                                       $AssocUserCorporationRegistrationDateDayNew, 
+		                                                                       $AssocUserCorporationRegistrationDateMonthNew, 
+		                                                                       $AssocUserCorporationRegistrationDateYearNew,
+																			   $AssocUserCorporationRegistrationIdNew,
+																			   &$InstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence             = $this->Factory->CreateFacedePersistence();
+		$this->InputValueDepartmentName        = $AssocUserCorporationDepartmentNameNew;
+		$this->InputValueRegistrationDateDay   = $AssocUserCorporationRegistrationDateDayNew;
+		$this->InputValueRegistrationDateMonth = $AssocUserCorporationRegistrationDateMonthNew;
+		$this->InputValueRegistrationDateYear  = $AssocUserCorporationRegistrationDateYearNew;
+		$this->InputValueRegistrationId        = $AssocUserCorporationRegistrationIdNew;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+		$arrayElements[0]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY;
+		$arrayElementsClass[0]        = &$this->ReturnRegistrationDateDayClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DATE_DAY;
+		$arrayElementsInput[0]        = $this->InputValueRegistrationDateDay; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 0; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnRegistrationDateDayText;
+		array_push($arrayConstants, 'FORM_INVALID_DATE_DAY', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH
+		$arrayElements[1]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH;
+		$arrayElementsClass[1]        = &$this->ReturnRegistrationDateMonthClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DATE_MONTH;
+		$arrayElementsInput[1]        = $this->InputValueRegistrationDateMonth; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 0; 
+		$arrayElementsNullable[1]     = TRUE;
+		$arrayElementsText[1]         = &$this->ReturnRegistrationDateMonthText;
+		array_push($arrayConstants, 'FORM_INVALID_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR
+		$arrayElements[2]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR;
+		$arrayElementsClass[2]        = &$this->ReturnRegistrationDateYearClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_DATE_YEAR;
+		$arrayElementsInput[2]        = $this->InputValueRegistrationDateYear; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 0; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnRegistrationDateYearText;
+		array_push($arrayConstants, 'FORM_INVALID_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID
+		$arrayElements[3]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID;
+		$arrayElementsClass[3]        = &$this->ReturnRegistrationIdClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_REGISTRATION_ID;
+		$arrayElementsInput[3]        = $this->InputValueRegistrationId; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 12; 
+		$arrayElementsNullable[3]     = TRUE;
+		$arrayElementsText[3]         = &$this->ReturnRegistrationIdText;
+		array_push($arrayConstants, 'FORM_INVALID_REGISTRATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_DEPARTMENT_NAME
+		$arrayElements[4]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[4]        = &$this->ReturnDepartmentNameText;
+		$arrayElementsDefaultValue[4] = ""; 
+		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[4]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[4]     = 0; 
+		$arrayElementsMaxValue[4]     = 80; 
+		$arrayElementsNullable[4]     = TRUE;
+		$arrayElementsText[4]         = &$this->ReturnDepartmentNameClass;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE',  'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
+		if($return == Config::SUCCESS)
+		{
+			if($this->InputValueRegistrationDateYear != "" && $this->InputValueRegistrationDateMonth != "" 
+			   && $this->InputValueRegistrationDateDay != "")
+			{
+				$registrationDate = $this->InputValueRegistrationDateYear . "-" . $this->InputValueRegistrationDateMonth . "-" 
+				         	        . $this->InputValueRegistrationDateDay;
+			}
+			else $registrationDate = NULL;
+			$return = $instanceFacedePersistence->AssocUserCorporationUpdateByUserEmailAndCorporationName($this->InputValueDepartmentName,
+				                                                                                          $registrationDate,
+															                                              $this->InputValueRegistrationId,
+															                                              $InstanceUser->GetCorporationName(),
+															                                              $InstanceUser->GetEmail(),
+															                                              $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
+				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+			}
+			return $return;
+		}
+		$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_ASSOC_USER_CORPORATION', $this->Language);
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		return Config::ERROR;
 	}
 	
 	protected function UserUpdateByUserEmail($BirthDateDayNew, $BirthDateMonthNew, $BirthDateYearNew, 
@@ -3675,7 +4249,7 @@ abstract class Page
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";

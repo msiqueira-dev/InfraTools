@@ -50,10 +50,10 @@
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>"
 						   class="<?php echo $this->ReturnEmailClass; ?>"
-						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>',
+						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
@@ -62,7 +62,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
-						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>',
+						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
@@ -71,7 +71,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>',
+						   onchange="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
@@ -151,16 +151,16 @@
 				  }
 			?>
 		</select>
-		<!-- FORM_FIELD_USER_BIRTH_DATE_MONTH -->
+		<!-- FORM_FIELD_USER_BIRTH_DATE_YEAR -->
 		<select style=";
 					   <?php if($this->InputValueBirthDateYear != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY
 								 && $this->InputValueBirthDateYear != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>"
 				class="SelectBirthDateYear <?php echo $this->ReturnBirthDateYearClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>');
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 											 'DivContentBodySubmit',
@@ -370,12 +370,6 @@
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LATITUDE; ?>"/>
 		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>" 
 							 id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>"/>
-		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"
-							 value="<?php echo $this->InputValueCountry ?>"/>
-		<input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
-							 value="<?php echo $this->InputValueRegion ?>"/>
 	</div>
 	<div id="GoogleMapsDiv" class="DivContentBodyContainerGoogleMaps">
 		<input type="text"   id="GoogleMapsSearch" name="searchInput" class="GoogleMapsSearch GoogleMapsSearchControls" value=""/>
@@ -422,7 +416,7 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
-												   '');" disabled="disabled" 
+												   '');" 
 									   value="<?php echo $this->InputValueCountry; ?>"/>
 		</div>
 		<div class="DivContentBodyContainerLabelMapsEstate">
@@ -458,7 +452,7 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
-												   '');" disabled="disabled"
+												   '');"
 								   value="<?php echo $this->InputValueRegion; ?>"/>
 		</div>                
 	</div>
@@ -678,7 +672,7 @@
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', true);
-					 ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_EMAIL; ?>',
+					 ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', true);

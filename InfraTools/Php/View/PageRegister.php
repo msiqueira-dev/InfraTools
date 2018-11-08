@@ -54,7 +54,31 @@ class PageRegister extends PageInfraTools
 		if (isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
 			$this->ValidateCaptcha = TRUE;
-			$this->UserRegister(TRUE, TRUE, FALSE, TRUE, FALSE, FALSE);	
+			$this->UserInsert(ConfigInfraTools::APPLICATION_INFRATOOLS,
+							  TRUE,
+				              @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
+					  		  @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
+							  @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
+							  NULL,
+							  $_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+							  $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+							  @$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
+						      NULL,
+							  $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
+						      $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW],
+							  $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
+							  $_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],
+					  		  @$_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES], 
+						      @$_POST[ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION], 
+						      @$_POST[ConfigInfraTools::FORM_FIELD_USER_ACTIVE], 
+						      @$_POST[ConfigInfraTools::FORM_FIELD_USER_CONFIRMED],
+   							  $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY], 
+						      $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX], 
+						      $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY],
+							  $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX], 
+							  ConfigInfraTools::TYPE_USER_DEFAULT_ID, 
+							  NULL,
+							  $this->InputValueHeaderDebug);	
 		}
 		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_REGISTER, FALSE);
 		$this->LoadHtml(FALSE);

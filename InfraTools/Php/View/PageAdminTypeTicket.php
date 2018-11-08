@@ -57,7 +57,7 @@ class PageAdminTypeTicket extends PageAdmin
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
-			$this->PageFormLoad();
+			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
 		//TYPE TICKET LIST
@@ -207,7 +207,7 @@ class PageAdminTypeTicket extends PageAdmin
 			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		} else $this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
+			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);
 	}
 }

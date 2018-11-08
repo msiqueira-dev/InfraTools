@@ -47,10 +47,8 @@ function SetCountryAndEstate(latLng)
 {
 	var inputLatitude        = document.getElementById("RegisterGoogleMapsLatitude");
 	var inputLongitude       = document.getElementById("RegisterGoogleMapsLongitude");
-	var inputCountryHidden   = document.getElementById("FormFieldUserCountryHidden");
-	var inputRegionHidden    = document.getElementById("FormFieldUserRegionHidden");
-	var inputCountry         = document.getElementById("FormGoogleMapsCountry");
-	var inputRegion          = document.getElementById("FormGoogleMapsRegion");
+	var inputCountry         = document.getElementById("FormFieldUserCountry");
+	var inputRegion          = document.getElementById("FormFieldUserRegion");
 	if(inputLatitude != null && inputLongitude != null && inputCountry != null && inputRegion != null)
 	{
 		sleep(450);
@@ -67,10 +65,7 @@ function SetCountryAndEstate(latLng)
 						for(var i = 0; i < results[0].address_components.length; i++) 
 						{
 							if(results[0].address_components[i].types[0] == "country")
-							{
 								inputCountry.value = results[0].address_components[i].short_name;
-								inputCountryHidden.value = results[0].address_components[i].short_name;
-							}
 							else if(results[0].address_components[i].types[0] == "administrative_area_level_1" &&
 									results[0].address_components[i].types[1] == "political")
 							{
@@ -78,35 +73,21 @@ function SetCountryAndEstate(latLng)
 								{
 									if(results[0].address_components[i-1].types[0] == "locality" &&
 										results[0].address_components[i-1].types[1] == "political")
-									{
 										inputRegion.value = results[0].address_components[i-1].long_name;
-										inputRegionHidden.value = results[0].address_components[i-1].long_name;
-									}
-									else 
-									{
-										inputRegion.value = results[0].address_components[i].long_name;
-										inputRegionHidden.value = results[0].address_components[i].long_name;
-									}
+									else inputRegion.value = results[0].address_components[i].long_name;
 								}
-								else
-								{
-									inputRegion.value = "";
-									inputRegionHidden.value = "";
-								}
+								else inputRegion.value = "";
 							}
 						}
 						inputLatitude.value = latLng.lat();
 						inputLongitude.value = latLng.lng();
 						inputRegion.value = inputRegion.value.replace("State of ", "");
-						inputRegionHidden.value = inputRegionHidden.value.replace("State of ", "");
 						SetCountryAndEstateClass(inputCountry, inputRegion, false);
 						return true;
 					}
 				}
 				inputCountry.value = "";
-				inputCountryHidden.value = "";
 				inputRegion.value = "";
-				inputRegionHidden.value = "";
 				inputLatitude.value = latLng.lat();
 				inputLongitude.value = latLng.lng();
 				SetCountryAndEstateClass(inputCountry, inputRegion, true);

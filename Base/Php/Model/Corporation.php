@@ -85,13 +85,13 @@ class Corporation
 	}
 	
 	/* METHODS */
-	public function UpdateCorporation($CorporationActive, $ArrayInstanceDepartment, $CorpotaionName)
+	public function UpdateCorporation($CorporationActive, $ArrayInstanceDepartment, $CorporationName)
 	{
 		if(is_bool($CorporationActive))
 			$this->CorporationActive = $CorporationActive;
 		if($ArrayInstanceDepartment != NULL)
 			$this->ArrayDepartment   = $ArrayInstanceDepartment;
-		if($Name != NULL)
+		if($CorporationName != NULL)
 			$this->CorporationName   = $CorporationName;
 		if($RegisterDate != NULL)
 			$this->RegisterDate      = $RegisterDate;
