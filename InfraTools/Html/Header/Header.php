@@ -184,7 +184,7 @@
         <div class="DivHeaderPageTitleContentText">
             <h1>
                 <?php
-					echo $this->InstanceLanguageText->GetPageName($this->Page);
+					echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage());
                 ?>
             </h1>
         </div>

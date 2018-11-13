@@ -74,31 +74,31 @@
 		</form>
 		<?php 
 		//TYPE_ASSOC_USER_REQUESTING LIST
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_LIST)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_LIST)) . ".php");
 		}
 		//TYPE_ASSOC_USER_REQUESTING REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_REGISTER)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_REGISTER)) . ".php");
 		}
 		//TYPE_ASSOC_USER_REQUESTING SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_SELECT)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_SELECT)) . ".php");
 		}
 		//TYPE_ASSOC_USER_REQUESTING UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_UPDATE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_UPDATE)) . ".php");
 		}
 		//TYPE_ASSOC_USER_REQUESTING VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_REQUESTING_VIEW)) . ".php");

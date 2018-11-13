@@ -74,31 +74,31 @@
 		</form>
 		<?php 
 		//SERVICE LIST
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST)) . ".php");
 		}
 		//SERVICE REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_SERVICE_REGISTER)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_SERVICE_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_SERVICE_REGISTER)) . ".php");
 		}
 		//SERVICE SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT)) . ".php");
 		}
 		//SERVICE UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_SERVICE_UPDATE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_SERVICE_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_SERVICE_UPDATE)) . ".php");
 		}
 		//SERVICE VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW)) . ".php");

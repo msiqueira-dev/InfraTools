@@ -10,7 +10,6 @@ Dependencies:
 Description: 
 			Class that deals with the information of the system shown to the user such as details and external links.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -31,27 +30,21 @@ class PageAbout extends PageInfraTools
 	/* Singleton */
 	protected static $Instance;
 
-	/* Get Instance */
-	public static function __create($Language)
+	/* __create */
+	public static function __create($Page, $Language)
 	{
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class($Language);
+			self::$Instance = new $class($Page, $Language);
 		}
 		return self::$Instance;
 	}
 
 	/* Constructor */
-	protected function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()

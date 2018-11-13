@@ -12,7 +12,6 @@ Description:
 Functions: 
 			protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug);
 			protected function LoadDataFromSession($SessionKey, $Function, &$Instance);
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -38,12 +37,19 @@ class PageAdmin extends PageInfraTools
 	public $ArrayInstanceInfraToolsCorporation                           = "";
 	public $ArrayInstanceInfraToolsTypeUser                              = "";
 
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
+		parent::__construct($Page, $Language);
 		if($this->User != NULL)
 		{
 			if(!$this->User->CheckSuperUser())
@@ -118,11 +124,6 @@ class PageAdmin extends PageInfraTools
 		else return ConfigInfraTools::ERROR;
 	}
 	
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
 	public function LoadPage()
 	{
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_SACK);

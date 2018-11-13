@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Class for technical details of the system.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -41,17 +40,18 @@ class PageAdminTechInfo extends PageAdmin
 	public $MatrixLanguageConstant            = 0;
 	public $TotalDirectoryCount               = 0;
 	public $TotalFileCount                    = 0;
-
-	/* Constructor */
-	public function __construct($Language) 
+	
+	/* __create */
+	public static function __create($Page, $Language)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Page, $Language);
 	}
-
-	public function GetCurrentPage()
+	
+	/* Constructor */
+	protected function __construct($Page, $Language) 
 	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()

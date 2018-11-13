@@ -74,31 +74,31 @@
 		</form>
 		<?php 
 		//TYPE_SERVICE LIST
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_LIST)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_LIST)) . ".php");
 		}
 		//TYPE_SERVICE REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_REGISTER)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_REGISTER)) . ".php");
 		}
 		//TYPE_SERVICE SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT)) . ".php");
 		}
 		//TYPE_SERVICE UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_UPDATE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_UPDATE)) . ".php");
 		}
 		//TYPE_SERVICE VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW)) . ".php");

@@ -89,7 +89,7 @@ class FacedePersistenceDepartment
 	
 	public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)

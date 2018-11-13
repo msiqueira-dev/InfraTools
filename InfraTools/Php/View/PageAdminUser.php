@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe existente para a página de administração de usuário
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -32,20 +31,17 @@ class PageAdminUser extends PageAdmin
 	public    $ArrayInstanceInfraToolsUser = NULL;
 	protected $InstanceTypeUser            = NULL;
 	
-	/* Constructor */
-	public function __construct($Language) 
+	/* __create */
+	public static function __create($Page, $Language)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Page, $Language);
 	}
 	
-	/**                               **/
-	/************* METODOS *************/
-	/**                               **/
-
-	public function GetCurrentPage()
+	/* Constructor */
+	protected function __construct($Page, $Language) 
 	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 	
 	public function LoadPage()
@@ -69,7 +65,7 @@ class PageAdminUser extends PageAdmin
 		{
 			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_USER);
 			unset($this->ArrayInstanceInfraToolsUser);
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 			$this->InputLimitOne = 0;
 			$this->InputLimitTwo = 25;
 			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
@@ -78,7 +74,7 @@ class PageAdminUser extends PageAdmin
 		//USER LIST BACK SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST_BACK))
 		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
 			if($this->InputLimitOne < 0)
@@ -91,7 +87,7 @@ class PageAdminUser extends PageAdmin
 		//USER LIST FORWARD SUBMIT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST_FORWARD))
 		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
@@ -117,11 +113,11 @@ class PageAdminUser extends PageAdmin
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->CorporationLoadData($this->InstanceCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 			}
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
+			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
 			{
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
@@ -134,10 +130,10 @@ class PageAdminUser extends PageAdmin
 			if($this->TypeUserSelectByTypeUserDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION], 
 														  $this->InstanceTypeUser,
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
 			{
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
@@ -150,10 +146,10 @@ class PageAdminUser extends PageAdmin
 			if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
 												      $this->InstanceInfraToolsUserAdmin, 
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 			{
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
@@ -162,7 +158,7 @@ class PageAdminUser extends PageAdmin
 		}
 		//USER REGISTER
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_REGISTER))
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
 		//USER REGISTER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
@@ -191,19 +187,19 @@ class PageAdminUser extends PageAdmin
 								 ConfigInfraTools::TYPE_USER_DEFAULT_ID, 
 								 NULL,
 								 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
-			else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
 		}
 		//USER SELECT
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_SELECT))
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		//USER SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_SELECT_SUBMIT]))
 		{
 			if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
 												      $this->InstanceInfraToolsUserAdmin, 
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		//USER VIEW ACTIVATE SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_ACTIVATE_SUBMIT]))
@@ -213,7 +209,7 @@ class PageAdminUser extends PageAdmin
 			{
 				$this->UserUpdateActiveByUserEmail(true, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug);
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
 		}
 		//USER VIEW DEACTIVATE SUBMIT
@@ -224,7 +220,7 @@ class PageAdminUser extends PageAdmin
 			{
 				$this->UserUpdateActiveByUserEmail(false, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug);
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
 		}
 		//USER VIEW DELETE SUBMIT
@@ -235,9 +231,9 @@ class PageAdminUser extends PageAdmin
 			{
 				if($this->UserDeleteByUserEmail($this->InstanceInfraToolsUserAdmin, 
 												$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW RESET PASSWORD SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_RESET_PASSWORD_SUBMIT]))
@@ -249,8 +245,8 @@ class PageAdminUser extends PageAdmin
 				if($this->UserUpdatePasswordRandomByUserEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
 															  $this->InstanceInfraToolsUserAdmin, 
 															  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW CHANGE CORPORATION
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT]))
@@ -261,7 +257,7 @@ class PageAdminUser extends PageAdmin
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
 				$this->CorporationSelectActiveNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
@@ -279,13 +275,13 @@ class PageAdminUser extends PageAdmin
 					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
 												              $this->InstanceInfraToolsUserAdmin, 
 														      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
 				{
 					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
 					$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
 				}
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
@@ -303,7 +299,7 @@ class PageAdminUser extends PageAdmin
 																$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = '';
 				$this->SubmitClass = 'SubmitEnabled';
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
@@ -331,7 +327,7 @@ class PageAdminUser extends PageAdmin
 						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
 						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
 							                                . ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 					}
 				}
 				else 
@@ -340,7 +336,7 @@ class PageAdminUser extends PageAdmin
 					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
 					                                                $this->ArrayInstanceDepartment,
 																    $this->InputValueHeaderDebug);
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
 				}
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
@@ -355,7 +351,7 @@ class PageAdminUser extends PageAdmin
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
 				$this->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser,$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
@@ -373,13 +369,13 @@ class PageAdminUser extends PageAdmin
 					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
 												          $this->InstanceInfraToolsUserAdmin, 
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
 				{
 					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
 					$this->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser, $this->InputValueHeaderDebug);
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
 				}
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
@@ -393,8 +389,8 @@ class PageAdminUser extends PageAdmin
 			{
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
 				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, TRUE, $this->InputValueHeaderDebug);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_DEACTIVATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE]))
@@ -404,8 +400,8 @@ class PageAdminUser extends PageAdmin
 			{
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
 				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, FALSE, $this->InputValueHeaderDebug);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW UPDATE
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT]))
@@ -414,8 +410,8 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_UPDATE;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_UPDATE;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW UPDATE CANCEL - USER VIEW CORPORATION CANCEL
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_CANCEL]) ||
@@ -425,8 +421,8 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW UPDATE SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_SUBMIT]))
@@ -453,12 +449,12 @@ class PageAdminUser extends PageAdmin
 												TRUE,
 												$this->InstanceInfraToolsUserAdmin, 
 												$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_UPDATE;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_UPDATE;
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		else $this->Page = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
+		else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

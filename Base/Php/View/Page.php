@@ -16,7 +16,6 @@ Description:
 Get / Set:		
 			public function GetPageLoadTime();
 Methods: 
-		abstract protected function GetCurrentPage();
 		private       function        CheckPostLanguage();
 		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
@@ -79,7 +78,7 @@ Methods:
 		protected     function        TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$InstanceTypeAssocUserTeam, $Debug);
 		protected     function        TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug);
 		protected     function        TypeStatusTicketDeleteByTypeStatusTicketId(&$InstanceTypeStatusTicket, $Debug);
-		protected     function        TypeStatusTicketInsert($TypeStatusTicketDescritpion, $Debug);
+		protected     function        TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug);
 		protected     function        TypeStatusTicketLoadData($InstanceTypeStatusTicket);
 		protected     function        TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug);
 		protected     function        TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, 
@@ -140,9 +139,11 @@ Methods:
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
 		public        function        CheckPostContainsKey($Key);
+		public        function        GetCurrentPage();
 		public        function        IncludeHeadAll($Page);
 		public        function        IncludeHeadGeneric();
 		public        function        IncludeHeadJavaScript();
+		public        function        LoadPage();
 		public        function        LoadPageDependencies();
 		public        function        LoadPageDependenciesDebug();
 		public        function        LoadPageDependenciesDevice();
@@ -153,7 +154,6 @@ Methods:
 		public static function        GetCurrentDomain(&$currentDomain);
 		public static function        GetCurrentDomainWithPort(&$currentDomain);
 		public static function        GetCurrentURL(&$pageUrl);
-		public static function        GetPageFileDefaultLanguageByDir($PageDirName);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -175,7 +175,7 @@ if (!class_exists("Language"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class Language');
 }
 
-abstract class Page
+class Page
 {
 	/* Constantes de Retorno */
 	const ERROR_HEAD_GENERIC_NOT_EXISTS       = "ReturnErrorHeadGenericNotExists";
@@ -276,6 +276,7 @@ abstract class Page
 	public    $InputValueUserUniqueId                               = "";
 	public    $InputValueUserUniqueIdActive                         = "";
 	public    $Page                                                 = "";
+	public    $PageBody                                             = "";
 	public    $ReturnBirthDateDayClass                              = "";
 	public    $ReturnBirthDateDayText                               = "";
 	public    $ReturnBirthDateMonthClass                            = "";
@@ -348,7 +349,7 @@ abstract class Page
 	public    $ReturnTypeTicketDescriptionText                      = "";
 	public    $ReturnTypeTicketIdClass                              = "";
 	public    $ReturnTypeTicketIdText                               = "";
-	public    $ReturnTypeUserDescritpionClass                       = "";
+	public    $ReturnTypeUserDescriptionClass                       = "";
 	public    $ReturnTypeUserDescriptionText                        = "";
 	public    $ReturnTypeUserIdClass                                = "";
 	public    $ReturnTypeUserIdText                                 = "";
@@ -375,41 +376,21 @@ abstract class Page
 	public    $SubmitEnabled                                        = 'disabled="disabled"';
 	public    $ValidateCaptcha                                      = TRUE;
 	
-	/* Singleton */
-	private static $Instance;
-	
 	/* Get Instance */
-	public static function __create($Language)
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class($Language);
-        }
-        return self::$Instance;
-    }
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
 	
 	/* Constructor */
-	protected function __construct($Language) 
+	protected function __construct($Page, $Language) 
     {
+		$this->Page = $Page;
 		$this->Factory = Factory::__create();
 		$this->Session = $this->Factory->CreateSession();
 		$this->Config = $this->Factory->CreateConfig();
-		if(get_object_vars($this->Config)[get_class($this).Config::ENABLED])
-		{
-			$this->PageEnabled = TRUE;
-			$this->Session->SetSessionValue(Config::SESS_LANGUAGE, $Language);
-			if($this->LoadPageDependencies() == Config::SUCCESS)
-			{
-				if($this->PageCheckLogin == TRUE)
-				{
-					if($this->CheckInstanceUser() == Config::USER_NOT_LOGGED_IN)
-						$this->CheckLogin($this->InputValueHeaderDebug);
-				}
-			}
-		}
-		else $this->PageEnabled = FALSE;
-		//LOG OUT
+		//FORM_FIELD_HEADER_LOG_OUT
 		if(isset($_POST[Config::POST_BACK_FORM]))
 		{
 			if ($_POST[Config::POST_BACK_FORM] == Config::FORM_FIELD_HEADER_LOG_OUT)
@@ -418,6 +399,25 @@ abstract class Page
 				$this->User = NULL;
 			}
 		}
+		if(isset(get_object_vars($this->Config)[get_class($this).Config::ENABLED]))
+		{
+			if(!get_object_vars($this->Config)[get_class($this).Config::ENABLED])
+			{
+				$this->PageEnabled = FALSE;
+				return Config::ERROR;
+			}
+		}
+		$this->PageEnabled = TRUE;
+		$this->Session->SetSessionValue(Config::SESS_LANGUAGE, $Language);
+		if($this->LoadPageDependencies() == Config::SUCCESS)
+		{
+			if($this->PageCheckLogin == TRUE)
+			{
+				if($this->CheckInstanceUser() == Config::USER_NOT_LOGGED_IN)
+					$this->CheckLogin($this->InputValueHeaderDebug);
+			}
+		}
+		return Config::SUCCESS;
     }
 	
 	/* Clone */
@@ -437,8 +437,6 @@ abstract class Page
 	}
 	
 	/* Métodos */
-	abstract protected function GetCurrentPage();
-	
 	private function CheckPostLanguage()
 	{
 		if(isset($_POST[Config::POST_BACK_FORM]))
@@ -450,7 +448,7 @@ abstract class Page
 			{
 				header("Location: "  . ProjectConfig::$AddressApplication . "/" . str_replace('Language/', '', 
 									   $_POST[Config::POST_BACK_FORM]) . "/"
-									 . str_replace("_", "", $this->GetCurrentPage()));
+									 . $this->Page);
 			}
 		}
 	}
@@ -2212,11 +2210,11 @@ abstract class Page
 	}
 	
 	
-	protected function TypeStatusTicketInsert($TypeStatusTicketDescritpion, $Debug)
+	protected function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeStatusTicketDescription = $TypeStatusTicketDescritpion;
+		$this->InputValueTypeStatusTicketDescription = $TypeStatusTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
@@ -3972,6 +3970,8 @@ abstract class Page
 											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
 		if($return == Config::SUCCESS)
 		{
+			if($this->InputValueDepartmentName == "")
+				$this->InputValueDepartmentName = NULL;
 			if($this->InputValueRegistrationDateYear != "" && $this->InputValueRegistrationDateMonth != "" 
 			   && $this->InputValueRegistrationDateDay != "")
 			{
@@ -3979,6 +3979,8 @@ abstract class Page
 				         	        . $this->InputValueRegistrationDateDay;
 			}
 			else $registrationDate = NULL;
+			if($this->InputValueRegistrationId == "")
+				$this->InputValueRegistrationId = NULL;
 			$return = $instanceFacedePersistence->AssocUserCorporationUpdateByUserEmailAndCorporationName($this->InputValueDepartmentName,
 				                                                                                          $registrationDate,
 															                                              $this->InputValueRegistrationId,
@@ -4708,6 +4710,14 @@ abstract class Page
 		return Config::ERROR;
 	}
 	
+	public function GetCurrentPage()
+	{
+		$pageConstant = Config::GetPageConstant($this->Page);
+		if($pageConstant == NULL)
+			return get_class($this);
+		else return $pageConstant;
+	}
+	
 	public function IncludeHeadAll($Page)
 	{
 		$return = NULL;
@@ -4776,6 +4786,12 @@ abstract class Page
 			return Config::SUCCESS;
 		}
 		else return self::ERROR_HEAD_JAVASCRIPT_NOT_EXISTS;
+	}
+	
+	public function LoadPage()
+	{	
+		if(!$this->PageEnabled) return ConfigInfraTools::ERROR;
+		$this->LoadHtml(FALSE);
 	}
 	
 	public function LoadPageDependencies()
@@ -4855,8 +4871,7 @@ abstract class Page
 		$Config = $this->Factory->CreateConfig();
 		$this->ReturnLoginText = Config::USER_NOT_CONFIRMED;
 		$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
-		$this->ReturnImage   = "<img src='" . $Config->DefaultServerImage . 
-				   				Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+		$this->ReturnImage   = "<img src='" . $Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
 	}
 	
 	public function RedirectPage($Page)
@@ -4961,19 +4976,6 @@ abstract class Page
 			return Config::SUCCESS;
 		}
 		else return Config::EMPTY_AMBIENT_VARIABLE;
-	}
-	
-	public static function GetPageFileDefaultLanguageByDir($PageDirName)
-	{
-		if (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_GERMAN)) !== false) 
-			return Config::LANGUAGE_GERMAN;
-		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_ENGLISH)) !== false) 
-			return Config::LANGUAGE_ENGLISH;
-		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_SPANISH)) !== false) 
-			return Config::LANGUAGE_SPANISH;
-		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
-			return Config::LANGUAGE_PORTUGUESE;
-		else return Config::ERROR;
 	}
 }
 ?>

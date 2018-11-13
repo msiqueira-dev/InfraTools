@@ -74,64 +74,64 @@
 		</form>
 		<?php
 		//CORPORATION VIEW
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
 		}
 		//TYPE USER VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)) . ".php");
 		}
 		//USER CHANGE CORPORATION
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", 
 									 str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION)) . ".php");
 		}
 		//USER CHANGE ASSOC USER CORPORATION
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", 
 									 str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION)) . ".php");
 		}
 		//USER CHANGE USER TYPE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", 
 									 str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE)) . ".php");
 		}
 		//USER LIST
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_LIST)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_LIST)) . ".php");
 		}
 		//USER REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_REGISTER)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM .
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_REGISTER)) . ".php");
 		}
 		//USER SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_SELECT)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_SELECT)) . ".php");
 		}
 		//USER UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_UPDATE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_UPDATE)) . ".php");
 		}
 		//USER VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_VIEW)) . ".php");

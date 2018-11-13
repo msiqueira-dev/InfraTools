@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Class used for displaying the home page. 
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -31,34 +30,29 @@ class PageNotFound extends PageInfraTools
 	/* Singleton */
 	protected static $Instance;
 
-	/* Get Instance */
-	public static function __create($Language)
+	/* __create */
+	public static function __create($Page, $Language)
 	{
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class($Language);
+			self::$Instance = new $class($Page, $Language);
 		}
 		return self::$Instance;
 	}
 
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = FALSE;
-		parent::__construct($Language);
+		parent::__construct($Page, $Language);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
 		}
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 
 	public function LoadPage()

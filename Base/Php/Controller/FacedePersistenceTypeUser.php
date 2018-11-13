@@ -13,13 +13,13 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about type user.
 Functions: 
-			public function TypeUserDelete($Id, $Debug);
-			public function TypeUserInsert($Description, $Debug);
-			public function TypeUserSelect($Limit1, $Limit2, &ArrayInstanceTypeUser, &$RowCount, $Debug);
-			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
-			public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug);
-			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug);
-			public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug);
+			public function TypeUserDelete($TypeUserId, $Debug, $MySqlConnection);
+			public function TypeUserInsert($TypeUserDescription, $Debug, $MySqlConnection);
+			public function TypeUserSelect($Limit1, $Limit2, &ArrayInstanceTypeUser, &$RowCount, $Debug, $MySqlConnection);
+			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
+			public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug, $MySqlConnection);
+			public function TypeUserSelectByTypeUserId($TypeUserId, &$TypeUser, $Debug, $MySqlConnection);
+			public function TypeUserUpdateByTypeUserId($TypeUserId, $Description, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -78,36 +78,30 @@ class FacedePersistenceTypeUser
         return self::$Instance;
     }
 	
-	public function TypeUserDelete($Id, $Debug)
+	public function TypeUserDelete($TypeUserId, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserDelete');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserDelete());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserDelete());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $Id);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$stmt->bind_param("i", $TypeUserId);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_TYPE_USER_DELETE_FAILED_NOT_FOUND;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_TYPE_USER_DELETE_FAILED;
@@ -116,8 +110,7 @@ class FacedePersistenceTypeUser
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 
@@ -125,56 +118,50 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserInsert($Description, $Debug)
+	public function TypeUserInsert($TypeUserDescription, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserInsert');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserInsert());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("s", $Description);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$stmt->bind_param("s", $TypeUserDescription);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_CORPORATION_INSERT_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug)
+	public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$ArrayInstanceTypeUser = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserSelect');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelect());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -187,7 +174,6 @@ class FacedePersistenceTypeUser
 														 $row[Config::TABLE_FIELD_REGISTER_DATE]);	
 						array_push($ArrayInstanceTypeUser, $InstanceTypeUser);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceTypeUser))
 						return Config::SUCCESS;
 					else 
@@ -203,29 +189,27 @@ class FacedePersistenceTypeUser
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_USER_SELECT_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
+	public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
 	{
 		$ArrayInstanceTypeUser = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserSelectNoLimit');
-			if($result = $mySqlConnection->query(Persistence::SqlTypeUserSelectNoLimit()))
+			if($result = $MySqlConnection->query(Persistence::SqlTypeUserSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
@@ -234,7 +218,6 @@ class FacedePersistenceTypeUser
 										                               $row[Config::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceTypeUser, $InstanceTypeUser);
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 				if(!empty($ArrayInstanceTypeUser))
 					return Config::SUCCESS;
 				else return Config::MYSQL_TYPE_USER_SELECT_FETCH_FAILED;
@@ -245,30 +228,29 @@ class FacedePersistenceTypeUser
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 				$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
 			}
-			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 			return $return;
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug)
+	public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserSelectByDescription');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelectByDescription());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelectByDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $Description);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$stmt->bind_param("s", $TypeUserDescription);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($Description, $id, $registerDate);
+					$stmt->bind_result($TypeUserDescription, $typeUserId, $registerDate);
 					if ($stmt->fetch())
 					{
-						$TypeUser = $this->Factory->CreateTypeUser($Description, $id, $registerDate);
+						$TypeUser = $this->Factory->CreateTypeUser($TypeUserDescription, $typeUserId, $registerDate);
 						return Config::SUCCESS;
 					}
 					else 
@@ -284,38 +266,36 @@ class FacedePersistenceTypeUser
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug)
+	public function TypeUserSelectByTypeUserId($TypeUserId, &$TypeUser, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserSelectByTypeUserId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserSelectByTypeUserId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelectByTypeUserId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("i", $Id);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$stmt->bind_param("i", $TypeUserId);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($descritpion, $Id, $registerDate);
+					$stmt->bind_result($typeUserDescription, $TypeUserId, $registerDate);
 					if ($stmt->fetch())
 					{
-						$TypeUser = $this->Factory->CreateTypeUser($descritpion, $Id, $registerDate);
+						$TypeUser = $this->Factory->CreateTypeUser($typeUserDescription, $TypeUserId, $registerDate);
 						return Config::SUCCESS;
 					}
 					else 
@@ -331,58 +311,49 @@ class FacedePersistenceTypeUser
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug)
+	public function TypeUserUpdateByTypeUserId($TypeUserId, $TypeUserDescription, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserUpdateByTypeUserId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeUserUpdateByTypeUserId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserUpdateByTypeUserId());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $Description, $Id);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$stmt->bind_param("si", $TypeUserDescription, $TypeUserId);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_TYPE_USER_UPDATE_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

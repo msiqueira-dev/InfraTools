@@ -74,31 +74,31 @@
 		</form>
 		<?php 
 		//TYPE TICKET LIST
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST)) . ".php");
 		}
 		//TYPE TICKET REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_REGISTER)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_REGISTER)) . ".php");
 		}
 		//TYPE TICKET SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT)) . ".php");
 		}
 		//TYPE TICKET UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_UPDATE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_UPDATE)) . ".php");
 		}
 		//TYPE TICKET VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW)) . ".php");

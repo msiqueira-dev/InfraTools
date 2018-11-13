@@ -18,82 +18,82 @@ Functions:
 			public function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 			                              $ServiceDepartment, $ServiceDepartmentCanChange,
 										  $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection);
-			public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection);
+			public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                           &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                             &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
 			                                                    $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
-			                                                          &$ArrayInstanceInfraToolService, 
+			                                                          &$ArrayInstanceInfraToolsService, 
 			                                                          &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
-			                                                                 &$ArrayInstanceInfraToolService, 
+			                                                                 &$ArrayInstanceInfraToolsService, 
 			                                                                 $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 															  &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 			                                                         $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail, 
-			                                                                $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			                                                                $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                                                &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
-			                                                                       &$ArrayInstanceInfraToolService, 
+			                                                                       &$ArrayInstanceInfraToolsService, 
 			                                                                       $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2,
-			                                                 &$ArrayInstanceInfraToolService, &$RowCount, 
+			                                                 &$ArrayInstanceInfraToolsService, &$RowCount, 
 															 $Debug, $MySqlConnection);
 	        public function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation $ServiceDepartment,
-			                                                        &$ArrayInstanceInfraToolService, $Debug);
+			                                                        &$ArrayInstanceInfraToolsService, $Debug);
 			public function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-			                                                              $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			                                                              $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                                              $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-			                                                                     &$ArrayInstanceInfraToolService, 
+			                                                                     &$ArrayInstanceInfraToolsService, 
 			                                                                     $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection);	
 			public function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
 			                                                      &$TypeAssocUserServiceId, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                           &$RowCount, $Debug, $MySqlConnection);	
-			public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
 			                                                  $Debug, $MySqlConnection);	
 			public function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-			                                                        $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			                                                        $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                                        &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
-			                                                               &$ArrayInstanceInfraToolService, 
+			                                                               &$ArrayInstanceInfraToolsService, 
 			                                                               $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                           &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, 
 			                                                  $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail, $Limit1, $Limit2, 
-			                                                        &$ArrayInstanceInfraToolService, &$RowCount, 
+			                                                        &$ArrayInstanceInfraToolsService, &$RowCount, 
 																	$Debug, $MySqlConnection);
 			public function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
-			                                                              &$ArrayInstanceInfraToolService, 
+			                                                              &$ArrayInstanceInfraToolsService, 
 																		  $Debug, $MySqlConnection);
 			public function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                                    &$ArrayInstanceInfraToolService, 
+			                                                    &$ArrayInstanceInfraToolsService, 
 			                                                    &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
-			                                                           &$ArrayInstanceInfraToolService, 
+			                                                           &$ArrayInstanceInfraToolsService, 
 																       $Debug, $MySqlConnection);
 			public function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
 			                                                                 $UserEmail, $Limit1, $Limit2, 
-			                                                                 &$ArrayInstanceInfraToolService, &$RowCount, 
+			                                                                 &$ArrayInstanceInfraToolsService, &$RowCount, 
 																			 $Debug, $MySqlConnection);
 			public function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
 			                                                                        $UserEmail,
-			                                                                        &$ArrayInstanceInfraToolService, 
+			                                                                        &$ArrayInstanceInfraToolsService, 
 																		            $Debug, $MySqlConnection);
-			public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                    &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolService, 
+			public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                           $Debug, $MySqlConnection);
-			public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolService, 
+			public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, 
 			                                     $Debug, $MySqlConnection);
 			public function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
 			                                         $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
@@ -275,10 +275,10 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug, $MySqlConnection)
+	public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelect');
 		if($MySqlConnection != NULL)
@@ -291,12 +291,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -310,10 +310,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else 
 					{
@@ -340,11 +340,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                  &$RowCount, $Debug, $MySqlConnection)
+	public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			                                   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectOnUserContext');
 		if($MySqlConnection != NULL)
@@ -356,12 +356,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -375,10 +375,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else 
 					{
@@ -405,11 +405,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 												 &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActive');
 		if($MySqlConnection != NULL)
@@ -421,12 +421,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -440,10 +440,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -469,10 +469,10 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+	public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActiveNoLimit');
 		if($MySqlConnection != NULL)
@@ -484,11 +484,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -502,10 +502,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -532,10 +532,10 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
-															  &$ArrayInstanceInfraToolService, &$RowCount, $Debug, $MySqlConnection)
+															  &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActiveOnUserContext');
 		if($MySqlConnection != NULL)
@@ -547,12 +547,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -566,10 +566,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -595,11 +595,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                                         $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActiveOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
@@ -611,11 +611,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -629,10 +629,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -658,11 +658,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 													  &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporation');
 		if($MySqlConnection != NULL)
@@ -675,7 +675,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -684,7 +684,7 @@ class InfraToolsFacedePersistenceService
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -698,10 +698,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -727,11 +727,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 															 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporationNoLimit');
 		if($MySqlConnection != NULL)
@@ -744,7 +744,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -752,7 +752,7 @@ class InfraToolsFacedePersistenceService
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -766,10 +766,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -796,11 +796,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail,$Limit1, $Limit2,
-																   &$ArrayInstanceInfraToolService, &$RowCount, 
+																   &$ArrayInstanceInfraToolsService, &$RowCount, 
 																   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporationOnUserContext');
 		if($MySqlConnection != NULL)
@@ -813,7 +813,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -822,7 +822,7 @@ class InfraToolsFacedePersistenceService
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -836,10 +836,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -866,11 +866,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
-																		  &$ArrayInstanceInfraToolService, 
+																		  &$ArrayInstanceInfraToolsService, 
 																		  $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporationOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
@@ -883,7 +883,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -891,7 +891,7 @@ class InfraToolsFacedePersistenceService
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
 						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -905,10 +905,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -935,11 +935,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, 
-													 $Limit1, $Limit2, &$ArrayInstanceInfraToolService,
+													 $Limit1, $Limit2, &$ArrayInstanceInfraToolsService,
 													 &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartment');
 		if($MySqlConnection != NULL)
@@ -952,7 +952,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -966,7 +966,7 @@ class InfraToolsFacedePersistenceService
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -980,10 +980,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1010,10 +1010,10 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment, 
-															&$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+															&$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartmentNoLimit');
 		if($MySqlConnection != NULL)
@@ -1026,7 +1026,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1039,7 +1039,7 @@ class InfraToolsFacedePersistenceService
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1053,10 +1053,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1084,11 +1084,11 @@ class InfraToolsFacedePersistenceService
 	
 	public function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, 
 																  $UserEmail, $Limit1, $Limit2,
-																  &$ArrayInstanceInfraToolService, &$RowCount, $Debug,
+																  &$ArrayInstanceInfraToolsService, &$RowCount, $Debug,
 																  $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartmentOnUserContext');
 		if($MySqlConnection != NULL)
@@ -1101,7 +1101,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1115,7 +1115,7 @@ class InfraToolsFacedePersistenceService
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1129,10 +1129,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1159,10 +1159,10 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail,
-																		 &$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+																		 &$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartmentOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
@@ -1175,7 +1175,7 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1188,7 +1188,7 @@ class InfraToolsFacedePersistenceService
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
 									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1202,10 +1202,10 @@ class InfraToolsFacedePersistenceService
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1251,7 +1251,7 @@ class InfraToolsFacedePersistenceService
 									   $typeServiceName, $typeServiceSla, $typeServiceRegDate);
 					if ($stmt->fetch())
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $typeServiceRegDate,
 						                                            $serviceName,
 						                                            $typeServiceSla);
@@ -1265,7 +1265,7 @@ class InfraToolsFacedePersistenceService
 								                                    $serviceDescription, 
 																	$serviceId, 
 													                $serviceName,
-																	$InstanceceInfraToolsTypeService);
+																	$InstanceInfraToolsTypeService);
 						return ConfigInfraTools::SUCCESS;
 					}
 				}
@@ -1308,7 +1308,7 @@ class InfraToolsFacedePersistenceService
 									   $typeServiceName, $typeServiceSla, $typeServiceRegDate, $TypeAssocUserServiceId);
 					if ($stmt->fetch())
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $typeServiceRegDate,
 						                                            $typeServiceName,
 						                                            $typeServiceSla);
@@ -1322,7 +1322,7 @@ class InfraToolsFacedePersistenceService
 								                                    $serviceDescription, 
 																	$serviceId, 
 													                $serviceName, 
-																	$InstanceceInfraToolsTypeService);
+																	$InstanceInfraToolsTypeService);
 						return ConfigInfraTools::SUCCESS;
 					}
 				}
@@ -1343,11 +1343,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 											   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceName');
 		if($MySqlConnection != NULL)
@@ -1360,12 +1360,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1379,10 +1379,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1408,11 +1408,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
 													  $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceNameNoLimit');
 		if($MySqlConnection != NULL)
@@ -1425,11 +1425,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1443,10 +1443,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1473,11 +1473,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail,$Limit1, $Limit2,
-															&$ArrayInstanceInfraToolService, &$RowCount, 
+															&$ArrayInstanceInfraToolsService, &$RowCount, 
 															$Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceNameOnUserContext');
 		if($MySqlConnection != NULL)
@@ -1490,12 +1490,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1509,10 +1509,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1539,11 +1539,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
-																   &$ArrayInstanceInfraToolService, 
+																   &$ArrayInstanceInfraToolsService, 
 																   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceNameOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
@@ -1556,11 +1556,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1574,10 +1574,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1603,11 +1603,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceType($ServiceNType, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceType($ServiceNType, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 											   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceType');
 		if($MySqlConnection != NULL)
@@ -1620,12 +1620,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1639,10 +1639,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1668,11 +1668,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, 
 													  $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceType');
 		if($MySqlConnection != NULL)
@@ -1685,11 +1685,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1703,10 +1703,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1733,11 +1733,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail,$Limit1, $Limit2,
-															&$ArrayInstanceInfraToolService, &$RowCount, 
+															&$ArrayInstanceInfraToolsService, &$RowCount, 
 															$Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceTypeOnUserContext');
 		if($MySqlConnection != NULL)
@@ -1750,12 +1750,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1769,10 +1769,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1799,11 +1799,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail, 
-																   &$ArrayInstanceInfraToolService, 
+																   &$ArrayInstanceInfraToolsService, 
 																   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceTypeOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
@@ -1816,11 +1816,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1834,10 +1834,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1864,11 +1864,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                            &$ArrayInstanceInfraToolService, 
+			                                            &$ArrayInstanceInfraToolsService, 
 			                                            &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserService');
 		if($MySqlConnection != NULL)
@@ -1881,12 +1881,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1900,10 +1900,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1930,11 +1930,11 @@ class InfraToolsFacedePersistenceService
 	}
 	
 	public function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
-			                                                   &$ArrayInstanceInfraToolService, 
+			                                                   &$ArrayInstanceInfraToolsService, 
 															   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceNoLimit');
 		if($MySqlConnection != NULL)
@@ -1947,11 +1947,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -1965,10 +1965,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -1996,11 +1996,11 @@ class InfraToolsFacedePersistenceService
 	
 	public function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
 			                                                         $UserEmail, $Limit1, $Limit2, 
-			                                                         &$ArrayInstanceInfraToolService, 
+			                                                         &$ArrayInstanceInfraToolsService, 
 																	 &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceOnUserContext');
 		if($MySqlConnection != NULL)
@@ -2013,12 +2013,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -2032,10 +2032,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -2063,11 +2063,11 @@ class InfraToolsFacedePersistenceService
 	
 	public function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
 			                                                                $UserEmail,
-			                                                                &$ArrayInstanceInfraToolService, 
+			                                                                &$ArrayInstanceInfraToolsService, 
 																		    $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
@@ -2080,11 +2080,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -2098,10 +2098,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -2127,11 +2127,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 										&$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByUser');
 		if($MySqlConnection != NULL)
@@ -2143,12 +2143,12 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -2162,10 +2162,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -2191,11 +2191,11 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, 
 											   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByUserNoLimit');
 		if($MySqlConnection != NULL)
@@ -2207,11 +2207,11 @@ class InfraToolsFacedePersistenceService
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -2225,10 +2225,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
+					if(!empty($ArrayInstanceInfraToolsService))
 						return ConfigInfraTools::SUCCESS;
 					else
 					{
@@ -2254,20 +2254,20 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+	public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlServiceSelectNoLimit()))
 			{
-				$ArrayInstanceInfraToolService = array();
+				$ArrayInstanceInfraToolsService = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+					$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
@@ -2281,10 +2281,10 @@ class InfraToolsFacedePersistenceService
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-					array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+																 $InstanceInfraToolsTypeService);
+					array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 				}
-				if(!empty($ArrayInstanceInfraToolService))
+				if(!empty($ArrayInstanceInfraToolsService))
 					return ConfigInfraTools::SUCCESS;
 				else return ConfigInfraTools::MYSQL_SERVICE_SELECT_FETCH_FAILED;
 			}

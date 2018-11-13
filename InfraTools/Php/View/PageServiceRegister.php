@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe que trata da página do cadastro de serviços.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -32,17 +31,19 @@ class PageServiceRegister extends PageInfraTools
 	public $ArrayInstanceInfraToolsDepartment  = NULL;
 	public $ArrayInstanceInfraToolsTypeService = NULL;
 	
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()

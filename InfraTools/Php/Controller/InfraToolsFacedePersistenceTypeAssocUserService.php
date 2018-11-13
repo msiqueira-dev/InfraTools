@@ -102,11 +102,11 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeAssocUserService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeAssocUserService(
 						                                   $row["TypeAssocUserService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                   $row[ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_DESCRIPTION],
 						                                   $row[ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID]);
-						array_push($ArrayInstanceInfraToolsTypeAssocUserService, $InstanceceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsTypeAssocUserService, $InstanceInfraToolsTypeService);
 					}
 					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceInfraToolsTypeAssocUserService))
@@ -214,11 +214,11 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeAssocUserService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeAssocUserService(
 						                                   $row["TypeAssocUserService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                   $row[ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_DESCRIPTION],
 						                                   $row[ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID]);
-						array_push($ArrayInstanceInfraToolsTypeAssocUserService, $InstanceceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsTypeAssocUserService, $InstanceInfraToolsTypeService);
 					}
 					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceInfraToolsTypeAssocUserService))

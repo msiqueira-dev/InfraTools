@@ -52,7 +52,7 @@ if(is_array($this->ArrayInstanceTypeTicket))
 							       value='" . $typeTicket->GetTypeTicketId() . "' 
 								   title='" . $typeTicket->GetTypeTicketId() . "' />
 		      </td>";
-		echo "<td class='TableTypeTicketThDescritpion'>"   . $typeTicket->GetTypeTicketDescription()  . "</td>";
+		echo "<td class='TableTypeTicketThDescription'>"   . $typeTicket->GetTypeTicketDescription()  . "</td>";
 		echo "<td class= 'TableTypeTicketThRegisterDate'>" . $typeTicket->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}

@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Class for notifications and alett for all system users.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -28,37 +27,34 @@ if (!class_exists("PageInfraTools"))
 
 class PageNotification extends PageInfraTools
 {
-	protected static $Instance;
 	public $ArrayCountry = NULL;
 	
 	/* Singleton */
-	public static function __create($Language)
+	protected static $Instance;
+	
+	/* __create */
+	public static function __create($Page, $Language)
     {
         if (!isset(self::$Instance)) 
 		{
             $class = __CLASS__;
-            self::$Instance = new $class($Language);
+            self::$Instance = new $class($Page, $Language);
         }
         return self::$Instance;
     }
 	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
+		parent::__construct($Page, $Language);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
 		}
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 
 	public function LoadPage()

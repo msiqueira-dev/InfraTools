@@ -81,7 +81,7 @@ class FacedePersistenceTypeAssocUserRequesting
 	
 	public function TypeAssocUserRequestingDelete($TypeAssocUserRequestingBond, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -121,7 +121,7 @@ class FacedePersistenceTypeAssocUserRequesting
 	
 	public function TypeAssocUserRequestingInsert($TypeAssocUserRequestingBond, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -153,8 +153,8 @@ class FacedePersistenceTypeAssocUserRequesting
 	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocUserRequesting,  &$RowCount, 
 												  $Debug, $MySqlConnection)
 	{
-		$errorStr = NULL; $errorCode = NULL;
 		$ArrayTypeAssocUserTeam = array();
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -206,7 +206,7 @@ class FacedePersistenceTypeAssocUserRequesting
 	public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond, &$TypeAssocUserRequesting, 
 															$Debug, $MySqlConnection)
 	{
-		$errorStr = NULL; $errorCode = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -252,7 +252,7 @@ class FacedePersistenceTypeAssocUserRequesting
 	
 	public function TypeAssocUserRequestingUpdateByTypeBond($TypeAssocUserRequestingTypeBond, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)

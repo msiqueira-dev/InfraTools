@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Class used for login. 
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -30,13 +29,20 @@ class PageLogin extends PageInfraTools
 {	
 	/*  Variaveis de página para controle de exibição de elementos */
 	public $DisableGenericHtml = TRUE;
+	
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
 
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = FALSE;
-		parent::__construct($Language);
+		parent::__construct($Page, $Language);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
@@ -65,11 +71,6 @@ class PageLogin extends PageInfraTools
 				}
 			}
 		}
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 
 	public function LoadPage()

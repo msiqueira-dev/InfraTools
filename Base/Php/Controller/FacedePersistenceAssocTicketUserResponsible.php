@@ -219,10 +219,10 @@ class FacedePersistenceAssocUserResponsible
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $typeAssocUserTeamDescritpion, $TypeAssocUserTeamId);
+					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $TypeAssocUserTeamId);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescritpion,
+						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescription,
 																			  $TypeAssocUserTeamId);
 						return Config::SUCCESS;
 					}

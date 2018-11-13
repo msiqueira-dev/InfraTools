@@ -10,7 +10,6 @@ Dependencies:
 Description: 
 			Class used for viewing and use all diagnostic functions at once. 
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -108,12 +107,19 @@ class PageDiagnosticTools extends PageInfraTools
 	public $VisibilityFunctionGetWhoisIp                                = "Hidden";
 	public $VisibilityFunctionGetWhoisSubmit                            = "HiddenTab";
 	
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
+		parent::__construct($Page, $Language);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
@@ -122,11 +128,6 @@ class PageDiagnosticTools extends PageInfraTools
 		}
 	}
 
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-	
 	private function CheckPostBack()
 	{
 		if ($_POST != NULL)

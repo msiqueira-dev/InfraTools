@@ -14,23 +14,25 @@ if (!class_exists("PageInfraTools"))
 
 class PageResendConfirmationLink extends PageInfraTools
 {	
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = FALSE;
-		parent::__construct($Language);
+		parent::__construct($Page, $Language);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_LOGIN));
 		}
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
 	}
 
 	public function LoadPage()

@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe que trata da página de seleção de serviços.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -28,20 +27,21 @@ if (!class_exists("PageInfraTools"))
 
 class PageServiceSelect extends PageInfraTools
 {
-	protected static $Instance;
-	public $ArrayInfraToolsService     = NULL;
+	public $ArrayInfraToolsService    = NULL;
 	public $InstanceInfraToolsService = NULL;
 	
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()

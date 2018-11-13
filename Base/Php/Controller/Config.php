@@ -10,8 +10,9 @@ Description:
 			Classe de configurcão Web Base.
 			Padroes: Singleton.
 Functions: 
+			public static function GetDefaultLanguageByDir($PageDirName);
+			public static function GetPageConstant($Constant);
 			public function SetApplication();
-			public function AuthenticateServerBasic();
 **************************************************************************/
 if (!class_exists("Factory"))
 {
@@ -169,6 +170,7 @@ class Config
 	const LOGIN_TWO_STEP_VERIFICATION_CODE                              = "LoginTwoStepVerificationCode";
 	const LOGIN_TWO_STEP_VERIFICATION_FORM                              = "LoginTwoStepVerificationForm";
 	const LOGIN_USER                                                    = "LoginUser";
+	const PAGE                                                          = "Page";
 	const PAGE_ABOUT                                                    = "Page_About";
 	const PAGE_ACCOUNT                                                  = "Page_Account";
 	const PAGE_ACCOUNT_CHANGE_PASSWORD                                  = "Page_Account_Change_Password";
@@ -566,6 +568,26 @@ class Config
         }
         return self::$Instance;
     }
+	
+	public static function GetDefaultLanguageByDir($PageDirName)
+	{
+		if (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_GERMAN)) !== false) 
+			return Config::LANGUAGE_GERMAN;
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_ENGLISH)) !== false) 
+			return Config::LANGUAGE_ENGLISH;
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_SPANISH)) !== false) 
+			return Config::LANGUAGE_SPANISH;
+		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
+			return Config::LANGUAGE_PORTUGUESE;
+		else return Config::ERROR;
+	}
+	
+	public static function GetPageConstant($Constant)
+	{
+		if(defined("Config::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_"))))
+			return constant("Config::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_")));
+		else return Config::ERROR;
+	}
 	
 	public function SetApplication()
 	{

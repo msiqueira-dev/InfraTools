@@ -11,59 +11,59 @@ Dependencies:
 Description: 
 			Classe used to create instance of all elements in the Base Project.
 Methods:
-			protected function LoadPage($Page);
-			public  function   CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
-			public  function   CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
+			public    function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
+			public    function CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
 			                                              $AssocUserCorporationRegistrationId, $CorporationInstance, $RegisterDate,
-								    					  $UserInstance);
-			public function     CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance);
-			public function     CreateCaptcha();
-			public function     CreateConfig();
-			public function     CreateCorporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
-			public function     CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
-			public function     CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
-			public function     CreateEmail();
-			public function     CreateFacedeBusiness($LanguageText);
-			public function     CreateFacedePersistence();
-			public function     CreateFacedePersistenceAssocTicketUserRequesting();
-			public function     CreateFacedePersistenceAssocTicketUserResponsible();
-			public function     CreateFacedePersistenceAssocUserCorporation();
-			public function     CreateFacedePersistenceAssocUserTeam();
-			public function     CreateFacedePersistenceCorporation();
-			public function     CreateFacedePersistenceCountry();
-			public function     CreateFacedePersistenceDepartment();
-			public function     CreateFacedePersistenceHistoryTicket();
-			public function     CreateFacedePersistenceNotification();
-			public function     CreateFacedePersistenceStatusTicket();
-			public function     CreateFacedePersistenceTeam();
-			public function     CreateFacedePersistenceTicket();
-			public function     CreateFacedePersistenceTypeAssocUserTeam();
-			public function     CreateFacedePersistenceTypeStatusTicket();
-			public function     CreateFacedePersistenceTypeTicket();
-			public function     CreateFacedePersistenceTypeUser();
-			public function     CreateFacedePersistenceUser();
-			public function     CreateFile();
-			public function     CreateFormValidator();
-			public function     CreateLog($LogPathDirectory);
-			public function     CreateNotification($NotificationText, $NotificationUser, $RegisterDate);
-			public function     CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword);
-			public function     CreateMobileDetect();
-			public function     CreateNetWhois();
-			public function     CreateNetwork();
-			public function     CreatePageForm();
-			public function     CreatePersistence();
-			public function     CreateSession();
-			public function     CreateSessionHandlerCustom();
-			public function     CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
-			public function     CreateTechInfo();
-			public function     CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
-			public function     CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
-			public function     CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
-			public function     CreateTypeUser($Description, $Id, $RegisterDate);
-			public function     CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-			                               $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
-							               $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
-							               $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
+								   					      $UserInstance);
+			public    function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance);
+			public    function CreateCaptcha();
+			public    function CreateConfig();
+			public    function CreateCorporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
+			public    function CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
+			public    function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
+			public    function CreateEmail();
+			public    function CreateFacedeBusiness($LanguageText);
+			public    function CreateFacedePersistence();
+			public    function CreateFacedePersistenceAssocTicketUserRequesting();
+			public    function CreateFacedePersistenceAssocTicketUserResponsible();
+			public    function CreateFacedePersistenceAssocUserCorporation();
+			public    function CreateFacedePersistenceAssocUserTeam();
+			public    function CreateFacedePersistenceCorporation();
+			public    function CreateFacedePersistenceCountry();
+			public    function CreateFacedePersistenceDepartment();
+			public    function CreateFacedePersistenceHistoryTicket();
+			public    function CreateFacedePersistenceNotification();
+			public    function CreateFacedePersistenceStatusTicket();
+			public    function CreateFacedePersistenceTeam();
+			public    function CreateFacedePersistenceTicket();
+			public    function CreateFacedePersistenceTypeAssocUserTeam();
+			public    function CreateFacedePersistenceTypeStatusTicket();
+			public    function CreateFacedePersistenceTypeTicket();
+			public    function CreateFacedePersistenceTypeUser();
+			public    function CreateFacedePersistenceUser();
+			public    function CreateFile();
+			public    function CreateFormValidator();
+			public    function CreateLog($LogPathDirectory);
+			public    function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword);
+			public    function CreateMobileDetect();
+			public    function CreateNetWhois();
+			public    function CreateNetwork();
+			public    function CreateNotification($NotificationText, $NotificationUser, $RegisterDate);
+			public    function CreatePage($Page, $Language);
+			public    function CreatePageForm();
+			public    function CreatePersistence();
+			public    function CreateSession();
+			public    function CreateSessionHandlerCustom();
+			public    function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
+			public    function CreateTechInfo();
+			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
+			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
+			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
+			public    function CreateTypeUser($Description, $Id, $RegisterDate);
+			public    function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+			                              $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
+							              $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
+							              $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
 **************************************************************************/
 
 /* BASE PATH CONSTANTS */
@@ -141,21 +141,6 @@ class Factory
         }
         return self::$Instance;
     }
-	
-	protected function LoadPage($Page)
-	{
-		if($Page != NULL)
-		{
-			$Page->LoadPage();
-			if($Page->InputValueHeaderDebug == Config::CHECKBOX_CHECKED)
-			{
-				$Page->StopPageLoadTime();
-				echo "<div class='DivPageLoadTime'><b>Page Load Time: " . $Page->GetPageLoadTime() . "</b></div>";
-			}
-			return Config::SUCCESS;
-		}
-		else return Config::ERROR;
-	}
 	
 	public function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate)
 	{
@@ -437,14 +422,6 @@ class Factory
 		return new Log($LogPathDirectory);
 	}
 	
-	public function CreateNotification($NotificationText, $NotificationUser, $RegisterDate)
-	{
-		if(!file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
-		else include_once(BASE_PATH_PHP_MODEL . "Notification.php");
-		return new Notification($NotificationText, $NotificationUser, $RegisterDate);
-	}
-	
 	public function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "MySqlManager.php"))
@@ -475,6 +452,43 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Network');
 		else include_once(BASE_PATH_PHP_MODEL . "Network.php");
 		return Network::__create();	
+	}
+	
+	public function CreateNotification($NotificationText, $NotificationUser, $RegisterDate)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
+		else include_once(BASE_PATH_PHP_MODEL . "Notification.php");
+		return new Notification($NotificationText, $NotificationUser, $RegisterDate);
+	}
+	
+	public function CreatePage($Page, $Language)
+	{
+		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
+		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
+		if(file_exists(SITE_PATH_PHP_VIEW . $Page . ".php"))
+			include_once(SITE_PATH_PHP_VIEW . $Page . ".php");
+		elseif(file_exists(BASE_PATH_PHP_VIEW . $Page . ".php"))
+			include_once(BASE_PATH_PHP_VIEW . $Page . ".php");
+		elseif(file_exists(BASE_PATH_PHP_VIEW . "Page.php"))
+		{
+			include_once(BASE_PATH_PHP_VIEW . "Page.php");
+			$Page = Config::PAGE;
+		}
+		else exit(basename(__FILE__, '.php') . ': Not a single View Class available for $Page. Check View Dictories.');
+		$page = $Page::__create($Page, $Language);
+		if($page != NULL)
+		{
+			$page->LoadPage();
+			if($page->InputValueHeaderDebug == Config::CHECKBOX_CHECKED)
+			{
+				$page->StopPageLoadTime();
+				echo "<div class='DivPageLoadTime'><b>Page Load Time: " . $page->GetPageLoadTime() . "</b></div>";
+			}
+			return Config::SUCCESS;
+		}
+		else return Config::ERROR;
 	}
 	
 	public function CreatePageForm()

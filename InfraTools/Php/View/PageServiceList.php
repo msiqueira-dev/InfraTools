@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -30,16 +29,18 @@ class PageServiceList extends PageService
 {
 	public $ArrayInfraToolsService = NULL;
 	
+	/* __create */
+	public static function __create($Page, $Language)
+	{
+		$class = __CLASS__;
+		return new $class($Page, $Language);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Page, $Language) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()
@@ -72,20 +73,20 @@ class PageServiceList extends PageService
 												  $rowCount,
 												  $this->InputValueHeaderDebug);
 				if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
-												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInfraToolsService,
-												  $rowCount,
-												  $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
+				{
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
+													  $this->InputLimitOne, $this->InputLimitTwo, 
+													  $this->ArrayInfraToolsService,
+													  $rowCount,
+													  $this->InputValueHeaderDebug);
+				}
+				elseif($this->InputLimitTwo > $rowCount)
+				{
+					$this->InputLimitOne = $this->InputLimitOne - 25;
+					$this->InputLimitTwo = $this->InputLimitTwo - 25;
+				}
 			}
 			//SERVICE LIST SELECT SUBMIT
 			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]))

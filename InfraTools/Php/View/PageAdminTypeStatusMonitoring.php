@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe que trata da administração dos equipes.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -30,16 +29,17 @@ class PageAdminTypeStatusMonitoring extends PageAdmin
 {
 	public $InstanceTypeStatusMonitoring = NULL;
 	
-	/* Constructor */
-	protected function __construct($Language) 
+	/* __create */
+	public static function __create($Page, $Language)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Page, $Language);
 	}
-
-	public function GetCurrentPage()
+	
+	/* Constructor */
+	protected function __construct($Page, $Language) 
 	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()

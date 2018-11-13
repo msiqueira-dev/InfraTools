@@ -100,11 +100,11 @@ class InfraToolsFacedePersistenceTypeService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
-						array_push($ArrayInstanceInfraToolsTypeService, $InstanceceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 					}
 					if(!empty($ArrayInstanceInfraToolsTypeService))
 						return ConfigInfraTools::SUCCESS;
@@ -145,11 +145,11 @@ class InfraToolsFacedePersistenceTypeService
 				$ArrayInstanceInfraToolsTypeService = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+					$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 																$row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 																$row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 																$row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
-					array_push($ArrayInstanceInfraToolsTypeService, $InstanceceInfraToolsTypeService);
+					array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 				}
 				if(!empty($ArrayInstanceInfraToolsTypeService))
 					return ConfigInfraTools::SUCCESS;
@@ -192,11 +192,11 @@ class InfraToolsFacedePersistenceTypeService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
-						array_push($ArrayInstanceInfraToolsTypeService, $InstanceceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 					}
 					if(!empty($ArrayInstanceInfraToolsTypeService))
 						return ConfigInfraTools::SUCCESS;
@@ -243,11 +243,11 @@ class InfraToolsFacedePersistenceTypeService
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
 						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
-						array_push($ArrayInstanceInfraToolsTypeService, $InstanceceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 					}
 					if(!empty($ArrayInstanceInfraToolsTypeService))
 						return ConfigInfraTools::SUCCESS;

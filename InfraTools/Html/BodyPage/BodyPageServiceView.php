@@ -129,7 +129,7 @@
 			</div>
 		</div>
 		<?php
-			if($this->Page == ConfigInfraTools::PAGE_SERVICE_UPDATE)
+			if($this->PageBody == ConfigInfraTools::PAGE_SERVICE_UPDATE)
 			{
 				include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("Page", "", str_replace("_", "", 

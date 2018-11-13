@@ -16,7 +16,10 @@ Functions:
 			public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug, $MySqlConnection);
 			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, 
 			                                           $UserEmail, $Debug, $MySqlConnection);
-			
+			public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+			                                                                        $AssocUserCorporationRegistrationDateNew, 
+			                                                                        $AssocUserCorporationRegistrationIdNew, 
+																					$CorporationName, $UserEmail, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Factory"))
@@ -140,6 +143,48 @@ class FacedePersistenceAssocUserCorporation
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+		                                                                    $AssocUserCorporationRegistrationDateNew, 
+																			$AssocUserCorporationRegistrationIdNew, 
+																			$CorporationName, $UserEmail, $Debug, $MySqlConnection)
+	{
+		$errorCode = NULL; $errorStr = NULL; $mySqlError = NULL; $queryResult = NULL;		
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlAssocUserCorporationUpdateByUserEmailAndCorporationName');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationUpdateByUserEmailAndCorporationName());
+			if ($stmt)
+			{
+				$stmt->bind_param("sssss", $AssocUserCorporationDepartmentNameNew, $AssocUserCorporationRegistrationDateNew, 
+								           $AssocUserCorporationRegistrationIdNew, $CorporationName, $UserEmail);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL && $stmt->affected_rows > 0)
+					return Config::SUCCESS;
+				elseif($errorStr == NULL && $stmt->affected_rows == 0)
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, $stmt);
+					return Config::MYSQL_UPDATE_SAME_VALUE;
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return Config::MYSQL_USER_UPDATE_ASSOC_USER_CORPORATION_BY_EMAIL_FAILED;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $mySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

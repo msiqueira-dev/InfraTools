@@ -13,14 +13,14 @@ Dependencies:
 Description: 
 			Classe used to access and deal with system notification.
 Functions: 
-			public function NotificationDeleteByText($Text);
-			public function NotificationDeleteByTextAndUserEmail($Text, $UserEmail);
-			public function NotificationDeleteByUserEmail($UserEmail);
-			public function NotificationInsert($Text, $UserEmail);
-			public function NotificationSelectByText($Text, &$InstanceArrayNotification);
-			public function NotificationSelectByTextAndUserEmail($Text, $UserEmail, &$InstanceArrayNotification);
-			public function NotificationSelectByUserEmail($UserEmail, &$InstanceArrayNotification);
-			public function NotificationUpdateTextByUserEmail($UserEmail);
+			public function NotificationDeleteByText($Text, $Debug, $MySqlConnection);
+			public function NotificationDeleteByTextAndUserEmail($Text, $UserEmail, $Debug, $MySqlConnection);
+			public function NotificationDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection);
+			public function NotificationInsert($Text, $UserEmail, $Debug, $MySqlConnection);
+			public function NotificationSelectByText($Text, &$InstanceArrayNotification, $Debug, $MySqlConnection);
+			public function NotificationSelectByTextAndUserEmail($Text, $UserEmail, &$InstanceArrayNotification, $Debug, $MySqlConnection);
+			public function NotificationSelectByUserEmail($UserEmail, &$InstanceArrayNotification, $MySqlConnection);
+			public function NotificationUpdateTextByUserEmail($UserEmail, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -79,7 +79,7 @@ class FacedePersistenceNotification
         return self::$Instance;
     }
 	
-	public function NotificationDeleteByText($Text)
+	public function NotificationDeleteByText($Text, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
@@ -126,30 +126,30 @@ class FacedePersistenceNotification
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function NotificationDeleteByTextAndUserEmail($Text, $UserEmail)
+	public function NotificationDeleteByTextAndUserEmail($Text, $UserEmail, $Debug, $MySqlConnection)
 	{
 	}
 	
-	public function NotificationDeleteByUserEmail($UserEmail)
+	public function NotificationDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection)
 	{
 	}
 	
-	public function NotificationInsert($Text, $UserEmail)
+	public function NotificationInsert($Text, $UserEmail, $Debug, $MySqlConnection)
 	{
 	}
 	
-	public function NotificationSelectByText($Text, &$InstanceArrayNotification)
+	public function NotificationSelectByText($Text, &$InstanceArrayNotification, $Debug, $MySqlConnection)
 	{
 	}
 	
-	public function NotificationSelectByTextAndUserEmail($Text, $UserEmail, &$InstanceArrayNotification)
+	public function NotificationSelectByTextAndUserEmail($Text, $UserEmail, &$InstanceArrayNotification, $Debug, $MySqlConnection)
 	{
 	}
 	
-	public function NotificationSelectByUserEmail($UserEmail, &$InstanceArrayNotification)
+	public function NotificationSelectByUserEmail($UserEmail, &$InstanceArrayNotification, $Debug, $MySqlConnection)
 	{
 	}
-	public function NotificationUpdateTextByUserEmail($UserEmail)
+	public function NotificationUpdateTextByUserEmail($UserEmail, $Debug, $MySqlConnection)
 	{
 	}
 }

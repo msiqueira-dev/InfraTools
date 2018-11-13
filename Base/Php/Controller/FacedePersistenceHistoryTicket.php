@@ -13,12 +13,12 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about tickets.
 Functions: 
-			public function HistoryTicketDelete($TypeTicketId, $Debug);
-			public function HistoryTicketInsert($TypeTicketDescription, $Debug);
-			public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug);
-			public function HistoryTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug);
-			public function HistoryTicketSelectById($TypeTicketId, &$TypeTicket, $Debug);
-			public function HistoryTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug);
+			public function HistoryTicketDelete($TypeTicketId, $Debug, $MySqlConnection);
+			public function HistoryTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
+			public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection);
+			public function HistoryTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection);
+			public function HistoryTicketSelectById($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection);
+			public function HistoryTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -77,36 +77,30 @@ class FacedePersistenceHistoryTicket
         return self::$Instance;
     }
 	
-	public function HistoryTicketDelete($TypeTicketId, $Debug)
+	public function HistoryTicketDelete($TypeTicketId, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlHistoryTicketDelete');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketDelete());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $TypeTicketId);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_TYPE_USER_DELETE_FAILED_NOT_FOUND;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_TYPE_USER_DELETE_FAILED;
@@ -115,8 +109,7 @@ class FacedePersistenceHistoryTicket
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 
@@ -124,56 +117,48 @@ class FacedePersistenceHistoryTicket
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function HistoryTicketInsert($TypeTicketDescription, $Debug)
+	public function HistoryTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL){
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlHistoryTicketInsert');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketInsert());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TypeTicketDescription);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_CORPORATION_INSERT_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug)
+	public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$ArrayInstanceTypeTicket = array();
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlHistoryTicketSelect');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketSelect());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -186,7 +171,6 @@ class FacedePersistenceHistoryTicket
 						                                 $row[Config::TABLE_TYPE_TICKET_FIELD_ID]);	
 						array_push($ArrayInstanceTypeTicket, $InstanceTypeTicket);
 					}
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					if(!empty($ArrayInstanceTypeTicket))
 						return Config::SUCCESS;
 					else 
@@ -202,31 +186,29 @@ class FacedePersistenceHistoryTicket
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_USER_SELECT_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function HistoryTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug)
+	public function HistoryTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlHistoryTicketSelectByDescription');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketSelectByDescription());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketSelectByDescription());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $TypeTicketDescription);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$stmt->bind_result($registerDate, $TypeTicketDescription, $typeTicketId);
@@ -248,37 +230,35 @@ class FacedePersistenceHistoryTicket
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function HistoryTicketSelectById($TypeTicketId, &$TypeTicket, $Debug)
+	public function HistoryTicketSelectById($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection)
 	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlHistoryTicketSelectById');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketSelectById());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketSelectById());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("i", $TypeTicketId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $typeTicketDescritpion, $TypeTicketId);
+					$stmt->bind_result($registerDate, $typeTicketDescription, $TypeTicketId);
 					if ($stmt->fetch())
 					{
-						$TypeTicket = $this->Factory->CreateTypeTicket($registerDate, $typeTicketDescritpion, $TypeTicketId);
+						$TypeTicket = $this->Factory->CreateTypeTicket($registerDate, $typeTicketDescription, $TypeTicketId);
 						return Config::SUCCESS;
 					}
 					else 
@@ -294,58 +274,49 @@ class FacedePersistenceHistoryTicket
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 					$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FAILED;
 				}
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function HistoryTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug)
+	public function HistoryTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlHistoryTicketUpdateById');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlHistoryTicketUpdateById());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketUpdateById());
 			if ($stmt)
 			{
 				$stmt->bind_param("si", $TypeTicketDescription, $TypeTicketId);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-				{
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::SUCCESS;
-				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, $stmt);
 					return Config::MYSQL_TYPE_USER_UPDATE_FAILED;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Class for countries management.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -30,22 +29,23 @@ class PageAdminCountry extends PageAdmin
 {
 	public $ArrayCountry = NULL;
 	
-	/* Constructor */
-	public function __construct($Language) 
+	/* __create */
+	public static function __create($Page, $Language)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Page, $Language);
 	}
-
-	public function GetCurrentPage()
+	
+	/* Constructor */
+	protected function __construct($Page, $Language) 
 	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		parent::__construct($Page, $Language);
 	}
 	
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$this->Page = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST;
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{

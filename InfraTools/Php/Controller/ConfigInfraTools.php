@@ -10,7 +10,7 @@ Description:
 			Classe de configurcão Web do InfraTools.
 			Padrões: Singleton.
 Functions: 
-			
+			public static function GetPageConstant($Constant);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -964,13 +964,6 @@ class ConfigInfraTools extends Config
 	public $PageTeamUpdateEnabled                                   = TRUE;
 	public $PageTeamViewEnabled                                     = TRUE;
 	
-	/**                               **/
-	/************* METODOS *************/
-	/**                               **/
-	public static function GetPageConstant($Constant)
-	{
-		return constant("ConfigInfraTools::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_")));
-	}
 	/* Clone */
 	protected function __clone()
     {
@@ -997,5 +990,16 @@ class ConfigInfraTools extends Config
         }
         return self::$Instance;
     }
+	
+	/**                               **/
+	/************* METODOS *************/
+	/**                               **/
+	public static function GetPageConstant($Constant)
+	{
+		$Const = Parent::GetPageConstant($Constant);
+		if($Const != ConfigInfraTools::ERROR) return $Const;
+		if(defined("ConfigInfraTools::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_"))))
+			return constant("ConfigInfraTools::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_")));
+	}
 }
 ?>

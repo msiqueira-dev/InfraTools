@@ -48,7 +48,7 @@
 		</fom>
 		<?php 
 		//COUNTRY LIST
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST)) 

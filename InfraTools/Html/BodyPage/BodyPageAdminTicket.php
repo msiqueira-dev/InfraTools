@@ -74,55 +74,55 @@
 		</form>
 		<?php
 		//CORPORATION VIEW
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
 		}
 		//DEPARTMENT VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
 		}
 		//TICKET LIST
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TICKET_LIST)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TICKET_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TICKET_LIST)) . ".php");
 		}
 		//TICKET REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER)) . ".php");
 		}
 		//TICKET SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT)) . ".php");
 		}
 		//TICKET UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TICKET_UPDATE)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TICKET_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TICKET_UPDATE)) . ".php");
 		}
 		//TICKET VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW)) . ".php");
 		}
 		//TYPE USER VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)) . ".php");
 		}
 		//USER VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_VIEW)) . ".php");

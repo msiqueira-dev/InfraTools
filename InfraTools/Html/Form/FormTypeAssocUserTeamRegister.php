@@ -9,7 +9,7 @@
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>" 
                                id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>" 
-                               class="<?php echo $this->ReturnTypeAssocUserTeamTeamDescritpionClass; ?>"
+                               class="<?php echo $this->ReturnTypeAssocUserTeamTeamDescriptionClass; ?>"
                                onblur="ValidateDescription(null, 
                                                   '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>',
                                                    'DivContentBodySubmitBigger ',

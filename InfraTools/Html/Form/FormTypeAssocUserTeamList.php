@@ -54,7 +54,7 @@ if(is_array($this->ArrayTypeAssocUserTeam))
 							       value='" . $typeAssocUserTeam->GetTypeAssocUserTeamTeamId() . "' 
 								   title='" . $typeAssocUserTeam->GetTypeAssocUserTeamTeamId() . "' />
 		      </td>";
-		echo "<td class='TableTypeAssocUserTeamThDescritpion'>"   . 
+		echo "<td class='TableTypeAssocUserTeamThDescription'>"   . 
 			$typeAssocUserTeam->GetTypeAssocUserTeamTeamDescription()  . "</td>";
 		echo "<td class= 'TableTypeAssocUserTeamThRegisterDate'>" . $typeAssocUserTeam->GetRegisterDate() . "</td>";
 		echo "</tr>";

@@ -9,7 +9,6 @@ Dependencies:
 Description: 
 			Classe que trata da página de listagem de serviços.
 Functions: 
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -32,16 +31,18 @@ class PageServiceListByDepartment extends PageService
 	public $ArrayInstanceInfraToolsDepartment = NULL;
 	public $ArrayInfraToolsService = NULL;
 	
-	/* Constructor */
-	public function __construct($Language) 
+	/* __create */
+	public static function __create($Page, $Language)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Page, $Language);
 	}
 	
-	public function GetCurrentPage()
+	/* Constructor */
+	protected function __construct($Page, $Language) 
 	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Page, $Language);
 	}
 
 	public function LoadPage()
