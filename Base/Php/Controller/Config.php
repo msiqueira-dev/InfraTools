@@ -565,6 +565,8 @@ class Config
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
+			if(self::$Instance->SetApplication() == self::WARNING)
+				echo '<script type="text/javascript">alert("A sessão terminou devido ao tempo inativo!");</script>';
         }
         return self::$Instance;
     }

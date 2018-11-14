@@ -56,7 +56,7 @@ abstract class Language
 	}
 	
 	/* Singleton */
-	public static function __create($Language)
+	public static function __create($Config, $Language)
     {
         if (!isset(self::$Instance)) 
 		{

@@ -31,21 +31,21 @@ class PageTeam extends PageInfraTools
 	protected static $Instance;
 	
 	/* __create */
-	public static function __create($Page, $Language)
+	public static function __create($Config, $Language, $Page)
     {
         if (!isset(self::$Instance)) 
 		{
             $class = __CLASS__;
-            self::$Instance = new $class($Page, $Language);
+            self::$Instance = new $class($Config, $Language, $Page);
         }
         return self::$Instance;
     }
 
 	/* Constructor */
-	protected function __construct($Page, $Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Page, $Language);
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()

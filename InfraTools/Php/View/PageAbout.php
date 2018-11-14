@@ -31,20 +31,20 @@ class PageAbout extends PageInfraTools
 	protected static $Instance;
 
 	/* __create */
-	public static function __create($Page, $Language)
+	public static function __create($Config, $Language, $Page)
 	{
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class($Page, $Language);
+			self::$Instance = new $class($Config, $Page, $Language);
 		}
 		return self::$Instance;
 	}
 
 	/* Constructor */
-	protected function __construct($Page, $Language) 
+	protected function __construct($Config, $Page, $Language) 
 	{
-		parent::__construct($Page, $Language);
+		parent::__construct($Config, $Page, $Language);
 	}
 
 	public function LoadPage()

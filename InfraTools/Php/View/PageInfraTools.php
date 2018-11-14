@@ -195,12 +195,14 @@ abstract class PageInfraTools extends Page
 	public $ReturnTypeServiceNameText                            = "";
 
 	/* Constructor */
-	protected function __construct($Page, $Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Factory = InfraToolsFactory::__create();
-		$this->Config  = $this->Factory->CreateConfigInfraTools();
+		if($this->Factory == NULL)
+			$this->Factory = InfraToolsFactory::__create();
+		if($this->Config == NULL)
+			$Config = $this->Factory->CreateConfigInfraTools();
 		$this->LoadInstanceInfraToolsUser();
-		parent::__construct($Page, $Language);
+		parent::__construct($Config, $Language, $Page);
 	}
 	
 	private function LoadInstanceInfraToolsUser()

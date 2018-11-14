@@ -30,16 +30,16 @@ class PageAdminCountry extends PageAdmin
 	public $ArrayCountry = NULL;
 	
 	/* __create */
-	public static function __create($Page, $Language)
+	public static function __create($Config, $Language, $Page)
 	{
 		$class = __CLASS__;
-		return new $class($Page, $Language);
+		return new $class($Config, $Language, $Page);
 	}
 	
 	/* Constructor */
-	protected function __construct($Page, $Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
-		parent::__construct($Page, $Language);
+		parent::__construct($Config, $Language, $Page);
 	}
 	
 	public function LoadPage()

@@ -18,8 +18,7 @@
             	<!-- PÁGINA HOME -->
                 <a href='<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_HOME') ?>' id='PageHome' 
                    title='<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_HOME_TITLE') ?>'>
-                    <img src="<?php echo $this->Config->DefaultServerImage 
-					. 'Logos/LogoInfraTools-2.png'; ?>"
+                    <img src="<?php echo $this->Config->DefaultServerImage . 'Logos/LogoInfraTools-2.png'; ?>"
                     alt="<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_HOME_IMAGE_ALT') ?>" width='300' height='55' />
                 </a>
             </div>

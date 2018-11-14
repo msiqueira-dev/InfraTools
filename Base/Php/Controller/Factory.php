@@ -118,6 +118,7 @@ class Factory
 	/* Instance */
 	protected static $Instance;
 	protected $ClassSystemName = NULL;
+	protected $Config;
 		
 	/* Clone */
 	protected function __clone()
@@ -464,20 +465,25 @@ class Factory
 	
 	public function CreatePage($Page, $Language)
 	{
+		$Config = NULL;
 		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
 		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
 		if(file_exists(SITE_PATH_PHP_VIEW . $Page . ".php"))
 			include_once(SITE_PATH_PHP_VIEW . $Page . ".php");
 		elseif(file_exists(BASE_PATH_PHP_VIEW . $Page . ".php"))
+		{
 			include_once(BASE_PATH_PHP_VIEW . $Page . ".php");
+			$Config = $this->CreateConfig();
+		}
 		elseif(file_exists(BASE_PATH_PHP_VIEW . "Page.php"))
 		{
 			include_once(BASE_PATH_PHP_VIEW . "Page.php");
 			$Page = Config::PAGE;
+			$Config = $this->CreateConfig();
 		}
 		else exit(basename(__FILE__, '.php') . ': Not a single View Class available for $Page. Check View Dictories.');
-		$page = $Page::__create($Page, $Language);
+		$page = $Page::__create($Config, $Language, $Page);
 		if($page != NULL)
 		{
 			$page->LoadPage();

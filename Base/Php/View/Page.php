@@ -376,20 +376,24 @@ class Page
 	public    $SubmitEnabled                                        = 'disabled="disabled"';
 	public    $ValidateCaptcha                                      = TRUE;
 	
-	/* Get Instance */
-	public static function __create($Page, $Language)
+	/* __create */
+	public static function __create($Config, $Language, $Page)
 	{
 		$class = __CLASS__;
-		return new $class($Page, $Language);
+		return new $class($Config, $Language, $Page);
 	}
 	
 	/* Constructor */
-	protected function __construct($Page, $Language) 
+	protected function __construct($Config, $Language, $Page) 
     {
 		$this->Page = $Page;
-		$this->Factory = Factory::__create();
-		$this->Session = $this->Factory->CreateSession();
-		$this->Config = $this->Factory->CreateConfig();
+		if($this->Factory == NULL)
+			$this->Factory = Factory::__create();
+		if($this->Session == NULL)
+			$this->Session = $this->Factory->CreateSession();
+		if($this->Config == NULL && $Config == NULL)
+			$this->Config = $this->Factory->CreateConfig();
+		else $this->Config = $Config;
 		//FORM_FIELD_HEADER_LOG_OUT
 		if(isset($_POST[Config::POST_BACK_FORM]))
 		{
@@ -4799,7 +4803,7 @@ class Page
 		$return = NULL; $currentDomain = NULL; $language = NULL; $instanceLanguage = NULL;
 		$this->CheckPostLanguage();
 		$this->Session->GetSessionValue(Config::SESS_LANGUAGE, $this->Language);
-		$this->InstanceLanguageText = LanguageInfraTools::__create($this->Language);
+		$this->InstanceLanguageText = LanguageInfraTools::__create($this->Config, $this->Language);
 		if($this->InstanceLanguageText != NULL)
 		{
 			$this->LoadInstanceUser();

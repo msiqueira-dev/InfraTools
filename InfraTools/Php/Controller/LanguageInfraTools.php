@@ -64,17 +64,16 @@ class LanguageInfraTools extends Language
 	}
 	
 	/* Create */
-	public static function __create($Language)
+	public static function __create($Config, $Language)
     {
 		$InfraToolsFactory = InfraToolsFactory::__create();
-		$ConfigInfraTools = $InfraToolsFactory->CreateConfigInfraTools();
         if (!isset(self::$Instance)) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
         }
 		if(empty($Language))
-			$Language = $ConfigInfraTools->DefaultLanguage;
+			$Language = $Config->DefaultLanguage;
 		if(file_exists(SITE_PATH_PHP_CONTROLLER . $Language . ".php"))
 		{
 			include_once(SITE_PATH_PHP_CONTROLLER . $Language . ".php");

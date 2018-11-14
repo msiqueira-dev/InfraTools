@@ -32,18 +32,18 @@ class PageServiceRegister extends PageInfraTools
 	public $ArrayInstanceInfraToolsTypeService = NULL;
 	
 	/* __create */
-	public static function __create($Page, $Language)
+	public static function __create($Config, $Language, $Page)
 	{
 		$class = __CLASS__;
-		return new $class($Page, $Language);
+		return new $class($Config, $Language, $Page);
 	}
 	
 	/* Constructor */
-	protected function __construct($Page, $Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Page, $Language);
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()

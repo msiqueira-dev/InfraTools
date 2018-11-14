@@ -974,10 +974,7 @@ class ConfigInfraTools extends Config
 	protected function __construct() 
     {
 		parent::__construct();
-		$this->DefaultApplicationName       = "InfraTools";
-		$this->SessionName                  = self::APPLICATION_INFRATOOLS;
-		if($this->SetApplication() == self::WARNING)
-			echo '<script type="text/javascript">alert("A sessão terminou devido ao tempo inativo!");</script>';
+		$this->SessionName = self::APPLICATION_INFRATOOLS;
     }
 	
 	//* Create */
@@ -987,6 +984,8 @@ class ConfigInfraTools extends Config
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
+			if(self::$Instance->SetApplication() == self::WARNING)
+				echo '<script type="text/javascript">alert("A sessão terminou devido ao tempo inativo!");</script>';
         }
         return self::$Instance;
     }
