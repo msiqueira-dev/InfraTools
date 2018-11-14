@@ -36,7 +36,7 @@ class PageAbout extends PageInfraTools
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class($Config, $Page, $Language);
+			self::$Instance = new $class($Config, $Language, $Page);
 		}
 		return self::$Instance;
 	}
