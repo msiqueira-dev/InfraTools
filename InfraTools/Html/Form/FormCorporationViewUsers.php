@@ -1,21 +1,23 @@
 <!-- FORM CORPORATION VIEW USERS -->
-<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_VIEW_USERS; ?>"
-      id="<?php echo ConfigInfraTools::FORM_CORPORATION_VIEW_USERS; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS; ?>"
+      id="<?php echo ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS; ?>" method="post" >
 <?php
 if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 {
+	echo "<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO . "'/>";
-	echo "<table class='TableCorporationUser'>";
+	echo "<table class='TableGeneric'>";
 	echo "<tr>";
-	echo "<th>" .
-		 "<input  type='image'
-				  class='TableCorporationInputRight'
-				  name='"  . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_BACK . "'
-				  value='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_BACK . "'
+	echo "<th class='TableGenericThArrow'>" .
+		 "<div class='TableGenericInputLeft'>
+		  <input  type='image'
+				  class='TableGenericThArrowImage'
+				  name='"  . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -23,18 +25,19 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28.png'\" />" .
-		 "<div class='TableCorporationThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
-	echo "<th>"                                  . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
-	echo "<th>"                                  . $this->InstanceLanguageText->GetText('NAME') . "</th>";
-	echo "<th>"                                  . $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION') . "</th>";
-	echo "<th>"                                  .
-	     "<div  class='TableCorporationThLeft'>" . $this->InstanceLanguageText->GetText('ACTIVE') . "</div>" .
-		 "<input  type='image'
-				  class='TableCorporationInputLeft'
-				  name='"  . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_FORWARD . "'
+						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
+	echo "<th  class= 'TableGenericThArrow'> 
+	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('DEPARTMENT') . "</div>" .
+		 "<div class='TableGenericInputRight'>
+		          <input  type='image'
+				  class='TableGenericThArrowImage'
+				  name='"  . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -42,59 +45,73 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28.png'\" />";
+						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
+	echo "</form>";
 	foreach($this->ArrayInstanceInfraToolsCorporationUsers as $key=>$user)
 	{
 		echo "<tr>";
-		echo "<td class='TdLink'>
-				<form  name='" . ConfigInfraTools::FORM_USER_LIST . "' method='post' />
+		echo "<td class='TableGenericTdLink'>
+				<form  name='" . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' method='post' />
 					<input type='hidden'
-								 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
-								 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
-								 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
-										 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
-										 value='" . $user->GetEmail() . "' 
-										 title='" . $user->GetEmail() . "' />
+							 name='"   . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' />
+		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+		                                 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
+							             value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
 				</form>
 		      </td>";
-		echo "<td class='TdLink'>
-				<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST . "' method='post' />
+		echo "<td>"     . $user->GetName()             . "</td>";
+		echo "<td class='TableGenericTdLink'>
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' method='post' />
 					<input type='hidden'
-								 name='"   . ConfigInfraTools::FORM_CORPORATION_LIST . "' 
-								 id='"     . ConfigInfraTools::FORM_CORPORATION_LIST . "'
-								 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
-										 id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
-										 value='" . $this->InstanceCorporation->GetCorporationName() . "' 
-										 title='" . $this->InstanceCorporation->GetCorporationName() . "' />
+							 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
+					  <input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
+							 value='"  . $user->GetUserTypeId()                    . "' />
+		        	<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+		                             id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+							         value='" . $user->GetUserTypeDescription() . "' 
+								     title='" . $user->GetUserTypeDescription() . "' />
 				</form>
 		      </td>";
-		echo "<td>" . $user->GetName()      . "</td>";
-		echo "<td class='TdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
-					<input type='hidden'
-								 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
-								 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
-								 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
-										 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
-										 value='" . $user->GetUserTypeDescription() . "' 
-										 title='" . $user->GetUserTypeDescription() . "' />
-				</form>
-		      </td>";
-		if($user->GetUserActive())
-			echo "<td> 
-					<img   src='".$this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png' 
-			                     . "' alt='CorporationVerification' width='20' height='20' />
-				 </td>";
-		else
-			echo "<td> 
-					<img   src='".$this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png' 
-			                     . "' alt='CorporationVerification' width='20' height='20' />
-				 </td>";
+		if($user->GetCorporationName() != NULL)
+			echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     value='" . $user->GetCorporationName() . "' 
+										     title='" . $user->GetCorporationName() . "' />
+					</form>
+				  </td>";
+		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
+		if($user->GetDepartmentName() != NULL)
+			echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "'
+							 value='"  . $user->GetCorporationName() . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										 value='" . $user->GetDepartmentName() . "' 
+										 title='" . $user->GetDepartmentName() . "' />
+						</form>
+				  </td>";
+		else echo "<td>" . "<img src='" . $user->GetDepartmentActiveIcon() . "'/>" . "</td>";
 		echo "</tr>";
 	}
 	echo "</table>";

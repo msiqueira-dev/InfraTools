@@ -116,7 +116,7 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
 		}
-		//PAGE_ADMIN_CORPORATION_VIEW
+		//PAGE_ADMIN_DEPARTMENT_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

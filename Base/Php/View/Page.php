@@ -34,7 +34,7 @@ Methods:
 		protected     function        CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
 		protected     function        CorporationSelectUsers($Limit1, $Limit2, $InstanceCorporation, &$ArrayInstanceCorporationUsers,
 		                                                     &$RowCount, $Debug, $HideReturnSuccessImage = TRUE);
-		protected     function        CorporationUpdate($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug);
+		protected     function        CorporationUpdateByName($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug);
 		protected     function        CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug);
 		protected     function        DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
 		protected     function        DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
@@ -653,6 +653,10 @@ class Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$arrayConstants = array(); $matrixConstants = array();
+		if($CorporationActive == NULL)
+			$CorporationActive = FALSE;
+		elseif($CorporationActive != FALSE)
+			$CorporationActive = TRUE;
 
 		//CORPORATION_NAME
 		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
@@ -847,11 +851,15 @@ class Page
 		}
 	}
 	
-	protected function CorporationUpdate($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug)
+	protected function CorporationUpdateByName($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$arrayConstants = array(); $matrixConstants = array();
+		if($CorporationActive == NULL)
+			$CorporationActive = FALSE;
+		elseif($CorporationActive != FALSE)
+			$CorporationActive = TRUE;
 
 		//VALIDA NOME DE CORPORAÇÃO
 		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
@@ -883,6 +891,7 @@ class Page
 				$InstanceCorporation->SetCorporationActive($CorporationActive);
 				$InstanceCorporation->SetCorporationName($CorporationName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
+				$this->CorporationLoadData($InstanceCorporation);
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_UPDATE_SUCCESS', $this->Language);
 				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 

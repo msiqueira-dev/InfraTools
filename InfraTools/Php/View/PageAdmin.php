@@ -10,7 +10,7 @@ Dependencies:
 Description: 
 			Classe que trata da administração dos tipos de usuários.
 Functions: 
-			protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug);
+			protected function ExecuteFunction($PostForm, $Function, $ArrayParameter);
 			protected function LoadDataFromSession($SessionKey, $Function, &$Instance);
 			public    function LoadPage();
 			
@@ -64,7 +64,7 @@ class PageAdmin extends PageInfraTools
 		}
 	}
 	
-	protected function ExecuteFunction($PostForm, $Function, $Parameter, &$ObjectToFill, $Debug)
+	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug)
 	{
 		foreach($PostForm as $postElementKey=>$postElementValue)
 		{
@@ -85,9 +85,12 @@ class PageAdmin extends PageInfraTools
 				elseif (strpos($postElementKey, 'FORWARD') !== false) 
 				{
 					$this->InputLimitOne = $this->InputLimitOne + 25;
-					$this->InputLimitTwo = $this->InputLimitTwo + 25;	
-					$Function($this->InputLimitOne, $this->InputLimitTwo, $ObjectToFill, 
-							  $rowCount, $Debug);
+					$this->InputLimitTwo = $this->InputLimitTwo + 25;
+					$ArrayParameterTemp = $ArrayParameter;
+					array_unshift($ArrayParameterTemp, $this->InputLimitOne, $this->InputLimitTwo);
+				    $ArrayParameter[count($ArrayParameterTemp)] = &$rowCount;
+					array_push($ArrayParameterTemp, $Debug);
+					call_user_func_array(array($this, $Function), $ArrayParameterTemp);
 					if($this->InputLimitOne > $rowCount)
 					{
 						$this->InputLimitOne = $this->InputLimitOne - 25;
@@ -99,15 +102,15 @@ class PageAdmin extends PageInfraTools
 						$this->InputLimitTwo = $this->InputLimitTwo - 25;
 					}
 				}
-				if($Parameter != NULL)
-					return $this->$Function($this->InputLimitOne, $this->InputLimitTwo, $Parameter, $ObjectToFill, 
-											$rowCount, $this->InputValueHeaderDebug);
-				else return $this->$Function($this->InputLimitOne, $this->InputLimitTwo, $ObjectToFill, 
-											 $rowCount, $this->InputValueHeaderDebug);
+				array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
+				$ArrayParameter[count($ArrayParameter)] = &$rowCount;
+				array_push($ArrayParameter, $Debug);
+				return call_user_func_array(array($this, $Function), $ArrayParameter);
 			}
-			elseif(strpos($postElementKey, 'SELECT') !== false)
+			else
 			{
-				return $this->$Function($Parameter, $ObjectToFill, $this->InputValueHeaderDebug);
+				array_push($ArrayParameter, $Debug);
+				return call_user_func_array(array($this, $Function), $ArrayParameter); 
 			}
 		}
 	}

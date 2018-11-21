@@ -8,11 +8,12 @@ if(is_array($this->ArrayInstanceInfraToolsCorporation))
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO . "'/>";
-	echo "<table class='TableCorporation'>";
+	echo "<table class='TableGeneric'>";
 	echo "<tr>";
-	echo "<th>" .
-		 "<input  type='image'
-				  class='TableCorporationInputRight'
+	echo "<th class='TableGenericThArrow'>" .
+		 "<div class='TableGenericInputLeft'>
+		 <input  type='image'
+				  class='TableGenericThArrowImage'
 				  name='"  . ConfigInfraTools::FORM_CORPORATION_LIST_BACK . "' 
 				  id='"    . ConfigInfraTools::FORM_CORPORATION_LIST_BACK . "'
 				  value='" . ConfigInfraTools::FORM_CORPORATION_LIST_BACK . "'
@@ -23,13 +24,14 @@ if(is_array($this->ArrayInstanceInfraToolsCorporation))
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28.png'\" />" .
-		 "<div class='TableCorporationThRight'>" . $this->InstanceLanguageText->GetText('ACTIVE') . "</div></th>";
-	echo "<th>" . $this->InstanceLanguageText->GetText('NAME') . "</th>";
-	echo "<th>
-	     <div  class='TableCorporationThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-		 "<input  type='image'
-				  class='TableCorporationInputLeft'
+						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('ACTIVE') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
+	echo "<th  class='TableGenericThArrow'>
+	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
+		 "<div class='TableGenericInputRight'>
+		  <input  type='image'
+				  class='TableGenericThArrowImage'
 				  name='"  . ConfigInfraTools::FORM_CORPORATION_LIST_FORWARD . "' 
 				  id='"    . ConfigInfraTools::FORM_CORPORATION_LIST_FORWARD . "'
 				  value='" . ConfigInfraTools::FORM_CORPORATION_LIST_FORWARD . "'
@@ -40,9 +42,10 @@ if(is_array($this->ArrayInstanceInfraToolsCorporation))
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28.png'\" />";
+						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
+	echo "</form>";
 	foreach($this->ArrayInstanceInfraToolsCorporation as $key=>$corporation)
 	{
 		echo "<tr>";
@@ -50,13 +53,18 @@ if(is_array($this->ArrayInstanceInfraToolsCorporation))
 				<img   src='"   . $corporation->GetCorporationActiveImage() . "' 
                        alt='CorporationVerification' width='20' height='20' />
 			 </td>";
-		echo "<td class='TdLink'>
-		          <input type='submit'       
-				                   name='" . ConfigInfraTools::FORM_CORPORATION_LIST_SELECT . "' 
-		                           id='"   . ConfigInfraTools::FORM_CORPORATION_LIST_SELECT . "' 
-							       value='" . $corporation->GetCorporationName() . "' 
-								   title='" . $corporation->GetCorporationName() . "' />
-		      </td>";
+		echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     value='" . $corporation->GetCorporationName() . "' 
+										     title='" . $corporation->GetCorporationName() . "' />
+					</form>
+				  </td>";
 		echo "<td>" . $corporation->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}

@@ -172,7 +172,9 @@ class ConfigInfraTools extends Config
 	const FORM_CORPORATION_LIST                                         = "FormCorporationList";
 	const FORM_CORPORATION_LIST_BACK                                    = "FormCorporationListBack";
 	const FORM_CORPORATION_LIST_FORWARD                                 = "FormCorporationListForward";
-	const FORM_CORPORATION_LIST_SELECT                                  = "FormCorporationListSelect";
+	const FORM_CORPORATION_LIST_VIEW_USERS                              = "FormCorporationListViewUsers";
+	const FORM_CORPORATION_LIST_VIEW_USERS_BACK                         = "FormCorporationListViewUsersBack";
+	const FORM_CORPORATION_LIST_VIEW_USERS_FORWARD                      = "FormCorporationListViewUsersForward";
 	const FORM_CORPORATION_REGISTER                                     = "FormCorporationRegister";
 	const FORM_CORPORATION_REGISTER_CANCEL                              = "FormCorporationRegisterCancel";
 	const FORM_CORPORATION_REGISTER_SUBMIT                              = "FormCorporationRegisterSubmit";
@@ -183,11 +185,7 @@ class ConfigInfraTools extends Config
 	const FORM_CORPORATION_UPDATE_SUBMIT                                = "FormCorporationUpdateSubmit";
 	const FORM_CORPORATION_VIEW                                         = "FormCorporationView";
 	const FORM_CORPORATION_VIEW_DELETE_SUBMIT                           = "FormCorporationViewDeleteSubmit";
-	const FORM_CORPORATION_VIEW_SELECT_USERS_SUBMIT                     = "FormCorporationViewSelectUsersSubmit";
 	const FORM_CORPORATION_VIEW_UPDATE_SUBMIT                           = "FormCorporationViewUpdateSubmit";
-	const FORM_CORPORATION_VIEW_USERS                                   = "FormCorporationViewUsers";
-	const FORM_CORPORATION_VIEW_USERS_LIST_BACK                         = "FormCorporationViewUsersListBack";
-	const FORM_CORPORATION_VIEW_USERS_LIST_FORWARD                      = "FormCorporationViewUsersListForward";
 	const FORM_COUNTRY                                                  = "FormCountry";
 	const FORM_COUNTRY_LIST                                             = "FormCountryList";
 	const FORM_COUNTRY_LIST_BACK                                        = "FormCountryListBack";
