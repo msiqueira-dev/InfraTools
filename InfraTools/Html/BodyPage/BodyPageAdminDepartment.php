@@ -45,8 +45,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_ADMIN_REGISTER; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_ADMIN_REGISTER; ?>"
+							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
+							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 

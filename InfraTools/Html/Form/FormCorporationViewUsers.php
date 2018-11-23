@@ -106,7 +106,7 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 							 id='"     . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "'
 							 value='"  . $user->GetCorporationName() . "' />
 						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
-										 id='"   . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										 id='"       . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
 										 value='" . $user->GetDepartmentName() . "' 
 										 title='" . $user->GetDepartmentName() . "' />
 						</form>

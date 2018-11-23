@@ -52,53 +52,9 @@ class PageAdminCountry extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//COUNTRY LIST BACK SUBMIT
-		if($this->CheckInputImage(ConfigInfraTools::FORM_COUNTRY_LIST_BACK))
-		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
-																$this->ArrayCountry,
-																$rowCount,
-															    $this->InputValueHeaderDebug);
-		}
-		//COUNTRY LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_COUNTRY_LIST_FORWARD))
-		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayCountry, 
-								 $rowCount, $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayCountry,
-									 $rowCount, $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
-		}
-		//COUNTRY LIST
-		else
-		{
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->CountrySelect($this->InputLimitOne, $this->InputLimitTwo, 
-																$this->ArrayCountry,
-																$rowCount,
-															    $this->InputValueHeaderDebug);
-			$_POST[ConfigInfraTools::FORM_COUNTRY_LIST . "_x"] = "1";
-			$_POST[ConfigInfraTools::FORM_COUNTRY_LIST . "_y"] = "1";
+		if($_POST == NULL)
 			$_POST[ConfigInfraTools::FORM_COUNTRY_LIST] = ConfigInfraTools::FORM_COUNTRY_LIST;
-		}
+		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

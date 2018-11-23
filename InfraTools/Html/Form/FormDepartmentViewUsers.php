@@ -13,9 +13,9 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_BACK . "'
-				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -33,9 +33,9 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -51,11 +51,11 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_USER_LIST . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' method='post' />
 					<input type='hidden'
-								 name='"   . ConfigInfraTools::FORM_USER_LIST . "' 
-								 id='"     . ConfigInfraTools::FORM_USER_LIST . "'
-								 value='"  . ConfigInfraTools::FORM_USER_LIST . "' />
+								 name='"   . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' 
+								 id='"     . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "'
+								 value='"  . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' />
 		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
 		                                 id='"   . ConfigInfraTools::FORM_FIELD_USER_EMAIL . "' 
 							             value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
@@ -63,11 +63,11 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		      </td>";
 		echo "<td>"     . $user->GetName()             . "</td>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' method='post' />
 					<input type='hidden'
-								 name='"   . ConfigInfraTools::FORM_TYPE_USER_LIST . "' 
-								 id='"     . ConfigInfraTools::FORM_TYPE_USER_LIST . "'
-								 value='"  . ConfigInfraTools::FORM_TYPE_USER_LIST . "' />
+								 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
+								 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
+								 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
 		        	<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 		                                 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 							             value='" . $user->GetUserTypeDescription() . "' 
@@ -76,15 +76,15 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		      </td>";
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
-									 name='"   . ConfigInfraTools::FORM_CORPORATION_LIST . "' 
-									 id='"     . ConfigInfraTools::FORM_CORPORATION_LIST . "'
-									 value='"  . ConfigInfraTools::FORM_CORPORATION_LIST . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION . "' 
-										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION . "' 
-										 value='" . $user->GetCorporationName() . "' 
-										 title='" . $user->GetCorporationName() . "' />
+									 name='"   . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' 
+									 id='"     . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "'
+									 value='"  . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										    id='"    . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										    value='" . $user->GetCorporationName() . "' 
+										    title='" . $user->GetCorporationName() . "' />
 					</form>
 				  </td>";
 		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
@@ -96,8 +96,8 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 							   id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST . "'
 							   value='"  . $user->GetCorporationName() . "' />
 						<input type='hidden'
-							   name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
-							   id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "'
+							   name='"   . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' 
+							   id='"     . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "'
 							   value='"  . $user->GetCorporationName() . "' />
 						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
 										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 

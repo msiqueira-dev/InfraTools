@@ -55,7 +55,7 @@ class PageAdminCorporation extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//CORPORATION LIST
+		//FORM_CORPORATION_LIST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_LIST) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsCorporationSelect', 
@@ -63,14 +63,20 @@ class PageAdminCorporation extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_LIST;
 		}
-		//FORM_CORPORATION_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
-											&$this->InstanceCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		//FORM_CORPORATION_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{				
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation)
+			                                   == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'CorporationDelete', 
+									      array($this->InstanceCorporation->GetCorporationName()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
+				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
+												  $this->InstanceCorporation) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+			} 
 		}
 		//FORM_CORPORATION_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_REGISTER) == ConfigInfraTools::SUCCESS)
@@ -88,20 +94,14 @@ class PageAdminCorporation extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER;
 		}
-		//FORM_CORPORATION_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{				
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation)
-			                                   == ConfigInfraTools::SUCCESS)
-			{
-				if($this->ExecuteFunction($_POST, 'CorporationDelete', 
-									      array($this->InstanceCorporation->GetCorporationName()),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
-												  $this->InstanceCorporation) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-			} 
+		//FORM_CORPORATION_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
 		//FORM_CORPORATION_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)

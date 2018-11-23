@@ -51,6 +51,71 @@ class PageAdminNotification extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
+		//FORM_NOTIFICATION_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'NotificationSelect', 
+									  array(&$this->ArrayInstanceNotification),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LIST;
+		}
+		//FORM_NOTICAITION_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER;
+		//FORM_NOTIFICATION_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+		//FORM_NOTIFICATION_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+		}
+		//FORM_NOTIFICATION_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+		//FORM_NOTIFICATION_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'NotificationSelectByNotificationId', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_ID],
+											&$this->InstanceNotification),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+		}
+		//FORM_NOTIFICATION_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'NotificationDeleteByNotificationId', 
+										  array($this->InstanceNotification->GetNotificationId()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+			}
+		}
+		//FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_UPDATE;
+		}
+		//FORM_NOTIFICATION_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+		}
+		//FORM_NOTIFICATION_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, 
+														$this->InstanceNotification) == ConfigInfraTools::SUCCESS)
+			{
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;	
+			}
+		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

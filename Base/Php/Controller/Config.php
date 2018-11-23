@@ -58,7 +58,6 @@ class Config
 	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR      = "FormFieldAssocUserCorporationRegistrationDateYear";
 	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID             = "FormFieldAssocUserCorporationRegistrationId";
 	const FORM_FIELD_CAPTCHA                                            = "FormFieldCaptcha";
-	const FORM_FIELD_CORPORATION_SELECT                                 = "FormFieldCorporationSelect";
 	const FORM_FIELD_CORPORATION_ACITVE                                 = "InputCorporationActive";
 	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
 	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";

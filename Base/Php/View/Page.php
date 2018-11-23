@@ -38,7 +38,7 @@ Methods:
 		protected     function        CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug);
 		protected     function        DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
 		protected     function        DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug);
-		protected     function        DepartmentLoadData();
+		protected     function        DepartmentLoadData($InstanceDepartment);
 		protected     function        DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug);
 		protected     function        DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
 													                    &$ArrayInstanceDepartment, &$RowCount, $Debug);
@@ -109,7 +109,8 @@ Methods:
 												 $UserType, $UserUniqueId, $Debug);
 		protected     function        UserLoadData($InstanceUser);
 		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-		protected     function        UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, &$RowCount, Debug);
+		protected     function        UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+		                                                     &$ArrayInstanceDepartmentUsers, &$RowCount, Debug);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
@@ -1243,8 +1244,8 @@ class Page
 		$this->InputValueDepartmentName = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_CORPORATION_SELECT
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_SELECT;
+		//FORM_FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -3542,12 +3543,12 @@ class Page
 		else return Config::SUCCESS;
 	}
 	
-	protected function UserSelectByDepartment($CorporationName, $DepartmentName, $Limit1, $Limit2, 
-											 &$ArrayInstanceDepartmentUsers, &$RowCount, $Debug)
+	protected function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+											  &$ArrayInstanceDepartmentUsers, &$RowCount, $Debug)
 	{
 		$ArrayInstanceDepartmentUsers = NULL;
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->UserSelectByDepartment($DepartmentName, $Limit1, $Limit2,
+		$return = $FacedePersistence->UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName,
 			                                                 $ArrayInstanceDepartmentUsers, $RowCount, 
 															 $Debug);
 		if($return == Config::SUCCESS)

@@ -51,6 +51,90 @@ class PageAdminSystemConfiguration extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
+		//FORM_SYSTEM_CONFIGURATION_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'SystemConfigurationSelect', 
+									  array(&$this->ArrayInstanceSystemConfiguration),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_LIST;
+		}
+		//FORM_SYSTEM_CONFIGURATION_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEMC_CONFIGURATION_REGISTER;
+		//FORM_SYSTEM_CONFIGURATION_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
+		//FORM_SYSTEM_CONFIGURATION_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'SystemConfigurationInsert', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_ACTIVE],
+										    $_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
+										    $_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
+		}
+		//FORM_SYSTEM_CONFIGURATION_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+		//FORM_SYSYTEM_CONFIGURATION_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+											&$this->InstanceArraySystemConfiguration),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			{
+				if(count($this->ArrayInstanceSystemConfiguration) > 1)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_LIST;	
+				else
+				{
+					$this->InstanceSystemConfiguration = array_pop($this->ArraySystemConfiguration);
+					//if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+					//					          $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+					//	$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+				}
+			}
+		}
+		//FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "SystemConfigurationLoadData", 
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'SystemConfigurationDeleteBySystemConfigurationOptionName', 
+										  array($this->InstanceNotification->GetNotificationId()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+			}
+		}
+		//FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEMC_CONFIGURATION_UPDATE;
+		}
+		//FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+		}
+		//FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, 
+											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'SystemConfigurationUpdateBySystemConfigurationOptionName', 
+										  array($this->InstanceSystemConfiguration->GetSystemConfigurationOptionName()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;	
+			}
+		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

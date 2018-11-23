@@ -93,10 +93,10 @@
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<select 
-					name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT; ?>" 
-					id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT; ?>"
+					name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
+					id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
 					class="<?php echo $this->ReturnCorporationNameClass; ?>"
-					onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT; ?>');
+					onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>');
 							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>')
 											 .disabled = false;
 							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>')

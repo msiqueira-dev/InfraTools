@@ -55,374 +55,172 @@ class PageAdminDepartment extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//DEPARTMENT VIEW USERS SELECT USER SUBMIT
-		if(isset($_POST[ConfigInfraTools::FORM_USER_LIST]))
+		//FORM_CORPORATION_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
-												      $this->InstanceUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
-			{
-				if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-												   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-				{
-					$this->InputLimitOne = 0;
-					$this->InputLimitTwo = 25;
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-					$this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                         $this->InstanceDepartment->GetDepartmentName(), 
-												 $this->InputLimitOne, $this->InputLimitTwo, 
-												 $this->ArrayInstanceDepartmentUsers, $rowCount,
-												 $this->InputValueHeaderDebug);
-				}
-			}
-		}
-		//DEPARTMENT LIST
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_LIST))
-		{
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_DEPARTMENT);
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
-									$rowCount, $this->InputValueHeaderDebug);
-		}
-		//DEPARTMENT LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_LIST_BACK))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
-									$rowCount, $this->InputValueHeaderDebug);
-		}
-		//DEPARTMENT LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_LIST_FORWARD))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
-									$rowCount, $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->DepartmentSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceDepartment,
-									    $rowCount, $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
-		}
-		//DEPARTMENT LIST SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT]))
-		{
-			if($this->DepartmentSelectByDepartmentNameAndCorporationName
-			                                          ($_POST[ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION],
-				                                       $_POST[ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT],
-													   $this->InstanceDepartment, $this->InputValueHeaderDebug)
-			                                           == ConfigInfraTools::SUCCESS)
-			{
-				if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-				else
-				{
-					$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-				}
-			} 
-			else 
-			{
-				$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-			}
-		}
-		//DEPARTMENT LIST SELECT CORPORATION SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION]))
-		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION],
-			                                  $this->InstanceCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceCorporation) == ConfigInfraTools::SUCCESS)
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+					                        $this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 		}
-		//DEPARTMENT REGISTER
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_ADMIN_REGISTER))
+		//FORM_CORPORATION_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
-													  $this->InputValueHeaderDebug);
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_DEPARTMENT);
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER;
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
-		//DEPARTMENT REGISTER CANCEL
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_REGISTER_CANCEL]))
+		//FORM_DEPARTMENT_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
+			if($this->ExecuteFunction($_POST, 'DepartmentSelect', 
+									  array(&$this->ArrayInstanceDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
 		}
-		//DEPARTMENT REGISTER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT]))
+		//FORM_DEPARTMENT_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->DepartmentInsert($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT],
-									   $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS],
-									   $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME], 
-									   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-			else 
+			if($_POST[ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT] == ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME)
 			{
-				$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
-														  $this->InputValueHeaderDebug);
-				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_DEPARTMENT);
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER;
-			}
-		}
-		//DEPARTMENT SELECT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_SELECT))
-		{
-			$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
-													  $this->InputValueHeaderDebug);
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_DEPARTMENT);
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT]))
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT]))
-				$radio = $_POST[ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT];
-			if($radio == ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME)
-			{
-				if($this->DepartmentSelectByDepartmentName($_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
-														   $this->ArrayInstanceDepartment,
-														   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentName', 
+										  array($_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+												&$this->ArrayInstanceDepartment),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					$this->InputLimitOne = 0;
-					$this->InputLimitTwo = 25;
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;
-				}
-				else 
-				{
-					$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
-															  $this->InputValueHeaderDebug);
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-				}
-			}
-			elseif($radio == ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME)
-			{
-				if($this->DepartmentSelectByDepartmentNameAndCorporationName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT],
-																			 $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
-																			 $this->InstanceDepartment,
-																			 $this->InputValueHeaderDebug))
-				{
-					if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					
+					if(count($this->ArrayInstanceDepartment) > 1)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;	
 					else
 					{
-						$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, 
-															                $this->InputValueHeaderDebug);
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
+						$this->InstanceDepartment = array_pop($this->ArrayInstanceDepartment);
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+													  $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 					}
-				}
-				else 
-				{
-					$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 				}
 			}
 			else
 			{
-				$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
+				if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
+										  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+												$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+												&$this->InstanceDepartment),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+			}
+		}
+		//FORM_DEPARTMENT_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_REGISTER) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+									  array(&$this->ArrayInstanceInfraToolsCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER;
+		}
+		//FORM_DEPARTMENT_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
+		//FORM_DEPARTMENT_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'DepartmentInsert', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+									        $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS],
+									        $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
+			else 
+			{
+				if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+									  array(&$this->ArrayInstanceInfraToolsCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER;
 			}
 		}
-		//DEPARTMENT VIEW DELETE SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_VIEW_DELETE_SUBMIT]))
+		//FORM_DEPARTMENT_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+			if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+									  array(&$this->ArrayInstanceInfraToolsCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
+		}
+		//FORM_DEPARTMENT_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+										  $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->DepartmentDelete($this->InstanceDepartment->GetDepartmentCorporationName(),
-					                       $this->InstanceDepartment->GetDepartmentName(),
-										   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				{
+				if($this->ExecuteFunction($_POST, 'DepartmentDelete', 
+										  array($this->InstanceDepartment->GetDepartmentCorporationName(),
+												$this->InstanceDepartment->GetDepartmentName()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_DEPARTMENT);
-				} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW UPDATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_VIEW_UPDATE_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-											   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE;
-				else 
-				{
-					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-					{
-						if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-					    else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-					} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW UPDATE CANCEL
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_UPDATE_CANCEL]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-											   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW UPDATE SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->DepartmentUpdateDepartmentByDepartmentAndCorporation(
-					                   $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS],
-					                   $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
-					                   $this->InstanceDepartment,
-					                   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				{
-					if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE;
-				} else
-				{
-					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-													   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-						if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW USERS
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_VIEW_SELECT_USERS_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                        $this->InstanceDepartment->GetDepartmentName(), 
-												$this->InputLimitOne, $this->InputLimitTwo, 
-												$this->ArrayInstanceDepartmentUsers, 
-												$rowCount, $this->InputValueHeaderDebug)
-				                                == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-				else
-				{
-					if($this->DepartmentLoadData($this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW USERS LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_BACK))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				if($this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                        $this->InstanceDepartment->GetDepartmentName(), 
-												$this->InputLimitOne, $this->InputLimitTwo, 
-												$this->ArrayInstanceDepartmentUsers, $rowCount, $this->InputValueHeaderDebug)
-				                                == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-			}
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW USERS LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_LIST_FORWARD))
-		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] +25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] +25;
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-											   $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-			{
-				$this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                     $this->InstanceDepartment->GetDepartmentName(), 
-											 $this->InputLimitOne, $this->InputLimitTwo, 
-											 $this->ArrayInstanceDepartmentUsers, 
-											 $rowCount, $this->InputValueHeaderDebug);
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-				if($this->InputLimitOne > $rowCount)
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					if($this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                            $this->InstanceDepartment->GetDepartmentName(), 
-												    $this->InputLimitOne, $this->InputLimitTwo, 
-												    $this->ArrayInstanceDepartmentUsers, 
-												    $rowCount, $this->InputValueHeaderDebug) != ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				}
-				elseif($this->InputLimitTwo > $rowCount)
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-		}
-		//DEPARTMENT VIEW USERS SELECT CORPORATION SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION]))
-		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS_SELECT_CORPORATION],
-											  $this->InstanceCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceCorporation) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 			}
 		}
-		//DEPARTMENT VIEW USERS SELECT TYPE USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION]))
+		//FORM_DEPARTMENT_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->TypeUserSelectByTypeUserDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION], 
-														  $this->InstanceTypeUser,
-														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+										  $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE;
+		}
+		//FORM_DEPARTMENT_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+										  $this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+		}
+		//FORM_DEPARTMENT_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
+														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'DepartmentUpdateDepartmentByDepartmentAndCorporation', 
+									  array( $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS],
+					                         $_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+					                         $this->InstanceDepartment,),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;	
+			}
+		}
+		//FORM_DEPARTMENT_VIEW_LIST_USERS
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
+														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'UserSelectByDepartment', 
+									  array($this->InstanceDepartment->GetDepartmentCorporationName(),
+						                    $this->InstanceDepartment->GetDepartmentName(),
+											&$this->ArrayInstanceDepartmentUsers),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
+			}
+		}
+		//FORM_TYPE_USER_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+					                        &$this->InstanceTypeUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
-			{
-				if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-															$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
-				{
-					$this->InputLimitOne = 0;
-					$this->InputLimitTwo = 25;
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
-					$this->UserSelectByDepartment($this->InstanceDepartment->GetDepartmentCorporationName(),
-						                         $this->InstanceDepartment->GetDepartmentName(), 
-												 $this->InputLimitOne, $this->InputLimitTwo, 
-												 $this->ArrayInstanceDepartmentUsers, 
-												 $rowCount, $this->InputValueHeaderDebug);
-				}
-			}
+		}
+		//FORM_USER_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+											&$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		else
 		{	

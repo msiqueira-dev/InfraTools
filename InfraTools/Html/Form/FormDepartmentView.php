@@ -52,8 +52,8 @@
 					   class="DivContentBodySubmitBigger"
 					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
 					   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW_SELECT_USERS_SUBMIT; ?>" 
-					   id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW_SELECT_USERS_SUBMIT; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS; ?>" 
+					   id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS; ?>"
 					   class="DivContentBodySubmitBigger"
 					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
 		</div>

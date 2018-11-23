@@ -234,13 +234,16 @@ abstract class PageInfraTools extends Page
 															                        $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "";
+			$this->ReturnImage = "";
 			return $return;
 		}
 		else
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
+			$this->ReturnText  = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
 			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+			$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 			return ConfigInfraTools::ERROR;
 		}

@@ -50,30 +50,36 @@ if(is_array($this->ArrayInstanceDepartment))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				  <form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />
-					  <input type='submit'       
-									   name='"  . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
-									   id='"    . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
-									   value='" . $department->GetDepartmentCorporationName() . "' 
-									   title='" . $department->GetDepartmentCorporationName() . "'/>
-				  </form>
-		      </td>";
+					<form  name='" . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+										     value='" . $department->GetDepartmentCorporationName() . "' 
+										     title='" . $department->GetDepartmentCorporationName() . "' />
+					</form>
+				  </td>";
 		echo "<td class='TableGenericTdLink'>
 				  <label>" . $department->GetDepartmentInitials() . "</label> 
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-				  <form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />
-					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "' 
-							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT_CORPORATION . "'
-							 value='"  . $department->GetDepartmentCorporationName()               . "' />
-					  <input type='submit'       
-									   name='"  . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "'
-									   id='"    . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "'
-									   value='" . $department->GetDepartmentName() . "' 
-									   title='" . $department->GetDepartmentName() . "'/>
-				  </form>
-		      </td>";
+					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "'
+							 value='"  . $department->GetDepartmentCorporationName() . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										 id='"       . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										 value='" . $department->GetDepartmentName() . "' 
+										 title='" . $department->GetDepartmentName() . "' />
+						</form>
+				  </td>";
 		echo "<td class='TableGenericTdLink'><label>" . $department->GetRegisterDate() . "</label></td>";
 		echo "</tr>";
 	}

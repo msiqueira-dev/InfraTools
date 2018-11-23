@@ -10,7 +10,7 @@ Dependencies:
 Description: 
 			Classe que trata da administração dos tipos de usuários.
 Functions: 
-			protected function ExecuteFunction($PostForm, $Function, $ArrayParameter);
+			protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug);
 			protected function LoadDataFromSession($SessionKey, $Function, &$Instance);
 			public    function LoadPage();
 			
@@ -69,28 +69,29 @@ class PageAdmin extends PageInfraTools
 		foreach($PostForm as $postElementKey=>$postElementValue)
 		{
 			$postElementKey = strtoupper($postElementKey);
-			if(strpos($postElementKey, 'LIST') !== false)
+			if((strpos($postElementKey, 'LIST') !== FALSE) && strpos($postElementKey, 'LIMIT') == FALSE)
 			{
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				if(strpos($postElementKey, 'BACK') !== false)
+				if(strpos($postElementKey, 'BACK') !== FALSE)
 				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
+					$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
 					if($this->InputLimitOne < 0)
 						$this->InputLimitOne = 0;
 					if($this->InputLimitTwo <= 0)
 						$this->InputLimitTwo = 25;
 				}
-				elseif (strpos($postElementKey, 'FORWARD') !== false) 
+				elseif (strpos($postElementKey, 'FORWARD') !== FALSE) 
 				{
-					$this->InputLimitOne = $this->InputLimitOne + 25;
-					$this->InputLimitTwo = $this->InputLimitTwo + 25;
+					$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
+					$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 					$ArrayParameterTemp = $ArrayParameter;
 					array_unshift($ArrayParameterTemp, $this->InputLimitOne, $this->InputLimitTwo);
 				    $ArrayParameter[count($ArrayParameterTemp)] = &$rowCount;
+				    $ArrayParameterTemp[count($ArrayParameterTemp)] = &$rowCount;
 					array_push($ArrayParameterTemp, $Debug);
-					call_user_func_array(array($this, $Function), $ArrayParameterTemp);
+					$return = call_user_func_array(array($this, $Function), $ArrayParameterTemp);
 					if($this->InputLimitOne > $rowCount)
 					{
 						$this->InputLimitOne = $this->InputLimitOne - 25;
@@ -101,13 +102,22 @@ class PageAdmin extends PageInfraTools
 						$this->InputLimitOne = $this->InputLimitOne - 25;
 						$this->InputLimitTwo = $this->InputLimitTwo - 25;
 					}
+					if($return == ConfigInfraTools::SUCCESS)
+						return Config::SUCCESS;
+					else 
+					{
+						array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
+						$ArrayParameter[count($ArrayParameter)] = &$rowCount;
+						array_push($ArrayParameter, $Debug);
+						return call_user_func_array(array($this, $Function), $ArrayParameter);
+					}
 				}
 				array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
 				$ArrayParameter[count($ArrayParameter)] = &$rowCount;
 				array_push($ArrayParameter, $Debug);
 				return call_user_func_array(array($this, $Function), $ArrayParameter);
 			}
-			else
+			elseif(strpos($postElementKey, 'LIST') == FALSE)
 			{
 				array_push($ArrayParameter, $Debug);
 				return call_user_func_array(array($this, $Function), $ArrayParameter); 
@@ -119,10 +129,14 @@ class PageAdmin extends PageInfraTools
 	{
 		if(isset($Function) && isset($SessionKey))
 		{
-			if($this->Session->GetSessionValue($SessionKey, $Instance) == ConfigInfraTools::SUCCESS)
-			{	
-				return $this->$Function($Instance);
+			if(!isset($Instance))
+			{
+				if($this->Session->GetSessionValue($SessionKey, $Instance) != ConfigInfraTools::SUCCESS)
+				{	
+					return ConfigInfraTools::ERROR;
+				}
 			}
+			return $this->$Function($Instance);
 		}
 		else return ConfigInfraTools::ERROR;
 	}

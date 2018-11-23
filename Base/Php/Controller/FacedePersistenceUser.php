@@ -23,8 +23,8 @@ Functions:
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                        $Debug, $MySqlConnection);
-			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
-			                                       $Debug, $MySqlConnection);
+			public function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, 
+			                                       &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
@@ -459,7 +459,8 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
+	public function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, 
+										   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
@@ -472,7 +473,7 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByDepartment());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $DepartmentName, $DepartmentName, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{

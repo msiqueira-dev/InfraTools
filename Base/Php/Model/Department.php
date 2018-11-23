@@ -9,8 +9,8 @@ Description:
 			Corporations Departments.
 Get / Set:		
 			public function GetDepartmentCorporation();
-			public function GetDepartmentInitials();
 			public function GetDepartmentCorporationName();
+			public function GetDepartmentInitials();
 			public function GetDepartmentName();
 			public function GetRegisterDate();
 			public function SetDepartmentCorporation($DepartmentCorporation);
