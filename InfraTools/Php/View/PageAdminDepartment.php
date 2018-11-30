@@ -48,7 +48,7 @@ class PageAdminDepartment extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
@@ -221,14 +221,6 @@ class PageAdminDepartment extends PageAdmin
 											&$this->InstanceUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-		}
-		else
-		{	
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
-			$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
-			$_POST[ConfigInfraTools::FORM_DEPARTMENT_SELECT . "_x"] = "1";
-			$_POST[ConfigInfraTools::FORM_DEPARTMENT_SELECT . "_y"] = "1";
-			$_POST[ConfigInfraTools::FORM_DEPARTMENT_SELECT] = ConfigInfraTools::FORM_DEPARTMENT_SELECT;
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

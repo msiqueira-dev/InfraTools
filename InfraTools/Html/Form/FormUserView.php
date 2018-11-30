@@ -215,17 +215,19 @@
 		{?>
 			 <!-- FORM_FIELD_USER_TWO_STEP_VERIFICATION -->
 			 <div class="DivContentBodyContainerSided">
-				<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
+				<div class="DivContentBodyContainerLabelSided">
 					<label><?php echo $this->InstanceLanguageText->GetText('TWO_STEP_VERIFICATION').":"; ?></label>
 				</div>
-				<div class="DivContentBodyContainerSubmitImage">
-					<?php  if($this->InputValueTwoStepVerification)
-								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
-							else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
-					?>
-					<img	src="<?php echo $this->InputValueTwoStepVerification; ?>"
-								alt="TwoStepVerification" width="20" height="20" />
-				</div>
+				<div class="DivContentBodyContainerValueSided">
+					<div class="DivContentBodyContainerSubmitImage">
+						<?php  if($this->InputValueTwoStepVerification)
+									$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
+								else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
+						?>
+						<img	src="<?php echo $this->InputValueTwoStepVerification; ?>"
+									alt="TwoStepVerification" width="20" height="20" />
+					</div>
+				 </div>
 			</div>
 		<?php } ?>
 		<?php if($this->EnableFieldUserActive)

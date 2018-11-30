@@ -62,8 +62,8 @@
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT_ID; ?>',
 											   '', true);">
-			<form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_ID; ?>" 
-                  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_ID; ?>" method="get" >
+			<form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_BY_ID; ?>" 
+                  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_BY_ID; ?>" method="get" >
 			<div class="DivContentBodyContainerLabelExtraWidth">
 				<label> <?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
@@ -108,8 +108,8 @@
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT_NAME; ?>',
 											   '', true);">
-			<form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_NAME; ?>" 
-                  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_NAME; ?>" method="get" >
+			<form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_BY_NAME; ?>" 
+                  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_BY_NAME; ?>" method="get" >
 				<div class="DivContentBodyContainerLabelExtraWidth">
 					<label> <?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?> </label>
 					<label class="RequiredField">&nbsp;*</label>

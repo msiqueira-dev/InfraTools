@@ -45,11 +45,77 @@ class PageAdminService extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
+		}
+		//FORM_SERVICE_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'ServiceSelect', 
+									  array(&$this->ArrayInstanceService),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST;
+		}
+		//FORM_SERVICE_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_REGISTER;
+		//FORM_SERVICE_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
+		//FORM_SERVICE_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+		}
+		//FORM_SERVICE_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
+		//FORM_SERVICE_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceId', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
+											&$this->InstanceService),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;
+		}
+		//FORM_SERVICE_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+										  $this->InstanceService) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'ServiceDeleteByServiceId', 
+										  array($this->InstanceService->GetServiceId()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
+			}
+		}
+		//FORM_SERVICE_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+										  $this->InstanceService) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_UPDATE;
+		}
+		//FORM_SERVICE_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+										  $this->InstanceService) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;
+		}
+		//FORM_SERVICE_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, 
+														$this->InstanceService) == ConfigInfraTools::SUCCESS)
+			{
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;	
+			}
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

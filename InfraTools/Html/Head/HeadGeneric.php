@@ -40,42 +40,6 @@
 <link href="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" rel="canonical" />
 <link href="<?php echo $this->Config->DefaultServerImage. 'Icons/FavIconInfraTools32x32.ico'; ?>" rel="icon" type="image/x-icon"/>
 <?php
-if($this->Device == Page::DEVICE_TABLET) 
-{
-	echo '<style>';
-	include_once(REL_PATH . "Style/Desktop/Generic/Generic.css"); 
-	echo '</style>';
-	echo '<style>'; 
-	include_once(REL_PATH . "Style/Desktop/Header/Header.css"); 
-	echo '</style>';
-	echo '<style>'; 
-	include_once(REL_PATH . "Style/Desktop/Footer/Footer.css"); 
-	echo '</style>';
-}
-elseif ($this->Device == Page::DEVICE_MOBILE)
-{
-	echo '<style>';
-	include_once(REL_PATH . "Style/Mobile/Generic/MobileGeneric.css"); 
-	echo '</style>';
-	echo '<style>'; 
-	include_once(REL_PATH . "Style/Mobile/Header/MobileHeader.css"); 
-	echo '</style>';
-	echo '<style>'; 
-	include_once(REL_PATH . "Style/Mobile/Footer/MobileFooter.css"); 
-	echo '</style>';
-}
-else 
-{
-	echo '<style>';
-	include_once(REL_PATH . "Style/Desktop/Generic/Generic.css"); 
-	echo '</style>';
-	echo '<style>'; 
-	include_once(REL_PATH . "Style/Desktop/Header/Header.css"); 
-	echo '</style>';
-	echo '<style>'; 
-	include_once(REL_PATH . "Style/Desktop/Footer/Footer.css"); 
-	echo '</style>';
-}
 if($this->CheckInstanceUser() != ConfigInfraTools::SUCCESS)
 {
 	if($this->PageCheckLogin == ConfigInfraTools::SUCCESS)

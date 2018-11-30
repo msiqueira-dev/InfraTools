@@ -404,7 +404,7 @@ class En
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_ROBOTS             = "noindex";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_TITLE              = "InfraTools - Admin type of association between user and team";
 	const PAGE_ADMIN_TYPE_SERVICE                                 = "Admin Service Type";
-	const PAGE_ADMIN_TYPE_SERVICE_LIST                            = "Admin Serivce Type - List";
+	const PAGE_ADMIN_TYPE_SERVICE_LIST                            = "Admin Service Type - List";
 	const PAGE_ADMIN_TYPE_SERVICE_LIST_ROBOTS                     = "noindex";
 	const PAGE_ADMIN_TYPE_SERVICE_LIST_TITLE                      = "InfraTools - Admin Service Type";
 	const PAGE_ADMIN_TYPE_SERVICE_REGISTER                        = "Admin Service Type - Register";

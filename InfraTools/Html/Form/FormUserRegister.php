@@ -45,7 +45,7 @@
 	 <div class="DivClearFloat"></div>
 	 <!-- REGISTER_EMAIL -->
 	 <div class="DivContentBodyContainer">
-		<div class="DivContentBodyContainerLabel">
+		<div class="DivContentBodyContainerLabelBig">
 			<label> <?php echo $this->InstanceLanguageText->GetText('EMAIL'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
@@ -86,7 +86,7 @@
 	<div class="DivClearFloat"></div>
 	<!-- REGISTER_BIRTH_DATE -->
 	<div class="DivContentBodyContainer">
-		<div class="DivContentBodyContainerLabel">
+		<div class="DivContentBodyContainerLabelBig">
 			<label> <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
@@ -182,6 +182,7 @@
 			?>
 		</select>
 	</div>
+	<div class="DivClearFloat"></div>
 	<!-- REGISTER_USER_PHONE_PRIMARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
@@ -251,8 +252,9 @@
 							   value="<?php echo $this->InputValueUserPhonePrimary; ?>" maxlength="9" />
 		</div>
      </div>
+     <div class="DivClearFloat"></div>
      <!-- REGISTER_USER_PHONE_SECONDARY -->
-    <div class="DivContentBodyContainer">
+     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
             <label><?php echo $this->InstanceLanguageText->GetText('PHONE_SECONDARY'); ?></label>
             <label>:</label>
@@ -325,7 +327,7 @@
 	<div class="DivClearFloat"></div>
 	<!-- FORM_FIELD_USER_GENDER -->
 	<div class="DivContentBodyContainer">
-		<div class="DivContentBodyContainerLabel">
+		<div class="DivContentBodyContainerLabelBig">
 			<label> <?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_GENDER'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>

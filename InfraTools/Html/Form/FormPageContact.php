@@ -185,6 +185,7 @@
 						   title="<?php echo $this->InstanceLanguageText->GetText('CONTACT_TEXT_TITLE'); ?>" 
 						   value="<?php echo $this->InputValueTicketTitle; ?>" maxlength="90" />
 	</div>
+	<div class="DivClearFloat"></div>
 	<!-- FORM_FIELD_TICKET_DESCRIPTION -->
 	<div class="DivContentBodyContainerTextArea">
 		<div class="DivContentBodyContainerLabel">

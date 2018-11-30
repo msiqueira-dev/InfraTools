@@ -13,6 +13,10 @@
 .DivContentBodyContainerLabelSided label{font-weight:bold;}
 .DivContentBodyContainerLabelTip{width:100%;height:45px;}
 .DivContentBodyContainerLabelTip label{font-size:8px;font-weight:normal;}
+.DivContentBodyContainerPhonePrefix{width:35px !important;float:left;}
+.DivContentBodyContainerPhone{float:left;margin-left:5px;}
+#FormFieldUserPhonePrimary{width:93% !important;}
+#FormFieldUserPhoneSecondary{width:93% !important;}
 /* Google Maps */
 .DivContentBodyContainerMaps{height:100px;margin-top:10px;}
 .DivContentBodyContainerLabelMapsCountry, .DivContentBodyContainerLabelMapsEstate{min-width:100%;height:55px;float:left;}
@@ -32,7 +36,7 @@
 /*End of Submits */
 .DivContentBodyContainerValue{width:60%;height:35px;float:left;}
 .DivContentBodyContainerValueContent{font-size:100%;}
-.DivContentBodyContainer select{width:64%;height:26px;font-size:100%;font-weight:600;border:2px groove #F5F2F3;color:graytext;background-color:white;}
+.DivContentBodyContainer select{width:61%;height:26px;font-size:100%;font-weight:600;border:2px groove #F5F2F3;color:graytext;background-color:white;}
 .DivContentBodySubmit {max-width:120px;min-width:120px;min-height:30px;max-height:30px;background-color:#f5821f;border:0;color:white;font-size:100%;margin-top:5%;clear:both;}
 .DivContentBodySubmit:hover{background-color:#ef4e22;}
 .DivContentBodyContainerSubmit{margin-bottom:10px;}

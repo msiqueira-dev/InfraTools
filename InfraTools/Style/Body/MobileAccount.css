@@ -1,7 +1,8 @@
 .DivContentBody{max-width:320px !important;min-height:380px !important;}
 .DivContentBodyContainer{height:auto !important;min-height:35px !important;clear:both;}
 .DivContentBodyContainerSided{width:100% !important;}
-.DivContentBodyContainerSided{height:auto !important;min-height:20px;margin-bottom:10px;display:inline-block;}
+.DivContentBodyContainerSided{height:auto !important;min-height:20px;display:inline-block;}
+.DivContentBodyContainerValueSided{margin-top:5px;}
 .DivContentBodyContainerValueSided div{float:left;}
 .DivContentBodyContainer input[type="text"]{width:58% !important;}
 .DivContentBodyContainer input[type="password"]{width:50% !important;margin-left:0px !important;}
@@ -21,3 +22,5 @@
 .DivContentBodyContainersBoxLink a span{width:auto;display:block;color:white;font-size:100%;text-align:center;position:relative;top:12px;}
 #DivContentBodyContainerValueSidedFloat{float:left;}
 #UniqueIdImage{height:20px !important;}
+.DivContentBodyContainerLabelSided{margin-top:10px;}
+.DivContentBodyContainerLabelSided label{color:#ef4e22;}

@@ -4,9 +4,9 @@
 .DivContentBodySubmitOption{width:165px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-right:20px;}
 .DivContentBodySubmitOption:hover{background-color:#ef4e22;}
 .DivContentBodyContainer{width:100% !important;display:inline;}
-.DivContentBodyContainerLabel{width:22% !important;}
+.DivContentBodyContainerLabel{width:26% !important;}
 .DivContentBodyContainer input{width:70% !important;}
-.DivContentBodyContainersBox{width:70px;height:50px;float:left;margin-right:2px;margin-left:2px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
+.DivContentBodyContainersBox{width:55px;height:50px;float:left;margin-right:2px;margin-left:1px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
 .DivContentBodyContainersBox input{position:relative;top:2px;}
 .DivContentBody form{min-height:35px !important;}
 .DivContentBodyContainerLabel label{top:1px !important;}

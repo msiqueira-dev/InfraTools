@@ -4735,43 +4735,67 @@ class Page
 	public function IncludeHeadAll($Page)
 	{
 		$return = NULL;
-		if ($Page != NULL)
+		if ($this->Page != NULL)
 		{
 			echo Config::HTML_TAG_HEAD_START;
 			$return = $this->IncludeHeadGeneric();
 			if ($return == Config::SUCCESS)
 			{
-				echo "<!-- HEAD " . $Page . " -->";
 				if($this->Device == Page::DEVICE_MOBILE)
+					$prefix = "Mobile";
+				else $prefix = NULL;
+				echo "<!-- HEAD " . $this->Page . " -->";
+				if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Generic.css"))
 				{
-					echo'<style>';
-					if (strpos($Page, "PageAdmin") !== false)
-					{
-						if(file_exists(REL_PATH . "Style/Mobile/Generic/MobileAdmin.css"))
-							include_once(REL_PATH . "Style/Mobile/Generic/MobileAdmin.css");
-					}
-					if(file_exists(REL_PATH . "Style/Mobile/Generic/MobileForm.css"))
-						include_once(REL_PATH . "Style/Mobile/Generic/MobileForm.css");
-					if(file_exists(REL_PATH . "Style/Mobile/Generic/MobileTabs.css"))
-						include_once(REL_PATH . "Style/Mobile/Generic/MobileTabs.css");
-					if(file_exists(REL_PATH . "Style/Mobile/Body/Mobile" . str_replace("Page", "", $Page) . ".css"))
-						include_once(REL_PATH . "Style/Mobile/Body/Mobile" . str_replace("Page", "", $Page)  . ".css");
+					echo '<style name="Generic.css">';
+					include_once(REL_PATH . "Style/Generic/" . $prefix . "Generic.css"); 
 					echo '</style>';
 				}
-				else
+				if(file_exists(REL_PATH . "Style/Header/" . $prefix . "Header.css"))
 				{
-					echo'<style>';
-					if (strpos($Page, "PageAdmin") !== false)
+					echo '<style name="Header.css">';
+					include_once(REL_PATH . "Style/Header/" . $prefix . "Header.css"); 
+					echo '</style>';
+				}
+				if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Form.css"))
+				{
+					echo '<style name="' . $prefix . '"Form.css">';
+					include_once(REL_PATH . "Style/Generic/" . $prefix . "Form.css");
+					echo '</style>';
+				}
+				if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Tabs.css"))
+				{
+					echo '<style name="' . $prefix . 'Tabs.css">';
+					include_once(REL_PATH . "Style/Generic/" . $prefix . "Tabs.css");
+					echo '</style>';
+				}
+				if(file_exists(REL_PATH . "Style/Body/" . $prefix . str_replace("Page", "", $this->Page) . ".css"))
+				{
+					echo'<style name="' . $prefix . $this->Page . '.css">';
+					include_once(REL_PATH . "Style/Body/" . $prefix . str_replace("Page", "", $this->Page) . ".css");
+					echo '</style>';
+				}
+				elseif(file_exists(REL_PATH . "Style/Body/" . $prefix . 
+								   str_replace("_", "", str_replace("Page_Admin_", "", $this->PageBody)) . ".css"))
+				{
+					echo'<style name="' . $prefix . $this->PageBody . '.css">';
+					include_once(REL_PATH . "Style/Body/" . $prefix . 
+								 str_replace("_", "", str_replace("Page_Admin_", "", $this->PageBody)) . ".css");
+					echo '</style>';
+				}
+				if(strpos($this->Page, "PageAdmin") !== false)
+				{
+					if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Admin.css"))
 					{
-						if(file_exists(REL_PATH . "Style/Desktop/Generic/Admin.css"))
-							include_once(REL_PATH . "Style/Desktop/Generic/Admin.css");
+						echo'<style name="' . $prefix .'Admin.css">';
+						include_once(REL_PATH . "Style/Generic/" . $prefix . "Admin.css");
+						echo '</style>';
 					}
-					if(file_exists(REL_PATH . "Style/Desktop/Generic/Form.css"))
-						include_once(REL_PATH . "Style/Desktop/Generic/Form.css");
-					if(file_exists(REL_PATH . "Style/Desktop/Generic/Tabs.css"))
-						include_once(REL_PATH . "Style/Desktop/Generic/Tabs.css");
-					if(file_exists(REL_PATH . "Style/Desktop/Body/" . str_replace("Page", "", $Page) . ".css"))
-						include_once(REL_PATH . "Style/Desktop/Body/" . str_replace("Page", "", $Page) . ".css");
+				}
+				if(file_exists(REL_PATH . "Style/Footer/" . $prefix . "Footer.css"))
+				{
+					echo '<style name="' . $prefix . 'Footer.css">';
+					include_once(REL_PATH . "Style/Footer/" . $prefix . "Footer.css"); 
 					echo '</style>';
 				}
 				$return = $this->IncludeHeadJavaScript();
