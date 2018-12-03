@@ -120,6 +120,17 @@ class PageAdmin extends PageInfraTools
 			elseif(strpos($postElementKey, 'LIST') == FALSE)
 			{
 				array_push($ArrayParameter, $Debug);
+				if($Debug)
+				{
+					echo "<b>ArrayParameter</b>:<br>";
+					foreach ($ArrayParameter as $key => $value)
+					{
+						if(is_object($value))
+							{echo "<b>" . $key . "</b>: "; print_r($value); echo "<br>";}
+						else
+							echo "<b>" . $key . "</b>: " . $value . "<br>";	
+					}
+				}
 				return call_user_func_array(array($this, $Function), $ArrayParameter); 
 			}
 		}

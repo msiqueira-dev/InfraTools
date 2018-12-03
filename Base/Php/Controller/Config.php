@@ -212,11 +212,11 @@ class Config
 	const PAGE_ADMIN_TEAM                                               = "Page_Admin_Team";
 	const PAGE_ADMIN_TEAM_ASSIGN_USER                                   = "Page_Admin_Team_Assign_User";
 	const PAGE_ADMIN_TEAM_LIST                                          = "Page_Admin_Team_List";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS                                = "Page_Admin_Team_Manage_Members";
 	const PAGE_ADMIN_TEAM_REGISTER                                      = "Page_Admin_Team_Register";
 	const PAGE_ADMIN_TEAM_SELECT                                        = "Page_Admin_Team_Select";
 	const PAGE_ADMIN_TEAM_UPDATE                                        = "Page_Admin_Team_Update";
 	const PAGE_ADMIN_TEAM_VIEW                                          = "Page_Admin_Team_View";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS                               = "Page_Admin_Team_View_List_Users";
 	const PAGE_ADMIN_TECH_INFO                                          = "Page_Admin_Tech_Info";
 	const PAGE_ADMIN_TICKET                                             = "Page_Admin_Ticket";
 	const PAGE_ADMIN_TICKET_ASSOCIATE                                   = "Page_Admin_Ticket_Associate";

@@ -344,9 +344,9 @@ class Pt
 	const PAGE_ADMIN_TEAM_LIST                                    = "Gerência de Equipe - Listar";
 	const PAGE_ADMIN_TEAM_LIST_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TEAM_LIST_TITLE                              = "InfraTools - Gerência de Equipe";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS                          = "Gerenciar Membros";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS_ROBOTS                   = "noindex";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS_TITLE                    = "InfraTools - Gerenciar Membros";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS                         = "Gerenciar Membros";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS_ROBOTS                  = "noindex";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS_TITLE                   = "InfraTools - Gerenciar Membros";
 	const PAGE_ADMIN_TEAM_REGISTER                                = "Gerência de Equipe - Cadastrar";
 	const PAGE_ADMIN_TEAM_REGISTER_ROBOTS                         = "noindex";
 	const PAGE_ADMIN_TEAM_REGISTER_TITLE                          = "InfraTools - Gerência de Equipe";
@@ -667,7 +667,6 @@ class Pt
 	const SUBMIT_INSERT                                           = "ADICIONAR";
 	const SUBMIT_LIST                                             = "LISTAR";
 	const SUBMIT_LIST_USERS                                       = "LISTAR USUÁRIOS";
-	const SUBMIT_MANAGE_MEMBERS                                   = "GERENCIAR USUARIOS";
 	const SUBMIT_REGISTER                                         = "CADASTRAR";
 	const SUBMIT_RESET_PASSWORD                                   = "RESTAURAR SENHA";
 	const SUBMIT_SELECT                                           = "OBTER";

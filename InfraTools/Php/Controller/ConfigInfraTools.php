@@ -228,6 +228,11 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_NAME_RADIO_DIV                             = "FormFieldServiceNameRadioDiv";
 	const FORM_FIELD_SERVICE_RADIO                                      = "FormFieldServiceRadio";
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
+	const FORM_FIELD_TEAM_RADIO                                         = "FormFieldTeamRadio";
+	const FORM_FIELD_TEAM_RADIO_DIV_ID                                  = "FormFieldTeamRadioDivId";
+	const FORM_FIELD_TEAM_RADIO_DIV_NAME                                = "FormFieldTeamRadioDivName";
+	const FORM_FIELD_TEAM_RADIO_ID                                      = "FormFieldTeamRadioId";
+	const FORM_FIELD_TEAM_RADIO_NAME                                    = "FormFieldTeamRadioName";
 	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
 	const FORM_FIELD_USER_CORPORATION_SELECT                            = "FormFieldUserCorporationSelect";
 	const FORM_GOOGLE_MAPS_LATITUDE                                     = "RegisterGoogleMapsLatitude";
@@ -340,11 +345,6 @@ class ConfigInfraTools extends Config
 	const FORM_TEAM_LIST_FORWARD                                        = "FormTeamListForward";
 	const FORM_TEAM_LIST_SELECT_SUBMIT                                  = "FormTeamListSelectSubmit";
 	const FORM_TEAM_LIST_SELECT_SUBMIT_NAME                             = "FormTeamListSelectSubmitName";
-	const FORM_TEAM_MANAGE_MEMBERS                                      = "FormTeamManageMembers";
-	const FORM_TEAM_MANAGE_MEMBERS_BACK                                 = "FormTeamManageMembersBack";
-	const FORM_TEAM_MANAGE_MEMBERS_FORWARD                              = "FormTeamManageMembersForward";
-	const FORM_TEAM_MANAGE_MEMBERS_CANCEL                               = "FormTeamManageMembersCancel";
-	const FORM_TEAM_MANAGE_MEMBERS_SUBMIT                               = "FormTeamManageMembersSubmit";
 	const FORM_TEAM_REGISTER                                            = "FormTeamRegister";
 	const FORM_TEAM_REGISTER_CANCEL                                     = "FormTeamRegisterCancel";
 	const FORM_TEAM_REGISTER_SUBMIT                                     = "FormTeamRegisterSubmit";
@@ -356,7 +356,9 @@ class ConfigInfraTools extends Config
 	const FORM_TEAM_VIEW                                                = "FormTeamView";
 	const FORM_TEAM_VIEW_CANCEL                                         = "FormTeamViewCancel";
 	const FORM_TEAM_VIEW_DELETE_SUBMIT                                  = "FormTeamViewDeleteSubmit";
-	const FORM_TEAM_VIEW_MANAGE_MEMBERS_SUBMIT                          = "FormTeamViewManageMembersSubmit";
+	const FORM_TEAM_VIEW_LIST_USERS                                     = "FormTeamViewListUsers";
+	const FORM_TEAM_VIEW_LIST_USERS_BACK                                = "FormTeamViewListUsersBack";
+	const FORM_TEAM_VIEW_LIST_USERS_FORWARD                             = "FormTeamViewListUsersForward";
 	const FORM_TEAM_VIEW_UPDATE_SUBMIT                                  = "FormTeamViewUpdateSubmit";
 	const FORM_TECH_INFO                                                = "FormTechInfo";
 	const FORM_TECH_INFO_LIST                                           = "FormTechInfoList";

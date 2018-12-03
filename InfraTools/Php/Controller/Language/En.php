@@ -344,9 +344,6 @@ class En
 	const PAGE_ADMIN_TEAM_LIST                                    = "Admin Team - List";
 	const PAGE_ADMIN_TEAM_LIST_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TEAM_LIST_TITLE                              = "InfraTools - Admin Team";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS                          = "Admin Manage Members";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS_ROBOTS                   = "noindex";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS_TITLE                    = "InfraTools - Admin Manage Members";
 	const PAGE_ADMIN_TEAM_REGISTER                                = "Admin Team - Register";
 	const PAGE_ADMIN_TEAM_REGISTER_ROBOTS                         = "noindex";
 	const PAGE_ADMIN_TEAM_REGISTER_TITLE                          = "InfraTools - Admin Team";
@@ -361,6 +358,9 @@ class En
 	const PAGE_ADMIN_TEAM_VIEW                                    = "Admin Team - View";
 	const PAGE_ADMIN_TEAM_VIEW_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TEAM_VIEW_TITLE                              = "InfraTools - Admin Team";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS                         = "Admin Manage Members";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS_ROBOTS                  = "noindex";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS_TITLE                   = "InfraTools - Admin Manage Members";
 	const PAGE_ADMIN_TECH_INFO                                    = "Admin Technical Informations";
 	const PAGE_ADMIN_TECH_INFO_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TECH_INFO_TITLE                              = "InfraTools - Admin Technical Informations";
@@ -665,7 +665,6 @@ class En
 	const SUBMIT_FORWARD                                          = "NEXT";
 	const SUBMIT_LIST                                             = "LIST";
 	const SUBMIT_LIST_USERS                                       = "LIST USERS";
-	const SUBMIT_MANAGE_MEMBERS                                   = "MANAGE MEMBERS";
 	const SUBMIT_INSERT                                           = "INSERT";
 	const SUBMIT_REGISTER                                         = "REGISTER";
 	const SUBMIT_RESET_PASSWORD                                   = "RESET PASSWORD";

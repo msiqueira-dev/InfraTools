@@ -85,11 +85,11 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamDeleteByTeamDescription');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamDeleteByTeamDescription());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamDeleteByTeamDescription());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TeamDescription);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -110,7 +110,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 
@@ -125,11 +125,11 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamDeleteByTeamId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamDeleteByTeamId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamDeleteByTeamId());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $TeamId);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -150,7 +150,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 
@@ -165,11 +165,11 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamInsert');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamInsert());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $TeamDescription, $TeamName);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				else
@@ -182,7 +182,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -197,11 +197,11 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamSelect');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelect());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -234,7 +234,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -249,7 +249,7 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamSelectNoLimit');
-			if($result = $mySqlConnection->query(Persistence::SqlTeamSelectNoLimit()))
+			if($result = $MySqlConnection->query(Persistence::SqlTeamSelectNoLimit()))
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
@@ -281,11 +281,11 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamSelectByTeamId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelectByTeamId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamSelectByTeamId());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("i", $TeamId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$stmt->bind_result($teamDescription, $TeamId, $teamName, $registerDate);
@@ -312,7 +312,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -326,12 +326,12 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamSelectByTeamName');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamSelectByTeamName());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamSelectByTeamName());
 			if($stmt)
 			{
 				$TeamName = "%".$TeamName."%";  
 				$stmt->bind_param("s", $TeamName);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$ArrayInstanceTeam = array();
@@ -359,7 +359,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}
@@ -373,11 +373,11 @@ class FacedePersistenceTeam
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamUpdateByTeamId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTeamUpdateByTeamId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamUpdateByTeamId());
 			if ($stmt)
 			{
 				$stmt->bind_param("ssi", $TeamDescription, $TeamName, $TeamId);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -396,7 +396,7 @@ class FacedePersistenceTeam
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;
 			}
 		}

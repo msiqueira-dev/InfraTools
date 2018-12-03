@@ -14,3 +14,5 @@
 .DivContentBodySided{width:500px !important; float:left;}
 .TableGenericThArrow{width:60px!important;}
 .TableGenericThRight{width:50%!important}
+.DivContentBodyContainer input[type="radio"]{width:20px;height:15px;float:left;}
+.DivContentBodyContainerRadio{height:25px !important;}

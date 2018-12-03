@@ -1,6 +1,6 @@
 <!-- BODY TEAM LIST -->
 <?php
-if(is_array($this->ArrayTeam))
+if(is_array($this->ArrayInstanceTeam))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_LIST . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -46,29 +46,37 @@ if(is_array($this->ArrayTeam))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayTeam as $key=>$team)
+	foreach($this->ArrayInstanceTeam as $key=>$team)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_TEAM_LIST_BACK . "' method='post' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT . "' 
-									   id='"   . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT . "' 
-									   value='" . $team->GetTeamId() . "' 
-									   title='" . $team->GetTeamId() . "' />
-			  	</form>
-		      </td>";
+					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
+										     value='" . $team->GetTeamId() . "' 
+										     title='" . $team->GetTeamId() . "' />
+					</form>
+				  </td>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_TEAM_LIST_BACK . "' method='post' />
-			    	<input type='hidden' name='" . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT . "' 
-			  					   id='"   . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT . "' 
-								   value='" . $team->GetTeamId() . "' />
-								   
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT_NAME . "' 
-		                           id='"   . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT_NAME . "' 
-							       value='" . $team->GetTeamName() . "' 
-								   title='" . $team->GetTeamName() . "' />
-				</form>
-		      </td>";
+					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_TEAM_ID . "'
+							 value='"  . $team->GetTeamId() . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
+										 id='"       . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
+										 value='" . $team->GetTeamName() . "' 
+										 title='" . $team->GetTeamName() . "' />
+						</form>
+				  </td>";
 		echo "<td class='TableGenericTdLink'>"   . 
 			$team->GetTeamDescription()  . "</td>";
 		echo "<td class='TableGenericTdLink'>" . $team->GetRegisterDate() . "</td>";

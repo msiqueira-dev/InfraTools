@@ -48,10 +48,10 @@
                    class="DivContentBodySubmitBigger"
                    value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
                    onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TEAM_VIEW_MANAGE_MEMBERS_SUBMIT; ?>" 
-                   id="<?php echo ConfigInfraTools::FORM_TEAM_VIEW_MANAGE_MEMBERS_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS; ?>" 
+                   id="<?php echo ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS; ?>"
                    class="DivContentBodySubmitBigger"
-                   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_MANAGE_MEMBERS'); ?>"/>
+                   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
     </div>
 </form>
 <div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">

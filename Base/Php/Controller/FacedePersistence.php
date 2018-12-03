@@ -832,7 +832,7 @@ class FacedePersistence
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-			$return = $FacedePersistenceTeam->TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceTeam->TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection);
 			if($return == ConfigInfraTools::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();

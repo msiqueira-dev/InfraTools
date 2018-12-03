@@ -15,7 +15,7 @@
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
-														   'Host')"
+														   'Department Name')"
 					   title="<?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?>"  
 					   <?php echo $this->InputValueDepartmentNameRadio; ?> checked/>
 				<div class="DivContentBodyContainerLabelHost">
@@ -36,7 +36,7 @@
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
-														   'Ip')"
+														   'Corporation Name and Department Name')"
 					   title="<?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?>"  
 					   <?php echo $this->InputValueDepartmentNameAndCorporationNameRadio; ?> />
 				<div class="DivContentBodyContainerLabelIp">
@@ -54,7 +54,7 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
-							   class="<?php echo $this->ReturnEmailClass; ?>"
+							   class="<?php echo $this->ReturnDepartmentNameClass; ?>"
 							   onkeyup="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
@@ -97,10 +97,10 @@
 					id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
 					class="<?php echo $this->ReturnCorporationNameClass; ?>"
 					onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>');
-							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>')
+							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>')
 											 .disabled = false;
-							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>')
-											 .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
+							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>')
+											 .className = 'DivContentBodySubmit SubmitEnabled;'">
 					<option <?php if ($this->InputValueCorporationName == "" 
 									  || $this->InputValueCorporationName == ConfigInfraTools::FORM_SELECT_NONE) 
 						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 

@@ -248,7 +248,9 @@ class Page
 	public    $InputValueRepeatPassword                             = "";
 	public    $InputValueTeamDescription                            = "";
 	public    $InputValueTeamId                                     = "";
+	public    $InputValueTeamIdRadio                                = "";
 	public    $InputValueTeamName                                   = "";
+	public    $InputValueTeamNameRadio                              = "";
 	public    $InputValueTicketDescription                          = "";
 	public    $InputValueTicketTitle                                = "";
 	public    $InputValueTicketType                                 = "";
@@ -1393,6 +1395,7 @@ class Page
 				$InstanceDepartment->SetDepartmentInitials($this->InputValueDepartmentInitials);
 				$InstanceDepartment->SetDepartmentName($this->InputValueDepartmentName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+				$this->DepartmentLoadData($InstanceDepartment);
 				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
@@ -1483,6 +1486,7 @@ class Page
 					{
 						$InstanceDepartment->SetDepartmentCorporation($InstanceCorporation);
 						$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+						$this->DepartmentLoadData($InstanceDepartment);
 						$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 											   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
@@ -1785,6 +1789,7 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
+				$this->TeamLoadData($InstanceTeam);
 				return Config::SUCCESS;
 			}
 			else
@@ -1904,18 +1909,16 @@ class Page
 															 $Debug);
 			if($return == Config::SUCCESS)
 			{
-				if($this->TeamLoadData($InstanceTeam) == Config::SUCCESS)
-				{
-					$InstanceTeam->SetTeamDescription($this->InputValueTeamDescription);
-					$InstanceTeam->SetTeamName($this->InputValueTeamName);
-					$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
-					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_UPDATE_SUCCESS', 
-																					$this->Language);
-					return Config::SUCCESS;
-				}
+				$InstanceTeam->SetTeamDescription($this->InputValueTeamDescription);
+				$InstanceTeam->SetTeamName($this->InputValueTeamName);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
+				$this->TeamLoadData($InstanceTeam);
+				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
+				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ADMIN_TEAM_UPDATE_SUCCESS', 
+																				$this->Language);
+				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
@@ -3620,7 +3623,8 @@ class Page
 											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
 		}

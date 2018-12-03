@@ -316,9 +316,6 @@ class Es
 	const PAGE_ADMIN_TEAM_LIST                                    = "";
 	const PAGE_ADMIN_TEAM_LIST_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TEAM_LIST_TITLE                              = "InfraTools -";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS                          = "";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS_ROBOTS                   = "noindex";
-	const PAGE_ADMIN_TEAM_MANAGE_MEMBERS_TITLE                    = "InfraTools -";
 	const PAGE_ADMIN_TEAM_REGISTER                                = "";
 	const PAGE_ADMIN_TEAM_REGISTER_ROBOTS                         = "noindex";
 	const PAGE_ADMIN_TEAM_REGISTER_TITLE                          = "InfraTools -";
@@ -333,6 +330,9 @@ class Es
 	const PAGE_ADMIN_TEAM_VIEW                                    = "";
 	const PAGE_ADMIN_TEAM_VIEW_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TEAM_VIEW_TITLE                              = "InfraTools -";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS                         = "";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS_ROBOTS                  = "noindex";
+	const PAGE_ADMIN_TEAM_VIEW_LIST_USERS_TITLE                   = "InfraTools -";
 	const PAGE_ADMIN_TECH_INFO                                    = "";
 	const PAGE_ADMIN_TECH_INFO_ROBOTS                             = "noindex";
 	const PAGE_ADMIN_TECH_INFO_TITLE                              = "InfraTools -";
@@ -636,7 +636,6 @@ class Es
 	const SUBMIT_INSERT                                           = "";
 	const SUBMIT_LIST                                             = "";
 	const SUBMIT_LIST_USERS                                       = "";
-	const SUBMIT_MANAGE_MEMBERS                                   = "";
 	const SUBMIT_REGISTER                                         = "";
 	const SUBMIT_RESET_PASSWORD                                   = "";
 	const SUBMIT_SELECT                                           = "";

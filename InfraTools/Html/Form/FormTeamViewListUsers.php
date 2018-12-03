@@ -1,8 +1,8 @@
-<!-- FORM MANAGE MEMBERS -->
+<!-- FORM_TEAM_VIEW_LIST_USERS -->
 <?php
 if(is_array($this->ArrayTeamMembers))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -13,9 +13,9 @@ if(is_array($this->ArrayTeamMembers))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -34,9 +34,9 @@ if(is_array($this->ArrayTeamMembers))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_MANAGE_MEMBERS_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -52,16 +52,21 @@ if(is_array($this->ArrayTeamMembers))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
-			  		<input type='hidden' name='" . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT . "' 
-			  					         id='"   . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT . "' 
-								         value='" . $this->InstanceTeam->GetTeamId() . "' />
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT_NAME . "' 
-		                                 id='"   . ConfigInfraTools::FORM_TEAM_LIST_SELECT_SUBMIT_NAME . "' 
-							             value='" . $this->InstanceTeam->GetTeamName() . "' 
-								         title='" . $this->InstanceTeam->GetTeamName() . "' />
-				</form>
-		      </td>";
+					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_TEAM_ID . "'
+							 value='"  . $this->InstanceTeam->GetTeamId() . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
+										 id='"       . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
+										 value='" . $this->InstanceTeam->GetTeamName() . "' 
+										 title='" . $this->InstanceTeam->GetTeamName() . "' />
+						</form>
+				  </td>";
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' method='post' />
 					<input type='hidden'
@@ -124,7 +129,6 @@ if(is_array($this->ArrayTeamMembers))
 	echo "</table>";
 }
 ?>
-</form>
 <div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
 	<div class="DivReturnMessageImage">
 		<div>
