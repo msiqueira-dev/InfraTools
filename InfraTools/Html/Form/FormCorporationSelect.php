@@ -10,7 +10,7 @@
 		</div>
 		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
-						   class="<?php echo $this->ReturnEmailClass; ?>"
+						   class="<?php echo $this->ReturnCorporationNameClass; ?>"
 						   onkeyup="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',

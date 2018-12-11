@@ -52,7 +52,7 @@
 		</div>
 		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>" 
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>"
-						   class="<?php echo $this->ReturnEmailClass; ?>"
+						   class="<?php echo $this->ReturnUserEmailClass; ?>"
 						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',

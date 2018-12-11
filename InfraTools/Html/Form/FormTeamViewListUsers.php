@@ -138,11 +138,11 @@ if(is_array($this->ArrayTeamMembers))
 	<label>
 		<?php if(isset($this->ReturnEmptyText))               echo $this->ReturnEmptyText; ?>
 		<?php if(isset($this->ReturnTeamNameText))            echo $this->ReturnTeamNameText; ?>
-		<?php if(isset($this->ReturnEmailText))               echo $this->ReturnEmailText; ?>
+		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
 		<?php if(isset($this->ReturnTeamDescriptionText))     echo $this->ReturnTeamDescriptionText; ?>
 		<?php if(isset($this->ReturnCorporationNameText))     echo $this->ReturnCorporationNameText; ?>
 		<?php if(isset($this->ReturnDepartmentNameText))      echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnEmailText))               echo $this->ReturnEmailText; ?>
+		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>

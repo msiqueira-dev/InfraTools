@@ -91,9 +91,6 @@ class PageAdminSystemConfiguration extends PageAdmin
 				else
 				{
 					$this->InstanceSystemConfiguration = array_pop($this->ArraySystemConfiguration);
-					//if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
-					//					          $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
-					//	$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
 				}
 			}
 		}

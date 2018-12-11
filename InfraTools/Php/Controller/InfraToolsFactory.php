@@ -69,8 +69,7 @@ if (file_exists("Php"))
 	if(!defined('SITE_PATH_PHP_VIEW'))       define("SITE_PATH_PHP_VIEW", "Php/View/");
 	if(!defined('SITE_PATH_PHP_CONTROLLER')) define("SITE_PATH_PHP_CONTROLLER", "Php/Controller/");
 	if(!defined('SITE_PATH_PT'))             define("SITE_PATH_PT", "Pt");
-	if(!defined('SITE_PATH_STYLE_DESKTOP'))  define("SITE_PATH_STYLE_DESKTOP", "Style/Desktop");
-	if(!defined('SITE_PATH_STYLE_MOBILE'))   define("SITE_PATH_STYLE_MOBILE", "Style/Mobile");
+	if(!defined('SITE_PATH_STYLE'))          define("SITE_PATH_STYLE", "Style");
 }
 elseif(file_exists("../Php"))
 {
@@ -86,8 +85,7 @@ elseif(file_exists("../Php"))
 	if(!defined('SITE_PATH_PHP_VIEW'))       define("SITE_PATH_PHP_VIEW", "../Php/View/");
 	if(!defined('SITE_PATH_PHP_CONTROLLER')) define("SITE_PATH_PHP_CONTROLLER", "../Php/Controller/");
 	if(!defined('SITE_PATH_PT'))             define("SITE_PATH_PT", "../Pt");
-	if(!defined('SITE_PATH_STYLE_MOBILE'))   define("SITE_PATH_STYLE_MOBILE", "../Style/Mobile");
-	if(!defined('SITE_PATH_STYLE_DESKTOP'))  define("SITE_PATH_STYLE_DESKTOP", "../Style/Desktop");
+	if(!defined('SITE_PATH_STYLE'))          define("SITE_PATH_STYLE", "../Style");
 }
 else
 {
@@ -103,8 +101,7 @@ else
 	if(!defined('SITE_PATH_PHP_VIEW'))       define("SITE_PATH_PHP_VIEW", "../../Php/View/");
 	if(!defined('SITE_PATH_PHP_CONTROLLER')) define("SITE_PATH_PHP_CONTROLLER", "../../Php/Controller/");
 	if(!defined('SITE_PATH_PT'))             define("SITE_PATH_PT", "../../Pt");
-	if(!defined('SITE_PATH_STYLE_DESKTOP'))  define("SITE_PATH_STYLE_DESKTOP", "../../Style/Desktop");
-	if(!defined('SITE_PATH_STYLE_MOBILE'))   define("SITE_PATH_STYLE_MOBILE", "../../Style/Mobile");
+	if(!defined('SITE_PATH_STYLE'))          define("SITE_PATH_STYLE", "../../Style");
 }
 
 if (!class_exists("Factory"))

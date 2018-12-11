@@ -377,6 +377,9 @@ class ConfigInfraTools extends Config
 	const FORM_TICKET_UPDATE_SUBMIT                                     = "FormTicketUpdateSubmit";
 	const FORM_TICKET_VIEW                                              = "FormTicketUpdateView";
 	const FORM_TICKET_VIEW_DELETE_SUBMIT                                = "FormTicketViewDeleteSubmit";
+	const FORM_TICKET_VIEW_LIST_USERS                                   = "FormTicketViewListUsers";
+	const FORM_TICKET_VIEW_LIST_USERS_BACK                              = "FormTicketViewListUsersBack";
+	const FORM_TICKET_VIEW_LIST_USERS_FORWARD                           = "FormTicketViewListUsersForward";
 	const FORM_TICKET_VIEW_UPDATE_SUBMIT                                = "FormTicketViewUpdateSubmit";
 	const FORM_TYPE_ASSOC_USER_TEAM                                     = "FormTypeAssocUserTeam";
 	const FORM_TYPE_ASSOC_USER_TEAM_LIST                                = "FormTypeAssocUserTeamList";

@@ -2289,14 +2289,14 @@ abstract class PageInfraTools extends Page
 
 		//SERVICE_USER
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $UserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnEmailText;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -2345,14 +2345,14 @@ abstract class PageInfraTools extends Page
 
 		//SERVICE_USER
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $UserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnEmailText;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -3005,7 +3005,7 @@ abstract class PageInfraTools extends Page
 				}
 				else
 				{
-					$this->ReturnEmailText = $this->InstanceLanguageText->GetConstant('USER_TEAM_SELECT_ERROR', $this->Language);
+					$this->ReturnUserEmailText = $this->InstanceLanguageText->GetConstant('USER_TEAM_SELECT_ERROR', $this->Language);
 					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
@@ -3014,7 +3014,7 @@ abstract class PageInfraTools extends Page
 			}
 			else
 			{
-				$this->ReturnEmailText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
+				$this->ReturnUserEmailText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
 				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
@@ -3023,7 +3023,7 @@ abstract class PageInfraTools extends Page
 		}
 		else 
 		{
-			$this->ReturnEmailText = $this->InstanceLanguageText->GetConstant('USER_SAME_AS_ADMIN', $this->Language);
+			$this->ReturnUserEmailText = $this->InstanceLanguageText->GetConstant('USER_SAME_AS_ADMIN', $this->Language);
 			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";

@@ -10,7 +10,7 @@
 		</div>
 		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>" 
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>"
-						   class="<?php echo $this->ReturnEmailClass; ?>"
+						   class="<?php echo $this->ReturnUserEmailClass; ?>"
 						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
@@ -66,8 +66,8 @@
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->EmptyText))       echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnEmailText)) echo $this->ReturnEmailText; ?>
-		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
+		<?php if(isset($this->EmptyText))           echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnUserEmailText)) echo $this->ReturnUserEmailText; ?>
+		<?php if(isset($this->ReturnText))          echo $this->ReturnText; ?>
 	</label>
 </div>

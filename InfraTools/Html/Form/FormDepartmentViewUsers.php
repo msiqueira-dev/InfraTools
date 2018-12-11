@@ -90,20 +90,20 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
 		if($user->GetDepartmentName() != NULL)
 			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
-							   name='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' 
-							   id='"     . ConfigInfraTools::FORM_DEPARTMENT_LIST . "'
-							   value='"  . $user->GetCorporationName() . "' />
+							 name='"   . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT . "' />
 						<input type='hidden'
-							   name='"   . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' 
-							   id='"     . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "'
-							   value='"  . $user->GetCorporationName() . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
-										 id='"   . ConfigInfraTools::FORM_DEPARTMENT_LIST_SELECT . "' 
-										 value='" . $user->GetDepartmentName() . "' 
-										 title='" . $user->GetDepartmentName() . "' />
-					</form>
+							 name='"   . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_CORPORATION_NAME . "'
+							 value='"  . $user->GetCorporationName() . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME . "' 
+										     value='" . $user->GetDepartmentName() . "' 
+										     title='" . $user->GetDepartmentName() . "' />
+						</form>
 				  </td>";
 		else echo "<td>" . "<img src='" . $user->GetDepartmentActiveIcon() . "'/>" . "</td>";
 		echo "</tr>";
@@ -122,11 +122,11 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 	<label>
 		<?php if(isset($this->ReturnEmptyText))               echo $this->ReturnEmptyText; ?>
 		<?php if(isset($this->ReturnTeamNameText))            echo $this->ReturnTeamNameText; ?>
-		<?php if(isset($this->ReturnEmailText))               echo $this->ReturnEmailText; ?>
+		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
 		<?php if(isset($this->ReturnTypeUserDescriptionText)) echo $this->ReturnTypeUserDescriptionText; ?>
 		<?php if(isset($this->ReturnCorporationNameText))     echo $this->ReturnCorporationNameText; ?>
 		<?php if(isset($this->ReturnDepartmentNameText))      echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnEmailText))               echo $this->ReturnEmailText; ?>
+		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>

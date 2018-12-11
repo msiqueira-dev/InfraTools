@@ -71,7 +71,7 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>"
-							   class="<?php echo $this->ReturnEmailClass; ?>"
+							   class="<?php echo $this->ReturnServiceIdClass; ?>"
 							   onkeyup="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT_ID; ?>',
@@ -117,7 +117,7 @@
 				</div>
 				<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
 								   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>"
-								   class="<?php echo $this->ReturnEmailClass; ?>"
+								   class="<?php echo $this->ReturnServiceNameClass; ?>"
 								   onkeyup="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
 													   'DivContentBodySubmit',
 													   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT_NAME; ?>',

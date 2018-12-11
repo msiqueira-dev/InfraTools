@@ -230,16 +230,11 @@ class InfraToolsTechInfo extends TechInfo
 		array_push($arraySiteDir, SITE_PATH_PHP_CONTROLLER . "/Language");
 		array_push($arraySiteDir, SITE_PATH_PHP_MODEL);
 		array_push($arraySiteDir, SITE_PATH_PT);
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP);
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Body");
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Footer");
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Generic");
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Header");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE);
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Body");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Footer");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Generic");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Header");
+		array_push($arraySiteDir, SITE_PATH_STYLE);
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Body");
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Footer");
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Generic");
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Header");
 		foreach($arraySiteDir as $key=>$dir)
 		{
 			$arrayFile = scandir($dir);

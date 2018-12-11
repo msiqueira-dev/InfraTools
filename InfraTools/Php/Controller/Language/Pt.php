@@ -688,6 +688,10 @@ class Pt
 	const TEXT_NUMBER                                             = "Número";
 	const TEXT_PORT                                               = "Porta";
 	const TEXT_WEBSITE                                            = "Web Site";
+	const TICKET_DELETE_ERROR                                     = "";
+	const TICKET_DELETE_SUCCESS                                   = "";
+	const TICKET_INSERT_ERROR                                     = "";
+	const TICKET_INSERT_SUCCESS                                   = "";
 	const TWO_STEP_VERIFICATION                                   = "Verificação duas etapas";
 	const TYPE                                                    = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                    = "Erro ao obter tipos de associação";
@@ -846,118 +850,118 @@ class Pt
 	const ADMIN_TEXT_USER                                         = "Inserir, excluir, atualizar e consultar usuários";
 	
 	/* Body Page AdminCorporation */
-	const ADMIN_CORPORATION_DELETE_ERROR                          = "Erro ao excluir corporação";
-	const ADMIN_CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporação possui departamentos associados, exclua-os antes";
-	const ADMIN_CORPORATION_DELETE_SUCCESS                        = "Corporação excluída com sucesso";
-	const ADMIN_CORPORATION_REGISTER_ERROR                        = "Erro ao cadastrar corporação";
-	const ADMIN_CORPORATION_REGISTER_SUCCESS                      = "Corporação cadastrada com sucesso";
-	const ADMIN_CORPORATION_SELECT_USERS_ERROR                    = "Erro ao tentar obter os usuários de uma corporação";
+	const CORPORATION_DELETE_ERROR                          = "Erro ao excluir corporação";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporação possui departamentos associados, exclua-os antes";
+	const CORPORATION_DELETE_SUCCESS                        = "Corporação excluída com sucesso";
+	const CORPORATION_INSERT_ERROR                        = "Erro ao cadastrar corporação";
+	const CORPORATION_INSERT_SUCCESS                      = "Corporação cadastrada com sucesso";
+	const CORPORATION_SELECT_USERS_ERROR                    = "Erro ao tentar obter os usuários de uma corporação";
 	
 	/* Body Page AdminCountry */
 	
 	/* Body Page AdminDepartment */
-	const ADMIN_DEPARTMENT_DELETE_ERROR                           = "Erro ao excluir departamento";
-	const ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Departamento possui usuários associados, remova-os antes";
-	const ADMIN_DEPARTMENT_DELETE_SUCCESS                         = "Departamento excluido com sucesso";
-	const ADMIN_DEPARTMENT_REGISTER_ERROR                         = "Erro ao cadastrar departamento";
-	const ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS       = "Departamento já existe para esta corporação";
-	const ADMIN_DEPARTMENT_REGISTER_SUCCESS                       = "Departamento cadastrado com sucesso";
-	const ADMIN_DEPARTMENT_SELECT_USERS_ERROR                     = "Erro ao tentar obter usuários de um departamento";
-	const ADMIN_DEPARTMENT_UPDATE_ERROR                           = "Erro ao atualizar departamento";
-	const ADMIN_DEPARTMENT_UPDATE_SUCCESS                         = "Departamento atualizado com sucesso";
+	const DEPARTMENT_DELETE_ERROR                           = "Erro ao excluir departamento";
+	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Departamento possui usuários associados, remova-os antes";
+	const DEPARTMENT_DELETE_SUCCESS                         = "Departamento excluido com sucesso";
+	const DEPARTMENT_INSERT_ERROR                         = "Erro ao cadastrar departamento";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS       = "Departamento já existe para esta corporação";
+	const DEPARTMENT_INSERT_SUCCESS                       = "Departamento cadastrado com sucesso";
+	const DEPARTMENT_SELECT_USERS_ERROR                     = "Erro ao tentar obter usuários de um departamento";
+	const DEPARTMENT_UPDATE_ERROR                           = "Erro ao atualizar departamento";
+	const DEPARTMENT_UPDATE_SUCCESS                         = "Departamento atualizado com sucesso";
 	
 	/* Body Page AdminNotification */
-	const ADMIN_NOTIFICATION_DELETE_ERROR                         = "Erro ao excluir notificação";
-	const ADMIN_NOTIFICATION_DELETE_SUCCESS                       = "Notificação excluida com sucesso";
-	const ADMIN_NOTIFICATION_INVALID_TEXT                         = "Texto inválido";
-	const ADMIN_NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantidade de caracteres excede o tamanho máximo no texto";
-	const ADMIN_NOTIFICATION_REGISTER_ERROR                       = "Erro ao cadastrar notificação";
-	const ADMIN_NOTIFICATION_REGISTER_SUCCESS                     = "Notificação cadastrada com sucesso";
-	const ADMIN_NOTIFICATION_UPDATE_ERROR                         = "Erro ao atualizar notificação";
-	const ADMIN_NOTIFICATION_UPDATE_SUCCESS                       = "Notificação atualizada com sucesso";
+	const NOTIFICATION_DELETE_ERROR                         = "Erro ao excluir notificação";
+	const NOTIFICATION_DELETE_SUCCESS                       = "Notificação excluida com sucesso";
+	const NOTIFICATION_INVALID_TEXT                         = "Texto inválido";
+	const NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantidade de caracteres excede o tamanho máximo no texto";
+	const NOTIFICATION_INSERT_ERROR                       = "Erro ao cadastrar notificação";
+	const NOTIFICATION_INSERT_SUCCESS                     = "Notificação cadastrada com sucesso";
+	const NOTIFICATION_UPDATE_ERROR                         = "Erro ao atualizar notificação";
+	const NOTIFICATION_UPDATE_SUCCESS                       = "Notificação atualizada com sucesso";
 	
 	/* Body Page AdminTeam */
-	const ADMIN_TEAM_DELETE_ERROR                                 = "Erro ao excluir equipe";
-	const ADMIN_TEAM_DELETE_ERROR_DEPENDENCY_TEAM                 = "Equipe possui usuários associados, exclua-os primeiro";
-	const ADMIN_TEAM_DELETE_SUCCESS                               = "Equipe excluida com sucesso";
-	const ADMIN_TEAM_INVALID_DESCRIPTION                          = "Descrição inválida";
-	const ADMIN_TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const ADMIN_TEAM_REGISTER_ERROR                               = "Erro ao cadastrar equipe";
-	const ADMIN_TEAM_REGISTER_SUCCESS                             = "Equipe cadastrada com sucesso";
-	const ADMIN_TEAM_SELECT_USERS_ERROR                           = "Erro ao tentar obter os usuários de uma equipe";
-	const ADMIN_TEAM_UPDATE_ERROR                                 = "Erro ao atualizar equipe";
-	const ADMIN_TEAM_UPDATE_SUCCESS                               = "Equipe atualizada com sucesso";
+	const TEAM_DELETE_ERROR                                 = "Erro ao excluir equipe";
+	const TEAM_DELETE_ERROR_DEPENDENCY_TEAM                 = "Equipe possui usuários associados, exclua-os primeiro";
+	const TEAM_DELETE_SUCCESS                               = "Equipe excluida com sucesso";
+	const TEAM_INVALID_DESCRIPTION                          = "Descrição inválida";
+	const TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantidade de caracteres excede o tamanho máximo na descrição";
+	const TEAM_INSERT_ERROR                               = "Erro ao cadastrar equipe";
+	const TEAM_INSERT_SUCCESS                             = "Equipe cadastrada com sucesso";
+	const TEAM_SELECT_USERS_ERROR                           = "Erro ao tentar obter os usuários de uma equipe";
+	const TEAM_UPDATE_ERROR                                 = "Erro ao atualizar equipe";
+	const TEAM_UPDATE_SUCCESS                               = "Equipe atualizada com sucesso";
 	
 	/* Body Page Admin Tech Info */
-	const ADMIN_TECH_INFO_DIRECTORY_COUNT                         = "Quantidade de Diretórios";
-	const ADMIN_TECH_INFO_FILE_COUNT                              = "Quantidade de Arquivos";
-	const ADMIN_TECH_INFO_FILE_EXTENSION                          = "Extensão";
-	const ADMIN_TECH_INFO_FILE_TYPE                               = "Tipo";
-	const ADMIN_TECH_INFO_FILE_VALUE                              = "Valor";
-	const ADMIN_TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "Quantidade de constantes";
-	const ADMIN_TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "Quantidade de textos";
-	const ADMIN_TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "Contantes com possívels problemas";
-	const ADMIN_TECH_INFO_TITLE_BASE                              = "Base";
-	const ADMIN_TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
-	const ADMIN_TECH_INFO_TITLE_TOTAL                             = "Total";	
+	const TECH_INFO_DIRECTORY_COUNT                         = "Quantidade de Diretórios";
+	const TECH_INFO_FILE_COUNT                              = "Quantidade de Arquivos";
+	const TECH_INFO_FILE_EXTENSION                          = "Extensão";
+	const TECH_INFO_FILE_TYPE                               = "Tipo";
+	const TECH_INFO_FILE_VALUE                              = "Valor";
+	const TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "Quantidade de constantes";
+	const TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "Quantidade de textos";
+	const TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "Contantes com possívels problemas";
+	const TECH_INFO_TITLE_BASE                              = "Base";
+	const TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
+	const TECH_INFO_TITLE_TOTAL                             = "Total";	
 	
 	/* Body Page AdminTypeAssocUserTeam */
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "Erro ao excluir tipo de associação";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "Tipo de associação está sendo usada entre usuários e equipes, "
+	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "Erro ao excluir tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "Tipo de associação está sendo usada entre usuários e equipes, "
 		                                                          . "faça desassociações necessárias primeiro";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "Tipo de associação excluida com sucesso";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_ERROR               = "Erro ao cadastrar tipo de associação";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_SUCCESS             = "Tipo de associação cadastrado com sucesso";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "Erro ao atualizar tipo de associação";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "Tipo de associação atualizada com sucesso";
+	const TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "Tipo de associação excluida com sucesso";
+	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR               = "Erro ao cadastrar tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS             = "Tipo de associação cadastrado com sucesso";
+	const TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "Erro ao atualizar tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "Tipo de associação atualizada com sucesso";
 	
 	/* Body Page AdminTypeStatusTicket */
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_ERROR                   = "Erro ao excluir tipo de estado de solicitação";
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "Tipo de estado de solicitação está em uso em solcitações, "
+	const TYPE_STATUS_TICKET_DELETE_ERROR                   = "Erro ao excluir tipo de estado de solicitação";
+	const TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "Tipo de estado de solicitação está em uso em solcitações, "
 		                                                          . "faça as desassociações necessárias primeiro";
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "Tipo de estado de solicitação excluido com sucesso";
-	const ADMIN_TYPE_STATUS_TICKET_REGISTER_ERROR                 = "Erro ao cadastrar tip ode estado de solicitação";
-	const ADMIN_TYPE_STATUS_TICKET_REGISTER_SUCCESS               = "Tipo de estado de solicitação cadastrado com sucesso";
-	const ADMIN_TYPE_STATUS_TICKET_UPDATE_ERROR                   = "Erro ao atualizar tipo de estado de solicitação";
-	const ADMIN_TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "Tipo de solicitação atualizado com sucesso";
+	const TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "Tipo de estado de solicitação excluido com sucesso";
+	const TYPE_STATUS_TICKET_INSERT_ERROR                 = "Erro ao cadastrar tip ode estado de solicitação";
+	const TYPE_STATUS_TICKET_INSERT_SUCCESS               = "Tipo de estado de solicitação cadastrado com sucesso";
+	const TYPE_STATUS_TICKET_UPDATE_ERROR                   = "Erro ao atualizar tipo de estado de solicitação";
+	const TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "Tipo de solicitação atualizado com sucesso";
 	
 	/* Body Page AdminTypeTicket */
-	const ADMIN_TYPE_TICKET_DELETE_ERROR                          = "Erro ao excluir tipo de solcitação";
-	const ADMIN_TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "Tipo de solicitação está em uso em solcitações, "
+	const TYPE_TICKET_DELETE_ERROR                          = "Erro ao excluir tipo de solcitação";
+	const TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "Tipo de solicitação está em uso em solcitações, "
 		                                                          . "faça as desassociações necessárias primeiro";
-	const ADMIN_TYPE_TICKET_DELETE_SUCCESS                        = "Tipo de solcitação excluída com sucesso";
-	const ADMIN_TYPE_TICKET_INVALID_DESCRIPTION                   = "Descrição inválida";
-	const ADMIN_TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const ADMIN_TYPE_TICKET_REGISTER_ERROR                        = "Erro ao cadastrar tipo de solcitação";
-	const ADMIN_TYPE_TICKET_REGISTER_SUCCESS                      = "Tipo de solcitação cadastrado com sucesso";
-	const ADMIN_TYPE_TICKET_UPDATE_ERROR                          = "Erro ao atualizar tipo de solcitação";
-	const ADMIN_TYPE_TICKET_UPDATE_SUCCESS                        = "Tipo de solcitação atualizada com sucesso";
+	const TYPE_TICKET_DELETE_SUCCESS                        = "Tipo de solcitação excluída com sucesso";
+	const TYPE_TICKET_INVALID_DESCRIPTION                   = "Descrição inválida";
+	const TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "Quantidade de caracteres excede o tamanho máximo na descrição";
+	const TYPE_TICKET_INSERT_ERROR                        = "Erro ao cadastrar tipo de solcitação";
+	const TYPE_TICKET_INSERT_SUCCESS                      = "Tipo de solcitação cadastrado com sucesso";
+	const TYPE_TICKET_UPDATE_ERROR                          = "Erro ao atualizar tipo de solcitação";
+	const TYPE_TICKET_UPDATE_SUCCESS                        = "Tipo de solcitação atualizada com sucesso";
 	
 	/* Body Page AdminTypeUser */
-	const ADMIN_TYPE_USER_DELETE_ERROR                            = "Erro ao excluir tipo de usuário";
-	const ADMIN_TYPE_USER_DELETE_ERROR_DEPENDENCY_USER            = "Tipo de usuário possui usuários associados, exclua-os antes";
-	const ADMIN_TYPE_USER_DELETE_SUCCESS                          = "Tipo de usuário excluído com sucesso";
-	const ADMIN_TYPE_USER_INVALID_DESCRIPTION                     = "Descrição inválida";
-	const ADMIN_TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const ADMIN_TYPE_USER_REGISTER_ERROR                          = "Erro ao cadastrar tipo de usuário";
-	const ADMIN_TYPE_USER_REGISTER_SUCCESS                        = "Tipo de usuário cadastrado com sucesso";
-	const ADMIN_TYPE_USER_SELECT_USERS_ERROR                      = "Erro ao tentar obter os usuários de um tipo de usuário";
-	const ADMIN_TYPE_USER_UPDATE_ERROR                            = "Error ao atualizar tipo de usuário";
-	const ADMIN_TYPE_USER_UPDATE_SUCCESS                          = "Tipo de usuário atualizado com sucesso";
+	const TYPE_USER_DELETE_ERROR                            = "Erro ao excluir tipo de usuário";
+	const TYPE_USER_DELETE_ERROR_DEPENDENCY_USER            = "Tipo de usuário possui usuários associados, exclua-os antes";
+	const TYPE_USER_DELETE_SUCCESS                          = "Tipo de usuário excluído com sucesso";
+	const TYPE_USER_INVALID_DESCRIPTION                     = "Descrição inválida";
+	const TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantidade de caracteres excede o tamanho máximo na descrição";
+	const TYPE_USER_INSERT_ERROR                          = "Erro ao cadastrar tipo de usuário";
+	const TYPE_USER_INSERT_SUCCESS                        = "Tipo de usuário cadastrado com sucesso";
+	const TYPE_USER_SELECT_USERS_ERROR                      = "Erro ao tentar obter os usuários de um tipo de usuário";
+	const TYPE_USER_UPDATE_ERROR                            = "Error ao atualizar tipo de usuário";
+	const TYPE_USER_UPDATE_SUCCESS                          = "Tipo de usuário atualizado com sucesso";
 	
 	/* Body Page AdminUser */
-	const ADMIN_USER_ACTIVATE_ERROR                               = "Erro ao tentar [0] usuário";
-	const ADMIN_USER_ACTIVATE_ERROR_NO_USER_SELECTED              = "Nenhum usuário foi selecionado";
-	const ADMIN_USER_ACTIVATE_SUCCESS                             = "Usuário [0] com sucesso";
-	const ADMIN_USER_CHANGE_CORPORATION_ERROR                     = "Erro ao tentar alterar corporação do usuário";
-	const ADMIN_USER_CHANGE_CORPORATION_SUCCESS                   = "Corporação do usuário alterada com sucesso";
-	const ADMIN_USER_CHANGE_USER_TYPE_ERROR                       = "Erro ao tentar alterar tipo de usuário";
-	const ADMIN_USER_CHANGE_USER_TYPE_SUCCESS                     = "Tipo de usuário alterado com sucesso";
-	const ADMIN_USER_DELETE_ERROR                                 = "Erro ao tentar excluir usuário";       
-	const ADMIN_USER_DELETE_SUCCESS                               = "Usuário excluido com sucesso";
-	const ADMIN_USER_SEARCH_RESULT_NUMBER                         = "Resultado máximo da busca é 20";
-	const ADMIN_USER_SEARCH_RANGE_START                           = "Alcance do início";
-	const ADMIN_USER_SEARCH_RANGE_END                             = "Alcance do fim";
+	const USER_ACTIVATE_ERROR                               = "Erro ao tentar [0] usuário";
+	const USER_ACTIVATE_ERROR_NO_USER_SELECTED              = "Nenhum usuário foi selecionado";
+	const USER_ACTIVATE_SUCCESS                             = "Usuário [0] com sucesso";
+	const USER_CHANGE_CORPORATION_ERROR                     = "Erro ao tentar alterar corporação do usuário";
+	const USER_CHANGE_CORPORATION_SUCCESS                   = "Corporação do usuário alterada com sucesso";
+	const USER_CHANGE_USER_TYPE_ERROR                       = "Erro ao tentar alterar tipo de usuário";
+	const USER_CHANGE_USER_TYPE_SUCCESS                     = "Tipo de usuário alterado com sucesso";
+	const USER_DELETE_ERROR                                 = "Erro ao tentar excluir usuário";       
+	const USER_DELETE_SUCCESS                               = "Usuário excluido com sucesso";
+	const USER_SEARCH_RESULT_NUMBER                         = "Resultado máximo da busca é 20";
+	const USER_SEARCH_RANGE_START                           = "Alcance do início";
+	const USER_SEARCH_RANGE_END                             = "Alcance do fim";
 	
 	/* Body Page Check */
 	const CHECK_SUBMIT                                            = "VERIFICAR";

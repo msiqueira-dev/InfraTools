@@ -657,6 +657,10 @@ class Es
 	const TEXT_NUMBER                                             = "";
 	const TEXT_PORT                                               = "";
 	const TEXT_WEBSITE                                            = "";
+	const TICKET_DELETE_ERROR                                     = "";
+	const TICKET_DELETE_SUCCESS                                   = "";
+	const TICKET_INSERT_ERROR                                     = "";
+	const TICKET_INSERT_SUCCESS                                   = "";
 	const TWO_STEP_VERIFICATION                                   = "";
 	const TYPE                                                    = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                    = "";
@@ -802,115 +806,115 @@ class Es
 	const ADMIN_TEXT_USER                                         = "";
 	
 	/* Body Page AdminCorporation */
-	const ADMIN_CORPORATION_DELETE_ERROR                          = "";
-	const ADMIN_CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "";
-	const ADMIN_CORPORATION_DELETE_SUCCESS                        = "";
-	const ADMIN_CORPORATION_REGISTER_ERROR                        = "";
-	const ADMIN_CORPORATION_REGISTER_SUCCESS                      = "";
-	const ADMIN_CORPORATION_SELECT_USERS_ERROR                    = "";
+	const CORPORATION_DELETE_ERROR                          = "";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "";
+	const CORPORATION_DELETE_SUCCESS                        = "";
+	const CORPORATION_INSERT_ERROR                        = "";
+	const CORPORATION_INSERT_SUCCESS                      = "";
+	const CORPORATION_SELECT_USERS_ERROR                    = "";
 	
 	/* Body Page AdminCountry */
 	
 	/* Body Page AdminDepartment */
-	const ADMIN_DEPARTMENT_DELETE_ERROR                           = "";
-	const ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "";
-	const ADMIN_DEPARTMENT_DELETE_SUCCESS                         = "";
-	const ADMIN_DEPARTMENT_REGISTER_ERROR                         = "";
-	const ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS       = "";
-	const ADMIN_DEPARTMENT_REGISTER_SUCCESS                       = "";
-	const ADMIN_DEPARTMENT_SELECT_USERS_ERROR                     = "";
-	const ADMIN_DEPARTMENT_UPDATE_ERROR                           = "";
-	const ADMIN_DEPARTMENT_UPDATE_SUCCESS                         = "";
+	const DEPARTMENT_DELETE_ERROR                           = "";
+	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "";
+	const DEPARTMENT_DELETE_SUCCESS                         = "";
+	const DEPARTMENT_INSERT_ERROR                         = "";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS       = "";
+	const DEPARTMENT_INSERT_SUCCESS                       = "";
+	const DEPARTMENT_SELECT_USERS_ERROR                     = "";
+	const DEPARTMENT_UPDATE_ERROR                           = "";
+	const DEPARTMENT_UPDATE_SUCCESS                         = "";
 	
 	/* Body Page AdminNotification */
-	const ADMIN_NOTIFICATION_DELETE_ERROR                         = "";
-	const ADMIN_NOTIFICATION_DELETE_SUCCESS                       = "";
-	const ADMIN_NOTIFICATION_INVALID_TEXT                         = "";
-	const ADMIN_NOTIFICATION_INVALID_TEXT_SIZE                    = "";
-	const ADMIN_NOTIFICATION_REGISTER_ERROR                       = "";
-	const ADMIN_NOTIFICATION_REGISTER_SUCCESS                     = "";
-	const ADMIN_NOTIFICATION_UPDATE_ERROR                         = "";
-	const ADMIN_NOTIFICATION_UPDATE_SUCCESS                       = "";
+	const NOTIFICATION_DELETE_ERROR                         = "";
+	const NOTIFICATION_DELETE_SUCCESS                       = "";
+	const NOTIFICATION_INVALID_TEXT                         = "";
+	const NOTIFICATION_INVALID_TEXT_SIZE                    = "";
+	const NOTIFICATION_INSERT_ERROR                       = "";
+	const NOTIFICATION_INSERT_SUCCESS                     = "";
+	const NOTIFICATION_UPDATE_ERROR                         = "";
+	const NOTIFICATION_UPDATE_SUCCESS                       = "";
 	
 	/* Body Page AdminTeam */
-	const ADMIN_TEAM_DELETE_ERROR                                 = "";
-	const ADMIN_TEAM_DELETE_ERROR_DEPENDENCY_TEAM                 = "";
-	const ADMIN_TEAM_DELETE_SUCCESS                               = "";
-	const ADMIN_TEAM_INVALID_DESCRIPTION                          = "";
-	const ADMIN_TEAM_INVALID_DESCRIPTION_SIZE                     = "";
-	const ADMIN_TEAM_REGISTER_ERROR                               = "";
-	const ADMIN_TEAM_REGISTER_SUCCESS                             = "";
-	const ADMIN_TEAM_SELECT_USERS_ERROR                           = "";
-	const ADMIN_TEAM_UPDATE_ERROR                                 = "";
-	const ADMIN_TEAM_UPDATE_SUCCESS                               = "";
+	const TEAM_DELETE_ERROR                                 = "";
+	const TEAM_DELETE_ERROR_DEPENDENCY_TEAM                 = "";
+	const TEAM_DELETE_SUCCESS                               = "";
+	const TEAM_INVALID_DESCRIPTION                          = "";
+	const TEAM_INVALID_DESCRIPTION_SIZE                     = "";
+	const TEAM_INSERT_ERROR                               = "";
+	const TEAM_INSERT_SUCCESS                             = "";
+	const TEAM_SELECT_USERS_ERROR                           = "";
+	const TEAM_UPDATE_ERROR                                 = "";
+	const TEAM_UPDATE_SUCCESS                               = "";
 	
 	/* Body Page Admin Tech Info */
-	const ADMIN_TECH_INFO_DIRECTORY_COUNT                         = "";
-	const ADMIN_TECH_INFO_FILE_COUNT                              = "";
-    const ADMIN_TECH_INFO_FILE_EXTENSION                          = "";
-	const ADMIN_TECH_INFO_FILE_TYPE                               = "";
-	const ADMIN_TECH_INFO_FILE_VALUE                              = "";
-	const ADMIN_TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "";
-	const ADMIN_TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "";
-	const ADMIN_TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "";
-	const ADMIN_TECH_INFO_TITLE_BASE                              = "";
-	const ADMIN_TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
-	const ADMIN_TECH_INFO_TITLE_TOTAL                             = "";
+	const TECH_INFO_DIRECTORY_COUNT                         = "";
+	const TECH_INFO_FILE_COUNT                              = "";
+    const TECH_INFO_FILE_EXTENSION                          = "";
+	const TECH_INFO_FILE_TYPE                               = "";
+	const TECH_INFO_FILE_VALUE                              = "";
+	const TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "";
+	const TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "";
+	const TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "";
+	const TECH_INFO_TITLE_BASE                              = "";
+	const TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
+	const TECH_INFO_TITLE_TOTAL                             = "";
 	
 	/* Body Page AdminTypeAssocUserTeam */
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_ERROR               = "";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_SUCCESS             = "";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "";
+	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "";
+	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "";
+	const TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "";
+	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR               = "";
+	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS             = "";
+	const TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "";
+	const TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "";
 	
 	/* Body Page AdminTypeStatusTicket */
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_ERROR                   = "";
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "";
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "";
-	const ADMIN_TYPE_STATUS_TICKET_REGISTER_ERROR                 = "";
-	const ADMIN_TYPE_STATUS_TICKET_REGISTER_SUCCESS               = "";
-	const ADMIN_TYPE_STATUS_TICKET_UPDATE_ERROR                   = "";
-	const ADMIN_TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "";
+	const TYPE_STATUS_TICKET_DELETE_ERROR                   = "";
+	const TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "";
+	const TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "";
+	const TYPE_STATUS_TICKET_INSERT_ERROR                 = "";
+	const TYPE_STATUS_TICKET_INSERT_SUCCESS               = "";
+	const TYPE_STATUS_TICKET_UPDATE_ERROR                   = "";
+	const TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "";
 	
 	/* Body Page AdminTypeTicket */
-	const ADMIN_TYPE_TICKET_DELETE_ERROR                          = "";
-	const ADMIN_TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "";
-	const ADMIN_TYPE_TICKET_DELETE_SUCCESS                        = "";
-	const ADMIN_TYPE_TICKET_INVALID_DESCRIPTION                   = "";
-	const ADMIN_TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "";
-	const ADMIN_TYPE_TICKET_REGISTER_ERROR                        = "";
-	const ADMIN_TYPE_TICKET_REGISTER_SUCCESS                      = "";
-	const ADMIN_TYPE_TICKET_UPDATE_ERROR                          = "";
-	const ADMIN_TYPE_TICKET_UPDATE_SUCCESS                        = "";
+	const TYPE_TICKET_DELETE_ERROR                          = "";
+	const TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "";
+	const TYPE_TICKET_DELETE_SUCCESS                        = "";
+	const TYPE_TICKET_INVALID_DESCRIPTION                   = "";
+	const TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "";
+	const TYPE_TICKET_INSERT_ERROR                        = "";
+	const TYPE_TICKET_INSERT_SUCCESS                      = "";
+	const TYPE_TICKET_UPDATE_ERROR                          = "";
+	const TYPE_TICKET_UPDATE_SUCCESS                        = "";
 	
 	/* Body Page AdminTypeUser */
-	const ADMIN_TYPE_USER_DELETE_ERROR                            = "";
-	const ADMIN_TYPE_USER_DELETE_ERROR_DEPENDENCY_USER            = "";
-	const ADMIN_TYPE_USER_DELETE_SUCCESS                          = "";
-	const ADMIN_TYPE_USER_INVALID_DESCRIPTION                     = "";
-	const ADMIN_TYPE_USER_INVALID_DESCRIPTION_SIZE                = "";
-	const ADMIN_TYPE_USER_REGISTER_ERROR                          = "";
-	const ADMIN_TYPE_USER_REGISTER_SUCCESS                        = "";
-	const ADMIN_TYPE_USER_SELECT_USERS_ERROR                      = "";
-	const ADMIN_TYPE_USER_UPDATE_ERROR                            = "";
-	const ADMIN_TYPE_USER_UPDATE_SUCCESS                          = "";
+	const TYPE_USER_DELETE_ERROR                            = "";
+	const TYPE_USER_DELETE_ERROR_DEPENDENCY_USER            = "";
+	const TYPE_USER_DELETE_SUCCESS                          = "";
+	const TYPE_USER_INVALID_DESCRIPTION                     = "";
+	const TYPE_USER_INVALID_DESCRIPTION_SIZE                = "";
+	const TYPE_USER_INSERT_ERROR                          = "";
+	const TYPE_USER_INSERT_SUCCESS                        = "";
+	const TYPE_USER_SELECT_USERS_ERROR                      = "";
+	const TYPE_USER_UPDATE_ERROR                            = "";
+	const TYPE_USER_UPDATE_SUCCESS                          = "";
 	
 	/* Body Page AdminUser */
-	const ADMIN_USER_ACTIVATE_ERROR                               = "";
-	const ADMIN_USER_ACTIVATE_ERROR_NO_USER_SELECTED              = "";
-	const ADMIN_USER_ACTIVATE_SUCCESS                             = "";
-	const ADMIN_USER_CHANGE_CORPORATION_ERROR                     = "";
-	const ADMIN_USER_CHANGE_CORPORATION_SUCCESS                   = "";
-	const ADMIN_USER_CHANGE_USER_TYPE_ERROR                       = "";
-	const ADMIN_USER_CHANGE_USER_TYPE_SUCCESS                     = "";
-	const ADMIN_USER_DELETE_ERROR                                 = "";         
-	const ADMIN_USER_DELETE_SUCCESS                               = "";
-	const ADMIN_USER_SEARCH_RESULT_NUMBER                         = "";
-	const ADMIN_USER_SEARCH_RANGE_START                           = "";
-	const ADMIN_USER_SEARCH_RANGE_END                             = "";
+	const USER_ACTIVATE_ERROR                               = "";
+	const USER_ACTIVATE_ERROR_NO_USER_SELECTED              = "";
+	const USER_ACTIVATE_SUCCESS                             = "";
+	const USER_CHANGE_CORPORATION_ERROR                     = "";
+	const USER_CHANGE_CORPORATION_SUCCESS                   = "";
+	const USER_CHANGE_USER_TYPE_ERROR                       = "";
+	const USER_CHANGE_USER_TYPE_SUCCESS                     = "";
+	const USER_DELETE_ERROR                                 = "";         
+	const USER_DELETE_SUCCESS                               = "";
+	const USER_SEARCH_RESULT_NUMBER                         = "";
+	const USER_SEARCH_RANGE_START                           = "";
+	const USER_SEARCH_RANGE_END                             = "";
 	
 	/* Body Page Check */
 

@@ -117,71 +117,71 @@ class FormValidator
 	
 	public function ExecuteValidation($FunctionName, $Value, $DefaultValue, $ArrayOption = NULL)
 	{
-		if($FunctionName == "VALIDATE_BOOL")
+		if($FunctionName == Config::FORM_VALIDATE_FUNCTION_BOOL)
 			return $this->ValidateBool($Value);
-		elseif($FunctionName == "VALIDATE_CORPORATION_NAME")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME)
 			return $this->ValidateCorporationName($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_COMPARE_STRING")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING)
 			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption);
-		elseif($FunctionName == "VALIDATE_COUNTRY_NAME")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_NAME)
 			return $this->ValidateCountryName($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_COUNTRY_REGION_CODE")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE)
 			return $this->ValidateCountryRegionCode($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_CPF")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_CPF)
 			return $this->ValidateCpf($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_DATE")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE)
 			return $this->ValidateDate($Value[0], $Value[1], $Value[2], $DefaultValue[0], $DefaultValue[1], $DefaultValue[2]);
-		elseif($FunctionName == "VALIDATE_DATE_DAY")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE_DAY)
 			return $this->ValidateDateDay($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_DATE_MONTH")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE_MONTH)
 			return $this->ValidateDateMonth($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_DATE_YEAR")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE_YEAR)
 			return $this->ValidateDateYear($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_DEPARTMENT_INITIALS")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS)
 			return $this->ValidateDepartmentInitials($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_DEPARTMENT_NAME")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME)
 			return $this->ValidateDepartmentName($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_DESCRIPTION")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DESCRIPTION)
 			return $this->ValidateDescription($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_EMAIL")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_EMAIL)
 			return $this->ValidateEmail($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_GENDER")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_GENDER)
 			return $this->ValidateGender($Value, $DefaultValue);	
-		elseif($FunctionName == "VALIDATE_HOST")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_HOST)
 			return $this->ValidateHost($Value);
-		elseif($FunctionName == "VALIDATE_IP_ADDRESS")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_ADDRESS)
 			return $this->ValidateIpAddress($Value);
-		elseif($FunctionName == "VALIDATE_IP_MASK")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_MASK)
 			return $this->ValidateIpMask($Value);
-		elseif($FunctionName == "VALIDATE_MESSAGE")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_MESSAGE)
 			return $this->ValidateMessage($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_NAME")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NAME)
 			return $this->ValidateName($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_NOT_NULL_OR_EMPTY")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NOT_NULL_OR_EMPTY)
 			return $this->ValidateNotNullOrEmpty($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_NOT_NUMBER")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NOT_NUMBER)
 			return $this->ValidateIsNotNumericValue($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_NUMERIC")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NUMERIC)
 			return $this->ValidateNumericValue($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_PASSWORD")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_PASSWORD)
 			return $this->ValidatePassword($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_REGISTRATION_ID")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_REGISTRATION_ID)
 			return $this->ValidateRegistrationId($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_SERVICE_NAME")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_SERVICE_NAME)
 			return $this->ValidateServiceName($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_SUBJECT")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_SUBJECT)
 			return $this->ValidateSubject($Value, $DefaultValue, $ArrayOption);
-		elseif($FunctionName == "VALIDATE_TEAM_NAME")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TEAM_NAME)
 			return $this->ValidateTeamName($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_TITLE")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TITLE)
 			return $this->ValidateTitle($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_TYPE_ASSOC_USER_SERVICE")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE)
 			return $this->ValidateTypeAssocUserService($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_TYPE_SERVICE")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TYPE_SERVICE)
 			return $this->ValidateTypeService($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_URL")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_URL)
 			return $this->ValidateURL($Value, $DefaultValue);
-		elseif($FunctionName == "VALIDATE_USER_UNIQUE_ID")
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID)
 			return $this->ValidateUserUniqueId($Value, $DefaultValue);
 		else return self::ERROR;
 	}

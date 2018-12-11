@@ -120,7 +120,7 @@ class PageAdminDepartment extends PageAdmin
 		//FORM_DEPARTMENT_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_TEAM_RADIO]))
+			if(isset($_POST[ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT]))
 			{
 				if($_POST[ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT] == ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME)
 				{
@@ -129,7 +129,6 @@ class PageAdminDepartment extends PageAdmin
 													&$this->ArrayInstanceDepartment),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					{
-
 						if(count($this->ArrayInstanceDepartment) > 1)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST;	
 						else

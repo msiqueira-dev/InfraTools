@@ -200,7 +200,7 @@ class En
 	const HREF_PAGE_DIAGNOSTIC_TOOLS                              = "/En/PageDiagnosticTools";
 	const HREF_PAGE_GET                                           = "/En/PageGet";
 	const HREF_PAGE_HOME                                          = "/En/PageHome";
-	const HREF_INSTALL_INFRATOOLS                                 = "/En/PageInstall";
+	const HREF_PAGE_INSTALL                                       = "/En/PageInstall";
 	const HREF_PAGE_LOGIN                                         = "/En/PageLogin";
 	const HREF_PAGE_NOT_FOUND                                     = "/En/PageNotFound";
 	const HREF_PAGE_NOTIFICATION                                  = "/En/PageNotification";
@@ -687,6 +687,10 @@ class En
 	const TEXT_NUMBER                                             = "Number";
 	const TEXT_PORT                                               = "Port";
 	const TEXT_WEBSITE                                            = "Web Site";
+	const TICKET_DELETE_ERROR                                     = "";
+	const TICKET_DELETE_SUCCESS                                   = "";
+	const TICKET_INSERT_ERROR                                     = "";
+	const TICKET_INSERT_SUCCESS                                   = "";
 	const TWO_STEP_VERIFICATION                                   = "Two step verification";
 	const TYPE                                                    = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                    = "Error obtaining types of association";
@@ -843,122 +847,120 @@ class En
 	const ADMIN_TEXT_USER                                         = "Insert, delete, update and select users";
 	
 	/* Body Page AdminCorporation */
-	const ADMIN_CORPORATION_DELETE_ERROR                          = "Error deleting corporation";
-	const ADMIN_CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporation has departments associated, delete them first";
-	const ADMIN_CORPORATION_DELETE_SUCCESS                        = "Corporation deleted succesfully";
-	const ADMIN_CORPORATION_REGISTER_ERROR                        = "Error while trying to register corporation";
-	const ADMIN_CORPORATION_REGISTER_SUCCESS                      = "Corporation registered succesfully";
-	const ADMIN_CORPORATION_SELECT_USERS_ERROR                    = "Error while trying to select users from corporation";
+	const CORPORATION_DELETE_ERROR                          = "Error deleting corporation";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporation has departments associated, delete them first";
+	const CORPORATION_DELETE_SUCCESS                        = "Corporation deleted succesfully";
+	const CORPORATION_INSERT_ERROR                        = "Error while trying to register corporation";
+	const CORPORATION_INSERT_SUCCESS                      = "Corporation registered succesfully";
+	const CORPORATION_SELECT_USERS_ERROR                    = "Error while trying to select users from corporation";
 	
 	/* Body Page AdminCountry */
 	
 	/* Body Page AdminDepartment */
-	const ADMIN_DEPARTMENT_DELETE_ERROR                           = "Error deleting department";
-	const ADMIN_DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Department has users associated, remove them first";
-	const ADMIN_DEPARTMENT_DELETE_SUCCESS                         = "Department deleted succesfully";
-	const ADMIN_DEPARTMENT_REGISTER_ERROR                         = "Error while trying to register department";
-	const ADMIN_DEPARTMENT_REGISTER_ERROR_DEPARTMENT_EXISTS       = "Department already exists for that corporation";
-	const ADMIN_DEPARTMENT_REGISTER_SUCCESS                       = "Department registered succesfully";
-	const ADMIN_DEPARTMENT_SELECT_USERS_ERROR                     = "Error while trying to select users from department";
-	const ADMIN_DEPARTMENT_UPDATE_ERROR                           = "Error updating department";
-	const ADMIN_DEPARTMENT_UPDATE_SUCCESS                         = "Department updated succesfully";
+	const DEPARTMENT_DELETE_ERROR                           = "Error deleting department";
+	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Department has users associated, remove them first";
+	const DEPARTMENT_DELETE_SUCCESS                         = "Department deleted succesfully";
+	const DEPARTMENT_INSERT_ERROR                         = "Error while trying to register department";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS       = "Department already exists for that corporation";
+	const DEPARTMENT_INSERT_SUCCESS                       = "Department registered succesfully";
+	const DEPARTMENT_SELECT_USERS_ERROR                     = "Error while trying to select users from department";
+	const DEPARTMENT_UPDATE_ERROR                           = "Error updating department";
+	const DEPARTMENT_UPDATE_SUCCESS                         = "Department updated succesfully";
 	
 	/* Body Page AdminNotification */
-	const ADMIN_NOTIFICATION_DELETE_ERROR                         = "Error deleting notification";
-	const ADMIN_NOTIFICATION_DELETE_SUCCESS                       = "Notification deleted succefully";
-	const ADMIN_NOTIFICATION_INVALID_TEXT                         = "Invalid text";
-	const ADMIN_NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantity of characters exceeds the maximum allowed on text";
-	const ADMIN_NOTIFICATION_REGISTER_ERROR                       = "Error while inserting notification";
-	const ADMIN_NOTIFICATION_REGISTER_SUCCESS                     = "Notification inserted succesfully";
-	const ADMIN_NOTIFICATION_UPDATE_ERROR                         = "Error updating notification";
-	const ADMIN_NOTIFICATION_UPDATE_SUCCESS                       = "Notification updated succesfully";
+	const NOTIFICATION_DELETE_ERROR                         = "Error deleting notification";
+	const NOTIFICATION_DELETE_SUCCESS                       = "Notification deleted succefully";
+	const NOTIFICATION_INVALID_TEXT                         = "Invalid text";
+	const NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantity of characters exceeds the maximum allowed on text";
+	const NOTIFICATION_INSERT_ERROR                       = "Error while inserting notification";
+	const NOTIFICATION_INSERT_SUCCESS                     = "Notification inserted succesfully";
+	const NOTIFICATION_UPDATE_ERROR                         = "Error updating notification";
+	const NOTIFICATION_UPDATE_SUCCESS                       = "Notification updated succesfully";
 	
 	/* Body Page AdminTeam */
-	const ADMIN_TEAM_DELETE_ERROR                                 = "Error deleting team";
-	const ADMIN_TEAM_DELETE_ERROR_DEPENDENCY_TEAM                 = "Team has users associated, delete them first";
-	const ADMIN_TEAM_DELETE_SUCCESS                               = "Team deleted succesfully";
-	const ADMIN_TEAM_INVALID_DESCRIPTION                          = "Invalid description";
-	const ADMIN_TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantity of characters exceeds the maximum allowed on "
+	const TEAM_DELETE_ERROR                                 = "Error deleting team";
+	const TEAM_DELETE_ERROR_DEPENDENCY_TEAM                 = "Team has users associated, delete them first";
+	const TEAM_DELETE_SUCCESS                               = "Team deleted succesfully";
+	const TEAM_INVALID_DESCRIPTION                          = "Invalid description";
+	const TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantity of characters exceeds the maximum allowed on "
 		                                                          . "description";
-	const ADMIN_TEAM_REGISTER_ERROR                               = "Error while trying to register team";
-	const ADMIN_TEAM_REGISTER_SUCCESS                             = "Team registered succesfully";
-	const ADMIN_TEAM_SELECT_USERS_ERROR                           = "Error while trying to select users from team";
-	const ADMIN_TEAM_UPDATE_ERROR                                 = "Error while trying to update team";
-	const ADMIN_TEAM_UPDATE_SUCCESS                               = "Team updated succesfully";
+	const TEAM_INSERT_ERROR                               = "Error while trying to register team";
+	const TEAM_INSERT_SUCCESS                             = "Team registered succesfully";
+	const TEAM_SELECT_USERS_ERROR                           = "Error while trying to select users from team";
+	const TEAM_UPDATE_ERROR                                 = "Error while trying to update team";
+	const TEAM_UPDATE_SUCCESS                               = "Team updated succesfully";
 	
 	/* Body Page Admin Tech Info */
-	const ADMIN_TECH_INFO_DIRECTORY_COUNT                         = "Number of Directories";
-	const ADMIN_TECH_INFO_FILE_COUNT                              = "Number of Files";
-	const ADMIN_TECH_INFO_FILE_EXTENSION                          = "Extension";
-	const ADMIN_TECH_INFO_FILE_TYPE                               = "Type";
-	const ADMIN_TECH_INFO_FILE_VALUE                              = "Value";
-	const ADMIN_TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "Quantity of constants";
-	const ADMIN_TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "Quantity of texts";
-	const ADMIN_TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "Constants with possible problem";
-	const ADMIN_TECH_INFO_TITLE_BASE                              = "Base";
-	const ADMIN_TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
-	const ADMIN_TECH_INFO_TITLE_TOTAL                             = "Total";
+	const TECH_INFO_DIRECTORY_COUNT                         = "Number of Directories";
+	const TECH_INFO_FILE_COUNT                              = "Number of Files";
+	const TECH_INFO_FILE_EXTENSION                          = "Extension";
+	const TECH_INFO_FILE_TYPE                               = "Type";
+	const TECH_INFO_FILE_VALUE                              = "Value";
+	const TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "Quantity of constants";
+	const TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "Quantity of texts";
+	const TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "Constants with possible problem";
+	const TECH_INFO_TITLE_BASE                              = "Base";
+	const TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
+	const TECH_INFO_TITLE_TOTAL                             = "Total";
 		
 	
 	/* Body Page AdminTypeAssocUserTeam */
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "Error deleting type of association";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "Type of associations is used between users and teams,"
+	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "Error deleting type of association";
+	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "Type of associations is used between users and teams,"
 		                                                          . "delete them first";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "Type of association deleted succesfully";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_ERROR               = "Error while inserting type of association between user "
+	const TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "Type of association deleted succesfully";
+	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR               = "Error while inserting type of association between user "
 		                                                          . "and teams";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER_SUCCESS             = "Type of association inserted succesfully";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "Error updating type of association";
-	const ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "Type of association updated succesfully";
+	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS             = "Type of association inserted succesfully";
+	const TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "Error updating type of association";
+	const TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "Type of association updated succesfully";
 	
 	/* Body Page AdminTypeStatusTicket */
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_ERROR                   = "Error deleting ticket status type";
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "Type of status ticket is associated,"
+	const TYPE_STATUS_TICKET_DELETE_ERROR                   = "Error deleting ticket status type";
+	const TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "Type of status ticket is associated,"
 		                                                          . "delete the associations first";
-	const ADMIN_TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "Type status ticket deleted succefully";
-	const ADMIN_TYPE_STATUS_TICKET_REGISTER_ERROR                 = "Error while inserting type status ticket";
-	const ADMIN_TYPE_STATUS_TICKET_REGISTER_SUCCESS               = "Type status ticket inserted succesfully";
-	const ADMIN_TYPE_STATUS_TICKET_UPDATE_ERROR                   = "Error updating type status ticket";
-	const ADMIN_TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "Type status ticket updated succesfully";
+	const TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "Type status ticket deleted succefully";
+	const TYPE_STATUS_TICKET_INSERT_ERROR                 = "Error while inserting type status ticket";
+	const TYPE_STATUS_TICKET_INSERT_SUCCESS               = "Type status ticket inserted succesfully";
+	const TYPE_STATUS_TICKET_UPDATE_ERROR                   = "Error updating type status ticket";
+	const TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "Type status ticket updated succesfully";
 	
 	/* Body Page AdminTypeTicket */
-	const ADMIN_TYPE_TICKET_DELETE_ERROR                          = "Error deleting ticket type";
-	const ADMIN_TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "Ticket type has ticket associated, delete them first";
-	const ADMIN_TYPE_TICKET_DELETE_SUCCESS                        = "Ticket type deleted succesfully";
-	const ADMIN_TYPE_TICKET_INVALID_DESCRIPTION                   = "Invalid description";
-	const ADMIN_TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "Quantity of characters exceeds the maximum allowed on"
-		                                                          . "description";
-	const ADMIN_TYPE_TICKET_REGISTER_ERROR                        = "Error while inserting ticket type";
-	const ADMIN_TYPE_TICKET_REGISTER_SUCCESS                      = "Ticket type inserted succesfully";
-	const ADMIN_TYPE_TICKET_UPDATE_ERROR                          = "Error updating ticket type";
-	const ADMIN_TYPE_TICKET_UPDATE_SUCCESS                        = "Ticket type updated succesfully";
+	const TYPE_TICKET_DELETE_ERROR                          = "Error deleting ticket type";
+	const TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "Ticket type has ticket associated, delete them first";
+	const TYPE_TICKET_DELETE_SUCCESS                        = "Ticket type deleted succesfully";
+	const TYPE_TICKET_INVALID_DESCRIPTION                   = "Invalid description";
+	const TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "Quantity of characters exceeds the maximum allowed on description";
+	const TYPE_TICKET_INSERT_ERROR                        = "Error while inserting ticket type";
+	const TYPE_TICKET_INSERT_SUCCESS                      = "Ticket type inserted succesfully";
+	const TYPE_TICKET_UPDATE_ERROR                          = "Error updating ticket type";
+	const TYPE_TICKET_UPDATE_SUCCESS                        = "Ticket type updated succesfully";
 	
 	/* Body Page AdminTypeUser */
-	const ADMIN_TYPE_USER_DELETE_ERROR                            = "Error deleting user type";
-	const ADMIN_TYPE_USER_DELETE_ERROR_DEPENDENCY_USER            = "User type has user associated, delete them first";
-	const ADMIN_TYPE_USER_DELETE_SUCCESS                          = "User type deleted succesfully";
-	const ADMIN_TYPE_USER_INVALID_DESCRIPTION                     = "Invalid description";
-	const ADMIN_TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantity of characters exceeds the maximum allowed on"
-		                                                          . "description";
-	const ADMIN_TYPE_USER_REGISTER_ERROR                          = "Error while inserting user type";
-	const ADMIN_TYPE_USER_REGISTER_SUCCESS                        = "User type inserted succesfully";
-	const ADMIN_TYPE_USER_SELECT_USERS_ERROR                      = "Error while trying to select users from user type";
-	const ADMIN_TYPE_USER_UPDATE_ERROR                            = "Error while updating user type";
-	const ADMIN_TYPE_USER_UPDATE_SUCCESS                          = "User type updated succesfully";
+	const TYPE_USER_DELETE_ERROR                            = "Error deleting user type";
+	const TYPE_USER_DELETE_ERROR_DEPENDENCY_USER            = "User type has user associated, delete them first";
+	const TYPE_USER_DELETE_SUCCESS                          = "User type deleted succesfully";
+	const TYPE_USER_INVALID_DESCRIPTION                     = "Invalid description";
+	const TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantity of characters exceeds the maximum allowed on description";
+	const TYPE_USER_INSERT_ERROR                          = "Error while inserting user type";
+	const TYPE_USER_INSERT_SUCCESS                        = "User type inserted succesfully";
+	const TYPE_USER_SELECT_USERS_ERROR                      = "Error while trying to select users from user type";
+	const TYPE_USER_UPDATE_ERROR                            = "Error while updating user type";
+	const TYPE_USER_UPDATE_SUCCESS                          = "User type updated succesfully";
 
 	/* Body Page AdminUser */
-	const ADMIN_USER_ACTIVATE_ERROR                              = "Error while trying to [0] user";
-	const ADMIN_USER_ACTIVATE_ERROR_NO_USER_SELECTED             = "No user were selected";
-	const ADMIN_USER_ACTIVATE_SUCCESS                            = "User [0] successfully";
-	const ADMIN_USER_CHANGE_CORPORATION_ERROR                    = "Error while trying to change user corporation";
-	const ADMIN_USER_CHANGE_CORPORATION_SUCCESS                  = "User corporation updated successfully";
-	const ADMIN_USER_CHANGE_USER_TYPE_ERROR                      = "Error while trying to change user type";
-	const ADMIN_USER_CHANGE_USER_TYPE_SUCCESS                    = "User type updated successfully";
-	const ADMIN_USER_DELETE_ERROR                                = "Error while trying to delete user";           
-	const ADMIN_USER_DELETE_SUCCESS                              = "User deleted successfully";
-	const ADMIN_USER_SEARCH_RESULT_NUMBER                        = "Max search result is 20";
-	const ADMIN_USER_SEARCH_RANGE_START                          = "Start Range";
-	const ADMIN_USER_SEARCH_RANGE_END                            = "End Range";
+	const USER_ACTIVATE_ERROR                              = "Error while trying to [0] user";
+	const USER_ACTIVATE_ERROR_NO_USER_SELECTED             = "No user were selected";
+	const USER_ACTIVATE_SUCCESS                            = "User [0] successfully";
+	const USER_CHANGE_CORPORATION_ERROR                    = "Error while trying to change user corporation";
+	const USER_CHANGE_CORPORATION_SUCCESS                  = "User corporation updated successfully";
+	const USER_CHANGE_USER_TYPE_ERROR                      = "Error while trying to change user type";
+	const USER_CHANGE_USER_TYPE_SUCCESS                    = "User type updated successfully";
+	const USER_DELETE_ERROR                                = "Error while trying to delete user";           
+	const USER_DELETE_SUCCESS                              = "User deleted successfully";
+	const USER_SEARCH_RESULT_NUMBER                        = "Max search result is 20";
+	const USER_SEARCH_RANGE_START                          = "Start Range";
+	const USER_SEARCH_RANGE_END                            = "End Range";
 	
 	/* Body Page Check */
 	const CHECK_SUBMIT                                           = "CHECK";
@@ -1174,7 +1176,7 @@ class En
 	const PASSWORD_RESET_INVALID_CODE                            = "Invalid code";
 	const PASSWORD_RESET_INVALID_PASSWORD                        = "Invalid password, type a valid password that matches the criteria";
 	const PASSWORD_RESET_INVALID_PASSWORD_MATCH                  = "Passwords do not match";
-	const PASSWORD_RESET_INVALID_PASSWORD_SIZE                   = "Password must be at least 8 character long and a maximum of 16 "                                                                . "characaters";
+	const PASSWORD_RESET_INVALID_PASSWORD_SIZE                   = "Password must be at least 8 character long and a maximum of 16 "                                                                          . "characaters";
 	const PASSWORD_RESET_ERROR                                   = "Error while trying to change password";
 	const PASSWORD_RESET_SUCCESS                                 = "Password updated successfully";
 	const PASSWORD_RESET_TEXT_CODE                               = "Change code";
@@ -1183,6 +1185,7 @@ class En
 	const PASSWORD_RESET_TEXT_REPEAT_PASSWORD                    = "Repeat new Password";
 	const PASSWORD_RESET_TEXT_REPEAT_PASSWORD_TIP                = "(At least 1 number and 1 capital letter, between 8 and 18 digits)";
 	const PASSWORD_RESET_TEXT_SEND                               = "CHANGE";
+	const PASSWORD_RESET_WARNING                                 = "";
 	
 	/* Body Page Register */
 	const REGISTER_EMAIL_ALREADY_REGISTERED                      = "E-mail already registered";
