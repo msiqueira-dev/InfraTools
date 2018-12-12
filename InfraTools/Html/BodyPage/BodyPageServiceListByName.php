@@ -1,4 +1,4 @@
-<!-- BODY PAGE_SERVICE_VIEW -->
+<!-- BODY PAGE_SERVICE_LIST_BY_CORPORATION -->
 <div class="DivBody">
     <div class="DivContentBody">
 		<div class="DivContentBodyOptions">
@@ -129,8 +129,9 @@
 			</div>
 		</div>
 		<?php
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . str_replace("Page", "", str_replace("_", "", 
-									ConfigInfraTools::PAGE_SERVICE_VIEW)) . ".php");
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("Page", "", str_replace("_", "",
+												 ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME)) . ".php");
 		?>
 	</div>
 </div>

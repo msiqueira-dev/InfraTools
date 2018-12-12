@@ -1,6 +1,6 @@
 <?php
 /************************************************************************
-Class: PageService.php
+Class: PageServiceView.php
 Creation: 19/06/2018
 Creator: Marcus Siqueira
 Dependencies:
@@ -61,7 +61,7 @@ class PageServiceView extends PageInfraTools
 			                                                       $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 				$this->ServiceLoadData();
 				$this->ReturnImage = "";
 				$this->ReturnClass = "DivDisplayNone";
@@ -95,7 +95,7 @@ class PageServiceView extends PageInfraTools
 															           $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 					$this->ServiceLoadData();
 					$this->ReturnImage = $retImage;
 					$this->ReturnClass = $retClass;
@@ -105,7 +105,7 @@ class PageServiceView extends PageInfraTools
 		}
 		elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT]))
 		{
-			$this->Page = ConfigInfraTools::PAGE_SERVICE_UPDATE;
+			$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_UPDATE);
 			$this->InputValueServiceId = $_POST[ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_HIDDEN_ID];
 			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 														           $this->User->GetEmail(), 
@@ -150,7 +150,7 @@ class PageServiceView extends PageInfraTools
 			                                                       $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 				$this->ServiceLoadData();
 				$this->ReturnImage = "DivDisplayNone";
 				$this->ReturnClass = "";
@@ -187,7 +187,7 @@ class PageServiceView extends PageInfraTools
 			                                                       $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 					$this->ServiceLoadData();
 					$this->ReturnImage = "DivDisplayNone";
 					$this->ReturnClass = "";
@@ -203,7 +203,7 @@ class PageServiceView extends PageInfraTools
 		}
 		elseif($this->InstanceInfraToolsService != NULL)
 		{
-			$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+			$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 			$this->ServiceLoadData();
 		}
 		else

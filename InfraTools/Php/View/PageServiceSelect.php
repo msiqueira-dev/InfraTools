@@ -183,7 +183,7 @@ class PageServiceSelect extends PageInfraTools
 				}
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->Page = ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME;
+					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME);
 					$this->ReturnImage = "";
 					$this->ReturnClass = "";
 					$this->ReturnText  = "";

@@ -1542,7 +1542,7 @@ class Page
 		$page = str_replace("_", "", $this->GetCurrentPage());
 		echo Config::HTML_TAG_DOCTYPE;
 		echo Config::HTML_TAG_START;
-		$return = $this->IncludeHeadAll($page);
+		$return = $this->IncludeHeadAll();
 		if ($return == Config::SUCCESS)
 		{
 			echo Config::HTML_TAG_BODY_START;
@@ -5143,7 +5143,7 @@ class Page
 		else return $pageConstant;
 	}
 	
-	public function IncludeHeadAll($Page)
+	public function IncludeHeadAll()
 	{
 		$return = NULL;
 		if ($this->Page != NULL)
@@ -5158,31 +5158,31 @@ class Page
 				echo "<!-- HEAD " . $this->Page . " -->";
 				if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Generic.css"))
 				{
-					echo '<style name="Generic.css">';
+					echo "<style name='" . $prefix . "Generic.css'>";
 					include_once(REL_PATH . "Style/Generic/" . $prefix . "Generic.css"); 
 					echo '</style>';
 				}
 				if(file_exists(REL_PATH . "Style/Header/" . $prefix . "Header.css"))
 				{
-					echo '<style name="Header.css">';
+					echo "<style name='" . $prefix . "Header.css'>";
 					include_once(REL_PATH . "Style/Header/" . $prefix . "Header.css"); 
 					echo '</style>';
 				}
 				if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Form.css"))
 				{
-					echo '<style name="' . $prefix . '"Form.css">';
+					echo "<style name='" . $prefix . "Form.css'>";
 					include_once(REL_PATH . "Style/Generic/" . $prefix . "Form.css");
 					echo '</style>';
 				}
 				if(file_exists(REL_PATH . "Style/Generic/" . $prefix . "Tabs.css"))
 				{
-					echo '<style name="' . $prefix . 'Tabs.css">';
+					echo "<style name='" . $prefix . "Tabs.css'>";
 					include_once(REL_PATH . "Style/Generic/" . $prefix . "Tabs.css");
 					echo '</style>';
 				}
 				if(file_exists(REL_PATH . "Style/Body/" . $prefix . str_replace("Page", "", $this->Page) . ".css"))
 				{
-					echo'<style name="' . $prefix . $this->Page . '.css">';
+					echo "<style name='" . $prefix . $this->Page . ".css'>";
 					include_once(REL_PATH . "Style/Body/" . $prefix . str_replace("Page", "", $this->Page) . ".css");
 					echo '</style>';
 				}

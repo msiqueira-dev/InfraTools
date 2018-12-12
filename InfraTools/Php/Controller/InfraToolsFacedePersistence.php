@@ -459,6 +459,13 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	public function InfraToolsCheckDataBase($Debug)
 	{
 		$mySqlConnection;
+		$this->MySqlManager->DestroyMySqlManagerInstance();
+		unset($this->MySqlManager);
+		$this->MySqlManager = $this->Factory->CreateMySqlManager($this->Config->DefaultMySqlAddress,
+			                                                     $this->Config->DefaultMySqlPort,
+												                 $this->Config->DefaultMySqlDataBase,
+			                                                     $this->Config->DefaultMySqlSuperUser, 
+												                 $this->Config->DefaultMySqlSuperUserPassword);
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::MYSQL_ERROR_DATABASE_NOT_FOUND)
 			return Config::MYSQL_ERROR_DATABASE_NOT_FOUND;

@@ -1797,7 +1797,9 @@ class InfraToolsFacedePersistenceDataBase
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::ERROR;
+					if($mySqlError == NULL && $errorStr == NULL)
+						$return = Config::SUCCESS;
+					else $return = Config::ERROR;
 				}
 				return $return;
 			}

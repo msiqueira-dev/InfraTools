@@ -130,7 +130,7 @@
 		</div>
 		<?php
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . str_replace("Page", "", str_replace("_", "", 
-									ConfigInfraTools::PAGE_SERVICE_VIEW)) . ".php");
+									ConfigInfraTools::PAGE_SERVICE_UPDATE)) . ".php");
 		?>
 	</div>
 </div>
