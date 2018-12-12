@@ -24,8 +24,7 @@ if(is_array($this->ArrayInstanceTypeTicket))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" />" .
-		 "<div class='TableTypeTicketThRight'>" . $this->InstanceLanguageText->GetText('ID') . "</div></th>";
-	echo "<th  class='TableTypeTicketThDescription'>" . $this->InstanceLanguageText->GetText('DESCRIPTION') . "</th>";
+		 "<div class='TableTypeTicketThRight'>" . $this->InstanceLanguageText->GetText('DESCRIPTION') . "</div></th>";
 	echo "<th  class= 'TableTypeTicketThRegisterDate'>
 	     <div  class='TableTypeTicketThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<input  type='image'
@@ -49,10 +48,9 @@ if(is_array($this->ArrayInstanceTypeTicket))
 		echo "<td class='TableTypeTicketThId'>
 		      <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT . "' 
 		                           id='"   . ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT . "' 
-							       value='" . $typeTicket->GetTypeTicketId() . "' 
-								   title='" . $typeTicket->GetTypeTicketId() . "' />
+							       value='" . $typeTicket->GetTypeTicketDescription() . "' 
+								   title='" . $typeTicket->GetTypeTicketDescription() . "' />
 		      </td>";
-		echo "<td class='TableTypeTicketThDescription'>"   . $typeTicket->GetTypeTicketDescription()  . "</td>";
 		echo "<td class= 'TableTypeTicketThRegisterDate'>" . $typeTicket->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}

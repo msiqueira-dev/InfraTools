@@ -65,6 +65,7 @@ Functions:
 		    public function CreateInfraToolsDataBaseTriggerServiceAfterUpdate($Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseUserApplication($UserApplication, $UserApplicationPassword, $Debug, $MySqlConnection);
 			public function DropInfraToolsDataBase($Debug, $MySqlConnection);
 			public function InfraToolsCheckDataBase($Debug $MySqlConnection);
 **************************************************************************/
@@ -110,7 +111,7 @@ class InfraToolsFacedePersistenceDataBase
 			                                                         $this->InfraToolsConfig->DefaultMySqlPort,
 																	 $this->InfraToolsConfig->DefaultMySqlDataBase,
 			                                                         $this->InfraToolsConfig->DefaultMySqlUser, 
-																	 $this->InfraToolsConfig->DefaultMySqlPassword);
+																	 $this->InfraToolsConfig->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -864,29 +865,29 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, 
-			                                TypeTicketId) VALUES (now(), 'TYPE_TICKET_ACCOUNT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_ACCOUNT', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_BUG', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_COMPLAINT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_DOUBT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_FEATURE_REQUEST', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_GENERAL_COMMERCIAL', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_GENERAL_DOUBT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_GENERAL_SUGGESTION', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_MONITORING', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_OTHER', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_SECURITY', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_SERVICE', DEFAULT)");
 			return ConfigInfraTools::SUCCESS;
 		}
@@ -1671,6 +1672,95 @@ class InfraToolsFacedePersistenceDataBase
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
+	public function CreateInfraToolsDataBaseUserApplication($UserApplication, $UserApplicationPassword, $Debug, $MySqlConnection)
+	{
+		echo "<b>Query (SqlCreateInfraToolsDataBaseUserApplication)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "CREATE USER IF NOT EXISTS '$UserApplication' IDENTIFIED BY '$UserApplicationPassword'"))
+			{
+				mysqli_query($MySqlConnection, "GRANT INSERT, SELECT, TRIGGER, UPDATE, DELETE ON TABLE INFRATOOLS.USER 
+				                               TO '$UserApplication'");
+            	mysqli_query($MySqlConnection, "GRANT INSERT, UPDATE, TRIGGER, DELETE, SELECT ON TABLE INFRATOOLS.CORPORATION 
+				                               TO '$UserApplication'");
+            	mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_USER 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT SELECT, UPDATE, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.COUNTRY 
+				                               TO '$UserApplication'");
+            	mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.DEPARTMENT 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, INSERT, SELECT, DELETE, TRIGGER ON TABLE INFRATOOLS.ASSOC_USER_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.HISTORY_TICKET 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.TICKET 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.TYPE_TICKET 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.TYPE_STATUS_TICKET 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT SELECT, UPDATE, TRIGGER, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_TICKET_USER_RESPONSIBLE
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, TRIGGER, SELECT, UPDATE ON TABLE INFRATOOLS.TYPE_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.MONITORING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.HISTORY_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_TIME_MONITORING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, INSERT, SELECT, DELETE ON TABLE INFRATOOLS.TYPE_MONITORING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, DELETE, INSERT ON TABLE INFRATOOLS.STATUS_MONITORING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_STATUS_MONITORING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.HISTORY_MONITORING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_ASSOC_USER_REQUESTING 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_TICKET_USER_REQUESTING
+											   TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.NOTIFICATION 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_TEAM 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TEAM 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_CORPORATION 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TYPE_ASSOC_USER_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TYPE_ASSOC_USER_TEAM 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.INFORMATION_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_PREFERENCE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_ROLE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ROLE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.PREFERENCE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_IP_ADDRESS_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_URL_ADDRESS_SERVICE 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.URL_ADDRESS 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.IP_ADDRESS 
+				                               TO '$UserApplication'");
+				mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.SYSTEM_CONFIGURATION 
+				                               TO '$UserApplication'");
+			}
+			else return ConfigInfraTools::MYSQL_ERROR_USER_EXISTS;
+		}
+		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+	}
+	
 	public function DropInfraToolsDataBase($Debug, $MySqlConnection)
 	{
 		echo "<b>Query (SqlDropInfraToolsDataBase)</b>";
@@ -1713,6 +1803,8 @@ class InfraToolsFacedePersistenceDataBase
 			}
 			else
 			{
+				if(mysqli_errno($MySqlConnection) == "1146")
+					return Config::MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND;			
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_QUERY_PREPARE_FAILED;

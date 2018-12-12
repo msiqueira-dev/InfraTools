@@ -76,12 +76,11 @@ Methods:
 			public static function SqlTypeStatusTicketSelectByDescription();
 			public static function SqlTypeStatusTicketSelectByTypeStatusTicketId();
 			public static function SqlTypeStatusTicketUpdateByTypeStatusTicketId();
-			public static function SqlTypeTicketDelete();
+			public static function SqlTypeTicketDeleteByTypeTicketDescription();
 			public static function SqlTypeTicketInsert();
 			public static function SqlTypeTicketSelect();
-			public static function SqlTypeTicketSelectByDescription();
-			public static function SqlTypeTicketSelectById();
-			public static function SqlTypeTicketUpdateById();
+			public static function SqlTypeTicketSelectByTypeTicketDescription();
+			public static function SqlTypeTicketUpdateByTypeTicketDescription();
 			public static function SqlTypeUserDelete();
 			public static function SqlTypeUserInsert();
 			public static function SqlTypeUserSelect();
@@ -729,55 +728,43 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "=? ";
 	}
 	
-	public static function SqlTypeTicketDelete()
+	public static function SqlTypeTicketDeleteByTypeTicketDescription()
 	{
 		return "DELETE FROM " . Config::TABLE_TYPE_TICKET . " "  
-		     . "WHERE "       . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID . " = ?";
+		     . "WHERE "       . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . " = ?";
 	}
 	
 	public static function SqlTypeTicketInsert()
 	{
 		return "INSERT INTO " . Config::TABLE_TYPE_TICKET                   . " "
 			 . "("            . Config::TABLE_FIELD_REGISTER_DATE           . ","
-		     . " "            . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . ","
-			 . " "            . Config::TABLE_TYPE_TICKET_FIELD_ID          . ")"
-		     . " VALUES (NOW(), UPPER(?), DEFAULT)";
+		     . " "            . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . ")"
+		     . " VALUES (NOW(), UPPER(?))";
 	}
 	
 	public static function SqlTypeTicketSelect()
 	{
 		return "SELECT "   . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
 		                   . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . ", "
-					       . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID          . ", "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_TICKET . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_TYPE_TICKET . " " 
-			 . "ORDER BY " . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID          . "  "
+			 . "ORDER BY " . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "  "
 			 . "LIMIT ?, ?";
 	}
 	
-	public static function SqlTypeTicketSelectByDescription()
+	public static function SqlTypeTicketSelectByTypeTicketDescription()
 	{
 		return "SELECT " . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
-		                 . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . ", "
-					     . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID          . "  " 
+		                 . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "  "
 		     . "FROM  "  . Config::TABLE_TYPE_TICKET . " " 
-	         . "WHERE "  . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "=?";
+	         . "WHERE "  . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "=UPPER(?)";
 	}
 	
-	public static function SqlTypeTicketSelectById()
-	{
-		return "SELECT " . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
-		                 . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . ", "
-					     . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID          . "  " 
-		     . "FROM  "  . Config::TABLE_TYPE_TICKET . " "
-	         . "WHERE "  . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID          . "=?";
-	}
-	
-	public static function SqlTypeTicketUpdateById()
+	public static function SqlTypeTicketUpdateByTypeTicketDescription()
 	{
 		return "UPDATE " . Config::TABLE_TYPE_TICKET . " "  
 		     . "SET    " . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "=UPPER(?) "
-		     . "WHERE "  . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_ID          . "=? ";
+		     . "WHERE "  . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "=UPPER(?) ";
 	}
 	
 	public static function SqlTypeUserDelete()

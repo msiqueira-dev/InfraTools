@@ -1,16 +1,7 @@
 <!-- FORM TYPE TICKET VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW; ?>" method="post" >
-    <!-- ID -->
-    <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_ID').":"; ?></label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeTicketId; ?></label>
-        </div>
-    </div>
-    <!-- DESCRIPTION -->
+    <!-- TYPE_TICKET_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_DESCRIPTION').":"; ?></label>

@@ -62,15 +62,16 @@ Methods:
 		protected     function        TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
 		protected     function        TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug);
 		protected     function        TicketDeleteByTicketId($InstanceTicket, $Debug);
-		protected     function        TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketId, 
-		                                           $TypeTicketId, $Debug);
+		protected     function        TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
+		                                           $TypeTicketDescription, $Debug);
 		protected     function        TicketLoadData($InstanceTicket);
 		protected     function        TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug);
 		protected     function        TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug);
 		protected     function        TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug);
 		protected     function        TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug);
-		protected     function        TicketUpdateByTicketId($TicketDescriptionNew, $TicketStatusNew, $TicketSuggestionNew, $TicketTitleNew, 
-											                 $TicketTypeNew, &$InstanceTicket, $Debug);
+		protected     function        TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew, 
+											                 $TypeStatusTicketDescriptionNew, $TypeTicketDescriptionNew, 
+															 &$InstanceTicket, $Debug);
 		protected     function        TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug);
 		protected     function        TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, &$InstanceTicket, $Debug);
 		protected     function        TypeAssocUserTeamDeleteByTeamId($InstanceTypeAssocUserTeam, $Debug);
@@ -88,12 +89,12 @@ Methods:
 		protected     function        TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$InstanceTypeStatusTicket, $Debug);
 		protected     function        TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescriptionNew,
 		                                                                        &$InstanceTypeStatusTicket, $Debug);
-		protected     function        TypeTicketDeleteByTypeTicketId(&$InstanceTypeTicket, $Debug);
+		protected     function        TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug);
 		protected     function        TypeTicketInsert($TypeTicketDescription, $Debug);
 		protected     function        TypeTicketLoadData($InstanceTypeTicket);
 		protected     function        TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug);
-		protected     function        TypeTicketSelectByTypeTicketId($TypeTicketId, &$InstanceTypeTicket, $Debug);
-		protected     function        TypeTicketUpdateByTypeTicketId($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug);
+		protected     function        TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug);
+		protected     function        TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug);
 		protected     function        TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug);
 		protected     function        TypeUserInsert($TypeUserDescription, $Debug);
 		protected     function        TypeUserLoadData(&$InstanceTypeUser);
@@ -265,7 +266,6 @@ class Page
 	public    $InputValueTypeStatusTicketDescription                = "";
 	public    $InputValueTypeStatusTicketId                         = "";
 	public    $InputValueTypeTicketDescription                      = "";
-	public    $InputValueTypeTicketId                               = "";
 	public    $InputValueTypeUserDescription                        = "";
 	public    $InputValueTypeUserId                                 = "";
 	public    $InputValueUserActive                                 = "";
@@ -350,8 +350,6 @@ class Page
 	public    $ReturnTypeStatusTicketIdText                         = "";
 	public    $ReturnTypeTicketDescriptionClass                     = "";
 	public    $ReturnTypeTicketDescriptionText                      = "";
-	public    $ReturnTypeTicketIdClass                              = "";
-	public    $ReturnTypeTicketIdText                               = "";
 	public    $ReturnTypeUserDescriptionClass                       = "";
 	public    $ReturnTypeUserDescriptionText                        = "";
 	public    $ReturnTypeUserIdClass                                = "";
@@ -1969,15 +1967,16 @@ class Page
 		}
 	}
 	
-	protected function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketId, $TypeTicketId, $Debug)
+	protected function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
+									$TypeTicketDescription, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTeamDescription    = $TicketDescription;
-		$this->InputValueTicketSuggestion   = $TicketSuggestion;
-		$this->InputValueTicketTitle        = $TicketTitle;
-		$this->InputValueTypeStatusTicketId = $TypeStatusTicketId;
-		$this->InputValueTypeTicketId       = $TypeTicketId;
+		$this->InputValueTeamDescription             = $TicketDescription;
+		$this->InputValueTicketSuggestion            = $TicketSuggestion;
+		$this->InputValueTicketTitle                 = $TicketTitle;
+		$this->InputValueTypeStatusTicketDescription = $TypeStatusTicketDescription;
+		$this->InputValueTypeTicketDescription       = $TypeTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//FORM_FIELD_TICKET_DESCRIPTION
@@ -1990,8 +1989,7 @@ class Page
 		$arrayElementsMaxValue[0]     = 500; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_TICKET_SUGGESTION
@@ -2002,10 +2000,9 @@ class Page
 		$arrayElementsInput[1]        = $this->InputValueTicketSuggestion; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
-		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnTicketSuggestionText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FORM_FIELD_TICKET_TITLE
@@ -2018,36 +2015,35 @@ class Page
 		$arrayElementsMaxValue[2]     = 90; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnTicketTitleText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_TITLE', 'FORM_INVALID_TICKET_TITLE_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_TITLE', 'FORM_INVALID_TICKET_TITLE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TYPE_STATUS_TICKET_ID
-		$arrayElements[3]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_ID;
-		$arrayElementsClass[3]        = &$this->ReturnTypeStatusTicketIdClass;
+		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[3]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		$arrayElementsClass[3]        = &$this->ReturnTypeStatusTicketDescriptionClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[3]        = $this->InputValueTypeStatusTicketId; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[3]        = $this->InputValueTypeStatusTicketDescription; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 45; 
 		$arrayElementsNullable[3]     = FALSE;
-		$arrayElementsText[3]         = &$this->ReturnTypeStatusTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_ID',
-									'FORM_INVALID_TYPE_STATUS_TICKET_ID_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[3]         = &$this->ReturnTypeStatusTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TYPE_TICKET_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeTicketIdClass;
+		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeTicketId; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 8; 
+		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -2181,14 +2177,14 @@ class Page
 		
 		//FORM_FIELD_USER_EMAIL
 		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnTicketIdClass;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 2; 
+		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTicketIdText;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -2232,14 +2228,14 @@ class Page
 		
 		//FORM_FIELD_USER_EMAIL
 		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnTicketIdClass;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 2; 
+		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTicketIdText;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
 		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -2274,9 +2270,119 @@ class Page
 		}
 	}
 	
-	protected function TicketUpdateByTicketId($TicketDescriptionNew, $TicketStatusNew, $TicketSuggestionNew, $TicketTitleNew, 
-											  $TicketTypeNew, &$InstanceTicket, $Debug)
+	protected function TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew,
+											  $TypeStatusTicketDescriptionNew, $TypeTicketDescriptionNew, &$InstanceTicket, $Debug)
 	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueTicketDescription     = $TicketDescriptionNew;
+		$this->InputValueTicketSuggestion      = $TicketSuggestionNew;
+		$this->InputValueTicketTitle           = $TicketTitleNew;
+		$this->InputValueTypeStatusTicketId    = $TypeStatusTicketIdNew;
+		$this->InputValueTypeTicketDescription = $TypeTicketDescriptionNew;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTicketDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->TicketDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 500; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_TICKET_SUGGESTION
+		$arrayElements[1]             = Config::FORM_FIELD_TICKET_SUGGESTION;
+		$arrayElementsClass[1]        = &$this->ReturnTicketSuggestionClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->TicketSuggestion; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 45; 
+		$arrayElementsNullable[1]     = TRUE;
+		$arrayElementsText[1]         = &$this->ReturnTicketSuggestionText;
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_TICKET_TITLE
+		$arrayElements[2]             = Config::FORM_FIELD_TICKET_SUGGESTION;
+		$arrayElementsClass[2]        = &$this->ReturnTicketSuggestionClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_TITLE;
+		$arrayElementsInput[2]        = $this->InputValueTicketTitle; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 90; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnTicketTitleText;
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[3]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		$arrayElementsClass[3]        = &$this->ReturnTypeStatusTicketDescriptionClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[3]        = $this->InputValueTypeStatusTicketDescription; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 45; 
+		$arrayElementsNullable[3]     = FALSE;
+		$arrayElementsText[3]         = &$this->ReturnTypeStatusTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[4]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		$arrayElementsClass[4]        = &$this->ReturnTypeTicketDescriptionClass;
+		$arrayElementsDefaultValue[4] = ""; 
+		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[4]        = $this->InputValueTypeTicketDescription; 
+		$arrayElementsMinValue[4]     = 0; 
+		$arrayElementsMaxValue[4]     = 45; 
+		$arrayElementsNullable[4]     = FALSE;
+		$arrayElementsText[4]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE', 
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->TicketUpdateByTicketId($this->InputValueTicketDescription, $this->InputValueTicketSuggestion,
+																 $this->InputValueTicketTitle, $this->InputValueTypeStatusTicketId,
+																 $this->InputValueTypeTicket, $InstanceTicket, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
+				$this->TicketLoadData($InstanceTicket);
+				return Config::SUCCESS;
+			}
+			else
+			{
+				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_NOT_FOUND', $this->Language);
+				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
+				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
+								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				return Config::FORM_TICKET_RETURN_NOT_FOUND;
+			}
+		}
+		else
+		{
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::FORM_FIELD_ERROR;
+		}
 	}
 	
 	protected function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug)
@@ -2785,10 +2891,10 @@ class Page
 		}	
 	}
 	
-	protected function TypeTicketDeleteByTypeTicketId(&$InstanceTypeTicket, $Debug)
+	protected function TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TypeTicketDeleteByTypeTicketId($InstanceTypeTicket->GetTypeTicketId(), $Debug);
+		$return = $instanceFacedePersistence->TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket->GetTypeTicketDescription(), $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
@@ -2865,7 +2971,6 @@ class Page
 		if($InstanceTypeTicket != NULL)
 		{
 			$this->InputValueTypeTicketDescription  = $InstanceTypeTicket->GetTypeTicketDescription();
-			$this->InputValueTypeTicketId           = $InstanceTypeTicket->GetTypeTicketId();
 			$this->InputValueRegisterDate           = $InstanceTypeTicket->GetRegisterDate();
 			return Config::SUCCESS;
 		}
@@ -2889,24 +2994,25 @@ class Page
 		else return Config::SUCCESS;
 	}
 	
-	protected function TypeTicketSelectByTypeTicketId($TypeTicketId, &$InstanceTypeTicket, $Debug)
+	protected function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeTicketId = $TypeTicketId;
+		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_TICKET_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeTicketIdClass;
+		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeTicketId; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 8; 
+		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -2915,7 +3021,8 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $instanceFacedePersistence->TypeTicketSelectByTypeTicketId($this->InputValueTypeTicketId, $InstanceTypeTicket, $Debug);
+			$return = $instanceFacedePersistence->TypeTicketSelectByTypeTicketDescription($this->InputValueTypeTicketDescription,
+																						  $InstanceTypeTicket, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
@@ -2924,7 +3031,7 @@ class Page
 			}
 			else
 			{
-				$this->ReturnTypeTicketIdText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
+				$this->ReturnTypeTicketDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
 				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 				return Config::FORM_TYPE_TICKET_RETURN_NOT_FOUND;
@@ -2938,7 +3045,7 @@ class Page
 		}
 	}
 	
-	protected function TypeTicketUpdateByTypeTicketId($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug)
+	protected function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTypeTicketDescription  = $TypeTicketDescriptionNew;
@@ -2966,9 +3073,9 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->TypeTicketUpdateById($this->InputValueTypeTicketDescription,
-																	   $InstanceTypeTicket->GetTypeTicketId(),
-																	   $Debug);
+			$return = $instanceFacedePersistence->TypeTicketUpdateByTypeTicketDescription($this->InputValueTypeTicketDescription, 
+																						  $InstanceTypeTicket->GetTypeTicketDescription(),
+																						  $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$InstanceTypeTicket->SetTypeTicketDescription($this->InputValueTypeTicketDescription);

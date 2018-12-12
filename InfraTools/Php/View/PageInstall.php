@@ -61,8 +61,9 @@ class PageInstall extends PageInfraTools
 	public function LoadPage()
 	{
 		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase(NULL);
-		if($return == ConfigInfraTools::SUCCESS)
+		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase($this->InputValueHeaderDebug);
+		if($return == ConfigInfraTools::SUCCESS || $return == Config::MYSQL_ERROR_DATABASE_NOT_FOUND || 
+		   $return == Config::MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND)
 			$this->Install = TRUE;
 		else $this->Install = FALSE;
 		$this->LoadHtml(FALSE);

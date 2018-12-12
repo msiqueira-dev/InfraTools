@@ -57,8 +57,8 @@ Methods:
 			public    function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
 			public    function CreateTechInfo();
 			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
-			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
-			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
+			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
+			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription);
 			public    function CreateTypeUser($Description, $Id, $RegisterDate);
 			public    function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 			                              $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
@@ -550,20 +550,20 @@ class Factory
 		return new TypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
 	}
 	
-	public function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId)
+	public function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeStatusTicket');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php");
-		return new TypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
+		return new TypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
 	}
 	
-	public function CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId)
+	public function CreateTypeTicket($RegisterDate, $TypeTicketDescription)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeTicket');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeTicket.php");
-		return new TypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
+		return new TypeTicket($RegisterDate, $TypeTicketDescription);
 	}
 	
 	public function CreateTypeUser($Description, $Id, $RegisterDate)

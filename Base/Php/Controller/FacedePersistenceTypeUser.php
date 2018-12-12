@@ -63,7 +63,7 @@ class FacedePersistenceTypeUser
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	

@@ -618,10 +618,10 @@ class InfraToolsPersistenceDataBase
                 TicketId INT NOT NULL AUTO_INCREMENT,
                 TicketNumber INT NOT NULL,
                 TicketService INT NULL,
-                TicketStatus INT NOT NULL,
+                TicketStatus VARCHAR(45) NOT NULL,
                 TicketSuggestion VARCHAR(45) NULL,
                 TicketTitle VARCHAR(90) NOT NULL,
-                TicketType INT NOT NULL,
+                TicketType VARCHAR(45) NOT NULL,
                 PRIMARY KEY (TicketId),
                 UNIQUE INDEX UniqueTicketId (TicketId ASC),
                 INDEX IndexTicketTypeTicket (TicketType ASC),
@@ -629,7 +629,7 @@ class InfraToolsPersistenceDataBase
                 INDEX IndexTicketStatusTicket (TicketStatus ASC),
                 CONSTRAINT ForeignKeyTicketTypeTicket
                 FOREIGN KEY (TicketType)
-                REFERENCES INFRATOOLS.TYPE_TICKET (TypeTicketId)
+                REFERENCES INFRATOOLS.TYPE_TICKET (TypeTicketDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyTicketService
@@ -639,7 +639,7 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyTicketStatusTicket
                 FOREIGN KEY (TicketStatus)
-                REFERENCES INFRATOOLS.TYPE_STATUS_TICKET (TypeStatusTicketId)
+                REFERENCES INFRATOOLS.TYPE_STATUS_TICKET (TypeStatusTicketDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -733,10 +733,8 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_STATUS_TICKET (
                 RegisterDate DATETIME NOT NULL,
                 TypeStatusTicketDescription VARCHAR(45) NOT NULL,
-                TypeStatusTicketId INT NOT NULL AUTO_INCREMENT,
-                PRIMARY KEY (TypeStatusTicketId),
-                UNIQUE INDEX UniqueTypeStatusTicketTypeStatusTicketName (TypeStatusTicketDescription ASC),
-                UNIQUE INDEX UniqueTypeStatusTicketTypeStatusTicketId (TypeStatusTicketId ASC))
+				PRIMARY KEY (TypeStatusTicketDescription),
+                UNIQUE INDEX UniqueTypeStatusTicketTypeStatusTicketDescription (TypeStatusTicketDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -761,10 +759,8 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_TICKET (
                 RegisterDate DATETIME NOT NULL,
                 TypeTicketDescription VARCHAR(45) NOT NULL,
-                TypeTicketId INT NOT NULL AUTO_INCREMENT,
-                UNIQUE INDEX UniqueTypeTicketName (TypeTicketDescription ASC),
-                PRIMARY KEY (TypeTicketId),
-                UNIQUE INDEX UniqueTypeTicketId (TypeTicketId ASC))
+				PRIMARY KEY (TypeTicketDescription),
+                UNIQUE INDEX UniqueTypeTicketTypeTicketDescription (TypeTicketDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";

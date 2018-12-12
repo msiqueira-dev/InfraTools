@@ -1,17 +1,17 @@
 <!-- FORM TYPE TICKET SELECT -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>" method="post" >
-	<!-- FORM_FIELD_TYPE_TICKET_ID-->
+	<!-- FORM_FIELD_TYPE_TICKET_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_ID'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_DESCRIPTION'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID; ?>"
-						   class="<?php echo $this->ReturnTypeTicketIdClass; ?>"
-						   onkeyup="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID; ?>',
+		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>"
+						   class="<?php echo $this->ReturnTypeTicketDescriptionClass; ?>"
+						   onkeyup="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											   '', 'false');
@@ -20,7 +20,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID; ?>',
+						   onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											   '', true);
@@ -29,7 +29,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID; ?>',
+						   onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											   '', true);
@@ -38,12 +38,12 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_ID'); ?>" 
-						   value="<?php echo $this->InputValueTypeTicketId; ?>" maxlength="45" />
+						   title="<?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_DESCRIPTION'); ?>" 
+						   value="<?php echo $this->InputValueTypeTicketDescription; ?>" maxlength="45" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID; ?>',
+		 onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 								   '', true);
@@ -66,8 +66,8 @@
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))        echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTypeTicketIdText)) echo $this->ReturnTypeTicketIdText; ?>
-		<?php if(isset($this->ReturnText))             echo $this->ReturnText; ?>
+		<?php if(isset($this->ReturnEmptyText))                 echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTypeTicketDescriptionText)) echo $this->ReturnTypeTicketDescriptionText; ?>
+		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
 	</label>
 </div>

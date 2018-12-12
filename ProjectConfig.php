@@ -139,6 +139,22 @@ class ProjectConfig
 	public static $MySqlDataBasePassword = "";
 	
 	/*
+		MYSQL_DATABASE_SUPER_USER
+		Description: The database super user
+		Examples:
+			$MySqlDataBaseSuperUser = "infratools_root";
+	*/
+	public static $MySqlDataBaseSuperUser = "";
+	
+	/*
+		MYSQL_DATABASE_SUPER_USER_PASSWORD
+		Description: The database super user's password
+		Examples:
+			$MySqlDataBaseSuperUserPassword = "infratools_root_password";
+	*/
+	public static $MySqlDataBaseSuperUserPassword = "";
+	
+	/*
 		E-MAIL NO REPLY ACCOUNT
 		Description: The no replye-mail account to send system e-mails. It is meant to be automated e-mails that the end 
 		             user should not reply
@@ -234,6 +250,6 @@ class ProjectConfig
 		Examples:
 			$DisplayErrors = "1";
 	*/
-	public static $DisplayErrors = "1";
+	public static $DisplayErrors = "";
 }
 ?>

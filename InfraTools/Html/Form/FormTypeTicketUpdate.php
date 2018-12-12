@@ -1,15 +1,6 @@
 <!-- FORM TYPE TICKET UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE; ?>" method="post">
-    <!-- TYPE_TICKET_ID -->
-    <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_ID').":"; ?></label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-        	<label><?php echo $this->InputValueTypeTicketId; ?></label>
-		</div>
-	</div>
     <!-- TYPE_TICKET_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">

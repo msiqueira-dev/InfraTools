@@ -13,12 +13,11 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about tickets.
 Functions: 
-			public function TicketDelete($TypeTicketId, $Debug, $MySqlConnection);
+			public function TicketDeleteByTicketId($TicketDescription, $Debug, $MySqlConnection);
 			public function TicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
 			public function TicketSelect($Limit1, $Limit2, &ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection);
-			public function TicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection);
-			public function TicketSelectById($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection);
-			public function TicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection);
+			public function TicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug, $MySqlConnection);
+			public function TicketUpdateByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -62,7 +61,7 @@ class FacedePersistenceTicket
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -77,18 +76,18 @@ class FacedePersistenceTicket
         return self::$Instance;
     }
 	
-	public function TicketDelete($TypeTicketId, $Debug, $MySqlConnection)
+	public function TicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeTicketDelete');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketDelete());
+				Persistence::ShowQuery('SqlTypeTicketDeleteByTypeTicketDescription');
+			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketDeleteByTypeTicketDescription());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $TypeTicketId);
+				$stmt->bind_param("s", $TypeTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -171,8 +170,7 @@ class FacedePersistenceTicket
 						$RowCount = $row['COUNT'];
 						$InstanceTypeTicket = $this->Factory->CreateTypeTicket
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_TICKET_FIELD_ID]);	
+														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION]);	
 						array_push($ArrayInstanceTypeTicket, $InstanceTypeTicket);
 					}
 					if(!empty($ArrayInstanceTypeTicket))
@@ -246,63 +244,19 @@ class FacedePersistenceTicket
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function TicketSelectById($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeTicketSelectById');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeTicketSelectById());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("i", $TypeTicketId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
-				{
-					$stmt->bind_result($registerDate, $typeTicketDescription, $TypeTicketId);
-					if ($stmt->fetch())
-					{
-						$TypeTicket = $this->Factory->CreateTypeTicket($registerDate, $typeTicketDescription, $TypeTicketId);
-						return Config::SUCCESS;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FETCH_FAILED;
-					}
-				}
-				else 
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FAILED;
-				}
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return Config::MYSQL_CONNECTION_FAILED;
-	}
 	
-	public function TicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection)
+	public function TicketUpdateByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeTicketUpdateById');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeTicketUpdateById());
+				Persistence::ShowQuery('SqlTypeTicketUpdateByTypeTicketDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeTicketUpdateByTypeTicketDescription());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeTicketDescription, $TypeTicketId);
+				$stmt->bind_param("s", $TypeTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

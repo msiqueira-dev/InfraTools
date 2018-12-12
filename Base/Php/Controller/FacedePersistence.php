@@ -97,15 +97,22 @@ Functions:
 			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug, 
 			                                   $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TicketDeleteByTicketId($TicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-		    public function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketId, 
-		                                 $TypeTicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE, $Commit = TRUE);
+		    public function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
+		                                 $TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE, $Commit = TRUE);
 			public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug, 
 			                             $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 		    public function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug,
 			                                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-		    public function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug,
+			public function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug,
 			                                                   $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function TicketUpdateByTicketId($TicketDescriptionNew, $TicketStatusNew, $TicketSuggestionNew, $TicketTitleNew, 
+											       $TicketTypeNew, &$InstanceTicket, $Debug, $MySqlConnection = NULL, 
+												   $CloseConnectaion = FALSE);
+		    public function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug,
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+		    public function TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, &$InstanceTicket, $Debug,
+			                                                      $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug,
 			                                                $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug, 
@@ -141,18 +148,16 @@ Functions:
 			                                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug,
 			                                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function TypeTicketDeleteByTypeTicketId($TypeTicketId, $Debug,
-			                                               $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug,
+			                                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE,
 			                                 $Commit = TRUE);
 			public function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug,
 			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug,
 			                                              $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function TypeTicketSelectByTypeTicketId($TypeTicketId, &$TypeTicket, $Debug,
-			                                               $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function TypeTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug,
-			                                     $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			public function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, $TypeTicketDescription, $Debug,
+			                                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeUserDelete($Id, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
 			public function TypeUserInsert($Description, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE, $Commit = TRUE);
 			public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug,
@@ -252,7 +257,7 @@ class FacedePersistence
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -922,8 +927,8 @@ class FacedePersistence
 		}
 		return $return;
 	}
-	public function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketId, 
-		                         $TypeTicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE, $Commit = TRUE)
+	public function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
+		                         $TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE, $Commit = TRUE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
@@ -931,7 +936,8 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
 			$return = $instanceFacedePersistenceTicket->TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle,
-																     $TypeStatusTicketId, $TypeTicketId, $Debug, $MySqlConnection);
+																     $TypeStatusTicketDescription, $TypeTicketDescription, 
+																	 $Debug, $MySqlConnection);
 			if($return == ConfigInfraTools::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
@@ -995,6 +1001,56 @@ class FacedePersistence
 			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
 			$return = $instanceFacedePersistenceTicket->TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, $InstanceTicket, 
 																			               $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TicketUpdateByTicketId($TicketDescriptionNew, $TicketStatusNew, $TicketSuggestionNew, $TicketTitleNew, 
+										   $TicketTypeNew, &$InstanceTicket, $Debug, $MySqlConnection = NULL, 
+										   $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketUpdateByTicketId($TicketDescriptionNew, $TicketStatusNew, 
+																			   $TicketSuggestionNew, $TicketTitleNew, 
+																			   $TicketTypeNew, $InstanceTicket,
+																			   $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketUpdateTicketStatusByTicketId($TicketStatusNew, $InstanceTicket,
+																			               $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, &$InstanceTicket, $Debug)
+	{
+		if($MySqlConnection == NULL)
+			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, $InstanceTicket,
+																			                  $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1294,14 +1350,15 @@ class FacedePersistence
 		return $return;
 	}
 
-	public function TypeTicketDeleteByTypeTicketId($TypeTicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-			$return = $instanceFacedePersistenceTypeTicket->TypeTicketDeleteByTypeTicketId($TypeTicketId, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, 
+																									$Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1315,7 +1372,7 @@ class FacedePersistence
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-			$return = $FacedePersistenceTypeTicket->TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
 			if($return == ConfigInfraTools::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
@@ -1340,45 +1397,34 @@ class FacedePersistence
 		}
 		return $return;
 	}
-	public function TypeTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, 
-												  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	
+	public function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$TypeTicket, $Debug, 
+												            $MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-			$return = $instanceFacedePersistenceTypeTicket->TypeTicketSelectByDescription($TypeTicketDescription, $TypeTicket, 
-																						  $Debug, $MySqlConnection);
-			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	public function TypeTicketSelectByTypeTicketId($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
-	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-			$return = $instanceFacedePersistenceTypeTicket->TypeTicketSelectByTypeTicketId($TypeTicketId, $TypeTicket, $Debug, 
-																						   $MySqlConnection);
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, $TypeTicket, 
+																						            $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;
 	}
 	
-	public function TypeTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, $TypeTicketDescription, $Debug, 
+															$MySqlConnection = NULL, $CloseConnectaion = FALSE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-			$return = $instanceFacedePersistenceTypeTicket->TypeTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug,
-																				 $MySqlConnection);
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew,	
+																									$TypeTicketDescription,
+																									$Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

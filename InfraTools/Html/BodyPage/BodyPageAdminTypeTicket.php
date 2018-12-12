@@ -72,7 +72,7 @@
 				</div>
 			</div>
 		</form>
-		<?php 
+		<?php
 		//TYPE TICKET LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST)
 		{

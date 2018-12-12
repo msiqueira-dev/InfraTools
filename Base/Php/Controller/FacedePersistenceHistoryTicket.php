@@ -13,12 +13,11 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about tickets.
 Functions: 
-			public function HistoryTicketDelete($TypeTicketId, $Debug, $MySqlConnection);
+			public function HistoryTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection);
 			public function HistoryTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
 			public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection);
-			public function HistoryTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection);
-			public function HistoryTicketSelectById($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection);
-			public function HistoryTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection);
+			public function HistoryTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug, $MySqlConnection);
+			public function HistoryTicketUpdateByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -62,7 +61,7 @@ class FacedePersistenceHistoryTicket
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -77,7 +76,7 @@ class FacedePersistenceHistoryTicket
         return self::$Instance;
     }
 	
-	public function HistoryTicketDelete($TypeTicketId, $Debug, $MySqlConnection)
+	public function HistoryTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -87,7 +86,7 @@ class FacedePersistenceHistoryTicket
 			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketDelete());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $TypeTicketId);
+				$stmt->bind_param("s", $TypeTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -167,8 +166,7 @@ class FacedePersistenceHistoryTicket
 						$RowCount = $row['COUNT'];
 						$InstanceTypeTicket = $this->Factory->CreateTypeTicket
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_TICKET_FIELD_ID]);	
+														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION]);	
 						array_push($ArrayInstanceTypeTicket, $InstanceTypeTicket);
 					}
 					if(!empty($ArrayInstanceTypeTicket))
@@ -197,7 +195,7 @@ class FacedePersistenceHistoryTicket
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function HistoryTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection)
+	public function HistoryTicketSelectByTypeTicketDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -241,52 +239,8 @@ class FacedePersistenceHistoryTicket
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function HistoryTicketSelectById($TypeTicketId, &$TypeTicket, $Debug, $MySqlConnection)
-	{
-		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($MySqlConnection != NULL)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlHistoryTicketSelectById');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketSelectById());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("i", $TypeTicketId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
-				{
-					$stmt->bind_result($registerDate, $typeTicketDescription, $TypeTicketId);
-					if ($stmt->fetch())
-					{
-						$TypeTicket = $this->Factory->CreateTypeTicket($registerDate, $typeTicketDescription, $TypeTicketId);
-						return Config::SUCCESS;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FETCH_FAILED;
-					}
-				}
-				else 
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FAILED;
-				}
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return Config::MYSQL_CONNECTION_FAILED;
-	}
 	
-	public function HistoryTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug, $MySqlConnection)
+	public function HistoryTicketUpdateById($TypeTicketDescription, &$InstanceTypeTicket, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -296,7 +250,7 @@ class FacedePersistenceHistoryTicket
 			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketUpdateById());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeTicketDescription, $TypeTicketId);
+				$stmt->bind_param("s", $TypeTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

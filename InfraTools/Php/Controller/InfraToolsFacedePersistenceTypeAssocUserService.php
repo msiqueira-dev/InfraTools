@@ -65,7 +65,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			                                                         $this->InfraToolsConfig->DefaultMySqlPort,
 																	 $this->InfraToolsConfig->DefaultMySqlDataBase,
 			                                                         $this->InfraToolsConfig->DefaultMySqlUser, 
-																	 $this->InfraToolsConfig->DefaultMySqlPassword);
+																	 $this->InfraToolsConfig->DefaultMySqlUserPassword);
 		}
     }
 	

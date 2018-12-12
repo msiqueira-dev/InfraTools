@@ -112,8 +112,9 @@ class PageAdminTypeTicket extends PageAdmin
 		//TYPE TICKET LIST SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT]))
 		{
-			if($this->TypeTicketSelectByTypeTicketId($_POST[ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT],
-										             $this->InstanceTypeTicket, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->TypeTicketSelectByTypeTicketDescription($_POST[ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT],
+										                      $this->InstanceTypeTicket, $this->InputValueHeaderDebug) 
+			                                                  == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		}
@@ -134,8 +135,9 @@ class PageAdminTypeTicket extends PageAdmin
 		//TYPE TICKET SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT]))
 		{
-			if($this->TypeTicketSelectByTypeTicketId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID],
-										             $this->InstanceTypeTicket, $this->InputValueHeaderDebug))
+			if($this->TypeTicketSelectByTypeTicketDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION],
+										                      $this->InstanceTypeTicket, $this->InputValueHeaderDebug)
+			                                                  == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		}
@@ -145,7 +147,8 @@ class PageAdminTypeTicket extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeTicketDeleteByTypeTicketId($this->InstanceTypeTicket, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeTicketDeleteByTypeTicketDescription($this->InstanceTypeTicket, $this->InputValueHeaderDebug) 
+				                                                  == ConfigInfraTools::SUCCESS)
 				{
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET);
@@ -191,8 +194,9 @@ class PageAdminTypeTicket extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket) 
 			   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeTicketUpdateByTypeTicketId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION],
-														 $this->InstanceTypeTicket, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeTicketUpdateByTypeTicketDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION],
+														          $this->InstanceTypeTicket, $this->InputValueHeaderDebug) 
+				                                                  == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
 				else 
 				{
