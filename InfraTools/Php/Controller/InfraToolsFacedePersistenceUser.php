@@ -15,8 +15,8 @@ Description:
 Functions: 
 			public function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                     $Debug, $MySqlConnection);
-			public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
-			                                                  $Debug, $MySqlConnection);
+			public function InfraToolsUserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+			                                                      $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                               &$RowCount, $Debug, $MySqlConnection);
@@ -174,8 +174,8 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsUserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, 
-													  &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsUserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, 
+													      &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; 
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
@@ -184,10 +184,10 @@ class InfraToolsFacedePersistenceUser
 		$ArrayInstanceUser = array();
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByCorporation');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByCorporationName');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporation());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporationName());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $Limit2);

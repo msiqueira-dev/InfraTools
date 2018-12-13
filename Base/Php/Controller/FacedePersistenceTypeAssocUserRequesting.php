@@ -18,7 +18,7 @@ Functions:
 			public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &&ArrayAssocUserRequesting, 
 			                                              &$RowCount, $Debug, $MySqlConnection);
 			public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond,
-			                                                        &$TypeAssocUserRequesting, $Debug, $MySqlConnection);
+			                                                        &InstanceTypeAssocUserRequesting, $Debug, $MySqlConnection);
 			public function TypeAssocUserRequestingUpdateByTypeBond($TypeAssocUserRequestingTypeBond,
 			                                                        $Debug, $MySqlConnection);
 **************************************************************************/
@@ -150,10 +150,10 @@ class FacedePersistenceTypeAssocUserRequesting
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocUserRequesting,  &$RowCount, 
+	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayInstanceAssocUserRequesting,  &$RowCount, 
 												  $Debug, $MySqlConnection)
 	{
-		$ArrayTypeAssocUserTeam = array();
+		$ArrayInstanceAssocUserRequesting = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
@@ -170,13 +170,12 @@ class FacedePersistenceTypeAssocUserRequesting
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
+						$InstanceAssocUserRequesting = $this->Factory->CreateTypeAssocUserTeam
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID]);	
-						array_push($ArrayTypeAssocUserTeam, $InstanceTypeAssocUserTeam);
+														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);	
+						array_push($ArrayInstanceAssocUserRequesting, $InstanceAssocUserRequesting);
 					}
-					if(!empty($ArrayTypeAssocUserTeam))
+					if(!empty($ArrayInstanceAssocUserRequesting))
 						return Config::SUCCESS;
 					else 
 					{
@@ -203,7 +202,7 @@ class FacedePersistenceTypeAssocUserRequesting
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond, &$TypeAssocUserRequesting, 
+	public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond, &$InstanceTypeAssocUserRequesting, 
 															$Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -214,15 +213,14 @@ class FacedePersistenceTypeAssocUserRequesting
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelectByTypeBond());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $TypeAssocUserTeam);
+				$stmt->bind_param("s", $TypeAssocUserRequestingBond);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $TypeAssocUserTeam, $typeAssocUserTeamId);
+					$stmt->bind_result($registerDate, $TypeAssocUserRequestingBond);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $TypeAssocUserTeam,
-																					 $typeAssocUserTeamId);
+						$InstanceTypeAssocUserRequesting = $this->Factory->CreateTypeAssocUserTeam($registerDate, $TypeAssocUserRequestingBond);
 						return Config::SUCCESS;
 					}
 					else 

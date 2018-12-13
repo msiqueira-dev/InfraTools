@@ -11,7 +11,6 @@ Description:
 Get / Set:
 			public function GetRegisterDate();
 			public function GetTypeStatusTicketDescription();
-			public function GetTypeStatusTicketId();
 			public function SetTypeStatusTicketDescription($TypeStatusTicketDescription);
 Methods:
 			private function SetState(TypeStatusTicketState $State);
@@ -35,14 +34,12 @@ class TypeStatusTicket
 	/* Properties */
 	protected $RegisterDate                = NULL;
 	protected $TypeStatusTicketDescription = NULL;
-	protected $TypeStatusTicketId          = NULL;
 
 	/* Constructor */
-	public function __construct($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId) 
+	public function __construct($RegisterDate, $TypeStatusTicketDescription) 
 	{
 		$this->RegisterDate                = $RegisterDate;
 		$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
-		$this->TypeStatusTicketId          = $TypeStatusTicketId;
 	}
 	
 	/* Clone */
@@ -60,11 +57,6 @@ class TypeStatusTicket
 	public function GetTypeStatusTicketDescription()
 	{
 		return $this->TypeStatusTicketDescription;
-	}
-	
-	public function GetTypeStatusTicketId()
-	{
-		return $this->TypeStatusTicketId;
 	}
 	
 	/* SET */

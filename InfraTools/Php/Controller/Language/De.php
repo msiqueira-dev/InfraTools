@@ -665,8 +665,7 @@ class De
 	const TYPE                                                    = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                    = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                  = "";
-	const TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION                   = "";
-	const TYPE_ASSOC_USER_TEAM_TEAM_ID                            = "";
+	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                        = "";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                          = "";
 	const TYPE_SERVICE_NAME                                       = "";
 	const TYPE_STATUS_TICKET_DESCRIPTION                          = "";

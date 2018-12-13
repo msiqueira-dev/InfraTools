@@ -16,11 +16,15 @@ Get / Set:
 			public function GetTicketSuggestion();
 			public function GetTicketType();
 			public function GetTicketTitle();
+			public function GetTypeStatusTicketDescription();
+			public function GetTypeTicketDescription();
 			public function SetTicketDescription($TicketDescription);
 			public function SetTicketStatus($TicketStatus);
 			public function SetTicketSuggestion($TicketSuggestion);
 			public function SetTicketTitle($TicketTitle);
 			public function SetTicketType($TicketType);
+			public function SetTypeStatusTicketDescription($TypeStatusTicketDescription);
+			public function SetTypeTicketDescription($TypeTicketDescription);
 Methods:
 			public function UpdateTicket($TicketDescription, $TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType);
 **************************************************************************/
@@ -115,6 +119,16 @@ class Ticket
 	public function SetTicketType($TicketType)
 	{
 		$this->TicketType = $TicketType;
+	}
+	
+	public function SetTypeStatusTicketDescription($TypeStatusTicketDescription)
+	{
+		$this->TicketStatus->SetTypeStatusTicketDescription($TypeStatusTicketDescription); 
+	}
+	
+	public function SetTypeTicketDescription($TypeTicketDescription)
+	{
+		$this->TicketType->SetTypeTicketDescription($TypeStatusTicketDescription); 
 	}
 	
 	/* METHODS */

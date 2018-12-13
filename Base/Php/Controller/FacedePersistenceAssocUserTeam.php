@@ -14,7 +14,7 @@ Description:
 			Classe used to access and deal with information of the database about the association with user and a team.
 Functions: 
 			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug);
-			public function AssocUserTeamInsert($TeamName, $TypeAssocUserTeam, $UserEmail, $Debug);
+			public function AssocUserTeamInsert($TeamName, $TypeAssocUserTeamDescription, $UserEmail, $Debug);
 			
 **************************************************************************/
 
@@ -113,7 +113,7 @@ class FacedePersistenceAssocUserTeam
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserTeamInsert($TeamName, $AssocUserTeamType, $UserEmail, $Debug, $MySqlConnection)
+	public function AssocUserTeamInsert($TeamName, $TypeAssocUserTeamDescription, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($return == Config::SUCCESS)
@@ -123,7 +123,7 @@ class FacedePersistenceAssocUserTeam
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserTeamInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("sis", $TeamName, $AssocUserTeamType, $UserEmail);
+				$stmt->bind_param("sss", $TeamName, $TypeAssocUserTeamDescription, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
 					return Config::SUCCESS;

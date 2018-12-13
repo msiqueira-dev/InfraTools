@@ -56,7 +56,7 @@ Methods:
 			public    function CreateSessionHandlerCustom();
 			public    function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
 			public    function CreateTechInfo();
-			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
+			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
 			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription);
 			public    function CreateTypeUser($Description, $Id, $RegisterDate);
@@ -542,12 +542,12 @@ class Factory
 		return TechInfo::__create();
 	}
 	
-	public function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId)
+	public function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeAssocUserTeam');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php");
-		return new TypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
+		return new TypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 	}
 	
 	public function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription)

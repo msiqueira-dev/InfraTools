@@ -276,7 +276,7 @@ class FacedePersistenceAssocTicketUserRequesting
 	}
 	
 	public function AssocTicketUserRequestingSelectByTicketId($AssocTicketUserRequestingTicketId,
-			                                                  &$AssocTicketUserRequesting, 
+			                                                  &$InstanceAssocTicketUserRequesting, 
 			                                                  $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;
@@ -295,7 +295,7 @@ class FacedePersistenceAssocTicketUserRequesting
 									   $assocTicketUserRequestingUserEmail, $AssocTicketUserRequestingTicketId);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateAssocTicketUserRequesting(
+						$InstanceAssocTicketUserRequesting = $this->Factory->CreateAssocTicketUserRequesting(
 						                                                             $AssocTicketUserRequestingTicketId,
 							                                                         $assocTicketUserRequestingUserBond,
 																			         $assocTicketUserRequestingUserEmail,

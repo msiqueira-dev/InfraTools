@@ -696,8 +696,7 @@ class Pt
 	const TYPE                                                    = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                    = "Erro ao obter tipos de associação";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                  = "Tipos de associação obtidos com sucesso";
-	const TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION                   = "Descrição";
-	const TYPE_ASSOC_USER_TEAM_TEAM_ID                            = "Id";
+	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                        = "Descrição";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                          = "Tipo de associação entre usuário e equipe não "
 		                                                          . "encontrada";
 	const TYPE_SERVICE_NAME                                       = "Nome de tipo de serviço";

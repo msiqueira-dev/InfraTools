@@ -12,8 +12,7 @@ Get / Set:
 			public function GetTeam();
 			public function GetTeamName();
 			public function GetTypeAssocUserTeam();
-			public function GetTypeAssocUserTeamTeamDescription();	
-			public function GetTypeAssocUserTeamTeamId();
+			public function GetTypeAssocUserTeamTeamDescription();
 			public function GetUser();
 			public function SetRegisterDate($RegisterDate);
 	        public function SetTeam($Team);
@@ -25,10 +24,10 @@ Methods:
 class AssocUserTeam
 {
 	/* Properties */
-	protected $RegisterDate      = NULL;
-	protected $Team              = NULL;
-	protected $TypeAssocUserTeam = NULL;
-	protected $User              = NULL;
+	protected $RegisterDate              = NULL;
+	protected $Team                      = NULL;
+	protected $TypeAssocUserTeam         = NULL;
+	protected $User                      = NULL;
 
 	/* Constructor */
 	public function __construct($RegisterDate, $Team, $TypeAssocUserTeam, $User) 
@@ -39,6 +38,9 @@ class AssocUserTeam
 		if($Team != NULL)
 			$this->Team = $Team;
 		else throw new Exception(Config::EXCEPTION_ASSOC_USER_TEAM_TEAM);
+		if($TypeAssocUserTeam != NULL)
+			$this->TypeAssocUserTeam = $TypeAssocUserTeam;
+		else throw new Exeception(Config::EXCEPTION_ASSOC_USER_TEAM_TYPE);
 		if($User != NULL)
 			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_ASSOC_USER_TEAM_USER);
@@ -76,12 +78,6 @@ class AssocUserTeam
 	{
 		if($this->TypeAssocUserTeam != NULL)
 			return $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
-	}
-	
-	public function GetTypeAssocUserTeamTeamId()
-	{
-		if($this->TypeAssocUserTeam != NULL)
-			return $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId();	
 	}
 	
 	public function GetUser()

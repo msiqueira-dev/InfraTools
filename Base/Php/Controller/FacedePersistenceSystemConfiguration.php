@@ -17,13 +17,14 @@ Functions:
 			                                                       $Debug, $MySqlConnection);
 			public function SystemConfigurationInsert($TypeAssocUserTeamDescription, $Debug,
 			                                          $Debug, $MySqlConnection);
-			public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, 
+			public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, 
 			                                          &$RowCount, $Debug, $Debug, $MySqlConnection);
-			public function SystemConfigurationSelectByOptionDescription($TypeAssocUserTeamDescription, &$TypeAssocUserTeam, $Debug,
+			public function SystemConfigurationSelectByOptionDescription($SystemConfigurationOptionDescription, 
+			                                                             &$InstanceSystemConfiguration, $Debug,
 			                                                             $Debug, $MySqlConnection);
-			public function SystemConfigurationSelectByOptionNumber($TypeAssocUserTeamId, &$TypeAssocUserTeam, $Debug,
+			public function SystemConfigurationSelectByOptionNumber($TypeAssocUserTeamId, &$InstanceSystemConfiguration, $Debug,
 			                                                        $Debug, $MySqlConnection);
-			public function SystemConfigurationUpdateByOptionNumber($TypeAssocUserTeamId, $TypeAssocUserTeam, $Debug,
+			public function SystemConfigurationUpdateByOptionNumber($SystemConfiguration, $SystemConfiguration, $Debug,
 			                                                        $Debug, $MySqlConnection);
 **************************************************************************/
 
@@ -154,9 +155,9 @@ class FacedePersistenceAssocUserResponsible
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug, $MySqlConnection)
+	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayTypeAssocUserTeam = array();
+		$ArrayInstanceSystemConfiguration = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
@@ -173,13 +174,12 @@ class FacedePersistenceAssocUserResponsible
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
+						$InstanceSystemConfiguration = $this->Factory->CreateTypeAssocUserTeam
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID]);	
-						array_push($ArrayTypeAssocUserTeam, $InstanceTypeAssocUserTeam);
+														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);	
+						array_push($ArrayInstanceSystemConfiguration, $InstanceSystemConfiguration);
 					}
-					if(!empty($ArrayTypeAssocUserTeam))
+					if(!empty($ArrayInstanceSystemConfiguration))
 						return Config::SUCCESS;
 					else 
 					{
@@ -205,7 +205,8 @@ class FacedePersistenceAssocUserResponsible
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function SystemConfigurationSelectByOptionDescription($TypeAssocUserTeamDescription, &$TypeAssocUserTeam, $Debug, $MySqlConnection)
+	public function SystemConfigurationSelectByOptionDescription($SystemConfigurationOptionDescription, &$InstanceSystemConfiguration, 
+																 $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -215,15 +216,15 @@ class FacedePersistenceAssocUserResponsible
 			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationSelectByOptionDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $TypeAssocUserTeam);
+				$stmt->bind_param("s", $SystemConfigurationOptionDescription);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $TypeAssocUserTeam, $typeAssocUserTeamId);
+					$stmt->bind_result($registerDate, $SystemConfigurationOptionDescription);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $TypeAssocUserTeam,
-																					 $typeAssocUserTeamId);
+						$InstanceSystemConfiguration = $this->Factory->CreateTypeAssocUserTeam($registerDate,
+																							   $SystemConfigurationOptionDescription);
 						return Config::SUCCESS;
 					}
 					else 
@@ -250,7 +251,7 @@ class FacedePersistenceAssocUserResponsible
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function SystemConfigurationSelectByOptionNumber($TypeAssocUserTeamId, &$TypeAssocUserTeam, $Debug, $MySqlConnection)
+	public function SystemConfigurationSelectByOptionNumber($TypeAssocUserTeamId, &$InstanceSystemConfiguration, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -267,8 +268,8 @@ class FacedePersistenceAssocUserResponsible
 					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $TypeAssocUserTeamId);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescription,
-																			         $TypeAssocUserTeamId);
+						$InstanceSystemConfiguration = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescription,
+																			                   $TypeAssocUserTeamId);
 						return Config::SUCCESS;
 					}
 					else 

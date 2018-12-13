@@ -4,14 +4,14 @@
     <!-- TYPE_ASSOC_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>" 
-                               class="<?php echo $this->ReturnTypeAssocUserTeamTeamDescriptionClass; ?>"
+            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
+                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
+                               class="<?php echo $this->ReturnTypeAssocUserTeamDescriptionClass; ?>"
                                onblur="ValidateDescription(null, 
-                                                  '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>',
+                                                  '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
                                                    'DivContentBodySubmitBigger ',
                                                    '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                    '', true);
@@ -26,7 +26,7 @@
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onchange="ValidateDescription(null, 
-                                                 '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '', true);
@@ -35,14 +35,14 @@
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
-                                title="<?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION'); ?>"
-                                value="<?php echo $this->InputValueTypeAssocUserTeamTeamDescription; ?>" maxlength="45" />
+                                title="<?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_DESCRIPTION'); ?>"
+                                value="<?php echo $this->InputValueTypeAssocUserTeamDescription; ?>" maxlength="45" />
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
          onmouseover="ValidateDescription(null, 
-							       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION; ?>',
+							       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
 								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
 								   '', true);
@@ -69,8 +69,8 @@
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))                            echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTypeAssocUserTeamTeamDescriptionText)) echo $this->ReturnTypeAssocUserTeamTeamDescriptionText; ?>
-		<?php if(isset($this->ReturnText))                                 echo $this->ReturnText; ?>
+		<?php if(isset($this->ReturnEmptyText))                        echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTypeAssocUserTeamDescriptionText)) echo $this->ReturnTypeAssocUserTeamDescriptionText; ?>
+		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>

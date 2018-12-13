@@ -13,14 +13,13 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about type status ticket.
 Functions: 
-			public function TypeStatusTicketDeleteByTypeStatusTicketId($TypeStatusTicketId, $Debug, $MySqlConnection);
+			public function TypeStatusTicketDeleteByTypeStatusTicketDescription($TypeStatusTicketDescription, $Debug, $MySqlConnection);
 			public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, $MySqlConnection);
 			public function TypeStatusTicketSelect($Limit1, $Limit2, &ArrayInstanceTypeStatusTicket, &$RowCount, $Debug, $MySqlConnection);
 			public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, 
 			                                                                    $Debug, $MySqlConnection);
-			public function TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$TypeStatusTicket, $Debug, $MySqlConnection);
-			public function TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescription, $TypeStatusTicketId, 
-			                                                           $Debug, $MySqlConnection);
+			public function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription, 
+																		        $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -79,17 +78,17 @@ class FacedePersistenceTypeStatusTicket
         return self::$Instance;
     }
 	
-	public function TypeStatusTicketDeleteByTypeStatusTicketId($TypeStatusTicketId, $Debug, $MySqlConnection)
+	public function TypeStatusTicketDeleteByTypeStatusTicketDescription($TypeStatusTicketDescription, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeStatusTicketDelete');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketDelete());
+				Persistence::ShowQuery('SqlTypeStatusTicketDeleteByTypeStatusTicketDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketDeleteByTypeStatusTicketDescription());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $TypeStatusTicketId);
+				$stmt->bind_param("s", $TypeStatusTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -171,8 +170,7 @@ class FacedePersistenceTypeStatusTicket
 						$RowCount = $row['COUNT'];
 						$InstanceTypeStatusTicket = $this->Factory->CreateTypeStatusTicket
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID]);	
+														 $row[Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION]);	
 						array_push($ArrayInstanceTypeStatusTicket, $InstanceTypeStatusTicket);
 					}
 					if(!empty($ArrayInstanceTypeStatusTicket))
@@ -201,6 +199,7 @@ class FacedePersistenceTypeStatusTicket
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
+	
 	public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, 
 																		$Debug, $MySqlConnection)
 	{
@@ -208,64 +207,19 @@ class FacedePersistenceTypeStatusTicket
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeStatusTicketSelectByDescription');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketSelectByDescription());
+				Persistence::ShowQuery('SqlTypeStatusTicketSelectByTypeStatusTicketDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketSelectByTypeStatusTicketDescription());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $TypeStatusTicketDescription);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
-					if ($stmt->fetch())
-					{
-						$TypeStatusTicket = $this->Factory->CreateTypeStatusTicket($registerDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
-						return Config::SUCCESS;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FETCH_FAILED;
-					}
-				}
-				else 
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FAILED;
-				}
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return Config::MYSQL_CONNECTION_FAILED;
-	}
-	public function TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$TypeStatusTicket, $Debug, $MySqlConnection)
-	{
-		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($MySqlConnection != NULL)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeStatusTicketSelectByTypeStatusTicketId');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketSelectByTypeStatusTicketId());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("i", $TypeStatusTicketId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
-				{
-					$stmt->bind_result($registerDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
+					$stmt->bind_result($registerDate, $TypeStatusTicketDescription);
 					if ($stmt->fetch())
 					{
 						$TypeStatusTicket = $this->Factory->CreateTypeStatusTicket($registerDate, 
-																				   $TypeStatusTicketDescription,
-																				   $TypeStatusTicketId);
+																				   $TypeStatusTicketDescription);
 						return Config::SUCCESS;
 					}
 					else 
@@ -293,17 +247,18 @@ class FacedePersistenceTypeStatusTicket
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug, $MySqlConnection)
+	public function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription, 
+																		$Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeStatusTicketUpdateByTypeStatusTicketId');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketUpdateByTypeStatusTicketId());
+				Persistence::ShowQuery('SqlTypeStatusTicketUpdateByTypeStatusTicketDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeStatusTicketUpdateByTypeStatusTicketDescription());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeStatusTicketDescription, $TypeStatusTicketId);
+				$stmt->bind_param("ss", $TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

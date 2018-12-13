@@ -50,8 +50,8 @@ if(is_array($this->ArrayInstanceTypeStatusTicket))
 		echo "<td class='TableTypeStatusTicketThId'>
 		      <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT . "' 
 		                           id='"   . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT . "' 
-							       value='" . $typeStatusTicket->GetTypeStatusTicketId() . "' 
-								   title='" . $typeStatusTicket->GetTypeStatusTicketId() . "' />
+							       value='" . $typeStatusTicket->GetTypeStatusTicketDescription() . "' 
+								   title='" . $typeStatusTicket->GetTypeStatusTicketDescription() . "' />
 		      </td>";
 		echo "<td class='TableTypeStatusTicketThDescription'>"   . $typeStatusTicket->GetTypeStatusTicketDescription()  . "</td>";
 		echo "<td class= 'TableTypeStatusTicketThRegisterDate'>" . $typeStatusTicket->GetRegisterDate() . "</td>";

@@ -1,6 +1,6 @@
-<!-- FORM_TEAM_VIEW_LIST_USERS -->
+<!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS -->
 <?php
-if(is_array($this->ArrayInstanceTeamMembers))
+if(is_array($this->ArrayInstanceTypeAssocUserTeamMembers))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -13,9 +13,9 @@ if(is_array($this->ArrayInstanceTeamMembers))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -34,9 +34,9 @@ if(is_array($this->ArrayInstanceTeamMembers))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -48,23 +48,19 @@ if(is_array($this->ArrayInstanceTeamMembers))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceTeamMembers as $key=>$user)
+	foreach($this->ArrayInstanceTypeAssocUserTeamMembers as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
-						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_FIELD_TEAM_ID . "'
-							 value='"  . $this->InstanceTeam->GetTeamId() . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
-										 id='"       . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
-										 value='" . $this->InstanceTeam->GetTeamName() . "' 
-										 title='" . $this->InstanceTeam->GetTeamName() . "' />
+							 name='"   . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
+		                                     id='"   . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
+							                 value='" . $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' 
+										     title='" . $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' />
 						</form>
 				  </td>";
 		echo "<td class='TableGenericTdLink'>

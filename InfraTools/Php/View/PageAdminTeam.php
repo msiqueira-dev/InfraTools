@@ -189,12 +189,12 @@ class PageAdminTeam extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, 
 														$this->InstanceTeam) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'TeamUpdateByTeamId', 
-									      array($_POST[ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION],
-					                            $_POST[ConfigInfraTools::FORM_FIELD_TEAM_NAME],
-					                            &$this->InstanceTeam),
-									      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;	
+				$this->ExecuteFunction($_POST, 'TeamUpdateByTeamId', 
+									   array($_POST[ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION],
+					                         $_POST[ConfigInfraTools::FORM_FIELD_TEAM_NAME],
+					                         &$this->InstanceTeam),
+									   $this->InputValueHeaderDebug);
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;	
 			}
 		}
 		//FORM_TYPE_USER_SELECT

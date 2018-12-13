@@ -151,11 +151,11 @@ class FacedePersistenceAssocUserResponsible
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function AssocTicketUserResponsibleSelect($Limit1, $Limit2, &$AssocTicketUserResponsible, &$RowCount, 
+	public function AssocTicketUserResponsibleSelect($Limit1, $Limit2, &$ArrayInstanceAssocTicketUserResponsible, &$RowCount, 
 													 $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;
-		$ArrayTypeAssocUserTeam = array();
+		$ArrayInstanceAssocTicketUserResponsible = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -171,13 +171,12 @@ class FacedePersistenceAssocUserResponsible
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
+						$InstanceAssocTicketUserResponsible = $this->Factory->CreateTypeAssocUserTeam
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID]);	
-						array_push($ArrayTypeAssocUserTeam, $InstanceTypeAssocUserTeam);
+														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);	
+						array_push($ArrayInstanceAssocTicketUserResponsible, $InstanceAssocTicketUserResponsible);
 					}
-					if(!empty($ArrayTypeAssocUserTeam))
+					if(!empty($ArrayInstanceAssocTicketUserResponsible))
 						return Config::SUCCESS;
 					else 
 					{
@@ -205,7 +204,7 @@ class FacedePersistenceAssocUserResponsible
 	}
 	
 	public function AssocTicketUserResponsibleSelectByTicketId($AssocTicketUserResponsibleTicketId, 
-			                                                   &$AssocTicketUserResponsible, $Debug, $MySqlConnection)
+			                                                   &$InstanceAssocTicketUserResponsible, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -222,8 +221,9 @@ class FacedePersistenceAssocUserResponsible
 					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $TypeAssocUserTeamId);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescription,
-																			  $TypeAssocUserTeamId);
+						$InstanceAssocTicketUserResponsible = $this->Factory->CreateTypeAssocUserTeam($registerDate,
+																									  $typeAssocUserTeamDescription,
+																			                          $TypeAssocUserTeamId);
 						return Config::SUCCESS;
 					}
 					else 

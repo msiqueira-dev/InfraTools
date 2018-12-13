@@ -1,18 +1,18 @@
 <!-- FORM TYPE STATUS TICKET SELECT -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT; ?>" method="post" >
-	<!-- FORM_FIELD_TYPE_STATUS_TICKET_ID -->
+	<!-- TYPE_STATUS_TICKET_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_ID'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_DESCRIPTION'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID; ?>"
-						   class="<?php echo $this->ReturnTypeStatusTicketIdClass; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>"
+						   class="<?php echo $this->ReturnTypeStatusTicketDescriptionClass; ?>"
 						   onkeyup="ValidateNumbersOnly(null, 
-										     '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID; ?>',
+										     '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '', 'false');
@@ -21,7 +21,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID; ?>',
+						   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '', true);
@@ -30,7 +30,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID; ?>',
+						   onchange="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '', true);
@@ -39,12 +39,12 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('EMAIL'); ?>" 
-						   value="<?php echo $this->InputValueTypeStatusTicketId; ?>" maxlength="45" />
+						   title="<?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_DESCRIPTION'); ?>" 
+						   value="<?php echo $this->InputValueTypeStatusTicketDescription; ?>" maxlength="45" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID; ?>',
+		 onmouseover="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 								   '', true);
@@ -67,8 +67,8 @@
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTypeStatusTicketIdText)) echo $this->ReturnTypeStatusTicketIdText; ?>
-		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
+		<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTypeStatusTicketDescriptionText)) echo $this->ReturnTypeStatusTicketDescriptionText; ?>
+		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
 	</label>
 </div>

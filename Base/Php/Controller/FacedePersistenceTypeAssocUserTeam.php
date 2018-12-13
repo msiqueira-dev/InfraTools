@@ -13,14 +13,14 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about type of association betweeen a user and a team.
 Functions: 
-			public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug, $MySqlConnection);
-			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug, $MySqlConnection);
-			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug, $MySqlConnection);
-			public function TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, 
-			                                                         $Debug, $MySqlConnection);
-			public function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$TypeAssocUserTeam, $Debug, 
-			                                                $MySqlConnection);
-			public function TypeAssocUserTeamUpdateByUserTeamId($TypeAssocUserTeamTeamId, $TypeAssocUserTeam, $Debug, $MySqlConnection);
+			public function TypeAssocUserTeamDeleteByTypeAssocUserDescription($TypeAssocUserTeamDescription, $Debug, $MySqlConnection);
+			public function TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug, $MySqlConnection);
+			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug, $MySqlConnection);
+			public function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription,
+			                                                                      &$InstanceTypeAssocUserTeam, 
+			                                                                      $Debug, $MySqlConnection);
+			public function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, 
+			                                                                      $InstanceTypeAssocUserTeam, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -79,17 +79,17 @@ class FacedePersistenceTypeAssocUserTeam
         return self::$Instance;
     }
 	
-	public function TypeAssocUserTeamDeleteByTeamId($TypeAssocUserTeamTeamId, $Debug, $MySqlConnection)
+	public function TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeAssocUserTeamDeleteByTeamId');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamDeleteByTeamId());
+				Persistence::ShowQuery('SqlTypeAssocUserTeamDeleteByTypeAssocUserTeamDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamDeleteByTypeAssocUserTeamDescription());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $TypeAssocUserTeamTeamId);
+				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -119,7 +119,7 @@ class FacedePersistenceTypeAssocUserTeam
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug, $MySqlConnection)
+	public function TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -129,7 +129,7 @@ class FacedePersistenceTypeAssocUserTeam
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("s", $TypeAssocUserTeamTeamDescription);
+				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -150,9 +150,9 @@ class FacedePersistenceTypeAssocUserTeam
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug, $MySqlConnection)
+	public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayTypeAssocUserTeam = array();
+		$ArrayInstanceTypeAssocUserTeam = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
@@ -171,11 +171,10 @@ class FacedePersistenceTypeAssocUserTeam
 						$RowCount = $row['COUNT'];
 						$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION], 
-						                                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID]);	
-						array_push($ArrayTypeAssocUserTeam, $InstanceTypeAssocUserTeam);
+														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);	
+						array_push($ArrayInstanceTypeAssocUserTeam, $InstanceTypeAssocUserTeam);
 					}
-					if(!empty($ArrayTypeAssocUserTeam))
+					if(!empty($ArrayInstanceTypeAssocUserTeam))
 						return Config::SUCCESS;
 					else 
 					{
@@ -201,25 +200,25 @@ class FacedePersistenceTypeAssocUserTeam
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug, $MySqlConnection)
+	public function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, 
+																		  $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeAssocUserTeamSelectByTeamDescription');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByTeamDescription());
+				Persistence::ShowQuery('SqlTypeAssocUserTeamSelectByTypeAssocUserTeamDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByTypeAssocUserTeamDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("s", $TypeAssocUserTeam);
+				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $TypeAssocUserTeam, $typeAssocUserTeamId);
+					$stmt->bind_result($registerDate, $TypeAssocUserTeamDescription);
 					if ($stmt->fetch())
 					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $TypeAssocUserTeam,
-																					 $typeAssocUserTeamId);
+						$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $TypeAssocUserTeamDescription);
 						return Config::SUCCESS;
 					}
 					else 
@@ -246,63 +245,19 @@ class FacedePersistenceTypeAssocUserTeam
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$TypeAssocUserTeam, $Debug, $MySqlConnection)
-	{
-		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($MySqlConnection != NULL)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeAssocUserTeamSelectByTeamId');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelectByTeamId());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("i", $TypeAssocUserTeamTeamId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
-				{
-					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $TypeAssocUserTeamTeamId);
-					if ($stmt->fetch())
-					{
-						$TypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescription,
-																			         $TypeAssocUserTeamTeamId);
-						return Config::SUCCESS;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FETCH_FAILED;
-					}
-				}
-				else 
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FAILED;
-				}
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return Config::MYSQL_CONNECTION_FAILED;
-	}
 	
-	public function TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId, $Debug, $MySqlConnection)
+	public function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescriptionNew, $TypeAssocUserTeamDescription,
+																		  $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeAssocUserTeamUpdateByTeamId');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamUpdateByTeamId());
+				Persistence::ShowQuery('SqlTypeAssocUserTeamUpdateByTypeAssocUserTeamDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamUpdateByTypeAssocUserTeamDescription());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
+				$stmt->bind_param("ss", $TypeAssocUserTeamDescriptionNew, $TypeAssocUserTeamDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{

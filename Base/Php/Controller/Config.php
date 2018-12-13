@@ -41,6 +41,7 @@ class Config
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE                   = "ExceptionAssocTicketUserRequestingType";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_USER                   = "ExceptionAssocTicketUserRequestingUser";
 	const EXCEPTION_ASSOC_USER_TEAM_TEAM                                = "ExceptionAssocUserTeamTeam";
+	const EXCEPTION_ASSOC_USER_TEAM_TYPE                                = "ExceptionAssocUserTeamType";
 	const EXCEPTION_ASSOC_USER_TEAM_USER                                = "ExceptionAssocUserTeamUser";
 	const EXCEPTION_CORPORATION                                         = "ExceptionCorporation";
 	const EXCEPTION_DEPARTMENT_DEPARTMENT_CORPORATION                   = "ExceptionDepartmentDepartmentCorporation";
@@ -80,10 +81,8 @@ class Config
 	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
 	const FORM_FIELD_TICKET_TYPE                                        = "FormFieldTicketType";
 	const FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                = "FormFieldTypeAssocUserServiceDescription";
-	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID                       = "FormFieldTypeAssocUserTeamTeamId";
-	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION              = "FormFieldTypeAssocUserTeamTeamDescription";
+	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION                   = "FormFieldTypeAssocUserTeamDescription";
 	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                     = "FormFieldTypeStatusTicketDescription";
-	const FORM_FIELD_TYPE_STATUS_TICKET_ID                              = "FormFieldTypeStatusTicketId";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                            = "FormFieldTypeTicketDescription";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                              = "FormFieldTypeUserDescription";
 	const FORM_FIELD_TYPE_USER_ID                                       = "FormFieldTypeUserId";
@@ -497,10 +496,8 @@ class Config
 	const TABLE_TYPE_ASSOC_USER_REQUESTING_FIELD_TYPE_BOND              = "TypeAssocUserRequestingTypeBond";
 	const TABLE_TYPE_ASSOC_USER_TEAM                                    = "TYPE_ASSOC_USER_TEAM";
 	const TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION                  = "TypeAssocUserTeamDescription";
-	const TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID                           = "TypeAssocUserTeamId";
 	const TABLE_TYPE_STATUS_TICKET                                      = "TYPE_STATUS_TICKET";
 	const TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION                    = "TypeStatusTicketDescription";
-	const TABLE_TYPE_STATUS_TICKET_FIELD_ID                             = "TypeStatusTicketId";
 	const TABLE_TYPE_TICKET                                             = "TYPE_TICKET";
 	const TABLE_TYPE_TICKET_FIELD_DESCRIPTION                           = "TypeTicketDescription";
 	const TABLE_TYPE_USER                                               = "TYPE_USER";

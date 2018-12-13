@@ -74,22 +74,23 @@ Methods:
 															 &$InstanceTicket, $Debug);
 		protected     function        TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug);
 		protected     function        TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, &$InstanceTicket, $Debug);
-		protected     function        TypeAssocUserTeamDeleteByTeamId($InstanceTypeAssocUserTeam, $Debug);
-		protected     function        TypeAssocUserTeamInsert($InputValueTypeAssocUserTeamTeamDescription, $Debug);
+		protected     function        TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription($InstanceTypeAssocUserTeam, $Debug);
+		protected     function        TypeAssocUserTeamInsert($InputValueTypeAssocUserTeamDescription, $Debug);
 		protected     function        TypeAssocUserTeamLoadData(&$InstanceTypeAssocUserTeam);
 		protected     function        TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug);
-		protected     function        TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$InstanceTypeAssocUserTeam, $Debug);
-		protected     function        TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug);
-		protected     function        TypeStatusTicketDeleteByTypeStatusTicketId(&$InstanceTypeStatusTicket, $Debug);
+		protected     function        TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription,
+		                                                                                    &$InstanceTypeAssocUserTeam, $Debug);
+		protected     function        TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription,
+		                                                                                    &$InstanceTypeAssocUserTeam, $Debug);
+		protected     function        TypeStatusTicketDeleteByTypeStatusTicketDescription($InstanceTypeStatusTicket, $Debug);
 		protected     function        TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug);
 		protected     function        TypeStatusTicketLoadData($InstanceTypeStatusTicket);
 		protected     function        TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug);
 		protected     function        TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, 
 		                                                                                  &$InstanceTypeStatusTicket, $Debug);
-		protected     function        TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$InstanceTypeStatusTicket, $Debug);
-		protected     function        TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescriptionNew,
-		                                                                        &$InstanceTypeStatusTicket, $Debug);
-		protected     function        TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug);
+		protected     function        TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew,
+		                                                                                  &$InstanceTypeStatusTicket, $Debug);
+		protected     function        TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket, $Debug);
 		protected     function        TypeTicketInsert($TypeTicketDescription, $Debug);
 		protected     function        TypeTicketLoadData($InstanceTypeTicket);
 		protected     function        TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug);
@@ -260,11 +261,9 @@ class Page
 	public    $InputValueTwoStepVerification                        = "";
 	public    $InputValueTypeAssocUserServiceDescription            = "";
 	public    $InputValueTypeAssocUserServiceId                     = "";
-	public    $InputValueTypeAssocUserTeamTeamDescription           = "";
-	public    $InputValueTypeAssocUserTeamTeamId                    = "";
+	public    $InputValueTypeAssocUserTeamDescription               = "";
 	public    $InputValueTypeServiceName                            = "";
 	public    $InputValueTypeStatusTicketDescription                = "";
-	public    $InputValueTypeStatusTicketId                         = "";
 	public    $InputValueTypeTicketDescription                      = "";
 	public    $InputValueTypeUserDescription                        = "";
 	public    $InputValueTypeUserId                                 = "";
@@ -340,14 +339,8 @@ class Page
 	public    $ReturnTicketTypeText                                 = "";
 	public    $ReturnTypeAssocUserTeamDescriptionClass              = "";
 	public    $ReturnTypeAssocUserTeamDescriptionText               = "";
-	public    $ReturnTypeAssocUserTeamTeamDescriptionClass          = "";
-	public    $ReturnTypeAssocUserTeamTeamDescriptionText           = "";
-	public    $ReturnTypeAssocUserTeamTeamIdClass                   = "";
-	public    $ReturnTypeAssocUserTeamTeamIdText                    = "";
 	public    $ReturnTypeStatusTicketDescriptionClass               = "";
 	public    $ReturnTypeStatusTicketDescriptionText                = "";
-	public    $ReturnTypeStatusTicketIdClass                        = "";
-	public    $ReturnTypeStatusTicketIdText                         = "";
 	public    $ReturnTypeTicketDescriptionClass                     = "";
 	public    $ReturnTypeTicketDescriptionText                      = "";
 	public    $ReturnTypeUserDescriptionClass                       = "";
@@ -828,10 +821,10 @@ class Page
 	{
 		$ArrayInstanceCorporationUsers = NULL;
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->UserSelectByCorporation($InstanceCorporation->GetCorporationName(),
-			                                                          $Limit1, $Limit2,
-			                                                          $ArrayInstanceCorporationUsers, 
-																	  $RowCount, $Debug);
+		$return = $instanceFacedePersistence->UserSelectByCorporationName($InstanceCorporation->GetCorporationName(),
+			                                                              $Limit1, $Limit2,
+			                                                              $ArrayInstanceCorporationUsers, 
+																	      $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			if($HideReturnSuccessImage)
@@ -1940,7 +1933,7 @@ class Page
 		if($InstanceTicket != NULL)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TicketDeleteByTicketId($InstanceTicket->GetTypeAssocUserTeamTeamId(), $Debug);
+			$return = $FacedePersistence->TicketDeleteByTicketId($InstanceTicket->GetTicketId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2275,11 +2268,11 @@ class Page
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTicketDescription     = $TicketDescriptionNew;
-		$this->InputValueTicketSuggestion      = $TicketSuggestionNew;
-		$this->InputValueTicketTitle           = $TicketTitleNew;
-		$this->InputValueTypeStatusTicketId    = $TypeStatusTicketIdNew;
-		$this->InputValueTypeTicketDescription = $TypeTicketDescriptionNew;
+		$this->InputValueTicketDescription           = $TicketDescriptionNew;
+		$this->InputValueTicketSuggestion            = $TicketSuggestionNew;
+		$this->InputValueTicketTitle                 = $TicketTitleNew;
+		$this->InputValueTypeStatusTicketDescription = $TypeStatusTicketDescriptionNew;
+		$this->InputValueTypeTicketDescription       = $TypeTicketDescriptionNew;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//FORM_FIELD_TICKET_DESCRIPTION
@@ -2359,8 +2352,8 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TicketUpdateByTicketId($this->InputValueTicketDescription, $this->InputValueTicketSuggestion,
-																 $this->InputValueTicketTitle, $this->InputValueTypeStatusTicketId,
-																 $this->InputValueTypeTicket, $InstanceTicket, $Debug);
+																 $this->InputValueTicketTitle, $this->InputValueTypeStatusTicketDescription,
+																 $this->InputValueTypeTicketDescription, $InstanceTicket, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2393,15 +2386,17 @@ class Page
 	{
 	}
 	
-	protected function TypeAssocUserTeamDeleteByTeamId($InstanceTypeAssocUserTeam, $Debug)
+	protected function TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription($InstanceTypeAssocUserTeam, $Debug)
 	{
 		if($InstanceTypeAssocUserTeam != NULL)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeAssocUserTeamDeleteByTeamId($this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(), $Debug);
+			$return = $FacedePersistence->TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription(
+				                                                       $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
+																	   $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS', 
 																				$this->Language); 
 				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
@@ -2425,24 +2420,24 @@ class Page
 		}
 	}
 	
-	protected function TypeAssocUserTeamInsert($InputValueTypeAssocUserTeamTeamDescription, $Debug)
+	protected function TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeAssocUserTeamTeamDescription = $InputValueTypeAssocUserTeamTeamDescription;
+		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION;
-		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamTeamDescriptionClass;
+		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamTeamDescription; 
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION_SIZE');
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -2451,7 +2446,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamTeamDescription, $Debug);
+			$return = $FacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamDescription, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS', 
@@ -2475,9 +2470,8 @@ class Page
 			$this->Session->GetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
 		if($InstanceTypeAssocUserTeam != NULL)
 		{
-			$this->InputValueTypeAssocUserTeamTeamDescription  = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
-			$this->InputValueTypeAssocUserTeamTeamId           = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamTeamId();
-			$this->InputValueRegisterDate                      = $InstanceTypeAssocUserTeam->GetRegisterDate();
+			$this->InputValueRegisterDate                  = $InstanceTypeAssocUserTeam->GetRegisterDate();
+			$this->InputValueTypeAssocUserTeamDescription  = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription();
 			return Config::SUCCESS;
 		}
 		else return Config::ERROR;
@@ -2500,24 +2494,25 @@ class Page
 		else return Config::SUCCESS;
 	}
 	
-	protected function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$InstanceTypeAssocUserTeam, $Debug)
+	protected function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeAssocUserTeamTeamId = $TypeAssocUserTeamTeamId;
+		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamTeamIdClass;
+		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamTeamId; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamTeamIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
@@ -2525,9 +2520,9 @@ class Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeAssocUserTeamSelectByTeamId($this->InputValueTypeAssocUserTeamTeamId, 
-																		  $InstanceTypeAssocUserTeam,
-																		  $Debug);
+			$return = $FacedePersistence->TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamDescription, 
+																		                        $InstanceTypeAssocUserTeam,
+																		                        $Debug);
 			if($return == Config::SUCCESS)
 			{
 				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::SUCCESS)
@@ -2537,30 +2532,31 @@ class Page
 				}	
 			}
 		}
-		$this->ReturnTypeAssocUserTeamTeamIdText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_NOT_FOUND', $this->Language);
+		$this->ReturnTypeAssocUserTeamDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_NOT_FOUND', 
+																								 $this->Language);
 		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		return Config::FORM_TYPE_ASSOC_USER_TEAM_RETURN_NOT_FOUND;
 	}
 	
-	protected function TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, &$TypeAssocUserTeam, $Debug)
+	protected function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueTypeAssocUserTeamTeamDescription = $TypeAssocUserTeamTeamDescription;
-		$this->InputFocus = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION;
+		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
+		$this->InputFocus = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION;
-		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamTeamDescriptionClass;
+		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamTeamDescription; 
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION','FORM_INVALID_TYPE_ASSOC_TEAM_TEAM_DESCRIPTION_SIZE');
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION','FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -2570,14 +2566,15 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeAssocUserTeamUpdateByTeamId($this->InputValueTypeAssocUserTeamTeamDescription,
-																		  $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId(),
-																		  $Debug);
+			$return = $FacedePersistence->TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription(
+				                                                             $this->InputValueTypeAssocUserTeamDescription,
+																		     $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
+																		     $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->TypeAssocUserTeam->SetTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamTeamDescription);
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam);
-				if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == Config::SUCCESS)
+				$InstanceTypeAssocUserTeam->SetTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamDescription);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
+				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::SUCCESS)
 				{
 					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
 					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS 
@@ -2603,11 +2600,12 @@ class Page
 		return Config::ERROR;	
 	}
 	
-	protected function TypeStatusTicketDeleteByTypeStatusTicketId(&$InstanceTypeStatusTicket, $Debug)
+	protected function TypeStatusTicketDeleteByTypeStatusTicketDescription(&$InstanceTypeStatusTicket, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TypeStatusTicketDeleteByTypeStatusTicketId($InstanceTypeStatusTicket->GetTypeStatusTicketId(), 
-																                         $Debug);
+		$return = $instanceFacedePersistence->TypeStatusTicketDeleteByTypeStatusTicketDescription(
+			                                                                $InstanceTypeStatusTicket->GetTypeStatusTicketDescription(), 
+																            $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
@@ -2691,7 +2689,6 @@ class Page
 		if($InstanceTypeStatusTicket != NULL)
 		{
 			$this->InputValueTypeStatusTicketDescription  = $InstanceTypeStatusTicket->GetTypeStatusTicketDescription();
-			$this->InputValueTypeStatusTicketId           = $InstanceTypeStatusTicket->GetTypeStatusTicketId();
 			$this->InputValueRegisterDate                 = $InstanceTypeStatusTicket->GetRegisterDate();
 			return Config::SUCCESS;
 		}
@@ -2770,59 +2767,7 @@ class Page
 		}
 	}
 	
-	protected function TypeStatusTicketSelectByTypeStatusTicketId($TypeStatusTicketId, &$InstanceTypeStatusTicket, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeStatusTicketId = $TypeStatusTicketId;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_TYPE_STATUS_TICKET_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeStatusTicketIdClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeStatusTicketId; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeStatusTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_ID',
-									'FORM_INVALID_TYPE_STATUS_TICKET_ID_SIZE');
-		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
-		{
-			$return = $instanceFacedePersistence->TypeStatusTicketSelectByTypeStatusTicketId($this->InputValueTypeStatusTicketId, 
-												  					                         $this->InstanceTypeStatusTicket,
-																		                     $Debug);
-			if($return == Config::SUCCESS)
-			{
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
-				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
-				return Config::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnTypeStatusTicketIdText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TYPE_STATUS_TICKET_RETURN_NOT_FOUND;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function TypeStatusTicketUpdateByTypeStatusTicketId($TypeStatusTicketDescriptionNew, &$InstanceTypeStatusTicket, $Debug)
+	protected function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, &$InstanceTypeStatusTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTypeStatusTicketDescription  = $TypeStatusTicketDescriptionNew;
@@ -2851,9 +2796,9 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->TypeStatusTicketUpdateByTypeStatusTicketId(
+			$return = $instanceFacedePersistence->TypeStatusTicketUpdateByTypeStatusTicketDescription(
 				                                                               $this->InputValueTypeStatusTicketDescription,
-																			   $InstanceTypeStatusTicket->GetTypeStatusTicketId(),
+																			   $InstanceTypeStatusTicket->GetTypeStatusTicketDescription(),
 																			   $Debug);
 			if($return == Config::SUCCESS)
 			{

@@ -695,8 +695,7 @@ class En
 	const TYPE                                                    = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                    = "Error obtaining types of association";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                  = "Types of association obtained succefully";
-	const TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION                   = "Description";
-	const TYPE_ASSOC_USER_TEAM_TEAM_ID                            = "Id";
+	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                        = "Description";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                          = "Type of association between a user and a team not found";
 	const TYPE_SERVICE_NAME                                       = "Type Service Name";
 	const TYPE_STATUS_TICKET_DESCRIPTION                          = "Description";

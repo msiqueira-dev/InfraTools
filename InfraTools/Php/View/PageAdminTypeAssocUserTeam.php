@@ -35,8 +35,9 @@ if (!class_exists("TypeAssocUserTeam"))
 
 class PageAdminTypeAssocUserTeam extends PageAdmin
 {
-	protected $TypeAssocUserTeam      = NULL;
-	public    $ArrayTypeAssocUserTeam = NULL;
+	protected $InstanceTypeAssocUserTeam             = NULL;
+	public    $ArrayInstanceTypeAssocUserTeam        = NULL;
+	public    $ArrayInstanceTypeAssocUserTeamMembers = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -56,136 +57,146 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
-		
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//TYPE ASSOC USER TEAM LIST
-		if($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST))
+		//FORM_CORPORATION_SELECT_SUBMIT
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->TypeAssocUserTeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										   $this->ArrayTypeAssocUserTeam, $rowCount,
-										   $this->InputValueHeaderDebug);
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT))
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
-		//TYPE ASSOC USER TEAM LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK))
+		//FORM_DEPARTMENT_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->TypeAssocUserTeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										   $this->ArrayTypeAssocUserTeam, $rowCount,
-										   $this->InputValueHeaderDebug);
+			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+										    &$this->InstanceInfraToolsDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//TYPE ASSOC USER TEAM LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_FORWARD))
+		//FORM_TYPE_ASSOC_USER_TEAM_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			if($this->InputLimitOne > 250)
-				$this->InputLimitOne = 250;
-			if($this->InputLimitTwo > 275)
-				$this->InputLimitTwo = 275;
-			$this->TypeAssocUserTeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										   $this->ArrayTypeAssocUserTeam, $rowCount,
-										   $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->TypeAssocUserTeamSelect($this->InputLimitOne, $this->InputLimitTwo, 
-											   $this->ArrayTypeAssocUserTeam, $rowCount,
-											   $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
+			if($this->ExecuteFunction($_POST, 'TypeAssocUserTeamSelect', 
+									  array(&$this->ArrayInstanceTypeAssocUserTeam),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST;
 		}
-		//TYPE ASSOC USER TEAM LIST SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_SELECT_SUBMIT]))
-		{
-			if($this->TypeAssocUserTeamSelectByTeamId($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_SELECT_SUBMIT],
-													  $this->TypeAssocUserTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
-		}
-		//TYPE ASSOC USER TEAM REGISTER
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER))
+		//FORM_TYPE_ASSOC_USER_TEAM_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER;
-		//TYPE ASSOC USER TEAM REGISTER CANCEL
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL]))
+		//FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
-		//TYPE ASSOC USER TEAM REGISTER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT]))
+		//FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->TypeAssocUserTeamInsert($_POST[Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION], 
-													 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->ExecuteFunction($_POST, 'TypeAssocUserTeamInsert', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER;
 		}
-		//TYPE ASSOC USER TEAM SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT]))
+		//FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->TypeAssocUserTeamSelectByTeamId($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_SELECT_SUBMIT],
-													  $this->TypeAssocUserTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
+			if($this->ExecuteFunction($_POST, 'TypeAssocUserTeamSelectByTypeAssocUserTeamDescription', 
+											  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION],
+													&$this->InstanceTypeAssocUserTeam),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			{
+					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, "TypeAssocUserTeamLoadData", 
+												  $this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
+			}
 		}
-		//TYPE ASSOC USER TEAM VIEW DELETE SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT]))
+		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam) 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, "TypeAssocUserTeamLoadData", 
+										  $this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription', 
+										  array($this->InstanceTypeAssocUserTeam),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
+			}
+		}
+		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS
+		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS]))
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->InstanceTypeAssocUserTeam)  
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeAssocUserTeamDeleteByTeamId($this->TypeAssocUserTeam, 
-														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
+				$this->InputLimitOne = 0;
+				$this->InputLimitTwo = 25;
+				if($this->UserSelectByTypeAssocUserTeamDescription($this->InputLimitOne, $this->InputLimitTwo, 
+														           $this->InstanceTypeAssocUserTeam->GetTeamDescription(),
+										                           $this->ArrayInstanceTypeAssocUserTeamMembers, $rowCount, 
+																   $this->InputValueHeaderDebug) 
+				                                        == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS;
 				else
 				{
-					if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+					if($this->TypeAssocUserTeamLoadData($this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
 					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
 				}
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
 		}
-		//TYPE ASSOC USER TEAM VIEW UPDATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT]))
+		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, "TypeAssocUserTeamLoadData", 
+										  $this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE;
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
 		}
-		//TYPE ASSOC USER TEAM VIEW UPDATE CANCEL
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_UPDATE_CANCEL]))
+		//FORM_TYPE_ASSOC_USER_TEAM_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->TypeAssocUserTeamLoadData($this->TypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, "TypeAssocUserTeamLoadData", 
+										  $this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
 		}
-		//TYPE ASSOC USER TEAM VIEW UPDATE SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_UPDATE_SUBMIT]))
+		//FORM_TYPE_ASSOC_USER_TEAM_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->TypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, 
+														$this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeAssocUserTeamUpdateByTeamId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_TEAM_DESCRIPTION],
-														  $this->TypeAssocUserTeam, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE;
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TYPE_ASSOC_USER_TEAM_SELECT;
-		} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
+				$this->ExecuteFunction($_POST, 'TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription', 
+									   array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION],
+					                         &$this->InstanceTypeAssocUserTeam),
+									   $this->InputValueHeaderDebug);
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;	
+			}
+		}
+		//FORM_TYPE_USER_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserId', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID],
+									        &$this->InstanceTypeUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+		}
+		//FORM_USER_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+									        &$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

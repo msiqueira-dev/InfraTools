@@ -834,26 +834,26 @@ class InfraToolsFacedePersistenceDataBase
 		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_ASSIGNED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription,  
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_CANCELED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_COMPLETED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_FINISHED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_IN_PROGRESS', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_NEW', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_NULLFIED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_PAUSED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_REJECTED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_WARNING', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_ASSIGNED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription)  
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_CANCELED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_COMPLETED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_FINISHED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_IN_PROGRESS', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_NEW', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_NULLFIED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_PAUSED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_REJECTED', DEFAULT)");
+			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_WARNING', DEFAULT)");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;

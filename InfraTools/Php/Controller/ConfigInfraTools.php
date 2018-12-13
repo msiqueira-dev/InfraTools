@@ -385,7 +385,6 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_ASSOC_USER_TEAM_LIST                                = "FormTypeAssocUserTeamList";
 	const FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK                           = "FormTypeAssocUserTeamListBack";
 	const FORM_TYPE_ASSOC_USER_TEAM_LIST_FORWARD                        = "FormTypeAssocUserTeamListForward";
-	const FORM_TYPE_ASSOC_USER_TEAM_LIST_SELECT_SUBMIT                  = "FormTypeAssocUserTeamListSelectSubmit";
 	const FORM_TYPE_ASSOC_USER_TEAM_REGISTER                            = "FormTypeAssocUserTeamReturnRegister";
 	const FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL                     = "FormTypeAssocUserTeamReturnCancel";
 	const FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT                     = "FormTypeAssocUserTeamReturnSubmit";
@@ -395,6 +394,9 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_ASSOC_USER_TEAM_UPDATE_CANCEL                       = "FormTypeAssocUserTeamUpdateCancel";
 	const FORM_TYPE_ASSOC_USER_TEAM_UPDATE_SUBMIT                       = "FormTypeAssocUserTeamUpdateSubmit";
 	const FORM_TYPE_ASSOC_USER_TEAM_VIEW                                = "FormTypeAssocUserTeamView";
+	const FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS                     = "FormTypeAssocUserTeamViewListUsers";
+	const FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK                = "FormTypeAssocUserTeamViewListUsersBack";
+	const FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD             = "FormTypeAssocUserTeamViewListUsersForward";
 	const FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT                  = "FormTypeAssocUserTeamViewDeleteSubmit";
 	const FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT                  = "FormTypeAssocUserTeamViewUpdateSubmit";
 	const FORM_TYPE_MONITORING                                          = "FormTypeMonitoring";

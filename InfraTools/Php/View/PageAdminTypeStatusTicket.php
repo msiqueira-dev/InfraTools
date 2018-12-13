@@ -116,9 +116,9 @@ class PageAdminTypeStatusTicket extends PageAdmin
 		//TYPE TICKET LIST SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT]))
 		{
-			if($this->TypeStatusTicketSelectByTypeStatusTicketId($_POST[ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT],
-																 $this->InstanceTypeStatusTicket, $this->InputValueHeaderDebug) 
-			                                                     == ConfigInfraTools::SUCCESS)
+			if($this->TypeStatusTicketSelectByTypeStatusTicketDescription($_POST[ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT],
+																          $this->InstanceTypeStatusTicket, $this->InputValueHeaderDebug) 
+			                                                              == ConfigInfraTools::SUCCESS)
 			{
 				if($this->TypeStatusTicketLoadData($this->InstanceTypeStatusTicket) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW;
@@ -142,9 +142,9 @@ class PageAdminTypeStatusTicket extends PageAdmin
 		//TYPE TICKET SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT]))
 		{
-			if($this->TypeStatusTicketSelectByTypeStatusTicketId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_ID],
-			                                                     $this->InstanceTypeStatusTicket, $this->InputValueHeaderDebug) 
-			                                                     == ConfigInfraTools::SUCCESS)
+			if($this->TypeStatusTicketSelectByTypeStatusTicket($_POST[ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION],
+			                                                   $this->InstanceTypeStatusTicket, $this->InputValueHeaderDebug) 
+			                                                   == ConfigInfraTools::SUCCESS)
 			{
 				if($this->TypeStatusTicketLoadData($this->InstanceTypeStatusTicket) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW;
@@ -157,8 +157,8 @@ class PageAdminTypeStatusTicket extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_STATUS_TICKET, $this->InstanceTypeStatusTicket) 
 			   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeStatusTicketDeleteByTypeStatusTicketId($this->InstanceTypeStatusTicket, 
-														             $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeStatusTicketDeleteByTypeStatusTicketDescription($this->InstanceTypeStatusTicket, 
+														                      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT;
 				else
 				{
@@ -201,9 +201,10 @@ class PageAdminTypeStatusTicket extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_STATUS_TICKET, $this->InstanceTypeStatusTicket) 
 			   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeStatusTicketUpdateByTypeStatusTicketId($_POST[ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION],
-					                                                 $this->InstanceTypeStatusTicket, 
-																	 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeStatusTicketUpdateByTypeStatusTicketDescription(
+					                                            $_POST[ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION],
+					                                            $this->InstanceTypeStatusTicket, 
+																$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
 					if($this->TypeStatusTicketLoadData($this->InstanceTypeStatusTicket) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW;

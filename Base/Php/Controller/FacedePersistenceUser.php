@@ -21,8 +21,8 @@ Functions:
 									   $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 									   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug, $MySqlConnection);
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
-			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
-			                                        $Debug, $MySqlConnection);
+			public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+			                                            $Debug, $MySqlConnection);
 			public function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, 
 			                                       &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection);
@@ -357,7 +357,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
+	public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
@@ -366,8 +366,8 @@ class FacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserSelectByCorporation');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporation());
+				Persistence::ShowQuery('SqlUserSelectByCorporationName');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporationName());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $Limit2);
@@ -717,8 +717,7 @@ class FacedePersistenceUser
 															$row['Team' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstaceBaseTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
 							                               ($row['TypeAssocUserTeam' . Config::TABLE_FIELD_REGISTER_DATE],
-														    $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID]);
+														    $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);
 						$InstaceBaseAssocUserTeam = $this->Factory->CreateAssocUserTeam
 							                               ($row['AssocUserTeam' . Config::TABLE_FIELD_REGISTER_DATE],
 														    $InstaceBaseTeam,
@@ -1144,10 +1143,9 @@ class FacedePersistenceUser
 																	   $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
 																	   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME],
 																	   $row['Team'.Config::TABLE_FIELD_REGISTER_DATE]);
-							$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam(
-								                                       $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION],
-																	   $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID],
-																	   $row['AssocUserTeam'.Config::TABLE_FIELD_REGISTER_DATE]);
+							$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
+							                                            ($row['TypeAssocUserTeam' . Config::TABLE_FIELD_REGISTER_DATE],
+														                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);
 							$InstanceAssocUserTeam = $this->Factory->CreateAssocUserTeam
 								                                        ($row['AssocUserTeam'.Config::TABLE_FIELD_REGISTER_DATE],
 																		$InstanceTeam,
@@ -1225,7 +1223,7 @@ class FacedePersistenceUser
 	
 	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
 									      $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
-										  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
+										  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1266,7 +1264,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug)
+	public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($return == Config::SUCCESS)
@@ -1303,7 +1301,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateCorporationByUserEmail($Corporation, $UserEmail, $Debug)
+	public function UserUpdateCorporationByUserEmail($Corporation, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1340,7 +1338,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $UserEmail, $Debug)
+	public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1377,7 +1375,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug)
+	public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1414,7 +1412,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug)
+	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1449,9 +1447,9 @@ class FacedePersistenceUser
 			}
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
-	}
+	} 
 	
-	public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeId, $Debug)
+	public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeId, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1488,7 +1486,7 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug)
+	public function UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)

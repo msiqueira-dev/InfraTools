@@ -64,18 +64,16 @@ Methods:
 			public static function SqlTicketTakeOverById();
 			public static function SqlTicketUpdateById();
 			public static function SqlTicketUpdateStatusById();
-			public static function SqlTypeAssocUserTeamDeleteByTeamId();
+			public static function SqlTypeAssocUserTeamDeleteByTypeAssocUserTeamDescription();
 			public static function SqlTypeAssocUserTeamInsert();
 			public static function SqlTypeAssocUserTeamSelect();
-			public static function SqlTypeAssocUserTeamSelectByTeamDescription();
-			public static function SqlTypeAssocUserTeamSelectByTeamId();
-			public static function SqlTypeAssocUserTeamUpdateByTeamId();
-			public static function SqlTypeStatusTicketDelete();
+			public static function SqlTypeAssocUserTeamSelectByTypeAssocUserTeamDescription();
+			public static function SqlTypeAssocUserTeamUpdateByTypeAssocUserTeamDescription();
+			public static function SqlTypeStatusTicketDeleteByTypeStatusTicketDescription();
 			public static function SqlTypeStatusTicketInsert();
 			public static function SqlTypeStatusTicketSelect();
-			public static function SqlTypeStatusTicketSelectByDescription();
-			public static function SqlTypeStatusTicketSelectByTypeStatusTicketId();
-			public static function SqlTypeStatusTicketUpdateByTypeStatusTicketId();
+			public static function SqlTypeStatusTicketSelectByTypeStatusTicketDescription();
+			public static function SqlTypeStatusTicketUpdateByTypeStatusTicketDescription();
 			public static function SqlTypeTicketDeleteByTypeTicketDescription();
 			public static function SqlTypeTicketInsert();
 			public static function SqlTypeTicketSelect();
@@ -94,7 +92,7 @@ Methods:
 			public static function SqlUserDeleteByUserEmail();
 			public static function SqlUserInsert();
 			public static function SqlUserSelect();
-			public static function SqlUserSelectByCorporation();
+			public static function SqlUserSelectByCorporationName();
 			public static function SqlUserSelectByDepartment();
 			public static function SqlUserSelectByHashCode();
 			public static function SqlUserSelectByTeamId();
@@ -625,107 +623,83 @@ class Persistence
 	{
 	}
 	
-	public static function SqlTypeAssocUserTeamDeleteByTeamId()
+	public static function SqlTypeAssocUserTeamDeleteByTypeAssocUserTeamDescription()
 	{
 		return "DELETE FROM " . Config::TABLE_TYPE_ASSOC_USER_TEAM . " "  
-		     . "WHERE "       . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID." = ?";	
+		     . "WHERE "       . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . " =UPPER(?)";
 	}
 	
 	public static function SqlTypeAssocUserTeamInsert()
 	{
 		return "INSERT INTO " . Config::TABLE_TYPE_ASSOC_USER_TEAM                   . " "
 			 . "("            . Config::TABLE_FIELD_REGISTER_DATE                    . ","
-		     . " "            . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . ","
-			 . " "            . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . ")"
-		     . " VALUES (NOW(), UPPER(?), DEFAULT)";
+		     . " "            . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . ")"
+		     . " VALUES (NOW(), UPPER(?))";
 	}
 	
 	public static function SqlTypeAssocUserTeamSelect()
 	{
 		return "SELECT "   . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE                    . ", "
 		                   . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . ", "
-					       . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . ", "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_ASSOC_USER_TEAM . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_TYPE_ASSOC_USER_TEAM . " " 
-			 . "ORDER BY " . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . "  "
+			 . "ORDER BY " . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . "  "
 			 . "LIMIT ?, ?";
 	}
 	
-	public static function SqlTypeAssocUserTeamSelectByTeamDescription()
+	public static function SqlTypeAssocUserTeamSelectByTypeAssocUserTeamDescription()
 	{
 		return "SELECT " . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE                    . ", "
-		                 . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . ", "
-					     . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . "  " 
+		                 . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . "  "
 		     . "FROM  "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . " " 
-	         . "WHERE "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . "=?";
+	         . "WHERE "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . "=UPPER(?)";
 	}
 	
-	public static function SqlTypeAssocUserTeamSelectByTeamId()
+	public static function SqlTypeAssocUserTeamUpdateByTypeAssocUserTeamDescription()
 	{
-		return "SELECT " . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE                    . ", "
-		                 . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . ", "
-					     . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . "  " 
-		     . "FROM  "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . " " 
-	         . "WHERE "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . " =? ";
+		return "UPDATE " . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                              . " "  
+		     . "SET    " . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                              . "." . 
+				           Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION                                            . " =UPPER(?) "
+		     . "WHERE "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . " =UPPER(?)";
 	}
 	
-	public static function SqlTypeAssocUserTeamUpdateByTeamId()
-	{
-		return "UPDATE " . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                     . " "  
-		     . "SET    " . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                     . "." . 
-				           Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION                                   . " =UPPER(?) "
-		     . "WHERE "  . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID . " =? ";
-	}
-	
-	public static function SqlTypeStatusTicketDelete()
+	public static function SqlTypeStatusTicketDeleteByTypeStatusTicketDescription()
 	{
 		return "DELETE FROM " . Config::TABLE_TYPE_STATUS_TICKET . " "  
-		     . "WHERE "       . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID . " =? ";
+		     . "WHERE "       . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . " =UPPER(?)";
 	}
 	
 	public static function SqlTypeStatusTicketInsert()
 	{
 		return "INSERT INTO " . Config::TABLE_TYPE_STATUS_TICKET                   . " "
 			 . "("            . Config::TABLE_FIELD_REGISTER_DATE                  . ","
-		     . " "            . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ","
-			 . " "            . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . ")"
-		     . " VALUES (NOW(), UPPER(?), DEFAULT)";
+		     . " "            . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ")"
+		     . " VALUES (NOW(), UPPER(?))";
 	}
 	
 	public static function SqlTypeStatusTicketSelect()
 	{
-		return "SELECT "   . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
+		return "SELECT "   . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE                  . ", "
 		                   . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ", "
-					       . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . ", "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_TICKET . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_TYPE_STATUS_TICKET . " " 
-			 . "ORDER BY " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "  "
+			 . "ORDER BY " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "  "
 			 . "LIMIT ?, ?";
 	}
 	
-	public static function SqlTypeStatusTicketSelectByDescription()
+	public static function SqlTypeStatusTicketSelectByTypeStatusTicketDescription()
 	{
-		return "SELECT " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
-		                 . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ", "
-					     . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "  " 
+		return "SELECT " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE                  . ", "
+		                 . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ", " 
 		     . "FROM  "  . Config::TABLE_TYPE_STATUS_TICKET . " " 
-	         . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=?";
+	         . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=UPPER(?)";
 	}
 	
-	public static function SqlTypeStatusTicketSelectByTypeStatusTicketId()
-	{
-		return "SELECT " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE           . ", "
-		                 . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ", "
-					     . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "  " 
-		     . "FROM  "  . Config::TABLE_TYPE_STATUS_TICKET . " "
-	         . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "=?";
-	}
-	
-	public static function SqlTypeStatusTicketUpdateByTypeStatusTicketId()
+	public static function SqlTypeStatusTicketUpdateByTypeStatusTicketDescription()
 	{
 		return "UPDATE " . Config::TABLE_TYPE_STATUS_TICKET . " "  
 		     . "SET    " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=UPPER(?) "
-		     . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_ID          . "=? ";
+		     . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=UPPER(?) ";
 	}
 	
 	public static function SqlTypeTicketDeleteByTypeTicketDescription()
@@ -951,7 +925,7 @@ class Persistence
 	
 	
 	
-	public static function SqlUserSelectByCorporation()
+	public static function SqlUserSelectByCorporationName()
 	{
 		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                          . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                             . ", "
@@ -1192,7 +1166,6 @@ class Persistence
 		. Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  " 
 	    . "as AssocUserTeamRegisterDate, "     
         . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION          . ", " 
-		. Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID                   . ", " 
         . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  "
 		. "as TypeAssocUserTeamRegisterDate, "
         . Config::TABLE_TEAM                  .".". Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION                     . ", " 
@@ -1230,7 +1203,7 @@ class Persistence
 		. "= "          . Config::TABLE_TEAM                   .".". Config::TABLE_TEAM_FIELD_TEAM_ID                           ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_ASSOC_USER_TEAM   ." "
 		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE              ." "
-		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID                ." "
+		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION       ." "
 		. "WHERE "      . Config::TABLE_TEAM                   .".". Config::TABLE_TEAM_FIELD_TEAM_ID                           ."=? "
 		. "ORDER BY "   . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                              ." "
 		. "LIMIT ?, ?";	
@@ -1281,8 +1254,7 @@ class Persistence
         . Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE                 . ", "
 		. Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  " 
 	    . "as AssocUserTeamRegisterDate, "     
-        . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION          . ", " 
-		. Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID                   . ", " 
+        . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION          . ", "
         . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  "
 		. "as TypeAssocUserTeamRegisterDate, "
         . Config::TABLE_TEAM                  .".". Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION                     . ", " 
@@ -1320,8 +1292,8 @@ class Persistence
 		. "= "          . Config::TABLE_TEAM                   .".". Config::TABLE_TEAM_FIELD_TEAM_ID                           ." "
 		. "LEFT JOIN  " . Config::TABLE_TYPE_ASSOC_USER_TEAM   ." "
 		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE              ." "
-		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID                ." "
-		. "WHERE "      . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                        . "=? "
+		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION       ." "
+		. "WHERE "      . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           . "=? "
 		. "ORDER BY "   . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                              ." "
 		. "LIMIT ?, ?";		
 	}
@@ -1474,17 +1446,16 @@ class Persistence
 			 . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE                                    . "  "
 			 . "AS TeamRegisterDate, "
 			 . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . ", "
-			 . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID          . ", "
 			 . Config::TABLE_TYPE_ASSOC_USER_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE                    . "  "
 			 . "AS TypeAssocUserTeamRegisterDate "
-		     . "FROM  "           . Config::TABLE_ASSOC_USER_TEAM                                                             . " " 
-		     . "INNER JOIN "      . Config::TABLE_TEAM                                                                        . " "
-			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM . "."   . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID       . " = "
-			                      . Config::TABLE_TEAM            . "."   . Config::TABLE_TEAM_FIELD_TEAM_ID                  . " "
-			 . "INNER JOIN "      . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                        . " "
-			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM         . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID . " = "
-			                      . Config::TABLE_TYPE_ASSOC_USER_TEAM    . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_ID . "   "
-		     . "WHERE "  . Config::TABLE_ASSOC_USER_TEAM . "."            . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL    ." = ?";
+		     . "FROM  "           . Config::TABLE_ASSOC_USER_TEAM                                                                      . "   " 
+		     . "INNER JOIN "      . Config::TABLE_TEAM                                                                                 . "   "
+			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM . "."   . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID                . " = "
+			                      . Config::TABLE_TEAM            . "."   . Config::TABLE_TEAM_FIELD_TEAM_ID                           . "   "
+			 . "INNER JOIN "      . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                                 . "   "
+			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM         . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID          . " = "
+			                      . Config::TABLE_TYPE_ASSOC_USER_TEAM    . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . "   "
+		     . "WHERE "  . Config::TABLE_ASSOC_USER_TEAM . "."            . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL             ." = ?";
 	}
 	
 	public static function SqlUserUpdateActiveByUserEmail()

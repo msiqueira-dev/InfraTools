@@ -1,22 +1,13 @@
 <!-- FORM TYPE ASSOC USER TEAM VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW; ?>" method="post" >
-    <!-- ID -->
-    <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('ID').":"; ?></label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeAssocUserTeamTeamId; ?></label>
-        </div>
-    </div>
-    <!-- DESCRIPTION -->
+    <!-- TYPE_ASSOC_USER_TEAM_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeAssocUserTeamTeamDescription;?></label>
+            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeAssocUserTeamDescription;?></label>
         </div>
     </div>
     <!-- REGISTER_DATE -->
@@ -39,6 +30,10 @@
                    class="DivContentBodySubmitBigger"
                    value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
                    onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
+        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS; ?>" 
+                   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS; ?>"
+                   class="DivContentBodySubmitBigger"
+                   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
     </div>
 </form>
 <div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
