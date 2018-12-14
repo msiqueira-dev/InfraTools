@@ -1039,7 +1039,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$return = $this->AssocUserServiceInsert($mySqlConnection->insert_id, $UserEmail,
-													1, $Debug, $mySqlConnection);
+													1, $Debug, $mySqlConnection, FALSE);
 			if($return == ConfigInfraTools::SUCCESS)
 				$mySqlConnection->commit();
 			else $mySqlConnection->rollback();

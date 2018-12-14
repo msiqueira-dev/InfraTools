@@ -260,6 +260,7 @@ class Config
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT                        = "Page_Admin_Type_Assoc_User_Team_Select";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE                        = "Page_Admin_Type_Assoc_User_Team_Update";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW                          = "Page_Admin_Type_Assoc_User_Team_View";
+	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS               = "Page_Admin_Type_Assoc_User_Team_View_List_Users";
 	const PAGE_ADMIN_TYPE_STATUS_TICKET                                 = "Page_Admin_Type_Status_Ticket";
 	const PAGE_ADMIN_TYPE_STATUS_TICKET_LIST                            = "Page_Admin_Type_Status_Ticket_List";
 	const PAGE_ADMIN_TYPE_STATUS_TICKET_REGISTER                        = "Page_Admin_Type_Status_Ticket_Register";

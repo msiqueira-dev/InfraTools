@@ -50,7 +50,7 @@ Methods:
 		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew,$DepartmentNameNew, 
 		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
-		protected     function        LoadHtml($HasLoginForm);
+		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE;);
 		protected     function        PageStackSessionLoad();
 		protected     function        PageStackSessionRemoveAll();
 		protected     function        PageStackSessionSave();
@@ -116,7 +116,9 @@ Methods:
 		protected     function        UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
 		                                                     &$ArrayInstanceDepartmentUsers, &$RowCount, Debug);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
-		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
+		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
+		                                                                       &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug);
 		protected     function        UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug);
@@ -1530,7 +1532,7 @@ class Page
 		}	
 	}
 	
-	protected function LoadHtml($HasLoginForm)
+	protected function LoadHtml($HasLoginForm, $EnableDivPush = TRUE)
 	{
 		$page = str_replace("_", "", $this->GetCurrentPage());
 		echo Config::HTML_TAG_DOCTYPE;
@@ -1555,8 +1557,11 @@ class Page
 				else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
 			}
 			else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
+			if($EnableDivPush)
+			{
+				echo "<div class='DivPush'></div>";
+				echo "</div>";
+			}
 			include_once(REL_PATH . Config::PATH_FOOTER);
 			echo Config::HTML_TAG_BODY_END;
 			echo Config::HTML_TAG_END;
@@ -3976,13 +3981,56 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $TeamId, $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
 		}
 		else
 		{
 			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_SELECT_USERS_ERROR', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
+							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			return Config::ERROR;
+		}
+	}
+	
+	protected function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
+																&$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
+																						   $ArrayInstanceUser, $RowCount, $Debug);
+			if($return == Config::SUCCESS)
+				return Config::SUCCESS;
+		}
+		else
+		{
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_FAILED', $this->Language);
 			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";

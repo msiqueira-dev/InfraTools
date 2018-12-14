@@ -54,13 +54,17 @@ if(is_array($this->ArrayInstanceTypeAssocUserTeamMembers))
 		echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
-		                                     id='"   . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
-							                 value='" . $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' 
-										     title='" . $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' />
+							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
+							 id='"     . ConfigInfraTools::FORM_FIELD_TEAM_ID . "'
+							 value='"  . $user->GetAssocUserTeamTeamIdByIndex(0) . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
+										 id='"       . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
+							                 value='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' 
+										     title='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' />
 						</form>
 				  </td>";
 		echo "<td class='TableGenericTdLink'>

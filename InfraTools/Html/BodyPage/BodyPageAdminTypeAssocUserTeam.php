@@ -72,36 +72,79 @@
 				</div>
 			</div>
 		</form>
-		<?php 
-		//LIST
+		<?php
+		//PAGE_ADMIN_CORPORATION_VIEW
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_DEPARTMENT_VIEW
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_TEAM_LIST
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_LIST)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_LIST)) . ".php");
+		}
+		//PAGE_ADMIN_TEAM_VIEW
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_LIST)) . ".php");
 		}
-		//REGISTER
+		//PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", 
+													  ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS)) . ".php");
+		}
+		//PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_REGISTER)) . ".php");
 		}
-		//SELECT
+		//PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT)) . ".php");
 		}
-		//UPDATE
+		//PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDATE)) . ".php");
 		}
-		//VIEW
+		//PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_TYPE_USER_VIEW
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_USER_VIEW
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_USER_VIEW)) . ".php");
 		}
 		?>
     </div>

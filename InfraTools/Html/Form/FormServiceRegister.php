@@ -237,7 +237,6 @@
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ACTIVE'); ?></label>
-			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
 		<div class="DivContentBodyContainerValue">

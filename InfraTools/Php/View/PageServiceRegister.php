@@ -95,16 +95,29 @@ class PageServiceRegister extends PageInfraTools
 											   $this->InputValueServiceType,
 											   $this->User->GetEmail(),
 											   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					Page::GetCurrentDomain($domain);
-					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
-					   			                  str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SELECT));
-				}
-				
 				$returnClass = $this->ReturnClass;
 				$returnImage = $this->ReturnImage;
 				$returnText  = $this->ReturnText;
+				$return = $this->TypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, 
+														  $this->InputValueHeaderDebug);
+				if($return == ConfigInfraTools::SUCCESS)
+				{
+					$return = $this->CorporationSelectOnUserServiceContextNoLimit(
+						                     $this->User->GetEmail(),
+											 $this->ArrayInstanceInfraToolsCorporation, 
+											 $this->InputValueHeaderDebug);
+					if($return == ConfigInfraTools::SUCCESS)
+					{
+						$return = $this->DepartmentSelectOnUserServiceContextNoLimit(
+							             $this->User->GetCorporationName(),
+										 $this->User->GetEmail(),
+										 $this->ArrayInstanceInfraToolsDepartment, 
+										 $this->InputValueHeaderDebug);
+					}
+				}
+				$this->ReturnClass = $returnClass;
+				$this->ReturnImage = $returnImage;
+				$this->ReturnText  = $returnText;
 			}
 			if(!isset($_GET[ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT]) || $return != ConfigInfraTools::SUCCESS)
 			{

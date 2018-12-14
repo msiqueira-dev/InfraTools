@@ -74,7 +74,7 @@ class PageServiceSelect extends PageInfraTools
 					if($return == ConfigInfraTools::SUCCESS)
 					{
 						$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
-						$this->ServiceLoadData();
+						$this->ServiceLoadData($this->InstanceInfraToolsService);
 						$this->ReturnImage = $retImage;
 						$this->ReturnClass = $retClass;
 						$this->ReturnText  = $retText;
@@ -95,7 +95,7 @@ class PageServiceSelect extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
-					$this->ServiceLoadData();
+					$this->ServiceLoadData($this->InstanceInfraToolsService);
 					$this->ReturnImage = "";
 					$this->ReturnClass = "DivDisplayNone";
 					$this->ReturnText  = "";
@@ -202,7 +202,7 @@ class PageServiceSelect extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
-					$this->ServiceLoadData();
+					$this->ServiceLoadData($this->InstanceInfraToolsService);
 					$this->ReturnImage = "";
 					$this->ReturnClass = "DivDisplayNone";
 					$this->ReturnText  = "";

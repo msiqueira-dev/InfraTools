@@ -30,7 +30,7 @@ Methods:
 			protected function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 			                                 $ServiceDepartment, $ServiceDepartmentCanChange, 
 										     $ServiceDescription, $ServiceName, $ServiceType, $Debug);
-			protected function ServiceLoadData();
+			protected function ServiceLoadData($InstanceInfraToolsService);
 			protected function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug);
 			protected function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                              &$RowCount, $Debug);
@@ -544,7 +544,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsInput[0]        = $ServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
 		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
@@ -684,18 +684,18 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function ServiceLoadData()
+	protected function ServiceLoadData($InstanceInfraToolsService)
 	{
-		if($this->InstanceInfraToolsService != NULL)
+		if($InstanceInfraToolsService != NULL)
 		{
-			$this->InputValueRegisterDate       = $this->InstanceInfraToolsService->GetRegisterDate();
-			$this->InputValueServiceActive      = $this->InstanceInfraToolsService->GetServiceActive();
-			$this->InputValueServiceCorporation = $this->InstanceInfraToolsService->GetServiceCorporation();
-			$this->InputValueServiceDepartment  = $this->InstanceInfraToolsService->GetServiceDepartment();
-			$this->InputValueServiceDescription = $this->InstanceInfraToolsService->GetServiceDescription();
-			$this->InputValueServiceId          = $this->InstanceInfraToolsService->GetServiceId();
-			$this->InputValueServiceName        = $this->InstanceInfraToolsService->GetServiceName();
-			$this->InputValueServiceType        = $this->InstanceInfraToolsService->GetServiceTypeName();
+			$this->InputValueRegisterDate       = $InstanceInfraToolsService->GetRegisterDate();
+			$this->InputValueServiceActive      = $InstanceInfraToolsService->GetServiceActive();
+			$this->InputValueServiceCorporation = $InstanceInfraToolsService->GetServiceCorporation();
+			$this->InputValueServiceDepartment  = $InstanceInfraToolsService->GetServiceDepartment();
+			$this->InputValueServiceDescription = $InstanceInfraToolsService->GetServiceDescription();
+			$this->InputValueServiceId          = $InstanceInfraToolsService->GetServiceId();
+			$this->InputValueServiceName        = $InstanceInfraToolsService->GetServiceName();
+			$this->InputValueServiceType        = $InstanceInfraToolsService->GetServiceTypeName();
 			if($this->InputValueServiceActive)
 			$this->InputValueServiceActive = $this->Config->DefaultServerImage .
 																  'Icons/IconInfraToolsVerified.png';
@@ -2609,7 +2609,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceId = $ServiceId;
 		$this->InputFocus = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
-
+		
 		//SERVICE_ACTIVE
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
@@ -2617,8 +2617,8 @@ abstract class PageInfraTools extends Page
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 8; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsMaxValue[0]     = 0; 
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
 		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);

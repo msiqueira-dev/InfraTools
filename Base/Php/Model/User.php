@@ -11,6 +11,8 @@ Description:
 Get / Set: 
 			public function GetArrayAssocUserTeam();
 			public function GetArrayNotification();
+			public function GetAssocUserTeamTeamIdByIndex($Index);
+			public function GetAssocUserTeamTeamNameByIndex($Index);
 			public function GetAssocUserCorporation();
 			public function GetAssocUserCorporationUserRegistrationDate();
 			public function GetAssocUserCorporationUserRegistrationDateDay();
@@ -78,6 +80,7 @@ Methods:
 			public function CheckCorporationActive();
 			public function CheckDepartmentExists();
 			public function CheckSuperUser();
+			public function PushArrayAssocUserTeam($AssocUserTeam);
 			public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
 									   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
@@ -156,6 +159,26 @@ class User
 	public function GetArrayNotification()
 	{
 		return $this->ArrayNotification;
+	}
+	
+	public function GetAssocUserTeamTeamIdByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam[$Index]->GetTeamId();
+		}
+		return NULL;
+	}
+	
+	public function GetAssocUserTeamTeamNameByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam[$Index]->GetTeamName();
+		}
+		return NULL;
 	}
 	
 	public function GetAssocUserCorporation()
@@ -550,6 +573,21 @@ class User
 			else return FALSE;
 		}
 		else return FALSE;
+	}
+	
+	public function PushArrayAssocUserTeam($AssocUserTeam)
+	{
+		if($AssocUserTeam != NULL)
+		{
+			if(is_object($AssocUserTeam))
+			{
+				if($this->ArrayAssocUserTeam == NULL)
+					$this->ArrayAssocUserTeam = array();
+				array_push($this->ArrayAssocUserTeam, $AssocUserTeam);
+				return Config::SUCCESS;
+			}
+		}
+		return Config::ERROR;
 	}
 	
 	public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 

@@ -57,7 +57,7 @@ class PageHome extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$this->LoadHtml(FALSE);
+		$this->LoadHtml(FALSE, FALSE);
 	}
 }
 ?>

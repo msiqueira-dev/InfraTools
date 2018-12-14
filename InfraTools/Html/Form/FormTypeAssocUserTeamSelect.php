@@ -72,6 +72,7 @@
 	<label>
 		<?php if(isset($this->ReturnEmptyText))                        echo $this->ReturnEmptyText; ?>
 		<?php if(isset($this->ReturnTypeAssocUserTeamDescriptionText)) echo $this->ReturnTypeAssocUserTeamDescriptionText; ?>
+		<?php if(isset($this->ReturnUserEmailText))                    echo $this->ReturnUserEmailText; ?>
 		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>

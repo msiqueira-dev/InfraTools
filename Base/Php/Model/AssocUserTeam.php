@@ -10,6 +10,7 @@ Description:
 Get / Set:		
 			public function GetRegisterDate();
 			public function GetTeam();
+			public function GetTeamId();
 			public function GetTeamName();
 			public function GetTypeAssocUserTeam();
 			public function GetTypeAssocUserTeamTeamDescription();
@@ -61,6 +62,12 @@ class AssocUserTeam
 	public function GetTeam()
 	{
 		return $this->Team;
+	}
+	
+	public function GetTeamId()
+	{
+		if($this->Team != NULL)
+			return $this->Team->GetTeamId();
 	}
 	
 	public function GetTeamName()

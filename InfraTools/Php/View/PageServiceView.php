@@ -62,7 +62,7 @@ class PageServiceView extends PageInfraTools
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-				$this->ServiceLoadData();
+				$this->ServiceLoadData($this->InstanceInfraToolsService);
 				$this->ReturnImage = "";
 				$this->ReturnClass = "DivDisplayNone";
 				$this->ReturnText  = "";
@@ -96,7 +96,7 @@ class PageServiceView extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-					$this->ServiceLoadData();
+					$this->ServiceLoadData($this->InstanceInfraToolsService);
 					$this->ReturnImage = $retImage;
 					$this->ReturnClass = $retClass;
 					$this->ReturnText  = $retText;
@@ -118,7 +118,7 @@ class PageServiceView extends PageInfraTools
 											              $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->ServiceLoadData();
+					$this->ServiceLoadData($this->InstanceInfraToolsService);
 					if($this->InstanceInfraToolsService->GetServiceActive())
 						$this->InputValueServiceActive = "checked";
 					else $this->InputValueServiceActive = "";
@@ -151,7 +151,7 @@ class PageServiceView extends PageInfraTools
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-				$this->ServiceLoadData();
+				$this->ServiceLoadData($this->InstanceInfraToolsService);
 				$this->ReturnImage = "DivDisplayNone";
 				$this->ReturnClass = "";
 				$this->ReturnText  = "";
@@ -178,33 +178,40 @@ class PageServiceView extends PageInfraTools
 														      $this->InputValueServiceType, 
 															  $this->InputValueServiceId, 
 															  $this->InputValueHeaderDebug);
+			$returnImage = $this->ReturnImage;
+			$returnClass = $this->ReturnClass;
+			$returnText  = $this->ReturnText;
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														               $this->User->GetEmail(), 
-														           $this->InstanceInfraToolsService,
-																   $this->InputValueTypeAssocUserServiceId,
-			                                                       $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-					$this->ServiceLoadData();
-					$this->ReturnImage = "DivDisplayNone";
-					$this->ReturnClass = "";
-					$this->ReturnText  = "";
-				}
-				else
-				{
-					Page::GetCurrentDomain($domain);
-					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
-								          str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SELECT));
-				}
+				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
+				$this->ReturnImage = "DivDisplayNone";
+				$this->ReturnClass = "";
+				$this->ReturnText  = "";
 			}
+			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+															       $this->User->GetEmail(), 
+														   		   $this->InstanceInfraToolsService,
+														           $this->InputValueTypeAssocUserServiceId,
+														           $this->InputValueHeaderDebug);
+			if($return != ConfigInfraTools::SUCCESS)
+			{
+				Page::GetCurrentDomain($domain);
+				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
+									  str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SELECT));
+			}
+			else
+			{
+				$this->ServiceLoadData($this->InstanceInfraToolsService);
+				$this->ReturnImage = $returnImage;
+				$this->ReturnClass = $returnClass;
+				$this->ReturnText  = $returnText;
+			}
+			
 		}
 		elseif($this->InstanceInfraToolsService != NULL)
 		{
 			$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-			$this->ServiceLoadData();
+			$this->ServiceLoadData($this->InstanceInfraToolsService);
 		}
 		else
 		{
