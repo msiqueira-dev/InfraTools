@@ -818,9 +818,9 @@ class Es
 	const DEPARTMENT_DELETE_ERROR                           = "";
 	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "";
 	const DEPARTMENT_DELETE_SUCCESS                         = "";
-	const DEPARTMENT_INSERT_ERROR                         = "";
-	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS       = "";
-	const DEPARTMENT_INSERT_SUCCESS                       = "";
+	const DEPARTMENT_INSERT_ERROR                           = "";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "";
+	const DEPARTMENT_INSERT_SUCCESS                         = "";
 	const DEPARTMENT_SELECT_USERS_ERROR                     = "";
 	const DEPARTMENT_UPDATE_ERROR                           = "";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "";
@@ -830,8 +830,8 @@ class Es
 	const NOTIFICATION_DELETE_SUCCESS                       = "";
 	const NOTIFICATION_INVALID_TEXT                         = "";
 	const NOTIFICATION_INVALID_TEXT_SIZE                    = "";
-	const NOTIFICATION_INSERT_ERROR                       = "";
-	const NOTIFICATION_INSERT_SUCCESS                     = "";
+	const NOTIFICATION_INSERT_ERROR                         = "";
+	const NOTIFICATION_INSERT_SUCCESS                       = "";
 	const NOTIFICATION_UPDATE_ERROR                         = "";
 	const NOTIFICATION_UPDATE_SUCCESS                       = "";
 	
@@ -841,9 +841,10 @@ class Es
 	const TEAM_DELETE_SUCCESS                               = "";
 	const TEAM_INVALID_DESCRIPTION                          = "";
 	const TEAM_INVALID_DESCRIPTION_SIZE                     = "";
-	const TEAM_INSERT_ERROR                               = "";
-	const TEAM_INSERT_SUCCESS                             = "";
+	const TEAM_INSERT_ERROR                                 = "";
+	const TEAM_INSERT_SUCCESS                               = "";
 	const TEAM_SELECT_USERS_ERROR                           = "";
+	const TEAM_SELECT_USERS_WARNING                         = "";
 	const TEAM_UPDATE_ERROR                                 = "";
 	const TEAM_UPDATE_SUCCESS                               = "";
 	
@@ -864,8 +865,8 @@ class Es
 	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "";
 	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "";
 	const TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "";
-	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR               = "";
-	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS             = "";
+	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR                 = "";
+	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS               = "";
 	const TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "";
 	const TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "";
 	

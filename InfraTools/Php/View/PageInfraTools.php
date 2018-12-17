@@ -235,8 +235,8 @@ abstract class PageInfraTools extends Page
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ReturnText  = "";
-			$this->ReturnClass = "";
-			$this->ReturnImage = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
 			return $return;
 		}
 		else
@@ -258,11 +258,7 @@ abstract class PageInfraTools extends Page
 																                      $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -284,11 +280,7 @@ abstract class PageInfraTools extends Page
 																			                 $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -333,11 +325,7 @@ abstract class PageInfraTools extends Page
 																				   $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -382,11 +370,7 @@ abstract class PageInfraTools extends Page
 																				   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -443,10 +427,7 @@ abstract class PageInfraTools extends Page
 			$return = $FacedePersistenceInfraTools->ServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -495,10 +476,7 @@ abstract class PageInfraTools extends Page
 			$return = $FacedePersistenceInfraTools->ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			elseif($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
@@ -660,10 +638,7 @@ abstract class PageInfraTools extends Page
 																  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_INSERT_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_INSERT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -762,11 +737,7 @@ abstract class PageInfraTools extends Page
 																				 $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -818,11 +789,7 @@ abstract class PageInfraTools extends Page
 																				        $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -876,11 +843,7 @@ abstract class PageInfraTools extends Page
 																							  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -933,11 +896,7 @@ abstract class PageInfraTools extends Page
 																									 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -989,11 +948,7 @@ abstract class PageInfraTools extends Page
 																				 $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1045,11 +1000,7 @@ abstract class PageInfraTools extends Page
 																				             $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1104,11 +1055,7 @@ abstract class PageInfraTools extends Page
 																							       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1163,11 +1110,7 @@ abstract class PageInfraTools extends Page
 																							       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1235,11 +1178,7 @@ abstract class PageInfraTools extends Page
 																					 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1305,11 +1244,7 @@ abstract class PageInfraTools extends Page
 																					        $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1378,11 +1313,7 @@ abstract class PageInfraTools extends Page
 																					              $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1450,11 +1381,7 @@ abstract class PageInfraTools extends Page
 																					              $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1503,11 +1430,7 @@ abstract class PageInfraTools extends Page
 			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceId($ServiceId, $InstanceInfraToolsService, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1560,11 +1483,7 @@ abstract class PageInfraTools extends Page
 																						  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1618,11 +1537,7 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1673,11 +1588,7 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1732,11 +1643,7 @@ abstract class PageInfraTools extends Page
 																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1789,11 +1696,7 @@ abstract class PageInfraTools extends Page
 																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1845,11 +1748,7 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1900,11 +1799,7 @@ abstract class PageInfraTools extends Page
 																			          $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -1958,11 +1853,7 @@ abstract class PageInfraTools extends Page
 																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2014,11 +1905,7 @@ abstract class PageInfraTools extends Page
 																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2073,11 +1960,7 @@ abstract class PageInfraTools extends Page
 			                                                                            $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2133,11 +2016,7 @@ abstract class PageInfraTools extends Page
 			                                                                            $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2195,11 +2074,7 @@ abstract class PageInfraTools extends Page
 			                                                                            $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2255,11 +2130,7 @@ abstract class PageInfraTools extends Page
 			                                                                                   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2311,11 +2182,7 @@ abstract class PageInfraTools extends Page
 																		$Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_USER_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2366,11 +2233,7 @@ abstract class PageInfraTools extends Page
 																		       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_USER_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			else
@@ -2400,11 +2263,7 @@ abstract class PageInfraTools extends Page
 																	 $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2565,11 +2424,7 @@ abstract class PageInfraTools extends Page
 															                 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_BY_ID_SUCCESS', 
-																				$this->Language);
+				$this->ShowDivReturnSuccess("SERVICE_UPDATE_BY_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
@@ -2679,11 +2534,7 @@ abstract class PageInfraTools extends Page
 															                         $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS', 
-																				$this->Language);
+				$this->ShowDivReturnSuccess("SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
 			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
@@ -2725,11 +2576,7 @@ abstract class PageInfraTools extends Page
 																			$Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2750,11 +2597,7 @@ abstract class PageInfraTools extends Page
 																			      $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2778,12 +2621,7 @@ abstract class PageInfraTools extends Page
 																			            $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2807,12 +2645,7 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2835,11 +2668,7 @@ abstract class PageInfraTools extends Page
 																  $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2860,11 +2689,7 @@ abstract class PageInfraTools extends Page
 																	     $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2889,11 +2714,7 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2915,11 +2736,7 @@ abstract class PageInfraTools extends Page
 																					  $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
 		else
@@ -2945,12 +2762,7 @@ abstract class PageInfraTools extends Page
 		{
 			$InstanceInfraToolsUser->SetTwoStepVerification($TwoStepVerification);
 			$this->InputValueTwoStepVerification = $InstanceInfraToolsUser->GetTwoStepVerification();
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																			 'USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS', 
-																			  $this->Language);
+			$this->ShowDivReturnSuccess("USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS");
 		}
 		elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
 		{

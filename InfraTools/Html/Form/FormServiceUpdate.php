@@ -1,3 +1,23 @@
+<!-- DIV_RETURN -->	
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+    	<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText ?>
+	    <?php if(isset($this->ReturnServiceActiveText))               echo $this->ReturnServiceActiveText; ?>
+	    <?php if(isset($this->ReturnServiceCorporationText))          echo $this->ReturnServiceCorporationText; ?>
+	    <?php if(isset($this->ReturnServiceCorporationCanChangeText)) echo $this->ReturnServiceCorporationCanChangeText; ?>
+	    <?php if(isset($this->ReturnServiceDepartmentText))           echo $this->ReturnServiceDepartmentText; ?>
+	    <?php if(isset($this->ReturnServiceDepartmentCanChangeText))  echo $this->ReturnServiceDepartmentCanChangeText; ?>
+	    <?php if(isset($this->ReturnServiceDescriptionText))          echo $this->ReturnServiceDescriptionText; ?>
+	    <?php if(isset($this->ReturnServiceNameText))                 echo $this->ReturnServiceNameText; ?>
+	    <?php if(isset($this->ReturnServiceTypeText))                 echo $this->ReturnServiceTypeText; ?>
+		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM SERVICE UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" 
       id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" method="POST" >
@@ -232,22 +252,3 @@
 	</div>
 </form>
 <div class="DivClearFloat"></div>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-    	<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText ?>
-	    <?php if(isset($this->ReturnServiceActiveText))               echo $this->ReturnServiceActiveText; ?>
-	    <?php if(isset($this->ReturnServiceCorporationText))          echo $this->ReturnServiceCorporationText; ?>
-	    <?php if(isset($this->ReturnServiceCorporationCanChangeText)) echo $this->ReturnServiceCorporationCanChangeText; ?>
-	    <?php if(isset($this->ReturnServiceDepartmentText))           echo $this->ReturnServiceDepartmentText; ?>
-	    <?php if(isset($this->ReturnServiceDepartmentCanChangeText))  echo $this->ReturnServiceDepartmentCanChangeText; ?>
-	    <?php if(isset($this->ReturnServiceDescriptionText))          echo $this->ReturnServiceDescriptionText; ?>
-	    <?php if(isset($this->ReturnServiceNameText))                 echo $this->ReturnServiceNameText; ?>
-	    <?php if(isset($this->ReturnServiceTypeText))                 echo $this->ReturnServiceTypeText; ?>
-		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
-	</label>
-</div>

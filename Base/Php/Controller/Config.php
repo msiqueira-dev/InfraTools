@@ -321,6 +321,7 @@ class Config
 	const SESS_ADMIN_TYPE_TICKET                                        = "SessionAdminTypeTicket";
 	const SESS_ADMIN_TYPE_USER                                          = "SessionAdminTypeUser";
 	const SESS_ADMIN_USER                                               = "SessionAdminUser";
+	const SESS_CONTACT_EMAIL                                            = "SessionContactEmail";
 	const SESS_DEBUG                                                    = "SessionDebug";
 	const SESS_DEVICE_LAYOUT                                            = "SessionDeviceLayout";
 	const SESS_LAST_ACTIVITY                                            = "SessionLastActivity";
@@ -331,7 +332,7 @@ class Config
 	const SESS_PASSWORD_RECOVERY                                        = "SessionPasswordRecovery";
 	const SESS_UNLIMITED                                                = "SessionUnlimited";
 	const SESS_USER                                                     = "SessionUser";
-	const TYPE_USER_SUPER                                               = "Super Administrator";
+	const TYPE_USER_SUPER                                               = "SUPER_ADMINISTRATOR";
 	const USER_ACTIVE                                                   = 1;
 	const USER_NOT_CONFIRMED                                            = "UserNotConfirmed";
 	const USER_NOT_LOGGED_IN                                            = "UserNotLoggedIn";

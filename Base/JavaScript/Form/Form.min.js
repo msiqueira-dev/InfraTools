@@ -929,7 +929,7 @@ function ValidateTeamName(DefaultInputClass, InputId, DefaultSubmitClass, Submit
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
-	var $filter = /^[a-zA-Z_.-]{2,45}$/;
+	var $filter = /^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])*)*$/;
 	if ($input.value != $input.title && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 

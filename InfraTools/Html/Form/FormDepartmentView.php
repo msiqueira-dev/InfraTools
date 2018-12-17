@@ -1,3 +1,15 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText)) echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM DEPARRTMENT VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW; ?>" method="post" >
@@ -61,14 +73,3 @@
 	}
 	?>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText)) echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
-	</label>
-</div>

@@ -153,7 +153,7 @@ class FacedeBusiness
 	public function SendEmailContact($Application, $EmailAddress, $Message, $Name, $Subject, $Title, $Debug)
 	{
 		$Session = $this->Factory->CreateSession();
-		$Session->GetSessionValue(Config::CONTACT_EMAIL_SESSION, $emailSession);
+		$Session->GetSessionValue(Config::SESS_CONTACT_EMAIL, $emailSession);
 		$today = date("Ymd"); $hour = date("H"); $minute = date("i");
 		$emailHourMinute = $today . "_" . $hour . "_" . $minute;
 		if ($emailSession != NULL)
@@ -186,7 +186,7 @@ class FacedeBusiness
 							                $EmailAddress, $subject, $body);
 			if($return == Config::SUCCESS)
 			{
-				$Session->SetSessionValue(Config::CONTACT_EMAIL_SESSION, $emailHourMinute);
+				$Session->SetSessionValue(Config::SESS_CONTACT_EMAIL, $emailHourMinute);
 				return Config::SUCCESS;
 			}
 			else

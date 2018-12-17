@@ -159,7 +159,12 @@ class PageForm
 					}
 					if($MatrixOptions[$index] != NULL)
 					{
-							echo " - $MatrixOptions[$index]";	
+						if(is_array($MatrixOptions[$index]))
+						{
+							foreach($MatrixOptions[$index] as $value)
+								echo " - $value";
+						}
+						else echo " - $MatrixOptions[$index]";	
 					}
 					echo "<br>";
 				}

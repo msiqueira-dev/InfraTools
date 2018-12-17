@@ -53,13 +53,17 @@
 .DivContentBodyContainerCaptcha{width:550px;height:35px;margin-top:20px;}
 .DivContentBodyContainerCaptcha input[type="text"]{width:150px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
 .DivContentBodyContainerCaptchaImage{clear:both;position:relative;bottom:7px;}
-.DivReturnMessageImage{width:64px !important;height:auto;min-height:100px;float:right}
-.DivReturnMessageImage div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
 .DivReturnMessageSuccess{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#8DEE6D;border:none;}
+.DivReturnMessageSuccess div{width:64px !important;height:auto;min-height:100px;float:right; display:block !important;}
+.DivReturnMessageSuccess div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
 .DivReturnMessageSuccess label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageError{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#FFC1C1;}
+.DivReturnMessageError div{width:64px !important;height:auto;min-height:100px;float:right; display:block !important;}
+.DivReturnMessageError div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
 .DivReturnMessageError label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageWarning{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#faebcc;}
+.DivReturnMessageWarning div{width:64px !important;height:auto;min-height:100px;float:right;display:block !important;}
+.DivReturnMessageWarning div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
 .DivReturnMessageWarning label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageWarning a{width:auto;height:auto;font-weight:bold;position:relative;left:12px;top:8px;}
 .SelectBirthDateDay{width:100px !important;height:30px !important;}

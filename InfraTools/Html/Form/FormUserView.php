@@ -1,3 +1,25 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php 
+			if($this->ReturnLoginText == ConfigInfraTools::USER_NOT_CONFIRMED)
+			{
+				echo $this->InstanceLanguageText->GetText('USER_NOT_CONFIRMED');
+				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . str_replace("_", "", ConfigInfraTools::PAGE_LOGIN) 
+							          . "Link.php");
+			}
+			else
+			{
+				if(isset($this->ReturnText)) echo $this->ReturnText;
+			}
+		?>
+	</label>
+</div>
 <!-- WEB SITE BODY USER VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_USER_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_USER_VIEW; ?>" method="post" >
@@ -416,24 +438,3 @@
 	}
 	?>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php 
-			if($this->ReturnLoginText == ConfigInfraTools::USER_NOT_CONFIRMED)
-			{
-				echo $this->InstanceLanguageText->GetText('USER_NOT_CONFIRMED');
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . str_replace("_", "", ConfigInfraTools::PAGE_LOGIN) 
-							          . "Link.php");
-			}
-			else
-			{
-				if(isset($this->ReturnText)) echo $this->ReturnText;
-			}
-		?>
-	</label>
-</div>

@@ -122,7 +122,7 @@ class FormValidator
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME)
 			return $this->ValidateCorporationName($Value, $DefaultValue);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING)
-			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption);
+			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption[0]);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_NAME)
 			return $this->ValidateCountryName($Value, $DefaultValue);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE)

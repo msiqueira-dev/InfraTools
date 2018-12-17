@@ -808,7 +808,6 @@ class ConfigInfraTools extends Config
 	
 	/* Constantes de Formulário da Página Contact */
 	const CONTACT_EMAIL_LABEL                                       = "ContactEmailLabel";
-	const CONTACT_EMAIL_SESSION                                     = "ContactEmailSession";
 	const CONTACT_FORM                                              = "ContactForm";
 	const CONTACT_FORM_SUBMIT                                       = "ContactFormSubmit";
 	const CONTACT_MESSAGE                                           = "ContactMessage";

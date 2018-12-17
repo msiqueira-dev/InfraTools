@@ -1,3 +1,16 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText))    echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnPasswordText)) echo $this->ReturnPasswordText; ?>
+		<?php if(isset($this->ReturnText))         echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM USER CHANGE PASSWORD -->
 <form name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>" 
       id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>" method="post">
@@ -211,15 +224,3 @@
                                  value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SUBMIT_CANCEL'); ?>" />
     </div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText))    echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnPasswordText)) echo $this->ReturnPasswordText; ?>
-		<?php if(isset($this->ReturnText))         echo $this->ReturnText; ?>
-	</label>
-</div>

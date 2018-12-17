@@ -1,3 +1,16 @@
+<!-- DIV_RETURN -->	
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTypeStatusTicketDescriptionText)) echo $this->ReturnTypeStatusTicketDescriptionText; ?>
+		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM TYPE STATUS TICKET SELECT -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT; ?>" method="post" >
@@ -60,15 +73,3 @@
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTypeStatusTicketDescriptionText)) echo $this->ReturnTypeStatusTicketDescriptionText; ?>
-		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
-	</label>
-</div>

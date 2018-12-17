@@ -1,3 +1,26 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<?php
+		if($this->ReturnLoginText == ConfigInfraTools::USER_NOT_CONFIRMED)
+		{
+			echo "<label>" . $this->InstanceLanguageText->GetText('USER_NOT_CONFIRMED') . "</label>";
+			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . str_replace("_","",ConfigInfraTools::PAGE_LOGIN) . "Link.php");
+			$this->ReturnLoginText = "";
+			$this->ReturnEmptyText = "";
+			$this->ReturnText = "";
+		} 
+	?>
+	<label>
+		<?php if(isset($this->ReturnEmptyText)) echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnLoginText)) echo $this->ReturnLoginText; ?>
+		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM LOGIN -->
 <form name="<?php echo ConfigInfraTools::LOGIN_FORM; ?>" 
 	  id="<?php echo ConfigInfraTools::LOGIN_FORM; ?>" method="post" >
@@ -82,25 +105,3 @@
 	</div>
 	<div class="DivClearFloat"></div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<?php
-		if($this->ReturnLoginText == ConfigInfraTools::USER_NOT_CONFIRMED)
-		{
-			echo "<label>" . $this->InstanceLanguageText->GetText('USER_NOT_CONFIRMED') . "</label>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . str_replace("_","",ConfigInfraTools::PAGE_LOGIN) . "Link.php");
-			$this->ReturnLoginText = "";
-			$this->ReturnEmptyText = "";
-			$this->ReturnText = "";
-		} 
-	?>
-	<label>
-		<?php if(isset($this->ReturnEmptyText)) echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnLoginText)) echo $this->ReturnLoginText; ?>
-		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
-	</label>
-</div>

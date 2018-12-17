@@ -1,3 +1,23 @@
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+    	<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText ?>
+	    <?php if(isset($this->ReturnServiceActiveText))               echo $this->ReturnServiceActiveText; ?>
+	    <?php if(isset($this->ReturnServiceCorporationText))          echo $this->ReturnServiceCorporationText; ?>
+	    <?php if(isset($this->ReturnServiceCorporationCanChangeText)) echo $this->ReturnServiceCorporationCanChangeText; ?>
+	    <?php if(isset($this->ReturnServiceDepartmentText))           echo $this->ReturnServiceDepartmentText; ?>
+	    <?php if(isset($this->ReturnServiceDepartmentCanChangeText))  echo $this->ReturnServiceDepartmentCanChangeText; ?>
+	    <?php if(isset($this->ReturnServiceDescriptionText))          echo $this->ReturnServiceDescriptionText; ?>
+	    <?php if(isset($this->ReturnServiceNameText))                 echo $this->ReturnServiceNameText; ?>
+	    <?php if(isset($this->ReturnServiceTypeText))                 echo $this->ReturnServiceTypeText; ?>
+		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
+	</label>
+</div>
+<div class="DivClearFloat"></div>
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER; ?>" 
       id="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER; ?>" method="get" >
 	<!-- SERVICE_NAME -->
@@ -108,7 +128,12 @@
 					      ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
-											   '', true);"
+											   '', true);
+                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>');
+                                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                                               .disabled = false;
+				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                                               .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				class="SelectTypeService">
 				<option <?php if ($this->InputValueServiceType == "" 
 								  || $this->InputValueServiceType == ConfigInfraTools::FORM_SELECT_NONE) 
@@ -144,7 +169,24 @@
 			<select 
 				name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION; ?>" 
 				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION; ?>"
-				class="SelectCorporation">
+				class="SelectCorporation"
+				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+								   		       'DivContentBodySubmitBigger',
+								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								               '', true);
+						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+											   'DivContentBodySubmitBigger',
+											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '', true);
+					      ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+											   'DivContentBodySubmitBigger',
+											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '', true);
+                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION; ?>');
+                                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                                               .disabled = false;
+				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                                               .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				<option <?php if ($this->InputValueServiceCorporation == "" 
 								  || $this->InputValueServiceCorporation == ConfigInfraTools::FORM_SELECT_NONE) 
 					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
@@ -193,7 +235,24 @@
 			<select 
 				name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT; ?>" 
 				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT; ?>"
-				class="SelectDepartment">
+				class="SelectDepartment"
+				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+								   		       'DivContentBodySubmitBigger',
+								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								               '', true);
+						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+											   'DivContentBodySubmitBigger',
+											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '', true);
+					      ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+											   'DivContentBodySubmitBigger',
+											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '', true);
+                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT; ?>');
+                                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                                               .disabled = false;
+				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                                               .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				<option <?php if ($this->InputValueServiceDepartment == "" 
 								  || $this->InputValueServiceDepartment == ConfigInfraTools::FORM_SELECT_NONE) 
 					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
@@ -269,24 +328,4 @@
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>
-<div class="DivClearFloat"></div>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-    	<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText ?>
-	    <?php if(isset($this->ReturnServiceActiveText))               echo $this->ReturnServiceActiveText; ?>
-	    <?php if(isset($this->ReturnServiceCorporationText))          echo $this->ReturnServiceCorporationText; ?>
-	    <?php if(isset($this->ReturnServiceCorporationCanChangeText)) echo $this->ReturnServiceCorporationCanChangeText; ?>
-	    <?php if(isset($this->ReturnServiceDepartmentText))           echo $this->ReturnServiceDepartmentText; ?>
-	    <?php if(isset($this->ReturnServiceDepartmentCanChangeText))  echo $this->ReturnServiceDepartmentCanChangeText; ?>
-	    <?php if(isset($this->ReturnServiceDescriptionText))          echo $this->ReturnServiceDescriptionText; ?>
-	    <?php if(isset($this->ReturnServiceNameText))                 echo $this->ReturnServiceNameText; ?>
-	    <?php if(isset($this->ReturnServiceTypeText))                 echo $this->ReturnServiceTypeText; ?>
-		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
-	</label>
-</div>
 <div class="DivClearFloat"></div>

@@ -58,13 +58,8 @@ class PageRegisterConfirmation extends PageInfraTools
 			$return = $this->UserSelectUserActiveByHashCode($hashCode, $active, $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				if ($active)
-				{		
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_ALREADY_CONFIRMED', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . 
-										                ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				}
+				if ($active)	
+					$this->ShowDivReturnSuccess("REGISTER_CONFIRMATION_ALREADY_CONFIRMED");
 				else
 				{
 					$return = $this->UserUpdateUserConfirmedByHashCode(TRUE, $hashCode, $this->InputValueHeaderDebug);

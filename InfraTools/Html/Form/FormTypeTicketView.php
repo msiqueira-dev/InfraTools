@@ -1,3 +1,15 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
+		<?php if(isset($this->ReturnTypeTicketDescriptionText)) echo $this->ReturnTypeTicketDescriptionText; ?>
+	</label>
+</div>
 <!-- FORM TYPE TICKET VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW; ?>" method="post" >
@@ -32,14 +44,3 @@
                    onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
     </div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
-		<?php if(isset($this->ReturnTypeTicketDescriptionText)) echo $this->ReturnTypeTicketDescriptionText; ?>
-	</label>
-</div>

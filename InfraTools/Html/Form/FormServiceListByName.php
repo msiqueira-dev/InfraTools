@@ -48,12 +48,16 @@ if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsServi
 						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
+	echo "<input type='hidden'     name='" . ConfigInfraTools::FORM_FIELD_SERVICE_NAME . "' 
+		                           id='"   . ConfigInfraTools::FORM_FIELD_SERVICE_NAME . "' 
+							       value='" . $this->InputValueServiceName. "' 
+								   title='" . $this->InputValueServiceName . "' />";
 	echo "</form>";
 	foreach($this->ArrayInfraToolsService as $key=>$infraToolsService)
 	{
 		echo "<tr class='TableGenericTr'>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID . "' method='post' />
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID . "' method='get' />
 					<input type='submit' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 									   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 									   value='" . $infraToolsService->GetServiceId() . "' 
@@ -61,7 +65,7 @@ if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsServi
 			  	</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_NAME_AND_ID . "' method='post' />
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_NAME_AND_ID . "' method='get' />
 			    	<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 			  					   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 								   value='" . $infraToolsService->GetServiceId() . "' />

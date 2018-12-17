@@ -1,3 +1,26 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText))                    echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnNameText))                     echo $this->ReturnNameText; ?>
+		<?php if(isset($this->ReturnUserUniqueIdText))             echo $this->ReturnUserUniqueIdText; ?>
+		<?php if(isset($this->ReturnBirthDateDayText))             echo $this->ReturnBirthDateDayText; ?>
+		<?php if(isset($this->ReturnBirthDateMonthText))           echo $this->ReturnBirthDateMonthText; ?>
+		<?php if(isset($this->ReturnBirthDateYearText))            echo $this->ReturnBirthDateYearText; ?>
+		<?php if(isset($this->ReturnUserPhonePrimaryText))         echo $this->ReturnUserPhonePrimaryText; ?>
+		<?php if(isset($this->ReturnUserPhonePrimaryPrefixText))   echo $this->ReturnUserPhonePrimaryPrefixText; ?>
+		<?php if(isset($this->ReturnUserPhoneSecondaryText))       echo $this->ReturnUserPhoneSecondaryText; ?>
+		<?php if(isset($this->ReturnUserPhoneSecondaryPrefixText)) echo $this->ReturnUserPhoneSecondaryPrefixText; ?>
+		<?php if(isset($this->ReturnGenderText))                   echo $this->ReturnGenderText; ?>
+		<?php if(isset($this->ReturnText))                         echo $this->ReturnText; ?>
+
+	</label>
+</div>
 <!-- WEB SITE BODY PAGE ACCOUNT UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>" 
       id="<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>" method="post" >
@@ -649,25 +672,3 @@
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText))                    echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnNameText))                     echo $this->ReturnNameText; ?>
-		<?php if(isset($this->ReturnUserUniqueIdText))             echo $this->ReturnUserUniqueIdText; ?>
-		<?php if(isset($this->ReturnBirthDateDayText))             echo $this->ReturnBirthDateDayText; ?>
-		<?php if(isset($this->ReturnBirthDateMonthText))           echo $this->ReturnBirthDateMonthText; ?>
-		<?php if(isset($this->ReturnBirthDateYearText))            echo $this->ReturnBirthDateYearText; ?>
-		<?php if(isset($this->ReturnUserPhonePrimaryText))         echo $this->ReturnUserPhonePrimaryText; ?>
-		<?php if(isset($this->ReturnUserPhonePrimaryPrefixText))   echo $this->ReturnUserPhonePrimaryPrefixText; ?>
-		<?php if(isset($this->ReturnUserPhoneSecondaryText))       echo $this->ReturnUserPhoneSecondaryText; ?>
-		<?php if(isset($this->ReturnUserPhoneSecondaryPrefixText)) echo $this->ReturnUserPhoneSecondaryPrefixText; ?>
-		<?php if(isset($this->ReturnGenderText))                   echo $this->ReturnGenderText; ?>
-		<?php if(isset($this->ReturnText))                         echo $this->ReturnText; ?>
-
-	</label>
-</div>

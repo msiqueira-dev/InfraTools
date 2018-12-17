@@ -859,9 +859,9 @@ class En
 	const DEPARTMENT_DELETE_ERROR                           = "Error deleting department";
 	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Department has users associated, remove them first";
 	const DEPARTMENT_DELETE_SUCCESS                         = "Department deleted succesfully";
-	const DEPARTMENT_INSERT_ERROR                         = "Error while trying to register department";
-	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS       = "Department already exists for that corporation";
-	const DEPARTMENT_INSERT_SUCCESS                       = "Department registered succesfully";
+	const DEPARTMENT_INSERT_ERROR                           = "Error while trying to register department";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "Department already exists for that corporation";
+	const DEPARTMENT_INSERT_SUCCESS                         = "Department registered succesfully";
 	const DEPARTMENT_SELECT_USERS_ERROR                     = "Error while trying to select users from department";
 	const DEPARTMENT_UPDATE_ERROR                           = "Error updating department";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "Department updated succesfully";
@@ -871,8 +871,8 @@ class En
 	const NOTIFICATION_DELETE_SUCCESS                       = "Notification deleted succefully";
 	const NOTIFICATION_INVALID_TEXT                         = "Invalid text";
 	const NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantity of characters exceeds the maximum allowed on text";
-	const NOTIFICATION_INSERT_ERROR                       = "Error while inserting notification";
-	const NOTIFICATION_INSERT_SUCCESS                     = "Notification inserted succesfully";
+	const NOTIFICATION_INSERT_ERROR                         = "Error while inserting notification";
+	const NOTIFICATION_INSERT_SUCCESS                       = "Notification inserted succesfully";
 	const NOTIFICATION_UPDATE_ERROR                         = "Error updating notification";
 	const NOTIFICATION_UPDATE_SUCCESS                       = "Notification updated succesfully";
 	
@@ -883,9 +883,10 @@ class En
 	const TEAM_INVALID_DESCRIPTION                          = "Invalid description";
 	const TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantity of characters exceeds the maximum allowed on "
 		                                                          . "description";
-	const TEAM_INSERT_ERROR                               = "Error while trying to register team";
-	const TEAM_INSERT_SUCCESS                             = "Team registered succesfully";
+	const TEAM_INSERT_ERROR                                 = "Error while trying to register team";
+	const TEAM_INSERT_SUCCESS                               = "Team registered succesfully";
 	const TEAM_SELECT_USERS_ERROR                           = "Error while trying to select users from team";
+	const TEAM_SELECT_USERS_WARNING                         = "No users were found for this team";
 	const TEAM_UPDATE_ERROR                                 = "Error while trying to update team";
 	const TEAM_UPDATE_SUCCESS                               = "Team updated succesfully";
 	

@@ -101,6 +101,7 @@ class PageContact extends PageInfraTools
 			array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($matrixOptions, $arrayOptions);
+			$arrayOptions = array();
 			
 			//FORM_FIELD_USER_EMAIL
 			$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
@@ -115,6 +116,7 @@ class PageContact extends PageInfraTools
 			array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($matrixOptions, $arrayOptions);
+			$arrayOptions = array();
 			
 			//FORM_FIELD_TICKET_TYPE
 			$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_TICKET_TYPE;
@@ -147,6 +149,7 @@ class PageContact extends PageInfraTools
 			array_push($arrayConstants, 'FORM_INVALID_TICKET_TITLE', 'FORM_INVALID_TICKET_TITLE_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($matrixOptions, $arrayOptions);
+			$arrayOptions = array();
 			
 			//FORM_FIELD_TICKET_DESCRIPTION
 			$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION;
@@ -158,10 +161,10 @@ class PageContact extends PageInfraTools
 			$arrayElementsMaxValue[4]     = 500; 
 			$arrayElementsNullable[4]     = FALSE;
 			$arrayElementsText[4]         = &$this->ReturnTicketDescriptionText;
-			array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE',
-					                    'FILL_REQUIRED_FIELDS');
+			array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($matrixOptions, $arrayOptions);
+			$arrayOptions = array();
 			
 			//FORM_CAPTCHA_CONTACT
 			$arrayElements[5]             = ConfigInfraTools::FORM_CAPTCHA_CONTACT;
@@ -179,12 +182,11 @@ class PageContact extends PageInfraTools
 			array_push($arrayOptions, $captcha);
 			array_push($matrixOptions, $arrayOptions);
 			$arrayOptions = array();
-			
 			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $Debug, $matrixOptions);
+												$matrixConstants, $this->InputValueHeaderDebug, $matrixOptions);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
@@ -197,13 +199,7 @@ class PageContact extends PageInfraTools
 																 					$this->InputValueTicketTitle,
 																 					$this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
-				{ 
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('CONTACT_SUCCESS', 
-																						  $this->Language);
-				}
+					$this->ShowDivReturnSuccess("CONTACT_SUCCESS");
 				elseif($return == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
 				{
 					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(

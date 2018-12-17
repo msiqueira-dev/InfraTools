@@ -53,13 +53,7 @@ class PageResendConfirmationLink extends PageInfraTools
 																					 $this->User->GetEmail(),
 																					 $link, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('RESEND_CONFIRMATION_LINK_SUCCESS', 
-																	$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-											   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				}
+					$this->ShowDivReturnSuccess("RESEND_CONFIRMATION_LINK_SUCCESS");
 				else
 				{
 					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('RESEND_CONFIRMATION_LINK_ERROR', 

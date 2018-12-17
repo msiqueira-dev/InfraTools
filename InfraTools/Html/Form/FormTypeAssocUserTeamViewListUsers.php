@@ -1,3 +1,21 @@
+<!-- DIV_RETURN -->	
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText))               echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTeamNameText))            echo $this->ReturnTeamNameText; ?>
+		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
+		<?php if(isset($this->ReturnTeamDescriptionText))     echo $this->ReturnTeamDescriptionText; ?>
+		<?php if(isset($this->ReturnCorporationNameText))     echo $this->ReturnCorporationNameText; ?>
+		<?php if(isset($this->ReturnDepartmentNameText))      echo $this->ReturnDepartmentNameText; ?>
+		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
+		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS -->
 <?php
 if(is_array($this->ArrayInstanceTypeAssocUserTeamMembers))
@@ -129,20 +147,3 @@ if(is_array($this->ArrayInstanceTypeAssocUserTeamMembers))
 	echo "</table>";
 }
 ?>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText))               echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTeamNameText))            echo $this->ReturnTeamNameText; ?>
-		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
-		<?php if(isset($this->ReturnTeamDescriptionText))     echo $this->ReturnTeamDescriptionText; ?>
-		<?php if(isset($this->ReturnCorporationNameText))     echo $this->ReturnCorporationNameText; ?>
-		<?php if(isset($this->ReturnDepartmentNameText))      echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
-		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
-	</label>
-</div>

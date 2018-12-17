@@ -63,8 +63,8 @@ class PageServiceView extends PageInfraTools
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 				$this->ServiceLoadData($this->InstanceInfraToolsService);
-				$this->ReturnImage = "";
-				$this->ReturnClass = "DivDisplayNone";
+				$this->ReturnImage = "DivDisplayNone";
+				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
 			}
 		}
@@ -122,8 +122,8 @@ class PageServiceView extends PageInfraTools
 					if($this->InstanceInfraToolsService->GetServiceActive())
 						$this->InputValueServiceActive = "checked";
 					else $this->InputValueServiceActive = "";
-					$this->ReturnImage = "";
-					$this->ReturnClass = "DivDisplayNone";
+					$this->ReturnClass = "DivHidden";
+					$this->ReturnImage = "DivDisplayNone";
 					$this->ReturnText  = "";
 				}
 				else
@@ -153,7 +153,7 @@ class PageServiceView extends PageInfraTools
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 				$this->ServiceLoadData($this->InstanceInfraToolsService);
 				$this->ReturnImage = "DivDisplayNone";
-				$this->ReturnClass = "";
+				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
 			}
 			else
@@ -185,7 +185,7 @@ class PageServiceView extends PageInfraTools
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 				$this->ReturnImage = "DivDisplayNone";
-				$this->ReturnClass = "";
+				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
 			}
 			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 

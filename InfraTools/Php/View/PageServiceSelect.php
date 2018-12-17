@@ -73,7 +73,7 @@ class PageServiceSelect extends PageInfraTools
 																		   $this->InputValueHeaderDebug);
 					if($return == ConfigInfraTools::SUCCESS)
 					{
-						$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+						$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
 						$this->ServiceLoadData($this->InstanceInfraToolsService);
 						$this->ReturnImage = $retImage;
 						$this->ReturnClass = $retClass;
@@ -94,10 +94,10 @@ class PageServiceSelect extends PageInfraTools
 																	   $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+					$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
 					$this->ServiceLoadData($this->InstanceInfraToolsService);
-					$this->ReturnImage = "";
-					$this->ReturnClass = "DivDisplayNone";
+					$this->ReturnClass = "DivHidden";
+					$this->ReturnImage = "DivDisplayNone";
 					$this->ReturnText  = "";
 				}
 			}
@@ -184,8 +184,8 @@ class PageServiceSelect extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME);
-					$this->ReturnImage = "";
-					$this->ReturnClass = "";
+					$this->ReturnImage = "DivDisplayNone";
+					$this->ReturnClass = "DivHidden";
 					$this->ReturnText  = "";
 				}
 			}
@@ -201,19 +201,13 @@ class PageServiceSelect extends PageInfraTools
 																	   $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->Page = ConfigInfraTools::PAGE_SERVICE_VIEW;
+					$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
 					$this->ServiceLoadData($this->InstanceInfraToolsService);
-					$this->ReturnImage = "";
-					$this->ReturnClass = "DivDisplayNone";
+					$this->ReturnClass = "DivHidden";
+					$this->ReturnImage = "DivDisplayNone";
 					$this->ReturnText  = "";
 				}
-				else
-				{
-					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . 
-										 ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				}
+				else $this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
 			}
 			else
 			{

@@ -1,3 +1,16 @@
+<!-- DIV_RETURN -->	
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText))                        echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTypeAssocUserTeamDescriptionText)) echo $this->ReturnTypeAssocUserTeamDescriptionText; ?>
+		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM TYPE ASSOC USER TEAM UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_UPDATE; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_UPDATE; ?>" method="post">
@@ -71,15 +84,3 @@
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText))                        echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTypeAssocUserTeamDescriptionText)) echo $this->ReturnTypeAssocUserTeamDescriptionText; ?>
-		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
-	</label>
-</div>

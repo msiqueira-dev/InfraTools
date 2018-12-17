@@ -319,16 +319,9 @@ class PageAdminUser extends PageAdmin
 					                                      $this->InstanceInfraToolsUserAdmin, 
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{
-					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
-												              $this->InstanceInfraToolsUserAdmin, 
-														      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					{
-						$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
-							                                . ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-					}
+					$this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
+												           $this->InstanceInfraToolsUserAdmin, 
+														   $this->InputValueHeaderDebug);
 				}
 				else 
 				{

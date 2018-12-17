@@ -155,6 +155,10 @@ Methods:
 		public        function        LoadPageDependenciesDebug();
 		public        function        LoadPageDependenciesDevice();
 		public        function        RedirectPage($Page);
+		public        function        ShowDivReturnError($Constant);
+		public        function        ShowDivReturnEmpty();
+		public        function        ShowDivReturnSuccess($Constant);
+		public        function        ShowDivReturnWarning($Constant);
 		public        function        StartPageLoadTime();
 		public        function        StopPageLoadTime();
 		public static function        AlertMessage($Message);
@@ -308,7 +312,7 @@ class Page
 	public    $ReturnHeaderDebugClass                               = "SwitchToggleSlider";
 	public    $ReturnHeaderLayoutClass                              = "SwitchToggleSlider";
 	public    $ReturnIdClass                                        = "";
-	public    $ReturnImage                                          = "";
+	public    $ReturnImage                                          = "DivDisplayNone";
 	public    $ReturnLoginClass                                     = "";
 	public    $ReturnLoginText                                      = "";
 	public    $ReturnNameClass                                      = "";
@@ -516,12 +520,7 @@ class Page
 							return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
 						else
 						{
-							$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																		  'LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED', 
-																		  $this->Language);
-							$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-							$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								                                  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+							$this->ShowDivReturnError("LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED");
 							return Config::ERROR;
 						}
 					}
@@ -535,23 +534,9 @@ class Page
 					return Config::WARNING;
 				}
 			}
-			else
-			{
-				$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant('USER_INACTIVE', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						                              Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
+			else $this->ShowDivReturnError("USER_INACTIVE");
 		}
-		else
-		{
-			$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																		  'LOGIN_INVALID_LOGIN', 
-																		  $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							                      Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}		
+		else $this->ShowDivReturnError("LOGIN_INVALID_LOGIN");	
 	}
 	
 	private function ExecuteLoginSecondPhaseVerirication()
@@ -625,23 +610,14 @@ class Page
 		$return = $instanceFacedePersistence->CorporationDelete($CorporationName, $Debug, NULL, TRUE);
 		if($return == Config::SUCCESS)
 		{
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('CORPORATION_DELETE_SUCCESS', $this->Language); 
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess('CORPORATION_DELETE_SUCCESS');
 			return $return;
 		}
-		else
-		{
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT', 
-																			 $this->Language);	
-			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			$constant = "CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT";
+		else $constant = "CORPORATION_DELETE_ERROR";
+		$this->ShowDivReturnError($constant);
+		return Config::ERROR;
 	}
 	
 	protected function CorporationInsert($CorporationActive, $CorporationName, $Debug)
@@ -677,28 +653,12 @@ class Page
 																    $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_INSERT_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess('CORPORATION_INSERT_SUCCESS');
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_INSERT_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function CorporationLoadData(&$InstanceCorporation)
@@ -723,14 +683,8 @@ class Page
 															    $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 			return $return;
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
@@ -779,36 +733,12 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$return = $this->CorporationLoadData($InstanceCorporation);
-				if($return == Config::SUCCESS)
-				{
-					$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
-					return Config::SUCCESS;
-				}
-				else
-				{
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					return Config::ERROR;
-				}
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
+				return Config::SUCCESS;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							        Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
+		return Config::FORM_FIELD_ERROR;
 	}
 	
 	protected function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
@@ -830,21 +760,11 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			if($HideReturnSuccessImage)
-			{
-				$this->ReturnText = NULL;
-				$this->ReturnClass = NULL;
-				$this->ReturnImage = NULL;
-			}
+				$this->ShowDivReturnEmpty();
 			return Config::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_USERS_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_SELECT_USERS_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function CorporationUpdateByName($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug)
@@ -888,37 +808,17 @@ class Page
 				$InstanceCorporation->SetCorporationName($CorporationName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
 				$this->CorporationLoadData($InstanceCorporation);
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_UPDATE_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess('CORPORATION_UPDATE_SUCCESS');
 				return $return;
 			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_UPDATE_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS");
 				return Config::ERROR;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							                      Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug)
@@ -934,23 +834,14 @@ class Page
 		$return = $instanceFacedePersistence->DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('DEPARTMENT_DELETE_SUCCESS', $this->Language); 
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return $return;
+			$this->ShowDivReturnSuccess('DEPARTMENT_DELETE_SUCCESS');
+			return Config::SUCCESS;
 		}
-		else
-		{
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS', 
-																			 $this->Language);	
-			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			$constant = "DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS";	
+		else $constant = "DEPARTMENT_DELETE_ERROR";
+		$this->ShowDivReturnError($constant);
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug)
@@ -1016,10 +907,7 @@ class Page
 														   $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_INSERT_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess('DEPARTMENT_INSERT_SUCCESS');
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
@@ -1032,14 +920,8 @@ class Page
 				return Config::WARNING;
 			}
 		}
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_INSERT_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentLoadData($InstanceDepartment)
@@ -1064,14 +946,8 @@ class Page
 															   $Debug);
 		if($return == Config::SUCCESS)
 			return $return;
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceDepartment, 
@@ -1104,29 +980,15 @@ class Page
 			$return = $instanceFacedePersistence->DepartmentSelectByCorporationName($CorporationName,
 																					$Limit1, $Limit2,
 																		            $ArrayInstanceDepartment,
-																					$RowCount,
-																		            $Debug);
+																					$RowCount, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $ArrayInstanceDepartment);
 				return $return;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug)
@@ -1163,22 +1025,9 @@ class Page
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $ArrayInstanceDepartment);
 				return $return;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
@@ -1208,26 +1057,12 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
-																		   $ArrayInstanceDepartment, 
-																		   $Debug);
+																		   $ArrayInstanceDepartment, $Debug);
 			if($return == Config::SUCCESS)
 				return $return;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
@@ -1276,41 +1111,16 @@ class Page
 			$return = $FacedePersistence->DepartmentSelectByDepartmentNameAndCorporationName(
 				                                                                     $this->InputValueCorporationName, 
 																				     $this->InputValueDepartmentName,
-																		             $InstanceDepartment, 
-																		             $Debug);
+																		             $InstanceDepartment, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$return = $this->DepartmentLoadData($InstanceDepartment);
-				if($return == Config::SUCCESS)
-				{
-					$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
-					return Config::SUCCESS;
-				}
-				else
-				{
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					return Config::ERROR;
-				}
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
+				return Config::SUCCESS;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug)
@@ -1319,18 +1129,11 @@ class Page
 		$return = $FacedePersistence->DepartmentSelectNoLimit($ArrayInstanceDepartment, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$this->ReturnText  = NULL;
-			$this->ReturnClass = NULL;
-			$this->ReturnImage = NULL;
+			$this->ShowDivReturnEmpty();
 			return Config::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew, $DepartmentNameNew, 
@@ -1389,11 +1192,7 @@ class Page
 				$InstanceDepartment->SetDepartmentName($this->InputValueDepartmentName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
 				$this->DepartmentLoadData($InstanceDepartment);
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('DEPARTMENT_UPDATE_SUCCESS', 
-																				$this->Language);
+				$this->ShowDivReturnSuccess("DEPARTMENT_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -1404,22 +1203,9 @@ class Page
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
 				return Config::WARNING;
 			}
-			else
-			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('DEPARTMENT_UPDATE_ERROR', 
-																				$this->Language);
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("DEPARTMENT_UPDATE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug)
@@ -1480,30 +1266,14 @@ class Page
 						$InstanceDepartment->SetDepartmentCorporation($InstanceCorporation);
 						$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
 						$this->DepartmentLoadData($InstanceDepartment);
-						$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-											   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-						$this->ReturnText    = $this->InstanceLanguageText->GetConstant('DEPARTMENT_UPDATE_SUCCESS', 
-																						$this->Language);
+						$this->ShowDivReturnSuccess("DEPARTMENT_UPDATE_SUCCESS");
 						return Config::SUCCESS;
 					}
 					else
 					{
-						$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-						$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+						$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
 						return Config::ERROR;
 					}
-				}
-				else
-				{
-					$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('DEPARTMENT_UPDATE_ERROR', 
-																					$this->Language);
-					return Config::ERROR;
 				}
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -1514,22 +1284,9 @@ class Page
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
 				return Config::WARNING;
 			}
-			else
-			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('DEPARTMENT_UPDATE_ERROR', 
-																				$this->Language);
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("DEPARTMENT_UPDATE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function LoadHtml($HasLoginForm, $EnableDivPush = TRUE)
@@ -1630,22 +1387,14 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TEAM, $InstanceTeam);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TEAM_DELETE_SUCCESS', 
-																				$this->Language); 
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TEAM_DELETE_SUCCESS");
 				return Config::SUCCESS;
 			}
 		}
 		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
-																		 $this->Language);
-		else $this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_DELETE_ERROR', 
-																		  $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			$constant = "TEAM_DELETE_ERROR_DEPENDENCY_TEAM";
+		else $constant = "TEAM_DELETE_ERROR";
+		$this->ShowDivReturnError($constant);
 		return Config::ERROR;
 	}
 	
@@ -1696,30 +1445,12 @@ class Page
 													 $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_INSERT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TEAM_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_INSERT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TEAM_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function TeamLoadData(&$InstanceTeam)
@@ -1744,15 +1475,10 @@ class Page
 															 $ArrayInstanceTeam,
 															 $RowCount,
 															 $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TEAM_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug)
@@ -1788,22 +1514,9 @@ class Page
 				$this->TeamLoadData($InstanceTeam);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TEAM_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TEAM_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug)
@@ -1835,25 +1548,10 @@ class Page
 		{
 			$return = $FacedePersistence->TeamSelectByTeamName($this->InputValueTeamName, $ArrayInstanceTeam, $Debug);
 			if($return == Config::SUCCESS)
-			{
 				return Config::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TEAM_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TEAM_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug)
@@ -1909,11 +1607,7 @@ class Page
 				$InstanceTeam->SetTeamName($this->InputValueTeamName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
 				$this->TeamLoadData($InstanceTeam);
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TEAM_UPDATE_SUCCESS', 
-																				$this->Language);
+				$this->ShowDivReturnSuccess("TEAM_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -1925,11 +1619,7 @@ class Page
 				return Config::WARNING;
 			}
 		}
-		$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TEAM_UPDATE_ERROR', 
-																		$this->Language);
+		$this->ShowDivReturnError("TEAM_UPDATE_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -1942,26 +1632,14 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TICKET, $InstanceTicket);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TICKET_DELETE_SUCCESS', 
-																				$this->Language); 
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TICKET_DELETE_SUCCESS");
 				return $return;
 			}
-			else
-			{
-				if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant
-					                           ('TICKET_ERROR_DEPENDENCY', 
-												$this->Language);
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_DELETE_ERROR', 
-																				  $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
+			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+				$constant = "TICKET_ERROR_DEPENDENCY";
+			else $constant = "TICKET_DELETE_ERROR";
+			$this->ShowDivReturnError($constant);
+			return Config::ERROR;
 		}
 	}
 	
@@ -2055,30 +1733,12 @@ class Page
 												       $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_INSERT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_INSERT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TICKET_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function TicketLoadData($InstanceTicket)
@@ -2105,14 +1765,10 @@ class Page
 														   $ArrayInstanceTicket,
 														   $RowCount,
 														   $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug)
@@ -2148,22 +1804,9 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TICKET_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug)
@@ -2199,22 +1842,9 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TICKET_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug)
@@ -2250,22 +1880,9 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TICKET_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew,
@@ -2365,22 +1982,9 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass      = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage      = "<img src='" . $this->Config->DefaultServerImage . 
-								          Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TICKET_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug)
@@ -2402,26 +2006,14 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS', 
-																				$this->Language); 
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS");
 				return $return;
 			}
-			else
-			{
-				if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant
-					                           ('TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM', 
-												$this->Language);
-				else $this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_DELETE_ERROR', 
-																				  $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
+			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+				$constant = "TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM";
+			else $constant = "TYPE_ASSOC_USER_TEAM_DELETE_ERROR";
+			$this->ShowDivReturnError($constant);
+			return Config::ERROR;
 		}
 	}
 	
@@ -2454,18 +2046,11 @@ class Page
 			$return = $FacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamDescription, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								                      Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
 		}
-		$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_INSERT_ERROR', $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_INSERT_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -2489,14 +2074,10 @@ class Page
 															          $ArrayInstanceTypeAssocUserTeam,
 															          $RowCount,
 															          $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
@@ -2530,18 +2111,13 @@ class Page
 																		                        $Debug);
 			if($return == Config::SUCCESS)
 			{
-				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::SUCCESS)
-				{
-					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
-					return Config::SUCCESS;
-				}	
+				$this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
+				return Config::SUCCESS;	
 			}
 		}
-		$this->ReturnTypeAssocUserTeamDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_NOT_FOUND', 
-																								 $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return Config::FORM_TYPE_ASSOC_USER_TEAM_RETURN_NOT_FOUND;
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
@@ -2581,13 +2157,9 @@ class Page
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
 				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::SUCCESS)
 				{
-					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS 
-						                                . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS', 
-																					$this->Language);
+					$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS");
+					return Config::SUCCESS;
 				}
-				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
@@ -2598,10 +2170,7 @@ class Page
 				return Config::WARNING;
 			}
 		}
-		$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_TEAM_UPDATE_ERROR', 
-																		$this->Language);
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_UPDATE_ERROR");
 		return Config::ERROR;	
 	}
 	
@@ -2614,25 +2183,14 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_DELETE_SUCCESS', 
-																			$this->Language); 
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+			$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_DELETE_SUCCESS");
 			return $return;
 		}
-		else
-		{
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET', 
-																			 $this->Language);
-			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_DELETE_ERROR',
-																			  $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			$constant = "TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET";
+		else $constant = "TYPE_STATUS_TICKET_DELETE_ERROR";
+		$this->ShowDivReturnError($constant);
+		return Config::ERROR;
 	}
 	
 	
@@ -2666,27 +2224,12 @@ class Page
 			$return = $instanceFacedePersistence->TypeStatusTicketInsert($this->InputValueTypeStatusTicketDescription, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_INSERT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_INSERT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function TypeStatusTicketLoadData($InstanceTypeStatusTicket)
@@ -2707,14 +2250,10 @@ class Page
 															         $ArrayInstanceTypeStatusTicket,
 															         $RowCount,
 															         $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, 
@@ -2755,21 +2294,9 @@ class Page
 				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnTypeStatusTicketDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_NOT_FOUND', 
-																										$this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TYPE_STATUS_TICKET_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, &$InstanceTypeStatusTicket, $Debug)
@@ -2810,10 +2337,7 @@ class Page
 				$InstanceTypeStatusTicket->SetTypeStatusTicketDescription($this->InputValueTypeStatusTicketDescription);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
 				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_UPDATE_SUCCESS', 
-																				$this->Language);
+				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -2824,21 +2348,9 @@ class Page
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
 				return Config::WARNING;
 			}
-			else
-			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_STATUS_TICKET_UPDATE_ERROR', 
-																				$this->Language);
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDATE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket, $Debug)
@@ -2848,21 +2360,14 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_DELETE_SUCCESS', $this->Language); 
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return $return;
+			$this->ShowDivReturnSuccess("TYPE_TICKET_DELETE_SUCCESS");
+			return Config::SUCCESS;
 		}
-		else
-		{
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET', 
-																			 $this->Language);
-			else $this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			$constant = "TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET";
+		else $constant = "TYPE_TICKET_DELETE_ERROR";
+		$this->ShowDivReturnError($constant);
+		return Config::ERROR;
 	}
 	
 	protected function TypeTicketInsert($TypeTicketDescription, $Debug)
@@ -2895,25 +2400,12 @@ class Page
 			$return = $instanceFacedePersistence->TypeTicketInsert($this->InputValueTypeTicketDescription, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_INSERT_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TYPE_TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_INSERT_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_TICKET_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function TypeTicketLoadData($InstanceTypeTicket)
@@ -2931,17 +2423,11 @@ class Page
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeTicketSelect($Limit1, $Limit2,
-															   $ArrayInstanceTypeTicket,
-															   $RowCount,
-															   $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+															   $ArrayInstanceTypeTicket, $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug)
@@ -2979,20 +2465,9 @@ class Page
 				$this->TypeTicketLoadData($InstanceTypeTicket);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnTypeTicketDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TYPE_TICKET_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug)
@@ -3031,9 +2506,7 @@ class Page
 				$InstanceTypeTicket->SetTypeTicketDescription($this->InputValueTypeTicketDescription);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
 				$this->TypeTicketLoadData($InstanceTypeTicket);
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_UPDATE_SUCCESS', $this->Language);
+				$this->ShowDivReturnSuccess("TYPE_TICKET_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -3043,20 +2516,9 @@ class Page
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
 				return Config::WARNING;
 			}
-			else
-			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_UPDATE_ERROR', $this->Language);
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("TYPE_TICKET_UPDATE_ERROR");
+		return Config::ERROR;	
 	}
 	
 	protected function TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug)
@@ -3069,20 +2531,14 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_USER_DELETE_SUCCESS', $this->Language); 
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							           Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TYPE_USER_DELETE_SUCCESS");
 				return $return;
 			}
 		}
 		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_DELETE_ERROR_DEPENDENCY_USER', 
-																		 $this->Language);
-		else $this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_DELETE_ERROR', $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+			$constant = "TYPE_USER_DELETE_ERROR_DEPENDENCY_USER";
+		else $constant = "TYPE_USER_DELETE_ERROR";
+		$this->ShowDivReturnError($constant);
 		return Config::ERROR;
 	}
 	
@@ -3116,28 +2572,12 @@ class Page
 														 $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_INSERT_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("TYPE_USER_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_INSERT_ERROR', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_USER_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function TypeUserLoadData(&$InstanceTypeUser)
@@ -3159,15 +2599,10 @@ class Page
 															 $ArrayInstanceTypeUser,
 															 $RowCount,
 															 $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug)
@@ -3206,21 +2641,9 @@ class Page
 				$this->TypeUserLoadData($InstanceTypeUser); 
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnTypeUserDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', 
-																								$this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TYPE_USER_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug)
@@ -3258,37 +2681,19 @@ class Page
 				$this->TypeUserLoadData($InstanceTypeUser);
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnTypeUserIdText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_TYPE_USER_RETURN_NOT_FOUND;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeUserSelectNoLimit($ArrayInstanceTypeUser, $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug)
@@ -3329,11 +2734,7 @@ class Page
 					$InstanceTypeUser->SetTypeUserDescription($this->InputValueTypeUserDescription);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
 					$this->TypeUserLoadData($InstanceTypeUser);
-					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_USER_UPDATE_SUCCESS', 
-																					$this->Language);
+					$this->ShowDivReturnSuccess("TYPE_USER_UPDATE_SUCCESS");
 					return Config::SUCCESS;
 				}
 				elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -3344,22 +2745,9 @@ class Page
 					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
 					return Config::WARNING;
 				}
-				else
-				{
-					$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('TYPE_USER_UPDATE_ERROR', 
-																					$this->Language);
-					return Config::ERROR;
-				}
 			}
-			else
-			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}	
+			$this->ShowDivReturnError("TYPE_USER_UPDATE_ERROR");
+			return Config::ERROR;
 		}
 	}
 	
@@ -3400,36 +2788,17 @@ class Page
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_USER);
 				unset($InstanceUser);
 				$this->InputValueUserEmail = "";
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('USER_DELETE_SUCCESS', 
-																$this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("USER_DELETE_SUCCESS");
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_USER_DELETE_FAILED_NOT_FOUND)
 			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', 
-																$this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::FORM_USER_RETURN_NOT_FOUND;
-			}
-			else
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('USER_DELETE_ERROR', 
-																$this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnError("USER_NOT_FOUND");
 				return Config::ERROR;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return $return;
-		}
+		$this->ShowDivReturnError("USER_DELETE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserInsert($Application, $SendEmail, 
@@ -3767,51 +3136,31 @@ class Page
 					}
 					if($return == Config::SUCCESS)
 					{
-						if($SendEmail)
-							$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_SUCCESS', 
-																			$this->Language);
-						else
-							$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_SUCCESS_NO_LINK', 
-																			$this->Language);
-						$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									           Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+						if($SendEmail) $constant = 'REGISTER_SUCCESS';
+						else $constant = 'REGISTER_SUCCESS_NO_LINK';
+						$this->ShowDivReturnSuccess($constant);
 					}
 					else
 					{
-						$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_EMAIL_ERROR', 
-																		$this->Language);
-						$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									           Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 						$instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
+						$this->ShowDivReturnError("REGISTER_EMAIL_ERROR");
+						return Config::ERROR;
 					}
 				}
 				else
 				{
-					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_INSERT_ERROR', 
-																		$this->Language);
-					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+					$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
+					return Config::ERROR;
 				}
 			}
 			else
 			{
-				$return = Config::ERROR;
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_EMAIL_ALREADY_REGISTERED', 
-																		 $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnError("REGISTER_EMAIL_ALREADY_REGISTERED");
+				return Config::ERROR;
 			}
 		}
-		else
-		{
-			$return = Config::ERROR;
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}
-		return $return;
+		$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserLoadData($InstanceUser)
@@ -3892,15 +3241,10 @@ class Page
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
-		if($return != Config::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
-		else return Config::SUCCESS;
+		if($return == Config::SUCCESS)
+			return Config::SUCCESS;
+		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
@@ -3913,19 +3257,11 @@ class Page
 															 $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$this->ReturnText  = NULL;
-			$this->ReturnClass = NULL;
-			$this->ReturnImage = NULL;
+			$this->ShowDivReturnEmpty();
 			return Config::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_USERS_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("DEPARTMENT_SELECT_USERS_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByHashCode($HashCode, &$UserInstance, $Debug)
@@ -3942,17 +3278,12 @@ class Page
 																	   $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
-													. Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_HASH_CODE_SUCCESS', $this->Language);
+				$this->ShowDivReturnSuccess("USER_SELECT_BY_HASH_CODE_SUCCESS");
 				return $return;
 			}
 		}
-		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_HASH_CODE_ERROR', $this->Language);	
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return $return;
+		$this->ShowDivReturnError("USER_SELECT_BY_HASH_CODE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -3984,15 +3315,14 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $TeamId, $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
-		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_SELECT_USERS_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_SELECT_USERS_WARNING', $this->Language);
+			$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
+									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+			return Config::WARNING;
 		}
+		$this->ShowDivReturnError("TEAM_SELECT_USERS_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
@@ -4028,14 +3358,8 @@ class Page
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_FAILED', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							       Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_FAILED");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4047,14 +3371,8 @@ class Page
 															 $ArrayInstanceUser, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 			return Config::SUCCESS;
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_USER_SELECT_USERS_ERROR', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug)
@@ -4088,17 +3406,12 @@ class Page
 																		$Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
-													. Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_USER_EMAIL_SUCCESS', $this->Language);
-				return $return;
+				$this->ShowDivReturnSuccess("USER_SELECT_BY_USER_EMAIL_SUCCESS");
+				return Config::SUCCESS;
 			}
 		}
-		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_USER_EMAIL_ERROR', $this->Language);	
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return $return;
+		$this->ShowDivReturnError("USER_SELECT_BY_USER_EMAIL_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug)
@@ -4130,17 +3443,12 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueUserEmail, $InstanceUser, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
-													. Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_USER_EMAIL_SUCCESS', $this->Language);
-				return $return;
+				$this->ShowDivReturnSuccess("USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS");
+				return Config::SUCCESS;
 			}
 		}
-		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_BY_USER_EMAIL_ERROR', $this->Language);	
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return $return;
+		$this->ShowDivReturnError("USER_SELECT_BY_USER_UNIQUE_ID_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function  UserSelectExistsByUserEmail($Captcha, $UserEmail, $Debug)
@@ -4190,22 +3498,12 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectExistsByUserEmail($this->InputValueUserEmail, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS', $this->Language);
+				$this->ShowDivReturnSuccess("USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS");
 				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR', $this->Language);
-			}
 		}
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return $return;
+		$this->ShowDivReturnError("USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug)
@@ -4237,15 +3535,12 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($this->InputValueUserEmail, $HashCode, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS");
 				return Config::SUCCESS;
 			}
 		}
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		return $return;
+		$this->ShowDivReturnError("USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
@@ -4255,9 +3550,7 @@ class Page
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
 			return $FacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
 		}
-		$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_SELECT_ERROR', $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage .  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ShowDivReturnError("REGISTER_CONFIRMATION_SELECT_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -4271,17 +3564,15 @@ class Page
 		{
 			$InstanceUser->SetUserActive($UserActiveNew);
 			$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
-			$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 			if($UserActiveNew)
-				$this->ReturnText =	str_replace('[0]',  
+				$constant =	str_replace('[0]',  
 								strtolower($this->InstanceLanguageText->GetConstant('ACTIVATED', $this->Language)), 
 								$this->InstanceLanguageText->GetConstant('USER_ACTIVATE_SUCCESS', $this->Language));
 			else 
-				$this->ReturnText = str_replace('[0]', 
+				$constant = str_replace('[0]', 
 								strtolower($this->InstanceLanguageText->GetConstant('DEACTIVATED', $this->Language)), 
 								$this->InstanceLanguageText->GetConstant('USER_ACTIVATE_SUCCESS', $this->Language));
-
+			$this->ShowDivReturnSuccess($constant);
 			$this->InputFocus = Config::DIV_RETURN;
 			return Config::SUCCESS;
 		}
@@ -4291,13 +3582,8 @@ class Page
 			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
 			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_ACTIVATE_ERROR', $this->Language);		
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("USER_UPDATE_ACTIVE_BY_USER_EMAIL_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
@@ -4407,21 +3693,18 @@ class Page
 															                                              $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("ASSOC_USER_CORPORATION_UPDATE_SUCCESS");
+				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
 			}
-			return $return;
 		}
-		$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_ASSOC_USER_CORPORATION', $this->Language);
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ShowDivReturnError("ASSOC_USER_CORPORATION_UPDATE_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -4665,37 +3948,24 @@ class Page
 										  $this->InputValueUserConfirmed, $this->InputValueUserPhonePrimary,
 										  $this->InputValueUserPhonePrimaryPrefix, $this->InputValueUserPhoneSecondary,
 										  $this->InputValueUserPhoneSecondaryPrefix, NULL, $this->InputValueUserUniqueId);
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
+				$this->ShowDivReturnSuccess("ACCOUNT_UPDATE_SUCCESS");
+				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);															  
+				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);		
+				return Config::WARNING;
 			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_USER_UNIQUE_ID', $this->Language);
+				$this->ShowDivReturnError("UPDATE_ERROR_USER_UNIQUE_ID");
+				return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
 			}
-			else
-			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage .  Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ACCOUNT_UPDATE_ERROR', $this->Language);
-			}
-			return $return;
 		}
-		else
-		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			$this->SubmitEnabled = 'disabled="disabled"';
-			return Config::ERROR;
-		}
+		$this->ShowDivReturnError("ACCOUNT_UPDATE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug)
@@ -4766,10 +4036,7 @@ class Page
 					$InstanceUser->SetCorporation($instanceCorporation);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
 					$this->UserLoadData($InstanceUser);
-					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS 
-						                                . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_CHANGE_CORPORATION_SUCCESS', $this->Language);
+					$this->ShowDivReturnSuccess("USER_CHANGE_CORPORATION_SUCCESS");
 				}
 			}
 			if($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -4778,24 +4045,11 @@ class Page
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
 													. "' alt='ReturnImage'/>";
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
 			}
-			elseif($return != Config::SUCCESS)
-			{
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR 
-													. "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_CHANGE_CORPORATION_ERROR', 
-																				$this->Language);			
-			}
-			return $return;
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return $return;
-		}
+		$this->ShowDivReturnError("USER_CHANGE_CORPORATION_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, $UserEmail, $Debug)
@@ -4847,10 +4101,7 @@ class Page
 			$return = $FacedePersistence->UserUpdatePasswordByUserEmail($UserEmail, $this->InputValueNewPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							                          Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_SUCCESS', $this->Language);
+				$this->ShowDivReturnSuccess("USER_UPDATE_USER_PASSWORD_SUCCESS");
 				return Config::SUCCESS;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -4860,13 +4111,10 @@ class Page
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
 							                          Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_WARNING', $this->Language);
-				return Config::ERROR;
+				return Config::WARNING;
 			}
-		}			                        Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";			
-		$this->ReturnPasswordText = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_ERROR', $this->Language);
-		$this->ReturnPasswordClass = Config::FORM_FIELD_ERROR;
-		$this->ReturnClass         = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}
+		$this->ShowDivReturnError("USER_UPDATE_USER_PASSWORD_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -4886,24 +4134,14 @@ class Page
 										                              $newRandomPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('PASSWORD_RESET_SUCCESS', $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnSuccess("PASSWORD_RESET_SUCCESS");
+				return Config::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('SEND_EMAIL_ERROR', 
-																		                $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
+			$this->ShowDivReturnError("SEND_EMAIL_ERROR");
+			return Config::ERROR;
 		}
-		else
-		{
-			$this->ReturnText  = $this->InstanceLanguageText->GetConstant('PASSWORD_RESET_SUCCESS', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}
+		$this->ShowDivReturnError("PASSWORD_RESET_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug)
@@ -4935,10 +4173,7 @@ class Page
 			$return = $instanceFacedePersistence->UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $this->InputValueHeaderDebug);
 			if($return == Config::SUCCESS)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
-													. Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_CONFIRMED_SUCCESS', $this->Language);
+				$this->ShowDivReturnSuccess("USER_UPDATE_USER_CONFIRMED_SUCCESS");
 				return $return;
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
@@ -4947,11 +4182,10 @@ class Page
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
 												. "' alt='ReturnImage'/>";
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
 			}
-		}
-		$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_CONFIRMED_ERROR', $this->Language);	
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		}	
+		$this->ShowDivReturnError("USER_UPDATE_USER_CONFIRMED_ERROR");
 		return $return;
 	}
 	
@@ -4993,35 +4227,21 @@ class Page
 				{
 					$InstanceUser->SetUserType($instanceTypeUser);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
-					$this->ReturnClass   = Config::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage 
-						                                . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_CHANGE_USER_TYPE_SUCCESS', $this->Language);
+					$this->ShowDivReturnSuccess("USER_CHANGE_USER_TYPE_SUCCESS");
+					return Config::SUCCESS;
 				}
 			}
-			if($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
 				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
 													. "' alt='ReturnImage'/>";
 				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				return Config::WARNING;
 			}
-			elseif($return != Config::SUCCESS)
-			{
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR 
-													. "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_CHANGE_CORPORATION_ERROR', 
-																				$this->Language);			
-			}
-			return $return;
 		}
-		else
-		{
-			$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return $return;
-		}
+		$this->ShowDivReturnError("USER_CHANGE_CORPORATION_ERROR");
+		return Config::ERROR;
 	}
 	
 	public function CheckInputImage($Input)
@@ -5060,20 +4280,14 @@ class Page
 					return $this->ExecuteLoginFirstPhaseVerification($Debug);
 				else
 				{
-					$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant('LOGIN_INVALID_LOGIN', 
-																				      $this->Language);
-					$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+					$this->ShowDivReturnError("LOGIN_INVALID_LOGIN");
+					return Config::ERROR;
 				}
 			}
 			else
 			{
-				$this->ReturnEmptyText = $this->InstanceLanguageText->GetConstant('FILL_REQUIRED_FIELDS', 
-																					  $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ReturnEmptyText = $this->InstanceLanguageText->GetConstant('FILL_REQUIRED_FIELDS', $this->Language);
+				$this->ShowDivReturnError("");
 			}
 		}
 		elseif(isset($_POST[Config::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
@@ -5083,18 +4297,9 @@ class Page
 				$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);
 				return Config::SUCCESS;	
 			}
-			else 
-			{
-				$this->ReturnLoginText = $this->InstanceLanguageText->GetConstant(
-																			  'LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR', 
-																			  $this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return Config::ERROR;
-				$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);	
-				return Config::ERROR;
-			}
+			$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);	
+			$this->ShowDivReturnError("LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR");
+			return Config::ERROR;
 		}
 		elseif(isset($_POST[Config::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD]))
 		{
@@ -5329,6 +4534,34 @@ class Page
 			else return Config::EMPTY_AMBIENT_VARIABLE;
 		}
 		else header("Location: $Page");
+	}
+	
+	public function ShowDivReturnError($Constant)
+	{
+		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
+		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
+	}
+	
+	public function ShowDivReturnEmpty()
+	{
+		$this->ReturnClass = "DivHidden";
+		$this->ReturnImage = "DivDisplayNone";
+		$this->ReturnText  = "";
+	}
+	
+	public function ShowDivReturnSuccess($Constant)
+	{
+		$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
+		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+		$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
+	}
+	
+	public function ShowDivReturnWarning($Constant)
+	{
+		$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
+		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+		$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
 	}
 	
 	public function StartPageLoadTime()

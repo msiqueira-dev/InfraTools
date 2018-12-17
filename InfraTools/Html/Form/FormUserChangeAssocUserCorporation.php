@@ -1,3 +1,19 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass))  echo $this->ReturnClass; ?>">
+<div>
+    <div>
+        <?php if(isset($this->ReturnImage))  echo $this->ReturnImage; ?>
+    </div>
+</div>
+<label>
+    <?php if(isset($this->ReturnEmptyText))                 echo $this->ReturnEmptyText; ?>
+    <?php if(isset($this->ReturnRegistrationDateDayText))   echo $this->ReturnRegistrationDateDayText; ?>
+    <?php if(isset($this->ReturnRegistrationDateMonthText)) echo $this->ReturnRegistrationDateMonthText; ?>
+    <?php if(isset($this->ReturnRegistrationDateYearText))  echo $this->ReturnRegistrationDateYearText; ?>
+    <?php if(isset($this->ReturnRegistrationIdText))        echo $this->ReturnRegistrationIdText; ?>
+    <?php if(isset($this->ReturnDepartmentNameText))        echo $this->ReturnDepartmentNameText; ?>
+    <?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
+</label>
 <!-- FORM USER CHANGE ASSOC USER CORPORATION -->
 <form name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" 
       id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" method="post" >
@@ -340,18 +356,3 @@
     </div>
 </form>
 </div>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass))  echo $this->ReturnClass; ?>">
-<div class="DivReturnMessageImage">
-    <div>
-        <?php if(isset($this->ReturnImage))  echo $this->ReturnImage; ?>
-    </div>
-</div>
-<label>
-    <?php if(isset($this->ReturnEmptyText))                 echo $this->ReturnEmptyText; ?>
-    <?php if(isset($this->ReturnRegistrationDateDayText))   echo $this->ReturnRegistrationDateDayText; ?>
-    <?php if(isset($this->ReturnRegistrationDateMonthText)) echo $this->ReturnRegistrationDateMonthText; ?>
-    <?php if(isset($this->ReturnRegistrationDateYearText))  echo $this->ReturnRegistrationDateYearText; ?>
-    <?php if(isset($this->ReturnRegistrationIdText))        echo $this->ReturnRegistrationIdText; ?>
-    <?php if(isset($this->ReturnDepartmentNameText))        echo $this->ReturnDepartmentNameText; ?>
-    <?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
-</label>

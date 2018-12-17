@@ -849,12 +849,12 @@ class Pt
 	const ADMIN_TEXT_USER                                         = "Inserir, excluir, atualizar e consultar usuários";
 	
 	/* Body Page AdminCorporation */
-	const CORPORATION_DELETE_ERROR                          = "Erro ao excluir corporação";
-	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporação possui departamentos associados, exclua-os antes";
-	const CORPORATION_DELETE_SUCCESS                        = "Corporação excluída com sucesso";
-	const CORPORATION_INSERT_ERROR                        = "Erro ao cadastrar corporação";
-	const CORPORATION_INSERT_SUCCESS                      = "Corporação cadastrada com sucesso";
-	const CORPORATION_SELECT_USERS_ERROR                    = "Erro ao tentar obter os usuários de uma corporação";
+	const CORPORATION_DELETE_ERROR                                = "Erro ao excluir corporação";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT          = "Corporação possui departamentos associados, exclua-os antes";
+	const CORPORATION_DELETE_SUCCESS                              = "Corporação excluída com sucesso";
+	const CORPORATION_INSERT_ERROR                                = "Erro ao cadastrar corporação";
+	const CORPORATION_INSERT_SUCCESS                              = "Corporação cadastrada com sucesso";
+	const CORPORATION_SELECT_USERS_ERROR                          = "Erro ao tentar obter os usuários de uma corporação";
 	
 	/* Body Page AdminCountry */
 	
@@ -862,9 +862,9 @@ class Pt
 	const DEPARTMENT_DELETE_ERROR                           = "Erro ao excluir departamento";
 	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Departamento possui usuários associados, remova-os antes";
 	const DEPARTMENT_DELETE_SUCCESS                         = "Departamento excluido com sucesso";
-	const DEPARTMENT_INSERT_ERROR                         = "Erro ao cadastrar departamento";
-	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS       = "Departamento já existe para esta corporação";
-	const DEPARTMENT_INSERT_SUCCESS                       = "Departamento cadastrado com sucesso";
+	const DEPARTMENT_INSERT_ERROR                           = "Erro ao cadastrar departamento";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "Departamento já existe para esta corporação";
+	const DEPARTMENT_INSERT_SUCCESS                         = "Departamento cadastrado com sucesso";
 	const DEPARTMENT_SELECT_USERS_ERROR                     = "Erro ao tentar obter usuários de um departamento";
 	const DEPARTMENT_UPDATE_ERROR                           = "Erro ao atualizar departamento";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "Departamento atualizado com sucesso";
@@ -874,8 +874,8 @@ class Pt
 	const NOTIFICATION_DELETE_SUCCESS                       = "Notificação excluida com sucesso";
 	const NOTIFICATION_INVALID_TEXT                         = "Texto inválido";
 	const NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantidade de caracteres excede o tamanho máximo no texto";
-	const NOTIFICATION_INSERT_ERROR                       = "Erro ao cadastrar notificação";
-	const NOTIFICATION_INSERT_SUCCESS                     = "Notificação cadastrada com sucesso";
+	const NOTIFICATION_INSERT_ERROR                         = "Erro ao cadastrar notificação";
+	const NOTIFICATION_INSERT_SUCCESS                       = "Notificação cadastrada com sucesso";
 	const NOTIFICATION_UPDATE_ERROR                         = "Erro ao atualizar notificação";
 	const NOTIFICATION_UPDATE_SUCCESS                       = "Notificação atualizada com sucesso";
 	
@@ -885,9 +885,10 @@ class Pt
 	const TEAM_DELETE_SUCCESS                               = "Equipe excluida com sucesso";
 	const TEAM_INVALID_DESCRIPTION                          = "Descrição inválida";
 	const TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const TEAM_INSERT_ERROR                               = "Erro ao cadastrar equipe";
-	const TEAM_INSERT_SUCCESS                             = "Equipe cadastrada com sucesso";
+	const TEAM_INSERT_ERROR                                 = "Erro ao cadastrar equipe";
+	const TEAM_INSERT_SUCCESS                               = "Equipe cadastrada com sucesso";
 	const TEAM_SELECT_USERS_ERROR                           = "Erro ao tentar obter os usuários de uma equipe";
+	const TEAM_SELECT_USERS_WARNING                         = "Nenhum usuário foi encontrado para esta equipe";
 	const TEAM_UPDATE_ERROR                                 = "Erro ao atualizar equipe";
 	const TEAM_UPDATE_SUCCESS                               = "Equipe atualizada com sucesso";
 	

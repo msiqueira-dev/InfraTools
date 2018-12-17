@@ -1,3 +1,18 @@
+<!-- DIV_RETURN -->
+<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+	<div>
+		<div>
+			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+		</div>
+	</div>
+	<label>
+		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnCorporationNameText))    echo $this->ReturnCorporationNameText; ?>
+		<?php if(isset($this->ReturnDepartmentInitialsText)) echo $this->ReturnDepartmentInitialsText; ?>
+		<?php if(isset($this->ReturnDepartmentNameText))     echo $this->ReturnDepartmentNameText; ?>
+		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
+	</label>
+</div>
 <!-- FORM DEPARTMENT REGISTER -->
 <form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>" 
       id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>" method="post">
@@ -138,17 +153,3 @@
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>
 </form>
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div class="DivReturnMessageImage">
-		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
-		</div>
-	</div>
-	<label>
-		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnCorporationNameText))    echo $this->ReturnCorporationNameText; ?>
-		<?php if(isset($this->ReturnDepartmentInitialsText)) echo $this->ReturnDepartmentInitialsText; ?>
-		<?php if(isset($this->ReturnDepartmentNameText))     echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
-	</label>
-</div>
