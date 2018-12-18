@@ -1,6 +1,6 @@
 <!-- DIV_RETURN -->
 <div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
-	<div>
+	<div class="DivLoginReturn">
 		<div>
 			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
 		</div>
@@ -26,7 +26,7 @@
 	  id="<?php echo ConfigInfraTools::LOGIN_FORM; ?>" method="post" >
 	<div class="DivContentBodyRight">
 		<!-- USER -->
-		<div class="DivContentBodyContainer">
+		<div class="DivContentBodyContainerLogin">
 			<img src="<?php echo $this->Config->DefaultServerImage. 
 							  'Icons/IconInfraToolsUser.png'; ?>" 
 						 alt="IconInfraToolsUser" width="32" height="32"/>
@@ -49,7 +49,7 @@
 											'');"/>
 		</div>
 		<!-- PASSWORD -->
-		<div class="DivContentBodyContainer">
+		<div class="DivContentBodyContainerLogin">
 			<img src="<?php echo $this->Config->DefaultServerImage. 
 							  'Icons/IconInfraToolsPassword.png'; ?>" 
 						 alt="IconInfraToolsPassword" width="32" height="32"/>
@@ -73,7 +73,7 @@
 		</div>
 		<div class="DivClearFloat"></div>
 		<!-- SUBMIT -->
-		<div class="DivContentBodyContainer"
+		<div class="DivContentBodyContainerLogin"
 			 onmouseover="ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
@@ -88,13 +88,13 @@
 	<div class="DivContentBodyLeft">
 		<div class="DivContentBodyLeftSpace">
 		</div>
-		<div class="DivContentBodyContainer">
+		<div class="DivContentBodyContainerLogin">
 			<input type="submit" name="<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD; ?>" 
 								 id="<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD; ?>"
 								 class="InputSubmitForgotPassword"
 								 value="<?php echo $this->InstanceLanguageText->GetText('LOGIN_FORGOT_PASSWORD_TEXT'); ?>"/>
 		</div>
-		<div class="DivContentBodyContainer">
+		<div class="DivContentBodyContainerLogin">
 			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_REGISTER'); ?>" 
 			   id="PageLoginRegister" title="<?php echo $this->InstanceLanguageText->GetText('LOGIN_NEW_TEXT') ?>">
 				<span>

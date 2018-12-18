@@ -112,6 +112,7 @@ Methods:
 												 $UserPhonePrimary, UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 												 $UserType, $UserUniqueId, $Debug);
 		protected     function        UserLoadData($InstanceUser);
+		protected     function        UserResendConfirmationLink($Application, $UserEmail, $Debug);
 		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
 		                                                     &$ArrayInstanceDepartmentUsers, &$RowCount, Debug);
@@ -147,7 +148,7 @@ Methods:
 		public        function        CheckInstanceUser();
 		public        function        CheckPostContainsKey($Key);
 		public        function        GetCurrentPage();
-		public        function        IncludeHeadAll($Page);
+		public        function        IncludeHeadAll($HasLoginForm);
 		public        function        IncludeHeadGeneric();
 		public        function        IncludeHeadJavaScript();
 		public        function        LoadPage();
@@ -656,6 +657,11 @@ class Page
 				$this->ShowDivReturnSuccess('CORPORATION_INSERT_SUCCESS');
 				return Config::SUCCESS;
 			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
+			}
 		}
 		$this->ShowDivReturnError("CORPORATION_INSERT_ERROR");
 		return Config::ERROR;
@@ -811,6 +817,11 @@ class Page
 				$this->ShowDivReturnSuccess('CORPORATION_UPDATE_SUCCESS');
 				return $return;
 			}
+			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::WARNING;	
+			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS");
@@ -912,11 +923,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS',
-																			$this->Language);
-				$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
 				return Config::WARNING;
 			}
 		}
@@ -1197,10 +1204,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -1278,10 +1282,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -1294,7 +1295,7 @@ class Page
 		$page = str_replace("_", "", $this->GetCurrentPage());
 		echo Config::HTML_TAG_DOCTYPE;
 		echo Config::HTML_TAG_START;
-		$return = $this->IncludeHeadAll();
+		$return = $this->IncludeHeadAll($HasLoginForm);
 		if ($return == Config::SUCCESS)
 		{
 			echo Config::HTML_TAG_BODY_START;
@@ -1309,8 +1310,10 @@ class Page
 					$this->InputFocus = Config::LOGIN_USER;
 					echo $this->TagOnloadFocusField(Config::LOGIN_FORM, $this->InputFocus);
 				}
-				elseif($this->CheckInstanceUser() == Config::USER_NOT_CONFIRMED)
+				elseif($loginStatus == Config::USER_NOT_CONFIRMED)
+				{
 					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_CONFIRMED) . ".php");
+				}
 				else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
 			}
 			else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
@@ -1447,6 +1450,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("TEAM_INSERT_SUCCESS");
 				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TEAM_INSERT_ERROR");
@@ -1612,10 +1620,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -1735,6 +1740,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TICKET_INSERT_ERROR");
@@ -1982,6 +1992,11 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
+			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::WARNING;	
+			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
 		return Config::ERROR;
@@ -2048,6 +2063,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS");
 				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_INSERT_ERROR");
@@ -2163,10 +2183,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -2226,6 +2243,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_INSERT_ERROR");
@@ -2342,10 +2364,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -2402,6 +2421,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("TYPE_TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_INSERT_ERROR");
@@ -2511,9 +2535,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -2574,6 +2596,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("TYPE_USER_INSERT_SUCCESS");
 				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_INSERT_ERROR");
@@ -2739,10 +2766,7 @@ class Page
 				}
 				elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 				{
-					$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+					$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 					return Config::WARNING;
 				}
 			}
@@ -3147,6 +3171,11 @@ class Page
 						return Config::ERROR;
 					}
 				}
+				elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+				{
+					$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+					return Config::WARNING;
+				}
 				else
 				{
 					$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
@@ -3237,6 +3266,30 @@ class Page
 		else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 	}
 	
+	protected function UserResendConfirmationLink($Application, $UserEmail, $Debug)
+	{
+		$UniqueHash = NULL;
+		$return = $this->UserSelectHashCodeByUserEmail($UserEmail, $UniqueHash, $this->InputValueHeaderDebug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
+			Page::GetCurrentDomain($domain);
+			$link = $domain . str_replace('Language/', '', $this->Language) . "/" .
+							  str_replace("_", "",Config::PAGE_REGISTER_CONFIRMATION) . "?=" . $UniqueHash;
+			$return = $instanceFacedeBusiness->SendEmailResendConfirmationLink($Application,
+																			   $this->User->GetName(),
+																			   $this->User->GetEmail(),
+																			   $link, $this->InputValueHeaderDebug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnSuccess("RESEND_CONFIRMATION_LINK_SUCCESS");
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("RESEND_CONFIRMATION_LINK_ERROR");
+		return Config::ERROR;
+	}
+	
 	protected function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -3315,11 +3368,11 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $TeamId, $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TEAM_SELECT_USERS_WARNING', $this->Language);
-			$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-			return Config::WARNING;
+			else
+			{
+				$this->ShowDivReturnWarning("TEAM_SELECT_USERS_WARNING");
+				return Config::WARNING;	
+			}
 		}
 		$this->ShowDivReturnError("TEAM_SELECT_USERS_ERROR");
 		return Config::ERROR;
@@ -3578,9 +3631,8 @@ class Page
 		}
 		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 		{
-			$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+			return Config::WARNING;
 		}
 		$this->ShowDivReturnError("USER_UPDATE_ACTIVE_BY_USER_EMAIL_ERROR");
 		return Config::ERROR;
@@ -3698,9 +3750,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -3953,9 +4003,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);		
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
@@ -4041,10 +4089,7 @@ class Page
 			}
 			if($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
-													. "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -4106,11 +4151,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->Page          = Config::PAGE_ACCOUNT_CHANGE_PASSWORD;
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							                          Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('USER_UPDATE_USER_PASSWORD_WARNING', $this->Language);
+				$this->ShowDivReturnWarning("USER_UPDATE_USER_PASSWORD_WARNING");
 				return Config::WARNING;
 			}
 		}
@@ -4139,6 +4180,11 @@ class Page
 			}
 			$this->ShowDivReturnError("SEND_EMAIL_ERROR");
 			return Config::ERROR;
+		}
+		elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+		{
+			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+			return ConfigInfraTools::WARNING;	
 		}
 		$this->ShowDivReturnError("PASSWORD_RESET_ERROR");
 		return Config::ERROR;
@@ -4178,10 +4224,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
-												. "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}	
@@ -4233,10 +4276,7 @@ class Page
 			}
 			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = Config::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING 
-													. "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;
 			}
 		}
@@ -4341,7 +4381,7 @@ class Page
 		else return $pageConstant;
 	}
 	
-	public function IncludeHeadAll()
+	public function IncludeHeadAll($HasLoginForm)
 	{
 		$return = NULL;
 		if ($this->Page != NULL)
@@ -4382,6 +4422,12 @@ class Page
 				{
 					echo "<style name='" . $prefix . $this->Page . ".css'>";
 					include_once(REL_PATH . "Style/Body/" . $prefix . str_replace("Page", "", $this->Page) . ".css");
+					echo '</style>';
+				}
+				if($HasLoginForm)
+				{
+					echo "<style name='" . $prefix . "Login.css'>";
+					include_once(REL_PATH . "Style/Body/" . $prefix . "Login.css");
 					echo '</style>';
 				}
 				elseif(file_exists(REL_PATH . "Style/Body/" . $prefix . 
@@ -4515,10 +4561,8 @@ class Page
 	
 	public function LoadNotConfirmedToolTip()
 	{
-		$Config = $this->Factory->CreateConfig();
-		$this->ReturnLoginText = Config::USER_NOT_CONFIRMED;
-		$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
-		$this->ReturnImage   = "<img src='" . $Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+		$this->ShowDivReturnWarning(Config::USER_NOT_CONFIRMED);
+		return Config::WARNING;
 	}
 	
 	public function RedirectPage($Page)

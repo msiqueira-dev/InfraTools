@@ -90,7 +90,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckBlackListMessage)) 
-	                  	 echo $this->VisibilityFunctionCheckBlackListMessage; ?>">
+	                  	 echo $this->VisibilityFunctionCheckBlackListMessage; ?> DivReturnForm">
 		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_HIDDEN) 

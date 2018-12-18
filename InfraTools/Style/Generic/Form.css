@@ -59,13 +59,13 @@
 .DivReturnMessageSuccess label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageError{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#FFC1C1;}
 .DivReturnMessageError div{width:64px !important;height:auto;min-height:100px;float:right; display:block !important;}
-.DivReturnMessageError div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
+.DivReturnMessageError div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;float:right !important;min-height:48px !important;}
 .DivReturnMessageError label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageWarning{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#faebcc;}
 .DivReturnMessageWarning div{width:64px !important;height:auto;min-height:100px;float:right;display:block !important;}
 .DivReturnMessageWarning div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
 .DivReturnMessageWarning label{width:auto;height:auto;position:relative;left:10px;top:8px;}
-.DivReturnMessageWarning a{width:auto;height:auto;font-weight:bold;position:relative;left:12px;top:8px;}
+.DivReturnMessageWarning a{width:auto;height:auto;font-weight:bold;position:relative;left:0px;top:-0.5px;}
 .SelectBirthDateDay{width:100px !important;height:30px !important;}
 .SelectBirthDateMonth{width:100px !important;height:30px !important; margin-left:25px}
 .SelectBirthDateYear{width:100px !important;height:30px !important; margin-left:20px}

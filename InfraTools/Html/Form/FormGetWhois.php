@@ -90,7 +90,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetWhoisMessage)) 
-	                     echo $this->VisibilityFunctionGetWhoisMessage; ?>">
+	                     echo $this->VisibilityFunctionGetWhoisMessage; ?> DivReturnForm">
         <div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN) 

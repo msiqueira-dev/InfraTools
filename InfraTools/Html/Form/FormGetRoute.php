@@ -41,7 +41,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetRouteMessage))
-	                     echo $this->VisibilityFunctionGetRouteMessage; ?>">
+	                     echo $this->VisibilityFunctionGetRouteMessage; ?> DivReturnForm">
         <div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN) 

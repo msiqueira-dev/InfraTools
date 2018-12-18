@@ -91,8 +91,8 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckPingServerMessage))
-	                     echo $this->VisibilityFunctionCheckPingServerMessage; ?>">
-    	<div class="">
+	                     echo $this->VisibilityFunctionCheckPingServerMessage; ?> DivReturnForm">
+    	<div>
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN) 
                     echo $this->ExecutedFunctionReturnMessage; 

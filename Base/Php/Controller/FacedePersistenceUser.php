@@ -1155,7 +1155,8 @@ class FacedePersistenceUser
 	
 	public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug, $MySqlConnection)
 	{
-		if($return == Config::SUCCESS)
+		$mySqlError= NULL; $errorStr = NULL;
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlUserSelectUserActiveByHashCode');
@@ -1387,7 +1388,7 @@ class FacedePersistenceUser
 	public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($return == Config::SUCCESS)
+		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlUserUpdateConfirmedByHashCode');

@@ -40,7 +40,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetIpAddressesMessage))
-	                     echo $this->VisibilityFunctionGetIpAddressesMessage; ?>">
+	                     echo $this->VisibilityFunctionGetIpAddressesMessage; ?> DivReturnForm">
     	<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN) 

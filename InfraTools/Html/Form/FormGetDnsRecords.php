@@ -53,7 +53,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetDnsRecordsMessage))
-	                     echo $this->VisibilityFunctionGetDnsRecordsMessage; ?>">
+	                     echo $this->VisibilityFunctionGetDnsRecordsMessage; ?> DivReturnForm">
 		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN) 

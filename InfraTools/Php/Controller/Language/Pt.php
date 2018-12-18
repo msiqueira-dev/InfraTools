@@ -45,6 +45,7 @@ class Pt
 	/* Generic */
 	const ACTIVE                                                  = "Ativada";
 	const ACTIVATED                                               = "Ativado";
+	const ACCOUNT_UPDATE_SUCCESS                                  = "Conta atualizada com sucesso";
 	const BIRTH_DATE                                              = "Data de nascimento";
 	const BIRTH_DATE_DAY                                          = "Dia";
 	const BIRTH_DATE_MONTH                                        = "Mês";
@@ -180,6 +181,7 @@ class Pt
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                   = "Sua senha foi restaurada e sua nova senha é ";
 	const GENDER                                                  = "Gênero";
 	const ID                                                      = "Id";
+	const INSERT_WARNING_EXISTS                                   = "Um registro similar já foi efetuado";
 	const HREF_PAGE_ABOUT                                         = "/Pt/PageAbout";
 	const HREF_PAGE_ACCOUNT                                       = "/Pt/PageAccount";
 	const HREF_PAGE_ADMIN                                         = "/Pt/PageAdmin";
@@ -717,6 +719,9 @@ class Pt
 	const USER_ACTIVE                                             = "Conta ativa";
 	const USER_CONFIRMED                                          = "Conta confirmada";
 	const USER_INACTIVE                                           = "Esta conta foi desativada por um administrador";
+	const USER_NOT_CONFIRMED                                      = "Sua conta não foi confirmada, por favor confirme através do "
+	                                                              . "e-mail  que lhe foi enviado. Se você perdeu o e-mail enviado ou "
+																  . "não o recebeu, outro pode ser enviado";
 	const USER_NOT_FOUND                                          = "Usuário não encontrado";  
 	const USER_SAME_AS_ADMIN                                      = "Usuário é o mesmo do administrador!";
 	const USER_SELECT_BY_HASH_CODE_ERROR                          = "Erro ao obter usuário com o código hash";
@@ -727,13 +732,15 @@ class Pt
 	const USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS                   = "Usuário obtido com sucesso";
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR                  = "Não existe usuário com o e-mail especificado";
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                = "Usuário existe";
+	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR               = "Erro ao obter hash code de usuário com o e-mail fornecido";
+	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS             = "Código hash obtido com sucesso";
 	const USER_TEAM_SELECT_ERROR                                  = "Erro ao obter equipes do usuário";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "Erro ao modificar a verificação duas etapas";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "Verificação duas etapas modificada com sucesso";
 	const USER_UNIQUE_ID                                          = "ID Único";
 	const USER_UNIQUE_ID_TIP                                      = "(Login único)";
-	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "Campo usuário confirmado atualizado com sucesso";
-	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Erro ao tentar atualizar campo de usuário confirmado";
+	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "Erro ao tentar atualizar campo de usuário confirmado";
+	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Campo usuário confirmado atualizado com sucesso";
 	const USER_UPDATE_USER_PASSWORD_ERROR                         = "Senha de usuário atualizada com sucesso";
 	const USER_UPDATE_USER_PASSWORD_SUCCESS                       = "Erro ao tentar atualizar a senha do usuário";
 	const USER_UPDATE_USER_PASSWORD_WARNING                       = "Senha fornecida é a mesma da atual";
@@ -1160,9 +1167,6 @@ class Pt
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG              = "InfraTools - Login Verificação duas etapas";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT             = "Aqui está o código necessário para efetuar login";
 	const LOGIN_USER                                              = "Login (E-mail ou ID Único)";
-	const USER_NOT_CONFIRMED                                      = "Sua conta não foi confirmada, por favor confirme através do "
-	                                                              . "e-mail  que lhe foi enviado. Se você perdeu o e-mail enviado ou "
-																  . "não o recebeu, outro pode ser enviado";
 	
 	/* Body Page Not Found */
 	

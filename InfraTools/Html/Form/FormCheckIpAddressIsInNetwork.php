@@ -111,7 +111,7 @@
         </div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckIpAddressIsInNetworkMessage))
-	                     echo $this->VisibilityFunctionCheckIpAddressIsInNetworkMessage; ?>">
+	                     echo $this->VisibilityFunctionCheckIpAddressIsInNetworkMessage; ?> DivReturnForm">
     	<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN) 

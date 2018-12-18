@@ -239,14 +239,8 @@ abstract class PageInfraTools extends Page
 			$this->ReturnImage = "DivDisplayNone";
 			return $return;
 		}
-		else
-		{
-			$this->ReturnText  = $this->InstanceLanguageText->GetConstant('CORPORATION_NOT_FOUND', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, 
@@ -261,15 +255,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug)
@@ -283,15 +270,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2, 
@@ -328,15 +308,8 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
+			$this->ShowDivReturnError("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
+			return ConfigInfraTools::ERROR;
 		}
 	}
 	
@@ -373,15 +346,8 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
+			$this->ShowDivReturnError("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
+			return ConfigInfraTools::ERROR;
 		}
 	}
 	
@@ -430,23 +396,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_DELETE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug)
@@ -481,29 +433,12 @@ abstract class PageInfraTools extends Page
 			}
 			elseif($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR_FOREIGN_KEY', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+				$this->ShowDivReturnError("SERVICE_DELETE_ERROR_FOREIGN_KEY");
 				return ConfigInfraTools::ERROR;
 			}
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_DELETE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -641,22 +576,14 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_INSERT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
+			elseif($return == ConfigInfraTools::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_INSERT_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return ConfigInfraTools::WARNING;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_DELETE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceLoadData($InstanceInfraToolsService)
@@ -740,23 +667,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
@@ -792,23 +705,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	protected function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
 															     &$ArrayInstanceInfraToolsService, 
@@ -846,23 +745,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	protected function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
 			                                                            &$ArrayInstanceInfraToolsService, 
@@ -899,23 +784,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	protected function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2,
 			                                             &$ArrayInstanceInfraToolsService, 
@@ -951,23 +822,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
@@ -1003,23 +860,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail, 
@@ -1058,23 +901,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
@@ -1113,23 +942,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2,
@@ -1181,23 +996,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
@@ -1247,23 +1048,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, $UserEmail, 
@@ -1316,23 +1103,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
@@ -1384,23 +1157,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, &$RowCount, $Debug)
@@ -1433,23 +1192,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ID_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
@@ -1486,23 +1231,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ID_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
@@ -1540,23 +1271,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, $Debug)
@@ -1591,23 +1308,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
@@ -1646,23 +1349,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
@@ -1699,23 +1388,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
@@ -1751,23 +1426,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, $Debug)
@@ -1802,23 +1463,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail, $Limit1, $Limit2, 
@@ -1856,23 +1503,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
@@ -1908,23 +1541,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
@@ -1963,23 +1582,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
@@ -2019,23 +1624,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
@@ -2077,23 +1668,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
@@ -2133,23 +1710,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
@@ -2185,23 +1748,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_USER_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_USER_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, $Debug)
@@ -2236,23 +1785,9 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_USER_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_USER_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug)
@@ -2266,15 +1801,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
@@ -2429,28 +1957,12 @@ abstract class PageInfraTools extends Page
 			}
 			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-				return ConfigInfraTools::WARNING;
-			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_BY_ID_ERROR', 
-																				$this->Language);
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::WARNING;	
 			}
 		}
-		else
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("SERVICE_UPDATE_BY_ID_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, 
@@ -2539,28 +2051,12 @@ abstract class PageInfraTools extends Page
 			}
 			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return ConfigInfraTools::WARNING;
 			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_RESTRICTBY_ID_ERROR', 
-																				$this->Language);
-				return ConfigInfraTools::ERROR;
-			}
 		}
-		else
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("SERVICE_UPDATE_RESTRICTBY_ID_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug)
@@ -2579,15 +2075,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
@@ -2600,15 +2089,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail, &$RowCount,
@@ -2624,16 +2106,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail, $Debug)
@@ -2648,16 +2122,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
@@ -2671,15 +2137,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
@@ -2692,15 +2151,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
@@ -2717,15 +2169,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function TypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug)
@@ -2739,15 +2184,8 @@ abstract class PageInfraTools extends Page
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function UserChangeTwoStepVerification($InstanceInfraToolsUser, $TwoStepVerification, $Debug)
@@ -2766,36 +2204,21 @@ abstract class PageInfraTools extends Page
 		}
 		elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
 		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
+			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+			return ConfigInfraTools::WARNING;
 		}
-		else
-		{
-			$this->ReturnPasswordText = $this->InstanceLanguageText->
-										   GetConstant('USER_TWO_STEP_VERIFICATION_CHANGE_ERROR', 
-																				  $this->Language);
-			$this->ReturnPasswordClass = ConfigInfraTools::FORM_FIELD_ERROR;
-			$this->ReturnClass         = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}
+		$this->ShowDivReturnError("USER_TWO_STEP_VERIFICATION_CHANGE_ERROR");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 	{
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
-		if($return != ConfigInfraTools::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->ConfigInfraTools->DefaultServerImage . 
-							       ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
-		else return ConfigInfraTools::SUCCESS;
+		if($return == ConfigInfraTools::SUCCESS)
+			return ConfigInfraTools::SUCCESS;
+		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug)
@@ -2817,29 +2240,20 @@ abstract class PageInfraTools extends Page
 				}
 				else
 				{
-					$this->ReturnUserEmailText = $this->InstanceLanguageText->GetConstant('USER_TEAM_SELECT_ERROR', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
+					$this->ShowDivReturnError("USER_TEAM_SELECT_ERROR");
+					return ConfigInfraTools::ERROR;
 				}
 			}
 			else
 			{
-				$this->ReturnUserEmailText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
+				$this->ShowDivReturnError("USER_NOT_FOUND");
+				return ConfigInfraTools::ERROR;
 			}
 		}
 		else 
 		{
-			$this->ReturnUserEmailText = $this->InstanceLanguageText->GetConstant('USER_SAME_AS_ADMIN', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
+			$this->ShowDivReturnError("USER_SAME_AS_ADMIN");
+			return ConfigInfraTools::ERROR;
 		}
 	}
 	

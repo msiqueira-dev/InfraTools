@@ -40,7 +40,7 @@
     	</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckEmailExistsMessage))
-	                     echo $this->VisibilityFunctionCheckEmailExistsMessage; ?>">
+	                     echo $this->VisibilityFunctionCheckEmailExistsMessage; ?> DivReturnForm">
 		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_EMAIL_EXISTS_HIDDEN) 

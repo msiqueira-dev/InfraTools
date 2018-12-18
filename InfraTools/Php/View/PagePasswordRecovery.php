@@ -88,31 +88,10 @@ class PagePasswordRecovery extends PageInfraTools
 												  str_replace("_", "", ConfigInfraTools::PAGE_PASSWORD_RESET));
 				}
 				elseif($this->ReturnText == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
-				{
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																   'PASSWORD_RECOVERY_EMAIL_ALREADY_SENT', 
-																	$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-				else
-				{
-					$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-																   'PASSWORD_RECOVERY_EMAIL_ERROR', 
-																	$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
+					$this->ShowDivReturnError("PASSWORD_RECOVERY_EMAIL_ALREADY_SENT");
+				else $this->ShowDivReturnError("PASSWORD_RECOVERY_EMAIL_ERROR");
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('PASSWORD_RECOVERY_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
+			else $this->ShowDivReturnError("PASSWORD_RECOVERY_ERROR");
 		}
 		$this->CaptchaLoad(ConfigInfraTools::FORM_FIELD_CAPTCHA, $this->InputValueHeaderDebug);
 		$this->LoadHtml(FALSE);

@@ -153,7 +153,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckPortStatusMessage))
-	                     echo $this->VisibilityFunctionCheckPortStatusMessage; ?>">
+	                     echo $this->VisibilityFunctionCheckPortStatusMessage; ?> DivReturnForm">
 		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_HIDDEN) 

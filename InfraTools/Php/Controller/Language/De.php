@@ -45,6 +45,7 @@ class De
 	/* Generic */
 	const ACTIVE                                                  = "";
 	const ACTIVATED                                               = "";
+	const ACCOUNT_UPDATE_SUCCESS                                  = "";
 	const BIRTH_DATE                                              = "";
 	const BIRTH_DATE_DAY                                          = "";
 	const BIRTH_DATE_MONTH                                        = "";
@@ -153,6 +154,7 @@ class De
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                    = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                   = "";
 	const GENDER                                                  = "";
+	const INSERT_WARNING_EXISTS                                   = "";
 	const HREF_PAGE_ABOUT                                         = "/De/PageAbout";
 	const HREF_PAGE_ACCOUNT                                       = "/De/PageAccount";
 	const HREF_PAGE_ADMIN                                         = "/De/PageAdmin";
@@ -684,6 +686,7 @@ class De
 	const USER_ACTIVE                                             = "";
 	const USER_CONFIRMED                                          = "";
 	const USER_INACTIVE                                           = "";
+	const USER_NOT_CONFIRMED                                      = "";
 	const USER_NOT_FOUND                                          = "";
 	const USER_SAME_AS_ADMIN                                      = "";
 	const USER_SELECT_BY_HASH_CODE_ERROR                          = "";
@@ -694,6 +697,8 @@ class De
 	const USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS                   = "";
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR                  = "";
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                = "";
+	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR               = "";
+	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS             = ""; 
 	const USER_TEAM_SELECT_ERROR                                  = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "";
@@ -1077,7 +1082,6 @@ class De
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG              = "";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT             = "";
 	const LOGIN_USER                                              = "";
-	const USER_NOT_CONFIRMED                                      = "";
 	
 	/* Body Page Not Found */
 	

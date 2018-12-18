@@ -100,7 +100,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckDnsRecordMessage))
-	                     echo $this->VisibilityFunctionCheckDnsRecordMessage; ?>">
+	                     echo $this->VisibilityFunctionCheckDnsRecordMessage; ?> DivReturnForm">
 		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN) 

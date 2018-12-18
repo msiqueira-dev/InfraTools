@@ -41,7 +41,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetProtocolMessage))
-	                     echo $this->VisibilityFunctionGetProtocolMessage; ?>">
+	                     echo $this->VisibilityFunctionGetProtocolMessage; ?> DivReturnForm">
         <div class="">
  	       <label>
     	        <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN) 

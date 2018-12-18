@@ -41,7 +41,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetLocationMessage))
-	                     echo $this->VisibilityFunctionGetLocationMessage; ?>">
+	                     echo $this->VisibilityFunctionGetLocationMessage; ?> DivReturnForm">
         <div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN) 

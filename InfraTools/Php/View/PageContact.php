@@ -202,29 +202,12 @@ class PageContact extends PageInfraTools
 					$this->ShowDivReturnSuccess("CONTACT_SUCCESS");
 				elseif($return == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
 				{
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																	   'CONTACT_EMAIL_ALREADY_SENT', 
-																		$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-				else
-				{
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																	   'CONTACT_EMAIL_ERROR', 
-																		$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+					$this->ShowDivReturnError("CONTACT_EMAIL_ALREADY_SENT");
+					return Config::ERROR;
 				}
 			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
+			$this->ShowDivReturnError("CONTACT_EMAIL_ERROR");
+			return Config::ERROR;
 		}
 		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_CONTACT, $this->InputValueHeaderDebug);
 		$this->LoadHtml(FALSE);

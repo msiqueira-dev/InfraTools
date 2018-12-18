@@ -54,7 +54,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetServiceMessage))
-	                     echo $this->VisibilityFunctionGetServiceMessage; ?>">
+	                     echo $this->VisibilityFunctionGetServiceMessage; ?> DivReturnForm">
         <div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN) 

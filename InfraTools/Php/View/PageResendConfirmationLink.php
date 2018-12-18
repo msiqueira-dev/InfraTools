@@ -37,40 +37,9 @@ class PageResendConfirmationLink extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$FacedeBusinessInfraTools = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
 		if(isset($this->User))
 		{
-			$return = $this->UserSelectHashCodeByUserEmail($this->User->GetEmail(), $UniqueHash, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				Page::GetCurrentDomain($domain);
-				$link = $domain . str_replace('Language/', '', $this->Language) . "/" .
-								  str_replace("_", "",ConfigInfraTools::PAGE_REGISTER_CONFIRMATION) . "?=" . $UniqueHash;
-				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
-					                                                                        ($this->InstanceLanguageText);
-				$return = $FacedeBusinessInfraTools->SendEmailResendConfirmationLink(ConfigInfraTools::APPLICATION_INFRATOOLS,
-																					 $this->User->GetName(),
-																					 $this->User->GetEmail(),
-																					 $link, $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-					$this->ShowDivReturnSuccess("RESEND_CONFIRMATION_LINK_SUCCESS");
-				else
-				{
-					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('RESEND_CONFIRMATION_LINK_ERROR', 
-																	$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-											   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-			}
-			else
-			{
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant('RESEND_CONFIRMATION_LINK_ERROR', 
-																	$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-											   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
+			$this->UserResendConfirmationLink(ConfigInfraTools::APPLICATION_INFRATOOLS, $this->User->GetEmail(), $this->InputValueHeaderDebug);
 			$this->LoadHtml(FALSE);
 		}
 		else

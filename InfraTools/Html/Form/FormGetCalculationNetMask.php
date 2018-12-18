@@ -84,7 +84,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetCalculationNetMaskMessage))
-	                     echo $this->VisibilityFunctionGetCalculationNetMaskMessage; ?>">
+	                     echo $this->VisibilityFunctionGetCalculationNetMaskMessage; ?> DivReturnForm">
  		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN) 

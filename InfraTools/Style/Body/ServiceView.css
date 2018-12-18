@@ -12,3 +12,6 @@
 .DivContentBodyContainer{margin-top:0px !important;width:600px !important;}
 .DivContentBodyContainerValue{width:400px !important;}
 .SelectTypeService{color:black !important;}
+.DivReturnMessageError{margin-left:0 !important;}
+.DivReturnMessageSuccess{margin-left:0 !important;}
+.DivReturnMessageWarning{margin-left:0 !important;}

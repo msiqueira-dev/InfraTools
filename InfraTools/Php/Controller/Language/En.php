@@ -45,6 +45,7 @@ class En
 	/* Generic */
 	const ACTIVE                                                  = "Active";
 	const ACTIVATED                                               = "Activated";
+	const ACCOUNT_UPDATE_SUCCESS                                  = "Account updated succesfully";
 	const BIRTH_DATE                                              = "Birth date";
 	const BIRTH_DATE_DAY                                          = "Day";
 	const BIRTH_DATE_MONTH                                        = "Month";
@@ -179,6 +180,7 @@ class En
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                    = "InfraTools - Your password has been reseted";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                   = "Your password was reset and your new password is: ";
 	const GENDER                                                  = "Gender";
+	const INSERT_WARNING_EXISTS                                   = "A similar register was already performed";
 	const HREF_PAGE_ABOUT                                         = "/En/PageAbout";
 	const HREF_PAGE_ACCOUNT                                       = "/En/PageAccount";
 	const HREF_PAGE_ADMIN                                         = "/En/PageAdmin";
@@ -715,7 +717,10 @@ class En
 	const USER_ACTIVE                                             = "Account active";
 	const USER_CONFIRMED                                          = "Account confirmed";
 	const USER_INACTIVE                                           = "This account has been deactivated by an administrator";
-	const USER_NOT_FOUND                                          = "User not found";  
+	const USER_NOT_CONFIRMED                                      = "Your account has not been confirmed, please confirm it through the "
+	                                                              . "e-mail that was sent to you. If you lost the e-email or didn't "
+															      . "receive it, another one can be sent";
+	const USER_NOT_FOUND                                          = "User not found"; 
 	const USER_SAME_AS_ADMIN                                      = "User is the same as the Admin!";
 	const USER_SELECT_BY_HASH_CODE_ERROR                          = "Error trying to obtain user with the given hash code";
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                        = "User obtained sucessfully";
@@ -725,13 +730,15 @@ class En
 	const USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS                   = "User obtained sucessfully";
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR                  = "User with specified e-mail does not exists";
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                = "User exists";
+	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR               = "Error trying to obtain user's hash code with the given e-mail";
+	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS             = "Hash code obtained sucessfully";
 	const USER_TEAM_SELECT_ERROR                                  = "Error trying to get the user teams";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                 = "Error changing two step verification";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS               = "Two step verification changed succesfully";
 	const USER_UNIQUE_ID                                          = "Unique ID";
 	const USER_UNIQUE_ID_TIP                                      = "(Unique login)";
-	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "User confirmed updated succesfully";
-	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "Error trying to update value for user confirmed";
+	const USER_UPDATE_USER_CONFIRMED_ERROR                        = "Error trying to update value for user confirmed";
+	const USER_UPDATE_USER_CONFIRMED_SUCCESS                      = "User confirmed updated succesfully";
 	const USER_UPDATE_USER_PASSWORD_ERROR                         = "User password updated succesfully";
 	const USER_UPDATE_USER_PASSWORD_SUCCESS                       = "Error trying to update value for user password";
 	const USER_UPDATE_USER_PASSWORD_WARNING                       = "Password not changed, the typed password is the current one";
@@ -1151,9 +1158,6 @@ class En
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG             = "InfraTools - Login Two Step Verification";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT            = "Here is the code needed to login";
 	const LOGIN_USER                                             = "Login (E-mail or Unique ID)";
-	const USER_NOT_CONFIRMED                                     = "Your account has not been confirmed, please confirm it through the "
-	                                                             . "e-mail that was sent to you. If you lost the e-email or didn't "
-															     . "receive it, another one can be sent";
 	
 	/* Body Page Not Found */
 	

@@ -14,12 +14,12 @@
 .DivContentBodyContainerLabel label, .DivContentBodyContainerLabelSmall label, .DivContentBodyContainerLabelHost label, .DivContentBodyContainerLabelIp label{position:relative;top:7px;font-size:14px;font-weight:bold;}
 .DivContentBodySubmit {width: 120px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-left:0px !important;}
 .DivContentBodySubmit:hover{background-color:#ef4e22;}
-.DivReturnMessageSuccess{width:594px;height:auto;min-height:80px;margin-top:10px;background-color:#f5f5f5;border-left:1px solid #e8e8e8;border-left-width:6px;margin-bottom:0px !important;}
-.DivReturnMessageSuccess div{max-width:570px;width:570px;height:auto;word-wrap:break-word;color:#000;}
+.DivReturnMessageSuccess{width:594px !important;height:auto;min-height:80px;margin-top:10px;background-color:#f5f5f5;border-left:1px solid #e8e8e8;border-left-width:6px;margin-bottom:0px !important;margin-left:0px !important;}
+.DivReturnMessageSuccess div{width:auto !important;max-width:570px;width:570px;height:auto;word-wrap:break-word;color:#000;}
 .DivReturnMessageSuccess label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageSuccessBottom{width:594px;height:16px;margin-bottom:10px;background-color:#f5f5f5;border-left:1px solid #e8e8e8;border-left-width:6px;}
-.DivReturnMessageError{width:600px;height:auto;min-height:80px;margin-top:10px;background-color:#FFC1C1;border-color:#c82100;color:#c82100;margin-bottom:0px !important;}
-.DivReturnMessageError div{max-width:570px;width:570px;height:auto;word-wrap:break-word;}
+.DivReturnMessageError{width:600px;height:auto;min-height:80px;margin-top:10px;background-color:#FFC1C1;border-color:#c82100;color:#c82100;margin-bottom:0px !important;margin-left:0px !important;}
+.DivReturnMessageError div{width:auto !important;max-width:570px;width:570px;min-height:80px !important;height:auto;word-wrap:break-word;}
 .DivReturnMessageErrorBottom{width:600px;height:16px;margin-bottom:10px;background-color:#FFC1C1;}
 .DivReturnMessageError label{width:auto;height:auto;position:relative;left:10px;top:8px;}
 .DivReturnMessageWarning a{left:0px !important;top:0px !important;margin-bottom:0px !important;}
@@ -29,3 +29,5 @@
 .GetDnsRecordsTableTdTarget{width:270px;}
 .GetDnsRecordsTableTdIp{width:120px;}
 .GetDnsRecordsTableTdTtl{width:80px;}
+.DivReturnForm{width:600px !important;}
+.DivReturnForm div{float:none !important;}

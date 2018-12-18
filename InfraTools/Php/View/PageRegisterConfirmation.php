@@ -68,7 +68,8 @@ class PageRegisterConfirmation extends PageInfraTools
 						$return = $this->UserSelectByHashCode($hashCode, $this->User, $this->InputValueHeaderDebug);
 						if ($return == ConfigInfraTools::SUCCESS)
 						{
-							$this->Session->SetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
+							$this->User = NULL;
+							$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_USER);
 							$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_CONFIRMATION_SUCCESS', 
 																						 $this->Language);
 						}

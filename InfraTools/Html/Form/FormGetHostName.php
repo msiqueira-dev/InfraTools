@@ -42,7 +42,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetHostnameMessage))
-	                     echo $this->VisibilityFunctionGetHostnameMessage; ?>">
+	                     echo $this->VisibilityFunctionGetHostnameMessage; ?> DivReturnForm">
         <div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN) 

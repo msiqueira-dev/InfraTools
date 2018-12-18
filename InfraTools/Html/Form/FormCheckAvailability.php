@@ -40,7 +40,7 @@
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckAvailabilityMessage)) 
-	                  	 echo $this->VisibilityFunctionCheckAvailabilityMessage; ?>">
+	                  	 echo $this->VisibilityFunctionCheckAvailabilityMessage; ?> DivReturnForm">
  		<div class="">
             <label>
                 <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_AVAILABILITY_HIDDEN) 

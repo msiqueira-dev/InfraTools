@@ -60,3 +60,4 @@
 .SelectBirthDateDay{width:19%;height:30px !important;}
 .SelectBirthDateMonth{width:19%;height:30px !important;}
 .SelectBirthDateYear{width:20%;height:30px !important;}
+.InputSubmitForgotPassword{background-color:transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;text-decoration:underline;font-weight:bold;}

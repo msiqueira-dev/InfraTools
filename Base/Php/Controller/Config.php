@@ -334,7 +334,7 @@ class Config
 	const SESS_USER                                                     = "SessionUser";
 	const TYPE_USER_SUPER                                               = "SUPER_ADMINISTRATOR";
 	const USER_ACTIVE                                                   = 1;
-	const USER_NOT_CONFIRMED                                            = "UserNotConfirmed";
+	const USER_NOT_CONFIRMED                                            = "USER_NOT_CONFIRMED";
 	const USER_NOT_LOGGED_IN                                            = "UserNotLoggedIn";
 	
 	/* DataBase Errors */
