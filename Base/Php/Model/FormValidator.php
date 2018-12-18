@@ -428,7 +428,7 @@ class FormValidator
 		{
 			if($Description != NULL && !empty($Description))
 			{
-				if(preg_match('/^[a-zA-Z _.-]{2,45}$/', $Description) > 0)
+				if(preg_match('/(^([a-zA-Z]|[.]|[-]|[_]|[ ]|[0-9])*)$/', $Description) > 0)
 					return self::SUCCESS;
 				else return self::INVALID_DESCRIPTION;
 			}
