@@ -568,7 +568,7 @@ class User
 	{
 		if($this->UserType != NULL)
 		{
-			if($this->UserType->GetTypeUserDescription() == Config::TYPE_USER_SUPER)
+			if($this->UserType->GetTypeUserId() == Config::TYPE_USER_SUPER)
 				return TRUE;
 			else return FALSE;
 		}

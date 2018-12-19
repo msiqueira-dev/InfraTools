@@ -61,10 +61,12 @@ class De
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "";
 	const COUNTRY                                                 = "";
 	const COUNTRY_ABBREVIATION                                    = "";
+	const COUNTRY_NOT_FOUND                                       = "";
 	const DEACTIVATED                                             = "";
 	const DEFAULT_VALUE                                           = "";
 	const DEPARTMENT                                              = "";
 	const DEPARTMENT_INITIALS                                     = "";
+	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                  = "";
 	const DEPARTMENT_NAME                                         = "";
 	const DEPARTMENT_NAME_AND_CORPORATION_NAME                    = "";
 	const DEPARTMENT_NOT_FOUND                                    = "";
@@ -576,6 +578,7 @@ class De
 	const REGISTRATION_DATE_TIP                                   = "";
 	const REGISTRATION_ID                                         = "";
 	const REGISTRATION_ID_TIP                                     = "";
+	const ROW_COUNT                                               = "";
 	const SEND_EMAIL_ERROR                                        = "";
 	const SERVICE_DELETE_ERROR                                    = "";
 	const SERVICE_DELETE_ERROR_FOREIGN_KEY                        = "";
@@ -591,6 +594,7 @@ class De
 	const SERVICE_FIELD_TYPE                                      = "";
 	const SERVICE_INSERT_ERROR                                    = "";
 	const SERVICE_INSERT_SUCCESS                                  = "";
+	const SERVICE_NOT_FOUND                                       = "";
 	const SERVICE_NOT_FOUND_FOR_USER                              = "";
 	const SERVICE_NOT_FOUND_FOR_USER_BY_CORPORATION               = "";
 	const SERVICE_NOT_FOUND_FOR_USER_BY_DEPARTMENT                = "";
@@ -645,6 +649,8 @@ class De
 	const SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE                 = "";
 	const SUBMIT_UPDATE                                           = "";
 	const SUBMIT_VALIDATE                                         = "";
+	const TABLE_PAGE_PREFIX                                       = "";
+	const TABLE_PAGE                                              = "";
 	const TEAM                                                    = "";
 	const TEAM_DESCRIPTION                                        = "";
 	const TEAM_ID                                                 = "";

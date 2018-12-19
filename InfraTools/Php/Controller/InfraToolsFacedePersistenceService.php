@@ -244,7 +244,7 @@ class InfraToolsFacedePersistenceService
 								  $ServiceDepartment, $ServiceDepartmentCanChange,
 								  $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceInsert');
 		if($MySqlConnection != NULL)

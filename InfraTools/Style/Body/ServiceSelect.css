@@ -26,3 +26,6 @@
 .DivFormServiceViewUpdate{width:165px !important; height:40px !important;min-height:40px !important;float:left;}
 .DivContentBodyContainer{margin-top:0px !important;}
 .DivContentBodyContainer form{margin-left:20px;}
+.DivReturnMessageError{margin-left:0 !important;}
+.DivReturnMessageSuccess{margin-left:0 !important;}
+.DivReturnMessageWarning{margin-left:0 !important;}

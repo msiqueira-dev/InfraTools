@@ -103,6 +103,13 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW)) . ".php");
 		}
+		//PAGE_ADMIN_TYPE_SERVICE_VIEW_LIST_SERVICES
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW_LIST_SERVICES)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", 
+													  ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW_LIST_SERVICES)) . ".php");
+		}
 		?>
     </div>
 </div>

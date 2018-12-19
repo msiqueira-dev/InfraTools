@@ -19,7 +19,7 @@ Functions:
 			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
 			public function TypeUserSelectByTypeUserDescription($Description, &$TypeUser, $Debug, $MySqlConnection);
 			public function TypeUserSelectByTypeUserId($TypeUserId, &$TypeUser, $Debug, $MySqlConnection);
-			public function TypeUserUpdateByTypeUserId($TypeUserId, $Description, $Debug, $MySqlConnection);
+			public function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $TypeUserId, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -323,7 +323,7 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserUpdateByTypeUserId($TypeUserId, $TypeUserDescription, $Debug, $MySqlConnection)
+	public function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $TypeUserId, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -333,7 +333,7 @@ class FacedePersistenceTypeUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserUpdateByTypeUserId());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeUserDescription, $TypeUserId);
+				$stmt->bind_param("si", $TypeUserDescriptionNew, $TypeUserId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

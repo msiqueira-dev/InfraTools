@@ -9,3 +9,6 @@
 .DivContentBodyContainersBoxIcon{margin-top:5px;}
 .DivContentBodyContainerLabel, .DivContentBodyContainerLabelBig{width:250px !important;}
 .SelectCorporation, .SelectDepartment, .SelectTypeService{color:black !important;}
+.DivReturnMessageError{margin-left:0 !important;}
+.DivReturnMessageSuccess{margin-left:0 !important;}
+.DivReturnMessageWarning{margin-left:0 !important;}

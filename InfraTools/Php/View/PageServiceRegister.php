@@ -48,8 +48,9 @@ class PageServiceRegister extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$returnClass = "";
-		$returnImage = "";
+		$this->ShowDivReturnEmpty();
+		$returnClass = "DivHidden";
+		$returnImage = "DivDisplayNone";
 		$returnText  = "";
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{

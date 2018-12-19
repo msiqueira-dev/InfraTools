@@ -61,10 +61,12 @@ class En
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "Error obtaing corporations";
 	const COUNTRY                                                 = "Country";
 	const COUNTRY_ABBREVIATION                                    = "Country Initials";
+	const COUNTRY_NOT_FOUND                                       = "Country not found";
 	const DEACTIVATED                                             = "Deactivated";
 	const DEFAULT_VALUE                                           = "Please fill the necessary fields";
 	const DEPARTMENT                                              = "Department";
 	const DEPARTMENT_INITIALS                                     = "Department Initials";
+	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                  = "A department must be associated with a corporation";
 	const DEPARTMENT_NAME                                         = "Department name";
 	const DEPARTMENT_NAME_AND_CORPORATION_NAME                    = "Department name and corporation name";
 	const DEPARTMENT_NOT_FOUND                                    = "Department not found";
@@ -604,6 +606,7 @@ class En
 	const REGISTRATION_DATE_TIP                                   = "(Hiring date)";
 	const REGISTRATION_ID                                         = "Registration ID";
 	const REGISTRATION_ID_TIP                                     = "Registration ID";
+	const ROW_COUNT                                               = "Total Amount: ";
 	const SEND_EMAIL_ERROR                                        = "Error while sending email to user";
 	const SERVICE_DELETE_ERROR                                    = "Error deleting service";
 	const SERVICE_DELETE_ERROR_FOREIGN_KEY                        = "Error deleting service, delete associations first";
@@ -619,6 +622,7 @@ class En
 	const SERVICE_FIELD_TYPE                                      = "Type";
 	const SERVICE_INSERT_ERROR                                    = "Error inserting service";
 	const SERVICE_INSERT_SUCCESS                                  = "Service inserted successfully";
+	const SERVICE_NOT_FOUND                                       = "No services were found";
 	const SERVICE_NOT_FOUND_FOR_USER                              = "There is no service associated to your user";
 	const SERVICE_NOT_FOUND_FOR_USER_BY_CORPORATION               = "There is no service associated to your user for your "
 		                                                          . "corporation";
@@ -675,6 +679,8 @@ class En
 	const SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE                 = "DEACTIVATE TWO STEP VERIFICATION";
 	const SUBMIT_UPDATE                                           = "UPDATE";
 	const SUBMIT_VALIDATE                                         = "VALIDATE";
+	const TABLE_PAGE_PREFIX                                       = "From:";
+	const TABLE_PAGE                                              = "of";
 	const TEAM                                                    = "Team";
 	const TEAM_DESCRIPTION                                        = "Team description";
 	const TEAM_ID                                                 = "Team id";

@@ -160,10 +160,10 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) 
 			                                   == ConfigInfraTools::SUCCESS)
-			{
+			{;
 				if($this->ExecuteFunction($_POST, 'TypeUserUpdateByTypeUserId', 
 									      array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
-										        &$InstanceTypeUser),
+										        &$this->InstanceTypeUser),
 									      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE;

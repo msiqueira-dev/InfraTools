@@ -164,7 +164,8 @@ Functions:
 			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug,
 			                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, TypeUserId, $Debug, $MySqlConnection = NULL, 
+			                                           $CloseConnectaion = TRUE);
 			public function UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, 
 			                                                $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -1495,14 +1496,15 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function TypeUserUpdateByTypeUserId($Id, $Description, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $TypeUserId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		if($MySqlConnection == NULL)
 			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
-			$return = $instanceFacedePersistenceTypeUser->TypeUserUpdateByTypeUserId($Id, $Description, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceTypeUser->TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $TypeUserId, 
+																					 $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

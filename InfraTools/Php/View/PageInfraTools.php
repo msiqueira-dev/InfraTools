@@ -119,12 +119,17 @@ Methods:
 			                                                           $Limit1, $Limit2, $Debug);
 			protected function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, 
 			                                                                  $UserEmail, $Debug);
+			protected function TypeServiceDeleteByTypeTypeServiceName($TypeServiceName, $Debug);
+			protected function TypeServiceInsert($TypeServiceName, $TypeServiceSLA, $Debug);
+			protected function TypeServiceLoadData(InstanceInfraToolsTypeService);
 			protected function TypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, 
 			                                     &$RowCount, $Debug);
 			protected function TypeServiceSelectNoLimit(&ArrayInstanceInfraToolsTypeService, $Debug);
 			protected function TypeServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeService, $UserEmail, &$RowCount
 			                                                  $Limit1, $Limit2, $Debug);
 			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
+			protected function TypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew, &$InstanceInfraToolsTypeService,
+			                                                      $Debug);
 			protected function UserChangeTwoStepVerification($InstanceInfraToolsUser, $TwoStepVerification, $Debug);
 			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 			protected function InfraToolsUserSelectByUserEmail($UserEmail, &InstanceInfraToolsUser, $Debug);
@@ -166,6 +171,8 @@ abstract class PageInfraTools extends Page
 	public $InputValueServiceNameRadio                           = "";
 	public $InputValueServiceType                                = "";
 	public $InputValueSessionExpires                             = "";
+	public $InputValueTypeServiceName                            = "";
+	public $InputValueTypeServiceSLA                             = "";
 	public $Language                                             = "";
 	public $ReturnServiceActiveClass                             = "";
 	public $ReturnServiceActiveText                              = "";
@@ -193,6 +200,8 @@ abstract class PageInfraTools extends Page
 	public $ReturnTypeAssocUserServiceIdText                     = "";
 	public $ReturnTypeServiceNameClass                           = "";
 	public $ReturnTypeServiceNameText                            = "";
+	public $ReturnTypeServiceSLAClass                            = "";
+	public $ReturnTypeServiceSLAText                             = "";
 
 	/* Constructor */
 	protected function __construct($Config, $Language, $Page) 
@@ -237,6 +246,9 @@ abstract class PageInfraTools extends Page
 			$this->ReturnText  = "";
 			$this->ReturnClass = "DivHidden";
 			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return $return;
 		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
@@ -447,6 +459,18 @@ abstract class PageInfraTools extends Page
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		if($ServiceCorporation == Config::FORM_SELECT_NONE)
+			$ServiceCorporation = NULL;
+		if($ServiceDepartment == Config::FORM_SELECT_NONE)
+			$ServiceDepartment = NULL;
+		$this->InputValueServiceActive               = $ServiceActive;
+		$this->InputValueServiceCorporation          = $ServiceCorporation;
+		$this->InputValueServiceCorporationCanChange = $ServiceCorporationCanChange;
+		$this->InputValueServiceDepartment           = $ServiceDepartment;
+		$this->InputValueServiceDepartmentCanChange  = $ServiceDepartmentCanChange;
+		$this->InputValueServiceDescription          = $ServiceDescription;
+		$this->InputValueServiceType                 = $ServiceType;
+		$this->InputValueUserEmail                   = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_ACTIVE
@@ -454,7 +478,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $ServiceActive; 
+		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = TRUE;
@@ -468,7 +492,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[1]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $ServiceCorporation; 
+		$arrayElementsInput[1]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = TRUE;
@@ -482,7 +506,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[2]        = &$this->ReturnServiceCanChangeClass;
 		$arrayElementsDefaultValue[2] = ""; 
 		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[2]        = $ServiceCorporationCanChange; 
+		$arrayElementsInput[2]        = $this->InputValueServiceCorporationCanChange; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = TRUE;
@@ -496,7 +520,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[3]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[3] = ""; 
 		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[3]        = $ServiceDepartment; 
+		$arrayElementsInput[3]        = $this->InputValueServiceDepartment; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 80; 
 		$arrayElementsNullable[3]     = TRUE;
@@ -510,7 +534,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[4]        = &$this->ReturnServiceDepartmentCanChangeClass;
 		$arrayElementsDefaultValue[4] = ""; 
 		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[4]        = $ServiceDepartmentCanChange; 
+		$arrayElementsInput[4]        = $this->InputValueServiceDepartmentCanChange; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 45; 
 		$arrayElementsNullable[4]     = TRUE;
@@ -524,7 +548,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[5]        = &$this->ReturnServiceDescriptionClass;
 		$arrayElementsDefaultValue[5] = ""; 
 		$arrayElementsForm[5]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[5]        = $ServiceDescription; 
+		$arrayElementsInput[5]        = $this->InputValueServiceDescription; 
 		$arrayElementsMinValue[5]     = 0; 
 		$arrayElementsMaxValue[5]     = 200; 
 		$arrayElementsNullable[5]     = FALSE;
@@ -539,7 +563,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[6]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[6] = ""; 
 		$arrayElementsForm[6]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[6]        = $ServiceName; 
+		$arrayElementsInput[6]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[6]     = 0; 
 		$arrayElementsMaxValue[6]     = 45; 
 		$arrayElementsNullable[6]     = FALSE;
@@ -553,7 +577,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[7]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[7] = ""; 
 		$arrayElementsForm[7]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[7]        = $ServiceType; 
+		$arrayElementsInput[7]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[7]     = 0; 
 		$arrayElementsMaxValue[7]     = 45; 
 		$arrayElementsNullable[7]     = FALSE;
@@ -566,10 +590,14 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
-																  $ServiceDepartment, $ServiceDepartmentCanChange,
-									                              $ServiceDescription, $ServiceName, $ServiceType, 
-																  $UserEmail,
+			$return = $FacedePersistenceInfraTools->ServiceInsert($this->InputValueServiceActive, $this->InputValueServiceCorporation,
+																  $this->InputValueServiceCorporationCanChange, 
+																  $this->InputValueServiceDepartment, 
+																  $this->InputValueServiceDepartmentCanChange,
+									                              $this->InputValueServiceDescription, 
+																  $this->InputValueServiceName, 
+																  $this->InputValueServiceType, 
+																  $this->InputValueUserEmail,
 																  $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -582,7 +610,7 @@ abstract class PageInfraTools extends Page
 				return ConfigInfraTools::WARNING;
 			}
 		}
-		$this->ShowDivReturnError("SERVICE_DELETE_ERROR");
+		$this->ShowDivReturnError("SERVICE_INSERT_ERROR");
 		return ConfigInfraTools::ERROR;
 	}
 	
@@ -621,17 +649,35 @@ abstract class PageInfraTools extends Page
 	protected function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		return $return = $FacedePersistenceInfraTools->ServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsService, 
+		$return = $FacedePersistenceInfraTools->ServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsService, 
 																	 $RowCount, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return ConfigInfraTools::SUCCESS;
+		}
+		$this->ShowDivReturnError("SERVICE_NOT_FOUND");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
 			                                      &$RowCount, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		return $return = $FacedePersistenceInfraTools->ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2,
-																				  $ArrayInstanceInfraToolsService, 
-																	              $RowCount, $Debug);
+		$return = $FacedePersistenceInfraTools->ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2,
+																		   $ArrayInstanceInfraToolsService, 
+																	       $RowCount, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return ConfigInfraTools::SUCCESS;
+		}
+		$this->ShowDivReturnError("SERVICE_NOT_FOUND");
+		return ConfigInfraTools::ERROR;
 	}
 	
 	protected function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
@@ -819,6 +865,9 @@ abstract class PageInfraTools extends Page
 																				 $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -898,6 +947,9 @@ abstract class PageInfraTools extends Page
 																							       $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -993,6 +1045,9 @@ abstract class PageInfraTools extends Page
 																					 $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1100,6 +1155,9 @@ abstract class PageInfraTools extends Page
 																					              $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1268,6 +1326,9 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1346,6 +1407,9 @@ abstract class PageInfraTools extends Page
 																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1423,6 +1487,9 @@ abstract class PageInfraTools extends Page
 																			   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1500,6 +1567,9 @@ abstract class PageInfraTools extends Page
 																			                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1579,6 +1649,9 @@ abstract class PageInfraTools extends Page
 			                                                                            $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -1665,6 +1738,9 @@ abstract class PageInfraTools extends Page
 			                                                                            $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -2068,10 +2144,13 @@ abstract class PageInfraTools extends Page
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
         $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelect($ArrayInstanceInfraToolsTypeAssocUserService,
-																			$Limit1, $Limit2, $RowCount,
-																			$Debug);
+																		   $Limit1, $Limit2, $RowCount,
+																		   $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
@@ -2126,6 +2205,26 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::ERROR;
 	}
 	
+	protected function TypeServiceDeleteByTypeTypeServiceName($TypeServiceName, $Debug)
+	{
+		
+	}
+	
+	protected function TypeServiceInsert($TypeServiceName, $TypeServiceSLA, $Debug)
+	{
+		
+	}
+	
+	protected function TypeServiceLoadData($InstanceInfraToolsTypeService)
+	{
+		if($InstanceInfraToolsTypeService != NULL)
+		{
+			$this->InputValueRegisterDate    = $InstanceInfraToolsTypeService->GetRegisterDate();
+			$this->InputValueTypeServiceName = $InstanceInfraToolsTypeService->GetTypeServiceName();
+			$this->InputValueTypeServiceSLA  = $InstanceInfraToolsTypeService->GetTypeServiceSLA();
+		}
+	}
+	
 	protected function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -2134,6 +2233,9 @@ abstract class PageInfraTools extends Page
 																  $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
 			return ConfigInfraTools::SUCCESS;
 		}
@@ -2176,8 +2278,7 @@ abstract class PageInfraTools extends Page
 	protected function TypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeServiceSelectOnUserContextNoLimit($UserEmail,
-			                                                                          $ArrayInstanceInfraToolsTypeService,
+        $return = $FacedePersistenceInfraTools->TypeServiceSelectOnUserContextNoLimit($UserEmail, $ArrayInstanceInfraToolsTypeService,
 																					  $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
@@ -2186,6 +2287,75 @@ abstract class PageInfraTools extends Page
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
 		return ConfigInfraTools::ERROR;
+	}
+	
+	protected function TypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew, &$InstanceInfraToolsTypeService,
+			                                              $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeServiceName = $TypeServiceNameNew;
+		$this->InputValueTypeServiceSLA  = $TypeServiceSLANew;
+		$this->InputFocus = Config::FORM_FIELD_TYPE_SERVICE_NAME;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FORM_FIELD_TYPE_SERVICE_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_SERVICE_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnTypeServiceNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeServiceName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeServiceNameText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_SERVICE_NAME',
+									'FORM_INVALID_TYPE_SERVICE_NAME_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_TYPE_SERVICE_SLA
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_SERVICE_SLA;
+		$arrayElementsClass[0]        = &$this->ReturnTypeServiceSLAClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeServiceName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeServiceSLAText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_SERVICE_NAME',
+									'FORM_INVALID_TYPE_SERVICE_NAME_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TypeStatusTicketUpdateByTypeStatusTicketDescription(
+				                                                               $this->InputValueTypeStatusTicketDescription,
+																			   $InstanceTypeStatusTicket->GetTypeStatusTicketDescription(),
+																			   $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$InstanceTypeStatusTicket->SetTypeStatusTicketDescription($this->InputValueTypeStatusTicketDescription);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
+				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
+				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDATE_SUCCESS");
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return Config::WARNING;
+			}
+		}
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDATE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserChangeTwoStepVerification($InstanceInfraToolsUser, $TwoStepVerification, $Debug)
@@ -2216,7 +2386,12 @@ abstract class PageInfraTools extends Page
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return ConfigInfraTools::SUCCESS;
+		}
 		$this->ShowDivReturnError("USER_NOT_FOUND");
 		return ConfigInfraTools::ERROR;
 	}

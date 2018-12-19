@@ -12,3 +12,7 @@
 .TableGenericThLeft{width:70%!important;}
 .DivContentBodyServiceSubTitle{width:400px;height:34px;margin-left:30%;text-align:center;font-weight:bold;}
 .DivContentBodyServiceSubTitle h2{position: relative;top:10px;}
+.SelectTypeService{color:black !important;}
+.DivReturnMessageError{margin-left:0 !important;}
+.DivReturnMessageSuccess{margin-left:0 !important;}
+.DivReturnMessageWarning{margin-left:0 !important;}

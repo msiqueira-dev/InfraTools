@@ -103,7 +103,7 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
-		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug);
+		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $InstanceTypeUser, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
 		protected     function        UserInsert($Application, $SendEmail, 
 		                                         $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, 
@@ -246,6 +246,8 @@ class Page
 	public    $InputValueGender                                     = "";
 	public    $InputValueHeaderDebug                                = Config::CHECKBOX_UNCHECKED;
 	public    $InputValueHeaderLayout                               = Config::CHECKBOX_UNCHECKED;
+	public    $InputValueLimit1                                     = "";
+	public    $InputValueLimit2                                     = "";
 	public    $InputValueLoginEmail                                 = "";
 	public    $InputValueLoginPassword                              = "";
 	public    $InputValueLoginTwoStepVerificationCode               = "";
@@ -257,6 +259,7 @@ class Page
 	public    $InputValueRegistrationDateYear                       = "";
 	public    $InputValueRegistrationId                             = "";
 	public    $InputValueRepeatPassword                             = "";
+	public    $InputValueRowCount                                   = "";
 	public    $InputValueTeamDescription                            = "";
 	public    $InputValueTeamId                                     = "";
 	public    $InputValueTeamIdRadio                                = "";
@@ -688,7 +691,12 @@ class Page
 		$return = $instanceFacedePersistence->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation, 
 															    $RowCount, $Debug);
 		if($return == Config::SUCCESS)
-			return $return;
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -835,8 +843,17 @@ class Page
 	protected function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $instanceFacedePersistence->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, 
-													     $RowCount, $Debug);
+		$return = $instanceFacedePersistence->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, 
+													        $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return Config::SUCCESS;
+		}
+		$this->ShowDivReturnError("COUNTRY_NOT_FOUND");
+		return Config::ERROR;
 	}
 	
 	protected function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug)
@@ -926,6 +943,11 @@ class Page
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
 				return Config::WARNING;
 			}
+			elseif($return == Config::MYSQL_ERROR_FOREIGN_KEY_INSERT_RESTRICT)
+			{
+				$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR_NO_CORPORATION");
+				return Config::WARNING;
+			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR");
 		return Config::ERROR;
@@ -952,7 +974,12 @@ class Page
 															   $RowCount,
 															   $Debug);
 		if($return == Config::SUCCESS)
-			return $return;
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -1484,7 +1511,12 @@ class Page
 															 $RowCount,
 															 $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -1776,7 +1808,12 @@ class Page
 														   $RowCount,
 														   $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -2095,7 +2132,12 @@ class Page
 															          $RowCount,
 															          $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -2273,7 +2315,12 @@ class Page
 															         $RowCount,
 															         $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -2449,7 +2496,12 @@ class Page
 		$return = $instanceFacedePersistence->TypeTicketSelect($Limit1, $Limit2,
 															   $ArrayInstanceTypeTicket, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -2627,7 +2679,12 @@ class Page
 															 $RowCount,
 															 $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
 		return Config::ERROR;
 	}
@@ -2723,12 +2780,12 @@ class Page
 		return Config::ERROR;
 	}
 	
-	protected function TypeUserUpdateByTypeUserId($TypeUserDescription, $InstanceTypeUser, $Debug)
+	protected function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $InstanceTypeUser, $Debug)
 	{
 		if($InstanceTypeUser != NULL)
 		{
 			$PageForm = $this->Factory->CreatePageForm();
-			$this->InputValueTypeUserDescription  = $TypeUserDescription;
+			$this->InputValueTypeUserDescription  = $TypeUserDescriptionNew;
 			$this->InputFocus = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
 			$arrayConstants = array(); $matrixConstants = array();
 			
@@ -2753,8 +2810,8 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$FacedePersistence = $this->Factory->CreateFacedePersistence();
-				$return = $FacedePersistence->TypeUserUpdateByTypeUserId($InstanceTypeUser->GetTypeUserId(),
-																		 $this->InputValueTypeUserDescription,
+				$return = $FacedePersistence->TypeUserUpdateByTypeUserId($this->InputValueTypeUserDescription,
+					                                                     $InstanceTypeUser->GetTypeUserId(),
 																		 $Debug);
 				if($return == Config::SUCCESS)
 				{
@@ -3295,7 +3352,12 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
 			return Config::SUCCESS;
+		}
 		$this->ShowDivReturnError("USER_NOT_FOUND");
 		return Config::ERROR;
 	}

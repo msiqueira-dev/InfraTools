@@ -43,6 +43,13 @@ textarea{resize:none;}
 .SwitchToggleSliderChange{box-shadow: 0 0 1px #ef4e22;}
 .SwitchToggleSliderChange:before{transform: translateX(18px);}
 .SwitchToggleSliderChange:after{transform: translateX(18px);}
+.DivTableGenericHeader{width:auto;height:auto;}
+.InputValueLimitTitle{font-weight:bold;color:orangered;font-size:14px;}
+.InputValueLimitValue{font-weight:bold;font-size:14px;}
+.DivTableGenericHeaderRowCount{width:auto;max-width:170px;height:auto;min-height:30px;min-width:90px;margin-left:17%;margin-right:20%;position:relative;float:left;}
+.DivTableGenericHeaderRowCount label{position:relative;top:7px;margin-left:5px;}
+.DivTableGenericRowCountLabelTitle{font-size:14px;color:orangered;font-weight:bold;text-align:center;}
+.DivTableGenericRowCountLabelValue{font-weight:bold;font-size:14px;text-align:center;}
 .TableGeneric{width:100%;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;}
 .TableGeneric th, .TableGeneric th div{;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
 .TableGeneric th{width:auto;height:35px;}

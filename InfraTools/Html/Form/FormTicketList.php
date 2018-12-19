@@ -1,10 +1,32 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
-
-<body>
-</body>
-</html>
+<!-- BODY TICKET LIST -->
+<div class="DivTableGenericHeader">
+	<div class="DivTableGenericHeaderRowCount">
+		<?php 
+			 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
+			 {
+				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+					  echo "<label class='InputValueLimitTitle'>" . 
+							   $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
+						   "</label>" .
+						   "<label class='InputValueLimitValue'>" . 
+							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
+													   . " " . $this->InputValueLimit2 . 
+						   "</label>";
+			 }
+		?>
+	</div>
+	<div class="DivTableGenericHeaderRowCount">
+		<?php
+			 if(isset($this->InputValueRowCount)) 
+			  {
+				  if($this->InputValueRowCount != "") 
+					  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
+							   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
+						   "</label>" .
+						   "<label class='DivTableGenericRowCountLabelValue'>" . 
+							   $this->InputValueRowCount . 
+						   "</label>";
+			  } 
+		?>
+	</div>
+</div>

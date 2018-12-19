@@ -61,10 +61,12 @@ class Pt
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR        = "Erro ao obter corporações";
 	const COUNTRY                                                 = "País";
 	const COUNTRY_ABBREVIATION                                    = "Sigla do País";
+	const COUNTRY_NOT_FOUND                                       = "Nenhum país encontrado";
 	const DEACTIVATED                                             = "Desativado";
 	const DEFAULT_VALUE                                           = "Por favor preencha os campos necessários";
 	const DEPARTMENT                                              = "Departamento";
 	const DEPARTMENT_INITIALS                                     = "Código do Departamento";
+	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                  = "Um departamento tem que estar associado a uma corporação";
 	const DEPARTMENT_NAME                                         = "Nome do departamento";
 	const DEPARTMENT_NAME_AND_CORPORATION_NAME                    = "Nome do departamento e nome da corporação";
 	const DEPARTMENT_NOT_FOUND                                    = "Departamento não encontrado";
@@ -605,6 +607,7 @@ class Pt
 	const REGISTRATION_DATE_TIP                                   = "Data de contratação";
 	const REGISTRATION_ID                                         = "Matrícula";
 	const REGISTRATION_ID_TIP                                     = "Matrícula";
+	const ROW_COUNT                                               = "Valor total: ";
 	const SEND_EMAIL_ERROR                                        = "Erro ao enviar e-mail para o usuário";
 	const SERVICE_DELETE_ERROR                                    = "Erro ao excluir serviço";
 	const SERVICE_DELETE_ERROR_FOREIGN_KEY                        = "Erro ao excluir serviço, exclua as associações primeiro";
@@ -620,6 +623,7 @@ class Pt
 	const SERVICE_FIELD_TYPE                                      = "Tipo";
 	const SERVICE_INSERT_ERROR                                    = "Erro ao cadastrar serviço";
 	const SERVICE_INSERT_SUCCESS                                  = "Serviço cadastrado com sucesso";
+	const SERVICE_NOT_FOUND                                       = "Nenhum serviço foi encontrado";
 	const SERVICE_NOT_FOUND_FOR_USER                              = "Nenhum serviço associado a seu usuário";
 	const SERVICE_NOT_FOUND_FOR_USER_BY_CORPORATION               = "Nenhum serviço associado a seu usuário para sua "
 		                                                          . "corporação";
@@ -676,6 +680,8 @@ class Pt
 	const SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE                 = "DESATIVAR VERIFICAÇÃO DUAS ETAPAS";
 	const SUBMIT_UPDATE                                           = "ATUALIZAR";
 	const SUBMIT_VALIDATE                                         = "VALIDATE";
+	const TABLE_PAGE_PREFIX                                       = "De:";
+	const TABLE_PAGE                                              = "até";
 	const TEAM                                                    = "Equipe";
 	const TEAM_DESCRIPTION                                        = "Descrição de equipe";
 	const TEAM_ID                                                 = "Id da equipe";

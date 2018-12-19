@@ -146,6 +146,8 @@ class FacedePersistenceDepartment
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
 					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
+					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_INSERT_RESTRICT)
+						return Config::MYSQL_ERROR_FOREIGN_KEY_INSERT_RESTRICT;
 					else return Config::MYSQL_DEPARTMENT_INSERT_FAILED;
 				}
 			}
