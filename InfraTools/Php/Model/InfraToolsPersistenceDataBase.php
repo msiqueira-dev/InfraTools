@@ -962,9 +962,9 @@ class InfraToolsPersistenceDataBase
 			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE         ."  "
 			 . "FROM  "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            ."  "
  			 . "WHERE "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME   . "= 'ENABLE_PAGE_INSTALL' "
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME          . "= 'ENABLE_PAGE_INSTALL' "
              . "AND "    . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE . "= 1";
+			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE        . "= 1 ";
 	}
 }
 ?>

@@ -671,6 +671,9 @@ class Pt
 	const SUBMIT_CONFIRM                                          = "Confirma ?";
 	const SUBMIT_FORWARD                                          = "AVANÇAR";
 	const SUBMIT_INSERT                                           = "ADICIONAR";
+	const SUBMIT_INSTALL_IMPORT                                   = "Importar Dados ao Sistema";
+	const SUBMIT_INSTALL_NEW                                      = "Instalar Sistema";
+	const SUBMIT_INSTALL_REINSTALL                                = "Reinstalar Sistema";
 	const SUBMIT_LIST                                             = "LISTAR";
 	const SUBMIT_LIST_USERS                                       = "LISTAR USUÁRIOS";
 	const SUBMIT_REGISTER                                         = "CADASTRAR";

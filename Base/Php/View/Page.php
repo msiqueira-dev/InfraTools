@@ -4646,7 +4646,11 @@ class Page
 	{
 		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
+		if(isset($Constant))
+		{
+			if(($Constant) != NULL)
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+		}
 	}
 	
 	public function ShowDivReturnEmpty()
@@ -4660,14 +4664,22 @@ class Page
 	{
 		$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
 		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-		$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
+		if(isset($Constant))
+		{
+			if(($Constant) != NULL)
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+		}
 	}
 	
 	public function ShowDivReturnWarning($Constant)
 	{
 		$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
 		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-		$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
+		if(isset($Constant))
+		{
+			if(($Constant) != NULL)
+				$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+		}
 	}
 	
 	public function StartPageLoadTime()

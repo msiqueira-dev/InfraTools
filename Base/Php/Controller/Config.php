@@ -216,6 +216,8 @@ class Config
 	const MYSQL_ERROR_USER_EXISTS                                       = "RetMySqlErrorUserExists";
 	const MYSQL_LOG_ERROR                                               = "LogMySqlError";
 	const MYSQL_LOG_QUERY                                               = "LogMySqlQuery";
+	const MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_DISABLED  = "RetMySqlTableFieldSystemConfigurationPageInstallDisabled";
+	const MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_ENABLED   = "RetMySqlTableFieldSystemConfigurationPageInstallEnabled";
 	const PAGE                                                          = "Page";
 	const PAGE_ABOUT                                                    = "Page_About";
 	const PAGE_ACCOUNT                                                  = "Page_Account";
@@ -478,6 +480,8 @@ class Config
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME                  = "SystemConfigurationOptionName";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER                = "SystemConfigurationOptionNumber";
 	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE                 = "SystemConfigurationOptionValue";
+	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE_DISABLE         = "SystemConfigurationOptionValueDisable";
+	const TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE_ENABLE          = "SystemConfigurationOptionValueEnable";
 	const TABLE_CORPORATION                                             = "CORPORATION";
 	const TABLE_CORPORATION_FIELD_ACTIVE                                = "CorporationActive";
 	const TABLE_CORPORATION_FIELD_NAME                                  = "CorporationName";

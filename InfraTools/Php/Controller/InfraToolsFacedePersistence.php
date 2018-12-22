@@ -54,8 +54,8 @@ Methods:
 			public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, 
 			                                                            &$ArrayInstanceInfraToolsDepartment, $Debug,
 																		$MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function InfraToolsCheckDataBase($Debug);
-			public function InfraToolsCreateDataBase($Debug);
+			public function InfraToolsCheckDataBase(&$StringMessage, $Debug);
+			public function InfraToolsCreateDataBase(&$StringMessage, $Debug);
 			public function ServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			public function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug,);
 			public function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -457,7 +457,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function InfraToolsCheckDataBase($Debug)
+	public function InfraToolsCheckDataBase(&$StringMessage, $Debug)
 	{
 		$mySqlConnection;
 		$this->MySqlManager->DestroyMySqlManagerInstance();
@@ -471,12 +471,16 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		if($return == Config::MYSQL_ERROR_DATABASE_NOT_FOUND)
 			return Config::MYSQL_ERROR_DATABASE_NOT_FOUND;
 		$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
-		$return = $InfraToolsFacedePersistenceDataBase->InfraToolsCheckDataBase($Debug, $mySqlConnection);
+		$return = $InfraToolsFacedePersistenceDataBase->InfraToolsCheckDataBase($StringMessage, $Debug, $mySqlConnection);
+		if($return == ConfigInfraTools::SUCCESS)
+			$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+		elseif($return == ConfigInfraTools::MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_DISABLED)
+			$StringMessage .= ": " . ConfigInfraTools::MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_DISABLED;
 		$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
 		return $return;
 	}
 	
-	public function InfraToolsCreateDataBase($Debug)
+	public function InfraToolsCreateDataBase(&$StringMessage, $Debug)
 	{
 		$mySqlConnection;
 		$this->MySqlManager->DestroyMySqlManagerInstance();
@@ -490,17 +494,503 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		if($return == Config::SUCCESS)
 		{
 			$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
-
-			$return = $InfraToolsFacedePersistenceDataBase->DropInfraToolsDataBase($Debug, $mySqlConnection);
+			$return = $InfraToolsFacedePersistenceDataBase->DropInfraToolsDataBase($StringMessage, $Debug, $mySqlConnection);
 			if($return == ConfigInfraTools::SUCCESS)
-				echo ": " . ConfigInfraTools::SUCCESS . "<br>";
+				$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
 			else return $mySqlConnection->rollback();
 
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBase($Debug, $mySqlConnection);
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBase($StringMessage, $Debug, $mySqlConnection);
 				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableCorporation($StringMessage,
+																										 $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";		
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableCountry($StringMessage, $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeUser($StringMessage, $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableUser($StringMessage, $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableDepartment($StringMessage, 
+																										$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeTicket($StringMessage,
+																										$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeService($StringMessage,
+																										 $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableService($StringMessage, 
+																									 $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeStatusTicket($StringMessage,
+																											  $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";		
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTicket($StringMessage,
+																									$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocTicketUserResponsible($StringMessage,
+																														$Debug,
+																											            $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryTicket($StringMessage,
+																										   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserService($StringMessage,
+																												  $Debug,
+																												  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserService($StringMessage,
+																											  $Debug,
+																											  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeTimeMonitoring($StringMessage,
+																												$Debug,
+																												$mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeMonitoring($StringMessage,
+																											$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeStatusMonitoring($StringMessage,
+																												  $Debug,
+																												  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableStatusMonitoring($StringMessage,
+																											  $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableMonitoring($StringMessage,
+																										$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryService($StringMessage,
+																											$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryMonitoring($StringMessage,
+																											   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserRequesting($StringMessage,
+																													 $Debug,
+																												     $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocTicketUserRequesting($StringMessage,
+																													   $Debug,
+																												       $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableNotification($StringMessage,
+																										  $Debug,
+																									      $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserCorporation($StringMessage,
+																												  $Debug,
+																											      $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableSystemConfiguration($StringMessage,
+																												 $Debug,
+																											     $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTeam($StringMessage, $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserTeam($StringMessage, 
+																											   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserTeam($StringMessage, 
+																										   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableInformationService($StringMessage,
+																												$Debug,
+																												$mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTablePreference($StringMessage,
+																										$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableRole($StringMessage, $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserRole($StringMessage,
+																										   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserPreference($StringMessage,
+																												 $Debug,
+																												 $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableIpAddress($StringMessage,
+																									   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocIpAddressService($StringMessage,
+																												   $Debug,
+																												   $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableUrlAddress($StringMessage,
+																										$Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUrlAddressService($StringMessage,
+																													$Debug,
+																													$mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerServiceAfterInsert($StringMessage,
+																												  $Debug,
+																												  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerServiceAfterUpdate($StringMessage,
+																												  $Debug,
+																												  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($StringMessage,
+																													 $Debug,
+																													 $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($StringMessage,
+																													 $Debug,
+																													 $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertCountry($StringMessage,
+																									  $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertPreference($StringMessage,
+																										 $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertRole($StringMessage, $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertSystemConfiguration($StringMessage,
+																												  $Debug,
+																												  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeAssocUserTeam($StringMessage,
+																												$Debug,
+																												$mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeAssocUserService($StringMessage,
+																												   $Debug,
+																												   $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeService($StringMessage,
+																										  $Debug,
+																										  $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeStatusTicket($StringMessage,
+																											   $Debug,
+																										       $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeTicket($StringMessage,
+																										 $Debug,
+																										 $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
+
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeUser($StringMessage,
+																									   $Debug,
+																									   $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
@@ -508,455 +998,16 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseUserApplication($this->Config->DefaultMySqlUser,
 																							            $this->Config->DefaultMySqlUserPassword,
+																										$StringMessage,
 																										$Debug, $mySqlConnection);
 				if($return == ConfigInfraTools::SUCCESS || ConfigInfraTools::MYSQL_ERROR_USER_EXISTS)
 				{
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br><br>";	
 					$return = ConfigInfraTools::SUCCESS;
 				}
 				else $mySqlConnection->rollback();
 			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableCorporation($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";		
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableCountry($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeUser($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableUser($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableDepartment($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeTicket($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeService($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableService($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";	
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeStatusTicket($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";		
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTicket($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocTicketUserResponsible($Debug,
-																											  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryTicket($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserService($Debug,
-																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserService($Debug,
-																											  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeTimeMonitoring($Debug,
-																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeMonitoring($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeStatusMonitoring($Debug,
-																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableStatusMonitoring($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableMonitoring($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryService($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryMonitoring($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserRequesting($Debug,
-																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocTicketUserRequesting($Debug,
-																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableNotification($Debug,
-																									 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserCorporation($Debug,
-																											 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableSystemConfiguration($Debug,
-																											$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTeam($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserTeam($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserTeam($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableInformationService($Debug,
-																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTablePreference($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableRole($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserRole($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserPreference($Debug,
-																												 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableIpAddress($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocIpAddressService($Debug,
-																												   $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableUrlAddress($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUrlAddressService($Debug,
-																													$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerServiceAfterInsert($Debug,
-																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerServiceAfterUpdate($Debug,
-																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug,
-																													 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug,
-																													 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertCountry($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertPreference($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertRole($Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertSystemConfiguration($Debug,
-																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeAssocUserTeam($Debug,
-																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeAssocUserService($Debug,
-																												   $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeService($Debug,
-																										  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeStatusTicket($Debug,
-																										  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeTicket($Debug,
-																										 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
-
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeUser($Debug,
-																									   $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					echo ": " . ConfigInfraTools::SUCCESS . "<br>";
-				else $mySqlConnection->rollback();
-			}
+			
 
 			$mySqlConnection->commit();	
 			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);

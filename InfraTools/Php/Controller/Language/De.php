@@ -640,6 +640,9 @@ class De
 	const SUBMIT_DELETE                                           = "";
 	const SUBMIT_FORWARD                                          = "";
 	const SUBMIT_INSERT                                           = "";
+	const SUBMIT_INSTALL_IMPORT                                   = "";
+	const SUBMIT_INSTALL_NEW                                      = "";
+	const SUBMIT_INSTALL_REINSTALL                                = "";
 	const SUBMIT_LIST                                             = "";
 	const SUBMIT_LIST_USERS                                       = "";
 	const SUBMIT_REGISTER                                         = "";

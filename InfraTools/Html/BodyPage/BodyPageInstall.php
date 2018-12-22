@@ -2,10 +2,8 @@
 <div class="DivBody">
     <div class="DivContentBody">
     	<?php
-			if($this->Install)
-			{
-				$return = $this->FacedePersistenceInfraTools->InfraToolsCreateDataBase(ConfigInfraTools::CHECKBOX_CHECKED);	
-			}
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("Page", "", str_replace("_", "", ConfigInfraTools::PAGE_INSTALL)) . ".php");
 		?>
 	</div>
 </div>

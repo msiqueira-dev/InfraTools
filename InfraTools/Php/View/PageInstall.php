@@ -28,7 +28,7 @@ if (!class_exists("PageInfraTools"))
 
 class PageInstall extends PageInfraTools
 {	
-	protected $Install = NULL;
+	protected $DataBaseReturnMessage = NULL;
 	
 	/* Singleton */
 	protected static $Instance;
@@ -60,12 +60,29 @@ class PageInstall extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$this->DataBaseReturnMessage = "";
+		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase($this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS || $return == Config::MYSQL_ERROR_DATABASE_NOT_FOUND || 
-		   $return == Config::MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND)
-			$this->Install = TRUE;
-		else $this->Install = FALSE;
+		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase($this->DataBaseReturnMessage, ConfigInfraTools::CHECKBOX_CHECKED);
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_NEW_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($return == Config::MYSQL_ERROR_DATABASE_NOT_FOUND || 
+			   $return == Config::MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_ENABLED ||
+			   $return == Config::MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND)
+			{
+				$return = $this->FacedePersistenceInfraTools->InfraToolsCreateDataBase($this->DataBaseReturnMessage,
+																					   ConfigInfraTools::CHECKBOX_CHECKED);
+			}
+		}
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			$return = $this->FacedePersistenceInfraTools->InfraToolsCreateDataBase($this->DataBaseReturnMessage,
+																				   ConfigInfraTools::CHECKBOX_CHECKED);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnSuccess("");
+			}
+		}
 		$this->LoadHtml(FALSE);
 	}
 }

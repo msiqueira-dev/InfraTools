@@ -672,6 +672,9 @@ class En
 	const SUBMIT_LIST                                             = "LIST";
 	const SUBMIT_LIST_USERS                                       = "LIST USERS";
 	const SUBMIT_INSERT                                           = "INSERT";
+	const SUBMIT_INSTALL_IMPORT                                   = "Import Data into System";
+	const SUBMIT_INSTALL_NEW                                      = "Install System";
+	const SUBMIT_INSTALL_REINSTALL                                = "Reinstall System";
 	const SUBMIT_REGISTER                                         = "REGISTER";
 	const SUBMIT_RESET_PASSWORD                                   = "RESET PASSWORD";
 	const SUBMIT_SELECT                                           = "SELECT";
