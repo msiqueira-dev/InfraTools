@@ -214,16 +214,16 @@ class FacedePersistenceAssocUserResponsible
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleSelectByTicketId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("i", $TypeAssocUserTeamId);
+				$stmt->bind_param("i", $AssocTicketUserResponsibleTicketId);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $TypeAssocUserTeamId);
+					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $AssocTicketUserResponsibleTicketId);
 					if ($stmt->fetch())
 					{
 						$InstanceAssocTicketUserResponsible = $this->Factory->CreateTypeAssocUserTeam($registerDate,
 																									  $typeAssocUserTeamDescription,
-																			                          $TypeAssocUserTeamId);
+																			                          $AssocTicketUserResponsibleTicketId);
 						return Config::SUCCESS;
 					}
 					else 
@@ -262,7 +262,7 @@ class FacedePersistenceAssocUserResponsible
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserResponsibleUpdateByTicketId());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserTeamId);
+				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $AssocTicketUserResponsibleTicketId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

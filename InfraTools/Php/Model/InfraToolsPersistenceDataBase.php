@@ -54,7 +54,7 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert();
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate();
 		public static function SqlDropInfraToolsDataBase();
-		public static function SqlInfraToolsCheckDataBase();
+		public static function SqlInfraToolsDataBaseCheck();
 **************************************************************************/
 
 class InfraToolsPersistenceDataBase
@@ -282,23 +282,23 @@ class InfraToolsPersistenceDataBase
                 RegisterDate DATETIME NOT NULL,
                 AssocUserTeamTeamId INT NOT NULL,
                 AssocUserTeamUserEmail VARCHAR(60) NOT NULL,
-                AssocUserTeamUserType INT NOT NULL,
+                AssocUserTeamUserType VARCHAR(45) NOT NULL,
                 PRIMARY KEY (AssocUserTeamTeamId, AssocUserTeamUserEmail),
                 INDEX IndexAssocUserTeamUserEmail (AssocUserTeamUserEmail ASC),
                 INDEX IndexAssocUserTeamUserType (AssocUserTeamUserType ASC),
-                CONSTRAINT ForeignKeyUserTeamUserEmail
+                CONSTRAINT ForeignKeyAssocUserTeamUserEmail
                 FOREIGN KEY (AssocUserTeamUserEmail)
                 REFERENCES INFRATOOLS.USER (Email)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
-                CONSTRAINT ForeignKeyUserTeamTeamId
+                CONSTRAINT ForeignKeyAssocUserTeamTeamId
                 FOREIGN KEY (AssocUserTeamTeamId)
                 REFERENCES INFRATOOLS.TEAM (TeamId)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
-                CONSTRAINT ForeignKeyUserTeamUserType
+                CONSTRAINT ForeignKeyAssocUserTeamUserType
                 FOREIGN KEY (AssocUserTeamUserType)
-                REFERENCES INFRATOOLS.TYPE_ASSOC_USER_TEAM (TypeAssocUserTeamId)
+                REFERENCES INFRATOOLS.TYPE_ASSOC_USER_TEAM (TypeAssocUserTeamDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -678,9 +678,7 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_ASSOC_USER_TEAM (
                 RegisterDate DATETIME NOT NULL,
                 TypeAssocUserTeamDescription VARCHAR(45) NOT NULL,
-                TypeAssocUserTeamId INT NOT NULL AUTO_INCREMENT,
-                PRIMARY KEY (TypeAssocUserTeamId),
-                UNIQUE INDEX UniqueTypeAssocUserTeamId (TypeAssocUserTeamId ASC),
+                PRIMARY KEY (TypeAssocUserTeamDescription),
                 UNIQUE INDEX UniqueTypeAssocUserTeamDescription (TypeAssocUserTeamDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
@@ -948,23 +946,9 @@ class InfraToolsPersistenceDataBase
 		return "DROP SCHEMA IF EXISTS INFRATOOLS";
 	}
 	
-	public static function SqlInfraToolsCheckDataBase()
+	public static function SqlInfraToolsDataBaseCheck()
 	{
-		return "SELECT " . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE        .", "
-					     . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION   .", "
-						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME          .", "
-						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER        .", "
-						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE         ."  "
-			 . "FROM  "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            ."  "
- 			 . "WHERE "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME          . "= 'ENABLE_PAGE_INSTALL' "
-             . "AND "    . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE        . "= 1 ";
+		return "show full tables from Infratools";
 	}
 }
 ?>

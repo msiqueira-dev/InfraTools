@@ -67,8 +67,11 @@ Functions:
 			public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseUserApplication($UserApplication, $UserApplicationPassword, &$StringMessage
 			                                                        $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseUserApplicationImport($UserApplicationImport, $UserApplicationImportPassword,
+			                                                              &$StringMessage, $Debug, $MySqlConnection)
 			public function DropInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection);
-			public function InfraToolsCheckDataBase(&$StringMessage, $Debug $MySqlConnection);
+			public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug, $MySqlConnection);
+			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -980,12 +983,6 @@ class InfraToolsFacedePersistenceDataBase
 											SystemConfigurationOptionValue) VALUES (now(), 1, 
 										    'ENABLE_REGISTER', 'ENABLE_REGISTER', DEFAULT, NULL)") !== TRUE)
 			   return ConfigInfraTools::MYSQL_INSERT_FAILED;
-			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.SYSTEM_CONFIGURATION (RegisterDate, 
-			                                SystemConfigurationOptionActive, SystemConfigurationOptionDescription, 
-										    SystemConfigurationOptionName, SystemConfigurationOptionNumber,
-											SystemConfigurationOptionValue) VALUES (now(), 1, 
-										    'ENABLE_PAGE_INSTALL', 'ENABLE_PAGE_INSTALL', DEFAULT, 'DISABLE')") !== TRUE)
-			   return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
@@ -997,18 +994,16 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 
-										    'Creator', DEFAULT);") !== TRUE)
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'CREATOR');") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 
-										    'Administrator', DEFAULT);") !== TRUE)
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'ADMINISTRATOR');") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate, 
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 'Editor', DEFAULT);") !== TRUE)
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'EDITOR');") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 'Viewer', DEFAULT);") !== TRUE)
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'VIEWER');") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;
 		}
@@ -1021,19 +1016,19 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'Creator',
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'CREATOR',
 										    DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(),
-										    'Administrator', DEFAULT)") !== TRUE)
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'ADMINISTRATOR', 
+											DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'Editor',
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'EDITOR',
 										    DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate, 
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'Viewer',
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'VIEWER',
 										    DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;
@@ -1221,16 +1216,16 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'Super Administrator', DEFAULT)") !== TRUE)
+			                                (now(), 'SUPER_ADMINISTRATOR', DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'Administrator Technician', DEFAULT)") !== TRUE)
+			                                (now(), 'ADMINISTRATOR_TECHNICIAN', DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'Administrator Attendant', DEFAULT)") !== TRUE)
+			                                (now(), 'ADMINISTRATOR_ATTENDANT', DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'User', DEFAULT)") !== TRUE)
+			                                (now(), 'USER', DEFAULT)") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;			 
 		}
@@ -2125,6 +2120,135 @@ class InfraToolsFacedePersistenceDataBase
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
+	public function CreateInfraToolsDataBaseUserApplicationImport($UserApplicationImport, $UserApplicationImportPassword, &$StringMessage, 
+															      $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseUserApplicationImport)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "CREATE USER IF NOT EXISTS '$UserApplicationImport' IDENTIFIED BY
+			                                  '$UserApplicationImportPassword'"))
+			{
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.USER 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT  ON TABLE INFRATOOLS.CORPORATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_USER 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.COUNTRY 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.DEPARTMENT 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.HISTORY_TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_STATUS_TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE                        
+				                                   INFRATOOLS.ASSOC_TICKET_USER_RESPONSIBLE TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.HISTORY_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_TIME_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.STATUS_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_STATUS_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.HISTORY_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT, DELETE ON TABLE INFRATOOLS.TYPE_ASSOC_USER_REQUESTING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE 
+				                                   INFRATOOLS.ASSOC_TICKET_USER_REQUESTING TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.NOTIFICATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_TEAM 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TEAM 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_CORPORATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_ASSOC_USER_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_ASSOC_USER_TEAM 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.INFORMATION_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_PREFERENCE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_ROLE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ROLE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.PREFERENCE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_IP_ADDRESS_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_URL_ADDRESS_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.URL_ADDRESS 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.IP_ADDRESS 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.SYSTEM_CONFIGURATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+			}
+			else return ConfigInfraTools::MYSQL_ERROR_USER_EXISTS;
+		}
+		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+	}
+	
 	public function DropInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection)
 	{
 		$StringMessage .= "<b>Query (SqlDropInfraToolsDataBase)</b>";
@@ -2143,36 +2267,71 @@ class InfraToolsFacedePersistenceDataBase
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsCheckDataBase(&$StringMessage, $Debug, $MySqlConnection)
+	public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
-		$StringMessage .= "<b>Query (SqlInfraToolsCheckDataBase)</b>";
+		$StringMessage .= "<b>Query (SqlInfraToolsDataBaseCheck)</b>";
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase());
-			if($stmt != NULL)
+			if($result = $MySqlConnection->query(InfraToolsPersistenceDataBase::SqlInfraToolsDataBaseCheck()))
 			{
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				$stmt->bind_result($registerDate, $systemConfigurationOptionActive, $systemConfigurationOptionName,
-								   $systemConfigurationOptionNumber, $systemConfigurationOptionValue);
-				if ($stmt->fetch())
+				$ArrayTables = array();
+				while ($row = $result->fetch_assoc()) 
 				{
-					if($systemConfigurationOptionValue == Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE_ENABLE)
-						return Config::MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_ENABLED;
-					else if($systemConfigurationOptionValue == Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE_DISABLE)
-						return Config::MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_DISABLED;
+					$table = array();
+					array_push($table, "Tables_in_infratools");
+					array_push($ArrayTables, $table);
 				}
-				return $return;
+				if(!empty($ArrayTables))
+				{
+					if(count($ArrayTables) == 38)
+						return Config::SUCCESS;
+					else return Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED;
+				}
+				else return Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH_FAILED;
 			}
-			else
+			else 
 			{
-				if(mysqli_errno($MySqlConnection) == "1146")
-					return Config::MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND;			
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				$return = Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FAILED;
 			}
+			return $return;
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Queries (SqlInfraToolsDataBaseImport):</b><br>";
+		if($MySqlConnection != NULL)
+		{
+			if(is_array($InsertQueries))
+			{
+				$ErrorQueires = array();
+				foreach($InsertQueries as $key => $insertQuery)
+				{
+					$StringMessage .= "<b>[" . $key . "]:</b> " . $insertQuery . "<br>";
+					try
+					{
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+							echo "<br><b>Insert Query - [" . $key . "]:</b> " . $insertQuery;
+						if(mysqli_query($MySqlConnection, $insertQuery) !== TRUE)
+							array_push($ErrorQueires, $inserQuery);
+					}
+					catch (mysqli_sql_exception $e)
+					{
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+							echo " <b>-- ERROR: " . mysqli_errno($MySqlConnection) . " -- " . mysqli_error($MySqlConnection) . " -- </b> <br>";
+						if(mysqli_errno($MySqlConnection) == ConfigInfraTools::MYSQL_ERROR_SYNTAX)
+							return ConfigInfraTools::MYSQL_INSERT_SYNTAX_ERROR;
+						else continue;
+					}
+				}
+				return ConfigInfraTools::SUCCESS;			 
+			}
+			else return ConfigINfraTools::MYSQL_IMPORT_NO_INSERTS;
+		}
+		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 }

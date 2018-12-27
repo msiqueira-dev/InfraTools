@@ -22,7 +22,7 @@ Functions:
 			public function SystemConfigurationSelectByOptionDescription($SystemConfigurationOptionDescription, 
 			                                                             &$InstanceSystemConfiguration, $Debug,
 			                                                             $Debug, $MySqlConnection);
-			public function SystemConfigurationSelectByOptionNumber($TypeAssocUserTeamId, &$InstanceSystemConfiguration, $Debug,
+			public function SystemConfigurationSelectByOptionNumber($SystemConfigurationOptionNumber, &$InstanceSystemConfiguration, $Debug,
 			                                                        $Debug, $MySqlConnection);
 			public function SystemConfigurationUpdateByOptionNumber($SystemConfiguration, $SystemConfiguration, $Debug,
 			                                                        $Debug, $MySqlConnection);
@@ -251,7 +251,8 @@ class FacedePersistenceAssocUserResponsible
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function SystemConfigurationSelectByOptionNumber($TypeAssocUserTeamId, &$InstanceSystemConfiguration, $Debug, $MySqlConnection)
+	public function SystemConfigurationSelectByOptionNumber($SystemConfigurationOptionNumber, &$InstanceSystemConfiguration, 
+															$Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -261,15 +262,15 @@ class FacedePersistenceAssocUserResponsible
 			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationSelectByOptionNumber());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("i", $TypeAssocUserTeamId);
+				$stmt->bind_param("i", $SystemConfigurationOptionNumber);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $TypeAssocUserTeamId);
+					$stmt->bind_result($registerDate, $typeAssocUserTeamDescription, $SystemConfigurationOptionNumber);
 					if ($stmt->fetch())
 					{
 						$InstanceSystemConfiguration = $this->Factory->CreateTypeAssocUserTeam($registerDate, $typeAssocUserTeamDescription,
-																			                   $TypeAssocUserTeamId);
+																			                   $SystemConfigurationOptionNumber);
 						return Config::SUCCESS;
 					}
 					else 
@@ -297,7 +298,8 @@ class FacedePersistenceAssocUserResponsible
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function SystemConfigurationUpdateByOptionNumber($TypeAssocUserTeamDescription, $TypeAssocUserTeamId, $Debug, $MySqlConnection)
+	public function SystemConfigurationUpdateByOptionNumber($TypeAssocUserTeamDescription, $SystemConfigurationOptionNumber, 
+															$Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -307,7 +309,7 @@ class FacedePersistenceAssocUserResponsible
 			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationUpdateByOptionNumber());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserTeamId);
+				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $SystemConfigurationOptionNumber);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

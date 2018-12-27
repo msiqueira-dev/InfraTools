@@ -182,8 +182,6 @@ class Pt
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                    = "InfraTools - Sua senha foi restaurada";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                   = "Sua senha foi restaurada e sua nova senha é ";
 	const GENDER                                                  = "Gênero";
-	const ID                                                      = "Id";
-	const INSERT_WARNING_EXISTS                                   = "Um registro similar já foi efetuado";
 	const HREF_PAGE_ABOUT                                         = "/Pt/PageAbout";
 	const HREF_PAGE_ACCOUNT                                       = "/Pt/PageAccount";
 	const HREF_PAGE_ADMIN                                         = "/Pt/PageAdmin";
@@ -227,6 +225,16 @@ class Pt
 	const HREF_PAGE_SERVICE_VIEW                                  = "/Pt/PageServiceView";
 	const HREF_PAGE_SUPPORT                                       = "/Pt/PageSupport";
 	const HREF_PAGE_TEAM                                          = "/Pt/PageTeam";
+	const ID                                                      = "Id";
+	const INSERT_WARNING_EXISTS                                   = "Um registro similar já foi efetuado";
+	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                     = "Extensão de arquivo inválida";
+	const INSTALL_IMPORT_ERROR_INSERTS                            = "Error ao tentar inserir dados no banco de dados do sistema";
+	const INSTALL_IMPORT_ERROR_FILE_MOVE                          = "O arquivo não pode ser movido para o diretório de upload";
+	const INSTALL_IMPORT_ERROR_FILE_READ                          = "O arquivo não pode ser lido";
+	const INSTALL_IMPORT_SUCCESS                                  = "Dados importoados com sucesso";
+	const INSTALL_REINSTALL_ERROR_USER_PERMISSION                 = "Você não tem permissão para reinstalar o banco de dados do sistema";
+	const INSTALL_REINSTALL_SUCCESS                               = "Banco de dados do sistema reinstalado com sucesso";
+	const INSTALL_SUCCESS                                         = "Banco de dados do sistema instalado com sucesso";
 	const INVALID_IP_ADDRESS                                      = "Endereço de ip inválido";
 	const INVALID_MASK                                            = "Mascara de rede inválida";
 	const INVALID_NETWORK_ADDRESS                                 = "Endereço de rede inválido";

@@ -226,7 +226,7 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
+				$return = Config::MYSQL_TYPE_USER_SELECT_FAILED;
 			}
 			return $return;
 		}

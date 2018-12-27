@@ -89,7 +89,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingDelete());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $TypeAssocUserTeamId);
+				$stmt->bind_param("i", $TypeAssocUserRequestingBond);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -258,7 +258,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserTeamId);
+				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserRequestingTypeBond);
 				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

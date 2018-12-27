@@ -184,6 +184,7 @@ class Config
 	const GET_OPERATIONAL_SYSTEM_INVALID_OS                             = "ReturnGetOperationalSystemInvalidOs";
 	const HEAD_GENERIC                                                  = "HeadGeneric.php";
 	const HEAD_JAVASCRIPT                                               = "HeadJavaScript.php";
+	const HTACCESS_ERROR_FILE_CREATE                                    = "HtacessErrorFileCreate";
 	const HTML_TAG_BODY_START                                           = "<body>";
 	const HTML_TAG_BODY_END                                             = "</body>";
 	const HTML_TAG_DOCTYPE                                              = "<!DOCTYPE html>";
@@ -191,6 +192,8 @@ class Config
 	const HTML_TAG_HEAD_START                                           = "<head>";
 	const HTML_TAG_HEAD_END              	                            = "</head>";
 	const HTML_TAG_START                                                = "<html xmlns='http://www.w3.org/1999/xhtml' lang='pt'>";
+	const INI_SET_FATAL_ERROR_DISPLAY_ERRORS                            = "IniSetFatalErrorDisplayErrors";
+	const INI_SET_FATAL_ERROR_SESSION_SAVE_PATH                         = "IniSetFatalErrorSessionSavePath";
 	const LANGUAGE_ENGLISH                                              = "Language/En";
 	const LANGUAGE_GERMAN                                               = "Language/De";
 	const LANGUAGE_PORTUGUESE                                           = "Language/Pt";
@@ -208,16 +211,17 @@ class Config
 	const MYSQL_ERROR_CONNECTION_EMPTY                                  = "RetMySqlErrorConnectionEmpty";
 	const MYSQL_ERROR_CONNECTION_NOT_EMPTY                              = "RetMySqlErrorConnectionNotEmpty";
 	const MYSQL_ERROR_CONNECTION_OPEN                                   = "RetMySqlErrorConnectionOpen";
+	const MYSQL_ERROR_CONNECTION_REFUSED                                = "RetMySqlErrorConnectionRefused";
 	const MYSQL_ERROR_DATABASE_NOT_FOUND                                = "RetMySqlErrorDataBaseNotFound";
 	const MYSQL_ERROR_QUERY_PREPARE                                     = "RetMySqlErrorQueryPrepare";
  	const MYSQL_ERROR_QUERY_EMPTY                                       = "RetMySqlErrorQueryEmpty";
 	const MYSQL_ERROR_QUERY_SQL                                         = "RetMySqlErrorQuerySql";
-	const MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND              = "RetMySqlErrorTableSystemConfigurationNotFound";
 	const MYSQL_ERROR_USER_EXISTS                                       = "RetMySqlErrorUserExists";
+	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED         = "MySqlInfraToolsDataBaseCheckTablesCorruptFailed";
+	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FAILED                 = "MySqlInfraToolsDataBaseCheckTablesFailed";
+	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH_FAILED           = "MySqlInfraToolsDataBaseCheckTablesFetchFailed";
 	const MYSQL_LOG_ERROR                                               = "LogMySqlError";
 	const MYSQL_LOG_QUERY                                               = "LogMySqlQuery";
-	const MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_DISABLED  = "RetMySqlTableFieldSystemConfigurationPageInstallDisabled";
-	const MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_ENABLED   = "RetMySqlTableFieldSystemConfigurationPageInstallEnabled";
 	const PAGE                                                          = "Page";
 	const PAGE_ABOUT                                                    = "Page_About";
 	const PAGE_ACCOUNT                                                  = "Page_Account";
@@ -385,7 +389,12 @@ class Config
 	const MYSQL_DEPARTMENT_UPDATE_FAILED                                = "RetMySqlDepartmentUpdateFailed";
 	const MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT                       = "1451";
 	const MYSQL_ERROR_FOREIGN_KEY_INSERT_RESTRICT                       = "1452";
+	const MYSQL_ERROR_SYNTAX                                            = "1064";
 	const MYSQL_ERROR_UNIQUE_KEY_DUPLICATE                              = "1062";
+	const MYSQL_ERROR_ACCESS_DENIED                                     = "1045";
+	const MYSQL_IMPORT_NO_INSERTS                                       = "RetMySqlImportNoInserts";
+	const MYSQL_INSERT_FAILED                                           = "RetMySqlInsertFailed";
+	const MYSQL_INSERT_SYNTAX_ERROR                                     = "RetMySqlInsertSyntaxError";
 	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED                  = "RetMySqlTeamDeleteByTeamDescriptionFailed";
 	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED_NOT_FOUND        = "RetMySqlTeamDeleteByTeamDescriptionFailedNotFound";
 	const MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED                           = "RetMySqlTeamDeleteByTeamIdFailed";
@@ -574,11 +583,13 @@ class Config
 	public $DefaultLogPath                   = NULL;
 	public $DefaultMySqlAddress              = NULL;
 	public $DefaultMySqlDataBase             = NULL;
-	public $DefaultMySqlUserPassword             = NULL;
 	public $DefaultMySqlPort                 = NULL;
+	public $DefaultMySqlImportUser           = NULL;
+	public $DefaultMySqlImportUserPassword   = NULL;
 	public $DefaultMySqlSuperUser            = NULL;
 	public $DefaultMySqlSuperUserPassword    = NULL;
 	public $DefaultMySqlUser                 = NULL;
+	public $DefaultMySqlUserPassword         = NULL;
 	public $DefaultServerFile                = NULL;
 	public $DefaultServerImage               = NULL;
 	public $DefaultServerJavaScript          = NULL;
@@ -646,20 +657,39 @@ class Config
 	{
 		if(class_exists("ProjectConfig"))
 		{
-			ini_set("display_errors", ProjectConfig::$DisplayErrors);
 			error_reporting(E_ALL);
 			date_default_timezone_set(ProjectConfig::$TimeZone);
 			setlocale(LC_ALL, 'UTF8');
+			if(ini_set("display_errors", ProjectConfig::$DisplayErrors) === FALSE)
+				exit(Config::INI_SET_FATAL_ERROR_DISPLAY_ERRORS);
+			if(ini_set("session.save_path", ProjectConfig::$SessionFolder) === FALSE)
+				exit(Config::INI_SET_FATAL_ERROR_SESSION_SAVE_PATH);
+			if(strcmp("On", ProjectConfig::$EnableUpload) == 0)
+			{
+				if(!file_exists(ProjectConfig::$UploadDirectory))
+					mkdir(ProjectConfig::$UploadDirectory, 0755, TRUE);
+				if(!file_exists(ProjectConfig::$HtaccessFile))
+				{
+					$htaccessFile = fopen(ProjectConfig::$HtaccessFile, 'w') or die(Config::HTACCESS_ERROR_FILE_CREATE);
+					fwrite($htaccessFile, "php_value  file_uploads " . ProjectConfig::$EnableUpload . "\n");
+					fwrite($htaccessFile, "php_value  max_file_uploads " . ProjectConfig::$UploadFileLimit . "\n");
+					fwrite($htaccessFile, "php_value  upload_max_filesize " . ProjectConfig::$UploadFileMaxSize . "\n");
+					fwrite($htaccessFile, "php_value  post_max_size " . ProjectConfig::$UploadFileMaxSize . "\n");
+					fclose($htaccessFile);
+				}
+			}
 			$this->Session = $this->Factory->CreateSession();
 			$this->DefaultApplicationAddress             = ProjectConfig::$AddressApplication;
 			$this->DefaultApplicationName                = ProjectConfig::$ApplicationName;
 			$this->DefaultMySqlAddress                   = ProjectConfig::$MySqlDataBaseAddress;
 			$this->DefaultMySqlPort                      = ProjectConfig::$MySqlDataBasePort;
 			$this->DefaultMySqlDataBase                  = ProjectConfig::$MySqlDataBaseName;
-			$this->DefaultMySqlUser                      = ProjectConfig::$MySqlDataBaseUser;
-			$this->DefaultMySqlUserPassword              = ProjectConfig::$MySqlDataBasePassword;
+			$this->DefaultMySqlImportUser                = ProjectConfig::$MysqlDataBaseImportUser;
+			$this->DefaultMySqlImportUserPassword        = ProjectConfig::$MysqlDataBaseImportUserPassword;
 			$this->DefaultMySqlSuperUser                 = ProjectConfig::$MySqlDataBaseSuperUser;
 			$this->DefaultMySqlSuperUserPassword         = ProjectConfig::$MySqlDataBaseSuperUserPassword;
+			$this->DefaultMySqlUser                      = ProjectConfig::$MySqlDataBaseUser;
+			$this->DefaultMySqlUserPassword              = ProjectConfig::$MySqlDataBaseUserPassword;
 			$this->DefaultServerFile                     = ProjectConfig::$AddressFileServer;
 			$this->DefaultServerImage                    = ProjectConfig::$AddressImageServer;
 			$this->DefaultServerJavaScript               = ProjectConfig::$AddressJavaScriptServer;
@@ -669,7 +699,7 @@ class Config
 			$this->DefaultEmailSupportFormAddress        = ProjectConfig::$EmailSupportAccount;
 			$this->DefaultGoogleMapsApiKey               = ProjectConfig::$GoogleMapsApiKey;
 			$this->DefaultLanguage                       = ProjectConfig::$DefaultLanguage;
-			$this->DefaultLogPath                        = ProjectConfig::$LogApplication;
+			$this->DefaultLogPath                        = ProjectConfig::$LogFolder;
 			$this->Session->CreateBasic($this->DefaultApplicationName, $this->SessionTime);
 			return $this->Session->CheckActivity(self::SESS_LAST_ACTIVITY, self::SESS_USER, 
 												 $this->SessionTime, self::SESS_UNLIMITED);

@@ -182,7 +182,6 @@ class En
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                    = "InfraTools - Your password has been reseted";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                   = "Your password was reset and your new password is: ";
 	const GENDER                                                  = "Gender";
-	const INSERT_WARNING_EXISTS                                   = "A similar register was already performed";
 	const HREF_PAGE_ABOUT                                         = "/En/PageAbout";
 	const HREF_PAGE_ACCOUNT                                       = "/En/PageAccount";
 	const HREF_PAGE_ADMIN                                         = "/En/PageAdmin";
@@ -227,6 +226,15 @@ class En
 	const HREF_PAGE_SUPPORT                                       = "/En/PageSupport";
 	const HREF_PAGE_TEAM                                          = "/En/PageTeam";
 	const ID                                                      = "Id";
+	const INSERT_WARNING_EXISTS                                   = "A similar register was already performed";
+	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                     = "Invalid valid Extension";
+	const INSTALL_IMPORT_ERROR_INSERTS                            = "Error while trying to insert data into the system database";
+	const INSTALL_IMPORT_ERROR_FILE_MOVE                          = "File could not be moved to the upload folder";
+	const INSTALL_IMPORT_ERROR_FILE_READ                          = "File could not be read";
+	const INSTALL_IMPORT_SUCCESS                                  = "Data imported succesfully";
+	const INSTALL_REINSTALL_ERROR_USER_PERMISSION                 = "You do not have permission to reinstall the system database";
+	const INSTALL_REINSTALL_SUCCESS                               = "System database reinstalled successfully";
+	const INSTALL_SUCCESS                                         = "System database installed succesfully";
 	const INVALID_IP_ADDRESS                                      = "Invalid ip address";
 	const INVALID_MASK                                            = "Invalid network mask";
 	const INVALID_NETWORK_ADDRESS                                 = "Invalid network address";

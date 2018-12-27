@@ -4581,6 +4581,7 @@ class Page
 					echo "<div class='DivPageDebug'>";
 					echo "<div class='DivPageDebugContent'><b>GET</b>: "; print_r($_GET);  echo "</div>";
 					echo "<div class='DivPageDebugContent'><b>POST</b>: "; print_r($_POST); echo "</div></div>";
+					echo "<div class='DivPageDebugContent'><b>FILES</b>: "; print_r($_FILES); echo "</div></div>";
 					echo "<div class='DivClearFloat'></div>";
 				}
 				$this->Session->SetSessionValue(Config::SESS_DEBUG, $this->InputValueHeaderDebug);

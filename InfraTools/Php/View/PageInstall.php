@@ -28,7 +28,12 @@ if (!class_exists("PageInfraTools"))
 
 class PageInstall extends PageInfraTools
 {	
-	protected $DataBaseReturnMessage = NULL;
+	protected $ArrayTables                = NULL;
+	protected $ButtonImportEnabled        = TRUE;
+	protected $ButtonInstallEnabled       = TRUE;
+	protected $ButtonReinstallEnabled     = TRUE;
+	protected $DataBaseReturnMessage      = NULL;
+	protected $DataBaseImportErrorQueries = NULL;
 	
 	/* Singleton */
 	protected static $Instance;
@@ -63,24 +68,85 @@ class PageInstall extends PageInfraTools
 		$this->DataBaseReturnMessage = "";
 		mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $this->FacedePersistenceInfraTools->InfraToolsCheckDataBase($this->DataBaseReturnMessage, ConfigInfraTools::CHECKBOX_CHECKED);
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_NEW_SUBMIT) == ConfigInfraTools::SUCCESS)
+		$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayTables,
+																			  $this->DataBaseReturnMessage,
+																			  ConfigInfraTools::CHECKBOX_CHECKED);
+		if($return == ConfigInfraTools::SUCCESS)
 		{
-			if($return == Config::MYSQL_ERROR_DATABASE_NOT_FOUND || 
-			   $return == Config::MYSQL_TABLE_FIELD_SYSTEM_CONFIGURATION_PAGE_INSTALL_ENABLED ||
-			   $return == Config::MYSQL_ERROR_TABLE_SYSTEM_CONFIGURATION_NOT_FOUND)
+			$this->ButtonInstallEnabled = FALSE;
+			$this->ButtonImportEnabled = TRUE;
+			if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT_HIDDEN) == ConfigInfraTools::SUCCESS)
 			{
-				$return = $this->FacedePersistenceInfraTools->InfraToolsCreateDataBase($this->DataBaseReturnMessage,
-																					   ConfigInfraTools::CHECKBOX_CHECKED);
+				if (strpos(strtoupper($_FILES[ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT]["name"]), '.SQL') !== false) 
+				{
+					$importFile = ProjectConfig::$UploadDirectory . "/" .
+								  $_FILES[ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT]["name"];
+					$importFile = substr_replace($importFile, "." . date("Y-m-d--H-i"), strrpos($importFile, "."), 0);
+					if(move_uploaded_file($_FILES[ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT]["tmp_name"], $importFile))
+					{
+						$handle = fopen($importFile, "r");
+						if ($handle) 
+						{
+							$arrayQueries = array();
+							while (($line = fgets($handle)) !== false) 
+							{
+								$line = str_replace("`", "", $line);
+								$pos = strpos($line, 'INSERT');
+								if($pos !== FALSE && $pos == 0 && strpos($line, ';') !== FALSE) 
+								{
+									array_push($arrayQueries, $line);
+								}
+							}
+							fclose($handle);
+							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseImport($arrayQueries, 
+																								   $this->DataBaseImportErrorQueries,
+																								   $this->DataBaseReturnMessage,
+																						           $this->InputValueHeaderDebug);
+							if($return == ConfigInfraTools::SUCCESS)
+							{
+								$this->ShowDivReturnSuccess("INSTALL_IMPORT_SUCCESS");
+							}
+							else $this->ShowDivReturnError("INSTALL_IMPORT_ERROR_INSERTS");
+						} 
+						else $this->ShowDivReturnError("INSTALL_IMPORT_ERROR_FILE_READ");
+					}
+					else $this->ShowDivReturnError("INSTALL_IMPORT_ERROR_FILE_MOVE");
+				}
+				else $this->ShowDivReturnError("INSTALL_IMPORT_ERROR_FILE_EXTENSION");
+			}
+			else
+			{
+				if($this->User->CheckSuperUser())
+				{
+					$this->ButtonReinstallEnabled = TRUE;
+					if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT) == ConfigInfraTools::SUCCESS)
+					{
+						$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCreate($this->DataBaseReturnMessage,
+																							   $this->InputValueHeaderDebug);
+						if($return == ConfigInfraTools::SUCCESS)
+							$this->ShowDivReturnSuccess("INSTALL_REINSTALL_SUCCESS");
+					}
+				}
+				else $this->ShowDivReturnError("INSTALL_REINSTALL_ERROR_USER_PERMISSION");
 			}
 		}
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT) == ConfigInfraTools::SUCCESS)
+		else
 		{
-			$return = $this->FacedePersistenceInfraTools->InfraToolsCreateDataBase($this->DataBaseReturnMessage,
-																				   ConfigInfraTools::CHECKBOX_CHECKED);
-			if($return == ConfigInfraTools::SUCCESS)
+			$this->ButtonInstallEnabled = TRUE;
+			$this->ButtonImportEnabled = FALSE;
+			$this->ButtonReinstallEnabled = FALSE;
+			if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_NEW_SUBMIT) == ConfigInfraTools::SUCCESS)
 			{
-				$this->ShowDivReturnSuccess("");
+				$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCreate($this->DataBaseReturnMessage,
+																					   ConfigInfraTools::CHECKBOX_CHECKED);
+				if($return == ConfigInfraTools::SUCCESS)
+				{
+					$this->ButtonInstallEnabled = FALSE;
+					$this->ButtonImportEnabled = TRUE;
+					$this->ButtonReinstallEnabled = FALSE;
+					$this->ShowDivReturnSuccess("INSTALL_SUCCESS");
+				}
+					
 			}
 		}
 		$this->LoadHtml(FALSE);

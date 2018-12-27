@@ -6,6 +6,10 @@
 .DivContentBodyContainerSmall{width:550px;height:45px;margin-top:10px;}
 .DivContentBodyContainer input[type="text"], .DivContentBodyContainerSubmit input[type="text"]{width:350px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
 .DivContentBodyContainer input[type="password"], .DivContentBodyContainerSubmit input[type="password"]{width:350px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3;position:relative;top:8px;}
+.DivContentBodyContainer input[type="file"]{width:0.1px;height:0.1px;opacity:0;overflow:hidden;position:absolute;z-index:-1;}
+.DivContentBodyContainer input[type="file"] + label{;width:165px;height:40px;font-size:12px;font-weight:bolder;color:white;background-color:#f5821f;display:inline-block;margin-top:10px;margin-right:23px;text-align:center;vertical-align:middle;line-height:320%;cursor:pointer;outline: 0.1px solid #f5821f;}
+.DivContentBodyContainer input[type="file"]:focus + label, .DivContentBodyContainer input[type="file"] + label:hover {background-color:#ef4e22;outline: 0.1px solid #ef4e22;}
+.DivContentBodyContainer input[type="submit"]:focus {background-color:#ef4e22;}
 .DivContentBodyContainerTextArea{width:550px;height:200px;margin-top:20px;}
 .DivContentBodyContainerTextArea textarea{width:350px;height:200px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3;font-size:14px !important;}
 .DivContentBodyContainerLabel, .DivContentBodyContainerLabelBig{width:170px;height:50px;float:left;}
@@ -37,7 +41,7 @@
 #target {width:345px;}
 /* End Google Maps */
 /* Submits */
-.DivContentBodySubmitBigger{width:165px;height:40px;white-space:normal;vertical-align:top;background-color:#f5821f;border:0;color:white;font-size:12px;font-weight:bolder;margin-right:23px;margin-top:10px;}
+.DivContentBodySubmitBigger{width:165px;height:40px;white-space:normal;vertical-align:top;background-color:#f5821f;border:0;color:white;font-size:12px;font-weight:bolder;margin-right:23px;margin-top:10px;text-align:center !important;}
 .DivContentBodySubmitBigger:hover{background-color:#ef4e22;}
 /* End Submits */
 .DivContentBodyContainerValue{width:350px;height:35px;float:left;}

@@ -102,7 +102,7 @@ class FacedePersistenceAssocTicketUserRequesting
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingDeleteByTicketId());
 			if ($stmt)
 			{
-				$stmt->bind_param("i", $TypeAssocUserTeamId);
+				$stmt->bind_param("i", $AssocTicketUserRequestingTicketId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

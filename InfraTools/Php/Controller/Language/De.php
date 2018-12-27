@@ -156,7 +156,6 @@ class De
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                    = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                   = "";
 	const GENDER                                                  = "";
-	const INSERT_WARNING_EXISTS                                   = "";
 	const HREF_PAGE_ABOUT                                         = "/De/PageAbout";
 	const HREF_PAGE_ACCOUNT                                       = "/De/PageAccount";
 	const HREF_PAGE_ADMIN                                         = "/De/PageAdmin";
@@ -201,6 +200,15 @@ class De
 	const HREF_PAGE_SUPPORT                                       = "/De/PageSupport";
 	const HREF_PAGE_TEAM                                          = "/De/PageTeam";
 	const ID                                                      = "";
+	const INSERT_WARNING_EXISTS                                   = "";
+	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                     = "";
+	const INSTALL_IMPORT_ERROR_INSERTS                            = "";
+	const INSTALL_IMPORT_ERROR_FILE_MOVE                          = "";
+	const INSTALL_IMPORT_ERROR_FILE_READ                          = "";
+	const INSTALL_IMPORT_SUCCESS                                  = "";
+	const INSTALL_REINSTALL_ERROR_USER_PERMISSION                 = "";
+	const INSTALL_REINSTALL_SUCCESS                               = "";
+	const INSTALL_SUCCESS                                         = "";
 	const INVALID_IP_ADDRESS                                      = "";
 	const INVALID_MASK                                            = "";
 	const INVALID_NETWORK_ADDRESS                                 = "";

@@ -175,17 +175,29 @@ class MySqlManager
 		$return = NULL; $selectedDataBase = NULL; $MySqlError = NULL;
 		if ($MySqlConnection == NULL)
 		{
-			$MySqlConnection = @mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
-			                                   $this->MySqlDataBase, $this->MySqlPort);
-			if ($MySqlConnection != NULL) 
+			try
 			{
-				$MySqlConnection->set_charset(Config::MYSQL_CHATSET_UTF8);
-				return Config::SUCCESS;
+				$MySqlConnection = @mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
+												   $this->MySqlDataBase, $this->MySqlPort);
+				if ($MySqlConnection != NULL) 
+				{
+					$MySqlConnection->set_charset(Config::MYSQL_CHATSET_UTF8);
+					$MySqlConnection->options(MYSQLI_OPT_CONNECT_TIMEOUT, ProjectConfig::$MySqlOptionTimeOut);
+					return Config::SUCCESS;
+				}
+				else 
+				{
+					$MySqlError = "Error: " . mysqli_connect_error() . " - " . mysqli_connect_errno();
+					if(mysqli_connect_errno() == Config::MYSQL_ERROR_ACCESS_DENIED)
+						return Config::MYSQL_ERROR_ACCESS_DENIED;
+					return Config::MYSQL_ERROR_CONNECTION_OPEN;
+				}
 			}
-			else 
+			catch(mysqli_sql_exception $e)
 			{
-				$MySqlError = "Error: " . mysqli_connect_error() . " - " . mysqli_connect_errno();
 				if(mysqli_connect_errno() == "1049")
+					return Config::MYSQL_ERROR_CONNECTION_REFUSED;
+				elseif(mysqli_connect_errno() == "1049")
 					return Config::MYSQL_ERROR_DATABASE_NOT_FOUND;
 				else return Config::MYSQL_ERROR_CONNECTION_OPEN;
 			}

@@ -1,2 +1,4 @@
 .DivContentBody{width:1000px;min-height:120px;height:auto;color:black;}
-.DivContentBodyContainer{width:600px;margin:0 auto;}
+.DivContentBodyContainer{width:1000px;margin:0 auto;}
+.DivContentBody form{min-height:60px !important;}
+#DivReturn{margin:0 auto;width:1000px;}
