@@ -1903,14 +1903,21 @@ class InfraToolsFacedePersistenceDataBase
 		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableUser)</b>";
 		if($MySqlConnection != NULL)
 		{
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableUser()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableUser()))
+					return ConfigInfraTools::SUCCESS;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
@@ -1922,14 +1929,21 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert()))
+					return ConfigInfraTools::SUCCESS;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
@@ -1941,14 +1955,21 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate()))
+					return ConfigInfraTools::SUCCESS;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
@@ -1960,14 +1981,21 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert()))
+					return ConfigInfraTools::SUCCESS;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
@@ -1979,14 +2007,21 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate()))
+					return ConfigInfraTools::SUCCESS;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;

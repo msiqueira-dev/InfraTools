@@ -27,6 +27,8 @@ if (!class_exists("PageInfraTools"))
 
 class PageHome extends PageInfraTools
 {	
+	protected $LinkPageInstallEnabled = FALSE;
+	
 	/* Singleton */
 	protected static $Instance;
 
@@ -57,6 +59,12 @@ class PageHome extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayTables,
+																			  $this->DataBaseReturnMessage,
+																			  ConfigInfraTools::CHECKBOX_CHECKED);
+		if($return != ConfigInfraTools::SUCCESS)
+			$this->LinkPageInstallEnabled = TRUE;
 		$this->LoadHtml(FALSE, FALSE);
 	}
 }

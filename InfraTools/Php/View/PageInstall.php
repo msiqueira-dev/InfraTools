@@ -29,9 +29,10 @@ if (!class_exists("PageInfraTools"))
 class PageInstall extends PageInfraTools
 {	
 	protected $ArrayTables                = NULL;
+	protected $ButtonExportEnabled        = FALSE;
 	protected $ButtonImportEnabled        = TRUE;
 	protected $ButtonInstallEnabled       = TRUE;
-	protected $ButtonReinstallEnabled     = TRUE;
+	protected $ButtonReinstallEnabled     = FALSE;
 	protected $DataBaseReturnMessage      = NULL;
 	protected $DataBaseImportErrorQueries = NULL;
 	
@@ -116,18 +117,29 @@ class PageInstall extends PageInfraTools
 			}
 			else
 			{
-				if($this->User->CheckSuperUser())
+				if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 				{
-					$this->ButtonReinstallEnabled = TRUE;
-					if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT) == ConfigInfraTools::SUCCESS)
+					if($this->User->CheckSuperUser())
 					{
-						$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCreate($this->DataBaseReturnMessage,
-																							   $this->InputValueHeaderDebug);
-						if($return == ConfigInfraTools::SUCCESS)
-							$this->ShowDivReturnSuccess("INSTALL_REINSTALL_SUCCESS");
+						$this->ButtonReinstallEnabled = TRUE;
+						$this->ButtonExportEnabled = TRUE;
+						if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT) == ConfigInfraTools::SUCCESS)
+						{
+							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCreate($this->DataBaseReturnMessage,
+																								   $this->InputValueHeaderDebug);
+							if($return == ConfigInfraTools::SUCCESS)
+								$this->ShowDivReturnSuccess("INSTALL_REINSTALL_SUCCESS");
+						}
+						elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT) == ConfigInfraTools::SUCCESS)
+						{
+							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBacksup($this->DataBaseReturnMessage,
+																								$this->InputValueHeaderDebug);
+							if($return == ConfigInfraTools::SUCCESS)
+								$this->ShowDivReturnSuccess("INSTALL_IMPORT_SUCCESS");
+						}
 					}
+					else $this->ShowDivReturnError("INSTALL_REINSTALL_ERROR_USER_PERMISSION");
 				}
-				else $this->ShowDivReturnError("INSTALL_REINSTALL_ERROR_USER_PERMISSION");
 			}
 		}
 		else
@@ -146,7 +158,7 @@ class PageInstall extends PageInfraTools
 					$this->ButtonReinstallEnabled = FALSE;
 					$this->ShowDivReturnSuccess("INSTALL_SUCCESS");
 				}
-					
+				else $this->ShowDivReturnError("INSTALL_ERROR");
 			}
 		}
 		$this->LoadHtml(FALSE);

@@ -33,7 +33,7 @@ textarea{resize:none;}
 .SubmitDisabled:hover{background-color:#cccccc !important;}
 .SwitchToggle{position:relative;display:inline-block;width:44px;height:22px;top:-18px!important;left:4px !important;}
 .SwitchToggle input{display:none;}
-.SwitchToggleSlider{width:44px;height:22px;position:relative;cursor:pointer;top:4px;left:4px;right:0;bottom:0;background-color:#f5821f;transition:.4s;}
+.SwitchToggleSlider{width:44px;height:22px;position:relative;cursor:pointer;top:4px;left:4px;right:0;bottom:0;background-color:#cccccc;transition:.4s;}
 .SwitchToggleSlider:before{position: absolute;content:"";height:18px;width:18px;left:4px;bottom:2px;background-color:white;transition:.6s;}
 .SwitchToggleSlider:after{position: absolute;content:"";height:18px;width:18px;left:4px;bottom:2px;background-color:white;transition:.6s;}
 .SwitchToggleSlider.round{border-radius:18px;}

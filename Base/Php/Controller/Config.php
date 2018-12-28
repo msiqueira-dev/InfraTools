@@ -217,6 +217,7 @@ class Config
  	const MYSQL_ERROR_QUERY_EMPTY                                       = "RetMySqlErrorQueryEmpty";
 	const MYSQL_ERROR_QUERY_SQL                                         = "RetMySqlErrorQuerySql";
 	const MYSQL_ERROR_USER_EXISTS                                       = "RetMySqlErrorUserExists";
+	const MYSQL_ERROR_USER_PERMISSION_DENIED                            = "RetMySqlErrorUserPermissionDenied";
 	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED         = "MySqlInfraToolsDataBaseCheckTablesCorruptFailed";
 	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FAILED                 = "MySqlInfraToolsDataBaseCheckTablesFailed";
 	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH_FAILED           = "MySqlInfraToolsDataBaseCheckTablesFetchFailed";

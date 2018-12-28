@@ -73,7 +73,7 @@ class MySqlManager
 	
 	public function CloseDataBaseConnection($MySqlConnection, $Statement)
 	{
-		if ($MySqlConnection != NULL)
+		if ($MySqlConnection != NULL && is_a($MySqlConnection, "mysqli"))
 		{
 			if($Statement != NULL)
 			{
@@ -173,11 +173,12 @@ class MySqlManager
 	public function OpenDataBaseConnection(&$MySqlConnection, &$MySqlError)
 	{
 		$return = NULL; $selectedDataBase = NULL; $MySqlError = NULL;
-		if ($MySqlConnection == NULL)
+		if ($MySqlConnection == NULL || !is_a($MySqlConnection, "mysqli"))
 		{
 			try
 			{
-				$MySqlConnection = @mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
+				
+				$MySqlConnection = mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
 												   $this->MySqlDataBase, $this->MySqlPort);
 				if ($MySqlConnection != NULL) 
 				{
@@ -202,6 +203,8 @@ class MySqlManager
 				else return Config::MYSQL_ERROR_CONNECTION_OPEN;
 			}
 		}
+		elseif(is_a($MySqlConnection, "mysqli"))
+			return Config::SUCCESS;
 		else return Config::MYSQL_ERROR_CONNECTION_NOT_EMPTY;
 	}
 }

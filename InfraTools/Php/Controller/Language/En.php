@@ -227,6 +227,7 @@ class En
 	const HREF_PAGE_TEAM                                          = "/En/PageTeam";
 	const ID                                                      = "Id";
 	const INSERT_WARNING_EXISTS                                   = "A similar register was already performed";
+	const INSTALL_EXPORT_SUCCESS                                  = "System data exported succesfully";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                     = "Invalid valid Extension";
 	const INSTALL_IMPORT_ERROR_INSERTS                            = "Error while trying to insert data into the system database";
 	const INSTALL_IMPORT_ERROR_FILE_MOVE                          = "File could not be moved to the upload folder";
@@ -234,6 +235,8 @@ class En
 	const INSTALL_IMPORT_SUCCESS                                  = "Data imported succesfully";
 	const INSTALL_REINSTALL_ERROR_USER_PERMISSION                 = "You do not have permission to reinstall the system database";
 	const INSTALL_REINSTALL_SUCCESS                               = "System database reinstalled successfully";
+	const INSTALL_ERROR                                           = "It was not possible to install the system database, please check "
+		                                                          . "the system configuration file (ProjectConfig.php)";
 	const INSTALL_SUCCESS                                         = "System database installed succesfully";
 	const INVALID_IP_ADDRESS                                      = "Invalid ip address";
 	const INVALID_MASK                                            = "Invalid network mask";
@@ -535,7 +538,7 @@ class En
 	const PAGE_HOME                                               = "InfraTools";
 	const PAGE_HOME_ROBOTS                                        = "ALL";
 	const PAGE_HOME_TITLE                                         = "InfraTools - Home";
-	const PAGE_INSTALL                                            = "InfraTools";
+	const PAGE_INSTALL                                            = "InfraTools - Instalation";
 	const PAGE_INSTALL_ROBOTS                                     = "noindex";
 	const PAGE_INSTALL_TITLE                                      = "InfraTools - Install InfraTools";
 	const PAGE_LOGIN                                              = "Login";
@@ -680,6 +683,7 @@ class En
 	const SUBMIT_LIST                                             = "LIST";
 	const SUBMIT_LIST_USERS                                       = "LIST USERS";
 	const SUBMIT_INSERT                                           = "INSERT";
+	const SUBMIT_INSTALL_EXPORT                                   = "Export System data";
 	const SUBMIT_INSTALL_IMPORT                                   = "Import Data into System";
 	const SUBMIT_INSTALL_NEW                                      = "Install System";
 	const SUBMIT_INSTALL_REINSTALL                                = "Reinstall System";
@@ -838,7 +842,7 @@ class En
 	const ACCOUNT_CHANGE_PASSWORD_ERROR                          = "Error updating password";
 	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD               = "Invalid password, type a valid password that matches the criteria";
 	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_MATCH         = "Passwords do not match";
-	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE          = "Password must be at least 8 character long and a maximum of 16 "                                                                . "characaters";
+	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE          = "Password must be at least 8 character long and a maximum of 16 "                                                                          . "characaters";
 	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD                   = "New password";
 	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TIP               = "(At least 1 number and 1 capital letter, between 8 and 18 digits)";
 	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TITLE             = "The password must have at least 1 number and 1 capital letter, "
@@ -858,6 +862,7 @@ class En
 	const ADMIN_TEXT_CORPORATION                                  = "Insert, delete, update and select corporations";
 	const ADMIN_TEXT_COUNTRY                                      = "Select countries";
 	const ADMIN_TEXT_DEPARTMENT                                   = "Insert, delete, update and select departments";
+	const ADMIN_TEXT_INSTALL                                      = "Page for instalation, importation, and reinstalation of the system";
 	const ADMIN_TEXT_SERVICE                                      = "Insert, delete, update and select services";
 	const ADMIN_TEXT_TEAM                                         = "Insert, delete, update and select teams";
 	const ADMIN_TEXT_TECH_INFO                                    = "View technical details about InfraTools"; 
@@ -1143,23 +1148,27 @@ class En
 																 . "function will provid the information associated for that host.";
 	
 	/* Body Page Home */
-	const HOME_CHECK_1                                           = "Group of functions dedicated to";
-	const HOME_CHECK_2                                           = "verify network and";
-	const HOME_CHECK_3                                           = "diagnostic problems";
-	const HOME_CHECK_BUTTON_TEXT                                 = "Go";
-	const HOME_CLOUD_1                                           = "Page dedicated to";
-	const HOME_CLOUD_2                                           = "documentation and monitoring";
-	const HOME_CLOUD_3                                           = "services on the web";
-	const HOME_CLOUD_BUTTON_TEXT                                 = "Go";
-	const HOME_GET_1                                             = "Group of functions dedicated for";
-	const HOME_GET_2                                             = "gathering data about";
-	const HOME_GET_3                                             = "network and web.";
-	const HOME_GET_BUTTON_TEXT                                   = "Go";
-	const HOME_API_1                                             = "Group of functions that focus on";
-	const HOME_API_2                                             = "cloud services to provide";
-	const HOME_API_3                                             = "additional informations";
-	const HOME_API_BUTTON_TEXT                                   = "Go";
-	const HOME_CERTIFICATION                                     = "Certifications";
+	const HOME_CHECK_1                                            = "Group of functions dedicated to";
+	const HOME_CHECK_2                                            = "verify network and";
+	const HOME_CHECK_3                                            = "diagnostic problems";
+	const HOME_CHECK_BUTTON_TEXT                                  = "Go";
+	const HOME_CLOUD_1                                            = "Page dedicated to";
+	const HOME_CLOUD_2                                            = "documentation and monitoring";
+	const HOME_CLOUD_3                                            = "services on the web";
+	const HOME_CLOUD_BUTTON_TEXT                                  = "Go";
+	const HOME_GET_1                                              = "Group of functions dedicated for";
+	const HOME_GET_2                                              = "gathering data about";
+	const HOME_GET_3                                              = "network and web.";
+	const HOME_GET_BUTTON_TEXT                                    = "Go";
+	const HOME_INSTALL_1                                          = "Page that installs,";
+	const HOME_INSTALL_2                                          = "import data or reinstalls";
+	const HOME_INSTALL_3                                          = "the database system";
+	const HOME_INSTALL_BUTTON_TEXT                                = "Go";
+	const HOME_API_1                                              = "Group of functions that focus on";
+	const HOME_API_2                                              = "cloud services to provide";
+	const HOME_API_3                                              = "additional informations";
+	const HOME_API_BUTTON_TEXT                                    = "Go";
+	const HOME_CERTIFICATION                                      = "Certifications";
 	
 	/* Body Page Login */
 	const LOGIN_ERROR                                            = "Error trying to log in";

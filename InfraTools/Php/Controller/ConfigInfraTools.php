@@ -242,6 +242,7 @@ class ConfigInfraTools extends Config
 	const FORM_HEADER_LAYOUT                                            = "FormHeaderLayout";
 	const FORM_HEADER_DEBUG                                             = "FormHeaderDebug";
 	const FORM_INSTALL                                                  = "FormInstall";
+	const FORM_INSTALL_EXPORT_SUBMIT                                    = "FormInstallExportSubmit";
 	const FORM_INSTALL_IMPORT_SUBMIT                                    = "FormInstallImportSubmit";
 	const FORM_INSTALL_IMPORT_SUBMIT_HIDDEN                             = "FormInstallImportSubmitHidden";
 	const FORM_INSTALL_NEW_SUBMIT                                       = "FormInstallNewSubmit";

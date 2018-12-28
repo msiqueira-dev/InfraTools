@@ -4,13 +4,13 @@
     	<div class="DivContentBodyContainers">
         	<div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
-                    <img src="<?php echo $this->Config->DefaultServerImage. 
-                              'Backgrounds/BackgroundInfraToolsHomeContainer.png'; ?>" 
-                         alt="BackgroundInfraToolsHomeContainer" width="250" height="100"/>
                     <div class="DivContentBodyContainersBoxIcon">
-                        <img src="<?php echo $this->Config->DefaultServerImage. 
-                                  'Icons/IconInfraToolsSearch.png'; ?>" 
-                             alt="IconInfraToolsSearch" width="48" height="48"/>
+                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsSearch48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsSearch48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsSearch48x48.png'; ?>'" 
+                             alt="CheckTools" />
                     </div>
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
@@ -41,13 +41,13 @@
             </div>
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
-                    <img src="<?php echo $this->Config->DefaultServerImage. 
-                             'Backgrounds/BackgroundInfraToolsHomeContainer.png'; ?>"
-                         alt="BackgroundInfraToolsHomeContainer" width="250" height="100"/>
                     <div class="DivContentBodyContainersBoxIcon">
-                        <img src="<?php echo $this->Config->DefaultServerImage. 
-                                  'Icons/IconInfraToolsReport.png'; ?>" 
-                            alt="IconInfraToolsReport" width="48" height="48"/>
+                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsReport48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsReport48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsReport48x48.png'; ?>'" 
+                             alt="Services" />
                     </div>
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
@@ -78,9 +78,6 @@
             </div>
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
-                    <img src="<?php echo $this->Config->DefaultServerImage. 
-                             'Backgrounds/BackgroundInfraToolsHomeContainer.png'; ?>"
-                         alt="BackgroundInfraToolsHomeContainer" width="250" height="100"/>
                     <div class="DivContentBodyContainersBoxIcon">
                         <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsService48x48.png';?>"
 							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -116,7 +113,46 @@
                     </div>
                 </div>
             </div>
+            <div class="DivContentBodyContainersBox">
+				<div class="DivContentBodyContainersBoxBackground">
+                    <div class="DivContentBodyContainersBoxIcon">
+                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsInstall48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsInstall48x48.png'; ?>'" 
+                             alt="Install" />
+                    </div>
+                    <div class="DivContentBodyContainersBoxText">
+                        <div class="DivContentBodyContainersBoxText1">
+                            <label>
+                                <?php echo $this->InstanceLanguageText->GetText('HOME_INSTALL_1'); ?>
+                            </label>
+                        </div>
+                        <div class="DivContentBodyContainersBoxText2">
+                            <label>
+                                <?php echo $this->InstanceLanguageText->GetText('HOME_INSTALL_2'); ?>
+                            </label>
+                        </div>
+                        <div class="DivContentBodyContainersBoxText3">
+                            <label>
+                                <?php echo $this->InstanceLanguageText->GetText('HOME_INSTALL_3'); ?>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="DivContentBodyContainersBoxLink">
+                        <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL') ?>" title=''> 
+                            <span class="DivContentBodyContainersBoxLinkSpace"></span>
+                            <span> 
+                                <?php echo $this->InstanceLanguageText->GetText('HOME_INSTALL_BUTTON_TEXT'); ?>
+                            </span>
+                        </a>
+                    </div>
+				</div>
+			</div>
         </div>
+        <div class="DivClearFloat">
+		</div>
 	</div>
 </div>
 <div class="DivBodyPush">

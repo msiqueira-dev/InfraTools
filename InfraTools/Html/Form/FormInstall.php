@@ -42,6 +42,16 @@
 		      <?php
 			  }
 		      ?>
+		<?php if($this->ButtonExportEnabled)
+			  {
+		?>
+					<input type="submit" name="<?php echo ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT; ?>" 
+									 id="<?php echo ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT; ?>"
+									 class="DivContentBodySubmitBigger"
+									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_EXPORT'); ?>"/>
+		      <?php
+			  }
+		      ?>
 	</div>
 </form>
 <!-- DIV_RETURN -->	

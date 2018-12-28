@@ -201,6 +201,7 @@ class Es
 	const HREF_PAGE_TEAM                                          = "/Es/PageTeam";
 	const ID                                                      = "";
 	const INSERT_WARNING_EXISTS                                   = "";
+	const INSTALL_EXPORT_SUCCESS                                  = "";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                     = "";
 	const INSTALL_IMPORT_ERROR_INSERTS                            = "";
 	const INSTALL_IMPORT_ERROR_FILE_MOVE                          = "";
@@ -208,6 +209,7 @@ class Es
 	const INSTALL_IMPORT_SUCCESS                                  = "";
 	const INSTALL_REINSTALL_ERROR_USER_PERMISSION                 = "";
 	const INSTALL_REINSTALL_SUCCESS                               = "";
+	const INSTALL_ERROR                                           = "";
 	const INSTALL_SUCCESS                                         = "";
 	const INVALID_IP_ADDRESS                                      = "";
 	const INVALID_MASK                                            = "";
@@ -648,6 +650,7 @@ class Es
 	const SUBMIT_DELETE                                           = "";
 	const SUBMIT_FORWARD                                          = "";
 	const SUBMIT_INSERT                                           = "";
+	const SUBMIT_INSTALL_EXPORT                                   = "";
 	const SUBMIT_INSTALL_IMPORT                                   = "";
 	const SUBMIT_INSTALL_NEW                                      = "";
 	const SUBMIT_INSTALL_REINSTALL                                = "";
@@ -815,6 +818,7 @@ class Es
 	const ADMIN_TEXT_CORPORATION                                  = "";
 	const ADMIN_TEXT_COUNTRY                                      = "";
 	const ADMIN_TEXT_DEPARTMENT                                   = "";
+	const ADMIN_TEXT_INSTALL                                      = "";
 	const ADMIN_TEXT_SERVICE                                      = "";
 	const ADMIN_TEXT_TEAM                                         = "";
 	const ADMIN_TEXT_TECH_INFO                                    = "";
@@ -1078,6 +1082,10 @@ class Es
 	const HOME_GET_2                                             = "";
 	const HOME_GET_3                                             = "";
 	const HOME_GET_BUTTON_TEXT                                   = "";
+	const HOME_INSTALL_1                                          = "";
+	const HOME_INSTALL_2                                          = "";
+	const HOME_INSTALL_3                                          = "";
+	const HOME_INSTALL_BUTTON_TEXT                                = "";
 	const HOME_API_1                                             = "";
 	const HOME_API_2                                             = "";
 	const HOME_API_3                                             = "";

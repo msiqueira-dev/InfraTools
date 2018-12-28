@@ -227,6 +227,7 @@ class Pt
 	const HREF_PAGE_TEAM                                          = "/Pt/PageTeam";
 	const ID                                                      = "Id";
 	const INSERT_WARNING_EXISTS                                   = "Um registro similar já foi efetuado";
+	const INSTALL_EXPORT_SUCCESS                                  = "Dados do sistema exportados com sucesso";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                     = "Extensão de arquivo inválida";
 	const INSTALL_IMPORT_ERROR_INSERTS                            = "Error ao tentar inserir dados no banco de dados do sistema";
 	const INSTALL_IMPORT_ERROR_FILE_MOVE                          = "O arquivo não pode ser movido para o diretório de upload";
@@ -234,6 +235,8 @@ class Pt
 	const INSTALL_IMPORT_SUCCESS                                  = "Dados importoados com sucesso";
 	const INSTALL_REINSTALL_ERROR_USER_PERMISSION                 = "Você não tem permissão para reinstalar o banco de dados do sistema";
 	const INSTALL_REINSTALL_SUCCESS                               = "Banco de dados do sistema reinstalado com sucesso";
+	const INSTALL_ERROR                                           = "Não foi possível instalar banco de dados do sistema, favor verificar o "
+		                                                          . "arquivo de configuração do sistema (ProjectConfig.php)";
 	const INSTALL_SUCCESS                                         = "Banco de dados do sistema instalado com sucesso";
 	const INVALID_IP_ADDRESS                                      = "Endereço de ip inválido";
 	const INVALID_MASK                                            = "Mascara de rede inválida";
@@ -536,7 +539,7 @@ class Pt
 	const PAGE_HOME                                               = "InfraTools";
 	const PAGE_HOME_ROBOTS                                        = "ALL";
 	const PAGE_HOME_TITLE                                         = "InfraTools - Principal";
-	const PAGE_INSTALL                                            = "InfraTools";
+	const PAGE_INSTALL                                            = "InfraTools - Instalação";
 	const PAGE_INSTALL_ROBOTS                                     = "noindex";
 	const PAGE_INSTALL_TITLE                                      = "InfraTools - Instalar InfraTools";
 	const PAGE_LOGIN                                              = "Login";
@@ -679,6 +682,7 @@ class Pt
 	const SUBMIT_CONFIRM                                          = "Confirma ?";
 	const SUBMIT_FORWARD                                          = "AVANÇAR";
 	const SUBMIT_INSERT                                           = "ADICIONAR";
+	const SUBMIT_INSTALL_EXPORT                                   = "Exportar dados do sistema";
 	const SUBMIT_INSTALL_IMPORT                                   = "Importar Dados ao Sistema";
 	const SUBMIT_INSTALL_NEW                                      = "Instalar Sistema";
 	const SUBMIT_INSTALL_REINSTALL                                = "Reinstalar Sistema";
@@ -860,6 +864,7 @@ class Pt
 	const ADMIN_TEXT_CORPORATION                                  = "Inserir, excluir, atualizar e consultar corporações";
 	const ADMIN_TEXT_COUNTRY                                      = "Consultar países";
 	const ADMIN_TEXT_DEPARTMENT                                   = "Inserir, excluir, atualizar e consultar departamentos";
+	const ADMIN_TEXT_INSTALL                                      = "Página de instalação, importação e reinstalação do sistema";
 	const ADMIN_TEXT_SERVICE                                      = "Inserir, excluir, atualizar e consultar serviços";
 	const ADMIN_TEXT_TEAM                                         = "Inserir, excluir, atualizar e consultar equipes";
 	const ADMIN_TEXT_TECH_INFO                                    = "Vizualisar detalhes técnicos sobre o InfraTools";
@@ -1164,6 +1169,10 @@ class Pt
 	const HOME_GET_2                                              = "para obtenção de dados sobre";
 	const HOME_GET_3                                              = "rede e web.";
 	const HOME_GET_BUTTON_TEXT                                    = "Ir";
+	const HOME_INSTALL_1                                          = "Página que instala, ";
+	const HOME_INSTALL_2                                          = "importa dados ou reinstala";
+	const HOME_INSTALL_3                                          = "a base dados do sistema ";
+	const HOME_INSTALL_BUTTON_TEXT                                = "Ir";
 	const HOME_API_1                                              = "Conjunto de funcionalidades que utilizam";
 	const HOME_API_2                                              = "serviços externos para prover";
 	const HOME_API_3                                              = "informações adicionais";
