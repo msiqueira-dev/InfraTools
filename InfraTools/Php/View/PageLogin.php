@@ -4,13 +4,12 @@ Class: PageLogin.php
 Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class used for login. 
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

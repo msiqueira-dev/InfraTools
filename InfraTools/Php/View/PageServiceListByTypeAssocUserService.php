@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context by type association of a user and a service.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -75,7 +74,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
+															   $this->ArrayInstanceInfraToolsService,
 															   $rowCount,
 															   $this->InputValueHeaderDebug);
 			}
@@ -89,7 +88,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
+															   $this->ArrayInstanceInfraToolsService,
 															   $rowCount,
 															   $this->InputValueHeaderDebug);
 				if($this->InputLimitTwo > $rowCount)
@@ -109,7 +108,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 																   $this->User->GetEmail(),
 																   $this->InputLimitOne, 
 																   $this->InputLimitTwo, 
-																   $this->ArrayInfraToolsService,
+																   $this->ArrayInstanceInfraToolsService,
 																   $rowCount,
 																   $this->InputValueHeaderDebug);
 				}
@@ -134,7 +133,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
+															   $this->ArrayInstanceInfraToolsService,
 															   $rowCount,
 															   $this->InputValueHeaderDebug);
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE . "_x"] = "1";

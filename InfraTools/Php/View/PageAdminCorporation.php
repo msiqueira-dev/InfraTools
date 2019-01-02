@@ -5,13 +5,11 @@ Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			Base       - Php/Controller/Session.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
 			Class for corporation management.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

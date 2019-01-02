@@ -4,7 +4,7 @@ Class: PageRegister.php
 Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class used for registering a new user. 
@@ -24,7 +24,6 @@ if (!class_exists("PageInfraTools"))
 		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
 }
-
 
 class PageRegister extends PageInfraTools
 {	

@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -27,7 +26,7 @@ if (!class_exists("PageService"))
 
 class PageServiceList extends PageService
 {
-	public $ArrayInfraToolsService = NULL;
+	public $ArrayInstanceInfraToolsService = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -58,7 +57,7 @@ class PageServiceList extends PageService
 					$this->InputLimitTwo = 25;
 				$this->ServiceSelectOnUserContext($this->User->GetEmail(),
 												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInfraToolsService,
+												  $this->ArrayInstanceInfraToolsService,
 												  $rowCount,
 												  $this->InputValueHeaderDebug);
 			}
@@ -69,7 +68,7 @@ class PageServiceList extends PageService
 				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
 				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
 												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInfraToolsService,
+												  $this->ArrayInstanceInfraToolsService,
 												  $rowCount,
 												  $this->InputValueHeaderDebug);
 				if($this->InputLimitOne > $rowCount)
@@ -78,7 +77,7 @@ class PageServiceList extends PageService
 					$this->InputLimitTwo = $this->InputLimitTwo - 25;
 					$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
 													  $this->InputLimitOne, $this->InputLimitTwo, 
-													  $this->ArrayInfraToolsService,
+													  $this->ArrayInstanceInfraToolsService,
 													  $rowCount,
 													  $this->InputValueHeaderDebug);
 				}
@@ -105,7 +104,7 @@ class PageServiceList extends PageService
 				$this->InputLimitTwo = 25;
 				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
 												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInfraToolsService,
+												  $this->ArrayInstanceInfraToolsService,
 												  $rowCount,
 												  $this->InputValueHeaderDebug);
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST . "_x"] = "1";

@@ -660,7 +660,7 @@ class FormValidator
 			if($Service != NULL && !empty($Service))
 			{
 				if(preg_match(
-	                '/(^([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
+	                '/(^([a-zA-Z]|[.]|[-]|[_]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
 				   $Service) > 0)
 					return self::SUCCESS;
 				else return self::INVALID_SERVICE_NAME;

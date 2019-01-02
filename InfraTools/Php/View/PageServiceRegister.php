@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da página do cadastro de serviços.
+			Class that register a new service.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

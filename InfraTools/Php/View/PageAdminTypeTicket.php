@@ -4,13 +4,12 @@ Class: PageAdminTypeTicket.php
 Creation: 07/11/2017
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Class for the page AdminTypeTicket
+			Class for type ticket management.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

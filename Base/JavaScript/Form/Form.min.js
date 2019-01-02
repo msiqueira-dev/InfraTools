@@ -897,7 +897,7 @@ function ValidateServiceName(DefaultInputClass, InputId, DefaultSubmitClass, Sub
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
-	var $filter = /(^([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[*]|[0-9]|[^\u0000-\u007F])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[*]|[0-9]|[^\u0000-\u007F])*)*$)/;
+	var $filter = /(^([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[_]|[*]|[0-9]|[^\u0000-\u007F])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[*]|[0-9]|[^\u0000-\u007F])*)*$)/;
 	if ($input.value != $input.title && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 

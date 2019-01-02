@@ -5,12 +5,14 @@
         	<div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsSearch48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsSearch48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsSearch48x48.png'; ?>'" 
-                             alt="CheckTools" />
+                       	<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_CHECK') ?>" title=''>
+							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsSearch48x48.png';?>"
+								 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsSearch48x48Hover.png'; ?>'"
+								 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsSearch48x48.png'; ?>'" 
+								 alt="CheckTools" />
+						</a>
                     </div>
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
@@ -42,12 +44,14 @@
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsReport48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsReport48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsReport48x48.png'; ?>'" 
-                             alt="Services" />
+                        <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_GET') ?>" title=''>
+							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsReport48x48.png';?>"
+								 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsReport48x48Hover.png'; ?>'"
+								 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsReport48x48.png'; ?>'" 
+								 alt="Services" />
+						</a>
                     </div>
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
@@ -79,12 +83,14 @@
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsService48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsService48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsService48x48.png'; ?>'" 
-                             alt="Services" />
+                       	<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE') ?>" title=''> 
+							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsService48x48.png';?>"
+								 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsService48x48Hover.png'; ?>'"
+								 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsService48x48.png'; ?>'" 
+								 alt="Services" />
+						</a>
                     </div>
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
@@ -116,12 +122,14 @@
             <div class="DivContentBodyContainersBox">
 				<div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsInstall48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsInstall48x48.png'; ?>'" 
-                             alt="Install" />
+                       <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL') ?>" title=''> 
+							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall48x48.png';?>"
+								 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsInstall48x48Hover.png'; ?>'"
+								 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+																.'Icons/IconInfraToolsInstall48x48.png'; ?>'" 
+								 alt="Install" />
+						</a>
                     </div>
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">

@@ -4,8 +4,7 @@ Class: PageContact.php
 Creation: 16/08/2018
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-			InfraTools - Php/Controller/InfraToolsFacedeBusiness.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class used for creating the database structure. 
@@ -18,6 +17,12 @@ if (!class_exists("InfraToolsFactory"))
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
+}
+if (!class_exists("InfraToolsFacedePersistence"))
+{
+	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php"))
+		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistence');
 }
 if (!class_exists("PageInfraTools"))
 {
@@ -132,10 +137,20 @@ class PageInstall extends PageInfraTools
 						}
 						elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT) == ConfigInfraTools::SUCCESS)
 						{
-							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBacksup($this->DataBaseReturnMessage,
-																								$this->InputValueHeaderDebug);
+							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBackup($fileName, $fileNamePath, 
+																							   $this->InputValueHeaderDebug);
 							if($return == ConfigInfraTools::SUCCESS)
-								$this->ShowDivReturnSuccess("INSTALL_IMPORT_SUCCESS");
+							{
+								header('Content-Description: File Transfer');
+								header('Content-Type: application/octet-stream');
+								header('Content-Disposition: attachment; filename="'.basename($fileName).'"');
+								header('Expires: 0');
+								header('Cache-Control: must-revalidate');
+								header('Pragma: public');
+								header('Content-Length: ' . filesize($fileNamePath));
+								readfile($fileNamePath);
+								$this->ShowDivReturnSuccess("INSTALL_EXPORT_SUCCESS");
+							}
 						}
 					}
 					else $this->ShowDivReturnError("INSTALL_REINSTALL_ERROR_USER_PERMISSION");

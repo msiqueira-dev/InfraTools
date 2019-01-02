@@ -9,7 +9,8 @@
 					<input type="submit" name="<?php echo ConfigInfraTools::FORM_INSTALL_NEW_SUBMIT; ?>" 
 										 id="<?php echo ConfigInfraTools::FORM_INSTALL_NEW_SUBMIT; ?>"
 										 class="DivContentBodySubmitBigger"
-										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_NEW'); ?>"/>
+										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_NEW'); ?>"
+										 />
 			  <?php
 			  }
 			  ?>
@@ -38,7 +39,8 @@
 					<input type="submit" name="<?php echo ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT; ?>" 
 									 id="<?php echo ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT; ?>"
 									 class="DivContentBodySubmitBigger"
-									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_REINSTALL'); ?>"/>
+									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_REINSTALL'); ?>"
+									 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 		      <?php
 			  }
 		      ?>
@@ -48,7 +50,8 @@
 					<input type="submit" name="<?php echo ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT; ?>" 
 									 id="<?php echo ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT; ?>"
 									 class="DivContentBodySubmitBigger"
-									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_EXPORT'); ?>"/>
+									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_EXPORT'); ?>"
+									 />
 		      <?php
 			  }
 		      ?>

@@ -54,7 +54,7 @@ Methods:
 			public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, 
 			                                                            &$ArrayInstanceInfraToolsDepartment, $Debug,
 																		$MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function InfraToolsDataBacksup(&$StringMessage, $Debug);
+			public function InfraToolsDataBackup(&$FileName, &$FileNamePath, $Debug)
 			public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug);
 			public function InfraToolsDataBaseCreate(&$StringMessage, $Debug);
 			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug);
@@ -487,18 +487,21 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function InfraToolsDataBacksup(&$StringMessage, $Debug)
+	public function InfraToolsDataBackup(&$FileName, &$FileNamePath, $Debug)
 	{
-		$dump = "    "     .      ProjectConfig::$MySqlDumpCompletePath          . " --extended-insert=FALSE  " .
-			    " -u "     .      ProjectConfig::$MySqlDataBaseSuperUser         .
-			    "  -p"     .      ProjectConfig::$MySqlDataBaseSuperUserPassword .
-			    " --port=" .      ProjectConfig::$MySqlDataBasePort              .
-			    " -h "     .      ProjectConfig::$MySqlDataBaseAddress           . " --no-create-info --skip-triggers " . 
-				    			  ProjectConfig::$MySqlDataBaseName              .  " > " . ProjectConfig::$UploadDirectory . "/" . 
-							      ProjectConfig::$ApplicationName                . "-Dump-".date("Y-m-d-H-i");
-		$result = exec($dump);
-		echo $result;
-		return ConfigInfraTools::SUCCESS;
+		$FileName = ProjectConfig::$ApplicationName . "-Dump-".date("Y-m-d-H-i") . ".sql";
+		$FileNamePath = ProjectConfig::$UploadDirectory . "/" . $FileName;
+		$Command = "    "     .      ProjectConfig::$MySqlDumpCompletePath          . " --extended-insert=FALSE  " .
+			       " -u "     .      ProjectConfig::$MySqlDataBaseSuperUser         .
+			       "  -p"     .      ProjectConfig::$MySqlDataBaseSuperUserPassword .
+			       " --port=" .      ProjectConfig::$MySqlDataBasePort              .
+			       " -h "     .      ProjectConfig::$MySqlDataBaseAddress           . " --no-create-info --skip-triggers --complete-insert" .
+					                                                                  " --order-by-primary " .
+				         			 ProjectConfig::$MySqlDataBaseName              .  " > " . $FileNamePath;
+		exec($Command);
+		if(file_exists($FileNamePath) && filesize($FileNamePath) > 0)
+			return ConfigInfraTools::SUCCESS;
+		else return ConfigInfraTools::ERROR;
 	}
 	
 	public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug)
@@ -1446,7 +1449,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
-			$return = $InfraToolsFacedePersistenceService->ServiceSelectByServiceId($ServiceId, $Service, $Debug);
+			$return = $InfraToolsFacedePersistenceService->ServiceSelectByServiceId($ServiceId, $Service, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

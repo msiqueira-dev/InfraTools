@@ -132,16 +132,8 @@
 		include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("Page", "", str_replace("_", "", 
 												 ConfigInfraTools::PAGE_SERVICE_SELECT)) . ".php");
-		//SERVICE LIST BY NAME
-		if($this->PageBody == ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME)
-		{
-			echo "<div class='DivContentBodySecondTitleLine'></div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("Page", "", str_replace("_", "", 
-												 ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME)) . ".php");
-		}
 		//SERVICE VIEW
-		elseif($this->PageBody == ConfigInfraTools::PAGE_SERVICE_VIEW)
+		if($this->PageBody == ConfigInfraTools::PAGE_SERVICE_VIEW)
 		{
 			echo "<div class='DivContentBodySecondTitleLine'></div>";
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

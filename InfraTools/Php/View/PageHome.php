@@ -4,7 +4,7 @@ Class: PageHome.php
 Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class used for displaying the home page. 
@@ -17,6 +17,12 @@ if (!class_exists("InfraToolsFactory"))
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
+}
+if (!class_exists("InfraToolsFacedePersistence"))
+{
+	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php"))
+		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistence');
 }
 if (!class_exists("PageInfraTools"))
 {

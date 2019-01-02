@@ -142,6 +142,8 @@ class ConfigInfraTools extends Config
 	const APPLICATION_INFRATOOLS                                        = "InfraTools";
 	const DIV_RADIO                                                     = "DivRadio";
 	const DIV_RADIO_CORPORATION                                         = "DivRadioCorporation";
+	const DIV_RADIO_SERVICE_ID                                          = "DivRadioServiceId";
+	const DIV_RADIO_SERVICE_NAME                                        = "DivRadioServiceName";
 	const EMAIL_INFRATOOLS_LOCAL_PASSWORD                               = "";
 	const EMAIL_INFRATOOLS_TEST_PASSWORD                                = "";
 	const EMAIL_INFRATOOLS_PRODUCTION_PASSWORD                          = "";

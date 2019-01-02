@@ -37,7 +37,7 @@
 	</div>
  </div>
 <?php
-if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsService)>0))
+if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanceInfraToolsService)>0))
 {
 	?>
 	<div class="DivTableGenericHeader">
@@ -119,7 +119,7 @@ if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsServi
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInfraToolsService as $key=>$infraToolsService)
+	foreach($this->ArrayInstanceInfraToolsService as $key=>$infraToolsService)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

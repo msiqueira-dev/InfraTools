@@ -2344,6 +2344,10 @@ class InfraToolsFacedePersistenceDataBase
 			if(is_array($InsertQueries))
 			{
 				$ErrorQueires = array();
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+					echo "<b>SET FOREIGN_KEY_CHECKS = 0</b>";
+				$StringMessage .= "SET FOREIGN_KEY_CHECKS = 0";
+				mysqli_query($MySqlConnection, "SET FOREIGN_KEY_CHECKS = 0");
 				foreach($InsertQueries as $key => $insertQuery)
 				{
 					$StringMessage .= "<b>[" . $key . "]:</b> " . $insertQuery . "<br>";
@@ -2363,6 +2367,10 @@ class InfraToolsFacedePersistenceDataBase
 						else continue;
 					}
 				}
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+					echo "<b>SET FOREIGN_KEY_CHECKS = 1</b>";
+				$StringMessage .= "SET FOREIGN_KEY_CHECKS = 1";
+				mysqli_query($MySqlConnection, "SET FOREIGN_KEY_CHECKS = 1");
 				return ConfigInfraTools::SUCCESS;			 
 			}
 			else return ConfigINfraTools::MYSQL_IMPORT_NO_INSERTS;

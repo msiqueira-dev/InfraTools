@@ -1,6 +1,6 @@
 <!-- BODY SERVICE LIST BY USER -->
 <?php
-if(is_array($this->ArrayInfraToolsService))
+if(is_array($this->ArrayInstanceInfraToolsService))
 {
 	?>
 	<div class="DivTableGenericHeader">
@@ -82,7 +82,7 @@ if(is_array($this->ArrayInfraToolsService))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInfraToolsService as $key=>$infraToolsService)
+	foreach($this->ArrayInstanceInfraToolsService as $key=>$infraToolsService)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

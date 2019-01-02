@@ -4,14 +4,12 @@ Class: PageRegisterConfirmation.php
 Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-			InfraTools - Php/Controller/InfraToolsFacedeBusiness.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class used for recoverying the user password where it will send a code to the user's email. 
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

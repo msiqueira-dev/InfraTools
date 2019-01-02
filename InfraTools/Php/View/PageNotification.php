@@ -10,7 +10,6 @@ Description:
 			Class for notifications and alett for all system users.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

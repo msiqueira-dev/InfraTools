@@ -1,4 +1,16 @@
 <?php
+/************************************************************************
+Class: PageResendConfirmationLink.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used to resend user's confirmation link. 
+Functions: 
+			public    function LoadPage();
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))

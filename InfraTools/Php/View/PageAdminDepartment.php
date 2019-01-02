@@ -4,14 +4,12 @@ Class: PageAdminDepartment.php
 Creation: 28/02/2018
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-			Base       - Php/Controller/Session.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
 			Class for department management.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -49,6 +47,7 @@ class PageAdminDepartment extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
+		$this->InputValueDepartmentNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
@@ -142,6 +141,7 @@ class PageAdminDepartment extends PageAdmin
 				}
 				else
 				{
+					$this->InputValueDepartmentNameAndCorporationNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 					if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
 													$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
@@ -152,6 +152,7 @@ class PageAdminDepartment extends PageAdmin
 			}
 			else
 			{
+				$this->InputValueDepartmentNameAndCorporationNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 				if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
 										  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
 												$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],

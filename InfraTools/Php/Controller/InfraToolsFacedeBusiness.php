@@ -43,6 +43,13 @@ if (!class_exists("InfraToolsFactory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
 
+if (!class_exists("FacedeBusiness"))
+{
+	if(file_exists(BASE_PATH_PHP_CONTROLLER . "FacedeBusiness.php"))
+		include_once(BASE_PATH_PHP_CONTROLLER . "FacedeBusiness.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedeBusiness');
+}
+
 class InfraToolsFacedeBusiness extends FacedeBusiness
 {		
 	/* Instances */

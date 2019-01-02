@@ -31,7 +31,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInfraToolsService))
+if(is_array($this->ArrayInstanceInfraToolsService))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST . "' method='get' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -80,7 +80,7 @@ if(is_array($this->ArrayInfraToolsService))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInfraToolsService as $key=>$infraToolsService)
+	foreach($this->ArrayInstanceInfraToolsService as $key=>$infraToolsService)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

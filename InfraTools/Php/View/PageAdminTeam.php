@@ -5,12 +5,11 @@ Creation: 04/06/2018
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/AdminInfraTools.php
 Description: 
 			Class for team management.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

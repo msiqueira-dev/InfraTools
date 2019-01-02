@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context by corporation.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -28,7 +27,7 @@ if (!class_exists("PageService"))
 class PageServiceListByCorporation extends PageService
 {
 	public $ArrayInstanceInfraToolsCorporation = NULL;
-	public $ArrayInfraToolsService = NULL;
+	public $ArrayInstanceInfraToolsService = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -72,7 +71,7 @@ class PageServiceListByCorporation extends PageService
 																	            $this->User->GetEmail(),
 																	            $this->InputLimitOne, 
 																	            $this->InputLimitTwo, 
-																	            $this->ArrayInfraToolsService,
+																	            $this->ArrayInstanceInfraToolsService,
 																	            $rowCount,
 																	            $this->InputValueHeaderDebug);
 			}
@@ -85,7 +84,7 @@ class PageServiceListByCorporation extends PageService
 																	            $this->User->GetEmail(),
 																	            $this->InputLimitOne, 
 																	            $this->InputLimitTwo, 
-																	            $this->ArrayInfraToolsService,
+																	            $this->ArrayInstanceInfraToolsService,
 																	            $rowCount,
 																	            $this->InputValueHeaderDebug);
 				if($this->InputLimitTwo > $rowCount)
@@ -104,7 +103,7 @@ class PageServiceListByCorporation extends PageService
 																		  $this->User->GetEmail(),
 																		  $this->InputLimitOne, 
 																		  $this->InputLimitTwo, 
-																		  $this->ArrayInfraToolsService,
+																		  $this->ArrayInstanceInfraToolsService,
 																		  $rowCount,
 																		  $this->InputValueHeaderDebug);
 				}
@@ -127,7 +126,7 @@ class PageServiceListByCorporation extends PageService
 				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
 																	            $this->User->GetEmail(),
 																	            $this->InputLimitOne, $this->InputLimitTwo, 
-																	            $this->ArrayInfraToolsService,
+																	            $this->ArrayInstanceInfraToolsService,
 																	            $rowCount,
 																	            $this->InputValueHeaderDebug);
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "_x"] = "1";

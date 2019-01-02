@@ -2,8 +2,14 @@
 <div class="DivBody">
     <div class="DivContentBody">
     <div class="DivContentBodySecondTitle">
-			<img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconInfraToolsInstall100x100.png'; ?>" 
-				 alt="IconInfraToolsInstall" class="DivContentBodySecondTitleImage" width="100" height="100"/>
+    		<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL') ?>" title=''>
+				<img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconInfraToolsInstall100x100.png'; ?>" 
+					 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsInstall100x100Hover.png'; ?>'"
+					 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+													.'Icons/IconInfraToolsInstall100x100.png'; ?>'" 
+					 alt="Install" />
+			</a>
 		</div>
 		<div class="DivContentBodySecondTitleLine"></div>
     	<?php

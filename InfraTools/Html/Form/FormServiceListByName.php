@@ -1,6 +1,6 @@
 <!-- BODY SERVICE LIST BY NAME -->
 <?php
-if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsService)>0))
+if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanceInfraToolsService)>0))
 {
 	?>
 	<div class="DivTableGenericHeader">
@@ -86,11 +86,11 @@ if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsServi
 							       value='" . $this->InputValueServiceName. "' 
 								   title='" . $this->InputValueServiceName . "' />";
 	echo "</form>";
-	foreach($this->ArrayInfraToolsService as $key=>$infraToolsService)
+	foreach($this->ArrayInstanceInfraToolsService as $key=>$infraToolsService)
 	{
 		echo "<tr class='TableGenericTr'>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID . "' method='get' />
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID . "' method='post' />
 					<input type='submit' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 									   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 									   value='" . $infraToolsService->GetServiceId() . "' 
@@ -98,7 +98,7 @@ if(is_array($this->ArrayInfraToolsService) && (count($this->ArrayInfraToolsServi
 			  	</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_NAME_AND_ID . "' method='get' />
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_NAME_AND_ID . "' method='post' />
 			    	<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 			  					   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT . "' 
 								   value='" . $infraToolsService->GetServiceId() . "' />

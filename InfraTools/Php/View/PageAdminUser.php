@@ -4,10 +4,10 @@ Class: PageInfraTools.php
 Creation: 03/03/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Classe existente para a página de administração de usuário
+			Class for user management.
 Functions: 
 			public    function LoadPage();
 **************************************************************************/
@@ -27,7 +27,6 @@ if (!class_exists("PageAdmin"))
 class PageAdminUser extends PageAdmin
 {
 	/* Instance */
-	public    $FacedeBusinessInfraTools    = NULL;
 	public    $ArrayInstanceInfraToolsUser = NULL;
 	protected $InstanceTypeUser            = NULL;
 	

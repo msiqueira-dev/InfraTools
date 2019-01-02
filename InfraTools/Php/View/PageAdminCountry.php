@@ -10,7 +10,6 @@ Description:
 			Class for countries management.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -52,8 +51,8 @@ class PageAdminCountry extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		if($_POST == NULL)
-			$_POST[ConfigInfraTools::FORM_COUNTRY_LIST] = ConfigInfraTools::FORM_COUNTRY_LIST;
+		if($_POST == NULL || !isset($_POST[ConfigInfraTools::FORM_COUNTRY_LIST]))
+			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
 		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

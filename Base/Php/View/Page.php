@@ -50,7 +50,9 @@ Methods:
 		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew,$DepartmentNameNew, 
 		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
-		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE;);
+		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug);
+		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE);
+		protected     function        LoadDataFromSession($SessionKey, $Function, &$Instance);
 		protected     function        PageStackSessionLoad();
 		protected     function        PageStackSessionRemoveAll();
 		protected     function        PageStackSessionSave();
@@ -146,6 +148,8 @@ Methods:
 		protected     function        UserUpdateUserTypeByUserEmail($TypeUserIdNew, &$InstanceUser, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
+		public        function        CheckGetContainsKey($Key);
+		public        function        CheckGetOrPostContainsKey($Key);
 		public        function        CheckPostContainsKey($Key);
 		public        function        GetCurrentPage();
 		public        function        IncludeHeadAll($HasLoginForm);
@@ -825,10 +829,10 @@ class Page
 				$this->ShowDivReturnSuccess('CORPORATION_UPDATE_SUCCESS');
 				return $return;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return ConfigInfraTools::WARNING;	
+				return Config::WARNING;	
 			}
 			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
@@ -1317,6 +1321,78 @@ class Page
 		return Config::ERROR;
 	}
 	
+	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug)
+	{
+		foreach($PostForm as $postElementKey=>$postElementValue)
+		{
+			$postElementKey = strtoupper($postElementKey);
+			if((strpos($postElementKey, 'LIST') !== FALSE) && strpos($postElementKey, 'LIMIT') == FALSE)
+			{
+				$this->InputLimitOne = 0;
+				$this->InputLimitTwo = 25;
+				if(strpos($postElementKey, 'BACK') !== FALSE)
+				{
+					$this->InputLimitOne = $_POST[Config::FORM_LIST_INPUT_LIMIT_ONE] - 25;
+					$this->InputLimitTwo = $_POST[Config::FORM_LIST_INPUT_LIMIT_TWO] - 25;
+					if($this->InputLimitOne < 0)
+						$this->InputLimitOne = 0;
+					if($this->InputLimitTwo <= 0)
+						$this->InputLimitTwo = 25;
+				}
+				elseif (strpos($postElementKey, 'FORWARD') !== FALSE) 
+				{
+					$this->InputLimitOne = $_POST[Config::FORM_LIST_INPUT_LIMIT_ONE] + 25;
+					$this->InputLimitTwo = $_POST[Config::FORM_LIST_INPUT_LIMIT_TWO] + 25;
+					$ArrayParameterTemp = $ArrayParameter;
+					array_unshift($ArrayParameterTemp, $this->InputLimitOne, $this->InputLimitTwo);
+				    $ArrayParameter[count($ArrayParameterTemp)] = &$rowCount;
+				    $ArrayParameterTemp[count($ArrayParameterTemp)] = &$rowCount;
+					array_push($ArrayParameterTemp, $Debug);
+					$return = call_user_func_array(array($this, $Function), $ArrayParameterTemp);
+					if($this->InputLimitOne > $rowCount)
+					{
+						$this->InputLimitOne = $this->InputLimitOne - 25;
+						$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					}
+					elseif($this->InputLimitTwo > $rowCount)
+					{
+						$this->InputLimitOne = $this->InputLimitOne - 25;
+						$this->InputLimitTwo = $this->InputLimitTwo - 25;
+					}
+					if($return == Config::SUCCESS)
+						return Config::SUCCESS;
+					else 
+					{
+						array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
+						$ArrayParameter[count($ArrayParameter)] = &$rowCount;
+						array_push($ArrayParameter, $Debug);
+						return call_user_func_array(array($this, $Function), $ArrayParameter);
+					}
+				}
+				array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
+				$ArrayParameter[count($ArrayParameter)] = &$rowCount;
+				array_push($ArrayParameter, $Debug);
+				return call_user_func_array(array($this, $Function), $ArrayParameter);
+			}
+			elseif(strpos($postElementKey, 'LIST') == FALSE)
+			{
+				array_push($ArrayParameter, $Debug);
+				if($Debug)
+				{
+					echo "<b>ArrayParameter</b>:<br>";
+					foreach ($ArrayParameter as $key => $value)
+					{
+						if(is_object($value))
+							{echo "<b>" . $key . "</b>: "; print_r($value); echo "<br>";}
+						else
+							echo "<b>" . $key . "</b>: " . $value . "<br>";	
+					}
+				}
+				return call_user_func_array(array($this, $Function), $ArrayParameter); 
+			}
+		}
+	}
+	
 	protected function LoadHtml($HasLoginForm, $EnableDivPush = TRUE)
 	{
 		$page = str_replace("_", "", $this->GetCurrentPage());
@@ -1353,6 +1429,22 @@ class Page
 			echo Config::HTML_TAG_BODY_END;
 			echo Config::HTML_TAG_END;
 			return Config::SUCCESS;
+		}
+		else return Config::ERROR;
+	}
+	
+	protected function LoadDataFromSession($SessionKey, $Function, &$Instance)
+	{
+		if(isset($Function) && isset($SessionKey))
+		{
+			if(!isset($Instance))
+			{
+				if($this->Session->GetSessionValue($SessionKey, $Instance) != Config::SUCCESS)
+				{	
+					return Config::ERROR;
+				}
+			}
+			return $this->$Function($Instance);
 		}
 		else return Config::ERROR;
 	}
@@ -2029,10 +2121,10 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return ConfigInfraTools::WARNING;	
+				return Config::WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
@@ -3329,7 +3421,7 @@ class Page
 		$return = $this->UserSelectHashCodeByUserEmail($UserEmail, $UniqueHash, $this->InputValueHeaderDebug);
 		if($return == Config::SUCCESS)
 		{
-			$instanceFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
+			$instanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 			Page::GetCurrentDomain($domain);
 			$link = $domain . str_replace('Language/', '', $this->Language) . "/" .
 							  str_replace("_", "",Config::PAGE_REGISTER_CONFIRMATION) . "?=" . $UniqueHash;
@@ -4243,10 +4335,10 @@ class Page
 			$this->ShowDivReturnError("SEND_EMAIL_ERROR");
 			return Config::ERROR;
 		}
-		elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return ConfigInfraTools::WARNING;	
+			return Config::WARNING;	
 		}
 		$this->ShowDivReturnError("PASSWORD_RESET_ERROR");
 		return Config::ERROR;
@@ -4416,6 +4508,34 @@ class Page
 		}
 	}
 	
+	public function CheckGetContainsKey($Key)
+	{
+		foreach($_GET as $getElementKey=>$getElementValue)
+		{
+			if(strpos($getElementKey, $Key) !== false)
+			{
+				if($getElementKey == $Key) 
+					return Config::SUCCESS;
+				elseif($getElementKey == $Key."_x")
+					return Config::SUCCESS;
+				elseif($getElementKey == $Key."Back_x")
+					return Config::SUCCESS;
+				elseif($getElementKey == $Key."Forward_x")
+					return Config::SUCCESS;
+			}
+		}
+		return Config::ERROR;
+	}
+	
+	public function CheckGetOrPostContainsKey($Key)
+	{
+		if($this->CheckGetContainsKey($Key) == Config::SUCCESS)
+			return Config::SUCCESS;
+		elseif($this->CheckPostContainsKey($Key) == Config::SUCCESS)
+			return Config::SUCCESS;
+		else return Config::ERROR;
+	}
+	
 	public function CheckPostContainsKey($Key)
 	{
 		foreach($_POST as $postElementKey=>$postElementValue)
@@ -4545,7 +4665,7 @@ class Page
 	
 	public function LoadPage()
 	{	
-		if(!$this->PageEnabled) return ConfigInfraTools::ERROR;
+		if(!$this->PageEnabled) return Config::ERROR;
 		$this->LoadHtml(FALSE);
 	}
 	

@@ -4,7 +4,7 @@ Class: PagePasswordRecovy.php
 Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class used for reseting a user password where a code was sent to his e-mail and will be prompt. 

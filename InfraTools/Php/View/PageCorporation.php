@@ -1,4 +1,16 @@
 <?php
+/************************************************************************
+Class: PageCorporation.php
+Creation: 30/09/2016
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class that treats the main page of Corporation module.
+Functions: 
+			public    function LoadPage();
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))

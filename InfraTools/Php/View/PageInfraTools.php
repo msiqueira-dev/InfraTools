@@ -67,16 +67,16 @@ Methods:
 			                                                                        $ServiceDepartment, $UserEmail, 
 			                                                                        &$ArrayInstanceInfraToolsService, 
 			                                                                        $Debug);
-			protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, &$RowCount, $Debug);	
+			protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug);	
 			protected function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
 			                                                         &$TypeAssocUserServiceId, $Debug);
-			protected function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			protected function ServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
 			                                              &$RowCount, $Debug);	
 			protected function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
 			                                                     $Debug);	
-			protected function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-			                                                        $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
-			                                                        &$RowCount, $Debug);
+			protected function ServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail, 
+			                                                           &$ArrayInstanceInfraToolsService, 
+			                                                           &$RowCount, $Debug);
 			protected function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
 			                                                                  &$ArrayInstanceInfraToolsService, 
 			                                                                  $Debug);
@@ -1220,7 +1220,7 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::ERROR;
 	}
 	
-	protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, &$RowCount, $Debug)
+	protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -1294,11 +1294,12 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::ERROR;
 	}
 	
-	protected function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	protected function ServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
 												  &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
@@ -1306,7 +1307,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
@@ -1319,7 +1320,7 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceName($ServiceName,  
+			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceName($this->InputValueServiceName,  
 																			   $Limit1, $Limit2,
 																			   $ArrayInstanceInfraToolsService,
 																			   $RowCount, 
@@ -1341,6 +1342,7 @@ abstract class PageInfraTools extends Page
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
@@ -1348,7 +1350,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
@@ -1361,9 +1363,9 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameNoLimit($ServiceName,
-																			   $ArrayInstanceInfraToolsService,
-																			   $Debug);
+			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameNoLimit($$this->InputValueServiceName,
+																			          $ArrayInstanceInfraToolsService,
+																			          $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS");
@@ -1374,12 +1376,13 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::ERROR;
 	}
 	
-	protected function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-															   $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	protected function ServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail, 
+															   &$ArrayInstanceInfraToolsService, 
 															   &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
@@ -1387,7 +1390,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
@@ -1400,7 +1403,7 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
+			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameOnUserContext($this->InputValueServiceName, $UserEmail, 
 																							$Limit1, $Limit2,
 																			                $ArrayInstanceInfraToolsService,
 																							$RowCount,

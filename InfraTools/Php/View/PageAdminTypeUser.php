@@ -4,15 +4,12 @@ Class: PageAdminTypeUser.php
 Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-			Base       - Php/Controller/Session.php
-			Base       - Php/Model/FormValidator.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Classe que trata da administração dos tipos de usuários.
+			Class for type user management.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

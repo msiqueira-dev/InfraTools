@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Class that treats the main page of Service module.
+			Class that treats the main page of service module.
 Functions: 
-			public    function LoadPage();
-			
+			public    function LoadPage();	
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {

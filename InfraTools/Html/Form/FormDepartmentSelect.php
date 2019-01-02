@@ -17,6 +17,7 @@
 	  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>" method="post" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
+		<!-- FORM_FIELD_RADIO_DEPARTMENT_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
 				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT; ?>"
@@ -31,13 +32,14 @@
 														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
 														   'Department Name')"
 					   title="<?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?>"  
-					   <?php echo $this->InputValueDepartmentNameRadio; ?> checked/>
+					   <?php echo $this->InputValueDepartmentNameRadio; ?>/>
 				<div class="DivContentBodyContainerLabelHost">
 					<i><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
+		<!-- FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
 				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT; ?>"

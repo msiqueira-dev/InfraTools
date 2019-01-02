@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context by type user.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -27,7 +26,7 @@ if (!class_exists("PageService"))
 
 class PageServiceListByTypeService extends PageInfraTools
 {
-	public $ArrayInfraToolsService = NULL;
+	public $ArrayInstanceInfraToolsService = NULL;
 	public $ArrayInstanceInfraToolsTypeService = NULL;
 	
 	/* __create */
@@ -68,7 +67,7 @@ class PageServiceListByTypeService extends PageInfraTools
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
 															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
+															   $this->ArrayInstanceInfraToolsService,
 															   $rowCount,
 															   $this->InputValueHeaderDebug);
 			}
@@ -81,7 +80,7 @@ class PageServiceListByTypeService extends PageInfraTools
 																	  $this->User->GetEmail(),
 																	  $this->InputLimitOne, 
 																	  $this->InputLimitTwo, 
-																	  $this->ArrayInfraToolsService,
+																	  $this->ArrayInstanceInfraToolsService,
 																	  $rowCount,
 																	  $this->InputValueHeaderDebug);
 				if($this->InputLimitTwo > $rowCount)
@@ -100,7 +99,7 @@ class PageServiceListByTypeService extends PageInfraTools
 																   $this->User->GetEmail(),
 																   $this->InputLimitOne, 
 																   $this->InputLimitTwo, 
-																   $this->ArrayInfraToolsService,
+																   $this->ArrayInstanceInfraToolsService,
 																   $rowCount,
 																   $this->InputValueHeaderDebug);
 				}
@@ -123,7 +122,7 @@ class PageServiceListByTypeService extends PageInfraTools
 				$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
+															   $this->ArrayInstanceInfraToolsService,
 															   $rowCount,
 															   $this->InputValueHeaderDebug);
 				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE . "_x"] = "1";

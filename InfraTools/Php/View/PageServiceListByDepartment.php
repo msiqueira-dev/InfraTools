@@ -7,10 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context by department.
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -29,7 +28,7 @@ class PageServiceListByDepartment extends PageService
 {
 	public $ArrayInstanceInfraToolsCorporation = NULL;
 	public $ArrayInstanceInfraToolsDepartment = NULL;
-	public $ArrayInfraToolsService = NULL;
+	public $ArrayInstanceInfraToolsService = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -91,7 +90,7 @@ class PageServiceListByDepartment extends PageService
 																			 $this->User->GetEmail(),
 																			 $this->InputLimitOne, 
 																			 $this->InputLimitTwo, 
-																			 $this->ArrayInfraToolsService,
+																			 $this->ArrayInstanceInfraToolsService,
 																			 $rowCount,
 																			 $this->InputValueHeaderDebug);
 					}
@@ -105,7 +104,7 @@ class PageServiceListByDepartment extends PageService
 																			 $this->User->GetEmail(),
 																			 $this->InputLimitOne, 
 																			 $this->InputLimitTwo, 
-																			 $this->ArrayInfraToolsService,
+																			 $this->ArrayInstanceInfraToolsService,
 																			 $rowCount,
 																			 $this->InputValueHeaderDebug);
 						if($this->InputLimitTwo > $rowCount)
@@ -125,7 +124,7 @@ class PageServiceListByDepartment extends PageService
 																				 $this->User->GetEmail(),
 																				 $this->InputLimitOne, 
 																				 $this->InputLimitTwo, 
-																				 $this->ArrayInfraToolsService,
+																				 $this->ArrayInstanceInfraToolsService,
 																				 $rowCount,
 																				 $this->InputValueHeaderDebug);
 						}
@@ -149,7 +148,7 @@ class PageServiceListByDepartment extends PageService
 																			           $this->InputValueServiceDepartment,
 																					   $this->User->GetEmail(),
 																					   $this->InputLimitOne, $this->InputLimitTwo, 
-																					   $this->ArrayInfraToolsService,
+																					   $this->ArrayInstanceInfraToolsService,
 																					   $rowCount,
 																					   $this->InputValueHeaderDebug);
 						$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT . "_x"] = "1";

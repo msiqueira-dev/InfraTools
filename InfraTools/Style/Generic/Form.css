@@ -1,5 +1,5 @@
 .DivContentBody form{min-height:190px;}
-.DivContentBodyContainer{width:550px;height:50px;margin-top:12px;}
+.DivContentBodyContainer{width:550px;min-height:50px;margin-top:12px;}
 .DivContentBodyContainerSided{width:500px !important;height:50px;margin-top:12px;}
 .DivContentBodyContainerValue input[type="checkbox"]{position:relative;top:10px;}
 .DivContentBodyContainerSubmits{width:800px;height:auto;margin-top:12px;}

@@ -5,8 +5,7 @@ Creation: 30/09/2016
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
-			Base       - Php/Controller/Session.php
-			Base       - Php/Model/FormValidator.php
+			InfraTools - Php/View/PageInfraTools.php
 Description: 
 			Class that deals with the information of the system shown to the user such as details and external links.
 Functions: 
