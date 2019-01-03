@@ -56,6 +56,21 @@ Methods:
 		protected     function        PageStackSessionLoad();
 		protected     function        PageStackSessionRemoveAll();
 		protected     function        PageStackSessionSave();
+		protected     function        SystemConfigurationDeleteBySystemConfigurationNumber($InstanceSystemConfiguration, $Debug);
+		protected     function        SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+		                                                        $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug);
+		protected     function        SystemConfigurationLoadData($InstanceSystemConfiguration);
+		protected     function        SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug);
+		protected     function        SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, 
+		                                                                                       $SystemConfigurationOptionName, &$RowCount,
+		                                                                                       &$ArrayInstanceSystemConfiguration, $Debug);
+		protected     function        SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+		                                                                                         &$InstanceSystemConfiguration, $Debug);
+		protected     function        SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+		                                                                                         $SystemConfigurationOptionDescriptionNew,
+		                                                                                         $SystemConfigurationOptionNameNew,
+																								 $SystemConfigurationOptionValueNew,
+		                                                                                         &$InstanceSystemConfiguration, $Debug);
 		protected     function        TeamDeleteByTeamId($TeamId, $Debug);
 		protected     function        TeamInsert($TeamDescription, $TeamName, $Debug);
 		protected     function        TeamLoadData(&$InstanceTeam);
@@ -264,6 +279,13 @@ class Page
 	public    $InputValueRegistrationId                             = "";
 	public    $InputValueRepeatPassword                             = "";
 	public    $InputValueRowCount                                   = "";
+	public    $InputValueSystemConfigurationOptionAcitve            = "";
+	public    $InputValueSystemConfigurationOptionDescription       = "";
+	public    $InputValueSystemConfigurationOptionName              = "";
+	public    $InputValueSystemConfigurationOptionNameRadio         = "";
+	public    $InputValueSystemConfigurationOptionNumber            = "";
+	public    $InputValueSystemConfigurationOptionNumberRadio       = "";
+	public    $InputValueSystemConfigurationOptionValue             = "";
 	public    $InputValueTeamDescription                            = "";
 	public    $InputValueTeamId                                     = "";
 	public    $InputValueTeamIdRadio                                = "";
@@ -338,6 +360,16 @@ class Page
 	public    $ReturnRegistrationDateYearClass                      = "";
 	public    $ReturnRegistrationIdClass                            = "";
 	public    $ReturnRegistrationIdText                             = "";
+	public    $ReturnSystemConfigurationOptionActiveClass           = "";
+	public    $ReturnSystemConfigurationOptionActiveText            = "";
+	public    $ReturnSystemConfigurationOptionDescriptionClass      = "";
+	public    $ReturnSystemConfigurationOptionDescriptionText       = "";
+	public    $ReturnSystemConfigurationOptionNameClass             = "";
+	public    $ReturnSystemConfigurationOptionNameText              = "";
+	public    $ReturnSystemConfigurationOptionNumberClass           = "";
+	public    $ReturnSystemConfigurationOptionNumberText            = "";
+	public    $ReturnSystemConfigurationOptionValueClass            = "";
+	public    $ReturnSystemConfigurationOptionValueText             = "";
 	public    $ReturnTeamDescriptionClass                           = "";
 	public    $ReturnTeamDescriptionText                            = "";
 	public    $ReturnTeamIdClass                                    = "";
@@ -1498,6 +1530,340 @@ class Page
 		}
  		$this->Session->SetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm);
 		$this->Session->SetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
+	}
+	
+	protected function SystemConfigurationDeleteBySystemConfigurationNumber($InstanceSystemConfiguration, $Debug)
+	{
+		if($InstanceSystemConfiguration != NULL)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->SystemConfigurationDeleteBySystemConfigurationNumber(
+				                                        $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
+				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_DELETE_SUCCESS");
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_DELETE_ERROR");
+		return Config::ERROR;	
+	}
+	
+	protected function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+	                                             $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueSystemConfigurationOptionActive      = $SystemConfigurationOptionActive;
+		$this->InputValueSystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;
+		$this->InputValueSystemConfigurationOptionName        = $SystemConfigurationOptionName;
+		$this->InputValueSystemConfigurationOptionValue       = $SystemConfigurationOptionValue;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
+		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
+		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionActiveClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionActive; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionActiveText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION
+		$arrayElements[1]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
+		$arrayElementsClass[1]        = &$this->ReturnSystemConfigurationOptionDescriptionClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->InputValueSystemConfigurationOptionDescription; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 100; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnSystemConfigurationOptionDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION', 
+				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[2]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
+		$arrayElementsClass[2]        = &$this->ReturnSystemConfigurationOptionClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[2]        = $this->InputValueSystemConfigurationOptionName; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 45; 
+		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsText[2]         = &$this->ReturnSystemConfigurationOptionNameText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 
+				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE
+		$arrayElements[3]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE;
+		$arrayElementsClass[3]        = &$this->ReturnSystemConfigurationOptionValueClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[3]        = $this->InputValueSystemConfigurationOptionValue; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 45; 
+		$arrayElementsNullable[3]     = TRUE;
+		$arrayElementsText[3]         = &$this->ReturnSystemConfigurationOptionValueText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE',
+				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->SystemConfigurationInsert($this->InputValueSystemConfigurationOptionActive,
+																	$this->InputValueSystemConfigurationOptionDescription,
+	                                                                $this->InputValueSystemConfigurationOptionName, 
+																	$this->InputValueSystemConfigurationOptionValue, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_INSERT_SUCCESS");
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("SYSTEM_CONFIGURATION_INSERT_EXISTS");
+				return Config::WARNING;
+			}
+		}
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_INSERT_ERROR");
+		return Config::ERROR;
+	}
+	
+    protected function SystemConfigurationLoadData($InstanceSystemConfiguration)
+	{
+		if($this->InstanceSystemConfiguration == NULL)
+			$this->Session->GetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
+		if($InstanceSystemConfiguration != NULL)
+		{
+			$this->InputValueRegisterDate                         = $InstanceSystemConfiguration->GetRegisterDate();
+			if($InstanceSystemConfiguration->GetSystemConfigurationActive())
+				$this->InputValueSystemConfigurationOptionActive = "checked";
+			$this->InputValueSystemConfigurationOptionDescription = $InstanceSystemConfiguration->GetSystemConfigurationOptionDescription();
+			$this->InputValueSystemConfigurationOptionName        = $InstanceSystemConfiguration->GetSystemConfigurationOptionName();
+			$this->InputValueSystemConfigurationOptionNumber      = $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber();
+			$this->InputValueSystemConfigurationOptionValue       = $InstanceSystemConfiguration->GetSystemConfigurationOptionValue();
+			return Config::SUCCESS;
+		}
+		else return Config::ERROR;	
+	}
+	
+	protected function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->SystemConfigurationSelect($Limit1, $Limit2,
+															            $ArrayInstanceSystemConfiguration,
+															            $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return Config::SUCCESS;
+		}
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
+		return Config::ERROR;
+	}
+	
+	protected function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+	                                                                            &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueSystemConfigurationOptionName = $SystemConfigurationOptionName;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[0]             = Config::FORM_SYSTEM_CONFIGURATION_OPTION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionNameText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
+				                                                                              $this->InputValueSystemConfigurationOptionName, 
+																						      $RowCount, $InstanceSystemConfiguration, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
+				$this->TeamLoadData($InstanceTeam);
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
+		return Config::ERROR;	
+	}
+	
+	protected function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+	                                                                              &$InstanceSystemConfiguration, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueSystemConfigurationOptionNumber = $SystemConfigurationOptionNumber;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_SYSTEM_CONFIGURATION_OPTION_NUMBER
+		$arrayElements[0]             = Config::FORM_SYSTEM_CONFIGURATION_OPTION_NUMBER;
+		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionNumberClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionNumber; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionNumberText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NUMBER', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionNumber(
+				                                                          $this->InputValueSystemConfigurationOptionNumber, 
+				                                                          $InstanceSystemConfiguration, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
+				$this->TeamLoadData($InstanceTeam);
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
+		return Config::ERROR;
+	}
+	
+	protected function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+		                                                                          $SystemConfigurationOptionDescriptionNew,
+		                                                                          $SystemConfigurationOptionNameNew,
+				   		 												          $SystemConfigurationOptionValueNew,
+		                                                                          &$InstanceSystemConfiguration, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueSystemConfigurationOptionActiveNew      = $SystemConfigurationOptionActiveNew;
+		$this->InputValueSystemConfigurationOptionDescriptionNew = $SystemConfigurationOptionDescriptionNew;
+		$this->InputValueSystemConfigurationOptionNameNew        = $SystemConfigurationOptionNameNew;
+		$this->InputValueSystemConfigurationOptionValueNew       = $SystemConfigurationOptionValueNew;
+		$this->InputFocus = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
+		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
+		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionActiveClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionActive; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionActiveText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION
+		$arrayElements[1]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
+		$arrayElementsClass[1]        = &$this->ReturnSystemConfigurationOptionDescriptionClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->InputValueSystemConfigurationOptionDescription; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 100; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnSystemConfigurationOptionDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION', 
+				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[2]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
+		$arrayElementsClass[2]        = &$this->ReturnSystemConfigurationOptionClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[2]        = $this->InputValueSystemConfigurationOptionName; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 45; 
+		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsText[2]         = &$this->ReturnSystemConfigurationOptionNameText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 
+				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE
+		$arrayElements[3]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE;
+		$arrayElementsClass[3]        = &$this->ReturnSystemConfigurationOptionValueClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[3]        = $this->InputValueSystemConfigurationOptionValue; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 45; 
+		$arrayElementsNullable[3]     = TRUE;
+		$arrayElementsText[3]         = &$this->ReturnSystemConfigurationOptionValueText;
+		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE',
+				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
+				                                                           $this->InputValueSystemConfigurationOptionActiveNew,
+		                                                                   $this->InputValueSystemConfigurationOptionDescriptionNew,
+		                                                                   $this->InputValueSystemConfigurationOptionNameNew,
+				   		 												   $this->InputValueSystemConfigurationOptionValueNew,
+		                                                                   $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), 
+				                                                           $Debug);
+			if($return == Config::SUCCESS)
+			{
+				if($this->InputValueSystemConfigurationOptionActiveNew != NULL)
+					$InstanceSystemConfiguration->SetSystemConfigurationOptionActive($this->InputValueSystemConfigurationOptionActiveNew);
+				$InstanceSystemConfiguration->SetSystemConfigurationOptionDescription(
+					                                     $this->InputValueSystemConfigurationOptionDescriptionNew);
+				$InstanceSystemConfiguration->SetSystemConfigurationOptionName($this->InputValueSystemConfigurationOptionNameNew);
+				if($this->InputValueSystemConfigurationOptionValueNew)
+					$InstanceSystemConfiguration->SetSystemConfigurationOptionValue($this->InputValueSystemConfigurationOptionValueNew);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
+				$this->SystemConfigurationLoadData($InstanceSystemConfiguration);
+				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_UPDATE_SUCCESS");
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			{
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return Config::WARNING;
+			}
+		}
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_UPDATE_ERROR");
+		return Config::ERROR;	
 	}
 	
 	protected function TeamDeleteByTeamId($InstanceTeam, $Debug)
@@ -4442,6 +4808,8 @@ class Page
 	{
 		if(isset($_POST[$Input . "_x"]) && isset($_POST[$Input . "_y"]))
 			return TRUE;
+		elseif(isset($_GET[$Input . "_x"]) && isset($_GET[$Input . "_y"]))
+			return TRUE;
 		else FALSE;
 	}
 	
@@ -4530,9 +4898,15 @@ class Page
 	public function CheckGetOrPostContainsKey($Key)
 	{
 		if($this->CheckGetContainsKey($Key) == Config::SUCCESS)
+		{
+			$_POST = $_GET;
 			return Config::SUCCESS;
+		}
 		elseif($this->CheckPostContainsKey($Key) == Config::SUCCESS)
+		{
+			$_GET = $_POST;
 			return Config::SUCCESS;
+		}
 		else return Config::ERROR;
 	}
 	

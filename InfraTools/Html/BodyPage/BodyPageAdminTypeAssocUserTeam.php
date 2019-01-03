@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN TYPE USER -->
+<!-- BODY_PAGE_ADMIN_TYPE_USER -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM; ?>" 

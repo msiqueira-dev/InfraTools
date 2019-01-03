@@ -49,8 +49,8 @@
                                value="<?php echo $this->InputValueCorporationName; ?>" maxlength="45" />
         </div>
     </div>
-    <!-- ACTIVE -->
-   <div class="DivContentBodyContainer">
+    <!-- FORM_FIELD_CORPORATION_ACITVE -->
+    <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('ACTIVE').":"; ?></label>
         </div>

@@ -26,7 +26,8 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminMonitoring extends PageAdmin
 {
-	public $ArrayCountry = NULL;
+	public $ArrayInstanceMonitoring = NULL;
+	public $InstanceMonitoring      = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)

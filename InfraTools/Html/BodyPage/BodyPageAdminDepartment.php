@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN DEPARTMENT -->
+<!-- BODY_PAGE_ADMIN_DEPARTMENT -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT; ?>" 
@@ -73,67 +73,67 @@
 			</div>
 		</form>
 		<?php
-		//CORPORATION UPDATE
+		//PAGE_ADMIN_CORPORATION_UPDATE
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE)) . ".php");
 		}
-		//CORPORATION VIEW
+		//PAGE_ADMIN_CORPORATION_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
 		}
-		//CORPORATION VIEW USERS
+		//PAGE_ADMIN_CORPORATION_VIEW_USERS
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS)) . ".php");
 		}
-		//DEPARTMENT LIST
+		//PAGE_ADMIN_DEPARTMENT_LIST
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST)) . ".php");
 		}
-		//DEPARTMENT REGISTER
+		//PAGE_ADMIN_DEPARTMENT_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER)) . ".php");
 		}
-		//DEPARTMENT SELECT
+		//PAGE_ADMIN_DEPARTMENT_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM  . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT)) . ".php");
 		}
-		//DEPARTMENT UPDATE
+		//PAGE_ADMIN_DEPARTMENT_UPDATE
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE)) . ".php");
 		}
-		//DEPARTMENT VIEW
+		//PAGE_ADMIN_DEPARTMENT_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
 		}
-		//DEPARTMENT VIEW USERS
+		//PAGE_ADMIN_DEPARTMENT_VIEW_USERS
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS)) . ".php");
 		}
-		//TYPE USER VIEW
+		//PAGE_ADMIN_TYPE_USER_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)) . ".php");
 		}
-		//USER VIEW
+		//PAGE_ADMIN_USER_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

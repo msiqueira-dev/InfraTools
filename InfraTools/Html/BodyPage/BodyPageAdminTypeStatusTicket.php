@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN TYPE STATUS TICKET -->
+<!-- BODY_PAGE_ADMIN_TYPE_STATUS_TICKET -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET; ?>" 
@@ -73,38 +73,38 @@
 			</div>
 		</form>
 		<?php 
-		//LIST
+		//PAGE_ADMIN_TYPE_STATUS_TICKET_LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST)) 
-						                                          . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", 
+																  ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST)) . ".php");
 		}
-		//REGISTER
+		//PAGE_ADMIN_TYPE_STATUS_TICKET_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_REGISTER))
-						                                          . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", 
+																  ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_REGISTER)) . ".php");
 		}
-		//SELECT
+		//PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT)) . ".php");
 		}
-		//UPDATE
+		//PAGE_ADMIN_TYPE_STATUS_TICKET_UPDATE
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_UPDATE))                                            . ".php");
 		}
-		//VIEW
+		//PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW)) 
-						                                          . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", 
+																  ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_VIEW)) . ".php");
 		}
 		?>
     </div>

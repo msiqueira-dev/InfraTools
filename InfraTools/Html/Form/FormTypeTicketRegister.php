@@ -14,7 +14,7 @@
 <!-- FORM TYPE TICKET REGISTER -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_REGISTER; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_REGISTER; ?>" method="post">
-    <!-- NAME -->
+    <!-- TYPE_TICKET_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_DESCRIPTION').":"; ?></label>

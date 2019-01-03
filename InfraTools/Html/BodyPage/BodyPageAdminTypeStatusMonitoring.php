@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN TYPE_STATUS_MONITORING -->
+<!-- BODY_PAGE_ADMIN_TYPE_STATUS_MONITORING -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING; ?>" 
@@ -73,31 +73,31 @@
 			</div>
 		</form>
 		<?php 
-		//TYPE_STATUS_MONITORING LIST
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_LIST)) . ".php");
 		}
-		//TYPE_STATUS_MONITORING REGISTER
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_REGISTER)) . ".php");
 		}
-		//TYPE_STATUS_MONITORING SELECT
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_SELECT)) . ".php");
 		}
-		//TYPE_STATUS_MONITORING UPDATE
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDATE
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDATE)) . ".php");
 		}
-		//TYPE_STATUS_MONITORING VIEW
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

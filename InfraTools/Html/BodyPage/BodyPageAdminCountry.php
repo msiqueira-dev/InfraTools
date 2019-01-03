@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN COUNTRY -->
+<!-- BODY_PAGE_ADMIN_COUNTRY -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_COUNTRY; ?>" 
@@ -47,7 +47,7 @@
             </div>
 		</fom>
 		<?php 
-		//COUNTRY LIST
+		//PAGE_ADMIN_COUNTRY_LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

@@ -26,7 +26,7 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminCountry extends PageAdmin
 {
-	public $ArrayCountry = NULL;
+	public $ArrayInstanceCountry = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -53,7 +53,7 @@ class PageAdminCountry extends PageAdmin
 		}
 		if($_POST == NULL || !isset($_POST[ConfigInfraTools::FORM_COUNTRY_LIST]))
 			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
-		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayCountry), $this->InputValueHeaderDebug);
+		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayInstanceCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN TYPE USER -->
+<!-- BODY_PAGE_ADMIN_TYPE_USER -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER; ?>" 
@@ -73,37 +73,37 @@
 			</div>
 		</form>
 		<?php 
-		//TYPE_USER_LIST
+		//PAGE_ADMIN_TYPE_USER_LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST)) . ".php");
 		}
-		//TYPE_USER_REGISTER
+		//PAGE_ADMIN_TYPE_USER_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_REGISTER)) . ".php");
 		}
-		//TYPE_USER_SELECT
+		//PAGE_ADMIN_TYPE_USER_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT)) . ".php");
 		}
-		//TYPE_USER_UPDATE
+		//PAGE_ADMIN_TYPE_USER_UPDATE
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE)) . ".php");
 		}
-		//TYPE_USER_VIEW
+		//PAGE_ADMIN_TYPE_USER_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)) . ".php");
 		}
-		//TYPE_USER_VIEW_USERS
+		//PAGE_ADMIN_TYPE_USER_VIEW_USERS
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

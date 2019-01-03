@@ -83,6 +83,7 @@ class ConfigInfraTools extends Config
 	const PAGE_ADMIN_SERVICE_SELECT                                     = "Page_Admin_Service_Select";
 	const PAGE_ADMIN_SERVICE_UPDATE                                     = "Page_Admin_Service_Update";
 	const PAGE_ADMIN_SERVICE_VIEW                                       = "Page_Admin_Service_View";
+	const PAGE_ADMIN_SERVICE_VIEW_LIST_USERS                            = "Page_Admin_Service_View_List_Users";
 	const PAGE_ADMIN_SERVICE_VIEW_ASSOCIATE                             = "Page_Admin_Service_View_Associate";
 	const PAGE_ADMIN_SERVICE_VIEW_MONITORING_LIST                       = "Page_Admin_Service_View_Monitoring_List";
 	const PAGE_ADMIN_SERVICE_VIEW_MONITORING_REGISTER                   = "Page_Admin_Service_View_Monitoring_Register";
@@ -213,9 +214,6 @@ class ConfigInfraTools extends Config
 	const FORM_DEPARTMENT_VIEW_UPDATE_SUBMIT                            = "FormDepartmentViewUpdateSubmit";
 	const FORM_DEPARTMENT_VIEW_USERS                                    = "FormDepartmentViewUsers";
 	const FORM_FIELD_ID                                                 = "FormInputId";
-	const FORM_FIELD_RADIO_DEPARTMENT                                   = "FormFieldRadioDepartment";
-	const FORM_FIELD_RADIO_DEPARTMENT_NAME                              = "FormFieldRadioDepartmentName";
-	const FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME         = "FormFieldRadioDepartmentNameAndCorporationName";
 	const FORM_FIELD_SERVICE_ACTIVE                                     = "FormFieldServiceActive";
 	const FORM_FIELD_SERVICE_CORPORATION                                = "FormFieldServiceCorporation";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                     = "FormFieldServiceCorporationCanChange";
@@ -249,8 +247,6 @@ class ConfigInfraTools extends Config
 	const FORM_INSTALL_IMPORT_SUBMIT_HIDDEN                             = "FormInstallImportSubmitHidden";
 	const FORM_INSTALL_NEW_SUBMIT                                       = "FormInstallNewSubmit";
 	const FORM_INSTALL_REINSTALL_SUBMIT                                 = "FormInstallReinstallSubmit";
-	const FORM_LIST_INPUT_LIMIT_ONE                                     = "FormListInputLimitOne";
-	const FORM_LIST_INPUT_LIMIT_TWO                                     = "FormListInputLimitTwo";
 	const FORM_SERVICE                                                  = "FormService";
 	const FORM_SERVICE_LIST                                             = "FormServiceList";
 	const FORM_SERVICE_LIST_BACK                                        = "FormServiceListBack";

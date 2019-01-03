@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about country.
 Functions: 
-			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, $MySqlConnection);
+			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -72,10 +72,10 @@ class FacedePersistenceCountry
         return self::$Instance;
     }
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, $MySqlConnection)
+	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayCountry = array();
+		$ArrayInstanceCountry = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -91,14 +91,14 @@ class FacedePersistenceCountry
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$Country = $this->Factory->CreateCountry
+						$InstanceCountry = $this->Factory->CreateCountry
 							                              ($row[Config::TABLE_COUNTRY_FIELD_ABBREVIATION],
 							                               $row[Config::TABLE_COUNTRY_FIELD_NAME], 
 												      	   $row[Config::TABLE_COUNTRY_FIELD_REGION_CODE], 
 														   $row[Config::TABLE_FIELD_REGISTER_DATE]);
-						array_push($ArrayCountry, $Country);
+						array_push($ArrayInstanceCountry, $InstanceCountry);
 					}
-					if(!empty($ArrayCountry))
+					if(!empty($ArrayInstanceCountry))
 						return Config::SUCCESS;
 					else 
 					{

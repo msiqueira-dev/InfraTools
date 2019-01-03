@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN CORPORATION -->
+<!-- BODY_PAGE_ADMIN_CORPORATION -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_CORPORATION; ?>" 
@@ -73,31 +73,31 @@
 			</div>
 		</form>
 		<?php
-		//CORPORATION LIST
+		//PAGE_ADMIN_CORPORATION_LIST
 		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_LIST)) . ".php");
 		}
-		//CORPORATION REGISTER
+		//PAGE_ADMIN_CORPORATION_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER)) . ".php");
 		}
-		//CORPORATION SELECT
+		//PAGE_ADMIN_CORPORATION_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM  . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT)) . ".php");
 		}
-		//CORPORATION UPDATE
+		//PAGE_ADMIN_CORPORATION_UPDATE
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE)) . ".php");
 		}
-		//CORPORATION VIEW
+		//PAGE_ADMIN_CORPORATION_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 

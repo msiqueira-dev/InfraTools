@@ -1,4 +1,4 @@
-<!-- BODY TYPE TICKET LIST -->
+<!-- FORM_TYPE_TICKET_LIST -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_LIST; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_LIST; ?>" method="post" >
 <div class="DivTableGenericHeader">

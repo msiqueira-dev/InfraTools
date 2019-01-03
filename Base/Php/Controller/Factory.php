@@ -34,6 +34,7 @@ Methods:
 			public    function CreateFacedePersistenceHistoryTicket();
 			public    function CreateFacedePersistenceNotification();
 			public    function CreateFacedePersistenceStatusTicket();
+			public    function CreateFacedePersistenceSystemConfiguration();
 			public    function CreateFacedePersistenceTeam();
 			public    function CreateFacedePersistenceTicket();
 			public    function CreateFacedePersistenceTypeAssocUserTeam();
@@ -54,6 +55,7 @@ Methods:
 			public    function CreatePersistence();
 			public    function CreateSession();
 			public    function CreateSessionHandlerCustom();
+			public    function CreateSystemConfiguration();
 			public    function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
 			public    function CreateTechInfo();
 			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
@@ -343,6 +345,14 @@ class Factory
 		return FacedePersistenceStatusTicket::__create();
 	}
 	
+	public function CreateFacedePersistenceSystemConfiguration()
+	{
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceSystemConfiguration.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceSystemConfiguration');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceSystemConfiguration.php");
+		return FacedePersistenceSystemConfiguration::__create();
+	}
+	
 	public function CreateFacedePersistenceTeam()
 	{
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTeam.php"))
@@ -524,6 +534,18 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class SessionHandlerCustom');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "SessionHandlerCustom.php");
 		return new SessionHandler();
+	}
+	
+	public function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
+							                  $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+											  $SystemConfigurationOptionValue)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class SystemConfiguration');
+		else include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
+		return SystemConfiguration::__create($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
+							                 $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+											 $SystemConfigurationOptionValue);
 	}
 	
 	public function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)

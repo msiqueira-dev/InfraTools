@@ -26,7 +26,8 @@ if (!class_exists("PageInfraTools"))
 
 class PageNotification extends PageInfraTools
 {
-	public $ArrayCountry = NULL;
+	public $ArrayInstanceNotification = NULL;
+	public $InstanceNotification      = NULL;
 	
 	/* Singleton */
 	protected static $Instance;

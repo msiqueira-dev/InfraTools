@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN TEAM -->
+<!-- BODY_PAGE_ADMIN_TEAM -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_TEAM; ?>" 
@@ -98,12 +98,6 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_LIST)) . ".php");
 		}
-		//PAGE_ADMIN_TEAM_VIEW_LIST_USERS
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW_LIST_USERS)
-		{
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW_LIST_USERS)) . ".php");
-		}
 		//PAGE_ADMIN_TEAM_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT)
 		{
@@ -121,6 +115,12 @@
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_TEAM_VIEW_LIST_USERS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW_LIST_USERS)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW_LIST_USERS)) . ".php");
 		}
 		//PAGE_ADMIN_TYPE_USER_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)

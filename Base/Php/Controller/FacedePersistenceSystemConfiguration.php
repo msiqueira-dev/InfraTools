@@ -13,19 +13,26 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about type of association betweeen a user and a team.
 Functions: 
-			public function SystemConfigurationDeleteByOptionNumber($SystemConfigurationOptionNumber, $Debug,
-			                                                       $Debug, $MySqlConnection);
-			public function SystemConfigurationInsert($TypeAssocUserTeamDescription, $Debug,
-			                                          $Debug, $MySqlConnection);
-			public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, 
-			                                          &$RowCount, $Debug, $Debug, $MySqlConnection);
-			public function SystemConfigurationSelectByOptionDescription($SystemConfigurationOptionDescription, 
-			                                                             &$InstanceSystemConfiguration, $Debug,
-			                                                             $Debug, $MySqlConnection);
-			public function SystemConfigurationSelectByOptionNumber($SystemConfigurationOptionNumber, &$InstanceSystemConfiguration, $Debug,
-			                                                        $Debug, $MySqlConnection);
-			public function SystemConfigurationUpdateByOptionNumber($SystemConfiguration, $SystemConfiguration, $Debug,
-			                                                        $Debug, $MySqlConnection);
+			public function SystemConfigurationDeleteBySystemConfigurationNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                                     $MySqlConnection = NULL);
+			public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+													  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
+													  $MySqlConnection);
+			public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+			                                          $MySqlConnection);
+			public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, $MySqlConnection);
+			public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+																					 &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+																					 $MySqlConnection);
+			public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+																					   &$InstanceSystemConfiguration, $Debug,
+																					   $MySqlConnection);
+			public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+																					   $SystemConfigurationOptionDescriptionNew,
+																					   $SystemConfigurationOptionNameNew,
+																					   $SystemConfigurationOptionValueNew,
+																					   $SystemConfigurationOptionNumber, $Debug,
+																					   $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -42,7 +49,7 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
-class FacedePersistenceAssocUserResponsible
+class FacedePersistenceSystemConfiguration
 {	
 	/* Instance */
 	protected static $Instance;
@@ -84,14 +91,14 @@ class FacedePersistenceAssocUserResponsible
         return self::$Instance;
     }
 	
-	public function SystemConfigurationDeleteByOptionNumber($SystemConfigurationOptionNumber, $Debug, $MySqlConnection)
+	public function SystemConfigurationDeleteBySystemConfigurationNumber($SystemConfigurationOptionNumber, $Debug, $MySqlConnection = NULL)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlSystemConfigurationDeleteByOptionNumber');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationDeleteByOptionNumber());
+				Persistence::ShowQuery('SqlSystemConfigurationDeleteBySystemConfigurationNumber');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationDeleteBySystemConfigurationNumber());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $SystemConfigurationOptionNumber);
@@ -102,7 +109,7 @@ class FacedePersistenceAssocUserResponsible
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED_NOT_FOUND;
+					return Config::MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED_NOT_FOUND;
 				}
 				else
 				{
@@ -110,7 +117,7 @@ class FacedePersistenceAssocUserResponsible
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
 					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
 						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED;
+					else return Config::MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED;
 				}
 			}
 			else
@@ -124,7 +131,8 @@ class FacedePersistenceAssocUserResponsible
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function SystemConfigurationInsert($TypeAssocUserTeamDescription, $Debug, $MySqlConnection)
+	public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+											  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -134,7 +142,8 @@ class FacedePersistenceAssocUserResponsible
 			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
+				$stmt->bind_param("isss", $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription, 
+								          $SystemConfigurationOptionName, $SystemConfigurationOptionValue);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
@@ -142,7 +151,7 @@ class FacedePersistenceAssocUserResponsible
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_CORPORATION_INSERT_FAILED;
+					return Config::MYSQL_SYSTEM_CONFIGURATION_INSERT_FAILED;
 				}
 			}
 			else
@@ -174,9 +183,13 @@ class FacedePersistenceAssocUserResponsible
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceSystemConfiguration = $this->Factory->CreateTypeAssocUserTeam
+						$InstanceSystemConfiguration = $this->Factory->CreateSystemConfiguration
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);	
+														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE],
+														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION],
+														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME],
+														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER],
+														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE]);	
 						array_push($ArrayInstanceSystemConfiguration, $InstanceSystemConfiguration);
 					}
 					if(!empty($ArrayInstanceSystemConfiguration))
@@ -205,8 +218,46 @@ class FacedePersistenceAssocUserResponsible
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
-	public function SystemConfigurationSelectByOptionDescription($SystemConfigurationOptionDescription, &$InstanceSystemConfiguration, 
-																 $Debug, $MySqlConnection)
+	
+	public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, $MySqlConnection)
+	{
+		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceSystemConfiguration = array();
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlSystemConfigurationSelectNoLimit');
+			if($result = $MySqlConnection->query(Persistence::SqlSystemConfigurationSelectNoLimit()))
+			{
+				while ($row = $result->fetch_assoc()) 
+				{
+					$InstanceSystemConfiguration = $this->Factory->CreateSystemConfiguration
+													($row[Config::TABLE_FIELD_REGISTER_DATE],
+													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE],
+													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION],
+													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME],
+													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER],
+													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE]);	
+					array_push($ArrayInstanceSystemConfiguration, $InstanceSystemConfiguration);
+				}
+				if(!empty($ArrayInstanceSystemConfiguration))
+					return Config::SUCCESS;
+				else return Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_FETCH_FAILED;
+			}
+			else 
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				$return = Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_FAILED;
+			}
+			return $return;
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+																			 &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+																			 $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)

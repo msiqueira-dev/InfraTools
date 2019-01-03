@@ -33,7 +33,7 @@
 		</div>
 	</div>
 <?php
-	if(is_array($this->ArrayCountry))
+	if(is_array($this->ArrayInstanceCountry))
 	{
 		echo "<input type='hidden' value='$this->InputLimitOne' 
 					 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'
@@ -76,7 +76,7 @@
 							   . "Icons/IconInfraToolsArrowForward28.png'\" />";
 		echo "</th>";
 		echo "</tr>";
-		foreach($this->ArrayCountry as $key=>$country)
+		foreach($this->ArrayInstanceCountry as $key=>$country)
 		{
 			echo "<tr>";
 			echo "<td>" . $country->GetCountryName()          . "</td>";

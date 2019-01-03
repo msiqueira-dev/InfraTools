@@ -208,6 +208,24 @@
 					</div>
 				</div>
 			</a>
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION') ?>">
+				<div class="DivContentBodyContainersBox">
+					<div class="DivContentBodyContainersBoxIcon">
+						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsSystemPreferences48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsSystemPreferences48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsSystemPreferences48x48.png'; ?>'" 
+                             alt="SystemConfiguration" />
+					</div>
+					<div class="DivContentBodyContainersBoxText">
+						<i>
+							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_SYSTEM_CONFIGURATION'); ?> 
+						</i>
+					</div>
+				</div>
+			</a>
 			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TECH_INFO'); ?>" 
 					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TECH_INFO') ?>">
 				<div class="DivContentBodyContainersBox">

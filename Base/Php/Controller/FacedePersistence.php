@@ -84,8 +84,27 @@ Functions:
 																				  $DepartmentName, $Debug,
 																				  $MySqlConnection = NULL, 
 																				  $CloseConnectaion = TRUE);
-			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug,
+			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug,
 			                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationDeleteBySystemConfigurationNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+													  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
+													  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+			                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+																					 &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+																					 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+																					   &$InstanceSystemConfiguration, $Debug,
+																					   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+																					   $SystemConfigurationOptionDescriptionNew,
+																					   $SystemConfigurationOptionNameNew,
+																					   $SystemConfigurationOptionValueNew,
+																					   $SystemConfigurationOptionNumber, $Debug,
+																					   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TeamDeleteByTeamDescription($TeamDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TeamDeleteByTeamId($TeamId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE,
@@ -768,20 +787,138 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, 
+	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, 
 								  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceCountry = $this->Factory->CreateFacedePersistenceCountry();
-			$return = $instanceFacedePersistenceCountry->CountrySelect($Limit1, $Limit2, $ArrayCountry, $RowCount, 
+			$return = $instanceFacedePersistenceCountry->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, $RowCount, 
 																	   $Debug, $MySqlConnection);
 		
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
+	}
+	
+	public function SystemConfigurationDeleteBySystemConfigurationNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                             $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationDeleteBySystemConfigurationNumber(
+				                                                                            $SystemConfigurationOptionNumber, 
+				                                                                            $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+											  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
+											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationInsert(
+				                                                                            $SystemConfigurationOptionActive,
+				                                                                            $SystemConfigurationOptionDescription,
+				                                                                            $SystemConfigurationOptionName, 
+				                                                                            $SystemConfigurationOptionValue, 
+				                                                                            $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelect($Limit1, $Limit2,
+				                                                                               $ArrayInstanceSystemConfiguration,
+				                                                                               $RowCount, 
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+																			 &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+																			 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
+				                                                                               $SystemConfigurationOptionName,
+				                                                                               $ArrayInstanceSystemConfiguration,
+				                                                                               $RowCount, 
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+																			   &$InstanceSystemConfiguration, $Debug,
+																			   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelectBySystemConfigurationOptionNumber(
+				                                                                               $SystemConfigurationOptionNumber,
+				                                                                               $InstanceSystemConfiguration,
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+																			   $SystemConfigurationOptionDescriptionNew,
+																			   $SystemConfigurationOptionNameNew,
+																			   $SystemConfigurationOptionValueNew,
+																			   $SystemConfigurationOptionNumber, $Debug,
+																			   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
+				                                                                               $SystemConfigurationOptionActiveNew,
+																			                   $SystemConfigurationOptionDescriptionNew,
+																			                   $SystemConfigurationOptionNameNew,
+ 																			                   $SystemConfigurationOptionValueNew,
+				                                                                               $SystemConfigurationOptionNumber,
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
 	public function TeamDeleteByTeamDescription($TeamDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)

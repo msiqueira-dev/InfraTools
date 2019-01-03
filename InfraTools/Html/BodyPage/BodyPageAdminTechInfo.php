@@ -1,4 +1,4 @@
-<!-- BODY PAGE ADMIN TECH INFO -->z
+<!-- BODY_PAGE_ADMIN_TECH_INFO -->z
 <div class="DivBody">
     <div class="DivContentBody">
     <form name="<?php echo ConfigInfraTools::FORM_TECH_INFO; ?>" 

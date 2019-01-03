@@ -84,21 +84,27 @@ if(is_array($this->ArrayInstanceInfraToolsService))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID . "' method='post' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT . "' 
-									   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT . "' 
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' method='get' />
+					<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
+			  					   id='"   . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
+								   value='" . $ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' />
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "' 
+									   id='"   . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "' 
 									   value='" . $infraToolsService->GetServiceId() . "' 
 									   title='" . $infraToolsService->GetServiceId() . "' />
 			  	</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_NAME_AND_ID . "' method='post' />
-			    	<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT . "' 
-			  					   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT . "' 
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' method='get' />
+					<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
+			  					   id='"   . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
+								   value='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' />
+			    	<input type='hidden' name='" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "' 
+			  					   id='"   . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "' 
 								   value='" . $infraToolsService->GetServiceId() . "' />
 								   
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_NAME_AND_ID_SUBMIT . "' 
-		                           id='"   . ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_NAME_AND_ID_SUBMIT . "' 
+		      		<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_SERVICE_NAME . "' 
+		                           id='"   . ConfigInfraTools::FORM_FIELD_SERVICE_NAME . "' 
 							       value='" . $infraToolsService->GetServiceName() . "' 
 								   title='" . $infraToolsService->GetServiceName() . "' />
 				</form>
