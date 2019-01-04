@@ -20,7 +20,7 @@
 </div>
 <!-- FORM SERVICE UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" method="POST" >
+      id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
     <!-- SERVICE ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">

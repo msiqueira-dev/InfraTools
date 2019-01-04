@@ -77,11 +77,11 @@ class En
 	const FILL_REQUIRED_FIELDS                                      = "Please fill the necessary fields";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Active";
 	const FORM_FIELD_EDIT                                           = "Edit";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_ACTIVE                    = "Active";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_DESCRIPTION               = "Description";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_NAME                      = "Name";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_NUMBER                    = "Number";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_VALUE                     = "Value";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE             = "Active";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION        = "Description";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "Name";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "Number";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "Value";
 	const FORM_INVALID_CAPTCHA                                      = "The captcha value does not match";
 	const FORM_INVALID_CORPORATION_NAME                             = "Invalid Corporation Name";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantity of characters exceeds the maximum allowed for "
@@ -271,6 +271,7 @@ class En
                                                                     . "and a location that can be either a estate or a county.";
 	const NAME                                                      = "Name";
 	const NOT_LOGGED_IN                                             = "You must be authenticated to access this page";
+	const NULL_EMPTY                                                = "No value associated";
 	const NULL_OPTION                                               = "Please select an option";
 	const PAGE_ABOUT                                                = "About";
 	const PAGE_ABOUT_ROBOTS                                         = "ALL";
@@ -729,7 +730,7 @@ class En
 	const SYSTEM_CONFIGURATION_DELETE_ERROR                         = "Error deleting system configuration";
 	const SYSTEM_CONFIGURATION_DELETE_SUCCESS                       = "System configuration deleted succesfully";
 	const SYSTEM_CONFIGURATION_INSERT_ERROR                         = "Error inserting system configuration";
-	const SYSTEM_CONFIGURATION_INSERT_EXISTS                        = "A system configuration with that name already exists";
+	const SYSTEM_CONFIGURATION_INSERT_EXISTS                        = "A system configuration with that name an description already exists";
 	const SYSTEM_CONFIGURATION_INSERT_SUCCESS                       = "System configuration inserted succesfully";
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "System configuration not found";
 	const SYSTEM_CONFIGURATION_UPDATE_ERROR                         = "Error updating system configuration";

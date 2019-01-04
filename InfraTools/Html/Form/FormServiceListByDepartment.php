@@ -1,5 +1,6 @@
 <!-- BODY SERVICE LIST BY DEPARTMENT -->
-<form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT; ?>' method="GET">
+<form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT; ?>' 
+      method="<?php echo $this->InputValueFormMethod ?>" >
 	<!-- CORPORATION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
@@ -98,7 +99,7 @@ if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanc
 		</div>
 	</div>
 	<?php
-	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT . "' method='get' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT . "' method='" . $this->InputValueFormMethod . "' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'

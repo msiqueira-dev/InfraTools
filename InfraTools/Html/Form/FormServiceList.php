@@ -33,7 +33,7 @@
 <?php
 if(is_array($this->ArrayInstanceInfraToolsService))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST . "' method='get' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST . "' method='" . $this->InputValueFormMethod . "' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -84,7 +84,7 @@ if(is_array($this->ArrayInstanceInfraToolsService))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' method='get' />
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' method='" . $this->InputValueFormMethod . "' />
 					<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
 			  					   id='"   . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
 								   value='" . $ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' />
@@ -95,7 +95,7 @@ if(is_array($this->ArrayInstanceInfraToolsService))
 			  	</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' method='get' />
+			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' method='" . $this->InputValueFormMethod . "' />
 					<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
 			  					   id='"   . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' 
 								   value='" . ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT . "' />

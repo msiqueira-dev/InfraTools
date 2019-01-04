@@ -12,7 +12,7 @@
 .DivContentBodyContainerService{width:1000px !important;min-height:50px;margin-top:15px;}
 .DivContentBodyContainerService input[type="radio"]{width:20px;height:15px;float:left;margin-left:0px;}
 .DivContentBodyContainerService input[type="text"], .DivContentBodyContainerSubmit input[type="text"]{width:350px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
-.DivContentBodyContainerRadio{height:25px !important;max-width: 100px !important;}
+.DivContentBodyContainerRadio{max-width: 100px !important;}
 .DivContentBodyContainerServiceInput{height:95px;}
 .DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
 .DivContentBody form{min-height:80px;}

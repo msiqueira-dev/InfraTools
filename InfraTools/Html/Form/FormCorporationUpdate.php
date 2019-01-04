@@ -57,8 +57,8 @@
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="checkbox" 
-			           name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE; ?>" 
-				       value="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE; ?>"
+			           name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>" 
+				       value="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>"
 				        <?php echo $this->InputValueCorporationActive; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_CORPORATION_UPDATE; ?>',

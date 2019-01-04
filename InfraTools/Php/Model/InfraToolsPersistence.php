@@ -48,10 +48,10 @@ Methods:
 		public static function SqlServiceSelectByServiceTypeNoLimit();
 		public static function SqlServiceSelectByServiceTypeOnUserContext();
 		public static function SqlServiceSelectByServiceTypeOnUserContextNoLimit();
-		public static function SqlServiceSelectByTypeAssocUserService();
-		public static function SqlServiceSelectByTypeAssocUserServiceNoLimit();
-		public static function SqlServiceSelectByTypeAssocUserServiceOnUserContext();
-		public static function SqlServiceSelectByTypeAssocUserServiceOnUserContextNoLimit();
+		public static function SqlServiceSelectByTypeAssocUserServiceDescription();
+		public static function SqlServiceSelectByTypeAssocUserServiceDescriptionNoLimit();
+		public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContext();
+		public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit();
 		public static function SqlServiceSelectByUser();
 		public static function SqlServiceSelectByUserNoLimit();
 		public static function SqlServiceSelectNoLimit();
@@ -1139,7 +1139,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "    ";
 	}
 	
-	public static function SqlServiceSelectByTypeAssocUserService()
+	public static function SqlServiceSelectByTypeAssocUserServiceDescription()
 	{
 		return "SELECT "                                                                                                    . "   " 
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
@@ -1182,7 +1182,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByTypeAssocUserServiceNoLimit()
+	public static function SqlServiceSelectByTypeAssocUserServiceDescriptionNoLimit()
 	{
 		return "SELECT "                                                                                                    . "   " 
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
@@ -1222,7 +1222,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "   ";
 	}
 	
-	public static function SqlServiceSelectByTypeAssocUserServiceOnUserContext()
+	public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1266,7 +1266,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 		
-	public static function SqlServiceSelectByTypeAssocUserServiceOnUserContextNoLimit()
+	public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "

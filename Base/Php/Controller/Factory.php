@@ -55,7 +55,9 @@ Methods:
 			public    function CreatePersistence();
 			public    function CreateSession();
 			public    function CreateSessionHandlerCustom();
-			public    function CreateSystemConfiguration();
+			public    function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+							                             $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+											             $SystemConfigurationOptionValue);
 			public    function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
 			public    function CreateTechInfo();
 			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
@@ -536,16 +538,18 @@ class Factory
 		return new SessionHandler();
 	}
 	
-	public function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
+	public function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 							                  $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
 											  $SystemConfigurationOptionValue)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class SystemConfiguration');
 		else include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
-		return SystemConfiguration::__create($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
-							                 $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
-											 $SystemConfigurationOptionValue);
+		if(!isset($SystemConfigurationOptionActive))
+			$SystemConfigurationOptionActive = FALSE;
+		return  new SystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+										$SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+										$SystemConfigurationOptionValue);
 	}
 	
 	public function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)

@@ -13,7 +13,7 @@
 <!-- FORM SERVICE VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW; ?>" 
-      class="DivFormServiceView" method="get" >
+      class="DivFormServiceView" method="<?php echo $this->InputValueFormMethod ?>" >
     <!-- SERVICE ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">

@@ -20,7 +20,7 @@ Get / Set:
 			public function SetSystemConfigurationOptionName($SystemConfigurationOptionName);
 			public function SetSystemConfigurationOptionValue($SystemConfigurationOptionValue);
 Methods:
-			public function UpdateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
+			public function UpdateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, SystemConfigurationOptionDescription,
 							                          $SystemConfigurationOptionName, $SystemConfigurationOptionValue);
 **************************************************************************/
 
@@ -29,13 +29,10 @@ class SystemConfiguration
 	/* Properties */
 	protected $RegisterDate                          = NULL;
 	protected $SystemConfigurationOptionActive       = NULL;
-	protected $SystemConfigurationOptionDescritpion  = NULL;
+	protected $SystemConfigurationOptionDescription = NULL;
 	protected $SystemConfigurationOptionName         = NULL;
 	protected $SystemConfigurationOptionNumber       = NULL;
 	protected $SystemConfigurationOptionValue        = NULL;
-	
-	/* Instance */
-	protected static $Instance;
 
 	/* Clone */
 	public function __clone()
@@ -44,40 +41,27 @@ class SystemConfiguration
 	}
 	
 	/* Constructor */
-	public function __construct($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
+	public function __construct($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 							    $SystemConfigurationOptionName, $SystemConfigurationOptionNumber, $SystemConfigurationOptionValue) 
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($SystemConfigurationOptionActive != NULL)
+		if(!is_null($SystemConfigurationOptionActive))
 			$this->SystemConfigurationOptionActive = $SystemConfigurationOptionActive;
 		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_ACTIVE);
-		if($SystemConfigurationOptionDescritpion != NULL)
-			$this->SystemConfigurationOptionDescritpion = $SystemConfigurationOptionDescritpion;
+		if(!is_null($SystemConfigurationOptionDescription))
+			$this->SystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;
 		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION);
-		if($SystemConfigurationOptionName != NULL)
+		if(!is_null($SystemConfigurationOptionName))
 			$this->SystemConfigurationOptionName = $SystemConfigurationOptionName;
 		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_NAME);
-		if($SystemConfigurationOptionNumber != NULL)
+		if(!is_null($SystemConfigurationOptionNumber))
 			$this->SystemConfigurationOptionNumber = $SystemConfigurationOptionNumber;
 		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_NUMBER);
-		if($SystemConfigurationOptionValue != NULL)
+		if(!is_null($SystemConfigurationOptionValue))
 			$this->SystemConfigurationOptionValue = $SystemConfigurationOptionValue;
 	}
-	
-	/* Singleton */
-	public static function __create($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
-							        $SystemConfigurationOptionName, $SystemConfigurationOptionNumber, $SystemConfigurationOptionValue)
-    {
-        if (!isset(self::$Instance)) 
-		{
-            $class = __CLASS__;
-            self::$Instance = new $class($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
-							             $SystemConfigurationOptionName, $SystemConfigurationOptionNumber, $SystemConfigurationOptionValue);
-        }
-        return self::$Instance;
-    }
 	
 	/* GET */
 	public function GetRegisterDate()
@@ -131,15 +115,15 @@ class SystemConfiguration
 	}
 	
 	/* METHODS */
-	public function UpdateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescritpion,
+	public function UpdateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 							                  $SystemConfigurationOptionName, $SystemConfigurationOptionValue)	
 	{
 		if($RegisterDate != NULL)
 			$this->RegisterDate  = $RegisterDate;
 		if($SystemConfigurationOptionActive != NULL)
 			$this->SystemConfigurationOptionActive = $SystemConfigurationOptionActive;
-		if($SystemConfigurationOptionDescritpion != NULL)
-			$this->SystemConfigurationOptionDescritpion = $SystemConfigurationOptionDescritpion;
+		if($SystemConfigurationOptionDescription != NULL)
+			$this->SystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;
 		if($SystemConfigurationOptionName != NULL)
 			$this->SystemConfigurationOptionName = $SystemConfigurationOptionName;
 		if($SystemConfigurationOptionValue != NULL)

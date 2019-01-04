@@ -1,4 +1,4 @@
-<!-- FORM_SYSTEM_CONFIGURATION_LIST -->
+<!-- FORM_SYSTEM_CONFIGURATION_LIST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -33,7 +33,7 @@
 <?php
 if(is_array($this->ArrayInstanceSystemConfiguration))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -44,9 +44,9 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 		 "<div class='TableGenericInputLeft'>
 		 <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_BACK . "'
-				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_BACK . "'
+				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -55,18 +55,18 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_NUMBER') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_ACTIVE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_VALUE') . "</th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE') . "</th>";
 	echo "<th  class='TableGenericThArrow'>
 	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -82,14 +82,14 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' method='post' />
 					<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' />
+							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' />
 		      		<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "'
+							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "'
 							 value='"  . $systemConfiguration->GetSystemConfigurationOptionNumber() . "' />
 					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "' 
 		                           id='"   . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "' 
@@ -98,11 +98,11 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 				</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' method='post' />
 					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' />
+							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' />
 					  <input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "' 
 							 id='"     . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "'
@@ -113,8 +113,15 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 								   title='" . $systemConfiguration->GetSystemConfigurationOptionName() . "' />
 				</form>
 		      </td>";
-		echo "<td class= 'TableGenericTdLink'>" . $systemConfiguration->GetSystemConfigurationOptionActive() . "</td>";
-		echo "<td class= 'TableGenericTdLink'>" . $systemConfiguration->GetSystemConfigurationOptionValue() . "</td>";
+		echo "<td class='TableGenericTdLink'>";
+		if($systemConfiguration->GetSystemConfigurationOptionActive())
+			echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsVerified.png'
+			           'alt='SystemConfigurationOptionActive' width='20' height='20' />" . "</td>";
+		else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsNotVerified.png' 
+			           'alt='SystemConfigurationOptionActive' width='20' height='20' />" . "</td>";
+		if($systemConfiguration->GetSystemConfigurationOptionValue() != NULL)
+			echo "<td class= 'TableGenericTdLink'>" . $systemConfiguration->GetSystemConfigurationOptionValue() . "</td>";
+		else echo "<td class= 'TableGenericTdLink'>" .  $this->InstanceLanguageText->GetText('NULL_EMPTY') . "</td>";
 		echo "<td class= 'TableGenericTdLink'>" . $systemConfiguration->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}

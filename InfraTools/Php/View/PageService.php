@@ -46,6 +46,7 @@ class PageService extends PageInfraTools
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
 		parent::__construct($Config, $Language, $Page);
+		$this->InputValueFormMethod = "GET";
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);

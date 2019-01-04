@@ -35,7 +35,7 @@ if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanc
 		</div>
 	</div>
 	<?php
-	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME . "' method='get' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME . "' method='" . $this->InputValueFormMethod . "' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'

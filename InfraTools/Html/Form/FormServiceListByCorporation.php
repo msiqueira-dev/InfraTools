@@ -5,7 +5,8 @@
             <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-           	<form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION; ?>' method="GET">
+           	<form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION; ?>' 
+           	      method="<?php echo $this->InputValueFormMethod ?>" >
 				<select 
 					name="<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT; ?>" 
 					id="<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT; ?>"
@@ -70,7 +71,7 @@ if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanc
 		</div>
 	</div>
 	<?php
-	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "' method='get' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "' method='" . $this->InputValueFormMethod . "' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'

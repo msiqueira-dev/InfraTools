@@ -69,7 +69,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 					$this->InputLimitOne = 0;
 				if($this->InputLimitTwo <= 0)
 					$this->InputLimitTwo = 25;
-				$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
+				$this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
 															   $this->InputValueTypeAssocUserServiceDescription,
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
@@ -83,7 +83,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 			{
 				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
 				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
+				$this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
 															   $this->InputValueTypeAssocUserServiceDescription,
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 
@@ -103,7 +103,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 						$this->InputLimitOne = $rowCount - 25;
 						$this->InputLimitTwo = $rowCount;
 					}
-					$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
+					$this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
 																   $this->InputValueTypeAssocUserServiceDescription,
 																   $this->User->GetEmail(),
 																   $this->InputLimitOne, 
@@ -128,7 +128,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 			{
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				$return = $this->ServiceSelectByTypeAssocUserServiceOnUserContext(
+				$return = $this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
 															   $this->InputValueTypeAssocUserServiceDescription,
 															   $this->User->GetEmail(),
 															   $this->InputLimitOne, 

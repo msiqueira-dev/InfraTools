@@ -22,6 +22,4 @@
 .TableDepartment td, .TableDepartmentUser td{width:150px;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
 .TableDepartment td img, .TableDepartmentUser td img{position:relative;left:50%;top:2px;}
 .TdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
-.DivContentBodyContainer input[type="radio"]{width:20px;height:15px;float:left;}
-.DivContentBodyContainerRadio{height:25px !important;}
 .DivContentBodySided{width:500px !important; float:left;}

@@ -2,7 +2,7 @@
 <div class="DivBody">
     <div class="DivContentBody">
     	<form name="<?php echo ConfigInfraTools::FORM_SERVICE; ?>" 
-			  id="<?php echo ConfigInfraTools::FORM_SERVICE; ?>" method="get" >
+			  id="<?php echo ConfigInfraTools::FORM_SERVICE; ?>" method="post" >
 			<!-- SUBMIT -->
 			<div class="DivContentBodyOptions">
 				<div class="DivContentBodyOptionsBox">

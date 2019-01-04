@@ -23,6 +23,18 @@ if (!class_exists("PageAdmin"))
 		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
+if (!class_exists("InfraToolsService"))
+{
+	if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsService.php"))
+		include_once(SITE_PATH_PHP_MODEL . "InfraToolsService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class Service');
+}
+if (!class_exists("InfraToolsTypeService"))
+{
+	if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsTypeService.php"))
+		include_once(SITE_PATH_PHP_MODEL . "InfraToolsTypeService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class Service');
+}
 
 class PageAdminService extends PageAdmin
 {
@@ -56,28 +68,28 @@ class PageAdminService extends PageAdmin
 			$PageFormBack = TRUE;
 		}
 		//FORM_SERVICE_LIST
-		if($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'ServiceSelect', 
 									  array(&$this->ArrayInstanceInfraToolsService),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST;
 		}
 		//FORM_SERVICE_REGISTER
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_REGISTER;
 		//FORM_SERVICE_REGISTER_CANCEL
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
 		//FORM_SERVICE_REGISTER_SUBMIT
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 		}
 		//FORM_SERVICE_SELECT
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
 		//FORM_SERVICE_SELECT_SUBMIT
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if(isset($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_RADIO]))
 			{
@@ -88,7 +100,7 @@ class PageAdminService extends PageAdmin
 					if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceId', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
 													&$this->InstanceInfraToolsService),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 					{
 						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
 													  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
@@ -107,7 +119,7 @@ class PageAdminService extends PageAdmin
 					if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceName', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
 													&$this->ArrayInstanceInfraToolsService),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 					{
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST;	
 					}
@@ -119,7 +131,7 @@ class PageAdminService extends PageAdmin
 				if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceId', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
 													&$this->InstanceInfraToolsService),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 					{
 						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
 													  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
@@ -131,7 +143,7 @@ class PageAdminService extends PageAdmin
 			}
 		}
 		//FORM_SERVICE_VIEW_DELETE_SUBMIT
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
 										  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
@@ -143,14 +155,14 @@ class PageAdminService extends PageAdmin
 			}
 		}
 		//FORM_SERVICE_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
 										  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_UPDATE;
 		}
 		//FORM_SERVICE_UPDATE_CANCEL
-		elseif($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
 										  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)

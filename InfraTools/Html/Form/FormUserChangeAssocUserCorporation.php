@@ -293,7 +293,7 @@
 	 <?php } ?>
      <?php if($this->EnableFieldUserActive)
 	 {?>
-	 	 <!-- USER_ACITVE -->
+	 	 <!-- USER_ACTIVE -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
             	<label><?php echo $this->InstanceLanguageText->GetText('USER_ACTIVE').":"; ?></label>

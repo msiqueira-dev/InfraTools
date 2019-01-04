@@ -14,7 +14,7 @@
 </div>
 <!-- FORM SERVICE SELECT -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" method="post" >
+	  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainerService" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
 		<!-- RADIO BUTTON ID -->

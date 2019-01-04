@@ -254,7 +254,7 @@
 		<?php } ?>
 		<?php if($this->EnableFieldUserActive)
 		{?>
-			 <!-- USER_ACITVE -->
+			 <!-- USER_ACTIVE -->
 			 <div class="DivContentBodyContainerSided">
 				<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
 					<label><?php echo $this->InstanceLanguageText->GetText('USER_ACTIVE').":"; ?></label>

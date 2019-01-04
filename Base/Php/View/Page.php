@@ -50,13 +50,13 @@ Methods:
 		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew,$DepartmentNameNew, 
 		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
-		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug);
+		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = FALSENULL);
 		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE);
 		protected     function        LoadDataFromSession($SessionKey, $Function, &$Instance);
 		protected     function        PageStackSessionLoad();
 		protected     function        PageStackSessionRemoveAll();
 		protected     function        PageStackSessionSave();
-		protected     function        SystemConfigurationDeleteBySystemConfigurationNumber($InstanceSystemConfiguration, $Debug);
+		protected     function        SystemConfigurationDeleteBySystemConfigurationOptionNumber($InstanceSystemConfiguration, $Debug);
 		protected     function        SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 		                                                        $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug);
 		protected     function        SystemConfigurationLoadData($InstanceSystemConfiguration);
@@ -121,6 +121,7 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $InstanceTypeUser, $Debug);
+		protected     function        UserChangeTwoStepVerification($InstanceUser, $TwoStepVerification, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
 		protected     function        UserInsert($Application, $SendEmail, 
 		                                         $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, 
@@ -262,6 +263,7 @@ class Page
 	public    $InputValueDepartmentName                             = "";
 	public    $InputValueDepartmentNameAndCorporationNameRadio      = "";
 	public    $InputValueDepartmentNameRadio                        = "";
+	public    $InputValueFormMethod                                 = "POST";
 	public    $InputValueGender                                     = "";
 	public    $InputValueHeaderDebug                                = Config::CHECKBOX_UNCHECKED;
 	public    $InputValueHeaderLayout                               = Config::CHECKBOX_UNCHECKED;
@@ -279,7 +281,7 @@ class Page
 	public    $InputValueRegistrationId                             = "";
 	public    $InputValueRepeatPassword                             = "";
 	public    $InputValueRowCount                                   = "";
-	public    $InputValueSystemConfigurationOptionAcitve            = "";
+	public    $InputValueSystemConfigurationOptionActive            = "";
 	public    $InputValueSystemConfigurationOptionDescription       = "";
 	public    $InputValueSystemConfigurationOptionName              = "";
 	public    $InputValueSystemConfigurationOptionNameRadio         = "";
@@ -365,8 +367,10 @@ class Page
 	public    $ReturnSystemConfigurationOptionDescriptionClass      = "";
 	public    $ReturnSystemConfigurationOptionDescriptionText       = "";
 	public    $ReturnSystemConfigurationOptionNameClass             = "";
+	public    $ReturnSystemConfigurationOptionNameRadioClass        = "";
 	public    $ReturnSystemConfigurationOptionNameText              = "";
 	public    $ReturnSystemConfigurationOptionNumberClass           = "";
+	public    $ReturnSystemConfigurationOptionNumberRadioClass      = "";
 	public    $ReturnSystemConfigurationOptionNumberText            = "";
 	public    $ReturnSystemConfigurationOptionValueClass            = "";
 	public    $ReturnSystemConfigurationOptionValueText             = "";
@@ -688,9 +692,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $instanceFacedePersistence->CorporationInsert($CorporationActive, 
-																	$CorporationName, 
-																    $Debug);
+			$return = $instanceFacedePersistence->CorporationInsert($CorporationActive, $CorporationName, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess('CORPORATION_INSERT_SUCCESS');
@@ -1353,7 +1355,7 @@ class Page
 		return Config::ERROR;
 	}
 	
-	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug)
+	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = NULL)
 	{
 		foreach($PostForm as $postElementKey=>$postElementValue)
 		{
@@ -1380,6 +1382,7 @@ class Page
 				    $ArrayParameter[count($ArrayParameterTemp)] = &$rowCount;
 				    $ArrayParameterTemp[count($ArrayParameterTemp)] = &$rowCount;
 					array_push($ArrayParameterTemp, $Debug);
+					array_push($ArrayParameterTemp, $StoreSession);
 					$return = call_user_func_array(array($this, $Function), $ArrayParameterTemp);
 					if($this->InputLimitOne > $rowCount)
 					{
@@ -1398,17 +1401,20 @@ class Page
 						array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
 						$ArrayParameter[count($ArrayParameter)] = &$rowCount;
 						array_push($ArrayParameter, $Debug);
+						array_push($ArrayParameter, $StoreSession);
 						return call_user_func_array(array($this, $Function), $ArrayParameter);
 					}
 				}
 				array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
 				$ArrayParameter[count($ArrayParameter)] = &$rowCount;
 				array_push($ArrayParameter, $Debug);
+				array_push($ArrayParameter, $StoreSession);
 				return call_user_func_array(array($this, $Function), $ArrayParameter);
 			}
 			elseif(strpos($postElementKey, 'LIST') == FALSE)
 			{
 				array_push($ArrayParameter, $Debug);
+				array_push($ArrayParameter, $StoreSession);
 				if($Debug)
 				{
 					echo "<b>ArrayParameter</b>:<br>";
@@ -1532,12 +1538,12 @@ class Page
 		$this->Session->SetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
 	}
 	
-	protected function SystemConfigurationDeleteBySystemConfigurationNumber($InstanceSystemConfiguration, $Debug)
+	protected function SystemConfigurationDeleteBySystemConfigurationOptionNumber($InstanceSystemConfiguration, $Debug)
 	{
 		if($InstanceSystemConfiguration != NULL)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->SystemConfigurationDeleteBySystemConfigurationNumber(
+			$return = $FacedePersistence->SystemConfigurationDeleteBySystemConfigurationOptionNumber(
 				                                        $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), $Debug);
 			if($return == Config::SUCCESS)
 			{
@@ -1555,12 +1561,15 @@ class Page
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		if($SystemConfigurationOptionActive == NULL)
+			$SystemConfigurationOptionActive = FALSE;
+		elseif($SystemConfigurationOptionActive != FALSE)
+			$SystemConfigurationOptionActive = TRUE;
 		$this->InputValueSystemConfigurationOptionActive      = $SystemConfigurationOptionActive;
 		$this->InputValueSystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;
 		$this->InputValueSystemConfigurationOptionName        = $SystemConfigurationOptionName;
 		$this->InputValueSystemConfigurationOptionValue       = $SystemConfigurationOptionValue;
 		$arrayConstants = array(); $matrixConstants = array();
-		
 		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
 		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionActiveClass;
@@ -1648,7 +1657,7 @@ class Page
 		if($InstanceSystemConfiguration != NULL)
 		{
 			$this->InputValueRegisterDate                         = $InstanceSystemConfiguration->GetRegisterDate();
-			if($InstanceSystemConfiguration->GetSystemConfigurationActive())
+			if($InstanceSystemConfiguration->GetSystemConfigurationOptionActive())
 				$this->InputValueSystemConfigurationOptionActive = "checked";
 			$this->InputValueSystemConfigurationOptionDescription = $InstanceSystemConfiguration->GetSystemConfigurationOptionDescription();
 			$this->InputValueSystemConfigurationOptionName        = $InstanceSystemConfiguration->GetSystemConfigurationOptionName();
@@ -1684,8 +1693,8 @@ class Page
 		$this->InputValueSystemConfigurationOptionName = $SystemConfigurationOptionName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_SYSTEM_CONFIGURATION_OPTION_NAME
-		$arrayElements[0]             = Config::FORM_SYSTEM_CONFIGURATION_OPTION_NAME;
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
@@ -1706,11 +1715,11 @@ class Page
 		{
 			$return = $FacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
 				                                                                              $this->InputValueSystemConfigurationOptionName, 
-																						      $RowCount, $InstanceSystemConfiguration, $Debug);
+																						      $ArrayInstanceSystemConfiguration, $RowCount,
+																						      $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
-				$this->TeamLoadData($InstanceTeam);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $ArrayInstanceSystemConfiguration);
 				return Config::SUCCESS;
 			}
 		}
@@ -1726,8 +1735,8 @@ class Page
 		$this->InputValueSystemConfigurationOptionNumber = $SystemConfigurationOptionNumber;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_SYSTEM_CONFIGURATION_OPTION_NUMBER
-		$arrayElements[0]             = Config::FORM_SYSTEM_CONFIGURATION_OPTION_NUMBER;
+		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER
+		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionNumberClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
@@ -1751,7 +1760,7 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
-				$this->TeamLoadData($InstanceTeam);
+				$this->SystemConfigurationLoadData($InstanceSystemConfiguration);
 				return Config::SUCCESS;
 			}
 		}
@@ -3288,6 +3297,29 @@ class Page
 			$this->ShowDivReturnError("TYPE_USER_UPDATE_ERROR");
 			return Config::ERROR;
 		}
+	}
+	
+	protected function UserChangeTwoStepVerification($InstanceUser, $TwoStepVerification, $Debug)
+	{
+		if($InstanceUser == NULL)
+			$InstanceUser = $this->User;
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->UserUpdateTwoStepVerificationByUserEmail($InstanceUser->GetEmail(), 
+																				         $TwoStepVerification, 
+																				         $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$InstanceUser->SetTwoStepVerification($TwoStepVerification);
+			$this->InputValueTwoStepVerification = $InstanceUser->GetTwoStepVerification();
+			$this->ShowDivReturnSuccess("USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS");
+		}
+		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+		{
+			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+			return Config::WARNING;
+		}
+		$this->ShowDivReturnError("USER_TWO_STEP_VERIFICATION_CHANGE_ERROR");
+		return Config::ERROR;
 	}
 	
 	protected function UserDeleteByUserEmail(&$InstanceUser, $Debug)

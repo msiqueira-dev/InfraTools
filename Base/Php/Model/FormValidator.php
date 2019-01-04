@@ -42,7 +42,7 @@ Functions:
 			public function ValidateSubject($Subject, $DefaultValue, $ArrayOption);
 			public function ValidateTeamName(TeamName, $DefaultValue);
 			public function ValidateTitle($Title, $DefaultValue);
-			public function ValidateTypeAssocUserService($TypeAssocUserService, $DefaultValue);
+			public function ValidateTypeAssocUserService($TypeAssocUserServiceDescription, $DefaultValue);
 			public function ValidateTypeService($TypeService, $DefaultValue);
 			public function ValidateURL($Url, $DefaultValue);
 			public function ValidateUserUniqueId($UserUniqueId, $DefaultValue);
@@ -734,13 +734,13 @@ class FormValidator
 		else return self::INVALID_NULL;
 	}
 	
-	public function ValidateTypeAssocUserService($TypeAssocUserService, $DefaultValue)
+	public function ValidateTypeAssocUserService($TypeAssocUserServiceDescription, $DefaultValue)
 	{
-		if(isset($TypeAssocUserService))
+		if(isset($TypeAssocUserServiceDescription))
 		{
-			if($TypeAssocUserService != NULL && !empty($TypeAssocUserService))
+			if($TypeAssocUserServiceDescription != NULL && !empty($TypeAssocUserServiceDescription))
 			{
-				if(preg_match('/(^([a-zA-Z])+$)/', $TypeAssocUserService) > 0)
+				if(preg_match('/(^([a-zA-Z])+$)/', $TypeAssocUserServiceDescription) > 0)
 					return self::SUCCESS;
 				else return self::INVALID_TYPE_ASSOC_USER_SERVICE;
 			}

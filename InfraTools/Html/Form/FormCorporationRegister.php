@@ -49,15 +49,15 @@
                                value="<?php echo $this->InputValueCorporationName; ?>" maxlength="45" />
         </div>
     </div>
-    <!-- FORM_FIELD_CORPORATION_ACITVE -->
+    <!-- FORM_FIELD_CORPORATION_ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('ACTIVE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="checkbox" 
-			           name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE; ?>" 
-				       value="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE; ?>"
+			           name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>" 
+				       value="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>"
 				        <?php echo $this->InputValueCorporationActive; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>',

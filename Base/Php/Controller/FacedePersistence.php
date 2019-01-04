@@ -86,8 +86,8 @@ Functions:
 																				  $CloseConnectaion = TRUE);
 			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug,
 			                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function SystemConfigurationDeleteBySystemConfigurationNumber($SystemConfigurationOptionNumber, $Debug,
-			                                                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 													  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
 													  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -99,6 +99,8 @@ Functions:
 			public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
 																					   &$InstanceSystemConfiguration, $Debug,
 																					   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, 
+			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
 																					   $SystemConfigurationOptionDescriptionNew,
 																					   $SystemConfigurationOptionNameNew,
@@ -323,7 +325,7 @@ class FacedePersistence
 																								$AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
 																								$AssocUserRequestingTicketId, 
 																								$Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -434,7 +436,7 @@ class FacedePersistence
 			$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
 			$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
 																						 $RegistrationId, $UserEmail, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -458,7 +460,7 @@ class FacedePersistence
 																						$AssocUserCorporationRegistrationDateNew,
 																						$AssocUserCorporationRegistrationIdNew, 
 																						$CorporationName, $UserEmail, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -489,7 +491,7 @@ class FacedePersistence
 			$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
 			$return = $FacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, 
 																		   $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -519,7 +521,7 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -644,7 +646,7 @@ class FacedePersistence
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, 
 															                 $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -803,14 +805,14 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function SystemConfigurationDeleteBySystemConfigurationNumber($SystemConfigurationOptionNumber, $Debug,
-			                                                             $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
-			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationDeleteBySystemConfigurationNumber(
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationDeleteBySystemConfigurationOptionNumber(
 				                                                                            $SystemConfigurationOptionNumber, 
 				                                                                            $Debug, $MySqlConnection);
 			if($CloseConnectaion)
@@ -896,6 +898,21 @@ class FacedePersistence
 		return $return;
 	}
 	
+	public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, 
+													 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelectNoLimit($ArrayInstanceSystemConfiguration,
+				                                                                                      $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
 	public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
 																			   $SystemConfigurationOptionDescriptionNew,
 																			   $SystemConfigurationOptionNameNew,
@@ -954,7 +971,7 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
 			$return = $instanceFacedePersistenceTeam->TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1037,7 +1054,7 @@ class FacedePersistence
 			$return = $instanceFacedePersistenceTicket->TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle,
 																     $TypeStatusTicketDescription, $TypeTicketDescription, 
 																	 $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1173,7 +1190,7 @@ class FacedePersistence
 			$instanceFacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
 			$return = $instanceFacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug,
 																						   $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1253,7 +1270,7 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
 			$return = $instanceFacedePersistenceTypeService->TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1344,7 +1361,7 @@ class FacedePersistence
 			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
 			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, 
 																						 $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1421,7 +1438,7 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
 			$return = $instanceFacedePersistenceTypeTicket->TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1496,7 +1513,7 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
 			$return = $instanceFacedePersistenceTypeUser->TypeUserInsert($Description, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -1629,7 +1646,7 @@ class FacedePersistence
 												                 $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix,
 																 $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 																 $UserType, $UserUniqueId, $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)

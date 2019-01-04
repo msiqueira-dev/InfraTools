@@ -23,6 +23,9 @@
 .DivContentBodyContainerLabelTip label{font-size:10px;font-weight:normal;}
 .DivContentBodyContainerPhonePrefix input{width:43px !important;}
 .DivContentBodyContainerPhone input{width:280px !important;margin-left:20px;}
+.DivContentBodyContainerRadio{height:25px;}
+.DivContentBodyContainerRadio label input{float:left;}
+.DivContentBodyContainerRadio label div{position: relative;left:5px;}
 /* Google Maps */
 .DivContentBodyContainerLabelTipMaps{width:550px;height:45px;}
 .DivContentBodyContainerLabelMapsCountry{width:280px;height:30px;float:left;}
@@ -74,3 +77,5 @@
 .SelectBirthDateMonth{width:100px !important;height:30px !important; margin-left:25px}
 .SelectBirthDateYear{width:100px !important;height:30px !important; margin-left:20px}
 .InputSubmitForgotPassword{background-color:transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;text-decoration:underline;font-weight:bold;}
+.DivFormViewDelete{width:165px !important; height:40px !important;min-height:40px !important;float:left;margin-left:23px;}
+.DivFormViewUpdate{width:165px !important; height:40px !important;min-height:40px !important;float:left;}

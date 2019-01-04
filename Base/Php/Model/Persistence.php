@@ -47,13 +47,13 @@ Methods:
 			public static function SqlNotificationUpdateActiveByUserEmail();
 			public static function SqlNotificationUpdateTextById();
 			public static function SqlNotificationUpdateTextByUserEmail();
-			public static function SystemConfigurationDeleteBySystemConfigurationNumber();
-			public static function SystemConfigurationInsert();
-			public static function SystemConfigurationSelect();
-			public static function SystemConfigurationSelectNoLimit();
-			public static function SystemConfigurationSelectBySystemConfigurationOptionName();
-			public static function SystemConfigurationSelectBySystemConfigurationOptionNumber();
-			public static function SystemConfigurationUpdateBySystemConfigurationOptionNumber();
+			public static function SqlSystemConfigurationDeleteBySystemConfigurationOptionNumber();
+			public static function SqlSystemConfigurationInsert();
+			public static function SqlSystemConfigurationSelect();
+			public static function SqlSystemConfigurationSelectBySystemConfigurationOptionName();
+			public static function SqlSystemConfigurationSelectBySystemConfigurationOptionNumber();
+			public static function SqlSystemConfigurationSelectNoLimit();
+			public static function SqlSystemConfigurationUpdateBySystemConfigurationOptionNumber();
 			public static function SqlTeamDeleteByTeamDescription();
 			public static function SqlTeamDeleteByTeamId();
 			public static function SqlTeamInsert();
@@ -508,14 +508,22 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL . " =? ";
 	}
 	
-	public static function SqlSystemConfigurationDeleteBySystemConfigurationNumber()
+	public static function SqlSystemConfigurationDeleteBySystemConfigurationOptionNumber()
 	{
-		
+		return "DELETE FROM " . Config::TABLE_SYSTEM_CONFIGURATION . " "  
+		     . "WHERE "       . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER . " = ?";	
 	}
 	
 	public static function SqlSystemConfigurationInsert()
 	{
-		
+		return "INSERT INTO " . Config::TABLE_SYSTEM_CONFIGURATION               . " "
+			 . "(" . Config::TABLE_FIELD_REGISTER_DATE                           . ","
+		     . " " . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE      . ","
+		     . " " . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION . ","
+		     . " " . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME        . ","
+			 . " " . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER      . ","
+			 . " " . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE       . ")"
+		     . " VALUES (NOW(), ?, UPPER(?), UPPER(?), DEFAULT, ?)";
 	}
 	
 	public static function SqlSystemConfigurationSelect()
@@ -523,6 +531,32 @@ class Persistence
 		return "SELECT *,  (SELECT COUNT(*) FROM   " . Config::TABLE_SYSTEM_CONFIGURATION . ") AS COUNT "
 			 . "FROM "                               . Config::TABLE_SYSTEM_CONFIGURATION . " ORDER BY " 
 			 . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER . " LIMIT ?,?";
+	}
+	
+	public static function SqlSystemConfigurationSelectBySystemConfigurationOptionName()
+	{
+		return "SELECT "   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE      . ",  "
+		                   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME        . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER      . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE       . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_FIELD_REGISTER_DATE                           . ",  "
+			 . "(SELECT COUNT(*) FROM " . Config::TABLE_SYSTEM_CONFIGURATION . ") AS COUNT "
+		     . "FROM  "    . Config::TABLE_SYSTEM_CONFIGURATION . " "
+	         . "WHERE "    . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME . " LIKE ? "
+		     . "ORDER BY " . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER . " LIMIT ?,?";
+	}
+	
+	public static function SqlSystemConfigurationSelectBySystemConfigurationOptionNumber()
+	{
+		return "SELECT "   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE      . ",  "
+		                   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME        . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER      . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE       . ",  "
+						   . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_FIELD_REGISTER_DATE                           . "   "
+		     . "FROM  "    . Config::TABLE_SYSTEM_CONFIGURATION . " "
+	         . "WHERE "    . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER      . "=?";
 	}
 	
 	public static function SqlSystemConfigurationSelectNoLimit()
@@ -536,16 +570,6 @@ class Persistence
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_SYSTEM_CONFIGURATION . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_SYSTEM_CONFIGURATION . " " 
 			 . "ORDER BY " . Config::TABLE_SYSTEM_CONFIGURATION . "." . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER;	
-	}
-	
-	public static function SqlSystemConfigurationSelectBySystemConfigurationOptionName()
-	{
-		
-	}
-	
-	public static function SqlSystemConfigurationSelectBySystemConfigurationOptionNumber()
-	{
-		
 	}
 	
 	public static function SqlSystemConfigurationUpdateBySystemConfigurationOptionNumber()
@@ -610,7 +634,7 @@ class Persistence
 						 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME         . ", "
 					     . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE          . "  " 
 		     . "FROM  "  . Config::TABLE_TEAM . " "
-	         . "WHERE "  . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME         . " LIKE ?";
+	         . "WHERE "  . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME . " LIKE ? ";
 	}
 	
 	public static function SqlTeamUpdateByTeamId()

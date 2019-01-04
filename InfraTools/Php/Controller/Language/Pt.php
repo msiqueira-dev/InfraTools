@@ -77,11 +77,11 @@ class Pt
 	const FILL_REQUIRED_FIELDS                                      = "Por favor preencha os campos necessários";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Ativo";
 	const FORM_FIELD_EDIT                                           = "Editar";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_ACTIVE                    = "Ativo";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_DESCRIPTION               = "Descrição";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_NAME                      = "Nome";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_NUMBER                    = "Número";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_VALUE                     = "Valor";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE             = "Ativo";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION        = "Descrição";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "Nome";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "Número";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "Valor";
 	const FORM_INVALID_CAPTCHA                                      = "O valor catpcha não confere";
 	const FORM_INVALID_CORPORATION_NAME                             = "Nome de corporação inválida";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantidade de caracteres excede o tamanho máximo para " 
@@ -270,8 +270,8 @@ class Pt
                                                                     . "os campos abaixo serão preenchidos com seu país "
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
 	const NAME                                                      = "Nome";
+	const NULL_EMPTY                                                = "Nenhum valor associado";
 	const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
-	const NULL_OPTION                                               = "Por favor selecione uma opção";
 	const PAGE_ABOUT                                                = "Sobre";
 	const PAGE_ABOUT_ROBOTS                                         = "ALL";
 	const PAGE_ABOUT_TITLE                                          = "InfraTools - Sobre";
@@ -730,7 +730,7 @@ class Pt
 	const SYSTEM_CONFIGURATION_DELETE_ERROR                         = "Erro ao deletar configuração do sistema";
 	const SYSTEM_CONFIGURATION_DELETE_SUCCESS                       = "Configuração do sistema deletada com sucesso";
 	const SYSTEM_CONFIGURATION_INSERT_ERROR                         = "Error ao cadastrar configuração do sistema";
-	const SYSTEM_CONFIGURATION_INSERT_EXISTS                        = "Uma configuração do sistema com este nome já existe";
+	const SYSTEM_CONFIGURATION_INSERT_EXISTS                        = "Uma configuração do sistema com este nome e descrição já existe";
 	const SYSTEM_CONFIGURATION_INSERT_SUCCESS                       = "Configuração do sistema cadastrada com sucesso";
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "Configuração do sistema não encontrada";
 	const SYSTEM_CONFIGURATION_UPDATE_ERROR                         = "Erro ao atualizar configuração do sistema";

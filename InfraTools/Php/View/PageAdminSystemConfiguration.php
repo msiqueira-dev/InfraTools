@@ -23,6 +23,13 @@ if (!class_exists("PageAdmin"))
 		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
+if (!class_exists("SystemConfiguration"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
+		include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class SystemConfiguration');
+}
+
 
 class PageAdminSystemConfiguration extends PageAdmin
 {
@@ -47,6 +54,8 @@ class PageAdminSystemConfiguration extends PageAdmin
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
 		$this->InputValueSystemConfigurationOptionNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
+		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
 		{
@@ -63,21 +72,35 @@ class PageAdminSystemConfiguration extends PageAdmin
 		}
 		//FORM_SYSTEM_CONFIGURATION_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEMC_CONFIGURATION_REGISTER;
-		//FORM_SYSTEM_CONFIGURATION_REGISTER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
+		//FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
+		//FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'SystemConfigurationInsert', 
+									  array(@$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
+											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
+											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
+		}
 		//FORM_SYSTEM_CONFIGURATION_SELECT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
-		//FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if(isset($_POST[ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION]))
 			{
 				if($_POST[ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION] ==
 				          ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME)
 				{
+					$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
+					$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
 					$_POST = array(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST => ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST) 
 						     + $_POST;
 					if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionName', 
@@ -98,6 +121,8 @@ class PageAdminSystemConfiguration extends PageAdmin
 				}
 				else
 				{
+					$this->ReturnSystemConfigurationOptionNameRadioClass   = "Hidden";
+					$this->ReturnSystemConfigurationOptionNumberRadioClass = "NotHidden";
 					$this->InputValueSystemConfigurationOptionNumberRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 					if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionNumber', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER],
@@ -116,8 +141,8 @@ class PageAdminSystemConfiguration extends PageAdmin
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
 			}
 		}
-		//FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
@@ -128,22 +153,22 @@ class PageAdminSystemConfiguration extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
 			}
 		}
-		//FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEMC_CONFIGURATION_UPDATE;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDATE;
 		}
-		//FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
 		}
-		//FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, 
 											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)

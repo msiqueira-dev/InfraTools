@@ -76,11 +76,11 @@ class Es
 	const FILL_REQUIRED_FIELDS                                      = "";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "";
 	const FORM_FIELD_EDIT                                           = "";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_ACTIVE                    = "";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_DESCRIPTION               = "";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_NAME                      = "";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_NUMBER                    = "";
-	const FORM_FIELD_SYSTEM_CONFIGURATION_VALUE                     = "";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE             = "";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION        = "";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "";
+	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "";
 	const FORM_INVALID_CAPTCHA                                      = "";
 	const FORM_INVALID_CORPORATION_NAME                             = "";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "";
@@ -238,6 +238,7 @@ class Es
 	const MAPS_TIP                                                  = "";
 	const NAME                                                      = "";
 	const NOT_LOGGED_IN                                             = "";
+	const NULL_EMPTY                                                = "";
 	const NULL_OPTION                                               = "";
 	const PAGE_ABOUT                                                = "";
 	const PAGE_ABOUT_ROBOTS                                         = "noindex";
