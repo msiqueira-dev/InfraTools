@@ -58,7 +58,7 @@ Methods:
 			public    function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 							                             $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
 											             $SystemConfigurationOptionValue);
-			public    function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
+			public    function CreateTeam($RegisterDate, $TeamDescription, $TeamId, $TeamName)
 			public    function CreateTechInfo();
 			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
@@ -552,12 +552,12 @@ class Factory
 										$SystemConfigurationOptionValue);
 	}
 	
-	public function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
+	public function CreateTeam($RegisterDate, $TeamDescription, $TeamId, $TeamName)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Team.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Team');
 		else include_once(BASE_PATH_PHP_MODEL . "Team.php");
-		return new Team($TeamDescription, $TeamId, $TeamName, $RegisterDate);
+		return new Team($RegisterDate, $TeamDescription, $TeamId, $TeamName);
 	}
 	
 	public function CreateTechInfo()

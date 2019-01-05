@@ -29,12 +29,20 @@ class Team
 	protected $RegisterDate     = NULL;
 
 	/* Constructor */
-	public function __construct($TeamDescription, $TeamId, $TeamName, $RegisterDate) 
+	public function __construct($RegisterDate, $TeamDescription, $TeamId, $TeamName) 
 	{
-		$this->TeamDescription  = $TeamDescription;
-		$this->TeamId           = $TeamId;
-		$this->TeamName         = $TeamName;
-		$this->RegisterDate     = $RegisterDate;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		if(!is_null($TeamDescription))
+			$this->TeamDescription = $TeamDescription;
+		else throw new Exception(Config::EXCEPTION_TEAM_DESCRIPTION);
+		if(!is_null($TeamId))
+			$this->TeamId = $TeamId;
+		else throw new Exception(Config::EXCEPTION_TEAM_ID);
+		if(!is_null($TeamName))
+		$this->TeamName = $TeamName;
+		else throw new Exception(Config::EXCEPTION_TEAM_NAME);
 	}
 	
 	/* Clone */

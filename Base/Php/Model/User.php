@@ -125,29 +125,65 @@ class User
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
     {
-		$this->ArrayAssocUserTeam       = $ArrayAssocUserTeam;
-		$this->ArrayNotification        = $ArrayNotification;
-		$this->AssocUserCorporation     = $AssocUserCorporation;
-		$this->BirthDate                = $BirthDate;
-		$this->Corporation              = $CorporationInstance;
-		$this->Country                  = $Country;
-		$this->Department               = $DepartmentInstance;
-		$this->UserEmail                = $UserEmail;
-		$this->Gender                   = $Gender;
-		$this->HashCode                 = $HashCode;
-		$this->UserName                 = $UserName;
-		$this->Region                   = $Region;
-		$this->RegisterDate             = $RegisterDate;
-		$this->SessionExpires           = $SessionExpires;
-		$this->TwoStepVerification      = $TwoStepVerification;
-		$this->UserActive               = $UserActive;
-		$this->UserConfirmed            = $UserConfirmed;
-		$this->UserPhonePrimary         = $UserPhonePrimary;
-		$this->UserPhonePrimaryPrefix   = $UserPhonePrimaryPrefix;
-		$this->UserPhoneSecondary       = $UserPhoneSecondary;
-		$this->UserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefix;
-		$this->UserType                 = $UserTypeInstance;
-		$this->UserUniqueId             = $UserUniqueId;   
+		if(!is_null($ArrayAssocUserTeam))
+			$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
+		if(!is_null($ArrayNotification))
+			$this->ArrayNotification = $ArrayNotification;
+		if(!is_null($AssocUserCorporation))
+			$this->AssocUserCorporation = $AssocUserCorporation;
+		if(!is_null($BirthDate))
+			$this->BirthDate = $BirthDate;
+		else throw new Exception(Config::EXCEPTION_USER_BIRTH_DATE);
+		if(!is_null($CorporationInstance))
+			$this->Corporation = $CorporationInstance;
+		if(!is_null($Country))
+			$this->Country = $Country;
+		else throw new Exception(Config::EXCEPTION_USER_COUNTRY);
+		if(!is_null($DepartmentInstance))
+			$this->Department = $DepartmentInstance;
+		if(!is_null($UserEmail))
+			$this->UserEmail = $UserEmail;
+		else throw new Exception(Config::EXCEPTION_USER_EMAIL);
+		if(!is_null($Gender))
+			$this->Gender = $Gender;
+		else throw new Exception(Config::EXCEPTION_USER_GENDER);
+		if(!is_null($HashCode))
+			$this->HashCode = $HashCode;
+		else throw new Exception(Config::EXCEPTION_USER_HASH_CODE);
+		if(!is_null($UserName))
+			$this->UserName = $UserName;
+		else throw new Exception(Config::EXCEPTION_USER_NAME);
+		if(!is_null($Region))
+			$this->Region = $Region;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		if(!is_null($SessionExpires))
+			$this->SessionExpires = $SessionExpires;
+		else throw new Exception(Config::EXCEPTION_USER_SESSION_EXPIRES);
+		if(!is_null($TwoStepVerification))
+			$this->TwoStepVerification = $TwoStepVerification;
+		else throw new Exception(Config::EXCEPTION_USER_TWO_STEP_VERIFICATION);
+		if(!is_null($UserActive))
+			$this->UserActive = $UserActive;
+		else throw new Exception(Config::EXCEPTION_USER_ACTIVE);
+		if(!is_null($UserConfirmed))
+			$this->UserConfirmed = $UserConfirmed;
+		else throw new Exception(Config::EXCEPTION_USER_CONFIRMED);
+		if(!is_null($UserPhonePrimary))
+			$this->UserPhonePrimary = $UserPhonePrimary;
+		if(!is_null($UserPhonePrimaryPrefix))
+			$this->UserPhonePrimaryPrefix = $UserPhonePrimaryPrefix;
+		if(!is_null($UserPhoneSecondary))
+			$this->UserPhoneSecondary = $UserPhoneSecondary;
+		if(!is_null($UserPhoneSecondaryPrefix))
+			$this->UserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefix;
+		if(!is_null($UserTypeInstance))
+			$this->UserType = $UserTypeInstance;
+		else throw new Exception(Config::EXCEPTION_USER_TYPE);
+		if(!is_null($UserUniqueId))
+			$this->UserUniqueId = $UserUniqueId;
+		else throw new Exception(Config::EXCEPTION_USER_UNIQUE_ID);
     }
 	
 	/* GET */

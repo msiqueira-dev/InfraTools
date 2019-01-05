@@ -44,13 +44,26 @@ class Ticket
 	public function __construct($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
 								$TicketSuggestion, $TicketTitle, $TicketType)
 	{
-		$this->RegisterDate       = $RegisterDate;
-		$this->TicketDescription  = $TicketDescription;
-		$this->TicketId           = $TicketId;
-		$this->TicketStatus       = $TicketStatus;
-		$this->TicketSuggestion   = $TicketSuggestion;
-		$this->TicketTitle        = $TicketTitle;
-		$this->TicketType         = $TicketType;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		if(!is_null($TicketDescription))
+			$this->TicketDescription = $TicketDescription;
+		else throw new Exception(Config::EXCEPTION_TICKET_DESCRIPTION);
+		if(!is_null($TicketId))
+			$this->TicketId = $TicketId;
+		else throw new Exception(Config::EXCEPTION_TICKET_ID);
+		if(!is_null($TicketStatus))
+			$this->TicketStatus = $TicketStatus;
+		else throw new Exception(Config::EXCEPTION_TICKET_STATUS);
+		if(!is_null($TicketSuggestion))
+			$this->TicketSuggestion = $TicketSuggestion;
+		if(!is_null($TicketTitle))
+			$this->TicketTitle = $TicketTitle;
+		else throw new Exception(Config::EXCEPTION_TICKET_TITLE);
+		if(!is_null($TicketType))
+			$this->TicketType = $TicketType;
+		else throw new Exception(Config::EXCEPTION_TICKET_TYPE);
 	}
 	
 	/* Clone */

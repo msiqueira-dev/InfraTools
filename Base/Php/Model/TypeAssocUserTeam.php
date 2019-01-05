@@ -25,10 +25,10 @@ class TypeAssocUserTeam
 	/* Constructor */
 	public function __construct($RegisterDate, $TypeAssocUserTeamDescription) 
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($TypeAssocUserTeamDescription != NULL)
+		if(!is_null($TypeAssocUserTeamDescription))
 			$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		else throw new Exception(Config::EXCEPTION_TYPE_ASSOC_USER_TEAM_DESCRIPTION);
 	}

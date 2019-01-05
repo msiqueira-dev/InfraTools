@@ -34,16 +34,16 @@ class AssocTicketUserRequesting
 	/* Constructor */
 	public function __construct($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate) 
 	{
-		if($Ticket != NULL)
+		if(!is_null($Ticket))
 			$this->Ticket = $Ticket;
 		else throw new Exception(Config::EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TICKET);
-		if($TypeAssocUserRequesting != NULL)
+		if(!is_null($TypeAssocUserRequesting))
 			$this->TypeAssocUserRequesting = $TypeAssocUserRequesting;
 		else throw new Exception(Config::EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE);
-		if($User != NULL)
+		if(!is_null($User))
 			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_ASSOC_TICKET_USER_REQUESTING_USER);
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_USER);
 	}

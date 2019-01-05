@@ -208,10 +208,10 @@ class FacedePersistenceTeam
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
+						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
+							                                       $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
 						                                           $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
-														           $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
-														           $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+														           $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);	
 						array_push($ArrayInstanceTeam, $InstanceTeam);
 					}
 					if(!empty($ArrayInstanceTeam))
@@ -253,10 +253,10 @@ class FacedePersistenceTeam
 			{
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
+					$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
+															   $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
 						                                       $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
-														       $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
-														       $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+														       $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);	
 					array_push($ArrayInstanceTeam, $InstanceTeam);
 				}
 				if(!empty($ArrayInstanceTeam))
@@ -291,7 +291,7 @@ class FacedePersistenceTeam
 					$stmt->bind_result($teamDescription, $TeamId, $teamName, $registerDate);
 					if ($stmt->fetch())
 					{
-						$InstanceTeam = $this->Factory->CreateTeam($teamDescription, $TeamId, $teamName, $registerDate);
+						$InstanceTeam = $this->Factory->CreateTeam($registerDate, $teamDescription, $TeamId, $teamName);
 						return Config::SUCCESS;
 					}
 					else 
@@ -338,10 +338,10 @@ class FacedePersistenceTeam
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())  
 					{
-						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
+						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
+																   $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
 																   $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
-																   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME], 
-																   $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+																   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);	
 						array_push($ArrayInstanceTeam, $InstanceTeam);
 					}
 					if(!empty($ArrayInstanceTeam))

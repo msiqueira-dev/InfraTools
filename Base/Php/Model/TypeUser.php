@@ -28,9 +28,15 @@ class TypeUser
 	/* Constructor */
 	public function __construct($TypeUserDescription, $TypeUserId, $RegisterDate) 
 	{
-		$this->TypeUserDescription = $TypeUserDescription;
-		$this->TypeUserId          = $TypeUserId;
-		$this->RegisterDate        = $RegisterDate;
+		if(!is_null($TypeUserDescription))
+			$this->TypeUserDescription = $TypeUserDescription;
+		else throw new Exception(Config::EXCEPTION_TYPE_USER_DESCRIPTION);
+		if(!is_null($TypeUserId))
+			$this->TypeUserId = $TypeUserId;
+		else throw new Exception(Config::EXCEPTION_TYPE_USER_ID);
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 	}
 	
 	/* Clone */

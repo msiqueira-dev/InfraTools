@@ -34,11 +34,17 @@ class Corporation
 	public function __construct($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate) 
 	{
 		$this->Factory           = Factory::__create();
-		if($ArrayInstanceDepartment != NULL)
+		if(!is_null($ArrayInstanceDepartment))
 			$this->ArrayDepartment = $ArrayInstanceDepartment;
-		$this->CorporationActive = $CorporationActive;
-		$this->CorporationName   = $CorporationName;
-		$this->RegisterDate      = $RegisterDate;
+		if(!is_null($CorporationActive))
+			$this->CorporationActive = $CorporationActive;
+		else throw new Exception(Config::EXCEPTION_CORPORATION_ACTIVE);
+		if(!is_null($CorporationName))
+			$this->CorporationName = $CorporationName;
+		else throw new Exception(Config::EXCEPTION_CORPORATION_NAME);
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 	}
 	
 	/* Clone */

@@ -33,16 +33,16 @@ class AssocUserTeam
 	/* Constructor */
 	public function __construct($RegisterDate, $Team, $TypeAssocUserTeam, $User) 
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($Team != NULL)
+		if(!is_null($Team))
 			$this->Team = $Team;
 		else throw new Exception(Config::EXCEPTION_ASSOC_USER_TEAM_TEAM);
-		if($TypeAssocUserTeam != NULL)
+		if(!is_null($TypeAssocUserTeam))
 			$this->TypeAssocUserTeam = $TypeAssocUserTeam;
 		else throw new Exeception(Config::EXCEPTION_ASSOC_USER_TEAM_TYPE);
-		if($User != NULL)
+		if(!is_null($User))
 			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_ASSOC_USER_TEAM_USER);
 	}

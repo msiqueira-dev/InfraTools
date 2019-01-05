@@ -38,8 +38,12 @@ class TypeStatusTicket
 	/* Constructor */
 	public function __construct($RegisterDate, $TypeStatusTicketDescription) 
 	{
-		$this->RegisterDate                = $RegisterDate;
-		$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		if(!is_null($TypeStatusTicketDescription))
+			$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
+		else throw new Exception(Config::EXCEPTION_TYPE_STATUS_TICKET_DESCRIPTION);
 	}
 	
 	/* Clone */

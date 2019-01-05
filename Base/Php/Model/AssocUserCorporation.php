@@ -39,18 +39,18 @@ class AssocUserCorporation
 	public function __construct($AssocUserCorporationRegistrationDate, $AssocUserCorporationRegistrationId,
 								$Corporation, $RegisterDate, $User) 
 	{
-		if($AssocUserCorporationRegistrationDate != NULL)
+		if(!is_null($AssocUserCorporationRegistrationDate))
 			$this->AssocUserCorporationRegistrationDate = $AssocUserCorporationRegistrationDate;
-		if($AssocUserCorporationRegistrationId != NULL)
-			$this->AssocUserCorporationRegistrationId   = $AssocUserCorporationRegistrationId;
-		if($RegisterDate != NULL)
-			$this->RegisterDate                         = $RegisterDate;
+		if(!is_null($AssocUserCorporationRegistrationId))
+			$this->AssocUserCorporationRegistrationId = $AssocUserCorporationRegistrationId;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($Corporation != NULL)
-			$this->Corporation                          = $Corporation;
+		if(!is_null($Corporation))
+			$this->Corporation = $Corporation;
 		else throw new Exception(Config::EXCEPTION_CORPORATION);
-		if($User != NULL)
-			$this->User                                 = $User;
+		if(!is_null($User))
+			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_USER);
 	}
 	

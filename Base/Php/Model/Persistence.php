@@ -608,10 +608,10 @@ class Persistence
 	
 	public static function SqlTeamSelectNoLimit()
 	{
-		return "SELECT "   . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION   . ",  "
-		                   . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID            . ",  "
-						   . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME          . ",  "
-					       . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE           . ",  "
+		return "SELECT "   . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE         . ",  "
+		                   . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION . ",  "
+						   . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID          . ",  "
+					       . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME        . ",  "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_TEAM . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_TEAM . " " 
 			 . "ORDER BY " . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME;	
@@ -619,20 +619,20 @@ class Persistence
 	
 	public static function SqlTeamSelectByTeamId()
 	{
-		return "SELECT " . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION  . ", "
-		                 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID           . ", "
-						 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME         . ", "
-					     . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE          . "  " 
+		return "SELECT " . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE         . ", "
+		                 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION . ", "
+						 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID          . ", "
+					     . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME        . "  " 
 		     . "FROM  "  . Config::TABLE_TEAM . " "
 	         . "WHERE "  . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID  . "=?";
 	}
 	
 	public static function SqlTeamSelectByTeamName()
 	{
-		return "SELECT " . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION  . ", "
-		                 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID           . ", "
-						 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME         . ", "
-					     . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE          . "  " 
+		return "SELECT " . Config::TABLE_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE         . ", "
+		                 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION . ", "
+						 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID          . ", "
+					     . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME        . "  " 
 		     . "FROM  "  . Config::TABLE_TEAM . " "
 	         . "WHERE "  . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME . " LIKE ? ";
 	}

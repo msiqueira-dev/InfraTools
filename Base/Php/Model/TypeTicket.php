@@ -31,7 +31,7 @@ class TypeTicket
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 		if($TypeTicketDescription != NULL)
 			$this->TypeTicketDescription  = $TypeTicketDescription;
-		else throw new Exception(Config::EXCEPTION_TYPE_TICKET_TYPE_TICKET_DESCRIPTION);
+		else throw new Exception(Config::EXCEPTION_TYPE_TICKET_DESCRIPTION);
 	}
 	
 	/* Clone */

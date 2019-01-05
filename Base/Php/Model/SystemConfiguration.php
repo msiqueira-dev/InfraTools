@@ -29,7 +29,7 @@ class SystemConfiguration
 	/* Properties */
 	protected $RegisterDate                          = NULL;
 	protected $SystemConfigurationOptionActive       = NULL;
-	protected $SystemConfigurationOptionDescription = NULL;
+	protected $SystemConfigurationOptionDescription  = NULL;
 	protected $SystemConfigurationOptionName         = NULL;
 	protected $SystemConfigurationOptionNumber       = NULL;
 	protected $SystemConfigurationOptionValue        = NULL;

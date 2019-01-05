@@ -713,10 +713,10 @@ class FacedePersistenceUser
 							                  $InstanceUser);
 						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						$InstaceBaseTeam = $this->Factory->CreateTeam
-							                               ($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION],
+							                               ($row['Team' . Config::TABLE_FIELD_REGISTER_DATE],
+															$row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION],
 						                                    $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
-															$row[Config::TABLE_TEAM_FIELD_TEAM_NAME],
-															$row['Team' . Config::TABLE_FIELD_REGISTER_DATE]);
+															$row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);
 						$InstaceBaseTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
 							                               ($row['TypeAssocUserTeam' . Config::TABLE_FIELD_REGISTER_DATE],
 														    $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);
@@ -830,10 +830,10 @@ class FacedePersistenceUser
 							                  $InstanceUser);
 						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						$InstaceBaseTeam = $this->Factory->CreateTeam
-							                               ($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION],
+							                               ($row['Team' . Config::TABLE_FIELD_REGISTER_DATE],
+															$row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION],
 						                                    $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
-															$row[Config::TABLE_TEAM_FIELD_TEAM_NAME],
-															$row['Team' . Config::TABLE_FIELD_REGISTER_DATE]);
+															$row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);
 						$InstaceBaseTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
 							                               ($row['TypeAssocUserTeam' . Config::TABLE_FIELD_REGISTER_DATE],
 														    $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);
@@ -1260,10 +1260,10 @@ class FacedePersistenceUser
 						if($row[Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID]    != NULL &&
 						   $row[Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL] != NULL)
 						{
-							$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION],
+							$InstanceTeam = $this->Factory->CreateTeam($row['Team'.Config::TABLE_FIELD_REGISTER_DATE],
+								                                       $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION],
 																	   $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
-																	   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME],
-																	   $row['Team'.Config::TABLE_FIELD_REGISTER_DATE]);
+																	   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);
 							$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
 							                                            ($row['TypeAssocUserTeam' . Config::TABLE_FIELD_REGISTER_DATE],
 														                 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);

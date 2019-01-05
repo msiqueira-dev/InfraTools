@@ -25,10 +25,17 @@ class Country
 	/* Constructor */
 	public function __construct($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate) 
 	{
-		$this->CountryAbbreviation = $CountryAbbreviation;
-		$this->CountryName         = $CountryName;
-		$this->RegionCode          = $RegionCode;
-		$this->RegisterDate        = $RegisterDate;
+		if(!is_null($CountryAbbreviation))
+			$this->CountryAbbreviation = $CountryAbbreviation;
+		else throw new Exception(Config::EXCEPTION_COUNTRY_ABBREVIATION);
+		if(!is_null($CountryName))
+			$this->CountryName = $CountryName;
+		else throw new Exception(Config::EXCEPTION_COUNTRY_NAME);
+		if(!is_null($RegionCode))
+			$this->RegionCode = $RegionCode;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 	}
 	
 	/* Clone */
