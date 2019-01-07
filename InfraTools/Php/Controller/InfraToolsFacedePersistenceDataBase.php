@@ -28,6 +28,7 @@ Functions:
 			public function CreateInfraToolsDataBaseTableAssocIpAddressService(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocUrlAddressService(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocUserCorporation(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserNotification(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocUserPreference(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocUserRole(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocUserService(&$StringMessage, $Debug, $MySqlConnection);
@@ -71,6 +72,7 @@ Functions:
 			                                                              &$StringMessage, $Debug, $MySqlConnection)
 			public function DropInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection);
 			public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug, $MySqlConnection);
+			public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug, $MySqlConnection);
 **************************************************************************/
 
@@ -1215,17 +1217,17 @@ class InfraToolsFacedePersistenceDataBase
 		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeUser)</b>";
 		if($MySqlConnection != NULL)
 		{
-			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'SUPER_ADMINISTRATOR', DEFAULT)") !== TRUE)
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES 
+			                                (now(), 'SUPER_ADMINISTRATOR')") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
-			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'ADMINISTRATOR_TECHNICIAN', DEFAULT)") !== TRUE)
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES 
+			                                (now(), 'ADMINISTRATOR_TECHNICIAN')") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
-			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'ADMINISTRATOR_ATTENDANT', DEFAULT)") !== TRUE)
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES   
+			                                (now(), 'ADMINISTRATOR_ATTENDANT')") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
-			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'USER', DEFAULT)") !== TRUE)
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES   
+			                                (now(), 'USER')") !== TRUE)
 				return ConfigInfraTools::MYSQL_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;			 
 		}
@@ -1311,6 +1313,24 @@ class InfraToolsFacedePersistenceDataBase
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserCorporation()))
+				return ConfigInfraTools::SUCCESS;
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function CreateInfraToolsDataBaseTableAssocUserNotification(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserNotification)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection,
+							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserNotification()))
 				return ConfigInfraTools::SUCCESS;
 			else
 			{
@@ -2113,6 +2133,9 @@ class InfraToolsFacedePersistenceDataBase
 				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_CORPORATION 
 				                               TO '$UserApplication'") !== TRUE)
 					return ConfigInfraTools::MYSQL_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_NOTIFICATION 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::MYSQL_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TYPE_ASSOC_USER_SERVICE 
 				                               TO '$UserApplication'") !== TRUE)
 					return ConfigInfraTools::MYSQL_INSERT_FAILED;
@@ -2241,6 +2264,8 @@ class InfraToolsFacedePersistenceDataBase
 					return ConfigInfraTools::MYSQL_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_CORPORATION 
 				                               TO '$UserApplicationImport'") !== TRUE)
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_NOTIFICATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
 					return ConfigInfraTools::MYSQL_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_ASSOC_USER_SERVICE 
 				                               TO '$UserApplicationImport'") !== TRUE)
@@ -2319,7 +2344,7 @@ class InfraToolsFacedePersistenceDataBase
 				}
 				if(!empty($ArrayTables))
 				{
-					if(count($ArrayTables) == 38)
+					if(count($ArrayTables) == 39)
 						return Config::SUCCESS;
 					else return Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED;
 				}
@@ -2330,6 +2355,34 @@ class InfraToolsFacedePersistenceDataBase
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
 				$return = Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FAILED;
+			}
+			return $return;
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
+	public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug, $MySqlConnection)
+	{
+		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
+		if($Debug == Config::CHECKBOX_CHECKED)
+			echo "<b>Query (SqlInfraToolsDataBaseGetRowCount)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if($result = $MySqlConnection->query(InfraToolsPersistenceDataBase::SqlInfraToolsDataBaseGetRowCount()))
+			{
+				$ArrayTables = array();
+				if ($row = $result->fetch_assoc()) 
+				{
+					$RowCount = $row['ROW_COUNT'];
+					$return = Config::SUCCESS;
+				}
+				else $return = Config::MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FETCH_FAILED;
+			}
+			else 
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				$return = Config::MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FAILED;
 			}
 			return $return;
 		}

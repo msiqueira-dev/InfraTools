@@ -29,17 +29,9 @@ Methods:
 											 $MonitoringDescription, $MonitoringName) 
 **************************************************************************/
 
-if (!class_exists("InfraToolsFactory"))
-{
-	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
-		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
-}
-
 class InfraToolsMonitoring
 {
 	/* Properties */
-	protected $InfraToolsFactory            = NULL;
 	protected $InfraToolsService            = NULL;
 	protected $InfraToolsStatusMonitoring   = NULL;
 	protected $InfraToolsTypeMonitoring     = NULL;
@@ -54,29 +46,28 @@ class InfraToolsMonitoring
 							    $InfraToolsTypeTimeMonitoringInstance, $MonitoringDescription, $MonitoringId, $MonitoringName,
 							    $RegisterDate) 
 	{
-		$this->InfraToolsFactory  = InfraToolsFactory::__create();
-		if($InfraToolsService != NULL)
+		if(!is_null($InfraToolsService))
 			$InfraToolsService = $InfraToolsServiceInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_SERVICE);
-		if($InfraToolsStatusMonitoringInstance != NULL)
+		if(!is_null($InfraToolsStatusMonitoringInstance))
 			$InfraToolsStatusMonitoring = $InfraToolsStatusMonitoringInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_STATUS);
-		if($InfraToolsTypeMonitoringInstance != NULL)
+		if(!is_null($InfraToolsTypeMonitoringInstance))
 			$InfraToolsTypeMonitoring = $InfraToolsTypeMonitoringInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_TYPE);
-		if($InfraToolsTypeTimeMonitoringInstance != NULL)
+		if(!is_null($InfraToolsTypeTimeMonitoringInstance))
 			$InfraToolsTypeTimeMonitoring = $InfraToolsTypeTimeMonitoringInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_TIME);
-		if($MonitoringDescription != NULL)
+		if(!is_null($MonitoringDescription))
 			$MonitoringDescription = $MonitoringDescription;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_DESCRIPTION);
-		if($MonitoringId != NULL)
+		if(!is_null($MonitoringId))
 			$MonitoringId = $MonitoringId;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_ID);
-		if($MonitoringName != NULL)
+		if(!is_null($MonitoringName))
 			$MonitoringName = $MonitoringName;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_MONITORING_NAME);
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
 	}
@@ -165,17 +156,17 @@ class InfraToolsMonitoring
 			                         $InfraToolsTypeMonitoringInstance, $InfraToolsTypeTimeMonitoringInstance,
 									 $MonitoringDescription, $MonitoringName) 
 	{
-		if($InfraToolsServiceInstance != NULL)
+		if(!is_null($InfraToolsServiceInstance))
 			$this->InfraToolsService = $InfraToolsServiceInstance;
-		if($InfraToolsStatusMonitoringInstance != NULL)
+		if(!is_null($InfraToolsStatusMonitoringInstance))
 			$this->InfraToolsTypeMonitoring = $InfraToolsStatusMonitoringInstance;
-		if($InfraToolsTypeMonitoringInstance != NULL)
+		if(!is_null($InfraToolsTypeMonitoringInstance))
 			$this->InfraToolsTypeMonitoring = $InfraToolsTypeMonitoringInstance;
-		if($InfraToolsTypeTimeMonitoringInstance != NULL)
+		if(!is_null($InfraToolsTypeTimeMonitoringInstance))
 			$this->InfraToolsTypeTimeMonitoring = $InfraToolsTypeTimeMonitoringInstance;
-		if($MonitoringDescription != NULL)
+		if(!is_null($MonitoringDescription))
 			$this->MonitoringDescription = $MonitoringDescription;
-		if($MonitoringName != NULL)
+		if(!is_null($MonitoringName))
 			$this->MonitoringName = $MonitoringName;
 	}
 }

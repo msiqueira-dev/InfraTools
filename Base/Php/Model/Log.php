@@ -95,7 +95,7 @@ class Log
 						$val = get_object_vars($val); 
 						while (list($keyObject, $valObjetct) = each ($val))
 						{
-							if ($valObjetct != NULL)
+							if (!is_null($valObjetct))
 								$logString .= $keyObject . ": " . $valObjetct . self::LOG_STRING_DIVISION . " ";
 							else $logString .= $keyObject . ": " . "NULL" . self::LOG_STRING_DIVISION . " ";
 						}		
@@ -128,7 +128,7 @@ class Log
 
 		if (file_exists($this->LogPathDirectory))
 		{
-			if (isset($_POST) && $_POST != NULL)
+			if (isset($_POST) && !is_null($_POST))
 			{
 				$logString .= date(self::LOG_DATE_DAY_MONTH_YEAR) . " - " . date(self::LOG_DATE_HOUR_MINUTES) . " (" . PHP_OS . "): ";
 				while (list($key, $val) = each ($_POST))
@@ -175,7 +175,7 @@ class Log
 						$val = get_object_vars($val); 
 						while (list($keyObject, $valObjetct) = each ($val))
 						{
-							if ($valObjetct != NULL)
+							if (!is_null($valObjetct))
 								$logString .= $keyObject . ": "  . $valObjetct           . self::LOG_STRING_DIVISION . " ";
 							else $logString .= $keyObject . ": " . "NULL" . self::LOG_STRING_DIVISION . " ";
 						}		

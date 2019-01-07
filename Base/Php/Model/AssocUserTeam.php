@@ -66,13 +66,13 @@ class AssocUserTeam
 	
 	public function GetTeamId()
 	{
-		if($this->Team != NULL)
+		if(!is_null($this->Team))
 			return $this->Team->GetTeamId();
 	}
 	
 	public function GetTeamName()
 	{
-		if($this->Team != NULL)
+		if(!is_null($this->Team))
 			return $this->Team->GetTeamName();
 	}
 	
@@ -83,7 +83,7 @@ class AssocUserTeam
 	
 	public function GetTypeAssocUserTeamTeamDescription()
 	{
-		if($this->TypeAssocUserTeam != NULL)
+		if(!is_null($this->TypeAssocUserTeam))
 			return $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
 	}
 	
@@ -94,7 +94,7 @@ class AssocUserTeam
 	
 	public function GetTeamUserEmail()
 	{
-		if($this->User != NULL)
+		if(!is_null($this->User))
 			return $this->User->GetEmail();
 	}
 	
@@ -122,13 +122,13 @@ class AssocUserTeam
 	/* METHODS */
 	public function UpdateAssocUserTeam($RegisterDate, $Team, $TypeAssocUserTeam, $User)
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		if($Team != NULL)
+		if(!is_null($Team))
 			$this->Team = $Team;
-		if($TypeAssocUserTeam != NULL)
+		if(!is_null($TypeAssocUserTeam))
 			$this->TypeAssocUserTeam = $TypeAssocUserTeam;
-		if($User != NULL)
+		if(!is_null($User))
 			$this->User = $User;
 	}
 }

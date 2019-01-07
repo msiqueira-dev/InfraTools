@@ -44,19 +44,19 @@ class InfraToolsInformationService
 								$InformationServiceValue, $Service) 
 	{
 		$this->InfraToolsFactory = InfraToolsFactory::__create();		
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
-		if($InformationServiceDescription != NULL)
-			$this->InformationServiceDescription    = $InformationServiceDescription;
+		if(!is_null($InformationServiceDescription))
+			$this->InformationServiceDescription = $InformationServiceDescription;
 		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_DESCRIPTION);
-		if($InformationServiceId != NULL)
-			$this->InformationServiceId    = $InformationServiceId;
+		if(!is_null($InformationServiceId))
+			$this->InformationServiceId = $InformationServiceId;
 		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_ID);
-		if($InformationServiceValue != NULL)
+		if(!is_null($InformationServiceValue))
 			$this->InformationServiceVaalue    = $InformationServiceValue;
 		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_VALUE);
-		if($Service != NULL)
+		if(!is_null($Service))
 			$this->InfraToolsService    = $InfraToolsService;
 		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_SERVICE);
 	}
@@ -90,13 +90,13 @@ class InfraToolsInformationService
 	
 	public function GetInformationServiceServiceId()
 	{
-		if($this->InfraToolsService != NULL)
+		if(!is_null($this->InfraToolsService))
 			return $this->InfraToolsService->GetServiceId();
 	}
 	
 	public function GetInformationServiceServiceName()
 	{
-		if($this->InfraToolsService != NULL)
+		if(!is_null($this->InfraToolsService))
 			return $this->InfraToolsService->GetServiceName();
 	}
 	
@@ -119,9 +119,9 @@ class InfraToolsInformationService
 	/* METHODS */
 	public function UpdateServiceInformation($InformationServiceDescription, $InformationServiceValue)
 	{
-		if ($InformationServiceDescription != NULL)
+		if (!is_null($InformationServiceDescription))
 			$this->InformationServiceDescription = $InformationServiceDescription;
-		if($InformationServiceValue != NULL)
+		if(!is_null($InformationServiceValue))
 			$this->InformationServiceValue = $InformationServiceValue;
 	}	
 }

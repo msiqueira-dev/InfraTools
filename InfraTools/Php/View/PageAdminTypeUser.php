@@ -65,8 +65,8 @@ class PageAdminTypeUser extends PageAdmin
 		//FORM_TYPE_USER_SELECT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserId', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID],
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
 									        &$this->InstanceTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
@@ -76,8 +76,8 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'UserSelectByTypeUserId', 
-										  array($this->InstanceTypeUser->GetTypeUserId(), 
+				if($this->ExecuteFunction($_POST, 'UserSelectByTypeUserDescription', 
+										  array($this->InstanceTypeUser->GetTypeUserDescription(), 
 											    &$this->ArrayInstanceUser),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
@@ -131,7 +131,8 @@ class PageAdminTypeUser extends PageAdmin
 		{				
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->TypeUserDeleteByTypeUserId($this->InstanceTypeUser, $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				if($this->TypeUserDeleteByTypeUserDescription($this->InstanceTypeUser, $this->InputValueHeaderDebug) 
+				   == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 												  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
@@ -158,7 +159,7 @@ class PageAdminTypeUser extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{;
-				if($this->ExecuteFunction($_POST, 'TypeUserUpdateByTypeUserId', 
+				if($this->ExecuteFunction($_POST, 'TypeUserUpdateByTypeUserDescription', 
 									      array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
 										        &$this->InstanceTypeUser),
 									      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)

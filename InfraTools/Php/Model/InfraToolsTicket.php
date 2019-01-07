@@ -37,14 +37,11 @@ class InfraToolsTicket extends Ticket
 	public function __construct($RegisterDate, $TicketDescription, $TicketId, $TicketService,
 								$TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType)
 	{
-		$this->RegisterDate       = $RegisterDate;
-		$this->TicketDescription  = $TicketDescription;
-		$this->TicketId           = $TicketId;
-		$this->TicketService      = $TicketService;
-		$this->TicketStatus       = $TicketStatus;
-		$this->TicketSuggestion   = $TicketSuggestion;
-		$this->TicketTitle        = $TicketTitle;
-		$this->TicketType         = $TicketType;
+		parent::__construct($RegisterDate, $TicketDescription, $TicketId, $TicketService,
+							$TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType);
+		if(isset($TicketService))
+			$this->TicketService = $TicketService;
+		else throw new Exception(ConfigInfraTools::EXCEPTION_TICKET_SERVICE);
 	}
 	
 	/* Clone */
@@ -61,26 +58,35 @@ class InfraToolsTicket extends Ticket
 	
 	public function GetTicketServiceActive()
 	{
-		if($this->TicketService != NULL)
-			return $this->TicketServiceActive();
+		if(!is_null($this->TicketService))
+		{
+			if(is_object($this->TicketServiceActive))
+				return $this->TicketServiceActive();
+		}
 	}
 	
 	public function GetTicketServiceDescription()
 	{
-		if($this->TicketService != NULL)
+		if(!is_null($this->TicketService))
+		{
 			return $this->TicketServiceDescription();
+		}
 	}
 	
 	public function GetTicketServiceId()
 	{
-		if($this->TicketService != NULL)
+		if(!is_null($this->TicketService))
+		{
 			return $this->TicketServiceId();
+		}
 	}
 	
 	public function GetTicketServiceName()
 	{
-		if($this->TicketService != NULL)
+		if(!is_null($this->TicketService))
+		{
 			return $this->TicketServiceName();
+		}
 	}
 	
 	/* SET */
@@ -92,17 +98,19 @@ class InfraToolsTicket extends Ticket
 	/* METHODS */
 	public function UpdateTicket($TicketDescription, $TicketService, $TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType)
 	{
-		if($TicketDescription != NULL)
+		if(!is_null($TicketDescription))
 			$this->TicketDescription = $TicketDescription;
-		if($TicketDescription != NULL)
-			$this->TicketService = $TicketService;
-		if($TicketDescription != NULL)
+		if(!is_null($TicketService))
+		{
+			if(is_object($TicketService))
+				$this->TicketService = $TicketService;
+		}
+		if(!is_null($TicketStatus))
 			$this->TicketStatus = $TicketStatus;
-		if($TicketDescription != NULL)
 			$this->TicketSuggestion = $TicketSuggestion;
-		if($TicketDescription != NULL)
+		if(!is_null($TicketTitle))
 			$this->TicketTitle = $TicketTitle;
-		if($TicketDescription != NULL)
+		if(!is_null($TicketType))
 			$this->TicketType = $TicketType;
 	}
 }

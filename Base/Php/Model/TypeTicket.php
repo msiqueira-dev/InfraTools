@@ -26,10 +26,10 @@ class TypeTicket
 	/* Constructor */
 	public function __construct($RegisterDate, $TypeTicketDescription) 
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($TypeTicketDescription != NULL)
+		if(!is_null($TypeTicketDescription))
 			$this->TypeTicketDescription  = $TypeTicketDescription;
 		else throw new Exception(Config::EXCEPTION_TYPE_TICKET_DESCRIPTION);
 	}
@@ -54,13 +54,14 @@ class TypeTicket
 	/* SET */
 	public function SetTypeTicketDescription($TypeTicketDescription)
 	{
-		$this->TypeTicketDescription = $TypeTicketDescription;
+		if(!is_null($TypeTicketDescription))
+			$this->TypeTicketDescription = $TypeTicketDescription;
 	}
 	
 	/* METHODS */
 	public function UpdateTypeTicket($TypeTicketDescription)	
 	{
-		if($TypeTicketDescription != NULL)
+		if(!is_null($TypeTicketDescription))
 			$this->TypeTicketDescription = $TypeTicketDescription;
 	}
 }

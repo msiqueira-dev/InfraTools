@@ -77,30 +77,36 @@ class Corporation
 	/* SET */
 	public function SetArrayDepartment($ArrayInstanceDepartment)
 	{
-		$this->ArrayDepartament = $ArrayInstanceDepartment;
+		if(!is_null($ArrayInstanceDepartment))
+			$this->ArrayDepartament = $ArrayInstanceDepartment;
 	}
 	
 	public function SetCorporationActive($CorporationActive)
 	{
-		$this->CorporationActive = $CorporationActive;
+		if(!is_null($CorporationActive))
+			$this->CorporationActive = $CorporationActive;
 	}
 	
 	public function SetCorporationName($CorporationName)
 	{
-		$this->CorporationName = $CorporationName;
+		if(!is_null($CorporationName))
+			$this->CorporationName = $CorporationName;
 	}
 	
 	/* METHODS */
 	public function UpdateCorporation($CorporationActive, $ArrayInstanceDepartment, $CorporationName)
 	{
-		if(is_bool($CorporationActive))
-			$this->CorporationActive = $CorporationActive;
-		if($ArrayInstanceDepartment != NULL)
-			$this->ArrayDepartment   = $ArrayInstanceDepartment;
-		if($CorporationName != NULL)
-			$this->CorporationName   = $CorporationName;
-		if($RegisterDate != NULL)
-			$this->RegisterDate      = $RegisterDate;
+		if(!is_null($CorporationActive))
+		{
+			if(is_bool($CorporationActive))
+				$this->CorporationActive = $CorporationActive;
+		}
+		if(!is_null($ArrayInstanceDepartment))
+			$this->ArrayDepartment = $ArrayInstanceDepartment;
+		if(!is_null($CorporationName))
+			$this->CorporationName = $CorporationName;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 	}
 }
 ?>

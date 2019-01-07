@@ -47,30 +47,13 @@ class InfraToolsUser extends User
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
 	{
+		parent::__construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
+							$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
+							$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+							$TwoStepVerification, $UserActive, $UserConfirmed, 
+							$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
+							$UserTypeInstance, $UserUniqueId);
 		$this->InfraToolsFactory = InfraToolsFactory::__create();
-		$this->ArrayAssocUserTeam       = $ArrayAssocUserTeam;
-		$this->ArrayNotification        = $ArrayNotification;
-		$this->AssocUserCorporation     = $AssocUserCorporation;
-		$this->BirthDate                = $BirthDate;
-		$this->Corporation              = $CorporationInstance;
-		$this->Country                  = $Country;
-		$this->Department               = $DepartmentInstance;
-		$this->UserEmail                = $UserEmail;
-		$this->Gender                   = $Gender;
-		$this->HashCode                 = $HashCode;
-		$this->UserName                 = $UserName;
-		$this->Region                   = $Region;
-		$this->RegisterDate             = $RegisterDate;
-		$this->SessionExpires           = $SessionExpires;
-		$this->TwoStepVerification      = $TwoStepVerification;
-		$this->UserActive               = $UserActive;
-		$this->UserConfirmed            = $UserConfirmed;
-		$this->UserPhonePrimary         = $UserPhonePrimary;
-		$this->UserPhonePrimaryPrefix   = $UserPhonePrimaryPrefix;
-		$this->UserPhoneSecondary       = $UserPhoneSecondary;
-		$this->UserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefix;
-		$this->UserType                 = $UserTypeInstance;
-		$this->UserUniqueId             = $UserUniqueId; 
 	}
 	
 	/* Clone */
@@ -119,7 +102,7 @@ class InfraToolsUser extends User
 	public function GetUserUniqueIdImage()
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
-		if($this->UserUniqueId != NULL)
+		if(!is_null($this->UserUniqueId))
 			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
 		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
 	}

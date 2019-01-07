@@ -190,9 +190,9 @@ class FormValidator
 	{
 		if(isset($Bool))
 		{
-			if($Bool != NULL && !empty($Bool))
+			if(!empty($Bool))
 			{
-				if($Bool == TRUE || $Bool == FALSE)
+				if(is_bool($Bool))
 					return self::SUCCESS;
 				else return self::INVALID_BOOL;
 			}
@@ -205,7 +205,7 @@ class FormValidator
 	{
 		if(isset($CorporationName))
 		{
-			if($CorporationName != NULL && !empty($CorporationName) && $CorporationName != $DefaultValue)
+			if(!is_null($CorporationName) && !empty($CorporationName) && $CorporationName != $DefaultValue)
 			{
 				if(preg_match(
 	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])*)*$)/', 
@@ -222,7 +222,7 @@ class FormValidator
 	{
 		if(isset($StringToCompare))
 		{
-			if($StringToCompare != NULL && !empty($StringToCompare) && $StringToCompare != $DefaultValue)
+			if(!is_null($StringToCompare) && !empty($StringToCompare) && $StringToCompare != $DefaultValue)
 			{
 				if($StringToCompare == $String)
 					return self::SUCCESS;
@@ -237,7 +237,7 @@ class FormValidator
 	{
 		if(isset($Country))
 		{
-			if($Country != NULL && !empty($Country) && $Country != $DefaultValue)
+			if(!is_null($Country) && !empty($Country) && $Country != $DefaultValue)
 			{
 				if(preg_match(
 	               '/((([A-Z]|([Å])|([(][A-Z]))(([a-z])|([ç])|([ã])|([é])|([í])|([ô])|([(])|([)])|([&])|([’]))+)|([(DRC)])|([(FYROM)])|([U.S.])|([&])|([d’])|([-])|([of])|([ ]))+/', 
@@ -254,7 +254,7 @@ class FormValidator
 	{
 		if(isset($RegionCode))
 		{
-			if($RegionCode != NULL && !empty($RegionCode) && $RegionCode != $DefaultValue)
+			if(!is_null($RegionCode) && !empty($RegionCode) && $RegionCode != $DefaultValue)
 			{
 				if(preg_match('/^[A-Z]{2}$/', $RegionCode) > 0)
 					return self::SUCCESS;
@@ -269,7 +269,7 @@ class FormValidator
 	{
 		if(isset($Cpf))
 		{
-			if ($Cpf != NULL && !empty($Cpf))
+			if (!is_null($Cpf) && !empty($Cpf))
 			{
 				if ($Cpf != "")
 				{
@@ -314,9 +314,9 @@ class FormValidator
 	{
 		if(isset($Year) && isset($Month) && isset($Day))
 		{
-			if (($Year != NULL  && !empty($Year))
-			  &&($Month != NULL && !empty($Month)) 
-			  &&($Day != NULL   && !empty($Day)))
+			if ((!is_null($Year) && !empty($Year))
+			  &&(!is_null($Month) && !empty($Month)) 
+			  &&(!is_null($Day)  && !empty($Day)))
 			{
 				if ($Year != $DefaultValueYear && $Month != $DefaultValueMonth && $Day != $DefaultValueDay)
 				{
@@ -335,7 +335,7 @@ class FormValidator
 	{
 		if(isset($Day))
 		{
-			if($Day != NULL && !empty($Day))
+			if(!is_null($Day) && !empty($Day))
 			{
 				if($this->ValidateNumericValue($Day, "") == self::SUCCESS)
 				{
@@ -354,7 +354,7 @@ class FormValidator
 	{
 		if(isset($Month))
 		{
-			if($Month != NULL && !empty($Month))
+			if(!is_null($Month) && !empty($Month))
 			{
 				if($this->ValidateNumericValue($Month, "") == self::SUCCESS)
 				{
@@ -373,7 +373,7 @@ class FormValidator
 	{
 		if(isset($Year))
 		{
-			if($Year != NULL && !empty($Year))
+			if(!is_null($Year) && !empty($Year))
 			{
 				if($this->ValidateNumericValue($Year, "") == self::SUCCESS)
 				{
@@ -392,7 +392,7 @@ class FormValidator
 	{
 		if(isset($DepartmentInitials))
 		{
-			if($DepartmentInitials != NULL && !empty($DepartmentInitials))
+			if(!is_null($DepartmentInitials) && !empty($DepartmentInitials))
 			{
 				if(preg_match(
 	                '/(^([a-zA-Z]|[.]|[-]|[^\x{0000}-\x{007F}])+$)/', 
@@ -409,7 +409,7 @@ class FormValidator
 	{
 		if(isset($DepartmentName))
 		{
-			if($DepartmentName != NULL && !empty($DepartmentName))
+			if(!is_null($DepartmentName) && !empty($DepartmentName))
 			{
 				if(preg_match(
 	                '/(^([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
@@ -426,7 +426,7 @@ class FormValidator
 	{
 		if(isset($Description))
 		{
-			if($Description != NULL && !empty($Description))
+			if(!is_null($Description) && !empty($Description))
 			{
 				if(preg_match('/(^([a-zA-Z]|[.]|[-]|[_]|[ ]|[0-9])*)$/', $Description) > 0)
 					return self::SUCCESS;
@@ -441,7 +441,7 @@ class FormValidator
 	{
 		if(isset($EmailAddress))
 		{
-			if ($EmailAddress != NULL && !empty($EmailAddress))
+			if (!is_null($EmailAddress) && !empty($EmailAddress))
 			{
 				if ($EmailAddress != "")
 				{
@@ -464,7 +464,7 @@ class FormValidator
 	{
 		if(isset($Gender))
 		{
-			if($Gender != NULL && !empty($Gender) && $Gender != $DefaultValue)
+			if(!is_null($Gender) && !empty($Gender) && $Gender != $DefaultValue)
 			{
 				$arrayGender[0] = "M"; 
 				$arrayGender[1] = "F";
@@ -482,7 +482,7 @@ class FormValidator
 	{
 		if(isset($Host))
 		{
-			if($Host != NULL && !empty($Host))
+			if(!is_null($Host) && !empty($Host))
 			{
 				if(strstr($Host, ".") && strlen($Host) > 3 && strlen($Host) < 255 && (!strstr($Host, "..")) && (!strstr($Host, " "))
 				   && preg_match('/[a-zA-Z]+/', $Host) && (!strstr($Host, "@")) &&
@@ -499,7 +499,7 @@ class FormValidator
 	{
 		if(isset($NonNumeric))
 		{
-			if ($NonNumeric != NULL && !empty($NonNumeric))
+			if (!is_null($NonNumeric) && !empty($NonNumeric))
 			{
 				if ($NonNumeric != "")
 				{
@@ -522,7 +522,7 @@ class FormValidator
 	{
 		if(isset($IpAddress))
 		{
-			if($IpAddress != NULL && !empty($IpAddress))
+			if(!is_null($IpAddress) && !empty($IpAddress))
 			{
 				if(preg_match('/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/', $IpAddress) > 0)
 					return self::SUCCESS;
@@ -537,7 +537,7 @@ class FormValidator
 	{
 		if(isset($IpMask))
 		{
-			if($IpMask != NULL && !empty($IpMask))
+			if(!is_null($IpMask) && !empty($IpMask))
 			{
 				if($this->ValidateNumericValue($IpMask, "") == self::SUCCESS)
 				{
@@ -556,7 +556,7 @@ class FormValidator
 	{
 		if(isset($Message))
 		{
-			if($Message != NULL && !empty($Message) && $Message != $DefaultValue)
+			if(!is_null($Message) && !empty($Message) && $Message != $DefaultValue)
 				return self::SUCCESS;
 			else return self::INVALID_NULL;
 		}
@@ -567,7 +567,7 @@ class FormValidator
 	{
 		if(isset($Name))
 		{
-			if($Name != NULL && !empty($Name) && $Name != $DefaultValue)
+			if(!is_null($Name) && !empty($Name) && $Name != $DefaultValue)
 			{
 				if(preg_match(
 				'/(^([a-zA-Z]|[^\x{0000}-\x{007F}])+(([ ])+([a-zA-Z]|[^\x{0000}-\x{007F}]|(([a-zA-Z]|[^\x{0000}-\x{007F}])[.]))+)+$)/'
@@ -584,7 +584,7 @@ class FormValidator
 	{
 		if(isset($NotNullOrEmpty))
 		{
-			if ($NotNull != NULL && !empty($NotNullOrEmpty))
+			if (!is_null($NotNull) && !empty($NotNullOrEmpty))
 			{
 				if ($NotNull != "")
 				{
@@ -603,7 +603,7 @@ class FormValidator
 	{
 		if(isset($Numeric))
 		{
-			if ($Numeric != NULL && (!empty($Numeric) || $Numeric==0))
+			if (!is_null($Numeric) && (!empty($Numeric) || $Numeric==0))
 			{
 				if ($Numeric != "")
 				{
@@ -627,7 +627,7 @@ class FormValidator
 		
 		if(isset($Password))
 		{
-			if($Password != NULL && !empty($Password))
+			if(!is_null($Password) && !empty($Password))
 			{
 				if(preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,18}$/', $Password) > 0)
 					return self::SUCCESS;
@@ -642,7 +642,7 @@ class FormValidator
 	{
 		if(isset($RegistrationId))
 		{
-			if($RegistrationId != NULL && !empty($RegistrationId))
+			if(!is_null($RegistrationId) && !empty($RegistrationId))
 			{
 				if(preg_match('/^(^([a-zA-Z]|[ ]|[0-9])+$)/', $RegistrationId) > 0)
 					return self::SUCCESS;
@@ -657,7 +657,7 @@ class FormValidator
 	{
 		if(isset($Service))
 		{
-			if($Service != NULL && !empty($Service))
+			if(!is_null($Service) && !empty($Service))
 			{
 				if(preg_match(
 	                '/(^([a-zA-Z]|[.]|[-]|[_]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
@@ -674,7 +674,7 @@ class FormValidator
 	{
 		if(isset($String))
 		{
-			if($String != NULL && !empty($String))
+			if(!is_null($String) && !empty($String))
 			{
 				if (strlen($String) <= $Size)
 					return self::SUCCESS;
@@ -689,7 +689,7 @@ class FormValidator
 	{
 		if(isset($Subject))
 		{
-			if($Subject != NULL && !empty($Subject) && $Subject != $DefaultValue)
+			if(!is_null($Subject) && !empty($Subject) && $Subject != $DefaultValue)
 			{
 				if(in_array($Subject, $ArrayOption))
 					return self::SUCCESS;
@@ -704,7 +704,7 @@ class FormValidator
 	{
 		if(isset($TeamName))
 		{
-			if($TeamName != NULL && !empty($TeamName))
+			if(!is_null($TeamName) && !empty($TeamName))
 			{
 				
 				if(preg_match(
@@ -723,7 +723,7 @@ class FormValidator
 		
 		if(isset($Title))
 		{
-			if($Title != NULL && !empty($Title))
+			if(!is_null($Title) && !empty($Title))
 			{
 				if(preg_match('/(^([a-zA-Z]|[ ]|[^\x{0000}-\x{007F}])+$)/', $Title) > 0)
 					return self::SUCCESS;
@@ -738,7 +738,7 @@ class FormValidator
 	{
 		if(isset($TypeAssocUserServiceDescription))
 		{
-			if($TypeAssocUserServiceDescription != NULL && !empty($TypeAssocUserServiceDescription))
+			if(!is_null($TypeAssocUserServiceDescription) && !empty($TypeAssocUserServiceDescription))
 			{
 				if(preg_match('/(^([a-zA-Z])+$)/', $TypeAssocUserServiceDescription) > 0)
 					return self::SUCCESS;
@@ -754,7 +754,7 @@ class FormValidator
 		
 		if(isset($TypeService))
 		{
-			if($TypeService != NULL && !empty($TypeService))
+			if(!is_null($TypeService) && !empty($TypeService))
 			{
 				if(preg_match('/(^([a-zA-Z]|[ ]|[_]|[^\x{0000}-\x{007F}])+$)/', $TypeService) > 0)
 					return self::SUCCESS;
@@ -769,7 +769,7 @@ class FormValidator
 	{
 		if(isset($Url))
 		{
-			if($Url != NULL && !empty($Url))
+			if(!is_null($Url) && !empty($Url))
 			{
 				if(strstr($Url, "http://") == FALSE && strstr($Url, "https://") == FALSE)
 					$Url = "http://" . $Url;
@@ -786,7 +786,7 @@ class FormValidator
 	{
 		if(isset($UserUniqueId))
 		{
-			if($UserUniqueId != NULL && !empty($UserUniqueId))
+			if(!is_null($UserUniqueId) && !empty($UserUniqueId))
 			{
 				if(preg_match('/^[a-zA-Z_.-]{1,25}$/', $UserUniqueId) > 0)
 					return self::SUCCESS;

@@ -48,7 +48,6 @@ Get / Set:
 			public function GetUserPhoneSecondary();
 			public function GetUserPhoneSecondaryPrefix();
 			public function GetUserTypeDescription();
-			public function GetUserTypeId();
 			public function GetUserUniqueId();
 			public function SetArrayAssocUserTeam($ArrayAssocUserTeam);
 			public function SetArrayNotification($ArrayNotification);
@@ -126,7 +125,10 @@ class User
 								$UserTypeInstance, $UserUniqueId) 
     {
 		if(!is_null($ArrayAssocUserTeam))
-			$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
+		{
+			if(is_array($ArrayAssocUserTeam))
+				$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
+		}
 		if(!is_null($ArrayNotification))
 			$this->ArrayNotification = $ArrayNotification;
 		if(!is_null($AssocUserCorporation))
@@ -224,7 +226,7 @@ class User
 	
 	public function GetAssocUserCorporationUserRegistrationDate()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 		{
 			if(is_object($this->AssocUserCorporation))
 				return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationDate();
@@ -235,7 +237,7 @@ class User
 	
 	public function GetAssocUserCorporationUserRegistrationDateDay()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 		{
 			if(is_object($this->AssocUserCorporation))
 				return date('d',strtotime($this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationDate()));
@@ -246,7 +248,7 @@ class User
 	
 	public function GetAssocUserCorporationUserRegistrationDateMonth()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 		{
 			if(is_object($this->AssocUserCorporation))
 				return date('m',strtotime($this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationDate()));
@@ -257,7 +259,7 @@ class User
 	
 	public function GetAssocUserCorporationUserRegistrationDateYear()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 		{
 			if(is_object($this->AssocUserCorporation))
 				return date('Y',strtotime($this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationDate()));
@@ -268,7 +270,7 @@ class User
 	
 	public function GetAssocUserCorporationUserRegistrationId()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationId();
 		else return NULL;
 	}
@@ -303,38 +305,38 @@ class User
 	
 	public function GetCorporationName()
 	{
-		if($this->Corporation != NULL)
+		if(!is_null($this->Corporation))
 			return $this->Corporation->GetCorporationName();
 		else return NULL;
 	}
 	
 	public function GetCountry()
 	{
-		if($this->Country != NULL)
+		if(!is_null($this->Country))
 			return $this->Country;
 	}
 	
 	public function GetCountryAbbreviation()
 	{
-		if($this->Country != NULL)
+		if(!is_null($this->Country))
 			return $this->Country->GetCountryAbbreviation();
 	}
 	
 	public function GetCountryName()
 	{
-		if($this->Country != NULL)
+		if(!is_null($this->Country))
 			return $this->Country->GetCountryName();
 	}
 	
 	public function GetCountryRegionCode()
 	{
-		if($this->Country != NULL)
+		if(!is_null($this->Country))
 			return $this->Country->GetCountryRegionCode();
 	}
 	
 	public function GetDepartment()
 	{
-		if($this->Department != NULL)
+		if(!is_null($this->Department))
 		{
 			return $this->Department;
 		}
@@ -342,7 +344,7 @@ class User
 	
 	public function GetDepartmentInitials()
 	{
-		if($this->Department != NULL)
+		if(!is_null($this->Department))
 		{
 			return $this->Department->GetDepartmentInitials();	
 		}
@@ -350,7 +352,7 @@ class User
 	
 	public function GetDepartmentName()
 	{
-		if($this->Department != NULL)
+		if(!is_null($this->Department))
 			return $this->Department->GetDepartmentName();
 		else return NULL;
 	}
@@ -435,15 +437,8 @@ class User
 	
 	public function GetUserTypeDescription()
 	{
-		if($this->UserType != NULL)
+		if(!is_null($this->UserType))
 			return $this->UserType->GetTypeUserDescription();
-		else return NULL;
-	}
-	
-	public function GetUserTypeId()
-	{
-		if($this->UserType != NULL)
-			return $this->UserType->GetTypeUserId();
 		else return NULL;
 	}
 	
@@ -575,36 +570,36 @@ class User
 	/* METHODS */
 	public function CheckAssocUserCorporationRegistrationDateActive()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationDate();
 		else return NULL;
 	}
 	
 	public function CheckAssocUserCorporationRegistrationIdActive()
 	{
-		if($this->AssocUserCorporation != NULL)
+		if(!is_null($this->AssocUserCorporation))
 			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationId();
 		else return NULL;
 	}
 	public function CheckCorporationActive()
 	{
-		if($this->Corporation != NULL)
+		if(!is_null($this->Corporation))
 			return $this->Corporation->GetCorporationActive();
 		else return NULL;
 	}
 	
 	public function CheckDepartmentExists()
 	{
-		if($this->Department != NULL)
+		if(!is_null($this->Department))
 			return TRUE;
 		else return FALSE;
 	}
 	
 	public function CheckSuperUser()
 	{
-		if($this->UserType != NULL)
+		if(!is_null($this->UserType))
 		{
-			if($this->UserType->GetTypeUserId() == Config::TYPE_USER_SUPER)
+			if($this->UserType->GetTypeUserDescription() == Config::TYPE_USER_SUPER)
 				return TRUE;
 			else return FALSE;
 		}
@@ -613,7 +608,7 @@ class User
 	
 	public function PushArrayAssocUserTeam($AssocUserTeam)
 	{
-		if($AssocUserTeam != NULL)
+		if(!is_null($AssocUserTeam))
 		{
 			if(is_object($AssocUserTeam))
 			{
@@ -633,44 +628,56 @@ class User
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 							   $UserTypeInstance, $UserUniqueId)
 	{
-		$this->ArrayAssocUserTeam          = $ArrayAssocUserTeam;
-		$this->ArrayNotification           = $ArrayNotification;
-		$this->AssocUserCorporation            = $AssocUserCorporation;
-		if($BirthDate != NULL)
-			$this->BirthDate                   = $BirthDate;	
-		$this->Corporation                     = $CorporationInstance;
-		if($Country != NULL)
-			$this->Country                     = $Country;
-		$this->Department                  = $DepartmentInstance;
-		if($UserEmail != NULL)
-			$this->UserEmail                   = $UserEmail;
-		if($Gender != NULL)
-			$this->Gender                      = $Gender;
-		if($HashCode != NULL)
-			$this->HashCode                    = $HashCode;
-		if($LoggedIn != NULL)
-			$this->LoggedIn                    = $LoggedIn;
-		if($UserName != NULL)
-			$this->UserName                    = $UserName;
-		$this->Region                          = $Region;
-		if($RegisterDate != NULL)
-			$this->RegisterDate                = $RegisterDate;
-		if(is_bool($SessionExpires))
-			$this->SessionExpires              = $SessionExpires;
-		if(is_bool($TwoStepVerification))
-			$this->TwoStepVerification         = $TwoStepVerification;
-		if(is_bool($UserActive))
-			$this->UserActive                  = $UserActive;
-		if(is_bool($UserConfirmed))
-			$this->UserConfirmed               = $UserConfirmed;
-		$this->UserPhonePrimary                = $UserPhonePrimary;
-		$this->UserPhonePrimaryPrefix          = $UserPhonePrimaryPrefix;
-		$this->UserPhoneSecondary              = $UserPhoneSecondary;
-		$this->UserPhoneSecondaryPrefix        = $UserPhoneSecondaryPrefix;
-		if($UserTypeInstance != NULL)
-			$this->UserType                    = $UserTypeInstance;
-		if($UserUniqueId != NULL)
-			$this->UserUniqueId                = $UserUniqueId;
+		$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
+		$this->ArrayNotification = $ArrayNotification;
+		$this->AssocUserCorporation = $AssocUserCorporation;
+		if(!is_null($BirthDate))
+			$this->BirthDate = $BirthDate;	
+		$this->Corporation = $CorporationInstance;
+		if(!is_null($Country))
+			$this->Country = $Country;
+		$this->Department = $DepartmentInstance;
+		if(!is_null($UserEmail))
+			$this->UserEmail = $UserEmail;
+		if(!is_null($Gender))
+			$this->Gender = $Gender;
+		if(!is_null($HashCode))
+			$this->HashCode = $HashCode;
+		if(!is_null($LoggedIn))
+			$this->LoggedIn = $LoggedIn;
+		if(!is_null($UserName))
+			$this->UserName = $UserName;
+		$this->Region = $Region;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		if(!is_null($SessionExpires))
+		{
+			if(is_bool($SessionExpires))
+				$this->SessionExpires = $SessionExpires;
+		}
+		if(!is_null($TwoStepVerification))
+		{
+			if(is_bool($TwoStepVerification))
+				$this->TwoStepVerification = $TwoStepVerification;
+		}
+		if(!is_null($UserActive))
+		{
+			if(is_bool($UserActive))
+				$this->UserActive = $UserActive;
+		}
+		if(!is_null($UserConfirmed))
+		{
+			if(is_bool($UserConfirmed))
+				$this->UserConfirmed = $UserConfirmed;
+		}
+		$this->UserPhonePrimary = $UserPhonePrimary;
+		$this->UserPhonePrimaryPrefix = $UserPhonePrimaryPrefix;
+		$this->UserPhoneSecondary = $UserPhoneSecondary;
+		$this->UserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefix;
+		if(!is_null($UserTypeInstance))
+			$this->UserType = $UserTypeInstance;
+		if(!is_null($UserUniqueId))
+			$this->UserUniqueId = $UserUniqueId;
 	}
 }
 

@@ -111,12 +111,14 @@ class Ticket
 	/* SET */
 	public function SetTicketDescription($TicketDescription)
 	{
-		$this->TicketDescription = $TicketDescription;
+		if(!is_null($TicketDescription))
+			$this->TicketDescription = $TicketDescription;
 	}
 	
 	public function SetTicketStatus($TicketStatus)
 	{
-		$this->TicketStatus = $TicketStatus;
+		if(!is_null($TicketStatus))
+			$this->TicketStatus = $TicketStatus;
 	}
 	
 	public function SetTicketSuggestion($TicketSuggestion)
@@ -126,37 +128,40 @@ class Ticket
 	
 	public function SetTicketTitle($TicketTitle)
 	{
+		if(!is_null($TicketTitle))
 		$this->TicketTitle = $TicketTitle;
 	}
 	
 	public function SetTicketType($TicketType)
 	{
-		$this->TicketType = $TicketType;
+		if(!is_null($TicketType))
+			$this->TicketType = $TicketType;
 	}
 	
 	public function SetTypeStatusTicketDescription($TypeStatusTicketDescription)
 	{
-		$this->TicketStatus->SetTypeStatusTicketDescription($TypeStatusTicketDescription); 
+		if(!is_null($TypeStatusTicketDescription))
+			$this->TicketStatus->SetTypeStatusTicketDescription($TypeStatusTicketDescription); 
 	}
 	
 	public function SetTypeTicketDescription($TypeTicketDescription)
 	{
-		$this->TicketType->SetTypeTicketDescription($TypeStatusTicketDescription); 
+		if(!is_null($TypeTicketDescription))
+			$this->TicketType->SetTypeTicketDescription($TypeStatusTicketDescription); 
 	}
 	
 	/* METHODS */
 	public function UpdateTicket($TicketDescription, $TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType)
 	{
-		if($TicketDescription != NULL)
-			$this->TicketDescription  = $TicketDescription;
-		if($TicketStatus != NULL)
-			$this->TicketStatus       = $TicketStatus;
-		if($TicketSuggestion != NULL)
-			$this->TicketSuggestion   = $TicketSuggestion;
-		if($TicketTitle != NULL)
-			$this->TicketTitle        = $TicketTitle;
-		if($TicketType != NULL)
-			$this->TicketType         = $TicketType;
+		if(!is_null($TicketDescription))
+			$this->TicketDescription = $TicketDescription;
+		if(!is_null($TicketStatus))
+			$this->TicketStatus = $TicketStatus;
+		$this->TicketSuggestion = $TicketSuggestion;
+		if(!is_null($TicketTitle))
+			$this->TicketTitle = $TicketTitle;
+		if(!is_null($TicketType))
+			$this->TicketType = $TicketType;
 	}
 }
 ?>

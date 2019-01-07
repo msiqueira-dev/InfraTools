@@ -184,9 +184,8 @@ Functions:
 			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug,
 			                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, TypeUserId, $Debug, $MySqlConnection = NULL, 
-			                                           $CloseConnectaion = TRUE);
+			public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescriptionNew, $Debug, 
+			                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, 
 			                                                $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -206,8 +205,8 @@ Functions:
 			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
 																     &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
-			                                       &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			                                                &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -1564,27 +1563,15 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function TypeUserSelectByTypeUserId($Id, &$TypeUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, $Debug, 
+														$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
-			$return = $instanceFacedePersistenceTypeUser->TypeUserSelectByTypeUserId($Id, $TypeUser, $Debug, $MySqlConnection);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
-	public function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $TypeUserId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
-			$return = $instanceFacedePersistenceTypeUser->TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $TypeUserId, 
-																					 $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceTypeUser->TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, 
+																					          $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1755,15 +1742,15 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
-										   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+										            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 	 	if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, $ArrayInstanceUser,
-																			 $RowCount, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceUser->UserSelectByTypeUserDescription($UserSelectByTypeUserDescription, $Limit1, $Limit2,
+																			          $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

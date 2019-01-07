@@ -62,6 +62,9 @@ class Pt
 	const COUNTRY                                                   = "País";
 	const COUNTRY_ABBREVIATION                                      = "Sigla do País";
 	const COUNTRY_NOT_FOUND                                         = "Nenhum país encontrado";
+	const DATABASE                                                  = "Banco de Dados";
+	const DATABASE_ROW_COUNT                                        = "Quantidade total de registros";
+	const DATABASE_TABLE_QUANTITY                                   = "Quantidade de tabelas";
 	const DEACTIVATED                                               = "Desativado";
 	const DEFAULT_VALUE                                             = "Por favor preencha os campos necessários";
 	const DEPARTMENT                                                = "Departamento";
@@ -203,6 +206,7 @@ class Pt
 	const HREF_PAGE_ADMIN_CORPORATION                               = "/Pt/PageAdminCorporation";
 	const HREF_PAGE_ADMIN_COUNTRY                                   = "/Pt/PageAdminCountry";
 	const HREF_PAGE_ADMIN_DEPARTMENT                                = "/Pt/PageAdminDepartment";
+	const HREF_PAGE_ADMIN_NOTIFICATION                              = "/Pt/PageAdminNotification";
 	const HREF_PAGE_ADMIN_SERVICE                                   = "/Pt/PageAdminService";
 	const HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION                      = "/Pt/PageAdminSystemConfiguration";
 	const HREF_PAGE_ADMIN_TEAM                                      = "/Pt/PageAdminTeam";
@@ -271,6 +275,7 @@ class Pt
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
 	const NAME                                                      = "Nome";
 	const NULL_EMPTY                                                = "Nenhum valor associado";
+	const NULL_OPTION                                               = "Por favor escolha uma opção";
 	const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
 	const PAGE_ABOUT                                                = "Sobre";
 	const PAGE_ABOUT_ROBOTS                                         = "ALL";

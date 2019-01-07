@@ -288,7 +288,7 @@ class FacedePersistenceTeam
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
-					$stmt->bind_result($teamDescription, $TeamId, $teamName, $registerDate);
+					$stmt->bind_result($registerDate, $teamDescription, $TeamId, $teamName);
 					if ($stmt->fetch())
 					{
 						$InstanceTeam = $this->Factory->CreateTeam($registerDate, $teamDescription, $TeamId, $teamName);

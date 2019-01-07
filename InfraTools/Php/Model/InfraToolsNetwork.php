@@ -240,7 +240,7 @@ class InfraToolsNetwork extends Network
 	{
 		$fsock = NULL;
 		$fsock = @fsockopen($HostOrIp, $Port, $errorCode, $errorDescription, $this->TIME_OUT_SECONDS);
-		if($fsock != NULL)
+		if(!is_null($fsock))
 		{   
 			fclose($fsock);
 			return ConfigInfraTools::SUCCESS;
@@ -324,7 +324,7 @@ class InfraToolsNetwork extends Network
 	{
 		$ArrayDnsRecords = NULL;
 		$ArrayDnsRecords = dns_get_record($Host);
-		if ($ArrayDnsRecords != NULL)
+		if (!is_null($ArrayDnsRecords))
 			return ConfigInfraTools::SUCCESS;
 		else return ConfigInfraTools::GET_DNS_RECORDS_FAILED;
 	}
@@ -342,8 +342,12 @@ class InfraToolsNetwork extends Network
 	{
 		$HostName = NULL;
 		$HostName = gethostbyaddr($IpAddress);
-		if ($HostName != NULL && $HostName != $IpAddress)
+		if(isset($HostName))
+		{
+			if (!is_null($HostName) && $HostName != $IpAddress)
 			return ConfigInfraTools::SUCCESS;
+			else return ConfigInfraTools::GET_HOSTNAME_FAILED;
+		}
 		else return ConfigInfraTools::GET_HOSTNAME_FAILED;
 	}
 	
@@ -366,7 +370,7 @@ class InfraToolsNetwork extends Network
 		if($HostName[strlen($HostName)-1] == "/")
 			$HostName[strlen($HostName)-1] = "";
 		$ArrayIpAddress = gethostbynamel($HostName);
-		if ($ArrayIpAddress != NULL)
+		if (!is_null($ArrayIpAddress))
 			return ConfigInfraTools::SUCCESS;
 		else return ConfigInfraTools::GET_HOST_IP_ADDRESS_FAILED;
 	}
@@ -384,16 +388,16 @@ class InfraToolsNetwork extends Network
 	{
 		$ArrayLocationInformation = array(); $content = NULL;
 		$content = @file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $IpAddress);
-		if(isset($content) && $content != NULL)
+		if(isset($content) && !is_null($content))
 		{
 			$ip_data = @json_decode($content);   
 			if($ip_data && $ip_data->geoplugin_countryName != null)
 			{
-				if ($ip_data->geoplugin_countryCode != NULL)
+				if (!is_null($ip_data->geoplugin_countryCode))
 					array_push($ArrayLocationInformation, $ip_data->geoplugin_countryCode);
-				if ($ip_data->geoplugin_countryName != NULL)
+				if (!is_null($ip_data->geoplugin_countryName))
 					array_push($ArrayLocationInformation, $ip_data->geoplugin_countryName);
-				if ($ip_data->geoplugin_city != NULL)
+				if (!is_null($ip_data->geoplugin_city))
 					array_push($ArrayLocationInformation, $ip_data->geoplugin_city);
 				return ConfigInfraTools::SUCCESS;
 			}
@@ -438,7 +442,7 @@ class InfraToolsNetwork extends Network
 	{
 		$Service = NULL;
 		$Service = getservbyport($Port ,$Protocol);
-		if ($Service != NULL)
+		if (!is_null($Service))
 			return ConfigInfraTools::SUCCESS;
 		else return ConfigInfraTools::GET_SERVICE_FAILED;
 	}
@@ -447,7 +451,7 @@ class InfraToolsNetwork extends Network
 	{
 		$Content = NULL;
 		$Content = @file_get_contents($WebSite);
-		if ($Content != NULL)
+		if (!is_null($Content))
 		{
 			$Content = "<div>" . mb_convert_encoding($Content, 'HTML-ENTITIES', "UTF-8") . "</div>";
 			$Content = "<div>" . htmlspecialchars($Content, ENT_SUBSTITUTE) . "</div>";
@@ -460,7 +464,7 @@ class InfraToolsNetwork extends Network
 	{
 		$ArrayHeaders = NULL;
 		$ArrayHeaders = @get_headers($WebSite, 1);
-		if ($ArrayHeaders != NULL)
+		if (!is_null($ArrayHeaders))
 			return ConfigInfraTools::SUCCESS;
 		else return ConfigInfraTools::GET_WEBSITE_HEADERS_FAILED;
 	}
@@ -477,7 +481,7 @@ class InfraToolsNetwork extends Network
 	public function GetWhois($HostName, &$Info)
 	{
 		$InstancePearWhois = $this->InfraToolsFactory->CreateNetWhois();
-		if($InstancePearWhois != NULL)
+		if(!is_null($InstancePearWhois))
 		{
 			$Info = $InstancePearWhois->query($HostName);
 			if(isset($Info) && !empty($Info))

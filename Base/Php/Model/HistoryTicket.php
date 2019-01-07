@@ -146,15 +146,15 @@ class HistoryTicket
 	public function UpdateHistoryTicket($HistoryTicketDescription, $HistoryTicketStatus, $HistoryTicketSuggestion, 
 										$HistoryTicketTitle, $HistoryTicketType)
 	{
-		if($this->HistoryTicketDescription != NULL)
+		if(!is_null($this->HistoryTicketDescription))
 			$this->HistoryTicketDescription = $HistoryTicketDescription;
-		if($this->HistoryTicketStatus != NULL)
+		if(!is_null($this->HistoryTicketStatus))
 			$this->HistoryTicketStatus = $HistoryTicketStatus;
-		if($this->HistoryTicketSuggestion != NULL)
+		if(!is_null($this->HistoryTicketSuggestion))
 			$this->HistoryTicketSuggestion = $HistoryTicketSuggestion;
-		if($this->HistoryTicketTitle != NULL)
+		if(!is_null($this->HistoryTicketTitle))
 			$this->HistoryTicketTitle= $HistoryTicketTitle;
-		if($this->HistoryTicketDescription != NULL)
+		if(!is_null($this->HistoryTicketDescription))
 			$this->HistoryTicketType = $HistoryTicketType;
 	}
 }

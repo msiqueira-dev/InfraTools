@@ -57,6 +57,7 @@ Methods:
 			public function InfraToolsDataBackup(&$FileName, &$FileNamePath, $Debug)
 			public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug);
 			public function InfraToolsDataBaseCreate(&$StringMessage, $Debug);
+			public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug);
 			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug);
 			public function ServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			public function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug,);
@@ -769,6 +770,16 @@ class InfraToolsFacedePersistence extends FacedePersistence
 					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
 				else $mySqlConnection->rollback();
 			}
+			
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserNotification($StringMessage,
+																												  $Debug,
+																											      $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
 
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -1069,6 +1080,29 @@ class InfraToolsFacedePersistence extends FacedePersistence
 				$mySqlConnection->commit();	
 			else $mySqlConnection->rollback();
 			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug)
+	{
+		$mySqlConnection;
+		$this->MySqlManager->DestroyMySqlManagerInstance();
+		unset($this->MySqlManager);
+		$this->MySqlManager = $this->Factory->CreateMySqlManager($this->Config->DefaultMySqlAddress,
+			                                                     $this->Config->DefaultMySqlPort,
+												                 $this->Config->DefaultMySqlDataBase,
+			                                                     $this->Config->DefaultMySqlSuperUser, 
+												                 $this->Config->DefaultMySqlSuperUserPassword);
+		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND)
+			return ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND;
+		elseif($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
+			$return = $InfraToolsFacedePersistenceDataBase->InfraToolsDataBaseGetRowCount($RowCount, $Debug, $mySqlConnection);
+			if($return == ConfigInfraTools::SUCCESS)
+				$StringMessage = NULL;
 		}
 		return $return;
 	}

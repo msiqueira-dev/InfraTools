@@ -6,9 +6,9 @@
     </div>
 </div>
 <label>
-    <?php if(isset($this->ReturnEmptyText))      echo $this->ReturnEmptyText; ?>
-    <?php if(isset($this->ReturnTypeUserIdText)) echo $this->ReturnTypeUserIdText; ?>
-    <?php if(isset($this->ReturnText))           echo $this->ReturnText; ?>
+    <?php if(isset($this->ReturnEmptyText))               echo $this->ReturnEmptyText; ?>
+    <?php if(isset($this->ReturnTypeUserDescriptionText)) echo $this->ReturnTypeUserDescriptionText; ?>
+    <?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 </label>
 <!-- FORM USER CHANGE USER TYPE -->
 <form name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE; ?>" 
@@ -133,22 +133,22 @@
             </div>
         </div>
     </div>
-	<!-- TYPE USER -->
+	<!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_ID; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_ID; ?>"
+                name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>" 
+                id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>"
                 class="SelectCorporation"
                 onchange="document.getElementById('<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SUBMIT; ?>')
                                          .disabled = false;
 				          document.getElementById('<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SUBMIT; ?>')
                                          .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
-                <option <?php if ($this->InputValueTypeUserId == "" 
-                                  || $this->InputValueTypeUserId == ConfigInfraTools::FORM_SELECT_NONE) 
+                <option <?php if ($this->InputValueTypeUserDescription == "" 
+                                  || $this->InputValueTypeUserDescription == ConfigInfraTools::FORM_SELECT_NONE) 
                     echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
                         <?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
                 </option>
@@ -158,9 +158,9 @@
                     foreach($this->ArrayInstanceInfraToolsTypeUser as $key=>$userType)
                     {
                         echo "<option ";
-                          if($this->InputValueTypeUserId == $userType->GetTypeUserId())
+                          if($this->InputValueTypeUserDescription == $userType->GetTypeUserDescription())
                             echo "selected='selected' ";
-                        echo "value='" . $userType->GetTypeUserId() . "'>" . $userType->GetTypeUserDescription() 
+                        echo "value='" . $userType->GetTypeUserDescription() . "'>" . $userType->GetTypeUserDescription() 
 							           . "</option>";
                     }
                 }

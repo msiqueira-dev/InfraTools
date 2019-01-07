@@ -1,4 +1,4 @@
-.DivContentBodySection{width:1000px;height:auto;}
+.DivContentBodySection{width:1000px;height:auto;min-height:90px;}
 .DivContentBodySectionTitle{width:800px;height:auto;margin-bottom:5px;position:relative;left:7%;}
 .DivContentBodySectionTitleText{width:auto;height:16px;}
 .DivContentBodySectionTitleText h2{height:16px;color:#f5821f;font-family:sans-serif;font-size:16px;font-weight:bold;text-decoration:none;text-shadow: none;}
@@ -7,7 +7,7 @@
 .DivContentBodySectionTitleLine{width:100%;height:3px;background-color:#f4780b;}
 .DivContentBodySectionTitleLineLanguage{width:100%;height:3px;background-color:#ef4e22;}
 .DivContentBodySummary{width:800px;height:30px;position:relative;top:10px;left:15%;}
-.DivContentBodySummaryTitle{width:200px;height:auto;float:left;}
+.DivContentBodySummaryTitle{width:auto;height:auto;float:left;min-width:150px;}
 .DivContentBodySummaryTitleLanguage{width:160px;height:auto;float:left;margin-left:26%;}
 .DivContentBodySummaryValue{width:200px;height:auto;float:left;}
 .DivContentBodySummaryValue label{position:relative;top:1.5px;}

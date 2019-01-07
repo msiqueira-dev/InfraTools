@@ -27,10 +27,12 @@ if (!class_exists("PageAdmin"))
 class PageAdminTechInfo extends PageAdmin
 {
 	public $ArrayBaseFileType                 = array();
+	public $ArrayDataBaseTables               = array();
 	public $ArrayInfraToolsFileType           = array();
 	public $ArrayTotalFileType                = array();
 	public $BaseDirectoryCount                = 0;
 	public $BaseFileCount                     = 0;
+	public $DataBaseRowCount                  = 0;
 	public $InfraToolsArrayLanguageConstants  = 0;
 	public $InfraToolsArrayLanguageValueCount = 0;
 	public $InfraToolsDirectoryCount          = 0;
@@ -59,6 +61,7 @@ class PageAdminTechInfo extends PageAdmin
 		$InstanceInfraToolsTechInfo->ProcessTechBase();
 		$InstanceInfraToolsTechInfo->ProcessTechInfoInfraTools();
 		$InstanceInfraToolsTechInfo->ProccessTechLanguage();
+		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$PageFormBack = FALSE;
 		//FORM SUBMIT BACK
 		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
@@ -79,6 +82,13 @@ class PageAdminTechInfo extends PageAdmin
 		$this->InfraToolsArrayLanguageValueCount = $InstanceInfraToolsTechInfo->GetInfraToolsArrayLanguageValueCount();
 		$this->InfraToolsLanguageFileCount       = $InstanceInfraToolsTechInfo->GetInfraToolsLanguageFileCount();
 		$this->MatrixLanguageConstant            = $InstanceInfraToolsTechInfo->GetInfraToolsMatrixLanguageProblemConstant();
+		$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayDataBaseTables,
+																			  $this->DataBaseReturnMessage,
+																			  $this->InputValueHeaderDebug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->FacedePersistenceInfraTools->InfraToolsDataBaseGetRowCount($this->DataBaseRowCount, $this->InputValueHeaderDebug);
+		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
 		$this->LoadHtml(FALSE);

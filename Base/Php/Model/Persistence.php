@@ -91,8 +91,8 @@ Methods:
 			public static function SqlTypeUserSelect();
 			public static function SqlTypeUserSelectNoLimit();
 			public static function SqlTypeUserSelectByDescription();
-			public static function SqlTypeUserSelectByTypeUserId();
-			public static function SqlTypeUserUpdateByTypeUserId();
+			public static function SqlTypeUserSelectByTypeUserDescription();
+			public static function SqlTypeUserUpdateByTypeUserDescription();
 			public static function SqlUserSelectExistsByUserEmail();
 			public static function SqlUserCheckPasswordByUserEmail();
 			public static function SqlUserCheckPasswordByUserUniqueId();
@@ -574,7 +574,17 @@ class Persistence
 	
 	public static function SqlSystemConfigurationUpdateBySystemConfigurationOptionNumber()
 	{
-		
+		return "UPDATE " . Config::TABLE_SYSTEM_CONFIGURATION . " "  
+		     . "SET    " . Config::TABLE_SYSTEM_CONFIGURATION . "." 
+				         . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE      . " = ?, "
+		                 . Config::TABLE_SYSTEM_CONFIGURATION . "." 
+					     . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION . " = UPPER(?), "
+			             . Config::TABLE_SYSTEM_CONFIGURATION . "." 
+					     . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME        . " = UPPER(?), "
+				         . Config::TABLE_SYSTEM_CONFIGURATION . "." 
+					     . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE       . " = UPPER(?)  " 
+		     . "WHERE "  . Config::TABLE_SYSTEM_CONFIGURATION . "." 
+				         . Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER      . " = ?";
 	}
 	
 	public static function SqlTeamDeleteByTeamDescription()
@@ -821,7 +831,7 @@ class Persistence
 	public static function SqlTypeUserDelete()
 	{
 		return "DELETE FROM " . Config::TABLE_TYPE_USER . " "  
-		     . "WHERE "       . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID . " = ?";
+		     . "WHERE "       . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " = ?";
 	}
 	
 	
@@ -829,55 +839,42 @@ class Persistence
 	{
 		return "INSERT INTO " . Config::TABLE_TYPE_USER                   . " "
 			 . "("            . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . ","
-		     . " "            . Config::TABLE_FIELD_REGISTER_DATE         . ","
-			 . " "            . Config::TABLE_TYPE_USER_FIELD_ID          . ")"
-		     . " VALUES (UPPER(?), NOW(), DEFAULT)";
+		     . " "            . Config::TABLE_FIELD_REGISTER_DATE         . ")"
+		     . " VALUES (UPPER(?), NOW())";
 	}
 	
 	public static function SqlTypeUserSelect()
 	{
 		return "SELECT "   . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ",  "
-		                   . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . ",  "
 					       . Config::TABLE_TYPE_USER . "." . Config::TABLE_FIELD_REGISTER_DATE           . ",  "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_USER . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_TYPE_USER . " " 
-			 . "ORDER BY " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . "  "
+			 . "ORDER BY " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . "  "
 			 . "LIMIT ?, ?";
 	}
 	
 	public static function SqlTypeUserSelectNoLimit()
 	{
 		return "SELECT "   . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ",  "
-		                   . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . ",  "
 					       . Config::TABLE_TYPE_USER . "." . Config::TABLE_FIELD_REGISTER_DATE           . ",  "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_USER . ") AS COUNT "
 			 . "FROM  "    . Config::TABLE_TYPE_USER . " " 
-			 . "ORDER BY " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID;
+			 . "ORDER BY " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION;
 	}
 	
 	public static function SqlTypeUserSelectByDescription()
 	{
 		return "SELECT " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ", "
-		                 . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . ", "
 					     . Config::TABLE_TYPE_USER . "." . Config::TABLE_FIELD_REGISTER_DATE           . "  " 
 		     . "FROM  "  . Config::TABLE_TYPE_USER . " " 
 	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . " = ?";
 	}
 	
-	public static function SqlTypeUserSelectByTypeUserId()
-	{
-		return "SELECT " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ", "
-		                 . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . ", "
-					     . Config::TABLE_TYPE_USER . "." . Config::TABLE_FIELD_REGISTER_DATE           . "  " 
-		     . "FROM  "  . Config::TABLE_TYPE_USER . " " 
-	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID            . " = ?";
-	}
-	
-	public static function SqlTypeUserUpdateByTypeUserId()
+	public static function SqlTypeUserUpdateByTypeUserDescription()
 	{
 		return "UPDATE " . Config::TABLE_TYPE_USER . " "  
 		     . "SET    " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " =UPPER(?) "
-		     . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_ID          . " = ?";
+		     . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " = ?";
 	}
 	
 	public static function SqlUserSelectExistsByUserEmail()
@@ -957,7 +954,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as UserRegisterDate, "	
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -980,7 +976,7 @@ class Persistence
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                               . " "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                            . " "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                   . " "
 		. "LEFT JOIN  " . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                        . " "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                        . " "
@@ -1023,7 +1019,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as UserRegisterDate, "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1043,12 +1038,12 @@ class Persistence
 		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as DepartmentRegisterDate, "
 		. "(SELECT COUNT(*) FROM " . Config::TABLE_USER        ." "
-		. "WHERE "      .  Config::TABLE_USER                  .".". Config::TABLE_USER_FIELD_CORPORATION                    ."= ? "
+		. "WHERE "      .  Config::TABLE_USER                  .".". Config::TABLE_USER_FIELD_CORPORATION                       ."= ? "
 		. ") AS COUNT "
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1090,7 +1085,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as UserRegisterDate, "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1111,12 +1105,12 @@ class Persistence
 		. "as DepartmentRegisterDate, "
 		. "(SELECT COUNT(*) FROM " . Config::TABLE_USER        ." "
 		. "WHERE "      .  Config::TABLE_ASSOC_USER_CORPORATION                                                    .".". 
-			               Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                              ."= ? "
+			               Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                                           ."= ? "
 		. ") AS COUNT "
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1158,7 +1152,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX         . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                      . ", "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1180,7 +1173,7 @@ class Persistence
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1218,7 +1211,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as UserRegisterDate, "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1256,7 +1248,7 @@ class Persistence
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1307,7 +1299,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as UserRegisterDate, "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1345,7 +1336,7 @@ class Persistence
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1396,7 +1387,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as UserRegisterDate, "                                                                                 . "  "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "                                                                             . "  "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1429,12 +1419,12 @@ class Persistence
 		. Config::TABLE_TEAM                  .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  "
 		. "as TeamRegisterDate, "
 		. "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_USER   ." "
-		. "WHERE "      .  Config::TABLE_TYPE_USER             .".". Config::TABLE_TYPE_USER_FIELD_ID                           ."=? "
+		. "WHERE "      .  Config::TABLE_TYPE_USER             .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ."=? "
 		. ") AS COUNT "
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1459,7 +1449,7 @@ class Persistence
 		. "LEFT JOIN  " . Config::TABLE_TYPE_ASSOC_USER_TEAM   ." "
 		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE              ." "
 		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION       ." "
-		. "WHERE "      . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           . "=? "
+		. "WHERE "      . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  . "=? "
 		. "ORDER BY "   . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                              ." "
 		. "LIMIT ?, ?";		
 	}
@@ -1484,7 +1474,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX         . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                      . ", "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1506,7 +1495,7 @@ class Persistence
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1543,7 +1532,6 @@ class Persistence
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX         . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                      . ", "
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . ", "
-		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                             . ", " 
 		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as TypeUserRegisterDate, "
 		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                       . ", "
@@ -1565,7 +1553,7 @@ class Persistence
 		. "FROM "       . Config::TABLE_USER                   ." "
 		. "INNER JOIN " . Config::TABLE_TYPE_USER              ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                              ." "
-		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_ID                           ." "
+		. "= "          . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ." "
 		. "LEFT JOIN "  . Config::TABLE_CORPORATION            ." "
 		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
@@ -1602,10 +1590,12 @@ class Persistence
 	
 	public static function SqlUserSelectTeamByUserEmail()
 	{
-		return "SELECT " . Config::TABLE_ASSOC_USER_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE             . "  " 
-			 . "AS AssocUserTeamRegisterDate, " 
+		return "SELECT "  
 			 . Config::TABLE_ASSOC_USER_TEAM . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID               . ", "
 			 . Config::TABLE_ASSOC_USER_TEAM . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL            . ", "
+		     . Config::TABLE_ASSOC_USER_TEAM . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE             . ", "
+			 . Config::TABLE_ASSOC_USER_TEAM . "." . Config::TABLE_FIELD_REGISTER_DATE                         . "  " 
+			 . "AS AssocUserTeamRegisterDate, "
 			 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION                            . ", "
 			 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_ID                                     . ", "
 			 . Config::TABLE_TEAM . "." . Config::TABLE_TEAM_FIELD_TEAM_NAME                                   . ", "
@@ -1619,7 +1609,7 @@ class Persistence
 			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM . "."   . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID                . " = "
 			                      . Config::TABLE_TEAM            . "."   . Config::TABLE_TEAM_FIELD_TEAM_ID                           . "   "
 			 . "INNER JOIN "      . Config::TABLE_TYPE_ASSOC_USER_TEAM                                                                 . "   "
-			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM         . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID          . " = "
+			 . "ON "              . Config::TABLE_ASSOC_USER_TEAM         . "." . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE        . " = "
 			                      . Config::TABLE_TYPE_ASSOC_USER_TEAM    . "." . Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION . "   "
 		     . "WHERE "  . Config::TABLE_ASSOC_USER_TEAM . "."            . Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL             ." = ?";
 	}

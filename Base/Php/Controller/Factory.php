@@ -63,7 +63,7 @@ Methods:
 			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
 			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription);
-			public    function CreateTypeUser($Description, $Id, $RegisterDate);
+			public    function CreateTypeUser($TypeUserDescription, $RegisterDate);
 			public    function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
 			                              $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
 							              $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
@@ -592,12 +592,12 @@ class Factory
 		return new TypeTicket($RegisterDate, $TypeTicketDescription);
 	}
 	
-	public function CreateTypeUser($Description, $Id, $RegisterDate)
+	public function CreateTypeUser($TypeUserDescription, $RegisterDate)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeUser');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeUser.php");
-		return new TypeUser($Description, $Id, $RegisterDate);
+		return new TypeUser($TypeUserDescription, $RegisterDate);
 	}
 	
 	public function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 

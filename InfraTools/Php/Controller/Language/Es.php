@@ -61,6 +61,9 @@ class Es
 	const COUNTRY                                                   = "";
 	const COUNTRY_ABBREVIATION                                      = "";
 	const COUNTRY_NOT_FOUND                                         = "";
+	const DATABASE                                                  = "";
+	const DATABASE_ROW_COUNT                                        = "";
+	const DATABASE_TABLE_QUANTITY                                   = "";
 	const DEACTIVATED                                               = "";
 	const DEFAULT_VALUE                                             = "";
 	const DEPARTMENT                                                = "";
@@ -173,6 +176,7 @@ class Es
 	const HREF_PAGE_ADMIN_CORPORATION                               = "/Es/PageAdminCorporation";
 	const HREF_PAGE_ADMIN_COUNTRY                                   = "/Es/PageAdminCountry";
 	const HREF_PAGE_ADMIN_DEPARTMENT                                = "/Es/PageAdminDepartment";
+	const HREF_PAGE_ADMIN_NOTIFICATION                              = "/Es/PageAdminNotification";
 	const HREF_PAGE_ADMIN_SERVICE                                   = "/Es/PageAdminService";
 	const HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION                      = "/Es/PageAdminSystemConfiguration";
 	const HREF_PAGE_ADMIN_TEAM                                      = "/Es/PageAdminTeam";

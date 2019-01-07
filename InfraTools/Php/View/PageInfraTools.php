@@ -2505,8 +2505,6 @@ abstract class PageInfraTools extends Page
 		if($InstanceInfraToolsUser->GetUserConfirmed())
 			$this->InputValueUserConfirmed = "checked";
 		$this->InputValueTypeUserDescription = $InstanceInfraToolsUser->GetUserTypeDescription();
-		$this->InputValueTypeUserId = $InstanceInfraToolsUser->GetUserTypeId();
-
 		if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationDateActive())
 			$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
 															'Icons/IconInfraToolsVerified.png';

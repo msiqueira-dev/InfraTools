@@ -116,10 +116,6 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 							 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
 							 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
 							 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
-					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
-							 value='"  . $user->GetUserTypeId()                    . "' />
 		        	<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 		                             id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 							         value='" . $user->GetUserTypeDescription() . "' 

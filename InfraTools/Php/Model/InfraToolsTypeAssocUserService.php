@@ -37,13 +37,13 @@ class InfraToolsTypeAssocUserService
 	{
 		$this->InfraToolsFactory = InfraToolsFactory::__create();
 		
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
-		if($TypeAssocUserServiceDescription != NULL)
+		if(!is_null($TypeAssocUserServiceDescription))
 			$this->TypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_TYPE_ASSOC_USER_SERVICE_DESCRIPTION);
-		if($TypeAssocUserServiceId != NULL)
+		if(!is_null($TypeAssocUserServiceId))
 			$this->TypeAssocUserServiceId = $TypeAssocUserServiceId;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_TYPE_ASSOC_USER_SERVICE_ID);
 	}
@@ -78,9 +78,9 @@ class InfraToolsTypeAssocUserService
 	/* METHODS */
 	public function UpdateTypeAssocUserService($TypeAssocUserServiceDescription, $TypeAssocUserServiceId)
 	{
-		if($TypeAssocUserServiceDescription != NULL)
+		if(!is_null($TypeAssocUserServiceDescription))
 			$this->TypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
-		if($TypeAssocUserServiceId != NULL)
+		if(!is_null($TypeAssocUserServiceId))
 			$this->TypeAssocUserServiceId = $TypeAssocUserServiceId;
 	}
 }

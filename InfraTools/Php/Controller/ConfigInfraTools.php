@@ -168,6 +168,7 @@ class ConfigInfraTools extends Config
 	const EXCEPTION_SERVICE_ID                                          = "ExceptionServiceId";
 	const EXCEPTION_SERVICE_NAME                                        = "ExceptionServiceName";
 	const EXCEPTION_SERVICE_TYPE                                        = "ExceptionServiceType";
+	const EXCEPTION_TICKET_SERVICE                                      = "ExceptionTicketService";
 	const EXCEPTION_TYPE_SERVICE_NAME                                   = "ExceptionTypeServiceName";
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                 = "ExceptionTypeAssocUserServiceDescription";
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_ID                          = "ExceptionTypeAssocUserServiceId";

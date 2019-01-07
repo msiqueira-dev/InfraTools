@@ -32,14 +32,14 @@ class Department
 	/* Constructor */
 	public function __construct($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate) 
 	{
-		if($DepartmentCorporation != NULL)
+		if(!is_null($DepartmentCorporation))
 			$this->DepartmentCorporation  = $DepartmentCorporation;
 		else throw new Exception(Config::EXCEPTION_DEPARTMENT_DEPARTMENT_CORPORATION);
 		$this->DepartmentInitials     = $DepartmentInitials;
-		if($DepartmentName != NULL)
+		if(!is_null($DepartmentName))
 			$this->DepartmentName         = $DepartmentName;
 		else throw new Exception(Config::EXCEPTION_DEPARTMENT_DEPARTMENT_CORPORATION);
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 	}
@@ -58,8 +58,11 @@ class Department
 	
 	public function GetDepartmentCorporationName()
 	{
-		if($this->DepartmentCorporation != NULL)
-			return $this->DepartmentCorporation->GetCorporationName();
+		if(!is_null($this->DepartmentCorporation))
+		{
+			if(is_object($this->DepartmentCorporation))
+				return $this->DepartmentCorporation->GetCorporationName();
+		}
 	}
 	
 	public function GetDepartmentInitials()
@@ -80,33 +83,37 @@ class Department
 	/* SET */
 	public function SetDepartmentCorporation($DepartmentCorporation)
 	{
-		$this->DepartmentCorporation = $DepartmentCorporation;
+		if(!is_null($DepartmentCorporation))
+			$this->DepartmentCorporation = $DepartmentCorporation;
 	}
 	
 	public function SetDepartmentInitials($DepartmentInitials)
 	{
-		$this->DepartmentInitials = $DepartmentInitials;
+		if(!is_null($DepartmentInitials))
+			$this->DepartmentInitials = $DepartmentInitials;
 	}
 	
 	public function SetDepartmentName($DepartmentName)
 	{
-		$this->DepartmentName = $DepartmentName;
+		if(!is_null($DepartmentName))
+			$this->DepartmentName = $DepartmentName;
 	}
 	
 	public function SetRegisterDate($RegisterDate)
 	{
-		$this->RegisterDate = $RegisterDate;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 	}
 	
 	/* METHODS */
 	public function UpdateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName)
 	{
-		if($DepartmentCorporation != NULL)
+		if(!is_null($DepartmentCorporation))
 			$this->DepartmentCorporation = $DepartmentCorporation;
-		if($DepartmentInitials != NULL)
-			$this->DepartmentInitials    = $DepartmentInitials;
-		if($DepartmentName != NULL)
-			$this->DepartmentName        = $DepartmentName;
+		if(!is_null($DepartmentInitials))
+			$this->DepartmentInitials = $DepartmentInitials;
+		if(!is_null($DepartmentName))
+			$this->DepartmentName = $DepartmentName;
 	}
 }
 ?>

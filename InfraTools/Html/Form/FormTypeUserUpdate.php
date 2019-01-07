@@ -14,15 +14,6 @@
 <!-- FORM TYPE USER UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>" method="post">
-    <!-- TYPE_USER_ID -->
-    <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_ID').":"; ?></label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-        	<label><?php echo $this->InputValueTypeUserId; ?></label>
-		</div>
-	</div>
     <!-- TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">

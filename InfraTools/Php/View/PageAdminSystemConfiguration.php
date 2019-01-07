@@ -173,10 +173,15 @@ class PageAdminSystemConfiguration extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, 
 											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'SystemConfigurationUpdateBySystemConfigurationOptionName', 
-										  array($this->InstanceSystemConfiguration->GetSystemConfigurationOptionName()),
+				if($this->ExecuteFunction($_POST, 'SystemConfigurationUpdateBySystemConfigurationOptionNumber', 
+										  array(@$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
+												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
+												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE],
+					                            &$this->InstanceSystemConfiguration),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;	
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDATE;
 			}
 		}
 		if(!$PageFormBack != FALSE)

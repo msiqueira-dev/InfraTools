@@ -354,7 +354,7 @@ class PageAdminUser extends PageAdmin
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
-				if($this->UserUpdateUserTypeByUserEmail($_POST[Config::FORM_FIELD_TYPE_USER_ID],
+				if($this->UserUpdateUserTypeByUserEmail($_POST[Config::FORM_FIELD_TYPE_USER_DESCRIPTION],
 											        $this->InstanceInfraToolsUserAdmin,
 											        $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				{

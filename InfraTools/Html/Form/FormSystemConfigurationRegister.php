@@ -97,6 +97,26 @@
                                value="<?php echo $this->InputValueSystemConfigurationOptionDescription; ?>" maxlength="100" />
         </div>
     </div>
+    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE -->
+    <div class="DivContentBodyContainer">
+        <div class="DivContentBodyContainerLabel">
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE'); ?></label>
+            <label class="RequiredField">&nbsp;*</label>
+			<label>:</label>
+        </div>
+        <div class="DivContentBodyContainerValue">
+            <input type="checkbox" 
+			           name="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE; ?>" 
+				       value="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE; ?>"
+				        <?php echo $this->InputValueSystemConfigurationOptionActive; ?>
+					   onchange="ValidateMultiplyFields(
+									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM; ?>',
+									   'DivContentBodySubmitBigger',
+									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_SUBMIT; ?>',
+									   '');"
+				        />
+        </div>
+    </div>
     <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
@@ -134,26 +154,6 @@
                                                  '');"
                                title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE'); ?>"
                                value="<?php echo $this->InputValueSystemConfigurationOptionValue; ?>" maxlength="45" />
-        </div>
-    </div>
-    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE -->
-    <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE'); ?></label>
-            <label class="RequiredField">&nbsp;*</label>
-			<label>:</label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-            <input type="checkbox" 
-			           name="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE; ?>" 
-				       value="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE; ?>"
-				        <?php echo $this->InputValueCorporationActive; ?>
-					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM; ?>',
-									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_SUBMIT; ?>',
-									   '');"
-				        />
         </div>
     </div>
     <!-- SUBMIT -->

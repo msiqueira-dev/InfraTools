@@ -16,6 +16,7 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTableAssocIpAddressService();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUrlAddressService();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserCorporation();
+		public static function SqlCreateInfraToolsDataBaseTableAssocUserNotification();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserPreference();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserRole();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserService();
@@ -55,6 +56,7 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate();
 		public static function SqlDropInfraToolsDataBase();
 		public static function SqlInfraToolsDataBaseCheck();
+		public static function SqlInfraToolsDataBaseGetRowCount();
 **************************************************************************/
 
 class InfraToolsPersistenceDataBase
@@ -196,6 +198,30 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
+                COLLATE = utf8_unicode_ci";
+	}
+	
+	public static function SqlCreateInfraToolsDataBaseTableAssocUserNotification()
+	{
+		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.ASSOC_USER_NOTIFICATION (
+                AssocUserNotificationNotificationId INT NOT NULL,
+                AssocUserNotificationUserEmail VARCHAR(60) NOT NULL,
+                AssocUserNotificationRead TINYINT(1) NOT NULL,
+                RegisterDate DATETIME NOT NULL,
+                PRIMARY KEY (AssocUserNotificationNotificationId, AssocUserNotificationUserEmail),
+                INDEX IndexAssocUserNotificationUserEmail (AssocUserNotificationUserEmail ASC),
+                CONSTRAINT ForeignKeyAssocUserNotificationNotificationId
+                FOREIGN KEY (AssocUserNotificationNotificationId)
+                REFERENCES INFRATOOLS.NOTIFICATION (NotificationId)
+                ON DELETE RESTRICT
+                ON UPDATE CASCADE,
+                CONSTRAINT ForeignKeyAssocUserNotificationUserEmail
+                FOREIGN KEY (AssocUserNotificationUserEmail)
+                REFERENCES INFRATOOLS.USER (Email)
+                ON DELETE RESTRICT
+                ON UPDATE CASCADE)
+                ENGINE = InnoDB
+				DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
 	}
 	
@@ -478,17 +504,10 @@ class InfraToolsPersistenceDataBase
                 NotificationActive TINYINT(1) NOT NULL,
                 NotificationId INT NOT NULL AUTO_INCREMENT,
                 NotificationText VARCHAR(500) NOT NULL,
-                NotificationUserEmail VARCHAR(60) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (NotificationId),
-                INDEX IndexNotificationUser (NotificationUserEmail ASC),
                 UNIQUE INDEX UniqueNotificationText (NotificationText ASC),
-                UNIQUE INDEX UniqueNotificationId (NotificationId ASC),
-                CONSTRAINT ForeignKeyMessageUser
-                FOREIGN KEY (NotificationUserEmail)
-                REFERENCES INFRATOOLS.USER (Email)
-                ON DELETE RESTRICT
-                ON UPDATE CASCADE)
+                UNIQUE INDEX UniqueNotificationId (NotificationId ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -787,9 +806,7 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_USER (
 			    RegisterDate DATETIME NOT NULL,
 			    TypeUserDescription VARCHAR(45) NOT NULL,
-			    TypeUserId INT NOT NULL AUTO_INCREMENT,
-			    PRIMARY KEY (TypeUserId),
-			    UNIQUE INDEX UniqueTypeUserId (TypeUserId ASC),
+			    PRIMARY KEY (TypeUserDescription),
 			    UNIQUE INDEX UniqueTypeUserDescription (TypeUserDescription ASC))
 			    ENGINE = InnoDB
 			    DEFAULT CHARACTER SET = utf8
@@ -830,7 +847,7 @@ class InfraToolsPersistenceDataBase
 	            UserPhonePrimaryPrefix VARCHAR(3) NULL,
 	            UserPhoneSecondary VARCHAR(9) NULL,
 	            UserPhoneSecondaryPrefix VARCHAR(3) NULL,
-	            UserType INT NOT NULL,
+	            UserType VARCHAR(45) NOT NULL,
 	            UserUniqueID VARCHAR(25) NULL,
 	            PRIMARY KEY (Email),
 	            UNIQUE INDEX UniqueUserEmail (Email ASC),
@@ -846,7 +863,7 @@ class InfraToolsPersistenceDataBase
 		        ON UPDATE CASCADE,
 	            CONSTRAINT ForeignKeyUserTypeUser
 		        FOREIGN KEY (UserType)
-		        REFERENCES INFRATOOLS.TYPE_USER (TypeUserId)
+		        REFERENCES INFRATOOLS.TYPE_USER (TypeUserDescription)
 		        ON DELETE RESTRICT
 		        ON UPDATE CASCADE,
 	            CONSTRAINT ForeignKeyUserCountry
@@ -949,6 +966,11 @@ class InfraToolsPersistenceDataBase
 	public static function SqlInfraToolsDataBaseCheck()
 	{
 		return "show full tables from Infratools";
+	}
+	
+	public static function SqlInfraToolsDataBaseGetRowCount()
+	{
+		return "SELECT sum(TABLE_ROWS) AS ROW_COUNT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA like '%infratools%'";
 	}
 }
 ?>

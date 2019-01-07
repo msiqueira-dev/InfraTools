@@ -113,14 +113,13 @@ Methods:
 		protected     function        TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug);
 		protected     function        TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug);
 		protected     function        TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug);
-		protected     function        TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug);
+		protected     function        TypeUserDeleteByTypeUserDescription($InstanceTypeUser, $Debug);
 		protected     function        TypeUserInsert($TypeUserDescription, $Debug);
 		protected     function        TypeUserLoadData(&$InstanceTypeUser);
 		protected     function        TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
 		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug);
-		protected     function        TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
-		protected     function        TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $InstanceTypeUser, $Debug);
+		protected     function        TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $InstanceTypeUser, $Debug);
 		protected     function        UserChangeTwoStepVerification($InstanceUser, $TwoStepVerification, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
 		protected     function        UserInsert($Application, $SendEmail, 
@@ -138,7 +137,8 @@ Methods:
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
 		                                                                       &$ArrayInstanceUser, &$RowCount, $Debug);
-		protected     function        UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, 
+		                                                              &$RowCount, $Debug);
 		protected     function        UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug);
 		protected     function        UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug);
 		protected     function        UserSelectExistsByUserEmail($$Capcha, $UserEmail, $Debug);
@@ -161,7 +161,7 @@ Methods:
 		                                                            $UserEmail, $Debug);
 		protected     function        UserUpdatePasswordRandomByUserEmail($Application, &$InstanceUser, $Debug);
 		protected     function        UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug);
-		protected     function        UserUpdateUserTypeByUserEmail($TypeUserIdNew, &$InstanceUser, $Debug);
+		protected     function        UserUpdateUserTypeByUserEmail($TypeUserDescriptionNew, &$InstanceUser, $Debug);
 		public        function        CheckInputImage($Input);
 		public        function        CheckInstanceUser();
 		public        function        CheckGetContainsKey($Key);
@@ -304,7 +304,6 @@ class Page
 	public    $InputValueTypeStatusTicketDescription                = "";
 	public    $InputValueTypeTicketDescription                      = "";
 	public    $InputValueTypeUserDescription                        = "";
-	public    $InputValueTypeUserId                                 = "";
 	public    $InputValueUserActive                                 = "";
 	public    $InputValueUserConfirmed                              = "";
 	public    $InputValueUserCorporationName                        = "";
@@ -395,8 +394,6 @@ class Page
 	public    $ReturnTypeTicketDescriptionText                      = "";
 	public    $ReturnTypeUserDescriptionClass                       = "";
 	public    $ReturnTypeUserDescriptionText                        = "";
-	public    $ReturnTypeUserIdClass                                = "";
-	public    $ReturnTypeUserIdText                                 = "";
 	public    $ReturnUserCorporationClass                           = "";
 	public    $ReturnUserCorporationText                            = "";
 	public    $ReturnUserEmailClass                                 = "";
@@ -1423,7 +1420,7 @@ class Page
 						if(is_object($value))
 							{echo "<b>" . $key . "</b>: "; print_r($value); echo "<br>";}
 						else
-							echo "<b>" . $key . "</b>: " . $value . "<br>";	
+							echo "<b>" . $key . "</b>: " . $value . "<br>";
 					}
 				}
 				return call_user_func_array(array($this, $Function), $ArrayParameter); 
@@ -1775,10 +1772,14 @@ class Page
 		                                                                          &$InstanceSystemConfiguration, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueSystemConfigurationOptionActiveNew      = $SystemConfigurationOptionActiveNew;
-		$this->InputValueSystemConfigurationOptionDescriptionNew = $SystemConfigurationOptionDescriptionNew;
-		$this->InputValueSystemConfigurationOptionNameNew        = $SystemConfigurationOptionNameNew;
-		$this->InputValueSystemConfigurationOptionValueNew       = $SystemConfigurationOptionValueNew;
+		if($SystemConfigurationOptionActiveNew == NULL)
+			$SystemConfigurationOptionActiveNew = FALSE;
+		elseif($SystemConfigurationOptionActiveNew != FALSE)
+			$SystemConfigurationOptionActiveNew = TRUE;
+		$this->InputValueSystemConfigurationOptionActive      = $SystemConfigurationOptionActiveNew;
+		$this->InputValueSystemConfigurationOptionDescription = $SystemConfigurationOptionDescriptionNew;
+		$this->InputValueSystemConfigurationOptionName        = $SystemConfigurationOptionNameNew;
+		$this->InputValueSystemConfigurationOptionValue       = $SystemConfigurationOptionValueNew;
 		$this->InputFocus = Config::FORM_FIELD_TEAM_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1845,21 +1846,21 @@ class Page
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $FacedePersistence->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
-				                                                           $this->InputValueSystemConfigurationOptionActiveNew,
-		                                                                   $this->InputValueSystemConfigurationOptionDescriptionNew,
-		                                                                   $this->InputValueSystemConfigurationOptionNameNew,
-				   		 												   $this->InputValueSystemConfigurationOptionValueNew,
-		                                                                   $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), 
-				                                                           $Debug);
+				                                                 $this->InputValueSystemConfigurationOptionActive,
+		                                                         $this->InputValueSystemConfigurationOptionDescription,
+		                                                         $this->InputValueSystemConfigurationOptionName,
+				   		 										 $this->InputValueSystemConfigurationOptionValue,
+		                                                         $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), 
+				                                                 $Debug);
 			if($return == Config::SUCCESS)
 			{
-				if($this->InputValueSystemConfigurationOptionActiveNew != NULL)
-					$InstanceSystemConfiguration->SetSystemConfigurationOptionActive($this->InputValueSystemConfigurationOptionActiveNew);
+				if(!is_null($this->InputValueSystemConfigurationOptionActive))
+					$InstanceSystemConfiguration->SetSystemConfigurationOptionActive($this->InputValueSystemConfigurationOptionActive);
 				$InstanceSystemConfiguration->SetSystemConfigurationOptionDescription(
-					                                     $this->InputValueSystemConfigurationOptionDescriptionNew);
-				$InstanceSystemConfiguration->SetSystemConfigurationOptionName($this->InputValueSystemConfigurationOptionNameNew);
-				if($this->InputValueSystemConfigurationOptionValueNew)
-					$InstanceSystemConfiguration->SetSystemConfigurationOptionValue($this->InputValueSystemConfigurationOptionValueNew);
+					                                     $this->InputValueSystemConfigurationOptionDescription);
+				$InstanceSystemConfiguration->SetSystemConfigurationOptionName($this->InputValueSystemConfigurationOptionName);
+				if($this->InputValueSystemConfigurationOptionValue)
+					$InstanceSystemConfiguration->SetSystemConfigurationOptionValue($this->InputValueSystemConfigurationOptionValue);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
 				$this->SystemConfigurationLoadData($InstanceSystemConfiguration);
 				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_UPDATE_SUCCESS");
@@ -2835,7 +2836,8 @@ class Page
 		return Config::ERROR;
 	}
 	
-	protected function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, &$InstanceTypeStatusTicket, $Debug)
+	protected function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew,
+																		   &$InstanceTypeStatusTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTypeStatusTicketDescription  = $TypeStatusTicketDescriptionNew;
@@ -3062,12 +3064,12 @@ class Page
 		return Config::ERROR;	
 	}
 	
-	protected function TypeUserDeleteByTypeUserId($InstanceTypeUser, $Debug)
+	protected function TypeUserDeleteByTypeUserDescription($InstanceTypeUser, $Debug)
 	{
 		if($InstanceTypeUser != NULL)
 		{
 			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeUserDelete($InstanceTypeUser->GetTypeUserId(), 
+			$return = $FacedePersistence->TypeUserDelete($InstanceTypeUser->GetTypeUserDescription(), 
 														 $Debug);
 			if($return == Config::SUCCESS)
 			{
@@ -3131,7 +3133,6 @@ class Page
 		if($InstanceTypeUser != NULL)
 		{
 			$this->InputValueTypeUserDescription  = $InstanceTypeUser->GetTypeUserDescription();
-			$this->InputValueTypeUserId           = $InstanceTypeUser->GetTypeUserId();
 			$this->InputValueRegisterDate         = $InstanceTypeUser->GetRegisterDate();
 			return Config::SUCCESS;
 		}
@@ -3184,52 +3185,11 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$return = $FacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
-																			            $InstanceTypeUser,
-																			            $Debug);
+																			  $InstanceTypeUser, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
 				$this->TypeUserLoadData($InstanceTypeUser); 
-				return Config::SUCCESS;
-			}
-		}
-		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::ERROR;
-	}
-	
-	protected function TypeUserSelectByTypeUserId($TypeUserId, &$InstanceTypeUser, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeUserId = $TypeUserId;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//TYPE_USER_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeUserIdClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeUserId; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeUserIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
-		{
-			$return = $FacedePersistence->TypeUserSelectByTypeUserId($this->InputValueTypeUserId, 
-																	 $InstanceTypeUser,
-																	 $Debug);
-			if($return == Config::SUCCESS)
-			{
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
-				$this->TypeUserLoadData($InstanceTypeUser);
 				return Config::SUCCESS;
 			}
 		}
@@ -3247,7 +3207,7 @@ class Page
 		return Config::ERROR;
 	}
 	
-	protected function TypeUserUpdateByTypeUserId($TypeUserDescriptionNew, $InstanceTypeUser, $Debug)
+	protected function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $InstanceTypeUser, $Debug)
 	{
 		if($InstanceTypeUser != NULL)
 		{
@@ -3277,9 +3237,8 @@ class Page
 			if($return == Config::SUCCESS)
 			{
 				$FacedePersistence = $this->Factory->CreateFacedePersistence();
-				$return = $FacedePersistence->TypeUserUpdateByTypeUserId($this->InputValueTypeUserDescription,
-					                                                     $InstanceTypeUser->GetTypeUserId(),
-																		 $Debug);
+				$return = $FacedePersistence->TypeUserUpdateByTypeUserDescription($this->InputValueTypeUserDescription,
+					                                                              $InstanceTypeUser->GetTypeUserDescription(), $Debug);
 				if($return == Config::SUCCESS)
 				{
 					$InstanceTypeUser->SetTypeUserDescription($this->InputValueTypeUserDescription);
@@ -3794,8 +3753,6 @@ class Page
 		if($InstanceUser->GetUserConfirmed())
 			$this->InputValueUserConfirmed = "checked";
 		$this->InputValueTypeUserDescription = $InstanceUser->GetUserTypeDescription();
-		$this->InputValueTypeUserId = $InstanceUser->GetUserTypeId();
-
 		if($InstanceUser->CheckAssocUserCorporationRegistrationDateActive())
 			$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
 		else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
@@ -3894,7 +3851,7 @@ class Page
 	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueTeamId = $TeamId;	
+		$this->InputValueTeamId = $TeamId;
 		$arrayConstants = array(); $matrixConstants = array();
 			
 		//FORM_FIELD_TEAM_ID
@@ -3967,13 +3924,12 @@ class Page
 		return Config::ERROR;
 	}
 	
-	protected function UserSelectByTypeUserId($Limit1, $Limit2, $TypeUserId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	protected function UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$ArrayInstanceUser = NULL;
 		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->UserSelectByTypeUserId($TypeUserId,
-															 $Limit1, $Limit2,
-															 $ArrayInstanceUser, $RowCount, $Debug);
+		$return = $FacedePersistence->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
+															          $ArrayInstanceUser, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 			return Config::SUCCESS;
 		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
@@ -4784,22 +4740,22 @@ class Page
 		return $return;
 	}
 	
-	protected function UserUpdateUserTypeByUserEmail($UserTypeNew, &$InstanceUser, $Debug)
+	protected function UserUpdateUserTypeByUserEmail($TypeUserDescriptionNew, &$InstanceUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueTypeUserId = $UserTypeNew;	
+		$this->InputValueTypeUserDescription = $TypeUserDescriptionNew;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TYPE_USER_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeUserIdClass;
+		//FORM_FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeUserId; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeUserIdText;
+		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
 		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -4809,15 +4765,16 @@ class Page
 											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			if($this->InputValueTypeUserId == Config::FORM_SELECT_NONE)
-				$this->InputValueTypeUserId = NULL;
+			if($this->InputValueTypeUserDescription == Config::FORM_SELECT_NONE)
+				$this->InputValueTypeUserDescription = NULL;
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserUpdateUserTypeByUserEmail($InstanceUser->GetEmail(),
-																			    $this->InputValueTypeUserId,
+																			    $this->InputValueTypeUserDescription,
 																			    $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$instanceFacedePersistence->TypeUserSelectByTypeUserId($this->InputValueTypeUserId, $instanceTypeUser, $Debug);
+				$instanceFacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
+																				$instanceTypeUser, $Debug);
 				if($return == Config::SUCCESS)
 				{
 					$InstanceUser->SetUserType($instanceTypeUser);

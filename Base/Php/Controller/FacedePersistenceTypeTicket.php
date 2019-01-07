@@ -198,6 +198,7 @@ class FacedePersistenceTypeTicket
 		}
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
+	
 	public function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);

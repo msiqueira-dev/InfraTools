@@ -62,6 +62,9 @@ class En
 	const COUNTRY                                                   = "Country";
 	const COUNTRY_ABBREVIATION                                      = "Country Initials";
 	const COUNTRY_NOT_FOUND                                         = "Country not found";
+	const DATABASE                                                  = "Database";
+	const DATABASE_ROW_COUNT                                        = "Total ammount of Rows";
+	const DATABASE_TABLE_QUANTITY                                   = "Tables quantity";
 	const DEACTIVATED                                               = "Deactivated";
 	const DEFAULT_VALUE                                             = "Please fill the necessary fields";
 	const DEPARTMENT                                                = "Department";
@@ -203,6 +206,7 @@ class En
 	const HREF_PAGE_ADMIN_CORPORATION                               = "/En/PageAdminCorporation";
 	const HREF_PAGE_ADMIN_COUNTRY                                   = "/En/PageAdminCountry";
 	const HREF_PAGE_ADMIN_DEPARTMENT                                = "/En/PageAdminDepartment";
+	const HREF_PAGE_ADMIN_NOTIFICATION                              = "/En/PageAdminNotification";
 	const HREF_PAGE_ADMIN_SERVICE                                   = "/En/PageAdminService";
 	const HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION                      = "/En/PageAdminSystemConfiguration";
 	const HREF_PAGE_ADMIN_TEAM                                      = "/En/PageAdminTeam";

@@ -367,18 +367,24 @@ class FacedePersistenceSystemConfiguration
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function SystemConfigurationUpdateByOptionNumber($TypeAssocUserTeamDescription, $SystemConfigurationOptionNumber, 
-															$Debug, $MySqlConnection)
+	public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+																			   $SystemConfigurationOptionDescriptionNew,
+																			   $SystemConfigurationOptionNameNew,
+																			   $SystemConfigurationOptionValueNew,
+																		       $SystemConfigurationOptionNumber, $Debug,
+																			   $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlSystemConfigurationUpdateByOptionNumber');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationUpdateByOptionNumber());
+				Persistence::ShowQuery('SqlSystemConfigurationUpdateBySystemConfigurationOptionNumber');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationUpdateBySystemConfigurationOptionNumber());
 			if ($stmt)
 			{
-				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $SystemConfigurationOptionNumber);
+				$stmt->bind_param("isssi", $SystemConfigurationOptionActiveNew, $SystemConfigurationOptionDescriptionNew,
+								        $SystemConfigurationOptionNameNew, $SystemConfigurationOptionValueNew,
+								        $SystemConfigurationOptionNumber);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;

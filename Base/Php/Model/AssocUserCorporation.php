@@ -68,7 +68,7 @@ class AssocUserCorporation
 	
 	public function GetAssocUserCorporationCorporationName()
 	{
-		if($this->Corporation != NULL)
+		if(!is_null($this->Corporation))
 			return $this->Corporation->GetCorporationName();
 	}
 	
@@ -89,7 +89,7 @@ class AssocUserCorporation
 	
 	public function GetAssocUserCorporationUserEmail()
 	{
-		if($this->User != NULL)
+		if(!is_null($this->User))
 			return $this->User->GetEmail();
 	}
 	
@@ -128,16 +128,16 @@ class AssocUserCorporation
 	public function UpdateAssocUserCorporation($AssocUserCorporationRegistrationDate, $AssocUserCorporationRegistrationId,
 								               $Corporation, $RegisterDate, $User) 
 	{
-		if($AssocUserCorporationRegistrationDate != NULL)
-			$this->AssocUserCorporationRegistrationDate  = $AssocUserCorporationRegistrationDate;
-		if($AssocUserCorporationRegistrationId != NULL)
-			$this->AssocUserCorporationRegistrationId    = $AssocUserCorporationRegistrationId;
-		if($Corporation != NULL)
-			$this->Corporation                           = $Corporation;
-		if($RegisterDate != NULL)
-			$this->RegisterDate                          = $RegisterDate;
-		if($User != NULL)
-			$this->User                                  = $User;
+		if(!is_null($AssocUserCorporationRegistrationDate))
+			$this->AssocUserCorporationRegistrationDate = $AssocUserCorporationRegistrationDate;
+		if(!is_null($AssocUserCorporationRegistrationId))
+			$this->AssocUserCorporationRegistrationId = $AssocUserCorporationRegistrationId;
+		if(!is_null($Corporation))
+			$this->Corporation = $Corporation;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		if(!is_null($User))
+			$this->User = $User;
 	}
 }
 ?>

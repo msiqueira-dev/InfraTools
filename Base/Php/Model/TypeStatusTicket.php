@@ -66,13 +66,15 @@ class TypeStatusTicket
 	/* SET */
 	public function SetTypeStatusTicketDescription($TypeStatusTicketDescription)
 	{
-		$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
+		if(!is_null($TypeStatusTicketDescription))
+			$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
 	}
 	
 	/* METHODS */
 	private function SetState(TypeStatusTicketState $State)
 	{
-		$this->State = $State;
+		if(!is_null($State))
+			$this->State = $State;
 	}
 	
 	public function TypeStatusTicketCanceled()
@@ -114,7 +116,7 @@ class TypeStatusTicket
 	
 	public function UpdateTypeStatusTicket($TypeStatusTicketDescription)	
 	{
-		if($this->TypeStatusTicketDescription != NULL)
+		if(!is_null($this->TypeStatusTicketDescription))
 			$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
 	}
 }

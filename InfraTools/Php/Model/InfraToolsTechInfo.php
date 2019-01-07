@@ -304,7 +304,7 @@ class InfraToolsTechInfo extends TechInfo
 			$arrayConstantProblems = array(); $countValue = 0;
 			foreach($array as $keyArray => $row)
 			{
-				if($row != NULL) $countValue++;
+				if(!is_null($row)) $countValue++;
 				if(count($arrayAux) > 0)
 				{
 					if(array_key_exists($keyArray, $arrayAux) == FALSE)

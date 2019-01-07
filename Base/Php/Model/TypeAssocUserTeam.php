@@ -53,20 +53,22 @@ class TypeAssocUserTeam
 	/* SET */	
 	public function SetRegisterDate($RegisterDate)
 	{
-		$this->RegisterDate = $RegisterDate;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 	}
 	
 	public function SetTypeAssocUserTeamDescription($TypeAssocUserTeamDescription)
 	{
-		$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
+		if(!is_null($TypeAssocUserTeamDescription))
+			$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 	}
 	
 	/* METHODS */
 	public function UpdateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription)
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		if($TypeAssocUserTeamDescription != NULL)
+		if(!is_null($TypeAssocUserTeamDescription))
 			$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 	}
 }

@@ -18,7 +18,7 @@ Functions:
 			public function InfraToolsUserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
 			                                                      $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection);
-			public function InfraToolsUserSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			public function InfraToolsUserSelectByTypeUser($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
 			                                               &$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection);
 **************************************************************************/
@@ -112,7 +112,6 @@ class InfraToolsFacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row["TypeUser".Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
@@ -216,7 +215,6 @@ class InfraToolsFacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
@@ -300,7 +298,7 @@ class InfraToolsFacedePersistenceUser
 									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, 
 									   $usrPhonePrimaryPrefix, $usrPhoneSecondary,
 									   $usrPhoneSecondaryPrefix, $usrUniqueId,
-									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
+									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate,
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
 									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
@@ -315,7 +313,6 @@ class InfraToolsFacedePersistenceUser
 																				   $depRegDate);
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
-						                                    $usrTypeId,
 														    $usrTypeRegDate);
 						$InstanceUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, NULL, NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
@@ -355,7 +352,7 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsUserSelectByTypeUser($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
+	public function InfraToolsUserSelectByTypeUser($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
 												   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; 
@@ -371,7 +368,7 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTypeUser());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeUserId, $TypeUserId, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
@@ -397,7 +394,6 @@ class InfraToolsFacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
@@ -478,7 +474,7 @@ class InfraToolsFacedePersistenceUser
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
 									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
-									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
+									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate, 
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
 									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
@@ -493,7 +489,6 @@ class InfraToolsFacedePersistenceUser
 																				   $depRegDate);
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
-						                                    $usrTypeId,
 														    $usrTypeRegDate);
 						$InstanceUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, NULL, NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 

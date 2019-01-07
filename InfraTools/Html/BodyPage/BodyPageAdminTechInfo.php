@@ -47,7 +47,42 @@
     </form>
     <div class="DivContentBodySection">
     	<div class="DivContentBodySectionTitle">
-			<div class="DivContentBodySectionTitleTextLanguage">
+			<div class="DivContentBodySectionTitleText">
+				<h2>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE') ?>
+				</h2>
+			</div>
+			<div class="DivContentBodySectionTitleLineLanguage">
+			</div>
+        </div>
+		<div class="DivContentBodySummary">
+			<div class="DivContentBodySummaryTitle">
+				<label>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE_TABLE_QUANTITY') . ":"; ?>
+				</label>
+			</div>
+			<div class="DivContentBodySummaryValue">
+				<label>
+					<?php echo count($this->ArrayDataBaseTables);
+					?>
+				</label>
+			</div>
+			<div class="DivContentBodySummaryTitle">
+				<label>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE_ROW_COUNT') . ":"; ?>
+				</label>
+			</div>
+			<div class="DivContentBodySummaryValue">
+				<label>
+					<?php echo $this->DataBaseRowCount;
+					?>
+				</label>
+			</div>
+		</div>
+	</div>
+    <div class="DivContentBodySection">
+    	<div class="DivContentBodySectionTitle">
+			<div class="DivContentBodySectionTitleText">
 				<h2>
 					<?php echo $this->InstanceLanguageText->GetText('LANGUAGES') ?>
 				</h2>
@@ -207,7 +242,7 @@
 		</div>
 		<div class="DivContentBodySection">
     	<div class="DivContentBodySectionTitle">
-			<div class="DivContentBodySectionTitleText">
+			<div class="DivContentBodySectionTitleTextLanguage">
 				<h2>
 					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_TITLE_TOTAL') ?>
 				</h2>

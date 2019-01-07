@@ -55,8 +55,7 @@ if(is_array($this->ArrayInstanceTypeUser))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('TYPE_USER_ID') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION') . "</th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION') . "</div></th>";
 	echo "<th  class='TableGenericThArrow'>
 	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
@@ -81,30 +80,10 @@ if(is_array($this->ArrayInstanceTypeUser))
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' method='post' />
-					<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
-		      		<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
-							 value='"  . $typeUser->GetTypeUserId()               . "' />
-					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
-		                           id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
-							       value='" . $typeUser->GetTypeUserId() . "' 
-								   title='" . $typeUser->GetTypeUserId() . "' />
-				</form>
-		      </td>";
-		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' method='post' />
 					  <input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
 							 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
 							 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
-					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_FIELD_TYPE_USER_ID . "'
-							 value='"  . $typeUser->GetTypeUserId()               . "' />
 					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 		                           id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
 							       value='" . $typeUser->GetTypeUserDescription() . "' 

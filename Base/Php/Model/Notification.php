@@ -1,8 +1,8 @@
 <?php
 
 /************************************************************************
-Class: SystemConfiguration
-Creation: 2019/01/03
+Class: Notification
+Creation: 2019/01/07
 Creator: Marcus Siqueira
 Dependencies:
 

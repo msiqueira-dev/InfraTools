@@ -91,9 +91,9 @@ class Team
 	/* METHODS */
 	public function UpdateTeam($TeamDescription, $TeamName)	
 	{
-		if($TeamDescription != NULL)
+		if(!is_null($TeamDescription))
 			$this->TeamDescription  = $TeamDescription;
-		if($TeamName != NULL)
+		if(!is_null($TeamName))
 			$this->TeamName = $TeamName;
 	}
 }

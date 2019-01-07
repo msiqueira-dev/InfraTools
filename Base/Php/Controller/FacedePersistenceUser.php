@@ -29,8 +29,8 @@ Functions:
 			public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
 														             &$RowCount, $Debug, $MySqlConnection);
-			public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
-			                                       &$RowCount, $Debug, $MySqlConnection);
+			public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			                                                &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection);
@@ -297,7 +297,6 @@ class FacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row["TypeUser".Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
@@ -399,7 +398,6 @@ class FacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser'.Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
@@ -502,7 +500,6 @@ class FacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
@@ -583,7 +580,7 @@ class FacedePersistenceUser
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
 									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
-									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
+									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate,
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
 									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
@@ -597,7 +594,6 @@ class FacedePersistenceUser
 																				   $depRegDate);
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
-						                                    $usrTypeId,
 														    $usrTypeRegDate);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
@@ -678,7 +674,6 @@ class FacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
@@ -795,7 +790,6 @@ class FacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
@@ -871,8 +865,8 @@ class FacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function UserSelectByTypeUserId($TypeUserId, $Limit1, $Limit2, &$ArrayInstanceUser, 
-										   &$RowCount, $Debug, $MySqlConnection)
+	public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
+										            &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; 
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
@@ -886,7 +880,7 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTypeUser());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeUserId, $TypeUserId, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
@@ -912,7 +906,6 @@ class FacedePersistenceUser
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-						                                    $row[Config::TABLE_TYPE_USER_FIELD_ID],
 															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, 
 												 NULL,
@@ -993,7 +986,7 @@ class FacedePersistenceUser
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
 									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
-									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
+									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate,
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
 									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
@@ -1007,7 +1000,6 @@ class FacedePersistenceUser
 																				   $depRegDate);
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
-						                                    $usrTypeId,
 														    $usrTypeRegDate);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
@@ -1066,7 +1058,7 @@ class FacedePersistenceUser
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
 									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
-									   $usrTypeDescription, $usrTypeId, $usrTypeRegDate,
+									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate, 
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
 									   $assocUsrCorpRegistrationId, $assocUsrCorpUsrEmail, $assocUsrCorpRegDate,
@@ -1081,7 +1073,6 @@ class FacedePersistenceUser
 																				   $depRegDate);
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
-						                                    $usrTypeId,
 														    $usrTypeRegDate);
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 

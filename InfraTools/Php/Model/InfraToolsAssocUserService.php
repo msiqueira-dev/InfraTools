@@ -47,16 +47,16 @@ class InfraToolsAssocUserService
 								$InfraToolsUserInstance, $RegisterDate) 
 	{
 		$this->InfraToolsFactory = InfraToolsFactory::__create();
-		if($InfraToolsServiceInstance != NULL)
+		if(!is_null($InfraToolsServiceInstance))
 			$this->InfraToolsService = $InfraToolsServiceInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_ASSOC_USER_SERVICE_SERVICE);
-		if($InfraToolsTypeAssocUserServiceInstance != NULL)
+		if(!is_null($InfraToolsTypeAssocUserServiceInstance))
 			$this->InfraToolsTypeAssocUserService = $InfraToolsTypeAssocUserServiceInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_ASSOC_USER_SERVICE_TYPE);
-		if($InfraToolsUserInstance != NULL)
+		if(!is_null($InfraToolsUserInstance))
 			$this->InfraToolsUser = $InfraToolsUserInstance;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_ASSOC_USER_SERVICE_USER);
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
 	}
@@ -75,7 +75,7 @@ class InfraToolsAssocUserService
 	
 	public function GetInfraToolsServiceId()
 	{
-		if($this->InfraToolsService != NULL)
+		if(!is_null($this->InfraToolsService))
 		{
 			if(is_object($this->InfraToolsService))
 				return $this->InfraToolsService->GetServiceId();
@@ -86,7 +86,7 @@ class InfraToolsAssocUserService
 	
 	public function GetInfraToolsServiceName()
 	{
-		if($this->InfraToolsService != NULL)
+		if(!is_null($this->InfraToolsService))
 		{
 			if(is_object($this->InfraToolsService))
 				return $this->InfraToolsService->GetServiceName();
@@ -102,7 +102,7 @@ class InfraToolsAssocUserService
 	
 	public function GetInfraToolsTypeAssocUserServiceDescription()
 	{
-		if($this->InfraToolsTypeAssocUserService != NULL)
+		if(!is_null($this->InfraToolsTypeAssocUserService))
 		{
 			if(is_object($this->InfraToolsTypeAssocUserService))
 				return $this->InfraToolsTypeAssocUserService->GetTypeAssocUserServiceDescription();
@@ -113,7 +113,7 @@ class InfraToolsAssocUserService
 	
 	public function GetInfraToolsTypeAssocUserServiceId()
 	{
-		if($this->InfraToolsTypeAssocUserService != NULL)
+		if(!is_null($this->InfraToolsTypeAssocUserService))
 		{
 			if(is_object($this->InfraToolsTypeAssocUserService))
 				return $this->InfraToolsTypeAssocUserService->GetTypeAssocUserServiceId();
@@ -129,7 +129,7 @@ class InfraToolsAssocUserService
 	
 	public function GetInfraToolsUserEmail()
 	{
-		if($this->InfraToolsUser != NULL)
+		if(!is_null($this->InfraToolsUser))
 		{
 			if(is_object($this->InfraToolsUser))
 				return $this->InfraToolsUser->GetEmail();
@@ -163,12 +163,12 @@ class InfraToolsAssocUserService
 	public function UpdateAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
 								           $InfraToolsUserInstance)
 	{
-		if($InfraToolsServiceInstance != NULL)
-			$this->InfraToolsService    = $InfraToolsServiceInstance;
-		if($InfraToolsTypeAssocUserServiceInstance != NULL)
+		if(!is_null($InfraToolsServiceInstance))
+			$this->InfraToolsService = $InfraToolsServiceInstance;
+		if(!is_null($InfraToolsTypeAssocUserServiceInstance))
 			$this->InfraToolsTypeAssocUserService = $InfraToolsTypeAssocUserServiceInstance;
-		if($InfraToolsUserInstance != NULL)
-			$this->InfraToolsUser  = $InfraToolsUserInstance;
+		if(!is_null($InfraToolsUserInstance))
+			$this->InfraToolsUser = $InfraToolsUserInstance;
 	}
 }
 ?>

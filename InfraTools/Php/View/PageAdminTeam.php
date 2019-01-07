@@ -199,8 +199,8 @@ class PageAdminTeam extends PageAdmin
 		//FORM_TYPE_USER_SELECT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserId', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_ID],
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
 									        &$this->InstanceTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;

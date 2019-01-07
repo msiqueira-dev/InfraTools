@@ -73,9 +73,9 @@ class MySqlManager
 	
 	public function CloseDataBaseConnection($MySqlConnection, $Statement)
 	{
-		if ($MySqlConnection != NULL && is_a($MySqlConnection, "mysqli"))
+		if (!is_null($MySqlConnection) && is_a($MySqlConnection, "mysqli"))
 		{
-			if($Statement != NULL)
+			if(!is_null($Statement))
 			{
 				if (mysqli_close($MySqlConnection) == TRUE && $Statement->close() == TRUE)
 					return Config::SUCCESS;
@@ -96,7 +96,7 @@ class MySqlManager
 	{
 		$QueryResult = NULL; $ErrorCode = NULL; $ErrorString = NULL;
 
-		if ($Statement != NULL)
+		if (!is_null($Statement))
 		{
 			if ($this->Config->EnableLogMySqlQuery || $this->Config->EnableLogMySqlError)
 			{
@@ -122,7 +122,7 @@ class MySqlManager
 	{
 		$QueryResult = NULL; $QueryError = NULL;
 
-		if ($MySqlConnection != NULL)
+		if (!is_null($MySqlConnection))
 		{
 			if ($this->Config->EnableLogMySqlQuery || $this->Config->EnableLogMySqlError)
 			{
@@ -134,7 +134,7 @@ class MySqlManager
 			}
 			if($Statement == NULL)
 			{
-				if($Query != NULL)
+				if(!is_null($Query))
 				{
 					if(!($Statement = $MySqlConnection->prepare($Query)))
 					{
@@ -159,7 +159,7 @@ class MySqlManager
 	{
 		$ArrayMySqlProccess = array(); $MySqlConnection = NULL;
 		
-		if ($MySqlConnection != NULL)
+		if (!is_null($MySqlConnection))
 		{
 			$queryResult = mysqli_get_client_stats ($MySqlConnection);
 			while ($row = mysqli_fetch_assoc($queryResult))
@@ -180,7 +180,7 @@ class MySqlManager
 				
 				$MySqlConnection = mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
 												   $this->MySqlDataBase, $this->MySqlPort);
-				if ($MySqlConnection != NULL) 
+				if (!is_null($MySqlConnection)) 
 				{
 					$MySqlConnection->set_charset(Config::MYSQL_CHATSET_UTF8);
 					$MySqlConnection->options(MYSQLI_OPT_CONNECT_TIMEOUT, ProjectConfig::$MySqlOptionTimeOut);
