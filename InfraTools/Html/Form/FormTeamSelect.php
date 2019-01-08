@@ -12,9 +12,9 @@
 		<?php if(isset($this->ReturnText))         echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TEAM SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>" method="post" >
+<!-- FORM_TEAM_SELECT_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>" method="post" >
 	<!-- FORM_FIELD_TEAM_RADIO -->
 	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
 		<div class="DivContentBodyContainerRadio">
@@ -32,10 +32,10 @@
 														   'DivContentBodySubmit',
 														   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>', 
 														   'Team Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('TEAM_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?>"  
 					   <?php echo $this->InputValueTeamNameRadio; ?> checked/>
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('TEAM_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
@@ -55,10 +55,10 @@
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>', 
 														   'Team Id')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('TEAM_ID'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID'); ?>"  
 					   <?php echo $this->InputValueTeamIdRadio; ?> />
 				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('TEAM_ID'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID'); ?></i>
 				</div>
 			</label>
 		</div>
@@ -66,7 +66,7 @@
 		<!-- FORM_FIELD_TEAM_NAME -->
 		<div class="NotHidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_RADIO_DIV_NAME; ?>">>
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('TEAM_NAME'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
@@ -78,7 +78,7 @@
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', 'false');
 										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
@@ -87,7 +87,7 @@
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
@@ -96,17 +96,17 @@
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('TEAM_NAME'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?>" 
 							   value="<?php echo $this->InputValueTeamName; ?>" maxlength="80" />
 		</div>
 		<!-- FORM_FIELD_TEAM_ID -->
 		<div class="Hidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_RADIO_DIV_ID ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('TEAM_ID'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
@@ -118,7 +118,7 @@
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', 'false');
 										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
@@ -127,7 +127,7 @@
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
@@ -136,18 +136,18 @@
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('TEAM_ID'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID'); ?>" 
 							   value="<?php echo $this->InputValueTeamName; ?>" maxlength="5" />
 		</div>
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_FORM; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 								   '');">

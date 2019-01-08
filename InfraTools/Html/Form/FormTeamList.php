@@ -1,4 +1,4 @@
-<!-- BODY TEAM LIST -->
+<!-- FORM_TEAM_LIST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -33,7 +33,7 @@
 <?php
 if(is_array($this->ArrayInstanceTeam))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_LIST . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -55,11 +55,11 @@ if(is_array($this->ArrayInstanceTeam))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('ID') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('TEAM_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('TEAM_DESCRIPTION') . "</th>";
+		 "<div class='TableGenericThLeft'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"    . $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"    . $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
-	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
+	      <div  class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'

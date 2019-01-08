@@ -86,11 +86,12 @@ Methods:
 			public static function SqlTypeTicketSelect();
 			public static function SqlTypeTicketSelectByTypeTicketDescription();
 			public static function SqlTypeTicketUpdateByTypeTicketDescription();
-			public static function SqlTypeUserDelete();
+			public static function SqlTypeUserDeleteByTypeUserDescription();
 			public static function SqlTypeUserInsert();
 			public static function SqlTypeUserSelect();
 			public static function SqlTypeUserSelectNoLimit();
 			public static function SqlTypeUserSelectByDescription();
+			public static function SqlTypeUserSelectByDescriptionLike();
 			public static function SqlTypeUserSelectByTypeUserDescription();
 			public static function SqlTypeUserUpdateByTypeUserDescription();
 			public static function SqlUserSelectExistsByUserEmail();
@@ -103,8 +104,10 @@ Methods:
 			public static function SqlUserSelectByDepartment();
 			public static function SqlUserSelectByHashCode();
 			public static function SqlUserSelectByTeamId();
+			public static function SqlUserSelectByTicketId();
 			public static function SqlUserSelectByTypeAssocUserTeamDescription();
-			public static function SqlUserSelectByTypeUser();
+			public static function SqluserSelectByTypeTicketDescription();
+			public static function SqlUserSelectByTypeUserDescription();
 			public static function SqlUserSelectByUserEmail();
 			public static function SqlUserSelectByUserUniqueId();
 			public static function SqlUserSelectUserActiveByHashCode();
@@ -658,37 +661,36 @@ class Persistence
 	public static function SqlTicketDeleteById()
 	{
 		return "DELETE FROM " . Config::TABLE_TICKET . " "  
-		     . "WHERE "       . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_ID . " = ?";
+		     . "WHERE "       . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_ID . " = ?";
 	}
 	
 	public static function SqlTicketInsert()
 	{
-		return "INSERT INTO " . Config::TABLE_TICKET         . " "
-			 . "(" . Config::TABLE_FIELD_REGISTER_DATE       . ","
-			 . "(" . Config::TABLE_TICKET_FIELD_DESCRIPTION  . ","
-		     . " " . Config::TABLE_TICKET_FIELD_ID           . ","
-			 . " " . Config::TABLE_TICKET_FIELD_NUMBER       . ","
-			 . " " . Config::TABLE_TICKET_FIELD_SERVICE      . ")"
-			 . " " . Config::TABLE_TICKET_FIELD_STATUS       . ")"
-			 . " " . Config::TABLE_TICKET_FIELD_SUGGESTION   . ")"
-			 . " " . Config::TABLE_TICKET_FIELD_TITLE        . ")"
-			 . " " . Config::TABLE_TICKET_FIELD_TYPE         . ")"
+		return "INSERT INTO " . Config::TABLE_TICKET                . " "
+			 . "(" . Config::TABLE_FIELD_REGISTER_DATE              . ","
+			 . "(" . Config::TABLE_TICKET_FIELD_TICKET_DESCRIPTION  . ","
+		     . " " . Config::TABLE_TICKET_FIELD_TICKET_ID           . ","
+			 . " " . Config::TABLE_TICKET_FIELD_TICKET_SERVICE      . ")"
+			 . " " . Config::TABLE_TICKET_FIELD_TICKET_STATUS       . ")"
+			 . " " . Config::TABLE_TICKET_FIELD_TICKET_SUGGESTION   . ")"
+			 . " " . Config::TABLE_TICKET_FIELD_TICKET_TITLE        . ")"
+			 . " " . Config::TABLE_TICKET_FIELD_TICKET_TYPE         . ")"
 		     . " VALUES (NOW(), UPPER(?), DEFAULT, ?, ?, ?, UPPER(?), UPPER(?), ?";
 	}
 	
 	public static function SqlTicketSelect()
 	{
-		return "SELECT "   . Config::TABLE_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE      . ", "
-		                   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_DESCRIPTION . ", "
-					       . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_ID          . ", "
-						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_SERVICE     . ", "
-						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_STATUS      . ", "
-						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_SUGGESTION  . ", "
-						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TITLE       . ", "
-						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TYPE        . ", "
-			 . "(SELECT COUNT(*) FROM "                 . Config::TABLE_TICKET . ") AS COUNT "
-			 . "FROM  "    . Config::TABLE_TICKET . " " 
-			 . "ORDER BY " . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_ID          . "  "
+		return "SELECT "   . Config::TABLE_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE             . ", "
+		                   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_DESCRIPTION . ", "
+					       . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_ID          . ", "
+						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_SERVICE     . ", "
+						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_STATUS      . ", "
+						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_SUGGESTION  . ", "
+						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_TITLE       . ", "
+						   . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_TYPE        . ", "
+			 . "(SELECT COUNT(*) FROM "                 . Config::TABLE_TICKET                          . ") AS COUNT "
+			 . "FROM  "    . Config::TABLE_TICKET                                                       . " " 
+			 . "ORDER BY " . Config::TABLE_TICKET . "." . Config::TABLE_TICKET_FIELD_TICKET_ID          . "  "
 			 . "LIMIT ?, ?";
 	}
 	public static function SqlTicketSelectByRequestingUser()
@@ -828,7 +830,7 @@ class Persistence
 		     . "WHERE "  . Config::TABLE_TYPE_TICKET . "." . Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION . "=UPPER(?) ";
 	}
 	
-	public static function SqlTypeUserDelete()
+	public static function SqlTypeUserDeleteByTypeUserDescription()
 	{
 		return "DELETE FROM " . Config::TABLE_TYPE_USER . " "  
 		     . "WHERE "       . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " = ?";
@@ -867,14 +869,22 @@ class Persistence
 		return "SELECT " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ", "
 					     . Config::TABLE_TYPE_USER . "." . Config::TABLE_FIELD_REGISTER_DATE           . "  " 
 		     . "FROM  "  . Config::TABLE_TYPE_USER . " " 
-	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . " = ?";
+	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . " =UPPER(?)";
+	}
+	
+	public static function SqlTypeUserSelectByDescriptionLike()
+	{
+		return "SELECT " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . ", "
+					     . Config::TABLE_TYPE_USER . "." . Config::TABLE_FIELD_REGISTER_DATE           . "  " 
+		     . "FROM  "  . Config::TABLE_TYPE_USER . " " 
+	         . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION   . " LIKE UPPER(?) ";
 	}
 	
 	public static function SqlTypeUserUpdateByTypeUserDescription()
 	{
 		return "UPDATE " . Config::TABLE_TYPE_USER . " "  
 		     . "SET    " . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " =UPPER(?) "
-		     . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " = ?";
+		     . "WHERE "  . Config::TABLE_TYPE_USER . "." . Config::TABLE_TYPE_USER_FIELD_DESCRIPTION . " =UPPER(?) ";
 	}
 	
 	public static function SqlUserSelectExistsByUserEmail()
@@ -1278,6 +1288,83 @@ class Persistence
 		. "LIMIT ?, ?";	
 	}
 	
+	public static function SqlUserSelectByTicketId()
+	{
+		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                                                 . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                                                    . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_GENDER                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_HASH_CODE                                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_REGION                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_SESSION_EXPIRES                                            . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_ACTIVE                                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_CONFIRMED                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                         . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as UserRegisterDate, "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                                           . ", "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as TypeUserRegisterDate, "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                                              . ", "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                                . ", " 
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as CorporationRegisterDate, "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                         . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                        . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                               . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as AssocUserCorporationRegisterDate, "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                                          . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_INITIALS                                             . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                                 . ", " 
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as DepartmentRegisterDate, "
+		. "(SELECT COUNT(*) FROM " . Config::TABLE_TICKET      ." "
+		. "WHERE "      .  Config::TABLE_TICKET                .".". Config::TABLE_TICKET_FIELD_TICKET_ID                                ."=? "
+		. ") AS COUNT "
+		. "FROM "       . Config::TABLE_USER                                                                                             ." "
+		. "INNER JOIN " . Config::TABLE_TYPE_USER                                                                                        ." "
+		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                                       ." "
+		. "=  "         . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                           ." "
+		. "LEFT JOIN "  . Config::TABLE_CORPORATION                                                                                      ." "
+		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=  "         . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                ." "
+		. "LEFT JOIN "  . Config::TABLE_ASSOC_USER_CORPORATION                                                                           ." "
+		. "ON  "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                      ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL               ." "
+		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME         ." "
+		. "LEFT JOIN  " . Config::TABLE_DEPARTMENT                                                                                       ." "
+		. "ON  "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME          ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                 ." "
+		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                          ." "
+		. "AND "        . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                          ." "
+		. "LEFT JOIN  " . Config::TABLE_ASSOC_TICKET_USER_REQUESTING                                                                     ." "
+		. "ON  "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . Config::TABLE_ASSOC_TICKET_USER_REQUESTING  .".". Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL  ." "
+		. "LEFT JOIN  " . Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE                                                                    ." "
+		. "ON  "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE .".". Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE_FIELD_USER_EMAIL ." "
+		. "LEFT JOIN  " . Config::TABLE_TICKET                                                                                           ." "
+		. "ON  "        . Config::TABLE_ASSOC_TICKET_USER_REQUESTING  .".". Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_TICKET_ID   ." "
+		. "=   "        . Config::TABLE_TICKET                        .".". Config::TABLE_TICKET_FIELD_TICKET_ID                         ." "
+		. "OR  "        . Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE .".". Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE_FIELD_TICKET_ID  ." "
+		. "=   "        . Config::TABLE_TICKET                        .".". Config::TABLE_TICKET_FIELD_TICKET_ID                         ." "
+		. "WHERE "      . Config::TABLE_TICKET                        .".". Config::TABLE_TICKET_FIELD_TICKET_ID                         ."=? "
+		. "ORDER BY "   . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_NAME                                ." "
+		. "LIMIT ?, ?";
+	}
+	
 	public static function SqlUserSelectByTypeAssocUserTeamDescription()
 	{
 		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                          . ", "
@@ -1366,7 +1453,87 @@ class Persistence
 		. "LIMIT ?, ?";
 	}
 	
-	public static function SqlUserSelectByTypeUser()
+	public static function SqlUserSelectByTypeTicketDescription()
+	{
+		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                                                 . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                                                    . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_GENDER                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_HASH_CODE                                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_REGION                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_SESSION_EXPIRES                                            . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_ACTIVE                                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_CONFIRMED                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                         . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as UserRegisterDate, "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                                           . ", "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as TypeUserRegisterDate, "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                                              . ", "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                                . ", " 
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as CorporationRegisterDate, "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                         . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                        . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                               . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as AssocUserCorporationRegisterDate, "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                                          . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_INITIALS                                             . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                                 . ", " 
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as DepartmentRegisterDate, "
+		. "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_TICKET        ." "
+		. "WHERE "      .  Config::TABLE_TYPE_TICKET                  .".". Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION                  . "=? "
+		. ") AS COUNT "
+		. "FROM "       . Config::TABLE_USER                                                                                             . " "
+		. "INNER JOIN " . Config::TABLE_TYPE_USER                                                                                        . " "
+		. "ON "         . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_TYPE                                . " "
+		. "= "          . Config::TABLE_TYPE_USER                     .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                    . " "
+		. "LEFT JOIN "  . Config::TABLE_CORPORATION                                                                                      . " "
+		. "ON "         . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_CORPORATION                         . " "
+		. "= "          . Config::TABLE_CORPORATION                   .".". Config::TABLE_CORPORATION_FIELD_NAME                         . " "
+		. "LEFT JOIN "  . Config::TABLE_ASSOC_USER_CORPORATION        ." "
+		. "ON "         . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_EMAIL                               . " "
+		. "= "          . Config::TABLE_ASSOC_USER_CORPORATION        .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        . " "
+		. "AND "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_CORPORATION                         . " "
+		. "= "          . Config::TABLE_ASSOC_USER_CORPORATION        .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  . " "
+		. "LEFT JOIN  " . Config::TABLE_DEPARTMENT                                                                                       . " "
+		. "ON "         . Config::TABLE_ASSOC_USER_CORPORATION        .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME   . " "
+		. "= "          . Config::TABLE_DEPARTMENT                    .".". Config::TABLE_DEPARTMENT_FIELD_NAME                          . " "
+		. "AND "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_CORPORATION                         . " "
+		. "= "          . Config::TABLE_DEPARTMENT                    .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                   . " "
+		. "AND "        . Config::TABLE_CORPORATION                   .".". Config::TABLE_CORPORATION_FIELD_NAME                         . " "
+		. "= "          . Config::TABLE_DEPARTMENT                    .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                   . " "
+		. "LEFT JOIN  " . Config::TABLE_ASSOC_TICKET_USER_REQUESTING                                                                     . " "
+		. "ON  "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_EMAIL                               . " "
+		. "=   "        . Config::TABLE_ASSOC_TICKET_USER_REQUESTING  .".". Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL  . " "
+		. "LEFT JOIN  " . Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE                                                                    . " "
+		. "ON  "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_EMAIL                               . " "
+		. "=   "        . Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE .".". Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE_FIELD_USER_EMAIL . " "
+		. "LEFT JOIN  " . Config::TABLE_TICKET                                                                                           . " "
+		. "ON  "        . Config::TABLE_ASSOC_TICKET_USER_REQUESTING  .".". Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_TICKET_ID   . " "
+		. "=   "        . Config::TABLE_TICKET                        .".". Config::TABLE_TICKET_FIELD_TICKET_ID                         . " "
+		. "OR  "        . Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE .".". Config::TABLE_ASSOC_TICKET_USER_RESPONSIBLE_FIELD_TICKET_ID  . " "
+		. "=   "        . Config::TABLE_TICKET                        .".". Config::TABLE_TICKET_FIELD_TICKET_ID                         . " "
+		. "LEFT JOIN  " . Config::TABLE_TYPE_TICKET                                                                                      . " "
+		. "ON  "        . Config::TABLE_TICKET                        .".". Config::TABLE_TICKET_FIELD_TICKET_TYPE                       . " "
+		. "=   "        . Config::TABLE_TYPE_TICKET                   .".". Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION                  . " "
+		. "WHERE "      . Config::TABLE_TYPE_TICKET                   .".". Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION                  . "=? "
+		. "ORDER BY "   . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_NAME                                . " "
+		. "LIMIT ?, ?";
+	}
+	
+	public static function SqlUserSelectByTypeUserDescription()
 	{
 		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                          . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                             . ", "
@@ -1405,19 +1572,6 @@ class Persistence
 		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                          . ", " 
 		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_FIELD_REGISTER_DATE                            . "  "
 		. "as DepartmentRegisterDate, "
-		. Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID                   . ", " 
-		. Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL                . ", "        
-        . Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE                 . ", "
-		. Config::TABLE_ASSOC_USER_TEAM       .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  " 
-	    . "as AssocUserTeamRegisterDate, "     
-        . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION          . ", "
-        . Config::TABLE_TYPE_ASSOC_USER_TEAM  .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  "
-		. "as TypeAssocUserTeamRegisterDate, "
-        . Config::TABLE_TEAM                  .".". Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION                     . ", " 
-		. Config::TABLE_TEAM                  .".". Config::TABLE_TEAM_FIELD_TEAM_ID                              . ", " 
-		. Config::TABLE_TEAM                  .".". Config::TABLE_TEAM_FIELD_TEAM_NAME                            . ", " 
-		. Config::TABLE_TEAM                  .".". Config::TABLE_FIELD_REGISTER_DATE                             . "  "
-		. "as TeamRegisterDate, "
 		. "(SELECT COUNT(*) FROM " . Config::TABLE_TYPE_USER   ." "
 		. "WHERE "      .  Config::TABLE_TYPE_USER             .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  ."=? "
 		. ") AS COUNT "
@@ -1440,15 +1594,6 @@ class Persistence
 		. "= "          . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                 ." "
 		. "AND "        . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                       ." "
 		. "= "          . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                 ." "
-		. "LEFT JOIN  " . Config::TABLE_ASSOC_USER_TEAM        ." "
-		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                             ." "
-		. "= "          . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_EMAIL             ." "
-		. "LEFT JOIN  " . Config::TABLE_TEAM                   ." "
-		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_TEAM_ID                ." "
-		. "= "          . Config::TABLE_TEAM                   .".". Config::TABLE_TEAM_FIELD_TEAM_ID                           ." "
-		. "LEFT JOIN  " . Config::TABLE_TYPE_ASSOC_USER_TEAM   ." "
-		. "ON "         . Config::TABLE_ASSOC_USER_TEAM        .".". Config::TABLE_ASSOC_USER_TEAM_FIELD_USER_TYPE              ." "
-		. "= "          . Config::TABLE_TYPE_ASSOC_USER_TEAM   .".". Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION       ." "
 		. "WHERE "      . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                  . "=? "
 		. "ORDER BY "   . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                              ." "
 		. "LIMIT ?, ?";		

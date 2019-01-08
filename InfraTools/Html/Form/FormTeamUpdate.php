@@ -12,22 +12,22 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TEAM UPDATE -->
-<form name="<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>" method="post">
-    <!-- TEAM_ID -->
+<!-- FORM_TEAM_UPDATE_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>" method="post">
+    <!-- FORM_FIELD_TEAM_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TEAM_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
         	<label><?php echo $this->InputValueTeamId; ?></label>
 		</div>
 	</div>
-   <!-- TEAM_NAME -->
+   <!-- FORM_FIELD_TEAM_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TEAM_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>" 
@@ -38,12 +38,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
@@ -52,18 +52,18 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TEAM_NAME'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?>"
                                value="<?php echo $this->InputValueTeamName; ?>" maxlength="45" />
         </div>
     </div>
-    <!-- TEAM_DESCRIPTION -->
+    <!-- FORM_FIELD_TEAM_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TEAM_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION; ?>" 
@@ -74,12 +74,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
@@ -88,11 +88,11 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TEAM_DESCRIPTION'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueTeamDescription; ?>" maxlength="120" />
         </div>
     </div>
@@ -116,7 +116,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_TEAM_UPDATE_SUBMIT; ?>',
                                    '');">

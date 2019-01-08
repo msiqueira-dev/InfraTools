@@ -187,9 +187,9 @@ class FacedePersistenceAssocTicketUserRequesting
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceAssocTicketUserRequesting = $this->Factory->CreateAssocTicketUserRequesting
-							                                 ($row[Config::TABLE_ASSOC_TICKET_USER_FIELD_REQUESTING_TICKET_ID],
-															  $row[Config::TABLE_ASSOC_TICKET_USER_FIELD_REQUESTING_USER_BOND],
-														      $row[Config::TABLE_ASSOC_TICKET_USER_FIELD_REQUESTING_USER_EMAIL],
+							                                 ($row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_TICKET_ID],
+															  $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_BOND],
+														      $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL],
 														      $row[Config::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayAssocTicketUserRequesting, $InstanceAssocTicketUserRequesting);
 					}
@@ -242,9 +242,9 @@ class FacedePersistenceAssocTicketUserRequesting
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceAssocTicketUserRequesting = $this->Factory->CreateAssocTicketUserRequesting
-							                                 ($row[Config::TABLE_ASSOC_TICKET_USER_FIELD_REQUESTING_TICKET_ID],
-															  $row[Config::TABLE_ASSOC_TICKET_USER_FIELD_REQUESTING_USER_BOND],
-														      $row[Config::TABLE_ASSOC_TICKET_USER_FIELD_REQUESTING_USER_EMAIL],
+							                                 ($row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_TICKET_ID],
+															  $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_BOND],
+														      $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL],
 														      $row[Config::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayAssocTicketUserRequesting, $InstanceAssocTicketUserRequesting);
 					}

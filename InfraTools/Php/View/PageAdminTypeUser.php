@@ -53,7 +53,25 @@ class PageAdminTypeUser extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		
+		//FORM_CORPORATION_SELECT_SUBMIT
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		}
+		//FORM_DEPARTMENT_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+										    &$this->InstanceInfraToolsDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+		}
 		//FORM_TYPE_USER_LIST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_LIST) == ConfigInfraTools::SUCCESS)
 		{
@@ -61,55 +79,6 @@ class PageAdminTypeUser extends PageAdmin
 									  array(&$this->ArrayInstanceTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
-		}
-		//FORM_TYPE_USER_SELECT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
-									        &$this->InstanceTypeUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-		}
-		//FORM_TYPE_USER_LIST_VIEW_USERS
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->ExecuteFunction($_POST, 'UserSelectByTypeUserDescription', 
-										  array($this->InstanceTypeUser->GetTypeUserDescription(), 
-											    &$this->ArrayInstanceUser),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
-			}
-		}
-		//FORM_CORPORATION_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
-											&$this->InstanceCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-		}
-		//FORM_DEPARTMENT_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
-											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
-											&$this->InstanceInfraToolsDepartment),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-		}
-		//FORM_USER_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL], 
-											&$this->InstanceUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		//TYPE USER REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_REGISTER) == ConfigInfraTools::SUCCESS)
@@ -126,18 +95,51 @@ class PageAdminTypeUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_REGISTER;
 		}
-		//TYPE USER VIEW DELETE SUBMIT
+		//FORM_TYPE_USER_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescriptionLike', 
+											  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+													&$this->ArrayInstanceUser),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			{
+
+				if(count($this->ArrayInstanceUser) > 1)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;	
+				else
+				{
+					$this->InstanceTypeUser = array_pop($this->ArrayInstanceUser);
+					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser);
+					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
+												  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+				}
+			}
+		}
+		//FORM_TYPE_USER_VIEW_DELETE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{				
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->TypeUserDeleteByTypeUserDescription($this->InstanceTypeUser, $this->InputValueHeaderDebug) 
-				   == ConfigInfraTools::SUCCESS)
+				                                              == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
 				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 												  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 			} 
+		}
+		//FORM_TYPE_USER_VIEW_LIST_USERS
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTypeUserDescription', 
+										  array($this->InstanceTypeUser->GetTypeUserDescription(), 
+											    &$this->ArrayInstanceUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
+			}
 		}
 		//FORM_TYPE_USER_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
@@ -158,7 +160,7 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser) 
 			                                   == ConfigInfraTools::SUCCESS)
-			{;
+			{
 				if($this->ExecuteFunction($_POST, 'TypeUserUpdateByTypeUserDescription', 
 									      array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
 										        &$this->InstanceTypeUser),
@@ -166,6 +168,15 @@ class PageAdminTypeUser extends PageAdmin
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_UPDATE;
 			}
+		}
+		//FORM_USER_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL], 
+											&$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

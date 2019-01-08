@@ -56,7 +56,7 @@ class PageServiceListByDepartment extends PageService
 				if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
 				{
 					if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] 
-					   != ConfigInfraTools::FORM_SELECT_NONE)
+					   != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT];	
 					else if($this->User->GetCorporationName() != NULL)
 						$this->InputValueServiceCorporation = $this->User->GetCorporationName();
@@ -72,7 +72,7 @@ class PageServiceListByDepartment extends PageService
 				{
 					if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT]))
 					{
-						if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT] != ConfigInfraTools::FORM_SELECT_NONE)
+						if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 							$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT];	
 					}
 					

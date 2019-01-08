@@ -47,11 +47,11 @@
 		?>
 	</div>
 </div>
-<!-- FORM_TEAM_VIEW_LIST_USERS -->
+<!-- FORM_TEAM_VIEW_LIST_USERS_FORM -->
 <?php
-if(is_array($this->ArrayInstanceTeamMembers))
+if(is_array($this->ArrayInstanceUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -73,7 +73,7 @@ if(is_array($this->ArrayInstanceTeamMembers))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('TEAM') . "</div></th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('EMAIL') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
@@ -97,7 +97,7 @@ if(is_array($this->ArrayInstanceTeamMembers))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceTeamMembers as $key=>$user)
+	foreach($this->ArrayInstanceUser as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

@@ -365,13 +365,13 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
-				style=" <?php if($this->InputValueGender != ConfigInfraTools::FORM_SELECT_NONE
+				style=" <?php if($this->InputValueGender != ConfigInfraTools::FORM_FIELD_SELECT_NONE
 								 && $this->InputValueGender != "") 
 							echo 'color:black;'
 						?> " >
 			<option <?php if ($this->InputValueGender == "" 
-							  || $this->InputValueGender == ConfigInfraTools::FORM_SELECT_NONE) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" 
+							  || $this->InputValueGender == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_DEFAULT'); ?> 
 			</option>

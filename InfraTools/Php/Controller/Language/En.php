@@ -85,6 +85,11 @@ class En
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "Name";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "Number";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "Value";
+	const FORM_FIELD_TEAM_DESCRIPTION                               = "Team description";
+	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Description";
+	const FORM_FIELD_TEAM_ID                                        = "Team id";
+	const FORM_FIELD_TEAM_NAME                                      = "Team name";
+	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Description";
 	const FORM_INVALID_CAPTCHA                                      = "The captcha value does not match";
 	const FORM_INVALID_CORPORATION_NAME                             = "Invalid Corporation Name";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantity of characters exceeds the maximum allowed for "
@@ -136,6 +141,7 @@ class En
 	const FORM_INVALID_TICKET_DESCRIPTION                           = "Invalid ticket description";
 	const FORM_INVALID_TICKET_DESCRIPTION_SIZE                      = "Quantity of characters exceeds the maximum allowed for "
 		                                                            . "ticket description";
+	const FORM_INVALID_TICKET_ID                                    = "Inválid ticket id";
 	const FORM_INVALID_TICKET_TITLE                                 = "Invalid ticket title";
 	const FORM_INVALID_TICKET_TITLE_SIZE                            = "Quantity of characters exceeds the maximum allowed for "
 		                                                            . "ticket title";
@@ -196,7 +202,7 @@ class En
 	const FORM_INVALID_USER_UNIQUE_ID_SIZE                          = "Quantity of characters exceeds the maximum allowed for "
 		                                                            . "user unique id";
 	const FORM_SELECT_DEFAULT                                       = "Select";
-	const FORM_SELECT_NONE                                          = "None";             
+	const FORM_FIELD_SELECT_NONE                                    = "None";             
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Your password has been reseted";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "Your password was reset and your new password is: ";
 	const GENDER                                                    = "Gender";
@@ -742,9 +748,6 @@ class En
 	const TABLE_PAGE_PREFIX                                         = "From:";
 	const TABLE_PAGE                                                = "of";
 	const TEAM                                                      = "Team";
-	const TEAM_DESCRIPTION                                          = "Team description";
-	const TEAM_ID                                                   = "Team id";
-	const TEAM_NAME                                                 = "Team name";
 	const TEAM_NOT_FOUND                                            = "Team not found";
 	const TEAMS                                                     = "Teams";
 	const TEXT_BUTTON_GET                                           = "GET";
@@ -759,6 +762,8 @@ class En
 	const TICKET_DELETE_SUCCESS                                     = "";
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
+	const TICKET_SELECT_USERS_ERROR                                 = "Error while trying to obtain users associated with this ticket";
+	const TICKET_SELECT_USERS_WARNING                               = "No user is associated with this ticket";
 	const TWO_STEP_VERIFICATION                                     = "Two step verification";
 	const TYPE                                                      = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Error obtaining types of association";
@@ -769,10 +774,9 @@ class En
 	const TYPE_STATUS_TICKET_DESCRIPTION                            = "Description";
 	const TYPE_STATUS_TICKET_ID                                     = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Type status ticket not found";
-	const TYPE_TICKET_DESCRIPTION                                   = "Description";
-	const TYPE_TICKET_ID                                            = "Id";
 	const TYPE_TICKET_NOT_FOUND                                     = "Type ticket not found";
-	const TYPE_USER_DESCRIPTION                                     = "Description";
+	const TYPE_TICKET_SELECT_USERS_ERROR                            = "Error while trying to obtain users associated with this ticket type";
+	const TYPE_TICKET_SELECT_USERS_WARNING                          = "No user is associated with this ticket type";
 	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "User type not found";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Error while trying to update user's corporation information";

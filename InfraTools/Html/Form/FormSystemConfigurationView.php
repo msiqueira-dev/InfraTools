@@ -83,23 +83,23 @@
 </form>
 <!-- SUBMIT -->
 <div class="DivContentBodyContainer">
-	<!-- FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE -->
-	<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE; ?>" 
-		  class="DivFormViewUpdate"
+	<!-- FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE -->
+	<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE; ?>" 
+		  class="DivFormHorizontalButtons"
 		  method="post" >
-		  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE_SUBMIT; ?>" 
-				 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE_SUBMIT; ?>"
+		  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT; ?>" 
+				 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT; ?>"
 				 class="DivContentBodySubmitBigger"
 				 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
 	</form>
-	<!-- FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE -->
-	<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE; ?>" 
-		  class="DivFormViewDelete"
+	<!-- FORM_SYSTEM_CONFIGURATION_VIEW_DELETE -->
+	<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE; ?>" 
+		  class="DivFormHorizontalButtons"
 		  method="post" >
-		  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE_SUBMIT; ?>" 
-				 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE_SUBMIT; ?>"
+		  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT; ?>" 
+				 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT; ?>"
 				 class="DivContentBodySubmitBigger"
 				 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
 				 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>

@@ -125,9 +125,9 @@
 				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>"
 				class="SelectTypeService">
 				<option <?php if ($this->InputValueServiceType == "" 
-								  || $this->InputValueServiceType == ConfigInfraTools::FORM_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceType == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsTypeService))

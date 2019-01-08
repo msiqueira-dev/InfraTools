@@ -85,6 +85,11 @@ class Pt
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "Nome";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "Número";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "Valor";
+	const FORM_FIELD_TEAM_DESCRIPTION                               = "Descrição de equipe";
+	const FORM_FIELD_TEAM_ID                                        = "Id da equipe";
+	const FORM_FIELD_TEAM_NAME                                      = "Nome da equipe";
+	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Descrição";
+	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Descrição";
 	const FORM_INVALID_CAPTCHA                                      = "O valor catpcha não confere";
 	const FORM_INVALID_CORPORATION_NAME                             = "Nome de corporação inválida";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantidade de caracteres excede o tamanho máximo para " 
@@ -136,6 +141,7 @@ class Pt
 	const FORM_INVALID_TICKET_DESCRIPTION                           = "Descrição de solicitação inválida";
 	const FORM_INVALID_TICKET_DESCRIPTION_SIZE                      = "Quantidade de caracteres excede o tamanho máximo para "
 		                                                            . "descrição de solicitação";
+	const FORM_INVALID_TICKET_ID                                    = "Id de solicitação inválido";
 	const FORM_INVALID_TICKET_TITLE                                 = "Título de solicitação inválida";
 	const FORM_INVALID_TICKET_TITLE_SIZE                            = "Quantidade de caracteres excede o tamanho máximo para "
 		                                                            . "tipo de solicitação";
@@ -196,7 +202,7 @@ class Pt
 	const FORM_INVALID_USER_UNIQUE_ID_SIZE                          = "Quantidade de caracteres excede o tamanho máximo para a "
 	                                                                . "identificador único";
 	const FORM_SELECT_DEFAULT                                       = "Selecione";
-	const FORM_SELECT_NONE                                          = "Nenhuma";
+	const FORM_FIELD_SELECT_NONE                                    = "Nenhuma";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Sua senha foi restaurada";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "Sua senha foi restaurada e sua nova senha é ";
 	const GENDER                                                    = "Gênero";
@@ -743,9 +749,6 @@ class Pt
 	const TABLE_PAGE_PREFIX                                         = "De:";
 	const TABLE_PAGE                                                = "até";
 	const TEAM                                                      = "Equipe";
-	const TEAM_DESCRIPTION                                          = "Descrição de equipe";
-	const TEAM_ID                                                   = "Id da equipe";
-	const TEAM_NAME                                                 = "Nome da equipe";
 	const TEAM_NOT_FOUND                                            = "Equipe não encontrada";
 	const TEAMS                                                     = "Equipes";
 	const TEXT_BUTTON_GET                                           = "OBTER";
@@ -760,6 +763,8 @@ class Pt
 	const TICKET_DELETE_SUCCESS                                     = "";
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
+	const TICKET_SELECT_USERS_ERROR                                 = "Erro ao tentar obter os usuários de uma solicitação";
+	const TICKET_SELECT_USERS_WARNING                               = "Nenhum usuário está associado a esta solicitação";
 	const TWO_STEP_VERIFICATION                                     = "Verificação duas etapas";
 	const TYPE                                                      = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Erro ao obter tipos de associação";
@@ -771,10 +776,9 @@ class Pt
 	const TYPE_STATUS_TICKET_DESCRIPTION                            = "Descrição";
 	const TYPE_STATUS_TICKET_ID                                     = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Tipo de estado de solicitação não encontrado";
-	const TYPE_TICKET_DESCRIPTION                                   = "Descrição";
-	const TYPE_TICKET_ID                                            = "Id";
 	const TYPE_TICKET_NOT_FOUND                                     = "Tipo de solicitação não encontrado";
-	const TYPE_USER_DESCRIPTION                                     = "Descrição";
+	const TYPE_TICKET_SELECT_USERS_ERROR                            = "Erro ao tentar obter os usuários de um tipo de solicitação";
+	const TYPE_TICKET_SELECT_USERS_WARNING                          = "Nenhum usuário está associado a este tipo de solicitação";
 	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "Tipo de usuário não encontrado";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Erro ao tentar atualizar informações de corporação do usuário";

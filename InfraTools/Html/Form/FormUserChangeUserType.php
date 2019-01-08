@@ -148,9 +148,9 @@
 				          document.getElementById('<?php echo ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SUBMIT; ?>')
                                          .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
                 <option <?php if ($this->InputValueTypeUserDescription == "" 
-                                  || $this->InputValueTypeUserDescription == ConfigInfraTools::FORM_SELECT_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+                                  || $this->InputValueTypeUserDescription == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+                        <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
                 </option>
                 <?php 
                 if(is_array($this->ArrayInstanceInfraToolsTypeUser))

@@ -6,17 +6,15 @@
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))               echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTeamNameText))            echo $this->ReturnTeamNameText; ?>
-		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
-		<?php if(isset($this->ReturnTeamDescriptionText))     echo $this->ReturnTeamDescriptionText; ?>
-		<?php if(isset($this->ReturnCorporationNameText))     echo $this->ReturnCorporationNameText; ?>
-		<?php if(isset($this->ReturnDepartmentNameText))      echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnUserEmailText))           echo $this->ReturnUserEmailText; ?>
-		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
+		<?php if(isset($this->ReturnEmptyText))                 echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnTypeTicketDescriptionText)) echo $this->ReturnTypeTicketDescriptionText; ?>
+		<?php if(isset($this->ReturnUserEmailText))             echo $this->ReturnUserEmailText; ?>
+		<?php if(isset($this->ReturnCorporationNameText))       echo $this->ReturnCorporationNameText; ?>
+		<?php if(isset($this->ReturnDepartmentNameText))        echo $this->ReturnDepartmentNameText; ?>
+		<?php if(isset($this->ReturnUserEmailText))             echo $this->ReturnUserEmailText; ?>
+		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -48,10 +46,11 @@
 		?>
 	</div>
 </div>
+<!-- FORM_TYPE_TICKET_VIEW_LIST_USERS_FORM -->
 <?php
 if(is_array($this->ArrayInstanceUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORM . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -62,9 +61,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -73,7 +72,7 @@ if(is_array($this->ArrayInstanceUser))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION') . "</div></th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_TICKET_DESCRIPTION') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('EMAIL') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
@@ -83,9 +82,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -101,19 +100,15 @@ if(is_array($this->ArrayInstanceUser))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
-						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_FIELD_TEAM_ID . "'
-							 value='"  . $user->GetAssocUserTeamTeamIdByIndex(0) . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
-										 id='"       . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
-							                 value='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' 
-										     title='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' />
+							 name='"   . ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION . "' 
+										 id='"       . ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION . "' 
+										 value='" . $this->InstanceTypeTicket->GetTypeTicketDescription() . "' 
+										 title='" . $this->InstanceTypeTicket->GetTypeTicketDescription() . "' />
 						</form>
 				  </td>";
 		echo "<td class='TableGenericTdLink'>

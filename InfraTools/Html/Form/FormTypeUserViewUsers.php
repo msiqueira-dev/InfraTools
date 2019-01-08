@@ -51,7 +51,7 @@
 <?php
 if(is_array($this->ArrayInstanceUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -62,9 +62,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -82,9 +82,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 

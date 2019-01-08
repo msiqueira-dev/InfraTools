@@ -77,5 +77,5 @@
 .SelectBirthDateMonth{width:100px !important;height:30px !important; margin-left:25px}
 .SelectBirthDateYear{width:100px !important;height:30px !important; margin-left:20px}
 .InputSubmitForgotPassword{background-color:transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;text-decoration:underline;font-weight:bold;}
-.DivFormViewDelete{width:165px !important; height:40px !important;min-height:40px !important;float:left;margin-left:23px;}
-.DivFormViewUpdate{width:165px !important; height:40px !important;min-height:40px !important;float:left;}
+.DivFormHorizontalButtons {width:180px !important;height:50px !important;float:left;}
+.DivContentBodyContainer input{float:left;vertical-align:top;}

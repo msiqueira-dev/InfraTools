@@ -1,6 +1,4 @@
-<!-- FORM TYPE ASSOC USER TEAM LIST -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK; ?>" method="post" >
+<!-- FORM_TYPE_ASSOC_USER_TEAM_LIST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -35,7 +33,7 @@
 <?php
 if(is_array($this->ArrayInstanceTypeAssocUserTeam))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'

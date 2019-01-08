@@ -136,9 +136,9 @@
                                                .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				class="SelectTypeService">
 				<option <?php if ($this->InputValueServiceType == "" 
-								  || $this->InputValueServiceType == ConfigInfraTools::FORM_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceType == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsTypeService))
@@ -188,9 +188,9 @@
 				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
                                                .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				<option <?php if ($this->InputValueServiceCorporation == "" 
-								  || $this->InputValueServiceCorporation == ConfigInfraTools::FORM_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceCorporation == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsCorporation))
@@ -254,9 +254,9 @@
 				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
                                                .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				<option <?php if ($this->InputValueServiceDepartment == "" 
-								  || $this->InputValueServiceDepartment == ConfigInfraTools::FORM_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceDepartment == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsDepartment))

@@ -12,9 +12,9 @@
 		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE ASSOC USER TEAM SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT; ?>" method="post" >
+<!-- FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>" method="post" >
 	<!-- TYPE_ASSOC_USER_TEAM_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
@@ -31,7 +31,7 @@
 											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 											 '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 											 '');"
@@ -41,7 +41,7 @@
 											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 											 '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 											 '');"
@@ -51,7 +51,7 @@
 											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 											 '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 											 '');"
@@ -66,7 +66,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
 								   '');">

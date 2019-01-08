@@ -1,4 +1,4 @@
-<!-- BODY TYPE USER LIST -->
+<!-- FORM_TYPE_USER_LIST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -33,7 +33,7 @@
 <?php
 if(is_array($this->ArrayInstanceTypeUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -55,7 +55,7 @@ if(is_array($this->ArrayInstanceTypeUser))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION') . "</div></th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION') . "</div></th>";
 	echo "<th  class='TableGenericThArrow'>
 	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>

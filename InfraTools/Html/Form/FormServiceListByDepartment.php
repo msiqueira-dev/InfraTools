@@ -41,9 +41,9 @@
 				class="SelectCorporation"
 				onchange="this.form.submit()">
 				<option <?php if ($this->InputValueServiceDepartment == "" 
-								  || $this->InputValueServiceDepartment == ConfigInfraTools::FORM_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceDepartment == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsDepartment))

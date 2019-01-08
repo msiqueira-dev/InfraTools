@@ -34,9 +34,9 @@ if (!class_exists("TypeAssocUserTeam"))
 
 class PageAdminTypeAssocUserTeam extends PageAdmin
 {
-	protected $InstanceTypeAssocUserTeam             = NULL;
-	public    $ArrayInstanceTypeAssocUserTeam        = NULL;
-	public    $ArrayInstanceTypeAssocUserTeamMembers = NULL;
+	public $InstanceTypeAssocUserTeam      = NULL;
+	public $ArrayInstanceTypeAssocUserTeam = NULL;
+	public $ArrayInstanceUser              = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -171,8 +171,8 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
 			}
 		}
-		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS]))
+		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_SUBMIT]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->InstanceTypeAssocUserTeam)  
 			                                   == ConfigInfraTools::SUCCESS)
@@ -181,9 +181,8 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 				$this->InputLimitTwo = 25;
 				if($this->UserSelectByTypeAssocUserTeamDescription($this->InputLimitOne, $this->InputLimitTwo, 
 														           $this->InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
-										                           $this->ArrayInstanceTypeAssocUserTeamMembers, $rowCount, 
-																   $this->InputValueHeaderDebug) 
-				                                        == ConfigInfraTools::SUCCESS)
+										                           $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
+				                                                   == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS;
 				else
 				{

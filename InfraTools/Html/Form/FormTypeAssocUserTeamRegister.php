@@ -11,9 +11,9 @@
 		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE ASSOC USER TEAM REGISTER -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER; ?>" method="post">
+<!-- FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>" method="post">
     <!-- TYPE_ASSOC_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
@@ -29,12 +29,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -44,7 +44,7 @@
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -60,7 +60,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
                                    '');">

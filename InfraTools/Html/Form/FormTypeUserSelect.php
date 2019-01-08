@@ -11,13 +11,13 @@
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE_USER_SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT; ?>" method="post" >
+<!-- FORM_TYPE_USER_SELECT_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT_FORM; ?>" method="post" >
 	<!-- TYPE_USER_ID -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>

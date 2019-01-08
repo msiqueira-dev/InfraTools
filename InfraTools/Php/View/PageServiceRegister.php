@@ -61,7 +61,7 @@ class PageServiceRegister extends PageInfraTools
 				else $this->InputValueServiceActive = FALSE;
 				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION]))
 				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_SELECT_NONE)
+					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION];
 					else $this->InputValueServiceCorporation = NULL; 
 				}
@@ -71,7 +71,7 @@ class PageServiceRegister extends PageInfraTools
 				else $this->InputValueServiceCorporationCanChange = FALSE;
 				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT]))
 				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_SELECT_NONE)
+					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 						$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT];
 					else $this->InputValueServiceDepartment = NULL; 
 				}

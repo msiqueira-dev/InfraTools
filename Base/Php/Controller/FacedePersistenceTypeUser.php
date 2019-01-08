@@ -17,7 +17,8 @@ Functions:
 			public function TypeUserInsert($TypeUserDescription, $Debug, $MySqlConnection);
 			public function TypeUserSelect($Limit1, $Limit2, &ArrayInstanceTypeUser, &$RowCount, $Debug, $MySqlConnection);
 			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
-			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug, $MySqlConnection);
+			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug, $MySqlConnection);
+			public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
 			public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, $Debug, $MySqlConnection);
 **************************************************************************/
 
@@ -230,7 +231,7 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$TypeUser, $Debug, $MySqlConnection)
+	public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -247,7 +248,7 @@ class FacedePersistenceTypeUser
 					$stmt->bind_result($TypeUserDescription, $registerDate);
 					if ($stmt->fetch())
 					{
-						$TypeUser = $this->Factory->CreateTypeUser($TypeUserDescription, $registerDate);
+						$InstanceTypeUser = $this->Factory->CreateTypeUser($TypeUserDescription, $registerDate);
 						return Config::SUCCESS;
 					}
 					else 
@@ -275,8 +276,53 @@ class FacedePersistenceTypeUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
+	public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
+	{
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlTypeUserSelectByDescriptionLike');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelectByDescriptionLike());
+			if($stmt != NULL)
+			{
+				$TypeUserDescription = "%".$TypeUserDescription."%"; 
+				$stmt->bind_param("s", $TypeUserDescription);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::SUCCESS)
+				{
+					$ArrayInstanceTypeUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc())  
+					{
+						$InstanceTypeUser = $this->Factory->CreateTypeUser($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+										                                   $row[Config::TABLE_FIELD_REGISTER_DATE]);
+						array_push($ArrayInstanceTypeUser, $InstanceTypeUser);
+						return Config::SUCCESS;
+					}
+					if(!empty($ArrayInstanceTeam))
+						return Config::SUCCESS;
+					else return Config::MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FETCH_FAILED;
+				}
+				else 
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					$return = Config::MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FAILED;
+				}
+				return $return;
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
 	
-	public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $Debug, $MySqlConnection)
+	public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)

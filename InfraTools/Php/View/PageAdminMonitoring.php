@@ -83,7 +83,7 @@ class PageAdminMonitoring extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_MONITORING_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] == NULL || 
-			   $_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] == ConfigInfraTools::FORM_SELECT_NONE)
+			   $_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] == ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 			{
 			}
 			else

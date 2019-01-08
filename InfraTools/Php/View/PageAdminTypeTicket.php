@@ -33,8 +33,9 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTypeTicket extends PageAdmin
 {
-	protected $InstanceTypeTicket      = NULL;
-	public    $ArrayInstanceTypeTicket = NULL;
+	public $ArrayInstanceTypeTicket = NULL;
+	public $ArrayInstanceUser       = NULL;
+	public $InstanceTypeTicket      = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -59,71 +60,21 @@ class PageAdminTypeTicket extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//TYPE TICKET LIST
+		//FORM_TYPE_TICKET_LIST
 		if($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_TICKET_LIST))
 		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->TypeTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-									$this->ArrayInstanceTypeTicket, $rowCount, $this->InputValueHeaderDebug);
+			if($this->ExecuteFunction($_POST, 'TypeTicketSelect', 
+									  array(&$this->ArrayInstanceTypeTicket),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST;
 		}
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_TICKET_SELECT))
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
-		//TYPE TICKET LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_TICKET_LIST_BACK))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->TypeTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-								    $this->ArrayInstanceTypeTicket, $rowCount, $this->InputValueHeaderDebug);
-		}
-		//TYPE TICKET LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_TICKET_LIST_FORWARD))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			if($this->InputLimitOne > 250)
-				$this->InputLimitOne = 250;
-			if($this->InputLimitTwo > 275)
-				$this->InputLimitTwo = 275;
-			$this->TypeTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-									$this->ArrayInstanceTypeTicket, $rowCount, $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->TypeTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										$this->ArrayInstanceTypeTicket, $rowCount, $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
-		}
-		//TYPE TICKET LIST SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT]))
-		{
-			if($this->TypeTicketSelectByTypeTicketDescription($_POST[ConfigInfraTools::FORM_TYPE_TICKET_LIST_SELECT_SUBMIT],
-										                      $this->InstanceTypeTicket, $this->InputValueHeaderDebug) 
-			                                                  == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
-		}
-		//TYPE TICKET REGISTER
+		//FORM_TYPE_TICKET_REGISTER
 		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_TICKET_REGISTER))
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_REGISTER;
-		//TYPE TICKET CANCEL
+		//FORM_TYPE_TICKET_REGISTER_CANCEL
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_REGISTER_CANCEL]))
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
-		//TYPE TICKET REGISTER SUBMIT
+		//FORM_TYPE_TICKET_REGISTER_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_REGISTER_SUBMIT]))
 		{
 			if($this->TypeTicketInsert($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION],
@@ -131,7 +82,7 @@ class PageAdminTypeTicket extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_REGISTER;
 		}
-		//TYPE TICKET SELECT SUBMIT
+		//FORM_TYPE_TICKET_SELECT_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT]))
 		{
 			if($this->TypeTicketSelectByTypeTicketDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION],
@@ -140,7 +91,7 @@ class PageAdminTypeTicket extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		}
-		//TYPE TICKET VIEW DELETE SUBMIT
+		//FORM_TYPE_TICKET_VIEW_DELETE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_VIEW_DELETE_SUBMIT]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket) 
@@ -165,7 +116,28 @@ class PageAdminTypeTicket extends PageAdmin
 				}
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		}
-		//TYPE TICKET VIEW UPDATE
+		//FORM_TYPE_TICKET_VIEW_LIST_USERS_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_SUBMIT]))
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket)  
+			                                   == ConfigInfraTools::SUCCESS)
+			{
+				$this->InputLimitOne = 0;
+				$this->InputLimitTwo = 25;
+				if($this->InfraToolsUserSelectByTypeTicketDescription($this->InputLimitOne, $this->InputLimitTwo, 
+															          $this->InstanceTypeTicket->GetTypeTicketDescription(),
+										                              $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
+				                                                      == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW_LIST_USERS;
+				else
+				{
+					if($this->TypeTicketLoadData($this->InstanceTypeTicket) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
+					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
+				}
+			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
+		}
+		//FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket)  
@@ -176,7 +148,7 @@ class PageAdminTypeTicket extends PageAdmin
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		}
-		///TYPE TICKET VIEW UPDATE CANCEL
+		//FORM_TYPE_TICKET_UPDATE_CANCEL
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_CANCEL]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket) 
@@ -187,7 +159,7 @@ class PageAdminTypeTicket extends PageAdmin
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_SELECT;
 		}
-		///TYPE TICKET VIEW UPDATE SUBMIT
+		//FORM_TYPE_TICKET_UPDATE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket) 

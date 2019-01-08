@@ -84,6 +84,11 @@ class Es
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "";
+    const FORM_FIELD_TEAM_DESCRIPTION                               = "";
+	const FORM_FIELD_TEAM_ID                                        = "";
+	const FORM_FIELD_TEAM_NAME                                      = "";
+	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "";
+	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "";
 	const FORM_INVALID_CAPTCHA                                      = "";
 	const FORM_INVALID_CORPORATION_NAME                             = "";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "";
@@ -123,6 +128,7 @@ class Es
 	const FORM_INVALID_TEAM_NAME_SIZE                               = "";
 	const FORM_INVALID_TICKET_DESCRIPTION                           = "";
 	const FORM_INVALID_TICKET_DESCRIPTION_SIZE                      = "";
+	const FORM_INVALID_TICKET_ID                                    = "";
 	const FORM_INVALID_TICKET_TITLE                                 = "";
 	const FORM_INVALID_TICKET_TITLE_SIZE                            = "";
 	const FORM_INVALID_TICKET_TYPE                                  = "";
@@ -166,7 +172,7 @@ class Es
 	const FORM_INVALID_USER_UNIQUE_ID                               = "";
 	const FORM_INVALID_USER_UNIQUE_ID_SIZE                          = "";
 	const FORM_SELECT_DEFAULT                                       = "";
-	const FORM_SELECT_NONE                                          = "";
+	const FORM_FIELD_SELECT_NONE                                    = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "";
 	const GENDER                                                    = "";
@@ -709,9 +715,6 @@ class Es
 	const TABLE_PAGE_PREFIX                                         = "";
 	const TABLE_PAGE                                                = "";
 	const TEAM                                                      = "";
-	const TEAM_DESCRIPTION                                          = "";
-	const TEAM_ID                                                   = "";
-	const TEAM_NAME                                                 = "";
 	const TEAM_NOT_FOUND                                            = "";
 	const TEAMS                                                     = "";
 	const TEXT_BUTTON_GET                                           = "";
@@ -726,6 +729,8 @@ class Es
 	const TICKET_DELETE_SUCCESS                                     = "";
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
+	const TICKET_SELECT_USERS_ERROR                                 = "";
+	const TICKET_SELECT_USERS_WARNING                               = "";
 	const TWO_STEP_VERIFICATION                                     = "";
 	const TYPE                                                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "";
@@ -736,10 +741,9 @@ class Es
 	const TYPE_STATUS_TICKET_DESCRIPTION                            = "";
 	const TYPE_STATUS_TICKET_ID                                     = "";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "";
-	const TYPE_TICKET_DESCRIPTION                                   = "";
-	const TYPE_TICKET_ID                                            = "";
 	const TYPE_TICKET_NOT_FOUND                                     = "";
-	const TYPE_USER_DESCRIPTION                                     = "";
+	const TYPE_TICKET_SELECT_USERS_ERROR                            = "";
+	const TYPE_TICKET_SELECT_USERS_WARNING                          = "";
 	const TYPE_USER_ID                                              = "";
 	const TYPE_USER_NOT_FOUND                                       = "";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "";

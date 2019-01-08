@@ -32,9 +32,9 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTicket extends PageAdmin
 {
-	public $ArrayInstanceTicket        = NULL;
-	public $ArrayInstanceTicketMembers = NULL;
-	public $InstanceTicket             = NULL;
+	public $ArrayInstanceTicket = NULL;
+	public $ArrayInstanceUser   = NULL;
+	public $InstanceTicket      = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -166,7 +166,7 @@ class PageAdminTicket extends PageAdmin
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				if($this->UserSelectByTicketId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTicket->GetTicketId(),
-										       $this->ArrayInstanceTicketMembers, $rowCount, $this->InputValueHeaderDebug) 
+										       $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
 				                               == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW_LIST_USERS;
 				else

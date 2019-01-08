@@ -372,13 +372,13 @@
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
-                style=" <?php if($this->InputValueGender != ConfigInfraTools::FORM_SELECT_NONE
+                style=" <?php if($this->InputValueGender != ConfigInfraTools::FORM_FIELD_SELECT_NONE
                                  && $this->InputValueGender != "") 
                             echo 'color:black;'
                         ?> " >
             <option <?php if ($this->InputValueGender == "" 
-                              || $this->InputValueGender == ConfigInfraTools::FORM_SELECT_NONE) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" 
+                              || $this->InputValueGender == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" 
                 disabled="disabled"> 
                     <?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_DEFAULT'); ?> 
             </option>
@@ -543,7 +543,7 @@
         <div class="DivClearFloat"></div>
         <div class="DivContentBodyContainer">
             <div class="DivContentBodyContainerLabel">
-                <label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION').":"; ?></label>
+                <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
             </div>
             <div class="DivContentBodyContainerValue">
             	<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>

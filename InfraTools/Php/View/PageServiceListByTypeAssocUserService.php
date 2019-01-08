@@ -53,7 +53,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT]))
 			{
 				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT] 
-				   != ConfigInfraTools::FORM_SELECT_NONE)
+				   != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 					$this->InputValueTypeAssocUserServiceDescription = 
 					$_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT];	
 				else $this->InputValueTypeAssocUserServiceDescription = NULL;

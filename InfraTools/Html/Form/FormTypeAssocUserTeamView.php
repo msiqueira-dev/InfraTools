@@ -11,7 +11,7 @@
 		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE ASSOC USER TEAM VIEW -->
+<!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW; ?>" method="post" >
     <!-- TYPE_ASSOC_USER_TEAM_DESCRIPTION -->
@@ -32,20 +32,38 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegisterDate; ?></label>
         </div>
     </div>
-    <!-- SUBMIT -->
-    <div class="DivContentBodyContainer">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT; ?>"
-                                 class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT; ?>" 
-                   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT; ?>"
-                   class="DivContentBodySubmitBigger"
-                   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
-                   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS; ?>" 
-                   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS; ?>"
-                   class="DivContentBodySubmitBigger"
-                   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
-    </div>
 </form>
+<!-- SUBMIT -->
+<div class="DivContentBodyContainer">
+	<!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE -->
+	<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE; ?>" 
+		  class="DivFormHorizontalButtons"
+		  method="post" >
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT; ?>" 
+							 id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT; ?>"
+							 class="DivContentBodySubmitBigger"
+							 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
+	</form>
+	<!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE -->
+	<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE; ?>" 
+		  class="DivFormHorizontalButtons"
+		  method="post" >
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT; ?>" 
+				   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_DELETE_SUBMIT; ?>"
+				   class="DivContentBodySubmitBigger"
+				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
+			   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
+	</form>
+	<!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS -->
+	<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS; ?>" 
+		  class="DivFormHorizontalButtons"
+		  method="post" >
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_SUBMIT; ?>" 
+				   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_SUBMIT; ?>"
+				   class="DivContentBodySubmitBigger"
+				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
+	</form>
+</div>

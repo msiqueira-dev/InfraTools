@@ -12,12 +12,12 @@
 	</label>
 </div>
 <!-- FORM TYPE USER UPDATE -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>" method="post">
-    <!-- TYPE_USER_DESCRIPTION -->
+<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_FORM; ?>" method="post">
+    <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>" 
@@ -28,12 +28,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
                                                  '');"
@@ -42,11 +42,11 @@
                                                    '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueTypeUserDescription; ?>" maxlength="45" />
         </div>
     </div>
@@ -66,7 +66,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_TYPE_USER_UPDATE_SUBMIT; ?>',
                                    '');">

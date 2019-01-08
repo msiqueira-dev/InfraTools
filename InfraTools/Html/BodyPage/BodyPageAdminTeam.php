@@ -86,17 +86,17 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
 		}
-		//PAGE_ADMIN_TEAM_REGISTER
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_REGISTER)
-		{
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_REGISTER)) . ".php");
-		}
 		//PAGE_ADMIN_TEAM_LIST
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_LIST)) . ".php");
+		}
+		//PAGE_ADMIN_TEAM_REGISTER
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_REGISTER)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TEAM_REGISTER)) . ".php");
 		}
 		//PAGE_ADMIN_TEAM_SELECT
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT)

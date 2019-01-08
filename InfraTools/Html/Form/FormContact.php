@@ -137,13 +137,13 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											 '');"
-				style=" <?php if($this->InputValueTicketType != ConfigInfraTools::FORM_SELECT_NONE
+				style=" <?php if($this->InputValueTicketType != ConfigInfraTools::FORM_FIELD_SELECT_NONE
 								 && $this->InputValueTicketType != "") 
 							echo 'color:black;'
 						?> " >
 			<option <?php if ($this->InputValueTicketType == "" 
-							  || $this->InputValueTicketType == ConfigInfraTools::FORM_SELECT_NONE) 
-				echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" 
+							  || $this->InputValueTicketType == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+				echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_DEFAULT'); ?> 
 			</option>

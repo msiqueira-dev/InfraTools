@@ -44,9 +44,9 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 		 "<div class='TableGenericInputLeft'>
 		 <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_BACK . "'
-				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_BACK . "'
+				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -64,9 +64,9 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 		 "<div class='TableGenericInputRight'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORM_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -82,14 +82,14 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' method='post' />
 					<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' />
+							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' />
 		      		<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "'
+							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "'
 							 value='"  . $systemConfiguration->GetSystemConfigurationOptionNumber() . "' />
 					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "' 
 		                           id='"   . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "' 
@@ -98,11 +98,11 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 				</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' method='post' />
+				<form  name='" . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' method='post' />
 					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT . "' />
+							 name='"   . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT . "' />
 					  <input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "' 
 							 id='"     . ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER . "'

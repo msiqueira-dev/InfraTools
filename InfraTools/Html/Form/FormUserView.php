@@ -203,7 +203,7 @@
 			<!-- TYPE USER DESCRIPTION -->
 			<div class="DivContentBodyContainerSided">
 				<div class="DivContentBodyContainerLabelSided">
-					<label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION').":"; ?></label>
+					<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
 				</div>
 				<div class="DivContentBodyContainerValueSided">
 					<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>

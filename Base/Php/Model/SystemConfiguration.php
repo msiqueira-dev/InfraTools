@@ -16,7 +16,7 @@ Get / Set:
 			public function GetSystemConfigurationOptionNumber();
 			public function GetSystemConfigurationOptionValue();
 			public function SetSystemConfigurationOptionActive($SystemConfigurationOptionActive);
-			public function SetSystemConfigurationOptionDescription($SystemConfigurationDescription);
+			public function SetSystemConfigurationOptionDescription($SystemConfigurationOptionDescription);
 			public function SetSystemConfigurationOptionName($SystemConfigurationOptionName);
 			public function SetSystemConfigurationOptionValue($SystemConfigurationOptionValue);
 Methods:
@@ -101,10 +101,10 @@ class SystemConfiguration
 			$this->SystemConfigurationOptionActive = $SystemConfigurationOptionActive;
 	}
 	
-	public function SetSystemConfigurationOptionDescription($SystemConfigurationDescription)
+	public function SetSystemConfigurationOptionDescription($SystemConfigurationOptionDescription)
 	{
-		if(!is_null($SystemConfigurationDescription))
-			$this->SystemConfigurationDescription = $SystemConfigurationDescription;	
+		if(!is_null($SystemConfigurationOptionDescription))
+			$this->SystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;	
 	}
 	
 	public function SetSystemConfigurationOptionName($SystemConfigurationOptionName)

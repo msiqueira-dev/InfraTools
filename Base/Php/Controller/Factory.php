@@ -60,6 +60,8 @@ Methods:
 											             $SystemConfigurationOptionValue);
 			public    function CreateTeam($RegisterDate, $TeamDescription, $TeamId, $TeamName)
 			public    function CreateTechInfo();
+			public    function CreateTicket($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
+								            $TicketSuggestion, $TicketTitle, $TicketType);
 			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
 			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription);
@@ -567,6 +569,16 @@ class Factory
 		else include_once(BASE_PATH_PHP_MODEL . "TechInfo.php");
 		return TechInfo::__create();
 	}
+	
+	public function CreateTicket($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
+			     	             $TicketSuggestion, $TicketTitle, $TicketType)
+ 	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Ticket.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Ticket');
+		else include_once(BASE_PATH_PHP_MODEL . "Ticket.php");
+		return new Ticket($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
+			     	      $TicketSuggestion, $TicketTitle, $TicketType);
+    }
 	
 	public function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription)
 	{

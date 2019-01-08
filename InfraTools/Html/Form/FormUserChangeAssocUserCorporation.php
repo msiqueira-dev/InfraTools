@@ -232,9 +232,9 @@
                                         '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>')
                                          .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
                 <option <?php if ($this->InputValueDepartmentName == "" 
-                                  || $this->InputValueDepartmentName == ConfigInfraTools::FORM_SELECT_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+                                  || $this->InputValueDepartmentName == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+                        <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
                 </option>
                 <?php 
                 if(is_array($this->ArrayInstanceDepartment))
@@ -261,7 +261,7 @@
         <!-- TYPE USER DESCRIPTION -->
         <div class="DivContentBodyContainer">
             <div class="DivContentBodyContainerLabel">
-                <label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION').":"; ?></label>
+                <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
             </div>
             <div class="DivContentBodyContainerValue">
             	<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>

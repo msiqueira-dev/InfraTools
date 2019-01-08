@@ -38,27 +38,27 @@
                    onblur="ValidateDescription(null, 
                                             '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
                                             'DivContentBodySubmitBigger ',
-                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                             '', true);
                                        ValidateMultiplyFields(
                                             '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                             'DivContentBodySubmitBigger ',
-                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                             '');"
                                onkeyup="ValidateMultiplyFields(
                                             '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                             'DivContentBodySubmitBigger ',
-                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                             '');"
                                onchange="ValidateDescription(null, 
                                             '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
                                             'DivContentBodySubmitBigger ',
-                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                             '', true);
                                        ValidateMultiplyFields(
                                             '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                             'DivContentBodySubmitBigger ',
-                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                            '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                             '');"
                    title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>"
                    value="<?php echo $this->InputValueSystemConfigurationOptionName; ?>" maxlength="45" />
@@ -77,26 +77,26 @@
                    onblur="ValidateDescription(null, 
                                                '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION; ?>',
                                                'DivContentBodySubmitBigger ',
-                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                '', true);
                                        ValidateMultiplyFields(
                                                '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                                'DivContentBodySubmitBigger ',
-                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                '');"
                    onkeyup="ValidateMultiplyFields(
                                                '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                                'DivContentBodySubmitBigger ',
-                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                '');"
                    onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION; ?>',
                                                'DivContentBodySubmitBigger ',
-                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                '', true);
                                        ValidateMultiplyFields(
                                                '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                                'DivContentBodySubmitBigger ',
-                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                '');"
                    title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueSystemConfigurationOptionDescription; ?>" maxlength="100" />
@@ -117,7 +117,7 @@
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
 									   '');"
 				        />
         </div>
@@ -135,27 +135,27 @@
                    onblur="ValidateDescription(null, 
                                                  '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
                                                  '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                  '');"
                    onkeyup="ValidateMultiplyFields(
                                                  '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                  '');"
                    onchange="ValidateDescription(null, 
                                                  '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
                                                  '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                                  '');"
                    title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE'); ?>"
                    value="<?php echo $this->InputValueSystemConfigurationOptionValue; ?>" maxlength="45" />
@@ -174,24 +174,24 @@
     <div class="DivContentBodyContainer"
          onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
 								   '', true);
 				  ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
 								   '', true);
                   ValidateMultiplyFields(
                                    '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>" 
+                                 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

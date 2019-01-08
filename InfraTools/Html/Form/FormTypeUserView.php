@@ -15,7 +15,7 @@
     <!-- DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_USER_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>
@@ -45,8 +45,8 @@
 					   class="DivContentBodySubmitBigger"
 					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
 					   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS; ?>" 
-					   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_LIST_VIEW_USERS; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS; ?>" 
+					   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS; ?>"
 					   class="DivContentBodySubmitBigger"
 					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
 		</div>

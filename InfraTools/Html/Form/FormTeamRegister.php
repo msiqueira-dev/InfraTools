@@ -12,29 +12,29 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TEAM REGISTER -->
-<form name="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>" method="post">
-    <!-- NAME -->
+<!-- FORM_TEAM_REGISTER_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>" method="post">
+    <!-- FORM_FIELD_TEAM_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TEAM_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>" 
                                id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>" 
-                               class="<?php echo $this->ReturnNameClass; ?>"
+                               class="<?php echo $this->ReturnTeamNameClass; ?>"
                                onblur="ValidateTeamName(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -43,18 +43,18 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TEAM_NAME'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?>"
                                value="<?php echo $this->InputValueTeamName; ?>" maxlength="45" />
         </div>
     </div>
-    <!-- TEAM_DESCRIPTION -->
+    <!-- FORM_FIELD_TEAM_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TEAM_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_DESCRIPTION; ?>" 
@@ -65,12 +65,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -79,11 +79,11 @@
                                                    '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TEAM_DESCRIPTION'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueTeamDescription; ?>" maxlength="45" />
         </div>
     </div>
@@ -98,7 +98,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_TEAM_REGISTER_SUBMIT; ?>',
                                    '');">

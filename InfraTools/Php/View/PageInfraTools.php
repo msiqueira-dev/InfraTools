@@ -131,7 +131,12 @@ Methods:
 			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
 			protected function TypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew, &$InstanceInfraToolsTypeService,
 			                                                      $Debug);
-			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
+		                                                                 &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
+		                                                                   &$ArrayInstanceUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByUserEmail($UserEmail, &InstanceInfraToolsUser, $Debug);
 			protected function InfraToolsUserLoadData($InstanceInfraToolsUser);
 			public    function GetCurrentPage();
@@ -464,9 +469,9 @@ abstract class PageInfraTools extends Page
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		if($ServiceCorporation == ConfigInfraTools::FORM_SELECT_NONE)
+		if($ServiceCorporation == ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 			$ServiceCorporation = NULL;
-		if($ServiceDepartment == ConfigInfraTools::FORM_SELECT_NONE)
+		if($ServiceDepartment == ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 			$ServiceDepartment = NULL;
 		$this->InputValueServiceActive               = $ServiceActive;
 		$this->InputValueServiceCorporation          = $ServiceCorporation;
@@ -1394,7 +1399,7 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameNoLimit($$this->InputValueServiceName,
+			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameNoLimit($this->InputValueServiceName,
 																			          $ArrayInstanceInfraToolsService,
 																			          $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -2416,6 +2421,127 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return ConfigInfraTools::ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTicketId = $TicketId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TICKET_ID
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TICKET_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTicketIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTicketId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTicketIdText;
+		array_push($arrayConstants, 'FORM_INVALID_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTicketId($Limit1, $Limit2, $this->InputValueTicketId, 
+																	                       $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+				return ConfigInfraTools::SUCCESS;
+			else
+			{
+				$this->ShowDivReturnWarning("TICKET_SELECT_USERS_WARNING");
+				return ConfigInfraTools::WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("TICKET_SELECT_USERS_ERROR");
+		return ConfigInfraTools::ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
+		                                                           &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, 
+																							            $this->InputValueTypeTicketDescription,
+																	                                    $ArrayInstanceInfraToolsUser, 
+																										$RowCount, $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+				return ConfigInfraTools::SUCCESS;
+			else
+			{
+				$this->ShowDivReturnWarning("TYPE_TICKET_SELECT_USERS_WARNING");
+				return ConfigInfraTools::WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("TYPE_TICKET_SELECT_USERS_ERROR");
+		return ConfigInfraTools::ERROR;	
+	}
+	
+	protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, 
+		                                                         &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeUserDescription = $TypeUserDescription;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
+															                                          $ArrayInstanceUser, $RowCount, $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+				return ConfigInfraTools::SUCCESS;
+		}
+		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
 		return ConfigInfraTools::ERROR;
 	}
 	

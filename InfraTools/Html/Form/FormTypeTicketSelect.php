@@ -12,12 +12,12 @@
 	</label>
 </div>
 <!-- FORM TYPE TICKET SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>" method="post" >
 	<!-- FORM_FIELD_TYPE_TICKET_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_DESCRIPTION'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_TICKET_DESCRIPTION'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
@@ -29,7 +29,7 @@
 											   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
@@ -38,7 +38,7 @@
 											   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
@@ -47,11 +47,11 @@
 											   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('TYPE_TICKET_DESCRIPTION'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_TICKET_DESCRIPTION'); ?>" 
 						   value="<?php echo $this->InputValueTypeTicketDescription; ?>" maxlength="45" />
 	</div>
 	<!-- SUBMIT -->
@@ -61,7 +61,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT; ?>',
 								   '');">

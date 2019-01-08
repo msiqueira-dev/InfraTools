@@ -73,11 +73,11 @@ class PageAdminSystemConfiguration extends PageAdmin
 		//FORM_SYSTEM_CONFIGURATION_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
-		//FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
-		//FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_FORM_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'SystemConfigurationInsert', 
 									  array(@$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
@@ -91,8 +91,8 @@ class PageAdminSystemConfiguration extends PageAdmin
 		//FORM_SYSTEM_CONFIGURATION_SELECT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
-		//FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if(isset($_POST[ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION]))
 			{
@@ -141,8 +141,8 @@ class PageAdminSystemConfiguration extends PageAdmin
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
 			}
 		}
-		//FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
@@ -153,22 +153,22 @@ class PageAdminSystemConfiguration extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
 			}
 		}
-		//FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_FORM_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDATE;
 		}
-		//FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
 		}
-		//FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_FORM_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, 
 											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)

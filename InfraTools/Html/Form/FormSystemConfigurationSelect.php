@@ -28,10 +28,10 @@
 												 false);
 								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>', 
 												 true);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>', 
 														   '')"
 					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>"  
 					   <?php echo $this->InputValueSystemConfigurationOptionNameRadio; ?> />
@@ -52,10 +52,10 @@
 												 true);
 								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>', 
 												 false);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>', 
 														   '')"
 					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>"  
 					   <?php echo $this->InputValueSystemConfigurationOptionNumberRadio; ?>/>
@@ -79,17 +79,17 @@
 							   onkeyup="ValidateDescription(null, 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
 												   '', 'false');"
 							   onblur="ValidateDescription(null, 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
 												   '', true);"
 							   onchange="ValidateDescription(null, 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
 												   '', true);"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>" 
 							   value="<?php echo $this->InputValueSystemConfigurationOptionName; ?>" maxlength="45" />
@@ -108,17 +108,17 @@
 							   onkeyup="ValidateNumbersOnly(null, 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
 												   '', 'false');"
 							   onblur="ValidateNumbersOnly(null, 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
 												   '', true);"
 							   onchange="ValidateNumbersOnly(null, 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
 												   '', true);"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>" 
 							   value="<?php echo $this->InputValueSystemConfigurationOptionNumber; ?>" maxlength="4" />
@@ -126,8 +126,8 @@
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>" 
+								 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
 								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />

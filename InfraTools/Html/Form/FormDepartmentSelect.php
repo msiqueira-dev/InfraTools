@@ -118,9 +118,9 @@
 							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>')
 											 .className = 'DivContentBodySubmit SubmitEnabled;'">
 					<option <?php if ($this->InputValueCorporationName == "" 
-									  || $this->InputValueCorporationName == ConfigInfraTools::FORM_SELECT_NONE) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_SELECT_NONE; ?>" > 
-							<?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_NONE'); ?> 
+									  || $this->InputValueCorporationName == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
+						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
+							<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
 					</option>
 					<?php 
 					if(is_array($this->ArrayInstanceInfraToolsCorporation))

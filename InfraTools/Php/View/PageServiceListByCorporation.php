@@ -52,7 +52,8 @@ class PageServiceListByCorporation extends PageService
 											 $this->InputValueHeaderDebug);
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
 			{
-				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] != ConfigInfraTools::FORM_SELECT_NONE)
+				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] 
+				   != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 					$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT];	
 				else $this->InputValueServiceCorporation = NULL;
 			}
