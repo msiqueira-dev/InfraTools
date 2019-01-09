@@ -185,7 +185,6 @@ class User
 		else throw new Exception(Config::EXCEPTION_USER_TYPE);
 		if(!is_null($UserUniqueId))
 			$this->UserUniqueId = $UserUniqueId;
-		else throw new Exception(Config::EXCEPTION_USER_UNIQUE_ID);
     }
 	
 	/* GET */

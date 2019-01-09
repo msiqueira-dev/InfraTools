@@ -150,7 +150,7 @@ class PageAdminTeam extends PageAdmin
 			}
 		}
 		//FORM_TEAM_VIEW_LIST_USERS_SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT]))
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  == ConfigInfraTools::SUCCESS)
 			{

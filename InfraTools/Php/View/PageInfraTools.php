@@ -2453,8 +2453,11 @@ abstract class PageInfraTools extends Page
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTicketId($Limit1, $Limit2, $this->InputValueTicketId, 
 																	                       $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return ConfigInfraTools::SUCCESS;
-			else
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("TICKET_SELECT_USERS_WARNING");
 				return ConfigInfraTools::WARNING;	
@@ -2497,8 +2500,11 @@ abstract class PageInfraTools extends Page
 																	                                    $ArrayInstanceInfraToolsUser, 
 																										$RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return ConfigInfraTools::SUCCESS;
-			else
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("TYPE_TICKET_SELECT_USERS_WARNING");
 				return ConfigInfraTools::WARNING;	
@@ -2539,7 +2545,15 @@ abstract class PageInfraTools extends Page
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
 															                                          $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("TYPE_USER_SELECT_USERS_WARNING");
+				return ConfigInfraTools::WARNING;	
+			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
 		return ConfigInfraTools::ERROR;

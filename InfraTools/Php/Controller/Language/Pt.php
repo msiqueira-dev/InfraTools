@@ -88,6 +88,13 @@ class Pt
 	const FORM_FIELD_TEAM_DESCRIPTION                               = "Descrição de equipe";
 	const FORM_FIELD_TEAM_ID                                        = "Id da equipe";
 	const FORM_FIELD_TEAM_NAME                                      = "Nome da equipe";
+	const FORM_FIELD_TICKET_DESCRIPTION                             = "Descrição da solicitação";
+	const FORM_FIELD_TICKET_ID                                      = "Id da solicitação";
+	const FORM_FIELD_TICKET_SERVICE                                 = "Serviço";
+	const FORM_FIELD_TICKET_STATUS                                  = "Estado da solicitação";
+	const FORM_FIELD_TICKET_SUGGESTION                              = "Sugestão";
+	const FORM_FIELD_TICKET_TITLE                                   = "Título";
+	const FORM_FIELD_TICKET_TYPE                                    = "Tipo de solicitação";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Descrição";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Descrição";
 	const FORM_INVALID_CAPTCHA                                      = "O valor catpcha não confere";
@@ -759,10 +766,11 @@ class Pt
 	const TEXT_NUMBER                                               = "Número";
 	const TEXT_PORT                                                 = "Porta";
 	const TEXT_WEBSITE                                              = "Web Site";
-	const TICKET_DELETE_ERROR                                       = "";
-	const TICKET_DELETE_SUCCESS                                     = "";
-	const TICKET_INSERT_ERROR                                       = "";
-	const TICKET_INSERT_SUCCESS                                     = "";
+	const TICKET_DELETE_ERROR                                       = "Erro ao tentar execluir solicitação";
+	const TICKET_DELETE_SUCCESS                                     = "Solicitação excluida com sucesso";
+	const TICKET_INSERT_ERROR                                       = "Erro ao tentar cadastrar solicitação";
+	const TICKET_INSERT_SUCCESS                                     = "Solicitação cadastrada com sucesso";
+	const TICKET_NOT_FOUND                                          = "Solicitação não encontrada";
 	const TICKET_SELECT_USERS_ERROR                                 = "Erro ao tentar obter os usuários de uma solicitação";
 	const TICKET_SELECT_USERS_WARNING                               = "Nenhum usuário está associado a esta solicitação";
 	const TWO_STEP_VERIFICATION                                     = "Verificação duas etapas";
@@ -781,6 +789,7 @@ class Pt
 	const TYPE_TICKET_SELECT_USERS_WARNING                          = "Nenhum usuário está associado a este tipo de solicitação";
 	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "Tipo de usuário não encontrado";
+	const TYPE_USER_SELECT_USERS_WARNING                            = "Nenhum usuário está associado a este tipo de usuário";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Erro ao tentar atualizar informações de corporação do usuário";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "ID único já foi escolhido por outro usuário, por favor "
 		                                                            . "escolha outro";

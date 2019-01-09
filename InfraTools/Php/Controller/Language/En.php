@@ -89,6 +89,13 @@ class En
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Description";
 	const FORM_FIELD_TEAM_ID                                        = "Team id";
 	const FORM_FIELD_TEAM_NAME                                      = "Team name";
+	const FORM_FIELD_TICKET_DESCRIPTION                             = "Ticket Description";
+	const FORM_FIELD_TICKET_ID                                      = "Ticket Id";
+	const FORM_FIELD_TICKET_SERVICE                                 = "Service";
+	const FORM_FIELD_TICKET_STATUS                                  = "Ticket State";
+	const FORM_FIELD_TICKET_SUGGESTION                              = "Suggestion";
+	const FORM_FIELD_TICKET_TITLE                                   = "Title";
+	const FORM_FIELD_TICKET_TYPE                                    = "Ticket Type";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Description";
 	const FORM_INVALID_CAPTCHA                                      = "The captcha value does not match";
 	const FORM_INVALID_CORPORATION_NAME                             = "Invalid Corporation Name";
@@ -758,10 +765,11 @@ class En
 	const TEXT_NUMBER                                               = "Number";
 	const TEXT_PORT                                                 = "Port";
 	const TEXT_WEBSITE                                              = "Web Site";
-	const TICKET_DELETE_ERROR                                       = "";
-	const TICKET_DELETE_SUCCESS                                     = "";
-	const TICKET_INSERT_ERROR                                       = "";
-	const TICKET_INSERT_SUCCESS                                     = "";
+	const TICKET_DELETE_ERROR                                       = "Error while trying to delete ticket";
+	const TICKET_DELETE_SUCCESS                                     = "Ticket deleted succesfully";
+	const TICKET_INSERT_ERROR                                       = "Error while trying to register ticket";
+	const TICKET_INSERT_SUCCESS                                     = "Ticket registered succesfully";
+	const TICKET_NOT_FOUND                                          = "Ticket not found";
 	const TICKET_SELECT_USERS_ERROR                                 = "Error while trying to obtain users associated with this ticket";
 	const TICKET_SELECT_USERS_WARNING                               = "No user is associated with this ticket";
 	const TWO_STEP_VERIFICATION                                     = "Two step verification";
@@ -779,6 +787,7 @@ class En
 	const TYPE_TICKET_SELECT_USERS_WARNING                          = "No user is associated with this ticket type";
 	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "User type not found";
+	const TYPE_USER_SELECT_USERS_WARNING                            = "No user is associated with this type user";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Error while trying to update user's corporation information";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "Unique Id already picked by another user, "
 	                                                                . "please choose another";

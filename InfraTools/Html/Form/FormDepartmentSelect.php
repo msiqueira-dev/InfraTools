@@ -13,8 +13,8 @@
 	</label>
 </div>
 <!-- FORM DEPARTMENT SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>" method="post" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
 		<!-- FORM_FIELD_RADIO_DEPARTMENT_NAME -->
@@ -76,7 +76,7 @@
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												   '', 'false');
 										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												 '');"
@@ -85,7 +85,7 @@
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												 '');"
@@ -94,7 +94,7 @@
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>',
+												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												 '');"
@@ -146,7 +146,7 @@
 								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 								   '');">

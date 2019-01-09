@@ -124,7 +124,7 @@ class PageAdminUser extends PageAdmin
 			}
 		}
 		//USER LIST SELECT TYPE USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT]))
 		{
 			if($this->TypeUserSelectByTypeUserDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION], 
 														  $this->InstanceTypeUser,
@@ -183,7 +183,7 @@ class PageAdminUser extends PageAdmin
 								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX], 
 								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY],
 								 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX], 
-								 ConfigInfraTools::TYPE_USER_DEFAULT_ID, 
+								 ConfigInfraTools::TYPE_USER_DEFAULT, 
 								 NULL,
 								 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;

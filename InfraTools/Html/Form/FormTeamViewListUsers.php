@@ -62,9 +62,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -83,9 +83,9 @@ if(is_array($this->ArrayInstanceUser))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 

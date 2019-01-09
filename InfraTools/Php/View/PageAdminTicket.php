@@ -165,17 +165,17 @@ class PageAdminTicket extends PageAdmin
 			{
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
-				if($this->UserSelectByTicketId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTicket->GetTicketId(),
-										       $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
-				                               == ConfigInfraTools::SUCCESS)
+				if($this->ExecuteFunction($_POST, 'UserSelectByTicketId', 
+										  array($this->InstanceTicket->GetTicketId(),
+												$this->ArrayInstanceUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW_LIST_USERS;
 				else
 				{
 					if($this->TicketLoadData($this->InstanceTicket) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
 				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
+			}
 		}
 		//FORM_TICKET_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)

@@ -87,6 +87,13 @@ class De
 	const FORM_FIELD_TEAM_DESCRIPTION                               = "";
 	const FORM_FIELD_TEAM_ID                                        = "";
 	const FORM_FIELD_TEAM_NAME                                      = "";
+	const FORM_FIELD_TICKET_DESCRIPTION                             = "";
+	const FORM_FIELD_TICKET_ID                                      = "";
+	const FORM_FIELD_TICKET_SERVICE                                 = "";
+	const FORM_FIELD_TICKET_STATUS                                  = "";
+	const FORM_FIELD_TICKET_SUGGESTION                              = "";
+	const FORM_FIELD_TICKET_TITLE                                   = "";
+	const FORM_FIELD_TICKET_TYPE                                    = "";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "";
 	const FORM_INVALID_CAPTCHA                                      = "";
@@ -727,6 +734,7 @@ class De
 	const TICKET_DELETE_SUCCESS                                     = "";
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
+	const TICKET_NOT_FOUND                                          = "";
 	const TICKET_SELECT_USERS_ERROR                                 = "";
 	const TICKET_SELECT_USERS_WARNING                               = "";
 	const TWO_STEP_VERIFICATION                                     = "";
@@ -744,6 +752,7 @@ class De
 	const TYPE_TICKET_SELECT_USERS_WARNING                          = "";
 	const TYPE_USER_ID                                              = "";
 	const TYPE_USER_NOT_FOUND                                       = "";
+	const TYPE_USER_SELECT_USERS_WARNING                            = "";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "";
 	const UPDATE_SUCCESS                                            = "";

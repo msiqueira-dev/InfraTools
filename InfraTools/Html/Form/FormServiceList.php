@@ -31,7 +31,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInstanceInfraToolsService))
+if(!empty($this->ArrayInstanceInfraToolsService))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST . "' method='" . $this->InputValueFormMethod . "' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 

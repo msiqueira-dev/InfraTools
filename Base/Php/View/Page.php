@@ -3346,10 +3346,10 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->AssocUserCorporationDelete(
-					                                     $InstanceUser->GetCorporationName(),
-			                                             $this->InputValueUserEmail,
-														 $Debug, NULL, TRUE);
+			if(!empty($InstanceUser->GetCorporationName()))
+				$return = $instanceFacedePersistence->AssocUserCorporationDelete($InstanceUser->GetCorporationName(),
+			                                                                     $this->InputValueUserEmail,
+														                         $Debug, NULL, TRUE);
 			if($return == Config::SUCCESS)
 				$return = $instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
 			if($return == Config::SUCCESS)
@@ -3397,9 +3397,13 @@ class Page
 		if(isset($_POST[Config::FORM_FIELD_USER_TWO_STEP_VERIFICATION]))
 			$this->InputValueTwoStepVerification = TRUE;
 		else $this->InputValueTwoStepVerification = FALSE;
-		if(isset($_POST[Config::FORM_FIELD_USER_ACTIVE]))
-			$this->InputValueUserActive = TRUE;
-		else $this->InputValueUserActive = FALSE;
+		if(is_null($UserActive))
+		{
+			if(isset($_POST[Config::FORM_FIELD_USER_ACTIVE]))
+				$this->InputValueUserActive = TRUE;
+			else $this->InputValueUserActive = FALSE;
+		}
+		else $this->InputValueUserActive = $UserActive;
 		if(isset($_POST[Config::FORM_FIELD_USER_CONFIRMED]))
 			$this->InputValueUserConfirmed = TRUE;
 		else $this->InputValueUserConfirmed = FALSE;
@@ -3407,8 +3411,6 @@ class Page
 			$SessionExpires = $this->InputValueSessionExpires;
 		if($TwoStepVerification == NULL)
 			$TwoStepVerification = $this->InputValueTwoStepVerification;
-		if($UserActive == NULL)
-			$UserActive = $this->InputValueUserActive;
 		if($UserConfirmed == NULL)
 			$UserConfirmed = $this->InputValueUserConfirmed;
 		$this->InputValueUserUniqueId = explode("@", $this->InputValueUserEmail)[0];
@@ -3680,7 +3682,7 @@ class Page
 																 $this->InputValueRegion,
 																 $SessionExpires,
 																 $TwoStepVerification,
-																 $UserActive,
+																 $this->InputValueUserActive,
 																 $UserConfirmed,
 																 $this->InputValueUserPhonePrimary, 
 																 $this->InputValueUserPhonePrimaryPrefix, 
@@ -3708,6 +3710,7 @@ class Page
 						if($SendEmail) $constant = 'REGISTER_SUCCESS';
 						else $constant = 'REGISTER_SUCCESS_NO_LINK';
 						$this->ShowDivReturnSuccess($constant);
+						return Config::SUCCESS;
 					}
 					else
 					{
@@ -3729,7 +3732,7 @@ class Page
 			}
 			else
 			{
-				$this->ShowDivReturnError("REGISTER_EMAIL_ALREADY_REGISTERED");
+				$this->ShowDivReturnWarning("REGISTER_EMAIL_ALREADY_REGISTERED");
 				return Config::ERROR;
 			}
 		}
@@ -3915,8 +3918,11 @@ class Page
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $TeamId, $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
-			else
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("TEAM_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -3955,8 +3961,11 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByTicketId($Limit1, $Limit2, $this->InputValueTicketId, 
 																	   $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
-			else
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("TICKET_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -3997,9 +4006,17 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
 																						   $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("TYPE_ASSOC_USER_TEAM_SELECT_USERS_WARNING");
+				return Config::WARNING;	
+			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_FAILED");
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_SELECT_USERS_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -4034,8 +4051,11 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByTypeTicketDescription($Limit1, $Limit2, $this->InputValueTypeTicketDescription,
 																	                $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
-			else
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("TYPE_TICKET_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -4076,7 +4096,15 @@ class Page
 			$return = $instanceFacedePersistence->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
 															          $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("TYPE_USER_SELECT_USERS_WARNING");
+				return Config::WARNING;	
+			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
 		return Config::ERROR;

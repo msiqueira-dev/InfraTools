@@ -14,8 +14,8 @@
 	</label>
 </div>
 <!-- FORM DEPARTMENT REGISTER -->
-<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>" method="post">
+<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>" method="post">
     <!-- DEPARTMENT_INITIALS -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
@@ -31,12 +31,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -46,7 +46,7 @@
                                                    '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -68,12 +68,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -82,7 +82,7 @@
                                                    '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -138,7 +138,7 @@
 								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER_SUBMIT; ?>',
                                    '');">

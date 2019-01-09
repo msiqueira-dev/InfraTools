@@ -149,31 +149,36 @@ class FacedePersistenceTicket
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection)
+	public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTypeTicket = array();
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeTicketSelect');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeTicketSelect());
+				Persistence::ShowQuery('SqlTicketSelect');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTicketSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceTicket = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTypeTicket = $this->Factory->CreateTypeTicket
+						$InstanceTicket = $this->Factory->CreateTicket
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION]);	
-						array_push($ArrayInstanceTypeTicket, $InstanceTypeTicket);
+														 $row[Config::TABLE_TICKET_FIELD_TICKET_DESCRIPTION],
+														 $row[Config::TABLE_TICKET_FIELD_TICKET_ID],
+														 $row[Config::TABLE_TICKET_FIELD_TICKET_STATUS],
+														 $row[Config::TABLE_TICKET_FIELD_TICKET_SUGGESTION],
+														 $row[Config::TABLE_TICKET_FIELD_TICKET_TITLE],
+														 $row[Config::TABLE_TICKET_FIELD_TICKET_TYPE]);	
+						array_push($ArrayInstanceTicket, $InstanceTicket);
 					}
-					if(!empty($ArrayInstanceTypeTicket))
+					if(!empty($ArrayInstanceTicket))
 						return Config::SUCCESS;
 					else 
 					{

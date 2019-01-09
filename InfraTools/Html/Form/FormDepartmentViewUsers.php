@@ -16,7 +16,6 @@
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM DEPARTMENT VIEW USERS -->
 <div class="DivTableGenericHeader">
 		<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -48,10 +47,11 @@
 		?>
 		</div>
 	</div>
+<!-- FORM_DEPARTMENT_VIEW_LIST_USERS_FORM -->
 <?php
 if(is_array($this->ArrayInstanceDepartmentUsers))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_USERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -62,9 +62,9 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_BACK . "'
-				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_BACK . "'
+				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -82,9 +82,9 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORWARD . "'
+				  name='"  . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_FORWARD . "'
+				  value='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 

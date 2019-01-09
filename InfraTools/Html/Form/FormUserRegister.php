@@ -41,26 +41,26 @@
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>" 
 						   class="<?php echo $this->ReturnNameClass; ?>"
 						   onblur="ValidateName(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>',
-											   'DivContentBodySubmit',
+											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onchange="ValidateName(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>',
-											   'DivContentBodySubmit',
+											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   title="<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_NAME'); ?>"
@@ -78,30 +78,30 @@
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>"
 						   class="<?php echo $this->ReturnUserEmailClass; ?>"
 						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
-											   'DivContentBodySubmit',
+											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
 									ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
-											   'DivContentBodySubmit',
+											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onchange="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
-											   'DivContentBodySubmit',
+											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   title="<?php echo $this->InstanceLanguageText->GetText('EMAIL'); ?>" 
@@ -127,7 +127,7 @@
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');">
 			<option <?php if ($this->InputValueBirthDateDay == "" 
@@ -157,7 +157,7 @@
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');">
 			<option <?php if ($this->InputValueBirthDateMonth == "" 
@@ -187,7 +187,7 @@
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');">
 			<option <?php if ($this->InputValueBirthDateYear == "" 
@@ -362,7 +362,7 @@
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_GENDER; ?>');
 						  ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 				style=" <?php if($this->InputValueGender != ConfigInfraTools::FORM_FIELD_SELECT_NONE
@@ -420,27 +420,27 @@
 							   class="<?php echo $this->ReturnCountryClass; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('COUNTRY'); ?>"
 							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>',
-													  'DivContentBodySubmit',
+													  'DivContentBodySubmitBigger',
 													  '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													  '', true);
 									   ValidateMultiplyFields(
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-													 'DivContentBodySubmit',
+													 'DivContentBodySubmitBigger',
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													 '');"
 									   onkeyup="ValidateMultiplyFields(
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-													 'DivContentBodySubmit',
+													 'DivContentBodySubmitBigger',
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													 '');"
 									   onchange="ValidateNotNull(null, 
 													'<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>',
-													'DivContentBodySubmit',
+													'DivContentBodySubmitBigger',
 													'<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													'', true);
 									   ValidateMultiplyFields(
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-												   'DivContentBodySubmit',
+												   'DivContentBodySubmitBigger',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '');" 
 									   value="<?php echo $this->InputValueCountry; ?>"/>
@@ -456,27 +456,27 @@
 						   class="<?php echo $this->ReturnRegionClass; ?>"
 						   title="<?php echo $this->InstanceLanguageText->GetText('REGION'); ?>"
 						   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>',
-													  'DivContentBodySubmit',
+													  'DivContentBodySubmitBigger',
 													  '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													  '', true);
 								   ValidateMultiplyFields(
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-													 'DivContentBodySubmit',
+													 'DivContentBodySubmitBigger',
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													 '');"
 								   onkeyup="ValidateMultiplyFields(
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-													 'DivContentBodySubmit',
+													 'DivContentBodySubmitBigger',
 													 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													 '');"
 								   onchange="ValidateNotNull(null, 
 													'<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>',
-													'DivContentBodySubmit',
+													'DivContentBodySubmitBigger',
 													'<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 													'', true);
 								   ValidateMultiplyFields(
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-												   'DivContentBodySubmit',
+												   'DivContentBodySubmitBigger',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '');"
 								   value="<?php echo $this->InputValueRegion; ?>"/>
@@ -499,26 +499,26 @@
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
 						   class="<?php echo $this->ReturnPasswordClass; ?>"
 						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
-												   'DivContentBodySubmit',
+												   'DivContentBodySubmitBigger',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
-												   'DivContentBodySubmit',
+												   'DivContentBodySubmitBigger',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
 									 ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   title="<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_NEW_PASSWORD_TITLE'); ?>" 
@@ -541,26 +541,26 @@
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>"
 						   class="<?php echo $this->ReturnPasswordClass; ?>"
 						   onblur="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
-												   'DivContentBodySubmit',
+												   'DivContentBodySubmitBigger',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   onchange="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
-												   'DivContentBodySubmit',
+												   'DivContentBodySubmitBigger',
 												   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												   '', true);
 									 ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-											 'DivContentBodySubmit',
+											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 											 '');"
 						   title="<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_REPEAT_PASSWORD_TITLE'); ?>" 
@@ -582,21 +582,21 @@
 							   class="<?php echo $this->ReturnCaptchaClass; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_CAPTCHA'); ?>" 
 							   onblur="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::FORM_CAPTCHA_REGISTER; ?>',
-												 'DivContentBodySubmit',
+												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												 '', false);
 										ValidateMultiplyFields(
 												 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-												 'DivContentBodySubmit',
+												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												 '');"
 							   onkeyup="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::FORM_CAPTCHA_REGISTER; ?>',
-												 'DivContentBodySubmit',
+												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												 '', false);
 										ValidateMultiplyFields(
 												 '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-												 'DivContentBodySubmit',
+												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 												 '');"
 							   value="<?php echo $this->InputValueCaptcha; ?>" maxlength="8" />
@@ -695,29 +695,29 @@
 	<div class="DivClearFloat"></div>
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateName(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>',
-								   'DivContentBodySubmit',
+								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', true);
 					 ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
-								   'DivContentBodySubmit',
+								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', true);
 					 ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
-								   'DivContentBodySubmit',
+								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', false);
 					 ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
-								   'DivContentBodySubmit',
+								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '', false);
 					 ValidateMultiplyFields(
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
-								   'DivContentBodySubmit',
+								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
 								   '');">
 		<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>" 
 								 id="<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>"
-								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
+								 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
 								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>

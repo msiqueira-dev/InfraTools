@@ -70,13 +70,13 @@ class PageRegister extends PageInfraTools
 							  $_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],
 					  		  @$_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES], 
 						      @$_POST[ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION], 
-						      @$_POST[ConfigInfraTools::FORM_FIELD_USER_ACTIVE], 
+						      TRUE, 
 						      @$_POST[ConfigInfraTools::FORM_FIELD_USER_CONFIRMED],
    							  $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY], 
 						      $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX], 
 						      $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY],
 							  $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX], 
-							  ConfigInfraTools::TYPE_USER_DEFAULT_ID, 
+							  ConfigInfraTools::TYPE_USER_DEFAULT, 
 							  NULL,
 							  $this->InputValueHeaderDebug);	
 		}

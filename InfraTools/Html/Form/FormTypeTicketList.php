@@ -44,9 +44,9 @@ if(is_array($this->ArrayInstanceTypeTicket))
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TEAM_LIST_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TEAM_LIST_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TEAM_LIST_BACK . "'
+				  name='"  . ConfigInfraTools::FORM_TYPE_TICKET_LIST_BACK . "' 
+				  id='"    . ConfigInfraTools::FORM_TYPE_TICKET_LIST_BACK . "'
+				  value='" . ConfigInfraTools::FORM_TYPE_TICKET_LIST_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -78,7 +78,7 @@ if(is_array($this->ArrayInstanceTypeTicket))
 	foreach($this->ArrayInstanceTypeTicket as $key=>$typeTicket)
 	{
 		echo "<tr>";
-		echo "<td class='TableTypeTicketThId'>
+		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
 							 name='"   . ConfigInfraTools::FORM_TYPE_TICKET_SELECT_SUBMIT . "' 
@@ -90,7 +90,7 @@ if(is_array($this->ArrayInstanceTypeTicket))
 										   title='" . $typeTicket->GetTypeTicketDescription() . "' />
 				</form>
 		      </td>";
-		echo "<td class= 'TableTypeTicketThRegisterDate'>" . $typeTicket->GetRegisterDate() . "</td>";
+		echo "<td class= 'TableGenericTdLink'>" . $typeTicket->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}
 	echo "</table>";

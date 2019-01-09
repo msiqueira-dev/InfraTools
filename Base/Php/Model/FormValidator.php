@@ -122,7 +122,7 @@ class FormValidator
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME)
 			return $this->ValidateCorporationName($Value, $DefaultValue);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING)
-			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption[0]);
+			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_NAME)
 			return $this->ValidateCountryName($Value, $DefaultValue);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE)
@@ -225,7 +225,9 @@ class FormValidator
 			if(!is_null($StringToCompare) && !empty($StringToCompare) && $StringToCompare != $DefaultValue)
 			{
 				if($StringToCompare == $String)
+				{
 					return self::SUCCESS;
+				}
 				else return self::INVALID_CAPTCHA;
 			}
 			else return self::INVALID_NULL;

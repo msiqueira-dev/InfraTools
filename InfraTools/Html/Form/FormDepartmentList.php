@@ -11,7 +11,7 @@
 		<?php if(isset($this->ReturnText))               echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM DEPARTMENT LIST -->
+<!-- FORM_DEPARTMENT_LIST_FORM -->
 <div class="DivTableGenericHeader">
 		<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -46,7 +46,7 @@
 <?php
 if(is_array($this->ArrayInstanceDepartment))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'

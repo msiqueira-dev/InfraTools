@@ -202,8 +202,8 @@ class PageAdminDepartment extends PageAdmin
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;	
 			}
 		}
-		//FORM_DEPARTMENT_VIEW_LIST_USERS
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS) == ConfigInfraTools::SUCCESS)
+		//FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
 														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
@@ -237,8 +237,9 @@ class PageAdminDepartment extends PageAdmin
 		else
 		{
 			$_POST[ConfigInfraTools::FORM_DEPARTMENT_SELECT] = ConfigInfraTools::FORM_DEPARTMENT_SELECT;
-			$this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', array(&$this->ArrayInstanceInfraToolsCorporation),
-								   $this->InputValueHeaderDebug);
+			$this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+									  array(&$this->ArrayInstanceInfraToolsCorporation),
+									  $this->InputValueHeaderDebug);
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

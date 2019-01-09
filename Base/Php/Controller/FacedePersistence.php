@@ -233,7 +233,8 @@ Functions:
 			public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug,
 			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection = NULL, 
+			                                              $CloseConnectaion = TRUE);
 			public function UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 **************************************************************************/
 
@@ -1978,13 +1979,13 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 	 	if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserUpdateUserTypeByUserEmail($UserEmail, $TypeId, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceUser->UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1997,7 +1998,7 @@ class FacedePersistence
 	 	if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserUpdateUserTypeByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceUser->UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

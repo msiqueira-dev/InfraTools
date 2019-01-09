@@ -38,7 +38,7 @@
 	</div>
  </div>
 <?php
-if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanceInfraToolsService)>0))
+if(!empty($this->ArrayInstanceInfraToolsService))
 {
 	?>
 	<div class="DivTableGenericHeader">
