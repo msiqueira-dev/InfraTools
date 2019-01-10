@@ -54,7 +54,6 @@
 	if($this->GetCurrentPage() == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT)
 	{ 
 	?>
-		<!-- SUBMIT -->
 		<div class="DivContentBodyContainer">
 			<!-- FORM_DEPARTMENT_VIEW_UPDATE -->
 			<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW_UPDATE; ?>" 

@@ -47,7 +47,7 @@ class PageAdminTypeService extends PageAdmin
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
@@ -106,21 +106,18 @@ class PageAdminTypeService extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, $this->InstanceTypeService)  
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->ServiceSelectByServiceType($this->InputLimitOne, $this->InputLimitTwo, 
-													 $this->InstanceTypeService->GetTypeServiceName(),
-										             $this->ArrayInstanceTypeServiceServices, $rowCount, 
-													 $this->InputValueHeaderDebug) 
-				                                        == ConfigInfraTools::SUCCESS)
+				if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceType', 
+										  array($this->InstanceTypeTicket->GetTypeTicketDescription(),
+												$this->InstanceTypeService->GetTypeServiceName(),
+												&$this->ArrayInstanceTypeServiceServices), 
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW_LIST_SERVICES;
 				else
 				{
-					if($this->TypeServiceLoadData($this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
+					if($this->TypeServiceLoadData($this->ArrayInstanceTypeServiceServices) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
 				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
+			}
 		}
 		//FORM_TYPE_SERVICE_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)

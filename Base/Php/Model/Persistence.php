@@ -112,7 +112,6 @@ Methods:
 			public static function SqlUserSelectByUserUniqueId();
 			public static function SqlUserSelectUserActiveByHashCode();
 			public static function SqlUserSelectHashCodeByUserEmail();
-			public static function SqlUserSelectServiceByUserEmail();
 			public static function SqlUserSelectTeamByUserEmail();
 			public static function SqlUserUpdateActiveByUserEmail();
 			public static function SqlUserUpdateAssocUserCorporationByUserEmail();
@@ -1725,10 +1724,6 @@ class Persistence
 		return "SELECT " . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_HASH_CODE . " " 
 		     . "FROM  "  . Config::TABLE_USER . " " 
 		     . "WHERE "  . Config::TABLE_USER . "." . Config::TABLE_USER_FIELD_EMAIL     . " =UPPER(?)";
-	}
-	
-	public static function SqlUserSelectServiceByUserEmail()
-	{
 	}
 	
 	public static function SqlUserSelectTeamByUserEmail()

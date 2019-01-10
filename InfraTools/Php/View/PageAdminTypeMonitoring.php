@@ -47,7 +47,7 @@ class PageAdminTypeMonitoring extends PageAdmin
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;

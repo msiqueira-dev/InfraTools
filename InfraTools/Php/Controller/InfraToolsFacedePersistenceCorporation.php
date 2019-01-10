@@ -15,12 +15,12 @@ Description:
 Functions: 
 			public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
 			                                            $Debug, $MySqlConnection);
-			public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, 
+			public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, 
 			                                                         $Debug, $MySqlConnection);
 			public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, 
 			                                                  $Debug, $MySqlConnection);
 			public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
-			public function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
+			public function CorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
 			                                                      &$ArrayInstanceInfraToolsCorporation, 
 																  &$RowCount, $Debug, $MySqlConnection);
 			public function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, 
@@ -128,7 +128,7 @@ class InfraToolsFacedePersistenceCorporation
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationInfraToolsSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceCorporation = array();
@@ -241,7 +241,7 @@ class InfraToolsFacedePersistenceCorporation
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
+	public function CorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
 			                                              &$ArrayInstanceInfraToolsCorporation, 
 														  &$RowCount, $Debug, $MySqlConnection)
 	{

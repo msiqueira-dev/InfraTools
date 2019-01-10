@@ -53,59 +53,8 @@ class PageServiceListByTypeService extends PageInfraTools
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT]))
 				$this->InputValueServiceType = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT];
 			else $this->InputValueServiceType = NULL;
-
-			//SERVICE LIST BY TYPE BACK SUBMIT
-			if($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_BACK))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInstanceInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-			}
-			//SERVICE LIST BY TYPE FORWARD SUBMIT
-			elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_FORWARD))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$this->this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-																	  $this->User->GetEmail(),
-																	  $this->InputLimitOne, 
-																	  $this->InputLimitTwo, 
-																	  $this->ArrayInstanceInfraToolsService,
-																	  $rowCount,
-																	  $this->InputValueHeaderDebug);
-				if($this->InputLimitTwo > $rowCount)
-				{
-					if(!is_numeric($rowCount))
-					{
-						$this->InputLimitOne = $this->InputLimitOne - 25;
-						$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					}
-					else
-					{
-						$this->InputLimitOne = $rowCount - 25;
-						$this->InputLimitTwo = $rowCount;
-					}
-					$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-																   $this->User->GetEmail(),
-																   $this->InputLimitOne, 
-																   $this->InputLimitTwo, 
-																   $this->ArrayInstanceInfraToolsService,
-																   $rowCount,
-																   $this->InputValueHeaderDebug);
-				}
-			}
 			//SERVICE LIST BY TYPE SERVICE SELECT SUBMIT
-			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT]))
+			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT]))
 			{
 
 				Page::GetCurrentDomain($domain);
@@ -114,20 +63,16 @@ class PageServiceListByTypeService extends PageInfraTools
 											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
 											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT]);
 			}
-			//SERVICE LIST BY TYPE
+			//FORM_SERVICE_LIST_BY_TYPE_SERVICE
 			else
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$this->ServiceSelectByServiceTypeOnUserContext($this->InputValueServiceType,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, $this->InputLimitTwo, 
-															   $this->ArrayInstanceInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE . "_x"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE . "_y"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE] = ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE;
+				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE =>
+							  ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE) + $_GET;
+				$this->ExecuteFunction($_GET, 'ServiceSelectByServiceTypeOnUserContext', 
+											   array($this->InputValueServiceType,
+													 $this->User->GetEmail(),
+													 &$this->ArrayInstanceInfraToolsService),
+											   $this->InputValueHeaderDebug);
 			}
 		}
 		$this->LoadHtml(FALSE);

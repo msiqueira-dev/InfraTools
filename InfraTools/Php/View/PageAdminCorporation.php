@@ -48,7 +48,7 @@ class PageAdminCorporation extends PageAdmin
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
@@ -130,14 +130,14 @@ class PageAdminCorporation extends PageAdmin
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE;
 			}
 		}
-		//FORM_CORPORATION_LIST_VIEW_USERS
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS) == ConfigInfraTools::SUCCESS)
+		//FORM_CORPORATION_VIEW_LIST_USERS_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'CorporationSelectUsers', 
-										  array($this->InstanceCorporation, 
+				if($this->ExecuteFunction($_POST, 'UserSelectByCorporationName', 
+										  array($this->InstanceCorporation->GetCorporationName(), 
 										        &$this->ArrayInstanceInfraToolsCorporationUsers),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;

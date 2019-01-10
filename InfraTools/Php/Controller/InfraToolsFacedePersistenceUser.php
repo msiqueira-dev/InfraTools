@@ -17,9 +17,13 @@ Functions:
 			                                     $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, 
 			                                                      &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount,
+			                                                $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, 
 			                                               $Debug, $MySqlConnection);
-			public function InfraToolsUserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, 
+			public function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceInfraToolsUser,
+																        &$RowCount, $Debug, $MySqlConnection)
+			public function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
 			                                                          &$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceInfraToolsUser, $Debug, $MySqlConnection);
@@ -80,7 +84,6 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL;
 		$InstaceTypeUser = NULL; $InstanceInfraToolsUser = NULL; 
 		$dateNow = NULL; $mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolsUser = array();
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelect');
@@ -93,6 +96,7 @@ class InfraToolsFacedePersistenceUser
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -278,17 +282,118 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
+	public function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount,
+			                                        $Debug, $MySqlConnection)
+	{
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsUserSelectByServiceId');
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByServiceId());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("iiii", $ServiceId, $ServiceId, $Limit1, $Limit2);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::SUCCESS)
+				{
+					$ArrayInstanceInfraToolsUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$RowCount = $row['COUNT'];
+						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
+								                                        (NULL, 
+																		 $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[Config::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
+							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
+												 NULL,
+												 NULL,
+							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $InstanceCorporation,
+						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+												 $InstanceDepartment,
+							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_NAME], 
+												 $row[Config::TABLE_USER_FIELD_REGION],
+												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
+												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
+						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+							                  $InstanceInfraToolsUser);
+						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
+					}
+					if(!empty($ArrayInstanceInfraToolsUser))
+						return Config::SUCCESS;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::MYSQL_USER_SELECT_FAILED;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::MYSQL_QUERY_PREPARE_FAILED;
+			}
+		}
+		else return Config::MYSQL_CONNECTION_FAILED;
+	}
+	
 	public function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, 
 			                                       $Debug, $MySqlConnection)
 	{
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
-		$ArrayInstanceInfraToolsUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQuery('SqlUserSelectByTicketId');
+				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTicketId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTicketId());
 			if($stmt != NULL)
 			{
@@ -299,6 +404,7 @@ class InfraToolsFacedePersistenceUser
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
+						$ArrayInstanceInfraToolsUser = array();
 						$RowCount = $row['COUNT'];
 						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
 						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
@@ -390,7 +496,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQuery('SqlUserSelectByTypeTicketDescription');
+				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeTicketDescription');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeTicketDescription());
 			if($stmt != NULL)
 			{
@@ -482,7 +588,7 @@ class InfraToolsFacedePersistenceUser
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsUserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, 
+	public function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
 												              &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserTeam = NULL; 

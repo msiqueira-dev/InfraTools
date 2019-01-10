@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about department.
 Functions: 
-			public function DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2, 
+			public function DepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
 	                                                             &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
 																 $Debug, $MySqlConnection);
 			public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
@@ -70,7 +70,7 @@ class InfraToolsFacedePersistenceDepartment
         return self::$Instance;
     }
 	
-	public function DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2,
+	public function DepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail,
 														 &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
 														 $Debug, $MySqlConnection)
 	{

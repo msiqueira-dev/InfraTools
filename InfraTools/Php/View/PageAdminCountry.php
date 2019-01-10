@@ -46,7 +46,7 @@ class PageAdminCountry extends PageAdmin
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST;
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;

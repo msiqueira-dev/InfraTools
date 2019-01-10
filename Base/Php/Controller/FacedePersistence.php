@@ -201,8 +201,8 @@ Functions:
 			                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
 			                                            $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
-			                                       $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
+			                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug,
 			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -1707,14 +1707,14 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, $Debug,
+	public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, $Debug,
 										   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 	 	if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+			$return = $instanceFacedePersistenceUser->UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
 																			 $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);

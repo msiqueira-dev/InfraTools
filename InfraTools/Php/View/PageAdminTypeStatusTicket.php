@@ -54,63 +54,18 @@ class PageAdminTypeStatusTicket extends PageAdmin
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//TYPE TICKET LIST
-		if($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST))
+		//FORM_TYPE_STATUS_TICKET_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->TypeStatusTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										  $this->ArrayInstanceTypeStatusTicket, $rowCount,
-										  $this->InputValueHeaderDebug);
-		}
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT))
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT;
-		//TYPE TICKET LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_BACK))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->TypeStatusTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										  $this->ArrayInstanceTypeStatusTicket, $rowCount,
-										  $this->InputValueHeaderDebug);
-		}
-		//TYPE TICKET LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_FORWARD))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			if($this->InputLimitOne > 250)
-				$this->InputLimitOne = 250;
-			if($this->InputLimitTwo > 275)
-				$this->InputLimitTwo = 275;
-			$this->TypeStatusTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-										  $this->ArrayInstanceTypeStatusTicket, $rowCount,
-										  $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->TypeStatusTicketSelect($this->InputLimitOne, $this->InputLimitTwo, 
-											  $this->ArrayInstanceTypeStatusTicket, $rowCount,
-							                  $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
+			if($this->ExecuteFunction($_POST, 'TypeStatusTicketSelect', 
+									  array(&$this->ArrayInstanceTypeStatusTicket),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_LIST;
 		}
 		//TYPE TICKET LIST SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT]))
@@ -124,8 +79,8 @@ class PageAdminTypeStatusTicket extends PageAdmin
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_SELECT;
 		}
-		//TYPE TICKET REGISTER
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER))
+		//FORM_TYPE_STATUS_TICKET_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_TICKET_REGISTER;
 		//TYPE TICKET CANCEL
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_CANCEL]))

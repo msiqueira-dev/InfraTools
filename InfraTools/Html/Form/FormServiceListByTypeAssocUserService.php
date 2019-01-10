@@ -96,12 +96,12 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('SERVICE_FIELD_TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('SERVICE_FIELD_CORPORATION') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('SERVICE_FIELD_DEPARTMENT') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('SERVICE_FIELD_ACTIVE') . "</th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
@@ -169,7 +169,7 @@ else
 {
 	if(is_array($this->ArrayInstanceInfraToolsTypeAssocUserService) && (count($this->ArrayInstanceInfraToolsTypeAssocUserService)>0))
 		echo "<div class='DivContentBodyServiceSubTitle'><h2>" . 
-			$this->InstanceLanguageText->GetText('SERVICE_NOT_FOUND_FOR_USER') . "</h2></div>";
+			$this->InstanceLanguageText->GetText('SERVICE_NOT_FOUND_FOR_USER_BY_TYPE_ASSOC_USER_SERVICE') . "</h2></div>";
 	else echo "<div class='DivContentBodyServiceSubTitle'><h2>" . 
 			$this->InstanceLanguageText->GetText('SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE') . "</h2></div>";
 }

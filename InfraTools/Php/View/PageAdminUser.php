@@ -54,55 +54,18 @@ class PageAdminUser extends PageAdmin
 		$this->EnableFieldUserConfirmed = TRUE;
 		$this->ShowTypeUserDescription = TRUE;
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//USER LIST
-		if($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST))
+		//FORM_USER_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_USER);
-			unset($this->ArrayInstanceInfraToolsUser);
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
-							            $rowCount, $this->InputValueHeaderDebug);
-		}
-		//USER LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST_BACK))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
-							            $rowCount, $this->InputValueHeaderDebug);
-		}
-		//USER LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_LIST_FORWARD))
-		{
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
-							            $rowCount, $this->InputValueHeaderDebug);
-			if($this->InputLimitOne > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
-								            $rowCount, $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputLimitTwo > $rowCount)
-			{
-				$this->InputLimitOne = $this->InputLimitOne - 25;
-				$this->InputLimitTwo = $this->InputLimitTwo - 25;
-			}
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelect', 
+									  array(&$this->ArrayInstanceInfraToolsUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 		}
 		//USER LIST SELECT CORPORATION SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_LIST]))
@@ -156,9 +119,9 @@ class PageAdminUser extends PageAdmin
 			}
 		}
 		//USER REGISTER
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_REGISTER))
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_REGISTER) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
-		//USER REGISTER SUBMIT
+		//FORM_USER_REGISTER_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
 		{
 			if($this->UserInsert(ConfigInfraTools::APPLICATION_INFRATOOLS,
@@ -189,8 +152,8 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
 		}
-		//USER SELECT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_USER_SELECT))
+		//FORM_USER_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		//USER SELECT SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_SELECT_SUBMIT]))
@@ -254,7 +217,7 @@ class PageAdminUser extends PageAdmin
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{
 				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->CorporationSelectActiveNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
+				$this->InfraToolsCorporationSelectActiveNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
 			}
@@ -287,7 +250,7 @@ class PageAdminUser extends PageAdmin
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
 		//USER VIEW CHANGE ASSOC USER CORPORATION 
-		elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME]))
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
@@ -409,6 +372,7 @@ class PageAdminUser extends PageAdmin
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_CANCEL]) ||
 			   isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_CANCEL]))
 		{
+			echo "TESTE";
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{

@@ -32,8 +32,6 @@ Methods:
 		protected     function        CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
 		protected     function        CorporationSelectByName($CorporationName, &$InstanceCorporation, $Debug);
 		protected     function        CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
-		protected     function        CorporationSelectUsers($Limit1, $Limit2, $InstanceCorporation, &$ArrayInstanceCorporationUsers,
-		                                                     &$RowCount, $Debug, $HideReturnSuccessImage = TRUE);
 		protected     function        CorporationUpdateByName($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug);
 		protected     function        CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug);
 		protected     function        DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
@@ -132,8 +130,10 @@ Methods:
 		protected     function        UserLoadData($InstanceUser);
 		protected     function        UserResendConfirmationLink($Application, $UserEmail, $Debug);
 		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-		protected     function        UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
-		                                                     &$ArrayInstanceDepartmentUsers, &$RowCount, Debug);
+		protected     function        UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser,
+		                                                          &$RowCount, $Debug, $HideReturnSuccessImage = TRUE);
+		protected     function        UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+		                                                         &$ArrayInstanceUser, &$RowCount, Debug, $HideReturnSuccessImage = TRUE);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug);
@@ -801,25 +801,6 @@ class Page
 															          $Debug);
 	}
 	
-	protected function CorporationSelectUsers($Limit1, $Limit2, $InstanceCorporation, &$ArrayInstanceCorporationUsers, 
-											  &$RowCount, $Debug, $HideReturnSuccessImage = TRUE)
-	{
-		$ArrayInstanceCorporationUsers = NULL;
-		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->UserSelectByCorporationName($InstanceCorporation->GetCorporationName(),
-			                                                              $Limit1, $Limit2,
-			                                                              $ArrayInstanceCorporationUsers, 
-																	      $RowCount, $Debug);
-		if($return == Config::SUCCESS)
-		{
-			if($HideReturnSuccessImage)
-				$this->ShowDivReturnEmpty();
-			return Config::SUCCESS;
-		}
-		$this->ShowDivReturnError("CORPORATION_SELECT_USERS_ERROR");
-		return Config::ERROR;
-	}
-	
 	protected function CorporationUpdateByName($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
@@ -1403,13 +1384,21 @@ class Page
 						$ArrayParameter[count($ArrayParameter)] = &$rowCount;
 						array_push($ArrayParameter, $Debug);
 						array_push($ArrayParameter, $StoreSession);
-						return call_user_func_array(array($this, $Function), $ArrayParameter);
+						$return = call_user_func_array(array($this, $Function), $ArrayParameter);
+						if($return == Config::SUCCESS)
+							$this->ShowDivReturnEmpty();
+						return $return;
 					}
 				}
 				array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
 				$ArrayParameter[count($ArrayParameter)] = &$rowCount;
 				array_push($ArrayParameter, $Debug);
 				array_push($ArrayParameter, $StoreSession);
+				if($Debug == Config::CHECKBOX_CHECKED)
+				{
+					echo "<b>Array Parameter</b>: ";
+					print_r($ArrayParameter);
+				}
 				return call_user_func_array(array($this, $Function), $ArrayParameter);
 			}
 			elseif(strpos($postElementKey, 'LIST') == FALSE)
@@ -3851,20 +3840,115 @@ class Page
 		return Config::ERROR;
 	}
 	
-	protected function UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName, 
-											  &$ArrayInstanceDepartmentUsers, &$RowCount, $Debug)
+	protected function UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser, 
+											       &$RowCount, $Debug, $HideReturnSuccessImage = TRUE)
 	{
-		$ArrayInstanceDepartmentUsers = NULL;
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->UserSelectByDepartment($Limit1, $Limit2, $CorporationName, $DepartmentName,
-			                                                 $ArrayInstanceDepartmentUsers, $RowCount, 
-															 $Debug);
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$this->ShowDivReturnEmpty();
-			return Config::SUCCESS;
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByCorporationName($this->InputValueCorporationName, $Limit1, $Limit2,
+																			  $ArrayInstanceUser, 
+																			  $RowCount, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				if($return == Config::SUCCESS)
+				{
+					if($HideReturnSuccessImage)
+						$this->ShowDivReturnEmpty();
+					return Config::SUCCESS;
+				}
+				elseif(empty($ArrayInstanceUser))
+				{
+					$this->ShowDivReturnWarning("USER_SELECT_BY_CORPORATION_NAME_WARNING");
+					return Config::WARNING;	
+				}
+			}
 		}
-		$this->ShowDivReturnError("DEPARTMENT_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_CORPORATION_NAME_ERROR");
+		return Config::ERROR;
+	}
+	
+	protected function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
+												  $Debug, $HideReturnSuccessImage = TRUE)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$this->InputValueDepartmentName  = $DepartmentName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_DEPARTMENT_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->UserSelectByDepartmentName($Limit1, $Limit2, $this->InputValueCorporationName, 
+																	 $this->InputValueDepartmentName, $ArrayInstanceUser, 
+																	 $RowCount,  $Debug);
+			if($return == Config::SUCCESS)
+			{
+				if($return == Config::SUCCESS)
+				{
+					if($HideReturnSuccessImage)
+						$this->ShowDivReturnEmpty();
+					return Config::SUCCESS;
+				}
+				elseif(empty($ArrayInstanceUser))
+				{
+					$this->ShowDivReturnWarning("USER_SELECT_BY_DEPARTMENT_NAME_WARNING");
+					return Config::WARNING;	
+				}
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_DEPARTMENT_NAME_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -3916,13 +4000,14 @@ class Page
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $TeamId, $ArrayInstanceUser, $RowCount, $Debug);
+			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $this->InputValueTeamId, $ArrayInstanceUser, 
+																	 $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
 			}
-			elseif(empty($ArrayInstanceInfraToolsUser))
+			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("TEAM_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -3965,7 +4050,7 @@ class Page
 				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
 			}
-			elseif(empty($ArrayInstanceInfraToolsUser))
+			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("TICKET_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -4010,7 +4095,7 @@ class Page
 				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
 			}
-			elseif(empty($ArrayInstanceInfraToolsUser))
+			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("TYPE_ASSOC_USER_TEAM_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -4055,7 +4140,7 @@ class Page
 				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
 			}
-			elseif(empty($ArrayInstanceInfraToolsUser))
+			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("TYPE_TICKET_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -4100,7 +4185,7 @@ class Page
 				$this->ShowDivReturnEmpty();
 				return Config::SUCCESS;
 			}
-			elseif(empty($ArrayInstanceInfraToolsUser))
+			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("TYPE_USER_SELECT_USERS_WARNING");
 				return Config::WARNING;	
@@ -4758,7 +4843,7 @@ class Page
 				if($return == Config::MYSQL_UPDATE_SAME_VALUE)
 					$return = Config::SUCCESS;
 			}
-			if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() != NULL)
+			if($return == Config::SUCCESS && $this->InputValueCorporationName != NULL)
 			{
 				$instanceFacedePersistence->CorporationSelectByName($this->InputValueCorporationName, $instanceCorporation, $Debug);
 				if($return == Config::SUCCESS)
@@ -4767,9 +4852,18 @@ class Page
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
 					$this->UserLoadData($InstanceUser);
 					$this->ShowDivReturnSuccess("USER_CHANGE_CORPORATION_SUCCESS");
+					return Config::SUCCESS;
 				}
 			}
-			if($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			if($return == Config::SUCCESS && $this->InputValueCorporationName == NULL)
+			{
+				$InstanceUser->SetCorporation(NULL);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
+				$this->UserLoadData($InstanceUser);
+				$this->ShowDivReturnSuccess("USER_CHANGE_CORPORATION_SUCCESS");
+				return Config::SUCCESS;	
+			}
+			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::WARNING;

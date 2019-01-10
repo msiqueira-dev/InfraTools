@@ -17,7 +17,7 @@
     <!-- SERVICE ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceId; ?></label>
@@ -26,7 +26,7 @@
     <!-- SERVICE NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceName; ?></label>
@@ -35,7 +35,7 @@
     <!-- SERVICE DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceDescription; ?></label>
@@ -44,7 +44,7 @@
     <!-- SERVICE TYPE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_TYPE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceType; ?></label>
@@ -53,7 +53,7 @@
     <!-- SERVICE CORPORATION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_CORPORATION').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<div>
@@ -69,7 +69,7 @@
     <!-- SERVICE DEPARTMENT -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_DEPARTMENT').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<div>
@@ -85,7 +85,7 @@
     <!-- SERVICE ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ACTIVE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <img src="<?php echo $this->InputValueServiceActive; ?>" alt="ServiceDepartment" width="20" height="20" />
@@ -109,7 +109,7 @@
 		<!-- FORM SERVICE VIEW UPDATE -->
 		<form name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE; ?>" 
 			  id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE; ?>" 
-			  class="DivFormServiceViewUpdate"
+			  class="DivFormHorizontalButtons"
 			  method="post" >
 			  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT; ?>" 
 					 id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT; ?>"
@@ -122,7 +122,7 @@
 		<!-- FORM SERVICE VIEW DELETE -->
 		<form name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_DELETE; ?>" 
 			  id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_DELETE; ?>" 
-			  class="DivFormServiceViewDelete"
+			  class="DivFormHorizontalButtons"
 			  method="post" >
 			  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT; ?>" 
 					 id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT; ?>"
@@ -133,6 +133,21 @@
 					 id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID; ?>"
 					 value="<?php echo $this->InputValueServiceId; ?>"/>
 		</form>
+		<?php
+ 		if($this->User->CheckSuperUser())
+		{?>
+			<!-- FORM_SERVICE_VIEW_LIST_USERS -->
+			<form name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_LIST_USERS; ?>" 
+				  id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_LIST_USERS; ?>" 
+				  class="DivFormHorizontalButtons"
+				  method="post" >
+				<input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_LIST_USERS_SUBMIT; ?>" 
+						   id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW_LIST_USERS_SUBMIT; ?>"
+						   class="DivContentBodySubmitBigger"
+						   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
+			</form>
+		<?php
+		}?>
 	</div>
 <?php
 }

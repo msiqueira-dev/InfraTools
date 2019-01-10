@@ -80,6 +80,15 @@ class Pt
 	const FILL_REQUIRED_FIELDS                                      = "Por favor preencha os campos necessários";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Ativo";
 	const FORM_FIELD_EDIT                                           = "Editar";
+	const FORM_FIELD_SERVICE_ACTIVE                                 = "Ativo";
+	const FORM_FIELD_SERVICE_CORPORATION                            = "Corporação";
+	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporação pode mudar?";
+	const FORM_FIELD_SERVICE_DEPARTMENT                             = "Departamento";
+	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "Departamento pode mudar?";
+	const FORM_FIELD_SERVICE_DESCRIPTION                            = "Descrição";
+	const FORM_FIELD_SERVICE_ID                                     = "Id";
+	const FORM_FIELD_SERVICE_NAME                                   = "Nome";
+	const FORM_FIELD_SERVICE_TYPE                                   = "Tipo";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE             = "Ativo";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION        = "Descrição";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "Nome";
@@ -675,15 +684,6 @@ class Pt
 	const SERVICE_DELETE_ERROR                                      = "Erro ao excluir serviço";
 	const SERVICE_DELETE_ERROR_FOREIGN_KEY                          = "Erro ao excluir serviço, exclua as associações primeiro";
 	const SERVICE_DELETE_SUCCESS                                    = "Serviço excluido com sucesso";
-	const SERVICE_FIELD_ACTIVE                                      = "Ativo";
-	const SERVICE_FIELD_CORPORATION                                 = "Corporação";
-	const SERVICE_FIELD_CORPORATION_CAN_CHANGE                      = "Corporação pode mudar?";
-	const SERVICE_FIELD_DEPARTMENT                                  = "Departamento";
-	const SERVICE_FIELD_DEPARTMENT_CAN_CHANGE                       = "Departamento pode mudar?";
-	const SERVICE_FIELD_DESCRIPTION                                 = "Descrição";
-	const SERVICE_FIELD_ID                                          = "Id";
-	const SERVICE_FIELD_NAME                                        = "Nome";
-	const SERVICE_FIELD_TYPE                                        = "Tipo";
 	const SERVICE_INSERT_ERROR                                      = "Erro ao cadastrar serviço";
 	const SERVICE_INSERT_SUCCESS                                    = "Serviço cadastrado com sucesso";
 	const SERVICE_NOT_FOUND                                         = "Nenhum serviço foi encontrado";
@@ -692,6 +692,8 @@ class Pt
 		                                                            . "corporação";
 	const SERVICE_NOT_FOUND_FOR_USER_BY_DEPARTMENT                  = "Nenhum serviço associado a seu usuário para o "
 		                                                            . "departamento selecionado";
+	const SERVICE_NOT_FOUND_FOR_USER_BY_TYPE_ASSOC_USER_SERVICE     = "Nenhum serviço associado a o tipo de associação selecionada";
+	const SERVICE_NOT_FOUND_FOR_USER_BY_TYPE_SERVICE                = "Nenhum serviço associado ao tipo de serviço selecionado";
 	const SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR                    = "Nenhum serviço encontrado";
 	const SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS                  = "Serviço encontrado";
 	const SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR               = "Nenhum serviço encontrado";
@@ -805,6 +807,8 @@ class Pt
 	const USER_SAME_AS_ADMIN                                        = "Usuário é o mesmo do administrador!";
 	const USER_SELECT_BY_HASH_CODE_ERROR                            = "Erro ao obter usuário com o código hash";
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                          = "Usuário obtido com sucesso";
+	const USER_SELECT_BY_SERVICE_ID_ERROR                           = "Erro ao tentar obter usuários para este serviço";
+	const USER_SELECT_BY_SERVICE_ID_WARNING                         = "Nenhum usuário encontrado para este serviço";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                           = "Erro ao obter usuário com o endereço de e-mail";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                         = "Usuário obtido com sucesso";
 	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                       = "Erro ao obter usuário com o id único de usuário";

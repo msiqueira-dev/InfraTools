@@ -21,6 +21,7 @@ Methods:
 		public static function SqlCorporationSelectOnUserServiceContextNoLimit();
 		public static function SqlDepartmentSelectOnUserServiceContext();
 		public static function SqlDepartmentSelectOnUserServiceContextNoLimit();
+		public static function SqlInfraToolsUserSelectByServiceId();
 		public static function SqlServiceDeleteById();
 		public static function SqlServiceDeleteByIdOnUserContext();
 		public static function SqlServiceInsert();
@@ -182,7 +183,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                               . "   "
-			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID          . "   "
+			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID  . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                               . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_CORPORATION.".".ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME    . "   "
@@ -203,7 +204,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                               . "   "
-			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID          . "   "
+			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID  . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                               . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_CORPORATION.".".ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME    . "   ";
@@ -225,7 +226,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                 . "   "
-			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID            . "   "
+			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID    . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                                             .  ".".
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION                                           . "=? "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  .  ".".
@@ -250,7 +251,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                 . "   "
-			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID            . "   "
+			   . " = "         . ConfigInfraTools::TABLE_SERVICE    .".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID    . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                                             .  ".".
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION                                           . "=? "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  .  ".".
@@ -258,26 +259,151 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_DEPARTMENT.".".ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME        . "   ";
 	}
 	
+	public static function SqlInfraToolsUserSelectByServiceId()
+	{
+		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
+			              ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                          .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                                             .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                               .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_GENDER                                              .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                                           .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_NAME                                                .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_REGION                                              .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES                                     .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                               .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                                         .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED                                      .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                  .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                           .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                         .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID                                      .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as UserRegisterDate, "                                                                ." " 
+		. ConfigInfraTools::TABLE_TYPE_USER                                                      .".". 
+		  ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                                    .", "
+		. ConfigInfraTools::TABLE_TYPE_USER                                                      .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as TypeUserRegisterDate, "                                                            ." "
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+	      ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE                                       .", "
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+		  ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                                         .", " 
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as CorporationRegisterDate, "                                                         ." "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                  .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                   .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                 .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                   .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                        .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as AssocUserCorporationRegisterDate, "                                                ." "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+	      ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                                   .", "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+		  ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS                                      .", "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+	      ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                                          .", " 
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as DepartmentRegisterDate, "                                                          ." "
+		. "(SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_SERVICE                             ." "
+		. "WHERE "      .  ConfigInfraTools::TABLE_SERVICE                                       .".". 
+			               ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                      ."=? "
+		. ") AS COUNT "                                                                          ." "
+		. "FROM "       . ConfigInfraTools::TABLE_USER                                           ." "
+		. "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_USER                                      ." "
+		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_TYPE                                ." "
+		. "=  "         . ConfigInfraTools::TABLE_TYPE_USER                                      .".". 
+			              ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                    ." "
+		. "LEFT JOIN "  . ConfigInfraTools::TABLE_CORPORATION                                    ." "
+		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=  "         . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
+			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
+		. "LEFT JOIN "  . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         ." "
+		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        ." "
+		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_DEPARTMENT                                     ." "
+		. "ON  "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME   ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                          ." "
+		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
+		. "AND "        . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
+			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             ." "
+		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
+			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL            ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_SERVICE                                        ." "
+		. "ON  "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
+			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID            ." "
+		. "=   "        . ConfigInfraTools::TABLE_SERVICE                                        .".". 
+			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ." "
+		. "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                        .".". 
+			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ."=? "
+		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
+		. "LIMIT ?, ?";
+	}
+	
 	public static function SqlServiceDeleteById()
 	{
 		return "DELETE FROM " . ConfigInfraTools::TABLE_SERVICE ." "
-		       . "WHERE "     . ConfigInfraTools::TABLE_SERVICE .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID . " =? ";
+		       . "WHERE "     . ConfigInfraTools::TABLE_SERVICE .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID . " =? ";
 	}
 	
 	public static function SqlServiceDeleteByIdOnUserContext()
 	{
-		return "DELETE "      . ConfigInfraTools::TABLE_SERVICE                                                . "    "
-			   . "FROM  "     . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                     . "    "
-			   . "INNER JOIN ". ConfigInfraTools::TABLE_SERVICE                                                . "    "
-               . "ON "        . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID   . "    "
-               . "=  "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                     .   ".".
-				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                    . "    "
-			   . "WHERE "     . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                     .   ".".
-				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                    . " =? "
-			   . "AND "       . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                     .   ".".
-				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                    . " =? "
-			   . "AND "       . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                     .   ".".
-				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                          . "<=2";
+		return "DELETE "      . ConfigInfraTools::TABLE_SERVICE                                                        . "    "
+			   . "FROM  "     . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                             . "    "
+			   . "INNER JOIN ". ConfigInfraTools::TABLE_SERVICE                                                        . "    "
+               . "ON "        . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID   . "    "
+               . "=  "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                             .   ".".
+				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                            . "    "
+			   . "WHERE "     . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                             .   ".".
+				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                            . " =? "
+			   . "AND "       . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                             .   ".".
+				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                            . " =? "
+			   . "AND "       . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                             .   ".".
+				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                  . "<=2";
 	}
 	
 	public static function SqlServiceInsert()
@@ -290,7 +416,7 @@ class InfraToolsPersistence extends Persistence
 		     . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT             . ","
 		     . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE  . ","
 			 . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION            . "," 
-		     . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_ID                     . "," 
+		     . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID             . "," 
 			 . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                   . ","
 			 . " "            . ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                   . ")"
 			 . " VALUES (NOW(), ?, ?, ?, ?, ?, ?, DEFAULT, ?, ?)";
@@ -304,7 +430,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -331,7 +457,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -351,7 +477,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "   "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "." .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "   "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "   "
 			   . "WHERE   "    . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "." . 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "   "
@@ -366,7 +492,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -394,7 +520,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -408,7 +534,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ON "         . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE      . "   "
       		   . "= "          . ConfigInfraTools::TABLE_TYPE_SERVICE .".". ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE    . "=? "
-			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME . "   ";
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "   ";
 	}
 	
 	public static function SqlServiceSelectByServiceActiveOnUserContext()
@@ -419,7 +545,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -439,7 +565,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE    . "=?  "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  . 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "=?  " 
@@ -455,7 +581,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -471,7 +597,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE    . "=?  "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  . 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "=?  " 
@@ -486,7 +612,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "   "
@@ -522,7 +648,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "   "
@@ -555,7 +681,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "    "
@@ -582,7 +708,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                  . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID          . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID  . "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION . "    "  
 			   . " LIKE "                                                                                                     . "?   "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "."  . 
@@ -599,7 +725,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "    "
@@ -622,7 +748,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                  . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID          . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID  . "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION . "    "  
 			   . " LIKE "                                                                                                     . "?   "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "."  . 
@@ -638,7 +764,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "   "
@@ -683,7 +809,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "   "
@@ -725,7 +851,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "    "
@@ -760,7 +886,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                  . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID          . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID  . "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION . "=?  "
 			   . "AND   "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT  . "    "  
 			   . " LIKE "                                                                                                     . "?   "
@@ -778,7 +904,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE   . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION             . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                      . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID              . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                    . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                    . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                   . "    "
@@ -809,7 +935,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                   . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                  . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID          . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID  . "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION . "=?  "
 			   . "AND   "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT  .   "  "  
 			   . " LIKE "                                                                                                     . "?   "
@@ -826,7 +952,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -839,7 +965,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_SERVICE                                                       . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE      . "   "
       		   . "= "          . ConfigInfraTools::TABLE_TYPE_SERVICE .".". ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME . "   "
-			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "=? ";
+			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "=? ";
 	}
 	
 	public static function SqlServiceSelectByServiceIdOnUserContext()
@@ -850,7 +976,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -868,13 +994,13 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "   "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "." .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "   "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "." .
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
 		       . "= "          . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "." . 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                      . "   "
-			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "=? "
+			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "=? "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "." . 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "=? ";
 	}
@@ -887,7 +1013,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -916,7 +1042,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -942,7 +1068,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -960,7 +1086,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "    "  
 			   . " LIKE "                                                                                                   . "?   "
                . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  . 
@@ -977,7 +1103,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -993,7 +1119,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
-		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "    "
+		       . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "    "  
 			   . " LIKE "                                                                                                   . "?   "
                . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  . 
@@ -1009,7 +1135,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -1042,7 +1168,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -1072,7 +1198,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -1093,7 +1219,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
 			    . "= "         . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "    "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE . " LIKE "                                      . "?   "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  . 
@@ -1111,7 +1237,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -1129,8 +1255,8 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "    "
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  .
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
-			    . "= "         . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "    "
+			   . "= "          . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                                                 . "=?  "
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "."  . 
@@ -1148,7 +1274,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -1169,7 +1295,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
 			    . "= "         . ConfigInfraTools::TABLE_SERVICE                                                            .  ".". 
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "   "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            .  ".".
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
@@ -1191,7 +1317,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -1210,7 +1336,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
 			    . "= "         . ConfigInfraTools::TABLE_SERVICE                                                            .  ".". 
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "   "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "." .
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
@@ -1230,7 +1356,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -1251,7 +1377,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .   ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
 			    . "= "         . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "    "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "    "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "    "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "."  .
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "    "
@@ -1274,7 +1400,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",   "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",   "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",   "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",   "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",   "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "    "
@@ -1295,7 +1421,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .   ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "    "
 			    . "= "         . ConfigInfraTools::TABLE_SERVICE                                                            .   ".". 
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "    "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "    "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "    "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "."  .
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "    "
@@ -1317,7 +1443,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ", "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ", "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ", "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ", "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ", "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ", "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ", "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "  "
@@ -1377,7 +1503,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
                . "= "          . ConfigInfraTools::TABLE_SERVICE                                                            .  ".".
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "   "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "   "
                . "LEFT JOIN "  . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            .  ".". 
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
@@ -1403,7 +1529,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -1461,7 +1587,7 @@ class InfraToolsPersistence extends Persistence
                . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
                . "= "          . ConfigInfraTools::TABLE_SERVICE                                                            .  ".".
-				                 ConfigInfraTools::TABLE_SERVICE_FIELD_ID                                                   . "   "
+				                 ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                                           . "   "
                . "LEFT JOIN "  . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
                . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            .  ".". 
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
@@ -1486,7 +1612,7 @@ class InfraToolsPersistence extends Persistence
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . ",  "
          	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . ",  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
@@ -1504,16 +1630,16 @@ class InfraToolsPersistence extends Persistence
 	
 	public static function SqlServiceUpdateByServiceId()
 	{
-		return "UPDATE  " . ConfigInfraTools::TABLE_SERVICE                             . "     "
-			   . "SET "   . ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . "=?,  "
-        	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . "=?,  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE. "=?,  "
-        	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT            . "=?,  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE . "=?,  "
-         	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . "=?,  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . "=?,  "
-			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . "=?   "
-			   . "WHERE " . ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . "=?   ";
+		return "UPDATE  " . ConfigInfraTools::TABLE_SERVICE                                     . "     "
+			   . "SET "   . ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                        . "=?,  "
+        	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION                   . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE        . "=?,  "
+        	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT                    . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE         . "=?,  "
+         	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION                   . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                          . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                          . "=?   "
+			   . "WHERE " . ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                    . "=?   ";
 	}
 	
 	public static function SqlServiceUpdateRestrictByServiceId()
@@ -1523,7 +1649,7 @@ class InfraToolsPersistence extends Persistence
          	   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION           . "=?,  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . "=?,  "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . "=?   "
-			   . "WHERE " . ConfigInfraTools::TABLE_SERVICE_FIELD_ID                    . "=?   ";
+			   . "WHERE " . ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID            . "=?   ";
 	}
 	
 	public static function SqlTypeAssocUserServiceSelect()
@@ -1650,7 +1776,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
-      		   . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "   "
+      		   . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            .  ".". 
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
@@ -1681,7 +1807,7 @@ class InfraToolsPersistence extends Persistence
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                . "   "
-      		   . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_ID        . "   "
+      		   . "= "          . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                            .  ".". 
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "

@@ -11,8 +11,8 @@
 	</label>
 </div>
 <!-- FORM CORPORATION REGISTER -->
-<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>" method="post">
+<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" method="post">
     <!-- NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
@@ -27,12 +27,12 @@
                                                    '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -41,7 +41,7 @@
                                                    '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -60,7 +60,7 @@
 				       value="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>"
 				        <?php echo $this->InputValueCorporationActive; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>',
+									   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
 									   'DivContentBodySubmitBigger',
 									   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
 									   '');"
@@ -74,7 +74,7 @@
 								   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                    '');">

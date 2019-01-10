@@ -11,8 +11,8 @@
 	</label>
 </div>
 <!-- FORM CORPORATION SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>" method="post" >
 	<!-- CORPORATION NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
@@ -28,7 +28,7 @@
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
@@ -37,7 +37,7 @@
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
@@ -46,7 +46,7 @@
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
@@ -60,7 +60,7 @@
 								   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 								   '');">

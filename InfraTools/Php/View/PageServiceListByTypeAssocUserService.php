@@ -59,62 +59,8 @@ class PageServiceListByTypeAssocUserService extends PageService
 				else $this->InputValueTypeAssocUserServiceDescription = NULL;
 			}
 			else $this->InputValueTypeAssocUserServiceDescription = NULL;
-
-			//SERVICE LIST BY TYPE ASSOC USER SERVICE BACK SUBMIT
-			if($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_BACK))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				$this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
-															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInstanceInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-			}
-			//SERVICE LIST BY TYPE ASSOC USER SERVICE FORWARD SUBMIT
-			elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_FORWARD))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
-															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInstanceInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-				if($this->InputLimitTwo > $rowCount)
-				{
-					if(!is_numeric($rowCount))
-					{
-						$this->InputLimitOne = $this->InputLimitOne - 25;
-						$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					}
-					else
-					{
-						$this->InputLimitOne = $rowCount - 25;
-						$this->InputLimitTwo = $rowCount;
-					}
-					$this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
-																   $this->InputValueTypeAssocUserServiceDescription,
-																   $this->User->GetEmail(),
-																   $this->InputLimitOne, 
-																   $this->InputLimitTwo, 
-																   $this->ArrayInstanceInfraToolsService,
-																   $rowCount,
-																   $this->InputValueHeaderDebug);
-				}
-			}
-			//SERVICE LIST BY TYPE ASSOC USER SERVICE SELECT SUBMIT
-			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]))
+			//FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT
+			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]))
 			{
 
 				Page::GetCurrentDomain($domain);
@@ -123,22 +69,16 @@ class PageServiceListByTypeAssocUserService extends PageService
 											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
 											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]);
 			}
-			//SERVICE LIST BY TYPE
+			//FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE
 			else
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$return = $this->ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
-															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInstanceInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE . "_x"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE . "_y"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE] = ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE;
+				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE =>
+							  ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE) + $_GET;
+				$this->ExecuteFunction($_GET, 'ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext', 
+											   array($this->InputValueTypeAssocUserServiceDescription,
+													 $this->User->GetEmail(),
+													 &$this->ArrayInstanceInfraToolsService),
+											   $this->InputValueHeaderDebug);
 			}
 		}
 		$this->LoadHtml(TRUE);

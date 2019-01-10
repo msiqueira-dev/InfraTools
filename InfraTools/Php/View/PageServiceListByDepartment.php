@@ -76,61 +76,9 @@ class PageServiceListByDepartment extends PageService
 							$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT];	
 					}
 					
-					//SERVICE LIST BY DEPARTMENT BACK SUBMIT
-					if($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_BACK))
-					{
-						$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-						$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-						if($this->InputLimitOne < 0)
-							$this->InputLimitOne = 0;
-						if($this->InputLimitTwo <= 0)
-							$this->InputLimitTwo = 25;
-						$this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
-																			 $this->InputValueServiceDepartment,
-																			 $this->User->GetEmail(),
-																			 $this->InputLimitOne, 
-																			 $this->InputLimitTwo, 
-																			 $this->ArrayInstanceInfraToolsService,
-																			 $rowCount,
-																			 $this->InputValueHeaderDebug);
-					}
-					//SERVICE LIST BY DEPARTMENT FORWARD SUBMIT
-					elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_FORWARD))
-					{
-						$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-						$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-						$this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
-																			 $this->InputValueServiceDepartment,
-																			 $this->User->GetEmail(),
-																			 $this->InputLimitOne, 
-																			 $this->InputLimitTwo, 
-																			 $this->ArrayInstanceInfraToolsService,
-																			 $rowCount,
-																			 $this->InputValueHeaderDebug);
-						if($this->InputLimitTwo > $rowCount)
-						{
-							if(!is_numeric($rowCount))
-							{
-								$this->InputLimitOne = $this->InputLimitOne - 25;
-								$this->InputLimitTwo = $this->InputLimitTwo - 25;
-							}
-							else
-							{
-								$this->InputLimitOne = $rowCount - 25;
-								$this->InputLimitTwo = $rowCount;
-							}
-							$this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
-																			     $this->InputValueServiceDepartment,
-																				 $this->User->GetEmail(),
-																				 $this->InputLimitOne, 
-																				 $this->InputLimitTwo, 
-																				 $this->ArrayInstanceInfraToolsService,
-																				 $rowCount,
-																				 $this->InputValueHeaderDebug);
-						}
-					}
-					//SERVICE LIST BY DEPARTMENT SELECT SUBMIT
-					elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT]))
+					
+					//FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT
+					if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT]))
 					{
 
 						Page::GetCurrentDomain($domain);
@@ -139,21 +87,17 @@ class PageServiceListByDepartment extends PageService
 													. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
 													. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT]);
 					}
-					//SERVICE LIST BY DEPARTMENT
+					//FORM_SERVICE_LIST_BY_DEPARTMENT
 					else
 					{
-						$this->InputLimitOne = 0;
-						$this->InputLimitTwo = 25;
-						$return = $this->ServiceSelectByServiceDepartmentOnUserContext($this->InputValueServiceCorporation,
-																			           $this->InputValueServiceDepartment,
-																					   $this->User->GetEmail(),
-																					   $this->InputLimitOne, $this->InputLimitTwo, 
-																					   $this->ArrayInstanceInfraToolsService,
-																					   $rowCount,
-																					   $this->InputValueHeaderDebug);
-						$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT . "_x"] = "1";
-						$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT . "_y"] = "1";
-						$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT] = ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT;
+						$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT => ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT) 
+							                                                               + $_GET;
+						$this->ExecuteFunction($_GET, 'ServiceSelectByServiceDepartmentOnUserContext', 
+											   array($this->InputValueServiceCorporation, 
+													 $this->InputValueServiceDepartment,
+													 $this->User->GetEmail(),
+													 &$this->ArrayInstanceInfraToolsService),
+											   $this->InputValueHeaderDebug);
 					}
 				}
 			}

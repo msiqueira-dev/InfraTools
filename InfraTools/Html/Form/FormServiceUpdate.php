@@ -24,7 +24,7 @@
     <!-- SERVICE ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceId; ?></label>
@@ -33,12 +33,12 @@
     <!-- SERVICE_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>
 				</label>
 			</div>
 		</div>
@@ -68,19 +68,19 @@
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>"
 						   value="<?php echo $this->InputValueServiceName; ?>" maxlength="45" />
 	</div>
 	<div class="DivClearFloat"></div>
     <!-- SERVICE_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_DESCRIPTION'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_DESCRIPTION'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?>
 				</label>
 			</div>
 		</div>
@@ -110,7 +110,7 @@
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_DESCRIPTION'); ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?>"
 						   value="<?php echo $this->InputValueServiceDescription; ?>" maxlength="200" />
 	 </div>
 	 <div class="DivClearFloat"></div>
@@ -157,7 +157,7 @@
 			<!-- SERVICE CORPORATION -->
 			<div class="DivContentBodyContainer">
 				<div class="DivContentBodyContainerLabel">
-					<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_CORPORATION').":"; ?></label>
+					<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION').":"; ?></label>
 				</div>
 				<div class="DivContentBodyContainerValue">
 					<div>
@@ -184,7 +184,7 @@
 			<!-- SERVICE DEPARTMENT -->
 			<div class="DivContentBodyContainer">
 				<div class="DivContentBodyContainerLabel">
-					<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_DEPARTMENT').":"; ?></label>
+					<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT').":"; ?></label>
 				</div>
 				<div class="DivContentBodyContainerValue">
 					<div>
@@ -205,7 +205,7 @@
     <!-- SERVICE ACTIVE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ACTIVE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<input type="checkbox" 

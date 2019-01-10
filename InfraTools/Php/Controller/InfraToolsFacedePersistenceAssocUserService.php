@@ -25,7 +25,7 @@ Functions:
 																					  $MySqlConnection);
 			public function AssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
 										           $AssocUserServiceUserType, $Debug, $MySqlConnection);
-			public function AssocUserServiceSelectByAssocUserServiceServiceId($AssocUserServiceId, $Limit1, $Limit2, 
+			public function AssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
 			                                                                  &$ArrayInstanceInfraToolAssocUserService, 
 											                                  &$RowCount, $Debug,
 																			  $MySqlConnection);
@@ -244,7 +244,7 @@ class InfraToolsFacedePersistenceAssocUserService
 		else return Config::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserServiceSelectByAssocUserServiceServiceId($AssocUserServiceId, $Limit1, $Limit2, 
+	public function AssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
 															          &$ArrayInstanceInfraToolAssocUserService, 
 											                          &$RowCount, $Debug, 
 																	  $MySqlConnection)

@@ -46,49 +46,8 @@ class PageServiceList extends PageService
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			//SERVICE LIST BACK SUBMIT
-			if($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BACK))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				$this->ServiceSelectOnUserContext($this->User->GetEmail(),
-												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInstanceInfraToolsService,
-												  $rowCount,
-												  $this->InputValueHeaderDebug);
-			}
-			//SERVICE LIST FORWARD SUBMIT
-			elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_FORWARD))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
-												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInstanceInfraToolsService,
-												  $rowCount,
-												  $this->InputValueHeaderDebug);
-				if($this->InputLimitOne > $rowCount)
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
-													  $this->InputLimitOne, $this->InputLimitTwo, 
-													  $this->ArrayInstanceInfraToolsService,
-													  $rowCount,
-													  $this->InputValueHeaderDebug);
-				}
-				elseif($this->InputLimitTwo > $rowCount)
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-			}
-			//SERVICE LIST SELECT SUBMIT
-			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]))
+			//FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT
+			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]))
 			{
 
 				Page::GetCurrentDomain($domain);
@@ -97,19 +56,14 @@ class PageServiceList extends PageService
 											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
 											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]);
 			}
-			//SERVICE LIST
+			//FORM_SERVICE_LIST
 			else
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$this->ServiceSelectOnUserContext($this->User->GetEmail(), 
-												  $this->InputLimitOne, $this->InputLimitTwo, 
-												  $this->ArrayInstanceInfraToolsService,
-												  $rowCount,
-												  $this->InputValueHeaderDebug);
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST . "_x"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST . "_y"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST] = ConfigInfraTools::FORM_SERVICE_LIST;
+				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_GET;
+				$this->ExecuteFunction($_GET, 'ServiceSelectOnUserContext', 
+				 					   array($this->User->GetEmail(),
+											 &$this->ArrayInstanceInfraToolsService),
+									   $this->InputValueHeaderDebug);
 			}
 		}
 		$this->LoadHtml(TRUE);

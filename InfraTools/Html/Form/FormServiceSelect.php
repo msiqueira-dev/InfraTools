@@ -33,10 +33,10 @@
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>', 
 														   'Service Id')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?>"  
 					   <?php echo $this->InputValueServiceIdRadio; ?> />
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?></i>
 				</div>
 			</label>
 		</div>
@@ -57,10 +57,10 @@
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>', 
 														   'Service Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>"  
 					   <?php echo $this->InputValueServiceNameRadio; ?> />
 				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
@@ -69,7 +69,7 @@
 		<div class="<?php echo $this->ReturnServiceIdRadioClass ?> DivContentBodyContainer"
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_ID; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
@@ -89,14 +89,14 @@
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
 												   '', true);"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_ID'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?>" 
 							   value="<?php echo $this->InputValueServiceId; ?>" maxlength="4" />
 		</div>
 		<!-- FORM_FIELD_SERVICE_NAME -->
 		<div class="<?php echo $this->ReturnServiceNameRadioClass ?> DivContentBodyContainer" 
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_NAME; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
@@ -116,7 +116,7 @@
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
 												   '', true);"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SERVICE_FIELD_NAME'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>" 
 							   value="<?php echo $this->InputValueServiceName; ?>" maxlength="45" />
 		</div>	
 	</div>

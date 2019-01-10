@@ -57,7 +57,7 @@ class PageAdminSystemConfiguration extends PageAdmin
 		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
 		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;

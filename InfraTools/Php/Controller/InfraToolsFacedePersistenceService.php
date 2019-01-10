@@ -19,35 +19,36 @@ Functions:
 			                              $ServiceDepartment, $ServiceDepartmentCanChange,
 										  $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection);
 			public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                           &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
 			                                             &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
 			                                                    $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
+			public function ServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
 			                                                          &$ArrayInstanceInfraToolsService, 
 			                                                          &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
 			                                                                 &$ArrayInstanceInfraToolsService, 
 			                                                                 $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 															  &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 			                                                         $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail, 
-			                                                                $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
-			                                                                &$RowCount, $Debug, $MySqlConnection);
+			public function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2,
+			                                                               $ServiceCorporation, $UserEmail, 
+			                                                               &$ArrayInstanceInfraToolsService, 
+			                                                               &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
 			                                                                       &$ArrayInstanceInfraToolsService, 
 			                                                                       $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2,
+			public function ServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment,
 			                                                 &$ArrayInstanceInfraToolsService, &$RowCount, 
 															 $Debug, $MySqlConnection);
 	        public function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation $ServiceDepartment,
 			                                                        &$ArrayInstanceInfraToolsService, $Debug);
-			public function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-			                                                              $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, $UserEmail, 
+			                                                              &$ArrayInstanceInfraToolsService, 
 			                                                              $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
 			                                                                     &$ArrayInstanceInfraToolsService, 
@@ -55,41 +56,41 @@ Functions:
 			public function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection);	
 			public function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
 			                                                      &$TypeAssocUserServiceId, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
 			                                           &$RowCount, $Debug, $MySqlConnection);	
 			public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
 			                                                  $Debug, $MySqlConnection);	
-			public function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-			                                                        $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail, 
+			                                                        &$ArrayInstanceInfraToolsService, 
 			                                                        &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
 			                                                               &$ArrayInstanceInfraToolsService, 
 			                                                               $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByServiceType($Limit1, $Limit2, $ServiceType, &$ArrayInstanceInfraToolsService, 
 			                                           &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, 
 			                                                  $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail, $Limit1, $Limit2, 
+			public function ServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail,
 			                                                        &$ArrayInstanceInfraToolsService, &$RowCount, 
 																	$Debug, $MySqlConnection);
 			public function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
 			                                                              &$ArrayInstanceInfraToolsService, 
 																		  $Debug, $MySqlConnection);
-			public function ServiceSelectByTypeAssocUserServiceDescription($TypeAssocUserServiceDescription, $Limit1, $Limit2, 
+			public function ServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription, 
 			                                                               &$ArrayInstanceInfraToolsService,  &$RowCount, 
 																		   $Debug, $MySqlConnection);
 			public function ServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, 
 			                                                                      &$ArrayInstanceInfraToolsService, 
 																                  $Debug, $MySqlConnection);
-			public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($TypeAssocUserServiceDescription, 
-			                                                                            $UserEmail, $Limit1, $Limit2, 
+			public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2,
+			                                                                            $TypeAssocUserServiceDescription, $UserEmail, 
 			                                                                            &$ArrayInstanceInfraToolsService, &$RowCount, 
 																			            $Debug, $MySqlConnection);
 			public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit($TypeAssocUserServiceDescription, 
 			                                                                                   $UserEmail,
 			                                                                                   &$ArrayInstanceInfraToolsService, 
 																		                       $Debug, $MySqlConnection);
-			public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+			public function ServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                    &$RowCount, $Debug, $MySqlConnection);
 			public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                           $Debug, $MySqlConnection);
@@ -308,7 +309,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -340,7 +341,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	public function ServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
@@ -373,7 +374,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -405,7 +406,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	public function ServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
 												 &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -438,7 +439,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -500,7 +501,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -531,7 +532,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
+	public function ServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
 															  &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -564,7 +565,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -627,7 +628,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -658,7 +659,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	public function ServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 													  &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -696,7 +697,7 @@ class InfraToolsFacedePersistenceService
 															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -764,7 +765,7 @@ class InfraToolsFacedePersistenceService
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -795,7 +796,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail,$Limit1, $Limit2,
+	public function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2, $ServiceCorporation, $UserEmail,
 																   &$ArrayInstanceInfraToolsService, &$RowCount, 
 																   $Debug, $MySqlConnection)
 	{
@@ -834,7 +835,7 @@ class InfraToolsFacedePersistenceService
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -903,7 +904,7 @@ class InfraToolsFacedePersistenceService
 																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -934,8 +935,8 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, 
-													 $Limit1, $Limit2, &$ArrayInstanceInfraToolsService,
+	public function ServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, 
+													 &$ArrayInstanceInfraToolsService,
 													 &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -978,7 +979,7 @@ class InfraToolsFacedePersistenceService
 																$InstanceDepartment, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1051,7 +1052,7 @@ class InfraToolsFacedePersistenceService
 																$InstanceDepartment, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1082,8 +1083,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, 
-																  $UserEmail, $Limit1, $Limit2,
+	public function ServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, $UserEmail,
 																  &$ArrayInstanceInfraToolsService, &$RowCount, $Debug,
 																  $MySqlConnection)
 	{
@@ -1127,7 +1127,7 @@ class InfraToolsFacedePersistenceService
 							                                    $InstanceDepartment,  
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1200,7 +1200,7 @@ class InfraToolsFacedePersistenceService
 																$InstanceDepartment, 
 							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																$InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1343,7 +1343,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	public function ServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
 											   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -1377,7 +1377,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1441,7 +1441,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1472,7 +1472,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail,$Limit1, $Limit2,
+	public function ServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail,
 															&$ArrayInstanceInfraToolsService, &$RowCount, 
 															$Debug, $MySqlConnection)
 	{
@@ -1507,7 +1507,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1572,7 +1572,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1603,7 +1603,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceType($ServiceNType, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	public function ServiceSelectByServiceType($Limit1, $Limit2, $ServiceNType, &$ArrayInstanceInfraToolsService, 
 											   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -1637,7 +1637,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1701,7 +1701,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1732,7 +1732,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail,$Limit1, $Limit2,
+	public function ServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail,
 															&$ArrayInstanceInfraToolsService, &$RowCount, 
 															$Debug, $MySqlConnection)
 	{
@@ -1767,7 +1767,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1832,7 +1832,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1863,7 +1863,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByTypeAssocUserServiceDescription($TypeAssocUserServiceDescription, $Limit1, $Limit2, 
+	public function ServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription,
 			                                                       &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -1897,7 +1897,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1961,7 +1961,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -1992,7 +1992,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($TypeAssocUserServiceDescription, $UserEmail, $Limit1, $Limit2, 
+	public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2, $TypeAssocUserServiceDescription, $UserEmail, 
 			                                                                    &$ArrayInstanceInfraToolsService, &$RowCount, 
 																				$Debug, $MySqlConnection)
 	{
@@ -2027,7 +2027,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -2092,7 +2092,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -2123,7 +2123,7 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
 	}
 	
-	public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsService, 
+	public function ServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 										&$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -2156,7 +2156,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -2219,7 +2219,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
@@ -2275,7 +2275,7 @@ class InfraToolsFacedePersistenceService
 																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
 							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
 								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
+																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID], 
 													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
 																 $InstanceInfraToolsTypeService);
 					array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);

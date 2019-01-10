@@ -80,6 +80,15 @@ class En
 	const FILL_REQUIRED_FIELDS                                      = "Please fill the necessary fields";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Active";
 	const FORM_FIELD_EDIT                                           = "Edit";
+	const FORM_FIELD_SERVICE_ACTIVE                                 = "Active";
+	const FORM_FIELD_SERVICE_CORPORATION                            = "Corporation";
+	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporation can change?";
+	const FORM_FIELD_SERVICE_DEPARTMENT                             = "Department";
+	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "Department can change?";
+	const FORM_FIELD_SERVICE_DESCRIPTION                            = "Description";
+	const FORM_FIELD_SERVICE_ID                                     = "Id";
+	const FORM_FIELD_SERVICE_NAME                                   = "Name";
+	const FORM_FIELD_SERVICE_TYPE                                   = "Type";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE             = "Active";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION        = "Description";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "Name";
@@ -674,23 +683,14 @@ class En
 	const SERVICE_DELETE_ERROR                                      = "Error deleting service";
 	const SERVICE_DELETE_ERROR_FOREIGN_KEY                          = "Error deleting service, delete associations first";
 	const SERVICE_DELETE_SUCCESS                                    = "Service deleted successfully";
-	const SERVICE_FIELD_ACTIVE                                      = "Active";
-	const SERVICE_FIELD_CORPORATION                                 = "Corporation";
-	const SERVICE_FIELD_CORPORATION_CAN_CHANGE                      = "Corporation can change?";
-	const SERVICE_FIELD_DEPARTMENT                                  = "Department";
-	const SERVICE_FIELD_DEPARTMENT_CAN_CHANGE                       = "Department can change?";
-	const SERVICE_FIELD_DESCRIPTION                                 = "Description";
-	const SERVICE_FIELD_ID                                          = "Id";
-	const SERVICE_FIELD_NAME                                        = "Name";
-	const SERVICE_FIELD_TYPE                                        = "Type";
 	const SERVICE_INSERT_ERROR                                      = "Error inserting service";
 	const SERVICE_INSERT_SUCCESS                                    = "Service inserted successfully";
 	const SERVICE_NOT_FOUND                                         = "No services were found";
-	const SERVICE_NOT_FOUND_FOR_USER                                = "There is no service associated to your user";
-	const SERVICE_NOT_FOUND_FOR_USER_BY_CORPORATION                 = "There is no service associated to your user for your "
-		                                                            . "corporation";
-	const SERVICE_NOT_FOUND_FOR_USER_BY_DEPARTMENT                  = "There is no service associated to your user for the "
-		                                                            . "selected department";
+	const SERVICE_NOT_FOUND_FOR_USER                                = "There are no service associated to your user";
+	const SERVICE_NOT_FOUND_FOR_USER_BY_CORPORATION                 = "There are no service associated to your user for your corporation";
+	const SERVICE_NOT_FOUND_FOR_USER_BY_DEPARTMENT                  = "There is no service associated to your user for the selected department";
+	const SERVICE_NOT_FOUND_FOR_USER_BY_TYPE_ASSOC_USER_SERVICE     = "There are no service associated to the type of association selected";
+	const SERVICE_NOT_FOUND_FOR_USER_BY_TYPE_SERVICE                = "There are no service associated to the type service selected";
 	const SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR                    = "No service was found";
 	const SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS                  = "Service was found";
 	const SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR               = "No service was found";
@@ -803,6 +803,8 @@ class En
 	const USER_SAME_AS_ADMIN                                        = "User is the same as the Admin!";
 	const USER_SELECT_BY_HASH_CODE_ERROR                            = "Error trying to obtain user with the given hash code";
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                          = "User obtained sucessfully";
+	const USER_SELECT_BY_SERVICE_ID_ERROR                           = "Error trying to obtain users associated with this service";
+	const USER_SELECT_BY_SERVICE_ID_WARNING                         = "No user is associated with this service";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                           = "Error trying to obtain user with the given e-mail";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                         = "User obtained sucessfully";
 	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                       = "Error trying to obtain user with the given unique id";

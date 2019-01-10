@@ -49,7 +49,7 @@ class PageAdminDepartment extends PageAdmin
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT;
 		$this->InputValueDepartmentNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
@@ -208,7 +208,7 @@ class PageAdminDepartment extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
 														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'UserSelectByDepartment', 
+				if($this->ExecuteFunction($_POST, 'UserSelectByDepartmentName', 
 									  array($this->InstanceDepartment->GetDepartmentCorporationName(),
 						                    $this->InstanceDepartment->GetDepartmentName(),
 											&$this->ArrayInstanceDepartmentUsers),

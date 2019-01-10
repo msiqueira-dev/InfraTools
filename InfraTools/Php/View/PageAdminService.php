@@ -39,6 +39,7 @@ if (!class_exists("InfraToolsTypeService"))
 class PageAdminService extends PageAdmin
 {
 	public $ArrayInstanceInfraToolsService = NULL;
+	public $ArrayInstanceInfraToolsUser    = NULL;
 	public $InstanceInfraToolsService      = NULL;
 	
 	/* __create */
@@ -62,7 +63,7 @@ class PageAdminService extends PageAdmin
 		$this->ReturnServiceIdRadioClass   = "NotHidden";
 		$this->ReturnServiceNameRadioClass = "Hidden";
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
@@ -152,6 +153,19 @@ class PageAdminService extends PageAdmin
 										  array($this->InstanceInfraToolsService->GetServiceId()),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_SELECT;
+			}
+		}
+		//FORM_SERVICE_VIEW_LIST_USERS_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $this->InstanceInfraToolsService) 
+			                                   == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByServiceId', 
+										  array($this->InstanceInfraToolsService->GetServiceId(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW_LIST_USERS;
 			}
 		}
 		//FORM_SERVICE_VIEW_UPDATE_SUBMIT

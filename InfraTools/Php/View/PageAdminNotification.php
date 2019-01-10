@@ -57,7 +57,7 @@ class PageAdminNotification extends PageAdmin
 		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
 		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
 		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
@@ -92,7 +92,7 @@ class PageAdminNotification extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
 		//FORM_NOTIFICATION_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIIFICATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if(isset($_POST[ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION]))
 			{

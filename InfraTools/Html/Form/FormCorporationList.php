@@ -11,8 +11,6 @@
 	</label>
 </div>
 <!-- FORM CORPORATION LIST -->
-<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_LIST; ?>"
-      id="<?php echo ConfigInfraTools::FORM_CORPORATION_LIST; ?>" method="post" >
       <div class="DivTableGenericHeader">
 		<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -47,6 +45,7 @@
 <?php
 if(is_array($this->ArrayInstanceInfraToolsCorporation))
 {
+	echo "<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
