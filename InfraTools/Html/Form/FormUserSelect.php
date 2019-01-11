@@ -12,8 +12,8 @@
 	</label>
 </div>
 <!-- FORM USER SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_USER_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_USER_SELECT; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>" method="post" >
 	<!-- SELECT_EMAIL -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
@@ -29,7 +29,7 @@
 											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											 '');"
@@ -38,7 +38,7 @@
 											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											 '');"
@@ -47,7 +47,7 @@
 											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT; ?>',
+											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											 '');"
@@ -61,7 +61,7 @@
 								   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_USER_SELECT; ?>',
+								   '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 								   '');">

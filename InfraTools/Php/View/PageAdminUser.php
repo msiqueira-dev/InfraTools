@@ -194,7 +194,10 @@ class PageAdminUser extends PageAdmin
 				if($this->UserDeleteByUserEmail($this->InstanceInfraToolsUserAdmin, 
 												$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_USER, "InfraToolsUserLoadData", 
+										          $this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
 		//USER VIEW RESET PASSWORD SUBMIT
@@ -336,8 +339,8 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//USER VIEW TWO STEP VERIFICATION ACTIVATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE]))
+		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
@@ -347,8 +350,8 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_DEACTIVATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE]))
+		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
@@ -372,7 +375,6 @@ class PageAdminUser extends PageAdmin
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_CANCEL]) ||
 			   isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_CANCEL]))
 		{
-			echo "TESTE";
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
 			{

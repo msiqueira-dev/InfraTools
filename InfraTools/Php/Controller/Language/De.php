@@ -739,15 +739,15 @@ class De
 	const TICKET_NOT_FOUND                                          = "";
 	const TICKET_SELECT_USERS_ERROR                                 = "";
 	const TICKET_SELECT_USERS_WARNING                               = "";
-	const TWO_STEP_VERIFICATION                                     = "";
+	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "";
 	const TYPE                                                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "";
 	const TYPE_SERVICE_NAME                                         = "";
-	const TYPE_STATUS_TICKET_DESCRIPTION                            = "";
-	const TYPE_STATUS_TICKET_ID                                     = "";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "";
 	const TYPE_TICKET_NOT_FOUND                                     = "";
 	const TYPE_TICKET_SELECT_USERS_ERROR                            = "";
@@ -761,6 +761,7 @@ class De
 	const UPDATE_WARNING_SAME_VALUE                                 = "";
 	const USER_ACTIVE                                               = "";
 	const USER_CONFIRMED                                            = "";
+	const USER_DELETE_FAILED_RESTRICTION                            = "";
 	const USER_INACTIVE                                             = "";
 	const USER_NOT_CONFIRMED                                        = "";
 	const USER_NOT_FOUND                                            = "";

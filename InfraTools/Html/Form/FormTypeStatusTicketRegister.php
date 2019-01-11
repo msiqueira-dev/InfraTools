@@ -11,13 +11,13 @@
 		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE STATUS TICKET REGISTER -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER; ?>" method="post">
+<!-- FORM_TYPE_STATUS_TICKET_REGISTER_FORM -->
+<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_FORM; ?>" method="post">
     <!-- NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>" 
@@ -29,12 +29,12 @@
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
                                                  '');"
@@ -44,11 +44,11 @@
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER; ?>',
+                                                 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_DESCRIPTION'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueTypeStatusTicketDescription; ?>" maxlength="45" />
         </div>
     </div>
@@ -59,7 +59,7 @@
 								   '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT; ?>',
                                    '');">

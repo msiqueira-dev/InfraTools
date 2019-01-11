@@ -172,10 +172,6 @@ class ConfigInfraTools extends Config
 	const EXCEPTION_TYPE_SERVICE_NAME                                   = "ExceptionTypeServiceName";
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                 = "ExceptionTypeAssocUserServiceDescription";
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_ID                          = "ExceptionTypeAssocUserServiceId";
-	const FORM_COUNTRY                                                  = "FormCountry";
-	const FORM_COUNTRY_LIST                                             = "FormCountryList";
-	const FORM_COUNTRY_LIST_BACK                                        = "FormCountryListBack";
-	const FORM_COUNTRY_LIST_FORWARD                                     = "FormCountryListForward";
 	const FORM_FIELD_ID                                                 = "FormInputId";
 	const FORM_FIELD_SERVICE_ACTIVE                                     = "FormFieldServiceActive";
 	const FORM_FIELD_SERVICE_CORPORATION                                = "FormFieldServiceCorporation";
@@ -191,13 +187,7 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_NAME_RADIO_DIV                             = "FormFieldServiceNameRadioDiv";
 	const FORM_FIELD_SERVICE_RADIO                                      = "FormFieldServiceRadio";
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
-	const FORM_FIELD_TEAM_RADIO                                         = "FormFieldTeamRadio";
-	const FORM_FIELD_TEAM_RADIO_DIV_ID                                  = "FormFieldTeamRadioDivId";
-	const FORM_FIELD_TEAM_RADIO_DIV_NAME                                = "FormFieldTeamRadioDivName";
-	const FORM_FIELD_TEAM_RADIO_ID                                      = "FormFieldTeamRadioId";
-	const FORM_FIELD_TEAM_RADIO_NAME                                    = "FormFieldTeamRadioName";
 	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
-	const FORM_FIELD_USER_CORPORATION_SELECT                            = "FormFieldUserCorporationSelect";
 	const FORM_GOOGLE_MAPS_LATITUDE                                     = "RegisterGoogleMapsLatitude";
 	const FORM_GOOGLE_MAPS_LONGITUDE                                    = "RegisterGoogleMapsLongitude";
 	const FORM_HEADER_LANGUAGE                                          = "FormHeaderLanguage";
@@ -247,14 +237,10 @@ class ConfigInfraTools extends Config
 	const FORM_SERVICE_LIST_BY_NAME_SELECT_BY_NAME_AND_ID_SUBMIT        = "FormServiceListByNameSelectByNameAndIdSubmit";
 	const FORM_SERVICE_LIST_BY_NAME_SELECT_DEPARTMENT                   = "FormServiceListByNameSelectDepartment";
 	const FORM_SERVICE_LIST_BY_NAME_SELECT_DEPARTMENT_SUBMIT            = "FormServiceListByNameSelectDepartmentSubmit";
-	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE                   
-		= "FormServiceListByTypeAssocUserService";
-	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_BACK                         
-		  = "FormServiceListByTypeAssocUserServiceBack";
-	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_FORWARD                      
-		  = "FormServiceListByTypeAssocUserServiceForward";
-	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID                 
-		  = "FormServiceListByTypeAssocUserServiceSelectById";
+	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE                  = "FormServiceListByTypeAssocUserService";
+	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_BACK             = "FormServiceListByTypeAssocUserServiceBack";
+	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_FORWARD          = "FormServiceListByTypeAssocUserServiceForward";
+	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID     = "FormServiceListByTypeAssocUserServiceSelectById";
 	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT          
 		  = "FormServiceListByTypeAssocUserServiceSelectByIdSubmit";
 	const FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_NAME_AND_ID        
@@ -365,23 +351,6 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_STATUS_MONITORING_VIEW                              = "FormTypeStatusMonitoringView";
 	const FORM_TYPE_STATUS_MONITORING_VIEW_DELETE_SUBMIT                = "FormTypeStatusMonitoringViewDeleteSubmit";
 	const FORM_TYPE_STATUS_MONITORING_VIEW_UPDATE_SUBMIT                = "FormTypeStatusMonitoringViewUpdateSubmit";
-	const FORM_TYPE_STATUS_TICKET                                       = "FormTypeStatusTicket";
-	const FORM_TYPE_STATUS_TICKET_LIST                                  = "FormTypeStatusTicketList";
-	const FORM_TYPE_STATUS_TICKET_LIST_BACK                             = "FormTypeStatusTicketListBack";
-	const FORM_TYPE_STATUS_TICKET_LIST_FORWARD                          = "FormTypeStatusTicketListForward";
-	const FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT                    = "FormTypeStatusTicketListSelectSubmit";
-	const FORM_TYPE_STATUS_TICKET_REGISTER                              = "FormTypeStatusTicketReturnRegister";
-	const FORM_TYPE_STATUS_TICKET_REGISTER_CANCEL                       = "FormTypeStatusTicketReturnCancel";
-	const FORM_TYPE_STATUS_TICKET_REGISTER_SUBMIT                       = "FormTypeStatusTicketReturnSubmit";
-	const FORM_TYPE_STATUS_TICKET_RETURN_NOT_FOUND                      = "FormTypeStatusTicketReturnNotFound";
-	const FORM_TYPE_STATUS_TICKET_SELECT                                = "FormTypeStatusTicketSelect";
-	const FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT                         = "FormTypeStatusTicketSelectSubmit";
-	const FORM_TYPE_STATUS_TICKET_UPDATE                                = "FormTypeStatusTicketUpdate";	
-	const FORM_TYPE_STATUS_TICKET_UPDATE_CANCEL                         = "FormTypeStatusTicketUpdateCancel";
-	const FORM_TYPE_STATUS_TICKET_UPDATE_SUBMIT                         = "FormTypeStatusTicketUpdateSubmit";
-	const FORM_TYPE_STATUS_TICKET_VIEW                                  = "FormTypeStatusTicketView";
-	const FORM_TYPE_STATUS_TICKET_VIEW_DELETE_SUBMIT                    = "FormTypeStatusTicketViewDeleteSubmit";
-	const FORM_TYPE_STATUS_TICKET_VIEW_UPDATE_SUBMIT                    = "FormTypeStatusTicketViewUpdateSubmit";
 	const FORM_USER                                                     = "FormUser";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION                       = "FormUserChangeAssocUserCorporation";
 	const FORM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL                = "FormUserChangeAssocUserCorporationCancel";
@@ -393,29 +362,6 @@ class ConfigInfraTools extends Config
 	const FORM_USER_CHANGE_USER_TYPE_CANCEL                             = "FormUserChangeUserTypeCancel";
 	const FORM_USER_CHANGE_USER_TYPE_SELECT                             = "FormUserChangeUserTypeSelect";
 	const FORM_USER_CHANGE_USER_TYPE_SUBMIT                             = "FormUserChangeUserTypeSubmit";
-	const FORM_USER_LIST                                                = "FormUserList";
-	const FORM_USER_LIST_BACK                                           = "FormUserListBack";
-	const FORM_USER_LIST_FORWARD                                        = "FormUserListForward";
-	const FORM_USER_REGISTER                                            = "FormUserRegister";
-	const FORM_USER_REGISTER_SUBMIT                                     = "FormUserRegisterSubmit";
-	const FORM_USER_RETURN_NOT_FOUND                                    = "FormUserReturnNotFound";
-	const FORM_USER_SELECT                                              = "FormUserSelect";
-	const FORM_USER_SELECT_SUBMIT                                       = "FormUserSelectSubmit";
-	const FORM_USER_UPDATE                                              = "FormUserUpdate";
-	const FORM_USER_UPDATE_CANCEL                                       = "FormUserUpdateCancel";
-	const FORM_USER_UPDATE_SUBMIT                                       = "FormUserUpdateSubmit";
-	const FORM_USER_VIEW                                                = "FormUserView";
-	const FORM_USER_VIEW_ACTIVATE_SUBMIT                                = "FormUserViewActivateSubmit";
-	const FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT           = "FormUserViewChangeAssocUserCorporationSubmit";
-	const FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT                      = "FormUserViewChangeCorporationSubmit";
-	const FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT                         = "FormUserViewChangePasswordSubmit";
-	const FORM_USER_VIEW_CHANGE_USER_TYPE_SUBMIT                        = "FormUserViewChangeUserType";
-	const FORM_USER_VIEW_DEACTIVATE_SUBMIT                              = "FormUserViewDeactivate";
-	const FORM_USER_VIEW_DELETE_SUBMIT                                  = "FormUserViewDeleteSubmit";
-	const FORM_USER_VIEW_RESET_PASSWORD_SUBMIT                          = "FormUserViewResetPasswordSubmit";
-	const FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE                 = "FormUserViewTwoStepVerificationActivate";
-	const FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE               = "FormUserViewTwoStepVerificationDeactivate";
-	const FORM_USER_VIEW_UPDATE_SUBMIT                                  = "FormUserViewUpdateSubmit";
 	const MYSQL_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FAILED 
 		  = "RetMySqlAssocUserServiceCheckUserTypeAdministratorFailed";
 	const MYSQL_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FETCH_FAILED 

@@ -180,10 +180,10 @@ Methods:
 		public        function        LoadPageDependenciesDebug();
 		public        function        LoadPageDependenciesDevice();
 		public        function        RedirectPage($Page);
-		public        function        ShowDivReturnError($Constant);
+		public        function        ShowDivReturnError($Constant, $ConstanteIsText = FALSE);
 		public        function        ShowDivReturnEmpty();
-		public        function        ShowDivReturnSuccess($Constant);
-		public        function        ShowDivReturnWarning($Constant);
+		public        function        ShowDivReturnSuccess($Constant, $ConstanteIsText = FALSE);
+		public        function        ShowDivReturnWarning($Constant, $ConstanteIsText = FALSE);
 		public        function        StartPageLoadTime();
 		public        function        StopPageLoadTime();
 		public static function        AlertMessage($Message);
@@ -1339,11 +1339,19 @@ class Page
 	
 	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = NULL)
 	{
+		if($Debug == Config::CHECKBOX_CHECKED)
+		{
+			echo "<b>Execute Function</b>:<br>";
+		}
 		foreach($PostForm as $postElementKey=>$postElementValue)
 		{
 			$postElementKey = strtoupper($postElementKey);
 			if((strpos($postElementKey, 'LIST') !== FALSE) && strpos($postElementKey, 'LIMIT') == FALSE)
 			{
+				if($Debug == Config::CHECKBOX_CHECKED)
+				{
+					echo "&emsp;<b>Post Element Key</b>: " . $postElementKey . "<br>";
+				}
 				$this->InputLimitOne = 0;
 				$this->InputLimitTwo = 25;
 				if(strpos($postElementKey, 'BACK') !== FALSE)
@@ -1365,6 +1373,11 @@ class Page
 				    $ArrayParameterTemp[count($ArrayParameterTemp)] = &$rowCount;
 					array_push($ArrayParameterTemp, $Debug);
 					array_push($ArrayParameterTemp, $StoreSession);
+					if($Debug == Config::CHECKBOX_CHECKED)
+					{
+						echo "&emsp;<b>Array Parameter List Forward</b>: ";
+						print_r($ArrayParameterTemp);
+					}
 					$return = call_user_func_array(array($this, $Function), $ArrayParameterTemp);
 					if($this->InputLimitOne > $rowCount)
 					{
@@ -1384,6 +1397,11 @@ class Page
 						$ArrayParameter[count($ArrayParameter)] = &$rowCount;
 						array_push($ArrayParameter, $Debug);
 						array_push($ArrayParameter, $StoreSession);
+						if($Debug == Config::CHECKBOX_CHECKED)
+						{
+							echo "&emsp;<b>Array Parameter List Forward (2)</b>: ";
+							print_r($ArrayParameter);
+						}
 						$return = call_user_func_array(array($this, $Function), $ArrayParameter);
 						if($return == Config::SUCCESS)
 							$this->ShowDivReturnEmpty();
@@ -1396,7 +1414,7 @@ class Page
 				array_push($ArrayParameter, $StoreSession);
 				if($Debug == Config::CHECKBOX_CHECKED)
 				{
-					echo "<b>Array Parameter</b>: ";
+					echo "&emsp;<b>Array Parameter List</b>: ";
 					print_r($ArrayParameter);
 				}
 				return call_user_func_array(array($this, $Function), $ArrayParameter);
@@ -3299,6 +3317,7 @@ class Page
 			$InstanceUser->SetTwoStepVerification($TwoStepVerification);
 			$this->InputValueTwoStepVerification = $InstanceUser->GetTwoStepVerification();
 			$this->ShowDivReturnSuccess("USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS");
+			return Config::SUCCESS;
 		}
 		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
 		{
@@ -3352,6 +3371,11 @@ class Page
 			elseif($return == Config::MYSQL_USER_DELETE_FAILED_NOT_FOUND)
 			{
 				$this->ShowDivReturnError("USER_NOT_FOUND");
+				return Config::ERROR;
+			}
+			elseif($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			{
+				$this->ShowDivReturnWarning("USER_NOT_FOUND");
 				return Config::ERROR;
 			}
 		}
@@ -4385,14 +4409,18 @@ class Page
 			$InstanceUser->SetUserActive($UserActiveNew);
 			$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
 			if($UserActiveNew)
-				$constant =	str_replace('[0]',  
+			{
+				$constant = str_replace('[0]', 
 								strtolower($this->InstanceLanguageText->GetConstant('ACTIVATED', $this->Language)), 
 								$this->InstanceLanguageText->GetConstant('USER_ACTIVATE_SUCCESS', $this->Language));
-			else 
+			}
+			else
+			{
 				$constant = str_replace('[0]', 
 								strtolower($this->InstanceLanguageText->GetConstant('DEACTIVATED', $this->Language)), 
 								$this->InstanceLanguageText->GetConstant('USER_ACTIVATE_SUCCESS', $this->Language));
-			$this->ShowDivReturnSuccess($constant);
+			}
+			$this->ShowDivReturnSuccess($constant, TRUE);
 			$this->InputFocus = Config::DIV_RETURN;
 			return Config::SUCCESS;
 		}
@@ -5330,9 +5358,10 @@ class Page
 					$this->InputValueHeaderDebug = Config::CHECKBOX_CHECKED;
 					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
 					echo "<div class='DivPageDebug'>";
-					echo "<div class='DivPageDebugContent'><b>GET</b>: "; print_r($_GET);  echo "</div>";
-					echo "<div class='DivPageDebugContent'><b>POST</b>: "; print_r($_POST); echo "</div></div>";
-					echo "<div class='DivPageDebugContent'><b>FILES</b>: "; print_r($_FILES); echo "</div></div>";
+					echo "<div class='DivPageDebugContent'><b>Form</b>: </div>";
+					echo "<div class='DivPageDebugContent'>&emsp;<b>GET</b>: "; print_r($_GET);  echo "</div>";
+					echo "<div class='DivPageDebugContent'>&emsp;<b>POST</b>: "; print_r($_POST); echo "</div></div>";
+					echo "<div class='DivPageDebugContent'>&emsp;<b>FILES</b>: "; print_r($_FILES); echo "</div></div>";
 					echo "<div class='DivClearFloat'></div>";
 				}
 				$this->Session->SetSessionValue(Config::SESS_DEBUG, $this->InputValueHeaderDebug);
@@ -5394,14 +5423,18 @@ class Page
 		else header("Location: $Page");
 	}
 	
-	public function ShowDivReturnError($Constant)
+	public function ShowDivReturnError($Constant, $ConstanteIsText = FALSE)
 	{
 		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
 		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		if(isset($Constant))
 		{
 			if(($Constant) != NULL)
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+			{
+				if($ConstanteIsText)
+					$this->ReturnText = $Constant;
+				else $this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+			}
 		}
 	}
 	
@@ -5412,25 +5445,33 @@ class Page
 		$this->ReturnText  = "";
 	}
 	
-	public function ShowDivReturnSuccess($Constant)
+	public function ShowDivReturnSuccess($Constant, $ConstanteIsText = FALSE)
 	{
 		$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
 		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 		if(isset($Constant))
 		{
 			if(($Constant) != NULL)
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+			{
+				if($ConstanteIsText)
+					$this->ReturnText = $Constant;
+				else $this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+			}
 		}
 	}
 	
-	public function ShowDivReturnWarning($Constant)
+	public function ShowDivReturnWarning($Constant, $ConstanteIsText = FALSE)
 	{
 		$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
 		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
 		if(isset($Constant))
 		{
 			if(($Constant) != NULL)
-				$this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);	
+			{
+				if($ConstanteIsText)
+					$this->ReturnText = $Constant;
+				else $this->ReturnText  = $this->InstanceLanguageText->GetConstant($Constant, $this->Language);
+			}
 		}
 	}
 	

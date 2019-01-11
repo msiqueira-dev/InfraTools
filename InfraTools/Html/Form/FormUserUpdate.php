@@ -22,8 +22,8 @@
 	</label>
 </div>
 <!-- WEB SITE BODY PAGE ACCOUNT UPDATE -->
-<form name="<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>" method="post" >
     <!-- FORM_FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
@@ -44,12 +44,12 @@
                                                '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
                            onkeyup="ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
@@ -58,7 +58,7 @@
                                                '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
@@ -95,12 +95,12 @@
                                                '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
                            onkeyup="ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
@@ -109,7 +109,7 @@
                                                '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
@@ -135,7 +135,7 @@
                 class="SelectBirthDateDay <?php echo $this->ReturnBirthDateDayClass; ?>"
                 onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');">
@@ -165,7 +165,7 @@
                 class="SelectBirthDateMonth <?php echo $this->ReturnBirthDateMonthClass; ?>"
                 onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');">
@@ -195,7 +195,7 @@
                 class="SelectBirthDateYear <?php echo $this->ReturnBirthDateYearClass; ?>"
                 onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');">
@@ -231,12 +231,12 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -246,7 +246,7 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -262,12 +262,12 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -276,7 +276,7 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -300,12 +300,12 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -315,7 +315,7 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -332,12 +332,12 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -347,7 +347,7 @@
 												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
@@ -368,7 +368,7 @@
                 class="<?php echo $this->ReturnGenderClass; ?>"
                 onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_GENDER; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
@@ -437,12 +437,12 @@
                                                       '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                       '', true);
                                        ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                      '');"
                                        onkeyup="ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                      '');"
@@ -452,7 +452,7 @@
                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                     '', true);
                                        ValidateMultiplyFields(
-                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                    'DivContentBodySubmitBigger',
                                                    '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                    '');" disabled="disabled" 
@@ -469,17 +469,17 @@
                            class="<?php echo $this->ReturnRegionClass; ?>"
                            title="<?php echo $this->InstanceLanguageText->GetText('REGION'); ?>"
                            onblur="ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                      '');"
                                    onkeyup="ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                      '');"
                                    onchange="ValidateMultiplyFields(
-                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                    'DivContentBodySubmitBigger',
                                                    '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                    '');" disabled="disabled"
@@ -566,7 +566,7 @@
 				       value="<?php echo ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES; ?>"
 				        <?php echo $this->InputValueSessionExpires; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 									   'DivContentBodySubmitBigger',
 									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 									   '');"
@@ -580,7 +580,7 @@
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('TWO_STEP_VERIFICATION').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_TWO_STEP_VERIFICATION').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
@@ -588,9 +588,9 @@
 					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
 					          <?php echo $this->InputValueTwoStepVerification; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 									   '');"
 						/>
 			</div>
@@ -610,9 +610,9 @@
 					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_ACTIVE; ?>" 
 					          <?php echo $this->InputValueUserActive; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 									   '');"
 						/>
 			</div>
@@ -631,9 +631,9 @@
 					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_CONFIRMED; ?>" 
 					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_CONFIRMED; ?>" <?php echo $this->InputValueUserConfirmed; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_REGISTER_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 									   '');"
 						/>
 			</div>
@@ -657,7 +657,7 @@
                                    '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                    '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE; ?>',
+                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                    'DivContentBodySubmitBigger',
                                    '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                    '');">

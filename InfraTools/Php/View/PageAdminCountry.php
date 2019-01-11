@@ -51,7 +51,7 @@ class PageAdminCountry extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		if($_POST == NULL || !isset($_POST[ConfigInfraTools::FORM_COUNTRY_LIST]))
+		if(empty($_POST))
 			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
 		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayInstanceCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)

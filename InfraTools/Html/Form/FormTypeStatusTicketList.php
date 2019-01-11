@@ -1,6 +1,4 @@
-<!-- FORM TYPE STATUS TICKET LIST -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST; ?>" method="post" >
+<!-- FORM_TYPE_STATUS_TICKET_LIST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -35,15 +33,17 @@
 <?php
 if(is_array($this->ArrayInstanceTypeStatusTicket))
 {
+	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO . "'/>";
-	echo "<table class='TableTypeStatusTicket'>";
+	echo "<table class='TableGeneric'>";
 	echo "<tr>";
-	echo "<th class='TableTypeStatusTicketThId'>" .
-		 "<input  type='image'
-				  class='TableTicketInputRight'
+	echo "<th class='TableGenericThArrow'>" .
+		 "<div class='TableGenericInputLeft'>
+		  <input  type='image'
+				  class='TableGenericThArrowImage'
 				  name='"  . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_BACK . "' 
 				  id='"    . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_BACK . "'
 				  value='" . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_BACK . "'
@@ -54,14 +54,14 @@ if(is_array($this->ArrayInstanceTypeStatusTicket))
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28.png'\" />" .
-		 "<div class='TableTypeStatusTicketThRight'>" . $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_ID') . "</div></th>";
-	echo "<th  class='TableTypeStatusTicketThDescription'>" . 
-		                                       $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_DESCRIPTION') . "</th>";
-	echo "<th  class='TableTypeStatusTicketThRegisterDate'>
-	     <div  class='TableTypeStatusTicketThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-		 "<input  type='image'
-				  class='TableTypeStatusTicketInputLeft'
+						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+		 "<div class='TableGenericThLeft'>"    . $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_STATUS_TICKET_ID') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"     . $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION') . "</th>";
+	echo "<th  class= 'TableGenericThArrow'> 
+	      <div  class='TableGenericThRight'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
+		 "<div class='TableGenericInputRight'>
+		          <input  type='image'
+				  class='TableGenericThArrowImage'
 				  name='"  . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_FORWARD . "' 
 				  id='"    . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_FORWARD . "'
 				  value='" . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_FORWARD . "'
@@ -72,20 +72,27 @@ if(is_array($this->ArrayInstanceTypeStatusTicket))
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28.png'\" />";
+						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
+	echo "</form>";
 	foreach($this->ArrayInstanceTypeStatusTicket as $key=>$typeStatusTicket)
 	{
 		echo "<tr>";
-		echo "<td class='TableTypeStatusTicketThId'>
-		      <input type='submit' name='" . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT . "' 
-		                           id='"   . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_LIST_SELECT_SUBMIT . "' 
-							       value='" . $typeStatusTicket->GetTypeStatusTicketDescription() . "' 
-								   title='" . $typeStatusTicket->GetTypeStatusTicketDescription() . "' />
+		echo "<td class='TableGenericTdLink'>
+				<form  name='" . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT . "' />
+					  <input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION . "' 
+										   id='"   . ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION . "' 
+										   value='" . $typeStatusTicket->GetTypeStatusTicketDescription() . "' 
+										   title='" . $typeStatusTicket->GetTypeStatusTicketDescription() . "' />
+				</form>
 		      </td>";
-		echo "<td class='TableTypeStatusTicketThDescription'>"   . $typeStatusTicket->GetTypeStatusTicketDescription()  . "</td>";
-		echo "<td class= 'TableTypeStatusTicketThRegisterDate'>" . $typeStatusTicket->GetRegisterDate() . "</td>";
+		echo "<td class='TableGenericTdLink'>"  . $typeStatusTicket->GetTypeStatusTicketDescription()  . "</td>";
+		echo "<td class= 'TableGenericTdLink'>" . $typeStatusTicket->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}
 	echo "</table>";

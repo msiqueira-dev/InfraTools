@@ -103,14 +103,14 @@ class PageAccount extends PageInfraTools
 				$this->PageBody = Config::PAGE_ACCOUNT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
 		}
-		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_ACTIVATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE]))
+		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT]))
 		{
 			$this->UserChangeTwoStepVerification(NULL, TRUE, $this->InputValueHeaderDebug);
 			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 		}
-		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_DEACTIVATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE]))
+		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT]))
 		{
 			$this->UserChangeTwoStepVerification(NULL, FALSE, $this->InputValueHeaderDebug);
 			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;

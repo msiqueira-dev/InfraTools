@@ -13,9 +13,7 @@
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM USER LIST -->
-<form name="<?php echo ConfigInfraTools::FORM_USER_LIST; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_USER_LIST; ?>" method="post" >
+<!-- FORM_USER_LIST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -50,6 +48,7 @@
 <?php
 if(is_array($this->ArrayInstanceInfraToolsUser))
 {
+	echo "<form  name='" . ConfigInfraTools::FORM_USER_LIST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -93,6 +92,7 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
+	echo "</form>";
 	foreach($this->ArrayInstanceInfraToolsUser as $key=>$user)
 	{
 		echo "<tr>";
@@ -143,4 +143,3 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 	echo "</table>";
 }
 ?>
-</form>

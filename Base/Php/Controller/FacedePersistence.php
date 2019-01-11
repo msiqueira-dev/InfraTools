@@ -1398,7 +1398,8 @@ class FacedePersistence
 		if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-			$return = $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription,
+			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByTypeStatusTicketDescription(
+				                                                                                              $TypeStatusTicketDescription,
 																					                          $TypeStatusTicket, $Debug,
 																											  $MySqlConnection);
 			if($CloseConnectaion)

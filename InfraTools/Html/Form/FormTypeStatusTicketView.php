@@ -13,10 +13,10 @@
 <!-- FORM TYPE STATUS TICKET VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW; ?>" method="post" >
-    <!-- TYPE_STATUS_TICKET_DESCRIPTION -->
+    <!-- FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_STATUS_TICKET_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeStatusTicketDescription; ?></label>
@@ -30,17 +30,39 @@
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegisterDate; ?></label>
         </div>
-    </div>
-    <!-- SUBMIT -->
-    <div class="DivContentBodyContainer">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_UPDATE_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_UPDATE_SUBMIT; ?>"
-                                 class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_DELETE_SUBMIT; ?>" 
-                   id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_DELETE_SUBMIT; ?>"
-                   class="DivContentBodySubmitBigger"
-                   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
-                   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
-    </div>
+	</div>
 </form>
+<!-- SUBMIT -->
+<div class="DivContentBodyContainer">
+	<!-- FORM_TYPE_STATUS_TICKET_VIEW_UPDATE -->
+	<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_UPDATE; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_UPDATE; ?>" 
+		  class="DivFormHorizontalButtons"
+		  method="post" >
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_UPDATE_SUBMIT; ?>" 
+							 id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_UPDATE_SUBMIT; ?>"
+							 class="DivContentBodySubmitBigger"
+							 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
+	</form>
+	<!-- FORM_TYPE_STATUS_TICKET_VIEW_DELETE -->
+	<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_DELETE; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_DELETE; ?>" 
+		  class="DivFormHorizontalButtons"
+		  method="post" >
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_DELETE_SUBMIT; ?>" 
+				   id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_DELETE_SUBMIT; ?>"
+				   class="DivContentBodySubmitBigger"
+				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
+			   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
+	</form>
+	<!-- FORM_TYPE_STATUS_TICKET_VIEW_LIST_USERS -->
+	<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_LIST_USERS; ?>" 
+		  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_LIST_USERS; ?>" 
+		  class="DivFormHorizontalButtons"
+		  method="post" >
+		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_LIST_USERS_SUBMIT; ?>" 
+				   id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW_LIST_USERS_SUBMIT; ?>"
+				   class="DivContentBodySubmitBigger"
+				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
+	</form>
+</div>

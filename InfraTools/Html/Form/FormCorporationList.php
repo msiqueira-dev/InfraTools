@@ -1,3 +1,4 @@
+<!-- FORM CORPORATION LIST -->
 <div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
 	<div>
 		<div>
@@ -10,38 +11,37 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM CORPORATION LIST -->
-      <div class="DivTableGenericHeader">
-		<div class="DivTableGenericHeaderRowCount">
-		<?php 
-		     if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-			 {
-				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-					  echo "<label class='InputValueLimitTitle'>" . 
-					           $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
-					       "</label>" .
-						   "<label class='InputValueLimitValue'>" . 
-					           $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
-					                                   . " " . $this->InputValueLimit2 . 
-					       "</label>";
-			 }
-		?>
-		</div>
-		<div class="DivTableGenericHeaderRowCount">
-		<?php
-			 if(isset($this->InputValueRowCount)) 
-			  {
-				  if($this->InputValueRowCount != "") 
-					  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-					           $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-					       "</label>" .
-						   "<label class='DivTableGenericRowCountLabelValue'>" . 
-					           $this->InputValueRowCount . 
-					       "</label>";
-			  } 
-		?>
-		</div>
+<div class="DivTableGenericHeader">
+	<div class="DivTableGenericHeaderRowCount">
+	<?php 
+		 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
+		 {
+			 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+				  echo "<label class='InputValueLimitTitle'>" . 
+						   $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
+					   "</label>" .
+					   "<label class='InputValueLimitValue'>" . 
+						   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
+												   . " " . $this->InputValueLimit2 . 
+					   "</label>";
+		 }
+	?>
 	</div>
+	<div class="DivTableGenericHeaderRowCount">
+	<?php
+		 if(isset($this->InputValueRowCount)) 
+		  {
+			  if($this->InputValueRowCount != "") 
+				  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
+						   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
+					   "</label>" .
+					   "<label class='DivTableGenericRowCountLabelValue'>" . 
+						   $this->InputValueRowCount . 
+					   "</label>";
+		  } 
+	?>
+	</div>
+</div>
 <?php
 if(is_array($this->ArrayInstanceInfraToolsCorporation))
 {
@@ -113,4 +113,3 @@ if(is_array($this->ArrayInstanceInfraToolsCorporation))
 	echo "</table>";
 }
 ?>
-</form>

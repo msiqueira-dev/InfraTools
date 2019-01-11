@@ -195,6 +195,8 @@ class FacedePersistenceUser
 				}
 				else
 				{
+					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
 					return Config::MYSQL_USER_DELETE_FAILED;

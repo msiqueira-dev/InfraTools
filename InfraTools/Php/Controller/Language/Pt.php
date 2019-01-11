@@ -775,7 +775,7 @@ class Pt
 	const TICKET_NOT_FOUND                                          = "Solicitação não encontrada";
 	const TICKET_SELECT_USERS_ERROR                                 = "Erro ao tentar obter os usuários de uma solicitação";
 	const TICKET_SELECT_USERS_WARNING                               = "Nenhum usuário está associado a esta solicitação";
-	const TWO_STEP_VERIFICATION                                     = "Verificação duas etapas";
+	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Verificação duas etapas";
 	const TYPE                                                      = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Erro ao obter tipos de associação";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "Tipos de associação obtidos com sucesso";
@@ -783,8 +783,8 @@ class Pt
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "Tipo de associação entre usuário e equipe não "
 		                                                            . "encontrada";
 	const TYPE_SERVICE_NAME                                         = "Nome de tipo de serviço";
-	const TYPE_STATUS_TICKET_DESCRIPTION                            = "Descrição";
-	const TYPE_STATUS_TICKET_ID                                     = "Id";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Descrição";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Tipo de estado de solicitação não encontrado";
 	const TYPE_TICKET_NOT_FOUND                                     = "Tipo de solicitação não encontrado";
 	const TYPE_TICKET_SELECT_USERS_ERROR                            = "Erro ao tentar obter os usuários de um tipo de solicitação";
@@ -799,6 +799,8 @@ class Pt
 	const UPDATE_WARNING_SAME_VALUE                                 = "Dados com os mesmo valores dos antigos";
 	const USER_ACTIVE                                               = "Conta ativa";
 	const USER_CONFIRMED                                            = "Conta confirmada";
+	const USER_DELETE_FAILED_RESTRICTION                            = "Existem associações a este usuário, por favor exclua as " 
+	                                                                . "associações antes";
 	const USER_INACTIVE                                             = "Esta conta foi desativada por um administrador";
 	const USER_NOT_CONFIRMED                                        = "Sua conta não foi confirmada, por favor confirme através do "
 	                                                                . "e-mail  que lhe foi enviado. Se você perdeu o e-mail enviado ou "

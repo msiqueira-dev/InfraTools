@@ -772,15 +772,15 @@ class En
 	const TICKET_NOT_FOUND                                          = "Ticket not found";
 	const TICKET_SELECT_USERS_ERROR                                 = "Error while trying to obtain users associated with this ticket";
 	const TICKET_SELECT_USERS_WARNING                               = "No user is associated with this ticket";
-	const TWO_STEP_VERIFICATION                                     = "Two step verification";
+	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Two step verification";
 	const TYPE                                                      = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Error obtaining types of association";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "Types of association obtained successfully";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "Description";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "Type of association between a user and a team not found";
 	const TYPE_SERVICE_NAME                                         = "Type Service Name";
-	const TYPE_STATUS_TICKET_DESCRIPTION                            = "Description";
-	const TYPE_STATUS_TICKET_ID                                     = "Id";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Description";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Type status ticket not found";
 	const TYPE_TICKET_NOT_FOUND                                     = "Type ticket not found";
 	const TYPE_TICKET_SELECT_USERS_ERROR                            = "Error while trying to obtain users associated with this ticket type";
@@ -796,6 +796,8 @@ class En
 	const USER_ACTIVE                                               = "Account active";
 	const USER_CONFIRMED                                            = "Account confirmed";
 	const USER_INACTIVE                                             = "This account has been deactivated by an administrator";
+	const USER_DELETE_FAILED_RESTRICTION                            = "There are associations to this user, please delete them " 
+	                                                                . "first";
 	const USER_NOT_CONFIRMED                                        = "Your account has not been confirmed, please confirm it through the "
 	                                                                . "e-mail that was sent to you. If you lost the e-email or didn't "
 								  							        . "receive it, another one can be sent";

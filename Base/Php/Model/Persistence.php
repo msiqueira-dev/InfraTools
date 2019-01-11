@@ -776,7 +776,7 @@ class Persistence
 	public static function SqlTypeStatusTicketSelectByTypeStatusTicketDescription()
 	{
 		return "SELECT " . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_FIELD_REGISTER_DATE                  . ", "
-		                 . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . ", " 
+		                 . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "  " 
 		     . "FROM  "  . Config::TABLE_TYPE_STATUS_TICKET . " " 
 	         . "WHERE "  . Config::TABLE_TYPE_STATUS_TICKET . "." . Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION . "=UPPER(?)";
 	}
