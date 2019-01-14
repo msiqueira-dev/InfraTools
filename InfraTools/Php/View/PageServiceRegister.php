@@ -59,20 +59,20 @@ class PageServiceRegister extends PageInfraTools
 				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE]))
 					$this->InputValueServiceActive = TRUE;
 				else $this->InputValueServiceActive = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION]))
+				if(isset($_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME]))
 				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION];
+					if($_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
+						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME];
 					else $this->InputValueServiceCorporation = NULL; 
 				}
 				else $this->InputValueServiceCorporation = NULL; 
 				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE]))
 					$this->InputValueServiceCorporationCanChange = TRUE;
 				else $this->InputValueServiceCorporationCanChange = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT]))
+				if(isset($_GET[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME]))
 				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-						$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT];
+					if($_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
+						$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME];
 					else $this->InputValueServiceDepartment = NULL; 
 				}
 				else $this->InputValueServiceDepartment = NULL; 

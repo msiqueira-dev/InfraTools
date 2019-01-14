@@ -67,7 +67,7 @@ class PageAdminUser extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 		}
-		//USER LIST SELECT CORPORATION SUBMIT
+		//FORM_CORPORATION_LIST
 		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_LIST]))
 		{
 			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
@@ -213,7 +213,7 @@ class PageAdminUser extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		//USER VIEW CHANGE CORPORATION
+		//FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -227,7 +227,7 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//USER VIEW CHANGE CORPORATION SUBMIT
+		//FORM_USER_CHANGE_CORPORATION_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -252,8 +252,8 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//USER VIEW CHANGE ASSOC USER CORPORATION 
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_SUBMIT]))
+		//FORM_USER_CHANGE_CORPORATION
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
@@ -269,7 +269,7 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//USER VIEW CHANGE ASSOC USER CORPORATION SUBMIT
+		//FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -300,7 +300,7 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//USER VIEW CHANGE USER TYPE
+		//FORM_USER_VIEW_CHANGE_USER_TYPE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_USER_TYPE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -314,7 +314,7 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//USER VIEW CHANGE USER TYPE SUBMIT
+		//FORM_USER_CHANGE_USER_TYPE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_USER_TYPE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -361,7 +361,7 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		//USER VIEW UPDATE
+		//FORM_USER_VIEW_UPDATE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -382,7 +382,7 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		//USER VIEW UPDATE SUBMIT
+		//FORM_USER_UPDATE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);

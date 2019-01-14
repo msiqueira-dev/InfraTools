@@ -49,7 +49,7 @@
 	</div>
 <!-- FORM_DEPARTMENT_VIEW_LIST_USERS_FORM -->
 <?php
-if(is_array($this->ArrayInstanceDepartmentUsers))
+if(is_array($this->ArrayInstanceInfraToolsUser))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_DEPARTMENT_VIEW_LIST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -76,9 +76,9 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
-	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('DEPARTMENT') . "</div>" .
+	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</div>" .
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
@@ -96,7 +96,7 @@ if(is_array($this->ArrayInstanceDepartmentUsers))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceDepartmentUsers as $key=>$user)
+	foreach($this->ArrayInstanceInfraToolsUser as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

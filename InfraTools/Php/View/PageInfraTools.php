@@ -132,12 +132,16 @@ Methods:
 			protected function TypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew, &$InstanceInfraToolsTypeService,
 			                                                      $Debug);
 			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser,
+		                                                             &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName,
+			                                                        &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
-			protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
-		                                                                 &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
 		                                                                   &$ArrayInstanceUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
+		                                                                 &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByUserEmail($UserEmail, &InstanceInfraToolsUser, $Debug);
 			protected function InfraToolsUserLoadData($InstanceInfraToolsUser);
 			public    function GetCurrentPage();
@@ -307,7 +311,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceCorporation = $UserCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//CORPORATION
+		//FORM_FIELD_CORPORATION_NAME
 		$arrayElements[0]             = ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -347,7 +351,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceCorporation = $UserCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//CORPORATION
+		//FORM_FIELD_CORPORATION_NAME
 		$arrayElements[0]             = ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -505,7 +509,7 @@ abstract class PageInfraTools extends Page
 		
 		//SERVICE_CORPORATION
 		$arrayConstants = array();
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -533,7 +537,7 @@ abstract class PageInfraTools extends Page
 		
 		//SERVICE_DEPARTMENT
 		$arrayConstants = array();
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[3]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[3] = ""; 
 		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
@@ -867,7 +871,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -909,7 +913,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -950,7 +954,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -996,7 +1000,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -1038,7 +1042,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -1051,7 +1055,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
@@ -1097,7 +1101,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -1110,7 +1114,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
@@ -1152,7 +1156,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -1165,7 +1169,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
@@ -1213,7 +1217,7 @@ abstract class PageInfraTools extends Page
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -1226,7 +1230,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
@@ -1971,7 +1975,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_CORPORATION
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
@@ -1985,7 +1989,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_CORPORATION_CAN_CHANGE
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnCorporationCanChangeClass;
 		$arrayElementsDefaultValue[2] = ""; 
 		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
@@ -1999,7 +2003,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DEPARTMENT
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[3]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[3] = ""; 
 		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
@@ -2013,7 +2017,7 @@ abstract class PageInfraTools extends Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DEPARTMENT_CAN_CHANGE
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[4]        = &$this->ReturnDepartmentCanChangeClass;
 		$arrayElementsDefaultValue[4] = ""; 
 		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
@@ -2434,6 +2438,113 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::ERROR;
 	}
 	
+	protected function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, 
+															 &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_CORPORATION_NAME
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByCorporationName($Limit1, $Limit2, 
+																								  $this->InputValueCorporationName, 
+																				                  $ArrayInstanceInfraToolsUser, $RowCount, 
+																							      $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_CORPORATION_NAME_WARNING");
+				return ConfigInfraTools::WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_CORPORATION_NAME_ERROR");
+		return ConfigInfraTools::ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+															&$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$this->InputValueDepartmentName = $DepartmentName;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_CORPORATION_NAME
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_DEPARTMENT_NAME
+		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 80; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, 
+																								 $this->InputValueCorporationName,
+																								 $this->InputValueDepartmentName, 
+																				                 $ArrayInstanceInfraToolsUser, $RowCount, 
+																							     $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_DEPARTMENT_NAME_WARNING");
+				return ConfigInfraTools::WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_DEPARTMENT_NAME_ERROR");
+		return ConfigInfraTools::ERROR;
+	}
+	
 	protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
@@ -2460,7 +2571,8 @@ abstract class PageInfraTools extends Page
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByServiceId($Limit1, $Limit2, 
+																							$this->InputValueServiceId, 
 																				            $ArrayInstanceInfraToolsUser, $RowCount, 
 																							$Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -2513,11 +2625,11 @@ abstract class PageInfraTools extends Page
 			}
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
-				$this->ShowDivReturnWarning("TICKET_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TICKET_ID_WARNING");
 				return ConfigInfraTools::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TICKET_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TICKET_ID_ERROR");
 		return ConfigInfraTools::ERROR;
 	}
 	
@@ -2560,11 +2672,11 @@ abstract class PageInfraTools extends Page
 			}
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
-				$this->ShowDivReturnWarning("TYPE_TICKET_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING");
 				return ConfigInfraTools::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TYPE_TICKET_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR");
 		return ConfigInfraTools::ERROR;	
 	}
 	
@@ -2596,7 +2708,8 @@ abstract class PageInfraTools extends Page
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeUserDescription( $Limit1, $Limit2, $TypeUserDescription,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeUserDescription( $Limit1, $Limit2,
+																									  $this->InputValueTypeUserDescription,
 															                                          $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -2605,11 +2718,11 @@ abstract class PageInfraTools extends Page
 			}
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
-				$this->ShowDivReturnWarning("TYPE_USER_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING");
 				return ConfigInfraTools::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR");
 		return ConfigInfraTools::ERROR;
 	}
 	
@@ -2632,7 +2745,7 @@ abstract class PageInfraTools extends Page
 				}
 				else
 				{
-					$this->ShowDivReturnError("USER_TEAM_SELECT_ERROR");
+					$this->ShowDivReturnError("USER_SELECT_TEAM_BY_USER_EMAIL_ERROR");
 					return ConfigInfraTools::ERROR;
 				}
 			}

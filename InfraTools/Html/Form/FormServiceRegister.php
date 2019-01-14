@@ -160,15 +160,15 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- CORPORATION -->
+	<!-- FORM_FIELD_CORPORATION_NAME -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
 				class="SelectCorporation"
 				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
@@ -182,7 +182,7 @@
 											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
 											   '', true);
-                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION; ?>');
+                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>');
                                                document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
                                                .disabled = false;
 				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
@@ -212,7 +212,7 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- SERVICE CORPORATION CAN CHANGE -->
+	<!-- FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE').":"; ?></label>
@@ -226,15 +226,15 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- SERVICE DEPARTMENT -->
+	<!-- FORM_FIELD_DEPARTMENT_NAME -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT; ?>"
+				name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
+				id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
 				class="SelectDepartment"
 				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
@@ -248,7 +248,7 @@
 											   'DivContentBodySubmitBigger',
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
 											   '', true);
-                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT; ?>');
+                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>');
                                                document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
                                                .disabled = false;
 				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
@@ -278,7 +278,7 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- SERVICE DEPARTMENT CAN CHANGE -->
+	<!-- FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE').":"; ?></label>

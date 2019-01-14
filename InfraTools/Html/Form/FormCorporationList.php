@@ -1,4 +1,4 @@
-<!-- FORM CORPORATION LIST -->
+<!-- FORM_CORPORATION_LIST_FORM -->
 <div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
 	<div>
 		<div>

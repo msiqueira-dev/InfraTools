@@ -120,10 +120,10 @@
 	</div>
 </div>
 <div class="DivContentBodySided">
-	<!-- CORPORATION -->
+	<!-- FORM_FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('CORPORATION').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -168,10 +168,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- DEPARTMENT -->
+	<!-- FORM_FIELD_DEPARTMENT_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>

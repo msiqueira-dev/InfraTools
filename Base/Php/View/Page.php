@@ -675,7 +675,7 @@ class Page
 		elseif($CorporationActive != FALSE)
 			$CorporationActive = TRUE;
 
-		//CORPORATION_NAME
+		//FORM_FIELD_CORPORATION_NAME
 		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -903,7 +903,7 @@ class Page
 		$arrayElementsInput = array(); $arrayElementsMinValue = array(); $arrayElementsMaxValue = array();
 		$arrayElementsNullable = array(); $arrayElementsText = array(); $arrayConstants = array(); $matrixConstants = array();
 		
-		//VALIDATE DEPARTMENT_INITIALS
+		//FORM_FIELD_DEPARTMENT_INITIALS
 		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_INITIALS;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -917,7 +917,7 @@ class Page
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//VALIDATE DEPARTMENT_NAME
+		//FORM_FIELD_DEPARTMENT_NAME
 		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[1] = "";
@@ -930,7 +930,7 @@ class Page
 		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-        //VALIDATE CORPORATION_NAME
+        //FORM_FIELD_CORPORATION_NAME
 		$arrayElements[2]             = Config::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[2] = ""; 
@@ -1199,7 +1199,7 @@ class Page
 		$this->InputFocus = Config::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//DEPARTMENT_INITIALS
+		//FORM_FIELD_DEPARTMENT_INITIALS
 		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_INITIALS;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1213,7 +1213,7 @@ class Page
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
-		//DEPARTMENT_NAME
+		//FORM_FIELD_DEPARTMENT_NAME
 		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
@@ -1267,7 +1267,7 @@ class Page
 		$this->InputFocus = Config::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//DEPARTMENT_NAME
+		//FORM_FIELD_DEPARTMENT_NAME
 		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1281,7 +1281,7 @@ class Page
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
-		//CORPORATION_NAME
+		//FORM_FIELD_CORPORATION_NAME
 		$arrayElements[1]             = Config::FORM_FIELD_CORPORATION_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
@@ -4033,11 +4033,11 @@ class Page
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("TEAM_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TEAM_ID_WARNING");
 				return Config::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TEAM_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TEAM_ID_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -4076,11 +4076,11 @@ class Page
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("TICKET_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("TICKET_SELECT_BY_TICKET_ID_WARNING");
 				return Config::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TICKET_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("TICKET_SELECT_BY_TICKET_ID_ERROR");
 		return Config::ERROR;	
 	}
 	
@@ -4121,11 +4121,11 @@ class Page
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("TYPE_ASSOC_USER_TEAM_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING");
 				return Config::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR");
 		return Config::ERROR;
 	}
 	
@@ -4166,11 +4166,11 @@ class Page
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("TYPE_TICKET_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING");
 				return Config::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TYPE_TICKET_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR");
 		return Config::ERROR;	
 	}
 	
@@ -4211,11 +4211,11 @@ class Page
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("TYPE_USER_SELECT_USERS_WARNING");
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING");
 				return Config::WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TYPE_USER_SELECT_USERS_ERROR");
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR");
 		return Config::ERROR;
 	}
 	

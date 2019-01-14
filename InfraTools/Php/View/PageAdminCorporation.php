@@ -26,9 +26,9 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminCorporation extends PageAdmin
 {
-	protected $ArrayInstanceInfraToolsCorporationUsers = NULL;
-	protected $InstanceCorporation                     = NULL;
-	protected $InstanceTypeUser                        = NULL;
+	protected $ArrayInstanceInfraToolsUser = NULL;
+	protected $InstanceCorporation         = NULL;
+	protected $InstanceTypeUser            = NULL;
 
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -64,7 +64,7 @@ class PageAdminCorporation extends PageAdmin
 		//FORM_CORPORATION_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_REGISTER) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER;
-		//CORPORATION REGISTER CANCEL
+		//FORM_CORPORATION_REGISTER_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
 		//FORM_CORPORATION_REGISTER_SUBMIT
@@ -136,9 +136,9 @@ class PageAdminCorporation extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'UserSelectByCorporationName', 
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByCorporationName', 
 										  array($this->InstanceCorporation->GetCorporationName(), 
-										        &$this->ArrayInstanceInfraToolsCorporationUsers),
+										        &$this->ArrayInstanceInfraToolsUser),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
 			}

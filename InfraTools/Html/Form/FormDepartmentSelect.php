@@ -12,7 +12,7 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM DEPARTMENT SELECT -->
+<!-- FORM_DEPARTMENT_SELECT_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>" method="post" >
 	<!-- RADIO BUTTON -->
@@ -31,10 +31,10 @@
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
 														   'Department Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?>"  
 					   <?php echo $this->InputValueDepartmentNameRadio; ?>/>
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
@@ -61,10 +61,10 @@
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- DEPARTMENT NAME -->
+		<!-- FORM_FIELD_DEPARTMENT_NAME -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
@@ -98,14 +98,14 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?>" 
 							   value="<?php echo $this->InputValueDepartmentName; ?>" maxlength="80" />
 		</div>
-		<!-- CORPORATION NAME -->
+		<!-- FORM_FIELD_CORPORATION_NAME -->
 		<div class="Hidden DivContentBodyContainer" 
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label><?php echo $this->InstanceLanguageText->GetText('CORPORATION').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<select 

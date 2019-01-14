@@ -178,9 +178,9 @@ class MySqlManager
 			try
 			{
 				
-				$MySqlConnection = mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
+				$MySqlConnection = @mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
 												   $this->MySqlDataBase, $this->MySqlPort);
-				if (!is_null($MySqlConnection)) 
+				if (is_object($MySqlConnection)) 
 				{
 					$MySqlConnection->set_charset(Config::MYSQL_CHATSET_UTF8);
 					$MySqlConnection->options(MYSQLI_OPT_CONNECT_TIMEOUT, ProjectConfig::$MySqlOptionTimeOut);

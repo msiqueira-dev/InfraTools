@@ -50,8 +50,6 @@ class De
 	const BIRTH_DATE_MONTH                                          = "";
 	const BIRTH_DATE_YEAR                                           = "";
 	const CONFIRMED                                                 = "";
-	const CORPORATION                                               = "";
-	const CORPORATION_NAME                                          = "";
 	const CORPORATION_NOT_FOUND                                     = "";
 	const CORPORATION_UPDATE_ERROR                                  = "";
 	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                    = "";
@@ -66,10 +64,7 @@ class De
 	const DATABASE_TABLE_QUANTITY                                   = "";
 	const DEACTIVATED                                               = "";
 	const DEFAULT_VALUE                                             = "";
-	const DEPARTMENT                                                = "";
-	const DEPARTMENT_INITIALS                                       = "";
 	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                    = "";
-	const DEPARTMENT_NAME                                           = "";
 	const DEPARTMENT_NAME_AND_CORPORATION_NAME                      = "";
 	const DEPARTMENT_NOT_FOUND                                      = "";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS         = "";
@@ -78,16 +73,17 @@ class De
 	const EMAIL                                                     = "";
 	const FILL_REQUIRED_FIELDS                                      = "";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "";
+	const FORM_FIELD_CORPORATION_NAME                               = "";
+	const FORM_FIELD_DEPARTMENT_INITIALS                            = "";
+	const FORM_FIELD_DEPARTMENT_NAME                                = "";
 	const FORM_FIELD_EDIT                                           = "";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "";
-	const FORM_FIELD_SERVICE_CORPORATION                            = "";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "";
-	const FORM_FIELD_SERVICE_DEPARTMENT                             = "";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "";
 	const FORM_FIELD_SERVICE_DESCRIPTION                            = "";
 	const FORM_FIELD_SERVICE_ID                                     = "";
 	const FORM_FIELD_SERVICE_NAME                                   = "";
-	const FORM_FIELD_SERVICE_FIELD_TYPE                             = "";
+	const FORM_FIELD_SERVICE_TYPE                                   = "";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE             = "";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION        = "";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME               = "";
@@ -737,8 +733,6 @@ class De
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
 	const TICKET_NOT_FOUND                                          = "";
-	const TICKET_SELECT_USERS_ERROR                                 = "";
-	const TICKET_SELECT_USERS_WARNING                               = "";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "";
 	const TYPE                                                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "";
@@ -750,11 +744,8 @@ class De
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "";
 	const TYPE_TICKET_NOT_FOUND                                     = "";
-	const TYPE_TICKET_SELECT_USERS_ERROR                            = "";
-	const TYPE_TICKET_SELECT_USERS_WARNING                          = "";
 	const TYPE_USER_ID                                              = "";
 	const TYPE_USER_NOT_FOUND                                       = "";
-	const TYPE_USER_SELECT_USERS_WARNING                            = "";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "";
 	const UPDATE_SUCCESS                                            = "";
@@ -766,10 +757,24 @@ class De
 	const USER_NOT_CONFIRMED                                        = "";
 	const USER_NOT_FOUND                                            = "";
 	const USER_SAME_AS_ADMIN                                        = "";
+	const USER_SELECT_BY_CORPORATION_NAME_ERROR                     = "";
+	const USER_SELECT_BY_CORPORATION_NAME_WARNING                   = "";
+	const USER_SELECT_BY_DEPARTMENT_NAME_ERROR                      = "";
+	const USER_SELECT_BY_DEPARTMENT_NAME_WARNING                    = "";
 	const USER_SELECT_BY_HASH_CODE_ERROR                            = "";
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                          = "";
 	const USER_SELECT_BY_SERVICE_ID_ERROR                           = "";
 	const USER_SELECT_BY_SERVICE_ID_WARNING                         = "";
+	const USER_SELECT_BY_TEAM_ID_ERROR                              = "";
+	const USER_SELECT_BY_TEAM_ID_WARNING                            = "";
+	const USER_SELECT_BY_TICKET_ID_ERROR                            = "";
+	const USER_SELECT_BY_TICKET_ID_WARNING                          = "";
+	const USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR     = "";
+	const USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING   = "";
+	const USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR              = "";
+	const USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING            = "";
+	const USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR                = "";
+	const USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING              = "";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                           = "";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                         = "";
 	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                       = "";
@@ -778,6 +783,8 @@ class De
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                  = "";
 	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR                 = "";
 	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS               = ""; 
+	const USER_SELECT_TEAM_BY_USER_EMAIL_ERROR                      = "";
+	const USER_SELECT_TEAM_BY_USER_EMAIL_WARNING                    = "";
 	const USER_TEAM_SELECT_ERROR                                    = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                   = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS                 = "";
@@ -895,7 +902,6 @@ class De
 	const CORPORATION_DELETE_SUCCESS                                = "";
 	const CORPORATION_INSERT_ERROR                                  = "";
 	const CORPORATION_INSERT_SUCCESS                                = "";
-	const CORPORATION_SELECT_USERS_ERROR                            = "";
 	
 	/* Body Page AdminCountry */
 	
@@ -906,7 +912,6 @@ class De
 	const DEPARTMENT_INSERT_ERROR                             = "";
 	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS           = "";
 	const DEPARTMENT_INSERT_SUCCESS                           = "";
-	const DEPARTMENT_SELECT_USERS_ERROR                       = "";
 	const DEPARTMENT_UPDATE_ERROR                             = "";
 	const DEPARTMENT_UPDATE_SUCCESS                           = "";
 	
@@ -929,8 +934,6 @@ class De
 	const TEAM_INVALID_DESCRIPTION_SIZE                       = "";
 	const TEAM_INSERT_ERROR                                   = "";
 	const TEAM_INSERT_SUCCESS                                 = "";
-	const TEAM_SELECT_USERS_ERROR                             = "";
-	const TEAM_SELECT_USERS_WARNING                           = "";
 	const TEAM_UPDATE_ERROR                                   = "";
 	const TEAM_UPDATE_SUCCESS                                 = "";
 	
@@ -984,7 +987,6 @@ class De
 	const TYPE_USER_INVALID_DESCRIPTION_SIZE                  = "";
 	const TYPE_USER_INSERT_ERROR                              = "";
 	const TYPE_USER_INSERT_SUCCESS                            = "";
-	const TYPE_USER_SELECT_USERS_ERROR                        = "";
 	const TYPE_USER_UPDATE_ERROR                              = "";
 	const TYPE_USER_UPDATE_SUCCESS                            = "";
 	

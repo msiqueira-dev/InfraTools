@@ -51,8 +51,6 @@ class Pt
 	const BIRTH_DATE_MONTH                                          = "Mês";
 	const BIRTH_DATE_YEAR                                           = "Ano";
 	const CONFIRMED                                                 = "Confirmed";
-	const CORPORATION                                               = "Corporação";
-	const CORPORATION_NAME                                          = "Nome da corporação";
 	const CORPORATION_NOT_FOUND                                     = "Corporação não encontrada";
 	const CORPORATION_UPDATE_ERROR                                  = "Erro ao alterar corporação";
 	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                    = "Corporação com o mesmo nome já existe";
@@ -67,10 +65,7 @@ class Pt
 	const DATABASE_TABLE_QUANTITY                                   = "Quantidade de tabelas";
 	const DEACTIVATED                                               = "Desativado";
 	const DEFAULT_VALUE                                             = "Por favor preencha os campos necessários";
-	const DEPARTMENT                                                = "Departamento";
-	const DEPARTMENT_INITIALS                                       = "Código do Departamento";
 	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                    = "Um departamento tem que estar associado a uma corporação";
-	const DEPARTMENT_NAME                                           = "Nome do departamento";
 	const DEPARTMENT_NAME_AND_CORPORATION_NAME                      = "Nome do departamento e nome da corporação";
 	const DEPARTMENT_NOT_FOUND                                      = "Departamento não encontrado";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS         = "Departamentos obetidos com sucesso";
@@ -79,11 +74,12 @@ class Pt
 	const EMAIL                                                     = "E-mail";
 	const FILL_REQUIRED_FIELDS                                      = "Por favor preencha os campos necessários";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Ativo";
+	const FORM_FIELD_CORPORATION_NAME                               = "Nome da corporação";
+	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Código do Departamento";
+	const FORM_FIELD_DEPARTMENT_NAME                                = "Nome do departamento";
 	const FORM_FIELD_EDIT                                           = "Editar";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Ativo";
-	const FORM_FIELD_SERVICE_CORPORATION                            = "Corporação";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporação pode mudar?";
-	const FORM_FIELD_SERVICE_DEPARTMENT                             = "Departamento";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "Departamento pode mudar?";
 	const FORM_FIELD_SERVICE_DESCRIPTION                            = "Descrição";
 	const FORM_FIELD_SERVICE_ID                                     = "Id";
@@ -773,8 +769,6 @@ class Pt
 	const TICKET_INSERT_ERROR                                       = "Erro ao tentar cadastrar solicitação";
 	const TICKET_INSERT_SUCCESS                                     = "Solicitação cadastrada com sucesso";
 	const TICKET_NOT_FOUND                                          = "Solicitação não encontrada";
-	const TICKET_SELECT_USERS_ERROR                                 = "Erro ao tentar obter os usuários de uma solicitação";
-	const TICKET_SELECT_USERS_WARNING                               = "Nenhum usuário está associado a esta solicitação";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Verificação duas etapas";
 	const TYPE                                                      = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Erro ao obter tipos de associação";
@@ -787,11 +781,8 @@ class Pt
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Tipo de estado de solicitação não encontrado";
 	const TYPE_TICKET_NOT_FOUND                                     = "Tipo de solicitação não encontrado";
-	const TYPE_TICKET_SELECT_USERS_ERROR                            = "Erro ao tentar obter os usuários de um tipo de solicitação";
-	const TYPE_TICKET_SELECT_USERS_WARNING                          = "Nenhum usuário está associado a este tipo de solicitação";
 	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "Tipo de usuário não encontrado";
-	const TYPE_USER_SELECT_USERS_WARNING                            = "Nenhum usuário está associado a este tipo de usuário";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Erro ao tentar atualizar informações de corporação do usuário";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "ID único já foi escolhido por outro usuário, por favor "
 		                                                            . "escolha outro";
@@ -807,10 +798,26 @@ class Pt
 								    								. "não o recebeu, outro pode ser enviado";
 	const USER_NOT_FOUND                                            = "Usuário não encontrado";  
 	const USER_SAME_AS_ADMIN                                        = "Usuário é o mesmo do administrador!";
+	const USER_SELECT_BY_CORPORATION_NAME_ERROR                     = "Erro ao tentar obter usuários para esta corporação";
+	const USER_SELECT_BY_CORPORATION_NAME_WARNING                   = "Nenhum usuário encontrado para esta corporação";
+	const USER_SELECT_BY_DEPARTMENT_NAME_ERROR                      = "Erro ao tentar obter usuários para este departamento";
+	const USER_SELECT_BY_DEPARTMENT_NAME_WARNING                    = "Nenhum usuário encontrado para este departamento";
 	const USER_SELECT_BY_HASH_CODE_ERROR                            = "Erro ao obter usuário com o código hash";
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                          = "Usuário obtido com sucesso";
 	const USER_SELECT_BY_SERVICE_ID_ERROR                           = "Erro ao tentar obter usuários para este serviço";
 	const USER_SELECT_BY_SERVICE_ID_WARNING                         = "Nenhum usuário encontrado para este serviço";
+	const USER_SELECT_BY_TEAM_ID_ERROR                              = "Erro ao tentar obter os usuários de uma equipe";
+	const USER_SELECT_BY_TEAM_ID_WARNING                            = "Nenhum usuário foi encontrado para esta equipe";
+	const USER_SELECT_BY_TICKET_ID_ERROR                            = "Erro ao tentar obter os usuários de uma solicitação";
+	const USER_SELECT_BY_TICKET_ID_WARNING                          = "Nenhum usuário está associado a esta solicitação";
+	const USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR     = "Erro ao tentar obter usuários com este tipo de associação "
+		                                                            . "entre usuário e equipe";
+	const USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING   = "Nenhum usuário está associado a este tipo de associação "
+		                                                            . "entre usuário e equipe";
+	const USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR              = "Erro ao tentar obter os usuários de um tipo de solicitação";
+	const USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING            = "Nenhum usuário está associado a este tipo de solicitação";
+	const USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR                = "Erro ao tentar obter os usuários de um tipo de usuário";
+	const USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING              = "Nenhum usuário está associado a este tipo de usuário";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                           = "Erro ao obter usuário com o endereço de e-mail";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                         = "Usuário obtido com sucesso";
 	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                       = "Erro ao obter usuário com o id único de usuário";
@@ -819,6 +826,8 @@ class Pt
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                  = "Usuário existe";
 	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR                 = "Erro ao obter hash code de usuário com o e-mail fornecido";
 	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS               = "Código hash obtido com sucesso";
+	const USER_SELECT_TEAM_BY_USER_EMAIL_ERROR                      = "Erro ao obter equipes desse usuário";
+	const USER_SELECT_TEAM_BY_USER_EMAIL_WARNING                    = "Esse usuário não possui equipes";
 	const USER_TEAM_SELECT_ERROR                                    = "Erro ao obter equipes do usuário";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                   = "Erro ao modificar a verificação duas etapas";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS                 = "Verificação duas etapas modificada com sucesso";
@@ -947,7 +956,6 @@ class Pt
 	const CORPORATION_DELETE_SUCCESS                              = "Corporação excluída com sucesso";
 	const CORPORATION_INSERT_ERROR                                = "Erro ao cadastrar corporação";
 	const CORPORATION_INSERT_SUCCESS                              = "Corporação cadastrada com sucesso";
-	const CORPORATION_SELECT_USERS_ERROR                          = "Erro ao tentar obter os usuários de uma corporação";
 	
 	/* Body Page AdminCountry */
 	
@@ -958,7 +966,6 @@ class Pt
 	const DEPARTMENT_INSERT_ERROR                           = "Erro ao cadastrar departamento";
 	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "Departamento já existe para esta corporação";
 	const DEPARTMENT_INSERT_SUCCESS                         = "Departamento cadastrado com sucesso";
-	const DEPARTMENT_SELECT_USERS_ERROR                     = "Erro ao tentar obter usuários de um departamento";
 	const DEPARTMENT_UPDATE_ERROR                           = "Erro ao atualizar departamento";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "Departamento atualizado com sucesso";
 	
@@ -980,8 +987,6 @@ class Pt
 	const TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantidade de caracteres excede o tamanho máximo na descrição";
 	const TEAM_INSERT_ERROR                                 = "Erro ao cadastrar equipe";
 	const TEAM_INSERT_SUCCESS                               = "Equipe cadastrada com sucesso";
-	const TEAM_SELECT_USERS_ERROR                           = "Erro ao tentar obter os usuários de uma equipe";
-	const TEAM_SELECT_USERS_WARNING                         = "Nenhum usuário foi encontrado para esta equipe";
 	const TEAM_UPDATE_ERROR                                 = "Erro ao atualizar equipe";
 	const TEAM_UPDATE_SUCCESS                               = "Equipe atualizada com sucesso";
 	
@@ -1001,32 +1006,32 @@ class Pt
 	/* Body Page AdminTypeAssocUserTeam */
 	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR                 = "Erro ao excluir tipo de associação";
 	const TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM = "Tipo de associação está sendo usada entre usuários e equipes, "
-		                                                          . "faça desassociações necessárias primeiro";
+		                                                    . "faça desassociações necessárias primeiro";
 	const TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS               = "Tipo de associação excluida com sucesso";
-	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR               = "Erro ao cadastrar tipo de associação";
-	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS             = "Tipo de associação cadastrado com sucesso";
+	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR                 = "Erro ao cadastrar tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS               = "Tipo de associação cadastrado com sucesso";
 	const TYPE_ASSOC_USER_TEAM_UPDATE_ERROR                 = "Erro ao atualizar tipo de associação";
 	const TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS               = "Tipo de associação atualizada com sucesso";
 	
 	/* Body Page AdminTypeStatusTicket */
 	const TYPE_STATUS_TICKET_DELETE_ERROR                   = "Erro ao excluir tipo de estado de solicitação";
 	const TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET = "Tipo de estado de solicitação está em uso em solcitações, "
-		                                                          . "faça as desassociações necessárias primeiro";
+		                                                    . "faça as desassociações necessárias primeiro";
 	const TYPE_STATUS_TICKET_DELETE_SUCCESS                 = "Tipo de estado de solicitação excluido com sucesso";
-	const TYPE_STATUS_TICKET_INSERT_ERROR                 = "Erro ao cadastrar tip ode estado de solicitação";
-	const TYPE_STATUS_TICKET_INSERT_SUCCESS               = "Tipo de estado de solicitação cadastrado com sucesso";
+	const TYPE_STATUS_TICKET_INSERT_ERROR                   = "Erro ao cadastrar tip ode estado de solicitação";
+	const TYPE_STATUS_TICKET_INSERT_SUCCESS                 = "Tipo de estado de solicitação cadastrado com sucesso";
 	const TYPE_STATUS_TICKET_UPDATE_ERROR                   = "Erro ao atualizar tipo de estado de solicitação";
 	const TYPE_STATUS_TICKET_UPDATE_SUCCESS                 = "Tipo de solicitação atualizado com sucesso";
 	
 	/* Body Page AdminTypeTicket */
 	const TYPE_TICKET_DELETE_ERROR                          = "Erro ao excluir tipo de solcitação";
 	const TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET        = "Tipo de solicitação está em uso em solcitações, "
-		                                                          . "faça as desassociações necessárias primeiro";
+		                                                    . "faça as desassociações necessárias primeiro";
 	const TYPE_TICKET_DELETE_SUCCESS                        = "Tipo de solcitação excluída com sucesso";
 	const TYPE_TICKET_INVALID_DESCRIPTION                   = "Descrição inválida";
 	const TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const TYPE_TICKET_INSERT_ERROR                        = "Erro ao cadastrar tipo de solcitação";
-	const TYPE_TICKET_INSERT_SUCCESS                      = "Tipo de solcitação cadastrado com sucesso";
+	const TYPE_TICKET_INSERT_ERROR                          = "Erro ao cadastrar tipo de solcitação";
+	const TYPE_TICKET_INSERT_SUCCESS                        = "Tipo de solcitação cadastrado com sucesso";
 	const TYPE_TICKET_UPDATE_ERROR                          = "Erro ao atualizar tipo de solcitação";
 	const TYPE_TICKET_UPDATE_SUCCESS                        = "Tipo de solcitação atualizada com sucesso";
 	
@@ -1036,9 +1041,8 @@ class Pt
 	const TYPE_USER_DELETE_SUCCESS                          = "Tipo de usuário excluído com sucesso";
 	const TYPE_USER_INVALID_DESCRIPTION                     = "Descrição inválida";
 	const TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const TYPE_USER_INSERT_ERROR                          = "Erro ao cadastrar tipo de usuário";
-	const TYPE_USER_INSERT_SUCCESS                        = "Tipo de usuário cadastrado com sucesso";
-	const TYPE_USER_SELECT_USERS_ERROR                      = "Erro ao tentar obter os usuários de um tipo de usuário";
+	const TYPE_USER_INSERT_ERROR                            = "Erro ao cadastrar tipo de usuário";
+	const TYPE_USER_INSERT_SUCCESS                          = "Tipo de usuário cadastrado com sucesso";
 	const TYPE_USER_UPDATE_ERROR                            = "Error ao atualizar tipo de usuário";
 	const TYPE_USER_UPDATE_SUCCESS                          = "Tipo de usuário atualizado com sucesso";
 	

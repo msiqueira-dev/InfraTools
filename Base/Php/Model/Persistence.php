@@ -101,7 +101,7 @@ Methods:
 			public static function SqlUserInsert();
 			public static function SqlUserSelect();
 			public static function SqlUserSelectByCorporationName();
-			public static function SqlUserSelectByDepartment();
+			public static function SqlUserSelectByDepartmentName();
 			public static function SqlUserSelectByHashCode();
 			public static function SqlUserSelectByTeamId();
 			public static function SqlUserSelectByTicketId();
@@ -1071,7 +1071,7 @@ class Persistence
 		. "LIMIT ?, ?";	
 	}
 	
-	public static function SqlUserSelectByDepartment()
+	public static function SqlUserSelectByDepartmentName()
 	{
 		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                          . ", "
 		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                             . ", "

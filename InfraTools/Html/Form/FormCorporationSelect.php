@@ -10,13 +10,13 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM CORPORATION SELECT -->
+<!-- FORM_CORPORATION_SELECT_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_FORM; ?>" method="post" >
-	<!-- CORPORATION NAME -->
+	<!-- FORM_FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
@@ -50,8 +50,8 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME'); ?>" 
-						   value="<?php echo $this->InputValueCorporationName; ?>" maxlength="45" />
+						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME'); ?>" 
+						   value="<?php echo $this->InputValueCorporationName; ?>" maxlength="80" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"

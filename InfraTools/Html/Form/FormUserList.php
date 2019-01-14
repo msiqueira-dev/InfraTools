@@ -71,7 +71,7 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 

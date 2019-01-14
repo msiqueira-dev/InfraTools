@@ -51,8 +51,6 @@ class En
 	const BIRTH_DATE_MONTH                                          = "Month";
 	const BIRTH_DATE_YEAR                                           = "Year";
 	const CONFIRMED                                                 = "Confirmed";
-	const CORPORATION                                               = "Corporation";
-	const CORPORATION_NAME                                          = "Corporation name";
 	const CORPORATION_NOT_FOUND                                     = "Corporation not found";
 	const CORPORATION_UPDATE_ERROR                                  = "Error updating corporation";
 	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                    = "A corporation with the same name exists";
@@ -67,10 +65,7 @@ class En
 	const DATABASE_TABLE_QUANTITY                                   = "Tables quantity";
 	const DEACTIVATED                                               = "Deactivated";
 	const DEFAULT_VALUE                                             = "Please fill the necessary fields";
-	const DEPARTMENT                                                = "Department";
-	const DEPARTMENT_INITIALS                                       = "Department Initials";
 	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                    = "A department must be associated with a corporation";
-	const DEPARTMENT_NAME                                           = "Department name";
 	const DEPARTMENT_NAME_AND_CORPORATION_NAME                      = "Department name and corporation name";
 	const DEPARTMENT_NOT_FOUND                                      = "Department not found";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS         = "Departments obtained successfully";
@@ -79,11 +74,12 @@ class En
 	const EMAIL                                                     = "E-mail";
 	const FILL_REQUIRED_FIELDS                                      = "Please fill the necessary fields";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Active";
+	const FORM_FIELD_CORPORATION_NAME                               = "Corporation name";
+	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Department Initials";
+	const FORM_FIELD_DEPARTMENT_NAME                                = "Department name";
 	const FORM_FIELD_EDIT                                           = "Edit";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Active";
-	const FORM_FIELD_SERVICE_CORPORATION                            = "Corporation";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporation can change?";
-	const FORM_FIELD_SERVICE_DEPARTMENT                             = "Department";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "Department can change?";
 	const FORM_FIELD_SERVICE_DESCRIPTION                            = "Description";
 	const FORM_FIELD_SERVICE_ID                                     = "Id";
@@ -770,8 +766,6 @@ class En
 	const TICKET_INSERT_ERROR                                       = "Error while trying to register ticket";
 	const TICKET_INSERT_SUCCESS                                     = "Ticket registered succesfully";
 	const TICKET_NOT_FOUND                                          = "Ticket not found";
-	const TICKET_SELECT_USERS_ERROR                                 = "Error while trying to obtain users associated with this ticket";
-	const TICKET_SELECT_USERS_WARNING                               = "No user is associated with this ticket";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Two step verification";
 	const TYPE                                                      = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Error obtaining types of association";
@@ -783,11 +777,8 @@ class En
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Type status ticket not found";
 	const TYPE_TICKET_NOT_FOUND                                     = "Type ticket not found";
-	const TYPE_TICKET_SELECT_USERS_ERROR                            = "Error while trying to obtain users associated with this ticket type";
-	const TYPE_TICKET_SELECT_USERS_WARNING                          = "No user is associated with this ticket type";
 	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "User type not found";
-	const TYPE_USER_SELECT_USERS_WARNING                            = "No user is associated with this type user";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Error while trying to update user's corporation information";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "Unique Id already picked by another user, "
 	                                                                . "please choose another";
@@ -803,10 +794,26 @@ class En
 								  							        . "receive it, another one can be sent";
 	const USER_NOT_FOUND                                            = "User not found"; 
 	const USER_SAME_AS_ADMIN                                        = "User is the same as the Admin!";
+	const USER_SELECT_BY_CORPORATION_NAME_ERROR                     = "Error trying to obtain users associated with this corporation";
+	const USER_SELECT_BY_CORPORATION_NAME_WARNING                   = "No user is associated with this corporation";
+	const USER_SELECT_BY_DEPARTMENT_NAME_ERROR                      = "Error trying to obtain users associated with this department";
+	const USER_SELECT_BY_DEPARTMENT_NAME_WARNING                    = "No user is associated with this department";
 	const USER_SELECT_BY_HASH_CODE_ERROR                            = "Error trying to obtain user with the given hash code";
 	const USER_SELECT_BY_HASH_CODE_SUCCESS                          = "User obtained sucessfully";
 	const USER_SELECT_BY_SERVICE_ID_ERROR                           = "Error trying to obtain users associated with this service";
 	const USER_SELECT_BY_SERVICE_ID_WARNING                         = "No user is associated with this service";
+	const USER_SELECT_BY_TEAM_ID_ERROR                              = "Error while trying to obtain users from this team";
+	const USER_SELECT_BY_TEAM_ID_WARNING                            = "No users were found for this team";
+	const USER_SELECT_BY_TICKET_ID_ERROR                            = "Error while trying to obtain users associated with this ticket";
+	const USER_SELECT_BY_TICKET_ID_WARNING                          = "No user is associated with this ticket";
+	const USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR     = "Error while trying to obtain users associated with this type of "
+		                                                            . "association between user and team";
+	const USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING   = "No user is associated with this type of association between user and "
+		                                                            . "team";
+	const USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR              = "Error while trying to obtain users associated with this ticket type";
+	const USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING            = "No user is associated with this ticket type";
+	const USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR                = "Error while trying to obtain users associated with this user type";
+	const USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING              = "No user is associated with this user type";
 	const USER_SELECT_BY_USER_EMAIL_ERROR                           = "Error trying to obtain user with the given e-mail";
 	const USER_SELECT_BY_USER_EMAIL_SUCCESS                         = "User obtained sucessfully";
 	const USER_SELECT_BY_USER_UNIQUE_ID_ERROR                       = "Error trying to obtain user with the given unique id";
@@ -815,6 +822,8 @@ class En
 	const USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS                  = "User exists";
 	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR                 = "Error trying to obtain user's hash code with the given e-mail";
 	const USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS               = "Hash code obtained sucessfully";
+	const USER_SELECT_TEAM_BY_USER_EMAIL_ERROR                      = "Error trying to obtain teams associated with this e-mail";
+	const USER_SELECT_TEAM_BY_USER_EMAIL_WARNING                    = "This user has not team";
 	const USER_TEAM_SELECT_ERROR                                    = "Error trying to get the user teams";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                   = "Error changing two step verification";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS                 = "Two step verification changed succesfully";
@@ -940,9 +949,8 @@ class En
 	const CORPORATION_DELETE_ERROR                          = "Error deleting corporation";
 	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporation has departments associated, delete them first";
 	const CORPORATION_DELETE_SUCCESS                        = "Corporation deleted succesfully";
-	const CORPORATION_INSERT_ERROR                        = "Error while trying to register corporation";
-	const CORPORATION_INSERT_SUCCESS                      = "Corporation registered succesfully";
-	const CORPORATION_SELECT_USERS_ERROR                    = "Error while trying to select users from corporation";
+	const CORPORATION_INSERT_ERROR                          = "Error while trying to register corporation";
+	const CORPORATION_INSERT_SUCCESS                        = "Corporation registered succesfully";
 	
 	/* Body Page AdminCountry */
 	
@@ -953,7 +961,6 @@ class En
 	const DEPARTMENT_INSERT_ERROR                           = "Error while trying to register department";
 	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "Department already exists for that corporation";
 	const DEPARTMENT_INSERT_SUCCESS                         = "Department registered succesfully";
-	const DEPARTMENT_SELECT_USERS_ERROR                     = "Error while trying to select users from department";
 	const DEPARTMENT_UPDATE_ERROR                           = "Error updating department";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "Department updated succesfully";
 	
@@ -976,8 +983,6 @@ class En
 		                                                          . "description";
 	const TEAM_INSERT_ERROR                                 = "Error while trying to register team";
 	const TEAM_INSERT_SUCCESS                               = "Team registered succesfully";
-	const TEAM_SELECT_USERS_ERROR                           = "Error while trying to select users from team";
-	const TEAM_SELECT_USERS_WARNING                         = "No users were found for this team";
 	const TEAM_UPDATE_ERROR                                 = "Error while trying to update team";
 	const TEAM_UPDATE_SUCCESS                               = "Team updated succesfully";
 	
@@ -1033,9 +1038,8 @@ class En
 	const TYPE_USER_DELETE_SUCCESS                          = "User type deleted succesfully";
 	const TYPE_USER_INVALID_DESCRIPTION                     = "Invalid description";
 	const TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantity of characters exceeds the maximum allowed on description";
-	const TYPE_USER_INSERT_ERROR                          = "Error while inserting user type";
-	const TYPE_USER_INSERT_SUCCESS                        = "User type inserted succesfully";
-	const TYPE_USER_SELECT_USERS_ERROR                      = "Error while trying to select users from user type";
+	const TYPE_USER_INSERT_ERROR                            = "Error while inserting user type";
+	const TYPE_USER_INSERT_SUCCESS                          = "User type inserted succesfully";
 	const TYPE_USER_UPDATE_ERROR                            = "Error while updating user type";
 	const TYPE_USER_UPDATE_SUCCESS                          = "User type updated succesfully";
 

@@ -474,8 +474,8 @@ class FacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlUserSelectByDepartment');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByDepartment());
+				Persistence::ShowQuery('SqlUserSelectByDepartmentName');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByDepartmentName());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $Limit2);

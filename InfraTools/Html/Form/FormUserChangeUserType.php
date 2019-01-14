@@ -70,10 +70,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegion; ?></label>
         </div>
     </div>
-    <!-- CORPORATION -->
+    <!-- FORM_FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -118,10 +118,10 @@
             </div>
         </div>
     </div>
-    <!-- DEPARTMENT -->
+    <!-- FORM_FIELD_DEPARTMENT_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>

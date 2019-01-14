@@ -9,13 +9,13 @@
 		<?php if(isset($this->ReturnText)) echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM CORPORATION VIEW -->
+<!-- FORM_CORPORATION_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_CORPORATION_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_CORPORATION_VIEW; ?>" method="post" >
     <!-- NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCorporationName; ?></label>

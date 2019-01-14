@@ -76,9 +76,9 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('EMAIL') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
-	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('DEPARTMENT') . "</div>" .
+	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</div>" .
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'

@@ -99,8 +99,8 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .

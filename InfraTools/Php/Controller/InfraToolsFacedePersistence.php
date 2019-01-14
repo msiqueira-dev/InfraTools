@@ -186,6 +186,9 @@ Methods:
 			                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, &$RowCount, 
 			                                                      $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+			                                                     &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug, 
+																 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug,
 			                                                MySqlConnection = NULL, $CloseConnectaion = TRUE));
 			public function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug,
@@ -1953,6 +1956,23 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName,
 																							  $ArrayInstanceInfraToolsUser, $RowCount, 
 																						  	  $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+			                                                     &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug, 
+																 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
+			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, 
+																							 $DepartmentName, $ArrayInstanceInfraToolsUser,
+																							 $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

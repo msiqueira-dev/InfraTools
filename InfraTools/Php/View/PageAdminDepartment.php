@@ -26,9 +26,9 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminDepartment extends PageAdmin
 {
-	public    $ArrayInstanceDepartment      = NULL;
-	protected $ArrayInstanceDepartmentUsers = NULL;
-	protected $InstanceDepartment           = NULL;
+	public    $ArrayInstanceDepartment     = NULL;
+	protected $ArrayInstanceInfraToolsUser = NULL;
+	protected $InstanceDepartment          = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -208,10 +208,10 @@ class PageAdminDepartment extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
 														$this->InstanceDepartment) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'UserSelectByDepartmentName', 
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByDepartmentName', 
 									  array($this->InstanceDepartment->GetDepartmentCorporationName(),
 						                    $this->InstanceDepartment->GetDepartmentName(),
-											&$this->ArrayInstanceDepartmentUsers),
+											&$this->ArrayInstanceInfraToolsUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS;
 			}

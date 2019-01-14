@@ -10,13 +10,13 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM CORPORATION REGISTER -->
+<!-- FORM_CORPORATION_REGISTER_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" 
       id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" method="post">
     <!-- NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
@@ -45,8 +45,8 @@
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME'); ?>"
-                               value="<?php echo $this->InputValueCorporationName; ?>" maxlength="45" />
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME'); ?>"
+                               value="<?php echo $this->InputValueCorporationName; ?>" maxlength="80" />
         </div>
     </div>
     <!-- FORM_FIELD_CORPORATION_ACTIVE -->

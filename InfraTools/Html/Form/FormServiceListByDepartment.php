@@ -1,10 +1,10 @@
-<!-- BODY SERVICE LIST BY DEPARTMENT -->
+<!-- FORM_SERVICE_LIST_BY_DEPARTMENT -->
 <form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT; ?>' 
       method="<?php echo $this->InputValueFormMethod ?>" >
-	<!-- CORPORATION -->
+	<!-- FORM_FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
@@ -29,10 +29,10 @@
 			</select>
         </div>
     </div>
-	<!-- DEPARTMENT -->
+	<!-- FORM_FIELD_DEPARTMENT_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
@@ -124,8 +124,8 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .

@@ -68,9 +68,9 @@ if(is_array($this->ArrayInstanceDepartment))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('CORPORATION') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('DEPARTMENT_INITIALS') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('DEPARTMENT_NAME') . "</th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_INITIALS') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	     <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>

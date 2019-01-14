@@ -13,28 +13,28 @@
 <!-- FORM DEPARRTMENT VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_VIEW; ?>" method="post" >
-    <!-- CORPORATION NAME -->
+    <!--FORM_FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCorporationName; ?></label>
         </div>
     </div>
-    <!-- DEPARTMENT INITIALS -->
+    <!-- FORM_FIELD_DEPARTMENT_INITIALS -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_INITIALS').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_INITIALS').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueDepartmentInitials; ?></label>
         </div>
     </div>
-    <!-- DEPARTMENT NAME -->
+    <!-- FORM_FIELD_DEPARTMENT_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueDepartmentName; ?></label>

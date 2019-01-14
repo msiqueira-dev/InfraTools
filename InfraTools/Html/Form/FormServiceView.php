@@ -50,10 +50,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceType; ?></label>
         </div>
     </div>
-    <!-- SERVICE CORPORATION -->
+    <!-- FORM_FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<div>
@@ -66,10 +66,10 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-    <!-- SERVICE DEPARTMENT -->
+    <!-- FORM_FIELD_DEPARTMENT_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<div>

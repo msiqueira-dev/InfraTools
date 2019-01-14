@@ -97,10 +97,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhoneSecondary; ?></label>
         </div>
     </div>
-    <!-- CORPORATION -->
+    <!-- FORM_FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -215,10 +215,10 @@
                            title="<?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID'); ?>"
                            value="<?php echo $this->InputValueRegistrationId; ?>" maxlength="12" />
      </div>
-     <!-- DEPARTMENT -->
+     <!-- FORM_FIELD_DEPARTMENT_NAME -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 

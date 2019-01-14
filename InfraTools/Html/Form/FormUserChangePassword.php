@@ -52,10 +52,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
         </div>
     </div>
-    <!-- CORPORATION -->
+    <!-- FORM_FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('CORPORATION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>

@@ -174,9 +174,7 @@ class ConfigInfraTools extends Config
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_ID                          = "ExceptionTypeAssocUserServiceId";
 	const FORM_FIELD_ID                                                 = "FormInputId";
 	const FORM_FIELD_SERVICE_ACTIVE                                     = "FormFieldServiceActive";
-	const FORM_FIELD_SERVICE_CORPORATION                                = "FormFieldServiceCorporation";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                     = "FormFieldServiceCorporationCanChange";
-	const FORM_FIELD_SERVICE_DEPARTMENT                                 = "FormFieldServiceDepartment";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                      = "FormFieldServiceDepartmentCanChange";
 	const FORM_FIELD_SERVICE_DESCRIPTION                                = "FormFieldServiceDescription";
 	const FORM_FIELD_SERVICE_ID                                         = "FormFieldServiceId";
@@ -436,7 +434,7 @@ class ConfigInfraTools extends Config
 	const TABLE_HISTORY_SERVICE                                         = "HISTORY_SERVICE";
 	const TABLE_HISTORY_SERVICE_FIELD_ACTIVE                            = "ServiceActive";
 	const TABLE_HISTORY_SERVICE_FIELD_DESCRIPTION                       = "ServiceDescription";
-	const TABLE_HISTORY_SERVICE_FIELD_ID                                = "ServiceId";
+	const TABLE_HISTORY_SERVICE_FIELD_HISTORY_SERVICE_ID                = "ServiceId";
 	const TABLE_HISTORY_SERVICE_FIELD_NAME                              = "ServiceName";
 	const TABLE_HISTORY_SERVICE_FIELD_TYPE                              = "ServiceType";
 	const TABLE_HISTORY_TICKET_FIELD_SERVICE                            = "HistoryTicketService";

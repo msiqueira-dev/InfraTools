@@ -13,44 +13,42 @@
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM CORPORATION VIEW USERS -->
-<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS; ?>"
-      id="<?php echo ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS; ?>" method="post" >
-      <div class="DivTableGenericHeader">
-		<div class="DivTableGenericHeaderRowCount">
-		<?php 
-		     if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-			 {
-				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-					  echo "<label class='InputValueLimitTitle'>" . 
-					           $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
-					       "</label>" .
-						   "<label class='InputValueLimitValue'>" . 
-					           $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
-					                                   . " " . $this->InputValueLimit2 . 
-					       "</label>";
-			 }
-		?>
-		</div>
-		<div class="DivTableGenericHeaderRowCount">
-		<?php
-			 if(isset($this->InputValueRowCount)) 
-			  {
-				  if($this->InputValueRowCount != "") 
-					  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-					           $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-					       "</label>" .
-						   "<label class='DivTableGenericRowCountLabelValue'>" . 
-					           $this->InputValueRowCount . 
-					       "</label>";
-			  } 
-		?>
-		</div>
+<div class="DivTableGenericHeader">
+	<div class="DivTableGenericHeaderRowCount">
+	<?php 
+		 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
+		 {
+			 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+				  echo "<label class='InputValueLimitTitle'>" . 
+						   $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
+					   "</label>" .
+					   "<label class='InputValueLimitValue'>" . 
+						   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
+												   . " " . $this->InputValueLimit2 . 
+					   "</label>";
+		 }
+	?>
 	</div>
+	<div class="DivTableGenericHeaderRowCount">
+	<?php
+		 if(isset($this->InputValueRowCount)) 
+		  {
+			  if($this->InputValueRowCount != "") 
+				  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
+						   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
+					   "</label>" .
+					   "<label class='DivTableGenericRowCountLabelValue'>" . 
+						   $this->InputValueRowCount . 
+					   "</label>";
+		  } 
+	?>
+	</div>
+</div>
+<!-- FORM_CORPORATION_VIEW_LIST_USERS_FORM -->
 <?php
-if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
+if(is_array($this->ArrayInstanceInfraToolsUser))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_CORPORATION_LIST_VIEW_USERS . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FORM_CORPORATION_VIEW_LIST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
@@ -75,9 +73,9 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('CORPORATION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
-	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('DEPARTMENT') . "</div>" .
+	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</div>" .
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
@@ -95,7 +93,7 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceInfraToolsCorporationUsers as $key=>$user)
+	foreach($this->ArrayInstanceInfraToolsUser as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
@@ -159,4 +157,3 @@ if(is_array($this->ArrayInstanceInfraToolsCorporationUsers))
 	echo "</table>";
 }
 ?>
-</form>
