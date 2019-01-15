@@ -5314,12 +5314,16 @@ class Page
 	
 	public function IncludeHeadJavaScript()
 	{
-		if (file_exists (REL_PATH . Config::PATH_HEAD . Config::HEAD_JAVASCRIPT))
+		if($_SERVER['HTTP_HOST'] != Config::LOCAL_IP)
 		{
-			include_once(REL_PATH . Config::PATH_HEAD . Config::HEAD_JAVASCRIPT);
-			return Config::SUCCESS;
+			if (file_exists (REL_PATH . Config::PATH_HEAD . Config::HEAD_JAVASCRIPT))
+			{
+				include_once(REL_PATH . Config::PATH_HEAD . Config::HEAD_JAVASCRIPT);
+				return Config::SUCCESS;
+			}
+			else return self::ERROR_HEAD_JAVASCRIPT_NOT_EXISTS;
 		}
-		else return self::ERROR_HEAD_JAVASCRIPT_NOT_EXISTS;
+		else return Config::SUCCESS;
 	}
 	
 	public function LoadPage()

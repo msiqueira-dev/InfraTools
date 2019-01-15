@@ -512,6 +512,7 @@ class Config
 	const LANGUAGE_GERMAN                                               = "Language/De";
 	const LANGUAGE_PORTUGUESE                                           = "Language/Pt";
 	const LANGUAGE_SPANISH                                              = "Language/Es";
+	const LOCAL_IP                                                      = "127.0.0.1";
 	const LOGIN_FORM                                                    = "LoginForm";
 	const LOGIN_FORM_SUBMIT                                             = "LoginFormSubmit";
 	const LOGIN_FORM_SUBMIT_FORGOT_PASSWORD                             = "LoginFormSubmitForgotPassword";
