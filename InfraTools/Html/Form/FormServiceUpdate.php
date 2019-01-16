@@ -19,8 +19,8 @@
 	</label>
 </div>
 <!-- FORM SERVICE UPDATE -->
-<form name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
+<form name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
     <!-- SERVICE ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
@@ -50,12 +50,12 @@
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
@@ -64,7 +64,7 @@
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
@@ -92,12 +92,12 @@
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
@@ -106,7 +106,7 @@
 											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 											 '');"
@@ -213,7 +213,7 @@
 				   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE; ?>"
 					<?php echo $this->InputValueServiceActive; ?>
 				   onchange="ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 								   '');"
@@ -236,7 +236,7 @@
 								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 								   '', true);
 					  ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE; ?>',
+								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
 								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
 								   '');">

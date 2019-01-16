@@ -77,6 +77,8 @@ class De
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "";
 	const FORM_FIELD_EDIT                                           = "";
+	const FORM_FIELD_LOGIN                                          = "";
+	const FORM_FIELD_SELECT_NONE                                    = "";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "";
@@ -99,8 +101,12 @@ class De
 	const FORM_FIELD_TICKET_SUGGESTION                              = "";
 	const FORM_FIELD_TICKET_TITLE                                   = "";
 	const FORM_FIELD_TICKET_TYPE                                    = "";
+	const FORM_FIELD_TYPE_SERVICE_NAME                              = "";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "";
+	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "";
 	const FORM_INVALID_CAPTCHA                                      = "";
 	const FORM_INVALID_CORPORATION_NAME                             = "";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "";
@@ -184,7 +190,6 @@ class De
 	const FORM_INVALID_USER_UNIQUE_ID                               = "";
 	const FORM_INVALID_USER_UNIQUE_ID_SIZE                          = "";
 	const FORM_SELECT_DEFAULT                                       = "";
-	const FORM_FIELD_SELECT_NONE                                    = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "";
 	const GENDER                                                    = "";
@@ -733,15 +738,11 @@ class De
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
 	const TICKET_NOT_FOUND                                          = "";
-	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "";
 	const TYPE                                                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "";
-	const TYPE_SERVICE_NAME                                         = "";
-	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "";
-	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "";
 	const TYPE_TICKET_NOT_FOUND                                     = "";
 	const TYPE_USER_ID                                              = "";
@@ -1165,7 +1166,6 @@ class De
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED             = "";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG                = "";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT               = "";
-	const LOGIN_USER                                                = "";
 	
 	/* Body Page Not Found */
 	
@@ -1306,7 +1306,7 @@ class De
 	const GET_HOSTNAME_SUCCESS                                      = "";
 	
 	/* Function: Get Ip Address Client */
-	const GET_IP_ADDRESS_CLIENT_FAILED                              = "";
+	const GET_ERROR_IP_ADDRESS_CLIENT                              = "";
 	const GET_IP_ADDRESS_CLIENT_SUCCESS                             = "";
 	
 	/* Function: Get Ip Addresses */

@@ -22,28 +22,28 @@
 	</label>
 </div>
 <!-- FORM LOGIN -->
-<form name="<?php echo ConfigInfraTools::LOGIN_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::LOGIN_FORM; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FORM_LOGIN; ?>" 
+	  id="<?php echo ConfigInfraTools::FORM_LOGIN; ?>" method="post" >
 	<div class="DivContentBodyRight">
 		<!-- USER -->
 		<div class="DivContentBodyContainerLogin">
 			<img src="<?php echo $this->Config->DefaultServerImage. 
 							  'Icons/IconInfraToolsUser.png'; ?>" 
 						 alt="IconInfraToolsUser" width="32" height="32"/>
-			<input type="text" name="<?php echo ConfigInfraTools::LOGIN_USER; ?>" 
-							   id="<?php echo ConfigInfraTools::LOGIN_USER; ?>" 
+			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_LOGIN; ?>" 
+							   id="<?php echo ConfigInfraTools::FORM_FIELD_LOGIN; ?>" 
 							   class="<?php echo $this->ReturnLoginClass; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('LOGIN_USER'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_LOGIN'); ?>"
 							   value="<?php echo $this->InputValueLoginEmail; ?>" maxlength="45"
-							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::LOGIN_USER; ?>',
+							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_LOGIN; ?>',
 										   'DivContentBodySubmit',
 										   '<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 										   '');
-									   ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FORM; ?>',
+									   ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
 											'DivContentBodySubmit',
 											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 											'');"
-									   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FORM; ?>',
+									   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
 											'DivContentBodySubmit',
 											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 											'');"/>
@@ -62,11 +62,11 @@
 										   'DivContentBodySubmit',
 										   '<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 										   '');
-								   ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FORM; ?>',
+								   ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
 											'DivContentBodySubmit',
 											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 											'');"
-								   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FORM; ?>',
+								   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
 											'DivContentBodySubmit',
 											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
 											'');"/>

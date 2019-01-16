@@ -507,7 +507,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		exec($Command);
 		if(file_exists($FileNamePath) && filesize($FileNamePath) > 0)
 			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::ERROR;
+		else return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug)

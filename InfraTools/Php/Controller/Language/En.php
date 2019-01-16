@@ -78,6 +78,8 @@ class En
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Department Initials";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Department name";
 	const FORM_FIELD_EDIT                                           = "Edit";
+	const FORM_FIELD_LOGIN                                          = "Login (E-mail or Unique ID)";
+	const FORM_FIELD_SELECT_NONE                                    = "None";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Active";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporation can change?";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "Department can change?";
@@ -91,6 +93,8 @@ class En
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER             = "Number";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE              = "Value";
 	const FORM_FIELD_TEAM_DESCRIPTION                               = "Team description";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Description";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Description";
 	const FORM_FIELD_TEAM_ID                                        = "Team id";
 	const FORM_FIELD_TEAM_NAME                                      = "Team name";
@@ -101,7 +105,9 @@ class En
 	const FORM_FIELD_TICKET_SUGGESTION                              = "Suggestion";
 	const FORM_FIELD_TICKET_TITLE                                   = "Title";
 	const FORM_FIELD_TICKET_TYPE                                    = "Ticket Type";
+	const FORM_FIELD_TYPE_SERVICE_NAME                              = "Type service";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Description";
+	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Two step verification";
 	const FORM_INVALID_CAPTCHA                                      = "The captcha value does not match";
 	const FORM_INVALID_CORPORATION_NAME                             = "Invalid Corporation Name";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantity of characters exceeds the maximum allowed for "
@@ -213,8 +219,7 @@ class En
 	const FORM_INVALID_USER_UNIQUE_ID                               = "Invalid user unique id";
 	const FORM_INVALID_USER_UNIQUE_ID_SIZE                          = "Quantity of characters exceeds the maximum allowed for "
 		                                                            . "user unique id";
-	const FORM_SELECT_DEFAULT                                       = "Select";
-	const FORM_FIELD_SELECT_NONE                                    = "None";             
+	const FORM_SELECT_DEFAULT                                       = "Select";             
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Your password has been reseted";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "Your password was reset and your new password is: ";
 	const GENDER                                                    = "Gender";
@@ -766,15 +771,11 @@ class En
 	const TICKET_INSERT_ERROR                                       = "Error while trying to register ticket";
 	const TICKET_INSERT_SUCCESS                                     = "Ticket registered succesfully";
 	const TICKET_NOT_FOUND                                          = "Ticket not found";
-	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Two step verification";
 	const TYPE                                                      = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Error obtaining types of association";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "Types of association obtained successfully";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "Description";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "Type of association between a user and a team not found";
-	const TYPE_SERVICE_NAME                                         = "Type Service Name";
-	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Description";
-	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Type status ticket not found";
 	const TYPE_TICKET_NOT_FOUND                                     = "Type ticket not found";
 	const TYPE_USER_ID                                              = "Id";
@@ -1248,7 +1249,6 @@ class En
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED          = "Falied to send the code to your e-mail, please try again";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG             = "InfraTools - Login Two Step Verification";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT            = "Here is the code needed to login";
-	const LOGIN_USER                                             = "Login (E-mail or Unique ID)";
 	
 	/* Body Page Not Found */
 	
@@ -1399,7 +1399,7 @@ class En
 	const GET_HOSTNAME_SUCCESS                                   = "The hostname for the ip address [0] is [1]";
 	
 	/* Function: Get Ip Address Client */
-	const GET_IP_ADDRESS_CLIENT_FAILED                           = "Unknown client ip address";
+	const GET_ERROR_IP_ADDRESS_CLIENT                           = "Unknown client ip address";
 	const GET_IP_ADDRESS_CLIENT_SUCCESS                          = "Your ip address: [0]";
 	
 	/* Function: Get Ip Addresses */

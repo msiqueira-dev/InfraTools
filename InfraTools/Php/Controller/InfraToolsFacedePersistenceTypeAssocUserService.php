@@ -125,10 +125,10 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, $Debug)
@@ -175,10 +175,10 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
@@ -228,10 +228,10 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
@@ -280,9 +280,9 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }

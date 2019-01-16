@@ -104,7 +104,7 @@ class Network
 				$IpAddress = "127.0.0.1";
 			return Config::SUCCESS;
 		}
-		else return Config::GET_IP_ADDRESS_CLIENT_FAILED;
+		else return Config::GET_ERROR_IP_ADDRESS_CLIENT;
 	}
 	
 	public function GetOperationalSystem(&$OsPlatform) 
@@ -113,7 +113,7 @@ class Network
 		if(empty($_SERVER['HTTP_USER_AGENT'])) 
 		{
 			$OsPlatform = 'unrecognized';
-			return Config::GET_OPERATIONAL_SYSTEM_INVALID_OS;
+			return Config::GET_ERROR_INVALID_OS;
 		}
 	    $userAgent      = $_SERVER['HTTP_USER_AGENT'];
     	$osArray        =   array(
@@ -152,6 +152,6 @@ class Network
 	    }
    	 	if($OsPlatform != "")
 			return Config::SUCCESS;
-		else return Config::GET_OPERATIONAL_SYSTEM_INVALID_OS;
+		else return Config::GET_ERROR_INVALID_OS;
 	}
 }

@@ -55,7 +55,7 @@
 		if (!cli_set_process_title('INFRATOOLS_MONITORING')) 
 		{
 			echo "Unable to set process title for PID: " . $pid . "...\n";
-			return INFRATOOLS_MONITORING_ERROR_SCRIPT_INIT_PROCCESS_ERROR;
+			return INFRATOOLS_MONITORING_ERROR_SCRIPT_INIT_PROCCESS_RETURN_ERROR;
 		}
 		else
 		{
@@ -83,7 +83,7 @@
 			else 
 			{
 				echo "RETURN: 0x" . dechex($return) . " | Could not delete service...\n";
-				return INFRATOOLS_MONITORING_DELETE_ERROR;
+				return INFRATOOLS_MONITORING_DELETE_RETURN_ERROR;
 			}
 		}
 		else 
@@ -134,7 +134,7 @@
 		else
 		{
 			echo "RETURN: 0x" . dechex($return) . " | Service installed...\n";
-			return INFRATOOLS_MONITORING_INSTALL_ERROR;
+			return INFRATOOLS_MONITORING_INSTALL_RETURN_ERROR;
 		}
 	}
 
@@ -180,7 +180,7 @@
 			else
 			{
 				echo "RETURN: 0x" . dechex($return) . " | Service not installed...\n";
-				return INFRATOOLS_MONITORING_INSTALL_ERROR;
+				return INFRATOOLS_MONITORING_INSTALL_RETURN_ERROR;
 			}
 		}
 		else
@@ -204,7 +204,7 @@
 			}
 			pclose($handle);
 		}
-		else return INFRATOOLS_MONITORING_ERROR_SCRIPT_INIT_PROCCESS_ERROR;
+		else return INFRATOOLS_MONITORING_ERROR_SCRIPT_INIT_PROCCESS_RETURN_ERROR;
 	}
 
 	function ServiceTerminateProccess()
@@ -218,7 +218,7 @@
 		else
 		{
 			echo "The INFRATOOL_MONITORING does not exists and could not be terminated...\n";
-			return INFRATOOLS_MONITORING_TERMINATE_PROCCESS_ERROR;
+			return INFRATOOLS_MONITORING_TERMINATE_PROCCESS_RETURN_ERROR;
 		}
 	}
 

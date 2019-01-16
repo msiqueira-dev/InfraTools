@@ -508,7 +508,7 @@ class Factory
 			}
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public function CreatePageForm()

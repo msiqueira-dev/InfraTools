@@ -17,6 +17,12 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
+if (!class_exists("TypeService"))
+{
+	if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsTypeService.php"))
+		include_once(SITE_PATH_PHP_MODEL . "InfraToolsTypeService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsTypeService');
+}
 if (!class_exists("PageAdmin"))
 {
 	if(file_exists(SITE_PATH_PHP_VIEW . "PageAdmin.php"))
@@ -46,6 +52,8 @@ class PageAdminTypeService extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
+		
 		//FORM SUBMIT BACK
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{

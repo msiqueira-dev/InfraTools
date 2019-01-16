@@ -102,8 +102,8 @@ class FacedePersistenceTypeUser
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_TYPE_USER_DELETE_FAILED;
 				}
 			}
@@ -111,11 +111,11 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeUserInsert($TypeUserDescription, $Debug, $MySqlConnection)
@@ -143,10 +143,10 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug, $MySqlConnection)
@@ -194,10 +194,10 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
@@ -228,7 +228,7 @@ class FacedePersistenceTypeUser
 			}
 			return $return;
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug, $MySqlConnection)
@@ -270,10 +270,10 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
@@ -316,10 +316,10 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, $Debug, $MySqlConnection)
@@ -340,7 +340,7 @@ class FacedePersistenceTypeUser
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_UPDATE_SAME_VALUE;
+					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else
 				{
@@ -353,10 +353,10 @@ class FacedePersistenceTypeUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }
 ?>

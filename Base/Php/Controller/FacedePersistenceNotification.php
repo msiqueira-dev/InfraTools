@@ -103,8 +103,8 @@ class FacedePersistenceNotification
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_TYPE_USER_DELETE_FAILED;
 				}
 			}
@@ -112,10 +112,10 @@ class FacedePersistenceNotification
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function NotificationDeleteByTextAndUserEmail($Text, $UserEmail, $Debug, $MySqlConnection)

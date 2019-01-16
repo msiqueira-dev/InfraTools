@@ -101,8 +101,8 @@ class FacedePersistenceTicket
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_TYPE_USER_DELETE_FAILED;
 				}
 			}
@@ -110,11 +110,11 @@ class FacedePersistenceTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TicketInsert($TypeTicketDescription, $Debug, $MySqlConnection)
@@ -143,10 +143,10 @@ class FacedePersistenceTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug, $MySqlConnection)
@@ -199,10 +199,10 @@ class FacedePersistenceTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug, $MySqlConnection)
@@ -244,10 +244,10 @@ class FacedePersistenceTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function TicketUpdateByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection)
@@ -269,7 +269,7 @@ class FacedePersistenceTicket
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_UPDATE_SAME_VALUE;
+					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else
 				{
@@ -282,7 +282,7 @@ class FacedePersistenceTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

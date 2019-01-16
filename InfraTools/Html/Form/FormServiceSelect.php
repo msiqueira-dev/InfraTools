@@ -75,20 +75,38 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>"
-							   class="<?php echo $this->ReturnServiceIdClass; ?>"
-							   onkeyup="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnServiceIdClass; ?>"
+							   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
 												   '', 'true');
-										KeyEnterClickButton('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');"
-							   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+										KeyEnterClickButton('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');
+										ValidateMultiplyFields(
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   'DivContentBodySubmit',
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '');"
+							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
-												   '', true);"
-							   onchange="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+												   '', true);
+										ValidateMultiplyFields(
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   'DivContentBodySubmit',
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '');"
+							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
-												   '', true);"
+												   '', true);
+										ValidateMultiplyFields(
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   'DivContentBodySubmit',
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?>" 
 							   value="<?php echo $this->InputValueServiceId; ?>" maxlength="4" />
 		</div>
@@ -102,26 +120,49 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>"
-							   class="<?php echo $this->ReturnServiceNameClass; ?>"
-							   onkeyup="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnServiceNameClass; ?>"
+							   onkeyup="ValidateServiceName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
 												   '', 'true');
-										KeyEnterClickButton('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');"
-							   onblur="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+										KeyEnterClickButton('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');
+										ValidateMultiplyFields(
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   'DivContentBodySubmit',
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '');"
+							   onblur="ValidateServiceName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
-												   '', true);"
-							   onchange="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+												   '', true);
+										ValidateMultiplyFields(
+								   				   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   'DivContentBodySubmit',
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '');"
+							   onchange="ValidateServiceName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
-												   '', true);"
+												   '', true);
+										 ValidateMultiplyFields(
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   'DivContentBodySubmit',
+								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>" 
 							   value="<?php echo $this->InputValueServiceName; ?>" maxlength="45" />
 		</div>	
 	</div>
 	<!-- SUBMIT -->
-	<div class="DivContentBodyContainerSubmit">
+	<div class="DivContentBodyContainerSubmit"
+	     onmouseover="ValidateMultiplyFields(
+								   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								   'DivContentBodySubmit',
+								   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								   '');">
 		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>" 
 								 id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"

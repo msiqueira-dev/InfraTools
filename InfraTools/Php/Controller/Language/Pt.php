@@ -78,6 +78,8 @@ class Pt
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Código do Departamento";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Nome do departamento";
 	const FORM_FIELD_EDIT                                           = "Editar";
+	const FORM_FIELD_LOGIN                                          = "Login (E-mail ou ID Único)";
+	const FORM_FIELD_SELECT_NONE                                    = "Nenhuma";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Ativo";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporação pode mudar?";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                  = "Departamento pode mudar?";
@@ -100,8 +102,12 @@ class Pt
 	const FORM_FIELD_TICKET_SUGGESTION                              = "Sugestão";
 	const FORM_FIELD_TICKET_TITLE                                   = "Título";
 	const FORM_FIELD_TICKET_TYPE                                    = "Tipo de solicitação";
+	const FORM_FIELD_TYPE_SERVICE_NAME                              = "Tipo de serviço";
+	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Descrição";
+	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Descrição";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Descrição";
+	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Verificação duas etapas";
 	const FORM_INVALID_CAPTCHA                                      = "O valor catpcha não confere";
 	const FORM_INVALID_CORPORATION_NAME                             = "Nome de corporação inválida";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantidade de caracteres excede o tamanho máximo para " 
@@ -214,7 +220,6 @@ class Pt
 	const FORM_INVALID_USER_UNIQUE_ID_SIZE                          = "Quantidade de caracteres excede o tamanho máximo para a "
 	                                                                . "identificador único";
 	const FORM_SELECT_DEFAULT                                       = "Selecione";
-	const FORM_FIELD_SELECT_NONE                                    = "Nenhuma";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Sua senha foi restaurada";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "Sua senha foi restaurada e sua nova senha é ";
 	const GENDER                                                    = "Gênero";
@@ -769,16 +774,12 @@ class Pt
 	const TICKET_INSERT_ERROR                                       = "Erro ao tentar cadastrar solicitação";
 	const TICKET_INSERT_SUCCESS                                     = "Solicitação cadastrada com sucesso";
 	const TICKET_NOT_FOUND                                          = "Solicitação não encontrada";
-	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Verificação duas etapas";
 	const TYPE                                                      = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Erro ao obter tipos de associação";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "Tipos de associação obtidos com sucesso";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "Descrição";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "Tipo de associação entre usuário e equipe não "
 		                                                            . "encontrada";
-	const TYPE_SERVICE_NAME                                         = "Nome de tipo de serviço";
-	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Descrição";
-	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Tipo de estado de solicitação não encontrado";
 	const TYPE_TICKET_NOT_FOUND                                     = "Tipo de solicitação não encontrado";
 	const TYPE_USER_ID                                              = "Id";
@@ -1260,7 +1261,6 @@ class Pt
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED           = "Falha ao enviar código para seu e-mail, por favor tente de novo";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG              = "InfraTools - Login Verificação duas etapas";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT             = "Aqui está o código necessário para efetuar login";
-	const LOGIN_USER                                              = "Login (E-mail ou ID Único)";
 	
 	/* Body Page Not Found */
 	
@@ -1412,7 +1412,7 @@ class Pt
 	const GET_HOSTNAME_SUCCESS                                   = "Domínio para o endereço de ip [0] é [1]";
 	
 	/* Function: Get Ip Address Client */
-	const GET_IP_ADDRESS_CLIENT_FAILED                           = "Endereço de ip de cliente desconhecido";
+	const GET_ERROR_IP_ADDRESS_CLIENT                           = "Endereço de ip de cliente desconhecido";
 	const GET_IP_ADDRESS_CLIENT_SUCCESS                          = "Seu endereço de ip: [0]";
 	
 	/* Function: Get Ip Addresses */

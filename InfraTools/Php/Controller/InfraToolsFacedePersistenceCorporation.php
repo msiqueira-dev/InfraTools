@@ -122,10 +122,10 @@ class InfraToolsFacedePersistenceCorporation
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
@@ -158,7 +158,7 @@ class InfraToolsFacedePersistenceCorporation
 			}
 			return $return;
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection)
@@ -201,10 +201,10 @@ class InfraToolsFacedePersistenceCorporation
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
@@ -238,7 +238,7 @@ class InfraToolsFacedePersistenceCorporation
 			}
 			return $return;
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function CorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
@@ -288,10 +288,10 @@ class InfraToolsFacedePersistenceCorporation
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, 
@@ -340,9 +340,9 @@ class InfraToolsFacedePersistenceCorporation
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }

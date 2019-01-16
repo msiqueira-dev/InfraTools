@@ -176,10 +176,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, 
@@ -279,10 +279,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceInfraToolsUser, 
@@ -382,10 +382,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount,
@@ -484,10 +484,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, 
@@ -586,10 +586,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceInfraToolsUser,
@@ -688,10 +688,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
@@ -791,10 +791,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug, $MySqlConnection)
@@ -867,10 +867,10 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceInfraToolsUser, $Debug, $MySqlConnection)
@@ -940,9 +940,9 @@ class InfraToolsFacedePersistenceUser
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }

@@ -298,7 +298,12 @@ class Page
 	public    $InputValueTeamName                                   = "";
 	public    $InputValueTeamNameRadio                              = "";
 	public    $InputValueTicketDescription                          = "";
+	public    $InputValueTicketId                                   = "";
+	public    $InputValueTicketIdRadio                              = "";
+	public    $InputValueTicketSuggestion                           = "";
+	public    $InputValueTicketStatus                               = "";
 	public    $InputValueTicketTitle                                = "";
+	public    $InputValueTicketTitleRadio                           = "";
 	public    $InputValueTicketType                                 = "";
 	public    $InputValueTwoStepVerification                        = "";
 	public    $InputValueTypeAssocUserServiceDescription            = "";
@@ -453,7 +458,7 @@ class Page
 			if(!get_object_vars($this->Config)[get_class($this).Config::ENABLED])
 			{
 				$this->PageEnabled = FALSE;
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
 		}
 		$this->PageEnabled = TRUE;
@@ -566,7 +571,7 @@ class Page
 						else
 						{
 							$this->ShowDivReturnError("LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED");
-							return Config::ERROR;
+							return Config::RETURN_ERROR;
 						}
 					}
 					return Config::SUCCESS;
@@ -576,7 +581,7 @@ class Page
 					$this->User = $user;
 					$this->Session->SetSessionValue(Config::SESS_USER, $this->User);
 					$this->LoadNotConfirmedToolTip();
-					return Config::WARNING;
+					return Config::RETURN_WARNING;
 				}
 			}
 			else $this->ShowDivReturnError("USER_INACTIVE");
@@ -592,7 +597,7 @@ class Page
 			$this->Session->GetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION, $value);
 			if($this->InputValueLoginTwoStepVerificationCode == $value)
 				return Config::SUCCESS;
-			else return Config::ERROR;
+			else return Config::RETURN_ERROR;
 		}
 		else
 		{
@@ -613,7 +618,7 @@ class Page
 			}
 			if($this->Session->GetSessionValue(Config::SESS_USER, $this->User) == Config::SUCCESS)
 				return Config::SUCCESS;
-			else return Config::ERROR;
+			else return Config::RETURN_ERROR;
 		}
 		else return Config::SUCCESS;
 	}
@@ -627,7 +632,7 @@ class Page
 		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Application, 
 																  $UserEmail, $UserName, $code, $Debug) == Config::SUCCESS)
 			return Config::SUCCESS;
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public static function TagOnloadFocusField($Form, $Field)
@@ -658,11 +663,11 @@ class Page
 			$this->ShowDivReturnSuccess('CORPORATION_DELETE_SUCCESS');
 			return $return;
 		}
-		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			$constant = "CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT";
 		else $constant = "CORPORATION_DELETE_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function CorporationInsert($CorporationActive, $CorporationName, $Debug)
@@ -699,14 +704,14 @@ class Page
 				$this->ShowDivReturnSuccess('CORPORATION_INSERT_SUCCESS');
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("CORPORATION_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function CorporationLoadData(&$InstanceCorporation)
@@ -721,7 +726,7 @@ class Page
 			$this->InputValueRegisterDate          = $InstanceCorporation->GetRegisterDate();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
@@ -737,7 +742,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
@@ -791,7 +796,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
-		return Config::FORM_FIELD_ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
@@ -845,19 +850,19 @@ class Page
 				$this->ShowDivReturnSuccess('CORPORATION_UPDATE_SUCCESS');
 				return $return;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS");
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
 		}
 		$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug)
@@ -873,7 +878,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("COUNTRY_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug)
@@ -885,11 +890,11 @@ class Page
 			$this->ShowDivReturnSuccess('DEPARTMENT_DELETE_SUCCESS');
 			return Config::SUCCESS;
 		}
-		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			$constant = "DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS";	
 		else $constant = "DEPARTMENT_DELETE_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug)
@@ -958,19 +963,19 @@ class Page
 				$this->ShowDivReturnSuccess('DEPARTMENT_INSERT_SUCCESS');
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
-			elseif($return == Config::MYSQL_ERROR_FOREIGN_KEY_INSERT_RESTRICT)
+			elseif($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_INSERT_RESTRICT)
 			{
 				$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR_NO_CORPORATION");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentLoadData($InstanceDepartment)
@@ -983,7 +988,7 @@ class Page
 			$this->InputValueRegisterDate        = $InstanceDepartment->GetRegisterDate();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug)
@@ -1001,7 +1006,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceDepartment, 
@@ -1042,7 +1047,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug)
@@ -1081,7 +1086,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
@@ -1116,7 +1121,7 @@ class Page
 				return $return;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
@@ -1174,7 +1179,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug)
@@ -1187,7 +1192,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew, $DepartmentNameNew, 
@@ -1249,14 +1254,14 @@ class Page
 				$this->ShowDivReturnSuccess("DEPARTMENT_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug)
@@ -1323,18 +1328,18 @@ class Page
 					else
 					{
 						$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-						return Config::ERROR;
+						return Config::RETURN_ERROR;
 					}
 				}
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = NULL)
@@ -1456,8 +1461,8 @@ class Page
 				if($loginStatus == Config::USER_NOT_LOGGED_IN || $loginStatus == Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
 				{
 					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_LOGGED_IN) . ".php");
-					$this->InputFocus = Config::LOGIN_USER;
-					echo $this->TagOnloadFocusField(Config::LOGIN_FORM, $this->InputFocus);
+					$this->InputFocus = Config::FORM_FIELD_LOGIN;
+					echo $this->TagOnloadFocusField(Config::FORM_LOGIN, $this->InputFocus);
 				}
 				elseif($loginStatus == Config::USER_NOT_CONFIRMED)
 				{
@@ -1476,7 +1481,7 @@ class Page
 			echo Config::HTML_TAG_END;
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function LoadDataFromSession($SessionKey, $Function, &$Instance)
@@ -1487,12 +1492,12 @@ class Page
 			{
 				if($this->Session->GetSessionValue($SessionKey, $Instance) != Config::SUCCESS)
 				{	
-					return Config::ERROR;
+					return Config::RETURN_ERROR;
 				}
 			}
 			return $this->$Function($Instance);
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function PageStackSessionLoad()
@@ -1561,7 +1566,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_DELETE_ERROR");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
@@ -1648,14 +1653,14 @@ class Page
 				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("SYSTEM_CONFIGURATION_INSERT_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
     protected function SystemConfigurationLoadData($InstanceSystemConfiguration)
@@ -1673,7 +1678,7 @@ class Page
 			$this->InputValueSystemConfigurationOptionValue       = $InstanceSystemConfiguration->GetSystemConfigurationOptionValue();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;	
+		else return Config::RETURN_ERROR;	
 	}
 	
 	protected function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug)
@@ -1690,7 +1695,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
@@ -1732,7 +1737,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
@@ -1773,7 +1778,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
@@ -1877,14 +1882,14 @@ class Page
 				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_UPDATE_ERROR");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function TeamDeleteByTeamId($InstanceTeam, $Debug)
@@ -1900,11 +1905,11 @@ class Page
 				return Config::SUCCESS;
 			}
 		}
-		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			$constant = "TEAM_DELETE_ERROR_DEPENDENCY_TEAM";
 		else $constant = "TEAM_DELETE_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TeamInsert($TeamDescription, $TeamName, $Debug)
@@ -1957,14 +1962,14 @@ class Page
 				$this->ShowDivReturnSuccess("TEAM_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TEAM_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TeamLoadData(&$InstanceTeam)
@@ -1979,7 +1984,7 @@ class Page
 			$this->InputValueRegisterDate     = $InstanceTeam->GetRegisterDate();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug)
@@ -1997,7 +2002,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug)
@@ -2035,7 +2040,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug)
@@ -2070,7 +2075,7 @@ class Page
 				return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug)
@@ -2129,14 +2134,14 @@ class Page
 				$this->ShowDivReturnSuccess("TEAM_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TEAM_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketDeleteByTicketId($InstanceTicket, $Debug)
@@ -2151,11 +2156,11 @@ class Page
 				$this->ShowDivReturnSuccess("TICKET_DELETE_SUCCESS");
 				return $return;
 			}
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 				$constant = "TICKET_ERROR_DEPENDENCY";
 			else $constant = "TICKET_DELETE_ERROR";
 			$this->ShowDivReturnError($constant);
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 	
@@ -2252,14 +2257,14 @@ class Page
 				$this->ShowDivReturnSuccess("TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TICKET_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketLoadData($InstanceTicket)
@@ -2276,7 +2281,7 @@ class Page
 			$this->InputValueType              = $InstanceTypeStatusTicket->GetTicketTypeName();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug)
@@ -2294,7 +2299,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug)
@@ -2332,7 +2337,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug)
@@ -2370,7 +2375,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug)
@@ -2408,7 +2413,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew,
@@ -2508,14 +2513,14 @@ class Page
 				$this->TicketLoadData($InstanceTicket);
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug)
@@ -2540,11 +2545,11 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS");
 				return $return;
 			}
-			if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 				$constant = "TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM";
 			else $constant = "TYPE_ASSOC_USER_TEAM_DELETE_ERROR";
 			$this->ShowDivReturnError($constant);
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 	
@@ -2580,14 +2585,14 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamLoadData(&$InstanceTypeAssocUserTeam)
@@ -2600,7 +2605,7 @@ class Page
 			$this->InputValueTypeAssocUserTeamDescription  = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug)
@@ -2618,7 +2623,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
@@ -2658,7 +2663,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
@@ -2702,14 +2707,14 @@ class Page
 					return Config::SUCCESS;
 				}
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_UPDATE_ERROR");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function TypeStatusTicketDeleteByTypeStatusTicketDescription(&$InstanceTypeStatusTicket, $Debug)
@@ -2724,11 +2729,11 @@ class Page
 			$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_DELETE_SUCCESS");
 			return $return;
 		}
-		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			$constant = "TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET";
 		else $constant = "TYPE_STATUS_TICKET_DELETE_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	
@@ -2765,14 +2770,14 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeStatusTicketLoadData($InstanceTypeStatusTicket)
@@ -2783,7 +2788,7 @@ class Page
 			$this->InputValueRegisterDate                 = $InstanceTypeStatusTicket->GetRegisterDate();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug)
@@ -2801,7 +2806,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, 
@@ -2844,7 +2849,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew,
@@ -2889,14 +2894,14 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket, $Debug)
@@ -2909,11 +2914,11 @@ class Page
 			$this->ShowDivReturnSuccess("TYPE_TICKET_DELETE_SUCCESS");
 			return Config::SUCCESS;
 		}
-		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			$constant = "TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET";
 		else $constant = "TYPE_TICKET_DELETE_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeTicketInsert($TypeTicketDescription, $Debug)
@@ -2949,14 +2954,14 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_TICKET_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeTicketLoadData($InstanceTypeTicket)
@@ -2967,7 +2972,7 @@ class Page
 			$this->InputValueRegisterDate           = $InstanceTypeTicket->GetRegisterDate();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug)
@@ -2983,7 +2988,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug)
@@ -3023,7 +3028,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug)
@@ -3065,14 +3070,14 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_TICKET_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_UPDATE_ERROR");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function TypeUserDeleteByTypeUserDescription($InstanceTypeUser, $Debug)
@@ -3088,11 +3093,11 @@ class Page
 				return $return;
 			}
 		}
-		if($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			$constant = "TYPE_USER_DELETE_ERROR_DEPENDENCY_USER";
 		else $constant = "TYPE_USER_DELETE_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserInsert($TypeUserDescription, $Debug)
@@ -3128,14 +3133,14 @@ class Page
 				$this->ShowDivReturnSuccess("TYPE_USER_INSERT_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserLoadData(&$InstanceTypeUser)
@@ -3146,7 +3151,7 @@ class Page
 			$this->InputValueRegisterDate         = $InstanceTypeUser->GetRegisterDate();
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug)
@@ -3164,7 +3169,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug)
@@ -3204,7 +3209,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug)
@@ -3240,7 +3245,7 @@ class Page
 				return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
@@ -3250,7 +3255,7 @@ class Page
 		if($return == Config::SUCCESS)
 			return Config::SUCCESS;
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, &$InstanceTypeUser, $Debug)
@@ -3293,14 +3298,14 @@ class Page
 					$this->ShowDivReturnSuccess("TYPE_USER_UPDATE_SUCCESS");
 					return Config::SUCCESS;
 				}
-				elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+				elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 				{
 					$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-					return Config::WARNING;
+					return Config::RETURN_WARNING;
 				}
 			}
 			$this->ShowDivReturnError("TYPE_USER_UPDATE_ERROR");
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 	
@@ -3319,13 +3324,13 @@ class Page
 			$this->ShowDivReturnSuccess("USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS");
 			return Config::SUCCESS;
 		}
-		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+		elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return Config::WARNING;
+			return Config::RETURN_WARNING;
 		}
 		$this->ShowDivReturnError("USER_TWO_STEP_VERIFICATION_CHANGE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserDeleteByUserEmail(&$InstanceUser, $Debug)
@@ -3371,16 +3376,16 @@ class Page
 			elseif($return == Config::MYSQL_USER_DELETE_FAILED_NOT_FOUND)
 			{
 				$this->ShowDivReturnError("USER_NOT_FOUND");
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
-			elseif($return == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			elseif($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			{
 				$this->ShowDivReturnWarning("USER_NOT_FOUND");
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
 		}
 		$this->ShowDivReturnError("USER_DELETE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserInsert($Application, $SendEmail, 
@@ -3729,28 +3734,28 @@ class Page
 					{
 						$instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
 						$this->ShowDivReturnError("REGISTER_EMAIL_ERROR");
-						return Config::ERROR;
+						return Config::RETURN_ERROR;
 					}
 				}
-				elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+				elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 				{
 					$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-					return Config::WARNING;
+					return Config::RETURN_WARNING;
 				}
 				else
 				{
 					$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
-					return Config::ERROR;
+					return Config::RETURN_ERROR;
 				}
 			}
 			else
 			{
 				$this->ShowDivReturnWarning("REGISTER_EMAIL_ALREADY_REGISTERED");
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
 		}
 		$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserLoadData($InstanceUser)
@@ -3846,7 +3851,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("RESEND_CONFIRMATION_LINK_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -3861,7 +3866,7 @@ class Page
 			return Config::SUCCESS;
 		}
 		$this->ShowDivReturnError("USER_NOT_FOUND");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser, 
@@ -3905,12 +3910,12 @@ class Page
 				elseif(empty($ArrayInstanceUser))
 				{
 					$this->ShowDivReturnWarning("USER_SELECT_BY_CORPORATION_NAME_WARNING");
-					return Config::WARNING;	
+					return Config::RETURN_WARNING;	
 				}
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_CORPORATION_NAME_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
@@ -3968,12 +3973,12 @@ class Page
 				elseif(empty($ArrayInstanceUser))
 				{
 					$this->ShowDivReturnWarning("USER_SELECT_BY_DEPARTMENT_NAME_WARNING");
-					return Config::WARNING;	
+					return Config::RETURN_WARNING;	
 				}
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_DEPARTMENT_NAME_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByHashCode($HashCode, &$UserInstance, $Debug)
@@ -3995,7 +4000,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_HASH_CODE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4034,11 +4039,11 @@ class Page
 			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TEAM_ID_WARNING");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TEAM_ID_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4077,11 +4082,11 @@ class Page
 			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("TICKET_SELECT_BY_TICKET_ID_WARNING");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("TICKET_SELECT_BY_TICKET_ID_ERROR");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
@@ -4122,11 +4127,11 @@ class Page
 			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
@@ -4167,11 +4172,11 @@ class Page
 			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR");
-		return Config::ERROR;	
+		return Config::RETURN_ERROR;	
 	}
 	
 	protected function UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4212,11 +4217,11 @@ class Page
 			elseif(empty($ArrayInstanceUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING");
-				return Config::WARNING;	
+				return Config::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug)
@@ -4255,7 +4260,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_USER_EMAIL_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug)
@@ -4292,7 +4297,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_USER_UNIQUE_ID_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function  UserSelectExistsByUserEmail($Captcha, $UserEmail, $Debug)
@@ -4347,7 +4352,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug)
@@ -4384,7 +4389,7 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
@@ -4395,7 +4400,7 @@ class Page
 			return $FacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
 		}
 		$this->ShowDivReturnError("REGISTER_CONFIRMATION_SELECT_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug)
@@ -4424,13 +4429,13 @@ class Page
 			$this->InputFocus = Config::DIV_RETURN;
 			return Config::SUCCESS;
 		}
-		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+		elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return Config::WARNING;
+			return Config::RETURN_WARNING;
 		}
 		$this->ShowDivReturnError("USER_UPDATE_ACTIVE_BY_USER_EMAIL_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
@@ -4543,14 +4548,14 @@ class Page
 				$this->ShowDivReturnSuccess("ASSOC_USER_CORPORATION_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("ASSOC_USER_CORPORATION_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserUpdateByUserEmail($BirthDateDayNew, $BirthDateMonthNew, $BirthDateYearNew, 
@@ -4796,19 +4801,19 @@ class Page
 				$this->ShowDivReturnSuccess("ACCOUNT_UPDATE_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
-			elseif($return == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnError("UPDATE_ERROR_USER_UNIQUE_ID");
-				return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
+				return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
 			}
 		}
 		$this->ShowDivReturnError("ACCOUNT_UPDATE_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug)
@@ -4868,7 +4873,7 @@ class Page
 																			 NULL, 
 																			 $InstanceUser->GetEmail(), 
 																			 $Debug);
-				if($return == Config::MYSQL_UPDATE_SAME_VALUE)
+				if($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 					$return = Config::SUCCESS;
 			}
 			if($return == Config::SUCCESS && $this->InputValueCorporationName != NULL)
@@ -4891,14 +4896,14 @@ class Page
 				$this->ShowDivReturnSuccess("USER_CHANGE_CORPORATION_SUCCESS");
 				return Config::SUCCESS;	
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("USER_CHANGE_CORPORATION_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, $UserEmail, $Debug)
@@ -4953,14 +4958,14 @@ class Page
 				$this->ShowDivReturnSuccess("USER_UPDATE_USER_PASSWORD_SUCCESS");
 				return Config::SUCCESS;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("USER_UPDATE_USER_PASSWORD_WARNING");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("USER_UPDATE_USER_PASSWORD_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserUpdatePasswordRandomByUserEmail($Application, &$InstanceUser, $Debug)
@@ -4983,15 +4988,15 @@ class Page
 				return Config::SUCCESS;
 			}
 			$this->ShowDivReturnError("SEND_EMAIL_ERROR");
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
-		elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+		elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return Config::WARNING;	
+			return Config::RETURN_WARNING;	
 		}
 		$this->ShowDivReturnError("PASSWORD_RESET_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug)
@@ -5026,10 +5031,10 @@ class Page
 				$this->ShowDivReturnSuccess("USER_UPDATE_USER_CONFIRMED_SUCCESS");
 				return $return;
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}	
 		$this->ShowDivReturnError("USER_UPDATE_USER_CONFIRMED_ERROR");
@@ -5079,14 +5084,14 @@ class Page
 					return Config::SUCCESS;
 				}
 			}
-			elseif($return == Config::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::WARNING;
+				return Config::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("USER_CHANGE_CORPORATION_ERROR");
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	public function CheckInputImage($Input)
@@ -5118,7 +5123,7 @@ class Page
 	{
 		if (isset($_POST[Config::LOGIN_FORM_SUBMIT]))
 		{
-			$this->InputValueLoginEmail     = $_POST[Config::LOGIN_USER];
+			$this->InputValueLoginEmail     = $_POST[Config::FORM_FIELD_LOGIN];
 			$this->InputValueLoginPassword  = $_POST[Config::LOGIN_PASSWORD];
 			//VALIDA LOGIN
 			if(!empty($this->InputValueLoginEmail) && !empty($this->InputValueLoginPassword))
@@ -5128,7 +5133,7 @@ class Page
 				else
 				{
 					$this->ShowDivReturnError("LOGIN_INVALID_LOGIN");
-					return Config::ERROR;
+					return Config::RETURN_ERROR;
 				}
 			}
 			else
@@ -5146,11 +5151,11 @@ class Page
 			}
 			$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);	
 			$this->ShowDivReturnError("LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR");
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 		elseif(isset($_POST[Config::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD]))
 		{
-			$this->InputValueLoginEmail     = $_POST[Config::LOGIN_USER];
+			$this->InputValueLoginEmail     = $_POST[Config::FORM_FIELD_LOGIN];
 			Page::GetCurrentDomain($domain);
 			if($this->InputValueLoginEmail != "")
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
@@ -5177,7 +5182,7 @@ class Page
 					return Config::SUCCESS;
 			}
 		}
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	public function CheckGetOrPostContainsKey($Key)
@@ -5192,7 +5197,7 @@ class Page
 			$_GET = $_POST;
 			return Config::SUCCESS;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public function CheckPostContainsKey($Key)
@@ -5211,7 +5216,7 @@ class Page
 					return Config::SUCCESS;
 			}
 		}
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	public function GetCurrentPage()
@@ -5328,7 +5333,7 @@ class Page
 	
 	public function LoadPage()
 	{	
-		if(!$this->PageEnabled) return Config::ERROR;
+		if(!$this->PageEnabled) return Config::RETURN_ERROR;
 		$this->LoadHtml(FALSE);
 	}
 	
@@ -5409,7 +5414,7 @@ class Page
 	public function LoadNotConfirmedToolTip()
 	{
 		$this->ShowDivReturnWarning(Config::USER_NOT_CONFIRMED);
-		return Config::WARNING;
+		return Config::RETURN_WARNING;
 	}
 	
 	public function RedirectPage($Page)
@@ -5422,7 +5427,7 @@ class Page
 			{
 				header("Location: $Page");
 			}
-			else return Config::EMPTY_AMBIENT_VARIABLE;
+			else return Config::RETURN_ERROR;
 		}
 		else header("Location: $Page");
 	}
@@ -5523,7 +5528,7 @@ class Page
 			}
 			return Config::SUCCESS;
 		}
-		else return Config::EMPTY_AMBIENT_VARIABLE;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public static function GetCurrentDomain(&$currentDomain)
@@ -5544,7 +5549,7 @@ class Page
 			$currentDomain .= "/";
 			return Config::SUCCESS;
 		}
-		else return Config::EMPTY_AMBIENT_VARIABLE;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public static function GetCurrentDomainWithPort(&$currentDomain)
@@ -5565,7 +5570,7 @@ class Page
 			$currentDomain .= "/";
 			return Config::SUCCESS;
 		}
-		else return Config::EMPTY_AMBIENT_VARIABLE;
+		else return Config::RETURN_ERROR;
 	}
 }
 ?>

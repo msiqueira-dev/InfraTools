@@ -131,7 +131,7 @@ class FacedeBusiness
 								$this->Language->GetText('GET_IP_ADDRESS_CLIENT_SUCCESS'));
 			else $ReturnMessage = $ipAddress;
 		}
-		else $ReturnMessage = $this->Language->GetText('GET_IP_ADDRESS_CLIENT_FAILED');
+		else $ReturnMessage = $this->Language->GetText('GET_ERROR_IP_ADDRESS_CLIENT');
 		return $return;
 	}
 	
@@ -193,7 +193,7 @@ class FacedeBusiness
 			{
 				if($Debug == Config::CHECKBOX_CHECKED)
 					echo "Email Error: " . $return;
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
 		}
 		else return Config::SEND_EMAIL_ALREADY_SENT;
@@ -219,7 +219,7 @@ class FacedeBusiness
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 	
@@ -243,7 +243,7 @@ class FacedeBusiness
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 	
@@ -286,7 +286,7 @@ class FacedeBusiness
 			{
 				if($Debug == Config::CHECKBOX_CHECKED)
 					echo "Email Error: " . $return;
-				return Config::ERROR;
+				return Config::RETURN_ERROR;
 			}
 		}
 		else return Config::SEND_EMAIL_ALREADY_SENT;
@@ -311,7 +311,7 @@ class FacedeBusiness
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 	
@@ -334,7 +334,7 @@ class FacedeBusiness
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::ERROR;
+			return Config::RETURN_ERROR;
 		}
 	}
 }

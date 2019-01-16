@@ -183,7 +183,7 @@ class FormValidator
 			return $this->ValidateURL($Value, $DefaultValue);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID)
 			return $this->ValidateUserUniqueId($Value, $DefaultValue);
-		else return self::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public function ValidateBool($Bool)

@@ -262,7 +262,7 @@ abstract class PageInfraTools extends Page
 			return $return;
 		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
@@ -284,7 +284,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug)
@@ -299,7 +299,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function DepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
@@ -339,7 +339,7 @@ abstract class PageInfraTools extends Page
 				return ConfigInfraTools::SUCCESS;
 			}
 			$this->ShowDivReturnError("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
-			return ConfigInfraTools::ERROR;
+			return ConfigInfraTools::RETURN_ERROR;
 		}
 	}
 	
@@ -378,7 +378,7 @@ abstract class PageInfraTools extends Page
 				return ConfigInfraTools::SUCCESS;
 			}
 			$this->ShowDivReturnError("DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR");
-			return ConfigInfraTools::ERROR;
+			return ConfigInfraTools::RETURN_ERROR;
 		}
 	}
 	
@@ -393,7 +393,7 @@ abstract class PageInfraTools extends Page
 			{
 					
 			}
-			else return ConfigInfraTools::ERROR;
+			else return ConfigInfraTools::RETURN_ERROR;
 		}
 	}
 	
@@ -430,7 +430,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_DELETE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug)
@@ -464,14 +464,14 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
+			elseif($return == ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
 			{
 				$this->ShowDivReturnError("SERVICE_DELETE_ERROR_FOREIGN_KEY");
-				return ConfigInfraTools::ERROR;
+				return ConfigInfraTools::RETURN_ERROR;
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_DELETE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -625,14 +625,14 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_INSERT_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
+			elseif($return == ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return ConfigInfraTools::WARNING;
+				return ConfigInfraTools::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_INSERT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceLoadData($InstanceInfraToolsService)
@@ -664,7 +664,7 @@ abstract class PageInfraTools extends Page
 				                                                  'Icons/IconInfraToolsNotVerified.png';
 			return ConfigInfraTools::SUCCESS;
 		}
-		else return ConfigInfraTools::ERROR;
+		else return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $StoreSession = FALSE)
@@ -681,7 +681,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_NOT_FOUND");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -699,7 +699,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_NOT_FOUND");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
@@ -738,7 +738,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
@@ -777,7 +777,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	protected function ServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
 															     &$ArrayInstanceInfraToolsService, 
@@ -818,7 +818,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	protected function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
 			                                                            &$ArrayInstanceInfraToolsService, 
@@ -859,7 +859,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	protected function ServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation,
 			                                             &$ArrayInstanceInfraToolsService, 
@@ -901,7 +901,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
@@ -940,7 +940,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2,
@@ -987,7 +987,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
@@ -1029,7 +1029,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment,
@@ -1088,7 +1088,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
@@ -1142,7 +1142,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, $UserEmail, 
@@ -1203,7 +1203,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
@@ -1259,7 +1259,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $StoreSession = FALSE)
@@ -1296,7 +1296,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ID_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
@@ -1338,7 +1338,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_ID_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
@@ -1383,7 +1383,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, $Debug, $StoreSession = FALSE)
@@ -1422,7 +1422,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail, 
@@ -1467,7 +1467,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -1508,7 +1508,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_NAME_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceType($Limit1, $Limit2, $ServiceType, &$ArrayInstanceInfraToolsService, 
@@ -1551,7 +1551,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, $Debug)
@@ -1589,7 +1589,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail, 
@@ -1634,7 +1634,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
@@ -1674,7 +1674,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription, 
@@ -1718,7 +1718,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, 
@@ -1760,7 +1760,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2, 
@@ -1807,7 +1807,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit($TypeAssocUserServiceDescription, 
@@ -1848,7 +1848,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
@@ -1887,7 +1887,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_USER_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, $Debug)
@@ -1925,7 +1925,7 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_USER_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $StoreSession = FALSE)
@@ -1941,7 +1941,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
@@ -2094,14 +2094,14 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_UPDATE_BY_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == ConfigInfraTools::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_UPDATE_BY_ID_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function ServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, 
@@ -2188,14 +2188,14 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == ConfigInfraTools::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return ConfigInfraTools::WARNING;
+				return ConfigInfraTools::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("SERVICE_UPDATE_RESTRICTBY_ID_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug)
@@ -2216,7 +2216,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
@@ -2230,7 +2230,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
@@ -2246,7 +2246,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail, $Debug)
@@ -2262,7 +2262,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SELECT_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeServiceDeleteByTypeTypeServiceName($TypeServiceName, $Debug)
@@ -2300,7 +2300,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
@@ -2314,7 +2314,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
@@ -2332,7 +2332,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug)
@@ -2346,7 +2346,7 @@ abstract class PageInfraTools extends Page
 			return ConfigInfraTools::SUCCESS;
 		}
 		$this->ShowDivReturnError("SERVICE_SELECT_BY_SERVICE_TYPE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function TypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew, &$InstanceInfraToolsTypeService,
@@ -2408,14 +2408,14 @@ abstract class PageInfraTools extends Page
 				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDATE_SUCCESS");
 				return ConfigInfraTools::SUCCESS;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == ConfigInfraTools::MYSQL_ERROR_UPDATE_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return ConfigInfraTools::WARNING;
+				return ConfigInfraTools::RETURN_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDATE_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
@@ -2432,10 +2432,10 @@ abstract class PageInfraTools extends Page
 		elseif(empty($ArrayInstanceInfraToolsUser))
 		{
 			$this->ShowDivReturnWarning("USER_NOT_FOUND");
-			return ConfigInfraTools::WARNING;	
+			return ConfigInfraTools::RETURN_WARNING;	
 		}
 		$this->ShowDivReturnError("USER_NOT_FOUND");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, 
@@ -2477,11 +2477,11 @@ abstract class PageInfraTools extends Page
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_CORPORATION_NAME_WARNING");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_CORPORATION_NAME_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
@@ -2538,11 +2538,11 @@ abstract class PageInfraTools extends Page
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_DEPARTMENT_NAME_WARNING");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_DEPARTMENT_NAME_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
@@ -2583,11 +2583,11 @@ abstract class PageInfraTools extends Page
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_SERVICE_ID_WARNING");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_SERVICE_ID_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
@@ -2626,11 +2626,11 @@ abstract class PageInfraTools extends Page
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TICKET_ID_WARNING");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TICKET_ID_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
@@ -2673,11 +2673,11 @@ abstract class PageInfraTools extends Page
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR");
-		return ConfigInfraTools::ERROR;	
+		return ConfigInfraTools::RETURN_ERROR;	
 	}
 	
 	protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, 
@@ -2719,11 +2719,11 @@ abstract class PageInfraTools extends Page
 			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
 				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING");
-				return ConfigInfraTools::WARNING;	
+				return ConfigInfraTools::RETURN_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR");
-		return ConfigInfraTools::ERROR;
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug)
@@ -2746,19 +2746,19 @@ abstract class PageInfraTools extends Page
 				else
 				{
 					$this->ShowDivReturnError("USER_SELECT_TEAM_BY_USER_EMAIL_ERROR");
-					return ConfigInfraTools::ERROR;
+					return ConfigInfraTools::RETURN_ERROR;
 				}
 			}
 			else
 			{
 				$this->ShowDivReturnError("USER_NOT_FOUND");
-				return ConfigInfraTools::ERROR;
+				return ConfigInfraTools::RETURN_ERROR;
 			}
 		}
 		else 
 		{
 			$this->ShowDivReturnError("USER_SAME_AS_ADMIN");
-			return ConfigInfraTools::ERROR;
+			return ConfigInfraTools::RETURN_ERROR;
 		}
 	}
 	
@@ -2841,7 +2841,7 @@ abstract class PageInfraTools extends Page
 												   'Icons/IconInfraToolsNotVerified.png';
 			return ConfigInfraTools::SUCCESS;
 		}
-		else return ConfigInfraTools::ERROR;
+		else return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	public function GetCurrentPage()

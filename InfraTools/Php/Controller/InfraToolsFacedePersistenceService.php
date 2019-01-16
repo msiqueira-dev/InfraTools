@@ -185,8 +185,8 @@ class InfraToolsFacedePersistenceService
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return ConfigInfraTools::MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED;
 				}
 			}
@@ -194,11 +194,11 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection)
@@ -225,8 +225,8 @@ class InfraToolsFacedePersistenceService
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return ConfigInfraTools::MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED;
 				}
 			}
@@ -234,11 +234,11 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -270,10 +270,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
@@ -335,10 +335,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -400,10 +400,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
@@ -464,10 +464,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
@@ -526,10 +526,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
@@ -590,10 +590,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -653,10 +653,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation, &$ArrayInstanceInfraToolsService, 
@@ -722,10 +722,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
@@ -790,10 +790,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2, $ServiceCorporation, $UserEmail,
@@ -860,10 +860,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
@@ -929,10 +929,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, 
@@ -1004,10 +1004,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment, 
@@ -1077,10 +1077,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, $UserEmail,
@@ -1152,10 +1152,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail,
@@ -1225,10 +1225,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection)
@@ -1280,10 +1280,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
@@ -1337,10 +1337,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
@@ -1402,10 +1402,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
@@ -1466,10 +1466,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail,
@@ -1532,10 +1532,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
@@ -1597,10 +1597,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceType($Limit1, $Limit2, $ServiceNType, &$ArrayInstanceInfraToolsService, 
@@ -1662,10 +1662,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, 
@@ -1726,10 +1726,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail,
@@ -1792,10 +1792,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail, 
@@ -1857,10 +1857,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription,
@@ -1922,10 +1922,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, &$ArrayInstanceInfraToolsService, 
@@ -1986,10 +1986,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2, $TypeAssocUserServiceDescription, $UserEmail, 
@@ -2052,10 +2052,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit($TypeAssocUserServiceDescription, $UserEmail,
@@ -2117,10 +2117,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -2181,10 +2181,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -2244,10 +2244,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
@@ -2292,7 +2292,7 @@ class InfraToolsFacedePersistenceService
 			}
 			return $return;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
@@ -2318,14 +2318,14 @@ class InfraToolsFacedePersistenceService
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_UPDATE_SAME_VALUE;
+					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
+					if($errorCode == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+						return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
 					else return Config::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
 				}
 			}
@@ -2333,10 +2333,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function ServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
@@ -2360,14 +2360,14 @@ class InfraToolsFacedePersistenceService
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_UPDATE_SAME_VALUE;
+					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
+					if($errorCode == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+						return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
 					else return Config::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
 				}
 			}
@@ -2375,10 +2375,10 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }
 }

@@ -58,7 +58,7 @@ class PagePasswordReset extends PageInfraTools
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
 								          str_replace("_", "", ConfigInfraTools::PAGE_HOME));
-			exit(ConfigInfraTools::ERROR);
+			exit(ConfigInfraTools::RETURN_ERROR);
 		}
 		if (isset($_POST[ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT]))
 		{

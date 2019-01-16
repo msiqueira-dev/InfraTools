@@ -70,8 +70,9 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
-							   class="<?php echo $this->ReturnDepartmentNameClass; ?>"
-							   onkeyup="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnDepartmentNameClass; ?>"
+							   onkeyup="ValidateDepartmentName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												   '', 'false');
@@ -80,7 +81,8 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												 '');"
-							   onblur="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+							   onblur="ValidateDepartmentName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												   '', true);
@@ -89,7 +91,8 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												 '');"
-							   onchange="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+							   onchange="ValidateDepartmentName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 												   '', true);
@@ -111,7 +114,7 @@
 				<select 
 					name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
 					id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
-					class="<?php echo $this->ReturnCorporationNameClass; ?>"
+					class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass; ?>"
 					onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>');
 							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>')
 											 .disabled = false;
@@ -141,7 +144,8 @@
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+		 onmouseover="ValidateDepartmentName('DivContentBodyContainerInputText', 
+							       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
 								   '', true);

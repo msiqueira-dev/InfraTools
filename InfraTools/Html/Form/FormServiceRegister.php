@@ -18,8 +18,8 @@
 	</label>
 </div>
 <div class="DivClearFloat"></div>
-<form name="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
+<form name="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
 	<!-- SERVICE_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">

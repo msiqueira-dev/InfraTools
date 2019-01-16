@@ -121,10 +121,10 @@ class InfraToolsFacedePersistenceAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function AssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug, 
@@ -152,8 +152,8 @@ class InfraToolsFacedePersistenceAssocUserService
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_ASSOC_USER_SERVICE_DELETE_BY_ASSOC_USER_SERVICE_ID_FAILED;
 				}
 			}
@@ -161,10 +161,10 @@ class InfraToolsFacedePersistenceAssocUserService
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function AssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
@@ -195,8 +195,8 @@ class InfraToolsFacedePersistenceAssocUserService
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
+					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
 					else return Config::MYSQL_ASSOC_USER_SERVICE_DELETE_BY_ASSOC_USER_SERVICE_ID_AND_USER_EMAIL_FAILED;
 				}
 			}
@@ -204,10 +204,10 @@ class InfraToolsFacedePersistenceAssocUserService
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function AssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
@@ -238,10 +238,10 @@ class InfraToolsFacedePersistenceAssocUserService
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function AssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
@@ -294,10 +294,10 @@ class InfraToolsFacedePersistenceAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function AssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
@@ -348,10 +348,10 @@ class InfraToolsFacedePersistenceAssocUserService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $mySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }
 ?>

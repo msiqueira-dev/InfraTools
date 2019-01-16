@@ -47,6 +47,7 @@ class PageAdminTeam extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
+		$this->InputValueTeamNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
 			$this->PageStackSessionLoad();

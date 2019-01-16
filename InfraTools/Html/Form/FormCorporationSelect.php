@@ -22,8 +22,9 @@
 		</div>
 		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
-						   class="<?php echo $this->ReturnCorporationNameClass; ?>"
-						   onkeyup="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+						   class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass; ?>"
+						   onkeyup="ValidateCorporation('DivContentBodyContainerInputText', 
+										       '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											   '', 'false');
@@ -32,7 +33,8 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
-						   onblur="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+						   onblur="ValidateCorporation('DivContentBodyContainerInputText', 
+										       '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											   '', true);
@@ -41,7 +43,8 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+						   onchange="ValidateCorporation('DivContentBodyContainerInputText', 
+										       '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 											   '', true);
@@ -55,7 +58,8 @@
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+		 onmouseover="ValidateCorporation('DivContentBodyContainerInputText', 
+							       '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT; ?>',
 								   '', true);

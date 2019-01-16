@@ -189,8 +189,8 @@ class MySqlManager
 				else 
 				{
 					$MySqlError = "Error: " . mysqli_connect_error() . " - " . mysqli_connect_errno();
-					if(mysqli_connect_errno() == Config::MYSQL_ERROR_ACCESS_DENIED)
-						return Config::MYSQL_ERROR_ACCESS_DENIED;
+					if(mysqli_connect_errno() == Config::MYSQL_ERROR_CODE_ACCESS_DENIED)
+						return Config::MYSQL_ERROR_CODE_ACCESS_DENIED;
 					return Config::MYSQL_ERROR_CONNECTION_OPEN;
 				}
 			}

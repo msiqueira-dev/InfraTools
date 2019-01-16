@@ -52,6 +52,8 @@ class PageAdminTicket extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
+		$this->InputValueTicketIdRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 		//FORM SUBMIT BACK
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{

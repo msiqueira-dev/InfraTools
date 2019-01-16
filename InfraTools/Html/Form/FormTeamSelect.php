@@ -64,7 +64,7 @@
 		</div>
 		<div class="DivClearFloat"></div>
 		<!-- FORM_FIELD_TEAM_NAME -->
-		<div class="NotHidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_RADIO_DIV_NAME; ?>">>
+		<div class="NotHidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_RADIO_DIV_NAME; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
 				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
@@ -72,8 +72,9 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>"
-							   class="<?php echo $this->ReturnTeamNameClass; ?>"
-							   onkeyup="ValidateTeamName(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnTeamNameClass; ?>"
+							   onkeyup="ValidateTeamName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', 'false');
@@ -82,7 +83,8 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
-							   onblur="ValidateTeamName(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
+							   onblur="ValidateTeamName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
@@ -91,7 +93,8 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
-							   onchange="ValidateTeamName(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
+							   onchange="ValidateTeamName('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
@@ -101,7 +104,7 @@
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_NAME'); ?>" 
-							   value="<?php echo $this->InputValueTeamName; ?>" maxlength="80" />
+							   value="<?php echo $this->InputValueTeamName; ?>" maxlength="45" />
 		</div>
 		<!-- FORM_FIELD_TEAM_ID -->
 		<div class="Hidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_RADIO_DIV_ID ?>">
@@ -112,8 +115,9 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>"
-							   class="<?php echo $this->ReturnTeamIdClass; ?>"
-							   onkeyup="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>',
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnTeamIdClass; ?>"
+							   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', 'false');
@@ -122,7 +126,8 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
-							   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>',
+							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
@@ -131,7 +136,8 @@
 												 'DivContentBodySubmit',
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
-							   onchange="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>',
+							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+											       '<?php echo ConfigInfraTools::FORM_FIELD_TEAM_ID; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												   '', true);
@@ -141,7 +147,7 @@
 												 '<?php echo ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT; ?>',
 												 '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TEAM_ID'); ?>" 
-							   value="<?php echo $this->InputValueTeamName; ?>" maxlength="5" />
+							   value="<?php echo $this->InputValueTeamId; ?>" maxlength="5" />
 		</div>
 	</div>
 	<!-- SUBMIT -->

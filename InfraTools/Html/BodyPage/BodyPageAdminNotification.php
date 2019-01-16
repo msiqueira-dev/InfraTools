@@ -1,8 +1,8 @@
-<!-- BODY_PAGE_ADMIN_DEPARTMENT -->
+<!-- BODY_PAGE_ADMIN_NOTIFICATION -->
 <div class="DivBody">
     <div class="DivContentBody">
-    	<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT; ?>" 
-			  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT; ?>" method="post" >
+    	<form name="<?php echo ConfigInfraTools::FORM_NOTIFICATION; ?>" 
+			  id="<?php echo ConfigInfraTools::FORM_NOTIFICATION; ?>" method="post" >
 			<!-- SUBMIT -->
 			<div class="DivContentBodyOptions">
 				<div class="DivContentBodyOptionsBox">
@@ -32,8 +32,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>"
+							   name="<?php echo ConfigInfraTools::FORM_NOTIFICATION_SELECT; ?>"
+							   value="<?php echo ConfigInfraTools::FORM_NOTIFICATION_SELECT; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -45,8 +45,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
+							   name="<?php echo ConfigInfraTools::FORM_NOTIFICATION_REGISTER; ?>"
+							   value="<?php echo ConfigInfraTools::FORM_NOTIFICATION_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -58,8 +58,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_LIST; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_LIST; ?>"
+							   name="<?php echo ConfigInfraTools::FORM_NOTIFICATION_LIST; ?>"
+							   value="<?php echo ConfigInfraTools::FORM_NOTIFICATION_LIST; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -79,41 +79,47 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
 		}
-		//PAGE_ADMIN_DEPARTMENT_LIST
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST)
-		{
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST)) . ".php");
-		}
-		//PAGE_ADMIN_DEPARTMENT_REGISTER
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER)
-		{
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER)) . ".php");
-		}
-		//PAGE_ADMIN_DEPARTMENT_SELECT
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT)
-		{
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM  . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT)) . ".php");
-		}
-		//PAGE_ADMIN_DEPARTMENT_UPDATE
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE)
-		{
-			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE)) . ".php");
-		}
 		//PAGE_ADMIN_DEPARTMENT_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
 		}
-		//PAGE_ADMIN_DEPARTMENT_VIEW_USERS
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS)
+		//PAGE_ADMIN_NOTIFICATION_LIST
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LIST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW_USERS)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LIST)) . ".php");
+		}
+		//PAGE_ADMIN_NOTIFICATION_REGISTER
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER)) . ".php");
+		}
+		//PAGE_ADMIN_NOTIFICATION_SELECT
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM  . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT)) . ".php");
+		}
+		//PAGE_ADMIN_NOTIFICATION_UPDATE
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_UPDATE)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_UPDATE)) . ".php");
+		}
+		//PAGE_ADMIN_NOTIFICATION_VIEW
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW)) . ".php");
+		}
+		//PAGE_ADMIN_NOTIFICATION_VIEW_USERS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW_USERS)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW_USERS)) . ".php");
 		}
 		//PAGE_ADMIN_TYPE_USER_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)

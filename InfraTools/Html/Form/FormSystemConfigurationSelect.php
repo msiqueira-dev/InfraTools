@@ -75,22 +75,37 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
-							   class="<?php echo $this->ReturnSystemConfigurationOptionNameClass; ?>"
-							   onkeyup="ValidateDescription(null, 
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnSystemConfigurationOptionNameClass; ?>"
+							   onkeyup="ValidateDescription('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
-												   '', 'false');"
-							   onblur="ValidateDescription(null, 
+												   '', 'false');
+									    ValidateMultiplyFields(
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 'DivContentBodySubmit',
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '');"
+							   onblur="ValidateDescription('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
-												   '', true);"
-							   onchange="ValidateDescription(null, 
+												   '', true);
+									    ValidateMultiplyFields(
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 'DivContentBodySubmit',
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '');"
+							   onchange="ValidateDescription('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
-												   '', true);"
+												   '', true);
+										  ValidateMultiplyFields(
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 'DivContentBodySubmit',
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>" 
 							   value="<?php echo $this->InputValueSystemConfigurationOptionName; ?>" maxlength="45" />
 		</div>
@@ -104,28 +119,48 @@
 			</div>
 			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>" 
 							   id="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
-							   class="<?php echo $this->ReturnSystemConfigurationOptionNumberClass; ?>"
-							   onkeyup="ValidateNumbersOnly(null, 
+							   class="DivContentBodyContainerInputText <?php echo $this->ReturnSystemConfigurationOptionNumberClass; ?>"
+							   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
-												   '', 'false');"
-							   onblur="ValidateNumbersOnly(null, 
+												   '', 'false');
+									   ValidateMultiplyFields(
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 'DivContentBodySubmit',
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '');"
+							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
-												   '', true);"
-							   onchange="ValidateNumbersOnly(null, 
+												   '', true);
+										 ValidateMultiplyFields(
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 'DivContentBodySubmit',
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '');"
+							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
-												   '', true);"
+												   '', true);
+										 ValidateMultiplyFields(
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 'DivContentBodySubmit',
+												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>" 
 							   value="<?php echo $this->InputValueSystemConfigurationOptionNumber; ?>" maxlength="4" />
 		</div>
 	</div>
 	<!-- SUBMIT -->
-	<div class="DivContentBodyContainerSubmit">
+	<div class="DivContentBodyContainerSubmit"
+	    onmouseover="ValidateMultiplyFields(
+								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+								   'DivContentBodySubmit',
+								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+								   '');">
 		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>" 
 								 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"

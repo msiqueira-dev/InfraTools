@@ -158,7 +158,7 @@ class PageCheck extends PageInfraTools
 					else
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
 						$this->VisibilityFunctionCheckBlackListMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionCheckBlackListMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -166,7 +166,7 @@ class PageCheck extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
 					$this->VisibilityFunctionCheckBlackListMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckBlackListMessageBottom = "DivReturnMessageErrorBottom";
 				}
@@ -271,7 +271,7 @@ class PageCheck extends PageInfraTools
 					else 
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
 						$this->VisibilityFunctionCheckPingServerMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionCheckPingServerMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -279,7 +279,7 @@ class PageCheck extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
 					$this->VisibilityFunctionCheckPingServerMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckPingServerMessageBottom = "DivReturnMessageErrorBottom";
 				}
@@ -331,7 +331,7 @@ class PageCheck extends PageInfraTools
 					else 
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
 						$this->VisibilityFunctionCheckPortStatusMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionCheckPortStatusMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -339,7 +339,7 @@ class PageCheck extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
 					$this->VisibilityFunctionCheckPortStatusMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckPortStatusMessageBottom = "DivReturnMessageErrorBottom";
 				}
@@ -350,7 +350,7 @@ class PageCheck extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$this->InputFocus = ConfigInfraTools::LOGIN_USER;
+		$this->InputFocus = ConfigInfraTools::FORM_FIELD_LOGIN;
 		$this->CheckPostBack();
 		Page::GetCurrentURL($pageUrl);
 		if(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_AVAILABILITY) 

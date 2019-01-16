@@ -23,14 +23,10 @@ if (!class_exists("Factory"))
 
 class Config
 {
-	/* Constantes de Retorno */
-	const EMPTY_AMBIENT_VARIABLE                                        = "EmptyAmbientVariable";
-	const ERROR                                                         = "Error";
 	const PARAMETERS_NULL                                               = "ParametersNull";
 	const POST_IS_NULL                                                  = "PostIsNull";
 	const SUCCESS                                                       = "Success";
 	const SESSION_IS_NULL                                               = "SessionIsNUll";
-	const WARNING                                                       = "Warning";
 	
 	/* Constantes gerais usadas pelo site */
 	const CHECKBOX_CHECKED                                              = "checked";
@@ -107,6 +103,7 @@ class Config
 	const FORM_FIELD_HEADER_LAYOUT                                      = "FormFieldHeaderLayout";
 	const FORM_FIELD_HEADER_LAYOUT_HIDDEN                               = "FormFieldHeaderLayoutHidden";
 	const FORM_FIELD_HEADER_LOG_OUT                                     = "FormFieldHeaderLogOut";
+	const FORM_FIELD_LOGIN                                              = "FormFieldLogin";
 	const FORM_FIELD_NOT_OBLIGATORY                                     = "FormFieldNotObligatory";
 	const FORM_FIELD_PASSWORD_NEW                                       = "FormFieldPasswordNew";
 	const FORM_FIELD_PASSWORD_REPEAT                                    = "FormFieldPasswordRepeat";
@@ -133,6 +130,11 @@ class Config
 	const FORM_FIELD_TEAM_RADIO_NAME                                    = "FormFieldTeamRadioName";
 	const FORM_FIELD_TICKET_DESCRIPTION                                 = "FormFieldTicketDescription";
 	const FORM_FIELD_TICKET_ID                                          = "FormFieldTicketId";
+	const FORM_FIELD_TICKET_RADIO                                       = "FormFieldTicketRadio";
+	const FORM_FIELD_TICKET_RADIO_DIV_ID                                = "FormFieldTicketRadioDivId";
+	const FORM_FIELD_TICKET_RADIO_DIV_TITLE                             = "FormFieldTicketRadioDivTitle";
+	const FORM_FIELD_TICKET_RADIO_ID                                    = "FormFieldTicketRadioId";
+	const FORM_FIELD_TICKET_RADIO_TITLE                                 = "FormFieldTicketRadioTitle";
 	const FORM_FIELD_TICKET_TITLE                                       = "FormFieldTicketTitle";
 	const FORM_FIELD_TICKET_TYPE                                        = "FormFieldTicketType";
 	const FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                = "FormFieldTypeAssocUserServiceDescription";
@@ -223,6 +225,7 @@ class Config
 	const FORM_DEPARTMENT_VIEW_LIST_USERS_SUBMIT_FORWARD                = "FormDepartmentViewListUsersSubmitForward";
 	const FORM_DEPARTMENT_VIEW_UPDATE                                   = "FormDepartmentViewUpdate";
 	const FORM_DEPARTMENT_VIEW_UPDATE_SUBMIT                            = "FormDepartmentViewUpdateSubmit";
+	const FORM_LOGIN                                                    = "FormLogin";
 	const FORM_NOTIFICATION                                             = "FormNotification";
 	const FORM_NOTIFICATION_LIST                                        = "FormNotificationList";
 	const FORM_NOTIFICATION_LIST_BACK                                   = "FormNotificationListBack";
@@ -307,6 +310,7 @@ class Config
 	const FORM_TICKET_REGISTER_FORM                                     = "FormTicketRegisterForm";
 	const FORM_TICKET_REGISTER_SUBMIT                                   = "FormTicketRegisterSubmit";
 	const FORM_TICKET_SELECT                                            = "FormTicketSelect";
+	const FORM_TICKET_SELECT_FORM                                       = "FormTicketSelectForm";
 	const FORM_TICKET_SELECT_SUBMIT                                     = "FormTicketSelectSubmit";
 	const FORM_TICKET_UPDATE                                            = "FormTicketUpdate";
 	const FORM_TICKET_UPDATE_CANCEL                                     = "FormTicketUpdateCancel";
@@ -494,8 +498,8 @@ class Config
 	const FORM_VALIDATE_FUNCTION_TYPE_SERVICE                           = "FORM_VALIDATE_FUNCTION_TYPE_SERVICE";
 	const FORM_VALIDATE_FUNCTION_URL                                    = "FORM_VALIDATE_FUNCTION_URL";
 	const FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID                         = "FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID";
-	const GET_IP_ADDRESS_CLIENT_FAILED                                  = "ReturnGetIpAddressClientFailed";
-	const GET_OPERATIONAL_SYSTEM_INVALID_OS                             = "ReturnGetOperationalSystemInvalidOs";
+	const GET_ERROR_IP_ADDRESS_CLIENT                                   = "ReturnGetErrorIpAddressClient";
+	const GET_ERROR_INVALID_OS                                          = "ReturnGetErrorInvalidOs";
 	const HEAD_GENERIC                                                  = "HeadGeneric.php";
 	const HEAD_JAVASCRIPT                                               = "HeadJavaScript.php";
 	const HTACCESS_ERROR_FILE_CREATE                                    = "HtacessErrorFileCreate";
@@ -513,24 +517,55 @@ class Config
 	const LANGUAGE_PORTUGUESE                                           = "Language/Pt";
 	const LANGUAGE_SPANISH                                              = "Language/Es";
 	const LOCAL_IP                                                      = "127.0.0.1";
-	const LOGIN_FORM                                                    = "LoginForm";
 	const LOGIN_FORM_SUBMIT                                             = "LoginFormSubmit";
 	const LOGIN_FORM_SUBMIT_FORGOT_PASSWORD                             = "LoginFormSubmitForgotPassword";
 	const LOGIN_PASSWORD                                                = "LoginPassword";
 	const LOGIN_TWO_STEP_VERIFICATION_ACTIVATED                         = "LoginTwoStepVerificationActivated";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE                              = "LoginTwoStepVerificationCode";
 	const LOGIN_TWO_STEP_VERIFICATION_FORM                              = "LoginTwoStepVerificationForm";
-	const LOGIN_USER                                                    = "LoginUser";
+	const MYSQL_ASSOC_USER_CORPORATION_DELETE_FAILED                    = "RetMySqlAssocUserCorporationDeleteFailed";
+	const MYSQL_ASSOC_USER_CORPORATION_INSERT_FAILED                    = "RetMySqlAssocUserCorporationInsertFailed";
 	const MYSQL_CHATSET_UTF8                                            = "utf8";
+	const MYSQL_CORPORATION_DELETE_FAILED                               = "RetMySqlCorporationDeleteFailed";
+	const MYSQL_CORPORATION_INSERT_FAILED                               = "RetMySqlCorporationInsertFailed";
+	const MYSQL_CORPORATION_SELECT_BY_NAME_FAILED                       = "RetMySqlCorporationSelectByNameFailed";
+	const MYSQL_CORPORATION_SELECT_BY_NAME_FETCH_FAILED                 = "RetMySqlCorporationSelectByNameFetchFailed";
+	const MYSQL_CORPORATION_SELECT_FAILED                               = "RetMySqlCorporationInsertFailed";
+	const MYSQL_CORPORATION_SELECT_FETCH_FAILED                         = "RetMySqlCorporationInsertFetchFailed";
+	const MYSQL_CORPORATION_UPDATE_FAILED                               = "RetMySqlCorporationUpdateFailed";
+	const MYSQL_COUNTRY_SELECT_FAILED                                   = "RetMySqlCountrySelectFailed";
+	const MYSQL_COUNTRY_SELECT_FETCH_FAILED                             = "RetMySqlCountrySelectFetchFailed";
+	const MYSQL_DEPARTMENT_DELETE_FAILED                                = "RetMySqlDepartmentDeleteFailed";
+	const MYSQL_DEPARTMENT_INSERT_FAILED                                = "RetMySqlDepartmentInsertFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FAILED                    = "RetMySqlDepartmentSelectByCorpDepFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FETCH_FAILED              = "RetMySqlDepartmentSelectByCorpDepFetchFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED            = "RetMySqlDepartmentSelectByCorporationFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED      = "RetMySqlDepartmentSelectByCorporationFetchFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FAILED             = "RetMySqlDepartmentSelectByDepartmentNameFailed";
+	const MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FETCH_FAILED       = "RetMySqlDepartmentSelectByDepartmentNameFetchFailed";
+	const MYSQL_DEPARTMENT_SELECT_FAILED                                = "RetMySqlDepartmentSelectFailed";
+	const MYSQL_DEPARTMENT_SELECT_FETCH_FAILED                          = "RetMySqlDepartmentSelectFetchFailed";
+	const MYSQL_DEPARTMENT_UPDATE_CORPORATION_FAILED                    = "RetMySqlDepartmentUpdateCorporationFailed";
+	const MYSQL_DEPARTMENT_UPDATE_FAILED                                = "RetMySqlDepartmentUpdateFailed";
+	const MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT                  = "1451";
+	const MYSQL_ERROR_CODE_FOREIGN_KEY_INSERT_RESTRICT                  = "1452";
+	const MYSQL_ERROR_CODE_SYNTAX                                       = "1064";
+	const MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE                         = "1062";
+	const MYSQL_ERROR_CODE_ACCESS_DENIED                                = "1045";
 	const MYSQL_ERROR_CONNECTION_CLOSE                                  = "RetMySqlErrorConnectionClose";
 	const MYSQL_ERROR_CONNECTION_EMPTY                                  = "RetMySqlErrorConnectionEmpty";
 	const MYSQL_ERROR_CONNECTION_NOT_EMPTY                              = "RetMySqlErrorConnectionNotEmpty";
 	const MYSQL_ERROR_CONNECTION_OPEN                                   = "RetMySqlErrorConnectionOpen";
 	const MYSQL_ERROR_CONNECTION_REFUSED                                = "RetMySqlErrorConnectionRefused";
+	const MYSQL_ERROR_CONNECTION_FAILED                                 = "RetMySqlErrorConnectionFailed";
 	const MYSQL_ERROR_DATABASE_NOT_FOUND                                = "RetMySqlErrorDataBaseNotFound";
+	const MYSQL_ERROR_IMPORT_NO_INSERTS                                 = "RetMySqlErrorImportNoInserts";
+	const MYSQL_ERROR_IMPORT_QUERY_SYNTAX                               = "RetMySqlErrorImportQuerySyntax";
+	const MYSQL_ERROR_INSERT_FAILED                                     = "RetMySqlErrorInsertFailed";
 	const MYSQL_ERROR_QUERY_PREPARE                                     = "RetMySqlErrorQueryPrepare";
  	const MYSQL_ERROR_QUERY_EMPTY                                       = "RetMySqlErrorQueryEmpty";
 	const MYSQL_ERROR_QUERY_SQL                                         = "RetMySqlErrorQuerySql";
+	const MYSQL_ERROR_UPDATE_SAME_VALUE                                 = "RetMySqlErrorUpdateSameValue";
 	const MYSQL_ERROR_USER_EXISTS                                       = "RetMySqlErrorUserExists";
 	const MYSQL_ERROR_USER_PERMISSION_DENIED                            = "RetMySqlErrorUserPermissionDenied";
 	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED         = "MySqlInfraToolsDataBaseCheckTablesCorruptFailed";
@@ -538,9 +573,82 @@ class Config
 	const MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH_FAILED           = "MySqlInfraToolsDataBaseCheckTablesFetchFailed";
 	const MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FAILED                = "MySqlInfraToolsDataBaseGetRowCountFailed";
 	const MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FETCH_FAILED          = "MySqlInfraToolsDataBaseGetRowCountFetchFailed";
-	
 	const MYSQL_LOG_ERROR                                               = "LogMySqlError";
 	const MYSQL_LOG_QUERY                                               = "LogMySqlQuery";
+	const MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED                      = "RetMySqlSystemConfigurationDeleteFailed";
+	const MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED_NOT_FOUND            = "RetMySqlSystemConfigurationDeleteFailedNotFound";
+	const MYSQL_SYSTEM_CONFIGURATION_INSERT_FAILED                      = "RetMySqlSystemConfigurationInsertFailed";
+	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NAME_FAILED       = "RetMySqlSystemConfigurationSelectByOptionNameFailed"; 
+	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NAME_FETCH_FAILED = "RetMySqlSystemConfigurationSelectByOptionNameFetchFailed";
+	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FAILED       = "RetMySqlSystemConfigurationSelectByOptionNumberFailed"; 
+	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FETCH_FAILED = "RetMySqlSystemConfigurationSelectByOptionNumberFetchFailed";
+	const MYSQL_SYSTEM_CONFIGURATION_SELECT_FAILED                      = "RetMySqlSystemConfigurationSelectFailed"; 
+	const MYSQL_SYSTEM_CONFIGURATION_SELECT_FETCH_FAILED                = "RetMySqlSystemConfigurationSelectFetchFailed";
+	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED                  = "RetMySqlTeamDeleteByTeamDescriptionFailed";
+	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED_NOT_FOUND        = "RetMySqlTeamDeleteByTeamDescriptionFailedNotFound";
+	const MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED                           = "RetMySqlTeamDeleteByTeamIdFailed";
+	const MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED_NOT_FOUND                 = "RetMySqlTeamDeleteByTeamIdFailedNotFound";
+	const MYSQL_TEAM_SELECT_BY_TEAM_DESCRIPTION_FAILED                  = "RetMySqlTeamSelectByDescriptionFailed";
+	const MYSQL_TEAM_SELECT_BY_TEAM_DESCRIPTION_FETCH_FAILED            = "RetMySqlTeamSelectByDescriptionFetchFailed";
+	const MYSQL_TEAM_SELECT_BY_TEAM_ID_FAILED                           = "RetMySqlTeamSelectByTeamIdFailed";
+	const MYSQL_TEAM_SELECT_BY_TEAM_ID_FETCH_FAILED                     = "RetMySqlTeamSelectByTeamIdFetchFailed";
+	const MYSQL_TEAM_SELECT_BY_TEAM_NAME_FAILED                         = "RetMySqlTeamSelectByTeamNameFailed";
+	const MYSQL_TEAM_SELECT_BY_TEAM_NAME_FETCH_FAILED                   = "RetMySqlTeamSelectByTeamNameFetchFailed";
+	const MYSQL_TEAM_SELECT_FAILED                                      = "RetMySqlTeamSelectFailed";
+	const MYSQL_TEAM_SELECT_FETCH_FAILED                                = "RetMySqlTeamSelectFetchFailed";
+	const MYSQL_TEAM_UPDATE_FAILED                                      = "RetMySqlTeamUpdateFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED                      = "RetMySqlTypeAssocUserTeamDeleteFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED_NOT_FOUND            = "RetMySqlTypeAssocUserTeamDeleteFailedNotFound";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FAILED       = "RetMySqlTypeAssocUserTeamSelectByDescriptionFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FETCH_FAILED = "RetMySqlTypeAssocUserTeamSelectByDescriptionFetchFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FAILED                = "RetMySqlTypeAssocUserTeamSelectByIdFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FETCH_FAILED          = "RetMySqlTypeAssocUserTeamSelectByIdFetchFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED                      = "RetMySqlTypeAssocUserTeamSelectFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED                = "RetMySqlTypeAssocUserTeamSelectFetchFailed";
+	const MYSQL_TYPE_ASSOC_USER_TEAM_UPDATE_FAILED                      = "RetMySqlTypeAssocUserTeamUpdateFailed";
+	const MYSQL_TYPE_TICKET_DELETE_FAILED                               = "RetMySqlTypeTicketDeleteFailed";
+	const MYSQL_TYPE_TICKET_DELETE_FAILED_NOT_FOUND                     = "RetMySqlTypeTicketDeleteFailedNotFound";
+	const MYSQL_TYPE_TICKET_SELECT_BY_DESCRIPTION_FAILED                = "RetMySqlTypeTicketSelectByTypeTicketDescriptionFailed";
+	const MYSQL_TYPE_TICKET_SELECT_BY_DESCRIPTION_FETCH_FAILED          = "RetMySqlTypeTicketSelectByTypeTicketDescriptionFetchFailed";
+	const MYSQL_TYPE_TICKET_SELECT_FAILED                               = "RetMySqlTypeTicketSelectFailed";
+	const MYSQL_TYPE_TICKET_SELECT_FETCH_FAILED                         = "RetMySqlTypeTicketSelectFetchFailed";
+	const MYSQL_TYPE_TICKET_UPDATE_FAILED                               = "RetMySqlTypeTicketUpdateByTypeTicketDescriptionFailed";
+	const MYSQL_TYPE_USER_DELETE_FAILED                                 = "RetMySqlTypeUserDeleteFailed";
+	const MYSQL_TYPE_USER_DELETE_FAILED_NOT_FOUND                       = "RetMySqlTypeUserDeleteFailedNotFound";
+	const MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FAILED                  = "RetMySqlTypeUserSelectByDescriptionFailed";
+	const MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FETCH_FAILED            = "RetMySqlTypeUserSelectByDescriptionFetchFailed";
+	const MYSQL_TYPE_USER_SELECT_BY_ID_FAILED                           = "RetMySqlTypeUserSelectByIdFailed";
+	const MYSQL_TYPE_USER_SELECT_BY_ID_FETCH_FAILED                     = "RetMySqlTypeUserSelectByIdFetchFailed";
+	const MYSQL_TYPE_USER_SELECT_FAILED                                 = "RetMySqlTypeUserSelectFailed";
+	const MYSQL_TYPE_USER_SELECT_FETCH_FAILED                           = "RetMySqlTypeUserSelectFetchFailed";
+	const MYSQL_TYPE_USER_UPDATE_FAILED                                 = "RetMySqlTypeUserUpdateFailed";
+	const MYSQL_USER_CHECK_HASH_ACTIVE_ACCOUNT_FAILED                   = "RetMySqlUserCheckHasActiveAccountFailed";
+	const MYSQL_USER_CHECK_PASSWORD_BY_EMAIL_FAILED                     = "RetMySqlUserCheckPasswordByEmailFailed";
+	const MYSQL_USER_CHECK_PASSWORD_BY_USER_UNIQUE_ID_FAILED            = "RetMySqlUserCheckPasswordByUserUniqueIdFailed";
+	const MYSQL_USER_INSERT_FAILED                                      = "RetMySqlUserInsertFailed";
+	const MYSQL_USER_DELETE_FAILED                                      = "RetMySqlUserDeleteFailed";
+	const MYSQL_USER_DELETE_FAILED_NOT_FOUND                            = "RetMySqlUserDeleteFailedNotFound";
+	const MYSQL_USER_SELECT_FAILED                                      = "RetMySqlUserSelectFailed";
+	const MYSQL_USER_SELECT_FETCH_FAILED                                = "RetMySqlUserSelectFetchFailed";
+	const MYSQL_USER_SELECT_BY_HASH_CODE_FAILED                         = "RetMySqlUserSelectByHashCodeFailed";
+	const MYSQL_USER_SELECT_BY_HASH_CODE_FETCH_FAILED                   = "RetMySqlUserSelectByHashCodeFetchFailed";
+	const MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED                        = "RetMySqlUserSelectByUserEmailFailed";
+	const MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED                  = "RetMySqlUserSelectByUserEmailFetchFailed";
+	const MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FAILED                    = "RetMySqlUserSelectByUserUniqueIdFailed";
+	const MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FETCH_FAILED              = "RetMySqlUserSelectByUserUniqueIdFetchFailed";
+	const MYSQL_USER_SELECT_EXISTS_BY_USER_EMAIL_FAILED                 = "RetMySqlUserSelectExistsByUserEmailFailed";
+	const MYSQL_USER_SELECT_HASH_BY_EMAIL_FAILED                  		= "RetMySqlUserSelectHashByEmailFailed";
+	const MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY                    = "RetMySqlUserSelectTeamByUserEmailEmpty";
+	const MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_FAILED                   = "RetMySqlUserSelectTeamByUserEmailFailed";
+	const MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_FETCH_FAILED             = "RetMySqlUserSelectTeamByUserEmailFetchFailed";
+	const MYSQL_USER_UPDATE_ASSOC_USER_CORPORATION_BY_EMAIL_FAILED      = "RetMySqlUpdateAssocUserCorporationByEmailFailed";
+	const MYSQL_USER_UPDATE_BY_EMAIL_FAILED                             = "RetMySqlUserUpdateByEmailFailed";
+	const MYSQL_USER_UPDATE_CORPORATION_BY_EMAIL_FAILED                 = "RetMySqlUserUpdateCorporationByEmail";
+	const MYSQL_USER_UPDATE_DEPARTMENT_BY_CORPORATION_EMAIL_FAILED      = "RetMySqlUserUpdateDepartmentByCorporationEmailFailed";
+	const MYSQL_USER_UPDATE_PASSWORD_BY_EMAIL_FAILED                    = "RetMySqlUserUpdatePasswordByEmailFailed";
+	const MYSQL_USER_UPDATE_TWO_STEP_VERIFICATION_BY_EMAIL_FAILED       = "RetMySqlUserUpdateTwoStepVerificationByEmailFailed";
+	const MYSQL_USER_UPDATE_USER_TYPE_BY_EMAIL_FAILED                   = "RetMySqlUserUpdateUserTypeByEmailFailed";
+	const MYSQL_USER_UPDATE_UNIQUE_ID_BY_EMAIL_FAILED                   = "RetMySqlUserUpdateUniqueIdByEmailFailed";
 	const PAGE                                                          = "Page";
 	const PAGE_ABOUT                                                    = "Page_About";
 	const PAGE_ACCOUNT                                                  = "Page_Account";
@@ -656,7 +764,14 @@ class Config
 	const PAGE_TEAM_SELECT                                              = "Page_Team_Select";
 	const PAGE_TEAM_UPDATE                                              = "Page_Team_Update";
 	const PAGE_TEAM_VIEW                                                = "Page_Team_View";
+	const PATH_BODY_PAGE                                                = "Html/BodyPage/Body";
+	const PATH_FOOTER                                                   = "Html/Footer/Footer.php";
+	const PATH_FORM                                                     = "Html/Form/Form";
+	const PATH_HEAD                                                     = "Html/Head/";
+	const PATH_HEADER                                                   = "Html/Header/Header";
 	const POST_BACK_FORM                                                = "HiddenTextForm";
+	const RETURN_ERROR                                                  = "ReturnError";
+	const RETURN_WARNING                                                = "ReturnWarning";
 	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
 	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
 	const SESS_ADMIN_SYSTEM_CONFIGURATION                               = "SessionAdminSystemConfiguration";
@@ -678,124 +793,6 @@ class Config
 	const SESS_PASSWORD_RECOVERY                                        = "SessionPasswordRecovery";
 	const SESS_UNLIMITED                                                = "SessionUnlimited";
 	const SESS_USER                                                     = "SessionUser";
-	const TYPE_USER_SUPER                                               = "SUPER_ADMINISTRATOR";
-	const USER_ACTIVE                                                   = 1;
-	const USER_NOT_CONFIRMED                                            = "USER_NOT_CONFIRMED";
-	const USER_NOT_LOGGED_IN                                            = "UserNotLoggedIn";
-	
-	/* DataBase Errors */
-	const MYSQL_ASSOC_USER_CORPORATION_DELETE_FAILED                    = "RetMySqlAssocUserCorporationDeleteFailed";
-	const MYSQL_ASSOC_USER_CORPORATION_INSERT_FAILED                    = "RetMySqlAssocUserCorporationInsertFailed";
-	const MYSQL_CONNECTION_FAILED                                       = "RetMySqlConnectionFailed";
-	const MYSQL_CORPORATION_DELETE_FAILED                               = "RetMySqlCorporationDeleteFailed";
-	const MYSQL_CORPORATION_INSERT_FAILED                               = "RetMySqlCorporationInsertFailed";
-	const MYSQL_CORPORATION_SELECT_BY_NAME_FAILED                       = "RetMySqlCorporationSelectByNameFailed";
-	const MYSQL_CORPORATION_SELECT_BY_NAME_FETCH_FAILED                 = "RetMySqlCorporationSelectByNameFetchFailed";
-	const MYSQL_CORPORATION_SELECT_FAILED                               = "RetMySqlCorporationInsertFailed";
-	const MYSQL_CORPORATION_SELECT_FETCH_FAILED                         = "RetMySqlCorporationInsertFetchFailed";
-	const MYSQL_CORPORATION_UPDATE_FAILED                               = "RetMySqlCorporationUpdateFailed";
-	const MYSQL_COUNTRY_SELECT_FAILED                                   = "RetMySqlCountrySelectFailed";
-	const MYSQL_COUNTRY_SELECT_FETCH_FAILED                             = "RetMySqlCountrySelectFetchFailed";
-	const MYSQL_DEPARTMENT_DELETE_FAILED                                = "RetMySqlDepartmentDeleteFailed";
-	const MYSQL_DEPARTMENT_INSERT_FAILED                                = "RetMySqlDepartmentInsertFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FAILED                    = "RetMySqlDepartmentSelectByCorpDepFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FETCH_FAILED              = "RetMySqlDepartmentSelectByCorpDepFetchFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED            = "RetMySqlDepartmentSelectByCorporationFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED      = "RetMySqlDepartmentSelectByCorporationFetchFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FAILED             = "RetMySqlDepartmentSelectByDepartmentNameFailed";
-	const MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FETCH_FAILED       = "RetMySqlDepartmentSelectByDepartmentNameFetchFailed";
-	const MYSQL_DEPARTMENT_SELECT_FAILED                                = "RetMySqlDepartmentSelectFailed";
-	const MYSQL_DEPARTMENT_SELECT_FETCH_FAILED                          = "RetMySqlDepartmentSelectFetchFailed";
-	const MYSQL_DEPARTMENT_UPDATE_CORPORATION_FAILED                    = "RetMySqlDepartmentUpdateCorporationFailed";
-	const MYSQL_DEPARTMENT_UPDATE_FAILED                                = "RetMySqlDepartmentUpdateFailed";
-	const MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT                       = "1451";
-	const MYSQL_ERROR_FOREIGN_KEY_INSERT_RESTRICT                       = "1452";
-	const MYSQL_ERROR_SYNTAX                                            = "1064";
-	const MYSQL_ERROR_UNIQUE_KEY_DUPLICATE                              = "1062";
-	const MYSQL_ERROR_ACCESS_DENIED                                     = "1045";
-	const MYSQL_IMPORT_NO_INSERTS                                       = "RetMySqlImportNoInserts";
-	const MYSQL_INSERT_FAILED                                           = "RetMySqlInsertFailed";
-	const MYSQL_INSERT_SYNTAX_ERROR                                     = "RetMySqlInsertSyntaxError";
-	const MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED                      = "RetMySqlSystemConfigurationDeleteFailed";
-	const MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED_NOT_FOUND            = "RetMySqlSystemConfigurationDeleteFailedNotFound";
-	const MYSQL_SYSTEM_CONFIGURATION_INSERT_FAILED                      = "RetMySqlSystemConfigurationInsertFailed";
-	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NAME_FAILED       = "RetMySqlSystemConfigurationSelectByOptionNameFailed"; 
-	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NAME_FETCH_FAILED = "RetMySqlSystemConfigurationSelectByOptionNameFetchFailed";
-	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FAILED       = "RetMySqlSystemConfigurationSelectByOptionNumberFailed"; 
-	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FETCH_FAILED = "RetMySqlSystemConfigurationSelectByOptionNumberFetchFailed";
-	const MYSQL_SYSTEM_CONFIGURATION_SELECT_FAILED                      = "RetMySqlSystemConfigurationSelectFailed"; 
-	const MYSQL_SYSTEM_CONFIGURATION_SELECT_FETCH_FAILED                = "RetMySqlSystemConfigurationSelectFetchFailed";
-	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED                  = "RetMySqlTeamDeleteByTeamDescriptionFailed";
-	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED_NOT_FOUND        = "RetMySqlTeamDeleteByTeamDescriptionFailedNotFound";
-	const MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED                           = "RetMySqlTeamDeleteByTeamIdFailed";
-	const MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED_NOT_FOUND                 = "RetMySqlTeamDeleteByTeamIdFailedNotFound";
-	const MYSQL_TEAM_SELECT_BY_TEAM_DESCRIPTION_FAILED                  = "RetMySqlTeamSelectByDescriptionFailed";
-	const MYSQL_TEAM_SELECT_BY_TEAM_DESCRIPTION_FETCH_FAILED            = "RetMySqlTeamSelectByDescriptionFetchFailed";
-	const MYSQL_TEAM_SELECT_BY_TEAM_ID_FAILED                           = "RetMySqlTeamSelectByTeamIdFailed";
-	const MYSQL_TEAM_SELECT_BY_TEAM_ID_FETCH_FAILED                     = "RetMySqlTeamSelectByTeamIdFetchFailed";
-	const MYSQL_TEAM_SELECT_BY_TEAM_NAME_FAILED                         = "RetMySqlTeamSelectByTeamNameFailed";
-	const MYSQL_TEAM_SELECT_BY_TEAM_NAME_FETCH_FAILED                   = "RetMySqlTeamSelectByTeamNameFetchFailed";
-	const MYSQL_TEAM_SELECT_FAILED                                      = "RetMySqlTeamSelectFailed";
-	const MYSQL_TEAM_SELECT_FETCH_FAILED                                = "RetMySqlTeamSelectFetchFailed";
-	const MYSQL_TEAM_UPDATE_FAILED                                      = "RetMySqlTeamUpdateFailed";
-	const MYSQL_QUERY_PREPARE_FAILED                                    = "RetMySqlQueryPrepareFailed";
-	const MYSQL_UPDATE_SAME_VALUE                                       = "RetMySqlUpdateSameValue";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED                      = "RetMySqlTypeAssocUserTeamDeleteFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED_NOT_FOUND            = "RetMySqlTypeAssocUserTeamDeleteFailedNotFound";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FAILED       = "RetMySqlTypeAssocUserTeamSelectByDescriptionFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FETCH_FAILED = "RetMySqlTypeAssocUserTeamSelectByDescriptionFetchFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FAILED                = "RetMySqlTypeAssocUserTeamSelectByIdFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FETCH_FAILED          = "RetMySqlTypeAssocUserTeamSelectByIdFetchFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED                      = "RetMySqlTypeAssocUserTeamSelectFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED                = "RetMySqlTypeAssocUserTeamSelectFetchFailed";
-	const MYSQL_TYPE_ASSOC_USER_TEAM_UPDATE_FAILED                      = "RetMySqlTypeAssocUserTeamUpdateFailed";
-	const MYSQL_TYPE_TICKET_DELETE_FAILED                               = "RetMySqlTypeTicketDeleteFailed";
-	const MYSQL_TYPE_TICKET_DELETE_FAILED_NOT_FOUND                     = "RetMySqlTypeTicketDeleteFailedNotFound";
-	const MYSQL_TYPE_TICKET_SELECT_BY_DESCRIPTION_FAILED                = "RetMySqlTypeTicketSelectByTypeTicketDescriptionFailed";
-	const MYSQL_TYPE_TICKET_SELECT_BY_DESCRIPTION_FETCH_FAILED          = "RetMySqlTypeTicketSelectByTypeTicketDescriptionFetchFailed";
-	const MYSQL_TYPE_TICKET_SELECT_FAILED                               = "RetMySqlTypeTicketSelectFailed";
-	const MYSQL_TYPE_TICKET_SELECT_FETCH_FAILED                         = "RetMySqlTypeTicketSelectFetchFailed";
-	const MYSQL_TYPE_TICKET_UPDATE_FAILED                               = "RetMySqlTypeTicketUpdateByTypeTicketDescriptionFailed";
-	const MYSQL_TYPE_USER_DELETE_FAILED                                 = "RetMySqlTypeUserDeleteFailed";
-	const MYSQL_TYPE_USER_DELETE_FAILED_NOT_FOUND                       = "RetMySqlTypeUserDeleteFailedNotFound";
-	const MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FAILED                  = "RetMySqlTypeUserSelectByDescriptionFailed";
-	const MYSQL_TYPE_USER_SELECT_BY_DESCRIPTION_FETCH_FAILED            = "RetMySqlTypeUserSelectByDescriptionFetchFailed";
-	const MYSQL_TYPE_USER_SELECT_BY_ID_FAILED                           = "RetMySqlTypeUserSelectByIdFailed";
-	const MYSQL_TYPE_USER_SELECT_BY_ID_FETCH_FAILED                     = "RetMySqlTypeUserSelectByIdFetchFailed";
-	const MYSQL_TYPE_USER_SELECT_FAILED                                 = "RetMySqlTypeUserSelectFailed";
-	const MYSQL_TYPE_USER_SELECT_FETCH_FAILED                           = "RetMySqlTypeUserSelectFetchFailed";
-	const MYSQL_TYPE_USER_UPDATE_FAILED                                 = "RetMySqlTypeUserUpdateFailed";
-	const MYSQL_USER_CHECK_HASH_ACTIVE_ACCOUNT_FAILED                   = "RetMySqlUserCheckHasActiveAccountFailed";
-	const MYSQL_USER_CHECK_PASSWORD_BY_EMAIL_FAILED                     = "RetMySqlUserCheckPasswordByEmailFailed";
-	const MYSQL_USER_CHECK_PASSWORD_BY_USER_UNIQUE_ID_FAILED            = "RetMySqlUserCheckPasswordByUserUniqueIdFailed";
-	const MYSQL_USER_INSERT_FAILED                                      = "RetMySqlUserInsertFailed";
-	const MYSQL_USER_DELETE_FAILED                                      = "RetMySqlUserDeleteFailed";
-	const MYSQL_USER_DELETE_FAILED_NOT_FOUND                            = "RetMySqlUserDeleteFailedNotFound";
-	const MYSQL_USER_SELECT_FAILED                                      = "RetMySqlUserSelectFailed";
-	const MYSQL_USER_SELECT_FETCH_FAILED                                = "RetMySqlUserSelectFetchFailed";
-	const MYSQL_USER_SELECT_BY_HASH_CODE_FAILED                         = "RetMySqlUserSelectByHashCodeFailed";
-	const MYSQL_USER_SELECT_BY_HASH_CODE_FETCH_FAILED                   = "RetMySqlUserSelectByHashCodeFetchFailed";
-	const MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED                        = "RetMySqlUserSelectByUserEmailFailed";
-	const MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED                  = "RetMySqlUserSelectByUserEmailFetchFailed";
-	const MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FAILED                    = "RetMySqlUserSelectByUserUniqueIdFailed";
-	const MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FETCH_FAILED              = "RetMySqlUserSelectByUserUniqueIdFetchFailed";
-	const MYSQL_USER_SELECT_EXISTS_BY_USER_EMAIL_FAILED                 = "RetMySqlUserSelectExistsByUserEmailFailed";
-	const MYSQL_USER_SELECT_HASH_BY_EMAIL_FAILED                  		= "RetMySqlUserSelectHashByEmailFailed";
-	const MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY                    = "RetMySqlUserSelectTeamByUserEmailEmpty";
-	const MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_FAILED                   = "RetMySqlUserSelectTeamByUserEmailFailed";
-	const MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_FETCH_FAILED             = "RetMySqlUserSelectTeamByUserEmailFetchFailed";
-	const MYSQL_USER_UPDATE_ASSOC_USER_CORPORATION_BY_EMAIL_FAILED      = "RetMySqlUpdateAssocUserCorporationByEmailFailed";
-	const MYSQL_USER_UPDATE_BY_EMAIL_FAILED                             = "RetMySqlUserUpdateByEmailFailed";
-	const MYSQL_USER_UPDATE_CORPORATION_BY_EMAIL_FAILED                 = "RetMySqlUserUpdateCorporationByEmail";
-	const MYSQL_USER_UPDATE_DEPARTMENT_BY_CORPORATION_EMAIL_FAILED      = "RetMySqlUserUpdateDepartmentByCorporationEmailFailed";
-	const MYSQL_USER_UPDATE_PASSWORD_BY_EMAIL_FAILED                    = "RetMySqlUserUpdatePasswordByEmailFailed";
-	const MYSQL_USER_UPDATE_TWO_STEP_VERIFICATION_BY_EMAIL_FAILED       = "RetMySqlUserUpdateTwoStepVerificationByEmailFailed";
-	const MYSQL_USER_UPDATE_USER_TYPE_BY_EMAIL_FAILED                   = "RetMySqlUserUpdateUserTypeByEmailFailed";
-	const MYSQL_USER_UPDATE_UNIQUE_ID_BY_EMAIL_FAILED                   = "RetMySqlUserUpdateUniqueIdByEmailFailed";
- 	const MYSQL_REQUIRED_OBJECTS_NOT_FILLED                             = "RetMySqlRequiredObjectsNotFilled";
-	const TYPE_USER_DEFAULT                                             = "USER";
-	
-	/* Database Tables and Fields */
 	const TABLE_ASSOC_TICKET_USER_REQUESTING                            = "ASSOC_TICKET_USER_REQUESTING";
 	const TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_BOND            = "AssocTicketUserRequestingUserBond";
 	const TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL           = "AssocTicketUserRequestingUserEmail"; 
@@ -886,14 +883,11 @@ class Config
 	const TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                  = "UserPhoneSecondaryPrefix";
 	const TABLE_USER_FIELD_TYPE                                         = "UserType";
 	const TABLE_USER_FIELD_USER_UNIQUE_ID                               = "UserUniqueID";
-	
-	
-	/* Constantes de caminhos de diretorios e arquivos */
-	const PATH_BODY_PAGE                                                = "Html/BodyPage/Body";
-	const PATH_FOOTER                                                   = "Html/Footer/Footer.php";
-	const PATH_FORM                                                     = "Html/Form/Form";
-	const PATH_HEAD                                                     = "Html/Head/";
-	const PATH_HEADER                                                   = "Html/Header/Header";
+	const TYPE_USER_DEFAULT                                             = "USER";
+	const TYPE_USER_SUPER                                               = "SUPER_ADMINISTRATOR";
+	const USER_ACTIVE                                                   = 1;
+	const USER_NOT_CONFIRMED                                            = "USER_NOT_CONFIRMED";
+	const USER_NOT_LOGGED_IN                                            = "UserNotLoggedIn";
 	
 	/* Instances */
 	protected static $Instance;
@@ -955,7 +949,7 @@ class Config
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
-			if(self::$Instance->SetApplication() == self::WARNING)
+			if(self::$Instance->SetApplication() == Config::RETURN_WARNING)
 				echo '<script type="text/javascript">alert("A sessão terminou devido ao tempo inativo!");</script>';
         }
         return self::$Instance;
@@ -971,14 +965,14 @@ class Config
 			return Config::LANGUAGE_SPANISH;
 		elseif (strpos($PageDirName, str_replace('Language/', '', Config::LANGUAGE_PORTUGUESE)) !== false)
 			return Config::LANGUAGE_PORTUGUESE;
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public static function GetPageConstant($Constant)
 	{
 		if(defined("Config::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_"))))
 			return constant("Config::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_")));
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public function SetApplication()

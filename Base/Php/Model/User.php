@@ -617,7 +617,7 @@ class User
 				return Config::SUCCESS;
 			}
 		}
-		return Config::ERROR;
+		return Config::RETURN_ERROR;
 	}
 	
 	public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 

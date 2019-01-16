@@ -52,15 +52,34 @@ function MakeInputVisible(InputIdToSee)
 function ShowOrHideElement(ElementToShowOrHide, Show)
 {
 	var $elementToShowOrHide = document.getElementById(ElementToShowOrHide);
+	var $inputs = $elementToShowOrHide.getElementsByTagName('INPUT');
 	if(Show)
 	{
 		if(!$elementToShowOrHide.className.search("NotHidden") != -1)
+		{
 			$elementToShowOrHide.className = $elementToShowOrHide.className.replace("Hidden", "NotHidden");
+			for (var $index = 0; $index < $inputs.length; $index++) 
+			{
+				if($inputs[$index].type == "hidden")
+				{
+					$inputs[$index].type = "input";
+				}
+			}
+		}
 	}
 	else
 	{
 		if($elementToShowOrHide.className.search("NotHidden") != -1)
+		{
 			$elementToShowOrHide.className = $elementToShowOrHide.className.replace("NotHidden", "Hidden");	
+			for (var $index = 0; $index < $inputs.length; $index++) 
+			{
+				if($inputs[$index].type == "text")
+				{
+					$inputs[$index].type = "hidden";
+				}
+			}
+		}
 	}
 }
 
@@ -650,7 +669,8 @@ function ValidateMultiplyFields(Id, DefaultSubmitClass, SubmitId, DefaultValue)
 	}
 	for (var $index = 0; $index < $inputs.length; $index++) 
 	{
-		if($inputs[$index].type != "submit" && $inputs[$index].type != "hidden" && $inputs[$index].id != "")
+		if($inputs[$index].type != "submit" && $inputs[$index].type != "hidden" && $inputs[$index].type != "radio"
+		   && $inputs[$index].id != "" && $inputs[$index].value.length != 0 )
 		{
 			if(($inputs[$index].className.search('InputAlertText') != -1 
 			|| $inputs[$index].value == ""

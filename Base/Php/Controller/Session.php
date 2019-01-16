@@ -79,7 +79,7 @@ class Session
 					{
 						session_unset();
 						session_destroy();
-						return Config::WARNING;
+						return Config::RETURN_WARNING;
 					}
 					session_unset();
 					session_destroy();
@@ -142,9 +142,9 @@ class Session
 				{
 					unset($_SESSION[$Key]);
 					return Config::SUCCESS;
-				} else return Config::ERROR;
-			} else return Config::ERROR;
-		} else return Config::ERROR;
+				} else return Config::RETURN_ERROR;
+			} else return Config::RETURN_ERROR;
+		} else return Config::RETURN_ERROR;
 	}
 	
 	public function GetSessionValue($Key, &$Value)

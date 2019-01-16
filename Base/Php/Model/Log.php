@@ -106,7 +106,7 @@ class Log
 			$logString .= self::LOG_STRING_JUMP_LINE;
 			$return = $this->InstanceFile->WriteFileEnd($this->LogPathDirectory . "/" . $LogName . date(self::LOG_DATE_FILE_YEAR_MONTH_DAY) . ".txt", $logString);
 			if ($return == self::SUCCESS) return self::SUCCESS;
-			else return self::ERROR;
+			else return Config::RETURN_ERROR;
 		}
 		else return self::LOG_DIRECTORY_DOES_NOT_EXISTS;
 	}
@@ -138,7 +138,7 @@ class Log
 				$logString .= self::LOG_STRING_JUMP_LINE;
 				$return = $this->InstanceFile->WriteFileEnd($this->LogPathDirectory . "/" . self::LOG_FILE_POST . date(self::LOG_DATE_FILE_YEAR_MONTH_DAY) . ".txt", $logString);
 				if ($return == self::SUCCESS) return self::SUCCESS;
-				else return self::ERROR;
+				else return Config::RETURN_ERROR;
 			}
 			else return Config::POST_IS_NULL;
 		}
@@ -184,7 +184,7 @@ class Log
 				$logString .= self::LOG_STRING_JUMP_LINE;
 				$return = $this->InstanceFile->WriteFileEnd($this->LogPathDirectory . "/" . self::LOG_FILE_SESSION . date(self::LOG_DATE_FILE_YEAR_MONTH_DAY) . ".txt", $logString);
 				if ($return == self::SUCCESS) return self::SUCCESS;
-				else return self::ERROR;
+				else return Config::RETURN_ERROR;
 			}
 			else return Config::SESSION_IS_NULL;
 		}

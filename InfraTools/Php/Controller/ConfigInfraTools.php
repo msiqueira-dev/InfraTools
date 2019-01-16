@@ -185,7 +185,8 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_SERVICE_NAME_RADIO_DIV                             = "FormFieldServiceNameRadioDiv";
 	const FORM_FIELD_SERVICE_RADIO                                      = "FormFieldServiceRadio";
 	const FORM_FIELD_SERVICE_TYPE                                       = "FormFieldServiceType";
-	const FORM_FIELD_TYPE_SERVICE_DESCRIPTION                           = "FormFieldTypeServiceDescription";
+	const FORM_FIELD_TYPE_SERVICE_NAME                                  = "FormFieldTypeServiceName";
+	const FORM_FIELD_TYPE_SERVICE_SLA                                   = "FormFieldTypeServiceSLA";
 	const FORM_GOOGLE_MAPS_LATITUDE                                     = "RegisterGoogleMapsLatitude";
 	const FORM_GOOGLE_MAPS_LONGITUDE                                    = "RegisterGoogleMapsLongitude";
 	const FORM_HEADER_LANGUAGE                                          = "FormHeaderLanguage";
@@ -272,16 +273,13 @@ class ConfigInfraTools extends Config
 	const FORM_SERVICE_VIEW_LIST_USERS_SUBMIT_FORWARD                   = "FormServiceViewListUsersSubmitForward";
 	const FORM_SERVICE_REGISTER                                         = "FormServiceRegister";
 	const FORM_SERVICE_REGISTER_CANCEL                                  = "FormServiceRegisterCancel";
+	const FORM_SERVICE_REGISTER_FORM                                    = "FormServiceRegisterForm";
 	const FORM_SERVICE_REGISTER_SUBMIT                                  = "FormServiceRegisterSubmit";
 	const FORM_SERVICE_SELECT                                           = "FormServiceSelect";
-	const FORM_SERVICE_SELECT_CANCEL                                    = "FormServiceSelectCancel";
-	const FORM_SERVICE_SELECT_BY_ID                                     = "FormServiceSelectById";
-	const FORM_SERVICE_SELECT_BY_NAME                                   = "FormServiceSelectByName";
+	const FORM_SERVICE_SELECT_FORM                                      = "FormServiceSelectForm";
 	const FORM_SERVICE_SELECT_SUBMIT                                    = "FormServiceSelectSubmit";
-	const FORM_SERVICE_SELECT_SUBMIT_ID                                 = "FormServiceSelectSubmitId";
-	const FORM_SERVICE_SELECT_SUBMIT_NAME                               = "FormServiceSelectSubmitName";
-	const FORM_SERVICE_UPDATE                                           = "FormServiceUpdate";
 	const FORM_SERVICE_UPDATE_CANCEL                                    = "FormServiceUpdateCancel";
+	const FORM_SERVICE_UPDATE_FORM                                      = "FormServiceUpdateForm";
 	const FORM_SERVICE_UPDATE_SUBMIT                                    = "FormServiceUpdateSubmit";
 	const FORM_SERVICE_VIEW                                             = "FormServiceView";
 	const FORM_SERVICE_VIEW_CANCEL                                      = "FormServiceViewCancel";
@@ -322,6 +320,7 @@ class ConfigInfraTools extends Config
 	const FORM_TYPE_SERVICE_REGISTER_CANCEL                             = "FormTypeServiceReturnCancel";
 	const FORM_TYPE_SERVICE_REGISTER_SUBMIT                             = "FormTypeServiceReturnSubmit";
 	const FORM_TYPE_SERVICE_SELECT                                      = "FormTypeServiceSelect";
+	const FORM_TYPE_SERVICE_SELECT_FORM                                 = "FormTypeServiceSelectForm";
 	const FORM_TYPE_SERVICE_SELECT_SUBMIT                               = "FormTypeServiceSelectSubmit";
 	const FORM_TYPE_SERVICE_UPDATE                                      = "FormTypeServiceUpdate";	
 	const FORM_TYPE_SERVICE_UPDATE_CANCEL                               = "FormTypeServiceUpdateCancel";
@@ -817,7 +816,7 @@ class ConfigInfraTools extends Config
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
-			if(self::$Instance->SetApplication() == self::WARNING)
+			if(self::$Instance->SetApplication() == ConfigInfraTools::RETURN_WARNING)
 				echo '<script type="text/javascript">alert("A sessão terminou devido ao tempo inativo!");</script>';
         }
         return self::$Instance;
@@ -829,7 +828,7 @@ class ConfigInfraTools extends Config
 	public static function GetPageConstant($Constant)
 	{
 		$Const = Parent::GetPageConstant($Constant);
-		if($Const != ConfigInfraTools::ERROR) return $Const;
+		if($Const != ConfigInfraTools::RETURN_ERROR) return $Const;
 		if(defined("ConfigInfraTools::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_"))))
 			return constant("ConfigInfraTools::" . strtoupper(implode(preg_split('/(?=[A-Z])/', $Constant, -1, PREG_SPLIT_NO_EMPTY), "_")));
 	}

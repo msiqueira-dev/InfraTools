@@ -434,7 +434,7 @@ class InfraToolsNetwork extends Network
 		elseif(strstr (PHP_OS, $this->OPERATIONAL_SYSTEM_LINUX) != FALSE)
 			exec('traceroute ' . $IpAddress . ' 2>&1', $ArrayRoute);
 		else
-			return ConfigInfraTools::GET_OPERATIONAL_SYSTEM_INVALID_OS;
+			return ConfigInfraTools::GET_ERROR_INVALID_OS;
 		return ConfigInfraTools::SUCCESS;
 	}
 	

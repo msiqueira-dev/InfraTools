@@ -14,17 +14,17 @@
 <!-- FORM TYPE_SERVICE_REGISTER -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER; ?>" method="post">
-    <!-- TYPE_SERVICE_NAME -->
+    <!-- FORM_FIELD_TYPE_SERVICE_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('TYPE_SERVICE_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_SERVICE_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_DESCRIPTION; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_DESCRIPTION; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>" 
+                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>" 
                                class="<?php echo $this->ReturnTypeServiceNameClass; ?>"
                                onblur="ValidateDescription(null, 
-                                                   '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_DESCRIPTION; ?>',
+                                                   '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
                                                    '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT; ?>',
                                                    '', true);
@@ -39,7 +39,7 @@
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT; ?>',
                                                  '');"
                                onchange="ValidateDescription(null, 
-                                                   '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_DESCRIPTION; ?>',
+                                                   '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
                                                    '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT; ?>',
                                                    '', true);
@@ -48,13 +48,13 @@
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('TYPE_SERVICE_NAME'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_SERVICE_NAME'); ?>"
                                value="<?php echo $this->InputValueTypeServiceName; ?>" maxlength="45" />
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_DESCRIPTION; ?>',
+         onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
 								   'DivContentBodySubmitBigger',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT; ?>',
 								   '', true);

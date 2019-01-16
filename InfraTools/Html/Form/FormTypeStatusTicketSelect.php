@@ -24,7 +24,7 @@
 		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>" 
 						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>"
 						   class="<?php echo $this->ReturnTypeStatusTicketDescriptionClass; ?>"
-						   onkeyup="ValidateNumbersOnly(null, 
+						   onkeyup="ValidateDescription(null, 
 										     '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
@@ -34,7 +34,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
+						   onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '', true);
@@ -43,7 +43,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '');"
-						   onchange="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
+						   onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 											 '', true);
@@ -57,7 +57,7 @@
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
+		 onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_SELECT_SUBMIT; ?>',
 								   '', true);

@@ -72,7 +72,7 @@ class PageForm
 			if($Nullable) return Config::SUCCESS;
 			$this->InputFocus      = $FieldId;
 			$ReturnEmptyText = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-			return $ReturnFieldClass = Config::FORM_FIELD_ERROR;
+			return $ReturnFieldClass = Config::FORM_FIELD_RETURN_ERROR;
 		} else array_pop($ArrayConstants);
 		if($MaxSize != 0 || $MinSize != 0)
 		{
@@ -80,7 +80,7 @@ class PageForm
 			{
 				$this->InputFocus = $FieldId;
 				$ReturnFieldText  = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-				return $ReturnFieldClass = Config::FORM_FIELD_ERROR;
+				return $ReturnFieldClass = Config::FORM_FIELD_RETURN_ERROR;
 			} else array_pop($ArrayConstants);
 		}
 		if($ExtraFieldSameValue != NULL)
@@ -89,7 +89,7 @@ class PageForm
 			{
 				$this->InputFocus = $FieldId;
 				$ReturnFieldText  = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-				return $ReturnFieldClass = Config::FORM_FIELD_ERROR;
+				return $ReturnFieldClass = Config::FORM_FIELD_RETURN_ERROR;
 			} else array_pop($ArrayConstants);
 		}
 		$FormValidator = $this->Factory->CreateFormValidator();
@@ -98,7 +98,7 @@ class PageForm
 		{
 			$this->InputFocus = $FieldId;
 			$ReturnFieldText  = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-			return $ReturnFieldClass  = Config::FORM_FIELD_ERROR;
+			return $ReturnFieldClass  = Config::FORM_FIELD_RETURN_ERROR;
 		}
 		array_pop($ArrayConstants);
 		return Config::SUCCESS;
@@ -182,13 +182,13 @@ class PageForm
 				for($index = 0; $index < count($arrayReturn); $index++)
 				{
 					if($arrayReturn[$index] != Config::SUCCESS)
-						return Config::ERROR;
+						return Config::RETURN_ERROR;
 				}
 				return Config::SUCCESS;
 			}
-			else return Config::ERROR;
+			else return Config::RETURN_ERROR;
 		}
-		else return Config::ERROR;
+		else return Config::RETURN_ERROR;
 	}
 	
 	public function ValidateSpecificField($FunctionName, $FieldValue, $FieldDefaultValue, $ArrayOptions)
