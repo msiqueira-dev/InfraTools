@@ -1,4 +1,4 @@
-<!-- BODY PAGE SERVICE -->
+<!-- BODY_PAGE_SERVICE -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<div class="DivContentBodySecondTitle">

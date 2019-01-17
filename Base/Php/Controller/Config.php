@@ -317,6 +317,7 @@ class Config
 	const FORM_TICKET_UPDATE_FORM                                       = "FormTicketUpdateForm";
 	const FORM_TICKET_UPDATE_SUBMIT                                     = "FormTicketUpdateSubmit";
 	const FORM_TICKET_VIEW                                              = "FormTicketUpdateView";
+	const FORM_TICKET_VIEW_DELETE                                       = "FormTicketViewDelete";
 	const FORM_TICKET_VIEW_DELETE_SUBMIT                                = "FormTicketViewDeleteSubmit";
 	const FORM_TICKET_VIEW_LIST_USERS                                   = "FormTicketViewListUsers";
 	const FORM_TICKET_VIEW_LIST_USERS_FORM                              = "FormTicketViewListUsersForm";

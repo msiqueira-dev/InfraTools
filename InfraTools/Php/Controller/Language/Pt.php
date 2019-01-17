@@ -268,6 +268,10 @@ class Pt
 	const HREF_PAGE_SERVICE_VIEW                                    = "/Pt/PageServiceView";
 	const HREF_PAGE_SUPPORT                                         = "/Pt/PageSupport";
 	const HREF_PAGE_TEAM                                            = "/Pt/PageTeam";
+	const HREF_PAGE_TEAM_LIST                                       = "/Pt/PageTeamList";
+	const HREF_PAGE_TEAM_REGISTER                                   = "/Pt/PageTeamRegister";
+	const HREF_PAGE_TEAM_SELECT                                     = "/Pt/PageTeamSelect";
+	const HREF_PAGE_TEAM_VIEW                                       = "/Pt/PageTeamView";
 	const ID                                                        = "Id";
 	const INSERT_WARNING_EXISTS                                     = "Um registro similar já foi efetuado";
 	const INSTALL_EXPORT_SUCCESS                                    = "Dados do sistema exportados com sucesso";
@@ -297,9 +301,12 @@ class Pt
                                                                     . "os campos abaixo serão preenchidos com seu país "
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
 	const NAME                                                      = "Nome";
+    const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
 	const NULL_EMPTY                                                = "Nenhum valor associado";
 	const NULL_OPTION                                               = "Por favor escolha uma opção";
-	const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
+	const OPERATION_LIST                                            = "Listagem";
+	const OPERATION_REGISTER                                        = "Cadastro";
+	const OPERATION_SEARCH                                          = "Busca";
 	const PAGE_ABOUT                                                = "Sobre";
 	const PAGE_ABOUT_ROBOTS                                         = "ALL";
 	const PAGE_ABOUT_TITLE                                          = "InfraTools - Sobre";
@@ -660,7 +667,7 @@ class Pt
 	const PAGE_SERVICE_SELECT_TITLE                                 = "InfraTools - Seleção de Serviços";
 	const PAGE_SERVICE_UPDATE                                       = "Atualizar Serviço";
 	const PAGE_SERVICE_UPDATE_ROBOTS                                = "noindex";
-	const PAGE_SERVICE_UPDATE_TITLE                                 = "InfraTools - Atualizar Serviço";
+	const PAGE_SERVICE_UPDATE_TITLE                                 = "InfraTools - Atualização de Serviço";
 	const PAGE_SERVICE_VIEW                                         = "Vizualização de Serviço";
 	const PAGE_SERVICE_VIEW_ROBOTS                                  = "noindex";
 	const PAGE_SERVICE_VIEW_TITLE                                   = "InfraTools - Vizualização de Serviço";
@@ -670,6 +677,21 @@ class Pt
 	const PAGE_TEAM                                                 = "Equipes";
 	const PAGE_TEAM_ROBOTS                                          = "noindex";
 	const PAGE_TEAM_TITLE                                           = "InfraTools - Equipes";
+	const PAGE_TEAM_LIST                                            = "Listagem de Equipes";
+	const PAGE_TEAM_LIST_ROBOTS                                     = "noindex";
+	const PAGE_TEAM_LIST_TITLE                                      = "InfraTools - Listagem de Equipes";
+	const PAGE_TEAM_REGISTER                                        = "Cadastro de Equipes";
+	const PAGE_TEAM_REGISTER_ROBOTS                                 = "noindex";
+	const PAGE_TEAM_REGISTER_TITLE                                  = "InfraTools - Cadastro de Equipes";
+	const PAGE_TEAM_SELECT                                          = "Seleção de Equipes";
+	const PAGE_TEAM_SELECT_ROBOTS                                   = "noindex";
+	const PAGE_TEAM_SELECT_TITLE                                    = "InfraTools - Seleção de Equipes";
+	const PAGE_TEAM_UPDATE                                          = "Atualização de Equipes";
+	const PAGE_TEAM_UPDATE_ROBOTS                                   = "noindex";
+	const PAGE_TEAM_UPDATE_TITLE                                    = "InfraTools - Atualização de Equipes";
+	const PAGE_TEAM_VIEW                                            = "Vizualização de Equipes";
+	const PAGE_TEAM_VIEW_ROBOTS                                     = "noindex";
+	const PAGE_TEAM_VIEW_TITLE                                      = "InfraTools - Vizualização de Equipes";
 	const PHONE_PREFIX                                              = "Prefixo";
 	const PHONE_PRIMARY                                             = "Telefone Primário";
 	const PHONE_SECONDARY                                           = "Telefone Secundário";

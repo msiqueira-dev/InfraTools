@@ -177,24 +177,31 @@
         <div class="DivContentBodyCertificationHtml">
             <p>
                 <a href="http://validator.w3.org/check?uri=referer">
-                    <img src="<?php echo $this->Config->DefaultServerImage. 
-                      'Icons/W3CHtml5.png'; ?>" alt="Valid HTML5" width="88" height="31" />
+                    <img src="<?php echo $this->Config->DefaultServerImage .'Icons/W3CHtml5.png'; ?>" 
+                         onmouseover="this.src='<?php echo $this->Config->DefaultServerImage .'Icons/W3CHtml5Hover.png'; ?>'"
+						 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage .'Icons/W3CHtml5.png'; ?>'"
+                         alt="Valid HTML5" width="88" height="31" />
                 </a>
             </p>
         </div>
         <div class="DivContentBodyCertificationCss">
             <p>
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                    <img src="<?php echo $this->Config->DefaultServerImage. 
-                      'Icons/W3CCssLevel3.png'; ?>" alt="Valid CSS3" width="88" height="31" />
+                    <img src="<?php echo $this->Config->DefaultServerImage. 'Icons/W3CCssLevel3.png'; ?>"
+                         onmouseover="this.src='<?php echo $this->Config->DefaultServerImage .'Icons/W3CCssLevel3Hover.png'; ?>'"
+						 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage .'Icons/W3CCssLevel3.png'; ?>'" 
+                         alt="Valid CSS3" width="88" height="31" />
                 </a>
             </p>
         </div>
         <div class="DivContentBodyCertificationValidRobots">
         	<p>
                 <a href="http://tool.motoricerca.info/robots-checker.phtml?checkreferer=1">
-                <img src="<?php echo $this->Config->DefaultServerImage. 'Icons/ValidRobots.png'; ?>"
-                alt="Valid Robots.txt" width="88" height="31"/> </a>
+					<img src="<?php echo $this->Config->DefaultServerImage. 'Icons/ValidRobots.png'; ?>"
+						 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage .'Icons/ValidRobotsHover.png'; ?>'"
+						 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage .'Icons/ValidRobots.png'; ?>'"
+						 alt="Valid Robots.txt" width="88" height="31"/> 
+               	</a>
             </p>
         </div>
 	</div>
