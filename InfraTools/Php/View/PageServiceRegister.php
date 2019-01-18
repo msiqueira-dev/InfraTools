@@ -53,62 +53,37 @@ class PageServiceRegister extends PageInfraTools
 		$returnText  = "";
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT]) || 
-			   isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME]))
+			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT]) || 
+			   isset($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME]))
 			{
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE]))
-					$this->InputValueServiceActive = TRUE;
-				else $this->InputValueServiceActive = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME]))
+				if(isset($_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME]))
 				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME];
-					else $this->InputValueServiceCorporation = NULL; 
+					if($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] == ConfigInfraTools::FORM_FIELD_SELECT_NONE)
+						$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME] = NULL; 
 				}
-				else $this->InputValueServiceCorporation = NULL; 
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE]))
-					$this->InputValueServiceCorporationCanChange = TRUE;
-				else $this->InputValueServiceCorporationCanChange = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME]))
-				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-						$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME];
-					else $this->InputValueServiceDepartment = NULL; 
-				}
-				else $this->InputValueServiceDepartment = NULL; 
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE]))
-					$this->InputValueServiceDepartmentCanChange = TRUE;
-				else $this->InputValueServiceDepartmentCanChange = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION]))
-					$this->InputValueServiceDescription = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION];
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME]))
-					$this->InputValueServiceName = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME];
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_TYPE]))
-					$this->InputValueServiceType = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_TYPE];
-				$return = $this->ServiceInsert($this->InputValueServiceActive, 
-											   $this->InputValueServiceCorporation, 
-											   $this->InputValueServiceCorporationCanChange,
-									           $this->InputValueServiceDepartment, 
-											   $this->InputValueServiceDepartmentCanChange,
-									           $this->InputValueServiceDescription, 
-											   $this->InputValueServiceName, 
-											   $this->InputValueServiceType,
-											   $this->User->GetEmail(),
-											   $this->InputValueHeaderDebug);
+				$return = $this->InfraToolsServiceInsert(@$_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE], 
+											             @$_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
+											             @$_POST[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE],
+		 							                     @$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+											             @$_POST[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE],
+									                     $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION], 
+											             $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME], 
+											             $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_TYPE],
+											             $this->User->GetEmail(),
+											             $this->InputValueHeaderDebug);
 				$returnClass = $this->ReturnClass;
 				$returnImage = $this->ReturnImage;
 				$returnText  = $this->ReturnText;
-				$return = $this->TypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, 
-														  $this->InputValueHeaderDebug);
+				$return = $this->InfraToolsTypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$return = $this->CorporationSelectOnUserServiceContextNoLimit(
+					$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit(
 						                     $this->User->GetEmail(),
 											 $this->ArrayInstanceInfraToolsCorporation, 
 											 $this->InputValueHeaderDebug);
 					if($return == ConfigInfraTools::SUCCESS)
 					{
-						$return = $this->DepartmentSelectOnUserServiceContextNoLimit(
+						$return = $this->InfraToolsDepartmentSelectOnUserServiceContextNoLimit(
 							             $this->User->GetCorporationName(),
 										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 
@@ -121,17 +96,16 @@ class PageServiceRegister extends PageInfraTools
 			}
 			if(!isset($_GET[ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT]) || $return != ConfigInfraTools::SUCCESS)
 			{
-				$return = $this->TypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, 
-														  $this->InputValueHeaderDebug);
+				$return = $this->InfraToolsTypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$return = $this->CorporationSelectOnUserServiceContextNoLimit(
+					$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit(
 						                     $this->User->GetEmail(),
 											 $this->ArrayInstanceInfraToolsCorporation, 
 											 $this->InputValueHeaderDebug);
 					if($return == ConfigInfraTools::SUCCESS)
 					{
-						$return = $this->DepartmentSelectOnUserServiceContextNoLimit(
+						$return = $this->InfraToolsDepartmentSelectOnUserServiceContextNoLimit(
 							             $this->User->GetCorporationName(),
 										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 

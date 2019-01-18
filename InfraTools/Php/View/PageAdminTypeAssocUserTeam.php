@@ -174,23 +174,15 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_SUBMIT]))
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->InstanceTypeAssocUserTeam)  
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $this->InstanceTypeAssocUserTeam) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->UserSelectByTypeAssocUserTeamDescription($this->InputLimitOne, $this->InputLimitTwo, 
-														           $this->InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
-										                           $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
-				                                                   == ConfigInfraTools::SUCCESS)
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTypeAssocUserTeamDescription', 
+										  array($this->InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS;
-				else
-				{
-					if($this->TypeAssocUserTeamLoadData($this->InstanceTypeAssocUserTeam) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_SELECT;
+			}
 		}
 		//FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)

@@ -57,7 +57,7 @@ class PageServiceSelect extends PageInfraTools
 				{
 					if($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_RADIO] == ConfigInfraTools::FORM_FIELD_SERVICE_ID_RADIO)
 					{
-						if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceIdOnUserContext', 
+						if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceIdOnUserContext', 
 												  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
 														$this->User->GetEmail(),
 														&$this->InstanceInfraToolsService,
@@ -78,7 +78,7 @@ class PageServiceSelect extends PageInfraTools
 						$this->ReturnServiceNameRadioClass = "NotHidden";
 						$this->InputValueServiceNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 						$_POST = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_POST;
-						if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceNameOnUserContext', 
+						if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
 												  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
 														$this->User->GetEmail(),
 														&$this->ArrayInstanceInfraToolsService),
@@ -99,7 +99,7 @@ class PageServiceSelect extends PageInfraTools
 					$this->ReturnServiceNameRadioClass = "NotHidden";
 					$this->InputValueServiceNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 					$_POST = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_POST;
-					if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceNameOnUserContext', 
+					if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
 											  array($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
 													$this->User->GetEmail(),
 													&$this->ArrayInstanceInfraToolsService),
@@ -123,7 +123,7 @@ class PageServiceSelect extends PageInfraTools
 			}
 			elseif($this->CheckGetContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 			{
-				$return = $this->ServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
+				$return = $this->InfraToolsServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
 												   $this->User->GetEmail(), 
 												   $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
@@ -137,7 +137,7 @@ class PageServiceSelect extends PageInfraTools
 					$retClass = $this->ReturnClass;
 					$retText  = $this->ReturnText;
 					$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
-					$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+					$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 																		   $this->User->GetEmail(),
 																		   $this->InstanceInfraToolsService,
 																		   $this->InputValueTypeAssocUserServiceId,
@@ -157,7 +157,7 @@ class PageServiceSelect extends PageInfraTools
 				$this->InputValueServiceIdRadio = "checked";
 				$this->ReturnServiceIdRadioClass = "NotHidden";
 				$this->ReturnServiceNameRadioClass = "Hidden";
-				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+				$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 																	   $this->User->GetEmail(), 
 																	   $this->InstanceInfraToolsService,
 																	   $this->InputValueTypeAssocUserServiceId,

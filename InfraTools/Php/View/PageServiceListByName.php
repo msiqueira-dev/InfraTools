@@ -59,7 +59,7 @@ class PageServiceListByName extends PageService
 			else
 			{
 				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME => ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME) + $_GET;
-				$this->ExecuteFunction($_GET, 'ServiceSelectByServiceNameOnUserContext', 
+				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
 											   array($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
 													 $this->User->GetEmail(),
 													 &$this->ArrayInstanceInfraToolsService),

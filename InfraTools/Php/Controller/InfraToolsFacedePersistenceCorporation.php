@@ -17,14 +17,14 @@ Functions:
 			                                            $Debug, $MySqlConnection);
 			public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, 
 			                                                         $Debug, $MySqlConnection);
-			public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, 
+			public function InfraToolsCorporationSelectByName($CorporationName, &$CorporationInstance, 
 			                                                  $Debug, $MySqlConnection);
-			public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
-			public function CorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
-			                                                      &$ArrayInstanceInfraToolsCorporation, 
-																  &$RowCount, $Debug, $MySqlConnection);
-			public function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, 
-			                                                             $Debug, $MySqlConnection);
+			public function InfraTools(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
+			public function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
+			                                                                &$ArrayInstanceInfraToolsCorporation, 
+																            &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, 
+			                                                                        $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("InfraToolsFactory"))
@@ -161,7 +161,7 @@ class InfraToolsFacedePersistenceCorporation
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function CorporationInfraToolsSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -207,7 +207,7 @@ class InfraToolsFacedePersistenceCorporation
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function CorporationInfraToolsSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
+	public function InfraTools(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceCorporation = array();
@@ -241,9 +241,9 @@ class InfraToolsFacedePersistenceCorporation
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
-			                                              &$ArrayInstanceInfraToolsCorporation, 
-														  &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
+			                                                        &$ArrayInstanceInfraToolsCorporation, 
+														            &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsCorporation = NULL;
@@ -294,8 +294,8 @@ class InfraToolsFacedePersistenceCorporation
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, 
-																 $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, 
+																           $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsCorporation = NULL;

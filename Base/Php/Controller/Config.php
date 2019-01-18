@@ -93,8 +93,8 @@ class Config
 	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR      = "FormFieldAssocUserCorporationRegistrationDateYear";
 	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID             = "FormFieldAssocUserCorporationRegistrationId";
 	const FORM_FIELD_CAPTCHA                                            = "FormFieldCaptcha";
-	const FORM_FIELD_CORPORATION_ACTIVE                                 = "InputCorporationActive";
-	const FORM_FIELD_CORPORATION_NAME                                   = "InputCorporationName";
+	const FORM_FIELD_CORPORATION_ACTIVE                                 = "FormFieldCorporationActive";
+	const FORM_FIELD_CORPORATION_NAME                                   = "FormFieldCorporationName";
 	const FORM_FIELD_DEPARTMENT_INITIALS                                = "FormFieldDepartmentInitials";
 	const FORM_FIELD_DEPARTMENT_NAME                                    = "FormFieldDepartmentName";
 	const FORM_FIELD_DEPARTMENT_SELECT                                  = "FormFieldDepartmentSelect";
@@ -114,6 +114,7 @@ class Config
 	const FORM_FIELD_RADIO_SYSTEM_CONFIGURATION                         = "FormFieldRadioSystemConfiguration";
 	const FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME             = "FormFieldRadioSystemConfigurationOptionName";
 	const FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER           = "FormFieldRadioSystemConfigurationOptionNumber";
+	const FORM_FIELD_RETURN_ERROR                                       = "FormFieldReturnError";
 	const FORM_FIELD_SELECT_NONE                                        = "None";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE                 = "FormFieldSystemConfigurationOptionActive";
 	const FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION            = "FormFieldSystemConfigurationOptionDescription";

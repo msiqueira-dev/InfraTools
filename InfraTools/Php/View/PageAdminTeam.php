@@ -26,9 +26,9 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTeam extends PageAdmin
 {
-	public    $ArrayInstanceTeam        = NULL;
-	public    $ArrayInstanceUser = NULL;
-	protected $InstanceTeam      = NULL;
+	public    $ArrayInstanceTeam           = NULL;
+	public    $ArrayInstanceInfraToolsUser = NULL;
+	protected $InstanceTeam                = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -152,22 +152,16 @@ class PageAdminTeam extends PageAdmin
 		}
 		//FORM_TEAM_VIEW_LIST_USERS_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TEAM_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam)  == ConfigInfraTools::SUCCESS)
+		{	
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TEAM, $this->InstanceTeam) 
+			                                   == ConfigInfraTools::SUCCESS)
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->UserSelectByTeamId($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceTeam->GetTeamId(),
-										     $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
-				                             == ConfigInfraTools::SUCCESS)
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTeamId', 
+										  array($this->InstanceTeam->GetTeamId(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW_LIST_USERS;
-				else
-				{
-					if($this->TeamLoadData($this->InstanceTeam) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_SELECT;
+			}
 		}
 		//FORM_TEAM_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TEAM_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)

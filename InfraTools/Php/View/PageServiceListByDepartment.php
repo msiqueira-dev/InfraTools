@@ -48,9 +48,9 @@ class PageServiceListByDepartment extends PageService
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
-											 $this->ArrayInstanceInfraToolsCorporation, 
-											 $this->InputValueHeaderDebug);
+			$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
+											                                        $this->ArrayInstanceInfraToolsCorporation, 
+											                                        $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
@@ -64,7 +64,7 @@ class PageServiceListByDepartment extends PageService
 				elseif($this->User->GetCorporationName() != NULL)
 					$this->InputValueServiceCorporation = $this->User->GetCorporationName();
 
-				$return = $this->DepartmentSelectOnUserServiceContextNoLimit($this->InputValueServiceCorporation,
+				$return = $this->InfraToolsDepartmentSelectOnUserServiceContextNoLimit($this->InputValueServiceCorporation,
 										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 
 										 $this->InputValueHeaderDebug);
@@ -92,7 +92,7 @@ class PageServiceListByDepartment extends PageService
 					{
 						$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT => ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT) 
 							                                                               + $_GET;
-						$this->ExecuteFunction($_GET, 'ServiceSelectByServiceDepartmentOnUserContext', 
+						$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceDepartmentOnUserContext', 
 											   array($this->InputValueServiceCorporation, 
 													 $this->InputValueServiceDepartment,
 													 $this->User->GetEmail(),

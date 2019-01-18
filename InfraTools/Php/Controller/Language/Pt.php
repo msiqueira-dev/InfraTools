@@ -46,6 +46,7 @@ class Pt
 	const ACTIVE                                                    = "Ativada";
 	const ACTIVATED                                                 = "Ativado";
 	const ACCOUNT_UPDATE_SUCCESS                                    = "Conta atualizada com sucesso";
+	const ASSOC_USER_CORPORATION_UPDATE_SUCCESS                     = "Informações de corporação alterada com sucesso";
 	const BIRTH_DATE                                                = "Data de nascimento";
 	const BIRTH_DATE_DAY                                            = "Dia";
 	const BIRTH_DATE_MONTH                                          = "Mês";

@@ -54,15 +54,7 @@ class PageAdminDepartment extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//FORM_CORPORATION_LIST
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_LIST) == ConfigInfraTools::SUCCESS)
-		{
-			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
-					                        $this->InstanceCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-		}
+		
 		//FORM_CORPORATION_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{

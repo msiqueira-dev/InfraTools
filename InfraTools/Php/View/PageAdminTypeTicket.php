@@ -136,15 +136,15 @@ class PageAdminTypeTicket extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW_LIST_USERS;
 				else
 				{
-					if($this->TicketLoadData($this->InstanceTypeTicket) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
+					if($this->TypeTicketLoadData($this->InstanceTypeTicket) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
 				}
 			}
 		}
 		//FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, "TicketLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, "TypeTicketLoadData", 
 										  $this->InstanceTypeTicket) == ConfigInfraTools::TypeTicketLoadData)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_UPDATE;
 		}

@@ -59,32 +59,54 @@ class PageAdminUser extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
+		//FORM_CORPORATION_SELECT_SUBMIT
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		}
+		//FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT]))
+		{
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
+			if($this->InstanceInfraToolsUserAdmin != NULL)
+			{
+				if($this->AssocUserCorporationUpdateByUserEmailAndCorporationName(
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+														  @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY],
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH],
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR],
+					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID],
+					                                      $this->InstanceInfraToolsUserAdmin, 
+														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				{
+					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
+												           $this->InstanceInfraToolsUserAdmin, 
+														   $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
+				}
+				else 
+				{
+					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
+					                                                $this->ArrayInstanceDepartment,
+																    $this->InputValueHeaderDebug);
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
+				}
+			}
+			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
+									 ConfigInfraTools::PAGE_NOT_FOUND);
+		}
 		//FORM_USER_LIST
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_LIST) == ConfigInfraTools::SUCCESS)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_LIST) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelect', 
 									  array(&$this->ArrayInstanceInfraToolsUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-		}
-		//FORM_CORPORATION_LIST
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_LIST]))
-		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
-											  $this->InstanceCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceCorporation) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-			}
-			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
-			{
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
-								            $rowCount, $this->InputValueHeaderDebug);
-			}
 		}
 		//USER LIST SELECT TYPE USER SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT]))
@@ -93,14 +115,6 @@ class PageAdminUser extends PageAdmin
 														  $this->InstanceTypeUser,
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-			if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
-			{
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$this->InfraToolsUserSelect($this->InputLimitOne, $this->InputLimitTwo, $this->ArrayInstanceInfraToolsUser, 
-								            $rowCount, $this->InputValueHeaderDebug);
-			}
 		}
 		//FORM_USER_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
@@ -111,7 +125,7 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		//USER REGISTER
+		//FORM_USER_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_REGISTER) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_REGISTER;
 		//FORM_USER_REGISTER_SUBMIT
@@ -245,8 +259,8 @@ class PageAdminUser extends PageAdmin
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);
 		}
-		//FORM_USER_CHANGE_CORPORATION
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION]))
+		//FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
 			if($this->InstanceInfraToolsUserAdmin != NULL)
@@ -258,37 +272,6 @@ class PageAdminUser extends PageAdmin
 				$this->SubmitEnabled = '';
 				$this->SubmitClass = 'SubmitEnabled';
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
-			}
-			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
-									 ConfigInfraTools::PAGE_NOT_FOUND);
-		}
-		//FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT]))
-		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
-			{
-				if($this->AssocUserCorporationUpdateByUserEmailAndCorporationName(
-					                                      @$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
-														  @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY],
-					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH],
-					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR],
-					                                      @$_POST[ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID],
-					                                      $this->InstanceInfraToolsUserAdmin, 
-														  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				{
-					$this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
-												           $this->InstanceInfraToolsUserAdmin, 
-														   $this->InputValueHeaderDebug);
-				}
-				else 
-				{
-					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
-					                                                $this->ArrayInstanceDepartment,
-																    $this->InputValueHeaderDebug);
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
-				}
 			}
 			else $this->RedirectPage($domain . str_replace('Language/', '', $InstanceLoginInfraTools->Language) . "/" . 
 									 ConfigInfraTools::PAGE_NOT_FOUND);

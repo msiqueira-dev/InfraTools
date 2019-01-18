@@ -13,12 +13,12 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about department.
 Functions: 
-			public function DepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
-	                                                             &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
-																 $Debug, $MySqlConnection);
-			public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
-			                                                            &$ArrayInstanceInfraToolsDepartment, 
-																		$Debug, $MySqlConnection);
+			public function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
+	                                                                       &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
+																           $Debug, $MySqlConnection);
+			public function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
+ 			                                                                      &$ArrayInstanceInfraToolsDepartment, 
+																		          $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("InfraToolsFactory"))
@@ -70,9 +70,9 @@ class InfraToolsFacedePersistenceDepartment
         return self::$Instance;
     }
 	
-	public function DepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail,
-														 &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
-														 $Debug, $MySqlConnection)
+	public function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail,
+														           &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
+														           $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsDepartment = NULL;
@@ -124,9 +124,8 @@ class InfraToolsFacedePersistenceDepartment
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, 
-																&$ArrayInstanceInfraToolsDepartment, 
-																$Debug, $MySqlConnection)
+	public function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment, 
+																          $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsDepartment = NULL;

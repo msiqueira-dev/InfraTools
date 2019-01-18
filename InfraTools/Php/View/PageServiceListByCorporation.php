@@ -47,9 +47,9 @@ class PageServiceListByCorporation extends PageService
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
-											 $this->ArrayInstanceInfraToolsCorporation, 
-											 $this->InputValueHeaderDebug);
+			$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
+											                                        $this->ArrayInstanceInfraToolsCorporation, 
+											                                        $this->InputValueHeaderDebug);
 			//FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
 			{

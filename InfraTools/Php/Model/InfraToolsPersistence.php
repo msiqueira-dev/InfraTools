@@ -21,7 +21,9 @@ Methods:
 		public static function SqlCorporationSelectOnUserServiceContextNoLimit();
 		public static function SqlDepartmentSelectOnUserServiceContext();
 		public static function SqlDepartmentSelectOnUserServiceContextNoLimit();
+		public static function SqlInfraToolsUserSelectByMonitoringId();
 		public static function SqlInfraToolsUserSelectByServiceId();
+		public static function SqlInfraToolsUserSelectByTypeMonitoringDescription();
 		public static function SqlServiceDeleteById();
 		public static function SqlServiceDeleteByIdOnUserContext();
 		public static function SqlServiceInsert();
@@ -259,6 +261,136 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_DEPARTMENT.".".ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME        . "   ";
 	}
 	
+	public static function SqlInfraToolsUserSelectByMonitoringId()
+	{
+		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
+			              ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                          .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                                             .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                               .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_GENDER                                              .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                                           .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_NAME                                                .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_REGION                                              .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES                                     .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                               .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                                         .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED                                      .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                  .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                           .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                         .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID                                      .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as UserRegisterDate, "                                                                ." " 
+		. ConfigInfraTools::TABLE_TYPE_USER                                                      .".". 
+		  ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                                    .", "
+		. ConfigInfraTools::TABLE_TYPE_USER                                                      .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as TypeUserRegisterDate, "                                                            ." "
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+	      ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE                                       .", "
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+		  ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                                         .", " 
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as CorporationRegisterDate, "                                                         ." "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                  .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                   .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                 .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                   .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                        .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as AssocUserCorporationRegisterDate, "                                                ." "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+	      ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                                   .", "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+		  ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS                                      .", "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+	      ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                                          .", " 
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as DepartmentRegisterDate, "                                                          ." "
+		. "(SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_MONITORING                          ." "
+		. "WHERE "      .  ConfigInfraTools::TABLE_MONITORING                                    .".". 
+			               ConfigInfraTools::TABLE_MONITORING_FIELD_ID                           ."=? "
+		. ") AS COUNT "                                                                          ." "
+		. "FROM "       . ConfigInfraTools::TABLE_USER                                           ." "
+		. "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_USER                                      ." "
+		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_TYPE                                ." "
+		. "=  "         . ConfigInfraTools::TABLE_TYPE_USER                                      .".". 
+			              ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                    ." "
+		. "LEFT JOIN "  . ConfigInfraTools::TABLE_CORPORATION                                    ." "
+		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=  "         . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
+			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
+		. "LEFT JOIN "  . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         ." "
+		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        ." "
+		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_DEPARTMENT                                     ." "
+		. "ON  "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME   ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                          ." "
+		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
+		. "AND "        . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
+			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             ." "
+		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
+			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL            ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_SERVICE                                        ." "
+		. "ON  "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
+			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID            ." "
+		. "=   "        . ConfigInfraTools::TABLE_SERVICE                                        .".". 
+			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_MONITORING                                     ." "
+		. "ON  "        . ConfigInfraTools::TABLE_SERVICE                                        .".".
+			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ." "
+		. "=   "        . ConfigInfraTools::TABLE_MONITORING                                     .".". 
+			              ConfigInfraTools::TABLE_MONITORING_FIELD_SERVICE                       ." "
+		. "WHERE "      . ConfigInfraTools::TABLE_MONITORING                                     .".". 
+			              ConfigInfraTools::TABLE_MONITORING_FIELD_ID                            ."=? "
+		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
+		. "LIMIT ?, ?";
+	}
+	
 	public static function SqlInfraToolsUserSelectByServiceId()
 	{
 		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
@@ -379,6 +511,141 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ." "
 		. "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                        .".". 
 			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ."=? "
+		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
+		. "LIMIT ?, ?";
+	}
+	
+	public static function SqlInfraToolsUserSelectByTypeMonitoringDescription()
+	{
+		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
+			              ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                          .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                                             .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                               .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_GENDER                                              .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                                           .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_NAME                                                .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_REGION                                              .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES                                     .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                               .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                                         .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED                                      .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                  .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                           .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                         .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID                                      .", "
+		. ConfigInfraTools::TABLE_USER                                                           .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as UserRegisterDate, "                                                                ." " 
+		. ConfigInfraTools::TABLE_TYPE_USER                                                      .".". 
+		  ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                                    .", "
+		. ConfigInfraTools::TABLE_TYPE_USER                                                      .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as TypeUserRegisterDate, "                                                            ." "
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+	      ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE                                       .", "
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+		  ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                                         .", " 
+		. ConfigInfraTools::TABLE_CORPORATION                                                    .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as CorporationRegisterDate, "                                                         ." "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                  .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                   .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                 .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                   .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                        .", "
+		. ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                                         .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as AssocUserCorporationRegisterDate, "                                                ." "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+	      ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                                   .", "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+		  ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS                                      .", "
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+	      ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                                          .", " 
+		. ConfigInfraTools::TABLE_DEPARTMENT                                                     .".". 
+		  ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                            ." "
+		. "as DepartmentRegisterDate, "                                                          ." "
+		. "(SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_TYPE_MONITORING                     ." "
+		. "WHERE "      .  ConfigInfraTools::TABLE_TYPE_MONITORING                               .".". 
+			               ConfigInfraTools::TABLE_TYPE_MONITORING_FIELD_DESCRIPTION             ."=? "
+		. ") AS COUNT "                                                                          ." "
+		. "FROM "       . ConfigInfraTools::TABLE_USER                                           ." "
+		. "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_USER                                      ." "
+		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_TYPE                                ." "
+		. "=  "         . ConfigInfraTools::TABLE_TYPE_USER                                      .".". 
+			              ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                    ." "
+		. "LEFT JOIN "  . ConfigInfraTools::TABLE_CORPORATION                                    ." "
+		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=  "         . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
+			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
+		. "LEFT JOIN "  . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         ." "
+		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        ." "
+		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_DEPARTMENT                                     ." "
+		. "ON  "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
+			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME   ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                          ." "
+		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
+		. "AND "        . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
+			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
+		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
+			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             ." "
+		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
+			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
+			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL            ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_SERVICE                                        ." "
+		. "ON  "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
+			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID            ." "
+		. "=   "        . ConfigInfraTools::TABLE_SERVICE                                        .".". 
+			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_MONITORING                                     ." "
+		. "ON  "        . ConfigInfraTools::TABLE_SERVICE                                        .".".
+			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ." "
+		. "=   "        . ConfigInfraTools::TABLE_MONITORING                                     .".". 
+			              ConfigInfraTools::TABLE_MONITORING_FIELD_SERVICE                       ." "
+		. "LEFT JOIN  " . ConfigInfraTools::TABLE_TYPE_MONITORING                                ." "
+		. "ON  "        . ConfigInfraTools::TABLE_MONITORING                                     .".".
+			              ConfigInfraTools::TABLE_MONITORING_FIELD_TYPE                          ." "
+		. "=   "        . ConfigInfraTools::TABLE_TYPE_MONITORING                                .".". 
+			              ConfigInfraTools::TABLE_TYPE_MONITORING_FIELD_DESCRIPTION              ." "
+		. "WHERE "      . ConfigInfraTools::TABLE_TYPE_MONITORING                                .".". 
+			              ConfigInfraTools::TABLE_TYPE_MONITORING_FIELD_DESCRIPTION              ."=? "
 		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
 			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
 		. "LIMIT ?, ?";

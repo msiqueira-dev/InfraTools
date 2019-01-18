@@ -45,6 +45,7 @@ class De
 	const ACTIVE                                                    = "";
 	const ACTIVATED                                                 = "";
 	const ACCOUNT_UPDATE_SUCCESS                                    = "";
+	const ASSOC_USER_CORPORATION_UPDATE_SUCCESS                     = "";
 	const BIRTH_DATE                                                = "";
 	const BIRTH_DATE_DAY                                            = "";
 	const BIRTH_DATE_MONTH                                          = "";

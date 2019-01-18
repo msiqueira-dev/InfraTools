@@ -163,20 +163,14 @@ class PageAdminTicket extends PageAdmin
 		//FORM_TICKET_VIEW_LIST_USERS
 		elseif(isset($_POST[ConfigInfraTools::FORM_TICKET_VIEW_LIST_USERS]))
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, $this->InstanceTicket)  == ConfigInfraTools::SUCCESS)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, $this->InstanceTicket) 
+			                                   == ConfigInfraTools::SUCCESS)
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->ExecuteFunction($_POST, 'UserSelectByTicketId', 
-										  array($this->InstanceTicket->GetTicketId(),
-												$this->ArrayInstanceUser),
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTicketId', 
+										  array($this->InstanceTicket->GetTicketId(), 
+										        &$this->ArrayInstanceInfraToolsUser),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW_LIST_USERS;
-				else
-				{
-					if($this->TicketLoadData($this->InstanceTicket) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
-				}
 			}
 		}
 		//FORM_TICKET_VIEW_UPDATE_SUBMIT

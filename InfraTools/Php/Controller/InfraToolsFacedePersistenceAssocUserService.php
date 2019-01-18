@@ -13,25 +13,21 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about the association with user and a service.
 Functions:
-			public function AssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, 
-			                                                           $AssocUserServiceUserEmail,
-			                                                           $Debug, $MySqlConnection);
-			public function AssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, 
-			                                                                  $Debug,
-																			  $MySqlConnection);
-			public function AssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
-			                                                                          $AssocUserServiceUserEmail, 
-															                          $Debug,
+			public function InfraToolsAssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
+			                                                                     $Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug,
+																			            $MySqlConnection);
+			public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
+			                                                                          $AssocUserServiceUserEmail, $Debug,
 																					  $MySqlConnection);
-			public function AssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
-										           $AssocUserServiceUserType, $Debug, $MySqlConnection);
-			public function AssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
-			                                                                  &$ArrayInstanceInfraToolAssocUserService, 
-											                                  &$RowCount, $Debug,
-																			  $MySqlConnection);
-			public function AssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
-			                                                                  &$ArrayInstanceInfraToolAssocUserService, 
-																			  $Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
+										                     $AssocUserServiceUserType, $Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
+			                                                                            &$ArrayInstanceInfraToolAssocUserService, &$RowCount,
+																						$Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
+			                                                                                   &$ArrayInstanceInfraToolAssocUserService, 
+																			                   $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -91,8 +87,8 @@ class InfraToolsFacedePersistenceAssocUserService
     }
 	
 	
-	public function AssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
-			                                                   $Debug, $MySqlConnection)
+	public function InfraToolsAssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
+			                                                             $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -127,8 +123,8 @@ class InfraToolsFacedePersistenceAssocUserService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug, 
-																	  $MySqlConnection)
+	public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug, 
+																	            $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -167,9 +163,8 @@ class InfraToolsFacedePersistenceAssocUserService
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
-																			  $AssocUserServiceUserEmail, 
-																			  $Debug, $MySqlConnection)
+	public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, $AssocUserServiceUserEmail, 
+																			            $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -210,9 +205,8 @@ class InfraToolsFacedePersistenceAssocUserService
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
-										   $AssocUserServiceUserType, $Debug, 
-										   $MySqlConnection)
+	public function InfraToolsAssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, $AssocUserServiceUserType,
+													 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -244,10 +238,9 @@ class InfraToolsFacedePersistenceAssocUserService
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
-															          &$ArrayInstanceInfraToolAssocUserService, 
-											                          &$RowCount, $Debug, 
-																	  $MySqlConnection)
+	public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
+															                    &$ArrayInstanceInfraToolAssocUserService, 
+											                                    &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolAssocUserService = NULL;
@@ -300,9 +293,9 @@ class InfraToolsFacedePersistenceAssocUserService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function AssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
-																	         &$ArrayInstanceInfraToolAssocUserService, 
-																	         $Debug, $MySqlConnection)
+	public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
+																	                   &$ArrayInstanceInfraToolAssocUserService, 
+																	                   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolAssocUserService = NULL;

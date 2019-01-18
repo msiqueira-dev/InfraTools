@@ -13,14 +13,14 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about the service type.
 Functions: 
-			public function TypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, &$RowCount, 
-			                                  $Debug, $MySqlConnection);
-	        public function TypeServiceSelectNoLimit(&ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection);
-			public function TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
-			                                               &$ArrayInstanceInfraToolsTypeService, 
-			                                               $Debug, $MySqlConnection);
-			public function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, 
-			                                                      $Debug, $MySqlConnection);
+			public function InfraToolsTypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, &$RowCount, 
+			                                            $Debug, $MySqlConnection);
+	        public function InfraToolsTypeServiceSelectNoLimit(&ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection);
+			public function InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
+			                                                         &$ArrayInstanceInfraToolsTypeService, 
+			                                                         $Debug, $MySqlConnection);
+			public function InfraToolsTypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, 
+			                                                                $Debug, $MySqlConnection);
 
 **************************************************************************/
 
@@ -80,7 +80,7 @@ class InfraToolsFacedePersistenceTypeService
         return self::$Instance;
     }
 	
-	public function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsTypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsTypeService = NULL;
@@ -132,7 +132,7 @@ class InfraToolsFacedePersistenceTypeService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function TypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection)
+	public function InfraToolsTypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsTypeService = NULL;
@@ -170,9 +170,8 @@ class InfraToolsFacedePersistenceTypeService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
-												   &$ArrayInstanceInfraToolsTypeService, 
-			                                       $Debug, $MySqlConnection)
+	public function InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,&$ArrayInstanceInfraToolsTypeService, 
+			                                                 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsTypeService = NULL;
@@ -224,7 +223,7 @@ class InfraToolsFacedePersistenceTypeService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function TypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection)
+	public function InfraToolsTypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsTypeService = NULL;

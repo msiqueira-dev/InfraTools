@@ -171,7 +171,6 @@ class FacedePersistenceAssocUserCorporation
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, $stmt);
 					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else

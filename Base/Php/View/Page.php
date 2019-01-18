@@ -2271,14 +2271,14 @@ class Page
 	{
 		if($InstanceTicket != NULL)
 		{
-			$this->InputValueTicketId          = $InstanceTypeStatusTicket->GetTicketId();
-			$this->InputValueRegisterDate      = $InstanceTypeStatusTicket->GetRegisterDate();
-			$this->InputValueServiceName       = $InstanceTypeStatusTicket->GetTicketServiceName();
-			$this->InputValueStatusName        = $InstanceTypeStatusTicket->GetTicketStatusName();
-			$this->InputValueSuggestion        = $InstanceTypeStatusTicket->GetTicketSuggestion();
-			$this->InputValueTicketDescription = $InstanceTypeStatusTicket->GetTicketDescription();
-			$this->InputValueTitle             = $InstanceTypeStatusTicket->GetTicketTitle();
-			$this->InputValueType              = $InstanceTypeStatusTicket->GetTicketTypeName();
+			$this->InputValueTicketId          = $InstanceTicket->GetTicketId();
+			$this->InputValueRegisterDate      = $InstanceTicket->GetRegisterDate();
+			$this->InputValueServiceName       = $InstanceTicket->GetTicketServiceName();
+			$this->InputValueStatusName        = $InstanceTicket->GetTicketStatusName();
+			$this->InputValueSuggestion        = $InstanceTicket->GetTicketSuggestion();
+			$this->InputValueTicketDescription = $InstanceTicket->GetTicketDescription();
+			$this->InputValueTitle             = $InstanceTicket->GetTicketTitle();
+			$this->InputValueType              = $InstanceTicket->GetTicketTypeName();
 			return Config::SUCCESS;
 		}
 		else return Config::RETURN_ERROR;

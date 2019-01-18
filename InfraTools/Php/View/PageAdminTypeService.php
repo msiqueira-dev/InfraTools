@@ -63,7 +63,7 @@ class PageAdminTypeService extends PageAdmin
 		//FORM_TYPE_SERVICE_LIST
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'TypeServiceSelect', 
+			if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceSelect', 
 									  array(&$this->ArrayInstanceTypeService),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_LIST;
@@ -77,7 +77,7 @@ class PageAdminTypeService extends PageAdmin
 		//FORM_TYPE_SERVICE_REGISTER_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'TypeServiceInsert', 
+			if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceInsert', 
 									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
@@ -91,7 +91,7 @@ class PageAdminTypeService extends PageAdmin
 													&$this->InstanceTypeService),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
-					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "TypeServiceLoadData", 
+					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
 												  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
 			}
@@ -99,10 +99,10 @@ class PageAdminTypeService extends PageAdmin
 		//FORM_TYPE_SERVICE_VIEW_DELETE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "TypeServiceLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
 										  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'TypeServiceDeleteByTypeTypeServiceName', 
+				if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceDeleteByTypeTypeServiceName', 
 										  array($this->InstanceTypeService),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
@@ -114,7 +114,7 @@ class PageAdminTypeService extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, $this->InstanceTypeService)  
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceType', 
+				if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceType', 
 										  array($this->InstanceTypeTicket->GetTypeTicketDescription(),
 												$this->InstanceTypeService->GetTypeServiceName(),
 												&$this->ArrayInstanceTypeServiceServices), 
@@ -122,7 +122,7 @@ class PageAdminTypeService extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW_LIST_SERVICES;
 				else
 				{
-					if($this->TypeServiceLoadData($this->ArrayInstanceTypeServiceServices) == ConfigInfraTools::SUCCESS)
+					if($this->InfraToolsTypeServiceLoadData($this->ArrayInstanceTypeServiceServices) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
 				}
 			}
@@ -130,14 +130,14 @@ class PageAdminTypeService extends PageAdmin
 		//FORM_TYPE_SERVICE_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "TypeServiceLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
 										  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_UPDATE;
 		}
 		//FORM_TYPE_SERVICE_UPDATE_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "TypeServiceLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
 										  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
 		}
@@ -147,7 +147,7 @@ class PageAdminTypeService extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, 
 														$this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
 			{
-				$this->ExecuteFunction($_POST, 'TypeServiceUpdateByTypeServiceName', 
+				$this->ExecuteFunction($_POST, 'InfraToolsTypeServiceUpdateByTypeServiceName', 
 									   array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME],
 					                         &$this->InstanceTypeService),
 									   $this->InputValueHeaderDebug);

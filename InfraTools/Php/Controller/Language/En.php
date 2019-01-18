@@ -46,6 +46,7 @@ class En
 	const ACTIVE                                                    = "Active";
 	const ACTIVATED                                                 = "Activated";
 	const ACCOUNT_UPDATE_SUCCESS                                    = "Account updated succesfully";
+	const ASSOC_USER_CORPORATION_UPDATE_SUCCESS                     = "Corporation information updated succesfully";
 	const BIRTH_DATE                                                = "Birth date";
 	const BIRTH_DATE_DAY                                            = "Day";
 	const BIRTH_DATE_MONTH                                          = "Month";

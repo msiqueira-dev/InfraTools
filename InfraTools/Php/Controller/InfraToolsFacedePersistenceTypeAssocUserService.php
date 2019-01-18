@@ -13,13 +13,14 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about informations of the type of associantions between users and services.
 Functions: 
-			public function TypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService,&$RowCount,
-			                                           $Debug, $MySqlConnection);
-			public function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, $Debug, $MySqlConnection);
-			public function TypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
-															        $UserEmail, $Debug, $MySqlConnection);
-			public function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
-																   $UserEmail, $Debug, $MySqlConnection);
+			public function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService,&$RowCount,
+			                                                     $Debug, $MySqlConnection);
+			public function InfraToolsTypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, $Debug,
+			                                                            $MySqlConnection);
+			public function InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
+															                  $UserEmail, $Debug, $MySqlConnection);
+			public function InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
+																                     $UserEmail, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -78,8 +79,8 @@ class InfraToolsFacedePersistenceTypeAssocUserService
         return self::$Instance;
     }
 	
-	public function TypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService,&$RowCount,
-			                                   $Debug, $MySqlConnection)
+	public function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService,&$RowCount,
+			                                             $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsTypeAssocUserService = NULL;
@@ -181,7 +182,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
+	public function InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
 															$UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
@@ -234,7 +235,7 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
+	public function InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
 																   $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;

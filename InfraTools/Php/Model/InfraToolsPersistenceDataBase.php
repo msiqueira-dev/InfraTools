@@ -34,7 +34,6 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTablePreference();
 		public static function SqlCreateInfraToolsDataBaseTableRole();
 		public static function SqlCreateInfraToolsDataBaseTableService();
-		public static function SqlCreateInfraToolsDataBaseTableStatusMonitoring();
 		public static function SqlCreateInfraToolsDataBaseTableSystemConfiguration();
 		public static function SqlCreateInfraToolsDataBaseTableTeam();
 		public static function SqlCreateInfraToolsDataBaseTableTicket();
@@ -463,15 +462,15 @@ class InfraToolsPersistenceDataBase
                 MonitoringName VARCHAR(45) NOT NULL,
                 MonitoringService INT NOT NULL,
                 MonitoringSLA VARCHAR(45) NULL,
-                MonitoringStatus VARCHAR(45) NOT NULL,
-                MonitoringTime DATETIME NOT NULL,
-                MonitoringType VARCHAR(45) NOT NULL,
+                MonitoringStatus VARCHAR(80) NOT NULL,
+                MonitoringTime INT NOT NULL,
+                MonitoringType VARCHAR(80) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (MonitoringId),
                 INDEX IndexMonitoringService (MonitoringService ASC),
                 INDEX IndexMonitoringTypeTimeMonitoring (MonitoringTime ASC),
                 INDEX IndexMonitoringTypeMonitoring (MonitoringType ASC),
-                INDEX IndexMonitoringStatusMonitoring (MonitoringStatus ASC),
+                INDEX IndexMonitoringTypeStatusMonitoring (MonitoringStatus ASC),
                 CONSTRAINT ForeignKeyMonitoringService
                 FOREIGN KEY (MonitoringService)
                 REFERENCES INFRATOOLS.SERVICE (ServiceId)
@@ -484,12 +483,12 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyMonitoringTypeMonitoring
                 FOREIGN KEY (MonitoringType)
-                REFERENCES INFRATOOLS.TYPE_MONITORING (TypeMonitoringName)
+                REFERENCES INFRATOOLS.TYPE_MONITORING (TypeMonitoringDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
-                CONSTRAINT ForergnKeyMonitoringStatusMonitoring
+                CONSTRAINT ForergnKeyMonitoringTypeStatusMonitoring
                 FOREIGN KEY (MonitoringStatus)
-                REFERENCES INFRATOOLS.STATUS_MONITORING (StatusMonitoringName)
+                REFERENCES INFRATOOLS.TYPE_STATUS_MONITORING (TypeStatusMonitoringDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -573,23 +572,6 @@ class InfraToolsPersistenceDataBase
                 CONSTRAINT ForeignKeyServiceDepartment
                 FOREIGN KEY (ServiceDepartment)
                 REFERENCES INFRATOOLS.DEPARTMENT (DepartmentName)
-                ON DELETE RESTRICT
-                ON UPDATE CASCADE)
-                ENGINE = InnoDB
-                DEFAULT CHARACTER SET = utf8
-                COLLATE = utf8_unicode_ci";
-	}
-	
-	public static function SqlCreateInfraToolsDataBaseTableStatusMonitoring()
-	{
-		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.STATUS_MONITORING (
-                RegisterDate DATETIME NOT NULL,
-                StatusMonitoringName VARCHAR(45) NOT NULL,
-                PRIMARY KEY (StatusMonitoringName),
-                UNIQUE INDEX UniqueStatusMonitoringStatusMonitoringName (StatusMonitoringName ASC),
-                CONSTRAINT ForeignKeyStatusMonitoringTypeStatusMonitoring
-                FOREIGN KEY (StatusMonitoringName)
-                REFERENCES INFRATOOLS.TYPE_STATUS_MONITORING (TypeStatusMonitoringName)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -705,12 +687,10 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableTypeMonitoring()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_MONITORING (
-			    TypeMonitoringDescription VARCHAR(200) NOT NULL,
-			    TypeMonitoringName VARCHAR(45) NOT NULL,
-			    RegisterDate DATETIME NOT NULL,
-			    PRIMARY KEY (TypeMonitoringName),
-			    UNIQUE INDEX UniqueTypeMonitoringTypeMonitoringDescription (TypeMonitoringDescription ASC),
-			    UNIQUE INDEX UniqueTypeMonitoringTypeMonitoringName (TypeMonitoringName ASC))
+		        RegisterDate DATETIME NOT NULL,
+			    TypeMonitoringDescription VARCHAR(80) NOT NULL,
+			    PRIMARY KEY (TypeMonitoringDescription),
+			    UNIQUE INDEX UniqueTypeMonitoringTypeMonitoringDescription (TypeMonitoringDescription ASC))
 			    ENGINE = InnoDB
 			    DEFAULT CHARACTER SET = utf8
 			    COLLATE = utf8_unicode_ci";	
@@ -732,12 +712,10 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableTypeStatusMonitoring()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_STATUS_MONITORING (
-                TypeStatusMonitoringDescription VARCHAR(200) NOT NULL,
-                TypeStatusMonitoringName VARCHAR(45) NOT NULL,
-                RegisterDate DATETIME NOT NULL,
-                PRIMARY KEY (TypeStatusMonitoringName),
-                UNIQUE INDEX UniqueTypeStatusMonitoringTypeStatusMonitoringDescription (TypeStatusMonitoringDescription ASC),
-                UNIQUE INDEX UniqueTypeStatusMonitoringTypeStatusMonitoringName (TypeStatusMonitoringName ASC))
+		        RegisterDate DATETIME NOT NULL,
+                TypeStatusMonitoringDescription VARCHAR(80) NOT NULL,
+                PRIMARY KEY (TypeStatusMonitoringDescription),
+                UNIQUE INDEX UniqueTypeStatusMonitoringTypeStatusMonitoringDescription (TypeStatusMonitoringDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -759,7 +737,7 @@ class InfraToolsPersistenceDataBase
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_TIME_MONITORING (
                 RegisterDate DATETIME NOT NULL,
-                TypeTimeMonitoringValue DATETIME NOT NULL,
+                TypeTimeMonitoringValue INT NOT NULL,
                 TypeTimeMonitoringDescription VARCHAR(45) NOT NULL,
                 PRIMARY KEY (TypeTimeMonitoringValue),
                 UNIQUE INDEX UniqueTypeTimeMonitoringTypeTimeMonitoringTimeValue (TypeTimeMonitoringValue ASC),

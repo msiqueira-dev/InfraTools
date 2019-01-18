@@ -47,7 +47,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->TypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 
+			$return = $this->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 
 														 $this->User->GetEmail(), 
 														 $this->InputValueHeaderDebug);
 			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT]))
@@ -74,7 +74,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 			{
 				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE =>
 							  ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE) + $_GET;
-				$this->ExecuteFunction($_GET, 'ServiceSelectByTypeAssocUserServiceDescriptionOnUserContext', 
+				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext', 
 											   array($this->InputValueTypeAssocUserServiceDescription,
 													 $this->User->GetEmail(),
 													 &$this->ArrayInstanceInfraToolsService),

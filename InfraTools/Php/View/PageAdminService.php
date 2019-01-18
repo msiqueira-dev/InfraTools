@@ -68,10 +68,29 @@ class PageAdminService extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
-		//FORM_SERVICE_LIST
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
+		//FORM_CORPORATION_SELECT_SUBMIT
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'ServiceSelect', 
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		}
+		//FORM_DEPARTMENT_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+										    &$this->InstanceInfraToolsDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+		}
+		//FORM_SERVICE_LIST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelect', 
 									  array(&$this->ArrayInstanceInfraToolsService),
 									  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_LIST;
@@ -98,7 +117,7 @@ class PageAdminService extends PageAdmin
 				{
 					$this->ReturnServiceIdRadioClass   = "NotHidden";
 					$this->ReturnServiceNameRadioClass = "Hidden";
-					if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceId', 
+					if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceId', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
 													&$this->InstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
@@ -117,7 +136,7 @@ class PageAdminService extends PageAdmin
 					$this->ReturnServiceNameRadioClass = "NotHidden";
 					$this->InputValueServiceNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 					$_POST = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_POST;
-					if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceName', 
+					if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceName', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
 													&$this->ArrayInstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
@@ -129,7 +148,7 @@ class PageAdminService extends PageAdmin
 			}
 			else
 			{
-				if($this->ExecuteFunction($_POST, 'ServiceSelectByServiceId', 
+				if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceId', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
 													&$this->InstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
@@ -190,6 +209,24 @@ class PageAdminService extends PageAdmin
 			{
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;	
 			}
+		}
+		//FORM_TYPE_USER_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+									        &$this->InstanceTypeUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+		}
+		//FORM_USER_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+									        &$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

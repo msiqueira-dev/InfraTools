@@ -374,13 +374,15 @@
 			{
 				?>
 				<!-- HREF_PAGE_ADMIN -->
-				<div class="DivContentBodyContainersBoxLink">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN') ?>" title=''>
-						<span> 
-							<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_ADMIN_TEXT'); ?>
-						</span>
-					</a>
-				</div>
+				<form class="DivFormHorizontalButtons">
+					<div class="DivContentBodyContainersBoxLink">
+						<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN') ?>" title=''>
+							<span> 
+								<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_ADMIN_TEXT'); ?>
+							</span>
+						</a>
+					</div>
+				</form>
 				<?php
 			}
 			if(isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())

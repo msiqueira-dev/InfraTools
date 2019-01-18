@@ -42,7 +42,8 @@ Functions:
 			                                                                        $AssocUserCorporationRegistrationDateNew, 
 			                                                                        $AssocUserCorporationRegistrationIdNew, 
 																					$CorporationName, $UserEmail, $Debug
-																					$MySqlConnection = NULL, $CloseConnectaion = TRUE));
+																					$MySqlConnection = NULL, $CloseConnectaion = TRUE,
+																					$Commit = TRUE);
 			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, $Debug, 
 										        $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
@@ -146,17 +147,6 @@ Functions:
 			public function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescriptionNew,
 			                                                                      $TypeAssocUserTeamDescription, $Debug,
 			                                                                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeServiceDelete($TypeServiceName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug, $MySqlConnection = NULL, 
-			                                  $CloseConnectaion = TRUE, $Commit = TRUE);
-			public function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceTypeService, &$RowCount, $Debug,
-			                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeServiceSelectNoLimit(&$ArrayInstanceTypeService, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeServiceSelectByName($TypeServiceName, &$TypeService, $Debug, 
-			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeServiceSelectBySLA($TypeServiceSLA, &$TypeService, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug,
-			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TypeStatusTicketDeleteByTypeStatusTicketDescription($TypeStatusTicketDescription, $Debug, 
 			                                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, $MySqlConnection = NULL, 
@@ -456,7 +446,7 @@ class FacedePersistence
 																			$AssocUserCorporationRegistrationDateNew,
 																			$AssocUserCorporationRegistrationIdNew, 
 																			$CorporationName, $UserEmail, $Debug,
-																			$MySqlConnection = NULL, $CloseConnectaion = TRUE)
+																			$MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
@@ -1250,93 +1240,6 @@ class FacedePersistence
 				                                                                                   $TypeAssocUserTeamDescriptionNew, 
 																			                       $TypeAssocUserTeamDescription, $Debug,
 																								   $MySqlConnection);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
-	public function TypeServiceDelete($TypeServiceName, $Debug,
-									 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-			$return = $instanceFacedePersistenceTypeService->TypeServiceDelete($TypeServiceName, $Debug);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	public function TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug,
-									 $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-			$return = $instanceFacedePersistenceTypeService->TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug, $MySqlConnection);
-			if($return == Config::SUCCESS && $Commit)
-				$MySqlConnection->commit();
-			else $MySqlConnection->rollback();
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
-	public function TypeServiceSelectNoLimit(&$ArrayInstanceTypeService, $Debug,
-											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-			$return = $instanceFacedePersistenceTypeService->TypeServiceSelectNoLimit($ArrayInstanceTypeService, $Debug, $MySqlConnection);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
-	public function TypeServiceSelectByName($TypeServiceName, &$TypeService, $Debug,
-										   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-			$return = $instanceFacedePersistenceTypeService->TypeServiceSelectByName($TypeServiceName, $TypeService, $Debug, $MySqlConnection);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
-	public function TypeServiceSelectBySLA($TypeServiceSLA, &$TypeService, $Debug,
-										  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-			$return = $instanceFacedePersistenceTypeService->TypeServiceSelectBySLA($TypeServiceSLA, $TypeService, $Debug, $MySqlConnection);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
-	public function TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug,
-										   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-			$return = $instanceFacedePersistenceTypeService->TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug, 
-																					 $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

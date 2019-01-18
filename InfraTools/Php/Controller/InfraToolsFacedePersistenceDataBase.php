@@ -19,9 +19,12 @@ Functions:
 			public function CreateInfraToolsDataBaseInsertSystemConfiguration(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertTypeAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertTypeAssocUserService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeMonitoring(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertTypeService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertTypeStatusTicket(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertTypeTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeTimeMonitoring(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertTypeUser(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocTicketUserResponsible(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableAssocTicketUserRequesting(&$StringMessage, $Debug, $MySqlConnection);
@@ -46,7 +49,6 @@ Functions:
 			public function CreateInfraToolsDataBaseTablePreference(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableRole(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableService(&$StringMessage, $Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableSystemConfiguration(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableTeam(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableTicket(&$StringMessage, $Debug, $MySqlConnection);
@@ -1038,6 +1040,25 @@ class InfraToolsFacedePersistenceDataBase
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
+	public function CreateInfraToolsDataBaseInsertTypeMonitoring(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeMonitoring)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_MONITORING (RegisterDate, TypeMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_MONITORING_PING')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_MONITORING (RegisterDate, TypeMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_MONITORING_HTTP')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_MONITORING (RegisterDate, TypeMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_MONITORING_HTTPS')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			return ConfigInfraTools::SUCCESS;
+		}
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+	}
+	
 	public function CreateInfraToolsDataBaseInsertTypeService(&$StringMessage, $Debug, $MySqlConnection)
 	{
 		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeService)</b>";
@@ -1125,6 +1146,29 @@ class InfraToolsFacedePersistenceDataBase
 		}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
+	
+	public function CreateInfraToolsDataBaseInsertTypeStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusMonitoring)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_ONLINE')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_OFFLINE')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_WARNING')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_CRITICAL')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			return ConfigInfraTools::SUCCESS;
+		}
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+	}
+	
 	public function CreateInfraToolsDataBaseInsertTypeStatusTicket(&$StringMessage, $Debug, $MySqlConnection)
 	{
 		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusTicket)</b>";
@@ -1206,6 +1250,25 @@ class InfraToolsFacedePersistenceDataBase
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
 			                                VALUES (now(), 'TYPE_TICKET_SERVICE')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			return ConfigInfraTools::SUCCESS;
+		}
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+	}
+	
+	public function CreateInfraToolsDataBaseInsertTypeTimeMonitoring(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeTimeMonitoring)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TIME_MONITORING (RegisterDate, TypeTimeMonitoringValue,
+			                                   TypeTimeMonitoringDescription) VALUES (now(), 30, 'INTERVAL_30_MINUTES')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TIME_MONITORING (RegisterDate, TypeTimeMonitoringValue,
+			                                   TypeTimeMonitoringDescription) VALUES (now(), 60, 'INTERVAL_1_HOURS')") !== TRUE)
+				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TIME_MONITORING (RegisterDate, TypeTimeMonitoringValue,
+			                                   TypeTimeMonitoringDescription) VALUES (now(), 120, 'INTERVAL_2_HOURS')") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;
 		}
@@ -1637,24 +1700,6 @@ class InfraToolsFacedePersistenceDataBase
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableService()))
-				return ConfigInfraTools::SUCCESS;
-			else
-			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
-			}
-		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
-	}
-	
-	public function CreateInfraToolsDataBaseTableStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection)
-	{
-		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableStatusMonitoring)</b>";
-		if($MySqlConnection != NULL)
-		{
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableStatusMonitoring()))
 				return ConfigInfraTools::SUCCESS;
 			else
 			{
@@ -2106,9 +2151,6 @@ class InfraToolsFacedePersistenceDataBase
 				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, INSERT, SELECT, DELETE ON TABLE INFRATOOLS.TYPE_MONITORING 
 				                               TO '$UserApplication'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
-				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, DELETE, INSERT ON TABLE INFRATOOLS.STATUS_MONITORING 
-				                               TO '$UserApplication'") !== TRUE)
-					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_STATUS_MONITORING 
 				                               TO '$UserApplication'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
@@ -2238,9 +2280,6 @@ class InfraToolsFacedePersistenceDataBase
 				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_MONITORING 
 				                               TO '$UserApplicationImport'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
-				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.STATUS_MONITORING 
-				                               TO '$UserApplicationImport'") !== TRUE)
-					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_STATUS_MONITORING 
 				                               TO '$UserApplicationImport'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
@@ -2344,7 +2383,7 @@ class InfraToolsFacedePersistenceDataBase
 				}
 				if(!empty($ArrayTables))
 				{
-					if(count($ArrayTables) == 39)
+					if(count($ArrayTables) == 38)
 						return Config::SUCCESS;
 					else return Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED;
 				}

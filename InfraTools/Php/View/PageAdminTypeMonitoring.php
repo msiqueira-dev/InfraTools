@@ -99,7 +99,7 @@ class PageAdminTypeMonitoring extends PageAdmin
 		//FORM_TYPE_MONITORING_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelectByTypeMonitoringName', 
+			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelectByTypeMonitoringDescription', 
 									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
 											&$this->InstanceTypeMonitoring),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
@@ -108,7 +108,7 @@ class PageAdminTypeMonitoring extends PageAdmin
 		//FORM_TYPE_MONITORING_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelectByTypeMonitoringName', 
+			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelectByTypeMonitoringDescription', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
 													&$this->InstanceTypeMonitoring),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
@@ -124,7 +124,7 @@ class PageAdminTypeMonitoring extends PageAdmin
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, "TypeMonitoringLoadData", 
 										  $this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'TypeMonitoringDeleteByTypeMonitoringName', 
+				if($this->ExecuteFunction($_POST, 'TypeMonitoringDeleteByTypeMonitoringDescription', 
 										  array($this->InstanceTypeMonitoring),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
@@ -133,23 +133,15 @@ class PageAdminTypeMonitoring extends PageAdmin
 		//FORM_TYPE_MONITORING_VIEW_LIST_USERS_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_MONITORING_VIEW_LIST_USERS_SUBMIT]))
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, $this->InstanceTypeMonitoring)  
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, $this->InstanceTypeMonitoring) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->UserSelectByTypeMonitoringName($this->InputLimitOne, $this->InputLimitTwo, 
-														           $this->InstanceTypeMonitoring->GetTypeMonitoringName(),
-										                           $this->ArrayInstanceUser, $rowCount, $this->InputValueHeaderDebug) 
-				                                                   == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_VIEW_LIST_USERS;
-				else
-				{
-					if($this->TypeMonitoringLoadData($this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_VIEW;
-					else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
-				}
-			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTypeMonitoringDescription', 
+										  array($this->InstanceTypeMonitoring->GetTypeMonitoringDescription(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS;
+			}
 		}
 		//FORM_TYPE_MONITORING_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
@@ -171,7 +163,7 @@ class PageAdminTypeMonitoring extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, 
 														$this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
 			{
-				$this->ExecuteFunction($_POST, 'TypeMonitoringUpdateByTypeMonitoringName', 
+				$this->ExecuteFunction($_POST, 'TypeMonitoringUpdateByTypeMonitoringDescription', 
 									   array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
 					                         &$this->InstanceTypeMonitoring),
 									   $this->InputValueHeaderDebug);

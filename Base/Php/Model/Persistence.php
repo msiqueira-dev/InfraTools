@@ -106,7 +106,7 @@ Methods:
 			public static function SqlUserSelectByTeamId();
 			public static function SqlUserSelectByTicketId();
 			public static function SqlUserSelectByTypeAssocUserTeamDescription();
-			public static function SqluserSelectByTypeTicketDescription();
+			public static function SqlUserSelectByTypeTicketDescription();
 			public static function SqlUserSelectByTypeUserDescription();
 			public static function SqlUserSelectByUserEmail();
 			public static function SqlUserSelectByUserUniqueId();

@@ -46,21 +46,20 @@ class PageServiceList extends PageService
 	{
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
-			//FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT
-			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]))
+			//FORM_SERVICE_SELECT_SUBMIT
+			if($this->CheckGetContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 			{
-
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
 											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_SELECT_BY_ID_SUBMIT]);
+											. $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID]);
 			}
 			//FORM_SERVICE_LIST
 			else
 			{
 				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_GET;
-				$this->ExecuteFunction($_GET, 'ServiceSelectOnUserContext', 
+				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectOnUserContext', 
 				 					   array($this->User->GetEmail(),
 											 &$this->ArrayInstanceInfraToolsService),
 									   $this->InputValueHeaderDebug);

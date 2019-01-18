@@ -53,7 +53,7 @@ class PageServiceView extends PageInfraTools
 		   !isset($_POST[ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT]))
 		{
 			$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
-			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 														           $this->User->GetEmail(), 
 														           $this->InstanceInfraToolsService,
 																   $this->InputValueTypeAssocUserServiceId,
@@ -70,7 +70,7 @@ class PageServiceView extends PageInfraTools
 		elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT]) && 
 			  isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID]))
 		{
-			$return = $this->ServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
+			$return = $this->InfraToolsServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
 											   $this->User->GetEmail(), 
 											   $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -87,11 +87,11 @@ class PageServiceView extends PageInfraTools
 				$retClass = $this->ReturnClass;
 				$retText  = $this->ReturnText;
 				$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
-				$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-															           $this->User->GetEmail(), 
-															           $this->InstanceInfraToolsService, 
-																	   $this->InputValueTypeAssocUserServiceId,
-															           $this->InputValueHeaderDebug);
+				$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+															                     $this->User->GetEmail(), 
+															                     $this->InstanceInfraToolsService, 
+																	             $this->InputValueTypeAssocUserServiceId,
+															                     $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
@@ -106,15 +106,14 @@ class PageServiceView extends PageInfraTools
 		{
 			$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_UPDATE);
 			$this->InputValueServiceId = $_POST[ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_HIDDEN_ID];
-			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 														           $this->User->GetEmail(), 
 														           $this->InstanceInfraToolsService, 
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS && $this->InputValueTypeAssocUserServiceId <= 2)
 			{
-				$return = $this->TypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService,
-											              $this->InputValueHeaderDebug);
+				$return = $this->InfraToolsTypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->ServiceLoadData($this->InstanceInfraToolsService);
@@ -142,11 +141,11 @@ class PageServiceView extends PageInfraTools
 		elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL]))
 		{
 			$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
-			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->User->GetEmail(), 
-														           $this->InstanceInfraToolsService,
-																   $this->InputValueTypeAssocUserServiceId,
-			                                                       $this->InputValueHeaderDebug);
+			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+														                     $this->User->GetEmail(), 
+														                     $this->InstanceInfraToolsService,
+																             $this->InputValueTypeAssocUserServiceId,
+			                                                                 $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
@@ -171,12 +170,12 @@ class PageServiceView extends PageInfraTools
 			$this->InputValueServiceName        = $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME];
 			$this->InputValueServiceType        = $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_TYPE];
 			$this->InputValueServiceId          = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
-			$return = $this->ServiceUpdateRestrictByServiceId($this->InputValueServiceActive, 
-															  $this->InputValueServiceDescription, 
-															  $this->InputValueServiceName, 
-														      $this->InputValueServiceType, 
-															  $this->InputValueServiceId, 
-															  $this->InputValueHeaderDebug);
+			$return = $this->InfraToolsServiceUpdateRestrictByServiceId($this->InputValueServiceActive, 
+															            $this->InputValueServiceDescription, 
+															            $this->InputValueServiceName, 
+														                $this->InputValueServiceType, 
+															            $this->InputValueServiceId, 
+															            $this->InputValueHeaderDebug);
 			$returnImage = $this->ReturnImage;
 			$returnClass = $this->ReturnClass;
 			$returnText  = $this->ReturnText;
@@ -187,11 +186,11 @@ class PageServiceView extends PageInfraTools
 				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
 			}
-			$return = $this->ServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-															       $this->User->GetEmail(), 
-														   		   $this->InstanceInfraToolsService,
-														           $this->InputValueTypeAssocUserServiceId,
-														           $this->InputValueHeaderDebug);
+			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+															                 $this->User->GetEmail(), 
+														   		             $this->InstanceInfraToolsService,
+														                     $this->InputValueTypeAssocUserServiceId,
+														                     $this->InputValueHeaderDebug);
 			if($return != ConfigInfraTools::SUCCESS)
 			{
 				Page::GetCurrentDomain($domain);
