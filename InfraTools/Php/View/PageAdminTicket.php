@@ -33,8 +33,8 @@ if (!class_exists("PageAdmin"))
 class PageAdminTicket extends PageAdmin
 {
 	public $ArrayInstanceTicket = NULL;
-	public $ArrayInstanceUser   = NULL;
-	public $InstanceTicket      = NULL;
+	public $ArrayInstanceInfraToolsUser   = NULL;
+	public $InstanceTicket                = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -160,8 +160,8 @@ class PageAdminTicket extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
 			}
 		}
-		//FORM_TICKET_VIEW_LIST_USERS
-		elseif(isset($_POST[ConfigInfraTools::FORM_TICKET_VIEW_LIST_USERS]))
+		//FORM_TICKET_VIEW_LIST_USERS_SUBMIT
+		elseif(isset($_POST[ConfigInfraTools::FORM_TICKET_VIEW_LIST_USERS_SUBMIT]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, $this->InstanceTicket) 
 			                                   == ConfigInfraTools::SUCCESS)

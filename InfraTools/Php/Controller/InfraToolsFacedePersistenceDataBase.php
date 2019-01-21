@@ -1982,7 +1982,7 @@ class InfraToolsFacedePersistenceDataBase
 			}
 			catch(mysqli_sql_exception $e)
 			{
-				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
+				return ConfigInfraTools::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
@@ -2008,7 +2008,7 @@ class InfraToolsFacedePersistenceDataBase
 			}
 			catch(mysqli_sql_exception $e)
 			{
-				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
+				return ConfigInfraTools::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
@@ -2034,7 +2034,7 @@ class InfraToolsFacedePersistenceDataBase
 			}
 			catch(mysqli_sql_exception $e)
 			{
-				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
+				return ConfigInfraTools::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
@@ -2060,7 +2060,7 @@ class InfraToolsFacedePersistenceDataBase
 			}
 			catch(mysqli_sql_exception $e)
 			{
-				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
+				return ConfigInfraTools::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
@@ -2086,7 +2086,7 @@ class InfraToolsFacedePersistenceDataBase
 			}
 			catch(mysqli_sql_exception $e)
 			{
-				return Config::MYSQL_ERROR_USER_PERMISSION_DENIED;
+				return ConfigInfraTools::MYSQL_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
@@ -2384,26 +2384,26 @@ class InfraToolsFacedePersistenceDataBase
 				if(!empty($ArrayTables))
 				{
 					if(count($ArrayTables) == 38)
-						return Config::SUCCESS;
-					else return Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED;
+						return ConfigInfraTools::SUCCESS;
+					else return ConfigInfraTools::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED;
 				}
-				else return Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH_FAILED;
+				else return ConfigInfraTools::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH_FAILED;
 			}
 			else 
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FAILED;
+				$return = ConfigInfraTools::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_FAILED;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
-		if($Debug == Config::CHECKBOX_CHECKED)
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			echo "<b>Query (SqlInfraToolsDataBaseGetRowCount)</b>";
 		if($MySqlConnection != NULL)
 		{
@@ -2413,19 +2413,19 @@ class InfraToolsFacedePersistenceDataBase
 				if ($row = $result->fetch_assoc()) 
 				{
 					$RowCount = $row['ROW_COUNT'];
-					$return = Config::SUCCESS;
+					$return = ConfigInfraTools::SUCCESS;
 				}
-				else $return = Config::MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FETCH_FAILED;
+				else $return = ConfigInfraTools::MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FETCH_FAILED;
 			}
 			else 
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FAILED;
+				$return = ConfigInfraTools::MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FAILED;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug, $MySqlConnection)

@@ -49,7 +49,7 @@ Methods:
 			public    function CreateMobileDetect();
 			public    function CreateNetWhois();
 			public    function CreateNetwork();
-			public    function CreateNotification($NotificationText, $NotificationUser, $RegisterDate);
+			public    function CreateNotificationCreateNotification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate);
 			public    function CreatePage($Page, $Language);
 			public    function CreatePageForm();
 			public    function CreatePersistence();
@@ -469,12 +469,12 @@ class Factory
 		return Network::__create();	
 	}
 	
-	public function CreateNotification($NotificationText, $NotificationUser, $RegisterDate)
+	public function CreateNotification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
 		else include_once(BASE_PATH_PHP_MODEL . "Notification.php");
-		return new Notification($NotificationText, $NotificationUser, $RegisterDate);
+		return new Notification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate);
 	}
 	
 	public function CreatePage($Page, $Language)

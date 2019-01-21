@@ -33,9 +33,9 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTypeTicket extends PageAdmin
 {
-	public $ArrayInstanceTypeTicket = NULL;
-	public $ArrayInstanceUser       = NULL;
-	public $InstanceTypeTicket      = NULL;
+	public $ArrayInstanceTypeTicket     = NULL;
+	public $ArrayInstanceInfraToolsUser = NULL;
+	public $InstanceTypeTicket          = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -126,19 +126,14 @@ class PageAdminTypeTicket extends PageAdmin
 		//FORM_TYPE_TICKET_VIEW_LIST_USERS_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket)  
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->InstanceTypeTicket) 
 			                                   == ConfigInfraTools::SUCCESS)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTypeTicketDescription', 
-										  array($this->InstanceTypeTicket->GetTypeTicketDescription(),
-												&$this->ArrayInstanceUser), 
+										  array($this->InstanceTypeTicket->GetTypeTicketDescription(), 
+										        &$this->ArrayInstanceInfraToolsUser),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW_LIST_USERS;
-				else
-				{
-					if($this->TypeTicketLoadData($this->InstanceTypeTicket) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_TICKET_VIEW;
-				}
 			}
 		}
 		//FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT

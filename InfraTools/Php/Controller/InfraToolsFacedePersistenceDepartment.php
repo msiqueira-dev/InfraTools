@@ -92,10 +92,10 @@ class InfraToolsFacedePersistenceDepartment
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION],
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[Config::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION],
+																			$row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+						                                                    $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME],
+																	        $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsDepartment, $InstanceceInfraToolsDepartment);
 					}
 					if(!empty($ArrayInstanceInfraToolsDepartment))
@@ -144,10 +144,10 @@ class InfraToolsFacedePersistenceDepartment
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION],
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[Config::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION],
+																			$row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+						                                                    $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME],
+																	        $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsDepartment, $InstanceceInfraToolsDepartment);
 					}
 					if(!empty($ArrayInstanceInfraToolsDepartment))

@@ -60,6 +60,8 @@ Functions:
 			                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug,
 			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug,
+			                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug,
 			                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug,
@@ -85,8 +87,15 @@ Functions:
 																				  $DepartmentName, $Debug,
 																				  $MySqlConnection = NULL, 
 																				  $CloseConnectaion = TRUE);
-			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug,
-			                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationDeleteByNotificationId($NotificationId, $Debug,$MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationInsert($NotificationActive, $NotificationText, $Debug, 
+			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug,
+			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug,
+			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, &$InstanceNotification, $Debug,
+			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
 			                                                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
@@ -619,6 +628,22 @@ class FacedePersistence
 		return $return;	
 	}
 	
+	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, 
+								  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceCountry = $this->Factory->CreateFacedePersistenceCountry();
+			$return = $instanceFacedePersistenceCountry->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, $RowCount, 
+																	   $Debug, $MySqlConnection);
+		
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
 	public function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug, 
 									 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
@@ -786,20 +811,79 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, 
-								  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function NotificationDeleteByNotificationId($NotificationId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$instanceFacedePersistenceCountry = $this->Factory->CreateFacedePersistenceCountry();
-			$return = $instanceFacedePersistenceCountry->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, $RowCount, 
-																	   $Debug, $MySqlConnection);
-		
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationDeleteByNotificationId($NotificationId,$Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
+	}
+	
+	public function NotificationInsert($NotificationActive, $NotificationText, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationInsert($NotificationActive, $NotificationText,
+																				 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;		
+	}
+	
+	public function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug, 
+									   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationSelect($Limit1, $Limit2, $ArrayInstanceNotification, $RowCount,
+																				 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
+	public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug, 
+													   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationSelectByNotificationId($NotificationId,
+																								 $InstanceNotification,
+																				                 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew,
+													   &$InstanceNotification, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationUpdateByNotificationId($NotificationActiveNew,
+																								 $NotificationTextNew,
+																								 $InstanceNotification,
+																				                 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
 	public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,

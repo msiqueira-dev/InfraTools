@@ -100,7 +100,7 @@ class PageAccount extends PageInfraTools
 												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
 													$this->User->GetEmail(),
 												    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = Config::PAGE_ACCOUNT;
+				$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
 		}
 		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT

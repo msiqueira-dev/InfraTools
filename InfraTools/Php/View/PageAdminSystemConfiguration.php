@@ -80,10 +80,10 @@ class PageAdminSystemConfiguration extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'SystemConfigurationInsert', 
-									  array(@$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
-											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
-											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
-											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE]),
+									  array(@$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
+											$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
+											$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+											$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;

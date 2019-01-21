@@ -142,8 +142,10 @@ Methods:
 			protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, 
+		                                                                          &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
-		                                                                   &$ArrayInstanceUser, &$RowCount, $Debug);
+		                                                                   &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
 		                                                                 &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByUserEmail($UserEmail, &InstanceInfraToolsUser, $Debug);
@@ -2670,7 +2672,7 @@ abstract class PageInfraTools extends Page
 											$matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsInfraToolsFacedePersistence();
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTicketId($Limit1, $Limit2, $this->InputValueTicketId, 
 																	                       $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -2685,6 +2687,53 @@ abstract class PageInfraTools extends Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_TICKET_ID_ERROR");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, 
+		                                                              &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
+		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2,
+																									 $TypeAssocUserTeamDescription,
+																						             $ArrayInstanceInfraToolsUser,
+																									 $RowCount, $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING");
+				return ConfigInfraTools::RETURN_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR");
 		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
@@ -2735,7 +2784,7 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RETURN_ERROR;	
 	}
 	
-	protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, 
+	protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
 		                                                         &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
@@ -2765,7 +2814,8 @@ abstract class PageInfraTools extends Page
 			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeUserDescription( $Limit1, $Limit2,
 																									  $this->InputValueTypeUserDescription,
-															                                          $ArrayInstanceUser, $RowCount, $Debug);
+															                                          $ArrayInstanceInfraToolsUser, 
+																									  $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnEmpty();
@@ -2785,7 +2835,7 @@ abstract class PageInfraTools extends Page
 	{
 		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $UserEmail;
-		if($UserEmail != $this->User->GetEmail())
+		if(!empty($UserEmail))
 		{
 			$return = $FacedePersistenceInfraTools->InfraToolsUserSelectByUserEmail($this->InputValueUserEmail, 
 																					$InstanceInfraToolsUser, $Debug);
@@ -2810,11 +2860,8 @@ abstract class PageInfraTools extends Page
 				return ConfigInfraTools::RETURN_ERROR;
 			}
 		}
-		else 
-		{
-			$this->ShowDivReturnError("USER_SAME_AS_ADMIN");
-			return ConfigInfraTools::RETURN_ERROR;
-		}
+		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsUserLoadData($InstanceInfraToolsUser)

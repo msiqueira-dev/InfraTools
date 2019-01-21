@@ -40,10 +40,10 @@ class InfraToolsTypeService
 		$this->InfraToolsFactory = InfraToolsFactory::__create();		
 		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
 		if(!is_null($TypeServiceName))
 			$this->TypeServiceName    = $TypeServiceName;
-		else throw new Exception(Config::EXCEPTION_TYPE_SERVICE_NAME);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_TYPE_SERVICE_NAME);
 		$this->TypeServiceSLA     = $TypeServiceSLA;
 	}
 	

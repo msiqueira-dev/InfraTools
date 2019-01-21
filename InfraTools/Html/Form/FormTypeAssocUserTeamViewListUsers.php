@@ -49,7 +49,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInstanceUser))
+if(is_array($this->ArrayInstanceInfraToolsUser))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -97,24 +97,20 @@ if(is_array($this->ArrayInstanceUser))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceUser as $key=>$user)
+	foreach($this->ArrayInstanceInfraToolsUser as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' method='post' />
+					<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_TEAM_SELECT_SUBMIT . "' />
-						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_FIELD_TEAM_ID . "' 
-							 id='"     . ConfigInfraTools::FORM_FIELD_TEAM_ID . "'
-							 value='"  . $user->GetAssocUserTeamTeamIdByIndex(0) . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
-										 id='"       . ConfigInfraTools::FORM_FIELD_TEAM_NAME . "' 
-							                 value='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' 
-										     title='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' />
-						</form>
+							 name='"   . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' 
+							 id='"     . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "'
+							 value='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' />
+						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
+										     id='"   . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
+										     value='" . $this->InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' 
+										     title='" . $this->InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' />
+					</form>
 				  </td>";
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FORM_USER_SELECT_SUBMIT . "' method='post' />

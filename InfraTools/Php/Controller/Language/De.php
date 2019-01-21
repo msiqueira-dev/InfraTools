@@ -79,6 +79,9 @@ class De
 	const FORM_FIELD_DEPARTMENT_NAME                                = "";
 	const FORM_FIELD_EDIT                                           = "";
 	const FORM_FIELD_LOGIN                                          = "";
+	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "";
+	const FORM_FIELD_NOTIFICATION_ID                                = "";
+	const FORM_FIELD_NOTIFICATION_TEXT                              = "";
 	const FORM_FIELD_SELECT_NONE                                    = "";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "";
@@ -122,6 +125,9 @@ class De
 	const FORM_INVALID_DESCRIPTION                                  = "";
 	const FORM_INVALID_HOSTNAME                                     = "";
 	const FORM_INVALID_ID                                           = "";
+	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "";
+	const FORM_INVALID_NOTIFICATION_ID                              = "";
+	const FORM_INVALID_NOTIFICATION_TEXT                            = "";
 	const FORM_INVALID_REGISTRATION_ID                              = "";
 	const FORM_INVALID_SERVICE_ACTIVE                               = "";
 	const FORM_INVALID_SERVICE_CORPORATION_CAN_CHANGE               = "";
@@ -270,6 +276,13 @@ class De
 	const MAPS_TIP                                                  = "";
 	const NAME                                                      = "";
 	const NOT_LOGGED_IN                                             = "";
+	const NOTIFICATION_DELETE_ERROR                                 = "";
+	const NOTIFICATION_DELETE_SUCCESS                               = "";
+	const NOTIFICATION_INSERT_ERROR                                 = "";
+	const NOTIFICATION_INSERT_SUCCESS                               = "";
+	const NOTIFICATION_NOT_FOUND                                    = "";
+	const NOTIFICATION_UPDATE_ERROR                                 = "";
+	const NOTIFICATION_UPDATE_SUCCESS                               = "";
 	const NULL_EMPTY                                                = "";
 	const NULL_OPTION                                               = "";
 	const OPERATION_LIST                                            = "";
@@ -780,7 +793,6 @@ class De
 	const USER_INACTIVE                                             = "";
 	const USER_NOT_CONFIRMED                                        = "";
 	const USER_NOT_FOUND                                            = "";
-	const USER_SAME_AS_ADMIN                                        = "";
 	const USER_SELECT_BY_CORPORATION_NAME_ERROR                     = "";
 	const USER_SELECT_BY_CORPORATION_NAME_WARNING                   = "";
 	const USER_SELECT_BY_DEPARTMENT_NAME_ERROR                      = "";
@@ -938,17 +950,6 @@ class De
 	const DEPARTMENT_INSERT_SUCCESS                           = "";
 	const DEPARTMENT_UPDATE_ERROR                             = "";
 	const DEPARTMENT_UPDATE_SUCCESS                           = "";
-	
-	
-	/* Body Page AdminNotification */
-	const NOTIFICATION_DELETE_ERROR                           = "";
-	const NOTIFICATION_DELETE_SUCCESS                         = "";
-	const NOTIFICATION_INVALID_TEXT                           = "";
-	const NOTIFICATION_INVALID_TEXT_SIZE                      = "";
-	const NOTIFICATION_INSERT_ERROR                           = "";
-	const NOTIFICATION_INSERT_SUCCESS                         = "";
-	const NOTIFICATION_UPDATE_ERROR                           = "";
-	const NOTIFICATION_UPDATE_SUCCESS                         = "";
 	
 	/* Body Page AdminTeam */
 	const TEAM_DELETE_ERROR                                   = "";

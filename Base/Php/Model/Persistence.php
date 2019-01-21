@@ -36,17 +36,11 @@ Methods:
 			public static function SqlDepartmentSelectNoLimit();
 			public static function SqlDepartmentUpdateDepartmentByDepartmentAndCorporation();
 			public static function SqlDepartmentUpdateCorporationByCorporationAndDepartment();
-			public static function SqlNotificationDeleteById();
-			public static function SqlNotificationDeleteByText();
-			public static function SqlNotificationDeleteByTextAndUserEmail();
-			public static function SqlNotificationDeleteByUserEmail();
+			public static function SqlNotificationDeleteByNotificationId();
 			public static function SqlNotificationInsert();
-			public static function SqlNotificationSelectByText();
-			public static function SqlNotificationSelectByTextAndUserEmail();
-			public static function SqlNotificationSelectByUserEmail();
-			public static function SqlNotificationUpdateActiveByUserEmail();
-			public static function SqlNotificationUpdateTextById();
-			public static function SqlNotificationUpdateTextByUserEmail();
+			public static function SqlNotificationSelect();
+			public static function SqlNotificationSelectByNotificationId();
+			public static function SqlNotificationUpdateByNotificationId();
 			public static function SqlSystemConfigurationDeleteBySystemConfigurationOptionNumber();
 			public static function SqlSystemConfigurationInsert();
 			public static function SqlSystemConfigurationSelect();
@@ -419,29 +413,10 @@ class Persistence
 			 . "AND   "  . Config::TABLE_DEPARTMENT . "." . Config::TABLE_DEPARTMENT_FIELD_CORPORATION . " =? ";
 	}
 	
-	public static function SqlNotificationDeleteById()
+	public static function SqlNotificationDeleteByNotificationId()
 	{
 		return "DELETE FROM " . Config::TABLE_NOTIFICATION . " "  
 		     . "WHERE "       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID." = ?";
-	}
-	
-	public static function SqlNotificationDeleteByText()
-	{
-		return "DELETE FROM " . Config::TABLE_NOTIFICATION . " "  
-		     . "WHERE "       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT . " = ?";
-	}
-	
-	public static function SqlNotificationDeleteByTextAndUserEmail()
-	{
-		return "DELETE FROM " . Config::TABLE_NOTIFICATION . " "  
-		     . "WHERE "       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT      ." = ? "
-			 . "AND "         . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL." = ? ";
-	}
-	
-	public static function SqlNotificationDeleteByUserEmail()
-	{
-		return "DELETE FROM " . Config::TABLE_NOTIFICATION . " "  
-		     . "WHERE "       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL ." = ?"; 
 	}
 	
 	public static function SqlNotificationInsert()
@@ -450,64 +425,37 @@ class Persistence
 			 . "(" . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ","
 		     . " " . Config::TABLE_NOTIFICATION_FIELD_ID          . ","
 			 . " " . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ","
-		     . " " . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL  . ","
 			 . " " . Config::TABLE_FIELD_REGISTER_DATE            . ")"
-		     . " VALUES (?, DEFAULT, UPPER(?), UPPER(?), NOW())";
+		     . " VALUES (?, DEFAULT, UPPER(?), NOW())";
 	}
 	
-	public static function SqlNotificationSelectByText()
+	public static function SqlNotificationSelect()
+	{
+		return "SELECT "   . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ", "
+			               . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . ", "
+			               . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ", "
+					       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE            . ", "
+			 . "(SELECT COUNT(*) FROM " . Config::TABLE_NOTIFICATION . ") AS COUNT "
+		     . "FROM  "    . Config::TABLE_NOTIFICATION . " " .                                                "  "
+			 . "ORDER BY " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . " LIMIT ?,?";
+	}
+	
+	public static function SqlNotificationSelectByNotificationId()
 	{
 		return "SELECT " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ", "
 			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . ", "
 			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ", "
-		                 . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL  . ", "
 					     . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE            . "  " 
 		     . "FROM  "  . Config::TABLE_NOTIFICATION . " " 
-	         . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . " = ?";
+	         . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID  . " = ?";
 	}
 	
-	public static function SqlNotificationSelectByTextAndUserEmail()
-	{
-		return "SELECT " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ", "
-			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . ", "
-			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ", "
-		                 . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL  . ", "
-					     . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE            . "  " 
-		     . "FROM  "  . Config::TABLE_NOTIFICATION . " " 
-	         . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . " = ? "
-			 . "AND "    . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL  . " = ? ";
-	}
-	
-	public static function SqlNotificationSelectByUserEmail()
-	{
-		return "SELECT " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ", "
-			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . ", "
-			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ", "
-		                 . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL  . ", "
-					     . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE            . "  " 
-		     . "FROM  "  . Config::TABLE_NOTIFICATION . " " 
-	         . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL  . " = ?";
-	}
-	
-	public static function SqlNotificationUpdateActiveByUserEmail()
+	public static function SqlNotificationUpdateByNotificationId()
 	{
 		return "UPDATE " . Config::TABLE_NOTIFICATION . " "  
-		     . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE       . " =? "
-		     . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL   . " =? ";
-	}
-	
-	public static function SqlNotificationUpdateTextById()
-	{
-		return "UPDATE " . Config::TABLE_NOTIFICATION . " "  
-		     . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT       . " =UPPER(?) "
+		     . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE     . " =?, "
+			 . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT       . " =UPPER(?), "	
 		     . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID         . " =? ";
-	}
-	
-	public static function SqlNotificationUpdateTextByUserEmail()
-	{
-		return "UPDATE " . Config::TABLE_NOTIFICATION . " "  
-		     . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT       . " =UPPER(?) "
-		     . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_USER_EMAIL . " =? ";
 	}
 	
 	public static function SqlSystemConfigurationDeleteBySystemConfigurationOptionNumber()

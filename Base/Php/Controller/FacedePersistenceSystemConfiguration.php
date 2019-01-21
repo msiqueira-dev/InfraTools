@@ -14,7 +14,7 @@ Description:
 			Classe used to access and deal with information of the database about type of association betweeen a user and a team.
 Functions: 
 			public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
-			                                                                           $MySqlConnection = NULL);
+			                                                                           $MySqlConnection);
 			public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 													  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
 													  $MySqlConnection);
@@ -91,8 +91,7 @@ class FacedePersistenceSystemConfiguration
         return self::$Instance;
     }
 	
-	public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug, 
-																			   $MySqlConnection = NULL)
+	public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -169,7 +168,6 @@ class FacedePersistenceSystemConfiguration
 	
 	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceSystemConfiguration = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
@@ -182,6 +180,7 @@ class FacedePersistenceSystemConfiguration
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceSystemConfiguration = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -398,7 +397,7 @@ class FacedePersistenceSystemConfiguration
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_UPDATE_FAILED;
+					return Config::MYSQL_SYSTEM_CONFIGURATION_UPDATE_FAILED;
 				}
 			}
 			else

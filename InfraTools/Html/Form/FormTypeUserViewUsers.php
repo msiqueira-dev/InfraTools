@@ -49,7 +49,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInstanceUser))
+if(is_array($this->ArrayInstanceInfraToolsUser))
 {
 	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -96,7 +96,7 @@ if(is_array($this->ArrayInstanceUser))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceUser as $key=>$user)
+	foreach($this->ArrayInstanceInfraToolsUser as $key=>$user)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

@@ -6,6 +6,7 @@
 	</div>
 	<label>
 		<?php if(isset($this->ReturnEmptyText))           echo $this->ReturnEmptyText; ?>
+		<?php if(isset($this->ReturnCorporationActiveText)) echo $this->ReturnCorporationActiveText; ?>
 		<?php if(isset($this->ReturnCorporationNameText)) echo $this->ReturnCorporationNameText; ?>
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
@@ -13,7 +14,7 @@
 <!-- FORM_CORPORATION_REGISTER_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" 
       id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" method="post">
-    <!-- NAME -->
+    <!-- FORM_FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>

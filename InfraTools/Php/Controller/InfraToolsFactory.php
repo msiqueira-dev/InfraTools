@@ -12,7 +12,6 @@ Description:
 			Classe used to create instance of all elements in the Base Project.
 Methods:
 			public static function CreateConfigInfraTools();
-			public function CreateFacedePersistenceTypeService();
 			public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
 								                             $InfraToolsUserInstance, $RegisterDate);
 			public function CreateInfraToolsFacedeBusiness($LanguageText);
@@ -154,14 +153,6 @@ class InfraToolsFactory extends Factory
 			include_once(SITE_PATH_PHP_CONTROLLER . "ConfigInfraTools.php");
 	    else include_once("../Php/Controller/ConfigInfraTools.php");
 		return ConfigInfraTools::__create();
-	}
-	
-	public function CreateFacedePersistenceTypeService()
-	{
-		if(!file_exists(SITE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeService.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Class FacedePersistenceTypeService');
-		else include_once(SITE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeService.php");
-		return FacedePersistenceInfraTools::__create();	
 	}
 	
 	public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate)

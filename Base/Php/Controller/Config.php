@@ -52,6 +52,9 @@ class Config
 	const EXCEPTION_HISTORY_TICKET_TICKET_ID                            = "ExceptionHistoryTicketTicketId";
 	const EXCEPTION_HISTORY_TICKET_TITLE                                = "ExceptionHistoryTicketTitle";
 	const EXCEPTION_HISTORY_TICKET_TYPE                                 = "ExceptionHistoryTicketType";
+	const EXCEPTION_NOTIFICATION_ACTIVE                                 = "ExceptionNotificationActive";
+	const EXCEPTION_NOTIFICATION_ID                                     = "ExceptionNotificationId";
+	const EXCEPTION_NOTIFICATION_TEXT                                   = "ExceptionNotificationText";
 	const EXCEPTION_REGISTER_DATE                                       = "ExceptionRegisterDate";
 	const EXCEPTION_SYSTEM_CONFIGURATION_OPTION_ACTIVE                  = "ExceptionSystemConfigurationOptionActive";
 	const EXCEPTION_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION             = "ExceptionSystemConfigurationOptionDescription";
@@ -105,6 +108,9 @@ class Config
 	const FORM_FIELD_HEADER_LOG_OUT                                     = "FormFieldHeaderLogOut";
 	const FORM_FIELD_LOGIN                                              = "FormFieldLogin";
 	const FORM_FIELD_NOT_OBLIGATORY                                     = "FormFieldNotObligatory";
+	const FORM_FIELD_NOTIFICATION_ACTIVE                                = "FormFieldNotificationActive";
+	const FORM_FIELD_NOTIFICATION_ID                                    = "FormFieldNotificationId";
+	const FORM_FIELD_NOTIFICATION_TEXT                                  = "FormFieldNotificationText";
 	const FORM_FIELD_PASSWORD_NEW                                       = "FormFieldPasswordNew";
 	const FORM_FIELD_PASSWORD_REPEAT                                    = "FormFieldPasswordRepeat";
 	const FORM_FIELD_PASSWORD_RESET_CODE                                = "FormFieldPasswordResetCode";
@@ -577,6 +583,12 @@ class Config
 	const MYSQL_INFRATOOLS_DATABASE_GET_ROW_COUNT_FETCH_FAILED          = "MySqlInfraToolsDataBaseGetRowCountFetchFailed";
 	const MYSQL_LOG_ERROR                                               = "LogMySqlError";
 	const MYSQL_LOG_QUERY                                               = "LogMySqlQuery";
+	const MYSQL_NOTIFICATION_DELETE_FAILED                              = "RetMySqlNotificationDeleteFailed";
+	const MYSQL_NOTIFICATION_DELETE_FAILED_NOT_FOUND                    = "RetMySqlNotificationDeleteFailedNotFound";
+	const MYSQL_NOTIFICATION_INSERT_FAILED                              = "RetMySqlNotificationInsertFailed";
+	const MYSQL_NOTIFICATION_SELECT_FAILED                              = "RetMySqlNotificationSelectFailed";
+	const MYSQL_NOTIFICATION_SELECT_FETCH_FAILED                        = "RetMySqlNotificationSelectFetchFailed";
+	const MYSQL_NOTIFICATION_UPDATE_FAILED                              = "RetMySqlNotificationUpdateFailed";
 	const MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED                      = "RetMySqlSystemConfigurationDeleteFailed";
 	const MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED_NOT_FOUND            = "RetMySqlSystemConfigurationDeleteFailedNotFound";
 	const MYSQL_SYSTEM_CONFIGURATION_INSERT_FAILED                      = "RetMySqlSystemConfigurationInsertFailed";
@@ -586,6 +598,7 @@ class Config
 	const MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FETCH_FAILED = "RetMySqlSystemConfigurationSelectByOptionNumberFetchFailed";
 	const MYSQL_SYSTEM_CONFIGURATION_SELECT_FAILED                      = "RetMySqlSystemConfigurationSelectFailed"; 
 	const MYSQL_SYSTEM_CONFIGURATION_SELECT_FETCH_FAILED                = "RetMySqlSystemConfigurationSelectFetchFailed";
+	const MYSQL_SYSTEM_CONFIGURATION_UPDATE_FAILED                      = "RetMySqlSystemConfigurationUpdateFailed";
 	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED                  = "RetMySqlTeamDeleteByTeamDescriptionFailed";
 	const MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED_NOT_FOUND        = "RetMySqlTeamDeleteByTeamDescriptionFailedNotFound";
 	const MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED                           = "RetMySqlTeamDeleteByTeamIdFailed";
@@ -679,6 +692,7 @@ class Config
 	const PAGE_ADMIN_NOTIFICATION_SELECT                                = "Page_Admin_Notification_Select";
 	const PAGE_ADMIN_NOTIFICATION_UPDATE                                = "Page_Admin_Notification_Update";
 	const PAGE_ADMIN_NOTIFICATION_VIEW                                  = "Page_Admin_Notification_View";
+	const PAGE_ADMIN_NOTIFICATION_VIEW_USERS                            = "Page_Admin_Notification_View_Users";
 	const PAGE_ADMIN_SYSTEM_CONFIGURATION                               = "Page_Admin_System_Configuration";
 	const PAGE_ADMIN_SYSTEM_CONFIGURATION_LIST                          = "Page_Admin_System_Configuration_List";
 	const PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER                      = "Page_Admin_System_Configuration_Register";
@@ -776,6 +790,7 @@ class Config
 	const RETURN_WARNING                                                = "ReturnWarning";
 	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
 	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
+	const SESS_ADMIN_NOTIFICATION                                       = "SessionAdminNotification";
 	const SESS_ADMIN_SYSTEM_CONFIGURATION                               = "SessionAdminSystemConfiguration";
 	const SESS_ADMIN_TEAM                                               = "SessionAdminTeam";
 	const SESS_ADMIN_TICKET                                             = "SessionAdminTicket";
@@ -843,7 +858,6 @@ class Config
 	const TABLE_NOTIFICATION_FIELD_ACTIVE                               = "NotificationActive";
 	const TABLE_NOTIFICATION_FIELD_ID                                   = "NotificationId";
 	const TABLE_NOTIFICATION_FIELD_TEXT                                 = "NotificationText";
-	const TABLE_NOTIFICATION_FIELD_USER_EMAIL                           = "NotificationUserEmail";
 	const TABLE_TEAM                                                    = "TEAM";
 	const TABLE_TEAM_FIELD_TEAM_DESCRIPTION                             = "TeamDescription";
 	const TABLE_TEAM_FIELD_TEAM_ID                                      = "TeamId";

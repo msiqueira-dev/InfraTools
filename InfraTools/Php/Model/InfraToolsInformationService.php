@@ -49,16 +49,16 @@ class InfraToolsInformationService
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
 		if(!is_null($InformationServiceDescription))
 			$this->InformationServiceDescription = $InformationServiceDescription;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_DESCRIPTION);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_DESCRIPTION);
 		if(!is_null($InformationServiceId))
 			$this->InformationServiceId = $InformationServiceId;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_ID);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_ID);
 		if(!is_null($InformationServiceValue))
 			$this->InformationServiceVaalue    = $InformationServiceValue;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_VALUE);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_VALUE);
 		if(!is_null($Service))
 			$this->InfraToolsService    = $InfraToolsService;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_SERVICE);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_SERVICE);
 	}
 	
 	/* Clone */

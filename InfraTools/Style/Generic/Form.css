@@ -80,3 +80,4 @@
 .InputSubmitForgotPassword{background-color:transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;text-decoration:underline;font-weight:bold;}
 .DivFormHorizontalButtons {width:180px !important;height:50px !important;float:left;}
 .DivContentBodyContainer input{float:left;vertical-align:top;}
+.DivContentBodyContainerValueTextArea{width:500px !important;height:200px !important;}

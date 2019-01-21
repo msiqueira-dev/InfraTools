@@ -26,8 +26,8 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTypeUser extends PageAdmin
 {
-	protected $ArrayInstanceUser = NULL;
-	protected $InstanceTypeUser  = NULL;
+	protected $ArrayInstanceInfraToolsUser = NULL;
+	protected $InstanceTypeUser            = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -100,16 +100,16 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescriptionLike', 
 											  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
-													&$this->ArrayInstanceUser),
+													&$this->InstanceTypeUser),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 			{
 
-				if(count($this->ArrayInstanceUser) > 1)
+				if(count($this->InstanceTypeUser) > 1)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;	
 				else
 				{
-					$this->InstanceTypeUser = array_pop($this->ArrayInstanceUser);
-					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser);
+					$this->InstanceTypeUser = array_pop($this->InstanceTypeUser);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceTypeUser);
 					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
 												  $this->InstanceTypeUser) == ConfigInfraTools::SUCCESS)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
@@ -136,7 +136,7 @@ class PageAdminTypeUser extends PageAdmin
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTypeUserDescription', 
 										  array($this->InstanceTypeUser->GetTypeUserDescription(), 
-											    &$this->ArrayInstanceUser),
+											    &$this->ArrayInstanceInfraToolsUser),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW_USERS;
 			}

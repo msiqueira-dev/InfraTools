@@ -29,8 +29,11 @@ Functions:
 			public function InfraToolsUserSelectByTypeMonitoringDescription($Limit1, $Limit2, $TypeMonitoringDescription,
 			                                                                &$ArrayInstanceInfraToolsUser,
 			                                                                &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
+			                                                                   &$ArrayInstanceInfraToolsUser,
+																               &$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceInfraToolsUser,
-																        &$RowCount, $Debug, $MySqlConnection)
+																        &$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
 			                                                          &$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug, $MySqlConnection);
@@ -102,89 +105,90 @@ class InfraToolsFacedePersistenceUser
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL && $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL   &&
+						   $row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
-								                                       (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE], 
-							                                            $row[Config::TABLE_CORPORATION_FIELD_NAME],
-												                        $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+								                                       (NULL, $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE], 
+							                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+												                        $row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row["TypeUser".Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row["TypeUser".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 		   										 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 												 $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-												 $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-												 $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-												 $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, 
@@ -204,90 +208,90 @@ class InfraToolsFacedePersistenceUser
 			{
 				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
-								                                        (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		$row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                    $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+								                                        (NULL, $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		$row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                    $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceInfraToolsUser, 
@@ -307,90 +311,90 @@ class InfraToolsFacedePersistenceUser
 			{
 				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
-								                                        (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		$row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                    $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+								                                        (NULL, $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		$row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                    $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount,
@@ -401,98 +405,98 @@ class InfraToolsFacedePersistenceUser
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
-			if($Debug == Config::CHECKBOX_CHECKED)
+			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsUserSelectByServiceId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByServiceId());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("iiii", $ServiceId, $ServiceId, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
 								                                        (NULL, 
-																		 $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		 $row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                     $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceBaseTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceInfraToolsUser, &$RowCount, 
@@ -503,98 +507,98 @@ class InfraToolsFacedePersistenceUser
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
-			if($Debug == Config::CHECKBOX_CHECKED)
+			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTeamId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTeamId());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("iiii", $TeamId, $TeamId, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$ArrayInstanceInfraToolsUser = array();
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
 								                                        (NULL, 
-																		 $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		 $row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                     $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceBaseTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, 
@@ -605,98 +609,98 @@ class InfraToolsFacedePersistenceUser
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
-			if($Debug == Config::CHECKBOX_CHECKED)
+			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTicketId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTicketId());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("iiii", $TicketId, $TicketId, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$ArrayInstanceInfraToolsUser = array();
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
 								                                        (NULL, 
-																		 $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		 $row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                     $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceBaseTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTypeMonitoringDescription($Limit1, $Limit2, $TypeMonitoringDescription, &$ArrayInstanceInfraToolsUser,
@@ -708,97 +712,200 @@ class InfraToolsFacedePersistenceUser
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
-			if($Debug == Config::CHECKBOX_CHECKED)
+			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsUserSelectByTypeMonitoringDescription');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByTypeMonitoringDescription());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ssii", $TypeMonitoringDescription, $TypeMonitoringDescription, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
 								                                        (NULL, 
-																		 $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		 $row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                     $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceBaseTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+	}
+	
+	public function InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
+			                                                           &$ArrayInstanceInfraToolsUser,
+																       &$RowCount, $Debug, $MySqlConnection)
+	{
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
+		$ArrayInstanceInfraToolsUser = array();
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeAssocUserTeamDescription');
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeAssocUserTeamDescription());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("ssii", $TypeAssocUserTeamDescription, $TypeAssocUserTeamDescription, $Limit1, $Limit2);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == ConfigInfraTools::SUCCESS)
+				{
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$RowCount = $row['COUNT'];
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
+								                                        (NULL, 
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
+												 NULL,
+												 NULL,
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $InstanceCorporation,
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+												 $InstanceDepartment,
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+							                  $InstanceInfraToolsUser);
+						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
+					}
+					if(!empty($ArrayInstanceInfraToolsUser))
+						return ConfigInfraTools::SUCCESS;
+					else
+					{
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
+					}
+				}
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
+				}
+			}
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceInfraToolsUser,
@@ -810,97 +917,97 @@ class InfraToolsFacedePersistenceUser
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
-			if($Debug == Config::CHECKBOX_CHECKED)
+			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeTicketDescription');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeTicketDescription());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ssii", $TypeTicketDescription, $TypeTicketDescription, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
 								                                        (NULL, 
-																		 $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		 $row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                     $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		 $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                     $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceBaseTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
@@ -921,89 +1028,89 @@ class InfraToolsFacedePersistenceUser
 			{
 				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						if($row[Config::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
-						   $row[Config::TABLE_CORPORATION_FIELD_NAME] != NULL 
-						   && $row['Corporation' . Config::TABLE_FIELD_REGISTER_DATE] != NULL)
+						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
+						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
+						   && $row['Corporation' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE] != NULL)
 						{
 							$InstanceCorporation = $this->Factory->CreateInfraToolsCorporation
-								                                        (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																		$row[Config::TABLE_CORPORATION_FIELD_NAME],
-									                                    $row['Corporation'.Config::TABLE_FIELD_REGISTER_DATE]);
-							if($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
+								                                        (NULL, $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																		$row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
+									                                    $row['Corporation'.ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							if($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION] != NULL)
 								$InstanceDepartment = $this->Factory->CreateDepartment(
 									          $InstanceCorporation, 
-									          $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									          $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									          $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									          $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
+									          $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						}
 						else $InstanceCorporation = NULL;
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
-							                               ($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
-															$row['TypeUser' . Config::TABLE_FIELD_REGISTER_DATE]);
+							                               ($row[ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION],
+															$row['TypeUser' . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
-												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
-						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
-						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
-												 $row[Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX],
 												 $InstaceTypeUser,
-												 $row[Config::TABLE_USER_FIELD_USER_UNIQUE_ID]);
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID]);
 						if($InstanceCorporation != NULL && $InstanceInfraToolsUser != NULL 
-						       && isset($row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE]))
+						       && isset($row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]))
 								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
-							                  $row[Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE],
+							                  $row[ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID],
 											  $InstanceCorporation,															   
-											  $row["AssocUserCorporation".Config::TABLE_FIELD_REGISTER_DATE],
+											  $row["AssocUserCorporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}
 					if(!empty($ArrayInstanceInfraToolsUser))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug, $MySqlConnection)
@@ -1021,7 +1128,7 @@ class InfraToolsFacedePersistenceUser
 			{
 				$stmt->bind_param("s", $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
@@ -1056,30 +1163,30 @@ class InfraToolsFacedePersistenceUser
 							$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
 							                  $assocUsrCorpRegistrationDate, $assocUsrCorpRegistrationId, $InstanceCorporation, $assocUsrCorpRegDate, $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					}
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_BY_USER_EMAIL_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_BY_USER_EMAIL_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsUserSelectByUserUniqueId($UserUniqueId, &$InstanceInfraToolsUser, $Debug, $MySqlConnection)
@@ -1096,7 +1203,7 @@ class InfraToolsFacedePersistenceUser
 			{
 				$stmt->bind_param("s", $UserUniqueId);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
@@ -1129,29 +1236,29 @@ class InfraToolsFacedePersistenceUser
 							$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
 							                  $assocUsrCorpRegistrationDate, $assocUsrCorpRegistrationId, $InstanceCorporation, $assocUsrCorpRegDate, $InstanceInfraToolsUser);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					}
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FAILED;
+					return ConfigInfraTools::MYSQL_USER_SELECT_BY_USER_UNIQUE_ID_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }

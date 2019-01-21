@@ -36,7 +36,7 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 {
 	public $InstanceTypeAssocUserTeam      = NULL;
 	public $ArrayInstanceTypeAssocUserTeam = NULL;
-	public $ArrayInstanceUser              = NULL;
+	public $ArrayInstanceInfraToolsUser    = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)

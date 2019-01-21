@@ -9,30 +9,23 @@ Dependencies:
 Description: 
 			Class that treats the System Configuration.
 Get / Set:
+			public function GetNotificationActive();
+			public function GetNotificationId();
+			public function GetNotificationText();
 			public function GetRegisterDate();
-			public function GetSystemConfigurationOptionActive();
-			public function GetSystemConfigurationOptionDescription();
-			public function GetSystemConfigurationOptionName();
-			public function GetSystemConfigurationOptionNumber();
-			public function GetSystemConfigurationOptionValue();
-			public function SetSystemConfigurationOptionActive($SystemConfigurationOptionActive);
-			public function SetSystemConfigurationOptionDescription($SystemConfigurationOptionDescription);
-			public function SetSystemConfigurationOptionName($SystemConfigurationOptionName);
-			public function SetSystemConfigurationOptionValue($SystemConfigurationOptionValue);
+			public function SetNotificationActive($NotificationActive);
+			public function SetNotificatioNText($NotificationText);
 Methods:
-			public function UpdateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, SystemConfigurationOptionDescription,
-							                          $SystemConfigurationOptionName, $SystemConfigurationOptionValue);
+			public function UpdateNotification($NotificationActive, $NotificationText, $RegisterDate);
 **************************************************************************/
 
-class SystemConfiguration
+class Notification
 {
 	/* Properties */
-	protected $RegisterDate                          = NULL;
-	protected $SystemConfigurationOptionActive       = NULL;
-	protected $SystemConfigurationOptionDescription  = NULL;
-	protected $SystemConfigurationOptionName         = NULL;
-	protected $SystemConfigurationOptionNumber       = NULL;
-	protected $SystemConfigurationOptionValue        = NULL;
+	protected $NotificationActive = NULL;
+	protected $NotificationId     = NULL;
+	protected $NotificationText   = NULL;
+	protected $RegisterDate       = NULL;
 
 	/* Clone */
 	public function __clone()
@@ -41,95 +34,65 @@ class SystemConfiguration
 	}
 	
 	/* Constructor */
-	public function __construct($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
-							    $SystemConfigurationOptionName, $SystemConfigurationOptionNumber, $SystemConfigurationOptionValue) 
+	public function __construct($NotificationActive, $NotificationId, $NotificationText, $RegisterDate) 
 	{
+		if(!is_null($NotificationActive))
+			$this->NotificationActive = $NotificationActive;
+		else throw new Exception(Config::EXCEPTION_NOTIFICATION_ACTIVE);
+		if(!is_null($NotificationId))
+			$this->NotificationId = $NotificationId;
+		else throw new Exception(Config::EXCEPTION_NOTIFICATION_ID);
+		if(!is_null($NotificationText))
+			$this->NotificationText = $NotificationText;
+		else throw new Exception(Config::EXCEPTION_NOTIFICATION_TEXT);
 		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if(!is_null($SystemConfigurationOptionActive))
-			$this->SystemConfigurationOptionActive = $SystemConfigurationOptionActive;
-		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_ACTIVE);
-		if(!is_null($SystemConfigurationOptionDescription))
-			$this->SystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;
-		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION);
-		if(!is_null($SystemConfigurationOptionName))
-			$this->SystemConfigurationOptionName = $SystemConfigurationOptionName;
-		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_NAME);
-		if(!is_null($SystemConfigurationOptionNumber))
-			$this->SystemConfigurationOptionNumber = $SystemConfigurationOptionNumber;
-		else throw new Exception(Config::EXCEPTION_SYSTEM_CONFIGURATION_OPTION_NUMBER);
-		if(!is_null($SystemConfigurationOptionValue))
-			$this->SystemConfigurationOptionValue = $SystemConfigurationOptionValue;
 	}
 	
 	/* GET */
+	public function GetNotificationActive()
+	{
+		return $this->NotificationActive;
+	}
+	
+	public function GetNotificationId()
+	{
+		return $this->NotificationId;
+	}
+	
+	public function GetNotificationText()
+	{
+		return $this->NotificationText;
+	}
+
 	public function GetRegisterDate()
 	{
 		return $this->RegisterDate;
 	}
 	
-	public function GetSystemConfigurationOptionActive()
-	{
-		return $this->SystemConfigurationOptionActive;
-	}
-	
-	public function GetSystemConfigurationOptionDescription()
-	{
-		return $this->SystemConfigurationOptionDescription;
-	}
-	
-	public function GetSystemConfigurationOptionName()
-	{
-		return $this->SystemConfigurationOptionName;
-	}
-
-	public function GetSystemConfigurationOptionNumber()
-	{
-		return $this->SystemConfigurationOptionNumber;
-	}
-	
-	public function GetSystemConfigurationOptionValue()
-	{
-		return $this->SystemConfigurationOptionValue;
-	}
-	
 	/* SET */
-	public function SetSystemConfigurationOptionActive($SystemConfigurationOptionActive)
+	public function SetNotificationActive($NotificationActive)
 	{
-		if(!is_null($SystemConfigurationOptionActive))
-			$this->SystemConfigurationOptionActive = $SystemConfigurationOptionActive;
+		if(!is_null($NotificationActive))
+			$this->NotificationActive = $NotificationActive;
 	}
 	
-	public function SetSystemConfigurationOptionDescription($SystemConfigurationOptionDescription)
+	public function SetNotificatioNText($NotificationText)
 	{
-		if(!is_null($SystemConfigurationOptionDescription))
-			$this->SystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;	
-	}
-	
-	public function SetSystemConfigurationOptionName($SystemConfigurationOptionName)
-	{
-		if(!is_null($SystemConfigurationOptionName))
-			$this->SystemConfigurationOptionName = $SystemConfigurationOptionName;
-	}
-	public function SetSystemConfigurationOptionValue($SystemConfigurationOptionValue)
-	{
-		$this->SystemConfigurationOptionValue = $SystemConfigurationOptionValue;
+		if(!is_null($NotificationText))
+			$this->NotificationText = $NotificationText;
 	}
 	
 	/* METHODS */
-	public function UpdateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
-							                  $SystemConfigurationOptionName, $SystemConfigurationOptionValue)	
+	public function UpdateNotification($NotificationActive, $NotificationText, $RegisterDate)	
 	{
+		if(!is_null($NotificationActive))
+			$this->NotificationActive = $NotificationActive;
+		if(!is_null($NotificationText))
+			$this->NotificationText = $NotificationText;
 		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		if(!is_null($SystemConfigurationOptionActive))
-			$this->SystemConfigurationOptionActive = $SystemConfigurationOptionActive;
-		if(!is_null($SystemConfigurationOptionDescription))
-			$this->SystemConfigurationOptionDescription = $SystemConfigurationOptionDescription;
-		if(!is_null($SystemConfigurationOptionName))
-			$this->SystemConfigurationOptionName = $SystemConfigurationOptionName;
-		$this->SystemConfigurationOptionValue = $SystemConfigurationOptionValue;
 	}
 }
 ?>

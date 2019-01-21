@@ -80,6 +80,9 @@ class Pt
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Nome do departamento";
 	const FORM_FIELD_EDIT                                           = "Editar";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail ou ID Único)";
+	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Ativo";
+	const FORM_FIELD_NOTIFICATION_ID                                = "Id";
+	const FORM_FIELD_NOTIFICATION_TEXT                              = "Texto";
 	const FORM_FIELD_SELECT_NONE                                    = "Nenhuma";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Ativo";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporação pode mudar?";
@@ -126,6 +129,11 @@ class Pt
 	const FORM_INVALID_DESCRIPTION                                  = "Descrição inválida";
 	const FORM_INVALID_HOSTNAME                                     = "Domínio inválido";
 	const FORM_INVALID_ID                                           = "Id inválido";
+	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "Campo ativo de notificação inválido";
+	const FORM_INVALID_NOTIFICATION_ID                              = "Id de notificação inválido";
+	const FORM_INVALID_NOTIFICATION_TEXT                            = "Texto de notificação inválido";
+	const FORM_INVALID_NOTIFICATION_TEXT_SIZE                       = "Quantidade de caracteres excede o tamanho máximo para "
+	                                                                . "texto de notificação";
 	const FORM_INVALID_REGISTRATION_ID                              = "Matrícula inválida";
 	const FORM_INVALID_SERVICE_ACTIVE                               = "Valor inválido para checkbox de serviço ativo";
 	const FORM_INVALID_SERVICE_CORPORATION_CAN_CHANGE               = "Valor inválido para checkbox de corporação pode ser alterada";
@@ -303,6 +311,13 @@ class Pt
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
 	const NAME                                                      = "Nome";
     const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
+	const NOTIFICATION_DELETE_ERROR                                 = "Erro ao excluir notificação";
+	const NOTIFICATION_DELETE_SUCCESS                               = "Notificação excluida com sucesso";
+	const NOTIFICATION_INSERT_ERROR                                 = "Error ao cadastrar notificação";
+	const NOTIFICATION_INSERT_SUCCESS                               = "Notificação cadastrada com sucesso";
+	const NOTIFICATION_NOT_FOUND                                    = "Notificação não encontrada";
+	const NOTIFICATION_UPDATE_ERROR                                 = "Error ao atualizar notificação";
+	const NOTIFICATION_UPDATE_SUCCESS                               = "Notificação atualizada com sucesso";
 	const NULL_EMPTY                                                = "Nenhum valor associado";
 	const NULL_OPTION                                               = "Por favor escolha uma opção";
 	const OPERATION_LIST                                            = "Listagem";
@@ -771,8 +786,8 @@ class Pt
 	const SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE                   = "DESATIVAR VERIFICAÇÃO DUAS ETAPAS";
 	const SUBMIT_UPDATE                                             = "ATUALIZAR";
 	const SUBMIT_VALIDATE                                           = "VALIDATE";
-	const SYSTEM_CONFIGURATION_DELETE_ERROR                         = "Erro ao deletar configuração do sistema";
-	const SYSTEM_CONFIGURATION_DELETE_SUCCESS                       = "Configuração do sistema deletada com sucesso";
+	const SYSTEM_CONFIGURATION_DELETE_ERROR                         = "Erro ao excluir configuração do sistema";
+	const SYSTEM_CONFIGURATION_DELETE_SUCCESS                       = "Configuração do sistema excluida com sucesso";
 	const SYSTEM_CONFIGURATION_INSERT_ERROR                         = "Error ao cadastrar configuração do sistema";
 	const SYSTEM_CONFIGURATION_INSERT_EXISTS                        = "Uma configuração do sistema com este nome e descrição já existe";
 	const SYSTEM_CONFIGURATION_INSERT_SUCCESS                       = "Configuração do sistema cadastrada com sucesso";
@@ -820,8 +835,7 @@ class Pt
 	const USER_NOT_CONFIRMED                                        = "Sua conta não foi confirmada, por favor confirme através do "
 	                                                                . "e-mail  que lhe foi enviado. Se você perdeu o e-mail enviado ou "
 								    								. "não o recebeu, outro pode ser enviado";
-	const USER_NOT_FOUND                                            = "Usuário não encontrado";  
-	const USER_SAME_AS_ADMIN                                        = "Usuário é o mesmo do administrador!";
+	const USER_NOT_FOUND                                            = "Usuário não encontrado";
 	const USER_SELECT_BY_CORPORATION_NAME_ERROR                     = "Erro ao tentar obter usuários para esta corporação";
 	const USER_SELECT_BY_CORPORATION_NAME_WARNING                   = "Nenhum usuário encontrado para esta corporação";
 	const USER_SELECT_BY_DEPARTMENT_NAME_ERROR                      = "Erro ao tentar obter usuários para este departamento";
@@ -992,16 +1006,6 @@ class Pt
 	const DEPARTMENT_INSERT_SUCCESS                         = "Departamento cadastrado com sucesso";
 	const DEPARTMENT_UPDATE_ERROR                           = "Erro ao atualizar departamento";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "Departamento atualizado com sucesso";
-	
-	/* Body Page AdminNotification */
-	const NOTIFICATION_DELETE_ERROR                         = "Erro ao excluir notificação";
-	const NOTIFICATION_DELETE_SUCCESS                       = "Notificação excluida com sucesso";
-	const NOTIFICATION_INVALID_TEXT                         = "Texto inválido";
-	const NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantidade de caracteres excede o tamanho máximo no texto";
-	const NOTIFICATION_INSERT_ERROR                         = "Erro ao cadastrar notificação";
-	const NOTIFICATION_INSERT_SUCCESS                       = "Notificação cadastrada com sucesso";
-	const NOTIFICATION_UPDATE_ERROR                         = "Erro ao atualizar notificação";
-	const NOTIFICATION_UPDATE_SUCCESS                       = "Notificação atualizada com sucesso";
 	
 	/* Body Page AdminTeam */
 	const TEAM_DELETE_ERROR                                 = "Erro ao excluir equipe";

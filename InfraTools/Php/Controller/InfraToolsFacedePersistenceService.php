@@ -964,8 +964,8 @@ class InfraToolsFacedePersistenceService
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
 									                                  $InstanceCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
@@ -1037,8 +1037,8 @@ class InfraToolsFacedePersistenceService
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
 									                                  $InstanceCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
@@ -1113,8 +1113,8 @@ class InfraToolsFacedePersistenceService
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
 									                                  $InstanceCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
@@ -1186,8 +1186,8 @@ class InfraToolsFacedePersistenceService
 																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
 									                                  $InstanceCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
+									                                  $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME], 
 									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
@@ -2304,7 +2304,7 @@ class InfraToolsFacedePersistenceService
 											           $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($Debug == Config::CHECKBOX_CHECKED)
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceUpdateByServiceId');
 		if($MySqlConnection != NULL)
 		{
@@ -2316,37 +2316,37 @@ class InfraToolsFacedePersistenceService
 								             $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return ConfigInfraTools::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return ConfigInfraTools::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
-					else return Config::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
+					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+						return ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
+					else return ConfigInfraTools::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
 													           $ServiceId, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL;
-		if($Debug == Config::CHECKBOX_CHECKED)
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceUpdateRestrictByServiceId');
 		if($MySqlConnection != NULL)
 		{
@@ -2357,29 +2357,29 @@ class InfraToolsFacedePersistenceService
 								           $ServiceNameNew, $ServiceTypeNew, $ServiceId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return ConfigInfraTools::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return ConfigInfraTools::MYSQL_ERROR_UPDATE_SAME_VALUE;
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
-					else return Config::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
+					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+						return ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
+					else return ConfigInfraTools::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 }

@@ -71,7 +71,7 @@ class PageAdminCorporation extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationInsert', 
-									  array(@$_POST[Config::FORM_FIELD_CORPORATION_ACTIVE],
+									  array(@$_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE],
 				                            $_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;

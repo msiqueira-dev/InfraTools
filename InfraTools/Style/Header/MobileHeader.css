@@ -4,7 +4,12 @@
 .DivHeaderContainerMenu{min-width:80px;max-width:100%;width:auto;height:100%;display:table;margin:0 auto;margin-top:15px;}
 .DivHeaderContainerMenu a{width:auto;text-align:left;letter-spacing:0;text-decoration:none;color:#FFFFFF;font-size:100%;}
 .DivHeaderContainerMenu span{width:auto;text-align:left;display:block;font-size:100%;color:#FFFFFF;font-weight:bold;}
-.DivHeaderContainerMenuLink{width:auto;height:auto;max-width:140px;max-height:50px;margin:0 auto;margin-right:8px;}
+.DivHeaderContainerMenuLink{width:auto;height:auto;max-width:100px;max-height:50px;margin:0 auto;margin-right:8px;}
+.DivHeaderContainerMenuLinkSub{height:auto;}
+.DivHeaderContainerMenuLinkSubContainer{width:auto;max-width:72px;height:auto;max-height:45px;z-index:100;position:relative;top:12px;background-color:#43435d;border-bottom:1px solid #7a7a9f;}
+.DivHeaderContainerMenuLinkSubContainer:hover{background-color:#192650;}
+.DivHeaderContainerMenuLinkSubContainer a{width:auto;height:38px;}
+.DivHeaderContainerMenuLinkSubContainer a span{width:auto;height:38px;font-size:11px;}
 .DivHeaderContainerMenuPageCheck{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
 .DivHeaderContainerMenuPageCheckHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
 .DivHeaderContainerMenuPageCheckTop{width:0px;height:0px;}

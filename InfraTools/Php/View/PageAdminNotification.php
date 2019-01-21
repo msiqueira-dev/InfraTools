@@ -62,93 +62,69 @@ class PageAdminNotification extends PageAdmin
 			$this->PageStackSessionLoad();
 			$PageFormBack = TRUE;
 		}
+		//FORM_CORPORATION_SELECT_SUBMIT
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		}
+		//FORM_DEPARTMENT_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
+									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+										    &$this->InstanceInfraToolsDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+		}
 		//FORM_NOTIFICATION_LIST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'SystemConfigurationSelect', 
-									  array(&$this->ArrayInstanceSystemConfiguration),
+			if($this->ExecuteFunction($_POST, 'NotificationSelect', 
+									  array(&$this->ArrayInstanceNotification),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_LIST;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LIST;
 		}
-		//FORM_SYSTEM_CONFIGURATION_REGISTER
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_REGISTER) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
+		//FORM_NOTIFICATION_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER;
 		//FORM_NOTIFICATION_REGISTER_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
 		//FORM_NOTIFICATION_REGISTER_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'SystemConfigurationInsert', 
-									  array(@$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
-											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
-											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
-											$_POST[Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE]),
+			if($this->ExecuteFunction($_POST, 'NotificationInsert', 
+									  array(@$_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_ACTIVE],
+											$_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_TEXT]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER;
 		}
-		//FORM_SYSTEM_CONFIGURATION_SELECT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SELECT;
+		//FORM_NOTIFICATION_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
 		//FORM_NOTIFICATION_SELECT_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION]))
-			{
-				if($_POST[ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION] ==
-				          ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME)
-				{
-					$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
-					$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
-					$_POST = array(ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST => ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_LIST) 
-						     + $_POST;
-					if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionName', 
-											  array($_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
-													&$this->ArrayInstanceSystemConfiguration),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					{
-						if(count($this->ArrayInstanceSystemConfiguration) > 1)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_LIST;	
-						else
-						{
-							$this->InstanceSystemConfiguration = array_pop($this->ArrayInstanceSystemConfiguration);
-							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
-														  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
-								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
-						}
-					}
-				}
-				else
-				{
-					$this->ReturnSystemConfigurationOptionNameRadioClass   = "Hidden";
-					$this->ReturnSystemConfigurationOptionNumberRadioClass = "NotHidden";
-					$this->InputValueSystemConfigurationOptionNumberRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-					if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionNumber', 
-											  array($_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER],
-													&$this->InstanceSystemConfiguration),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
-				}
-			}
-			else
-			{
-				$this->InputValueSystemConfigurationOptionNumberRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-				if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionNumber', 
-										  array($_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER],
-												&$this->InstanceSystemConfiguration),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
-			}
+			if($this->ExecuteFunction($_POST, 'NotificationSelectByNotificationId', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_ID],
+											&$this->InstanceNotification),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
 		//FORM_NOTIFICATION_VIEW_DELETE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "NotificationLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'SystemConfigurationDeleteBySystemConfigurationOptionNumber', 
-										  array($this->InstanceSystemConfiguration),
+				if($this->ExecuteFunction($_POST, 'NotificationDeleteByNotificationId', 
+										  array($this->InstanceNotification),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
 			}
@@ -163,7 +139,7 @@ class PageAdminNotification extends PageAdmin
 		//FORM_NOTIFICATION_UPDATE_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
 										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
 		}
@@ -173,7 +149,7 @@ class PageAdminNotification extends PageAdmin
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_NOTIFICATION_CONFIGURATION, 
 											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'SystemConfigurationUpdateBySystemConfigurationOptionNumber', 
+				if($this->ExecuteFunction($_POST, 'NotificationUpdateByNotificationId', 
 										  array(@$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
 												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
 												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
@@ -183,6 +159,24 @@ class PageAdminNotification extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;	
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDATE;
 			}
+		}
+		//FORM_TYPE_USER_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+									        &$this->InstanceTypeUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+		}
+		//FORM_USER_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+									        &$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

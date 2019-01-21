@@ -51,6 +51,13 @@ Methods:
 		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = FALSENULL);
 		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE);
 		protected     function        LoadDataFromSession($SessionKey, $Function, &$Instance);
+		protected     function        NotificationDeleteByNotificationId($InstanceNotification, $Debug);
+		protected     function        NotificationInsert($NotificationActive, $NotificationText, $Debug);
+		protected     function        NotificationLoadData($InstanceNotification);
+		protected     function        NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug);
+		protected     function        NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug);
+		protected     function        NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew,
+		                                                                 &$InstanceNotification, $Debug);
 		protected     function        PageStackSessionLoad();
 		protected     function        PageStackSessionRemoveAll();
 		protected     function        PageStackSessionSave();
@@ -277,6 +284,9 @@ class Page
 	public    $InputValueLoginPassword                              = "";
 	public    $InputValueLoginTwoStepVerificationCode               = "";
 	public    $InputValueNewPassword                                = "";
+	public    $InputValueNotificationActive                         = "";
+	public    $InputValueNotificationId                             = "";
+	public    $InputValueNotificationText                           = "";
 	public    $InputValueRegion                                     = "";
 	public    $InputValueRegisterDate                               = "";
 	public    $InputValueRegistrationDateDay                        = "";
@@ -357,6 +367,12 @@ class Page
 	public    $ReturnLoginText                                      = "";
 	public    $ReturnNameClass                                      = "";
 	public    $ReturnNameText                                       = "";
+	public    $ReturnNotificationActiveClass                        = "";
+	public    $ReturnNotificationActiveText                         = "";
+	public    $ReturnNotificationIdClass                            = "";
+	public    $ReturnNotificationIdText                             = "";
+	public    $ReturnNotificationTextClass                          = "";
+	public    $ReturnNotificationTextText                           = "";
 	public    $ReturnPasswordClass                                  = "";
 	public    $ReturnPasswordText                                   = "";
 	public    $ReturnRegionClass                                    = "";
@@ -1500,6 +1516,213 @@ class Page
 		else return Config::RETURN_ERROR;
 	}
 	
+	protected function NotificationDeleteByNotificationId($InstanceNotification, $Debug)
+	{
+		if($InstanceNotification != NULL)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->NotificationDeleteByNotificationId($InstanceNotification->GetNotificationId(), $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_NOTIFICATION, $NotificationDeleteByNotificationId);
+				$this->ShowDivReturnSuccess("NOTIFICATION_DELETE_SUCCESS");
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("NOTIFICATION_DELETE_ERROR");
+		return Config::RETURN_ERROR;
+	}
+	
+	protected function NotificationInsert($NotificationActive, $NotificationText, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		if($NotificationActive == NULL)
+			$NotificationActive = FALSE;
+		elseif($NotificationActive != FALSE)
+			$NotificationActive = TRUE;
+		$this->InputValueNotificationActive = $NotificationActive;
+		$this->InputValueNotificationText   = $NotificationText;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_NOTIFICATION_ACTIVE
+		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ACTIVE;
+		$arrayElementsClass[0]        = &$this->ReturnNotificationActiveClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueNotificationActive; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnNotificationActiveText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_NOTIFICATION_TEXT
+		$arrayElements[1]             = Config::FORM_FIELD_NOTIFICATION_TEXT;
+		$arrayElementsClass[1]        = &$this->ReturnNotificationTextClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->InputValueNotificationText; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 500; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnNotificationTextText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_TEXT', 
+				                    'FORM_INVALID_NOTIFICATION_TEXT_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->NotificationInsert($this->InputValueNotificationActive, $this->InputValueNotificationText, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnSuccess("NOTIFICATION_INSERT_SUCCESS");
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("NOTIFICATION_INSERT_ERROR");
+		return Config::RETURN_ERROR;
+	}
+	
+	protected function NotificationLoadData($InstanceNotification)
+	{
+		if($this->InstanceNotification == NULL)
+			$this->Session->GetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
+		if($InstanceNotification != NULL)
+		{
+			if($InstanceNotification->GetNotificationActive())
+				$this->InputValueSystemConfigurationOptionActive = "checked";
+			$this->InputValueNotificationId   = $InstanceNotification->GetNotificationId();
+			$this->InputValueNotificationText = $InstanceNotification->GetNotificationText();
+			$this->InputValueRegisterDate     = $InstanceNotification->GetRegisterDate();
+			return Config::SUCCESS;
+		}
+		else return Config::RETURN_ERROR;	
+	}
+	
+	protected function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->NotificationSelect($Limit1, $Limit2, $ArrayInstanceNotification, $RowCount, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return Config::SUCCESS;
+		}
+		$this->ShowDivReturnError("NOTIFICATION_NOT_FOUND");
+		return Config::RETURN_ERROR;	
+	}
+	
+	protected function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueNotificationId = $NotificationId;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FORM_FIELD_NOTIFICATION_ID
+		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ID;
+		$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueNotificationId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$return = $FacedePersistence->NotificationSelectByNotificationId($this->InputValueNotificationId, $InstanceNotification, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("NOTIFICATION_NOT_FOUND");
+		return Config::RETURN_ERROR;	
+	}
+	
+	protected function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, &$InstanceNotification, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		if($NotificationActiveNew == NULL)
+			$NotificationActiveNew = FALSE;
+		elseif($NotificationActiveNew != FALSE)
+			$NotificationActiveNew = TRUE;
+		$this->InputValueNotificationActive = $NotificationActiveNew;
+		$this->NotificationTextNew          = $NotificationTextNew;
+		$this->InputFocus = Config::FORM_FIELD_NOTIFICATION_TEXT;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FORM_FIELD_NOTIFICATION_ACTIVE
+		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ACTIVE;
+		$arrayElementsClass[0]        = &$this->ReturnNotificationActiveClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueNotificationActive; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnNotificationActiveText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FORM_FIELD_NOTIFICATION_TEXT
+		$arrayElements[1]             = Config::FORM_FIELD_NOTIFICATION_TEXT;
+		$arrayElementsClass[1]        = &$this->ReturnNotificationTextClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->InputValueNotificationText; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 500; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnNotificationTextText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_TEXT', 'FORM_INVALID_NOTIFICATION_TEXT_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$FacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $FacedePersistence->NotificationUpdateByNotificationId($this->InputValueNotificationActive, 
+																			 $this->InputValueNotificationText,
+		                                                                     $InstanceNotification->GetNotificationId(), $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$InstanceNotification->UpdateNotification($this->InputValueNotificationActive, $this->InputValueNotificationText, NULL);
+				$this->Session->SetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
+				$this->SystemConfigurationLoadData($InstanceNotification);
+				$this->ShowDivReturnSuccess("NOTIFICATION_UPDATE_SUCCESS");
+				return Config::SUCCESS;
+			}
+			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			{
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return Config::RETURN_WARNING;
+			}
+		}
+		$this->ShowDivReturnError("NOTIFICATION_UPDATE_ERROR");
+		return Config::RETURN_ERROR;
+	}
+	
 	protected function PageStackSessionLoad()
 	{
 		$arrayPageForm = array();
@@ -1684,9 +1907,7 @@ class Page
 	protected function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->SystemConfigurationSelect($Limit1, $Limit2,
-															            $ArrayInstanceSystemConfiguration,
-															            $RowCount, $Debug);
+		$return = $instanceFacedePersistence->SystemConfigurationSelect($Limit1, $Limit2, $ArrayInstanceSystemConfiguration, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -1796,7 +2017,7 @@ class Page
 		$this->InputValueSystemConfigurationOptionDescription = $SystemConfigurationOptionDescriptionNew;
 		$this->InputValueSystemConfigurationOptionName        = $SystemConfigurationOptionNameNew;
 		$this->InputValueSystemConfigurationOptionValue       = $SystemConfigurationOptionValueNew;
-		$this->InputFocus = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		$this->InputFocus = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
@@ -1870,13 +2091,10 @@ class Page
 				                                                 $Debug);
 			if($return == Config::SUCCESS)
 			{
-				if(!is_null($this->InputValueSystemConfigurationOptionActive))
-					$InstanceSystemConfiguration->SetSystemConfigurationOptionActive($this->InputValueSystemConfigurationOptionActive);
-				$InstanceSystemConfiguration->SetSystemConfigurationOptionDescription(
-					                                     $this->InputValueSystemConfigurationOptionDescription);
-				$InstanceSystemConfiguration->SetSystemConfigurationOptionName($this->InputValueSystemConfigurationOptionName);
-				if(!is_null($this->InputValueSystemConfigurationOptionValue))
-					$InstanceSystemConfiguration->SetSystemConfigurationOptionValue($this->InputValueSystemConfigurationOptionValue);
+				$InstanceSystemConfiguration->UpdateSystemConfiguration(NULL, $this->InputValueSystemConfigurationOptionActive,
+																	    $this->InputValueSystemConfigurationOptionDescription,
+																	    $this->InputValueSystemConfigurationOptionName,
+																	    $this->InputValueSystemConfigurationOptionValue);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
 				$this->SystemConfigurationLoadData($InstanceSystemConfiguration);
 				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_UPDATE_SUCCESS");

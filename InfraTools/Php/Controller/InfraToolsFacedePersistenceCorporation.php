@@ -89,43 +89,43 @@ class InfraToolsFacedePersistenceCorporation
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
-							                             (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                  $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-											              $row[Config::TABLE_FIELD_REGISTER_DATE]);
+							                             (NULL, $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+						                                  $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME], 
+											              $row[ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceCorporation, $InstanceCorporation);
 					}
 					if(!empty($ArrayInstanceCorporation))
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					else 
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "Prepare Error: " . $MySqlConnection->error;
-					$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
+					$return = ConfigInfraTools::MYSQL_CORPORATION_SELECT_FAILED;
 				}
 				return $return;
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
@@ -141,24 +141,24 @@ class InfraToolsFacedePersistenceCorporation
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
-						                                    (NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-					                                         $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-										                     $row[Config::TABLE_FIELD_REGISTER_DATE]);
+						                                    (NULL, $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+					                                         $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME], 
+										                     $row[ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceCorporation, $InstanceCorporation);
 				}
 				if(!empty($ArrayInstanceCorporation))
-					return Config::SUCCESS;
-				else return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
+					return ConfigInfraTools::SUCCESS;
+				else return ConfigInfraTools::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
 			}
 			else 
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
+				$return = ConfigInfraTools::MYSQL_CORPORATION_SELECT_FAILED;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsCorporationSelectByName($CorporationName, &$CorporationInstance, $Debug, $MySqlConnection)
@@ -173,38 +173,38 @@ class InfraToolsFacedePersistenceCorporation
 			{
 				$stmt->bind_param("s", $CorporationName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$stmt->bind_result($corpActive, $CorporationName, $registerDate);
 					if ($stmt->fetch())
 					{
 						$CorporationInstance = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL, $corpActive, 
 																						             $CorporationName, $registerDate);
-						return Config::SUCCESS;
+						return ConfigInfraTools::SUCCESS;
 					}
 					else
 					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_CORPORATION_SELECT_BY_NAME_FETCH_FAILED;
+						$return = ConfigInfraTools::MYSQL_CORPORATION_SELECT_BY_NAME_FETCH_FAILED;
 					}
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_CORPORATION_SELECT_BY_NAME_FAILED;
+					$return = ConfigInfraTools::MYSQL_CORPORATION_SELECT_BY_NAME_FAILED;
 				}
 				return $return;
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraTools(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
@@ -221,24 +221,24 @@ class InfraToolsFacedePersistenceCorporation
 				{
 					$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
 						                                                      (NULL,
-																			   $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-																			   $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-										                                       $row[Config::TABLE_FIELD_REGISTER_DATE]);
+																			   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
+																			   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME], 
+										                                       $row[ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceCorporation, $InstanceCorporation);
 				}
 				if(!empty($ArrayInstanceCorporation))
-					return Config::SUCCESS;
-				else return Config::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
+					return ConfigInfraTools::SUCCESS;
+				else return ConfigInfraTools::MYSQL_CORPORATION_SELECT_FETCH_FAILED;
 			}
 			else 
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_CORPORATION_SELECT_FAILED;
+				$return = ConfigInfraTools::MYSQL_CORPORATION_SELECT_FAILED;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
 	public function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 

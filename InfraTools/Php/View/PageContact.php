@@ -208,11 +208,11 @@ class PageContact extends PageInfraTools
 				elseif($return == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
 				{
 					$this->ShowDivReturnError("CONTACT_EMAIL_ALREADY_SENT");
-					return Config::RETURN_ERROR;
+					return ConfigInfraTools::RETURN_ERROR;
 				}
 			}
 			$this->ShowDivReturnError("CONTACT_EMAIL_ERROR");
-			return Config::RETURN_ERROR;
+			return ConfigInfraTools::RETURN_ERROR;
 		}
 		$this->CaptchaLoad(ConfigInfraTools::FORM_CAPTCHA_CONTACT, $this->InputValueHeaderDebug);
 		$this->LoadHtml(FALSE);

@@ -80,6 +80,9 @@ class En
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Department name";
 	const FORM_FIELD_EDIT                                           = "Edit";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail or Unique ID)";
+	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Active";
+	const FORM_FIELD_NOTIFICATION_ID                                = "Id";
+	const FORM_FIELD_NOTIFICATION_TEXT                              = "Text";
 	const FORM_FIELD_SELECT_NONE                                    = "None";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Active";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporation can change?";
@@ -126,6 +129,11 @@ class En
 	const FORM_INVALID_DESCRIPTION                                  = "Invalid description";
 	const FORM_INVALID_HOSTNAME                                     = "Invalid domain";
 	const FORM_INVALID_ID                                           = "Invalid id";
+	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "Invalid notification active";
+	const FORM_INVALID_NOTIFICATION_ID                              = "Invalid notification id";
+	const FORM_INVALID_NOTIFICATION_TEXT                            = "Invalid notification text";
+	const FORM_INVALID_NOTIFICATION_TEXT_SIZE                       = "Quantity of characters exceeds the maximum allowed for notification "
+	                                                                . "text";
 	const FORM_INVALID_REGISTRATION_ID                              = "Invalid registration id";
 	const FORM_INVALID_SERVICE_ACTIVE                               = "Invalid value for checkbox service active service";
 	const FORM_INVALID_SERVICE_CORPORATION_CAN_CHANGE               = "Invalid value for checkbox corporation can change";
@@ -303,6 +311,13 @@ class En
                                                                     . "and a location that can be either a estate or a county.";
 	const NAME                                                      = "Name";
 	const NOT_LOGGED_IN                                             = "You must be authenticated to access this page";
+	const NOTIFICATION_DELETE_ERROR                                 = "Error deleting notification";
+	const NOTIFICATION_DELETE_SUCCESS                               = "Notification deleted successfully";
+	const NOTIFICATION_INSERT_ERROR                                 = "Error inserting notification";
+	const NOTIFICATION_INSERT_SUCCESS                               = "Notification inserted successfully";
+	const NOTIFICATION_NOT_FOUND                                    = "System configuration not found";
+	const NOTIFICATION_UPDATE_ERROR                                 = "Error updating notification";
+	const NOTIFICATION_UPDATE_SUCCESS                               = "Notification updated successfully";
 	const NULL_EMPTY                                                = "No value associated";
 	const NULL_OPTION                                               = "Please select an option";
 	const OPERATION_LIST                                            = "Listing";
@@ -817,7 +832,6 @@ class En
 	                                                                . "e-mail that was sent to you. If you lost the e-email or didn't "
 								  							        . "receive it, another one can be sent";
 	const USER_NOT_FOUND                                            = "User not found"; 
-	const USER_SAME_AS_ADMIN                                        = "User is the same as the Admin!";
 	const USER_SELECT_BY_CORPORATION_NAME_ERROR                     = "Error trying to obtain users associated with this corporation";
 	const USER_SELECT_BY_CORPORATION_NAME_WARNING                   = "No user is associated with this corporation";
 	const USER_SELECT_BY_DEPARTMENT_NAME_ERROR                      = "Error trying to obtain users associated with this department";
@@ -987,16 +1001,6 @@ class En
 	const DEPARTMENT_INSERT_SUCCESS                         = "Department registered succesfully";
 	const DEPARTMENT_UPDATE_ERROR                           = "Error updating department";
 	const DEPARTMENT_UPDATE_SUCCESS                         = "Department updated succesfully";
-	
-	/* Body Page AdminNotification */
-	const NOTIFICATION_DELETE_ERROR                         = "Error deleting notification";
-	const NOTIFICATION_DELETE_SUCCESS                       = "Notification deleted succefully";
-	const NOTIFICATION_INVALID_TEXT                         = "Invalid text";
-	const NOTIFICATION_INVALID_TEXT_SIZE                    = "Quantity of characters exceeds the maximum allowed on text";
-	const NOTIFICATION_INSERT_ERROR                         = "Error while inserting notification";
-	const NOTIFICATION_INSERT_SUCCESS                       = "Notification inserted succesfully";
-	const NOTIFICATION_UPDATE_ERROR                         = "Error updating notification";
-	const NOTIFICATION_UPDATE_SUCCESS                       = "Notification updated succesfully";
 	
 	/* Body Page AdminTeam */
 	const TEAM_DELETE_ERROR                                 = "Error deleting team";
