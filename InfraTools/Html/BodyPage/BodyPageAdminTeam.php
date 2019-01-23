@@ -33,6 +33,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TEAM_SELECT; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
@@ -46,6 +47,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TEAM_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"

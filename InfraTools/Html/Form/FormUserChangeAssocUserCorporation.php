@@ -15,22 +15,22 @@
 		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM USER CHANGE ASSOC USER CORPORATION -->
+<!-- FORM_USER_CHANGE_ASSOC_USER_CORPORATION -->
 <form name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" 
       id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" method="post" >
-	<!-- NAME -->
+	<!-- FORM_FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserName; ?></label>
         </div>
     </div>
-    <!-- EMAIL -->
+    <!-- FORM_FIELD_USER_EMAIL -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
@@ -47,37 +47,37 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateYear; ?></label>
         </div>
     </div>
-    <!-- GENDER -->
+    <!-- FORM_FIELD_USER_GENDER -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('GENDER').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
         </div>
     </div>
-    <!-- COUNTRY -->
+    <!-- FORM_FIELD_COUNTRY_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('COUNTRY').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCountry; ?></label>
         </div>
     </div>
-    <!-- REGION -->
+    <!-- FORM_FIELD_USER_REGION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegion; ?></label>
         </div>
     </div>
-    <!-- PHONE PRIMARY -->
+    <!-- FORM_FIELD_USER_PHONE_PRIMARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('PHONE_PRIMARY').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
            	<label class="DivContentBodyContainerValueContent">
@@ -86,10 +86,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhonePrimary; ?></label>
         </div>
     </div>
-    <!-- PHONE SECONDARY -->
+    <!-- FORM_FIELD_USER_PHONE_SECONDARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('PHONE_SECONDARY').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_SECONDARY').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
            	<label class="DivContentBodyContainerValueContent">
@@ -114,10 +114,10 @@
             </div>
         </div>
     </div>
-    <!-- REGISTRATION_DATE -->
+    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('REGISTRATION_DATE'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE'); ?> </label>
 			<label>:</label>
 		</div>
 		<!-- REGISTRATION_DATE_BIRTH_DATE_DAY -->
@@ -196,10 +196,10 @@
 			?>
 		</select>
 	</div>
-    <!-- REGISTRATION_ID -->
+    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?></label>
             <label>:</label>
         </div>
         <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
@@ -213,7 +213,7 @@
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>',
                                                '', true);"
-                           title="<?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?>"
                            value="<?php echo $this->InputValueRegistrationId; ?>" maxlength="12" />
      </div>
      <!-- FORM_FIELD_DEPARTMENT_NAME -->
@@ -259,7 +259,7 @@
 	 if($this->ShowTypeUserDescription)
 	 {
 		?>
-        <!-- TYPE USER DESCRIPTION -->
+        <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
         <div class="DivContentBodyContainer">
             <div class="DivContentBodyContainerLabel">
                 <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
@@ -273,10 +273,10 @@
 	 ?>
      <?php if($this->EnableFieldSessionExpires)
 	 {?>
-	 	 <!-- SESSION_EXPIRES -->
+	 	 <!-- FORM_FIELD_USER_SESSION_EXPIRES -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('SESSION_EXPIRES').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_SESSION_EXPIRES').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
@@ -294,10 +294,10 @@
 	 <?php } ?>
      <?php if($this->EnableFieldUserActive)
 	 {?>
-	 	 <!-- USER_ACTIVE -->
+	 	 <!-- FORM_FIELD_USER_ACTIVE -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('USER_ACTIVE').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_ACTIVE').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
@@ -315,10 +315,10 @@
 	<?php } ?>
     <?php if($this->EnableFieldUserActive)
 	{?>
-	 	 <!-- USER_CONFIRMED -->
+	 	 <!-- FORM_FIELD_USER_CONFIRMED -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('USER_ACTIVE').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_CONFIRMED').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">

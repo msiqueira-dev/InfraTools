@@ -73,7 +73,7 @@ class PageAccount extends PageInfraTools
 			 if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
 											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
 											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
-											 $_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+											 $_POST[ConfigInfraTools::FORM_FIELD_COUNTRY_NAME],
 											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
 											 $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
 											 $_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],

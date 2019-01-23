@@ -45,44 +45,109 @@ class Pt
 	/* Generic */
 	const ACTIVE                                                    = "Ativada";
 	const ACTIVATED                                                 = "Ativado";
+	const ACCOUNT_UPDATE_ERROR                                      = "Erro ao atualizar dados";
 	const ACCOUNT_UPDATE_SUCCESS                                    = "Conta atualizada com sucesso";
+	const ADMIN_TEXT_CORPORATION                                    = "Gerência de Corporações";
+	const ADMIN_TEXT_COUNTRY                                        = "Consultar países";
+	const ADMIN_TEXT_DEPARTMENT                                     = "Gerência de departamentos";
+	const ADMIN_TEXT_INSTALL                                        = "Página de instalação, importação e reinstalação do sistema";
+	const ADMIN_TEXT_NOTIFICATION                                   = "Gerência de notificações";
+	const ADMIN_TEXT_SERVICE                                        = "Gerência de serviços";
+	const ADMIN_TEXT_SYSTEM_CONFIGURATION                           = "Gerência de Configurações do Sistema";
+	const ADMIN_TEXT_TEAM                                           = "Gerência equipes";
+	const ADMIN_TEXT_TECH_INFO                                      = "Vizualisar detalhes técnicos sobre o InfraTools";
+	const ADMIN_TEXT_TICKET                                         = "Gerência de solicitações";
+	const ADMIN_TEXT_TYPE_ASSOC_USER_TEAM                           = "Gerência de tipo de associação entre equipe e usuário" ;
+	const ADMIN_TEXT_TYPE_SERVICE                                   = "Gerência de tipo de serviço";
+	const ADMIN_TEXT_TYPE_STATUS_TICKET                             = "Gerência de tipo de estado de solicitaões";
+	const ADMIN_TEXT_TYPE_TICKET                                    = "Gerência de tipo de solicitações";
+	const ADMIN_TEXT_TYPE_USER                                      = "Gerência de tipo de usuário";
+	const ADMIN_TEXT_USER                                           = "Gerência de usuário";
+	const ASSOC_USER_CORPORATION_UPDATE_ERROR                       = "Erro ao atualizar informações de corporação";
 	const ASSOC_USER_CORPORATION_UPDATE_SUCCESS                     = "Informações de corporação alterada com sucesso";
 	const BIRTH_DATE                                                = "Data de nascimento";
 	const BIRTH_DATE_DAY                                            = "Dia";
 	const BIRTH_DATE_MONTH                                          = "Mês";
 	const BIRTH_DATE_YEAR                                           = "Ano";
-	const CONFIRMED                                                 = "Confirmed";
+	const CHECK_AVAILABILITY_FREE                                   = "Domínio está livre";
+	const CHECK_AVAILABILITY_TAKEN                                  = "Domínio já registrado";
+	const CHECK_BLACKLIST_HOST_NOT_LISTED                           = "Domínio [0] não está em nenhuma das listas negras: uceprotect, "
+	                                                                . "dronebl, sorbs, spamhaus, aupads, barracudacentral, unsubscore, "
+																    . "abuseat";
+	const CHECK_BLACKLIST_HOST_LISTED                               = "Domínio [0] está em lista negra<br>";
+	const CHECK_BLACKLIST_HOST_FAILED_TO_GET_IP                     = "Falha ao obter algum endereço de ip associado a este domínio";
+	const CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED                     = "Endereço de ip [0] não está em nenhuma das listas negras: uceprotect, " 
+		                                                            . "dronebl, sorbs, spamhaus, aupads, barracudacentral, unsubscore, "	
+		                                                            . "abuseat";
+	const CHECK_BLACKLIST_IP_ADDRESS_LISTED                         = "Endereço de ip [0] está em lista negra<br>";
+	const CHECK_BLACKLIST_ON_LIST                                   = "Está na lista negra: [0]<br>";
+	const CHECK_DNS_HAS_RECORD_TYPE                                 = "Domínio [0] possui registro dns do tipo [1]";
+	const CHECK_DNS_HAS_NO_RECORD_TYPE                              = "Domínio [0] não possui registro dns do tipo [1]";
+	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS                      = "Domínio não existe ou o endereço de e-mail [0] não existe";
+	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE                   = "Domínio para o endereço de e-mail [0] não está disponível";
+	const CHECK_EMAIL_EXISTS_FAILED                                 = "Endereço de e-mail [0] não existe";
+	const CHECK_EMAIL_EXISTS_SUCCESS                                = "Endereço de e-mail [0] existe";
+	const CHECK_IP_ADDRESS_IS_IN_NETWORK_FAILED                     = "Endereço de ip [0] não está contido na rede [1]";
+	const CHECK_IP_ADDRESS_IS_IN_NETWORK_SUCCESS                    = "Endereço de ip [0] está contido na rede [1]";
+	const CHECK_PING_SERVER_HOST_FAILED                             = "Erro ao tentar efetuar um ping ao domínio [0]";
+	const CHECK_PING_SERVER_IP_ADDRESS_FAILED                       = "Erro ao tentar efetuar um ping ao endereço de ip [0]";
+	const CHECK_PORT_STATUS_HOST_BLOCKED                            = "Porta [0] está fechada para o domínio [1]";
+	const CHECK_PORT_STATUS_HOST_DISALLOWED                         = "Domínio [0] não autorizou conexão socket na porta [0]";
+	const CHECK_PORT_STATUS_HOST_FAILED                             = "Falha ao checar a [0] para o domínio [1]";
+	const CHECK_PORT_STATUS_HOST_OPENED                             = "Porta [0] está aberta para o domínio [1]";
+	const CHECK_PORT_STATUS_IP_ADDRESS_FAILED                       = "Falha ao checar a porta [0] para o endereço de ip [1]";
+	const CHECK_PORT_STATUS_IP_ADDRESS_BLOCKED                      = "Porta [0] está fechada para o endereço de ip [1]";
+	const CHECK_PORT_STATUS_IP_ADDRESS_OPENED                       = "Porta [0] está aberta para o endereço de ip [1]";
+	const CHECK_PORT_STATUS_TIMEOUT                                 = "Tempo esgotado";
+	const CHECK_WEBSITE_EXISTS_FAILED                               = "Site [0] não existe ou ocorreu algum problema";
+	const CHECK_WEBSITE_EXISTS_SUCCESS                              = "Site [0] existe";
+	const CORPORATION_DELETE_ERROR                                  = "Erro ao excluir corporação";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT            = "Corporação possui departamentos associados, exclua-os antes";
+	const CORPORATION_DELETE_SUCCESS                                = "Corporação excluída com sucesso";
+	const CORPORATION_INSERT_ERROR                                  = "Erro ao cadastrar corporação";
+	const CORPORATION_INSERT_SUCCESS                                = "Corporação cadastrada com sucesso";
 	const CORPORATION_NOT_FOUND                                     = "Corporação não encontrada";
 	const CORPORATION_UPDATE_ERROR                                  = "Erro ao alterar corporação";
 	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                    = "Corporação com o mesmo nome já existe";
 	const CORPORATION_UPDATE_SUCCESS                                = "Corporação atualizada com sucesso";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS        = "Corporações obtidas com sucesso";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR          = "Erro ao obter corporações";
-	const COUNTRY                                                   = "País";
-	const COUNTRY_ABBREVIATION                                      = "Sigla do País";
 	const COUNTRY_NOT_FOUND                                         = "Nenhum país encontrado";
 	const DATABASE                                                  = "Banco de Dados";
 	const DATABASE_ROW_COUNT                                        = "Quantidade total de registros";
 	const DATABASE_TABLE_QUANTITY                                   = "Quantidade de tabelas";
 	const DEACTIVATED                                               = "Desativado";
 	const DEFAULT_VALUE                                             = "Por favor preencha os campos necessários";
+	const DEPARTMENT_DELETE_ERROR                                   = "Erro ao excluir departamento";
+	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS                  = "Departamento possui usuários associados, remova-os antes";
+	const DEPARTMENT_DELETE_SUCCESS                                 = "Departamento excluido com sucesso";
+	const DEPARTMENT_INSERT_ERROR                                   = "Erro ao cadastrar departamento";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS                 = "Departamento já existe para esta corporação";
 	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                    = "Um departamento tem que estar associado a uma corporação";
-	const DEPARTMENT_NAME_AND_CORPORATION_NAME                      = "Nome do departamento e nome da corporação";
+	const DEPARTMENT_INSERT_SUCCESS                                 = "Departamento cadastrado com sucesso";
 	const DEPARTMENT_NOT_FOUND                                      = "Departamento não encontrado";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS         = "Departamentos obetidos com sucesso";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR           = "Erro ao obter departamentos";
-	const DESCRIPTION                                               = "Descrição";
-	const EMAIL                                                     = "E-mail";
+	const DEPARTMENT_UPDATE_ERROR                                   = "Erro ao atualizar departamento";
+	const DEPARTMENT_UPDATE_SUCCESS                                 = "Departamento atualizado com sucesso";
 	const FILL_REQUIRED_FIELDS                                      = "Por favor preencha os campos necessários";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE       = "Data de contratação";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID         = "Matrícula";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Ativo";
 	const FORM_FIELD_CORPORATION_NAME                               = "Nome da corporação";
+	const FORM_FIELD_COUNTRY_ABBREVIATION                           = "Sigla do País";
+	const FORM_FIELD_COUNTRY_NAME                                   = "Nome";
+	const FORM_FIELD_REGION_CODE                                    = "Código de região";
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Código do Departamento";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Nome do departamento";
 	const FORM_FIELD_EDIT                                           = "Editar";
+	const FORM_FIELD_IP_ADDRESS_IPV4                                = "Ipv4";
+	const FORM_FIELD_IP_ADDRESS_IPV6                                = "Ipv6";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail ou ID Único)";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Ativo";
 	const FORM_FIELD_NOTIFICATION_ID                                = "Id";
 	const FORM_FIELD_NOTIFICATION_TEXT                              = "Texto";
+	const FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME     = "Nome do departamento e nome da corporação";
 	const FORM_FIELD_SELECT_NONE                                    = "Nenhuma";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Ativo";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporação pode mudar?";
@@ -106,12 +171,24 @@ class Pt
 	const FORM_FIELD_TICKET_SUGGESTION                              = "Sugestão";
 	const FORM_FIELD_TICKET_TITLE                                   = "Título";
 	const FORM_FIELD_TICKET_TYPE                                    = "Tipo de solicitação";
+	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION               = "Descrição";
 	const FORM_FIELD_TYPE_SERVICE_NAME                              = "Tipo de serviço";
 	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "Descrição";
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "Id";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "Descrição";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Descrição";
+	const FORM_FIELD_USER_ACTIVE                                    = "Conta ativa";
+	const FORM_FIELD_USER_CONFIRMED                                 = "Conta confirmada";
+	const FORM_FIELD_USER_EMAIL                                     = "E-mail";
+	const FORM_FIELD_USER_GENDER                                    = "Gênero";
+	const FORM_FIELD_USER_NAME                                      = "Nome";
+	const FORM_FIELD_USER_PHONE_PRIMARY                             = "Telefone Primário";
+	const FORM_FIELD_USER_PHONE_SECONDARY                           = "Telefone Secundário";
+	const FORM_FIELD_USER_REGION                                    = "Localização";
+	const FORM_FIELD_USER_SESSION_EXPIRES                           = "Sessão Expira";
+	const FORM_FIELD_USER_TYPE                                      = "Tipo";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Verificação duas etapas";
+	const FORM_FIELD_USER_UNIQUE_ID                                 = "ID Único";
 	const FORM_INVALID_CAPTCHA                                      = "O valor catpcha não confere";
 	const FORM_INVALID_CORPORATION_NAME                             = "Nome de corporação inválida";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantidade de caracteres excede o tamanho máximo para " 
@@ -128,7 +205,8 @@ class Pt
 	                                                                . "de departamento";
 	const FORM_INVALID_DESCRIPTION                                  = "Descrição inválida";
 	const FORM_INVALID_HOSTNAME                                     = "Domínio inválido";
-	const FORM_INVALID_ID                                           = "Id inválido";
+	const FORM_INVALID_IP_ADDRESS_IPV4                              = "Campo de endereço de ipv4 inválido";
+	const FORM_INVALID_IP_ADDRESS_IPV6                              = "Campo de endereço de ipv6 inválido";
 	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "Campo ativo de notificação inválido";
 	const FORM_INVALID_NOTIFICATION_ID                              = "Id de notificação inválido";
 	const FORM_INVALID_NOTIFICATION_TEXT                            = "Texto de notificação inválido";
@@ -231,7 +309,38 @@ class Pt
 	const FORM_SELECT_DEFAULT                                       = "Selecione";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Sua senha foi restaurada";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "Sua senha foi restaurada e sua nova senha é ";
-	const GENDER                                                    = "Gênero";
+	const GET_BROWSER_CLIENT_ERROR                                  = "Navegador desconhecido";
+	const GET_BROWSER_CLIENT_SUCCESS                                = "Seu navegador: [0]";
+	const GET_CALCULATION_NETMASK_IP_ADDRESS                        = "Endereço de ip: [0]<br>";
+	const GET_CALCULATION_NETMASK_MASK                              = "Mascara: [0]<br>";
+	const GET_CALCULATION_NETMASK_SUB_NETWORK                       = "Endereço de Sub Rede: [0]<br>";
+	const GET_CALCULATION_NETMASK_BROADCAST                         = "Endereço de Broadcast: [0]<br>";
+	const GET_CALCULATION_NETMASK_SUB_MASK                          = "Mascara de Sub Rede: [0]<br>";
+	const GET_CALCULATION_NETMASK_AVAILABLE_IP_ADDRESSES            = "Endereços de IP disponíveis: [0]<br>";
+	const GET_DNS_MX_RECORDS_ERROR                                  = "Falha ao tentar obter os registros MX de DNS para o domínio [0]";
+	const GET_DNS_RECORDS_ERROR                                     = "Falha ao tentar obter os registros de DNS para o domínio [0]";
+	const GET_HOSTNAME_ERROR                                        = "Falha ao tentar obter o domínio para o endereço de ip [0]";
+	const GET_HOSTNAME_SUCCESS                                      = "Domínio para o endereço de ip [0] é [1]";
+	const GET_IP_ADDRESS_CLIENT_ERROR                               = "Endereço de ip de cliente desconhecido";
+	const GET_IP_ADDRESS_CLIENT_SUCCESS                             = "Seu endereço de ip: [0]";
+	const GET_IP_ADDRESSES_ERROR                                    = "Falha ao obter os endereços de ip associados ao domínio [0]";
+	const GET_IP_ADDRESSES_SUCCESS                                  = "Endereços de ip: [0]<br>";
+	const GET_LOCATION_ERROR                                        = "Falha ao obter localização para o endereço de ip [0]";
+	const GET_LOCATION_ERROR_GET_CONTENTS                           = "Falha ao obter contéudo do endereço externo";
+	const GET_OPERATIONAL_SYSTEM_ERROR                              = "Sistema operacional desconhecido";
+	const GET_OPERATIONAL_SYSTEM_SUCCESS                            = "Sistema operacional: [0]";
+	const GET_PROTOCOL_ERROR                                        = "Falha ao obter protocolo com o número [0]";
+	const GET_PROTOCOL_SUCCESS                                      = "Protocolo para o número [0] é [1]";
+	const GET_ROUTE_ERROR                                           = "Falha ao obter a rota para o endereço de ip [0]";
+	const GET_ROUTE_SUCCESS                                         = "Traçando rota do nosso sistema até para o endereço de ip [0]<br><br>";
+	const GET_SERVICE_ERROR                                         = "Falha ao obter serviço para a porta [0] e o protocolo [1]";
+	const GET_SERVICE_SUCCESS                                       = "Para a porta [0] e o protocolo [1] o serviço padrão é [2]";
+	const GET_WHOIS_ERROR                                           = "Falha ao tentar obter as informações para o endereço [0]";
+	const GET_WHOIS_SUCCESS                                         = "Informações sobre o endereço [0]:<br><br>[1]";
+	const GET_WEBSITE_CONTENT_ERROR                                 = "Falha ao obter conteúdo do web site [0]";
+	const GET_WEBSITE_CONTENT_SUCCESS                               = "Conteúdo para o web site [0]<br><br>";
+	const GET_WEBSITE_HEADER_ERROR                                  = "Falha ao obter o cabeçalho do web site [0]";
+	const GET_WEBSITE_HEADER_SUCCESS                                = "Cabeçalho para o web site [0]<br><br>";
 	const HREF_PAGE_ABOUT                                           = "/Pt/PageAbout";
 	const HREF_PAGE_ACCOUNT                                         = "/Pt/PageAccount";
 	const HREF_PAGE_ADMIN                                           = "/Pt/PageAdmin";
@@ -281,7 +390,6 @@ class Pt
 	const HREF_PAGE_TEAM_REGISTER                                   = "/Pt/PageTeamRegister";
 	const HREF_PAGE_TEAM_SELECT                                     = "/Pt/PageTeamSelect";
 	const HREF_PAGE_TEAM_VIEW                                       = "/Pt/PageTeamView";
-	const ID                                                        = "Id";
 	const INSERT_WARNING_EXISTS                                     = "Um registro similar já foi efetuado";
 	const INSTALL_EXPORT_SUCCESS                                    = "Dados do sistema exportados com sucesso";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                       = "Extensão de arquivo inválida";
@@ -309,8 +417,7 @@ class Pt
 	const MAPS_TIP                                                  = "Digite a sua localização na caixa de texto ou clique no mapa, "
                                                                     . "os campos abaixo serão preenchidos com seu país "
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
-	const NAME                                                      = "Nome";
-    const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
+	const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
 	const NOTIFICATION_DELETE_ERROR                                 = "Erro ao excluir notificação";
 	const NOTIFICATION_DELETE_SUCCESS                               = "Notificação excluida com sucesso";
 	const NOTIFICATION_INSERT_ERROR                                 = "Error ao cadastrar notificação";
@@ -709,15 +816,7 @@ class Pt
 	const PAGE_TEAM_VIEW_ROBOTS                                     = "noindex";
 	const PAGE_TEAM_VIEW_TITLE                                      = "InfraTools - Vizualização de Equipes";
 	const PHONE_PREFIX                                              = "Prefixo";
-	const PHONE_PRIMARY                                             = "Telefone Primário";
-	const PHONE_SECONDARY                                           = "Telefone Secundário";
-	const REGION                                                    = "Localização";
-	const REGION_CODE                                               = "Código de região";
 	const REGISTER_DATE                                             = "Data de registro";
-	const REGISTRATION_DATE                                         = "Data de contratação";
-	const REGISTRATION_DATE_TIP                                     = "Data de contratação";
-	const REGISTRATION_ID                                           = "Matrícula";
-	const REGISTRATION_ID_TIP                                       = "Matrícula";
 	const ROW_COUNT                                                 = "Valor total: ";
 	const SEND_EMAIL_ERROR                                          = "Erro ao enviar e-mail para o usuário";
 	const SERVICE_DELETE_ERROR                                      = "Erro ao excluir serviço";
@@ -755,12 +854,10 @@ class Pt
 	const SERVICE_SELECT_SUCCESS                                    = "Serviço encontrado";
 	const SERVICE_SELECT_TYPE                                       = "Selecione um tipo de serviço";
 	const SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE                    = "Selecione um serviço por um tipo de associação";
-	const SERVICE_TYPE                                              = "Tipo de Serviço";
 	const SERVICE_UPDATE_BY_ID_ERROR                                = "Erro ao atualizar serviço";
 	const SERVICE_UPDATE_BY_ID_SUCCESS                              = "Serviço atualizado com sucesso";
 	const SERVICE_UPDATE_RESTRICTBY_ID_ERROR                        = "Erro ao atualizar serviço";
 	const SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS                     = "Serviceço atualizado com sucesso";
-	const SESSION_EXPIRES                                           = "Sessão Expira";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ATIVAR CONTA";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DESATIVAR CONTA";
 	const SUBMIT_BACK                                               = "VOLTAR";
@@ -812,7 +909,6 @@ class Pt
 	const TICKET_INSERT_ERROR                                       = "Erro ao tentar cadastrar solicitação";
 	const TICKET_INSERT_SUCCESS                                     = "Solicitação cadastrada com sucesso";
 	const TICKET_NOT_FOUND                                          = "Solicitação não encontrada";
-	const TYPE                                                      = "Tipo";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Erro ao obter tipos de associação";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "Tipos de associação obtidos com sucesso";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "Descrição";
@@ -820,15 +916,12 @@ class Pt
 		                                                            . "encontrada";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Tipo de estado de solicitação não encontrado";
 	const TYPE_TICKET_NOT_FOUND                                     = "Tipo de solicitação não encontrado";
-	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "Tipo de usuário não encontrado";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Erro ao tentar atualizar informações de corporação do usuário";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "ID único já foi escolhido por outro usuário, por favor "
 		                                                            . "escolha outro";
 	const UPDATE_SUCCESS                                            = "Dados atualizados";
 	const UPDATE_WARNING_SAME_VALUE                                 = "Dados com os mesmo valores dos antigos";
-	const USER_ACTIVE                                               = "Conta ativa";
-	const USER_CONFIRMED                                            = "Conta confirmada";
 	const USER_DELETE_FAILED_RESTRICTION                            = "Existem associações a este usuário, por favor exclua as " 
 	                                                                . "associações antes";
 	const USER_INACTIVE                                             = "Esta conta foi desativada por um administrador";
@@ -869,7 +962,6 @@ class Pt
 	const USER_TEAM_SELECT_ERROR                                    = "Erro ao obter equipes do usuário";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                   = "Erro ao modificar a verificação duas etapas";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS                 = "Verificação duas etapas modificada com sucesso";
-	const USER_UNIQUE_ID                                            = "ID Único";
 	const USER_UNIQUE_ID_TIP                                        = "(Login único)";
 	const USER_UPDATE_USER_CONFIRMED_ERROR                          = "Erro ao tentar atualizar campo de usuário confirmado";
 	const USER_UPDATE_USER_CONFIRMED_SUCCESS                        = "Campo usuário confirmado atualizado com sucesso";
@@ -930,7 +1022,6 @@ class Pt
 	                                                                . "funcionalidade, assim como funcionalidades personalizadas.";
 	
 	/* Body Page Account Update */
-	const ACCOUNT_UPDATE_ERROR                                   = "Erro ao atualizar dados";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE                      = "Data de nascimento inválida";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE_DAY                  = "Dia de nascimento inválido";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE_MONTH                = "Mês de nascimento inválido";
@@ -965,47 +1056,6 @@ class Pt
 	const ACCOUNT_CHANGE_PASSWORD_SUBMIT                         = "ATUALIZAR";
 	const ACCOUNT_CHANGE_PASSWORD_SUBMIT_CANCEL                  = "CANCELAR";
 	const ACCOUNT_CHANGE_PASSWORD_SUCCESS                        = "Sucesso";
-	
-	/* Body Page Account Corporation */
-	
-	/* Body Page Admin */
-	const ADMIN_OPTIONS_TITLE                                     = "Opções de Administrador";
-	const ADMIN_TEXT_CORPORATION                                  = "Inserir, excluir, atualizar e consultar corporações";
-	const ADMIN_TEXT_COUNTRY                                      = "Consultar países";
-	const ADMIN_TEXT_DEPARTMENT                                   = "Inserir, excluir, atualizar e consultar departamentos";
-	const ADMIN_TEXT_INSTALL                                      = "Página de instalação, importação e reinstalação do sistema";
-	const ADMIN_TEXT_NOTIFICATION                                 = "Gerência de notificações";
-	const ADMIN_TEXT_SERVICE                                      = "Inserir, excluir, atualizar e consultar serviços";
-	const ADMIN_TEXT_SYSTEM_CONFIGURATION                         = "Gerência de Configurações do Sistema";
-	const ADMIN_TEXT_TEAM                                         = "Inserir, excluir, atualizar e consultar equipes";
-	const ADMIN_TEXT_TECH_INFO                                    = "Vizualisar detalhes técnicos sobre o InfraTools";
-	const ADMIN_TEXT_TICKET                                       = "Inserir, excluir, atualizar e consultar solicitações";
-	const ADMIN_TEXT_TYPE_ASSOC_USER_TEAM                         = "Inserir, excluir, atualizar e consultar tipos de associações de equipes" ;
-	const ADMIN_TEXT_TYPE_SERVICE                                 = "Inserir, excluir, atualizar e consultar tipos de serviço";
-	const ADMIN_TEXT_TYPE_STATUS_TICKET                           = "Inserir, excluir, atualizar e consultar tipos de estados de "
-		                                                          . "solicitações";
-	const ADMIN_TEXT_TYPE_TICKET                                  = "Inserir, excluir, atualizar e consultar tipos de solicitações";
-	const ADMIN_TEXT_TYPE_USER                                    = "Inserir, excluir, atualizar e consultar tipos de usuários";
-	const ADMIN_TEXT_USER                                         = "Inserir, excluir, atualizar e consultar usuários";
-	
-	/* Body Page AdminCorporation */
-	const CORPORATION_DELETE_ERROR                                = "Erro ao excluir corporação";
-	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT          = "Corporação possui departamentos associados, exclua-os antes";
-	const CORPORATION_DELETE_SUCCESS                              = "Corporação excluída com sucesso";
-	const CORPORATION_INSERT_ERROR                                = "Erro ao cadastrar corporação";
-	const CORPORATION_INSERT_SUCCESS                              = "Corporação cadastrada com sucesso";
-	
-	/* Body Page AdminCountry */
-	
-	/* Body Page AdminDepartment */
-	const DEPARTMENT_DELETE_ERROR                           = "Erro ao excluir departamento";
-	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Departamento possui usuários associados, remova-os antes";
-	const DEPARTMENT_DELETE_SUCCESS                         = "Departamento excluido com sucesso";
-	const DEPARTMENT_INSERT_ERROR                           = "Erro ao cadastrar departamento";
-	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "Departamento já existe para esta corporação";
-	const DEPARTMENT_INSERT_SUCCESS                         = "Departamento cadastrado com sucesso";
-	const DEPARTMENT_UPDATE_ERROR                           = "Erro ao atualizar departamento";
-	const DEPARTMENT_UPDATE_SUCCESS                         = "Departamento atualizado com sucesso";
 	
 	/* Body Page AdminTeam */
 	const TEAM_DELETE_ERROR                                 = "Erro ao excluir equipe";
@@ -1300,9 +1350,6 @@ class Pt
 	const PASSWORD_RECOVERY_EMAIL_TEXT                            = "Segue o código necessário para alterar sua senha.<br/><br/>"
 	                                                              .  "Código:";
 	const PASSWORD_RECOVERY_ERROR                                 = "Erro ao validar campos";
-	const PASSWORD_RECOVERY_INVALID_CAPTCHA                       = "O valor captcha não confere";
-	const PASSWORD_RECOVERY_INVALID_EMAIL                         = "Favor preencher um e-mail válido";
-	const PASSWORD_RECOVERY_INVALID_EMAIL_SIZE                    = "Quantidade de caracteres excede o tamanho máximo no e-mail";
 	const PASSWORD_RECOVERY_SUCCESS                               = "Senha enviada para o e-mail";
 	const PASSWORD_RECOVERY_TEXT_CAPTCHA                          = "Digite a Palavra";
 	const PASSWORD_RECOVERY_TEXT_SEND                             = "ENVIAR";
@@ -1311,7 +1358,7 @@ class Pt
 	const PASSWORD_RESET_INVALID_CODE                            = "Código inválido";
 	const PASSWORD_RESET_INVALID_PASSWORD                        = "Senha inválida, digite uma senha válida que atenda aos critérios";
 	const PASSWORD_RESET_INVALID_PASSWORD_MATCH                  = "Senhas não coincidem";
-	const PASSWORD_RESET_INVALID_PASSWORD_SIZE                   = "A Senha deve possuir um mínimo de 8 caracteres e um máximo de "                                                                      . "16 caracteres";
+	const PASSWORD_RESET_INVALID_PASSWORD_SIZE                   = "A Senha deve possuir um mínimo de 8 caracteres e um máximo de "                                                                          . "16 caracteres";
 	const PASSWORD_RESET_ERROR                                   = "Erro ao tentar alterar senha, tente novamente";
 	const PASSWORD_RESET_SUCCESS                                 = "Senha alterada com sucesso";
 	const PASSWORD_RESET_TEXT_CODE                               = "Codigo de alteração";
@@ -1330,9 +1377,6 @@ class Pt
 	const REGISTER_EMAIL_TAG                                     = "InfraTools - Cadastro";
 	const REGISTER_EMAIL_TEXT                                    = "clique no link abaixo para finalizar seu cadastro.<br/>"
 	                                                             . "<br/>Link:";
-	const REGISTER_INVALID_GENDER                                = "Gênero inválido, selecione um gênero valido da lista fornecido";
-	const REGISTER_INVALID_NAME                                  = "Nome inválido, digite um nome e sobrenome válido";
-	const REGISTER_INVALID_NAME_SIZE                             = "Nome com tamanho inválido";
 	const REGISTER_INSERT_ERROR                                  = "Erro ao tentar registrar usuário";
 	const REGISTER_SELECT_GENDER_FEMALE                          = "Feminino";
 	const REGISTER_SELECT_GENDER_MALE                            = "Masculino";
@@ -1342,8 +1386,6 @@ class Pt
 	const REGISTER_SUCCESS_NO_LINK                               = "Cadastro efetuado com sucesso.";
 	const REGISTER_TEXT_BIRTH_DATE                               = "Data de nascimento";
 	const REGISTER_TEXT_CAPTCHA                                  = "Digite a palavra";
-	const REGISTER_TEXT_GENDER                                   = "Gênero";
-	const REGISTER_TEXT_NAME                                     = "Nome";
 	const REGISTER_TEXT_NAME_TIP                                 = "(Nome e sobrenome)";
 	const REGISTER_TEXT_NEW_PASSWORD                             = "Senha";
 	const REGISTER_TEXT_NEW_PASSWORD_TIP                         = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 dígitos)";
@@ -1366,115 +1408,6 @@ class Pt
 	const RESEND_CONFIRMATION_EMAIL_TEXT                         = "clique no link abaixo para finalizar seu cadastro.<br/><br/>Link:";
 	const RESEND_CONFIRMATION_LINK_ERROR                         = "Um erro ocorreu, por favor tente novamente ou entre em contato";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                       = "Link de confirmação reenviado com sucesso";
-	
-	/* Footer */
-	const FOOTER_TEXT                                            = "O Sistema InfraTools é uma tecnologia da organização";
-	
-	/* Function: Check Availability */
-	const CHECK_AVAILABILITY_FREE                                = "Domínio está livre";
-	const CHECK_AVAILABILITY_TAKEN                               = "Domínio já registrado";
-	
-	/* Function: Check Blacklist */
-	const CHECK_BLACKLIST_HOST_NOT_LISTED                        = "Domínio [0] não está em nenhuma das listas negras: uceprotect, "
-	                                                             . "dronebl, sorbs, spamhaus, aupads, barracudacentral, unsubscore, "
-																 . "abuseat";
-	const CHECK_BLACKLIST_HOST_LISTED                            = "Domínio [0] está em lista negra<br>";
-	const CHECK_BLACKLIST_HOST_FAILED_TO_GET_IP                  = "Falha ao obter algum endereço de ip associado a este domínio";
-	const CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED                  = "Endereço de ip [0] não está em nenhuma das listas negras: uceprotect, "                                                                 
-	                                                             . "dronebl, sorbs, spamhaus, aupads, barracudacentral, unsubscore, "                                                                 
-																 . "abuseat";
-	const CHECK_BLACKLIST_IP_ADDRESS_LISTED                      = "Endereço de ip [0] está em lista negra<br>";
-	const CHECK_BLACKLIST_ON_LIST                                = "Está na lista negra: [0]<br>";
-	
-	/* Function: Check DNS Record */
-	const CHECK_DNS_HAS_RECORD_TYPE                              = "Domínio [0] possui registro dns do tipo [1]";
-	const CHECK_DNS_HAS_NO_RECORD_TYPE                           = "Domínio [0] não possui registro dns do tipo [1]";
-	
-	/* Function: Check Email Exists */
-	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS                   = "Domínio não existe ou o endereço de e-mail [0] não existe";
-	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE                = "Domínio para o endereço de e-mail [0] não está disponível";
-	const CHECK_EMAIL_EXISTS_FAILED                              = "Endereço de e-mail [0] não existe";
-	const CHECK_EMAIL_EXISTS_SUCCESS                             = "Endereço de e-mail [0] existe";
-	
-	/* Function: Check Ip Address is in network */
-	const CHECK_IP_ADDRESS_IS_IN_NETWORK_FAILED                  = "Endereço de ip [0] não está contido na rede [1]";
-	const CHECK_IP_ADDRESS_IS_IN_NETWORK_SUCCESS                 = "Endereço de ip [0] está contido na rede [1]";
-	
-	/* Function: Check Ping Server */
-	const CHECK_PING_SERVER_HOST_FAILED                          = "Erro ao tentar efetuar um ping ao domínio [0]";
-	const CHECK_PING_SERVER_IP_ADDRESS_FAILED                    = "Erro ao tentar efetuar um ping ao endereço de ip [0]";
-	
-	/* Function: Check Port Status */
-	const CHECK_PORT_STATUS_HOST_BLOCKED                         = "Porta [0] está fechada para o domínio [1]";
-	const CHECK_PORT_STATUS_HOST_DISALLOWED                      = "Domínio [0] não autorizou conexão socket na porta [0]";
-	const CHECK_PORT_STATUS_HOST_FAILED                          = "Falha ao checar a [0] para o domínio [1]";
-	const CHECK_PORT_STATUS_HOST_OPENED                          = "Porta [0] está aberta para o domínio [1]";
-	const CHECK_PORT_STATUS_IP_ADDRESS_FAILED                    = "Falha ao checar a porta [0] para o endereço de ip [1]";
-	const CHECK_PORT_STATUS_IP_ADDRESS_BLOCKED                   = "Porta [0] está fechada para o endereço de ip [1]";
-	const CHECK_PORT_STATUS_IP_ADDRESS_OPENED                    = "Porta [0] está aberta para o endereço de ip [1]";
-	const CHECK_PORT_STATUS_TIMEOUT                              = "Tempo esgotado";
-	
-	/* Function: Check Web Site Exists*/
-	const CHECK_WEBSITE_EXISTS_FAILED                            = "Site [0] não existe ou ocorreu algum problema";
-	const CHECK_WEBSITE_EXISTS_SUCCESS                           = "Site [0] existe";
-	
-	/* Function: Get Browser Client */
-	const GET_BROWSER_CLIENT_FAILED                              = "Navegador desconhecido";
-	const GET_BROWSER_CLIENT_SUCCESS                             = "Seu navegador: [0]";
-	
-	/* Function: Get Calculation NetMask */
-	const GET_CALCULATION_NETMASK_IP_ADDRESS                     = "Endereço de ip: [0]<br>";
-	const GET_CALCULATION_NETMASK_MASK                           = "Mascara: [0]<br>";
-	const GET_CALCULATION_NETMASK_SUB_NETWORK                    = "Endereço de Sub Rede: [0]<br>";
-	const GET_CALCULATION_NETMASK_BROADCAST                      = "Endereço de Broadcast: [0]<br>";
-	const GET_CALCULATION_NETMASK_SUB_MASK                       = "Mascara de Sub Rede: [0]<br>";
-	const GET_CALCULATION_NETMASK_AVAILABLE_IP_ADDRESSES         = "Endereços de IP disponíveis: [0]<br>";
-	
-	/* Function: Get Dns Records */
-	const GET_DNS_MX_RECORDS_FAILED                              = "Falha ao tentar obter os registros MX de DNS para o domínio [0]";
-	const GET_DNS_RECORDS_FAILED                                 = "Falha ao tentar obter os registros de DNS para o domínio [0]";
-	
-	/* Function: Get Hostname */
-	const GET_HOSTNAME_FAILED                                    = "Falha ao tentar obter o domínio para o endereço de ip [0]";
-	const GET_HOSTNAME_SUCCESS                                   = "Domínio para o endereço de ip [0] é [1]";
-	
-	/* Function: Get Ip Address Client */
-	const GET_ERROR_IP_ADDRESS_CLIENT                           = "Endereço de ip de cliente desconhecido";
-	const GET_IP_ADDRESS_CLIENT_SUCCESS                          = "Seu endereço de ip: [0]";
-	
-	/* Function: Get Ip Addresses */
-	const GET_IP_ADDRESSES_FAILED                                = "Falha ao obter os endereços de ip associados ao domínio [0]";
-	const GET_IP_ADDRESSES_SUCCESS                               = "Endereços de ip: [0]<br>";
-	
-	/* Function: Get Location */
-	const GET_LOCATION_FAILED                                    = "Falha ao obter localização para o endereço de ip [0]";
-	const GET_LOCATION_FAILED_GET_CONTENTS                       = "Falha ao obter contéudo do endereço externo";
-	
-	/* Function: Get Operational System */
-	const GET_OPERATIONAL_SYSTEM_FAILED                          = "Sistema operacional desconhecido";
-	const GET_OPERATIONAL_SYSTEM_SUCCESS                         = "Sistema operacional: [0]";
-	
-	/* Function: Get Protocol */
-	const GET_PROTOCOL_FAILED                                    = "Falha ao obter protocolo com o número [0]";
-	const GET_PROTOCOL_SUCCESS                                   = "Protocolo para o número [0] é [1]";
-	
-	/* Function: Get Route */
-	const GET_ROUTE_FAILED                                       = "Falha ao obter a rota para o endereço de ip [0]";
-	const GET_ROUTE_SUCCESS                                      = "Traçando rota do nosso sistema até para o endereço de ip [0]<br><br>";
-	
-	/* Function: Get Service */
-	const GET_SERVICE_FAILED                                     = "Falha ao obter serviço para a porta [0] e o protocolo [1]";
-	const GET_SERVICE_SUCCESS                                    = "Para a porta [0] e o protocolo [1] o serviço padrão é [2]";
-	
-	/* Function: Get WebSite */
-	const GET_WEBSITE_CONTENT_FAILED                             = "Falha ao obter conteúdo do web site [0]";
-	const GET_WEBSITE_CONTENT_SUCCESS                            = "Conteúdo para o web site [0]<br><br>";
-	const GET_WEBSITE_HEADER_FAILED                              = "Falha ao obter o cabeçalho do web site [0]";
-	const GET_WEBSITE_HEADER_SUCCESS                             = "Cabeçalho para o web site [0]<br><br>";
-	
-	/* Function: Get Whois */
-	const GET_WHOIS_FAILED                                       = "Falha ao tentar obter as informações para o endereço [0]";
-	const GET_WHOIS_SUCCESS                                      = "Informações sobre o endereço [0]:<br><br>[1]";
 	
 	public function GetText($Constant)
 	{

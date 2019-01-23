@@ -70,7 +70,7 @@
 	<!-- FORM_FIELD_USER_EMAIL -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
 		</div>
 		<?php 
 		if($this->User != NULL) 
@@ -114,7 +114,7 @@
 											   'DivContentBodySubmit',
 											   '<?php echo ConfigInfraTools::CONTACT_FORM_SUBMIT; ?>',
 											   '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('EMAIL'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL'); ?>" 
 						   value="<?php echo $this->InputValueUserEmail; ?>" maxlength="60" />
 		<?php
 		}

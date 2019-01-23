@@ -10,11 +10,11 @@
 		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM SERVICE VIEW -->
+<!-- FORM_SERVICE_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_SERVICE_VIEW; ?>" 
       class="DivFormServiceView" method="<?php echo $this->InputValueFormMethod ?>" >
-    <!-- SERVICE ID -->
+    <!-- FORM_FIELD_SERVICE_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID').":"; ?></label>
@@ -23,7 +23,7 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceId; ?></label>
         </div>
     </div>
-    <!-- SERVICE NAME -->
+    <!-- FORM_FIELD_SERVICE_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME').":"; ?></label>
@@ -32,7 +32,7 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceName; ?></label>
         </div>
     </div>
-    <!-- SERVICE DESCRIPTION -->
+    <!-- FORM_FIELD_SERVICE_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION').":"; ?></label>
@@ -41,7 +41,7 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceDescription; ?></label>
         </div>
     </div>
-    <!-- SERVICE TYPE -->
+    <!-- FORM_FIELD_SERVICE_TYPE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE').":"; ?></label>
@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-    <!-- SERVICE ACTIVE -->
+    <!-- FORM_FIELD_SERVICE_ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE').":"; ?></label>
@@ -91,7 +91,7 @@
             <img src="<?php echo $this->InputValueServiceActive; ?>" alt="ServiceDepartment" width="20" height="20" />
         </div>
     </div>
-     <!-- SERVICE REGISTER DATE -->
+     <!-- REGISTER_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('REGISTER_DATE').":"; ?></label>

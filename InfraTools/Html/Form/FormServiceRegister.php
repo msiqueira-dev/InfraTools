@@ -106,10 +106,10 @@
 						   value="<?php echo $this->InputValueServiceDescription; ?>" maxlength="200" />
 	 </div>
 	 <div class="DivClearFloat"></div>
-	<!-- TYPE SERVICE -->
+	<!-- FORM_FIELD_SERVICE_TYPE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_TYPE'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>

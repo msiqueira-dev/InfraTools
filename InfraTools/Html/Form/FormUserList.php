@@ -70,10 +70,10 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('EMAIL') . "</div></th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_USER_TYPE') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('TYPE') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('ACTIVE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
@@ -107,6 +107,19 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 										   value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
 				</form>
 		      </td>";
+		echo "<td>"     . $user->GetName()             . "</td>";
+		echo "<td class='TableGenericTdLink'>
+				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' method='post' />
+					<input type='hidden'
+								 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
+								 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
+								 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
+					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+										 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
+										 value='" . $user->GetUserTypeDescription() . "' 
+										 title='" . $user->GetUserTypeDescription() . "' />
+				</form>
+		      </td>";
 		if($user->GetCorporationName() != NULL)
 			echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT . "' method='post' />
@@ -121,19 +134,6 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 					</form>
 				  </td>";
 		else echo "<td>" . "<img src='" . $user->GetCorporationActiveIcon() . "'/>" . "</td>";
-		echo "<td>"     . $user->GetName()             . "</td>";
-		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' method='post' />
-					<input type='hidden'
-								 name='"   . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' 
-								 id='"     . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "'
-								 value='"  . ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT . "' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
-										 id='"   . ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION . "' 
-										 value='" . $user->GetUserTypeDescription() . "' 
-										 title='" . $user->GetUserTypeDescription() . "' />
-				</form>
-		      </td>";
 		echo "<td> 
 				<img   src='"   . $user->GetUserActiveImage() . "' alt='CorporationVerification' width='20' height='20' />
 			 </td>";

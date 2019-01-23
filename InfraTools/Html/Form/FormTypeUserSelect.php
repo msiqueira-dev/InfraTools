@@ -14,7 +14,7 @@
 <!-- FORM_TYPE_USER_SELECT_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT_FORM; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT_FORM; ?>" method="post" >
-	<!-- TYPE_USER_ID -->
+	<!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
 			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION'); ?> </label>

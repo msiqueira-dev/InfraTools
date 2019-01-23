@@ -15,6 +15,7 @@ Methods:
 			public    function CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
 			                                              $AssocUserCorporationRegistrationId, $CorporationInstance, $RegisterDate,
 								   					      $UserInstance);
+			public    function CreateAssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate);
 			public    function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance);
 			public    function CreateCaptcha();
 			public    function CreateConfig();
@@ -27,12 +28,14 @@ Methods:
 			public    function CreateFacedePersistenceAssocTicketUserRequesting();
 			public    function CreateFacedePersistenceAssocTicketUserResponsible();
 			public    function CreateFacedePersistenceAssocUserCorporation();
+			public    function CreateFacedePersistenceAssocUserRole();
 			public    function CreateFacedePersistenceAssocUserTeam();
 			public    function CreateFacedePersistenceCorporation();
 			public    function CreateFacedePersistenceCountry();
 			public    function CreateFacedePersistenceDepartment();
 			public    function CreateFacedePersistenceHistoryTicket();
 			public    function CreateFacedePersistenceNotification();
+			public    function CreateFacedePersistenceRole();
 			public    function CreateFacedePersistenceStatusTicket();
 			public    function CreateFacedePersistenceSystemConfiguration();
 			public    function CreateFacedePersistenceTeam();
@@ -53,6 +56,7 @@ Methods:
 			public    function CreatePage($Page, $Language);
 			public    function CreatePageForm();
 			public    function CreatePersistence();
+			public    function CreateRole($RegisterDate, $RoleDescription, $RoleName);
 			public    function CreateSession();
 			public    function CreateSessionHandlerCustom();
 			public    function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
@@ -165,6 +169,14 @@ class Factory
 		else include_once(BASE_PATH_PHP_MODEL . "AssocUserCorporation.php");
 		return new AssocUserCorporation($AssocUserCorporationRegistrationDate, $AssocUserCorporationRegistrationId,
 								        $CorporationInstance, $RegisterDate, $UserInstance);
+	}
+	
+	public function CreateAssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserRole.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserRole');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserRole.php");
+		return new AssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate);
 	}
 	
 	public function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance)
@@ -286,8 +298,29 @@ class Factory
 		return FacedePersistenceAssocUserCorporation::__create();
 	}
 	
+	public function CreateFacedePersistenceAssocUserRole()
+	{
+		if (!class_exists("AssocUserRole"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserRole.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocUserRole.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserRole');
+		}
+		
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserRole.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserRole');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserRole.php");
+		return FacedePersistenceAssocUserRole::__create();
+	}
+	
 	public function CreateFacedePersistenceAssocUserTeam()
 	{
+		if (!class_exists("AssocUserTeam"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserTeam');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserTeam');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserTeam.php");
@@ -302,7 +335,6 @@ class Factory
 				include_once(BASE_PATH_PHP_MODEL . "Corporation.php");
 			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Corporation');
 		}
-		
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCorporation.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceCorporation');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCorporation.php");
@@ -311,6 +343,12 @@ class Factory
 	
 	public function CreateFacedePersistenceCountry()
 	{
+		if (!class_exists("Country"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Country.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCountry.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceCountry');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCountry.php");
@@ -319,6 +357,12 @@ class Factory
 	
 	public function CreateFacedePersistenceDepartment()
 	{
+		if (!class_exists("Department"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Department.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Department.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Department');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceDepartment.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceDepartment');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceDepartment.php");
@@ -327,6 +371,12 @@ class Factory
 	
 	public function CreateFacedePersistenceHistoryTicket()
 	{
+		if (!class_exists("HistoryTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "HistoryTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "HistoryTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class HistoryTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceHistoryTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceHistoryTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceHistoryTicket.php");
@@ -335,14 +385,40 @@ class Factory
 	
 	public function CreateFacedePersistenceNotification()
 	{
+		if (!class_exists("Notification"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Notification.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceNotification.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceNotification');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceNotification.php");
 		return FacedePersistenceNotification::__create();
 	}
 	
+	public function CreateFacedePersistenceRole()
+	{
+		if (!class_exists("Role"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Role.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
+		}
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceRole.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceRole');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceRole.php");
+		return FacedePersistenceRole::__create();
+	}
+	
 	public function CreateFacedePersistenceStatusTicket()
 	{
+		if (!class_exists("StatusTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "StatusTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "StatusTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class StatusTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceStatusTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceStatusTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceStatusTicket.php");
@@ -351,6 +427,12 @@ class Factory
 	
 	public function CreateFacedePersistenceSystemConfiguration()
 	{
+		if (!class_exists("SystemConfiguration"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
+				include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class SystemConfiguration');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceSystemConfiguration.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceSystemConfiguration');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceSystemConfiguration.php");
@@ -359,6 +441,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTeam()
 	{
+		if (!class_exists("Team"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Team.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Team.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Team');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTeam');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTeam.php");
@@ -367,6 +455,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTicket()
 	{
+		if (!class_exists("Ticket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Ticket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Ticket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Ticket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTicket.php");
@@ -375,6 +469,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeAssocUserTeam()
 	{
+		if (!class_exists("TypeAssocUserTeam"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeAssocUserTeam');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeAssocUserTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeAssocUserTeam');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeAssocUserTeam.php");
@@ -383,6 +483,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeStatusTicket()
 	{
+		if (!class_exists("TypeStatusTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeStatusTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeStatusTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeStatusTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeStatusTicket.php");
@@ -391,6 +497,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeTicket()
 	{
+		if (!class_exists("TypeTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeTicket.php");
@@ -399,6 +511,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeUser()
 	{
+		if (!class_exists("TypeUser"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeUser.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeUser.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeUser');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeUser');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeUser.php");
@@ -407,6 +525,12 @@ class Factory
 	
 	public function CreateFacedePersistenceUser()
 	{
+		if (!class_exists("User"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "User.php"))
+				include_once(BASE_PATH_PHP_MODEL . "User.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceUser');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceUser.php");
@@ -522,6 +646,14 @@ class Factory
 	public function CreatePersistence()
 	{
 		return NULL;
+	}
+	
+	public function CreateRole($RegisterDate, $RoleDescription, $RoleName)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
+		else include_once(BASE_PATH_PHP_MODEL . "Role.php");
+		return new SessionHandler($RegisterDate, $RoleDescription, $RoleName);
 	}
 	
 	public function CreateSession()

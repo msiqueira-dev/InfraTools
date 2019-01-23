@@ -7,7 +7,7 @@ Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe para armazenamento de dados das equipes.
+			Class that deals with teams.
 Get / Set:
 			public function GetTeamDescription();
 			public function GetTeamId();

@@ -108,7 +108,7 @@ class PageAdminUser extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_LIST;
 		}
-		//USER LIST SELECT TYPE USER SUBMIT
+		//FORM_TYPE_USER_SELECT_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT]))
 		{
 			if($this->TypeUserSelectByTypeUserDescription($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION], 
@@ -137,7 +137,7 @@ class PageAdminUser extends PageAdmin
 								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
 								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
 								 NULL,
-								 $_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+								 $_POST[ConfigInfraTools::FORM_FIELD_COUNTRY_NAME],
 								 $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
 								 @$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
 								 NULL,
@@ -367,7 +367,7 @@ class PageAdminUser extends PageAdmin
 				if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
 												@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
 												@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
-												$_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+												$_POST[ConfigInfraTools::FORM_FIELD_COUNTRY_NAME],
 												@$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
 												$_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
 												$_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],

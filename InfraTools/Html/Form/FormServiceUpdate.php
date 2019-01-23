@@ -21,7 +21,7 @@
 <!-- FORM SERVICE UPDATE -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>" 
       id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
-    <!-- SERVICE ID -->
+    <!-- FORM_FIELD_SERVICE_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID').":"; ?></label>
@@ -114,10 +114,10 @@
 						   value="<?php echo $this->InputValueServiceDescription; ?>" maxlength="200" />
 	 </div>
 	 <div class="DivClearFloat"></div>
-    <!-- TYPE SERVICE -->
+    <!-- FORM_FIELD_SERVICE_TYPE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('SERVICE_TYPE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 

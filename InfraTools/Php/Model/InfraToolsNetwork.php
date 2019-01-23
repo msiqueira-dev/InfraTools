@@ -300,7 +300,7 @@ class InfraToolsNetwork extends Network
 	arrayDnsMxRecords.
 	Retornos:
 		Success - Sucesso, conseguiu obter os valores de DNS relacionados a E-mail.
-		GET_DNS_MX_RECORDS_FAILED - Falha ao obter os valores de DNS relacionados a E-mail.
+		GET_DNS_MX_RECORDS_ERROR - Falha ao obter os valores de DNS relacionados a E-mail.
 	Data: 
 	**/
 	public function GetDnsMxRecords($Host, &$ArrayDnsMxRecords)
@@ -308,7 +308,7 @@ class InfraToolsNetwork extends Network
 		$ArrayDnsMxRecords = NULL;
 		if (getmxrr($Host, $ArrayDnsMxRecords) == TRUE)
 			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_DNS_MX_RECORDS_FAILED;
+		else return ConfigInfraTools::GET_DNS_MX_RECORDS_ERROR;
 	}
 	
 	/**
@@ -317,7 +317,7 @@ class InfraToolsNetwork extends Network
 	Array na variável arrayDnsRecords.
 	Retornos:
 		Success - Sucesso, conseguiu obter os valores de DNS.
-		GET_DNS_RECORDS_FAILED - Falha ao obter os valores de DNS.
+		GET_DNS_RECORDS_ERROR - Falha ao obter os valores de DNS.
 	Data:
 	**/
 	public function GetDnsRecords($Host, &$ArrayDnsRecords)
@@ -326,7 +326,7 @@ class InfraToolsNetwork extends Network
 		$ArrayDnsRecords = dns_get_record($Host);
 		if (!is_null($ArrayDnsRecords))
 			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_DNS_RECORDS_FAILED;
+		else return ConfigInfraTools::GET_DNS_RECORDS_ERROR;
 	}
 	
 		/**
@@ -335,7 +335,7 @@ class InfraToolsNetwork extends Network
 	hostName.
 	Retornos:
 		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOSTNAME_FAILED - Falha ao obter o hostname com o dado endereço de IP.
+		GET_HOSTNAME_ERROR - Falha ao obter o hostname com o dado endereço de IP.
 	Data:
 	**/
 	public function GetHostName($IpAddress, &$HostName)
@@ -346,9 +346,9 @@ class InfraToolsNetwork extends Network
 		{
 			if (!is_null($HostName) && $HostName != $IpAddress)
 			return ConfigInfraTools::SUCCESS;
-			else return ConfigInfraTools::GET_HOSTNAME_FAILED;
+			else return ConfigInfraTools::GET_HOSTNAME_ERROR;
 		}
-		else return ConfigInfraTools::GET_HOSTNAME_FAILED;
+		else return ConfigInfraTools::GET_HOSTNAME_ERROR;
 	}
 	
 	/**
@@ -357,7 +357,7 @@ class InfraToolsNetwork extends Network
     de Array na variável arrayIpAddress.
 	Retornos:
 		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOST_IP_ADDRESS_FAILED - Falha ao obter o hostname com o dado endereço de IP.
+		GET_HOST_IP_ADDRESS_ERROR - Falha ao obter o hostname com o dado endereço de IP.
 	Data:
 	**/
 	public function GetIpAddresses($HostName, &$ArrayIpAddress)
@@ -372,7 +372,7 @@ class InfraToolsNetwork extends Network
 		$ArrayIpAddress = gethostbynamel($HostName);
 		if (!is_null($ArrayIpAddress))
 			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_HOST_IP_ADDRESS_FAILED;
+		else return ConfigInfraTools::GET_HOST_IP_ADDRESS_ERROR;
 	}
 		
 	/**
@@ -412,7 +412,7 @@ class InfraToolsNetwork extends Network
 		$Protocol = getprotobynumber($Number);
 		if ($Protocol != FALSE)
 			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_PROTOCOL_FAILED;
+		else return ConfigInfraTools::GET_PROTOCOL_ERROR;
 	}
 	
 	public function GetRoute($IpAddress, $TimeOut, &$ArrayRoute)
@@ -444,7 +444,7 @@ class InfraToolsNetwork extends Network
 		$Service = getservbyport($Port ,$Protocol);
 		if (!is_null($Service))
 			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::GET_SERVICE_FAILED;
+		else return ConfigInfraTools::GET_SERVICE_ERROR;
 	}
 	
 	public function GetWebSiteContent($WebSite, &$Content)
@@ -457,7 +457,7 @@ class InfraToolsNetwork extends Network
 			$Content = "<div>" . htmlspecialchars($Content, ENT_SUBSTITUTE) . "</div>";
 			return ConfigInfraTools::SUCCESS;
 		}
-		else return ConfigInfraTools::GET_WEBSITE_CONTENT_FAILED;
+		else return ConfigInfraTools::GET_WEBSITE_CONTENT_ERROR;
 	}
 	
 	public function GetWebSiteHeaders($WebSite, &$ArrayHeaders)
@@ -475,7 +475,7 @@ class InfraToolsNetwork extends Network
 	hostName.
 	Retornos:
 		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOSTNAME_FAILED - Falha ao obter o hostname com o dado endereço de IP.
+		GET_HOSTNAME_ERROR - Falha ao obter o hostname com o dado endereço de IP.
 	Data:
 	**/
 	public function GetWhois($HostName, &$Info)
@@ -492,9 +492,9 @@ class InfraToolsNetwork extends Network
 					$Info = str_replace("\n", "<br>", $Info);
 					return ConfigInfraTools::SUCCESS;
 				}
-				else return ConfigInfraTools::GET_WHOIS_FAILED;
+				else return ConfigInfraTools::GET_WHOIS_ERROR;
 			}
-			else return ConfigInfraTools::GET_WHOIS_FAILED;
+			else return ConfigInfraTools::GET_WHOIS_ERROR;
 		}
 		else return ConfigInfraTools::GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND;
 	}

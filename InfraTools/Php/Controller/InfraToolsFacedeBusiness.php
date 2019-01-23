@@ -642,7 +642,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 							$ReturnMessage .= $dnsMxRecords . "<br>";
 					}
 					else $ReturnMessage = str_replace('[0]', $HostName, 
-											$this->Language->GetText('GET_DNS_MX_RECORDS_FAILED')); 
+											$this->Language->GetText('GET_DNS_MX_RECORDS_ERROR')); 
 					return $return;
 				}
 				else
@@ -685,7 +685,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 						$ReturnMessage .= "</table>";
 					}
 					else $ReturnMessage = str_replace('[0]', $HostName, 
-											$this->Language->GetText('GET_DNS_RECORDS_FAILED', $language));
+											$this->Language->GetText('GET_DNS_RECORDS_ERROR', $language));
 					return $return;
 				}
 			}
@@ -719,7 +719,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					$ReturnMessage = str_replace('[1]', $HostName, $ReturnMessage);
 				}
 				else $ReturnMessage = str_replace('[0]', $IpAddress, 
-										$this->Language->GetText('GET_HOSTNAME_FAILED'));
+										$this->Language->GetText('GET_HOSTNAME_ERROR'));
 				return $return;
 			}
 			else 
@@ -752,7 +752,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 											$this->Language->GetText('GET_IP_ADDRESSES_SUCCESS'));
 				}
 				else $ReturnMessage = str_replace('[0]', $HostName, 
-											$this->Language->GetText('GET_IP_ADDRESSES_FAILED'));
+											$this->Language->GetText('GET_IP_ADDRESSES_ERROR'));
 				return $return;
 			}
 			else 
@@ -786,9 +786,9 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				}
 				else if($return == ConfigInfraTools::GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS)
 					$ReturnMessage = str_replace('[0]', $IpAddress, 
-											$this->Language->GetText('GET_LOCATION_FAILED_GET_CONTENTS'));
+											$this->Language->GetText('GET_LOCATION_ERROR_GET_CONTENTS'));
 				else $ReturnMessage = str_replace('[0]', $IpAddress, 
-											$this->Language->GetText('GET_LOCATION_FAILED'));
+											$this->Language->GetText('GET_LOCATION_ERROR'));
 				return $return;
 			}
 			else 
@@ -821,7 +821,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					$ReturnMessage = str_replace('[1]', $Protocol, $ReturnMessage);
 				}
 				else $ReturnMessage = str_replace('[0]', $Number, 
-											$this->Language->GetText('GET_PROTOCOL_FAILED'));
+											$this->Language->GetText('GET_PROTOCOL_ERROR'));
 				return $return;
 			}
 			else 
@@ -856,7 +856,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 						$ReturnMessage .= $route . "<br>";
 				}
 				else $ReturnMessage = str_replace('[0]', $IpAddress, 
-										$this->Language->GetText('GET_ROUTE_FAILED'));
+										$this->Language->GetText('GET_ROUTE_ERROR'));
 				return $return;
 			}
 			else 
@@ -901,7 +901,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				else
 				{ 
 					$ReturnMessage  = str_replace('[0]', $Port, 
-													$this->Language->GetText('GET_SERVICE_FAILED'));
+													$this->Language->GetText('GET_SERVICE_ERROR'));
 					$ReturnMessage  = str_replace('[1]', $Protocol, $ReturnMessage);
 				}
 				return $return;
@@ -938,7 +938,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					$ReturnMessage .= $Content;
 				}
 				else $ReturnMessage = str_replace('[0]', $WebSiteAddress, 
-											$this->Language->GetText('GET_WEBSITE_CONTENT_FAILED'));
+											$this->Language->GetText('GET_WEBSITE_CONTENT_ERROR'));
 				return $return;
 			}
 			else 
@@ -982,7 +982,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					}
 				}
 				else $ReturnMessage = str_replace('[0]', $WebSiteAddress, 
-										$this->Language->GetText('GET_WEBSITE_HEADER_FAILED'));
+										$this->Language->GetText('GET_WEBSITE_HEADER_ERROR'));
 				return $return;
 			}
 			else 
@@ -1015,7 +1015,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					$ReturnMessage = str_replace('[1]', $Info, $ReturnMessage);
 				}
 				else $ReturnMessage = str_replace('[0]', $HostName, 
-											$this->Language->GetText('GET_WHOIS_FAILED'));
+											$this->Language->GetText('GET_WHOIS_ERROR'));
 				return $return;
 			}
 			else 
@@ -1048,7 +1048,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					$ReturnMessage = str_replace('[1]', $Info, $ReturnMessage);
 				}
 				else $ReturnMessage = str_replace('[0]', $IpAddress, 
-											$this->Language->GetText('GET_WHOIS_FAILED'));
+											$this->Language->GetText('GET_WHOIS_ERROR'));
 				return $return;
 			}
 			else 

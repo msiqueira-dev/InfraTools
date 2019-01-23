@@ -44,44 +44,105 @@ class De
 	
 	const ACTIVE                                                    = "";
 	const ACTIVATED                                                 = "";
+	const ACCOUNT_UPDATE_ERROR                                      = "";
 	const ACCOUNT_UPDATE_SUCCESS                                    = "";
+	const ADMIN_TEXT_CORPORATION                                    = "";
+	const ADMIN_TEXT_COUNTRY                                        = "";
+	const ADMIN_TEXT_DEPARTMENT                                     = "";
+	const ADMIN_TEXT_INSTALL                                        = "";
+	const ADMIN_TEXT_NOTIFICATION                                   = "";
+	const ADMIN_TEXT_SERVICE                                        = "";
+	const ADMIN_TEXT_SYSTEM_CONFIGURATION                           = "";
+	const ADMIN_TEXT_TEAM                                           = "";
+	const ADMIN_TEXT_TECH_INFO                                      = "";
+	const ADMIN_TEXT_TICKET                                         = "";
+	const ADMIN_TEXT_TYPE_ASSOC_USER_TEAM                           = "";
+	const ADMIN_TEXT_TYPE_SERVICE                                   = "";
+	const ADMIN_TEXT_TYPE_STATUS_TICKET                             = "";
+	const ADMIN_TEXT_TYPE_TICKET                                    = "";
+	const ADMIN_TEXT_TYPE_USER                                      = "";
+	const ADMIN_TEXT_USER                                           = "";
+	const ASSOC_USER_CORPORATION_UPDATE_ERROR                       = "";
 	const ASSOC_USER_CORPORATION_UPDATE_SUCCESS                     = "";
 	const BIRTH_DATE                                                = "";
 	const BIRTH_DATE_DAY                                            = "";
 	const BIRTH_DATE_MONTH                                          = "";
 	const BIRTH_DATE_YEAR                                           = "";
-	const CONFIRMED                                                 = "";
+	const CHECK_AVAILABILITY_FREE                                   = "";
+	const CHECK_AVAILABILITY_TAKEN                                  = "";
+	const CHECK_BLACKLIST_HOST_NOT_LISTED                           = "";
+	const CHECK_BLACKLIST_HOST_LISTED                               = "";
+	const CHECK_BLACKLIST_HOST_FAILED_TO_GET_IP                     = "";
+	const CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED                     = "";
+	const CHECK_BLACKLIST_IP_ADDRESS_LISTED                         = "";
+	const CHECK_BLACKLIST_ON_LIST                                   = "";
+	const CHECK_DNS_HAS_RECORD_TYPE                                 = "";
+	const CHECK_DNS_HAS_NO_RECORD_TYPE                              = "";
+	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS                      = "";
+	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE                   = "";
+	const CHECK_EMAIL_EXISTS_FAILED                                 = "";
+	const CHECK_EMAIL_EXISTS_SUCCESS                                = "";
+	const CHECK_IP_ADDRESS_IS_IN_NETWORK_FAILED                     = "";
+	const CHECK_IP_ADDRESS_IS_IN_NETWORK_SUCCESS                    = "";
+	const CHECK_PING_SERVER_HOST_FAILED                             = "";
+	const CHECK_PING_SERVER_IP_ADDRESS_FAILED                       = "";
+	const CHECK_PORT_STATUS_HOST_BLOCKED                            = "";
+	const CHECK_PORT_STATUS_HOST_DISALLOWED                         = "";
+	const CHECK_PORT_STATUS_HOST_FAILED                             = "";
+	const CHECK_PORT_STATUS_HOST_OPENED                             = "";
+	const CHECK_PORT_STATUS_IP_ADDRESS_FAILED                       = "";
+	const CHECK_PORT_STATUS_IP_ADDRESS_BLOCKED                      = "";
+	const CHECK_PORT_STATUS_IP_ADDRESS_OPENED                       = "";
+	const CHECK_PORT_STATUS_TIMEOUT                                 = "";
+	const CHECK_WEBSITE_EXISTS_FAILED                               = "";
+	const CHECK_WEBSITE_EXISTS_SUCCESS                              = "";
+	const CORPORATION_DELETE_ERROR                                  = "";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT            = "";
+	const CORPORATION_DELETE_SUCCESS                                = "";
+	const CORPORATION_INSERT_ERROR                                  = "";
+	const CORPORATION_INSERT_SUCCESS                                = "";
 	const CORPORATION_NOT_FOUND                                     = "";
 	const CORPORATION_UPDATE_ERROR                                  = "";
 	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                    = "";
 	const CORPORATION_UPDATE_SUCCESS                                = "";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS        = "";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR          = "";
-	const COUNTRY                                                   = "";
-	const COUNTRY_ABBREVIATION                                      = "";
 	const COUNTRY_NOT_FOUND                                         = "";
 	const DATABASE                                                  = "";
 	const DATABASE_ROW_COUNT                                        = "";
 	const DATABASE_TABLE_QUANTITY                                   = "";
 	const DEACTIVATED                                               = "";
 	const DEFAULT_VALUE                                             = "";
+	const DEPARTMENT_DELETE_ERROR                                   = "";
+	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS                  = "";
+	const DEPARTMENT_DELETE_SUCCESS                                 = "";
+	const DEPARTMENT_INSERT_ERROR                                   = "";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS                 = "";
 	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                    = "";
-	const DEPARTMENT_NAME_AND_CORPORATION_NAME                      = "";
+	const DEPARTMENT_INSERT_SUCCESS                                 = "";
 	const DEPARTMENT_NOT_FOUND                                      = "";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS         = "";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR           = "";
-	const DESCRIPTION                                               = "";
-	const EMAIL                                                     = "";
+	const DEPARTMENT_UPDATE_ERROR                                   = "";
+	const DEPARTMENT_UPDATE_SUCCESS                                 = "";
 	const FILL_REQUIRED_FIELDS                                      = "";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE       = "";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID         = "";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "";
 	const FORM_FIELD_CORPORATION_NAME                               = "";
+	const FORM_FIELD_COUNTRY_ABBREVIATION                           = "";
+	const FORM_FIELD_COUNTRY_NAME                                   = "";
+	const FORM_FIELD_REGION_CODE                                    = "";
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "";
 	const FORM_FIELD_EDIT                                           = "";
+	const FORM_FIELD_IP_ADDRESS_IPV4                                = "";
+	const FORM_FIELD_IP_ADDRESS_IPV6                                = "";
 	const FORM_FIELD_LOGIN                                          = "";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "";
 	const FORM_FIELD_NOTIFICATION_ID                                = "";
 	const FORM_FIELD_NOTIFICATION_TEXT                              = "";
+	const FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME     = "";
 	const FORM_FIELD_SELECT_NONE                                    = "";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "";
@@ -105,12 +166,24 @@ class De
 	const FORM_FIELD_TICKET_SUGGESTION                              = "";
 	const FORM_FIELD_TICKET_TITLE                                   = "";
 	const FORM_FIELD_TICKET_TYPE                                    = "";
+	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION               = "";
 	const FORM_FIELD_TYPE_SERVICE_NAME                              = "";
 	const FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION                 = "";
 	const FORM_FIELD_TYPE_STATUS_TICKET_ID                          = "";
 	const FORM_FIELD_TYPE_TICKET_DESCRIPTION                        = "";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "";
+	const FORM_FIELD_USER_ACTIVE                                    = "";
+	const FORM_FIELD_USER_CONFIRMED                                 = "";
+	const FORM_FIELD_USER_EMAIL                                     = "";
+	const FORM_FIELD_USER_GENDER                                    = "";
+	const FORM_FIELD_USER_NAME                                      = "";
+	const FORM_FIELD_USER_PHONE_PRIMARY                             = "";
+	const FORM_FIELD_USER_PHONE_SECONDARY                           = "";
+	const FORM_FIELD_USER_REGION                                    = "";
+	const FORM_FIELD_USER_SESSION_EXPIRES                           = "";
+	const FORM_FIELD_USER_TYPE                                      = "";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "";
+	const FORM_FIELD_USER_UNIQUE_ID                                 = "";
 	const FORM_INVALID_CAPTCHA                                      = "";
 	const FORM_INVALID_CORPORATION_NAME                             = "";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "";
@@ -124,7 +197,8 @@ class De
 	const FORM_INVALID_DEPARTMENT_NAME_SIZE                         = "";
 	const FORM_INVALID_DESCRIPTION                                  = "";
 	const FORM_INVALID_HOSTNAME                                     = "";
-	const FORM_INVALID_ID                                           = "";
+	const FORM_INVALID_IP_ADDRESS_IPV4                              = "";
+	const FORM_INVALID_IP_ADDRESS_IPV6                              = "";
 	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "";
 	const FORM_INVALID_NOTIFICATION_ID                              = "";
 	const FORM_INVALID_NOTIFICATION_TEXT                            = "";
@@ -199,7 +273,38 @@ class De
 	const FORM_SELECT_DEFAULT                                       = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "";
-	const GENDER                                                    = "";
+	const GET_BROWSER_CLIENT_ERROR                                  = "";
+	const GET_BROWSER_CLIENT_SUCCESS                                = "";
+	const GET_CALCULATION_NETMASK_IP_ADDRESS                        = "";
+	const GET_CALCULATION_NETMASK_MASK                              = "";
+	const GET_CALCULATION_NETMASK_SUB_NETWORK                       = "";
+	const GET_CALCULATION_NETMASK_BROADCAST                         = "";
+	const GET_CALCULATION_NETMASK_SUB_MASK                          = "";
+	const GET_CALCULATION_NETMASK_AVAILABLE_IP_ADDRESSES            = "";
+	const GET_DNS_MX_RECORDS_ERROR                                  = "";
+	const GET_DNS_RECORDS_ERROR                                     = "";
+	const GET_HOSTNAME_ERROR                                        = "";
+	const GET_HOSTNAME_SUCCESS                                      = "";
+	const GET_IP_ADDRESS_CLIENT_ERROR                               = "";
+	const GET_IP_ADDRESS_CLIENT_SUCCESS                             = "";
+	const GET_IP_ADDRESSES_ERROR                                    = "";
+	const GET_IP_ADDRESSES_SUCCESS                                  = "";
+	const GET_LOCATION_ERROR                                        = "";
+	const GET_LOCATION_ERROR_GET_CONTENTS                           = "";
+	const GET_OPERATIONAL_SYSTEM_ERROR                              = "";
+	const GET_OPERATIONAL_SYSTEM_SUCCESS                            = "";
+	const GET_PROTOCOL_ERROR                                        = "";
+	const GET_PROTOCOL_SUCCESS                                      = "";
+	const GET_ROUTE_ERROR                                           = "";
+	const GET_ROUTE_SUCCESS                                         = "";
+	const GET_SERVICE_ERROR                                         = "";
+	const GET_SERVICE_SUCCESS                                       = "";
+	const GET_WEBSITE_CONTENT_ERROR                                 = "";
+	const GET_WEBSITE_CONTENT_SUCCESS                               = "";
+	const GET_WEBSITE_HEADER_ERROR                                  = "";
+	const GET_WEBSITE_HEADER_SUCCESS                                = "";
+	const GET_WHOIS_ERROR                                           = "";
+	const GET_WHOIS_SUCCESS                                         = "";
 	const HREF_PAGE_ABOUT                                           = "/De/PageAbout";
 	const HREF_PAGE_ACCOUNT                                         = "/De/PageAccount";
 	const HREF_PAGE_ADMIN                                           = "/De/PageAdmin";
@@ -249,7 +354,6 @@ class De
 	const HREF_PAGE_TEAM_REGISTER                                   = "/De/PageTeamRegister";
 	const HREF_PAGE_TEAM_SELECT                                     = "/De/PageTeamSelect";
 	const HREF_PAGE_TEAM_VIEW                                       = "/De/PageTeamView";
-	const ID                                                        = "";
 	const INSERT_WARNING_EXISTS                                     = "";
 	const INSTALL_EXPORT_SUCCESS                                    = "";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                       = "";
@@ -274,7 +378,6 @@ class De
 	const LANGUAGES_FILES                                           = "";
 	const MAPS_SEARCH                                               = "";
 	const MAPS_TIP                                                  = "";
-	const NAME                                                      = "";
 	const NOT_LOGGED_IN                                             = "";
 	const NOTIFICATION_DELETE_ERROR                                 = "";
 	const NOTIFICATION_DELETE_SUCCESS                               = "";
@@ -673,15 +776,7 @@ class De
 	const PAGE_TEAM_VIEW_ROBOTS                                     = "noindex";
 	const PAGE_TEAM_VIEW_TITLE                                      = "InfraTools -";
 	const PHONE_PREFIX                                              = "";
-	const PHONE_PRIMARY                                             = "";
-	const PHONE_SECONDARY                                           = "";
-	const REGION                                                    = "";
-	const REGION_CODE                                               = "";
 	const REGISTER_DATE                                             = "";
-	const REGISTRATION_DATE                                         = "";
-	const REGISTRATION_DATE_TIP                                     = "";
-	const REGISTRATION_ID                                           = "";
-	const REGISTRATION_ID_TIP                                       = "";
 	const ROW_COUNT                                                 = "";
 	const SEND_EMAIL_ERROR                                          = "";
 	const SERVICE_DELETE_ERROR                                      = "";
@@ -722,7 +817,6 @@ class De
 	const SERVICE_UPDATE_BY_ID_SUCCESS                              = "";
 	const SERVICE_UPDATE_RESTRICTBY_ID_ERROR                        = "";
 	const SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS                     = "";
-	const SESSION_EXPIRES                                           = "";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "";
 	const SUBMIT_BACK                                               = "";
@@ -774,21 +868,17 @@ class De
 	const TICKET_INSERT_ERROR                                       = "";
 	const TICKET_INSERT_SUCCESS                                     = "";
 	const TICKET_NOT_FOUND                                          = "";
-	const TYPE                                                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "";
 	const TYPE_TICKET_NOT_FOUND                                     = "";
-	const TYPE_USER_ID                                              = "";
 	const TYPE_USER_NOT_FOUND                                       = "";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "";
 	const UPDATE_SUCCESS                                            = "";
 	const UPDATE_WARNING_SAME_VALUE                                 = "";
-	const USER_ACTIVE                                               = "";
-	const USER_CONFIRMED                                            = "";
 	const USER_DELETE_FAILED_RESTRICTION                            = "";
 	const USER_INACTIVE                                             = "";
 	const USER_NOT_CONFIRMED                                        = "";
@@ -824,7 +914,6 @@ class De
 	const USER_TEAM_SELECT_ERROR                                    = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                   = "";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS                 = "";
-	const USER_UNIQUE_ID                                            = "";
 	const USER_UNIQUE_ID_TIP                                        = "";
 	const USER_UPDATE_USER_CONFIRMED_ERROR                          = "";
 	const USER_UPDATE_USER_CONFIRMED_SUCCESS                        = "";
@@ -878,7 +967,6 @@ class De
 	const ABOUT_PERSONALIZED_TEXT                                   = "";
 	
 	/* Body Page Account Update */
-	const ACCOUNT_UPDATE_ERROR                                      = "";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE                         = "";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE_DAY                     = "";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE_MONTH                   = "";
@@ -910,46 +998,6 @@ class De
 	const ACCOUNT_CHANGE_PASSWORD_SUBMIT                            = "";
 	const ACCOUNT_CHANGE_PASSWORD_SUBMIT_CANCEL                     = "";
 	const ACCOUNT_CHANGE_PASSWORD_SUCCESS                           = "";
-	
-	/* Body Page Account Corporation */
-	
-	/* Body Page Admin */
-	const ADMIN_OPTIONS_TITLE                                       = "";
-	const ADMIN_TEXT_CORPORATION                                    = "";
-	const ADMIN_TEXT_COUNTRY                                        = "";
-	const ADMIN_TEXT_DEPARTMENT                                     = "";
-	const ADMIN_TEXT_INSTALL                                        = "";
-	const ADMIN_TEXT_NOTIFICATION                                   = "";
-	const ADMIN_TEXT_SERVICE                                        = "";
-	const ADMIN_TEXT_SYSTEM_CONFIGURATION                           = "";
-	const ADMIN_TEXT_TEAM                                           = "";
-	const ADMIN_TEXT_TECH_INFO                                      = "";
-	const ADMIN_TEXT_TICKET                                         = "";
-	const ADMIN_TEXT_TYPE_ASSOC_USER_TEAM                           = "";
-	const ADMIN_TEXT_TYPE_SERVICE                                   = "";
-	const ADMIN_TEXT_TYPE_STATUS_TICKET                             = "";
-	const ADMIN_TEXT_TYPE_TICKET                                    = "";
-	const ADMIN_TEXT_TYPE_USER                                      = "";
-	const ADMIN_TEXT_USER                                           = "";
-	
-	/* Body Page AdminCorporation */
-	const CORPORATION_DELETE_ERROR                                  = "";
-	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT            = "";
-	const CORPORATION_DELETE_SUCCESS                                = "";
-	const CORPORATION_INSERT_ERROR                                  = "";
-	const CORPORATION_INSERT_SUCCESS                                = "";
-	
-	/* Body Page AdminCountry */
-	
-	/* Body Page AdminDepartment */
-	const DEPARTMENT_DELETE_ERROR                             = "";
-	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS            = "";
-	const DEPARTMENT_DELETE_SUCCESS                           = "";
-	const DEPARTMENT_INSERT_ERROR                             = "";
-	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS           = "";
-	const DEPARTMENT_INSERT_SUCCESS                           = "";
-	const DEPARTMENT_UPDATE_ERROR                             = "";
-	const DEPARTMENT_UPDATE_SUCCESS                           = "";
 	
 	/* Body Page AdminTeam */
 	const TEAM_DELETE_ERROR                                   = "";
@@ -1200,9 +1248,6 @@ class De
 	const PASSWORD_RECOVERY_EMAIL_TAG                               = "";
 	const PASSWORD_RECOVERY_EMAIL_TEXT                              = "";
 	const PASSWORD_RECOVERY_ERROR                                   = "";
-	const PASSWORD_RECOVERY_INVALID_CAPTCHA                         = "";
-	const PASSWORD_RECOVERY_INVALID_EMAIL                           = "";
-	const PASSWORD_RECOVERY_INVALID_EMAIL_SIZE                      = "";
 	const PASSWORD_RECOVERY_SUCCESS                                 = "";
 	const PASSWORD_RECOVERY_TEXT_CAPTCHA                            = "";
 	const PASSWORD_RECOVERY_TEXT_SEND                               = "";
@@ -1228,9 +1273,6 @@ class De
 	const REGISTER_EMAIL_ERROR                                      = "";
 	const REGISTER_EMAIL_TAG                                        = "";
 	const REGISTER_EMAIL_TEXT                                       = "";
-	const REGISTER_INVALID_GENDER                                   = "";
-	const REGISTER_INVALID_NAME                                     = "";
-	const REGISTER_INVALID_NAME_SIZE                                = "";
 	const REGISTER_INSERT_ERROR                                     = "";
 	const REGISTER_SELECT_GENDER_FEMALE                             = "";
 	const REGISTER_SELECT_GENDER_MALE                               = "";
@@ -1239,8 +1281,6 @@ class De
 	const REGISTER_SUCCESS_NO_LINK                                  = "";
 	const REGISTER_TEXT_BIRTH_DATE                                  = "";
 	const REGISTER_TEXT_CAPTCHA                                     = "";
-	const REGISTER_TEXT_GENDER                                      = "";
-	const REGISTER_TEXT_NAME                                        = "";
 	const REGISTER_TEXT_NAME_TIP                                    = "";
 	const REGISTER_TEXT_NEW_PASSWORD                                = "";
 	const REGISTER_TEXT_NEW_PASSWORD_TIP                            = "";
@@ -1261,111 +1301,6 @@ class De
 	const RESEND_CONFIRMATION_EMAIL_TEXT                            = "";
 	const RESEND_CONFIRMATION_LINK_ERROR                            = "";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "";
-		
-	/* Footer */
-	const FOOTER_TEXT                                               = "";
-	
-	/* Function: Check Availability */
-	const CHECK_AVAILABILITY_FREE                                   = "";
-	const CHECK_AVAILABILITY_TAKEN                                  = "";
-	
-	/* Function: Check Blacklist */
-	const CHECK_BLACKLIST_HOST_NOT_LISTED                           = "";
-	const CHECK_BLACKLIST_HOST_LISTED                               = "";
-	const CHECK_BLACKLIST_HOST_FAILED_TO_GET_IP                     = "";
-	const CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED                     = "";
-	const CHECK_BLACKLIST_IP_ADDRESS_LISTED                         = "";
-	const CHECK_BLACKLIST_ON_LIST                                   = "";
-	
-	/* Function: Check DNS Record */
-	const CHECK_DNS_HAS_RECORD_TYPE                                 = "";
-	const CHECK_DNS_HAS_NO_RECORD_TYPE                              = "";
-	
-	/* Function: Check Email Exists */
-	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS                      = "";
-	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE                   = "";
-	const CHECK_EMAIL_EXISTS_FAILED                                 = "";
-	const CHECK_EMAIL_EXISTS_SUCCESS                                = "";
-	
-	/* Function: Check Ip Address is in network */
-	const CHECK_IP_ADDRESS_IS_IN_NETWORK_FAILED                     = "";
-	const CHECK_IP_ADDRESS_IS_IN_NETWORK_SUCCESS                    = "";
-	
-	/* Function: Check Ping Server */
-	const CHECK_PING_SERVER_HOST_FAILED                             = "";
-	const CHECK_PING_SERVER_IP_ADDRESS_FAILED                       = "";
-	
-	/* Function: Check Port Status */
-	const CHECK_PORT_STATUS_HOST_BLOCKED                            = "";
-	const CHECK_PORT_STATUS_HOST_DISALLOWED                         = "";
-	const CHECK_PORT_STATUS_HOST_FAILED                             = "";
-	const CHECK_PORT_STATUS_HOST_OPENED                             = "";
-	const CHECK_PORT_STATUS_IP_ADDRESS_FAILED                       = "";
-	const CHECK_PORT_STATUS_IP_ADDRESS_BLOCKED                      = "";
-	const CHECK_PORT_STATUS_IP_ADDRESS_OPENED                       = "";
-	const CHECK_PORT_STATUS_TIMEOUT                                 = "";
-	
-	/* Function: Check Web Site Exists*/
-	const CHECK_WEBSITE_EXISTS_FAILED                               = "";
-	const CHECK_WEBSITE_EXISTS_SUCCESS                              = "";
-	
-	/* Function: Get Browser Client */
-	const GET_BROWSER_CLIENT_FAILED                                 = "";
-	const GET_BROWSER_CLIENT_SUCCESS                                = "";
-	
-	/* Function: Get Calculation NetMask */
-	const GET_CALCULATION_NETMASK_IP_ADDRESS                        = "";
-	const GET_CALCULATION_NETMASK_MASK                              = "";
-	const GET_CALCULATION_NETMASK_SUB_NETWORK                       = "";
-	const GET_CALCULATION_NETMASK_BROADCAST                         = "";
-	const GET_CALCULATION_NETMASK_SUB_MASK                          = "";
-	const GET_CALCULATION_NETMASK_AVAILABLE_IP_ADDRESSES            = "";
-	
-	/* Function: Get Dns Records */
-	const GET_DNS_MX_RECORDS_FAILED                                 = "";
-	const GET_DNS_RECORDS_FAILED                                    = "";
-	
-	/* Function: Get Hostname */
-	const GET_HOSTNAME_FAILED                                       = "";
-	const GET_HOSTNAME_SUCCESS                                      = "";
-	
-	/* Function: Get Ip Address Client */
-	const GET_ERROR_IP_ADDRESS_CLIENT                              = "";
-	const GET_IP_ADDRESS_CLIENT_SUCCESS                             = "";
-	
-	/* Function: Get Ip Addresses */
-	const GET_IP_ADDRESSES_FAILED                                   = "";
-	const GET_IP_ADDRESSES_SUCCESS                                  = "";
-	
-	/* Function: Get Location */
-	const GET_LOCATION_FAILED                                       = "";
-	const GET_LOCATION_FAILED_GET_CONTENTS                          = "";
-	
-	/* Function: Get Operational System */
-	const GET_OPERATIONAL_SYSTEM_FAILED                             = "";
-	const GET_OPERATIONAL_SYSTEM_SUCCESS                            = "";
-	
-	/* Function: Get Protocol */
-	const GET_PROTOCOL_FAILED                                       = "";
-	const GET_PROTOCOL_SUCCESS                                      = "";
-	
-	/* Function: Get Route */
-	const GET_ROUTE_FAILED                                          = "";
-	const GET_ROUTE_SUCCESS                                         = "";
-	
-	/* Function: Get Service */
-	const GET_SERVICE_FAILED                                        = "";
-	const GET_SERVICE_SUCCESS                                       = "";
-	
-	/* Function: Get WebSite */
-	const GET_WEBSITE_CONTENT_FAILED                                = "";
-	const GET_WEBSITE_CONTENT_SUCCESS                               = "";
-	const GET_WEBSITE_HEADER_FAILED                                 = "";
-	const GET_WEBSITE_HEADER_SUCCESS                                = "";
-	
-	/* Function: Get Whois */
-	const GET_WHOIS_FAILED                                          = "";
-	const GET_WHOIS_SUCCESS                                         = "";
 	
 	public function GetText($Constant)
 	{

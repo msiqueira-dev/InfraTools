@@ -3822,9 +3822,9 @@ class Page
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_COUNTRY
+		//FORM_FIELD_COUNTRY_NAME
 		$arrayConstants = array();
-		$arrayElements[11]             = Config::FORM_FIELD_USER_COUNTRY;
+		$arrayElements[11]             = Config::FORM_FIELD_COUNTRY_NAME;
 		$arrayElementsClass[11]        = &$this->ReturnCountryClass;
 		$arrayElementsDefaultValue[11] = ""; 
 		$arrayElementsForm[11]         = Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
@@ -4550,7 +4550,7 @@ class Page
 		$arrayElementsMaxValue[1]     = 0; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnCaptchaText;
-		array_push($arrayConstants, 'PASSWORD_RECOVERY_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FORM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, $captcha);
 		
@@ -4954,8 +4954,8 @@ class Page
 		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 							 
-		//FORM_FIELD_USER_COUNTRY
-		$arrayElements[10]             = Config::FORM_FIELD_USER_COUNTRY;
+		//FORM_FIELD_COUNTRY_NAME
+		$arrayElements[10]             = Config::FORM_FIELD_COUNTRY_NAME;
 		$arrayElementsClass[10]        = &$this->ReturnCountryClass;
 		$arrayElementsDefaultValue[10] = ""; 
 		$arrayElementsForm[10]         = Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;

@@ -45,44 +45,108 @@ class En
 	/* Generic */
 	const ACTIVE                                                    = "Active";
 	const ACTIVATED                                                 = "Activated";
+	const ACCOUNT_UPDATE_ERROR                                      = "Error updating information";
 	const ACCOUNT_UPDATE_SUCCESS                                    = "Account updated succesfully";
+	const ADMIN_TEXT_CORPORATION                                    = "Corporation Management";
+	const ADMIN_TEXT_COUNTRY                                        = "Select countries";
+	const ADMIN_TEXT_DEPARTMENT                                     = "Departments Management";
+	const ADMIN_TEXT_INSTALL                                        = "Page for instalation, importation, and reinstalation of the system";
+	const ADMIN_TEXT_NOTIFICATION                                   = "Notification Management";
+	const ADMIN_TEXT_SERVICE                                        = "Service Management";
+	const ADMIN_TEXT_SYSTEM_CONFIGURATION                           = "System Configuration Management";
+	const ADMIN_TEXT_TEAM                                           = "Team Management";
+	const ADMIN_TEXT_TECH_INFO                                      = "View technical details about InfraTools"; 
+	const ADMIN_TEXT_TICKET                                         = "Ticket Management";
+	const ADMIN_TEXT_TYPE_ASSOC_USER_TEAM                           = "Team Association Type Management";
+	const ADMIN_TEXT_TYPE_SERVICE                                   = "Service Type Management";
+	const ADMIN_TEXT_TYPE_STATUS_TICKET                             = "Ticket Status Type Management";
+	const ADMIN_TEXT_TYPE_TICKET                                    = "Ticket Types Management";
+	const ADMIN_TEXT_TYPE_USER                                      = "User Type Management";
+	const ADMIN_TEXT_USER                                           = "User Management";
+	const ASSOC_USER_CORPORATION_UPDATE_ERROR                       = "Error updating corporation information";
 	const ASSOC_USER_CORPORATION_UPDATE_SUCCESS                     = "Corporation information updated succesfully";
 	const BIRTH_DATE                                                = "Birth date";
 	const BIRTH_DATE_DAY                                            = "Day";
 	const BIRTH_DATE_MONTH                                          = "Month";
 	const BIRTH_DATE_YEAR                                           = "Year";
-	const CONFIRMED                                                 = "Confirmed";
+	const CHECK_AVAILABILITY_FREE                                   = "Domain is free";
+	const CHECK_AVAILABILITY_TAKEN                                  = "Domain already taken";
+	const CHECK_BLACKLIST_HOST_NOT_LISTED                           = "Domain [0] is not on the following black lists: uceprotect, dronebl, "
+	                                                                . "sorbs, spamhaus, aupads, barracudacentral, unsubscore, abuseat";
+	const CHECK_BLACKLIST_HOST_LISTED                               = "Domain [0] is black listed<br>";
+	const CHECK_BLACKLIST_HOST_FAILED_TO_GET_IP                     = "Failed to get any ip address associated to this domain";
+	const CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED                     = "Ip address [0] is not on the following black lists: uceprotect, "
+                                                                    . "dronebl, sorbs, spamhaus, aupads, barracudacentral, unsubscore, "
+		                                                            . "abuseat";
+	const CHECK_BLACKLIST_IP_ADDRESS_LISTED                         = "Ip address [0] is black listed<br>";
+	const CHECK_BLACKLIST_ON_LIST                                   = "Is on the black list: [0]<br>";
+	const CHECK_DNS_HAS_RECORD_TYPE                                 = "Domain [0] has dns record type [1]";
+	const CHECK_DNS_HAS_NO_RECORD_TYPE                              = "Domain [0] does not have the record [1]";
+	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS                      = "Domain does not exist or the e-mail[0] does not exist";
+	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE                   = "Domain for the e-mail address [0] not available";
+	const CHECK_EMAIL_EXISTS_FAILED                                 = "E-mail address [0] does not exists";
+	const CHECK_EMAIL_EXISTS_SUCCESS                                = "E-mail address [0] exists";
+	const CHECK_IP_ADDRESS_IS_IN_NETWORK_FAILED                     = "Ip address [0] is not on network [1]";
+	const CHECK_IP_ADDRESS_IS_IN_NETWORK_SUCCESS                    = "Ip address [0] is on network [1]";
+	const CHECK_PING_SERVER_HOST_FAILED                             = "Error while trying to ping for the domain [0]";
+	const CHECK_PING_SERVER_IP_ADDRESS_FAILED                       = "Error while trying to ping for the ip address [0]";
+	const CHECK_PORT_STATUS_HOST_BLOCKED                            = "Port [0] is closed for the host [1]";
+	const CHECK_PORT_STATUS_HOST_DISALLOWED                         = "Host [1] disallowed connection socket on port [0]";
+	const CHECK_PORT_STATUS_HOST_FAILED                             = "Failed to check the port [0] for the host [1]";
+	const CHECK_PORT_STATUS_HOST_OPENED                             = "Port [0] is open for the host [1]";
+	const CHECK_PORT_STATUS_IP_ADDRESS_FAILED                       = "Failed to check port [0] for the ip address [1]";
+	const CHECK_PORT_STATUS_IP_ADDRESS_BLOCKED                      = "Port [0] is closed for the ip address";
+	const CHECK_PORT_STATUS_IP_ADDRESS_OPENED                       = "Port [0] is open for the ip address [1]";
+	const CHECK_PORT_STATUS_TIMEOUT                                 = "Time out";
+	const CHECK_WEBSITE_EXISTS_FAILED                               = "Website [0] does not exists or a problem has ocurred";
+	const CHECK_WEBSITE_EXISTS_SUCCESS                              = "Website [0] exists";
+	const CORPORATION_DELETE_ERROR                                  = "Error deleting corporation";
+	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT            = "Corporation has departments associated, delete them first";
+	const CORPORATION_DELETE_SUCCESS                                = "Corporation deleted succesfully";
+	const CORPORATION_INSERT_ERROR                                  = "Error while trying to register corporation";
+	const CORPORATION_INSERT_SUCCESS                                = "Corporation registered succesfully";
 	const CORPORATION_NOT_FOUND                                     = "Corporation not found";
 	const CORPORATION_UPDATE_ERROR                                  = "Error updating corporation";
 	const CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS                    = "A corporation with the same name exists";
 	const CORPORATION_UPDATE_SUCCESS                                = "Corporation updated successfully";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS        = "Corporations obtained successfully";
 	const CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR          = "Error obtaing corporations";
-	const COUNTRY                                                   = "Country";
-	const COUNTRY_ABBREVIATION                                      = "Country Initials";
 	const COUNTRY_NOT_FOUND                                         = "Country not found";
 	const DATABASE                                                  = "Database";
 	const DATABASE_ROW_COUNT                                        = "Total ammount of Rows";
 	const DATABASE_TABLE_QUANTITY                                   = "Tables quantity";
 	const DEACTIVATED                                               = "Deactivated";
 	const DEFAULT_VALUE                                             = "Please fill the necessary fields";
+	const DEPARTMENT_DELETE_ERROR                                   = "Error deleting department";
+	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS                  = "Department has users associated, remove them first";
+	const DEPARTMENT_DELETE_SUCCESS                                 = "Department deleted succesfully";
+	const DEPARTMENT_INSERT_ERROR                                   = "Error while trying to register department";
+	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS                 = "Department already exists for that corporation";
 	const DEPARTMENT_INSERT_ERROR_NO_CORPORATION                    = "A department must be associated with a corporation";
-	const DEPARTMENT_NAME_AND_CORPORATION_NAME                      = "Department name and corporation name";
+	const DEPARTMENT_INSERT_SUCCESS                                 = "Department registered succesfully";
 	const DEPARTMENT_NOT_FOUND                                      = "Department not found";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS         = "Departments obtained successfully";
 	const DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR           = "Error obtaineg departments";
-	const DESCRIPTION                                               = "Description";
-	const EMAIL                                                     = "E-mail";
+	const DEPARTMENT_UPDATE_ERROR                                   = "Error updating department";
+	const DEPARTMENT_UPDATE_SUCCESS                                 = "Department updated succesfully";
 	const FILL_REQUIRED_FIELDS                                      = "Please fill the necessary fields";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE       = "Registration date";
+	const FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID         = "Registration ID";
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Active";
 	const FORM_FIELD_CORPORATION_NAME                               = "Corporation name";
+	const FORM_FIELD_COUNTRY_ABBREVIATION                           = "Country Initials";
+	const FORM_FIELD_COUNTRY_NAME                                   = "Name";
+	const FORM_FIELD_REGION_CODE                                    = "Region Code";
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Department Initials";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Department name";
+	const FORM_FIELD_IP_ADDRESS_IPV4                                = "Ipv4";
+	const FORM_FIELD_IP_ADDRESS_IPV6                                = "Ipv6";
 	const FORM_FIELD_EDIT                                           = "Edit";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail or Unique ID)";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Active";
 	const FORM_FIELD_NOTIFICATION_ID                                = "Id";
 	const FORM_FIELD_NOTIFICATION_TEXT                              = "Text";
+	const FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME     = "Department name and corporation name";
 	const FORM_FIELD_SELECT_NONE                                    = "None";
 	const FORM_FIELD_SERVICE_ACTIVE                                 = "Active";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                 = "Corporation can change?";
@@ -109,9 +173,21 @@ class En
 	const FORM_FIELD_TICKET_SUGGESTION                              = "Suggestion";
 	const FORM_FIELD_TICKET_TITLE                                   = "Title";
 	const FORM_FIELD_TICKET_TYPE                                    = "Ticket Type";
+	const FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION               = "Description";
 	const FORM_FIELD_TYPE_SERVICE_NAME                              = "Type service";
 	const FORM_FIELD_TYPE_USER_DESCRIPTION                          = "Description";
+	const FORM_FIELD_USER_ACTIVE                                    = "Account active";
+	const FORM_FIELD_USER_CONFIRMED                                 = "Account confirmed";
+	const FORM_FIELD_USER_EMAIL                                     = "E-mail";
+	const FORM_FIELD_USER_GENDER                                    = "Gender";
+	const FORM_FIELD_USER_NAME                                      = "Name";
+	const FORM_FIELD_USER_PHONE_PRIMARY                             = "Phone Primary";
+	const FORM_FIELD_USER_PHONE_SECONDARY                           = "Phone Secondary";
+	const FORM_FIELD_USER_REGION                                    = "Location";
+	const FORM_FIELD_USER_SESSION_EXPIRES                           = "Session Expires";
+	const FORM_FIELD_USER_TYPE                                      = "Type";
 	const FORM_FIELD_USER_TWO_STEP_VERIFICATION                     = "Two step verification";
+	const FORM_FIELD_USER_UNIQUE_ID                                 = "Unique ID";
 	const FORM_INVALID_CAPTCHA                                      = "The captcha value does not match";
 	const FORM_INVALID_CORPORATION_NAME                             = "Invalid Corporation Name";
 	const FORM_INVALID_CORPORATION_NAME_SIZE                        = "Quantity of characters exceeds the maximum allowed for "
@@ -128,7 +204,8 @@ class En
 		                                                            . "department name" ;
 	const FORM_INVALID_DESCRIPTION                                  = "Invalid description";
 	const FORM_INVALID_HOSTNAME                                     = "Invalid domain";
-	const FORM_INVALID_ID                                           = "Invalid id";
+	const FORM_INVALID_IP_ADDRESS_IPV4                              = "Invalid value for ipv4";
+	const FORM_INVALID_IP_ADDRESS_IPV6                              = "Invalid value for ipv6";
 	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "Invalid notification active";
 	const FORM_INVALID_NOTIFICATION_ID                              = "Invalid notification id";
 	const FORM_INVALID_NOTIFICATION_TEXT                            = "Invalid notification text";
@@ -231,7 +308,38 @@ class En
 	const FORM_SELECT_DEFAULT                                       = "Select";             
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Your password has been reseted";
 	const FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT                     = "Your password was reset and your new password is: ";
-	const GENDER                                                    = "Gender";
+	const GET_BROWSER_CLIENT_ERROR                                  = "Unknown browser";
+	const GET_BROWSER_CLIENT_SUCCESS                                = "Your browser: [0]";
+	const GET_CALCULATION_NETMASK_IP_ADDRESS                        = "Ip address: [0]<br>";
+	const GET_CALCULATION_NETMASK_MASK                              = "Mask: [0]<br>";
+	const GET_CALCULATION_NETMASK_SUB_NETWORK                       = "Network address: [0]<br>";
+	const GET_CALCULATION_NETMASK_BROADCAST                         = "Broadcast address: [0]<br>";
+	const GET_CALCULATION_NETMASK_SUB_MASK                          = "Network mask: [0]<br>";
+	const GET_CALCULATION_NETMASK_AVAILABLE_IP_ADDRESSES            = "Available ip addresses: [0]<br>";
+	const GET_DNS_MX_RECORDS_ERROR                                  = "Error when trying to get the mx records for the domain [0]";
+	const GET_DNS_RECORDS_ERROR                                     = "Error when trying to get the dns records for the domain [0]";
+	const GET_HOSTNAME_ERROR                                        = "Failed to get hostname for the ip address [0]";
+	const GET_HOSTNAME_SUCCESS                                      = "The hostname for the ip address [0] is [1]";
+	const GET_IP_ADDRESS_CLIENT_ERROR                               = "Unknown client ip address";
+    const GET_IP_ADDRESS_CLIENT_SUCCESS                             = "Your ip address: [0]";
+	const GET_IP_ADDRESSES_ERROR                                    = "Failed to get the ip addresses for the hostname [0]";
+	const GET_IP_ADDRESSES_SUCCESS                                  = "Ip Addresses: [0]<br>";
+	const GET_LOCATION_ERROR                                        = "Failed to get location for the ip address [0]";
+	const GET_LOCATION_ERROR_GET_CONTENTS                           = "Failed to get contents from the external address";
+	const GET_OPERATIONAL_SYSTEM_ERROR                              = "Unknown operational system";
+	const GET_OPERATIONAL_SYSTEM_SUCCESS                            = "Operational system: [0]";
+	const GET_PROTOCOL_ERROR                                        = "Failed to get protocol for the number [0]";
+	const GET_PROTOCOL_SUCCESS                                      = "Protocol for the number [0] is [1]";
+	const GET_ROUTE_ERROR                                           = "Failed to get route for the ip address [0]";
+	const GET_ROUTE_SUCCESS                                         = "Tracing route from our system to the ip address [0]<br><br>";
+	const GET_SERVICE_ERROR                                         = "Failed to get the service for the port [0] and the protocol [1]";
+	const GET_SERVICE_SUCCESS                                       = "For the port [0] and the protocol [1] the default service is [2]";
+	const GET_WEBSITE_CONTENT_ERROR                                 = "Failed to get the content for the website [0]";
+	const GET_WEBSITE_CONTENT_SUCCESS                               = "Web site content [0]<br><br>";
+	const GET_WEBSITE_HEADER_ERROR                                  = "Failed to get the header for the website [0]";
+	const GET_WEBSITE_HEADER_SUCCESS                                = "Web site header [0]<br><br>";
+	const GET_WHOIS_ERROR                                           = "Failed to get address information [0]";
+	const GET_WHOIS_SUCCESS                                         = "Information for the address [0] is:<br><br>[1]";
 	const HREF_PAGE_ABOUT                                           = "/En/PageAbout";
 	const HREF_PAGE_ACCOUNT                                         = "/En/PageAccount";
 	const HREF_PAGE_ADMIN                                           = "/En/PageAdmin";
@@ -281,7 +389,6 @@ class En
 	const HREF_PAGE_TEAM_REGISTER                                   = "/En/PageTeamRegister";
 	const HREF_PAGE_TEAM_SELECT                                     = "/En/PageTeamSelect";
 	const HREF_PAGE_TEAM_VIEW                                       = "/En/PageTeamView";
-	const ID                                                        = "Id";
 	const INSERT_WARNING_EXISTS                                     = "A similar register was already performed";
 	const INSTALL_EXPORT_SUCCESS                                    = "System data exported succesfully";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                       = "Invalid valid Extension";
@@ -309,7 +416,6 @@ class En
 	const MAPS_TIP                                                  = "Type your location in the text field or click on the map, "
                                                                     . "the fields above will be filled with your country "
                                                                     . "and a location that can be either a estate or a county.";
-	const NAME                                                      = "Name";
 	const NOT_LOGGED_IN                                             = "You must be authenticated to access this page";
 	const NOTIFICATION_DELETE_ERROR                                 = "Error deleting notification";
 	const NOTIFICATION_DELETE_SUCCESS                               = "Notification deleted successfully";
@@ -708,15 +814,7 @@ class En
 	const PAGE_TEAM_VIEW_ROBOTS                                     = "noindex";
 	const PAGE_TEAM_VIEW_TITLE                                      = "InfraTools - Team View";
 	const PHONE_PREFIX                                              = "Prefix";
-	const PHONE_PRIMARY                                             = "Phone Primary";
-	const PHONE_SECONDARY                                           = "Phone Secondary";
-	const REGION                                                    = "Location";
-	const REGION_CODE                                               = "Region Code";
 	const REGISTER_DATE                                             = "Register date";
-	const REGISTRATION_DATE                                         = "Registration date";
-	const REGISTRATION_DATE_TIP                                     = "(Hiring date)";
-	const REGISTRATION_ID                                           = "Registration ID";
-	const REGISTRATION_ID_TIP                                       = "Registration ID";
 	const ROW_COUNT                                                 = "Total Amount: ";
 	const SEND_EMAIL_ERROR                                          = "Error while sending email to user";
 	const SERVICE_DELETE_ERROR                                      = "Error deleting service";
@@ -752,12 +850,10 @@ class En
 	const SERVICE_SELECT_SUCCESS                                    = "Service was found";
 	const SERVICE_SELECT_TYPE                                       = "Select a service type";
 	const SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE                    = "Select a service by the type of association";
-	const SERVICE_TYPE                                              = "Type of Service";
 	const SERVICE_UPDATE_BY_ID_ERROR                                = "Error updating service";
 	const SERVICE_UPDATE_BY_ID_SUCCESS                              = "Service updated succesfully";
 	const SERVICE_UPDATE_RESTRICTBY_ID_ERROR                        = "Error updating service";
 	const SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS                     = "Service updated succesfully";
-	const SESSION_EXPIRES                                           = "Session Expires";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ACTIVATE ACCOUNT";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DEACTIVATE ACCOUNT";
 	const SUBMIT_BACK                                               = "BACK";
@@ -809,22 +905,18 @@ class En
 	const TICKET_INSERT_ERROR                                       = "Error while trying to register ticket";
 	const TICKET_INSERT_SUCCESS                                     = "Ticket registered succesfully";
 	const TICKET_NOT_FOUND                                          = "Ticket not found";
-	const TYPE                                                      = "Type";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_ERROR                      = "Error obtaining types of association";
 	const TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS                    = "Types of association obtained successfully";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "Description";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "Type of association between a user and a team not found";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Type status ticket not found";
 	const TYPE_TICKET_NOT_FOUND                                     = "Type ticket not found";
-	const TYPE_USER_ID                                              = "Id";
 	const TYPE_USER_NOT_FOUND                                       = "User type not found";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Error while trying to update user's corporation information";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "Unique Id already picked by another user, "
 	                                                                . "please choose another";
 	const UPDATE_SUCCESS                                            = "Information updated";
 	const UPDATE_WARNING_SAME_VALUE                                 = "Information with same value as the old one";
-	const USER_ACTIVE                                               = "Account active";
-	const USER_CONFIRMED                                            = "Account confirmed";
 	const USER_INACTIVE                                             = "This account has been deactivated by an administrator";
 	const USER_DELETE_FAILED_RESTRICTION                            = "There are associations to this user, please delete them " 
 	                                                                . "first";
@@ -865,7 +957,6 @@ class En
 	const USER_TEAM_SELECT_ERROR                                    = "Error trying to get the user teams";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_ERROR                   = "Error changing two step verification";
 	const USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS                 = "Two step verification changed succesfully";
-	const USER_UNIQUE_ID                                            = "Unique ID";
 	const USER_UNIQUE_ID_TIP                                        = "(Unique login)";
 	const USER_UPDATE_USER_CONFIRMED_ERROR                          = "Error trying to update value for user confirmed";
 	const USER_UPDATE_USER_CONFIRMED_SUCCESS                        = "User confirmed updated succesfully";
@@ -926,7 +1017,6 @@ class En
 	                                                              . "functions as well as personalized functions";
 	
 	/* Body Page Account Update */
-	const ACCOUNT_UPDATE_ERROR                                   = "Error updating information";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE                      = "Invalid birth date";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE_DAY                  = "Invalid birth day";
 	const ACCOUNT_UPDATE_INVALID_BIRTH_DATE_MONTH                = "Invalid birth month";
@@ -962,45 +1052,6 @@ class En
 	const ACCOUNT_CHANGE_PASSWORD_SUBMIT_CANCEL                  = "CANCEL";
 	const ACCOUNT_CHANGE_PASSWORD_SUCCESS                        = "Success";
 	
-	/* Body Page Account Corporation */
-	
-	/* Body Page Admin */
-	const ADMIN_OPTIONS_TITLE                                       = "Admin Options";
-	const ADMIN_TEXT_CORPORATION                                    = "Insert, delete, update and select corporations";
-	const ADMIN_TEXT_COUNTRY                                        = "Select countries";
-	const ADMIN_TEXT_DEPARTMENT                                     = "Insert, delete, update and select departments";
-	const ADMIN_TEXT_INSTALL                                        = "Page for instalation, importation, and reinstalation of the system";
-	const ADMIN_TEXT_NOTIFICATION                                   = "Notification Management";
-	const ADMIN_TEXT_SERVICE                                        = "Insert, delete, update and select services";
-	const ADMIN_TEXT_SYSTEM_CONFIGURATION                           = "System Configuration Management";
-	const ADMIN_TEXT_TEAM                                           = "Insert, delete, update and select teams";
-	const ADMIN_TEXT_TECH_INFO                                      = "View technical details about InfraTools"; 
-	const ADMIN_TEXT_TICKET                                         = "Insert, delete, update and select tickets";
-	const ADMIN_TEXT_TYPE_ASSOC_USER_TEAM                           = "Insert, delete, update and select team association types";
-	const ADMIN_TEXT_TYPE_SERVICE                                   = "Insert, delete, update and select service types";
-	const ADMIN_TEXT_TYPE_STATUS_TICKET                             = "Insert, delete, update and select ticket status types";
-	const ADMIN_TEXT_TYPE_TICKET                                    = "Insert, delete, update and select ticket types";
-	const ADMIN_TEXT_TYPE_USER                                      = "Insert, delete, update and select user types";
-	const ADMIN_TEXT_USER                                           = "Insert, delete, update and select users";
-	
-	/* Body Page AdminCorporation */
-	const CORPORATION_DELETE_ERROR                          = "Error deleting corporation";
-	const CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT    = "Corporation has departments associated, delete them first";
-	const CORPORATION_DELETE_SUCCESS                        = "Corporation deleted succesfully";
-	const CORPORATION_INSERT_ERROR                          = "Error while trying to register corporation";
-	const CORPORATION_INSERT_SUCCESS                        = "Corporation registered succesfully";
-	
-	/* Body Page AdminCountry */
-	
-	/* Body Page AdminDepartment */
-	const DEPARTMENT_DELETE_ERROR                           = "Error deleting department";
-	const DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS          = "Department has users associated, remove them first";
-	const DEPARTMENT_DELETE_SUCCESS                         = "Department deleted succesfully";
-	const DEPARTMENT_INSERT_ERROR                           = "Error while trying to register department";
-	const DEPARTMENT_INSERT_ERROR_DEPARTMENT_EXISTS         = "Department already exists for that corporation";
-	const DEPARTMENT_INSERT_SUCCESS                         = "Department registered succesfully";
-	const DEPARTMENT_UPDATE_ERROR                           = "Error updating department";
-	const DEPARTMENT_UPDATE_SUCCESS                         = "Department updated succesfully";
 	
 	/* Body Page AdminTeam */
 	const TEAM_DELETE_ERROR                                 = "Error deleting team";
@@ -1287,9 +1338,6 @@ class En
 	const PASSWORD_RECOVERY_EMAIL_TAG                             = "InfraTools - Password Recovery";
 	const PASSWORD_RECOVERY_EMAIL_TEXT                            = "Here is the code needed to change your password.<br/><br/>Code:";
 	const PASSWORD_RECOVERY_ERROR                                 = "Error validating fields";
-	const PASSWORD_RECOVERY_INVALID_CAPTCHA                       = "The captcha value does not match";
-	const PASSWORD_RECOVERY_INVALID_EMAIL                         = "Please fill a valid e-mail";
-	const PASSWORD_RECOVERY_INVALID_EMAIL_SIZE                    = "Quantity of characters exceeds the maximum allowed on e-mail";
 	const PASSWORD_RECOVERY_SUCCESS                               = "Password sent to the e-mail address.";
 	const PASSWORD_RECOVERY_TEXT_CAPTCHA                          = "Type the word";
 	const PASSWORD_RECOVERY_TEXT_SEND                             = "Send";
@@ -1316,9 +1364,6 @@ class En
 	const REGISTER_EMAIL_ERROR                                   = "An error has occurred when trying to send the e-mail";
 	const REGISTER_EMAIL_TAG                                     = "InfraTools - Register";
 	const REGISTER_EMAIL_TEXT                                    = "click in the link bellow to finish your register.<br/><br/>Link:";
-	const REGISTER_INVALID_GENDER                                = "Invalid gender, chose a valid gender from the given list";
-	const REGISTER_INVALID_NAME                                  = "Invalid name, type a valid name and sir name";
-	const REGISTER_INVALID_NAME_SIZE                             = "Invalid name size";
 	const REGISTER_INSERT_ERROR                                  = "Error while trying to register user";
 
 	const REGISTER_SELECT_GENDER_FEMALE                          = "Female";
@@ -1329,8 +1374,6 @@ class En
 	const REGISTER_SUCCESS_NO_LINK                               = "Registration successfully complete";
 	const REGISTER_TEXT_BIRTH_DATE                               = "Birth date";
 	const REGISTER_TEXT_CAPTCHA                                  = "Type the word";
-	const REGISTER_TEXT_GENDER                                   = "Gender";
-	const REGISTER_TEXT_NAME                                     = "Name";
 	const REGISTER_TEXT_NAME_TIP                                 = "(Name and sir name)";
 	const REGISTER_TEXT_NEW_PASSWORD                             = "Password";
 	const REGISTER_TEXT_NEW_PASSWORD_TIP                         = "(At least 1 number and 1 capital letter, between 8 and 18 digits)";
@@ -1354,114 +1397,6 @@ class En
 	const RESEND_CONFIRMATION_EMAIL_TEXT                         = "click in the link bellow to finish your register.<br/><br/>Link:";
 	const RESEND_CONFIRMATION_LINK_ERROR                         = "An error has occurred, please try again or contact us";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                       = "Confirmation link resent successfully";
-	
-	/* Footer */
-	const FOOTER_TEXT                                            = "The Infratools System is a technology from the organization";
-	
-	/* Function: Check Availability */
-	const CHECK_AVAILABILITY_FREE                                = "Domain is free";
-	const CHECK_AVAILABILITY_TAKEN                               = "Domain already taken";
-	
-	/* Function: Check Blacklist */
-	const CHECK_BLACKLIST_HOST_NOT_LISTED                        = "Domain [0] is not on the following black lists: uceprotect, dronebl, "
-	                                                             . "sorbs, spamhaus, aupads, barracudacentral, unsubscore, abuseat";
-	const CHECK_BLACKLIST_HOST_LISTED                            = "Domain [0] is black listed<br>";
-	const CHECK_BLACKLIST_HOST_FAILED_TO_GET_IP                  = "Failed to get any ip address associated to this domain";
-	const CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED                  = "Ip address [0] is not on the following black lists: uceprotect, "
-                                                                 . "dronebl, sorbs, spamhaus, aupads, barracudacentral, unsubscore, "
-		                                                         . "abuseat";
-	const CHECK_BLACKLIST_IP_ADDRESS_LISTED                      = "Ip address [0] is black listed<br>";
-	const CHECK_BLACKLIST_ON_LIST                                = "Is on the black list: [0]<br>";
-	
-	/* Function: Check DNS Record */
-	const CHECK_DNS_HAS_RECORD_TYPE                              = "Domain [0] has dns record type [1]";
-	const CHECK_DNS_HAS_NO_RECORD_TYPE                           = "Domain [0] does not have the record [1]";
-	
-	/* Function: Check Email Exists */
-	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_EXISTS                   = "Domain does not exist or the e-mail[0] does not exist";
-	const CHECK_EMAIL_EXISTS_DOMAIN_NOT_AVAILABLE                = "Domain for the e-mail address [0] not available";
-	const CHECK_EMAIL_EXISTS_FAILED                              = "E-mail address [0] does not exists";
-	const CHECK_EMAIL_EXISTS_SUCCESS                             = "E-mail address [0] exists";
-	
-	/* Function: Check Ip Address is in network */
-	const CHECK_IP_ADDRESS_IS_IN_NETWORK_FAILED                  = "Ip address [0] is not on network [1]";
-	const CHECK_IP_ADDRESS_IS_IN_NETWORK_SUCCESS                 = "Ip address [0] is on network [1]";
-	
-	/* Function: Check Ping Server */
-	const CHECK_PING_SERVER_HOST_FAILED                          = "Error while trying to ping for the domain [0]";
-	const CHECK_PING_SERVER_IP_ADDRESS_FAILED                    = "Error while trying to ping for the ip address [0]";
-	
-	/* Function: Check Port Status */
-	const CHECK_PORT_STATUS_HOST_BLOCKED                         = "Port [0] is closed for the host [1]";
-	const CHECK_PORT_STATUS_HOST_DISALLOWED                      = "Host [1] disallowed connection socket on port [0]";
-	const CHECK_PORT_STATUS_HOST_FAILED                          = "Failed to check the port [0] for the host [1]";
-	const CHECK_PORT_STATUS_HOST_OPENED                          = "Port [0] is open for the host [1]";
-	const CHECK_PORT_STATUS_IP_ADDRESS_FAILED                    = "Failed to check port [0] for the ip address [1]";
-	const CHECK_PORT_STATUS_IP_ADDRESS_BLOCKED                   = "Port [0] is closed for the ip address";
-	const CHECK_PORT_STATUS_IP_ADDRESS_OPENED                    = "Port [0] is open for the ip address [1]";
-	const CHECK_PORT_STATUS_TIMEOUT                              = "Time out";
-	
-	/* Function: Check Web Site Exists*/
-	const CHECK_WEBSITE_EXISTS_FAILED                            = "Website [0] does not exists or a problem has ocurred";
-	const CHECK_WEBSITE_EXISTS_SUCCESS                           = "Website [0] exists";
-	
-	/* Function: Get Browser Client */
-	const GET_BROWSER_CLIENT_FAILED                              = "Unknown browser";
-	const GET_BROWSER_CLIENT_SUCCESS                             = "Your browser: [0]";
-		
-	/* Function: Get Calculation NetMask */
-	const GET_CALCULATION_NETMASK_IP_ADDRESS                     = "Ip address: [0]<br>";
-	const GET_CALCULATION_NETMASK_MASK                           = "Mask: [0]<br>";
-	const GET_CALCULATION_NETMASK_SUB_NETWORK                    = "Network address: [0]<br>";
-	const GET_CALCULATION_NETMASK_BROADCAST                      = "Broadcast address: [0]<br>";
-	const GET_CALCULATION_NETMASK_SUB_MASK                       = "Network mask: [0]<br>";
-	const GET_CALCULATION_NETMASK_AVAILABLE_IP_ADDRESSES         = "Available ip addresses: [0]<br>";
-	
-	/* Function: Get Dns Records */
-	const GET_DNS_MX_RECORDS_FAILED                              = "Error when trying to get the mx records for the domain [0]";
-	const GET_DNS_RECORDS_FAILED                                 = "Error when trying to get the dns records for the domain [0]";
-	
-	/* Function: Get Hostname */
-	const GET_HOSTNAME_FAILED                                    = "Failed to get hostname for the ip address [0]";
-	const GET_HOSTNAME_SUCCESS                                   = "The hostname for the ip address [0] is [1]";
-	
-	/* Function: Get Ip Address Client */
-	const GET_ERROR_IP_ADDRESS_CLIENT                           = "Unknown client ip address";
-	const GET_IP_ADDRESS_CLIENT_SUCCESS                          = "Your ip address: [0]";
-	
-	/* Function: Get Ip Addresses */
-	const GET_IP_ADDRESSES_FAILED                                = "Failed to get the ip addresses for the hostname [0]";
-	const GET_IP_ADDRESSES_SUCCESS                               = "Ip Addresses: [0]<br>";
-	
-	/* Function: Get Location */
-	const GET_LOCATION_FAILED                                    = "Failed to get location for the ip address [0]";
-	const GET_LOCATION_FAILED_GET_CONTENTS                       = "Failed to get contents from the external address";
-	
-	/* Function: Get Operational System */
-	const GET_OPERATIONAL_SYSTEM_FAILED                          = "Unknown operational system";
-	const GET_OPERATIONAL_SYSTEM_SUCCESS                         = "Operational system: [0]";
-	
-	/* Function: Get Protocol */
-	const GET_PROTOCOL_FAILED                                    = "Failed to get protocol for the number [0]";
-	const GET_PROTOCOL_SUCCESS                                   = "Protocol for the number [0] is [1]";
-	
-	/* Function: Get Route */
-	const GET_ROUTE_FAILED                                       = "Failed to get route for the ip address [0]";
-	const GET_ROUTE_SUCCESS                                      = "Tracing route from our system to the ip address [0]<br><br>";
-	
-	/* Function: Get Service */
-	const GET_SERVICE_FAILED                                     = "Failed to get the service for the port [0] and the protocol [1]";
-	const GET_SERVICE_SUCCESS                                    = "For the port [0] and the protocol [1] the default service is [2]";
-	
-	/* Function: Get WebSite */
-	const GET_WEBSITE_CONTENT_FAILED                             = "Failed to get the content for the website [0]";
-	const GET_WEBSITE_CONTENT_SUCCESS                            = "Web site content [0]<br><br>";
-	const GET_WEBSITE_HEADER_FAILED                              = "Failed to get the header for the website [0]";
-	const GET_WEBSITE_HEADER_SUCCESS                             = "Web site header [0]<br><br>";
-	
-	/* Function: Get Whois */
-	const GET_WHOIS_FAILED                                       = "Failed to get address information [0]";
-	const GET_WHOIS_SUCCESS                                      = "Information for the address [0] is:<br><br>[1]";
 	
 	public function GetText($Constant)
 	{

@@ -33,6 +33,7 @@
                     <div class="DivContentBodyContainersBox">
                         <input type="image" 
                                name="<?php echo ConfigInfraTools::FORM_COUNTRY_LIST; ?>"
+                               id="<?php echo ConfigInfraTools::FORM_COUNTRY_LIST; ?>"
                                value="<?php echo ConfigInfraTools::FORM_COUNTRY_LIST; ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
                                alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"

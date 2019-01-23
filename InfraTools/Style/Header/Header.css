@@ -20,7 +20,7 @@
 .DivHeaderContainerMenuPageContactTop{width:100px;height:10px;margin-top:-10px;}
 .DivHeaderContainerMenuPageContactTopOrange{width:100px;height:10px;margin-top:-10px;background-color:#ef4e22;}
 .DivHeaderContainerMenuPageDiagnosticTools{width:120px;height:77px;float:left;position:relative;top:10px;}
-.DivHeaderContainerMenuPageDiagnosticToolsHover{width:120px;height:77px;float:left;position:relative;top:10px;background-color:#43435d;}
+.DivHeaderContainerMenuPageDiagnosticToolsHover{width:120px;height:77px;float:left;position:relative;top:10px;background-color:#43435d;border-bottom:2px solid #7a7a9f;z-index:100;}
 .DivHeaderContainerMenuPageDiagnosticToolsTop{width:120px;height:10px;margin-top:-10px;}
 .DivHeaderContainerMenuPageDiagnosticToolsTopOrange{width:120px;height:10px;margin-top:-10px;background-color:#ef4e22;}
 .DivHeaderContainerMenuPageAbout{width:120px;height:77px;float:left;position:relative;top:10px;}

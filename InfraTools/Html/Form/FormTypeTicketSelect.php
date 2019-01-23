@@ -11,7 +11,7 @@
 		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE TICKET SELECT -->
+<!-- FORM_TYPE_TICKET_SELECT_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_SELECT_FORM; ?>" method="post" >
 	<!-- FORM_FIELD_TYPE_TICKET_DESCRIPTION -->

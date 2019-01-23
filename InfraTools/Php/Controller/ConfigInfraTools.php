@@ -72,11 +72,19 @@ if (!class_exists("InfraToolsUser"))
 class ConfigInfraTools extends Config
 {	
 	/* Constantes de Páginas */
+	const PAGE_ADMIN_IP_ADDRESS                                         = "Page_Admin_Ip_Address";
+	const PAGE_ADMIN_IP_ADDRESS_LIST                                    = "Page_Admin_Ip_Address_List";
+	const PAGE_ADMIN_IP_ADDRESS_REGISTER                                = "Page_Admin_Ip_Address_Register";
+	const PAGE_ADMIN_IP_ADDRESS_SELECT                                  = "Page_Admin_Ip_Address_Select";
+	const PAGE_ADMIN_IP_ADDRESS_UPDATE                                  = "Page_Admin_Ip_Address_Update";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW                                    = "Page_Admin_Ip_Address_View";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS                              = "Page_Admin_Ip_Address_View_Users";
 	const PAGE_ADMIN_MONITORING                                         = "Page_Admin_Monitoring";
 	const PAGE_ADMIN_MONITORING_LIST                                    = "Page_Admin_Monitoring_List";
 	const PAGE_ADMIN_MONITORING_SELECT                                  = "Page_Admin_Monitoring_Select";
 	const PAGE_ADMIN_MONITORING_UPDATE                                  = "Page_Admin_Monitoring_Update";
 	const PAGE_ADMIN_MONITORING_VIEW                                    = "Page_Admin_Monitoring_View";
+	const PAGE_ADMIN_MONITORING_VIEW_USERS                              = "Page_Admin_Monitoring_View_Users";
 	const PAGE_ADMIN_SERVICE                                            = "Page_Admin_Service";
 	const PAGE_ADMIN_SERVICE_LIST                                       = "Page_Admin_Service_List";
 	const PAGE_ADMIN_SERVICE_REGISTER                                   = "Page_Admin_Service_Register";
@@ -150,11 +158,15 @@ class ConfigInfraTools extends Config
 	const EMAIL_INFRATOOLS_LOCAL_PASSWORD                               = "";
 	const EMAIL_INFRATOOLS_TEST_PASSWORD                                = "";
 	const EMAIL_INFRATOOLS_PRODUCTION_PASSWORD                          = "";
+	const EXCEPTION_ASSOC_IP_ADDRESS_SERVICE_SERVICE_ID                 = "ExceptionAssocIpAddressServiceServiceId";
+	const EXCEPTION_ASSOC_IP_ADDRESS_SERVICE_SERVICE_IP                 = "ExceptionAssocIpAddressServiceServiceIp";
 	const EXCEPTION_INFORMATION_SERVICE_DESCRIPTION                     = "ExceptionInformationServiceDescription";
 	const EXCEPTION_INFORMATION_SERVICE_ID                              = "ExceptionInformationServiceId";
 	const EXCEPTION_INFORMATION_SERVICE_SERVICE                         = "ExceptionInformationServiceService";
 	const EXCEPTION_INFORMATION_SERVICE_VALUE                           = "ExceptionInformationServiceValue";
 	const EXCEPTION_MONITORING_DESCRITPION                              = "ExceptionMonitoringDescription";
+	const EXCEPTION_IP_ADDRESS_IPV4                                     = "ExceptionIpAddressIpv4";
+	const EXCEPTION_IP_ADDRESS_IPV6                                     = "ExceptionIpAddressIpv6";
 	const EXCEPTION_MONITORING_ID                                       = "ExceptionMonitoringId";
 	const EXCEPTION_MONITORING_NAME                                     = "ExceptionMonitoringName";
 	const EXCEPTION_MONITORING_SERVICE                                  = "ExceptionMonitoringService";
@@ -173,6 +185,8 @@ class ConfigInfraTools extends Config
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                 = "ExceptionTypeAssocUserServiceDescription";
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_ID                          = "ExceptionTypeAssocUserServiceId";
 	const FORM_FIELD_ID                                                 = "FormInputId";
+	const FORM_FIELD_IP_ADDRESS_IPV4                                    = "FormFieldIpAddressIpv4";
+	const FORM_FIELD_IP_ADDRESS_IPV6                                    = "FormFieldIpAddressIpv6";
 	const FORM_FIELD_SERVICE_ACTIVE                                     = "FormFieldServiceActive";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                     = "FormFieldServiceCorporationCanChange";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                      = "FormFieldServiceDepartmentCanChange";
@@ -199,6 +213,32 @@ class ConfigInfraTools extends Config
 	const FORM_INSTALL_IMPORT_SUBMIT_HIDDEN                             = "FormInstallImportSubmitHidden";
 	const FORM_INSTALL_NEW_SUBMIT                                       = "FormInstallNewSubmit";
 	const FORM_INSTALL_REINSTALL_SUBMIT                                 = "FormInstallReinstallSubmit";
+	const FORM_IP_ADDRESS                                               = "FormIpAddress";
+	const FORM_IP_ADDRESS_LIST                                          = "FormIpAddressList";
+	const FORM_IP_ADDRESS_LIST_BACK                                     = "FormIpAddressListBack";
+	const FORM_IP_ADDRESS_LIST_FORM                                     = "FormIpAddressListForm";
+	const FORM_IP_ADDRESS_LIST_FORWARD                                  = "FormIpAddressListForward";
+	const FORM_IP_ADDRESS_REGISTER                                      = "FormIpAddressRegister";
+	const FORM_IP_ADDRESS_REGISTER_CANCEL                               = "FormIpAddressRegisterCancel";
+	const FORM_IP_ADDRESS_REGISTER_FORM                                 = "FormIpAddressRegisterForm";
+	const FORM_IP_ADDRESS_REGISTER_SUBMIT                               = "FormIpAddressRegisterSubmit";
+	const FORM_IP_ADDRESS_RETURN_NOT_FOUND                              = "FormIpAddressNotFound";
+	const FORM_IP_ADDRESS_SELECT                                        = "FormIpAddressSelect";
+	const FORM_IP_ADDRESS_SELECT_FORM                                   = "FormIpAddressSelectForm";
+	const FORM_IP_ADDRESS_SELECT_SUBMIT                                 = "FormIpAddressSelectSubmit";
+	const FORM_IP_ADDRESS_UPDATE_FORM                                   = "FormIpAddressUpdateForm";
+	const FORM_IP_ADDRESS_UPDATE_CANCEL                                 = "FormIpAddressUpdateCancel";
+	const FORM_IP_ADDRESS_UPDATE_SUBMIT                                 = "FormIpAddressUpdateSubmit";
+	const FORM_IP_ADDRESS_VIEW                                          = "FormIpAddressView";
+	const FORM_IP_ADDRESS_VIEW_DELETE                                   = "FormIpAddressViewDelete";
+	const FORM_IP_ADDRESS_VIEW_DELETE_SUBMIT                            = "FormIpAddressViewDeleteSubmit";
+	const FORM_IP_ADDRESS_VIEW_LIST_USERS                               = "FormIpAddressViewListUsers";
+	const FORM_IP_ADDRESS_VIEW_LIST_USERS_FORM                          = "FormIpAddressViewListUsersForm";
+	const FORM_IP_ADDRESS_VIEW_LIST_USERS_SUBMIT                        = "FormIpAddressViewListUsersSubmit";
+	const FORM_IP_ADDRESS_VIEW_LIST_USERS_SUBMIT_BACK                   = "FormIpAddressViewListUsersSubmitBack";
+	const FORM_IP_ADDRESS_VIEW_LIST_USERS_SUBMIT_FORWARD                = "FormIpAddressViewListUsersSubmitForward";
+	const FORM_IP_ADDRESS_VIEW_UPDATE                                   = "FormIpAddressViewUpdate";
+	const FORM_IP_ADDRESS_VIEW_UPDATE_SUBMIT                            = "FormIpAddressViewUpdateSubmit";	
 	const FORM_SERVICE                                                  = "FormService";
 	const FORM_SERVICE_LIST                                             = "FormServiceList";
 	const FORM_SERVICE_LIST_BACK                                        = "FormServiceListBack";
@@ -421,6 +461,7 @@ class ConfigInfraTools extends Config
 	const MYSQL_TYPE_ASSOC_USER_SERVICE_SELECT_FETCH_FAILED             = "RetMySqlTypeAssocUserServiceSelectFetchFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FAILED                              = "RetMySqlTypeServiceSelectFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED                        = "RetMySqlTypeServiceSelectFetchFailed";
+	const SESS_ADMIN_IP_ADDRESS                                         = "SessionAdminIpAddress";
 	const SESS_ADMIN_SERVICE                                            = "SessionAdminService";
 	const SESS_ADMIN_TYPE_SERVICE                                       = "SessionAdminTypeService";
 	const TABLE_ASSOC_IP_ADDRESS_SERVICE                                = "ASSOC_IP_ADDRESS_SERVICE";
@@ -453,6 +494,9 @@ class ConfigInfraTools extends Config
 	const TABLE_INFORMATION_SERVICE_FIELD_DESCRIPTION                   = "InformationServiceDescription";
 	const TABLE_INFORMATION_SERVICE_FIELD_SERVICE_ID                    = "InformationServiceServiceId";
 	const TABLE_INFORMATION_SERVICE_FIELD_VALUE                         = "InformationServiceValue";
+	const TABLE_IP_ADDRESS                                              = "IP_ADDRESS";
+	const TABLE_IP_ADDRESS_FIELD_IPADDRESS_IPV4                         = "IpAddressIpv4";
+	const TABLE_IP_ADDRESS_FIELD_IPADDRESS_IPV6                         = "IpAddressIpv6";
 	const TABLE_MONITORING                                              = "MONITORING";
 	const TABLE_MONITORING_FIELD_DESCRIPTION                            = "MonitoringDescription";
 	const TABLE_MONITORING_FIELD_ID                                     = "MonitoringId";
@@ -713,17 +757,17 @@ class ConfigInfraTools extends Config
 	const CHECK_PING_SERVER_FAILED                                  = "ReturnCheckPingServerFailed";
 	const CHECK_AVAILABILITY_NOT_AVAILABLE                          = "ReturnDomainNotAvailable";
 	const GET_BROWSER_CLIENT_INVALID_BROWSER                        = "ReturnInvalidBrowserClient";
-	const GET_DNS_MX_RECORDS_FAILED                                 = "ReturnGetDnsMxRecordsFailed";
-	const GET_DNS_RECORDS_FAILED                                    = "ReturnGetDnsRecordsFailed";
-	const GET_HOSTNAME_FAILED                                       = "ReturnGetHostNameFaileds";
-	const GET_HOST_IP_ADDRESS_FAILED                                = "ReturnGetHostIpAddressFailed";
-	const GET_LOCATION_BY_IP_ADDRESS_FAILED                         = "ReturnGetLocationByIpAddressFailed";
-	const GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS            = "ReturnGetLocationByIpAddressFailedGetContents";
-	const GET_PROTOCOL_FAILED                                       = "ReturnGEtProtocolFailed";
-	const GET_SERVICE_FAILED                                        = "ReturnGetServiceFailed";
-	const GET_WEBSITE_CONTENT_FAILED                                = "ReturnGetWebSiteContentFailed";
-	const GET_WEBSITE_HEADERS_FAILED                                = "ReturnGetWebSiteHeadersFailed";
-	const GET_WHOIS_FAILED                                          = "ReturnGetWhoisFailed";
+	const GET_DNS_MX_RECORDS_ERROR                                  = "ReturnGetDnsMxRecordsError";
+	const GET_DNS_RECORDS_ERROR                                     = "ReturnGetDnsRecordsError";
+	const GET_HOSTNAME_ERROR                                        = "ReturnGetHostNameError";
+	const GET_HOST_IP_ADDRESS_ERROR                                 = "ReturnGetHostIpAddressError";
+	const GET_LOCATION_BY_IP_ADDRESS_FAILED                         = "ReturnGetLocationByIpAddressError";
+	const GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS            = "ReturnGetLocationByIpAddressErrorGetContents";
+	const GET_PROTOCOL_ERROR                                        = "ReturnGEtProtocolError";
+	const GET_SERVICE_ERROR                                         = "ReturnGetServiceError";
+	const GET_WEBSITE_CONTENT_ERROR                                 = "ReturnGetWebSiteContentError";
+	const GET_WEBSITE_HEADERS_FAILED                                = "ReturnGetWebSiteHeadersError";
+	const GET_WHOIS_ERROR                                           = "ReturnGetWhoisError";
 	const GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND                     = "ReturnPackageNetWhoisNotFound";
 	
 	

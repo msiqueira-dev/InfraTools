@@ -9,10 +9,10 @@
 		<?php if(isset($this->ReturnText))  echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM TYPE USER VIEW -->
+<!-- FORM_TYPE_USER_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW; ?>" method="post" >
-    <!-- DESCRIPTION -->
+    <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>

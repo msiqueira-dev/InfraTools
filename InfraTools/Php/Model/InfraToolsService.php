@@ -7,7 +7,7 @@ Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um serviço.
+			Class that deals with services.
 Get / Set: 
 			public function GetRegisterDate();
 			public function GetServiceActive();

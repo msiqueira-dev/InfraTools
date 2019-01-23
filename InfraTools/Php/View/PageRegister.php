@@ -60,7 +60,7 @@ class PageRegister extends PageInfraTools
 					  		  @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
 							  @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
 							  NULL,
-							  $_POST[ConfigInfraTools::FORM_FIELD_USER_COUNTRY],
+							  $_POST[ConfigInfraTools::FORM_FIELD_COUNTRY_NAME],
 							  $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
 							  @$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
 						      NULL,

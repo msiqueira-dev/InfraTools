@@ -53,10 +53,10 @@
 														   'DivContentBodySubmit', 
 														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
 														   'Corporation Name and Department Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?>"  
 					   <?php echo $this->InputValueDepartmentNameAndCorporationNameRadio; ?> />
 				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?></i>
 				</div>
 			</label>
 		</div>

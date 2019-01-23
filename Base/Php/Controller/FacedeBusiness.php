@@ -116,7 +116,7 @@ class FacedeBusiness
 				$ReturnMessage .= str_replace('[0]', $browser, $this->Language->GetText('GET_BROWSER_CLIENT_SUCCESS'));
 			else $ReturnMessage = $browser;
 		}
-		else $ReturnMessage = $this->Language->GetText('GET_BROWSER_CLIENT_FAILED');
+		else $ReturnMessage = $this->Language->GetText('GET_BROWSER_CLIENT_ERROR');
 		return $return;
 	}
 	
@@ -131,7 +131,7 @@ class FacedeBusiness
 								$this->Language->GetText('GET_IP_ADDRESS_CLIENT_SUCCESS'));
 			else $ReturnMessage = $ipAddress;
 		}
-		else $ReturnMessage = $this->Language->GetText('GET_ERROR_IP_ADDRESS_CLIENT');
+		else $ReturnMessage = $this->Language->GetText('GET_IP_ADDRESS_CLIENT_ERROR');
 		return $return;
 	}
 	
@@ -146,7 +146,7 @@ class FacedeBusiness
 								                     $this->Language->GetText('GET_OPERATIONAL_SYSTEM_SUCCESS'));
 			else $ReturnMessage = $osPlatform;
 		}
-		else $ReturnMessage = $this->Language->GetText('GET_OPERATIONAL_SYSTEM_FAILED');
+		else $ReturnMessage = $this->Language->GetText('GET_OPERATIONAL_SYSTEM_ERROR');
 		return $return;
 	}
 	

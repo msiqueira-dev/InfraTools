@@ -21,28 +21,28 @@
 	</label>
 </div>
 <div class="DivContentBodySided">
-	<!-- NAME -->
+	<!-- FORM_FIELD_USER_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserName; ?></label>
 		</div>
 	</div>
-	<!-- EMAIL -->
+	<!-- FORM_FIELD_USER_EMAIL -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided" id="BodyUserViewEmailDiv">
 			<label id="BodyUserViewEmailLabel" class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
 		</div>
 	</div>
-	<!-- USER_UNIQUE_ID -->
+	<!-- FORM_FIELD_USER_UNIQUE_ID -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('USER_UNIQUE_ID').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_UNIQUE_ID').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -67,37 +67,37 @@
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateYear; ?></label>
 		</div>
 	</div>
-	<!-- GENDER -->
+	<!-- FORM_FIELD_USER_GENDER -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('GENDER').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
 		</div>
 	</div>
-	<!-- COUNTRY -->
+	<!-- FORM_FIELD_COUNTRY_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('COUNTRY').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCountry; ?></label>
 		</div>
 	</div>
-	<!-- REGION -->
+	<!-- FORM_FIELD_USER_REGION -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('REGION').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegion; ?></label>
 		</div>
 	</div>
-	<!-- PHONE PRIMARY -->
+	<!-- FORM_FIELD_USER_PHONE_PRIMARY -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('PHONE_PRIMARY').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent">
@@ -106,10 +106,10 @@
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhonePrimary; ?></label>
 		</div>
 	</div>
-	<!-- PHONE SECONDARY -->
+	<!-- FORM_FIELD_USER_PHONE_SECONDARY -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('PHONE_SECONDARY').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_SECONDARY').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent">
@@ -136,10 +136,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- ASSOC USER CORPORATION REGISTRATION DATE -->
+	<!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_DATE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -152,10 +152,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- ASSOC USER CORPORATION REGISTRATION ID -->
+	<!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -197,7 +197,7 @@
 	if($this->ShowTypeUserDescription)
 	{
 		?>
-		<!-- TYPE USER DESCRIPTION -->
+		<!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
 		<div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided">
 				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
@@ -211,10 +211,10 @@
 	?>
    <?php if($this->EnableFieldSessionExpires)
 	{?>
-		 <!-- SESSION_EXPIRES -->
+		 <!-- FORM_FIELD_USER_SESSION_EXPIRES -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
-				<label><?php echo $this->InstanceLanguageText->GetText('SESSION_EXPIRES').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_SESSION_EXPIRES').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
@@ -251,10 +251,10 @@
 	<?php } ?>
 	<?php if($this->EnableFieldUserActive)
 	{?>
-		 <!-- USER_ACTIVE -->
+		 <!-- FORM_FIELD_USER_ACTIVE -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
-				<label><?php echo $this->InstanceLanguageText->GetText('USER_ACTIVE').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_ACTIVE').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
@@ -269,10 +269,10 @@
 	<?php } ?>
    <?php if($this->EnableFieldUserConfirmed)
 	{?>
-		 <!-- USER_CONFIRMED -->
+		 <!-- FORM_FIELD_USER_CONFIRMED -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
-				<label><?php echo $this->InstanceLanguageText->GetText('USER_CONFIRMED').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_CONFIRMED').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">

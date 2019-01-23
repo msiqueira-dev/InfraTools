@@ -12,7 +12,7 @@
 <!-- FORM_CORPORATION_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_CORPORATION_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_CORPORATION_VIEW; ?>" method="post" >
-    <!-- NAME -->
+    <!-- FORM_FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
@@ -21,7 +21,7 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCorporationName; ?></label>
         </div>
     </div>
-    <!-- ACTIVE -->
+    <!-- FORM_FIELD_CORPORATION_ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_ACTIVE').":"; ?></label>

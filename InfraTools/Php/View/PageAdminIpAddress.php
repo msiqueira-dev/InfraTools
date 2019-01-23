@@ -1,13 +1,13 @@
 <?php
 /************************************************************************
-Class: PageAdminNotification.php
-Creation: 2018/04/06
+Class: PageAdminIpAddress.php
+Creation: 2019/01/23
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Class for notification management.
+			Class for ip address management.
 Functions: 
 			public    function LoadPage();
 **************************************************************************/
@@ -23,18 +23,18 @@ if (!class_exists("PageAdmin"))
 		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
-if (!class_exists("Notification"))
+if (!class_exists("InfraToolsIpAdress"))
 {
-	if(file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Notification.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class Notification');
+	if(file_exists(BASE_PATH_PHP_MODEL . "InfraToolsIpAdress.php"))
+		include_once(BASE_PATH_PHP_MODEL . "InfraToolsIpAdress.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAdress');
 }
 
 
-class PageAdminNotification extends PageAdmin
+class PageAdminIpAddress extends PageAdmin
 {
-	public $ArrayInstanceNotification = NULL;
-	public $InstanceNotification      = NULL;
+	public $ArrayInstanceIpAddress = NULL;
+	public $InstanceIpAddress      = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -52,7 +52,7 @@ class PageAdminNotification extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
 		$this->InputValueSystemConfigurationOptionNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
 		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";

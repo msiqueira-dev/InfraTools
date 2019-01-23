@@ -14,10 +14,10 @@
 <!-- FORM_TYPE_ASSOC_USER_TEAM_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_VIEW; ?>" method="post" >
-    <!-- TYPE_ASSOC_USER_TEAM_DESCRIPTION -->
+    <!-- FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeAssocUserTeamDescription;?></label>

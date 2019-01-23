@@ -21,13 +21,13 @@
 
 	</label>
 </div>
-<!-- WEB SITE BODY PAGE ACCOUNT UPDATE -->
+<!-- FORM_USER_UPDATE_FORM -->
 <form name="<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>" 
       id="<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>" method="post" >
     <!-- FORM_FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('NAME'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME'); ?></label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
@@ -62,23 +62,23 @@
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
-                           title="<?php echo $this->InstanceLanguageText->GetText('NAME'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME'); ?>"
                            value="<?php echo $this->InputValueUserName; ?>" maxlength="45" />
      </div>
      <div class="DivClearFloat"></div>
-     <!-- EMAIL -->
+     <!-- FORM_FIELD_USER_EMAIL -->
      <div class="DivContentBodyContainer">
      	<div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
         </div>
      </div>
-     <!-- ACCOUNT_UPDATE_USER_UNIQUE_ID -->
+     <!-- FORM_FIELD_USER_UNIQUE_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('USER_UNIQUE_ID'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_UNIQUE_ID'); ?></label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
@@ -113,7 +113,7 @@
                                              'DivContentBodySubmitBigger',
                                              '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                              '');"
-                           title="<?php echo $this->InstanceLanguageText->GetText('USER_UNIQUE_ID'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_UNIQUE_ID'); ?>"
                            value="<?php echo $this->InputValueUserUniqueId; ?>" maxlength="25" />
      </div>
      <div class="DivClearFloat"></div>
@@ -215,10 +215,10 @@
             ?>
         </select>
      </div>
-    <!-- ACCOUNT_UPDATE_USER_PHONE_PRIMARY -->
+    <!-- FORM_FIELD_USER_PHONE_PRIMARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('PHONE_PRIMARY'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY'); ?></label>
             <label>:</label>
         </div>
         <div class="DivContentBodyContainerPhonePrefix">
@@ -280,14 +280,14 @@
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('PHONE_PRIMARY'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY'); ?>"
 							   value="<?php echo $this->InputValueUserPhonePrimary; ?>" maxlength="9" />
 		</div>
      </div>
      <!-- ACCOUNT_UPDATE_USER_PHONE_SECONDARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('PHONE_SECONDARY'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_SECONDARY'); ?></label>
             <label>:</label>
         </div>
         <div class="DivContentBodyContainerPhonePrefix">
@@ -351,7 +351,7 @@
 												 'DivContentBodySubmitBigger',
 												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('PHONE_PRIMARY'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY'); ?>"
 							   value="<?php echo $this->InputValueUserPhoneSecondary; ?>" maxlength="9" />
 		</div>
      </div>
@@ -359,7 +359,7 @@
      <!-- FORM_FIELD_USER_GENDER -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label> <?php echo $this->InstanceLanguageText->GetText('GENDER'); ?> </label>
+            <label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER'); ?> </label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
         </div>
@@ -403,8 +403,8 @@
                              id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LATITUDE; ?>"/>
         <input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>" 
                              id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>"/>
-        <input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>" 
-                             id="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"
+        <input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>" 
+                             id="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>"
                              value="<?php echo $this->InputValueCountry; ?>"/>
         <input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>" 
                              id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
@@ -425,14 +425,14 @@
      <div class="DivContentBodyContainer DivContentBodyContainerMaps">
         <div class="DivContentBodyContainerLabelMapsCountry">
             <div class="DivContentBodyContainerLabel">
-                <label> <?php echo $this->InstanceLanguageText->GetText('COUNTRY'); ?> </label>
+                <label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME'); ?> </label>
                 <label>:</label>
             </div>
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"  
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>"
+            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>"  
+                               id="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>"
                                class="<?php echo $this->ReturnCountryClass; ?>"
-                               title="<?php echo $this->InstanceLanguageText->GetText('COUNTRY'); ?>"
-                               onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>',
+                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME'); ?>"
+                               onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>',
                                                       'DivContentBodySubmitBigger',
                                                       '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                       '', true);
@@ -447,7 +447,7 @@
                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                      '');"
                                        onchange="ValidateNotNull(null, 
-                                                    '<?php echo ConfigInfraTools::FORM_FIELD_USER_COUNTRY; ?>',
+                                                    '<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>',
                                                     'DivContentBodySubmitBigger',
                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
                                                     '', true);
@@ -461,13 +461,13 @@
         <div class="DivContentBodyContainerLabelMapsEstate">
             <div class="DivContentBodyContainerLabel DivContentBodyContainerLabelMapsLabel">
                 <label class=""> 
-                    <?php echo $this->InstanceLanguageText->GetText('REGION') . ":"; ?> 
+                    <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION') . ":"; ?> 
                 </label>
             </div>
             <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"  
                            id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
                            class="<?php echo $this->ReturnRegionClass; ?>"
-                           title="<?php echo $this->InstanceLanguageText->GetText('REGION'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION'); ?>"
                            onblur="ValidateMultiplyFields(
                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
@@ -503,10 +503,10 @@
             </div>
         </div>
     </div>
-    <!-- ASSOC USER CORPORATION REGISTRATION DATE -->
+    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -519,10 +519,10 @@
             </div>
         </div>
     </div>
-    <!-- ASSOC USER CORPORATION REGISTRATION ID -->
+    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -539,7 +539,7 @@
     if($this->ShowTypeUserDescription)
 	{
 		?>
-        <!-- TYPE USER DESCRIPTION -->
+        <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
         <div class="DivClearFloat"></div>
         <div class="DivContentBodyContainer">
             <div class="DivContentBodyContainerLabel">
@@ -558,7 +558,7 @@
 	 	 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('SESSION_EXPIRES').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_SESSION_EXPIRES').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
@@ -602,7 +602,7 @@
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('USER_ACTIVE').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_ACTIVE').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
@@ -620,11 +620,11 @@
 	<?php } ?>
     <?php if($this->EnableFieldUserConfirmed)
 	{?>
-		 <!-- USER_CONFIRMED-->
+		 <!-- FORM_FIELD_USER_CONFIRMED-->
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('USER_CONFIRMED').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_CONFIRMED').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 

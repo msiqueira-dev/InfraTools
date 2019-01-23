@@ -80,13 +80,13 @@ class PageAdminTypeUser extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_LIST;
 		}
-		//TYPE USER REGISTER
+		//FORM_TYPE_USER_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_REGISTER) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_REGISTER;
-		//TYPE USER CANCEL
+		//FORM_TYPE_USER_REGISTER_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_SELECT;
-		//TYPE USER REGISTER SUBMIT
+		//FORM_TYPE_USER_REGISTER_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserInsert', 

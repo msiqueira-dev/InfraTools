@@ -12,17 +12,19 @@ Description:
 			Classe used to create instance of all elements in the Base Project.
 Methods:
 			public static function CreateConfigInfraTools();
+			public function CreateInfraToolsAssocIpAddressService($IpAddressIpv4, $IpAddressIpv6, $RegisterDate);
 			public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
 								                             $InfraToolsUserInstance, $RegisterDate);
+			public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);	
 			public function CreateInfraToolsFacedeBusiness($LanguageText);
-			public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, 
-			                                            $RegisterDate);
 			public function CreateInfraToolsFacedePersistence();
+			public function CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			public function CreateInfraToolsFacedePersistenceAssocUserService();
 			public function CreateInfraToolsFacedePersistenceCorporation();
 			public function CreateInfraToolsFacedePersistenceDataBase();
 			public function CreateInfraToolsFacedePersistenceDepartment();
 			public function CreateInfraToolsFacedePersistenceInformationService();
+			public function CreateInfraToolsFacedePersistenceIpAddress();
 			public function CreateInfraToolsFacedePersistenceService();
 			public function CreateInfraToolsFacedePersistenceTypeAssocUserService();
 			public function CreateInfraToolsFacedePersistenceTypeService();
@@ -31,6 +33,7 @@ Methods:
 			public function CreateInfraToolsHistoryTicket();
 			public function CreateInfraToolsInformationService($RegisterDate, $InformationServiceDescription, $InformationServiceId, 
 								                               $InformationServiceValue, $Service);
+			public function CreateaInfraToolsIpAddress($IpAddressIpv4, $IpAddressIpv6, $RegisterDate);
 			public function CreateInfraToolsMonitoring();
 			public function CreateInfraToolsNetwork();
 			public function CreateInfraToolsService($RegisterDate, $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange, 
@@ -155,6 +158,24 @@ class InfraToolsFactory extends Factory
 		return ConfigInfraTools::__create();
 	}
 	
+	public function CreateInfraToolsAssocIpAddressService($IpAddressIpv4, $IpAddressIpv6, $RegisterDate)
+	{
+		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
+		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
+		return new InfraToolsIpAddress($IpAddressIpv4, $IpAddressIpv6, $RegisterDate);
+	}
+	
+	public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
+								                     $InfraToolsUserInstance, $RegisterDate) 
+	{
+		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsAssocUserService.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsAssocUserService');
+		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsAssocUserService.php");
+		return new InfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
+								              $InfraToolsUserInstance, $RegisterDate);
+	}
+	
 	public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate)
 	{
 		if (!class_exists("Corporation"))
@@ -167,16 +188,6 @@ class InfraToolsFactory extends Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsCorporation');
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsCorporation.php");
 		return new InfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);
-	}
-	
-	public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
-								                     $InfraToolsUserInstance, $RegisterDate) 
-	{
-		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsAssocUserService.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsAssocUserService');
-		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsAssocUserService.php");
-		return new InfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
-								              $InfraToolsUserInstance, $RegisterDate);
 	}
 	
 	public function CreateInfraToolsFacedeBusiness($LanguageText)
@@ -205,6 +216,26 @@ class InfraToolsFactory extends Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistence');
 		else include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php");
 		return InfraToolsFacedePersistence::__create();
+	}
+	
+	public function CreateInfraToolsFacedePersistenceAssocIpAddressService()
+	{
+		if (!class_exists("InfraToolsPersistence"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsPersistence');
+		}
+		if (!class_exists("InfraToolsAssocIpAddressService"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsAssocIpAddressService.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsAssocIpAddressService.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsAssocIpAddressService');
+		}
+		if(!file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceAssocIpAddressService.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistenceAssocIpAddressService');
+		else include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceAssocIpAddressService.php");
+		return InfraToolsFacedePersistenceAssocIpAddressService::__create();
 	}
 	
 	public function CreateInfraToolsFacedePersistenceAssocUserService()
@@ -307,6 +338,26 @@ class InfraToolsFactory extends Factory
 		return InfraToolsFacedePersistenceInformationService::__create();
 	}
 	
+	public function CreateInfraToolsFacedePersistenceIpAddress()
+	{
+		if (!class_exists("InfraToolsPersistence"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsPersistence');
+		}
+		if (!class_exists("InfraToolsIpAddress"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
+		}
+		if(!file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceIpAddress.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistenceIpAddress');
+		else include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceIpAddress.php");
+		return InfraToolsFacedePersistenceIpAddress::__create();
+	}
+	
 	public function CreateInfraToolsFacedePersistenceService()
 	{
 		if (!class_exists("InfraToolsPersistence"))
@@ -369,6 +420,18 @@ class InfraToolsFactory extends Factory
 	
 	public function CreateInfraToolsFacedePersistenceTypeStatusMonitoring()
 	{
+		if (!class_exists("InfraToolsPersistence"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsPersistence');
+		}
+		if (!class_exists("InfraToolsTypeStatusMonitoring"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsTypeStatusMonitoring.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsTypeStatusMonitoring.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsTypeStatusMonitoring');
+		}
 		if(!file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceTypeStatusMonitoring.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistenceTypeStatusMonitoring');
 		else include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceTypeStatusMonitoring.php");
@@ -382,6 +445,12 @@ class InfraToolsFactory extends Factory
 			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php"))
 				include_once(SITE_PATH_PHP_MODEL . "InfraToolsPersistence.php");
 			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsPersistence');
+		}
+		if (!class_exists("InfraToolsUser"))
+		{
+			if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsUser.php"))
+				include_once(SITE_PATH_PHP_MODEL . "InfraToolsUser.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsUser');
 		}
 		if(!file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistenceUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistenceUser');
@@ -411,6 +480,14 @@ class InfraToolsFactory extends Factory
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsInformationService.php");
 		return new InfraToolsInformationService($RegisterDate, $InformationServiceDescription, $InformationServiceId, 
 								                $InformationServiceValue, $Service);
+	}
+	
+	public function CreateaInfraToolsIpAddress($IpAddressIpv4, $IpAddressIpv6, $RegisterDate)
+	{
+		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
+		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
+		return new InfraToolsIpAddress($IpAddressIpv4, $IpAddressIpv6, $RegisterDate);
 	}
 	
 	public function CreateInfraToolsMonitoring()

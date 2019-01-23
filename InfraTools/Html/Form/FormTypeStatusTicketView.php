@@ -10,7 +10,7 @@
 		<?php if(isset($this->ReturnTypeStatusTicketDescriptionText)) echo $this->ReturnTypeStatusTicketDescriptionText; ?>
 	</label>
 </div>
-<!-- FORM TYPE STATUS TICKET VIEW -->
+<!-- FORM_TYPE_STATUS_TICKET_VIEW -->
 <form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW; ?>" 
       id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_TICKET_VIEW; ?>" method="post" >
     <!-- FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION -->

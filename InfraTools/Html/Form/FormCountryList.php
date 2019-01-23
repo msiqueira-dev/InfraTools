@@ -55,9 +55,9 @@
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				    onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		     "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('NAME') . "</div></th>";
-		echo "<th>" . $this->InstanceLanguageText->GetText('COUNTRY_ABBREVIATION') . "</th>";
-		echo "<th>" . $this->InstanceLanguageText->GetText('REGION_CODE') . "</th>";
+		     "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME') . "</div></th>";
+		echo "<th>" . $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_ABBREVIATION') . "</th>";
+		echo "<th>" . $this->InstanceLanguageText->GetText('FORM_FIELD_REGION_CODE') . "</th>";
 		echo "<th  class='TableGenericThArrow'>
 	         <div  class='TableGenericThDiv'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		     "<div class='TableGenericInputRight'>

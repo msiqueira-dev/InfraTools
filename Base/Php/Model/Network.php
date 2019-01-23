@@ -104,7 +104,7 @@ class Network
 				$IpAddress = "127.0.0.1";
 			return Config::SUCCESS;
 		}
-		else return Config::GET_ERROR_IP_ADDRESS_CLIENT;
+		else return Config::GET_IP_ADDRESS_CLIENT_ERROR;
 	}
 	
 	public function GetOperationalSystem(&$OsPlatform) 

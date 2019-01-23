@@ -33,6 +33,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TYPE_USER_SELECT; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
@@ -46,6 +47,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
@@ -59,6 +61,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TYPE_USER_LIST; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_LIST; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TYPE_USER_LIST; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"

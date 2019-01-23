@@ -1,8 +1,8 @@
-<!-- BODY SERVICE LIST BY TYPE ASSOC USER SERVICE -->
-<!-- TYPE -->
+<!-- FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE -->
+<!-- FORM_FIELD_SERVICE_TYPE -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('SERVICE_TYPE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
            	<form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE; ?>' 

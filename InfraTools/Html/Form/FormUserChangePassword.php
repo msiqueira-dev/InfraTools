@@ -11,22 +11,22 @@
 		<?php if(isset($this->ReturnText))         echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM USER CHANGE PASSWORD -->
+<!-- ACCOUNT_CHANGE_PASSWORD_FORM -->
 <form name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>" 
       id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>" method="post">
-    <!-- NAME -->
+    <!-- FORM_FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserName; ?></label>
         </div>
     </div>
-    <!-- EMAIL -->
+    <!-- FORM_FIELD_USER_EMAIL -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
@@ -43,10 +43,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateYear; ?></label>
         </div>
     </div>
-    <!-- GENDER -->
+    <!-- FORM_FIELD_USER_GENDER -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('GENDER').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
@@ -68,10 +68,10 @@
             </div>
         </div>
     </div>
-    <!-- ASSOC USER CORPORATION REGISTRATION DATE -->
+    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -84,10 +84,10 @@
             </div>
         </div>
     </div>
-    <!-- ASSOC USER CORPORATION REGISTRATION ID -->
+    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGISTRATION_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>

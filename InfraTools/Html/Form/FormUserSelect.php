@@ -17,7 +17,7 @@
 	<!-- SELECT_EMAIL -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('EMAIL'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
@@ -51,7 +51,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('EMAIL'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL'); ?>" 
 						   value="<?php echo $this->InputValueUserEmail; ?>" maxlength="60" />
 	</div>
 	<!-- SUBMIT -->

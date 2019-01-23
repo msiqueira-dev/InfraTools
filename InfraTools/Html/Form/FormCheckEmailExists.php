@@ -1,4 +1,4 @@
-<!-- FORM CHECK EMAIL EXISTS -->
+<!-- FORM_FUNCTION_CHECK_EMAIL_EXISTS -->
 <a name="tabs4" id="tabs4"></a>
 <div id="tabs-4" class="ui-tabs-panel ui-widget-content <?php echo $this->VisibilityFunctionCheckEmailExists; ?>">
 	<h2><?php echo $this->InstanceLanguageText->GetText('CHECK_EMAIL_EXISTS_TEXT'); ?></h2>

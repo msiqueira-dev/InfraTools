@@ -1,4 +1,4 @@
-<!-- BODY SERVICE LIST BY NAME -->
+<!-- FORM_SERVICE_LIST_BY_NAME -->
 <?php
 if(is_array($this->ArrayInstanceInfraToolsService) && (count($this->ArrayInstanceInfraToolsService)>0))
 {

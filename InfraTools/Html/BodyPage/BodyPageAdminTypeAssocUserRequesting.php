@@ -33,6 +33,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_SELECT; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_SELECT; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_SELECT; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
@@ -46,6 +47,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_REGISTER; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_REGISTER; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
@@ -59,6 +61,7 @@
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
 							   name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_LIST; ?>"
+							   id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_LIST; ?>"
 							   value="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_REQUESTING_LIST; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"

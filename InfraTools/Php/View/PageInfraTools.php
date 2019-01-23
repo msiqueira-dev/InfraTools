@@ -606,7 +606,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayConstants = array();
 		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[7]        = &$this->ReturnServiceTypeClass;
@@ -1536,7 +1536,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1578,7 +1578,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1617,7 +1617,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1661,7 +1661,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -2073,7 +2073,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[5]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[5] = ""; 
@@ -2172,7 +2172,7 @@ abstract class PageInfraTools extends Page
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_TYPE
+		//FORM_FIELD_SERVICE_TYPE
 		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
 		$arrayElementsClass[3]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[3] = ""; 

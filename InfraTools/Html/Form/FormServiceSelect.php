@@ -15,9 +15,9 @@
 <!-- FORM SERVICE SELECT -->
 <form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" 
 	  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
-	<!-- RADIO BUTTON -->
+	<!-- FORM_FIELD_SERVICE_RADIO -->
 	<div class="DivContentBodyContainerService" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
-		<!-- RADIO BUTTON ID -->
+		<!-- FORM_FIELD_SERVICE_ID_RADIO -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
 				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_RADIO; ?>"
@@ -41,7 +41,7 @@
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- RADIO BUTTON NAME -->
+		<!-- FORM_FIELD_SERVICE_NAME_RADIO -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
 				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_RADIO; ?>"

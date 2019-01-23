@@ -18,7 +18,7 @@
 	<!-- E-MAIL -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('EMAIL').":"; ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?> </label>
 		</div>
 		<label class="DivContentBodyContainerLabelValue"> <?php echo $this->InputValueUserEmail; ?> </label>
 	</div>
