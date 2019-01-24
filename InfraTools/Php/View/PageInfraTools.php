@@ -14,6 +14,14 @@ Description:
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
 			private   function LoadInstanceInfraToolsUser();
+			protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 
+			                                                         &$RowCount, $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
+			                                                                                   $AssocIpAddressServiceServiceIp, $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceId($AssocIpAddressServiceServiceId,
+			                                                                    $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp,
+			                                                                    $Debug);
 			protected function InfraToolsCorporationSelect($Limit1, $Limit2,, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug);
 			protected function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug);
 			protected function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
@@ -26,7 +34,12 @@ Methods:
 	                                                                          &$RowCount, $Debug)
 			protected function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
 			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
-			protected function MessageSelectByUserEmail($UserEmail, $Debug);
+			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug);
+			protected function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug);
+			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
+			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
+															            &$RowCount, $Debug)
+			protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug);
 			protected function InfraToolsServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			protected function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
 			protected function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -139,6 +152,12 @@ Methods:
 		                                                             &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName,
 			                                                        &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsUser,
+			                                                       &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceInfraToolsUser,
+			                                                        &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceInfraToolsUser,
+			                                                  &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
 			protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
@@ -173,6 +192,12 @@ abstract class PageInfraTools extends Page
 	protected $Session                          = NULL;
 	
 	/* Propiedades de página */
+	public $InputValueAssocIpAddressServiceServiceId             = "";
+	public $InputValueAssocIpAddressServiceServiceIp             = "";
+	public $InputValueIpAddressIpv4                              = "";
+	public $InputValueIpAddressIpv4Radio                         = "";
+	public $InputValueIpAddressIpv6                              = "";
+	public $InputValueIpAddressIpv6Radio                         = "";
 	public $InputValueServiceActive                              = "";
 	public $InputValueServiceCorporation                         = "";
 	public $InputValueServiceCorporationActive                   = "";
@@ -190,6 +215,14 @@ abstract class PageInfraTools extends Page
 	public $InputValueTypeServiceName                            = "";
 	public $InputValueTypeServiceSLA                             = "";
 	public $Language                                             = "";
+	public $ReturnAssocIpAddressServiceServiceIdClass            = "";
+	public $ReturnAssocIpAddressServiceServiceIdText             = "";
+	public $ReturnAssocIpAddressServiceServiceIpClass            = "";
+	public $ReturnAssocIpAddressServiceServiceIpText             = "";
+	public $ReturnIpAddressIpv4Class                             = "";
+	public $ReturnIpAddressIpv4Text                              = "";
+	public $ReturnIpAddressIpv6Class                             = "";
+	public $ReturnIpAddressIpv6Text                              = "";
 	public $ReturnServiceActiveClass                             = "";
 	public $ReturnServiceActiveText                              = "";
 	public $ReturnServiceCorporationClass                        = "";
@@ -250,6 +283,43 @@ abstract class PageInfraTools extends Page
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
 			return ConfigInfraTools::SUCCESS;
 		}
+	}
+	
+	protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 
+															 &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2,
+																							  $ArrayInstanceInfraToolsAssocIpAddressService, 
+															                                  $RowCount, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
+		}
+		$this->ShowDivReturnError("ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
+																					   $AssocIpAddressServiceServiceIp, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceId($AssocIpAddressServiceServiceId, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp, $Debug)
+	{
+		
 	}
 	
 	protected function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
@@ -388,19 +458,44 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function MessageSelectByUserEmail($UserEmail, $Debug)
+	protected function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug)
 	{
-		if($UserEmail != NULL)
+		
+	}
+	
+	protected function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelect($Limit1, $Limit2,$ArrayInstanceInfraToolsIpAddress, 
+															                      $RowCount, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $this->InstanceInfraToolsFacedePersistence->MessageSelectByUserEmail($this->InputValueLoginEmail, 
-																			               $infraToolsUser, 
-																						   $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-					
-			}
-			else return ConfigInfraTools::RETURN_ERROR;
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
 		}
+		$this->ShowDivReturnError("IP_ADDRESS_NOT_FOUND");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
+	protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
+																&$RowCount, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug)
+	{
+		
 	}
 	
 	protected function InfraToolsServiceDeleteById($ServiceId, $UserEmail, $Debug)
@@ -410,7 +505,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
+		//FORM_FIELD_SERVICE_ID
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -446,7 +541,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
+		//FORM_FIELD_SERVICE_ID
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1285,7 +1380,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
+		//FORM_FIELD_SERVICE_ID
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -1323,7 +1418,7 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
+		//FORM_FIELD_SERVICE_ID
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
@@ -2559,13 +2654,149 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
+	protected function InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsUser,&$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_IP_ADDRESS_IPV4
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV4;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
+		$arrayElementsInput[0]        = $this->InputValueIpAddressIpv4; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FORM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, 
+																							    $this->InputValueIpAddressIpv4, 
+																				                $ArrayInstanceInfraToolsUser, $RowCount, 
+																							    $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_IP_ADDRESS_IPV4_WARNING");
+				return ConfigInfraTools::RETURN_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_IP_ADDRESS_IPV4_ERROR");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceInfraToolsUser, 
+															&$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueNotificationId = $NotificationId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_NOTIFICATION_ID
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_NOTIFICATION_ID;
+		$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueNotificationId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByNotificationId($Limit1, $Limit2, 
+																							     $this->InputValueNotificationId, 
+																				                 $ArrayInstanceInfraToolsUser, $RowCount, 
+																							     $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_NOTIFICATION_ID_WARNING");
+				return ConfigInfraTools::RETURN_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_NOTIFICATION_ID_ERROR");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueRoleName = $RoleName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_ROLE_NAME
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_ROLE_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnRoleNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueRoleName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnRoleNameText;
+		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByRoleName($Limit1, $Limit2, 
+																						   $this->InputValueRoleName, 
+																				           $ArrayInstanceInfraToolsUser, $RowCount, 
+																						   $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_ROLE_NAME_WARNING");
+				return ConfigInfraTools::RETURN_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_ROLE_NAME_ERROR");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
 	protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//SERVICE_ID
+		//FORM_FIELD_SERVICE_ID
 		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 

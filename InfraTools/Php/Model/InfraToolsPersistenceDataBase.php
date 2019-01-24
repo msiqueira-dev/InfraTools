@@ -135,7 +135,7 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyAssocIpAddressServiceIp
                 FOREIGN KEY (AssocIpAddressServiceIp)
-                REFERENCES INFRATOOLS.IP_ADDRESS (Ip)
+                REFERENCES INFRATOOLS.IP_ADDRESS (IpAddressIpv4)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -251,8 +251,8 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableAssocUserRole()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.ASSOC_USER_ROLE (
-                AssocUserRoleUserEmail VARCHAR(60) NOT NULL,
                 AssocUserRoleRoleName VARCHAR(45) NOT NULL,
+				AssocUserRoleUserEmail VARCHAR(60) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (AssocUserRoleRoleName, AssocUserRoleUserEmail),
                 INDEX IndexAssocUserRoleUser (AssocUserRoleUserEmail ASC),
@@ -445,10 +445,12 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableIpAddress()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.IP_ADDRESS (
-                Ip VARCHAR(15) NOT NULL,
-                RegisterDate DATETIME NOT NULL,
-                PRIMARY KEY (Ip),
-                UNIQUE INDEX UniqueIpAddressIp (Ip ASC))
+                IpAddressIpv4 VARCHAR(15) NOT NULL,
+  				IpAddressIpv6 VARCHAR(38) NULL,
+  				RegisterDate DATETIME NOT NULL,
+  				PRIMARY KEY (IpAddressIpv4),
+  				UNIQUE INDEX UniqueIpAddressIp (IpAddressIpv4 ASC),
+  				UNIQUE INDEX IpAddressIpv6_UNIQUE (IpAddressIpv6 ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";

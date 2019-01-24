@@ -162,7 +162,7 @@ class PageAdminUser extends PageAdmin
 		//FORM_USER_SELECT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT) == ConfigInfraTools::SUCCESS)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
-		//USER SELECT SUBMIT
+		//FORM_USER_SELECT_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_SELECT_SUBMIT]))
 		{
 			if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
@@ -170,7 +170,7 @@ class PageAdminUser extends PageAdmin
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
-		//USER VIEW ACTIVATE SUBMIT
+		//FORM_USER_VIEW_ACTIVATE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_ACTIVATE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -181,7 +181,7 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
 		}
-		//USER VIEW DEACTIVATE SUBMIT
+		//FORM_USER_VIEW_DEACTIVATE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_DEACTIVATE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -192,7 +192,7 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
 		}
-		//USER VIEW DELETE SUBMIT
+		//FORM_USER_VIEW_DELETE_SUBMIT
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_DELETE_SUBMIT]))
 		{
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
@@ -347,7 +347,7 @@ class PageAdminUser extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_UPDATE;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SELECT;
 		}
-		//USER VIEW UPDATE CANCEL - USER VIEW CORPORATION CANCEL
+		//FORM_USER_UPDATE_CANCEL - FORM_USER_CHANGE_CORPORATION_CANCEL
 		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_CANCEL]) ||
 			   isset($_POST[ConfigInfraTools::FORM_USER_CHANGE_CORPORATION_CANCEL]))
 		{

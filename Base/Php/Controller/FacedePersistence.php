@@ -203,6 +203,10 @@ Functions:
 			public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
 			                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount,
+			                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, 
+			                                     $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug,
 			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug,
@@ -1682,19 +1686,6 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
-	{
-		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-	 	if($return == Config::SUCCESS)
-		{
-			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserSelectByHashCode($HashCode, $InstanceUser, $Debug, $MySqlConnection);
-			if($CloseConnectaion)
-				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		}
-		return $return;
-	}
-	
 	public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, $Debug,
 										   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
@@ -1710,13 +1701,43 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 	 	if($return == Config::SUCCESS)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserSelectByUserEmail($UserEmail, $InstanceUser, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceUser->UserSelectByHashCode($HashCode, $InstanceUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount,
+			                                   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, 
+																			     $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, 
+										 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByRoleName($Limit1, $Limit2, $RoleName, 
+																		   $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1794,6 +1815,19 @@ class FacedePersistence
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 			$return = $instanceFacedePersistenceUser->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
 																			          $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByUserEmail($UserEmail, $InstanceUser, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

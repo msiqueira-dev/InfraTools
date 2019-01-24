@@ -23,11 +23,11 @@ if (!class_exists("PageAdmin"))
 		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
-if (!class_exists("InfraToolsIpAdress"))
+if (!class_exists("InfraToolsIpAddress"))
 {
-	if(file_exists(BASE_PATH_PHP_MODEL . "InfraToolsIpAdress.php"))
-		include_once(BASE_PATH_PHP_MODEL . "InfraToolsIpAdress.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAdress');
+	if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php"))
+		include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
 }
 
 
@@ -53,9 +53,7 @@ class PageAdminIpAddress extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
-		$this->InputValueSystemConfigurationOptionNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
-		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
+		$this->InputValueIpAddressIpv4Radio = ConfigInfraTools::CHECKBOX_CHECKED;
 		//FORM SUBMIT BACK
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
@@ -81,83 +79,81 @@ class PageAdminIpAddress extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//FORM_NOTIFICATION_LIST
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_LIST) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_LIST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_LIST) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'NotificationSelect', 
-									  array(&$this->ArrayInstanceNotification),
+			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelect', 
+									  array(&$this->ArrayInstanceIpAddress),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LIST;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LIST;
 		}
-		//FORM_NOTIFICATION_REGISTER
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER;
-		//FORM_NOTIFICATION_REGISTER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
-		//FORM_NOTIFICATION_REGISTER_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_REGISTER) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
+		//FORM_IP_ADDRESS_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
+		//FORM_IP_ADDRESS_REGISTER_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'NotificationInsert', 
-									  array(@$_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_ACTIVE],
-											$_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_TEXT]),
+			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressInsert', 
+									  array(@$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_ACTIVE],
+											$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_TEXT]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_REGISTER;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
 		}
-		//FORM_NOTIFICATION_SELECT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
-		//FORM_NOTIFICATION_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_SELECT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_SELECT) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
+		//FORM_IP_ADDRESS_SELECT_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->ExecuteFunction($_POST, 'NotificationSelectByNotificationId', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_ID],
-											&$this->InstanceNotification),
+			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
+									  array($_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_ID],
+											&$this->InstanceIpAddress),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;
 		}
-		//FORM_NOTIFICATION_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_VIEW_DELETE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
+										  $this->InstanceIpAddress) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'NotificationDeleteByNotificationId', 
-										  array($this->InstanceNotification),
+				if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressDeleteByIpAddressIpv4', 
+										  array($this->InstanceIpAddress),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
 			}
 		}
-		//FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_VIEW_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_UPDATE;
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
+										  $this->InstanceIpAddress) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDATE;
 		}
-		//FORM_NOTIFICATION_UPDATE_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_UPDATE_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
+										  $this->InstanceIpAddress) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;
 		}
-		//FORM_NOTIFICATION_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FORM_IP_ADDRESS_UPDATE_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_NOTIFICATION_CONFIGURATION, 
-											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, 
+											   $this->InstanceIpAddress) == ConfigInfraTools::SUCCESS)
 			{
-				if($this->ExecuteFunction($_POST, 'NotificationUpdateByNotificationId', 
-										  array(@$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
-												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
-												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
-												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE],
-					                            &$this->InstanceSystemConfiguration),
+				if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressUpdateByIpAddressIpv4', 
+										  array($_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV4],
+												@$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV6],
+												&$this->InstanceIpAddress),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;	
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDATE;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;	
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDATE;
 			}
 		}
 		//FORM_TYPE_USER_SELECT

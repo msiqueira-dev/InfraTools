@@ -208,6 +208,24 @@
 					</div>
 				</div>
 			</a>
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_IP_ADDRESS'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_IP_ADDRESS') ?>">
+				<div class="DivContentBodyContainersBox">
+					<div class="DivContentBodyContainersBoxIcon">
+						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsIpAddress48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsIpAddress48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsIpAddress48x48.png'; ?>'" 
+                             alt="Services" />
+					</div>
+					<div class="DivContentBodyContainersBoxText">
+						<i>
+							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_IP_ADDRESS'); ?> 
+						</i>
+					</div>
+				</div>
+			</a>
 			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_NOTIFICATION'); ?>" 
 					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_NOTIFICATION') ?>">
 				<div class="DivContentBodyContainersBox">

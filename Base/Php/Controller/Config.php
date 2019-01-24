@@ -521,7 +521,7 @@ class Config
 	const FORM_VALIDATE_FUNCTION_EMAIL                                  = "FORM_VALIDATE_FUNCTION_EMAIL";
 	const FORM_VALIDATE_FUNCTION_GENDER                                 = "FORM_VALIDATE_FUNCTION_GENDER";
 	const FORM_VALIDATE_FUNCTION_HOST                                   = "FORM_VALIDATE_FUNCTION_HOST";
-	const FORM_VALIDATE_FUNCTION_IP_ADDRESS                             = "FORM_VALIDATE_FUNCTION_IP_ADDRESS";
+	const FORM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4                        = "FORM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4";
 	const FORM_VALIDATE_FUNCTION_IP_MASK                                = "FORM_VALIDATE_FUNCTION_IP_MASK";
 	const FORM_VALIDATE_FUNCTION_MESSAGE                                = "FORM_VALIDATE_FUNCTION_MESSAGE";
 	const FORM_VALIDATE_FUNCTION_NAME                                   = "FORM_VALIDATE_FUNCTION_NAME";
@@ -863,6 +863,9 @@ class Config
 	const TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE          = "AssocUserCorporationRegistrationDate";
 	const TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID            = "AssocUserCorporationRegistrationId";
 	const TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                 = "AssocUserCorporationUserEmail";
+	const TABLE_ASSOC_USER_NOTIFICATION                                 = "ASSOC_USER_NOTIFICATION";
+	const TABLE_ASSOC_USER_NOTIFICATION_FIELD_NOTIFICATION_ID           = "AssocUserNotificationNotificationId";
+	const TABLE_ASSOC_USER_NOTIFICATION_FIELD_USER_EMAIL                = "AssocUserNotificationUserEmail";
 	const TABLE_ASSOC_USER_ROLE                                         = "ASSOC_USER_ROLE";
 	const TABLE_ASSOC_USER_ROLE_FIELD_ROLE_NAME                         = "AssocUserRoleRoleName";
 	const TABLE_ASSOC_USER_ROLE_FIELD_USER_EMAIL                        = "AssocUserRoleUserEmail";
@@ -898,9 +901,9 @@ class Config
 	const TABLE_HISTORY_TICKET_FIELD_SUGGESTION                         = "Suggestion";
 	const TABLE_HISTORY_TICKET_FIELD_TICKET_ID                          = "TicketId";
 	const TABLE_NOTIFICATION                                            = "NOTIFICATION";
-	const TABLE_NOTIFICATION_FIELD_ACTIVE                               = "NotificationActive";
-	const TABLE_NOTIFICATION_FIELD_ID                                   = "NotificationId";
-	const TABLE_NOTIFICATION_FIELD_TEXT                                 = "NotificationText";
+	const TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE                  = "NotificationActive";
+	const TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID                      = "NotificationId";
+	const TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT                    = "NotificationText";
 	const TABLE_ROLE                                                    = "ROLE";
 	const TABLE_ROLE_FIELD_DESCRIPTION                                  = "RoleDescription";
 	const TABLE_ROLE_FIELD_NAME                                         = "RoleName";

@@ -97,6 +97,8 @@ Methods:
 			public static function SqlUserSelectByCorporationName();
 			public static function SqlUserSelectByDepartmentName();
 			public static function SqlUserSelectByHashCode();
+			public static function SqlUserSelectByNotificationId();
+			public static function SqlUserSelectByRoleName();
 			public static function SqlUserSelectByTeamId();
 			public static function SqlUserSelectByTicketId();
 			public static function SqlUserSelectByTypeAssocUserTeamDescription();
@@ -416,46 +418,46 @@ class Persistence
 	public static function SqlNotificationDeleteByNotificationId()
 	{
 		return "DELETE FROM " . Config::TABLE_NOTIFICATION . " "  
-		     . "WHERE "       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID." = ?";
+		     . "WHERE "       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID." = ?";
 	}
 	
 	public static function SqlNotificationInsert()
 	{
-		return "INSERT INTO " . Config::TABLE_NOTIFICATION        . " "
-			 . "(" . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ","
-		     . " " . Config::TABLE_NOTIFICATION_FIELD_ID          . ","
-			 . " " . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ","
-			 . " " . Config::TABLE_FIELD_REGISTER_DATE            . ")"
+		return "INSERT INTO " . Config::TABLE_NOTIFICATION                . " "
+			 . "(" . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE . ","
+		     . " " . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID     . ","
+			 . " " . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT   . ","
+			 . " " . Config::TABLE_FIELD_REGISTER_DATE                    . ")"
 		     . " VALUES (?, DEFAULT, UPPER(?), NOW())";
 	}
 	
 	public static function SqlNotificationSelect()
 	{
-		return "SELECT "   . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ", "
-			               . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . ", "
-			               . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ", "
-					       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE            . ", "
+		return "SELECT "   . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE      . ", "
+			               . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID          . ", "
+			               . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT        . ", "
+					       . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE                         . ", "
 			 . "(SELECT COUNT(*) FROM " . Config::TABLE_NOTIFICATION . ") AS COUNT "
-		     . "FROM  "    . Config::TABLE_NOTIFICATION . " " .                                                "  "
-			 . "ORDER BY " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . " LIMIT ?,?";
+		     . "FROM  "    . Config::TABLE_NOTIFICATION . " " .                                                           "  "
+			 . "ORDER BY " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID          . " LIMIT ?,?";
 	}
 	
 	public static function SqlNotificationSelectByNotificationId()
 	{
-		return "SELECT " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE      . ", "
-			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID          . ", "
-			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT        . ", "
-					     . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE            . "  " 
+		return "SELECT " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE      . ", "
+			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID          . ", "
+			             . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT        . ", "
+					     . Config::TABLE_NOTIFICATION . "." . Config::TABLE_FIELD_REGISTER_DATE                         . "  " 
 		     . "FROM  "  . Config::TABLE_NOTIFICATION . " " 
-	         . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID  . " = ?";
+	         . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID          . " = ?";
 	}
 	
 	public static function SqlNotificationUpdateByNotificationId()
 	{
 		return "UPDATE " . Config::TABLE_NOTIFICATION . " "  
-		     . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ACTIVE     . " =?, "
-			 . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_TEXT       . " =UPPER(?), "	
-		     . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_ID         . " =? ";
+		     . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE     . " =?, "
+			 . "SET    " . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT       . " =UPPER(?), "	
+		     . "WHERE "  . Config::TABLE_NOTIFICATION . "." . Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID         . " =? ";
 	}
 	
 	public static function SqlSystemConfigurationDeleteBySystemConfigurationOptionNumber()
@@ -1143,6 +1145,150 @@ class Persistence
 		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                       ." "
 		. "= "          . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                 ." "
 		. "WHERE "      . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_HASH_CODE                         . "=?";
+	}
+	
+	public static function SqlUserSelectByNotificationId()
+	{
+		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                                                 . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                                                    . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_GENDER                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_HASH_CODE                                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_REGION                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_SESSION_EXPIRES                                            . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_ACTIVE                                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_CONFIRMED                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                         . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as UserRegisterDate, "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                                           . ", "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as TypeUserRegisterDate, "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                                              . ", "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                                . ", " 
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as CorporationRegisterDate, "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                         . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                        . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                               . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as AssocUserCorporationRegisterDate, "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                                          . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_INITIALS                                             . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                                 . ", " 
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as DepartmentRegisterDate, "
+		. "(SELECT COUNT(*) FROM " . Config::TABLE_NOTIFICATION ." "
+		. "WHERE "      .  Config::TABLE_NOTIFICATION           .".". Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID                   ."=? "
+		. ") AS COUNT "
+		. "FROM "       . Config::TABLE_USER                                                                                             ." "
+		. "INNER JOIN " . Config::TABLE_TYPE_USER                                                                                        ." "
+		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                                       ." "
+		. "=  "         . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                           ." "
+		. "LEFT JOIN "  . Config::TABLE_CORPORATION                                                                                      ." "
+		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=  "         . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                ." "
+		. "LEFT JOIN "  . Config::TABLE_ASSOC_USER_CORPORATION                                                                           ." "
+		. "ON  "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                      ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL               ." "
+		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME         ." "
+		. "LEFT JOIN  " . Config::TABLE_DEPARTMENT                                                                                       ." "
+		. "ON  "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME          ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                 ." "
+		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                          ." "
+		. "AND "        . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                          ." "
+		. "LEFT JOIN  " . Config::TABLE_ASSOC_USER_NOTIFICATION                                                                          ." "
+		. "ON  "        . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_EMAIL                               ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_NOTIFICATION       .".". Config::TABLE_ASSOC_USER_NOTIFICATION_FIELD_USER_EMAIL       ." "
+		. "LEFT JOIN  " . Config::TABLE_NOTIFICATION                                                                                     ." "
+		. "ON  "        . Config::TABLE_ASSOC_USER_NOTIFICATION       .".". Config::TABLE_ASSOC_USER_NOTIFICATION_FIELD_NOTIFICATION_ID  ." "
+		. "=   "        . Config::TABLE_NOTIFICATION                  .".". Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID             ." "
+		. "WHERE "      . Config::TABLE_NOTIFICATION                  .".". Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID             ."=? "
+		. "ORDER BY "   . Config::TABLE_USER                          .".". Config::TABLE_USER_FIELD_NAME                                ." "
+		. "LIMIT ?, ?";
+	}
+	
+	public static function SqlUserSelectByRoleName()
+	{
+		return "SELECT ". Config::TABLE_USER   .".". Config::TABLE_USER_FIELD_BIRTH_DATE                                                 . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_COUNTRY                                                    . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_GENDER                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_HASH_CODE                                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_NAME                                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_REGION                                                     . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_SESSION_EXPIRES                                            . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                                      . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_ACTIVE                                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_CONFIRMED                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY                                         . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY_PREFIX                                  . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY                                       . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_PHONE_SECONDARY_PREFIX                                . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_USER_UNIQUE_ID                                             . ", "
+		. Config::TABLE_USER                   .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as UserRegisterDate, "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                                           . ", "
+		. Config::TABLE_TYPE_USER              .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as TypeUserRegisterDate, "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_ACTIVE                                              . ", "
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                                . ", " 
+		. Config::TABLE_CORPORATION            .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as CorporationRegisterDate, "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME                         . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_DATE                        . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_REGISTRATION_ID                          . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL                               . ", "
+		. Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as AssocUserCorporationRegisterDate, "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                                          . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_INITIALS                                             . ", "
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                                 . ", " 
+		. Config::TABLE_DEPARTMENT             .".". Config::TABLE_FIELD_REGISTER_DATE                                                   . "  "
+		. "as DepartmentRegisterDate, "
+		. "(SELECT COUNT(*) FROM " . Config::TABLE_ROLE ." "
+		. "WHERE "      .  Config::TABLE_ROLE           .".". Config::TABLE_ROLE_FIELD_ROLE_ID                                           ."=? "
+		. ") AS COUNT "
+		. "FROM "       . Config::TABLE_USER                                                                                             ." "
+		. "INNER JOIN " . Config::TABLE_TYPE_USER                                                                                        ." "
+		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_TYPE                                       ." "
+		. "=  "         . Config::TABLE_TYPE_USER              .".". Config::TABLE_TYPE_USER_FIELD_DESCRIPTION                           ." "
+		. "LEFT JOIN "  . Config::TABLE_CORPORATION                                                                                      ." "
+		. "ON "         . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=  "         . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                ." "
+		. "LEFT JOIN "  . Config::TABLE_ASSOC_USER_CORPORATION                                                                           ." "
+		. "ON  "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_EMAIL                                      ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL               ." "
+		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME         ." "
+		. "LEFT JOIN  " . Config::TABLE_DEPARTMENT                                                                                       ." "
+		. "ON  "        . Config::TABLE_ASSOC_USER_CORPORATION .".". Config::TABLE_ASSOC_USER_CORPORATION_FIELD_DEPARTMENT_NAME          ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_NAME                                 ." "
+		. "AND "        . Config::TABLE_USER                   .".". Config::TABLE_USER_FIELD_CORPORATION                                ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                          ." "
+		. "AND "        . Config::TABLE_CORPORATION            .".". Config::TABLE_CORPORATION_FIELD_NAME                                ." "
+		. "=   "        . Config::TABLE_DEPARTMENT             .".". Config::TABLE_DEPARTMENT_FIELD_CORPORATION                          ." "
+		. "LEFT JOIN  " . Config::TABLE_ASSOC_USER_ROLE                                                                                  ." "
+		. "ON  "        . Config::TABLE_USER                  .".". Config::TABLE_USER_FIELD_EMAIL                                       ." "
+		. "=   "        . Config::TABLE_ASSOC_USER_ROLE       .".". Config::TABLE_ASSOC_USER_ROLE_FIELD_USER_EMAIL                       ." "
+		. "LEFT JOIN  " . Config::TABLE_ROLE                                                                                             ." "
+		. "ON  "        . Config::TABLE_ASSOC_USER_ROLE       .".". Config::TABLE_ASSOC_USER_ROLE_FIELD_ROLE_NAME                        ." "
+		. "=   "        . Config::TABLE_ROLE                  .".". Config::TABLE_ROLE_FIELD_ROLE_NAME                                   ." "
+		. "WHERE "      . Config::TABLE_ROLE                  .".". Config::TABLE_ROLE_FIELD_ROLE_NAME                                   ."=? "
+		. "ORDER BY "   . Config::TABLE_USER                  .".". Config::TABLE_USER_FIELD_NAME                                        ." "
+		. "LIMIT ?, ?";
 	}
 	
 	public static function SqlUserSelectByTeamId()

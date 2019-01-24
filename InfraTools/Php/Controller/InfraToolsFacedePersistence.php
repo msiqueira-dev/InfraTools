@@ -223,6 +223,12 @@ Methods:
 			public function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
 			                                                     &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug, 
 																 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsUser, &$RowCount,
+			                                                    $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceInfraToolsUser, &$RowCount,
+			                                                     $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceInfraToolsUser, &$RowCount, 
+			                                               $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug,
 			                                                MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug,
@@ -2275,6 +2281,53 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, 
 																							 $DepartmentName, $ArrayInstanceInfraToolsUser,
 																							 $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsUser, &$RowCount,
+			                                            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
+			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4,
+																					         $ArrayInstanceInfraToolsUser, $RowCount, 
+																					         $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceInfraToolsUser, &$RowCount,
+														 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
+			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId,
+																					         $ArrayInstanceInfraToolsUser, $RowCount, 
+																					         $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	public function InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceInfraToolsUser, &$RowCount, 
+												   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
+			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName,
+																					   $ArrayInstanceInfraToolsUser, $RowCount, 
+																					   $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

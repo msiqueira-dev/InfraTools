@@ -53,9 +53,9 @@ class PageAdminNotification extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
-		$this->InputValueSystemConfigurationOptionNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
-		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
+		$this->InputValueNotificationOptionNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+		$this->ReturnNotificationOptionNameRadioClass   = "NotHidden";
+		$this->ReturnNotificationOptionNumberRadioClass = "Hidden";
 		//FORM SUBMIT BACK
 		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
 		{
@@ -121,7 +121,7 @@ class PageAdminNotification extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->ExecuteFunction($_POST, 'NotificationDeleteByNotificationId', 
 										  array($this->InstanceNotification),
@@ -129,35 +129,46 @@ class PageAdminNotification extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_SELECT;
 			}
 		}
+		//FORM_NOTIFICATION_VIEW_LIST_USERS_SUBMIT
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_LIST_USERS_SUBMIT) == ConfigInfraTools::SUCCESS)
+		{	
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, $this->InstanceNotification) 
+			                                   == ConfigInfraTools::SUCCESS)
+			{
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByNotificationId', 
+										  array($this->InstanceNotification->GetNotificationId(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW_USERS;
+			}
+		}
 		//FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_UPDATE;
 		}
 		//FORM_NOTIFICATION_UPDATE_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+										  $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
 		//FORM_NOTIFICATION_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_NOTIFICATION_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_NOTIFICATION_CONFIGURATION, 
-											   $this->InstanceSystemConfiguration) == ConfigInfraTools::SUCCESS)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, 
+											   $this->InstanceNotification) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->ExecuteFunction($_POST, 'NotificationUpdateByNotificationId', 
-										  array(@$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
-												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
-												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
-												$_POST[ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE],
-					                            &$this->InstanceSystemConfiguration),
+										  array(@$_POST[ConfigInfraTools::FORM_FIELD_NOTICATION_ACTIVE],
+												$_POST[ConfigInfraTools::FORM_FIELD_NOTIFICATION_TEXT],
+					                            &$this->InstanceNotification),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;	
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDATE;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;	
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_UPDATE;
 			}
 		}
 		//FORM_TYPE_USER_SELECT

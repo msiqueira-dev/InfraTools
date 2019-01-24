@@ -187,6 +187,11 @@ class ConfigInfraTools extends Config
 	const FORM_FIELD_ID                                                 = "FormInputId";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                    = "FormFieldIpAddressIpv4";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                    = "FormFieldIpAddressIpv6";
+	const FORM_FIELD_IP_ADDRESS_RADIO                                   = "FormFieldIpAddressRadio";
+	const FORM_FIELD_IP_ADDRESS_RADIO_DIV_IPV4                          = "FormFieldIpAddressRadioDivIpv4";
+	const FORM_FIELD_IP_ADDRESS_RADIO_DIV_IPV6                          = "FormFieldIpAddressRadioDivIpv6";
+	const FORM_FIELD_IP_ADDRESS_RADIO_IPV4                              = "FormFieldIpAddressRadioIpv4";
+	const FORM_FIELD_IP_ADDRESS_RADIO_IPV6                              = "FormFieldIpAddressRadioIpv6";
 	const FORM_FIELD_SERVICE_ACTIVE                                     = "FormFieldServiceActive";
 	const FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE                     = "FormFieldServiceCorporationCanChange";
 	const FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                      = "FormFieldServiceDepartmentCanChange";

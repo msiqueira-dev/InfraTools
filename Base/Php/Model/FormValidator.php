@@ -29,7 +29,7 @@ Functions:
 			public function ValidateGender($Gender, $DefaultValue);
 			public function ValidateHost($Host);
 			public function ValidateIsNotNumericValue($NonNumeric, $DefaultValue);
-			public function ValidateIpAddress($IpAddress);
+			public function ValidateIpAddressIpv4(IpAddressIpv4);
 			public function ValidateIpMask($IpMask);
 			public function ValidateMessage($Message, $DefaultValue);
 			public function ValidateName($Name, $DefaultValue);
@@ -71,7 +71,7 @@ class FormValidator
 	const INVALID_EMAIL_ADDRESS           = "ReturnInvalidEmailAddress";
 	const INVALID_HOST_NAME               = "ReturnInvalidHostName";
 	const INVALID_GENDER                  = "ReturnInvalidGender";
-	const INVALID_IP_ADDRESS              = "ReturnInvalidIpAddress";
+	const INVALID_IP_ADDRESS_IPV4         = "ReturnInvalidIpAddressIpv4";
 	const INVALID_IP_MASK                 = "ReturnInvalidIpMask";
 	const INVALID_NAME                    = "ReturnInvalidName";
 	const INVALID_NON_NUMERIC             = "ReturnInvalidNonNumeric";
@@ -149,8 +149,8 @@ class FormValidator
 			return $this->ValidateGender($Value, $DefaultValue);	
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_HOST)
 			return $this->ValidateHost($Value);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_ADDRESS)
-			return $this->ValidateIpAddress($Value);
+		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4)
+			return $this->ValidateIpAddressIpv4($Value);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_MASK)
 			return $this->ValidateIpMask($Value);
 		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_MESSAGE)
@@ -520,15 +520,15 @@ class FormValidator
 		else return self::INVALID_NULL;
 	}
 	
-	public function ValidateIpAddress($IpAddress)
+	public function ValidateIpAddressIpv4($IpAddressIpv4)
 	{
-		if(isset($IpAddress))
+		if(isset($IpAddressIpv4))
 		{
-			if(!is_null($IpAddress) && !empty($IpAddress))
+			if(!is_null($IpAddressIpv4) && !empty($IpAddressIpv4))
 			{
-				if(preg_match('/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/', $IpAddress) > 0)
+				if(preg_match('/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/', $IpAddressIpv4) > 0)
 					return self::SUCCESS;
-				else return self::INVALID_IP_ADDRESS;
+				else return self::INVALID_IP_ADDRESS_IPV4;
 			}
 			else return self::INVALID_NULL;
 		}

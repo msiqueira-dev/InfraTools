@@ -8,7 +8,7 @@
 	<label>
 		<?php if(isset($this->ReturnEmptyText))    echo $this->ReturnEmptyText; ?>
 		<?php if(isset($this->ReturnTeamIdText))   echo $this->ReturnTeamIdText; ?>
-		<?php if(isset($this->ReturnTeamNameText)) echo $this->ReturnNameText; ?>
+		<?php if(isset($this->ReturnTeamNameText)) echo $this->ReturnTeamNameText; ?>
 		<?php if(isset($this->ReturnText))         echo $this->ReturnText; ?>
 	</label>
 </div>

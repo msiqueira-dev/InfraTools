@@ -9,8 +9,8 @@ Dependencies:
 Description: 
 			Class that deals with ip address.
 Get / Set: 
-			public function GetIpAdressIpv4();
-			public function GetIpAdressIpv6();
+			public function GetIpAddressIpv4();
+			public function GetIpAddressIpv6();
 			public function GetRegisterDate();
 			public function SetIpAddressIpv4($IpAddressIpv4);
 			public function SetIpAddressIpv6($IpAddressIpv6);
@@ -46,12 +46,12 @@ class InfraToolsIpAddress
 	}
 	
 	/* GET */
-	public function GetIpAdressIpv4()
+	public function GetIpAddressIpv4()
 	{
 		return $this->IpAddressIpv4;
 	}
 	
-	public function GetIpAdressIpv6()
+	public function GetIpAddressIpv6()
 	{
 		return $this->IpAddressIpv6;
 	}

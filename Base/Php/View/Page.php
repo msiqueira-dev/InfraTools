@@ -142,6 +142,8 @@ Methods:
 		protected     function        UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
 		                                                         &$ArrayInstanceUser, &$RowCount, Debug, $HideReturnSuccessImage = TRUE);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
+		protected     function        UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
@@ -261,6 +263,11 @@ class Page
 	public    $InputValueAssocUserCorporationRegistrationDateActive = "";
 	public    $InputValueAssocUserCorporationRegistrationId         = "";
 	public    $InputValueAssocUserCorporationRegistrationIdActive   = "";
+	public    $InputValueAssocUserNotificationNotificationId        = "";
+	public    $InputValueAssocUserNotificationRead                  = "";
+	public    $InputValueAssocUserNotificationUserEmail             = "";
+	public    $InputValueAssocUserRoleRoleName                      = "";
+	public    $InputValueAssocUserRoleUserEmail                     = "";
 	public    $InputValueBirthDateDay                               = "";
 	public    $InputValueBirthDateMonth                             = "";
 	public    $InputValueBirthDateYear                              = "";
@@ -294,6 +301,8 @@ class Page
 	public    $InputValueRegistrationDateYear                       = "";
 	public    $InputValueRegistrationId                             = "";
 	public    $InputValueRepeatPassword                             = "";
+	public    $InputValueRoleDescription                            = "";
+	public    $InputValueRoleName                                   = "";
 	public    $InputValueRowCount                                   = "";
 	public    $InputValueSystemConfigurationOptionActive            = "";
 	public    $InputValueSystemConfigurationOptionDescription       = "";
@@ -337,6 +346,16 @@ class Page
 	public    $InputValueUserUniqueIdActive                         = "";
 	public    $Page                                                 = "";
 	public    $PageBody                                             = "";
+	public    $ReturnAssocUserNotificationNotificationIdClass       = "";
+	public    $ReturnAssocUserNotificationNotificationIdText        = "";
+	public    $ReturnAssocUserNotificationReadClass                 = "";
+	public    $ReturnAssocUserNotificationReadText                  = "";
+	public    $ReturnAssocUserNotificationUserEmailClass            = "";
+	public    $ReturnAssocUserNotificationUserEmailText             = "";
+	public    $ReturnAssocUserRoleRoleNameClass                     = "";
+	public    $ReturnAssocUserRoleRoleNameText                      = "";
+	public    $ReturnAssocUserRoleUserEmailClass                    = "";
+    public    $ReturnAssocUserRoleUserEmailText                     = "";
 	public    $ReturnBirthDateDayClass                              = "";
 	public    $ReturnBirthDateDayText                               = "";
 	public    $ReturnBirthDateMonthClass                            = "";
@@ -386,6 +405,10 @@ class Page
 	public    $ReturnRegistrationDateYearClass                      = "";
 	public    $ReturnRegistrationIdClass                            = "";
 	public    $ReturnRegistrationIdText                             = "";
+	public    $ReturnValueRoleDescriptionClass                      = "";
+	public    $ReturnValueRoleDescriptionText                       = "";
+	public    $ReturnValueRoleNameClass                             = "";
+	public    $ReturnValueRoleNameText                              = "";
 	public    $ReturnSystemConfigurationOptionActiveClass           = "";
 	public    $ReturnSystemConfigurationOptionActiveText            = "";
 	public    $ReturnSystemConfigurationOptionDescriptionClass      = "";
@@ -4218,6 +4241,92 @@ class Page
 			}
 		}
 		$this->ShowDivReturnError("USER_SELECT_BY_HASH_CODE_ERROR");
+		return Config::RETURN_ERROR;
+	}
+	
+	protected function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueNotificationId = $NotificationId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_NOTIFICATION_ID
+		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ID;
+		$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueNotificationId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
+		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByNotificationId($Limit1, $Limit2, $this->InputValueNotificationId, 
+																			 $ArrayInstanceUser, $RowCount, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return Config::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_NOTIFICATION_ID_WARNING");
+				return Config::RETURN_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_NOTIFICATION_ID_ERROR");
+		return Config::RETURN_ERROR;
+	}
+	
+	protected function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueRoleName = $RoleName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FORM_FIELD_ROLE_NAME
+		$arrayElements[0]             = Config::FORM_FIELD_ROLE_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnRoleNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueRoleName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnRoleNameText;
+		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::SUCCESS)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByRoleName($Limit1, $Limit2, $this->InputValueRoleName, 
+																	   $ArrayInstanceUser, $RowCount, $Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->ShowDivReturnEmpty();
+				return Config::SUCCESS;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SELECT_BY_ROLE_NAME_WARNING");
+				return Config::RETURN_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SELECT_BY_ROLE_NAME_ERROR");
 		return Config::RETURN_ERROR;
 	}
 	

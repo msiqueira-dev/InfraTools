@@ -167,9 +167,9 @@ class FacedePersistenceNotification
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceNotification = $this->Factory->CreateNotification
-							                            ($row[Config::TABLE_NOTIFICATION_FIELD_ACTIVE],
-														 $row[Config::TABLE_NOTIFICATION_FIELD_ID],
-														 $row[Config::TABLE_NOTIFICATION_FIELD_TEXT],
+							                            ($row[Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE],
+														 $row[Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID],
+														 $row[Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT],
 														 $row[Config::TABLE_FIELD_REGISTER_DATE]);	
 						array_push($ArrayInstanceNotification, $InstanceNotification);
 					}
