@@ -21,6 +21,13 @@ Methods:
 		public static function SqlCorporationSelectOnUserServiceContextNoLimit();
 		public static function SqlDepartmentSelectOnUserServiceContext();
 		public static function SqlDepartmentSelectOnUserServiceContextNoLimit();
+		public static function SqlInfraToolsIpAddressDeleteByIpAddressIpv4();
+		public static function SqlInfraToolsIpAddressInsert();
+		public static function SqlInfraToolsIpAddressSelect();
+		public static function SqlInfraToolsIpAddressSelectByIpAddressIpv4();
+		public static function SqlInfraToolsIpAddressSelectByIpAddressIpv6();
+		public static function SqlInfraToolsIpAddressUpdateByIpAddressIpv4();
+		public static function SqlInfraToolsIpAddressUpdateByIpAddressIpv6();
 		public static function SqlInfraToolsUserSelectByMonitoringId();
 		public static function SqlInfraToolsUserSelectByServiceId();
 		public static function SqlInfraToolsUserSelectByTypeMonitoringDescription();
@@ -259,6 +266,98 @@ class InfraToolsPersistence extends Persistence
 			   . "AND   "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                  .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                 . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_DEPARTMENT.".".ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME        . "   ";
+	}
+	
+	public static function SqlInfraToolsIpAddressDeleteByIpAddressIpv4()
+	{
+		return "DELETE FROM " . ConfigInfraTools::TABLE_IP_ADDRESS ." "
+		       . "WHERE "     . ConfigInfraTools::TABLE_IP_ADDRESS .".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4 . " =? ";
+	}
+	
+	public static function SqlInfraToolsIpAddressInsert()
+	{
+		return "INSERT INTO " . ConfigInfraTools::TABLE_IP_ADDRESS                              . " "
+			 . "("            . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . ","
+			 . " "            . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . ","
+			 . " "            . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ","
+		     . " "            . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ","
+			 . " "            . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . ")"
+			 . " VALUES (?, ?, NOW())";	
+	}
+	
+	public static function SqlInfraToolsIpAddressSelect()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
+			   . " as IpAddressRegisterDate, "                                                                                     . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_IP_ADDRESS                                                    . "   "
+			   . " ) AS COUNT "                                                                                                    . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4  . "   "
+			   . "LIMIT ?, ?";
+	}
+	
+	public static function SqlInfraToolsIpAddressSelectByIpAddressIpv4()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
+			   . " as IpAddressRegisterDate "                                                                                      . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "WHERE "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4   . "=? "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4  . "   ";
+	}
+	
+	public static function SqlInfraToolsIpAddressSelectByIpAddressIpv6()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
+			   . " as IpAddressRegisterDate "                                                                                      . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "WHERE "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6   . "=? "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6  . "   ";
+	}
+	
+	public static function SqlInfraToolsIpAddressSelectNoLimit()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
+			   . " as IpAddressRegisterDate, "                                                                                     . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_IP_ADDRESS                                                    . "   "
+			   . " ) AS COUNT "                                                                                                    . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4  . "   ";
+	}
+	
+	public static function SqlInfraToolsIpAddressUpdateByIpAddressIpv4()
+	{
+		return "UPDATE  " . ConfigInfraTools::TABLE_IP_ADDRESS                              . "     "
+			   . "SET "   . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . "=?,  "
+        	   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . "=?   "
+			   . "WHERE " . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . "=?   ";
+	}
+	
+	public static function SqlInfraToolsIpAddressUpdateByIpAddressIpv6()
+	{
+		return "UPDATE  " . ConfigInfraTools::TABLE_IP_ADDRESS                              . "     "
+			   . "SET "   . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4        . "=?,  "
+        	   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . "=?   "
+			   . "WHERE " . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . "=?   ";
 	}
 	
 	public static function SqlInfraToolsUserSelectByMonitoringId()

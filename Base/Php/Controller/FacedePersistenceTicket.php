@@ -79,16 +79,16 @@ class FacedePersistenceTicket
 	public function TicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeTicketDeleteByTypeTicketDescription');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeTicketDeleteByTypeTicketDescription());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeTicketDeleteByTypeTicketDescription());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TypeTicketDescription);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -109,7 +109,7 @@ class FacedePersistenceTicket
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 

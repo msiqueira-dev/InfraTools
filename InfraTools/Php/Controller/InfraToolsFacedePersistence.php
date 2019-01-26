@@ -77,13 +77,21 @@ Methods:
 			public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug);
 			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug);
 			public function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug, 
+			public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $Debug, 
 			                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug, 
 								                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
-															         &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+															         &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
+															         &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug, $MySqlConnection = NULL,
+													         $CloseConnectaion = TRUE)
+			public function InfraToolsIpAddressSelect(&$ArrayInstanceInfraToolsIpAddress, $Debug, 
+								                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug, 
+			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv6, $Debug, 
 			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			public function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
@@ -1027,6 +1035,15 @@ class InfraToolsFacedePersistence extends FacedePersistence
 					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
 				else $mySqlConnection->rollback();
 			}
+			
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableNetwork($StringMessage,
+																									   $Debug, $mySqlConnection);
+				if($return == ConfigInfraTools::SUCCESS)
+					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				else $mySqlConnection->rollback();
+			}
 
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -1331,15 +1348,15 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug, 
+	public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $Debug, 
 											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
-			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, 
-																					   $Debug, $MySqlConnection);
+			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, 
+																					   $IpAddressNetwork, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1368,10 +1385,42 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
-			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectByIpAddressIpv4($ILimit1, $Limit2, $IpAddressIpv4,
+			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4,
 																									  $ArrayInstanceInfraToolsIpAddress, 
 																									  $RowCount, $Debug,
 																									  $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
+															 &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
+			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6,
+																									  $ArrayInstanceInfraToolsIpAddress, 
+																									  $RowCount, $Debug,
+																									  $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug, $MySqlConnection = NULL,
+													 $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
+			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectNoLimit($ArrayInstanceInfraToolsIpAddress, 
+																					          $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1387,6 +1436,22 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New,
 																									  $IpAddressIpv4, $Debug,
+																									  $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv6, $Debug, 
+			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
+			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressIpv4New, $IpAddressIpv6New,
+																									  $IpAddressIpv6, $Debug,
 																									  $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);

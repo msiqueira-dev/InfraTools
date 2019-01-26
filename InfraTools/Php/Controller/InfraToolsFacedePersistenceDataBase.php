@@ -45,6 +45,7 @@ Functions:
 			public function CreateInfraToolsDataBaseTableInformationService(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableIpAddress(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableNetwork(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableNotification(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTablePreference(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseTableRole(&$StringMessage, $Debug, $MySqlConnection);
@@ -1639,6 +1640,24 @@ class InfraToolsFacedePersistenceDataBase
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
+	public function CreateInfraToolsDataBaseTableNetwork(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableNetwork)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection,
+							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableNetwork()))
+				return ConfigInfraTools::SUCCESS;
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+	}
+	
 	public function CreateInfraToolsDataBaseTableNotification(&$StringMessage, $Debug, $MySqlConnection)
 	{
 		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableNotification)</b>";
@@ -2208,6 +2227,9 @@ class InfraToolsFacedePersistenceDataBase
 				if(mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.URL_ADDRESS 
 				                               TO '$UserApplication'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.NETWORK 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.IP_ADDRESS 
 				                               TO '$UserApplication'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
@@ -2336,6 +2358,9 @@ class InfraToolsFacedePersistenceDataBase
 				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.URL_ADDRESS 
 				                               TO '$UserApplicationImport'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.NETWORK 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.IP_ADDRESS 
 				                               TO '$UserApplicationImport'") !== TRUE)
 					return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
@@ -2383,7 +2408,7 @@ class InfraToolsFacedePersistenceDataBase
 				}
 				if(!empty($ArrayTables))
 				{
-					if(count($ArrayTables) == 38)
+					if(count($ArrayTables) == 39)
 						return ConfigInfraTools::SUCCESS;
 					else return ConfigInfraTools::MYSQL_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT_FAILED;
 				}

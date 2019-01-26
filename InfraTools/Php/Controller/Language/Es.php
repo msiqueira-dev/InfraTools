@@ -139,8 +139,10 @@ class Es
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "";
 	const FORM_FIELD_EDIT                                           = "";
+	const FORM_FIELD_IP_ADDRESS_DESCRIPTION                         = "";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                = "";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                = "";
+	const FORM_FIELD_IP_ADDRESS_NETWORK                             = "";
 	const FORM_FIELD_LOGIN                                          = "";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "";
 	const FORM_FIELD_NOTIFICATION_ID                                = "";
@@ -206,6 +208,7 @@ class Es
 	const FORM_INVALID_NOTIFICATION_ACTIVE                          = "";
 	const FORM_INVALID_NOTIFICATION_ID                              = "";
 	const FORM_INVALID_NOTIFICATION_TEXT                            = "";
+	const FORM_INVALID_NOTIFICATION_TEXT_SIZE                       = "";
 	const FORM_INVALID_ROLE_DESCRIPTION                             = "";
 	const FORM_INVALID_ROLE_DESCRIPTION_SIZE                        = "";
 	const FORM_INVALID_REGISTRATION_ID                              = "";
@@ -877,6 +880,7 @@ class Es
 	const SERVICE_SELECT_DEPARTMENT                                 = "";
 	const SERVICE_SELECT_ERROR                                      = "";
 	const SERVICE_SELECT_SUCCESS                                    = "";
+	const SERVICE_SELECT_TYPE                                       = "";
 	const SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE                    = "";
 	const SERVICE_UPDATE_BY_ID_ERROR                                = "";
 	const SERVICE_UPDATE_BY_ID_SUCCESS                              = "";

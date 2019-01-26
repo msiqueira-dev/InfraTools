@@ -2370,7 +2370,7 @@ class InfraToolsFacedePersistenceService
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
 					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
 						return ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
-					else return ConfigInfraTools::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
+					else return ConfigInfraTools::MYSQL_SERVICE_UPDATE_RESTRICT_BY_SERVICE_ID_FAILED;
 				}
 			}
 			else

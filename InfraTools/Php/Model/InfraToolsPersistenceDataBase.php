@@ -30,6 +30,7 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTableInformationService();
 		public static function SqlCreateInfraToolsDataBaseTableIpAddress();
 		public static function SqlCreateInfraToolsDataBaseTableMonitoring();
+		public static function SqlCreateInfraToolsDataBaseTableNetwork();
 		public static function SqlCreateInfraToolsDataBaseTableNotification();
 		public static function SqlCreateInfraToolsDataBaseTablePreference();
 		public static function SqlCreateInfraToolsDataBaseTableRole();
@@ -444,13 +445,21 @@ class InfraToolsPersistenceDataBase
 	
 	public static function SqlCreateInfraToolsDataBaseTableIpAddress()
 	{
-		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.IP_ADDRESS (
+		return "CREATE TABLE IF NOT EXISTS `INFRATOOLS`.`IP_ADDRESS` (
+                IpAddressDescription VARCHAR(100) NULL,
                 IpAddressIpv4 VARCHAR(15) NOT NULL,
-  				IpAddressIpv6 VARCHAR(38) NULL,
-  				RegisterDate DATETIME NOT NULL,
-  				PRIMARY KEY (IpAddressIpv4),
-  				UNIQUE INDEX UniqueIpAddressIp (IpAddressIpv4 ASC),
-  				UNIQUE INDEX IpAddressIpv6_UNIQUE (IpAddressIpv6 ASC))
+                IpAddressIpv6 VARCHAR(38) NULL,
+                IpAddressNetwork VARCHAR(60) NULL,
+                RegisterDate DATETIME NOT NULL,
+                PRIMARY KEY (IpAddressIpv4),
+                UNIQUE INDEX UniqueIpAddressIp (IpAddressIpv4 ASC),
+                UNIQUE INDEX UniqueIpAddressIpv6 (IpAddressIpv6 ASC),
+                INDEX IndexIpAddressNetwork (IpAddressNetwork ASC),
+                CONSTRAINT ForeignKeyIpAddressNetwork
+                FOREIGN KEY (IpAddressNetwork)
+                REFERENCES INFRATOOLS.NETWORK (NetworkName)
+                ON DELETE RESTRICT
+                ON UPDATE CASCADE)
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -493,6 +502,20 @@ class InfraToolsPersistenceDataBase
                 REFERENCES INFRATOOLS.TYPE_STATUS_MONITORING (TypeStatusMonitoringDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
+                ENGINE = InnoDB
+                DEFAULT CHARACTER SET = utf8
+                COLLATE = utf8_unicode_ci";
+	}
+	
+	public static function SqlCreateInfraToolsDataBaseTableNetwork()
+	{
+		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.NETWORK (
+  			    NetworkIp VARCHAR(15) NOT NULL,
+                NetworkName VARCHAR(60) NOT NULL,
+                NetworkNetmask VARCHAR(2) NOT NULL,
+                RegisterDate DATETIME NOT NULL,
+                UNIQUE INDEX NetworkName_UNIQUE (NetworkName ASC),
+                PRIMARY KEY (NetworkName))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";

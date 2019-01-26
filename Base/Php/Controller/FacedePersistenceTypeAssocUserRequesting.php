@@ -86,11 +86,11 @@ class FacedePersistenceTypeAssocUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeAssocUserRequestingDelete');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingDelete());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $TypeAssocUserRequestingBond);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -111,7 +111,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 
@@ -126,11 +126,11 @@ class FacedePersistenceTypeAssocUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeAssocUserRequestingInsert');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingInsert());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				else
@@ -143,7 +143,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -159,11 +159,11 @@ class FacedePersistenceTypeAssocUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeAssocUserRequestingSelect');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelect());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelect());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("ii", $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$result = $stmt->get_result();
@@ -195,7 +195,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -210,11 +210,11 @@ class FacedePersistenceTypeAssocUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeAssocUserRequestingSelectByTypeBond');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelectByTypeBond());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelectByTypeBond());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("s", $TypeAssocUserRequestingBond);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$stmt->bind_result($registerDate, $TypeAssocUserRequestingBond);
@@ -241,7 +241,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -255,11 +255,11 @@ class FacedePersistenceTypeAssocUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeAssocUserRequestingUpdateByTypeBond');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingUpdateByTypeBond());
 			if ($stmt)
 			{
 				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserRequestingTypeBond);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -278,7 +278,7 @@ class FacedePersistenceTypeAssocUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}

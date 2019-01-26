@@ -144,8 +144,10 @@ class Pt
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Código do Departamento";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Nome do departamento";
 	const FORM_FIELD_EDIT                                           = "Editar";
+	const FORM_FIELD_IP_ADDRESS_DESCRIPTION                         = "Descrição";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                = "Ipv4";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                = "Ipv6";
+	const FORM_FIELD_IP_ADDRESS_NETWORK                             = "Rede";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail ou ID Único)";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Ativo";
 	const FORM_FIELD_NOTIFICATION_ID                                = "Id";

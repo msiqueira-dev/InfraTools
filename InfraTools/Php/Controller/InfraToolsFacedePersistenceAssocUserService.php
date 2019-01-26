@@ -171,11 +171,11 @@ class InfraToolsFacedePersistenceAssocUserService
 			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $AssocUserServiceServiceId, $AssocUserServiceUserEmail);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{
 					return ConfigInfraTools::SUCCESS;
@@ -198,7 +198,7 @@ class InfraToolsFacedePersistenceAssocUserService
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -248,11 +248,11 @@ class InfraToolsFacedePersistenceAssocUserService
 			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceSelectByAssocUserServiceServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("iii", $AssocUserServiceId, $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolAssocUserService = array();
@@ -286,7 +286,7 @@ class InfraToolsFacedePersistenceAssocUserService
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -303,11 +303,11 @@ class InfraToolsFacedePersistenceAssocUserService
 			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("i", $AssocUserServiceId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolAssocUserService = array();
@@ -340,7 +340,7 @@ class InfraToolsFacedePersistenceAssocUserService
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}

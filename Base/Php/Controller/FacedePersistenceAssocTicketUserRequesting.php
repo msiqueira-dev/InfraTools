@@ -268,7 +268,7 @@ class FacedePersistenceAssocTicketUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -284,11 +284,11 @@ class FacedePersistenceAssocTicketUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlAssocTicketUserRequestingSelectByTicketId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelectByTicketId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelectByTicketId());
 			if($stmt != NULL)
 			{
 				$stmt->bind_param("i", $AssocTicketUserRequestingTicketId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
 					$stmt->bind_result($registerDate, $assocTicketUserRequestingUserBond,
@@ -320,7 +320,7 @@ class FacedePersistenceAssocTicketUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}
@@ -336,12 +336,12 @@ class FacedePersistenceAssocTicketUserRequesting
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('AssocTicketUserRequestingUpdateByTicketId');
-			$stmt = $mySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingUpdateByTicketId());
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingUpdateByTicketId());
 			if ($stmt)
 			{
 				$stmt->bind_param("ssi", $AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail, 
 								         $AssocUserRequestingTicketId);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::SUCCESS;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
@@ -360,7 +360,7 @@ class FacedePersistenceAssocTicketUserRequesting
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}

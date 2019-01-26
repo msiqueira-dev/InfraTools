@@ -142,8 +142,10 @@ class En
 	const FORM_FIELD_REGION_CODE                                    = "Region Code";
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Department Initials";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Department name";
+	const FORM_FIELD_IP_ADDRESS_DESCRIPTION                         = "Description";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                = "Ipv4";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                = "Ipv6";
+	const FORM_FIELD_IP_ADDRESS_NETWORK                             = "Network";
 	const FORM_FIELD_EDIT                                           = "Edit";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail or Unique ID)";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Active";

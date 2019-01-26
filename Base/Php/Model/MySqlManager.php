@@ -14,7 +14,7 @@ Functions:
 			public function ExecuteInsertOrUpdate($MySqlConnection, $Statement, &$ErrorCode, &$ErrorString, &$QueryResult)
 			public function ExecuteSqlSelectQuery($Query, $MySqlConnection, &$Statement, &$QueryError);
 			public function GetDataBaseProccess($MySqlConnection, &$ArrayMySqlProccess, &$MySqlError);
-			public function OpenDataBaseConnection(&$mySqlConnection, &$MySqlError);
+			public function OpenDataBaseConnection(&$MySqlConnection, &$MySqlError);
 **************************************************************************/
 
 if (!class_exists("Config"))

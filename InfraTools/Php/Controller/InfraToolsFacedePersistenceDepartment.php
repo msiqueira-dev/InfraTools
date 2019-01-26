@@ -80,11 +80,11 @@ class InfraToolsFacedePersistenceDepartment
 			InfraToolsPersistence::ShowQueryInfraTools('SqlDepartmentSelectOnUserServiceContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("ssii", $UserCorporation, $UserEmail, $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ArrayInstanceInfraToolsDepartment = array();

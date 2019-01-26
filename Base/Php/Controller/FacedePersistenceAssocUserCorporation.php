@@ -183,7 +183,7 @@ class FacedePersistenceAssocUserCorporation
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
+					echo "Prepare Error: " . $MySqlConnection->error;
 				return Config::MYSQL_ERROR_QUERY_PREPARE;
 			}
 		}

@@ -35,10 +35,11 @@ Methods:
 			protected function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
 			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
 			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug);
-			protected function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug);
+			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork $Debug);
 			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
-															            &$RowCount, $Debug)
+															            &$RowCount, $Debug);
+			protected function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug);
 			protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug);
 			protected function InfraToolsServiceDeleteById($ServiceId, $UserEmail, $Debug);
 			protected function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
@@ -194,10 +195,12 @@ abstract class PageInfraTools extends Page
 	/* Propiedades de página */
 	public $InputValueAssocIpAddressServiceServiceId             = "";
 	public $InputValueAssocIpAddressServiceServiceIp             = "";
+	public $InputValueIpAddressDescription                       = "";
 	public $InputValueIpAddressIpv4                              = "";
 	public $InputValueIpAddressIpv4Radio                         = "";
 	public $InputValueIpAddressIpv6                              = "";
 	public $InputValueIpAddressIpv6Radio                         = "";
+	public $InputValueIpAddressNetwork                           = "";
 	public $InputValueServiceActive                              = "";
 	public $InputValueServiceCorporation                         = "";
 	public $InputValueServiceCorporationActive                   = "";
@@ -219,10 +222,14 @@ abstract class PageInfraTools extends Page
 	public $ReturnAssocIpAddressServiceServiceIdText             = "";
 	public $ReturnAssocIpAddressServiceServiceIpClass            = "";
 	public $ReturnAssocIpAddressServiceServiceIpText             = "";
+	public $ReturnIpAddressDescriptionClass                      = "";
+	public $ReturnIpAddressDescriptionText                       = "";
 	public $ReturnIpAddressIpv4Class                             = "";
 	public $ReturnIpAddressIpv4Text                              = "";
 	public $ReturnIpAddressIpv6Class                             = "";
 	public $ReturnIpAddressIpv6Text                              = "";
+	public $ReturnIpAddressNetworkClass                          = "";
+	public $ReturnIpAddressNetworkText                           = "";
 	public $ReturnServiceActiveClass                             = "";
 	public $ReturnServiceActiveText                              = "";
 	public $ReturnServiceCorporationClass                        = "";
@@ -491,6 +498,30 @@ abstract class PageInfraTools extends Page
 																&$RowCount, $Debug)
 	{
 		
+	}
+	
+	protected function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
+																&$RowCount, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelectNoLimit($ArrayInstanceInfraToolsIpAddress, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_NOT_FOUND");
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug)

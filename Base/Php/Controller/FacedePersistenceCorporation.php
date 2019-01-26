@@ -336,13 +336,13 @@ class FacedePersistenceCorporation
 	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;	
-		$ArrayInstanceCorporation = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlCorporationSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectNoLimit()))
 			{
+				$ArrayInstanceCorporation = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->Factory->CreateCorporation(NULL, $row[Config::TABLE_CORPORATION_FIELD_ACTIVE], 

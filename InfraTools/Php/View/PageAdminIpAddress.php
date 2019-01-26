@@ -97,8 +97,10 @@ class PageAdminIpAddress extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_IP_ADDRESS_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressInsert', 
-									  array(@$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_ACTIVE],
-											$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_TEXT]),
+									  array(@$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_DESCRIPTION],
+											$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV4],
+										    $_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV6],
+										    $_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_NETWORK]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;

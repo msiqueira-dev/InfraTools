@@ -166,7 +166,6 @@ class ConfigInfraTools extends Config
 	const EXCEPTION_INFORMATION_SERVICE_VALUE                           = "ExceptionInformationServiceValue";
 	const EXCEPTION_MONITORING_DESCRITPION                              = "ExceptionMonitoringDescription";
 	const EXCEPTION_IP_ADDRESS_IPV4                                     = "ExceptionIpAddressIpv4";
-	const EXCEPTION_IP_ADDRESS_IPV6                                     = "ExceptionIpAddressIpv6";
 	const EXCEPTION_MONITORING_ID                                       = "ExceptionMonitoringId";
 	const EXCEPTION_MONITORING_NAME                                     = "ExceptionMonitoringName";
 	const EXCEPTION_MONITORING_SERVICE                                  = "ExceptionMonitoringService";
@@ -185,8 +184,10 @@ class ConfigInfraTools extends Config
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_DESCRIPTION                 = "ExceptionTypeAssocUserServiceDescription";
 	const EXCEPTION_TYPE_ASSOC_USER_SERVICE_ID                          = "ExceptionTypeAssocUserServiceId";
 	const FORM_FIELD_ID                                                 = "FormInputId";
+	const FORM_FIELD_IP_ADDRESS_DESCRIPTION                             = "FormFieldIpAddressDescription";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                    = "FormFieldIpAddressIpv4";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                    = "FormFieldIpAddressIpv6";
+	const FORM_FIELD_IP_ADDRESS_NETWORK                                 = "FormFieldIpAddressNetwork";
 	const FORM_FIELD_IP_ADDRESS_RADIO                                   = "FormFieldIpAddressRadio";
 	const FORM_FIELD_IP_ADDRESS_RADIO_DIV_IPV4                          = "FormFieldIpAddressRadioDivIpv4";
 	const FORM_FIELD_IP_ADDRESS_RADIO_DIV_IPV6                          = "FormFieldIpAddressRadioDivIpv6";
@@ -431,6 +432,17 @@ class ConfigInfraTools extends Config
 		  = "RetMySqlAssocUserServiceSelectByAssocUserServiceIdFailed";
 	const MYSQL_ASSOC_USER_SERVICE_SELECT_BY_ASSOC_USER_SERVICE_ID_FETCH_FAILED           
 		  = "RetMySqlAssocUserServiceSelectByAssocUserServiceIdFetchFailed";
+	const MYSQL_IP_ADDRESS_DELETE_BY_IP_ADDRESS_IPV4_FAILED             = "RetMySqlIpAddressDeleteByIpAddressIpv4Failed";
+	const MYSQL_IP_ADDRESS_DELETE_BY_IP_ADDRESS_IPV4_FAILED_NOT_FOUND   = "RetMySqlIpAddressDeleteByIpAddressIpv4FailedNotFound";
+	const MYSQL_IP_ADDRESS_INSERT_FAILED                                = "RetMySqlIpAddressInsertFailed";
+	const MYSQL_IP_ADDRESS_SELECT_FAILED                                = "RetMySqlIpAddressSelectFailed";
+	const MYSQL_IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_FAILED             = "RetMySqlIpAddressSelectByIpAddressIpv4Failed";
+	const MYSQL_IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_FETCH_FAILED       = "RetMySqlIpAddressSelectByIpAddressIpv4FetchFailed";
+	const MYSQL_IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_FAILED             = "RetMySqlIpAddressSelectByIpAddressIpv6Failed";
+	const MYSQL_IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_FETCH_FAILED       = "RetMySqlIpAddressSelectByIpAddressIpv6FetchFailed";
+	const MYSQL_IP_ADDRESS_SELECT_FETCH_FAILED                          = "RetMySqlIpAddressSelectFetchFailed";
+	const MYSQL_IP_ADDRESS_UPDATE_BY_IP_ADDRESS_IPV4_FAILED             = "RetMySqlIpAddressUpdateByIpAddressIpv4Failed";
+	const MYSQL_IP_ADDRESS_UPDATE_BY_IP_ADDRESS_IPV6_FAILED             = "RetMySqlIpAddressUpdateByIpAddressIpv6Failed";
 	const MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED                     = "RetMySqlServiceDeleteByServiceIdFailed";
 	const MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED_NOT_FOUND           = "RetMySqlServiceDeleteByServiceIdFailedNotFound";
 	const MYSQL_SERVICE_INSERT_FAILED                                   = "RetMySqlServiceInsertFailed";
@@ -462,6 +474,7 @@ class ConfigInfraTools extends Config
 	const MYSQL_SERVICE_SELECT_FAILED                                   = "RetMySqlServiceSelectFailed";
 	const MYSQL_SERVICE_SELECT_FETCH_FAILED                             = "RetMySqlServiceSelectFetchFailed";
 	const MYSQL_SERVICE_UPDATE_BY_SERVICE_ID_FAILED                     = "RetMySqlServiceUpdateByServiceIdFailed";
+	const MYSQL_SERVICE_UPDATE_RESTRICT_BY_SERVICE_ID_FAILED            = "RetMySqlServiceUpdateRestrictByServiceId";
 	const MYSQL_TYPE_ASSOC_USER_SERVICE_SELECT_FAILED                   = "RetMySqlTypeAssocUserServiceSelectFailed";
 	const MYSQL_TYPE_ASSOC_USER_SERVICE_SELECT_FETCH_FAILED             = "RetMySqlTypeAssocUserServiceSelectFetchFailed";
 	const MYSQL_TYPE_SERVICE_SELECT_FAILED                              = "RetMySqlTypeServiceSelectFailed";
@@ -500,8 +513,10 @@ class ConfigInfraTools extends Config
 	const TABLE_INFORMATION_SERVICE_FIELD_SERVICE_ID                    = "InformationServiceServiceId";
 	const TABLE_INFORMATION_SERVICE_FIELD_VALUE                         = "InformationServiceValue";
 	const TABLE_IP_ADDRESS                                              = "IP_ADDRESS";
-	const TABLE_IP_ADDRESS_FIELD_IPADDRESS_IPV4                         = "IpAddressIpv4";
-	const TABLE_IP_ADDRESS_FIELD_IPADDRESS_IPV6                         = "IpAddressIpv6";
+	const TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION                 = "IpAddressDescription";
+	const TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4                        = "IpAddressIpv4";
+	const TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6                        = "IpAddressIpv6";
+	const TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK                     = "IpAddressNetwork";
 	const TABLE_MONITORING                                              = "MONITORING";
 	const TABLE_MONITORING_FIELD_DESCRIPTION                            = "MonitoringDescription";
 	const TABLE_MONITORING_FIELD_ID                                     = "MonitoringId";
