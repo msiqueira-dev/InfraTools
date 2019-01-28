@@ -152,8 +152,8 @@ class FacedePersistenceTypeAssocUserTeam
 	
 	public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTypeAssocUserTeam = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTypeAssocUserTeam = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -161,10 +161,12 @@ class FacedePersistenceTypeAssocUserTeam
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserTeamSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceTypeAssocUserTeam = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{

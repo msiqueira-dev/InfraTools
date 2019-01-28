@@ -45,6 +45,7 @@ class PageServiceListByTypeService extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$this->InputValueFormMethod = "GET";
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
 			$return = $this->InfraToolsTypeServiceSelectOnUserContextNoLimit($this->User->GetEmail(),

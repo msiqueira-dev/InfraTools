@@ -153,7 +153,7 @@ class FacedePersistenceCorporation
 	public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;	
-		$ArrayInstanceCorporation = array();
+		$ArrayInstanceCorporation = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -161,10 +161,12 @@ class FacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceCorporation = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -205,7 +207,7 @@ class FacedePersistenceCorporation
 	public function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;	
-		$ArrayInstanceCorporation = array();
+		$ArrayInstanceCorporation = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -213,10 +215,12 @@ class FacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelectActive());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceCorporation = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -257,13 +261,14 @@ class FacedePersistenceCorporation
 	public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;	
-		$ArrayInstanceCorporation = array();
+		$ArrayInstanceCorporation = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlCorporationSelectActiveNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectActiveNoLimit()))
 			{
+				$ArrayInstanceCorporation = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->Factory->CreateCorporation
@@ -335,7 +340,8 @@ class FacedePersistenceCorporation
 	
 	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
-		$errorStr = NULL; $errorCode = NULL;	
+		$errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceCorporation = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)

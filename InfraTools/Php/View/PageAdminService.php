@@ -122,7 +122,7 @@ class PageAdminService extends PageAdmin
 													&$this->InstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 					{
-						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "InfraToolsServiceLoadData", 
 													  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
 						{
 							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;
@@ -153,7 +153,7 @@ class PageAdminService extends PageAdmin
 													&$this->InstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::SUCCESS)
 					{
-						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "InfraToolsServiceLoadData", 
 													  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
 						{
 							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;
@@ -165,7 +165,7 @@ class PageAdminService extends PageAdmin
 		//FORM_SERVICE_VIEW_DELETE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "InfraToolsServiceLoadData", 
 										  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
 			{
 				if($this->ExecuteFunction($_POST, 'ServiceDeleteByServiceId', 
@@ -190,14 +190,14 @@ class PageAdminService extends PageAdmin
 		//FORM_SERVICE_VIEW_UPDATE_SUBMIT
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "InfraToolsServiceLoadData", 
 										  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_UPDATE;
 		}
 		//FORM_SERVICE_UPDATE_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
 		{
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "ServiceLoadData", 
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SERVICE, "InfraToolsServiceLoadData", 
 										  $this->InstanceInfraToolsService) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;
 		}

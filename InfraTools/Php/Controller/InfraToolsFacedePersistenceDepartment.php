@@ -83,7 +83,8 @@ class InfraToolsFacedePersistenceDepartment
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("ssii", $UserCorporation, $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $UserCorporation, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{

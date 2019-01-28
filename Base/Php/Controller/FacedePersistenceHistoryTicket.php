@@ -146,9 +146,10 @@ class FacedePersistenceHistoryTicket
 		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection)
+	public function HistoryTicketSelect($Limit1, $Limit2, &$ArrayInstanceHistoryTicket, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTypeTicket = array();
+		$mySqlError = NULL; $errorStr = NULL;
+		$ArrayInstanceHistoryTicket = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -156,20 +157,22 @@ class FacedePersistenceHistoryTicket
 			$stmt = $MySqlConnection->prepare(Persistence::SqlHistoryTicketSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceHistoryTicket = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTypeTicket = $this->Factory->CreateTypeTicket
+						$InstanceHistoryTicket = $this->Factory->CreateTypeTicket
 							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
 														 $row[Config::TABLE_TYPE_TICKET_FIELD_DESCRIPTION]);	
-						array_push($ArrayInstanceTypeTicket, $InstanceTypeTicket);
+						array_push($ArrayInstanceHistoryTicket, $InstanceHistoryTicket);
 					}
-					if(!empty($ArrayInstanceTypeTicket))
+					if(!empty($ArrayInstanceHistoryTicket))
 						return Config::SUCCESS;
 					else 
 					{

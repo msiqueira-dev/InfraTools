@@ -159,775 +159,775 @@ class InfraToolsFacedePersistenceDataBase
 		if($MySqlConnection != NULL)
 		{	
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AC', 'Ascension Island', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AC', 'ASCENSION ISLAND', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AD', 'Andorra', 376, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AD', 'ANDORRA', 376, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AE', 'United Arab Emirates', 971, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AE', 'UNITED ARAB EMIRATES', 971, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AF', 'Afghanistan', 93, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AF', 'AFGHANISTAN', 93, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AG', 'Antigua & Barbuda', 1268, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AG', 'ANTIGUA & BARBUDA', 1268, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AI', 'Anguilla', 1264, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AI', 'ANGUILLA', 1264, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AL', 'Albania', 355, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AL', 'ALBANIA', 355, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AM', 'Armenia', 374, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AM', 'ARMENIA', 374, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AN', 'Netherlands Antilles', 599, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AN', 'NETHERLANDS ANTILLES', 599, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AO', 'Angola', 244, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AO', 'ANGOLA', 244, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AQ', 'Antarctica', 642, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AQ', 'ANTARCTICA', 642, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AR', 'Argentina', 54, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AR', 'ARGENTINA', 54, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AS', 'American Samoa', 1684, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AS', 'AMERICAN SAMOA', 1684, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AT', 'Austria', 43, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AT', 'AUSTRIA', 43, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AU', 'Australia', 61, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AU', 'AUSTRALIA', 61, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AW', 'Aruba', 297, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AW', 'ARUBA', 297, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AX', 'Åland Islands', 358, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AX', 'ÅLAND ISLANDSA', 358, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AZ', 'Azerbaijan', 994, now())") !== TRUE)
+			                                RegisterDate) VALUES ('AZ', 'AZERBAIJAN', 994, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BA', 'Bosnia & Herzegovina', 387, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BA', 'BOSNIA & HERZEGOVINA', 387, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BB', 'Barbados', 1246, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BB', 'BARBADOS', 1246, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BD', 'Bangladesh', 880, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BD', 'BANGLADESH', 880, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BE', 'Belgium', 32, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BE', 'BELGIUM', 32, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BF', 'Burkina Faso', 226, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BF', 'BURKINA FASO', 226, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BG', 'Bulgaria', 359, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BG', 'BULGARIA', 359, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BH', 'Bahrain', 973, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BH', 'BAHRAIN', 973, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BI', 'Burundi', 257, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BI', 'BURUNDI', 257, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BJ', 'Benin', 229, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BJ', 'BENIN', 229, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BL', 'St. Barthélemy', 590, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BL', 'ST. BARTHÉLEMY', 590, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BM', 'Bermuda', 1441, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BM', 'BERMUDA', 1441, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BN', 'Brunei', 673, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BN', 'BRUNEI', 673, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BO', 'Bolivia', 591, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BO', 'BOLIVIA', 591, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BQ', 'Caribbean Netherlands', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BQ', 'CARIBBEAN NETHERLANDS', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BR', 'Brazil', 55, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BR', 'BRAZIL', 55, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BS', 'Bahamas', 1242, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BS', 'BAHAMAS', 1242, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BT', 'Bhutan', 975, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BT', 'BHUTAN', 975, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BV', 'Bouvet Island', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BV', 'BOUVET ISLAND', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BW', 'Botswana', 267, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BW', 'BOTSWANA', 267, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BY', 'Belarus', 375, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BY', 'BELARUS', 375, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BZ', 'Belize', 501, now())") !== TRUE)
+			                                RegisterDate) VALUES ('BZ', 'BELIZE', 501, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CA', 'Canada', 1, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CA', 'CANADA', 1, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CC', 'Cocos (Keeling) Islands', 61, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CC', 'COCOS (KEELING) ISLANDS', 61, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CD', 'Congo (DRC)', 243, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CD', 'CONGO (DRC)', 243, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CF', 'Central African Republic', 236, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CF', 'CENTRAL AFRICAN REPUBLIC', 236, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CG', 'Congo (Republic)', 242, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CG', 'CONGO (REPUBLIC)', 242, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CH', 'Switzerland', 41, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CH', 'SWITZERLAND', 41, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CI', 'Côte d’Ivoire', 225, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CI', 'CÔTE D’IVOIRE', 225, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CK', 'Cook Islands', 682, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CK', 'COOK ISLANDS', 682, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CL', 'Chile', 56, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CL', 'CHILE', 56, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CM', 'Cameroon', 237, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CM', 'CAMEROON', 237, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CN', 'China', 86, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CN', 'CHINA', 86, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CO', 'Colombia', 57, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CO', 'COLOMBIA', 57, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CP', 'Clipperton Island', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CP', 'CLIPPERTON ISLAND', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
 			                                RegisterDate) VALUES ('CR', 'Costa Rica', 506, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CU', 'Cuba', 53, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CU', 'CUBA', 53, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CV', 'Cape Verde', 238, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CV', 'CAPE VERDE', 238, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CW', 'Curaçao', 599, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CW', 'CURAÇAO', 599, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CX', 'Christmas Island', 61, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CX', 'CHRISTMAS ISLAND', 61, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CY', 'Cyprus', 357, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CY', 'CYPRUS', 357, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CZ', 'Czech Republic', 420, now())") !== TRUE)
+			                                RegisterDate) VALUES ('CZ', 'CZECH REPUBLIC', 420, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DE', 'Germany', 49, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DE', 'GERMANY', 49, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DG', 'Diego Garcia', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DG', 'DIEGO GARCIA', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DJ', 'Djibouti', 253, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DJ', 'DJIBOUTI', 253, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DK', 'Denmark', 45, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DK', 'DENMARK', 45, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DM', 'Dominica', 1767, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DM', 'DOMINICA', 1767, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DO', 'Dominican Republic', 1809, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DO', 'DOMINICAN REPUBLIC', 1809, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DZ', 'Algeria', 213, now())") !== TRUE)
+			                                RegisterDate) VALUES ('DZ', 'ALGERIA', 213, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EA', 'Ceuta & Melilla', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('EA', 'CEUTA & MELILLA', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EC', 'Ecuador', 593, now())") !== TRUE)
+			                                RegisterDate) VALUES ('EC', 'ECUADOR', 593, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EE', 'Estonia', 372, now())") !== TRUE)
+			                                RegisterDate) VALUES ('EE', 'ESTONIA', 372, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EG', 'Egypt', 20, now())") !== TRUE)
+			                                RegisterDate) VALUES ('EG', 'EGYPT', 20, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EH', 'Western Sahara', 212, now())") !== TRUE)
+			                                RegisterDate) VALUES ('EH', 'WESTERN SAHARA', 212, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ER', 'Eritrea', 291, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ER', 'ERITREA', 291, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ES', 'Spain', 34, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ES', 'SPAIN', 34, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ET', 'Ethiopia', 251, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ET', 'ETHIOPIA', 251, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FI', 'Finland', 358, now())") !== TRUE)
+			                                RegisterDate) VALUES ('FI', 'FINLAND', 358, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FJ', 'Fiji', 679, now())") !== TRUE)
+			                                RegisterDate) VALUES ('FJ', 'FIJI', 679, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FK', 'Falkland Islands (Islas Malvinas)', 500, now())") !== TRUE)
+			                                RegisterDate) VALUES ('FK', 'FALKLAND ISLANDS (ISLAS MALVINAS)', 500, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FM', 'Micronesia', 691, now())") !== TRUE)
+			                                RegisterDate) VALUES ('FM', 'MICRONESIA', 691, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FO', 'Faroe Islands', 298, now())") !== TRUE)
+			                                RegisterDate) VALUES ('FO', 'FAROE ISLANDS', 298, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FR', 'France', 33, now())") !== TRUE)
+			                                RegisterDate) VALUES ('FR', 'FRANCE', 33, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GA', 'Gabon', 241, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GA', 'GABON', 241, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GB', 'United Kingdom', 44, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GB', 'UNITED KINGDOM', 44, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GD', 'Grenada', 1473, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GD', 'GRENADA', 1473, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GE', 'Georgia', 995, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GE', 'GEORGIA', 995, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GF', 'French Guiana', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GF', 'FRENCH GUIANA', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GG', 'Guernsey', 441481, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GG', 'GUERNSEY', 441481, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GH', 'Ghana', 233, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GH', 'GHANA', 233, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GI', 'Gibraltar', 350, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GI', 'GIBRALTAR', 350, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GL', 'Greenland', 299, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GL', 'GREENLAND', 299, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GM', 'Gambia', 220, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GM', 'GAMBIA', 220, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GN', 'Guinea', 224, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GN', 'GUINEA', 224, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GP', 'Guadeloupe', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GP', 'GUADELOUPE', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GQ', 'Equatorial Guinea', 240, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GQ', 'EQUATORIAL GUINEA', 240, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GR', 'Greece', 30, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GR', 'GREECE', 30, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GS', 'South Georgia & South Sandwich Islands', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GS', 'SOUTH GEORGIA & SOUTH SANDWICH ISLANDS', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GT', 'Guatemala', 502, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GT', 'GUATEMALA', 502, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GU', 'Guam', 1671, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GU', 'GUAM', 1671, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GW', 'Guinea-Bissau', 245, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GW', 'GUINEA-BISSAU', 245, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GY', 'Guyana', 592, now())") !== TRUE)
+			                                RegisterDate) VALUES ('GY', 'GUYANA', 592, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HK', 'Hong Kong', 852, now())") !== TRUE)
+			                                RegisterDate) VALUES ('HK', 'HONG KONG', 852, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HM', 'Heard & McDonald Islands', 509, now())") !== TRUE)
+			                                RegisterDate) VALUES ('HM', 'HEARD & MCDONALD ISLANDS', 509, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HN', 'Honduras', 504, now())") !== TRUE)
+			                                RegisterDate) VALUES ('HN', 'HONDURAS', 504, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HR', 'Croatia', 385, now())") !== TRUE)
+			                                RegisterDate) VALUES ('HR', 'CROATIA', 385, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HT', 'Haiti', 509, now())") !== TRUE)
+			                                RegisterDate) VALUES ('HT', 'HAITI', 509, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HU', 'Hungary', 36, now())") !== TRUE)
+			                                RegisterDate) VALUES ('HU', 'HUNGARY', 36, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IC', 'Canary Islands', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IC', 'CANARY ISLANDS', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ID', 'Indonesia', 62, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ID', 'INDONESIA', 62, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IE', 'Ireland', 353, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IE', 'IRELAND', 353, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IL', 'Israel', 972, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IL', 'ISRAEL', 972, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IM', 'Isle of Man', 441624, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IM', 'ISLE OF MAN', 441624, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IN', 'India', 91, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IN', 'INDIA', 91, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IO', 'British Indian Ocean Territory', 246, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IO', 'BRITISH INDIAN OCEAN TERRITORY', 246, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IQ', 'Iraq', 964, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IQ', 'IRAQ', 964, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IR', 'Iran', 98, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IR', 'IRAN', 98, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IS', 'Iceland', 354, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IS', 'ICELAND', 354, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IT', 'Italy', 39, now())") !== TRUE)
+			                                RegisterDate) VALUES ('IT', 'ITALY', 39, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JE', 'Jersey', 441534, now())") !== TRUE)
+			                                RegisterDate) VALUES ('JE', 'JERSEY', 441534, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JM', 'Jamaica', 1876, now())") !== TRUE)
+			                                RegisterDate) VALUES ('JM', 'JAMAICA', 1876, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JO', 'Jordan', 962, now())") !== TRUE)
+			                                RegisterDate) VALUES ('JO', 'JORDAN', 962, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JP', 'Japan', 81, now())") !== TRUE)
+			                                RegisterDate) VALUES ('JP', 'JAPAN', 81, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KE', 'Kenya', 254, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KE', 'KENYA', 254, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KG', 'Kyrgyzstan', 996, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KG', 'KYRGYZSTAN', 996, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KH', 'Cambodia', 855, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KH', 'CAMBODIA', 855, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KI', 'Kiribati', 686, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KI', 'KIRIBATI', 686, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KM', 'Comoros', 269, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KM', 'COMOROS', 269, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KN', 'St. Kitts & Nevis', 1869, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KN', 'ST. KITTS & NEVIS', 1869, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KP', 'North Korea', 850, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KP', 'NORTH KOREA', 850, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KR', 'South Korea', 82, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KR', 'SOUTH KOREA', 82, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KW', 'Kuwait', 965, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KW', 'KUWAIT', 965, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KY', 'Cayman Islands', 1345, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KY', 'CAYMAN ISLANDS', 1345, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KZ', 'Kazakhstan', 7, now())") !== TRUE)
+			                                RegisterDate) VALUES ('KZ', 'KAZAKHSTAN', 7, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LA', 'Laos', 856, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LA', 'LAOS', 856, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LB', 'Lebanon', 961, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LB', 'LEBANON', 961, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LC', 'St. Lucia', 1758, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LC', 'ST. LUCIA', 1758, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LI', 'Liechtenstein', 423, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LI', 'LIECHTENSTEIN', 423, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LK', 'Sri Lanka', 94, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LK', 'SRI LANKA', 94, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LR', 'Liberia', 231, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LR', 'LIBERIA', 231, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LS', 'Lesotho', 266, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LS', 'LESOTHO', 266, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LT', 'Lithuania', 370, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LT', 'LITHUANIA', 370, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LU', 'Luxembourg', 352, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LU', 'LUXEMBOURG', 352, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LV', 'Latvia', 371, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LV', 'LATVIA', 371, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LY', 'Libya', 218, now())") !== TRUE)
+			                                RegisterDate) VALUES ('LY', 'LIBYA', 218, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MA', 'Morocco', 212, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MA', 'MOROCCO', 212, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MC', 'Monaco', 377, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MC', 'MONACO', 377, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MD', 'Moldova', 373, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MD', 'MOLDOVA', 373, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ME', 'Montenegro', 382, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ME', 'MONTENEGRO', 382, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MF', 'St. Martin', 590, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MF', 'ST. MARTIN', 590, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MG', 'Madagascar', 261, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MG', 'MADAGASCAR', 261, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MH', 'Marshall Islands', 692, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MH', 'MARSHALL ISLANDS', 692, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MK', 'Macedonia (FYROM)', 389, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MK', 'MACEDONIA (FYROM)', 389, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ML', 'Mali', 223, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ML', 'MALI', 223, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MM', 'Myanmar (Burma)', 95, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MM', 'MYANMAR (BURMA)', 95, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MN', 'Mongolia', 976, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MN', 'MONGOLIA', 976, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MO', 'Macau', 853, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MO', 'MACAU', 853, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MP', 'Northern Mariana Islands', 1670, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MP', 'NORTHERN MARIANA ISLANDS', 1670, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MQ', 'Martinique', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MQ', 'MARTINIQUE', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MR', 'Mauritania', 222, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MR', 'MAURITANIA', 222, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MS', 'Montserrat', 1664, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MS', 'MONTSERRAT', 1664, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MT', 'Malta', 356, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MT', 'MALTA', 356, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MU', 'Mauritius', 230, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MU', 'MAURITIUS', 230, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MV', 'Maldives', 960, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MV', 'MALDIVES', 960, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MW', 'Malawi', 265, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MW', 'MALAWI', 265, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MX', 'Mexico', 52, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MX', 'MEXICO', 52, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MY', 'Malaysia', 60, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MY', 'MALAYSIA', 60, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MZ', 'Mozambique', 258, now())") !== TRUE)
+			                                RegisterDate) VALUES ('MZ', 'MOZAMBIQUE', 258, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NA', 'Namibia', 264, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NA', 'NAMIBIA', 264, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NC', 'New Caledonia', 687, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NC', 'NEW CALEDONIA', 687, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NE', 'Niger', 227, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NE', 'NIGER', 227, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NF', 'Norfolk Island', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NF', 'NORFOLK ISLAND', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NG', 'Nigeria', 234, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NG', 'NIGERIA', 234, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NI', 'Nicaragua', 505, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NI', 'NICARAGUA', 505, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NL', 'Netherlands', 31, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NL', 'NETHERLANDS', 31, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NO', 'Norway', 47, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NO', 'NORWAY', 47, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NP', 'Nepal', 977, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NP', 'NEPAL', 977, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NR', 'Nauru', 674, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NR', 'NAURU', 674, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NU', 'Niue', 683, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NU', 'NIUE', 683, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NZ', 'New Zealand', 64, now())") !== TRUE)
+			                                RegisterDate) VALUES ('NZ', 'NEW ZEALAND', 64, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('OM', 'Oman', 968, now())") !== TRUE)
+			                                RegisterDate) VALUES ('OM', 'OMAN', 968, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PA', 'Panama', 507, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PA', 'PANAMA', 507, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PE', 'Peru', 51, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PE', 'PERU', 51, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PF', 'French Polynesia', 689, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PF', 'FRENCH POLYNESIA', 689, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PG', 'Papua New Guinea', 675, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PG', 'PAPUA NEW GUINEA', 675, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PH', 'Philippines', 63, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PH', 'PHILIPPINES', 63, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PK', 'Pakistan', 92, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PK', 'PAKISTAN', 92, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PL', 'Poland', 48, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PL', 'POLAND', 48, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PM', 'St. Pierre & Miquelon', 508, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PM', 'ST. PIERRE & MIQUELON', 508, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PN', 'Pitcairn Islands', 64, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PN', 'PITCAIRN ISLANDS', 64, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PR', 'Puerto Rico', 1787, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PR', 'PUERTO RICO', 1787, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PS', 'Palestine', 970, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PS', 'PALESTINE', 970, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PT', 'Portugal', 351, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PT', 'PORTUGAL', 351, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PW', 'Palau', 680, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PW', 'PALAU', 680, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PY', 'Paraguay', 595, now())") !== TRUE)
+			                                RegisterDate) VALUES ('PY', 'PARAGUAY', 595, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('QA', 'Qatar', 974, now())") !== TRUE)
+			                                RegisterDate) VALUES ('QA', 'QATAR', 974, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RE', 'Réunion', 262, now())") !== TRUE)
+			                                RegisterDate) VALUES ('RE', 'RÉUNION', 262, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RO', 'Romania', 40, now())") !== TRUE)
+			                                RegisterDate) VALUES ('RO', 'ROMANIA', 40, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RS', 'Serbia', 381, now())") !== TRUE)
+			                                RegisterDate) VALUES ('RS', 'SERBIA', 381, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RU', 'Russia', 7, now())") !== TRUE)
+			                                RegisterDate) VALUES ('RU', 'RUSSIA', 7, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RW', 'Rwanda', 250, now())") !== TRUE)
+			                                RegisterDate) VALUES ('RW', 'RWANDA', 250, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SA', 'Saudi Arabia', 966, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SA', 'SAUDI ARABIA', 966, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SB', 'Solomon Islands', 677, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SB', 'SOLOMON ISLANDS', 677, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SC', 'Seychelles', 248, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SC', 'SEYCHELLES', 248, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SD', 'Sudan', 249, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SD', 'SUDAN', 249, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SE', 'Sweden', 46, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SE', 'SWEDEN', 46, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SG', 'Singapore', 65, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SG', 'SINGAPORE', 65, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SH', 'St. Helena', 290, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SH', 'ST. HELENA', 290, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SI', 'Slovenia', 386, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SI', 'SLOVENIA', 386, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SJ', 'Svalbard & Jan Mayen', 47, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SJ', 'SVALBARD & JAN MAYEN', 47, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SK', 'Slovakia', 421, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SK', 'SLOVAKIA', 421, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SL', 'Sierra Leone', 232, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SL', 'SIERRA LEONE', 232, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SM', 'San Marino', 378, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SM', 'SAN MARINO', 378, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SN', 'Senegal', 221, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SN', 'SENEGAL', 221, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SO', 'Somalia', 252, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SO', 'SOMALIA', 252, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SR', 'Suriname', 597, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SR', 'SURINAME', 597, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SS', 'South Sudan', 211, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SS', 'SOUTH SUDAN', 211, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ST', 'São Tomé & Príncipe', 239, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ST', 'SÃO TOMÉ & PRÍNCIPE', 239, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SV', 'El Salvador', 503, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SV', 'EL SALVADOR', 503, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SX', 'Sint Maarten', 1721, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SX', 'SINT MAARTEN', 1721, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SY', 'Syria', 963, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SY', 'SYRIA', 963, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SZ', 'Swaziland', 268, now())") !== TRUE)
+			                                RegisterDate) VALUES ('SZ', 'SWAZILAND', 268, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TA', 'Tristan da Cunha', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TA', 'TRISTAN DA CUNHA', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TC', 'Turks & Caicos Islands', 1649, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TC', 'TURKS & CAICOS ISLANDS', 1649, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TD', 'Chad', 235, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TD', 'CHAD', 235, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TF', 'French Southern Territories', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TF', 'FRENCH SOUTHERN TERRITORIES', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TG', 'Togo', 228, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TG', 'TOGO', 228, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TH', 'Thailand', 66, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TH', 'THAILAND', 66, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TJ', 'Tajikistan', 992, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TJ', 'TAJIKISTAN', 992, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TK', 'Tokelau', 690, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TK', 'TOKELAU', 690, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TL', 'Timor-Leste', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TL', 'TIMOR-LESTE', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TM', 'Turkmenistan', 993, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TM', 'TURKMENISTAN', 993, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TN', 'Tunisia', 216, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TN', 'TUNISIA', 216, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TO', 'Tonga', 676, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TO', 'TONGA', 676, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TR', 'Turkey', 90, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TR', 'TURKEY', 90, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TT', 'Trinidad & Tobago', 1868, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TT', 'TRINIDAD & TOBAGO', 1868, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TV', 'Tuvalu', 688, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TV', 'TUVALU', 688, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TW', 'Taiwan', 886, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TW', 'TAIWAN', 886, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TZ', 'Tanzania', 255, now())") !== TRUE)
+			                                RegisterDate) VALUES ('TZ', 'TANZANIA', 255, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UA', 'Ukraine', 380, now())") !== TRUE)
+			                                RegisterDate) VALUES ('UA', 'UKRAINE', 380, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UG', 'Uganda', 250, now())") !== TRUE)
+			                                RegisterDate) VALUES ('UG', 'UGANDA', 250, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UM', 'U.S. Outlying Islands', NULL, now())") !== TRUE)
+			                                RegisterDate) VALUES ('UM', 'U.S. OUTLYING ISLANDS', NULL, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('US', 'United States', 1, now())") !== TRUE)
+			                                RegisterDate) VALUES ('US', 'UNITED STATES', 1, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UY', 'Uruguay', 598, now())") !== TRUE)
+			                                RegisterDate) VALUES ('UY', 'URUGUAY', 598, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UZ', 'Uzbekistan', 998, now())") !== TRUE)
+			                                RegisterDate) VALUES ('UZ', 'UZBEKISTAN', 998, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VA', 'Vatican City', 379, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VA', 'VATICAN CITY', 379, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VC', 'St. Vincent & Grenadines', 1784, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VC', 'ST. VINCENT & GRENADINES', 1784, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VE', 'Venezuela', 58, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VE', 'VENEZUELA', 58, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VG', 'British Virgin Islands', 1284, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VG', 'BRITISH VIRGIN ISLANDS', 1284, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VI', 'U.S. Virgin Islands', 1340, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VI', 'U.S. VIRGIN ISLANDS', 1340, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VN', 'Vietnam', 84, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VN', 'VIETNAM', 84, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VU', 'Vanuatu', 678, now())") !== TRUE)
+			                                RegisterDate) VALUES ('VU', 'VANUATU', 678, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('WF', 'Wallis & Futuna', 681, now())") !== TRUE)
+			                                RegisterDate) VALUES ('WF', 'WALLIS & FUTUNA', 681, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('WS', 'Samoa', 685, now())") !== TRUE)
+			                                RegisterDate) VALUES ('WS', 'SAMOA', 685, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('XK', 'Kosovo', 383, now())") !== TRUE)
+			                                RegisterDate) VALUES ('XK', 'KOSOVO', 383, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('YE', 'Yemen', 967, now())") !== TRUE)
+			                                RegisterDate) VALUES ('YE', 'YEMEN', 967, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('YT', 'Mayotte', 262, now())") !== TRUE)
+			                                RegisterDate) VALUES ('YT', 'MAYOTTE', 262, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ZA', 'South Africa', 27, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ZA', 'SOUTH AFRICA', 27, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ZM', 'Zambia', 260, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ZM', 'ZAMBIA', 260, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ZW', 'Zimbabwe', 263, now())") !== TRUE)
+			                                RegisterDate) VALUES ('ZW', 'ZIMBABWE', 263, now())") !== TRUE)
 				return ConfigInfraTools::MYSQL_ERROR_INSERT_FAILED;
 			return ConfigInfraTools::SUCCESS;
 		}
@@ -2394,6 +2394,7 @@ class InfraToolsFacedePersistenceDataBase
 	public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
+		$ArrayTables = NULL;
 		$StringMessage .= "<b>Query (SqlInfraToolsDataBaseCheck)</b>";
 		if($MySqlConnection != NULL)
 		{

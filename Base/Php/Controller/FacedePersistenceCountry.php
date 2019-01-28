@@ -75,7 +75,7 @@ class FacedePersistenceCountry
 	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayInstanceCountry = array();
+		$ArrayInstanceCountry = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -83,10 +83,12 @@ class FacedePersistenceCountry
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCountrySelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceCountry = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{

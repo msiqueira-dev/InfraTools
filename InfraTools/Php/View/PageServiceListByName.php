@@ -44,6 +44,7 @@ class PageServiceListByName extends PageService
 
 	public function LoadPage()
 	{
+		$this->InputValueFormMethod = "GET";
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
 			//FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT

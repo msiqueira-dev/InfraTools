@@ -151,8 +151,8 @@ class FacedePersistenceTypeUser
 	
 	public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTypeUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTypeUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -160,10 +160,12 @@ class FacedePersistenceTypeUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceTypeUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -202,14 +204,15 @@ class FacedePersistenceTypeUser
 	
 	public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTypeUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTypeUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTypeUserSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlTypeUserSelectNoLimit()))
 			{
+				$ArrayInstanceTypeUser = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceTypeUser = $this->Factory->CreateTypeUser($row[Config::TABLE_TYPE_USER_FIELD_DESCRIPTION],
@@ -279,6 +282,7 @@ class FacedePersistenceTypeUser
 	public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTypeUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)

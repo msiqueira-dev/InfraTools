@@ -1,7 +1,7 @@
 <?php
 
 /************************************************************************
-Class: Network.php
+Class: DiagnosticTools.php
 Creation: 2018/09/20
 Creator: Marcus Siqueira
 Dependencies:
@@ -21,7 +21,7 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class Factory');
 }
 
-class Network
+class DiagnosticTools
 {
 	/* Instances */
 	private static $Instance;

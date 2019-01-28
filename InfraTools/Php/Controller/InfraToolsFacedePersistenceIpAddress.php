@@ -8,7 +8,7 @@ Dependencies:
 			Base       - Php/Model/MySqlManager.php
 			InfraTools - Php/Controller/Config.php
 			InfraTools - Php/Model/InfraToolsPersistence.php
-			InfraTools - Php/Model/IpAddress.php
+			InfraTools - Php/Model/InfraToolsIpAddress.php
 	
 Description: 
 			Classe used to deal with ip addess database information.
@@ -23,9 +23,10 @@ Functions:
 			public function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
 															         &$RowCount, $Debug, $MySqlConnection);
 			public function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug, $MySqlConnection);
-			public function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, 
-			                                                         $Debug, $MySqlConnection);
-			public function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv6, 
+			public function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+			                                                         $IpAddressNetworkNew, $IpAddressIpv4, $Debug, $MySqlConnection)
+			public function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+			                                                         $IpAddressNetworkNew, $IpAddressIpv6, 
 			                                                         $Debug, $MySqlConnection);
 **************************************************************************/
 
@@ -168,7 +169,8 @@ class InfraToolsFacedePersistenceIpAddress
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsIpAddressSelect());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -177,11 +179,20 @@ class InfraToolsFacedePersistenceIpAddress
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
+						if(isset($row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME]))
+						{
+							$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
+																		$row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						} 
+						else $InstanceInfraToolsNetwork = $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK];
 						$InstanceInfraToolsIpAddress = $this->InfraToolsFactory->CreateInfraToolsIpAddress(
 							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION],
 																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4],
 																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6],
-						                                            $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK],
+						                                            $InstanceInfraToolsNetwork,
 						                                            $row["IpAddress".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsIpAddress, $InstanceInfraToolsIpAddress);
 					}
@@ -206,8 +217,8 @@ class InfraToolsFacedePersistenceIpAddress
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
 				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
-			}
 		}
+			}
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
@@ -223,7 +234,8 @@ class InfraToolsFacedePersistenceIpAddress
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsIpAddressSelectByIpAddressIpv4());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("sii", $IpAddressIpv4, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $IpAddressIpv4, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -232,11 +244,20 @@ class InfraToolsFacedePersistenceIpAddress
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
+						if(isset($row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME]))
+						{
+							$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
+																		$row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						} 
+						else $InstanceInfraToolsNetwork = $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK];
 						$InstanceInfraToolsIpAddress = $this->InfraToolsFactory->CreateInfraToolsIpAddress(
 							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION],
 																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4],
 																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6],
-							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK],
+						                                            $InstanceInfraToolsNetwork,
 						                                            $row["IpAddress".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsIpAddress, $InstanceInfraToolsIpAddress);
 					}
@@ -278,7 +299,8 @@ class InfraToolsFacedePersistenceIpAddress
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsIpAddressSelectByIpAddressIpv6());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("sii", $IpAddressIpv6, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $IpAddressIpv6, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -287,11 +309,20 @@ class InfraToolsFacedePersistenceIpAddress
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
+						if(isset($row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME]))
+						{
+							$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
+																		$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
+																		$row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						} 
+						else $InstanceInfraToolsNetwork = $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK];
 						$InstanceInfraToolsIpAddress = $this->InfraToolsFactory->CreateInfraToolsIpAddress(
 							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION],
 																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4],
 																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6],
-							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK],
+						                                            $InstanceInfraToolsNetwork,
 						                                            $row["IpAddress".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsIpAddress, $InstanceInfraToolsIpAddress);
 					}
@@ -301,14 +332,14 @@ class InfraToolsFacedePersistenceIpAddress
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_ASSOC_USER_SERVICE_SELECT_BY_ASSOC_USER_SERVICE_ID_FETCH_FAILED;
+						return ConfigInfraTools::MYSQL_IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_FETCH_FAILED;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_ASSOC_USER_SERVICE_SELECT_BY_ASSOC_USER_SERVICE_ID_FAILED;
+					return ConfigInfraTools::MYSQL_IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_FAILED;
 				}
 			}
 			else
@@ -324,6 +355,7 @@ class InfraToolsFacedePersistenceIpAddress
 	public function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;	
+		$ArrayInstanceInfraToolsIpAddress = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -333,12 +365,21 @@ class InfraToolsFacedePersistenceIpAddress
 				$ArrayInstanceInfraToolsIpAddress = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceIpAddress = $this->InfraToolsFactory->CreateInfraToolsIpAddress(
-							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION],
-																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4],
-																	$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6],
-							                                        $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK],
-						                                            $row["IpAddress".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+					if(isset($row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME]))
+					{
+						$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
+																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
+																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
+																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
+																	$row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+					} 
+					else $InstanceInfraToolsNetwork = $row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK];
+					$InstanceInfraToolsIpAddress = $this->InfraToolsFactory->CreateInfraToolsIpAddress(
+																$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_DESCRIPTION],
+																$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4],
+																$row[ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6],
+																$InstanceInfraToolsNetwork,
+																$row["IpAddress".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
 					array_push($ArrayInstanceInfraToolsIpAddress, $InstanceIpAddress);
 				}
 				if(!empty($ArrayInstanceInfraToolsIpAddress))
@@ -356,11 +397,10 @@ class InfraToolsFacedePersistenceIpAddress
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, 
-															 $Debug, $MySqlConnection)
+	public function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+															 $IpAddressNetworkNew, $IpAddressIpv4, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolAssocUserService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsIpAddressUpdateByIpAddressIpv4');
 		if($MySqlConnection != NULL)
@@ -368,7 +408,8 @@ class InfraToolsFacedePersistenceIpAddress
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsIpAddressUpdateByIpAddressIpv4());
 			if ($stmt)
 			{
-				$stmt->bind_param("sss", $IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4);
+				$stmt->bind_param("sssss", $IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New, $IpAddressNetworkNew,
+								           $IpAddressIpv4);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return ConfigInfraTools::SUCCESS;
@@ -397,11 +438,10 @@ class InfraToolsFacedePersistenceIpAddress
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv6, 
-			                                                 $Debug, $MySqlConnection)
+	public function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+															 $IpAddressNetworkNew, $IpAddressIpv6, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolAssocUserService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsIpAddressUpdateByIpAddressIpv6');
 		if($MySqlConnection != NULL)
@@ -409,7 +449,8 @@ class InfraToolsFacedePersistenceIpAddress
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsIpAddressUpdateByIpAddressIpv6());
 			if ($stmt)
 			{
-				$stmt->bind_param("sss", $IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv6);
+				$stmt->bind_param("sssss", $IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New, $IpAddressNetworkNew,
+								           $IpAddressIpv6);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return ConfigInfraTools::SUCCESS;

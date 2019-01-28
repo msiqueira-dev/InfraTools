@@ -191,8 +191,8 @@ class FacedePersistenceTeam
 	
 	public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTeam = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTeam = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -200,10 +200,12 @@ class FacedePersistenceTeam
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTeamSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceTeam = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -243,14 +245,15 @@ class FacedePersistenceTeam
 	
 	public function TeamSelectNoLimit(&$ArrayInstanceTeam, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTeam = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTeam = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlTeamSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlTeamSelectNoLimit()))
 			{
+				$ArrayInstanceTeam = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
@@ -322,6 +325,7 @@ class FacedePersistenceTeam
 	public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTeam = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)

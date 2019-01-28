@@ -22,6 +22,7 @@ Methods:
 			public    function CreateCorporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
 			public    function CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
 			public    function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
+			public    function CreateDiagnosticTools();
 			public    function CreateEmail();
 			public    function CreateFacedeBusiness($LanguageText);
 			public    function CreateFacedePersistence();
@@ -51,7 +52,6 @@ Methods:
 			public    function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword);
 			public    function CreateMobileDetect();
 			public    function CreateNetWhois();
-			public    function CreateNetwork();
 			public    function CreateNotificationCreateNotification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate);
 			public    function CreatePage($Page, $Language);
 			public    function CreatePageForm();
@@ -227,6 +227,14 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Department');
 		else include_once(BASE_PATH_PHP_MODEL . "Department.php");
 		return new Department($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
+	}
+	
+		public function CreateDiagnosticTools()
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "DiagnosticTools.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class DiagnosticTools');
+		else include_once(BASE_PATH_PHP_MODEL . "DiagnosticTools.php");
+		return DiagnosticTools::__create();	
 	}
 	
 	public function CreateEmail() 
@@ -583,14 +591,6 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading PEAR Class Net_Whois');
 		else include_once(PEAR_PATH . "Net/Whois.php");
 		return new Net_Whois;
-	}
-	
-	public function CreateNetwork()
-	{
-		if(!file_exists(BASE_PATH_PHP_MODEL . "Network.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Network');
-		else include_once(BASE_PATH_PHP_MODEL . "Network.php");
-		return Network::__create();	
 	}
 	
 	public function CreateNotification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate)

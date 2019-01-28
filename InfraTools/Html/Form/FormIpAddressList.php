@@ -57,7 +57,7 @@ if(is_array($this->ArrayInstanceIpAddress))
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_IP_ADDRESS_IPV4') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_IP_ADDRESS_IPV6') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_IP_ADDRESS_NETWORK') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_NETWORK_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FORM_FIELD_IP_ADDRESS_DESCRIPTION') . "</th>";
 	echo "<th  class='TableGenericThArrow'>
 	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .

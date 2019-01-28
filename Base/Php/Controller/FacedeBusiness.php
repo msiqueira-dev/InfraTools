@@ -108,8 +108,8 @@ class FacedeBusiness
 	
 	public function GetBrowserClient($TrueValue, &$ReturnMessage)
 	{
-		$instanceNetwork = $this->Factory->CreateNetwork();
-		$return = $instanceNetwork->GetBrowserClient($browser);
+		$instanceDiagnosticTools = $this->Factory->CreateDiagnosticTools();
+		$return = $instanceDiagnosticTools->GetBrowserClient($browser);
 		if ($return == Config::SUCCESS)
 		{
 			if(!$TrueValue)
@@ -122,8 +122,8 @@ class FacedeBusiness
 	
 	public function GetIpAddressClient($TrueValue, &$ReturnMessage)
 	{
-		$instanceNetwork = $this->Factory->CreateNetwork();
-		$return = $instanceNetwork->GetIpAddressClient($ipAddress);
+		$instanceDiagnosticTools = $this->Factory->CreateDiagnosticTools();
+		$return = $instanceDiagnosticTools->GetIpAddressClient($ipAddress);
 		if ($return == Config::SUCCESS)
 		{
 			if(!$TrueValue)
@@ -137,8 +137,8 @@ class FacedeBusiness
 	
 	public function GetOperationalSystem($TrueValue, &$ReturnMessage) 
 	{
-		$instanceNetwork = $this->Factory->CreateNetwork();
-		$return = $instanceNetwork->GetOperationalSystem($osPlatform);
+		$instanceDiagnosticTools = $this->Factory->CreateDiagnosticTools();
+		$return = $instanceDiagnosticTools->GetOperationalSystem($osPlatform);
 		if ($return == Config::SUCCESS)
 		{
 			if(!$TrueValue)

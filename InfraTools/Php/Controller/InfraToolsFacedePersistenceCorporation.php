@@ -79,7 +79,6 @@ class InfraToolsFacedePersistenceCorporation
 	public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceCorporation = array();
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelect');
 		if($MySqlConnection != NULL)
@@ -87,10 +86,12 @@ class InfraToolsFacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCorporationSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
+					$ArrayInstanceCorporation = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -131,13 +132,14 @@ class InfraToolsFacedePersistenceCorporation
 	public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceCorporation = array();
+		$ArrayInstanceCorporation = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelectActiveNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectActiveNoLimit()))
 			{
+				$ArrayInstanceCorporation = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
@@ -210,13 +212,14 @@ class InfraToolsFacedePersistenceCorporation
 	public function InfraTools(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceCorporation = array();
+		$ArrayInstanceCorporation = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlCorporationSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectNoLimit()))
 			{
+				$ArrayInstanceCorporation = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
@@ -254,7 +257,8 @@ class InfraToolsFacedePersistenceCorporation
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlCorporationSelectOnUserServiceContext());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("sii", $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{

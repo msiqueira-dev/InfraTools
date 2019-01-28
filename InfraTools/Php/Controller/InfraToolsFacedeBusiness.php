@@ -9,7 +9,7 @@ Dependencies:
 			Base       - Php/Controller/Session.php
 			Base       - Php/Model/Email.php
 			Base       - Php/Model/FormValidator.php
-			InfraTools - Php/Model/InfraToolsNetwork.php
+			InfraTools - Php/Model/InfraToolsDiagnosticTools.php
 Description: 
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Functions: 
@@ -95,14 +95,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckAvailability($HostName, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->CheckAvailability($HostName);
+				$return = $instanceInfraToolsDiagnosticTools->CheckAvailability($HostName);
 				if($return == ConfigInfraTools::SUCCESS)
 					$ReturnMessage = $this->Language->GetText('CHECK_AVAILABILITY_FREE');
 				else $ReturnMessage = $this->Language->GetText('CHECK_AVAILABILITY_TAKEN');
@@ -123,14 +123,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckBlackListHost($HostName, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->CheckBlackListHost($HostName, $ArrayBlackList);
+				$return = $instanceInfraToolsDiagnosticTools->CheckBlackListHost($HostName, $ArrayBlackList);
 				if($return == ConfigInfraTools::SUCCESS)
 					$ReturnMessage = str_replace('[0]', $HostName, 
 												 $this->Language->GetText('CHECK_BLACKLIST_HOST_NOT_LISTED'));
@@ -162,14 +162,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckBlackListIpAddress($IpAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->CheckBlackListIp($IpAddress, $ArrayBlackList);
+				$return = $instanceInfraToolsDiagnosticTools->CheckBlackListIp($IpAddress, $ArrayBlackList);
 				if ($return == ConfigInfraTools::SUCCESS)
 					$ReturnMessage = str_replace('[0]', $IpAddress,
 												 $this->Language->GetText('CHECK_BLACKLIST_IP_ADDRESS_NOT_LISTED'));
@@ -198,14 +198,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckDnsRecord($HostName, $RecordType, &$ReturnMessage)
 	{ 
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->CheckDnsRecord($HostName, $RecordType);
+				$return = $instanceInfraToolsDiagnosticTools->CheckDnsRecord($HostName, $RecordType);
 				if ($return != ConfigInfraTools::CHECK_HOST_DNS_RECORD_TYPE_NOT_ALLOWED)
 				{
 					if($return == ConfigInfraTools::SUCCESS)
@@ -244,7 +244,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	public function CheckEmailExists($EmailAddress, &$ReturnMessage)
 	{
 		$configInfraTools = $this->Factory->CreateConfigInfraTools();
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateEmail($EmailAddress, "email@email.com");
 		if ($return != FormValidator::INVALID_NULL)
@@ -290,7 +290,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckIpAddressIsInNetwork($IpAddress, $NetworkWithAddress, $NetworkMask, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
@@ -308,7 +308,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 							if ($return != FormValidator::INVALID_IP_MASK)
 							{
 								$networkWithMask = $NetworkWithAddress . "/" . $NetworkMask;
-								$return = $instanceInfraToolsNetwork->CheckIpAddressIsInNetwork($IpAddress, $networkWithMask);
+								$return = $instanceInfraToolsDiagnosticTools->CheckIpAddressIsInNetwork($IpAddress, $networkWithMask);
 								if($return == ConfigInfraTools::SUCCESS)
 								{
 									$ReturnMessage = str_replace('[0]', $IpAddress, 
@@ -362,14 +362,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckPingServerHost($HostName, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->CheckPingServer($HostName, $ArrayOutput);
+				$return = $instanceInfraToolsDiagnosticTools->CheckPingServer($HostName, $ArrayOutput);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					foreach($ArrayOutput as $outputLine)
@@ -394,14 +394,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckPingServerIpAddress($IpAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->CheckPingServer($IpAddress, $ArrayOutput);
+				$return = $instanceInfraToolsDiagnosticTools->CheckPingServer($IpAddress, $ArrayOutput);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					foreach($ArrayOutput as $outputLine)
@@ -426,14 +426,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckPortStatusHost($HostName, $Port, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->CheckPortStatus($HostName, $Port);
+				$return = $instanceInfraToolsDiagnosticTools->CheckPortStatus($HostName, $Port);
 				if($return == ConfigInfraTools::CHECK_HOST_PORT_FAILED_UNKNOWN)
 				{
 					$ReturnMessage = str_replace('[0]', $Port, 
@@ -478,14 +478,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckPortStatusIpAddress($IpAddress, $Port, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->CheckPortStatus($IpAddress, $Port);
+				$return = $instanceInfraToolsDiagnosticTools->CheckPortStatus($IpAddress, $Port);
 				if($return == ConfigInfraTools::CHECK_HOST_PORT_FAILED_UNKNOWN)
 				{
 					$ReturnMessage = str_replace('[0]', $Port, 
@@ -530,14 +530,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function CheckWebSiteExists($WebSite, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateURL($WebSiteAddress, "example.com");
 		if($return != FormValidator::INVALID_NULL)
 		{
 			if($return != FormValidator::INVALID_URL)
 			{
-				$return = $instanceInfraToolsNetwork->GetWebSiteHeaders($WebSiteAddress, $ArrayHeaders);
+				$return = $instanceInfraToolsDiagnosticTools->GetWebSiteHeaders($WebSiteAddress, $ArrayHeaders);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $Port, 
@@ -566,7 +566,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetCalculationNetMask($IpAddress, $Mask, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$subNetworkIp = NULL; $netMask = NULL; $broadCastAddress = NULL; $availableNetworkIps = NULL;
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
@@ -579,7 +579,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				{
 					if ($return != FormValidator::INVALID_IP_MASK)
 					{
-						$return = $instanceInfraToolsNetwork->GetCalculationNetMask($IpAddress, $Mask, $subNetworkIp, 
+						$return = $instanceInfraToolsDiagnosticTools->GetCalculationNetMask($IpAddress, $Mask, $subNetworkIp, 
 																		  $netMask, $broadCastAddress, $availableNetworkIps);
 						if($return == ConfigInfraTools::SUCCESS)
 						{
@@ -626,7 +626,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetDnsRecords($HostName, $DnsOption, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
@@ -635,7 +635,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			{
 				if($DnsOption == ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT_MX)
 				{
-					$return = $instanceInfraToolsNetwork->GetDnsMxRecords($HostName, $ArrayDnsMxRecords);
+					$return = $instanceInfraToolsDiagnosticTools->GetDnsMxRecords($HostName, $ArrayDnsMxRecords);
 					if($return == ConfigInfraTools::SUCCESS)
 					{
 						foreach($ArrayDnsMxRecords as $dnsMxRecords)
@@ -647,7 +647,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				}
 				else
 				{
-					$return = $instanceInfraToolsNetwork->GetDnsRecords($HostName, $ArrayDnsRecords);
+					$return = $instanceInfraToolsDiagnosticTools->GetDnsRecords($HostName, $ArrayDnsRecords);
 					if($return == ConfigInfraTools::SUCCESS)
 					{
 						usort($ArrayDnsRecords,'FacedeBusinessInfraTools::SortArrayByType');
@@ -704,14 +704,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetHostName($IpAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->GetHostName($IpAddress, $HostName);
+				$return = $instanceInfraToolsDiagnosticTools->GetHostName($IpAddress, $HostName);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $IpAddress, 
@@ -737,14 +737,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetIpAddresses($HostName, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->GetIpAddresses($HostName, $ArrayIpAddress);
+				$return = $instanceInfraToolsDiagnosticTools->GetIpAddresses($HostName, $ArrayIpAddress);
 				if ($return == ConfigInfraTools::SUCCESS)
 				{
 					foreach($ArrayIpAddress as $ipAddress)
@@ -770,14 +770,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetLocation($IpAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->GetLocation($IpAddress, $ArrayLocationInformation);
+				$return = $instanceInfraToolsDiagnosticTools->GetLocation($IpAddress, $ArrayLocationInformation);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage .= array_shift($ArrayLocationInformation) . "<br>";
@@ -806,14 +806,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetProtocol($Number, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateNumericValue($Number, "");
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return == ConfigInfraTools::SUCCESS)
 			{
-				$return = $instanceInfraToolsNetwork->GetProtocol($Number, $Protocol);
+				$return = $instanceInfraToolsDiagnosticTools->GetProtocol($Number, $Protocol);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $Number, 
@@ -839,7 +839,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetRoute($IpAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$timeToLive = 30;
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
@@ -847,7 +847,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->GetRoute($IpAddress, $timeToLive, $ArrayRoute);
+				$return = $instanceInfraToolsDiagnosticTools->GetRoute($IpAddress, $timeToLive, $ArrayRoute);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $IpAddress, 
@@ -874,7 +874,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetService($Port, $Protocol, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateNumericValue($Port, 0);
 		if ($return != FormValidator::INVALID_NULL)
@@ -882,15 +882,15 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			if ($return == ConfigInfraTools::SUCCESS)
 			{
 				if ($Protocol == ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT_TCP)
-					$Protocol = InfraToolsNetwork::PROTOCOL_TCP;
+					$Protocol = InfraToolsDiagnosticTools::PROTOCOL_TCP;
 				elseif ($Protocol == ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT_UDP)
-					$Protocol = InfraToolsNetwork::PROTOCOL_UDP;
+					$Protocol = InfraToolsDiagnosticTools::PROTOCOL_UDP;
 				else 
 				{
 					$ReturnMessage = $this->Language->GetText('INVALID_PROTOCOL');
 					return $return = ConfigInfraTools::INVALID_PROTOCOL;
 				}
-				$return = $instanceInfraToolsNetwork->GetService($Port, $Protocol, $Service);
+				$return = $instanceInfraToolsDiagnosticTools->GetService($Port, $Protocol, $Service);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage  = str_replace('[0]', $Port, 
@@ -921,7 +921,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetWebSiteContent($WebSiteAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateURL($WebSiteAddress, "example.com");
 		if($return != FormValidator::INVALID_NULL)
@@ -930,7 +930,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			{
 				if(strstr($WebSiteAddress, "http://") == FALSE && strstr($WebSiteAddress, "https://") == FALSE)
 					$WebSiteAddress = "http://" . $WebSiteAddress;
-				$return = $instanceInfraToolsNetwork->GetWebSiteContent($WebSiteAddress, $Content);
+				$return = $instanceInfraToolsDiagnosticTools->GetWebSiteContent($WebSiteAddress, $Content);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage  = str_replace('[0]', $WebSiteAddress, 
@@ -956,7 +956,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetWebSiteHeaders($WebSiteAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateURL($WebSiteAddress, "example.com");
 		if($return != FormValidator::INVALID_NULL)
@@ -965,7 +965,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			{
 				if(strstr($WebSiteAddress, "http://") == FALSE && strstr($WebSiteAddress, "https://") == FALSE)
 					$WebSiteAddress = "http://" . $WebSiteAddress;
-				$return = $instanceInfraToolsNetwork->GetWebSiteHeaders($WebSiteAddress, $ArrayHeaders);
+				$return = $instanceInfraToolsDiagnosticTools->GetWebSiteHeaders($WebSiteAddress, $ArrayHeaders);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $WebSiteAddress, 
@@ -1000,14 +1000,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetWhoisHost($HostName, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
-				$return = $instanceInfraToolsNetwork->GetWhois($HostName, $Info);
+				$return = $instanceInfraToolsDiagnosticTools->GetWhois($HostName, $Info);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $HostName, 
@@ -1033,14 +1033,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 	
 	public function GetWhoisIpAddress($IpAddress, &$ReturnMessage)
 	{
-		$instanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork();
+		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddress($IpAddress);
 		if ($return != FormValidator::INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS)
 			{
-				$return = $instanceInfraToolsNetwork->GetWhois($IpAddress, $Info);
+				$return = $instanceInfraToolsDiagnosticTools->GetWhois($IpAddress, $Info);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$ReturnMessage = str_replace('[0]', $IpAddress, 

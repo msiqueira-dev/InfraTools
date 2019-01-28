@@ -552,12 +552,10 @@ class Page
 		if (strpos($this->InputValueLoginEmail, '@') !== false) 
 		{
 			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserEmail($this->InputValueLoginEmail, 
-					                                                                 $this->InputValueLoginPassword, 
-																				     $Debug);
+																					 $this->InputValueLoginPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$return = $this->InstanceFacedePersistence->UserSelectByUserEmail($this->InputValueLoginEmail, 
-																			  $user, $Debug);
+				$return = $this->InstanceFacedePersistence->UserSelectByUserEmail($this->InputValueLoginEmail, $user, $Debug);
 				if($return == Config::SUCCESS)
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $Debug);
 			}
@@ -565,15 +563,12 @@ class Page
 		else
 		{
 			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserUniqueId($this->InputValueLoginEmail, 
-					                                                                    $this->InputValueLoginPassword, 
-																				        $Debug);
+					                                                                    $this->InputValueLoginPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, 
-																			         $user, $Debug);
+				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, $user, $Debug);
 				if($return == Config::SUCCESS)
-					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,
-																				 	      $Debug);
+					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,$Debug);
 			}
 		}
 		if($return == Config::SUCCESS || $return == Config::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
@@ -787,15 +782,13 @@ class Page
 	protected function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $instanceFacedePersistence->CorporationSelectActive($Limit1, $Limit2, $ArrayInstanceCorporation, 
-															         $RowCount, $Debug);
+		return $instanceFacedePersistence->CorporationSelectActive($Limit1, $Limit2, $ArrayInstanceCorporation, $RowCount, $Debug);
 	}
 	
 	protected function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $instanceFacedePersistence->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, 
-															                $Debug);
+		return $instanceFacedePersistence->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, $Debug);
 	}
 	
 	protected function CorporationSelectByName($CorporationName, &$InstanceCorporation, $Debug)
@@ -824,9 +817,7 @@ class Page
 											$matrixConstants, $Debug, $arrayOptions);
 		if($return == Config::SUCCESS)
 		{
-			$return = $instanceFacedePersistence->CorporationSelectByName($CorporationName,
-																		  $InstanceCorporation, 
-																		  $Debug);
+			$return = $instanceFacedePersistence->CorporationSelectByName($CorporationName, $InstanceCorporation, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$return = $this->CorporationLoadData($InstanceCorporation);
@@ -841,8 +832,7 @@ class Page
 	protected function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		return $instanceFacedePersistence->CorporationSelectNoLimit($ArrayInstanceCorporation, 
-															          $Debug);
+		return $instanceFacedePersistence->CorporationSelectNoLimit($ArrayInstanceCorporation, $Debug);
 	}
 	
 	protected function CorporationUpdateByName($CorporationActive, $CorporationName, &$InstanceCorporation, $Debug)
@@ -876,10 +866,8 @@ class Page
 
 		if($return == Config::SUCCESS)
 		{
-			$return = $instanceFacedePersistence->CorporationUpdateByName($CorporationActive,
-																          $CorporationName,
-																          $InstanceCorporation->GetCorporationName(),
-																          $Debug);
+			$return = $instanceFacedePersistence->CorporationUpdateByName($CorporationActive, $CorporationName,
+																          $InstanceCorporation->GetCorporationName(), $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$InstanceCorporation->SetCorporationActive($CorporationActive);
@@ -906,9 +894,9 @@ class Page
 	
 	protected function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug)
 	{
+		echo "TESTE: Limits: " . $Limit1 . " - " . $Limit2;
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, 
-													        $RowCount, $Debug);
+		$return = $instanceFacedePersistence->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -942,7 +930,7 @@ class Page
 		$this->InputValueDepartmentInitials = $DepartmentInitials;
 		$this->InputValueCorporationName = $CorporationName;
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$arrayElements = array(); $arrayElementsClass = array(); $arrayElementsDefaultValue = array(); $arrayElementsForm = array();
 		$arrayElementsInput = array(); $arrayElementsMinValue = array(); $arrayElementsMaxValue = array();
 		$arrayElementsNullable = array(); $arrayElementsText = array(); $arrayConstants = array(); $matrixConstants = array();
@@ -993,10 +981,10 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->DepartmentInsert($this->InputValueCorporationName,
-														   $this->InputValueDepartmentInitials,
-														   $this->InputValueDepartmentName, 
-														   $Debug);
+			$return = $instanceFacedePersistence->DepartmentInsert($this->InputValueCorporationName,
+														           $this->InputValueDepartmentInitials,
+														           $this->InputValueDepartmentName, 
+														           $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess('DEPARTMENT_INSERT_SUCCESS');
@@ -1131,7 +1119,7 @@ class Page
 	protected function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueDepartmentName = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -1154,7 +1142,7 @@ class Page
 											$matrixConstants, $Debug, $arrayOptions);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
+			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
 																		   $ArrayInstanceDepartment, $Debug);
 			if($return == Config::SUCCESS)
 				return $return;
@@ -1167,7 +1155,7 @@ class Page
 																		  &$InstanceDepartment, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueCorporationName = $CorporationName;
 		$this->InputValueDepartmentName = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -1206,7 +1194,7 @@ class Page
 		
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->DepartmentSelectByDepartmentNameAndCorporationName(
+			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentNameAndCorporationName(
 				                                                                     $this->InputValueCorporationName, 
 																				     $this->InputValueDepartmentName,
 																		             $InstanceDepartment, $Debug);
@@ -1223,8 +1211,8 @@ class Page
 	
 	protected function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug)
 	{
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $FacedePersistence->DepartmentSelectNoLimit($ArrayInstanceDepartment, $Debug);
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->DepartmentSelectNoLimit($ArrayInstanceDepartment, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->ShowDivReturnEmpty();
@@ -1277,8 +1265,8 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->DepartmentUpdateDepartmentByDepartmentAndCorporation(
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->DepartmentUpdateDepartmentByDepartmentAndCorporation(
 															   $InstanceDepartment->GetDepartmentCorporationName(),
 															   $this->InputValueDepartmentInitials,
 															   $this->InputValueDepartmentName,
@@ -1345,8 +1333,9 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->DepartmentUpdateCorporationByCorporationAndDepartment($this->InputValueCorporationName,
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->DepartmentUpdateCorporationByCorporationAndDepartment(
+				                                                                        $this->InputValueCorporationName,
 															                            $InstanceDepartment->GetDepartmentCorporationName(),
 															                            $InstanceDepartment->GetDepartmentName(),
 															                            $Debug);
@@ -1543,11 +1532,11 @@ class Page
 	{
 		if($InstanceNotification != NULL)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->NotificationDeleteByNotificationId($InstanceNotification->GetNotificationId(), $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->NotificationDeleteByNotificationId($InstanceNotification->GetNotificationId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_NOTIFICATION, $NotificationDeleteByNotificationId);
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
 				$this->ShowDivReturnSuccess("NOTIFICATION_DELETE_SUCCESS");
 				return Config::SUCCESS;
 			}
@@ -1559,7 +1548,7 @@ class Page
 	protected function NotificationInsert($NotificationActive, $NotificationText, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		if($NotificationActive == NULL)
 			$NotificationActive = FALSE;
 		elseif($NotificationActive != FALSE)
@@ -1601,7 +1590,7 @@ class Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->NotificationInsert($this->InputValueNotificationActive, $this->InputValueNotificationText, $Debug);
+			$return = $instanceFacedePersistence->NotificationInsert($this->InputValueNotificationActive, $this->InputValueNotificationText, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("NOTIFICATION_INSERT_SUCCESS");
@@ -1646,7 +1635,7 @@ class Page
 	protected function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueNotificationId = $NotificationId;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -1669,7 +1658,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->NotificationSelectByNotificationId($this->InputValueNotificationId, $InstanceNotification, $Debug);
+			$return = $instanceFacedePersistence->NotificationSelectByNotificationId($this->InputValueNotificationId, $InstanceNotification, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
@@ -1724,10 +1713,10 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->NotificationUpdateByNotificationId($this->InputValueNotificationActive, 
-																			 $this->InputValueNotificationText,
-		                                                                     $InstanceNotification->GetNotificationId(), $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->NotificationUpdateByNotificationId($this->InputValueNotificationActive, 
+																			         $this->InputValueNotificationText,
+		                                                                             $InstanceNotification->GetNotificationId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$InstanceNotification->UpdateNotification($this->InputValueNotificationActive, $this->InputValueNotificationText, NULL);
@@ -1801,8 +1790,8 @@ class Page
 	{
 		if($InstanceSystemConfiguration != NULL)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->SystemConfigurationDeleteBySystemConfigurationOptionNumber(
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->SystemConfigurationDeleteBySystemConfigurationOptionNumber(
 				                                        $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), $Debug);
 			if($return == Config::SUCCESS)
 			{
@@ -1819,7 +1808,7 @@ class Page
 	                                             $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		if($SystemConfigurationOptionActive == NULL)
 			$SystemConfigurationOptionActive = FALSE;
 		elseif($SystemConfigurationOptionActive != FALSE)
@@ -1890,10 +1879,10 @@ class Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->SystemConfigurationInsert($this->InputValueSystemConfigurationOptionActive,
-																	$this->InputValueSystemConfigurationOptionDescription,
-	                                                                $this->InputValueSystemConfigurationOptionName, 
-																	$this->InputValueSystemConfigurationOptionValue, $Debug);
+			$return = $instanceFacedePersistence->SystemConfigurationInsert($this->InputValueSystemConfigurationOptionActive,
+																	        $this->InputValueSystemConfigurationOptionDescription,
+	                                                                        $this->InputValueSystemConfigurationOptionName, 
+																	        $this->InputValueSystemConfigurationOptionValue, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_INSERT_SUCCESS");
@@ -1946,7 +1935,7 @@ class Page
 	                                                                            &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueSystemConfigurationOptionName = $SystemConfigurationOptionName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -1970,7 +1959,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
+			$return = $instanceFacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
 				                                                                              $this->InputValueSystemConfigurationOptionName, 
 																						      $ArrayInstanceSystemConfiguration, $RowCount,
 																						      $Debug);
@@ -1988,7 +1977,7 @@ class Page
 	                                                                              &$InstanceSystemConfiguration, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueSystemConfigurationOptionNumber = $SystemConfigurationOptionNumber;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2011,7 +2000,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionNumber(
+			$return = $instanceFacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionNumber(
 				                                                          $this->InputValueSystemConfigurationOptionNumber, 
 				                                                          $InstanceSystemConfiguration, $Debug);
 			if($return == Config::SUCCESS)
@@ -2104,8 +2093,8 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
 				                                                 $this->InputValueSystemConfigurationOptionActive,
 		                                                         $this->InputValueSystemConfigurationOptionDescription,
 		                                                         $this->InputValueSystemConfigurationOptionName,
@@ -2137,8 +2126,8 @@ class Page
 	{
 		if($InstanceTeam != NULL)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TeamDeleteByTeamId($InstanceTeam->GetTeamId(), $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TeamDeleteByTeamId($InstanceTeam->GetTeamId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TEAM, $InstanceTeam);
@@ -2156,7 +2145,7 @@ class Page
 	protected function TeamInsert($TeamDescription, $TeamName, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTeamDescription = $TeamDescription;
 		$this->InputValueTeamName = $TeamName;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -2195,9 +2184,7 @@ class Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TeamInsert($this->InputValueTeamDescription,
-												     $this->InputValueTeamName, 
-													 $Debug);
+			$return = $instanceFacedePersistence->TeamInsert($this->InputValueTeamDescription, $this->InputValueTeamName, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("TEAM_INSERT_SUCCESS");
@@ -2231,10 +2218,7 @@ class Page
 	protected function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TeamSelect($Limit1, $Limit2,
-															 $ArrayInstanceTeam,
-															 $RowCount,
-															 $Debug);
+		$return = $instanceFacedePersistence->TeamSelect($Limit1, $Limit2, $ArrayInstanceTeam, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -2249,7 +2233,7 @@ class Page
 	protected function TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTeamId = $TeamId;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2272,7 +2256,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TeamSelectByTeamId($this->InputValueTeamId, $InstanceTeam, $Debug);
+			$return = $instanceFacedePersistence->TeamSelectByTeamId($this->InputValueTeamId, $InstanceTeam, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
@@ -2287,7 +2271,7 @@ class Page
 	protected function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTeamName = $TeamName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2311,7 +2295,7 @@ class Page
 		$return = Config::SUCCESS;
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TeamSelectByTeamName($this->InputValueTeamName, $ArrayInstanceTeam, $Debug);
+			$return = $instanceFacedePersistence->TeamSelectByTeamName($this->InputValueTeamName, $ArrayInstanceTeam, $Debug);
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
 		}
@@ -2361,11 +2345,9 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TeamUpdateByTeamId($this->InputValueTeamDescription,
-															 $InstanceTeam->GetTeamId(),
-															 $this->InputValueTeamName,
-															 $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TeamUpdateByTeamId($this->InputValueTeamDescription, $InstanceTeam->GetTeamId(),
+																	 $this->InputValueTeamName, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$InstanceTeam->SetTeamDescription($this->InputValueTeamDescription);
@@ -2389,8 +2371,8 @@ class Page
 	{
 		if($InstanceTicket != NULL)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TicketDeleteByTicketId($InstanceTicket->GetTicketId(), $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TicketDeleteByTicketId($InstanceTicket->GetTicketId(), $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2409,7 +2391,7 @@ class Page
 									$TypeTicketDescription, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTeamDescription             = $TicketDescription;
 		$this->InputValueTicketSuggestion            = $TicketSuggestion;
 		$this->InputValueTicketTitle                 = $TicketTitle;
@@ -2490,9 +2472,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TicketInsert($this->InputValueTicketDescription,
-												       $this->InputValueTeamName, 
-												       $Debug);
+			$return = $instanceFacedePersistence->TicketInsert($this->InputValueTicketDescription, $this->InputValueTeamName, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("TICKET_INSERT_SUCCESS");
@@ -2528,10 +2508,7 @@ class Page
 	protected function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TicketSelect($Limit1, $Limit2,
-														   $ArrayInstanceTicket,
-														   $RowCount,
-														   $Debug);
+		$return = $instanceFacedePersistence->TicketSelect($Limit1, $Limit2, $ArrayInstanceTicket, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -2546,7 +2523,7 @@ class Page
 	protected function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTicketId = $TicketId;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2569,7 +2546,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TicketSelectByTicketId($this->InputValueTicketId, $InstanceTicket, $Debug);
+			$return = $instanceFacedePersistence->TicketSelectByTicketId($this->InputValueTicketId, $InstanceTicket, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2584,7 +2561,7 @@ class Page
 	protected function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueUserEmail = $RequestingUserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2607,7 +2584,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TicketSelectByRequestingUserEmail($this->InputValueUserEmail, $InstanceTicket, $Debug);
+			$return = $instanceFacedePersistence->TicketSelectByRequestingUserEmail($this->InputValueUserEmail, $InstanceTicket, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2622,7 +2599,7 @@ class Page
 	protected function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueUserEmail = $ResponsibleUserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2645,7 +2622,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TicketSelectByResponsibleUserEmail($this->InputValueUserEmail, $InstanceTicket, $Debug);
+			$return = $instanceFacedePersistence->TicketSelectByResponsibleUserEmail($this->InputValueUserEmail, $InstanceTicket, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2661,7 +2638,7 @@ class Page
 											  $TypeStatusTicketDescriptionNew, $TypeTicketDescriptionNew, &$InstanceTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTicketDescription           = $TicketDescriptionNew;
 		$this->InputValueTicketSuggestion            = $TicketSuggestionNew;
 		$this->InputValueTicketTitle                 = $TicketTitleNew;
@@ -2745,9 +2722,10 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TicketUpdateByTicketId($this->InputValueTicketDescription, $this->InputValueTicketSuggestion,
-																 $this->InputValueTicketTitle, $this->InputValueTypeStatusTicketDescription,
-																 $this->InputValueTypeTicketDescription, $InstanceTicket, $Debug);
+			$return = $instanceFacedePersistence->TicketUpdateByTicketId($this->InputValueTicketDescription, $this->InputValueTicketSuggestion,
+																         $this->InputValueTicketTitle, 
+																		 $this->InputValueTypeStatusTicketDescription,
+																         $this->InputValueTypeTicketDescription, $InstanceTicket, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
@@ -2776,8 +2754,8 @@ class Page
 	{
 		if($InstanceTypeAssocUserTeam != NULL)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription(
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription(
 				                                                       $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
 																	   $Debug);
 			if($return == Config::SUCCESS)
@@ -2797,7 +2775,7 @@ class Page
 	protected function TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2820,7 +2798,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamDescription, $Debug);
+			$return = $instanceFacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamDescription, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS");
@@ -2852,10 +2830,7 @@ class Page
 	protected function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TypeAssocUserTeamSelect($Limit1, $Limit2,
-															          $ArrayInstanceTypeAssocUserTeam,
-															          $RowCount,
-															          $Debug);
+		$return = $instanceFacedePersistence->TypeAssocUserTeamSelect($Limit1, $Limit2, $ArrayInstanceTypeAssocUserTeam, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -2870,7 +2845,7 @@ class Page
 	protected function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -2893,7 +2868,8 @@ class Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamDescription, 
+			$return = $instanceFacedePersistence->TypeAssocUserTeamSelectByTypeAssocUserTeamDescription(
+				                                                                                $this->InputValueTypeAssocUserTeamDescription, 
 																		                        $InstanceTypeAssocUserTeam,
 																		                        $Debug);
 			if($return == Config::SUCCESS)
@@ -2933,8 +2909,8 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription(
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription(
 				                                                             $this->InputValueTypeAssocUserTeamDescription,
 																		     $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
 																		     $Debug);
@@ -3035,10 +3011,7 @@ class Page
 	protected function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TypeStatusTicketSelect($Limit1, $Limit2,
-															         $ArrayInstanceTypeStatusTicket,
-															         $RowCount,
-															         $Debug);
+		$return = $instanceFacedePersistence->TypeStatusTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeStatusTicket, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -3219,8 +3192,7 @@ class Page
 	protected function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TypeTicketSelect($Limit1, $Limit2,
-															   $ArrayInstanceTypeTicket, $RowCount, $Debug);
+		$return = $instanceFacedePersistence->TypeTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeTicket, $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -3325,8 +3297,8 @@ class Page
 	{
 		if($InstanceTypeUser != NULL)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->TypeUserDeleteByTypeUserDescription($InstanceTypeUser->GetTypeUserDescription(), $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->TypeUserDeleteByTypeUserDescription($InstanceTypeUser->GetTypeUserDescription(), $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
@@ -3344,7 +3316,7 @@ class Page
 	protected function TypeUserInsert($TypeUserDescription, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTypeUserDescription = $TypeUserDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -3367,8 +3339,7 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeUserInsert($this->InputValueTypeUserDescription, 
-														 $Debug);
+			$return = $instanceFacedePersistence->TypeUserInsert($this->InputValueTypeUserDescription, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("TYPE_USER_INSERT_SUCCESS");
@@ -3398,10 +3369,8 @@ class Page
 	protected function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$return = $instanceFacedePersistence->TypeUserSelect($Limit1, $Limit2,
-															 $ArrayInstanceTypeUser,
-															 $RowCount,
-															 $Debug);
+		$return = $instanceFacedePersistence->TypeUserSelect($Limit1, $Limit2, $ArrayInstanceTypeUser,
+															 $RowCount, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -3416,7 +3385,7 @@ class Page
 	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTypeUserDescription = $TypeUserDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -3440,8 +3409,8 @@ class Page
 											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
-																			  $InstanceTypeUser, $Debug);
+			$return = $instanceFacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
+																			          $InstanceTypeUser, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
@@ -3456,7 +3425,7 @@ class Page
 	protected function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistence = $this->Factory->CreateFacedePersistence();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$this->InputValueTypeUserDescription = $TypeUserDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -3480,8 +3449,8 @@ class Page
 											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$return = $FacedePersistence->TypeUserSelectByTypeUserDescriptionLike($this->InputValueTypeUserDescription, 
-																			      $ArrayInstanceTypeUser, $Debug);
+			$return = $instanceFacedePersistence->TypeUserSelectByTypeUserDescriptionLike($this->InputValueTypeUserDescription, 
+																			               $ArrayInstanceTypeUser, $Debug);
 			if($return == Config::SUCCESS)
 				return Config::SUCCESS;
 		}
@@ -3528,9 +3497,9 @@ class Page
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 			if($return == Config::SUCCESS)
 			{
-				$FacedePersistence = $this->Factory->CreateFacedePersistence();
-				$return = $FacedePersistence->TypeUserUpdateByTypeUserDescription($this->InputValueTypeUserDescription,
-					                                                              $InstanceTypeUser->GetTypeUserDescription(), $Debug);
+				$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+				$return = $instanceFacedePersistence->TypeUserUpdateByTypeUserDescription($this->InputValueTypeUserDescription,
+					                                                                      $InstanceTypeUser->GetTypeUserDescription(), $Debug);
 				if($return == Config::SUCCESS)
 				{
 					$InstanceTypeUser->SetTypeUserDescription($this->InputValueTypeUserDescription);
@@ -3556,8 +3525,7 @@ class Page
 			$InstanceUser = $this->User;
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->UserUpdateTwoStepVerificationByUserEmail($InstanceUser->GetEmail(), 
-																				         $TwoStepVerification, 
-																				         $Debug);
+																				       $TwoStepVerification, $Debug);
 		if($return == Config::SUCCESS)
 		{
 			$InstanceUser->SetTwoStepVerification($TwoStepVerification);
@@ -4138,8 +4106,7 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByCorporationName($this->InputValueCorporationName, $Limit1, $Limit2,
-																			  $ArrayInstanceUser, 
-																			  $RowCount, $Debug);
+																			  $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				if($return == Config::SUCCESS)
@@ -4199,10 +4166,10 @@ class Page
 											$matrixConstants, $Debug);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->UserSelectByDepartmentName($Limit1, $Limit2, $this->InputValueCorporationName, 
-																	 $this->InputValueDepartmentName, $ArrayInstanceUser, 
-																	 $RowCount,  $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByDepartmentName($Limit1, $Limit2, $this->InputValueCorporationName, 
+																	         $this->InputValueDepartmentName, $ArrayInstanceUser, 
+																	         $RowCount,  $Debug);
 			if($return == Config::SUCCESS)
 			{
 				if($return == Config::SUCCESS)
@@ -4232,8 +4199,7 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByHashCode($this->InputValueUserHashCode, 
-																	   $InstanceUser, 
-																	   $Debug);
+																	   $InstanceUser, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("USER_SELECT_BY_HASH_CODE_SUCCESS");
@@ -4535,7 +4501,7 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
-															          $ArrayInstanceUser, $RowCount, $Debug);
+															                      $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnEmpty();
@@ -4723,8 +4689,8 @@ class Page
 	{
 		if(isset($HashCode))
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			return $FacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			return $instanceFacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
 		}
 		$this->ShowDivReturnError("REGISTER_CONFIRMATION_SELECT_ERROR");
 		return Config::RETURN_ERROR;
@@ -5278,8 +5244,8 @@ class Page
 											$arrayExtraField);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $FacedePersistence->UserUpdatePasswordByUserEmail($UserEmail, $this->InputValueNewPassword, $Debug);
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserUpdatePasswordByUserEmail($UserEmail, $this->InputValueNewPassword, $Debug);
 			if($return == Config::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("USER_UPDATE_USER_PASSWORD_SUCCESS");

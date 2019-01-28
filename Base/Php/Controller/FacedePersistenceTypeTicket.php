@@ -150,8 +150,8 @@ class FacedePersistenceTypeTicket
 	
 	public function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceTypeTicket = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceTypeTicket = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -159,10 +159,12 @@ class FacedePersistenceTypeTicket
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeTicketSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceTypeTicket = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{

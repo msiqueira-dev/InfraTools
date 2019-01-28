@@ -123,7 +123,7 @@ class PageServiceSelect extends PageInfraTools
 			}
 			elseif($this->CheckGetContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
 			{
-				$return = $this->InfraToolsServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
+				$return = $this->InfraToolsServiceDeleteByServiceId($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
 												   $this->User->GetEmail(), 
 												   $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
@@ -145,7 +145,7 @@ class PageServiceSelect extends PageInfraTools
 					if($return == ConfigInfraTools::SUCCESS)
 					{
 						$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
-						$this->ServiceLoadData($this->InstanceInfraToolsService);
+						$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 						$this->ReturnImage = $retImage;
 						$this->ReturnClass = $retClass;
 						$this->ReturnText  = $retText;
@@ -165,7 +165,7 @@ class PageServiceSelect extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
-					$this->ServiceLoadData($this->InstanceInfraToolsService);
+					$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 					$this->ShowDivReturnEmpty();
 				}
 				else $this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");

@@ -31,3 +31,4 @@
 .InputSmall{width:40px !important;}
 .DivReturnForm{width:600px !important;}
 .DivReturnForm div{float:none !important;}
+.DivContentBodyContainer input[type="text"]{height:30px !important;}

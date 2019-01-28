@@ -28,55 +28,63 @@ Methods:
 		public static function SqlInfraToolsIpAddressSelectByIpAddressIpv6();
 		public static function SqlInfraToolsIpAddressUpdateByIpAddressIpv4();
 		public static function SqlInfraToolsIpAddressUpdateByIpAddressIpv6();
+		public static function SqlInfraToolsNetworkDeleteByNetworkName();
+		public static function SqlInfraToolsNetworkInsert();
+		public static function SqlInfraToolsNetworkSelect();
+		public static function SqlInfraToolsNetworkSelectByNetworkIp();
+		public static function SqlInfraToolsNetworkSelectByNetworkName();
+		public static function SqlInfraToolsNetworkSelectByNetworkNetmask();
+		public static function SqlInfraToolsNetworkSelectNoLimit();
+		public static function SqlInfraToolsNetworkUpdateByNetworkName();
 		public static function SqlInfraToolsUserSelectByMonitoringId();
 		public static function SqlInfraToolsUserSelectByServiceId();
 		public static function SqlInfraToolsUserSelectByTypeMonitoringDescription();
-		public static function SqlServiceDeleteById();
-		public static function SqlServiceDeleteByIdOnUserContext();
-		public static function SqlServiceInsert();
-		public static function SqlServiceSelect();
-		public static function SqlServiceSelectOnUserContext();
-		public static function SqlServiceSelectByServiceActive();
-		public static function SqlServiceSelectByServiceActiveNoLimit();
-		public static function SqlServiceSelectByServiceActiveOnUserContext();
-		public static function SqlServiceSelectByServiceActiveOnUserContextNoLimit();
-		public static function SqlServiceSelectByServiceCorporation();
-		public static function SqlServiceSelectByServiceCorporationNoLimit();
-		public static function SqlServiceSelectByServiceCorporationOnUserContext();
-		public static function SqlServiceSelectByServiceCorporationOnUserContextNoLimit();
-		public static function SqlServiceSelectByServiceDepartment();
-		public static function SqlServiceSelectByServiceDepartmentNoLimit();
-		public static function SqlServiceSelectByServiceDepartmentOnUserContext();
-		public static function SqlServiceSelectByServiceDepartmentOnUserContextNoLimit();
-		public static function SqlServiceSelectByServiceId();
-		public static function SqlServiceSelectByServiceIdOnUserContext();
-		public static function SqlServiceSelectByServiceName();
-		public static function SqlServiceSelectByServiceNameNoLimit();
-		public static function SqlServiceSelectByServiceNameOnUserContext();
-		public static function SqlServiceSelectByServiceNameOnUserContextNoLimit();
-		public static function SqlServiceSelectByServiceType();
-		public static function SqlServiceSelectByServiceTypeNoLimit();
-		public static function SqlServiceSelectByServiceTypeOnUserContext();
-		public static function SqlServiceSelectByServiceTypeOnUserContextNoLimit();
-		public static function SqlServiceSelectByTypeAssocUserServiceDescription();
-		public static function SqlServiceSelectByTypeAssocUserServiceDescriptionNoLimit();
-		public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContext();
-		public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit();
-		public static function SqlServiceSelectByUser();
-		public static function SqlServiceSelectByUserNoLimit();
-		public static function SqlServiceSelectNoLimit();
-		public static function SqlServiceSelectUsers();
-		public static function SqlServiceUpdateByServiceId();
-		public static function SqlServiceUpdateRestrictByServiceId();
-		public static function SqlServiceUpdateByName();
+		public static function SqlInfraToolsServiceDeleteById();
+		public static function SqlInfraToolsServiceDeleteByIdOnUserContext();
+		public static function SqlInfraToolsServiceInsert();
+		public static function SqlInfraToolsServiceSelect();
+		public static function SqlInfraToolsServiceSelectOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceActive();
+		public static function SqlInfraToolsServiceSelectByServiceActiveNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceActiveOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceActiveOnUserContextNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceCorporation();
+		public static function SqlInfraToolsServiceSelectByServiceCorporationNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceCorporationOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceDepartment();
+		public static function SqlInfraToolsServiceSelectByServiceDepartmentNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceDepartmentOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceId();
+		public static function SqlInfraToolsServiceSelectByServiceIdOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceName();
+		public static function SqlInfraToolsServiceSelectByServiceNameNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceNameOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceNameOnUserContextNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceType();
+		public static function SqlInfraToolsServiceSelectByServiceTypeNoLimit();
+		public static function SqlInfraToolsServiceSelectByServiceTypeOnUserContext();
+		public static function SqlInfraToolsServiceSelectByServiceTypeOnUserContextNoLimit();
+		public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescription();
+		public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit();
+		public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext();
+		public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit();
+		public static function SqlInfraToolsServiceSelectByUser();
+		public static function SqlInfraToolsServiceSelectByUserNoLimit();
+		public static function SqlInfraToolsServiceSelectNoLimit();
+		public static function SqlInfraToolsServiceSelectUsers();
+		public static function SqlInfraToolsServiceUpdateByServiceId();
+		public static function SqlInfraToolsServiceUpdateRestrictByServiceId();
+		public static function SqlInfraToolsServiceUpdateByName();
 		public static function SqlTypeAssocUserServiceSelect();
 		public static function SqlTypeAssocUserServiceSelectNoLimit();
 		public static function SqlTypeAssocUserServiceSelectOnUserContext();
 		public static function SqlTypeAssocUserServiceSelectOnUserContextNoLimit();
-		public static function SqlTypeServiceSelect();
-		public static function SqlTypeServiceSelectNoLimit();
-		public static function SqlTypeServiceSelectOnUserContext();
-		public static function SqlTypeServiceSelectOnUserContextNoLimit();
+		public static function SqlInfraToolsTypeServiceSelect();
+		public static function SqlInfraToolsTypeServiceSelectNoLimit();
+		public static function SqlInfraToolsTypeServiceSelectOnUserContext();
+		public static function SqlInfraToolsTypeServiceSelectOnUserContextNoLimit();
 **************************************************************************/
 if (!class_exists("ConfigInfraTools"))
 {
@@ -282,7 +290,7 @@ class InfraToolsPersistence extends Persistence
 			 . " "            . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ","
 		     . " "            . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ","
 			 . " "            . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . ")"
-			 . " VALUES (?, ?, NOW())";	
+			 . " VALUES (?, ?, ?, ?, NOW())";	
 	}
 	
 	public static function SqlInfraToolsIpAddressSelect()
@@ -293,9 +301,19 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
 			   . " as IpAddressRegisterDate, "                                                                                     . "   "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP                   . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                 . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK              . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                        . "   "
+			   . " as NetworkRegisterDate, "                                                                                       . "   "
 			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_IP_ADDRESS                                                    . "   "
 			   . " ) AS COUNT "                                                                                                    . "   "
 			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "LEFT JOIN "  . ConfigInfraTools::TABLE_NETWORK                                                                   ."    "
+			   . "ON "         . ConfigInfraTools::TABLE_IP_ADDRESS                                                                .".". 
+								 ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK                                       ."    "
+			   . "=  "         . ConfigInfraTools::TABLE_NETWORK                                                                   .".". 
+								 ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                                                ."    "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4  . "   "
 			   . "LIMIT ?, ?";
 	}
@@ -307,8 +325,18 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
-			   . " as IpAddressRegisterDate "                                                                                      . "   "
+			   . " as IpAddressRegisterDate "                                                                                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP                   . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                 . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK              . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                        . "   "
+			   . " as NetworkRegisterDate "                                                                                        . "   "
 			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "LEFT JOIN "  . ConfigInfraTools::TABLE_NETWORK                                                                   ."    "
+			   . "ON "         . ConfigInfraTools::TABLE_IP_ADDRESS                                                                .".". 
+								 ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK                                       ."    "
+			   . "=  "         . ConfigInfraTools::TABLE_NETWORK                                                                   .".". 
+								  ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                                               ."    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4   . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4  . "   ";
 	}
@@ -320,8 +348,18 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
-			   . " as IpAddressRegisterDate "                                                                                      . "   "
+			   . " as IpAddressRegisterDate "                                                                                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP                   . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                 . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK              . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                        . "   "
+			   . " as NetworkRegisterDate, "                                                                                       . "   "
 			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "LEFT JOIN "  . ConfigInfraTools::TABLE_NETWORK                                                                   ."    "
+			   . "ON "         . ConfigInfraTools::TABLE_IP_ADDRESS                                                                .".". 
+								 ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK                                       ."    "
+			   . "=  "         . ConfigInfraTools::TABLE_NETWORK                                                                   .".". 
+								  ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                                               ."    "
 			   . "WHERE "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6   . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6  . "   ";
 	}
@@ -333,10 +371,20 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK     . ",  "
 			   . " "      . ConfigInfraTools::TABLE_IP_ADDRESS.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                     . "   "
-			   . " as IpAddressRegisterDate, "                                                                                     . "   "
+			   . " as IpAddressRegisterDate "                                                                                      . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP                   . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                 . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK              . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                        . "   "
+			   . " as NetworkRegisterDate, "                                                                                       . "   "
 			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_IP_ADDRESS                                                    . "   "
 			   . " ) AS COUNT "                                                                                                    . "   "
 			   . "FROM "       . ConfigInfraTools::TABLE_IP_ADDRESS                                                                . "   "
+			   . "LEFT JOIN "  . ConfigInfraTools::TABLE_NETWORK                                                                   ."    "
+			   . "ON "         . ConfigInfraTools::TABLE_IP_ADDRESS                                                                .".". 
+								 ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_NETWORK                                       ."    "
+			   . "=  "         . ConfigInfraTools::TABLE_NETWORK                                                                   .".". 
+								  ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME                                               ."    "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_IP_ADDRESS.".". ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV4  . "   ";
 	}
 	
@@ -360,26 +408,120 @@ class InfraToolsPersistence extends Persistence
 			   . "WHERE " . ConfigInfraTools::TABLE_IP_ADDRESS_FIELD_IP_ADDRESS_IPV6        . "=?   ";
 	}
 	
+	public static function SqlInfraToolsNetworkDeleteByNetworkName()
+	{
+		return "DELETE FROM " . ConfigInfraTools::TABLE_NETWORK ." "
+		     . "WHERE "       . ConfigInfraTools::TABLE_NETWORK .".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME . " =? ";
+	}
+	
+	public static function SqlInfraToolsNetworkInsert()
+	{
+		return "INSERT INTO " . ConfigInfraTools::TABLE_NETWORK                       . " "
+			 . "("            . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP      . ","
+			 . " "            . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME    . ","
+			 . " "            . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK . ","
+			 . " "            . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE           . ")"
+			 . " VALUES (?, ?, ?, NOW())";	
+	}
+	public static function SqlInfraToolsNetworkSelect()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP         . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME       . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE              . "   "
+			   . " as NetworkRegisterDate, "                                                                             . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_NETWORK                                             . "   "
+			   . " ) AS COUNT "                                                                                          . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_NETWORK                                                         . "   "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME . "   "
+			   . "LIMIT ?, ?";
+	}
+	public static function SqlInfraToolsNetworkSelectByNetworkIp()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP         . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME       . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE              . "   "
+			   . " as NetworkRegisterDate, "                                                                             . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_NETWORK                                             . "   "
+			   . " ) AS COUNT "                                                                                          . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_NETWORK                                                         . "   "
+			   . "WHERE "      . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP   . " LIKE ? "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME . "   "
+			   . "LIMIT ?, ?";
+	}
+	
+	public static function SqlInfraToolsNetworkSelectByNetworkName()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP         . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME       . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK    . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE              . "   "
+			   . " as NetworkRegisterDate, "                                                                             . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_NETWORK                                             . "   "
+			   . " ) AS COUNT "                                                                                          . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_NETWORK                                                         . "   "
+			   . "WHERE "      . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME . " LIKE ? "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME . "   "
+			   . "LIMIT ?, ?";	
+	}
+	
+	public static function SqlInfraToolsNetworkSelectByNetworkNetmask()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP            . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME          . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK       . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
+			   . " as NetworkRegisterDate, "                                                                                . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_NETWORK                                                . "   "
+			   . " ) AS COUNT "                                                                                             . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_NETWORK                                                            . "   "
+			   . "WHERE "      . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK . " LIKE ? "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME    . "   "
+			   . "LIMIT ?, ?";	
+	}
+	public static function SqlInfraToolsNetworkSelectNoLimit()
+	{
+		return "SELECT  " . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP            . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME          . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK       . ",  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "   "
+			   . " as NetworkRegisterDate, "                                                                                . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_NETWORK                                                . "   "
+			   . " ) AS COUNT "                                                                                             . "   "
+			   . "FROM "       . ConfigInfraTools::TABLE_NETWORK                                                            . "   "
+			   . "ORDER BY "   . ConfigInfraTools::TABLE_NETWORK.".". ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME    . "   ";
+	}
+	
+	public static function SqlInfraToolsNetworkUpdateByNetworkName()
+	{
+		return "UPDATE  " . ConfigInfraTools::TABLE_NETWORK                       . "     "
+			   . "SET "   . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP      . "=?,  "
+			   . " "      . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME    . "=?,  "
+        	   . " "      . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK . "=?,  "
+			   . "WHERE " . ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME    . "=?   ";
+	}
+	
 	public static function SqlInfraToolsUserSelectByMonitoringId()
 	{
 		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
-			              ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                          .", "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE                     .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                                             .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY                                        .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                               .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                          .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_GENDER                                              .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                                           .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE                                      .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_NAME                                                .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                                           .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_REGION                                              .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_REGION                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES                                     .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES                                .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                               .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION                          .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
 		  ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
@@ -443,16 +585,16 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                    ." "
 		. "LEFT JOIN "  . ConfigInfraTools::TABLE_CORPORATION                                    ." "
 		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=  "         . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
 			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
 		. "LEFT JOIN "  . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         ." "
 		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                          ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
 			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        ." "
 		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
 			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_DEPARTMENT                                     ." "
@@ -461,7 +603,7 @@ class InfraToolsPersistence extends Persistence
 		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                          ." "
 		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
 		. "AND "        . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
@@ -470,7 +612,7 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             ." "
 		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                          ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
 			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL            ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_SERVICE                                        ." "
@@ -486,30 +628,30 @@ class InfraToolsPersistence extends Persistence
 		. "WHERE "      . ConfigInfraTools::TABLE_MONITORING                                     .".". 
 			              ConfigInfraTools::TABLE_MONITORING_FIELD_ID                            ."=? "
 		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                           ." "
 		. "LIMIT ?, ?";
 	}
 	
 	public static function SqlInfraToolsUserSelectByServiceId()
 	{
 		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
-			              ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                          .", "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE                     .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                                             .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY                                        .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                               .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                          .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_GENDER                                              .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                                           .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE                                      .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_NAME                                                .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                                           .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_REGION                                              .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_REGION                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES                                     .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES                                .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                               .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION                          .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
 		  ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
@@ -573,16 +715,16 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                    ." "
 		. "LEFT JOIN "  . ConfigInfraTools::TABLE_CORPORATION                                    ." "
 		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=  "         . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
 			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
 		. "LEFT JOIN "  . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         ." "
 		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                          ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
 			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        ." "
 		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
 			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_DEPARTMENT                                     ." "
@@ -591,7 +733,7 @@ class InfraToolsPersistence extends Persistence
 		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                          ." "
 		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
 		. "AND "        . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
@@ -600,7 +742,7 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             ." "
 		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                          ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
 			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL            ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_SERVICE                                        ." "
@@ -611,30 +753,30 @@ class InfraToolsPersistence extends Persistence
 		. "WHERE "      . ConfigInfraTools::TABLE_SERVICE                                        .".". 
 			              ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                       ."=? "
 		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                           ." "
 		. "LIMIT ?, ?";
 	}
 	
 	public static function SqlInfraToolsUserSelectByTypeMonitoringDescription()
 	{
 		return "SELECT ". ConfigInfraTools::TABLE_USER                                           .".".
-			              ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                          .", "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE                     .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                                             .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY                                        .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                               .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                          .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_GENDER                                              .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                                           .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE                                      .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_NAME                                                .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                                           .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_REGION                                              .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_REGION                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES                                     .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES                                .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
-		  ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION                               .", "
+		  ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION                          .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
 		  ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                                         .", "
 		. ConfigInfraTools::TABLE_USER                                                           .".". 
@@ -698,16 +840,16 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_TYPE_USER_FIELD_DESCRIPTION                    ." "
 		. "LEFT JOIN "  . ConfigInfraTools::TABLE_CORPORATION                                    ." "
 		. "ON "         . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=  "         . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
 			              ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME                         ." "
 		. "LEFT JOIN "  . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         ." "
 		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                          ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
 			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_USER_EMAIL        ." "
 		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION                         .".". 
 			              ConfigInfraTools::TABLE_ASSOC_USER_CORPORATION_FIELD_CORPORATION_NAME  ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_DEPARTMENT                                     ." "
@@ -716,7 +858,7 @@ class InfraToolsPersistence extends Persistence
 		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME                          ." "
 		. "AND "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                         ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION                    ." "
 		. "=   "        . ConfigInfraTools::TABLE_DEPARTMENT                                     .".". 
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
 		. "AND "        . ConfigInfraTools::TABLE_CORPORATION                                    .".". 
@@ -725,7 +867,7 @@ class InfraToolsPersistence extends Persistence
 			              ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION                   ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             ." "
 		. "ON  "        . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_EMAIL                               ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                          ." "
 		. "=   "        . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                             .".".
 			              ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL            ." "
 		. "LEFT JOIN  " . ConfigInfraTools::TABLE_SERVICE                                        ." "
@@ -746,17 +888,17 @@ class InfraToolsPersistence extends Persistence
 		. "WHERE "      . ConfigInfraTools::TABLE_TYPE_MONITORING                                .".". 
 			              ConfigInfraTools::TABLE_TYPE_MONITORING_FIELD_DESCRIPTION              ."=? "
 		. "ORDER BY "   . ConfigInfraTools::TABLE_USER                                           .".". 
-			              ConfigInfraTools::TABLE_USER_FIELD_NAME                                ." "
+			              ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                           ." "
 		. "LIMIT ?, ?";
 	}
 	
-	public static function SqlServiceDeleteById()
+	public static function SqlInfraToolsServiceDeleteById()
 	{
 		return "DELETE FROM " . ConfigInfraTools::TABLE_SERVICE ." "
 		       . "WHERE "     . ConfigInfraTools::TABLE_SERVICE .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID . " =? ";
 	}
 	
-	public static function SqlServiceDeleteByIdOnUserContext()
+	public static function SqlInfraToolsServiceDeleteByIdOnUserContext()
 	{
 		return "DELETE "      . ConfigInfraTools::TABLE_SERVICE                                                        . "    "
 			   . "FROM  "     . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                             . "    "
@@ -772,7 +914,7 @@ class InfraToolsPersistence extends Persistence
 				                ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                  . "<=2";
 	}
 	
-	public static function SqlServiceInsert()
+	public static function SqlInfraToolsServiceInsert()
 	{
 		return "INSERT INTO " . ConfigInfraTools::TABLE_SERVICE                              . " "
 			 . "("            . ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                  . ","
@@ -788,7 +930,7 @@ class InfraToolsPersistence extends Persistence
 			 . " VALUES (NOW(), ?, ?, ?, ?, ?, ?, DEFAULT, ?, ?)";
 	}
 	
-	public static function SqlServiceSelect()
+	public static function SqlInfraToolsServiceSelect()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -815,7 +957,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectOnUserContext()
+	public static function SqlInfraToolsServiceSelectOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -850,7 +992,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceActive()
+	public static function SqlInfraToolsServiceSelectByServiceActive()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -878,7 +1020,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceActiveNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceActiveNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -903,7 +1045,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceActiveOnUserContext()
+	public static function SqlInfraToolsServiceSelectByServiceActiveOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -939,7 +1081,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceActiveOnUserContextNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceActiveOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -970,7 +1112,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "    ";
 	}
 	
-	public static function SqlServiceSelectByServiceCorporation()
+	public static function SqlInfraToolsServiceSelectByServiceCorporation()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",  "
@@ -1006,7 +1148,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceCorporationNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceCorporationNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",  "
@@ -1039,7 +1181,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME        . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceCorporationOnUserContext()
+	public static function SqlInfraToolsServiceSelectByServiceCorporationOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",   "
@@ -1083,7 +1225,7 @@ class InfraToolsPersistence extends Persistence
 			   . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceCorporationOnUserContextNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",   "
@@ -1122,7 +1264,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME        . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceDepartment()
+	public static function SqlInfraToolsServiceSelectByServiceDepartment()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",  "
@@ -1167,7 +1309,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceDepartmentNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceDepartmentNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",  "
@@ -1209,7 +1351,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME        . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceDepartmentOnUserContext()
+	public static function SqlInfraToolsServiceSelectByServiceDepartmentOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",   "
@@ -1262,7 +1404,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceDepartmentOnUserContextNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                  . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION             . ",   "
@@ -1310,7 +1452,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME        . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceId()
+	public static function SqlInfraToolsServiceSelectByServiceId()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1334,7 +1476,7 @@ class InfraToolsPersistence extends Persistence
 			   . "WHERE "      . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID. "=? ";
 	}
 	
-	public static function SqlServiceSelectByServiceIdOnUserContext()
+	public static function SqlInfraToolsServiceSelectByServiceIdOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1371,7 +1513,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "=? ";
 	}
 	
-	public static function SqlServiceSelectByServiceName()
+	public static function SqlInfraToolsServiceSelectByServiceName()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1400,7 +1542,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceNameNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceNameNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1426,7 +1568,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceNameOnUserContext()
+	public static function SqlInfraToolsServiceSelectByServiceNameOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1461,7 +1603,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceNameOnUserContextNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceNameOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1493,7 +1635,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "    ";
 	}
 	
-	public static function SqlServiceSelectByServiceType()
+	public static function SqlInfraToolsServiceSelectByServiceType()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1526,7 +1668,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceTypeNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceTypeNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1556,7 +1698,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "   ";
 	}
 	
-	public static function SqlServiceSelectByServiceTypeOnUserContext()
+	public static function SqlInfraToolsServiceSelectByServiceTypeOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1595,7 +1737,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByServiceTypeOnUserContextNoLimit()
+	public static function SqlInfraToolsServiceSelectByServiceTypeOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1631,7 +1773,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "    ";
 	}
 	
-	public static function SqlServiceSelectByTypeAssocUserServiceDescription()
+	public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescription()
 	{
 		return "SELECT "                                                                                                    . "   " 
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
@@ -1674,7 +1816,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByTypeAssocUserServiceDescriptionNoLimit()
+	public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit()
 	{
 		return "SELECT "                                                                                                    . "   " 
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
@@ -1714,7 +1856,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "   ";
 	}
 	
-	public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContext()
+	public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1758,7 +1900,7 @@ class InfraToolsPersistence extends Persistence
                . "LIMIT ?,?";
 	}
 		
-	public static function SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit()
+	public static function SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",   "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",   "
@@ -1801,7 +1943,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "    ";
 	}
 	
-	public static function SqlServiceSelectByUser()
+	public static function SqlInfraToolsServiceSelectByUser()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ", "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ", "
@@ -1813,40 +1955,40 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                  . ", "
 			   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_TYPE                  . ", "
 		       . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                 . "  "
-			   . " as ServiceRegisterDate, "
+			   . " as ServiceRegisterDate, "                                                                                . "  "
 			   . " "      . ConfigInfraTools::TABLE_TYPE_SERVICE                                                            . ".".
 				            ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME                                                 . ", "
 			   . " "      . ConfigInfraTools::TABLE_TYPE_SERVICE                                                            . ".".
 				            ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA                                                  . ", "
 			   . " "      . ConfigInfraTools::TABLE_TYPE_SERVICE                                                            . ".".
 				            ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                                     . "  "
-			   . " as TypeServiceRegisterDate, "
+			   . " as TypeServiceRegisterDate, "                                                                            . "  "
 			   . " "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                      . ".".
-				            ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                     .",  "
+				            ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID                                     . ", "
                . " "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                      . ".".
-				            ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                     .",  "
+				            ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                     . ", "
                . " "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                      . ".".
-				            ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                           .",  "
+				            ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                           . ", "
                . " "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                      . ".".
-				            ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                                     ."   "
-               . " as AssocUserServceRegisterDate, "
+				            ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                                     . "  "
+               . " as AssocUserServceRegisterDate, "                                                                        . "  "
                . " "      . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                                 . ".".
 				            ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_DESCRIPTION                               . ", "
                . " "      . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                                 . ".".
 				            ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                        . ", "
                . " "      . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                                 . ".".
 				            ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                                     . "  "
-               . " as TypeAssocUserServiceRegisterDate, "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                  . ", "
-			   . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                 . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                     . ", " 
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_EMAIL                       . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_GENDER                      . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                   . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_NAME                        . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_REGION                      . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES             . ", "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION       . ", "
+               . " as TypeAssocUserServiceRegisterDate, "                                                                   . "  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE             . ", "
+			   . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION            . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY                . ", " 
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                  . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER                 . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE              . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                   . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_REGION                 . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES        . ", "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION  . ", "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                 . ", "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED              . ", "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY          . ", "
@@ -1856,9 +1998,9 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_TYPE                        . ", "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_UNIQUE_ID              . ", "
                . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                    . "  "
-               . " as UserRegisterDate, "
+               . " as UserRegisterDate, "                                                                                   . "   "
 			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TABLE_SERVICE                                                . "   "
-			   . " ) AS COUNT "
+			   . " ) AS COUNT "                                                                                             . "   "
 			   . "FROM "       . ConfigInfraTools::TABLE_SERVICE                                                            . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_TYPE_SERVICE                                                       . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_SERVICE                                                            .  ".". 
@@ -1877,17 +2019,17 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                      . "   "
 		       . "LEFT JOIN "  . ConfigInfraTools::TABLE_USER                                                               . "   "
 		       . "ON "         . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "   "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "   "
 		       . " = "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "=? "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE                                                            .  ".".  
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "   "
 			   . "LIMIT ?,?";
 	}
 	
-	public static function SqlServiceSelectByUserNoLimit()
+	public static function SqlInfraToolsServiceSelectByUserNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1923,16 +2065,16 @@ class InfraToolsPersistence extends Persistence
                . " "      . ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE                                                 .  ".".
 				            ConfigInfraTools::TABLE_FIELD_REGISTER_DATE                                                     . "   "
                . " as TypeAssocUserServiceRegisterDate, "                                                                   . "   "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE                  . ",  "
-			   . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_CORPORATION                 . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_COUNTRY                     . ",  " 
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_EMAIL                       . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_GENDER                      . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE                   . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_NAME                        . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_REGION                      . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES             . ",  "
-		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION       . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE             . ",  "
+			   . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_CORPORATION            . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY                . ",  " 
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                  . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER                 . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE              . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_NAME                   . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_REGION                 . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES        . ",  "
+		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION  . ",  "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE                 . ",  "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED              . ",  "
 		       . " "      . ConfigInfraTools::TABLE_USER.".".ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY          . ",  "
@@ -1961,16 +2103,16 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                      . "   "
 		       . "LEFT JOIN "  . ConfigInfraTools::TABLE_USER                                                               . "   "
 		       . "ON "         . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "   "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "   "
 		       . " = "         . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "=? "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "=? "
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE                                                            .  ".".  
 				                 ConfigInfraTools::TABLE_SERVICE_FIELD_NAME                                                 . "   ";
 	}
 	
-	public static function SqlServiceSelectNoLimit()
+	public static function SqlInfraToolsServiceSelectNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . ",  "
         	   . " "      . ConfigInfraTools::TABLE_SERVICE.".".ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION           . ",  "
@@ -1994,7 +2136,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_SERVICE      .".". ConfigInfraTools::TABLE_SERVICE_FIELD_NAME      . "   ";
 	}
 	
-	public static function SqlServiceUpdateByServiceId()
+	public static function SqlInfraToolsServiceUpdateByServiceId()
 	{
 		return "UPDATE  " . ConfigInfraTools::TABLE_SERVICE                                     . "     "
 			   . "SET "   . ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                        . "=?,  "
@@ -2008,7 +2150,7 @@ class InfraToolsPersistence extends Persistence
 			   . "WHERE " . ConfigInfraTools::TABLE_SERVICE_FIELD_SERVICE_ID                    . "=?   ";
 	}
 	
-	public static function SqlServiceUpdateRestrictByServiceId()
+	public static function SqlInfraToolsServiceUpdateRestrictByServiceId()
 	{
 		return "UPDATE  " . ConfigInfraTools::TABLE_SERVICE                             . "     "
 			   . "SET "   . ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE                . "=?,  "
@@ -2065,7 +2207,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_USER                                                               . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "   "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "   "
       		   . "= "          . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
@@ -2093,7 +2235,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_ID                                   . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_USER                                                               . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "   "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "   "
       		   . "= "          . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
@@ -2102,7 +2244,7 @@ class InfraToolsPersistence extends Persistence
 				                  ConfigInfraTools::TABLE_TYPE_ASSOC_USER_SERVICE_FIELD_DESCRIPTION                         . "   ";
 	}
 	
-	public static function SqlTypeServiceSelect()
+	public static function SqlInfraToolsTypeServiceSelect()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME        . ",  "
 			   . " "      . ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA         . ",  "
@@ -2115,7 +2257,7 @@ class InfraToolsPersistence extends Persistence
 			   . "LIMIT ?, ?";
 	}
 	
-	public static function SqlTypeServiceSelectNoLimit()
+	public static function SqlInfraToolsTypeServiceSelectNoLimit()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME        . ",  "
 			   . " "      . ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA         . ",  "
@@ -2127,7 +2269,7 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TABLE_TYPE_SERVICE.".". ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME  . "   ";
 	}
 	
-	public static function SqlTypeServiceSelectOnUserContext()
+	public static function SqlInfraToolsTypeServiceSelectOnUserContext()
 	{
 		return "SELECT  " . ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME        . ",  "
 			   . " "      . ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA         . ",  "
@@ -2150,7 +2292,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                      . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_USER                                                               . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "   "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "   "
       		   . "= "          . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".
@@ -2159,7 +2301,7 @@ class InfraToolsPersistence extends Persistence
 			   . "LIMIT ?, ?";
 	}
 	
-	public static function SqlTypeServiceSelectOnUserContextNoLimit()
+	public static function SqlInfraToolsTypeServiceSelectOnUserContextNoLimit()
 	{
 		return "SELECT  " .
 			   "DISTINCT ". ConfigInfraTools::TABLE_TYPE_SERVICE.".".ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME        . ",  "
@@ -2181,7 +2323,7 @@ class InfraToolsPersistence extends Persistence
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE                                      . "   "
 			   . "INNER JOIN " . ConfigInfraTools::TABLE_USER                                                               . "   "
 			   . "ON "         . ConfigInfraTools::TABLE_USER                                                               .  ".". 
-				                 ConfigInfraTools::TABLE_USER_FIELD_EMAIL                                                   . "   "
+				                 ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL                                              . "   "
       		   . "= "          . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".". 
 				                 ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL                                . "   "
 			   . "WHERE "      . ConfigInfraTools::TABLE_ASSOC_USER_SERVICE                                                 .  ".".

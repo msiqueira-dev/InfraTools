@@ -13,8 +13,8 @@ Dependencies:
 Description: 
 			Classe used to access and deal with information of the database about group user.
 Functions: 
-			public function InfraToolsServiceDeleteById($ServiceId, $Debug, $MySqlConnection);
-			public function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection);
+			public function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $MySqlConnection);
+			public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection);
 			public function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 			                                        $ServiceDepartment, $ServiceDepartmentCanChange,
 										            $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection);
@@ -162,14 +162,14 @@ class InfraToolsFacedePersistenceService
         return self::$Instance;
     }
 	
-	public function InfraToolsServiceDeleteById($ServiceId, $Debug, $MySqlConnection)
+	public function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceDeleteById');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceDeleteById');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceDeleteById());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceDeleteById());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $ServiceId);
@@ -202,14 +202,14 @@ class InfraToolsFacedePersistenceService
 		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
 	}
 	
-	public function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection)
+	public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlServiceDeleteByIdOnUserContext');
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceDeleteByIdOnUserContext());
+				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceDeleteByIdOnUserContext');
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceDeleteByIdOnUserContext());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $ServiceId, $UserEmail);
@@ -248,10 +248,10 @@ class InfraToolsFacedePersistenceService
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceInsert');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceInsert');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceInsert());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("isisisss", $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -282,14 +282,15 @@ class InfraToolsFacedePersistenceService
 		$mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelect');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelect');
 		if($MySqlConnection != NULL)
 		{
 			
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelect());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -348,13 +349,14 @@ class InfraToolsFacedePersistenceService
 		$mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectOnUserContext());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("sii", $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -413,13 +415,14 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActive');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActive');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActive());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActive());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("iii", $ServiceActive, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iii", $ServiceActive, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -476,10 +479,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActiveNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActiveNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActiveNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActiveNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("i", $ServiceActive);
@@ -539,13 +542,14 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActiveOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActiveOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActiveOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActiveOnUserContext());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("isii", $ServiceActive, $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("isii", $ServiceActive, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -603,10 +607,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceActiveOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActiveOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActiveOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActiveOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("is", $ServiceActive, $UserEmail);
@@ -666,14 +670,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporation');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporation');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporation());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporation());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceDepartment = "%".$ServiceCorporation."%";  
-				$stmt->bind_param("sii", $ServiceCorporation, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $ServiceCorporation, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -735,10 +740,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporationNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporationNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporationNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporationNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceDepartment = "%".$ServiceCorporation."%";  
@@ -804,14 +809,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporationOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporationOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporationOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporationOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceCorporation = "%".$ServiceCorporation."%";  
-				$stmt->bind_param("ssii", $ServiceCorporation, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceCorporation, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -874,10 +880,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceCorporationOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporationOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceDepartment = "%".$ServiceCorporation."%"; 
@@ -942,14 +948,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartment');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartment');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartment());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartment());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceDepartment = "%".$ServiceDepartment."%"; 
-				$stmt->bind_param("ssii", $ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceCorporation, $ServiceDepartment, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1016,10 +1023,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartmentNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartmentNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartmentNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartmentNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceDepartment = "%".$ServiceDepartment."%"; 
@@ -1091,14 +1098,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartmentOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartmentOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartmentOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartmentOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceDepartment = "%".$ServiceDepartment."%"; 
-				$stmt->bind_param("sssii", $ServiceCorporation, $ServiceDepartment, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("sssii", $ServiceCorporation, $ServiceDepartment, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1165,10 +1173,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceDepartmentOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartmentOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$ServiceDepartment = "%".$ServiceDepartment."%";
@@ -1236,10 +1244,10 @@ class InfraToolsFacedePersistenceService
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceId');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceId());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("i", $ServiceId);
@@ -1293,10 +1301,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$TypeAssocUserServiceId = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceIdOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceIdOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceIdOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceIdOnUserContext());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("is", $ServiceId, $UserEmail);
@@ -1350,14 +1358,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceName');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceName');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceName());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceName());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceName = "%".$ServiceName."%";  
-				$stmt->bind_param("sii", $ServiceName, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $ServiceName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1415,10 +1424,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceNameNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceNameNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceNameNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceNameNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceName = "%".$ServiceName."%";  
@@ -1480,14 +1489,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceNameOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceNameOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceNameOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceNameOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceName = "%".$ServiceName."%";  
-				$stmt->bind_param("ssii", $ServiceName, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceName, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1545,10 +1555,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceNameOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceNameOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceNameOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceNameOnUserContextNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceName = "%".$ServiceName."%"; 
@@ -1609,14 +1619,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceType');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceType');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceType());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceType());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceType = "%".$ServiceType."%"; 
-				$stmt->bind_param("sii", $ServiceNType, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $ServiceNType, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1674,10 +1685,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceType');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceType');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceTypeNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceTypeNoLimit());
 			if($stmt != NULL)
 			{ 
 				$ServiceType = "%".$ServiceType."%";
@@ -1734,19 +1745,20 @@ class InfraToolsFacedePersistenceService
 	
 	public function InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail,
 															          &$ArrayInstanceInfraToolsService, &$RowCount, 
-															$Debug, $MySqlConnection)
+															          $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceTypeOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceTypeOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceTypeOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceTypeOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceType = "%".$ServiceType."%";
-				$stmt->bind_param("ssii", $ServiceType, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceType, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1805,10 +1817,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByServiceTypeOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceTypeOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceTypeOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceTypeOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$ServiceType = "%".$ServiceType."%";
@@ -1870,14 +1882,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceDescription');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescription');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceDescription());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescription());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%"; 
-				$stmt->bind_param("sii", $TypeAssocUserServiceDescription, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $TypeAssocUserServiceDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -1936,10 +1949,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceDescriptionNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceDescriptionNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit());
 			if($stmt != NULL)
 			{ 
 				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%";
@@ -2001,14 +2014,15 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContext');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%";
-				$stmt->bind_param("ssii", $TypeAssocUserServiceDescription, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $TypeAssocUserServiceDescription, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -2068,10 +2082,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%";
@@ -2132,13 +2146,14 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByUser');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByUser');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByUser());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByUser());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("sii", $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -2196,10 +2211,10 @@ class InfraToolsFacedePersistenceService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectByUserNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByUserNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByUserNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByUserNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("s", $UserEmail);
@@ -2258,10 +2273,10 @@ class InfraToolsFacedePersistenceService
 		$mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceSelectNoLimit');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlServiceSelectNoLimit()))
+			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlInfraToolsServiceSelectNoLimit()))
 			{
 				$ArrayInstanceInfraToolsService = array();
 				while ($row = $result->fetch_assoc()) 
@@ -2305,10 +2320,10 @@ class InfraToolsFacedePersistenceService
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceUpdateByServiceId');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceUpdateByServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceUpdateByServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceUpdateByServiceId());
 			if ($stmt)
 			{
 				$stmt->bind_param("isisisssi", $ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
@@ -2347,10 +2362,10 @@ class InfraToolsFacedePersistenceService
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlServiceUpdateRestrictByServiceId');
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceUpdateRestrictByServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceUpdateRestrictByServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceUpdateRestrictByServiceId());
 			if ($stmt)
 			{
 				$stmt->bind_param("isssi", $ServiceActiveNew, $ServiceDescriptionNew, 

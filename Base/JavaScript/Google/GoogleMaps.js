@@ -47,7 +47,7 @@ function SetCountryAndEstate(latLng)
 {
 	var inputLatitude        = document.getElementById("RegisterGoogleMapsLatitude");
 	var inputLongitude       = document.getElementById("RegisterGoogleMapsLongitude");
-	var inputCountry         = document.getElementById("FormFieldUserCountry");
+	var inputCountry         = document.getElementById("FormFieldCountryName");
 	var inputRegion          = document.getElementById("FormFieldUserRegion");
 	if(inputLatitude != null && inputLongitude != null && inputCountry != null && inputRegion != null)
 	{

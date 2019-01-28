@@ -310,9 +310,9 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocTicketUserRequesting = 
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
 								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-			$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingDeleteByTicketId(
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingDeleteByTicketId(
 																								$AssocUserServiceServiceId,
 																								$AssocUserServiceUserEmail,
 																								$Debug, $MySqlConnection);
@@ -369,9 +369,9 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocTicketUserRequesting = 
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
 								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-			$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByUserEmail(
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByUserEmail(
 																								$Limit1, $Limit2,
 																								$AssocTicketUserRequestingUserEmail,
 																								$ArrayAssocTicketUserRequesting, 
@@ -389,9 +389,9 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocTicketUserRequesting = 
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
 								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-			$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByTicketId(
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByTicketId(
 																								$AssocTicketUserRequestingTicketId,
 																								$AssocTicketUserRequesting, 
 																								$RowCount, $Debug, 
@@ -410,9 +410,9 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocTicketUserRequesting = 
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
 								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-			$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingUpdateByTicketId(
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingUpdateByTicketId(
 																								$AssocTicketUserRequestingUserBond,
 																								$AssocTicketUserRequestingUserEmail, 
 																								$AssocUserRequestingTicketId, 
@@ -428,9 +428,9 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-			$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationDelete($CorporationName, $UserEmail, 
-																					  $Debug, $MySqlConnection);
+			$instanceFacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
+			$return = $instanceFacedePersistenceAssocUserCorporation->AssocUserCorporationDelete($CorporationName, $UserEmail, 
+																					             $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -443,8 +443,8 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-			$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
+			$instanceFacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
+			$return = $instanceFacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
 																						 $RegistrationId, $UserEmail, $Debug, $MySqlConnection);
 			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
@@ -464,8 +464,8 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-			$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationUpdateByUserEmailAndCorporationName(
+			$instanceFacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
+			$return = $instanceFacedePersistenceAssocUserCorporation->AssocUserCorporationUpdateByUserEmailAndCorporationName(
 			                                                                            $AssocUserCorporationDepartmentNameNew,
 																						$AssocUserCorporationRegistrationDateNew,
 																						$AssocUserCorporationRegistrationIdNew, 
@@ -476,7 +476,7 @@ class FacedePersistence
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
-		return $return;	
+		return $return;
 	}
 	
 	public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
@@ -484,8 +484,8 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
-			$return = $FacedePersistenceAssocUserTeam->AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection);
+			$instanceFacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
+			$return = $instanceFacedePersistenceAssocUserTeam->AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 			return $return;	
@@ -498,9 +498,9 @@ class FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::SUCCESS)
 		{
-			$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
-			$return = $FacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, 
-																		   $Debug, $MySqlConnection);
+			$instanceFacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
+			$return = $instanceFacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, 
+																		           $Debug, $MySqlConnection);
 			if($return == Config::SUCCESS && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();

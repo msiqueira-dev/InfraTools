@@ -91,7 +91,8 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::TypeAssocUserServiceSelect());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -194,7 +195,8 @@ class InfraToolsFacedePersistenceTypeAssocUserService
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlTypeAssocUserServiceSelectOnUserContext());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("sii", $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{

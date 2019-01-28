@@ -169,6 +169,7 @@ class FacedePersistenceSystemConfiguration
 	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceSystemConfiguration = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -176,7 +177,8 @@ class FacedePersistenceSystemConfiguration
 			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
@@ -226,7 +228,7 @@ class FacedePersistenceSystemConfiguration
 																			 $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$ArrayInstanceSystemConfiguration = array();
+		$ArrayInstanceSystemConfiguration = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -234,11 +236,13 @@ class FacedePersistenceSystemConfiguration
 			$stmt = $MySqlConnection->prepare(Persistence::SqlSystemConfigurationSelectBySystemConfigurationOptionName());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$SystemConfigurationOptionName = "%".$SystemConfigurationOptionName."%"; 
-				$stmt->bind_param("sii", $SystemConfigurationOptionName, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $SystemConfigurationOptionName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceSystemConfiguration = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -332,13 +336,14 @@ class FacedePersistenceSystemConfiguration
 	public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		$ArrayInstanceSystemConfiguration = array();
+		$ArrayInstanceSystemConfiguration = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlSystemConfigurationSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlSystemConfigurationSelectNoLimit()))
 			{
+				$ArrayInstanceSystemConfiguration = array();
 				$result = $stmt->get_result();
 				while ($row = $result->fetch_assoc()) 
 				{

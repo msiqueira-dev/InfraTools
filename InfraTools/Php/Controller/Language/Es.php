@@ -142,8 +142,10 @@ class Es
 	const FORM_FIELD_IP_ADDRESS_DESCRIPTION                         = "";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                = "";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                = "";
-	const FORM_FIELD_IP_ADDRESS_NETWORK                             = "";
 	const FORM_FIELD_LOGIN                                          = "";
+	const FORM_FIELD_NETWORK_IP                                     = "";
+	const FORM_FIELD_NETWORK_NAME                                   = "";
+	const FORM_FIELD_NETWORK_NETMASK                                = "";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "";
 	const FORM_FIELD_NOTIFICATION_ID                                = "";
 	const FORM_FIELD_NOTIFICATION_TEXT                              = "";
@@ -390,6 +392,10 @@ class Es
 	const IP_ADDRESS_INSERT_ERROR                                   = "";
 	const IP_ADDRESS_INSERT_SUCCESS                                 = "";
 	const IP_ADDRESS_NOT_FOUND                                      = "";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_ERROR                = "";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_SUCCESS              = "";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_ERROR                = "";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_SUCCESS              = "";
 	const IP_ADDRESS_UPDATE_ERROR                                   = "";
 	const IP_ADDRESS_UPDATE_ERROR_UNIQUE_EXISTS                     = "";
 	const IP_ADDRESS_UPDATE_SUCCESS                                 = "";

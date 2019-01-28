@@ -13,7 +13,7 @@ Dependencies:
 Description: 
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
-			private   function LoadInstanceInfraToolsUser();
+			private   function InfraToolsLoadInstanceUser();
 			protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 
 			                                                         &$RowCount, $Debug);
 			protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
@@ -22,6 +22,7 @@ Methods:
 			                                                                    $Debug);
 			protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp,
 			                                                                    $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectNoLimit(&$ArrayInstanceInfraToolsAssocIpAddressService, $Debug);
 			protected function InfraToolsCorporationSelect($Limit1, $Limit2,, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug);
 			protected function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug);
 			protected function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
@@ -34,19 +35,32 @@ Methods:
 	                                                                          &$RowCount, $Debug)
 			protected function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
 			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
-			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug);
+			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug);
 			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork $Debug);
 			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
 															            &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug);
-			protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug);
-			protected function InfraToolsServiceDeleteById($ServiceId, $UserEmail, $Debug);
-			protected function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
+			protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																        $IpAddressNetworkNew, $IpAddressIpv4, $Debug);
+			protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																        $IpAddressNetworkNew, $IpAddressIpv6, $Debug);
+			protected function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug);
+			protected function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug);
+			protected function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork);
+			protected function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
+														         &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
+															       &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug);
+			protected function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug);
+			protected function InfraToolsServiceDeleteByServiceId($ServiceId, $UserEmail, $Debug);
+			protected function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug);
 			protected function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 			                                           $ServiceDepartment, $ServiceDepartmentCanChange, 
 										               $ServiceDescription, $ServiceName, $ServiceType, $Debug);
-			protected function ServiceLoadData($InstanceInfraToolsService);
+			protected function InfraToolsServiceLoadData($InstanceInfraToolsService);
 			protected function InfraToolsServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, 
 			                                           $StoreSession = FALSE);
 			protected function InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
@@ -266,11 +280,11 @@ abstract class PageInfraTools extends Page
 			$this->Factory = InfraToolsFactory::__create();
 		if($this->Config == NULL)
 			$Config = $this->Factory->CreateConfigInfraTools();
-		$this->LoadInstanceInfraToolsUser();
+		$this->InfraToolsLoadInstanceUser();
 		parent::__construct($Config, $Language, $Page);
 	}
 	
-	private function LoadInstanceInfraToolsUser()
+	private function InfraToolsLoadInstanceUser()
 	{
 		if (!class_exists("User"))
 		{
@@ -329,6 +343,23 @@ abstract class PageInfraTools extends Page
 		
 	}
 	
+	protected function InfraToolsAssocIpAddressServiceSelectNoLimit(&$ArrayInstanceInfraToolsAssocIpAddressService, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsAssocIpAddressServiceSelectNoLimit(
+																							  $ArrayInstanceInfraToolsAssocIpAddressService, 
+															                                  $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			return $return;
+		}
+		$this->ShowDivReturnError("ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND");
+		return ConfigInfraTools::RETURN_ERROR;
+	}
+	
 	protected function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
 	{
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -357,8 +388,9 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsCorporation, 
 	                                                                   &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsCorporationSelectOnUserServiceContext(
+			                                                                                    $Limit1, $Limit2, $UserEmail, 
 			                                                                                    $ArrayInstanceInfraToolsCorporation, 
 																                                $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
@@ -372,10 +404,11 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail,
-																			                           $ArrayInstanceInfraToolsCorporation,
-																			                           $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsCorporationSelectOnUserServiceContextNoLimit(
+			                                                                                            $UserEmail,
+																			                            $ArrayInstanceInfraToolsCorporation,
+																			                            $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ShowDivReturnSuccess("CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS");
@@ -390,7 +423,7 @@ abstract class PageInfraTools extends Page
 	                                                        &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $UserCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -412,7 +445,8 @@ abstract class PageInfraTools extends Page
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsDepartmentSelectOnUserServiceContext(
+				                                                                         $Limit1, $Limit2, 
 																						 $this->InputValueServiceCorporation, $UserEmail,
 																				         $ArrayInstanceInfraToolsCorporation, $RowCount,
 																						 $Debug);
@@ -430,7 +464,7 @@ abstract class PageInfraTools extends Page
 																             $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $UserCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -452,7 +486,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsDepartmentSelectOnUserServiceContextNoLimit($this->InputValueServiceCorporation,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsDepartmentSelectOnUserServiceContextNoLimit(
+				                                                                                $this->InputValueServiceCorporation,
 																								$UserEmail,$ArrayInstanceInfraToolsDepartment,
 																				                $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -465,9 +500,22 @@ abstract class PageInfraTools extends Page
 		}
 	}
 	
-	protected function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug)
+	protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug)
 	{
-		
+		if($InfraToolsInstanceIpAddress != NULL)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressDeleteByIpAddressIpv4(
+				                                                 $InfraToolsInstanceIpAddress->GetIpAddressIpv4(),$Debug);
+			if($return == Config::SUCCESS)
+			{
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_IP_ADDRESS, $InfraToolsInstanceIpAddress);
+				$this->ShowDivReturnSuccess("IP_ADDRESS_DELETE_SUCCESS");
+				return Config::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_DELETE_ERROR");
+		return Config::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug)
@@ -497,7 +545,42 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
 																&$RowCount, $Debug)
 	{
-		
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FORM_FIELD_IP_ADRESS_IPV4
+		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_IP_ADRESS_IPV4;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueIpAddressIpv4; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FORM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::SUCCESS)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelectByIpAddressIpv4(
+				                                                                             $Limit1, $Limit2, $this->InputValueIpAddressIpv4,
+																							 $ArrayInstanceInfraToolsIpAddress, $RowCount,
+																							 $Debug);
+			if($return == ConfigInfraTools::SUCCESS)
+			{
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_SUCCESS");
+				return ConfigInfraTools::SUCCESS;
+			}
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_ERROR");
+		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
 	protected function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
@@ -524,15 +607,64 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
-	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressIpv4New, $IpAddressIpv6New, $IpAddressIpv4, $Debug)
+	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																$IpAddressNetworkNew, $IpAddressIpv4, $Debug)
 	{
 		
 	}
 	
-	protected function InfraToolsServiceDeleteById($ServiceId, $UserEmail, $Debug)
+	protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																$IpAddressNetworkNew, $IpAddressIpv6, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
+														 &$RowCount, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
+															&$RowCount, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug)
+	{
+
+	}
+	
+	protected function InfraToolsServiceDeleteByServiceId($ServiceId, $UserEmail, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -554,7 +686,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceDeleteById($this->InputValueServiceId, $UserEmail, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceDeleteByServiceId($this->InputValueServiceId, 
+																						       $UserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
@@ -565,10 +698,10 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
-	protected function InfraToolsServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug)
+	protected function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -590,7 +723,9 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceDeleteByIdOnUserContext($this->InputValueServiceId, $UserEmail, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceDeleteByServiceIdOnUserContext(
+				                                                                           $this->InputValueServiceId, 
+				                                                                           $UserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
@@ -611,7 +746,7 @@ abstract class PageInfraTools extends Page
 									           $ServiceDescription, $ServiceName, $ServiceType, $UserEmail, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		if($ServiceCorporation == ConfigInfraTools::FORM_FIELD_SELECT_NONE)
 			$ServiceCorporation = NULL;
 		if($ServiceDepartment == ConfigInfraTools::FORM_FIELD_SELECT_NONE)
@@ -751,15 +886,15 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceInsert($this->InputValueServiceActive, $this->InputValueServiceCorporation,
-																            $this->InputValueServiceCorporationCanChange, 
-																            $this->InputValueServiceDepartment, 
-																            $this->InputValueServiceDepartmentCanChange,
-									                              $this->InputValueServiceDescription, 
-																  $this->InputValueServiceName, 
-																  $this->InputValueServiceType, 
-																  $this->InputValueUserEmail,
-																  $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceInsert($this->InputValueServiceActive, 
+																				    $this->InputValueServiceCorporation,
+																                    $this->InputValueServiceCorporationCanChange, 
+																                    $this->InputValueServiceDepartment, 
+																                    $this->InputValueServiceDepartmentCanChange,
+									                                                $this->InputValueServiceDescription, 
+																                    $this->InputValueServiceName, 
+																                    $this->InputValueServiceType, 
+																                    $this->InputValueUserEmail, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_INSERT_SUCCESS");
@@ -775,7 +910,7 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RETURN_ERROR;
 	}
 	
-	protected function ServiceLoadData($InstanceInfraToolsService)
+	protected function InfraToolsServiceLoadData($InstanceInfraToolsService)
 	{
 		if($InstanceInfraToolsService != NULL)
 		{
@@ -809,9 +944,9 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $StoreSession = FALSE)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $FacedePersistenceInfraTools->InfraToolsServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsService, 
-															  $RowCount, $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsService, 
+															                    $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -827,10 +962,10 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                      &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
-																		   $ArrayInstanceInfraToolsService, 
-																	       $RowCount, $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
+																		                               $ArrayInstanceInfraToolsService, 
+																	                                   $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -846,7 +981,7 @@ abstract class PageInfraTools extends Page
 			                                        &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -868,7 +1003,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, $this->InputValueServiceActive,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActive(
+				                                                                           $Limit1, $Limit2, $this->InputValueServiceActive,
 																				           $ArrayInstanceInfraToolsService,
 																				           $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -885,7 +1021,7 @@ abstract class PageInfraTools extends Page
 			                                               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -907,7 +1043,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceActiveNoLimit($this->InputValueServiceActive,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActiveNoLimit(
+				                                                                                  $this->InputValueServiceActive,
 																				                  $ArrayInstanceInfraToolsService,
 																				                  $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -924,7 +1061,7 @@ abstract class PageInfraTools extends Page
 															               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -946,7 +1083,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActiveOnUserContext(
+				                                                                              $Limit1, $Limit2,
 																							  $this->InputValueServiceActive, $UserEmail,
 																							  $ArrayInstanceInfraToolsService,
 																				              $RowCount, 
@@ -965,7 +1103,7 @@ abstract class PageInfraTools extends Page
 			                                                            &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -987,7 +1125,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit($this->InputValueServiceActive,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit(
+				                                                                                               $this->InputValueServiceActive,
 																									           $UserEmail,
 																				                               $ArrayInstanceInfraToolsService,
 																				                               $RowCount, 
@@ -1006,7 +1145,7 @@ abstract class PageInfraTools extends Page
 														           &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1028,7 +1167,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActive(
+				                                                                           $Limit1, $Limit2, 
 																						   $this->InputValueServiceCorporation,
 																				           $ArrayInstanceInfraToolsService,
 																				           $RowCount, $Debug);
@@ -1049,7 +1189,7 @@ abstract class PageInfraTools extends Page
 															    &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1071,7 +1211,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationNoLimit($this->InputValueServiceCorporation,
+			$return = $instanceInfraToolsFacedePersistence->ServiceSelectByServiceCorporationNoLimit(
+				                                                                             $this->InputValueServiceCorporation,
 																				             $ArrayInstanceInfraToolsService,
 																				             $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -1090,7 +1231,7 @@ abstract class PageInfraTools extends Page
 																	  &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 		
@@ -1112,7 +1253,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->ServiceSelectByServiceCorporationOnUserContext(
+				                                                                                   $Limit1, $Limit2,
 																								   $this->InputValueServiceCorporation,
 																								   $UserEmail,
 																				                   $ArrayInstanceInfraToolsService,
@@ -1136,7 +1278,7 @@ abstract class PageInfraTools extends Page
 																		               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1158,7 +1300,7 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit(
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit(
 				                                                                                          $this->InputValueServiceCorporation,
 																								          $UserEmail,
 																				                          $ArrayInstanceInfraToolsService,
@@ -1178,7 +1320,7 @@ abstract class PageInfraTools extends Page
 														          &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -1214,12 +1356,12 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceDepartment($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartment(
+				                                                                               $Limit1, $Limit2,
 																					           $this->InputValueServiceCorporation, 
 																					           $this->InputValueServiceDepartment,
 																				               $ArrayInstanceInfraToolsService,
-																				               $RowCount, 
-																					 $Debug);
+																				               $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->InputValueLimit1   = $Limit1;
@@ -1237,7 +1379,7 @@ abstract class PageInfraTools extends Page
 															             &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -1273,7 +1415,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceDepartmentNoLimit($this->InputValueServiceCorporation, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartmentNoLimit(
+				                                                                                      $this->InputValueServiceCorporation, 
 																							          $this->InputValueServiceDepartment,
 																				                      $ArrayInstanceInfraToolsService,
 																					                  $Debug);
@@ -1293,7 +1436,7 @@ abstract class PageInfraTools extends Page
 																               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -1329,7 +1472,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartmentOnUserContext(
+				                                                                                            $Limit1, $Limit2,
 																								            $this->InputValueServiceCorporation,
 																								            $this->InputValueServiceDepartment,
 																								            $UserEmail,
@@ -1352,7 +1496,7 @@ abstract class PageInfraTools extends Page
 																		             &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -1388,7 +1532,7 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit(
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit(
 				                                                                                         $this->InputValueServiceCorporation,
 				                                                                                         $this->InputValueServiceDepartment,
 																								         $UserEmail,
@@ -1407,7 +1551,7 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1429,7 +1573,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceId($this->InputValueServiceId, $InstanceInfraToolsService, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceId($this->InputValueServiceId, 
+				                                                                                         $InstanceInfraToolsService, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
@@ -1445,7 +1590,7 @@ abstract class PageInfraTools extends Page
 															           &$TypeAssocUserServiceId, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1467,7 +1612,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceIdOnUserContext(
+				                                                                          $this->InputValueServiceId, 
 																						  $UserEmail,
 																						  $InstanceInfraToolsService,
 																						  $TypeAssocUserServiceId,
@@ -1487,7 +1633,7 @@ abstract class PageInfraTools extends Page
 												            &$RowCount, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1509,7 +1655,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceName($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceName(
+				                                                                         $Limit1, $Limit2,
 																			             $this->InputValueServiceName,  
 																			             $ArrayInstanceInfraToolsService,
 																			             $RowCount, $Debug);
@@ -1531,7 +1678,7 @@ abstract class PageInfraTools extends Page
 																   $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1553,7 +1700,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceNameNoLimit($this->InputValueServiceName,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceNameNoLimit(
+				                                                                                $this->InputValueServiceName,
 																			                    $ArrayInstanceInfraToolsService,
 																			                    $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -1572,7 +1720,7 @@ abstract class PageInfraTools extends Page
 																		 $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1594,7 +1742,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceNameOnUserContext($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceNameOnUserContext(
+				                                                                            $Limit1, $Limit2,
 																							$this->InputValueServiceName, $UserEmail, 
 																							$ArrayInstanceInfraToolsService,
 																							$RowCount,
@@ -1617,7 +1766,7 @@ abstract class PageInfraTools extends Page
 																                $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1639,7 +1788,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceNameOnUserContextNoLimit($this->InputValueServiceName, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceNameOnUserContextNoLimit(
+				                                                                                             $this->InputValueServiceName, 
 																								             $UserEmail,
 																			                                 $ArrayInstanceInfraToolsService,
 																			                                 $Debug);
@@ -1658,7 +1808,7 @@ abstract class PageInfraTools extends Page
 												            &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1680,7 +1830,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceType($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceType(
+				                                                                         $Limit1, $Limit2,
 																			             $this->InputValueServiceType, 
 																			             $ArrayInstanceInfraToolsService, $RowCount,
 																			             $Debug);
@@ -1700,7 +1851,7 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1722,9 +1873,10 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceTypeNoLimit($this->InputValueServiceType,
-											     							                    $ArrayInstanceInfraToolsService,
-																			                    $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceTypeNoLimit(
+				                                                                                           $this->InputValueServiceType,
+											     							                               $ArrayInstanceInfraToolsService,
+																			                               $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
@@ -1739,7 +1891,7 @@ abstract class PageInfraTools extends Page
 															             &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1761,7 +1913,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceTypeOnUserContext(
+				                                                                                      $Limit1, $Limit2,
 																							          $this->InputValueServiceType, 
 																							          $UserEmail,
 											     							                          $ArrayInstanceInfraToolsService,
@@ -1783,7 +1936,7 @@ abstract class PageInfraTools extends Page
 																                &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -1805,7 +1958,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit($this->InputValueServiceType, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit(
+				                                                                                             $this->InputValueServiceType, 
 																								             $UserEmail,
 											     							                                 $ArrayInstanceInfraToolsService,
 																			                                 $Debug);
@@ -1823,7 +1977,8 @@ abstract class PageInfraTools extends Page
 			                                                                    &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
@@ -1831,7 +1986,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserServiceDescription; 
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
@@ -1846,10 +2001,11 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2,
-																								   $TypeAssocUserServiceDescription,  
-			                                                                                       $ArrayInstanceInfraToolsService, 
-			                                                                                       $RowCount, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescription(
+				                                                                             $Limit1, $Limit2,
+																							 $this->InputValueTypeAssocUserServiceDescription,  
+			                                                                                 $ArrayInstanceInfraToolsService, 
+			                                                                                 $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->InputValueLimit1   = $Limit1;
@@ -1864,11 +2020,11 @@ abstract class PageInfraTools extends Page
 	}
 	
 	protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, 
-			                                                                 &$ArrayInstanceInfraToolsService, 
-																             $Debug)
+			                                                                           &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
@@ -1876,7 +2032,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserServiceDescription; 
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
@@ -1891,8 +2047,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit(
-				                                                                        $TypeAssocUserServiceDescription, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit(
+				                                                                        $this->InputValueTypeAssocUserServiceDescription, 
 			                                                                            $ArrayInstanceInfraToolsService, 
 			                                                                            $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -1911,7 +2067,8 @@ abstract class PageInfraTools extends Page
 																							 &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
@@ -1919,7 +2076,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserServiceDescription; 
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = TRUE;
@@ -1934,9 +2091,9 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
 				                                                                        $Limit1, $Limit2, 
-				                                                                        $TypeAssocUserServiceDescription,
+				                                                                        $this->InputValueTypeAssocUserServiceDescription,
 				                                                                        $UserEmail,
 			                                                                            $ArrayInstanceInfraToolsService, 
 			                                                                            $RowCount, $Debug);
@@ -1959,7 +2116,8 @@ abstract class PageInfraTools extends Page
 										  							                                $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
@@ -1967,7 +2125,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserServiceDescription; 
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
@@ -1982,9 +2140,9 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, 
-			                                                                                              $ArrayInstanceInfraToolsService, 
-			                                                                                              $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit(
+				                                                                         $this->InputValueTypeAssocUserServiceDescription, 
+			                                                                             $ArrayInstanceInfraToolsService, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
@@ -1998,7 +2156,7 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -2020,8 +2178,9 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByUser($Limit1, $Limit2, $this->InputValueUserEmail,
-											     				 		          $ArrayInstanceInfraToolsService,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByUser(
+				                                                               $Limit1, $Limit2, $this->InputValueUserEmail,
+											     				 		       $ArrayInstanceInfraToolsService,
 																		          $RowCount, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
@@ -2036,7 +2195,7 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 
@@ -2058,8 +2217,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectByUserNoLimit($this->InputValueUserEmail,
-											     						                 $ArrayInstanceInfraToolsService, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByUserNoLimit($this->InputValueUserEmail,
+											     						                         $ArrayInstanceInfraToolsService, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_USER_SUCCESS");
@@ -2072,9 +2231,9 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $StoreSession = FALSE)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 
-		$return = $FacedePersistenceInfraTools->InfraToolsServiceSelectNoLimit($ArrayInstanceInfraToolsService, $Debug);
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectNoLimit($ArrayInstanceInfraToolsService, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
@@ -2219,17 +2378,17 @@ abstract class PageInfraTools extends Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceUpdateByServiceId($ServiceActiveNew, 
-																			           $ServiceCoporationNew,
-																			           $ServiceCorporationCanChangeNew,
-																			           $ServiceDepartmentNew,
-																			           $ServiceDepartmentCanChangeNew,
-	  										                                           $ServiceDescriptionNew, 
-																			           $ServiceNameNew, 
-																			           $ServiceTypeNew, 
-																			           $ServiceId,
-															                           $Debug);
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceUpdateByServiceId($ServiceActiveNew, 
+															   				                   $ServiceCoporationNew,
+																			                   $ServiceCorporationCanChangeNew,
+																			                   $ServiceDepartmentNew,
+																			                   $ServiceDepartmentCanChangeNew,
+	  										                                                   $ServiceDescriptionNew, 
+																			                   $ServiceNameNew, 
+																			                   $ServiceTypeNew, 
+																			                   $ServiceId,
+															                                   $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_UPDATE_BY_ID_SUCCESS");
@@ -2317,13 +2476,13 @@ abstract class PageInfraTools extends Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, 
-	  										                                                   $ServiceDescriptionNew, 
- 																			                   $ServiceNameNew, 
-																			                   $ServiceTypeNew, 
-																			                   $ServiceId,
-															                                   $Debug);
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, 
+	  										                                                          $ServiceDescriptionNew, 
+ 																			                          $ServiceNameNew, 
+																			                          $ServiceTypeNew, 
+																			                          $ServiceId,
+															                                          $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS");
@@ -2345,8 +2504,8 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2,
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2,
 																					 $ArrayInstanceInfraToolsTypeAssocUserService,
 																		             $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
@@ -2363,9 +2522,10 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsTypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeAssocUserServiceSelectNoLimit($ArrayInstanceInfraToolsTypeAssocUserService,
-																			                $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelectNoLimit(
+			                                                                          $ArrayInstanceInfraToolsTypeAssocUserService,
+																			          $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS");
@@ -2378,8 +2538,8 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
 															             $UserEmail, &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2,
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2,
 																						          $ArrayInstanceInfraToolsTypeAssocUserService, 
 																						          $UserEmail, $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
@@ -2394,8 +2554,8 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
 																				$UserEmail, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(
 			                                                                   $ArrayInstanceInfraToolsTypeAssocUserService, 
 																			   $UserEmail,
 																			   $Debug);
@@ -2430,10 +2590,10 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsTypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeServiceSelect($Limit1, $Limit2,
-																            $ArrayInstanceInfraToolsTypeService,
-																            $RowCount, $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelect($Limit1, $Limit2,
+																                              $ArrayInstanceInfraToolsTypeService,
+																                              $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->InputValueLimit1   = $Limit1;
@@ -2448,8 +2608,8 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsTypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeServiceSelectNoLimit($ArrayInstanceInfraToolsTypeService, $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelectNoLimit($ArrayInstanceInfraToolsTypeService, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
@@ -2462,8 +2622,9 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsTypeService, 
 			                                                    $RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelectOnUserContext(
+			                                                                             $Limit1, $Limit2, $UserEmail,
 			                                                                             $ArrayInstanceInfraToolsTypeService,
 																			             $RowCount, $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
@@ -2477,9 +2638,11 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsTypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->InfraToolsTypeServiceSelectOnUserContextNoLimit($UserEmail, $ArrayInstanceInfraToolsTypeService,
-																					            $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelectOnUserContextNoLimit(
+			                                                                                            $UserEmail,
+																										$ArrayInstanceInfraToolsTypeService,
+																					                    $Debug);
 		if($return == ConfigInfraTools::SUCCESS)
 		{
 			$this->ShowDivReturnSuccess("SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS");
@@ -3095,15 +3258,15 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueUserEmail = $UserEmail;
 		if(!empty($UserEmail))
 		{
-			$return = $FacedePersistenceInfraTools->InfraToolsUserSelectByUserEmail($this->InputValueUserEmail, 
-																					$InstanceInfraToolsUser, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByUserEmail($this->InputValueUserEmail, 
+																				  	        $InstanceInfraToolsUser, $Debug);
 			if($return == ConfigInfraTools::SUCCESS)
 			{
-				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($InstanceInfraToolsUser, $Debug);
+				$return = $instanceInfraToolsFacedePersistence->UserSelectTeamByUserEmail($InstanceInfraToolsUser, $Debug);
 				if($return == ConfigInfraTools::SUCCESS || $return == ConfigInfraTools::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
 				{
 					$this->InfraToolsUserLoadData($InstanceInfraToolsUser);

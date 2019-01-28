@@ -78,13 +78,13 @@ class LanguageInfraTools extends Language
 		{
 			include_once(SITE_PATH_PHP_CONTROLLER . $Language . ".php");
 			if(self::$Instance->InstanceLanguageText == NULL && $Language == ConfigInfraTools::LANGUAGE_GERMAN)     
-				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateLanguageDe();
+				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateInfraToolsLanguageDe();
 			elseif(self::$Instance->InstanceLanguageText == NULL && $Language == ConfigInfraTools::LANGUAGE_ENGLISH)
-				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateLanguageEn();
+				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateInfraToolsLanguageEn();
 			elseif(self::$Instance->InstanceLanguageText == NULL && $Language == ConfigInfraTools::LANGUAGE_SPANISH) 
-				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateLanguageEs();
+				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateInfraToolsLanguageEs();
 			elseif(self::$Instance->InstanceLanguageText == NULL && $Language == ConfigInfraTools::LANGUAGE_PORTUGUESE)
-				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateLanguagePt();
+				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateInfraToolsLanguagePt();
 		}
 		else exit(basename(__FILE__, '.php') . ': Error Loading Class Language');
 		return self::$Instance;

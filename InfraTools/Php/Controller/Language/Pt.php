@@ -139,7 +139,7 @@ class Pt
 	const FORM_FIELD_CORPORATION_ACTIVE                             = "Ativo";
 	const FORM_FIELD_CORPORATION_NAME                               = "Nome da corporação";
 	const FORM_FIELD_COUNTRY_ABBREVIATION                           = "Sigla do País";
-	const FORM_FIELD_COUNTRY_NAME                                   = "Nome";
+	const FORM_FIELD_COUNTRY_NAME                                   = "País";
 	const FORM_FIELD_REGION_CODE                                    = "Código de região";
 	const FORM_FIELD_DEPARTMENT_INITIALS                            = "Código do Departamento";
 	const FORM_FIELD_DEPARTMENT_NAME                                = "Nome do departamento";
@@ -147,8 +147,10 @@ class Pt
 	const FORM_FIELD_IP_ADDRESS_DESCRIPTION                         = "Descrição";
 	const FORM_FIELD_IP_ADDRESS_IPV4                                = "Ipv4";
 	const FORM_FIELD_IP_ADDRESS_IPV6                                = "Ipv6";
-	const FORM_FIELD_IP_ADDRESS_NETWORK                             = "Rede";
 	const FORM_FIELD_LOGIN                                          = "Login (E-mail ou ID Único)";
+	const FORM_FIELD_NETWORK_IP                                     = "Endereço de rede";
+	const FORM_FIELD_NETWORK_NAME                                   = "Nome da rede";
+	const FORM_FIELD_NETWORK_NETMASK                                = "Mascara de rede";
 	const FORM_FIELD_NOTIFICATION_ACTIVE                            = "Ativo";
 	const FORM_FIELD_NOTIFICATION_ID                                = "Id";
 	const FORM_FIELD_NOTIFICATION_TEXT                              = "Texto";
@@ -427,6 +429,10 @@ class Pt
 	const IP_ADDRESS_INSERT_ERROR                                   = "Erro ao cadastrar endereço de ip";
 	const IP_ADDRESS_INSERT_SUCCESS                                 = "Endereço de ip cadastrado com sucesso";
 	const IP_ADDRESS_NOT_FOUND                                      = "Endereço de ip não encontrado";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_ERROR                = "Erro ao tentar obter endereço de ip com o ipv4 fornecido";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV4_SUCCESS              = "Endereço de ip obtido com sucesso";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_ERROR                = "Erro ao tentar obter endereço de ip com o ipv6 fornecido";
+	const IP_ADDRESS_SELECT_BY_IP_ADDRESS_IPV6_SUCCESS              = "Endereço de ip obtido com sucesso";
 	const IP_ADDRESS_UPDATE_ERROR                                   = "Erro ao atualizar endereço de ip";
 	const IP_ADDRESS_UPDATE_ERROR_UNIQUE_EXISTS                     = "Um endereço de ip com este valor já existe";
 	const IP_ADDRESS_UPDATE_SUCCESS                                 = "Endereço de ip atualizado com sucesso";

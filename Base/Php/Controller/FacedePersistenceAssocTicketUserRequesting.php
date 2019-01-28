@@ -170,7 +170,7 @@ class FacedePersistenceAssocTicketUserRequesting
 			                                        &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;
-		$ArrayAssocTicketUserRequesting = array();
+		$ArrayAssocTicketUserRequesting = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -178,10 +178,12 @@ class FacedePersistenceAssocTicketUserRequesting
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayAssocTicketUserRequesting = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -225,7 +227,6 @@ class FacedePersistenceAssocTicketUserRequesting
 			                                                   $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $errorCode = NULL;
-		$ArrayAssocTicketUserRequesting = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -233,10 +234,12 @@ class FacedePersistenceAssocTicketUserRequesting
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocTicketUserRequestingSelectByUserEmail());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("sii", $AssocTicketUserRequestingUserEmail,$Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $AssocTicketUserRequestingUserEmail,$Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayAssocTicketUserRequesting = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{

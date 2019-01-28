@@ -268,11 +268,11 @@ class FacedePersistenceUser
 	
 	public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceUser = array();
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; 
 		$InstaceBaseTypeUser = NULL; $InstanceDepartment = NULL;
 		$InstanceCorporation = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -280,10 +280,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -310,18 +312,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 		   										 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 												 $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-												 $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+												 $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -371,8 +373,8 @@ class FacedePersistenceUser
 	{
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -380,10 +382,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporationName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -411,18 +415,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row['User'.Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -473,8 +477,8 @@ class FacedePersistenceUser
 	{
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -482,10 +486,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByDepartmentName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -513,18 +519,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row['User'.Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -648,8 +654,8 @@ class FacedePersistenceUser
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -657,10 +663,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByNotiticationId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $NotificationId, $NotificationId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $NotificationId, $NotificationId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -688,18 +696,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -751,8 +759,8 @@ class FacedePersistenceUser
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -760,10 +768,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByRoleName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $RoleName, $RoleName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $RoleName, $RoleName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -791,18 +801,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -853,8 +863,8 @@ class FacedePersistenceUser
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -862,10 +872,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTeamId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $TeamId, $TeamId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $TeamId, $TeamId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -893,18 +905,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -967,8 +979,8 @@ class FacedePersistenceUser
 	{
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -976,10 +988,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTicketId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $TicketId, $TicketId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $TicketId, $TicketId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1007,18 +1021,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1070,8 +1084,8 @@ class FacedePersistenceUser
 		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -1079,10 +1093,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTypeAssocUserTeamDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeAssocUserTeamDescription, $TypeAssocUserTeamDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeAssocUserTeamDescription, $TypeAssocUserTeamDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1110,18 +1126,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1186,8 +1202,8 @@ class FacedePersistenceUser
 	{
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = array();
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -1195,10 +1211,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTypeTicketDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeTicketDescription, $TypeTicketDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeTicketDescription, $TypeTicketDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1226,18 +1244,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1289,8 +1307,8 @@ class FacedePersistenceUser
 		$InstanceArrayAssocUserTeam = NULL; 
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
 		$InstaceTypeUser = NULL; $InstanceUser = NULL;
-		$ArrayInstanceUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -1298,10 +1316,12 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTypeUserDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1328,18 +1348,18 @@ class FacedePersistenceUser
 						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[Config::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[Config::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[Config::TABLE_USER_FIELD_COUNTRY],
+						                         $row[Config::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[Config::TABLE_USER_FIELD_EMAIL], 
-						                         $row[Config::TABLE_USER_FIELD_GENDER], 
-												 $row[Config::TABLE_USER_FIELD_HASH_CODE],
-												 $row[Config::TABLE_USER_FIELD_NAME], 
-												 $row[Config::TABLE_USER_FIELD_REGION],
+							                     $row[Config::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[Config::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[Config::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[Config::TABLE_USER_FIELD_USER_NAME], 
+												 $row[Config::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".Config::TABLE_FIELD_REGISTER_DATE],
-												 $row[Config::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[Config::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[Config::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[Config::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[Config::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[Config::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[Config::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1649,8 +1669,8 @@ class FacedePersistenceUser
 	public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection)
 	{
 		$InstanceTeam = NULL; $InstanceTypeAssocUserTeam = NULL;
-		$ArrayInstanceAssocUserTeam = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceAssocUserTeam = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -1663,6 +1683,7 @@ class FacedePersistenceUser
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceAssocUserTeam = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{

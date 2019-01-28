@@ -100,7 +100,7 @@ class PageAdminIpAddress extends PageAdmin
 									  array(@$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_DESCRIPTION],
 											$_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV4],
 										    $_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_IPV6],
-										    $_POST[ConfigInfraTools::FORM_FIELD_IP_ADDRESS_NETWORK]),
+										    $_POST[ConfigInfraTools::FORM_FIELD_NETWORK_NAME]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SELECT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;

@@ -61,7 +61,7 @@ class PageServiceView extends PageInfraTools
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-				$this->ServiceLoadData($this->InstanceInfraToolsService);
+				$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 				$this->ReturnImage = "DivDisplayNone";
 				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
@@ -70,7 +70,7 @@ class PageServiceView extends PageInfraTools
 		elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT]) && 
 			  isset($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID]))
 		{
-			$return = $this->InfraToolsServiceDeleteById($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
+			$return = $this->InfraToolsServiceDeleteByServiceId($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
 											   $this->User->GetEmail(), 
 											   $this->InputValueHeaderDebug);
 			if($return == ConfigInfraTools::SUCCESS)
@@ -95,7 +95,7 @@ class PageServiceView extends PageInfraTools
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-					$this->ServiceLoadData($this->InstanceInfraToolsService);
+					$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 					$this->ReturnImage = $retImage;
 					$this->ReturnClass = $retClass;
 					$this->ReturnText  = $retText;
@@ -116,7 +116,7 @@ class PageServiceView extends PageInfraTools
 				$return = $this->InfraToolsTypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, $this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
-					$this->ServiceLoadData($this->InstanceInfraToolsService);
+					$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 					if($this->InstanceInfraToolsService->GetServiceActive())
 						$this->InputValueServiceActive = "checked";
 					else $this->InputValueServiceActive = "";
@@ -149,7 +149,7 @@ class PageServiceView extends PageInfraTools
 			if($return == ConfigInfraTools::SUCCESS)
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-				$this->ServiceLoadData($this->InstanceInfraToolsService);
+				$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 				$this->ReturnImage = "DivDisplayNone";
 				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
@@ -199,7 +199,7 @@ class PageServiceView extends PageInfraTools
 			}
 			else
 			{
-				$this->ServiceLoadData($this->InstanceInfraToolsService);
+				$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 				$this->ReturnImage = $returnImage;
 				$this->ReturnClass = $returnClass;
 				$this->ReturnText  = $returnText;
@@ -209,7 +209,7 @@ class PageServiceView extends PageInfraTools
 		elseif($this->InstanceInfraToolsService != NULL)
 		{
 			$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
-			$this->ServiceLoadData($this->InstanceInfraToolsService);
+			$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 		}
 		else
 		{

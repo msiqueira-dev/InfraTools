@@ -153,8 +153,8 @@ class FacedePersistenceTypeAssocUserRequesting
 	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayInstanceAssocUserRequesting,  &$RowCount, 
 												  $Debug, $MySqlConnection)
 	{
-		$ArrayInstanceAssocUserRequesting = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceAssocUserRequesting = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -162,10 +162,12 @@ class FacedePersistenceTypeAssocUserRequesting
 			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeAssocUserRequestingSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceAssocUserRequesting = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{

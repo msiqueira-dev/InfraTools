@@ -45,6 +45,7 @@ class PageServiceListByTypeAssocUserService extends PageService
 
 	public function LoadPage()
 	{
+		$this->InputValueFormMethod = "GET";
 		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
 		{
 			$return = $this->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 

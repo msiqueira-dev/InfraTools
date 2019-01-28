@@ -251,7 +251,8 @@ class InfraToolsFacedePersistenceAssocUserService
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("iii", $AssocUserServiceId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iii", $AssocUserServiceId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{

@@ -164,7 +164,7 @@ class FacedePersistenceDepartment
 	public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayInstanceDepartment = array();
+		$ArrayInstanceDepartment = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -172,10 +172,12 @@ class FacedePersistenceDepartment
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -221,7 +223,7 @@ class FacedePersistenceDepartment
 			                                          &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayInstanceDepartment = array();
+		$ArrayInstanceDepartment = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -229,10 +231,12 @@ class FacedePersistenceDepartment
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByCorporationName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("sii", $CorporationName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $CorporationName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())
 					{
@@ -270,7 +274,7 @@ class FacedePersistenceDepartment
 	public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceDepartment = array();
+		$ArrayInstanceDepartment = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -282,6 +286,7 @@ class FacedePersistenceDepartment
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())
 					{
@@ -316,7 +321,7 @@ class FacedePersistenceDepartment
 	public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceDepartment = array();
+		$ArrayInstanceDepartment = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
@@ -328,6 +333,7 @@ class FacedePersistenceDepartment
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::SUCCESS)
 				{
+					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -419,13 +425,14 @@ class FacedePersistenceDepartment
 	public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayInstanceDepartment = array();
+		$ArrayInstanceDepartment = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlDepartmentSelectNoLimit');
 			if($result = $MySqlConnection->query(Persistence::SqlDepartmentSelectNoLimit()))
 			{
+				$ArrayInstanceDepartment = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->Factory->CreateCorporation(NULL,

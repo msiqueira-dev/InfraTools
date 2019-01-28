@@ -13,6 +13,9 @@ Get / Set:
 			public function GetIpAddressIpv4();
 			public function GetIpAddressIpv6();
 			public function GetIpAddressNetwork();
+			public function GetIpAddressNetworkIp();
+			public function GetIpAddressNetworkName();
+			public function GetIpAddressNetworkNetmask();
 			public function GetRegisterDate();
 			public function SetIpAddressDescription($IpAddressDescription);
 			public function SetIpAddressIpv4($IpAddressIpv4);
@@ -73,6 +76,30 @@ class InfraToolsIpAddress
 	public function GetIpAddressNetwork()
 	{
 		return $this->IpAddressNetwork;
+	}
+	
+	public function GetIpAddressNetworkIp()
+	{
+		if(is_object($this->IpAddressNetwork))
+		{
+			return $this->IpAddressNetwork->GetNetworkIp();
+		}
+	}
+	
+	public function GetIpAddressNetworkName()
+	{
+		if(is_object($this->IpAddressNetwork))
+		{
+			return $this->IpAddressNetwork->GetNetworkName();
+		}
+	}
+	
+	public function GetIpAddressNetworkNetmask()
+	{
+		if(is_object($this->IpAddressNetwork))
+		{
+			return $this->IpAddressNetwork->GetNetworkNetmask();
+		}
 	}
 	
 	public function GetRegisterDate()

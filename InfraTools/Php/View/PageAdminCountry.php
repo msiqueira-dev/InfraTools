@@ -53,6 +53,10 @@ class PageAdminCountry extends PageAdmin
 		}
 		if(empty($_POST))
 			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_COUNTRY_LIST) != ConfigInfraTools::SUCCESS &&
+			   $this->CheckPostContainsKey(ConfigInfraTools::FORM_COUNTRY_LIST_BACK) != ConfigInfraTools::SUCCESS &&
+			   $this->CheckPostContainsKey(ConfigInfraTools::FORM_COUNTRY_LIST_FORWARD) != ConfigInfraTools::SUCCESS)
+			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
 		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayInstanceCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

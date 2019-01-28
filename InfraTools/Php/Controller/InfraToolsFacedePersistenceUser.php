@@ -101,7 +101,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL;
 		$InstaceTypeUser = NULL; $InstanceInfraToolsUser = NULL; 
 		$dateNow = NULL; $mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
-		
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelect');
 		if($MySqlConnection != NULL)
@@ -109,7 +109,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -140,18 +141,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 		   										 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 												 $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -204,7 +205,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
 		$InstaceTypeUser = NULL; $InstanceInfraToolsUser = NULL;
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
-		
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByCorporationName');
 		if($MySqlConnection != NULL)
@@ -212,7 +213,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByCorporationName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $CorporationName, $CorporationName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -243,18 +245,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -307,7 +309,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
 		$InstaceTypeUser = NULL; $InstanceInfraToolsUser = NULL;
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
-		
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByDepartmentName');
 		if($MySqlConnection != NULL)
@@ -315,7 +317,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByDepartmentName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -346,18 +349,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -409,6 +412,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -416,7 +420,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByIpAddressIpv4());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $IpAddressIpv4, $IpAddressIpv4, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $IpAddressIpv4, $IpAddressIpv4, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -448,18 +453,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -511,6 +516,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -518,7 +524,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByNotificationId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $NotificationId, $NotificationId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $NotificationId, $NotificationId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -550,18 +557,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -613,6 +620,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -620,7 +628,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByRoleName());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $RoleName, $RoleName, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $RoleName, $RoleName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -652,18 +661,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -715,6 +724,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -722,7 +732,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByServiceId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $ServiceId, $ServiceId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $ServiceId, $ServiceId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -754,18 +765,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -817,6 +828,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -824,7 +836,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTeamId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $TeamId, $TeamId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $TeamId, $TeamId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -856,18 +869,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -919,6 +932,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -926,7 +940,8 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTicketId());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("iiii", $TicketId, $TicketId, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iiii", $TicketId, $TicketId, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
@@ -958,18 +973,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1020,8 +1035,8 @@ class InfraToolsFacedePersistenceUser
 	{
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
-		$ArrayInstanceInfraToolsUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -1029,10 +1044,12 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByTypeMonitoringDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeMonitoringDescription, $TypeMonitoringDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeMonitoringDescription, $TypeMonitoringDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
+					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1060,18 +1077,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1123,8 +1140,8 @@ class InfraToolsFacedePersistenceUser
 	{
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
-		$ArrayInstanceInfraToolsUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -1132,10 +1149,12 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeAssocUserTeamDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeAssocUserTeamDescription, $TypeAssocUserTeamDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeAssocUserTeamDescription, $TypeAssocUserTeamDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
+					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1163,18 +1182,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1225,8 +1244,8 @@ class InfraToolsFacedePersistenceUser
 	{
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceInfraToolsUser = NULL;
-		$ArrayInstanceInfraToolsUser = array();
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -1234,10 +1253,12 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeTicketDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeTicketDescription, $TypeTicketDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeTicketDescription, $TypeTicketDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
+					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
@@ -1265,18 +1286,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser(NULL,
 												 NULL,
 												 NULL,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],
@@ -1329,8 +1350,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
 		$InstaceTypeUser = NULL; $InstanceInfraToolsUser = NULL;
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolsUser = array();
-		
+		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeUserDescription');
 		if($MySqlConnection != NULL)
@@ -1338,13 +1358,15 @@ class InfraToolsFacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeUserDescription());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $TypeUserDescription, $TypeUserDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::SUCCESS)
 				{
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
+						$ArrayInstanceInfraToolsUser = array();
 						$RowCount = $row['COUNT'];
 						if($row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE] != NULL &&
 						   $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME] != NULL 
@@ -1368,18 +1390,18 @@ class InfraToolsFacedePersistenceUser
 						$InstanceInfraToolsUser = $this->Factory->CreateInfraToolsUser($InstanceArrayAssocUserTeam, 
 												 NULL,
 												 NULL,
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_BIRTH_DATE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_COUNTRY],
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_COUNTRY],
 												 $InstanceDepartment,
-							                     $row[ConfigInfraTools::TABLE_USER_FIELD_EMAIL], 
-						                         $row[ConfigInfraTools::TABLE_USER_FIELD_GENDER], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_HASH_CODE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_NAME], 
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_REGION],
+							                     $row[ConfigInfraTools::TABLE_USER_FIELD_USER_EMAIL], 
+						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_GENDER], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_HASH_CODE],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_NAME], 
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_REGION],
 												 $row["User".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_SESSION_EXPIRES],
-												 $row[ConfigInfraTools::TABLE_USER_FIELD_TWO_STEP_VERIFICATION],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_SESSION_EXPIRES],
+												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_TWO_STEP_VERIFICATION],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_ACTIVE],
 						                         $row[ConfigInfraTools::TABLE_USER_FIELD_USER_CONFIRMED],
 												 $row[ConfigInfraTools::TABLE_USER_FIELD_USER_PHONE_PRIMARY],

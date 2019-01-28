@@ -435,8 +435,8 @@ class InfraToolsPersistenceDataBase
                 PRIMARY KEY (InformationServiceId),
                 INDEX IndexServiceInformationService (InformationServiceId ASC),
                 UNIQUE INDEX UniqueInformationServiceId (InformationServiceId ASC),
-                CONSTRAINT ForeignKeyServiceInformationService
-                FOREIGN KEY (InformationServiceId)
+                CONSTRAINT ForeignKeyInformationServiceService
+                FOREIGN KEY (InformationServiceServiceId)
                 REFERENCES INFRATOOLS.SERVICE (ServiceId)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
