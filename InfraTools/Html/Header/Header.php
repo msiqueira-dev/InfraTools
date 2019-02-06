@@ -8,8 +8,8 @@
 	$FacedeBusinessInfraTools->GetOperationalSystem(false, $returnMessageOperationalSystem);
 ?>
 <div class="DivHeader">
-	<form name="<?php echo ConfigInfraTools::FORM_HEADER_PAGES; ?>"
-  	      id="<?php echo ConfigInfraTools::FORM_HEADER_PAGES; ?>" method="post" class="DivHeader">
+	<form name="<?php echo ConfigInfraTools::FM_HEADER_PAGES; ?>"
+  	      id="<?php echo ConfigInfraTools::FM_HEADER_PAGES; ?>" method="post" class="DivHeader">
     	<div class="DivHidden">
         	<input type="hidden" name="HiddenTextForm" id="HiddenTextForm" class="DivHeader"/>
 		</div>
@@ -104,8 +104,8 @@
             -->
         </div>
     	<div class="DivHeaderDivisionContainerLanguage">
-        	<form name="<?php echo ConfigInfraTools::FORM_HEADER_LANGUAGE; ?>" 
-                  id="<?php echo ConfigInfraTools::FORM_HEADER_LANGUAGE; ?>" action="#" method="post">
+        	<form name="<?php echo ConfigInfraTools::FM_LANGUAGE; ?>" 
+                  id="<?php echo ConfigInfraTools::FM_LANGUAGE; ?>" action="#" method="post">
                 <!-- Language Portuguese -->
                 <?php
                     if($ConfigInfraTools->LanguagePortugueseEnabled == true)
@@ -188,7 +188,9 @@
         <div class="DivHeaderPageTitleContentText">
             <h1>
                 <?php
-					echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage());
+					if(empty($this->PageBody))
+					   echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage());
+					else echo $this->InstanceLanguageText->GetPageName($this->PageBody);
                 ?>
             </h1>
         </div>

@@ -46,35 +46,35 @@ class PageServiceListByTypeAssocUserService extends PageService
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
 			$return = $this->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 
 														 $this->User->GetEmail(), 
 														 $this->InputValueHeaderDebug);
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT]))
+			if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_TYPE_ASSOC_SERVICE_SB]))
 			{
-				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT] 
-				   != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
+				if($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_TYPE_ASSOC_SERVICE_SB] 
+				   != ConfigInfraTools::FIELD_SEL_NONE)
 					$this->InputValueTypeAssocUserServiceDescription = 
-					$_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT];	
+					$_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_TYPE_ASSOC_SERVICE_SB];	
 				else $this->InputValueTypeAssocUserServiceDescription = NULL;
 			}
 			else $this->InputValueTypeAssocUserServiceDescription = NULL;
-			//FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT
-			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]))
+			//FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_BY_ID_SB
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_BY_ID_SB]))
 			{
 
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_BY_ID_SB]);
 			}
-			//FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE
+			//FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE
 			else
 			{
-				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE =>
-							  ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE) + $_GET;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE =>
+							  ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE) + $_GET;
 				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext', 
 											   array($this->InputValueTypeAssocUserServiceDescription,
 													 $this->User->GetEmail(),

@@ -60,21 +60,21 @@ class PagePasswordRecovery extends PageInfraTools
 	public function LoadPage()
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
+		$this->InputFocus = ConfigInfraTools::FIELD_USER_EMAIL;
 		Page::GetCurrentURL($pageUrl);
 		if(strstr($pageUrl, "?="))
 		{
 			$email = substr($pageUrl, strrpos($pageUrl, "=")+1);
-			if($PageForm->ValidateSpecificField(ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL, $email, NULL, NULL) 
-			                                    == ConfigInfraTools::SUCCESS)
+			if($PageForm->ValidateSpecificField(ConfigInfraTools::FM_VALIDATE_FUNCTION_EMAIL, $email, NULL, NULL) 
+			                                    == ConfigInfraTools::RET_OK)
 				$this->InputValueUserEmail = $email;
 		}
-		if (isset($_POST[ConfigInfraTools::PASSWORD_RECOVERY_FORM_SUBMIT]))
+		if (isset($_POST[ConfigInfraTools::FM_PASSWORD_RECOVERY_SB]))
 		{
-			$return = $this->UserSelectExistsByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_CAPTCHA],
-														 $_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL], 
+			$return = $this->UserSelectExistsByUserEmail($_POST[ConfigInfraTools::FIELD_CAPTCHA],
+														 $_POST[ConfigInfraTools::FIELD_USER_EMAIL], 
 														 $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 																							($this->InstanceLanguageText);
@@ -83,9 +83,9 @@ class PagePasswordRecovery extends PageInfraTools
 					                                      ConfigInfraTools::APPLICATION_INFRATOOLS,
 														  $this->InputValueUserEmail,
 														  $code, $this->InputValueHeaderDebug);
-				if ($this->ReturnText == ConfigInfraTools::SUCCESS)
+				if ($this->ReturnText == ConfigInfraTools::RET_OK)
 				{
-					$this->Session->SetSessionValue(ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE, $code);
+					$this->Session->SetSessionValue(ConfigInfraTools::FIELD_PASSWORD_RESET_CODE, $code);
 					$this->Session->SetSessionValue(ConfigInfraTools::SESS_PASSWORD_RECOVERY, 
 															 $this->InputValueUserEmail);
 					Page::GetCurrentDomain($domain);
@@ -98,7 +98,7 @@ class PagePasswordRecovery extends PageInfraTools
 			}
 			else $this->ShowDivReturnError("PASSWORD_RECOVERY_ERROR");
 		}
-		$this->CaptchaLoad(ConfigInfraTools::FORM_FIELD_CAPTCHA, $this->InputValueHeaderDebug);
+		$this->CaptchaLoad(ConfigInfraTools::FIELD_CAPTCHA, $this->InputValueHeaderDebug);
 		$this->LoadHtml(FALSE);
 	}
 }

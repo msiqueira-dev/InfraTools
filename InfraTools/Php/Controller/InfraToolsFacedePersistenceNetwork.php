@@ -96,30 +96,30 @@ class InfraToolsFacedePersistenceNetwork
 				$stmt->bind_param("s", $NetworkName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_NETWORK_DELETE_BY_NETWORK_NAME_FAILED_NOT_FOUND;
+					return ConfigInfraTools::DB_ERROR_NETWORK_DEL_BY_NETWORK_NAME;
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return ConfigInfraTools::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return ConfigInfraTools::MYSQL_NETWORK_DELETE_BY_NETWORK_NAME_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_NETWORK_DEL_BY_NETWORK_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug, $MySqlConnection)
@@ -135,22 +135,22 @@ class InfraToolsFacedePersistenceNetwork
 				$stmt->bind_param("sss", $NetworkIp, $NetworkName, $NetworkNetmask);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_NETWORK_INSERT_FAILED;
+					return ConfigInfraTools::DB_ERROR_NETWORK_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug, $MySqlConnection)
@@ -167,7 +167,7 @@ class InfraToolsFacedePersistenceNetwork
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsNetwork = array();
 					$result = $stmt->get_result();
@@ -175,36 +175,36 @@ class InfraToolsFacedePersistenceNetwork
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
-							                                        $row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
-						                                            $row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							                                        $row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK],
+						                                            $row["Network".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsNetwork, $InstanceInfraToolsNetwork);
 					}
 					if(!empty($ArrayInstanceInfraToolsNetwork))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_NETWORK_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_NETWORK_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_NETWORK_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_NETWORK_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork, 
@@ -222,7 +222,7 @@ class InfraToolsFacedePersistenceNetwork
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("sii", $NetworkIp, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsNetwork = array();
 					$result = $stmt->get_result();
@@ -230,36 +230,36 @@ class InfraToolsFacedePersistenceNetwork
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
-							                                        $row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
-						                                            $row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							                                        $row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK],
+						                                            $row["Network".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsNetwork, $InstanceInfraToolsNetwork);
 					}
 					if(!empty($ArrayInstanceInfraToolsNetwork))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_NETWORK_SELECT_BY_NETWORK_IP_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_NETWORK_SEL_BY_NETWORK_IP_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_NETWORK_SELECT_BY_NETWORK_IP_FAILED;
+					return ConfigInfraTools::DB_ERROR_NETWORK_SEL_BY_NETWORK_IP;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
 	public function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork, 
@@ -277,7 +277,7 @@ class InfraToolsFacedePersistenceNetwork
 				$limitResult = $Limit2 - $Limit1;	
 				$stmt->bind_param("sii", $NetworkName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsNetwork = array();
 					$result = $stmt->get_result();
@@ -285,36 +285,36 @@ class InfraToolsFacedePersistenceNetwork
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
-							                                        $row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
-						                                            $row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							                                        $row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK],
+						                                            $row["Network".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsNetwork, $InstanceInfraToolsNetwork);
 					}
 					if(!empty($ArrayInstanceInfraToolsNetwork))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_NETWORK_SELECT_BY_NETWORK_NAME_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_NETWORK_SEL_BY_NETWORK_NAME_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_NETWORK_SELECT_BY_NETWORK_NAME_FAILED;
+					return ConfigInfraTools::DB_ERROR_NETWORK_SEL_BY_NETWORK_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
 	public function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
@@ -332,7 +332,7 @@ class InfraToolsFacedePersistenceNetwork
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("sii", $NetworkNetmask, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsNetwork = array();
 					$result = $stmt->get_result();
@@ -340,36 +340,36 @@ class InfraToolsFacedePersistenceNetwork
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
-							                                        $row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
-																	$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
-						                                            $row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+							                                        $row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME],
+																	$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK],
+						                                            $row["Network".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsNetwork, $InstanceInfraToolsNetwork);
 					}
 					if(!empty($ArrayInstanceInfraToolsNetwork))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_NETWORK_SELECT_BY_NETWORK_NETMASK_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_NETWORK_SEL_BY_NETWORK_NETMASK_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_NETWORK_SELECT_BY_NETWORK_NETMASK_FAILED;
+					return ConfigInfraTools::DB_ERROR_NETWORK_SEL_BY_NETWORK_NETMASK;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug, $MySqlConnection)
@@ -386,25 +386,25 @@ class InfraToolsFacedePersistenceNetwork
 				{
 
 					$InstanceInfraToolsNetwork = $this->InfraToolsFactory->CreateInfraToolsNetwork(
-																$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_IP],
-																$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NAME],
-																$row[ConfigInfraTools::TABLE_NETWORK_FIELD_NETWORK_NETMASK],
-																$row["Network".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+																$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP],
+																$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME],
+																$row[ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK],
+																$row["Network".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 					array_push($ArrayInstanceInfraToolsNetwork, $InstanceInfraToolsNetwork);
 				}
 				if(!empty($ArrayInstanceInfraToolsNetwork))
-					return ConfigInfraTools::SUCCESS;
-				else return ConfigInfraTools::MYSQL_NETWORK_SELECT_FETCH_FAILED;
+					return ConfigInfraTools::RET_OK;
+				else return ConfigInfraTools::DB_ERROR_NETWORK_SEL_FETCH;
 			}
 			else 
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = ConfigInfraTools::MYSQL_NETWORK_SELECT_FAILED;
+				$return = ConfigInfraTools::DB_ERROR_NETWORK_SEL;
 			}
 			return $return;
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 
 	
@@ -423,29 +423,29 @@ class InfraToolsFacedePersistenceNetwork
 				$stmt->bind_param("ssss", $NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
-						return ConfigInfraTools::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
-					else return ConfigInfraTools::MYSQL_NETWORK_UPDATE_BY_NETWORK_NAME_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+						return ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
+					else return ConfigInfraTools::DB_ERROR_NETWORK_UPDT_BY_NETWORK_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 }

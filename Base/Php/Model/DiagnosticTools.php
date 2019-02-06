@@ -79,7 +79,7 @@ class DiagnosticTools
 				$Browser = $value;
 		}
 		if($Browser != "")
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		else return Config::GET_BROWSER_CLIENT_INVALID_BROWSER;
 	}
 	
@@ -102,7 +102,7 @@ class DiagnosticTools
 		{
 			if($IpAddress == "::1")
 				$IpAddress = "127.0.0.1";
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		else return Config::GET_IP_ADDRESS_CLIENT_ERROR;
 	}
@@ -151,7 +151,7 @@ class DiagnosticTools
 			}
 	    }
    	 	if($OsPlatform != "")
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		else return Config::GET_ERROR_INVALID_OS;
 	}
 }

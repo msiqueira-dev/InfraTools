@@ -11,42 +11,42 @@
 		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>" method="post">
+<!-- FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>" method="post">
     <!-- TYPE_ASSOC_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
                                class="<?php echo $this->ReturnTypeAssocUserTeamDescriptionClass; ?>"
                                onblur="ValidateDescription(null, 
-                                                  '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+                                                  '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
                                                  '');"
                                onchange="ValidateDescription(null, 
-                                                 '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+                                                 '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
                                                  '');"
                                 title="<?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_DESCRIPTION'); ?>"
                                 value="<?php echo $this->InputValueTypeAssocUserTeamDescription; ?>" maxlength="45" />
@@ -55,22 +55,22 @@
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
          onmouseover="ValidateDescription(null, 
-							       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+							       '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_REGISTER_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

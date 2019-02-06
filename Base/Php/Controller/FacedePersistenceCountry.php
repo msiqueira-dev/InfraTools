@@ -86,7 +86,7 @@ class FacedePersistenceCountry
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceCountry = array();
 					$result = $stmt->get_result();
@@ -94,26 +94,26 @@ class FacedePersistenceCountry
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceCountry = $this->Factory->CreateCountry
-							                              ($row[Config::TABLE_COUNTRY_FIELD_ABBREVIATION],
-							                               $row[Config::TABLE_COUNTRY_FIELD_NAME], 
-												      	   $row[Config::TABLE_COUNTRY_FIELD_REGION_CODE], 
-														   $row[Config::TABLE_FIELD_REGISTER_DATE]);
+							                              ($row[Config::TB_COUNTRY_FD_ABBREVIATION],
+							                               $row[Config::TB_COUNTRY_FD_NAME], 
+												      	   $row[Config::TB_COUNTRY_FD_REGION_CODE], 
+														   $row[Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceCountry, $InstanceCountry);
 					}
 					if(!empty($ArrayInstanceCountry))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_COUNTRY_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_COUNTRY_SEL_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_COUNTRY_SELECT_FAILED;
+					$return = Config::DB_ERROR_COUNTRY_SEL;
 				}
 				return $return;
 			}
@@ -121,10 +121,10 @@ class FacedePersistenceCountry
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>

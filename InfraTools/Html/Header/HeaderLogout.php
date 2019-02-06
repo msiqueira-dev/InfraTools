@@ -1,5 +1,6 @@
 <div class="DivHeaderDivisionContainerLoginElement">
-    <a href="javascript: SubmitPostBackFormForm('<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LOG_OUT; ?>')" 
+    <a href="javascript: SubmitNewForm('<?php echo ConfigInfraTools::FIELD_HEADER_LOG_OUT; ?>', 'POST',
+                                       '<?php echo ConfigInfraTools::FIELD_HEADER_LOG_OUT; ?>')" 
        title="" id="ButtonLogOut" >
        <img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsLogOut.png';?>"
             onmouseover="this.src='<?php echo $this->Config->DefaultServerImage

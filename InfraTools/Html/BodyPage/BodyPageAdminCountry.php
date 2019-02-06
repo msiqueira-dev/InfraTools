@@ -1,8 +1,8 @@
 <!-- BODY_PAGE_ADMIN_COUNTRY -->
 <div class="DivBody">
     <div class="DivContentBody">
-    	<form name="<?php echo ConfigInfraTools::FORM_COUNTRY; ?>" 
-       	      id="<?php echo ConfigInfraTools::FORM_COUNTRY; ?>" method="post">
+    	<form name="<?php echo ConfigInfraTools::FM_COUNTRY; ?>" 
+       	      id="<?php echo ConfigInfraTools::FM_COUNTRY; ?>" method="post">
         	<!-- SUBMIT -->
             <div class="DivContentBodyOptions">
             	<div class="DivContentBodyOptionsBox">
@@ -19,8 +19,8 @@
 				   </div>
                    <div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
+							   name="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
+							   value="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -32,11 +32,11 @@
 					</div>
                     <div class="DivContentBodyContainersBox">
                         <input type="image" 
-                               name="<?php echo ConfigInfraTools::FORM_COUNTRY_LIST; ?>"
-                               id="<?php echo ConfigInfraTools::FORM_COUNTRY_LIST; ?>"
-                               value="<?php echo ConfigInfraTools::FORM_COUNTRY_LIST; ?>"
-                               title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
-                               alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+                               name="<?php echo ConfigInfraTools::FM_COUNTRY_LST; ?>"
+                               id="<?php echo ConfigInfraTools::FM_COUNTRY_LST; ?>"
+                               value="<?php echo ConfigInfraTools::FM_COUNTRY_LST; ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
+                               alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
                                src="<?php echo $this->Config->DefaultServerImage. 
                                                'Icons/IconInfraToolsList.png'; ?>"
                                onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -48,11 +48,11 @@
             </div>
 		</fom>
 		<?php 
-		//PAGE_ADMIN_COUNTRY_LIST
-		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST)
+		//PAGE_ADMIN_COUNTRY_LST
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST)) 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST)) 
 						                                                   . ".php");
 		}
         ?>

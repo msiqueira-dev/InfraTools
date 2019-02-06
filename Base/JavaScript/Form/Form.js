@@ -120,11 +120,18 @@ function SetSelectColor(SelectId)
 	}
 }
 
-function SubmitPostBackFormForm(Id)
+function SubmitNewForm(Id, Method, Name)
 {
-	var $buttonClicked = document.getElementsByName('HiddenTextForm')[0];
-	$buttonClicked.value = Id;
-	document.forms['PostBackForm'].submit();
+	var form = document.createElement("form");
+	var element = document.createElement("input");
+	form.method = Method;
+	form.id = Id;
+	form.name = Name
+	element.value = Id;
+    element.name = Name;
+    form.appendChild(element);  
+	document.body.appendChild(form);
+	form.submit();
 }
 
 function SubmitForm(Form)
@@ -560,7 +567,7 @@ function ValidateInputsOnlyOneFilled(DefaultInputClass,InputId1, InputId2, Defau
 	}
 }
 
-function ValidateIpAddress(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
+function ValidateIpAddressIpv4(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
@@ -601,7 +608,7 @@ function ValidateIpAndPort(DefaultInputIpClass, DefaultInputIpPortClass, InputIp
 	var $returnIp;
 	var $returnIpPort;
 	var $submit = document.getElementsByName(SubmitId)[0];
-	$returnIp = ValidateIpAddress(DefaultInputIpClass, InputIpId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightFirstInput);
+	$returnIp = ValidateIpAddressIpv4(DefaultInputIpClass, InputIpId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightFirstInput);
 	$returnIpPort = ValidateNumbersOnly(DefaultInputIpPortClass, InputIpPortId, DefaultSubmitClass, SubmitId, DefaultValue,
 	                                      HighlightSecondtInput);
 	if($returnIp == false || $returnIpPort == false)
@@ -670,18 +677,13 @@ function ValidateMultiplyFields(Id, DefaultSubmitClass, SubmitId, DefaultValue)
 	for (var $index = 0; $index < $inputs.length; $index++) 
 	{
 		if($inputs[$index].type != "submit" && $inputs[$index].type != "hidden" && $inputs[$index].type != "radio"
-		   && $inputs[$index].id != "" && $inputs[$index].value.length != 0 )
+		   && $inputs[$index].id != "")
 		{
 			if(($inputs[$index].className.search('InputAlertText') != -1 
 			|| $inputs[$index].value == ""
 			|| $inputs[$index].value == DefaultValue
-			|| $inputs[$index].value == $inputs[$index].title)
-			&& $inputs[$index].id != "GoogleMapsSearch"
-			&& $inputs[$index].id != "FormGoogleMapsRegion"
-			&& $inputs[$index].id != "FormFieldUserPhonePrimary"
-			&& $inputs[$index].id != "FormFieldUserPhonePrimaryPrefix"
-			&& $inputs[$index].id != "FormFieldUserPhoneSecondary"
-			&& $inputs[$index].id != "FormFieldUserPhoneSecondaryPrefix"
+			|| $inputs[$index].value == $inputs[$index].title
+			|| $inputs[$index].value.length == 0)
 			&& $inputs[$index].className.search('FormFieldNotObligatory') == -1)
 			{
 				$submit.className = DefaultSubmitClass + " SubmitDisabled";

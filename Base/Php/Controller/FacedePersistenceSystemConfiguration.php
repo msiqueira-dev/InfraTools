@@ -104,31 +104,31 @@ class FacedePersistenceSystemConfiguration
 				$stmt->bind_param("i", $SystemConfigurationOptionNumber);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_SYSTEM_CONFIGURATION_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_SYSTEM_CONFIGURATION_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_SYSTEM_CONFIGURATION_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
@@ -146,24 +146,24 @@ class FacedePersistenceSystemConfiguration
 								          $SystemConfigurationOptionName, $SystemConfigurationOptionValue);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
-					if($errorCode == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
+					if($errorCode == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+						return Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_SYSTEM_CONFIGURATION_INSERT_FAILED;
+					return Config::DB_ERROR_SYSTEM_CONFIGURATION_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug, $MySqlConnection)
@@ -180,7 +180,7 @@ class FacedePersistenceSystemConfiguration
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceSystemConfiguration = array();
 					$result = $stmt->get_result();
@@ -188,28 +188,28 @@ class FacedePersistenceSystemConfiguration
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceSystemConfiguration = $this->Factory->CreateSystemConfiguration
-							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE]);	
+							                            ($row[Config::TB_FD_REGISTER_DATE],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_ACTIVE],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_DESCRIPTION],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NAME],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_VALUE]);	
 						array_push($ArrayInstanceSystemConfiguration, $InstanceSystemConfiguration);
 					}
 					if(!empty($ArrayInstanceSystemConfiguration))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED;
+					$return = Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL;
 				}
 				return $return;
 			}
@@ -217,10 +217,10 @@ class FacedePersistenceSystemConfiguration
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
@@ -240,7 +240,7 @@ class FacedePersistenceSystemConfiguration
 				$SystemConfigurationOptionName = "%".$SystemConfigurationOptionName."%"; 
 				$stmt->bind_param("sii", $SystemConfigurationOptionName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceSystemConfiguration = array();
 					$result = $stmt->get_result();
@@ -248,23 +248,23 @@ class FacedePersistenceSystemConfiguration
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceSystemConfiguration = $this->Factory->CreateSystemConfiguration
-														($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER],
-														 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE]);
+														($row[Config::TB_FD_REGISTER_DATE],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_ACTIVE],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_DESCRIPTION],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NAME],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER],
+														 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_VALUE]);
 						array_push($ArrayInstanceSystemConfiguration, $InstanceSystemConfiguration);
 					}
 					if(!empty($ArrayInstanceSystemConfiguration))
-						return Config::SUCCESS;
-					else return Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NAME_FETCH_FAILED;
+						return Config::RET_OK;
+					else return Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL_BY_OPTION_NAME_FETCH;
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NAME_FAILED;
+					$return = Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL_BY_OPTION_NAME;
 				}
 				return $return;
 			}
@@ -272,10 +272,10 @@ class FacedePersistenceSystemConfiguration
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
@@ -292,7 +292,7 @@ class FacedePersistenceSystemConfiguration
 			{
 				$stmt->bind_param("i", $SystemConfigurationOptionNumber);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 									   $SystemConfigurationOptionName, $SystemConfigurationOptionNumber, $SystemConfigurationOptionValue,
@@ -306,20 +306,20 @@ class FacedePersistenceSystemConfiguration
 																								 $SystemConfigurationOptionName,
 																								 $SystemConfigurationOptionNumber,
 																								 $SystemConfigurationOptionValue);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FETCH_FAILED;
+						$return = Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL_BY_OPTION_NUMB_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_BY_OPTION_NUMB_FAILED;
+					$return = Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL_BY_OPTION_NUMB;
 				}
 				return $return;
 			}
@@ -327,10 +327,10 @@ class FacedePersistenceSystemConfiguration
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, $MySqlConnection)
@@ -348,27 +348,27 @@ class FacedePersistenceSystemConfiguration
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceSystemConfiguration = $this->Factory->CreateSystemConfiguration
-													($row[Config::TABLE_FIELD_REGISTER_DATE],
-													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE],
-													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION],
-													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME],
-													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER],
-													 $row[Config::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE]);	
+													($row[Config::TB_FD_REGISTER_DATE],
+													 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_ACTIVE],
+													 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_DESCRIPTION],
+													 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NAME],
+													 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER],
+													 $row[Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_VALUE]);	
 					array_push($ArrayInstanceSystemConfiguration, $InstanceSystemConfiguration);
 				}
 				if(!empty($ArrayInstanceSystemConfiguration))
-					return Config::SUCCESS;
-				else return Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_FETCH_FAILED;
+					return Config::RET_OK;
+				else return Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL_FETCH;
 			}
 			else 
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_SYSTEM_CONFIGURATION_SELECT_FAILED;
+				$return = Config::DB_ERROR_SYSTEM_CONFIGURATION_SEL;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
@@ -391,25 +391,25 @@ class FacedePersistenceSystemConfiguration
 								        $SystemConfigurationOptionNumber);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_SYSTEM_CONFIGURATION_UPDATE_FAILED;
+					return Config::DB_ERROR_SYSTEM_CONFIGURATION_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

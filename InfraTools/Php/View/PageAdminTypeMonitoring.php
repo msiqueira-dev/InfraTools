@@ -46,146 +46,142 @@ class PageAdminTypeMonitoring extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
-		//FORM SUBMIT BACK
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
-		{
-			$this->PageStackSessionLoad();
-			$PageFormBack = TRUE;
-		}
-		//FORM_CORPORATION_SELECT_SUBMIT
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SEL;
+		$this->AdminGoBack($PageFormBack);
+		
+		//FM_CORPORATION_SEL_SB
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
 											&$this->InstanceCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
-		//FORM_DEPARTMENT_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_DEPARTMENT_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
-											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
 										    &$this->InstanceInfraToolsDepartment),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//FORM_TYPE_MONITORING_LIST
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_LIST) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_LST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelect', 
 									  array(&$this->ArrayInstanceTypeMonitoring),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_LIST;
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_LST;
 		}
-		//FORM_TYPE_MONITORING_REGISTER
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_REGISTER) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_REGISTER) == ConfigInfraTools::RET_OK)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_REGISTER;
-		//FORM_TYPE_MONITORING_REGISTER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
-		//FORM_TYPE_MONITORING_REGISTER_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SEL;
+		//FM_TYPE_MONITORING_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_REGISTER_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeMonitoringInsert', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
-										    $_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_DESCRIPTION]),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_MONITORING_NAME],
+										    $_POST[ConfigInfraTools::FIELD_TYPE_MONITORING_DESCRIPTION]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SEL;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_REGISTER;
 		}
-		//FORM_TYPE_MONITORING_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelectByTypeMonitoringDescription', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_MONITORING_NAME],
 											&$this->InstanceTypeMonitoring),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_VIEW;
 		}
-		//FORM_TYPE_MONITORING_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeMonitoringSelectByTypeMonitoringDescription', 
-											  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
+											  array($_POST[ConfigInfraTools::FIELD_TYPE_MONITORING_NAME],
 													&$this->InstanceTypeMonitoring),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 			{
 					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING_TEAM, "TypeMonitoringLoadData", 
-												  $this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
+												  $this->InstanceTypeMonitoring) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_VIEW;
 			}
 		}
-		//FORM_TYPE_MONITORING_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, "TypeMonitoringLoadData", 
-										  $this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceTypeMonitoring) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'TypeMonitoringDeleteByTypeMonitoringDescription', 
 										  array($this->InstanceTypeMonitoring),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SELECT;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_SEL;
 			}
 		}
-		//FORM_TYPE_MONITORING_VIEW_LIST_USERS_SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_MONITORING_VIEW_LIST_USERS_SUBMIT]))
+		//FM_TYPE_MONITORING_VIEW_LST_USERS_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_TYPE_MONITORING_VIEW_LST_USERS_SB]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, $this->InstanceTypeMonitoring) 
-			                                   == ConfigInfraTools::SUCCESS)
+			                                   == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTypeMonitoringDescription', 
 										  array($this->InstanceTypeMonitoring->GetTypeMonitoringDescription(), 
 										        &$this->ArrayInstanceInfraToolsUser),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LIST_USERS;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LST_USERS;
 			}
 		}
-		//FORM_TYPE_MONITORING_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_MONITORING_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_TYPE_MONITORING, "TypeMonitoringLoadData", 
-										  $this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_UPDATE;
+										  $this->InstanceTypeMonitoring) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_UPDT;
 		}
-		//FORM_TYPE_TYPE_MONITORING_UPDATE_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_TYPE_MONITORING_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_TYPE_MONITORING_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_TYPE_MONITORING_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, "TypeMonitoringLoadData", 
-										  $this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceTypeMonitoring) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_VIEW;
 		}
-		//FORM_TYPE_TYPE_MONITORING_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_MONITORING_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_TYPE_MONITORING_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_MONITORING_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_MONITORING, 
-														$this->InstanceTypeMonitoring) == ConfigInfraTools::SUCCESS)
+														$this->InstanceTypeMonitoring) == ConfigInfraTools::RET_OK)
 			{
 				$this->ExecuteFunction($_POST, 'TypeMonitoringUpdateByTypeMonitoringDescription', 
-									   array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_MONITORING_NAME],
+									   array($_POST[ConfigInfraTools::FIELD_TYPE_MONITORING_NAME],
 					                         &$this->InstanceTypeMonitoring),
 									   $this->InputValueHeaderDebug);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_MONITORING_VIEW;	
 			}
 		}
-		//FORM_TYPE_USER_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_USER_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
 									        &$this->InstanceTypeUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}
-		//FORM_USER_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_USER_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+									  array($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
 									        &$this->InstanceUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)

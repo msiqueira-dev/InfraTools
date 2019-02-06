@@ -1,5 +1,6 @@
 <div>
-   <a href="javascript: SubmitPostBackFormForm('<?php echo ConfigInfraTools::LANGUAGE_GERMAN; ?>')" 
+   <a href="javascript: SubmitNewForm('<?php echo ConfigInfraTools::LANGUAGE_GERMAN; ?>', 'POST',
+                                      '<?php echo ConfigInfraTools::FM_LANGUAGE; ?>')" 
        title="Deutsch" id="ButtonLanguageGerman" >
         <img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconLanguageDe3.png'; ?>"
              onmouseover="this.src='<?php 

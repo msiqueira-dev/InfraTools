@@ -45,23 +45,23 @@ class PageServiceListByName extends PageService
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
-			//FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT
-			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT]))
+			//FM_SERVICE_LST_BY_NAME_SEL_BY_ID_SB
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_NAME_SEL_BY_ID_SB]))
 			{
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_NAME_SEL_BY_ID_SB]);
 			}
-			//FORM_SERVICE_LIST_BY_NAME
+			//FM_SERVICE_LST_BY_NAME
 			else
 			{
-				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME => ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME) + $_GET;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_NAME => ConfigInfraTools::FM_SERVICE_LST_BY_NAME) + $_GET;
 				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
-											   array($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
+											   array($_GET[ConfigInfraTools::FIELD_SERVICE_NAME],
 													 $this->User->GetEmail(),
 													 &$this->ArrayInstanceInfraToolsService),
 											   $this->InputValueHeaderDebug);

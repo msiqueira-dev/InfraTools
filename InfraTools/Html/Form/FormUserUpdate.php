@@ -21,65 +21,64 @@
 
 	</label>
 </div>
-<!-- FORM_USER_UPDATE_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>" method="post" >
-    <!-- FORM_FIELD_USER_NAME -->
+<!-- FM_USER_UPDT_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>" method="post" >
+    <!-- FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME'); ?></label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
                 <label>
-                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDATE_NAME_TIP'); ?>
+                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDT_NAME_TIP'); ?>
                 </label>
             </div>
         </div>
-        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>" 
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>" 
+        <input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_NAME; ?>" 
+                           id="<?php echo ConfigInfraTools::FIELD_USER_NAME; ?>" 
                            class="<?php echo $this->ReturnNameClass; ?>"
-                           onblur="ValidateName(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>',
+                           onblur="ValidateName(null, '<?php echo ConfigInfraTools::FIELD_USER_NAME; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
                            onkeyup="ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
-                           onclick="ValidateName(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>',
+                           onclick="ValidateName(null, '<?php echo ConfigInfraTools::FIELD_USER_NAME; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
-                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME'); ?>"
                            value="<?php echo $this->InputValueUserName; ?>" maxlength="45" />
      </div>
      <div class="DivClearFloat"></div>
-     <!-- FORM_FIELD_USER_EMAIL -->
+     <!-- FIELD_USER_EMAIL -->
      <div class="DivContentBodyContainer">
      	<div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
         </div>
      </div>
-     <!-- FORM_FIELD_USER_UNIQUE_ID -->
+     <!-- FIELD_USER_UNIQUE_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_UNIQUE_ID'); ?></label>
-            <label class="RequiredField">&nbsp;*</label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_UNIQUE_ID'); ?></label>
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
                 <label>
@@ -87,61 +86,61 @@
                 </label>
             </div>
         </div>
-        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>" 
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>" 
-                           class="<?php echo $this->ReturnUserUniqueIdClass; ?>"
-                           onblur="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>',
+        <input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_UNIQUE_ID; ?>" 
+                           id="<?php echo ConfigInfraTools::FIELD_USER_UNIQUE_ID; ?>" 
+                           class="FormFieldNotObligatory <?php echo $this->ReturnUserUniqueIdClass; ?>"
+                           onblur="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FIELD_USER_UNIQUE_ID; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
                            onkeyup="ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
-                           onclick="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID; ?>',
+                           onclick="ValidateUserUniqueId(null, '<?php echo ConfigInfraTools::FIELD_USER_UNIQUE_ID; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                '', true);
                                    ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
-                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_UNIQUE_ID'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_UNIQUE_ID'); ?>"
                            value="<?php echo $this->InputValueUserUniqueId; ?>" maxlength="25" />
      </div>
      <div class="DivClearFloat"></div>
-     <!-- ACCOUNT_UPDATE_BIRTH_DATE -->
+     <!-- ACCOUNT_UPDT_BIRTH_DATE -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label> <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDATE_TEXT_BIRTH_DATE'); ?> </label>
+            <label> <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDT_TEXT_BIRTH_DATE'); ?> </label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
         </div>
-        <!-- FORM_FIELD_USER_BIRTH_DATE_DAY -->
+        <!-- FIELD_USER_BIRTH_DATE_DAY -->
         <select style="
-                       <?php if($this->InputValueBirthDateDay != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY
+                       <?php if($this->InputValueBirthDateDay != ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY
                                  && $this->InputValueBirthDateDay != "") 
                             echo 'color:black;'
                         ?> " 
-                name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>"
+                name="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>" 
+                id="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>"
                 class="SelectBirthDateDay <?php echo $this->ReturnBirthDateDayClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>');
+                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');">
             <option <?php if ($this->InputValueBirthDateDay == "" 
-                              || $this->InputValueBirthDateDay == ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY; ?>" 
+                              || $this->InputValueBirthDateDay == ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>" 
                 disabled="disabled"> 
                     <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
             </option>
@@ -154,24 +153,24 @@
                   }
             ?>
         </select>
-        <!-- FORM_FIELD_USER_BIRTH_DATE_MONTH -->
+        <!-- FIELD_USER_BIRTH_DATE_MONTH -->
         <select style="
-                        <?php if($this->InputValueBirthDateMonth != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH
+                        <?php if($this->InputValueBirthDateMonth != ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH
                                  && $this->InputValueBirthDateMonth != "") 
                             echo 'color:black;'
                         ?> "
-                name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>"
+                name="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH; ?>" 
+                id="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH; ?>"
                 class="SelectBirthDateMonth <?php echo $this->ReturnBirthDateMonthClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>');
+                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');">
             <option <?php if ($this->InputValueBirthDateMonth == "" 
-                              || $this->InputValueBirthDateMonth == ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH; ?>" 
+                              || $this->InputValueBirthDateMonth == ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH; ?>" 
                 disabled="disabled"> 
                     <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
             </option>
@@ -184,24 +183,24 @@
                   }
             ?>
         </select>
-        <!-- FORM_FIELD_USER_BIRTH_DATE_YEAR -->
+        <!-- FIELD_USER_BIRTH_DATE_YEAR -->
         <select style=";
-                       <?php if($this->InputValueBirthDateYear != ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR
+                       <?php if($this->InputValueBirthDateYear != ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR
                                  && $this->InputValueBirthDateYear != "") 
                             echo 'color:black;'
                         ?>"
-                name="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>"
+                name="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR; ?>" 
+                id="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR; ?>"
                 class="SelectBirthDateYear <?php echo $this->ReturnBirthDateYearClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>');
+                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');">
             <option <?php if ($this->InputValueBirthDateYear == "" 
-                              || $this->InputValueBirthDateYear == ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR; ?>" 
+                              || $this->InputValueBirthDateYear == ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR; ?>" 
                 disabled="disabled"> 
                     <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
             </option>
@@ -215,199 +214,199 @@
             ?>
         </select>
      </div>
-    <!-- FORM_FIELD_USER_PHONE_PRIMARY -->
+    <!-- FIELD_USER_PHONE_PRIMARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_PRIMARY'); ?></label>
             <label>:</label>
         </div>
         <div class="DivContentBodyContainerPhonePrefix">
-        	<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX; ?>" 
-							   class="<?php echo $this->ReturnUserPhonePrimaryPrefixClass; ?>"
+        	<input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX; ?>" 
+							   class="FormFieldNotObligatory <?php echo $this->ReturnUserPhonePrimaryPrefixClass; ?>"
 							   onblur="ValidateNumbersOnly(null, 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onclick="ValidateNumbersOnly(null, 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('PHONE_PREFIX'); ?>"
 							   value="<?php echo $this->InputValueUserPhonePrimaryPrefix; ?>" maxlength="3" />
         </div>
         <div class="DivContentBodyContainerPhone">
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY; ?>" 
-							   class="<?php echo $this->ReturnUserPhonePrimaryClass; ?>"
-							   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY; ?>" 
+							   class="FormFieldNotObligatory <?php echo $this->ReturnUserPhonePrimaryClass; ?>"
+							   onblur="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
-							   onclick="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY; ?>',
+							   onclick="ValidateNumbersOnly(null, '<?php echo ConfigInfraTools::FIELD_USER_PHONE_PRIMARY; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_PRIMARY'); ?>"
 							   value="<?php echo $this->InputValueUserPhonePrimary; ?>" maxlength="9" />
 		</div>
      </div>
-     <!-- ACCOUNT_UPDATE_USER_PHONE_SECONDARY -->
+     <!-- ACCOUNT_UPDT_USER_PHONE_SECONDARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabelBig">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_SECONDARY'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_SECONDARY'); ?></label>
             <label>:</label>
         </div>
         <div class="DivContentBodyContainerPhonePrefix">
-        	<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX; ?>" 
-							   class="<?php echo $this->ReturnUserPhoneSecondaryPrefixClass; ?>"
+        	<input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX; ?>" 
+							   class="FormFieldNotObligatory <?php echo $this->ReturnUserPhoneSecondaryPrefixClass; ?>"
 							   onblur="ValidateNumbersOnly(null, 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onclick="ValidateNumbersOnly(null, 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   title="<?php echo $this->InstanceLanguageText->GetText('PHONE_PREFIX'); ?>"
 							   value="<?php echo $this->InputValueUserPhoneSecondaryPrefix; ?>" maxlength="3" />
         </div>
         <div class="DivContentBodyContainerPhone">
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY; ?>" 
-							   class="<?php echo $this->ReturnUserPhoneSecondaryClass; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY; ?>" 
+							   class="FormFieldNotObligatory <?php echo $this->ReturnUserPhoneSecondaryClass; ?>"
 							   onblur="ValidateNumbersOnly(null, 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
 							   onclick="ValidateNumbersOnly(null, 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_USER_PHONE_SECONDARY; ?>',
 												   'DivContentBodySubmitBigger',
-												   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 												 'DivContentBodySubmitBigger',
-												 '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_PRIMARY'); ?>"
 							   value="<?php echo $this->InputValueUserPhoneSecondary; ?>" maxlength="9" />
 		</div>
      </div>
      <div class="DivClearFloat"></div>
-     <!-- FORM_FIELD_USER_GENDER -->
+     <!-- FIELD_USER_GENDER -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER'); ?> </label>
+            <label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER'); ?> </label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
         </div>
-        <select name="<?php echo ConfigInfraTools::FORM_FIELD_USER_GENDER; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_USER_GENDER; ?>"
+        <select name="<?php echo ConfigInfraTools::FIELD_USER_GENDER; ?>" 
+                id="<?php echo ConfigInfraTools::FIELD_USER_GENDER; ?>"
                 class="<?php echo $this->ReturnGenderClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_USER_GENDER; ?>');
+                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_USER_GENDER; ?>');
                           ValidateMultiplyFields(
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                              'DivContentBodySubmitBigger',
-                                             '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                             '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                              '');"
-                style=" <?php if($this->InputValueGender != ConfigInfraTools::FORM_FIELD_SELECT_NONE
+                style=" <?php if($this->InputValueGender != ConfigInfraTools::FIELD_SEL_NONE
                                  && $this->InputValueGender != "") 
                             echo 'color:black;'
                         ?> " >
             <option <?php if ($this->InputValueGender == "" 
-                              || $this->InputValueGender == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" 
+                              || $this->InputValueGender == ConfigInfraTools::FIELD_SEL_NONE) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" 
                 disabled="disabled"> 
-                    <?php echo $this->InstanceLanguageText->GetText('FORM_SELECT_DEFAULT'); ?> 
+                    <?php echo $this->InstanceLanguageText->GetText('FM_SEL_DEFAULT'); ?> 
             </option>
-            <option <?php if ($this->InputValueGender == ConfigInfraTools::ACCOUNT_UPDATE_SELECT_GENDER_MALE) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::ACCOUNT_UPDATE_SELECT_GENDER_MALE; ?>"> 
-                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDATE_SELECT_GENDER_MALE'); ?> 
+            <option <?php if ($this->InputValueGender == ConfigInfraTools::FIELD_USER_GENDER_MALE) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_GENDER_MALE; ?>"> 
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER_MALE'); ?> 
             </option>
-            <option <?php if ($this->InputValueGender == ConfigInfraTools::ACCOUNT_UPDATE_SELECT_GENDER_FEMALE) 
-                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::ACCOUNT_UPDATE_SELECT_GENDER_FEMALE; ?>"> 
-                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDATE_SELECT_GENDER_FEMALE'); ?> 
+            <option <?php if ($this->InputValueGender == ConfigInfraTools::FIELD_USER_GENDER_FEMALE) 
+                echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_GENDER_FEMALE; ?>"> 
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER_FEMALE'); ?> 
             </option>
-            <option <?php if ($this->InputValueGender == ConfigInfraTools::REGISTER_SELECT_GENDER_OTHER) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::REGISTER_SELECT_GENDER_OTHER; ?>"> 
-					<?php echo $this->InstanceLanguageText->GetText('REGISTER_SELECT_GENDER_OTHER'); ?> 
+            <option <?php if ($this->InputValueGender == ConfigInfraTools::FIELD_USER_GENDER_OTHER) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_GENDER_OTHER; ?>"> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER_OTHER'); ?> 
 			</option>
         </select>
      </div>
      <div class="DivClearFloat"></div>
-     <!-- ACCOUNT_UPDATE_GOOGLE_MAPS -->
+     <!-- ACCOUNT_UPDT_GOOGLE_MAPS -->
      <div class="DivHidden">
-        <input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LATITUDE; ?>"  
-                             id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LATITUDE; ?>"/>
-        <input type="hidden" name="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>" 
-                             id="<?php echo ConfigInfraTools::FORM_GOOGLE_MAPS_LONGITUDE; ?>"/>
-        <input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>" 
-                             id="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>"
+        <input type="hidden" name="<?php echo ConfigInfraTools::FM_GOOGLE_MAPS_LATITUDE; ?>"  
+                             id="<?php echo ConfigInfraTools::FM_GOOGLE_MAPS_LATITUDE; ?>"/>
+        <input type="hidden" name="<?php echo ConfigInfraTools::FM_GOOGLE_MAPS_LONGITUDE; ?>" 
+                             id="<?php echo ConfigInfraTools::FM_GOOGLE_MAPS_LONGITUDE; ?>"/>
+        <input type="hidden" name="<?php echo ConfigInfraTools::FIELD_COUNTRY_NAME; ?>" 
+                             id="<?php echo ConfigInfraTools::FIELD_COUNTRY_NAME; ?>"
                              value="<?php echo $this->InputValueCountry; ?>"/>
-        <input type="hidden" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>" 
-                             id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
+        <input type="hidden" name="<?php echo ConfigInfraTools::FIELD_USER_REGION; ?>" 
+                             id="<?php echo ConfigInfraTools::FIELD_USER_REGION; ?>"
                              value="<?php echo $this->InputValueRegion; ?>"/>
      </div>
      <div id="GoogleMapsDiv" class="DivContentBodyContainerGoogleMaps">
@@ -425,72 +424,72 @@
      <div class="DivContentBodyContainer DivContentBodyContainerMaps">
         <div class="DivContentBodyContainerLabelMapsCountry">
             <div class="DivContentBodyContainerLabel">
-                <label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME'); ?> </label>
+                <label> <?php echo $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME'); ?> </label>
                 <label>:</label>
             </div>
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>"  
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>"
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_COUNTRY_NAME; ?>"  
+                               id="<?php echo ConfigInfraTools::FIELD_COUNTRY_NAME; ?>"
                                class="<?php echo $this->ReturnCountryClass; ?>"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME'); ?>"
-                               onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>',
+                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME'); ?>"
+                               onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FIELD_COUNTRY_NAME; ?>',
                                                       'DivContentBodySubmitBigger',
-                                                      '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                      '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                       '', true);
                                        ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                      '');"
                                        onkeyup="ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                      '');"
                                        onchange="ValidateNotNull(null, 
-                                                    '<?php echo ConfigInfraTools::FORM_FIELD_COUNTRY_NAME; ?>',
+                                                    '<?php echo ConfigInfraTools::FIELD_COUNTRY_NAME; ?>',
                                                     'DivContentBodySubmitBigger',
-                                                    '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                    '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                     '', true);
                                        ValidateMultiplyFields(
-                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                                    'DivContentBodySubmitBigger',
-                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                    '');" disabled="disabled" 
                                        value="<?php echo $this->InputValueCountry; ?>"/>
         </div>
         <div class="DivContentBodyContainerLabelMapsEstate">
             <div class="DivContentBodyContainerLabel DivContentBodyContainerLabelMapsLabel">
                 <label class=""> 
-                    <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION') . ":"; ?> 
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_REGION') . ":"; ?> 
                 </label>
             </div>
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"  
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_USER_REGION; ?>"
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_REGION; ?>"  
+                           id="<?php echo ConfigInfraTools::FIELD_USER_REGION; ?>"
                            class="<?php echo $this->ReturnRegionClass; ?>"
-                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_REGION'); ?>"
                            onblur="ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                      '');"
                                    onkeyup="ValidateMultiplyFields(
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                                      'DivContentBodySubmitBigger',
-                                                     '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                     '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                      '');"
                                    onchange="ValidateMultiplyFields(
-                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                                    'DivContentBodySubmitBigger',
-                                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                                    '');" disabled="disabled"
                                    value="<?php echo $this->InputValueRegion; ?>"/>
         </div>                
      </div>
      <div class="DivClearFloat"></div>
-     <!-- FORM_FIELD_CORPORATION_NAME -->
+     <!-- FIELD_CORPORATION_NAME -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -498,15 +497,15 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueCorporationActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
     </div>
-    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
+    <!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -514,15 +513,15 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueAssocUserCorporationRegistrationDateActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
     </div>
-    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
+    <!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -530,7 +529,7 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueAssocUserCorporationRegistrationIdActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
@@ -539,11 +538,11 @@
     if($this->ShowTypeUserDescription)
 	{
 		?>
-        <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
+        <!-- FIELD_TYPE_USER_DESCRIPTION -->
         <div class="DivClearFloat"></div>
         <div class="DivContentBodyContainer">
             <div class="DivContentBodyContainerLabel">
-                <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
+                <label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
             </div>
             <div class="DivContentBodyContainerValue">
             	<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>
@@ -554,21 +553,21 @@
 	?>
     <?php if($this->EnableFieldSessionExpires)
 	{?>
-	 	 <!-- FORM_FIELD_USER_SESSION_EXPIRES -->
+	 	 <!-- FIELD_USER_SESSION_EXPIRES -->
 	 	 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_SESSION_EXPIRES').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_SESSION_EXPIRES').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-			           name="<?php echo ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES; ?>" 
-				       value="<?php echo ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES; ?>"
+			           name="<?php echo ConfigInfraTools::FIELD_USER_SESSION_EXPIRES; ?>" 
+				       value="<?php echo ConfigInfraTools::FIELD_USER_SESSION_EXPIRES; ?>"
 				        <?php echo $this->InputValueSessionExpires; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 									   '');"
 				        />
 			</div>
@@ -576,21 +575,21 @@
     <?php } ?>
     <?php if($this->EnableFieldTwoStepVerification)
 	{?>
-		 <!-- FORM_FIELD_USER_TWO_STEP_VERIFICATION -->
+		 <!-- FIELD_USER_TWO_STEP_VERIFICATION -->
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_TWO_STEP_VERIFICATION').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_TWO_STEP_VERIFICATION').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
+					   name="<?php echo ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
+					   value="<?php echo ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
 					          <?php echo $this->InputValueTwoStepVerification; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 									   '');"
 						/>
 			</div>
@@ -598,21 +597,21 @@
 	<?php } ?>
     <?php if($this->EnableFieldUserActive)
 	{?>
-		 <!-- FORM_FIELD_USER_ACTIVE -->
+		 <!-- FIELD_USER_ACTIVE -->
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_ACTIVE').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_ACTIVE').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_ACTIVE; ?>" 
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_ACTIVE; ?>" 
+					   name="<?php echo ConfigInfraTools::FIELD_USER_ACTIVE; ?>" 
+					   value="<?php echo ConfigInfraTools::FIELD_USER_ACTIVE; ?>" 
 					          <?php echo $this->InputValueUserActive; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 									   '');"
 						/>
 			</div>
@@ -620,20 +619,20 @@
 	<?php } ?>
     <?php if($this->EnableFieldUserConfirmed)
 	{?>
-		 <!-- FORM_FIELD_USER_CONFIRMED-->
+		 <!-- FIELD_USER_CONFIRMED-->
 		 <div class="DivClearFloat"></div>
 		 <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_CONFIRMED').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_CONFIRMED').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
-					   name="<?php echo ConfigInfraTools::FORM_FIELD_USER_CONFIRMED; ?>" 
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_USER_CONFIRMED; ?>" <?php echo $this->InputValueUserConfirmed; ?>
+					   name="<?php echo ConfigInfraTools::FIELD_USER_CONFIRMED; ?>" 
+					   value="<?php echo ConfigInfraTools::FIELD_USER_CONFIRMED; ?>" <?php echo $this->InputValueUserConfirmed; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
 									   '');"
 						/>
 			</div>
@@ -652,22 +651,22 @@
     <!-- SUBMIT -->
     <div class="DivClearFloat"></div>
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateName(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_NAME; ?>',
+         onmouseover="ValidateName(null, '<?php echo ConfigInfraTools::FIELD_USER_NAME; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                    '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_USER_UPDATE_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_USER_UPDT_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_UPDATE_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_USER_UPDATE_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_USER_UPDT_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_USER_UPDT_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

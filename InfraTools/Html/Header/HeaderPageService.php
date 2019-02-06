@@ -20,10 +20,10 @@
 	</div>
 	<div class="Hidden DivHeaderContainerMenuLinkSub" id="DivHeaderService">
 		<div class="DivHeaderContainerMenuLinkSubContainer">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SELECT'); ?>" id="PageService" 
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SELECT'); ?>">
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SEL'); ?>" id="PageService" 
+			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SEL'); ?>">
 				<span> 
-					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_SELECT'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_SEL'); ?> 
 				</span>
 			</a>
 		</div>
@@ -36,42 +36,42 @@
 			</a>
 		</div>
         <div class="DivHeaderContainerMenuLinkSubContainer">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST'); ?>" id="PageService" 
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST'); ?>">
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST'); ?>" id="PageService" 
+			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST'); ?>">
 				<span> 
-					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST'); ?> 
 				</span>
 			</a>
 		</div>
        	<div class="DivHeaderContainerMenuLinkSubContainer">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_CORPORATION'); ?>" id="PageService" 
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_CORPORATION'); ?>">
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_CORPORATION'); ?>" id="PageService" 
+			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_CORPORATION'); ?>">
 				<span> 
-					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_CORPORATION'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_CORPORATION'); ?> 
 				</span>
 			</a>
 		</div>
 	    <div class="DivHeaderContainerMenuLinkSubContainer">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_DEPARTMENT'); ?>" id="PageService" 
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_DEPARTMENT'); ?>">
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_DEPARTMENT'); ?>" id="PageService" 
+			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_DEPARTMENT'); ?>">
 				<span> 
-					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_DEPARTMENT'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_DEPARTMENT'); ?> 
 				</span>
 			</a>
 		</div>
         <div class="DivHeaderContainerMenuLinkSubContainer">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE'); ?>" id="PageService" 
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE'); ?>">
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE'); ?>" id="PageService" 
+			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE'); ?>">
 				<span> 
-					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE'); ?> 
 				</span>
 			</a>
 		</div>
         <div class="DivHeaderContainerMenuLinkSubContainer">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_SERVICE'); ?>" id="PageService" 
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_SERVICE'); ?>">
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE'); ?>" id="PageService" 
+			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE'); ?>">
 				<span> 
-					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_TYPE_SERVICE'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_TYPE_SERVICE'); ?> 
 				</span>
 			</a>
 		</div>

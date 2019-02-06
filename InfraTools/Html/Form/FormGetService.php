@@ -7,48 +7,44 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_SERVICE_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_SERVICE; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_SERVICE; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_SERVICE . '#tabs15';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_SERVICE; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_SERVICE; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_SERVICE . '#tabs15';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN; ?>" />
-        </div>
         <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label><?php echo $this->InstanceLanguageText->GetText('TEXT_PORT'); ?></label>
 			</div>
-            <input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT; ?>" 
-                   id="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT; ?>"
-                   onblur="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT; ?>',
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE; ?>" 
+                   id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE; ?>"
+                   onblur="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE; ?>',
                                                  'DivContentBodySubmit',
-                                                 '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_SERVICE; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_SERVICE_SB; ?>',
                                                  '', 65535, true);"
-                   onkeyup="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT; ?>',
+                   onkeyup="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE; ?>',
                                                  'DivContentBodySubmit',
-                                                 '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_SERVICE; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_SERVICE_SB; ?>',
                                                  '', 65535, false);"
-                   value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT]; 
+                   value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE]; 
 									  ?>"
                    title="<?php echo $this->InstanceLanguageText->GetText('TEXT_PORT'); ?>" maxlength="5"
                    class="InputSmall" />
 			<div class="DivContentBodyContainerSelect">
-				<select name="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT; ?>" 
-                        id="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT; ?>">
-                    <option <?php if ($this->SelectedFunctionGetService == ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT_TCP) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT_TCP; ?>"> 
+				<select name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL; ?>" 
+                        id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL; ?>">
+                    <option <?php if ($this->SelectedFunctionGetService == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL_TCP) 
+						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL_TCP; ?>"> 
                         	<?php echo "TCP"; ?> 
                    	</option>
-                    <option <?php if ($this->SelectedFunctionGetService == ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT_UDP) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT_UDP; ?>"> 
+                    <option <?php if ($this->SelectedFunctionGetService == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL_UDP) 
+						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL_UDP; ?>"> 
                         	<?php echo "UDP" ?> 
                    	</option>
 				</select>
 			</div>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_SERVICE; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_SERVICE; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_SERVICE_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_SERVICE_SB; ?>"
                                  class="DivContentBodySubmit"
 				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
 		</div>
@@ -57,7 +53,7 @@
 	                     echo $this->VisibilityFunctionGetServiceMessage; ?> DivReturnForm">
         <div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>

@@ -105,7 +105,7 @@ abstract class TechInfo
 		$File->SetName($FileName);
 		$File->SetPath($Directory . "/" . $FileName . "." . $Extension);
 		$File->SetType($Type);
-		return Config::SUCCESS;
+		return Config::RET_OK;
 	}
 	
 	protected function SearchArrayFileType($MultidimensionalArray, $Extension, $Type, &$Key=0)

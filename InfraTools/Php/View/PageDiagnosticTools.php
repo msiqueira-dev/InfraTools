@@ -138,61 +138,61 @@ class PageDiagnosticTools extends PageInfraTools
 		if ($_POST != NULL)
 		{
 			//1 - CHECK HOST AVAILABILITY
-			if(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_AVAILABILITY_HIDDEN]))
+			if(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_AVAILABILITY]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$hostName = $_POST[ConfigInfraTools::FUNCTION_CHECK_AVAILABILITY_INPUT];
+				$hostName = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_AVAILABILITY];
 				$hostName = str_replace(" ", "", $hostName);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckAvailability($hostName,
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionCheckAvailabilityMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckAvailabilityMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_AVAILABILITY_HIDDEN;
-				$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_AVAILABILITY_INPUT] = $hostName;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_AVAILABILITY;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_AVAILABILITY] = $hostName;
 			}
 			//2 - CHECK BLACKLIST (HOSTNAME / IP)
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                       ($this->InstanceLanguageText);
-				$hostName     = $_POST[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_INPUT_HOST];
-				$ipAddress    = $_POST[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_INPUT_IP];
-				if(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_RADIO]))
-					$radioOption  = $_POST[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_RADIO];
+				$hostName     = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_HOST];
+				$ipAddress    = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_IP];
+				if(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO]))
+					$radioOption  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO];
 				if(!empty($radioOption))
 				{
-					if(!empty($hostName) && $radioOption == ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_RADIO_HOST)
+					if(!empty($hostName) && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO_HOST)
 					{
 						$hostName = str_replace(" ", "", $hostName);
 						$this->ExecutedFunctionReturn =  $this->InstanceInfraToolsFacedeBusiness->CheckBlackListHost($hostName, 
 																							 $this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionCheckBlackListMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionCheckBlackListMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_INPUT_HOST] = $hostName;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_HOST] = $hostName;
 					}
-					elseif(!empty($ipAddress) && $radioOption == ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_RADIO_IP)
+					elseif(!empty($ipAddress) && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO_IP)
 					{
 						$ipAddress = str_replace(" ", "", $ipAddress);
 						$this->ExecutedFunctionReturn =  $this->InstanceInfraToolsFacedeBusiness->CheckBlackListIpAddress($ipAddress, 
 																							 $this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionCheckBlackListMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionCheckBlackListMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_INPUT_IP] = $ipAddress;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_IP] = $ipAddress;
 					}
 					else
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 						$this->VisibilityFunctionCheckBlackListMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionCheckBlackListMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -200,56 +200,56 @@ class PageDiagnosticTools extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 					$this->VisibilityFunctionCheckBlackListMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckBlackListMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO;
 			}
 			//3 - CHECK DNS RECORD
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$hostName = $_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT];
-				$recordType = $_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT];
+				$hostName = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD];
+				$recordType = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL];
 				$hostName = str_replace(" ", "", $hostName);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckDnsRecord($hostName, $recordType, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionCheckDnsRecordMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckDnsRecordMessageBottom = "DivReturnMessageErrorBottom";
 				}	
-				$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT] = $hostName;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD] = $hostName;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD;
 			}
 			//4 - CHECK E-MAIL EXISTS
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_EMAIL_EXISTS_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_EMAIL_EXISTS]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$email = $_POST[ConfigInfraTools::FUNCTION_CHECK_EMAIL_EXISTS_INPUT];
+				$email = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_EMAIL_EXISTS];
 				$email = str_replace(" ", "", $email);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckEmailExists($email, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionCheckEmailExistsMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckEmailExistsMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_EMAIL_EXISTS_INPUT] = $email;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_EMAIL_EXISTS_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_EMAIL_EXISTS] = $email;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_EMAIL_EXISTS;
 
 			}
 			//5 - CHECK IP ADDRESS IS IN NETWORK
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP];
-				$networkAddress = $_POST[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK];
-				$maskAddress = $_POST[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP];
+				$networkAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK];
+				$maskAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK];
 				$ipAddress = str_replace(" ", "", $ipAddress);
 				$networkAddress = str_replace(" ", "", $networkAddress);
 				$maskAddress = str_replace(" ", "", $maskAddress);
@@ -257,55 +257,55 @@ class PageDiagnosticTools extends PageInfraTools
 																					  $networkAddress, 
 																					  $maskAddress, 
 																					  $this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionCheckIpAddressIsInNetworkMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckIpAddressIsInNetworkMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP] = $ipAddress;
-				$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK] = $networkAddress;
-				$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK] = $maskAddress;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP] = $ipAddress;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK] = $networkAddress;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK] = $maskAddress;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP;
 			}
 			//6 - CHECK PING SERVER
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$hostName  = $_POST[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST];
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP];
-				if(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO]))
-					$radioOption  = $_POST[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO];
+				$hostName  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP];
+				if(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO]))
+					$radioOption  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO];
 				if(!empty($radioOption))
 				{
-					if(!empty($hostName) && $radioOption == ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO_HOST)
+					if(!empty($hostName) && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO_HOST)
 					{
 						$hostName = str_replace(" ", "", $hostName);
 						$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckPingServerHost($hostName, 
 																							$this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionCheckPingServerMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionCheckPingServerMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST] = $hostName;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST] = $hostName;
 					}
-					elseif(!empty($ipAddress) && $radioOption == ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO_IP)
+					elseif(!empty($ipAddress) && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO_IP)
 					{
 						$ipAddress = str_replace(" ", "", $ipAddress);
 						$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckPingServerIpAddress($ipAddress, 
 																							$this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionCheckPingServerMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionCheckPingServerMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP] = $ipAddress;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP] = $ipAddress;
 					}
 					else 
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 						$this->VisibilityFunctionCheckPingServerMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionCheckPingServerMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -313,59 +313,59 @@ class PageDiagnosticTools extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 					$this->VisibilityFunctionCheckPingServerMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckPingServerMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO;
 			}
 			//7 - CHECK PORT STATUS
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$hostName  = $_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_HOST];
-				$hostNamePortNumber = $_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_HOST_PORT];
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_IP];
-				$ipAddressPortNumber = $_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_IP_PORT];
-				if(isset($_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_RADIO]))
-					$radioOption  = $_POST[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_RADIO];
+				$hostName  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_HOST];
+				$hostNamePortNumber = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_HOST_PORT];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_IP];
+				$ipAddressPortNumber = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_IP_PORT];
+				if(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO]))
+					$radioOption  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO];
 				if(!empty($radioOption))
 				{
 					if(!empty($hostName) && !empty($hostNamePortNumber) 
-					   && $radioOption == ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_RADIO_HOST)
+					   && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO_HOST)
 					{
 						$hostName = str_replace(" ", "", $hostName);
 						$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckPortStatusHost($hostName, 
 																							$hostNamePortNumber, 
 																							$this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionCheckPortStatusMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionCheckPortStatusMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_HOST] = $hostName;
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_HOST_PORT] = $hostNamePortNumber;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_HOST] = $hostName;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_HOST_PORT] = $hostNamePortNumber;
 					}
 					elseif(!empty($ipAddress) && !empty($ipAddressPortNumber)
-						   && $radioOption == ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_RADIO_IP)
+						   && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO_IP)
 					{
 						$ipAddress = str_replace(" ", "", $ipAddress);
 						$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->CheckPortStatusIpAddress($ipAddress, 
 																							$ipAddressPortNumber, 
 																							$this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionCheckPortStatusMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionCheckPortStatusMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_IP] = $ipAddress;
-						$GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_IP_PORT] = $ipAddressPortNumber;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_IP] = $ipAddress;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_IP_PORT] = $ipAddressPortNumber;
 					}
 					else 
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 						$this->VisibilityFunctionCheckPortStatusMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionCheckPortStatusMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -373,218 +373,218 @@ class PageDiagnosticTools extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 					$this->VisibilityFunctionCheckPortStatusMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionCheckPortStatusMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO;
 			}
 			//8 - GET CALCULATION NETMASK
-			if(isset($_POST[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN]))
+			if(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP];
 				$ipAddress = str_replace(" ", "", $ipAddress);
-				$mask = $_POST[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK];
+				$mask = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK];
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetCalculationNetMask($ipAddress, $mask, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetCalculationNetMaskMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetCalculationNetMaskMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP] = $ipAddress;
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK] = $mask;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP] = $ipAddress;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK] = $mask;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP;
 			}
 			//9 - OBTER REGISTRO DNS
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$dnsHostOption = $_POST[ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT];
-				$hostName = $_POST[ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT];
+				$dnsHostOption = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL];
+				$hostName = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST];
 				$hostName = str_replace(" ", "", $hostName);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetDnsRecords($hostName, $dnsHostOption,
 																						$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetDnsRecordsMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetDnsRecordsMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT] = $hostName;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST] = $hostName;
 				$this->SelectedFunctionGetDnsRecords = $dnsHostOption;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST;
 			}
 			//10 - OBTER DOMÍNIO
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME];
 				$ipAddress = str_replace(" ", "", $ipAddress);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetHostName($ipAddress, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetHostnameMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetHostnameMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT] = $ipAddress;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME] = $ipAddress;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME;
 			}
 			//11 - OBTER ENDEREÇOS DE IP
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                    ($this->InstanceLanguageText);
-				$hostName = $_POST[ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT];
+				$hostName = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES];
 				$hostName = str_replace(" ", "", $hostName);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetIpAddresses($hostName, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetIpAddressesMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetIpAddressesMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT] = $hostName;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES] = $hostName;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES;
 			}
 			//12 - OBTER LOCALIZAÇÃO
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION];
 				$ipAddress = str_replace(" ", "", $ipAddress);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetLocation($ipAddress, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetLocationMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetLocationMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT] = $ipAddress;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION] = $ipAddress;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION;
 			}
 			//13 - OBTER PROTOCOLO
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$number = $_POST[ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT];
+				$number = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL];
 				$number = str_replace(" ", "", $number);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetProtocol($number, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetProtocolMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetProtocolMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT] = $number;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL] = $number;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL;
 
 			}
 			//14 - OBTER ROTA
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$ipAddress = $_POST[ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT];
+				$ipAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE];
 				$ipAddress = str_replace(" ", "", $ipAddress);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetRoute($ipAddress, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetRouteMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetRouteMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT] = $ipAddress;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE] = $ipAddress;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE;
 			}
 			//15 - OBTER SERVIÇO
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$port = $_POST[ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT];
-				$protocol = $_POST[ConfigInfraTools::FUNCTION_GET_SERVICE_SELECT];
+				$port = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE];
+				$protocol = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE_SEL];
 				$port = str_replace(" ", "", $port);
 				$protocol = str_replace(" ", "", $protocol);
 				$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetService($port, 
 																					$protocol, 
 																					$this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetServiceMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetServiceMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_SERVICE_INPUT] = $port;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE] = $port;
 				$this->SelectedFunctionGetService = $protocol;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE;
 			}
 			//16 - OBTER WEBSITE
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_WEBSITE_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$webSiteAddress = $_POST[ConfigInfraTools::FUNCTION_GET_WEBSITE_INPUT];
-				$webSiteOption  = $_POST[ConfigInfraTools::FUNCTION_GET_WEBSITE_SELECT];
+				$webSiteAddress = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE];
+				$webSiteOption  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE_SEL];
 				$webSiteAddress = str_replace(" ", "", $webSiteAddress);
-				if ($webSiteOption == ConfigInfraTools::FUNCTION_GET_WEBSITE_SELECT_CONTENT)
+				if ($webSiteOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE_SEL_CONTENT)
 					$this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetWebSiteContent($webSiteAddress, 
 																						$this->ExecutedFunctionReturnMessage);
 				else $this->ExecutedFunctionReturn = $this->InstanceInfraToolsFacedeBusiness->GetWebSiteHeaders($webSiteAddress, 
 																						 $this->ExecutedFunctionReturnMessage);
-				if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+				if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 				{
 					$this->VisibilityFunctionGetWebSiteMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetWebSiteMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$GLOBALS[ConfigInfraTools::FUNCTION_GET_WEBSITE_INPUT] = $webSiteAddress;
+				$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE] = $webSiteAddress;
 				$this->SelectedFunctionGetWebSite = $webSiteOption;
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_WEBSITE_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE;
 			}
 			//17 - OBTER WHOIS
-			elseif(isset($_POST[ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN]))
+			elseif(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO]))
 			{
 				$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
 					                                                                        ($this->InstanceLanguageText);
-				$hostName     = $_POST[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST];
-				$ipAddress    = $_POST[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP];
-				if(isset($_POST[ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO]))
-					$radioOption  = $_POST[ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO];
+				$hostName     = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST];
+				$ipAddress    = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP];
+				if(isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO]))
+					$radioOption  = $_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO];
 				if(!empty($radioOption))
 				{
-					if(!empty($hostName) && $radioOption == ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO_HOST)
+					if(!empty($hostName) && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO_HOST)
 					{
 						$hostName = str_replace(" ", "", $hostName);
 						$this->ExecutedFunctionReturn =  $this->InstanceInfraToolsFacedeBusiness->GetWhoisHost($hostName, 
 																							 $this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionGetWhoisMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionGetWhoisMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST] = $hostName;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST] = $hostName;
 					}
-					elseif(!empty($ipAddress) && $radioOption == ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO_IP)
+					elseif(!empty($ipAddress) && $radioOption == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO_IP)
 					{
 						$ipAddress = str_replace(" ", "", $ipAddress);
 						$this->ExecutedFunctionReturn =  $this->InstanceInfraToolsFacedeBusiness->GetWhoisIpAddress($ipAddress, 
 																							 $this->ExecutedFunctionReturnMessage);
-						if($this->ExecutedFunctionReturn != ConfigInfraTools::SUCCESS)
+						if($this->ExecutedFunctionReturn != ConfigInfraTools::RET_OK)
 						{
 							$this->VisibilityFunctionGetWhoisMessage = "DivReturnMessageError";
 							$this->VisibilityFunctionGetWhoisMessageBottom = "DivReturnMessageErrorBottom";
 						}
-						$GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP] = $ipAddress;
+						$GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP] = $ipAddress;
 					}
 					else
 					{
 						$this->ExecutedFunctionReturnMessage = LanguageInfraTools::FILL_REQUIRED_FIELDS;
-						$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+						$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 						$this->VisibilityFunctionGetWhoisMessage = "DivReturnMessageError";
 						$this->VisibilityFunctionGetWhoisMessageBottom = "DivReturnMessageErrorBottom";
 					}
@@ -592,129 +592,129 @@ class PageDiagnosticTools extends PageInfraTools
 				else 
 				{
 					$this->ExecutedFunctionReturnMessage = LanguageInfraTools::NULL_OPTION;
-					$this->ExecutedFunctionReturn = ConfigInfraTools::RETURN_ERROR;
+					$this->ExecutedFunctionReturn = ConfigInfraTools::RET_ERROR;
 					$this->VisibilityFunctionGetWhoisMessage = "DivReturnMessageError";
 					$this->VisibilityFunctionGetWhoisMessageBottom = "DivReturnMessageErrorBottom";
 				}
-				$this->ExecutedFunction = ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN;
+				$this->ExecutedFunction = ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO;
 			}
 		}
 	}
 
 	public function LoadPage()
 	{
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_LOGIN;
+		$this->InputFocus = ConfigInfraTools::FIELD_LOGIN;
 		$this->CheckPostBack();
 		Page::GetCurrentURL($pageUrl);
-		if(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_AVAILABILITY) 
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_AVAILABILITY_HIDDEN)
+		if(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_AVAILABILITY) 
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_AVAILABILITY)
 			$this->VisibilityFunctionCheckAvailability = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_BLACKLIST)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_BLACKLIST)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_RADIO)
 		{
 			$this->VisibilityFunctionCheckBlackList = "NotHiddenTab";
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_INPUT_HOST]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_HOST]))
 			{
 				$this->CheckedFunctionCheckBlackListRadioHost = "checked";
 				$this->VisibilityFunctionCheckBlackListHost = "NotHidden";
 				$this->VisibilityFunctionCheckBlackListSubmit = "NotHidden";
 			}
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_BLACKLIST_INPUT_IP]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_BLACKLIST_IP]))
 			{
 				$this->CheckedFunctionCheckBlackListRadioIp = "checked";
 				$this->VisibilityFunctionCheckBlackListIp = "NotHidden";
 				$this->VisibilityFunctionCheckBlackListSubmit = "NotHidden";
 			}
 		}
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_DNS_RECORD)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_DNS_RECORD)
+		   || $this->ExecutedFunction == ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD)
 			$this->VisibilityFunctionCheckDnsRecord = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_EMAIL_EXISTS)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_EMAIL_EXISTS_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_EMAIL_EXISTS)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_EMAIL_EXISTS)
 			$this->VisibilityFunctionCheckEmailExists = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_IP_ADDRESS_IS_IN_NETWORK)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP)
 			$this->VisibilityFunctionCheckIpAddressIsInNetwork = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_PING_SERVER)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_PING_SERVER)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO)
 		{
 			$this->VisibilityFunctionCheckPingServer = "NotHiddenTab";
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST]))
 			{
 				$this->CheckedFunctionCheckPingServerRadioHost = "checked";
 				$this->VisibilityFunctionCheckPingServerHost = "NotHidden";
 				$this->VisibilityFunctionCheckPingServerSubmit = "NotHidden";
 			}
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP]))
 			{
 				$this->CheckedFunctionCheckPingServerRadioIp = "checked";
 				$this->VisibilityFunctionCheckPingServerIp = "NotHidden";
 				$this->VisibilityFunctionCheckPingServerSubmit = "NotHidden";
 			}
 		}
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::CHECK_PORT_STATUS)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_CHECK_PORT_STATUS)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_RADIO)
 		{
 			$this->VisibilityFunctionCheckPortStatus  = "NotHiddenTab";
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_HOST]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_HOST]))
 			{
 				$this->CheckedFunctionCheckPortStatusRadioHost = "checked";
 				$this->VisibilityFunctionCheckPortStatusHost = "NotHidden";
 				$this->VisibilityFunctionCheckPortStatusSubmit = "NotHidden";
 			}
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PORT_STATUS_INPUT_IP]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PORT_STATUS_IP]))
 			{
 				$this->CheckedFunctionCheckPortStatusRadioIp = "checked";
 				$this->VisibilityFunctionCheckPortStatusIp = "NotHidden";
 				$this->VisibilityFunctionCheckPortStatusSubmit = "NotHidden";
 			}
 		}
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_CALCULATION_NETMASK) 
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_CALCULATION_NETMASK) 
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP)
 			$this->VisibilityFunctionGetCalculationNetMask = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_DNS_RECORDS)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_DNS_RECORDS)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST)
 			$this->VisibilityFunctionGetDnsRecords = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_HOSTNAME)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_HOSTNAME)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME)
 			$this->VisibilityFunctionGetHostname = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_IP_ADDRESSES)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_IP_ADDRESSES)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES)
 			$this->VisibilityFunctionGetIpAddresses = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_LOCATION)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_LOCATION)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION)
 			$this->VisibilityFunctionGetLocation = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_PROTOCOL)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_PROTOCOL)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL)
 			$this->VisibilityFunctionGetProtocol = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_ROUTE)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_ROUTE)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE)
 			$this->VisibilityFunctionGetRoute = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_SERVICE)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_SERVICE_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_SERVICE)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_SERVICE)
 			$this->VisibilityFunctionGetService = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_WEBSITE)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_WEBSITE_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_WEBSITE)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE)
 			$this->VisibilityFunctionGetWebSite = "NotHiddenTab";
-		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::GET_WHOIS)
-		   || $this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN)
+		elseif(strstr($pageUrl, "?=" . ConfigInfraTools::PAGE_GET_WHOIS)
+		   || $this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO)
 		{
 			$this->VisibilityFunctionGetWhois = "NotHiddenTab";
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST]))
 			{
 				$this->CheckedFunctionGetWhoisRadioHost = "checked";
 				$this->VisibilityFunctionGetWhoisHost = "NotHidden";
 				$this->VisibilityFunctionGetWhoisSubmit = "NotHidden";
 			}
-			if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP]))
+			if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP]))
 			{
 				$this->CheckedFunctionGetWhoisRadioIp = "checked";
 				$this->VisibilityFunctionGetWhoisIp = "NotHidden";
 				$this->VisibilityFunctionGetWhoisSubmit = "NotHidden";
 			}
 		}
-		if(!isset($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT]))
-			$_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] = NULL;
+		if(!isset($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL]))
+			$_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] = NULL;
 		$this->LoadHtml(TRUE);
 	}
 }

@@ -13,160 +13,160 @@
 	</label>
 </div>
 <!-- FORM SERVICE SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
-	<!-- FORM_FIELD_SERVICE_RADIO -->
+<form name="<?php echo ConfigInfraTools::FM_SERVICE_SEL; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_SERVICE_SEL; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
+	<!-- FIELD_SERVICE_RADIO -->
 	<div class="DivContentBodyContainerService" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
-		<!-- FORM_FIELD_SERVICE_ID_RADIO -->
+		<!-- FIELD_SERVICE_ID_RADIO -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_RADIO; ?>"
-					   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID_RADIO; ?>"
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID_RADIO; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_SERVICE_RADIO; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_SERVICE_ID_RADIO; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_SERVICE_ID_RADIO; ?>"
 					   onclick="this.blur();this.focus();"
 					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_ID; ?>', 
 												  true);
 								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_NAME; ?>', 
 												  false);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_ID; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>', 
 														   'Service Id')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID'); ?>"  
 					   <?php echo $this->InputValueServiceIdRadio; ?> />
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- FORM_FIELD_SERVICE_NAME_RADIO -->
+		<!-- FIELD_SERVICE_NAME_RADIO -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_RADIO; ?>"
-					   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME_RADIO; ?>"
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME_RADIO; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_SERVICE_RADIO; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME_RADIO; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME_RADIO; ?>"
 					   onclick="this.blur();this.focus();"
 					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_ID; ?>', 
 												 false);
 								ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_NAME; ?>', 
 												 true);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_ID; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>', 
 														   'Service Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?>"  
 					   <?php echo $this->InputValueServiceNameRadio; ?> />
 				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- FORM_FIELD_SERVICE_ID -->
+		<!-- FIELD_SERVICE_ID -->
 		<div class="<?php echo $this->ReturnServiceIdRadioClass ?> DivContentBodyContainer"
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_ID; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_SERVICE_ID; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_SERVICE_ID; ?>"
 							   class="DivContentBodyContainerInputText <?php echo $this->ReturnServiceIdClass; ?>"
 							   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 												   '', 'true');
-										KeyEnterClickButton('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');
+										KeyEnterClickButton('<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>');
 										ValidateMultiplyFields(
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								                   'DivContentBodySubmit',
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								                   '');"
 							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 												   '', true);
 										ValidateMultiplyFields(
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								                   'DivContentBodySubmit',
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								                   '');"
 							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 												   '', true);
 										ValidateMultiplyFields(
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								                   'DivContentBodySubmit',
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								                   '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID'); ?>" 
 							   value="<?php echo $this->InputValueServiceId; ?>" maxlength="4" />
 		</div>
-		<!-- FORM_FIELD_SERVICE_NAME -->
+		<!-- FIELD_SERVICE_NAME -->
 		<div class="<?php echo $this->ReturnServiceNameRadioClass ?> DivContentBodyContainer" 
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_SERVICE_NAME; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>"
 							   class="DivContentBodyContainerInputText <?php echo $this->ReturnServiceNameClass; ?>"
 							   onkeyup="ValidateServiceName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 												   '', 'true');
-										KeyEnterClickButton('<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>');
+										KeyEnterClickButton('<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>');
 										ValidateMultiplyFields(
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								                   'DivContentBodySubmit',
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								                   '');"
 							   onblur="ValidateServiceName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 												   '', true);
 										ValidateMultiplyFields(
-								   				   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								   				   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								                   'DivContentBodySubmit',
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								                   '');"
 							   onchange="ValidateServiceName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ID; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SERVICE_ID; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 												   '', true);
 										 ValidateMultiplyFields(
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								                   'DivContentBodySubmit',
-								                   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								                   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								                   '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?>" 
 							   value="<?php echo $this->InputValueServiceName; ?>" maxlength="45" />
 		</div>	
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 	     onmouseover="ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_FORM; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_SERVICE_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

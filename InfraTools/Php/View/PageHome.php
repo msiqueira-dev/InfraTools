@@ -69,7 +69,7 @@ class PageHome extends PageInfraTools
 		$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayTables,
 																			  $this->DataBaseReturnMessage,
 																			  ConfigInfraTools::CHECKBOX_CHECKED);
-		if($return != ConfigInfraTools::SUCCESS)
+		if($return != ConfigInfraTools::RET_OK)
 			$this->LinkPageInstallEnabled = TRUE;
 		$this->LoadHtml(FALSE, FALSE);
 	}

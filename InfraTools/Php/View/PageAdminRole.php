@@ -52,125 +52,121 @@ class PageAdminRole extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SELECT;
-		//FORM SUBMIT BACK
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
-		{
-			$this->PageStackSessionLoad();
-			$PageFormBack = TRUE;
-		}
-		//FORM_CORPORATION_SELECT_SUBMIT
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SEL;
+		$this->AdminGoBack($PageFormBack);
+		
+		//FM_CORPORATION_SEL_SB
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
 											&$this->InstanceCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
-		//FORM_DEPARTMENT_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_DEPARTMENT_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
-											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
 										    &$this->InstanceInfraToolsDepartment),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//FORM_ROLE_LIST
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_LIST) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_LST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'RoleSelect', 
 									  array(&$this->ArrayInstanceRole),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_LIST;
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_LST;
 		}
-		//FORM_ROLE_REGISTER
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_REGISTER) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_REGISTER) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_REGISTER;
-		//FORM_ROLE_REGISTER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SELECT;
-		//FORM_ROLE_REGISTER_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SEL;
+		//FM_ROLE_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_REGISTER_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'RoleInsert', 
-									  array(@$_POST[ConfigInfraTools::FORM_FIELD_ROLE_DESCRIPTION],
-											$_POST[ConfigInfraTools::FORM_FIELD_ROLE_NAME]),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SELECT;
+									  array(@$_POST[ConfigInfraTools::FIELD_ROLE_DESCRIPTION],
+											$_POST[ConfigInfraTools::FIELD_ROLE_NAME]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SEL;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_REGISTER;
 		}
-		//FORM_ROLE_SELECT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_SELECT) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SELECT;
-		//FORM_ROLE_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_SEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_SEL) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SEL;
+		//FM_ROLE_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'RoleSelectByRoleName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_ROLE_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_ROLE_NAME],
 											&$this->InstanceRole),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_VIEW;
 		}
-		//FORM_ROLE_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_ROLE, "RoleLoadData", 
-										  $this->InstanceRole) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceRole) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'RoleDeleteByRoleName', 
 										  array($this->InstanceRole),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SELECT;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_SEL;
 			}
 		}
-		//FORM_ROLE_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_ROLE, "RoleLoadData", 
-										  $this->InstanceRole) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_UPDATE;
+										  $this->InstanceRole) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_UPDT;
 		}
-		//FORM_ROLE_UPDATE_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_ROLE, "RoleLoadData", 
-										  $this->InstanceRole) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceRole) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_VIEW;
 		}
-		//FORM_ROLE_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_ROLE_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_ROLE_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_ROLE, 
-											   $this->InstanceRole) == ConfigInfraTools::SUCCESS)
+											   $this->InstanceRole) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'RoleUpdateByRoleName', 
-										  array($_POST[ConfigInfraTools::FORM_FIELD_ROLE_DESCRIPTION],
-												@$_POST[ConfigInfraTools::FORM_FIELD_ROLE_NAME],
+										  array($_POST[ConfigInfraTools::FIELD_ROLE_DESCRIPTION],
+												@$_POST[ConfigInfraTools::FIELD_ROLE_NAME],
 												&$this->InstanceRole),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_VIEW;	
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_UPDATE;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_ROLE_UPDT;
 			}
 		}
-		//FORM_TYPE_USER_SELECT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_USER_SEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
 									        &$this->InstanceTypeUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}
-		//FORM_USER_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_USER_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+									  array($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
 									        &$this->InstanceUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)

@@ -7,78 +7,74 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_CALCULATION_NETMASK_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_CALCULATION_NETMASK; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_CALCULATION_NETMASK; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_CALCULATION_NETMASK . '#tabs8';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_CALCULATION_NETMASK . '#tabs8';?>" 
           method="post" >
-		<div class="DivHidden">
-            <input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN; ?>" 
-                                 id="<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN; ?>" />
-        </div>
         <div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_GET_CALCULATION_NETMASK; ?>">
 			<div class="DivContentBodyContainerLabel">
 				<label> <?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?> </label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP; ?>" 
-                               onblur="ValidateIpAddress(null, 
-                                         '<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP; ?>" 
+                               onblur="ValidateIpAddressIpv4(null, 
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '', true);
                                          ValidateMultiplyFields(
                                          '<?php echo ConfigInfraTools::DIV_GET_CALCULATION_NETMASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '');"
-                               onkeyup="ValidateIpAddress(null, 
-                                         '<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, 
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '', false);
                                          ValidateMultiplyFields(
                                          '<?php echo ConfigInfraTools::DIV_GET_CALCULATION_NETMASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '');"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_IP]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?>"
                                maxlength="15" />
 			<div class="DivContentBodyContainerLabelSmall">
 				<label> <?php echo $this->InstanceLanguageText->GetText('TEXT_MASK'); ?> </label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK; ?>" 
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK; ?>" 
                                onblur="ValidateNumberSize('InputSmall', 
-                                         '<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK; ?>',
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '', 30, true);
                                          ValidateMultiplyFields(
                                          '<?php echo ConfigInfraTools::DIV_GET_CALCULATION_NETMASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '');"
                                onkeyup="ValidateNumberSize('InputSmall', 
-                                         '<?php echo ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK; ?>',
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '', 30, false);
                                          ValidateMultiplyFields(
                                          '<?php echo ConfigInfraTools::DIV_GET_CALCULATION_NETMASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>',
                                          '');"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_INPUT_MASK]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_MASK]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEXT_MASK'); ?>"
                                maxlength="2"
 				               class="InputSmall" />
-            <input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_CALCULATION_NETMASK; ?>" 
+            <input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_SB; ?>" 
                                  class="DivContentBodySubmit"
 				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
 		</div>
@@ -87,7 +83,7 @@
 	                     echo $this->VisibilityFunctionGetCalculationNetMaskMessage; ?> DivReturnForm">
  		<div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_CALCULATION_NETMASK_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_CALCULATION_NETMASK_IP) 
                     echo $this->ExecutedFunctionReturnMessage;
                 ?>
             </label>            

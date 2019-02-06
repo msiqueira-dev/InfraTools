@@ -110,7 +110,7 @@ class FacedeBusiness
 	{
 		$instanceDiagnosticTools = $this->Factory->CreateDiagnosticTools();
 		$return = $instanceDiagnosticTools->GetBrowserClient($browser);
-		if ($return == Config::SUCCESS)
+		if ($return == Config::RET_OK)
 		{
 			if(!$TrueValue)
 				$ReturnMessage .= str_replace('[0]', $browser, $this->Language->GetText('GET_BROWSER_CLIENT_SUCCESS'));
@@ -124,7 +124,7 @@ class FacedeBusiness
 	{
 		$instanceDiagnosticTools = $this->Factory->CreateDiagnosticTools();
 		$return = $instanceDiagnosticTools->GetIpAddressClient($ipAddress);
-		if ($return == Config::SUCCESS)
+		if ($return == Config::RET_OK)
 		{
 			if(!$TrueValue)
 				$ReturnMessage .= str_replace('[0]', $ipAddress, 
@@ -139,7 +139,7 @@ class FacedeBusiness
 	{
 		$instanceDiagnosticTools = $this->Factory->CreateDiagnosticTools();
 		$return = $instanceDiagnosticTools->GetOperationalSystem($osPlatform);
-		if ($return == Config::SUCCESS)
+		if ($return == Config::RET_OK)
 		{
 			if(!$TrueValue)
 				$ReturnMessage .= str_replace('[0]', $osPlatform, 
@@ -184,16 +184,16 @@ class FacedeBusiness
 											$config->DefaultEmailNoReplyFormAddressReplyTo,
 							                $config->DefaultEmailNoReplyFormPassword, 
 							                $EmailAddress, $subject, $body);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$Session->SetSessionValue(Config::SESS_CONTACT_EMAIL, $emailHourMinute);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED)
 					echo "Email Error: " . $return;
-				return Config::RETURN_ERROR;
+				return Config::RET_ERROR;
 			}
 		}
 		else return Config::SEND_EMAIL_ALREADY_SENT;
@@ -213,13 +213,13 @@ class FacedeBusiness
 						 $config->DefaultEmailNoReplyFormAddressReplyTo,
 						 $config->DefaultEmailNoReplyFormPassword, 
 	                     $EmailAddress, $subject, $body);
-		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
+		if($return == Config::RET_OK)
+			return Config::RET_OK;
 		else
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
 	}
 	
@@ -227,9 +227,9 @@ class FacedeBusiness
 	{
 		$config = $this->Factory->CreateConfig();
 		$instanceEmail = $this->Factory->CreateEmail();  		
-		$subject = $this->Language->GetText('FORM_SUBMIT_RESET_PASSWORD_EMAIL_TAG');
+		$subject = $this->Language->GetText('FM_SB_RESET_PASSWORD_EMAIL_TAG');
 		$body    = $Name . ",</br></br>" 
-			             . $this->Language->GetText('FORM_SUBMIT_RESET_PASSWORD_EMAIL_TEXT')	 
+			             . $this->Language->GetText('FM_SB_RESET_PASSWORD_EMAIL_TEXT')	 
 		                 . "</br><b> " 
 			             . $Password . "</b>";
 		$return = $instanceEmail->SendFormEmail($Application,
@@ -237,13 +237,13 @@ class FacedeBusiness
 										$config->DefaultEmailNoReplyFormAddressReplyTo,
 						                $config->DefaultEmailNoReplyFormPassword, 
 	                                    $EmailAddress, $subject, $body);
-		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
+		if($return == Config::RET_OK)
+			return Config::RET_OK;
 		else
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
 	}
 	
@@ -277,16 +277,16 @@ class FacedeBusiness
 							 $config->DefaultEmailNoReplyFormAddressReplyTo,
 							 $config->DefaultEmailNoReplyFormPassword, 
 							 $EmailAddress, $subject, $body);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$Session->SetSessionValue(Config::SESS_PASSWORD_RECOVERY, $emailHourMinute);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED)
 					echo "Email Error: " . $return;
-				return Config::RETURN_ERROR;
+				return Config::RET_ERROR;
 			}
 		}
 		else return Config::SEND_EMAIL_ALREADY_SENT;
@@ -305,13 +305,13 @@ class FacedeBusiness
 						 $config->DefaultEmailNoReplyFormAddressReplyTo,
 						 $config->DefaultEmailNoReplyFormPassword, 
 	                     $EmailAddress, $subject, $body);
-		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
+		if($return == Config::RET_OK)
+			return Config::RET_OK;
 		else
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
 	}
 	
@@ -328,13 +328,13 @@ class FacedeBusiness
 						 $config->DefaultEmailNoReplyFormAddressReplyTo,
 						 $config->DefaultEmailNoReplyFormPassword, 
 	                     $EmailAddress, $subject, $body);
-		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
+		if($return == Config::RET_OK)
+			return Config::RET_OK;
 		else
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
 				echo "Email Error: " . $return;
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
 	}
 }

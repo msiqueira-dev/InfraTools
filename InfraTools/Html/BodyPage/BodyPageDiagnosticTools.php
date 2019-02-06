@@ -32,14 +32,14 @@
 					if($this->Config->FunctionCheckAvailabilityEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-1');
-						                  SetFunctionUrl('" . ConfigInfraTools::CHECK_AVAILABILITY . "#tabs1');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_AVAILABILITY . "#tabs1');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-1" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_AVAILABILITY; ?>#tabs1" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_AVAILABILITY; ?>#tabs1" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_AVAILABILITY_TITLE'); ?>'> 
@@ -52,14 +52,14 @@
 					if($this->Config->FunctionCheckBlacklistEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-2');
-						                  SetFunctionUrl('" . ConfigInfraTools::CHECK_BLACKLIST . "#tabs2');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_BLACKLIST . "#tabs2');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-2" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_BLACKLIST ?>#tabs2" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_BLACKLIST ?>#tabs2" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>" 
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_BLACKLIST_TITLE'); ?>'> 
@@ -72,14 +72,14 @@
 					if($this->Config->FunctionCheckDnsRecordEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-3');
-										  SetFunctionUrl('" . ConfigInfraTools::CHECK_DNS_RECORD . "#tabs3');
+										  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_DNS_RECORD . "#tabs3');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-3" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_DNS_RECORD ?>#tabs3" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_DNS_RECORD ?>#tabs3" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_DNS_TITLE'); ?>'> 
@@ -92,14 +92,14 @@
 					if($this->Config->FunctionCheckEmailExistsEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-4');
-										  SetFunctionUrl('" . ConfigInfraTools::CHECK_EMAIL_EXISTS . "#tabs4');
+										  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_EMAIL_EXISTS . "#tabs4');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-4" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_EMAIL_EXISTS ?>#tabs4" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_EMAIL_EXISTS ?>#tabs4" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_EMAIL_EXISTS_TITLE'); ?>'> 
@@ -112,14 +112,14 @@
 					if($this->Config->FunctionCheckIpAddresIsInNetworkEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-5');
-										  SetFunctionUrl('" . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK . "#tabs5');
+										  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_IP_ADDRESS_IS_IN_NETWORK . "#tabs5');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-5" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK ?>#tabs5" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_IP_ADDRESS_IS_IN_NETWORK ?>#tabs5" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_TITLE'); ?>'> 
@@ -132,14 +132,14 @@
 					if($this->Config->FunctionCheckPingServerEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-6');
-										  SetFunctionUrl('" . ConfigInfraTools::CHECK_PING_SERVER . "#tabs6');
+										  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_PING_SERVER . "#tabs6');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-6" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_PING_SERVER ?>#tabs6" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_PING_SERVER ?>#tabs6" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_PING_TITLE'); ?>'> 
@@ -152,14 +152,14 @@
 					if($this->Config->FunctionCheckPortStatusEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-7');
-										  SetFunctionUrl('" . ConfigInfraTools::CHECK_PORT_STATUS . "#tabs7');
+										  SetFunctionUrl('" . ConfigInfraTools::PAGE_CHECK_PORT_STATUS . "#tabs7');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-7" class="ui-state-default <?php echo $functionClass; ?>">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::CHECK_PORT_STATUS ?>#tabs7" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_CHECK_PORT_STATUS ?>#tabs7" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('CHECK_PORT_STATUS_TITLE'); ?>'> 
@@ -172,14 +172,14 @@
 					if($this->Config->FunctionGetCalculationNetMaskEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-8');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_CALCULATION_NETMASK . "#tabs8');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_CALCULATION_NETMASK . "#tabs8');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-8" class="ui-state-default">
-                	<a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_CALCULATION_NETMASK ?>#tabs8" 
+                	<a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_CALCULATION_NETMASK ?>#tabs8" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_CALCULATION_NETMASK_TITLE'); ?>'> 
@@ -192,14 +192,14 @@
 					if($this->Config->FunctionGetDnsRecordsEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-9');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_DNS_RECORDS . "#tabs9');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_DNS_RECORDS . "#tabs9');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-9" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_DNS_RECORDS ?>#tabs9" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_DNS_RECORDS ?>#tabs9" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_DNS_TITLE'); ?>'> 
@@ -212,14 +212,14 @@
 					if($this->Config->FunctionGetHostNameEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-10');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_HOSTNAME . "#tabs10');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_HOSTNAME . "#tabs10');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-10" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_HOSTNAME ?>#tabs10" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_HOSTNAME ?>#tabs10" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_HOSTNAME_TITLE'); ?>'> 
@@ -232,14 +232,14 @@
 					if($this->Config->FunctionGetIpAddressesEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-11');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_IP_ADDRESSES . "#tabs11');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_IP_ADDRESSES . "#tabs11');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-11" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_IP_ADDRESSES ?>#tabs11" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_IP_ADDRESSES ?>#tabs11" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_IP_ADDRESSES_TITLE'); ?>'> 
@@ -252,14 +252,14 @@
 					if($this->Config->FunctionGetLocationEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-12');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_LOCATION . "#tabs12');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_LOCATION . "#tabs12');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-12" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_LOCATION ?>#tabs12" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_LOCATION ?>#tabs12" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_LOCATION_TITLE'); ?>'> 
@@ -272,14 +272,14 @@
 					if($this->Config->FunctionGetProtocolEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-13');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_PROTOCOL . "#tabs13');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_PROTOCOL . "#tabs13');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-13" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_PROTOCOL ?>#tabs13" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_PROTOCOL ?>#tabs13" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_PROTOCOL_TITLE'); ?>'> 
@@ -292,14 +292,14 @@
 					if($this->Config->FunctionGetRouteEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-14');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_ROUTE . "#tabs14');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_ROUTE . "#tabs14');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-14" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_ROUTE ?>#tabs14" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_ROUTE ?>#tabs14" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_ROUTE_TITLE'); ?>'> 
@@ -312,14 +312,14 @@
 					if($this->Config->FunctionGetServiceEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-15');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_SERVICE . "#tabs15');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_SERVICE . "#tabs15');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-15" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_SERVICE ?>#tabs15" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_SERVICE ?>#tabs15" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_SERVICE_TITLE'); ?>'> 
@@ -332,14 +332,14 @@
 					if($this->Config->FunctionGetWebSiteEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-16');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_WEBSITE . "#tabs16');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_WEBSITE . "#tabs16');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-16" class="ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_WEBSITE ?>#tabs16" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_WEBSITE ?>#tabs16" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                         <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_WEBSITE_TITLE'); ?>'> 
@@ -352,14 +352,14 @@
 					if($this->Config->FunctionGetWhoisEnabled)
 					{
 						$functionId    = "onclick=\"TabsSelect('tabs-17');
-						                  SetFunctionUrl('" . ConfigInfraTools::GET_WHOIS . "#tabs17');
+						                  SetFunctionUrl('" . ConfigInfraTools::PAGE_GET_WHOIS . "#tabs17');
 										  \"";
 						$functionClass = NULL; 
 					}
 					else {$functionId = ">"; $functionClass = "NotActive";}
 				?>
                 <li id="tabsLi-17" class="NoBorder ui-state-default">
-                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::GET_WHOIS ?>#tabs17" 
+                    <a href="PageDiagnosticTools?=<?php echo ConfigInfraTools::PAGE_GET_WHOIS ?>#tabs17" 
                        class="ui-tabs-anchor <?php echo $functionClass; ?>"
                        <?php echo $functionId; ?>>
                         <span title='<?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_TITLE'); ?>'> 
@@ -370,40 +370,40 @@
 			</ul>
 			<?php
 				if($this->Config->FunctionCheckAvailabilityEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_AVAILABILITY . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_CHECK_AVAILABILITY . ".php");
 				if($this->Config->FunctionCheckBlacklistEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_BLACKLIST . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_CHECK_BLACKLIST . ".php");
                 if($this->Config->FunctionCheckDnsRecordEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_DNS_RECORD . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_CHECK_DNS_RECORD . ".php");
 				if($this->Config->FunctionCheckEmailExistsEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_EMAIL_EXISTS . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_CHECK_EMAIL_EXISTS . ".php");
 				if($this->Config->FunctionCheckIpAddresIsInNetworkEnabled)
 					include_once(REL_PATH . ConfigInfraTools::PATH_FORM 
-								               . ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK . ".php");
+								               . ConfigInfraTools::PAGE_CHECK_IP_ADDRESS_IS_IN_NETWORK . ".php");
 				if($this->Config->FunctionCheckPingServerEnabled)
-				    include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_PING_SERVER . ".php");
+				    include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_CHECK_PING_SERVER . ".php");
 				if($this->Config->FunctionCheckPortStatusEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::CHECK_PORT_STATUS . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_CHECK_PORT_STATUS . ".php");
 				if($this->Config->FunctionGetCalculationNetMaskEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_CALCULATION_NETMASK . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_CALCULATION_NETMASK . ".php");
 				if($this->Config->FunctionGetDnsRecordsEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_DNS_RECORDS . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_DNS_RECORDS . ".php");
 				if($this->Config->FunctionGetHostNameEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_HOSTNAME . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_HOSTNAME . ".php");
 				if($this->Config->FunctionGetIpAddressesEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_IP_ADDRESSES . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_IP_ADDRESSES . ".php");
 				if($this->Config->FunctionGetLocationEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_LOCATION . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_LOCATION . ".php");
 				if($this->Config->FunctionGetProtocolEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_PROTOCOL . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_PROTOCOL . ".php");
 				if($this->Config->FunctionGetRouteEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_ROUTE . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_ROUTE . ".php");
 				if($this->Config->FunctionGetServiceEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_SERVICE . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_SERVICE . ".php");
 				if($this->Config->FunctionGetWebSiteEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_WEBSITE . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_WEBSITE . ".php");
 				if($this->Config->FunctionGetWhoisEnabled)
-					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::GET_WHOIS . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_FORM . ConfigInfraTools::PAGE_GET_WHOIS . ".php");
 			?>
             <div class="DivClearFloat"></div>
 		</div>

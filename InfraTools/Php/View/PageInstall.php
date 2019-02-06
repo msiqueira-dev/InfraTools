@@ -77,18 +77,18 @@ class PageInstall extends PageInfraTools
 		$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayTables,
 																			  $this->DataBaseReturnMessage,
 																			  ConfigInfraTools::CHECKBOX_CHECKED);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$this->ButtonInstallEnabled = FALSE;
 			$this->ButtonImportEnabled = TRUE;
-			if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT_HIDDEN) == ConfigInfraTools::SUCCESS)
+			if($this->CheckPostContainsKey(ConfigInfraTools::FM_INSTALL_IMPORT_SB_HIDDEN) == ConfigInfraTools::RET_OK)
 			{
-				if (strpos(strtoupper($_FILES[ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT]["name"]), '.SQL') !== false) 
+				if (strpos(strtoupper($_FILES[ConfigInfraTools::FM_INSTALL_IMPORT_SB]["name"]), '.SQL') !== false) 
 				{
 					$importFile = ProjectConfig::$UploadDirectory . "/" .
-								  $_FILES[ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT]["name"];
+								  $_FILES[ConfigInfraTools::FM_INSTALL_IMPORT_SB]["name"];
 					$importFile = substr_replace($importFile, "." . date("Y-m-d--H-i"), strrpos($importFile, "."), 0);
-					if(move_uploaded_file($_FILES[ConfigInfraTools::FORM_INSTALL_IMPORT_SUBMIT]["tmp_name"], $importFile))
+					if(move_uploaded_file($_FILES[ConfigInfraTools::FM_INSTALL_IMPORT_SB]["tmp_name"], $importFile))
 					{
 						$handle = fopen($importFile, "r");
 						if ($handle) 
@@ -108,7 +108,7 @@ class PageInstall extends PageInfraTools
 																								   $this->DataBaseImportErrorQueries,
 																								   $this->DataBaseReturnMessage,
 																						           $this->InputValueHeaderDebug);
-							if($return == ConfigInfraTools::SUCCESS)
+							if($return == ConfigInfraTools::RET_OK)
 							{
 								$this->ShowDivReturnSuccess("INSTALL_IMPORT_SUCCESS");
 							}
@@ -122,24 +122,24 @@ class PageInstall extends PageInfraTools
 			}
 			else
 			{
-				if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+				if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 				{
 					if($this->User->CheckSuperUser())
 					{
 						$this->ButtonReinstallEnabled = TRUE;
 						$this->ButtonExportEnabled = TRUE;
-						if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_REINSTALL_SUBMIT) == ConfigInfraTools::SUCCESS)
+						if($this->CheckPostContainsKey(ConfigInfraTools::FM_INSTALL_REINSTALL_SB) == ConfigInfraTools::RET_OK)
 						{
 							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCreate($this->DataBaseReturnMessage,
 																								   $this->InputValueHeaderDebug);
-							if($return == ConfigInfraTools::SUCCESS)
+							if($return == ConfigInfraTools::RET_OK)
 								$this->ShowDivReturnSuccess("INSTALL_REINSTALL_SUCCESS");
 						}
-						elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_EXPORT_SUBMIT) == ConfigInfraTools::SUCCESS)
+						elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_INSTALL_EXPORT_SB) == ConfigInfraTools::RET_OK)
 						{
 							$return = $this->FacedePersistenceInfraTools->InfraToolsDataBackup($fileName, $fileNamePath, 
 																							   $this->InputValueHeaderDebug);
-							if($return == ConfigInfraTools::SUCCESS)
+							if($return == ConfigInfraTools::RET_OK)
 							{
 								header('Content-Description: File Transfer');
 								header('Content-Type: application/octet-stream');
@@ -162,11 +162,11 @@ class PageInstall extends PageInfraTools
 			$this->ButtonInstallEnabled = TRUE;
 			$this->ButtonImportEnabled = FALSE;
 			$this->ButtonReinstallEnabled = FALSE;
-			if($this->CheckPostContainsKey(ConfigInfraTools::FORM_INSTALL_NEW_SUBMIT) == ConfigInfraTools::SUCCESS)
+			if($this->CheckPostContainsKey(ConfigInfraTools::FM_INSTALL_NEW_SB) == ConfigInfraTools::RET_OK)
 			{
 				$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCreate($this->DataBaseReturnMessage,
 																					   ConfigInfraTools::CHECKBOX_CHECKED);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$this->ButtonInstallEnabled = FALSE;
 					$this->ButtonImportEnabled = TRUE;

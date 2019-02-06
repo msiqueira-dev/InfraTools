@@ -96,9 +96,9 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 	**/
 	public function CheckAvailability($Host)
 	{
-		if ($this->CheckDnsRecord($Host, self::DnsTypeAny) == ConfigInfraTools::SUCCESS)
+		if ($this->CheckDnsRecord($Host, self::DnsTypeAny) == ConfigInfraTools::RET_OK)
 			return ConfigInfraTools::CHECK_AVAILABILITY_NOT_AVAILABLE;
-		else return ConfigInfraTools::SUCCESS;
+		else return ConfigInfraTools::RET_OK;
 	}
 	
 	/**
@@ -115,7 +115,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 	public function CheckBlackListHost($HostName, &$ArrayBlackList)
 	{
 		$ArrayBlackList = array();
-		if ($this->GetIpAddresses($HostName, $arrayIpAddress) == ConfigInfraTools::SUCCESS)
+		if ($this->GetIpAddresses($HostName, $arrayIpAddress) == ConfigInfraTools::RET_OK)
 		{
 			for($n=0;$n<count($arrayIpAddress);$n++)
 			{
@@ -127,7 +127,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 						array_push($ArrayBlackList, $host);
 				}
 			}
-			if (count($ArrayBlackList) == 0) return ConfigInfraTools::SUCCESS;
+			if (count($ArrayBlackList) == 0) return ConfigInfraTools::RET_OK;
 			else return ConfigInfraTools::CHECK_HOST_BLACKLISTED;
 		}
 		else return ConfigInfraTools::CHECK_HOST_BLACKLIST_NO_IP_FOR_HOST;
@@ -151,7 +151,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 			if(checkdnsrr($reverse_ip.".".$host.".", self::DnsTypeA))
 				array_push($ArrayBlackList, $host);
 		}
-		if (count($ArrayBlackList) == 0) return ConfigInfraTools::SUCCESS;
+		if (count($ArrayBlackList) == 0) return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::CHECK_HOST_BLACKLISTED;
 	}
 	
@@ -174,7 +174,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 			$RecordType == self::DnsTypeNaptr || $RecordType == self::DnsTypeTxt || $RecordType == self::DnsTypeAny)
 		{
 			if (checkdnsrr ($Host, $RecordType))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else return ConfigInfraTools::CHECK_HOST_DNS_RECORD_TYPE_FAILED;
 		}
 		else return ConfigInfraTools::CHECK_HOST_DNS_RECORD_TYPE_NOT_ALLOWED;
@@ -201,7 +201,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$wildcard_decimal = pow(2,( 32 - $netmask ))-1;
 		$netmask_decimal = ~ $wildcard_decimal;
 		if (($ip_decimal & $netmask_decimal) == ($range_decimal & $netmask_decimal))
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::CHECK_IP_ADDRESS_IS_NOT_IN_NETWORK; 
 	}
 	
@@ -221,7 +221,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$ArrayOutput = NULL;
 		exec("ping -n 1 " . $HostOrIp, $ArrayOutput, $status);
 		if ($status == 0)
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::CHECK_PING_SERVER_FAILED;
 	}
 	
@@ -243,7 +243,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		if(!is_null($fsock))
 		{   
 			fclose($fsock);
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		} 
 		else 
 		{
@@ -290,7 +290,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		}
 		$AvaliableNetworkIps = (ip2long($BroadCastAddress) - ip2long($SubNetworkIp)) -2;
 
-		return ConfigInfraTools::SUCCESS;
+		return ConfigInfraTools::RET_OK;
 	}
 	
 	/**
@@ -307,7 +307,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 	{
 		$ArrayDnsMxRecords = NULL;
 		if (getmxrr($Host, $ArrayDnsMxRecords) == TRUE)
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::GET_DNS_MX_RECORDS_ERROR;
 	}
 	
@@ -325,7 +325,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$ArrayDnsRecords = NULL;
 		$ArrayDnsRecords = dns_get_record($Host);
 		if (!is_null($ArrayDnsRecords))
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::GET_DNS_RECORDS_ERROR;
 	}
 	
@@ -345,7 +345,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		if(isset($HostName))
 		{
 			if (!is_null($HostName) && $HostName != $IpAddress)
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 			else return ConfigInfraTools::GET_HOSTNAME_ERROR;
 		}
 		else return ConfigInfraTools::GET_HOSTNAME_ERROR;
@@ -371,7 +371,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 			$HostName[strlen($HostName)-1] = "";
 		$ArrayIpAddress = gethostbynamel($HostName);
 		if (!is_null($ArrayIpAddress))
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::GET_HOST_IP_ADDRESS_ERROR;
 	}
 		
@@ -399,7 +399,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 					array_push($ArrayLocationInformation, $ip_data->geoplugin_countryName);
 				if (!is_null($ip_data->geoplugin_city))
 					array_push($ArrayLocationInformation, $ip_data->geoplugin_city);
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			}
 			else return ConfigInfraTools::GET_LOCATION_BY_IP_ADDRESS_FAILED;
 		}
@@ -411,7 +411,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 	{
 		$Protocol = getprotobynumber($Number);
 		if ($Protocol != FALSE)
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::GET_PROTOCOL_ERROR;
 	}
 	
@@ -435,7 +435,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 			exec('traceroute ' . $IpAddress . ' 2>&1', $ArrayRoute);
 		else
 			return ConfigInfraTools::GET_ERROR_INVALID_OS;
-		return ConfigInfraTools::SUCCESS;
+		return ConfigInfraTools::RET_OK;
 	}
 	
 	public function GetService($Port, $Protocol, &$Service)
@@ -443,7 +443,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$Service = NULL;
 		$Service = getservbyport($Port ,$Protocol);
 		if (!is_null($Service))
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::GET_SERVICE_ERROR;
 	}
 	
@@ -455,7 +455,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		{
 			$Content = "<div>" . mb_convert_encoding($Content, 'HTML-ENTITIES', "UTF-8") . "</div>";
 			$Content = "<div>" . htmlspecialchars($Content, ENT_SUBSTITUTE) . "</div>";
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		}
 		else return ConfigInfraTools::GET_WEBSITE_CONTENT_ERROR;
 	}
@@ -465,7 +465,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$ArrayHeaders = NULL;
 		$ArrayHeaders = @get_headers($WebSite, 1);
 		if (!is_null($ArrayHeaders))
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		else return ConfigInfraTools::GET_WEBSITE_HEADERS_FAILED;
 	}
 	
@@ -490,7 +490,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 				{
 					$Info = utf8_encode($Info);
 					$Info = str_replace("\n", "<br>", $Info);
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				}
 				else return ConfigInfraTools::GET_WHOIS_ERROR;
 			}

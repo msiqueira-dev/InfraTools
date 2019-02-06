@@ -94,7 +94,7 @@ class InfraToolsFacedePersistenceTypeService
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsTypeService = array();
 					$result = $stmt->get_result();
@@ -102,35 +102,35 @@ class InfraToolsFacedePersistenceTypeService
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 					}
 					if(!empty($ArrayInstanceInfraToolsTypeService))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsTypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection)
@@ -147,28 +147,28 @@ class InfraToolsFacedePersistenceTypeService
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-																$row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-																$row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-																$row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+																$row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+																$row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+																$row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 					array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 				}
 				if(!empty($ArrayInstanceInfraToolsTypeService))
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+				return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,&$ArrayInstanceInfraToolsTypeService, 
@@ -186,7 +186,7 @@ class InfraToolsFacedePersistenceTypeService
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsTypeService = array();
 					$result = $stmt->get_result();
@@ -194,35 +194,35 @@ class InfraToolsFacedePersistenceTypeService
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 					}
 					if(!empty($ArrayInstanceInfraToolsTypeService))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsTypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug, $MySqlConnection)
@@ -238,41 +238,41 @@ class InfraToolsFacedePersistenceTypeService
 			{ 
 				$stmt->bind_param("s", $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsTypeService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						array_push($ArrayInstanceInfraToolsTypeService, $InstanceInfraToolsTypeService);
 					}
 					if(!empty($ArrayInstanceInfraToolsTypeService))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 }

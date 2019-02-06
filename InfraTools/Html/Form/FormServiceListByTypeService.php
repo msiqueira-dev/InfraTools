@@ -1,21 +1,21 @@
-<!-- FORM_SERVICE_LIST_BY_TYPE_SERVICE -->
-<!-- FORM_FIELD_SERVICE_TYPE -->
+<!-- FM_SERVICE_LST_BY_TYPE_SERVICE -->
+<!-- FIELD_SERVICE_TYPE -->
  <div class="DivContentBodyContainer">
 	<div class="DivContentBodyContainerLabel">
-		<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE').":"; ?></label>
+		<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_TYPE').":"; ?></label>
 	</div>
 	<div class="DivContentBodyContainerValue">
-		<form name='<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE; ?>' 
+		<form name='<?php echo ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_TYPE_SERVICE; ?>' 
 		      method="<?php echo $this->InputValueFormMethod ?>" >
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT; ?>"
+				name="<?php echo ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_TYPE_SERVICE_SB; ?>" 
+				id="<?php echo ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_TYPE_SERVICE_SB; ?>"
 				class="SelectTypeService"
 				onchange="this.form.submit()">
 				<option <?php if ($this->InputValueServiceType == "" 
-								  || $this->InputValueServiceType == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceType == ConfigInfraTools::FIELD_SEL_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsTypeService))
@@ -48,10 +48,10 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 				 {
 					 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
 						  echo "<label class='InputValueLimitTitle'>" . 
-								   $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
+								   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
 							   "</label>" .
 							   "<label class='InputValueLimitValue'>" . 
-								   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
+								   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
 														   . " " . $this->InputValueLimit2 . 
 							   "</label>";
 				 }
@@ -73,20 +73,20 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 		</div>
 	</div>
 	<?php
-	echo "<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE . "' method='" . $this->InputValueFormMethod . "' />";
+	echo "<form  name='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE . "' method='" . $this->InputValueFormMethod . "' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
-				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
+				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
-				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO . "'/>";
+				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
 	echo "<table class='TableGeneric'>";
 	echo "<tr>";
 	echo "<th class='TableGenericThArrow'>" .
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_BACK . "'
-				  value='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_BACK . "'
+				  name='"  . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_BACK . "' 
+				  id='"    . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_BACK . "'
+				  value='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -95,20 +95,20 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE') . "</th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID') . "</div></th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FIELD_SERVICE_TYPE') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>" . $this->InstanceLanguageText->GetText('FIELD_SERVICE_ACTIVE') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
 		          <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_FORWARD . "'
+				  name='"  . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_FORWARD . "'
+				  value='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -124,21 +124,21 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID . "' method='post' />
-					<input type='submit' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT . "' 
-									   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT . "' 
+			  	<form  name='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID . "' method='post' />
+					<input type='submit' name='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB . "' 
+									   id='"   . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB . "' 
 									   value='" . $infraToolsService->GetServiceId() . "' 
 									   title='" . $infraToolsService->GetServiceId() . "' />
 			  	</form>
 		      </td>";
 		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_NAME_AND_ID . "' method='post' />
-			    	<input type='hidden' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT . "' 
-			  					   id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT . "' 
+			  	<form  name='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_NAME_AND_ID . "' method='post' />
+			    	<input type='hidden' name='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB . "' 
+			  					   id='"   . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB . "' 
 								   value='" . $infraToolsService->GetServiceId() . "' />
 								   
-		      		<input type='submit' name='" . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_NAME_AND_ID_SUBMIT . "' 
-		                           id='"   . ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_NAME_AND_ID_SUBMIT . "' 
+		      		<input type='submit' name='" . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_NAME_AND_ID_SB . "' 
+		                           id='"   . ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_NAME_AND_ID_SB . "' 
 							       value='" . $infraToolsService->GetServiceName() . "' 
 								   title='" . $infraToolsService->GetServiceName() . "' />
 				</form>
@@ -170,6 +170,6 @@ else
 		echo "<div class='DivContentBodyServiceSubTitle'><h2>" . 
 			$this->InstanceLanguageText->GetText('SERVICE_NOT_FOUND_FOR_USER_BY_TYPE_SERVICE') . "</h2></div>";
 	else echo "<div class='DivContentBodyServiceSubTitle'><h2>" . 
-			$this->InstanceLanguageText->GetText('SERVICE_SELECT_TYPE') . "</h2></div>";
+			$this->InstanceLanguageText->GetText('SERVICE_SEL_TYPE') . "</h2></div>";
 }
 ?>

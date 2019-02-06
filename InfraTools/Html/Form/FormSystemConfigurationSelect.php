@@ -12,159 +12,159 @@
 		<?php if(isset($this->ReturnText))                                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_SYSTEM_CONFIGURATION_SELECT_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>" method="post" >
+<!-- FM_SYSTEM_CONFIGURATION_SEL_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>" method="post" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
-		<!-- FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME -->
+		<!-- FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION; ?>"
-					   id="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
 					   onclick="this.blur();this.focus();"
 					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>', 
 												 false);
 								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>', 
 												 true);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>', 
 														   '')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>"  
 					   <?php echo $this->InputValueSystemConfigurationOptionNameRadio; ?> />
 				<div>
-					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME -->
+		<!-- FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION; ?>"
-					   id="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
 					   onclick="this.blur();this.focus();"
 					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>', 
 												 true);
 								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>', 
 												 false);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>', 
 														   '')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>"  
 					   <?php echo $this->InputValueSystemConfigurationOptionNumberRadio; ?>/>
 				<div>
-					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME -->
+		<!-- FIELD_SYSTEM_CONFIGURATION_OPTION_NAME -->
 		<div class="<?php echo $this->ReturnSystemConfigurationOptionNameRadioClass ?> DivContentBodyContainer"
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
 							   class="DivContentBodyContainerInputText <?php echo $this->ReturnSystemConfigurationOptionNameClass; ?>"
 							   onkeyup="ValidateDescription('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												   '', 'false');
 									    ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												 '');"
 							   onblur="ValidateDescription('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												   '', true);
 									    ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												 '');"
 							   onchange="ValidateDescription('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												   '', true);
 										  ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?>" 
 							   value="<?php echo $this->InputValueSystemConfigurationOptionName; ?>" maxlength="45" />
 		</div>
-		<!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER -->
+		<!-- FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER -->
 		<div class="<?php echo $this->ReturnSystemConfigurationOptionNumberRadioClass ?> DivContentBodyContainer"
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
 							   class="DivContentBodyContainerInputText <?php echo $this->ReturnSystemConfigurationOptionNumberClass; ?>"
 							   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												   '', 'false');
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												 '');"
 							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												   '', true);
 										 ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												 '');"
 							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												   '', true);
 										 ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?>" 
 							   value="<?php echo $this->InputValueSystemConfigurationOptionNumber; ?>" maxlength="4" />
 		</div>
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 	    onmouseover="ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_SELECT_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

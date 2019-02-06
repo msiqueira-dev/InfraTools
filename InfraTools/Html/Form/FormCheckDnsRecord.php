@@ -7,103 +7,99 @@
         	<?php echo $this->InstanceLanguageText->GetText('CHECK_DNS_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_CHECK_DNS_RECORD; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_CHECK_DNS_RECORD; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::CHECK_DNS_RECORD . '#tabs3';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_CHECK_DNS_RECORD . '#tabs3';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label><?php echo $this->InstanceLanguageText->GetText('CHECK_DNS_LABEL_HOST'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT; ?>"
-                               onblur="ValidateHostName(null, '<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD; ?>"
+                               onblur="ValidateHostName(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_DNS_RECORD; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SB; ?>',
                                                           '', true);"
-                               onkeyup="ValidateHostName(null, '<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT; ?>',
+                               onkeyup="ValidateHostName(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_DNS_RECORD; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SB; ?>',
                                                           '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_INPUT]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('CHECK_DNS_INPUT_HOST_TITLE'); ?>" />
 			<div class="DivContentBodyContainerSelect">
-				<select name="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT; ?>" 
-                        id="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT; ?>">
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_A) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_A; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_A; ?>
+				<select name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL; ?>" 
+                        id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL; ?>">
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_A) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_A; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_A; ?>
                    	</option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_MX) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_MX; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_MX; ?>
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_MX) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_MX; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_MX; ?>
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_NS) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_NS; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_NS; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_NS) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_NS; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_NS; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_SOA) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_SOA; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_SOA; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_SOA) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_SOA; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_SOA; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_PTR) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_PTR; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_PTR; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_PTR) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_PTR; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_PTR; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_CNAME) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_CNAME; ?>">  
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_CNAME; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_CNAME) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_CNAME; ?>">  
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_CNAME; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_AAAA) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_AAAA; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_AAAA; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_AAAA) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_AAAA; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_AAAA; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_A6) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_A6; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_A6; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_A6) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_A6; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_A6; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_SRV) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_SRV; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_SRV; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_SRV) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_SRV; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_SRV; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                   == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_NAPTR) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_NAPTR; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_NAPTR; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                   == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_NAPTR) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_NAPTR; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_NAPTR; ?> 
                     </option>
-					<option <?php if ($_POST[ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT] 
-					                  == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_TXT) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_TXT; ?>"> 
-                        <?php echo ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_SELECT_TXT; ?> 
+					<option <?php if ($_POST[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL] 
+					                  == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_TXT) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_TXT; ?>"> 
+                        <?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SEL_TXT; ?> 
                     </option>
 				</select>
 			</div>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_DNS_RECORD; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_DNS_RECORD; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('CHECK_SUBMIT'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('CHECK_SB'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckDnsRecordMessage))
 	                     echo $this->VisibilityFunctionCheckDnsRecordMessage; ?> DivReturnForm">
 		<div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_DNS_RECORD_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD) 
                     echo $this->ExecutedFunctionReturnMessage;  
                 ?>
             </label>            

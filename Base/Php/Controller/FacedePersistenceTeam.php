@@ -91,31 +91,31 @@ class FacedePersistenceTeam
 				$stmt->bind_param("s", $TeamDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_TEAM_DEL_BY_TEAM_DESCRIPTION;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_TEAM_DELETE_BY_TEAM_DESCRIPTION_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_TEAM_DEL_BY_TEAM_DESCRIPTION;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamDeleteByTeamId($TeamId, $Debug, $MySqlConnection)
@@ -131,31 +131,31 @@ class FacedePersistenceTeam
 				$stmt->bind_param("i", $TeamId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_TEAM_DEL_BY_TEAM_ID;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_TEAM_DELETE_BY_TEAM_ID_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_TEAM_DEL_BY_TEAM_ID;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection)
@@ -171,22 +171,22 @@ class FacedePersistenceTeam
 				$stmt->bind_param("ss", $TeamDescription, $TeamName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TEAM_INSERT_FAILED;
+					return Config::DB_ERROR_TEAM_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug, $MySqlConnection)
@@ -203,33 +203,33 @@ class FacedePersistenceTeam
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceTeam = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
-							                                       $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
-						                                           $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
-														           $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);	
+						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TB_FD_REGISTER_DATE],
+							                                       $row[Config::TB_TEAM_FD_TEAM_DESCRIPTION], 
+						                                           $row[Config::TB_TEAM_FD_TEAM_ID], 
+														           $row[Config::TB_TEAM_FD_TEAM_NAME]);	
 						array_push($ArrayInstanceTeam, $InstanceTeam);
 					}
 					if(!empty($ArrayInstanceTeam))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TEAM_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_TEAM_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TEAM_SELECT_FAILED;
+					$return = Config::DB_ERROR_TEAM_SEL;
 				}
 				return $return;
 			}
@@ -237,10 +237,10 @@ class FacedePersistenceTeam
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamSelectNoLimit(&$ArrayInstanceTeam, $Debug, $MySqlConnection)
@@ -256,25 +256,25 @@ class FacedePersistenceTeam
 				$ArrayInstanceTeam = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
-															   $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
-						                                       $row[Config::TABLE_TEAM_FIELD_TEAM_ID],
-														       $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);	
+					$InstanceTeam = $this->Factory->CreateTeam($row[Config::TB_FD_REGISTER_DATE],
+															   $row[Config::TB_TEAM_FD_TEAM_DESCRIPTION], 
+						                                       $row[Config::TB_TEAM_FD_TEAM_ID],
+														       $row[Config::TB_TEAM_FD_TEAM_NAME]);	
 					array_push($ArrayInstanceTeam, $InstanceTeam);
 				}
 				if(!empty($ArrayInstanceTeam))
-					return Config::SUCCESS;
-				else return Config::MYSQL_TEAM_SELECT_FETCH_FAILED;
+					return Config::RET_OK;
+				else return Config::DB_ERROR_TEAM_SEL_FETCH;
 			}
 			else 
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_TEAM_SELECT_FAILED;
+				$return = Config::DB_ERROR_TEAM_SEL;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug, $MySqlConnection)
@@ -289,26 +289,26 @@ class FacedePersistenceTeam
 			{
 				$stmt->bind_param("i", $TeamId);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($registerDate, $teamDescription, $TeamId, $teamName);
 					if ($stmt->fetch())
 					{
 						$InstanceTeam = $this->Factory->CreateTeam($registerDate, $teamDescription, $TeamId, $teamName);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TEAM_SELECT_BY_TEAM_ID_FETCH_FAILED;
+						$return = Config::DB_ERROR_TEAM_SEL_BY_TEAM_ID_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TEAM_SELECT_BY_TEAM_ID_FAILED;
+					$return = Config::DB_ERROR_TEAM_SEL_BY_TEAM_ID;
 				}
 				return $return;
 			}
@@ -316,10 +316,10 @@ class FacedePersistenceTeam
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug, $MySqlConnection)
@@ -336,27 +336,27 @@ class FacedePersistenceTeam
 				$TeamName = "%".$TeamName."%";  
 				$stmt->bind_param("s", $TeamName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceTeam = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())  
 					{
-						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TABLE_FIELD_REGISTER_DATE],
-																   $row[Config::TABLE_TEAM_FIELD_TEAM_DESCRIPTION], 
-																   $row[Config::TABLE_TEAM_FIELD_TEAM_ID], 
-																   $row[Config::TABLE_TEAM_FIELD_TEAM_NAME]);	
+						$InstanceTeam = $this->Factory->CreateTeam($row[Config::TB_FD_REGISTER_DATE],
+																   $row[Config::TB_TEAM_FD_TEAM_DESCRIPTION], 
+																   $row[Config::TB_TEAM_FD_TEAM_ID], 
+																   $row[Config::TB_TEAM_FD_TEAM_NAME]);	
 						array_push($ArrayInstanceTeam, $InstanceTeam);
 					}
 					if(!empty($ArrayInstanceTeam))
-						return Config::SUCCESS;
-					else return Config::MYSQL_TEAM_SELECT_BY_TEAM_NAME_FETCH_FAILED;
+						return Config::RET_OK;
+					else return Config::DB_ERROR_TEAM_SEL_BY_TEAM_NAME_FETCH;
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TEAM_SELECT_BY_TEAM_NAME_FAILED;
+					$return = Config::DB_ERROR_TEAM_SEL_BY_TEAM_NAME;
 				}
 				return $return;
 			}
@@ -364,10 +364,10 @@ class FacedePersistenceTeam
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TeamUpdateByTeamId($TeamDescription, $TeamId, $TeamName, $Debug, $MySqlConnection)
@@ -383,28 +383,28 @@ class FacedePersistenceTeam
 				$stmt->bind_param("ssi", $TeamDescription, $TeamName, $TeamId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TEAM_UPDATE_FAILED;
+					return Config::DB_ERROR_TEAM_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>

@@ -12,89 +12,89 @@
 		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_DEPARTMENT_UPDATE_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>" method="post">
-    <!-- FORM_FIELD_CORPORATION_NAME -->
+<!-- FM_DEPARTMENT_UPDT_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>" method="post">
+    <!-- FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
        <div class="DivContentBodyContainerLabel">
-           <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+           <label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
        </div>
        <div class="DivContentBodyContainerValue">
            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCorporationName; ?></label>
        </div>
     </div>
-    <!-- FORM_FIELD_DEPARTMENT_INITIALS -->
+    <!-- FIELD_DEPARTMENT_INITIALS -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_INITIALS').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>" 
                                class="<?php echo $this->ReturnDepartmentInitialsClass; ?>"
                                onblur="ValidateDepartmentInitials(null, 
-                                                  '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS; ?>',
+                                                  '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                  '');"
                                onchange="ValidateDepartmentInitials(null, 
-                                                  '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_INITIALS; ?>',
+                                                  '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_INITIALS'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS'); ?>"
                                value="<?php echo $this->InputValueDepartmentInitials; ?>" maxlength="80" />
         </div>
     </div>
-    <!-- FORM_FIELD_DEPARTMENT_NAME -->
+    <!-- FIELD_DEPARTMENT_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
                                class="<?php echo $this->ReturnDepartmentNameClass; ?>"
-                               onblur="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+                               onblur="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                  '');"
-                               onchange="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+                               onchange="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>"
                                value="<?php echo $this->InputValueDepartmentName; ?>" maxlength="80" />
         </div>
     </div>
@@ -109,22 +109,22 @@
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+         onmouseover="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_UPDATE_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_UPDT_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

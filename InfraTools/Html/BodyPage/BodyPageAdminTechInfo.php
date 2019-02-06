@@ -1,8 +1,8 @@
 <!-- BODY_PAGE_ADMIN_TECH_INFO -->z
 <div class="DivBody">
     <div class="DivContentBody">
-    <form name="<?php echo ConfigInfraTools::FORM_TECH_INFO; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_TECH_INFO; ?>" method="post">
+    <form name="<?php echo ConfigInfraTools::FM_TECH_INFO; ?>" 
+          id="<?php echo ConfigInfraTools::FM_TECH_INFO; ?>" method="post">
 		<div class="DivContentBodyOptions">
 			<div class="DivContentBodyOptionsBox">
 				<div class="DivContentBodyContainersBox">
@@ -18,8 +18,8 @@
 				</div>
 				<div class="DivContentBodyContainersBox">
 					<input type="image" 
-						   name="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
-						   value="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
+						   name="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
+						   value="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
 						   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 						   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 						   src="<?php echo $this->Config->DefaultServerImage. 
@@ -31,11 +31,11 @@
 				</div>
 				<div class="DivContentBodyContainersBox">
 					<input type="image" 
-						   name="<?php echo ConfigInfraTools::FORM_TECH_INFO_LIST; ?>"
-						   id="<?php echo ConfigInfraTools::FORM_TECH_INFO_LIST; ?>"
-						   value="<?php echo ConfigInfraTools::FORM_TECH_INFO_LIST; ?>"
-						   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
-						   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+						   name="<?php echo ConfigInfraTools::FM_TECH_INFO_LST; ?>"
+						   id="<?php echo ConfigInfraTools::FM_TECH_INFO_LST; ?>"
+						   value="<?php echo ConfigInfraTools::FM_TECH_INFO_LST; ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
+						   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 						   src="<?php echo $this->Config->DefaultServerImage. 
 										   'Icons/IconInfraToolsList.png'; ?>"
 						   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -59,7 +59,7 @@
 		<div class="DivContentBodySummary">
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('DATABASE_TABLE_QUANTITY') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE_TB_QUANTITY') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">

@@ -12,9 +12,9 @@
 		<?php if(isset($this->ReturnText))                             echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>" method="post" >
+<!-- FM_TYPE_ASSOC_USER_TEAM_SEL_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_FORM; ?>" method="post" >
 	<!-- TYPE_ASSOC_USER_TEAM_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
@@ -22,38 +22,38 @@
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>"
 						   class="<?php echo $this->ReturnTypeAssocUserTeamDescriptionClass; ?>"
 						   onkeyup="ValidateDescription(null, 
-										     '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+										     '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 											 '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 											 '');"
 						   onblur="ValidateDescription(null, 
-										     '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+										     '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 											 '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 											 '');"
 						   onchange="ValidateDescription(null, 
-										     '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+										     '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 											 '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 											 '');"
 						   title="<?php echo $this->InstanceLanguageText->GetText('TYPE_ASSOC_USER_TEAM_DESCRIPTION'); ?>" 
 						   value="<?php echo $this->InputValueTypeAssocUserTeamDescription; ?>" maxlength="45" />
@@ -61,19 +61,19 @@
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateDescription(null, 
-							       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
+							       '<?php echo ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_FORM; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

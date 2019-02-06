@@ -47,18 +47,18 @@ class PageServiceListByDepartment extends PageService
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
 			$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
 											                                        $this->ArrayInstanceInfraToolsCorporation, 
 											                                        $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
+				if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB]))
 				{
-					if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] 
-					   != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT];	
+					if($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB] 
+					   != ConfigInfraTools::FIELD_SEL_NONE)
+						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB];	
 					else if($this->User->GetCorporationName() != NULL)
 						$this->InputValueServiceCorporation = $this->User->GetCorporationName();
 				}
@@ -69,29 +69,29 @@ class PageServiceListByDepartment extends PageService
 										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 
 										 $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT]))
+					if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT_SEL_DEPARTMENT_SB]))
 					{
-						if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT] != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-							$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_DEPARTMENT_SUBMIT];	
+						if($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT_SEL_DEPARTMENT_SB] != ConfigInfraTools::FIELD_SEL_NONE)
+							$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT_SEL_DEPARTMENT_SB];	
 					}
 					
 					
-					//FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT
-					if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT]))
+					//FM_SERVICE_LST_BY_DEPARTMENT_SEL_BY_ID_SB
+					if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT_SEL_BY_ID_SB]))
 					{
 
 						Page::GetCurrentDomain($domain);
 						$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 													. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-													. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-													. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT_SELECT_BY_ID_SUBMIT]);
+													. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+													. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT_SEL_BY_ID_SB]);
 					}
-					//FORM_SERVICE_LIST_BY_DEPARTMENT
+					//FM_SERVICE_LST_BY_DEPARTMENT
 					else
 					{
-						$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT => ConfigInfraTools::FORM_SERVICE_LIST_BY_DEPARTMENT) 
+						$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT => ConfigInfraTools::FM_SERVICE_LST_BY_DEPARTMENT) 
 							                                                               + $_GET;
 						$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceDepartmentOnUserContext', 
 											   array($this->InputValueServiceCorporation, 

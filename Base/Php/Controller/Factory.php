@@ -630,9 +630,9 @@ class Factory
 				$page->StopPageLoadTime();
 				echo "<div class='DivPageLoadTime'><b>Page Load Time: " . $page->GetPageLoadTime() . "</b></div>";
 			}
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	public function CreatePageForm()

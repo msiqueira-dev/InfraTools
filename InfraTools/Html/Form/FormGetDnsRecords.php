@@ -7,47 +7,43 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_DNS_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_DNS_RECORDS; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_DNS_RECORDS; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_DNS_RECORDS . '#tabs9';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_DNS_RECORDS . '#tabs9';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label> <?php echo $this->InstanceLanguageText->GetText('TEXT_HOSTNAME'); ?> </label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT; ?>" 
-                               onblur="ValidateHostName(null, '<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST; ?>" 
+                               onblur="ValidateHostName(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_DNS_RECORDS; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SB; ?>',
                                                           '', true);"
-                               onkeyup="ValidateHostName(null, '<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT; ?>',
+                               onkeyup="ValidateHostName(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_DNS_RECORDS; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SB; ?>',
                                                           '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_INPUT]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEXT_HOSTNAME'); ?>" />
 			<div class="DivContentBodyContainerSelect">
-				<select name="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT; ?>" 
-                        id="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT; ?>">
-                    <option <?php if ($this->SelectedFunctionGetDnsRecords == ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT_MX) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT_MX; ?>"> 
+				<select name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL; ?>" 
+                        id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL; ?>">
+                    <option <?php if ($this->SelectedFunctionGetDnsRecords == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL_MX) 
+						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL_MX; ?>"> 
                         	<?php echo $this->InstanceLanguageText->GetText('GET_DNS_OPTION_MX'); ?> 
                    	</option>
-					<option <?php if ($this->SelectedFunctionGetDnsRecords == ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT_OTHER) 
-						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_SELECT_OTHER; ?>"> 
+					<option <?php if ($this->SelectedFunctionGetDnsRecords == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL_OTHER) 
+						echo "selected='selected' "; ?>value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SEL_OTHER; ?>"> 
                         	<?php echo $this->InstanceLanguageText->GetText('GET_DNS_OPTION_OTHER'); ?>
                     </option>
 				</select>
 			</div>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_DNS_RECORDS; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_DNS_RECORDS; ?>"   
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_SB; ?>"   
                                  class="DivContentBodySubmit"
 				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
 		</div>
@@ -56,7 +52,7 @@
 	                     echo $this->VisibilityFunctionGetDnsRecordsMessage; ?> DivReturnForm">
 		<div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_DNS_RECORDS_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_DNS_RECORDS_HOST) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>            

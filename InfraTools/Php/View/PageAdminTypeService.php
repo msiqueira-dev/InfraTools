@@ -52,103 +52,98 @@ class PageAdminTypeService extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SEL;
+		$this->AdminGoBack($PageFormBack);
 		
-		//FORM SUBMIT BACK
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
-		{
-			$this->PageStackSessionLoad();
-			$PageFormBack = TRUE;
-		}
-		//FORM_TYPE_SERVICE_LIST
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_LIST) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_LST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceSelect', 
 									  array(&$this->ArrayInstanceTypeService),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_LIST;
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_LST;
 		}
-		//FORM_TYPE_SERVICE_REGISTER
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_REGISTER) == ConfigInfraTools::RET_OK)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_REGISTER;
-		//FORM_TYPE_SERVICE_REGISTER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
-		//FORM_TYPE_SERVICE_REGISTER_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SEL;
+		//FM_TYPE_SERVICE_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_REGISTER_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceInsert', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME]),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_SERVICE_NAME]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SEL;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_REGISTER;
 		}
-		//FORM_TYPE_SERVICE_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeServiceSelectByTypeServiceName', 
-											  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME],
+											  array($_POST[ConfigInfraTools::FIELD_TYPE_SERVICE_NAME],
 													&$this->InstanceTypeService),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 			{
 					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
-												  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
+												  $this->InstanceTypeService) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
 			}
 		}
-		//FORM_TYPE_SERVICE_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
-										  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceTypeService) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceDeleteByTypeTypeServiceName', 
 										  array($this->InstanceTypeService),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SELECT;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_SEL;
 			}
 		}
-		//FORM_TYPE_SERVICE_VIEW_LIST_SERVICES
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_SERVICE_VIEW_LIST_SERVICES]))
+		//FM_TYPE_SERVICE_VIEW_LST_SERVICES
+		elseif(isset($_POST[ConfigInfraTools::FM_TYPE_SERVICE_VIEW_LST_SERVICES]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, $this->InstanceTypeService)  
-			                                   == ConfigInfraTools::SUCCESS)
+			                                   == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceType', 
 										  array($this->InstanceTypeTicket->GetTypeTicketDescription(),
 												$this->InstanceTypeService->GetTypeServiceName(),
 												&$this->ArrayInstanceTypeServiceServices), 
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW_LIST_SERVICES;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW_LST_SERVICES;
 				else
 				{
-					if($this->InfraToolsTypeServiceLoadData($this->ArrayInstanceTypeServiceServices) == ConfigInfraTools::SUCCESS)
+					if($this->InfraToolsTypeServiceLoadData($this->ArrayInstanceTypeServiceServices) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
 				}
 			}
 		}
-		//FORM_TYPE_SERVICE_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
-										  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_UPDATE;
+										  $this->InstanceTypeService) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_UPDT;
 		}
-		//FORM_TYPE_SERVICE_UPDATE_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, "InfraToolsTypeServiceLoadData", 
-										  $this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceTypeService) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;
 		}
-		//FORM_TYPE_SERVICE_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_SERVICE_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_SERVICE_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_SERVICE, 
-														$this->InstanceTypeService) == ConfigInfraTools::SUCCESS)
+														$this->InstanceTypeService) == ConfigInfraTools::RET_OK)
 			{
 				$this->ExecuteFunction($_POST, 'InfraToolsTypeServiceUpdateByTypeServiceName', 
-									   array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME],
+									   array($_POST[ConfigInfraTools::FIELD_TYPE_SERVICE_NAME],
 					                         &$this->InstanceTypeService),
 									   $this->InputValueHeaderDebug);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE_VIEW;	

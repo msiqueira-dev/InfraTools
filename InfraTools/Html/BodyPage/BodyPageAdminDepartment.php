@@ -1,8 +1,8 @@
 <!-- BODY_PAGE_ADMIN_DEPARTMENT -->
 <div class="DivBody">
     <div class="DivContentBody">
-    	<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT; ?>" 
-			  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT; ?>" method="post" >
+    	<form name="<?php echo ConfigInfraTools::FM_DEPARTMENT; ?>" 
+			  id="<?php echo ConfigInfraTools::FM_DEPARTMENT; ?>" method="post" >
 			<!-- SUBMIT -->
 			<div class="DivContentBodyOptions">
 				<div class="DivContentBodyOptionsBox">
@@ -19,8 +19,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
+							   name="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
+							   value="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -32,11 +32,11 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>"
-							   id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+							   name="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL; ?>"
+							   id="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL; ?>"
+							   value="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsFind.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -46,9 +46,9 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
-							   id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_REGISTER; ?>"
+							   name="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER; ?>"
+							   id="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER; ?>"
+							   value="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -60,11 +60,11 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_LIST; ?>"
-							   id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_LIST; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_DEPARTMENT_LIST; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
+							   name="<?php echo ConfigInfraTools::FM_DEPARTMENT_LST; ?>"
+							   id="<?php echo ConfigInfraTools::FM_DEPARTMENT_LST; ?>"
+							   value="<?php echo ConfigInfraTools::FM_DEPARTMENT_LST; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsList.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -82,11 +82,11 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)) . ".php");
 		}
-		//PAGE_ADMIN_DEPARTMENT_LIST
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST)
+		//PAGE_ADMIN_DEPARTMENT_LST
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LIST)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST)) . ".php");
 		}
 		//PAGE_ADMIN_DEPARTMENT_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER)
@@ -94,17 +94,17 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER)) . ".php");
 		}
-		//PAGE_ADMIN_DEPARTMENT_SELECT
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT)
+		//PAGE_ADMIN_DEPARTMENT_SEL
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM  . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SELECT)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL)) . ".php");
 		}
-		//PAGE_ADMIN_DEPARTMENT_UPDATE
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE)
+		//PAGE_ADMIN_DEPARTMENT_UPDT
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDT)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDATE)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_UPDT)) . ".php");
 		}
 		//PAGE_ADMIN_DEPARTMENT_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)

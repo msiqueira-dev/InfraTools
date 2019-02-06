@@ -40,9 +40,9 @@
 <link href="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" rel="canonical" />
 <link href="<?php echo $this->Config->DefaultServerImage. 'Icons/FavIconInfraTools32x32.ico'; ?>" rel="icon" type="image/x-icon"/>
 <?php
-if($this->CheckInstanceUser() != ConfigInfraTools::SUCCESS)
+if($this->CheckInstanceUser() != ConfigInfraTools::RET_OK)
 {
-	if($this->PageCheckLogin == ConfigInfraTools::SUCCESS)
+	if($this->PageCheckLogin == ConfigInfraTools::RET_OK)
 	{
 		if(!($this->Page == ConfigInfraTools::PAGE_ACCOUNT && $this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED))
 		{

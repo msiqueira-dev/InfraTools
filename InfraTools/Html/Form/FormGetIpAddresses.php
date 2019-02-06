@@ -7,34 +7,30 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_IP_ADDRESSES_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_IP_ADDRESSES; ?>" 
-          id="FormFunctionGe<?php echo ConfigInfraTools::FORM_FUNCTION_GET_IP_ADDRESSES; ?>tIpAddresses" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_IP_ADDRESSES . '#tabs11';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES; ?>" 
+          id="FormFunctionGe<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES; ?>tIpAddresses" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_IP_ADDRESSES . '#tabs11';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label><?php echo $this->InstanceLanguageText->GetText('TEXT_HOSTNAME'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT; ?>" 
-                               onblur="ValidateHostName(null, '<?php echo ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES; ?>" 
+                               onblur="ValidateHostName(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_IP_ADDRESSES; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES_SB; ?>',
                                                           '', true);"
-                               onkeyup="ValidateHostName(null, '<?php echo ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT; ?>',
+                               onkeyup="ValidateHostName(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_IP_ADDRESSES; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES_SB; ?>',
                                                           '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_INPUT]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEXT_HOSTNAME'); ?>" />
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_IP_ADDRESSES; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_IP_ADDRESSES; ?>"  
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES_SB; ?>"  
                                  class="DivContentBodySubmit"
 				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
 		</div>
@@ -43,7 +39,7 @@
 	                     echo $this->VisibilityFunctionGetIpAddressesMessage; ?> DivReturnForm">
     	<div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_IP_ADDRESSES_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_IP_ADDRESSES) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>            

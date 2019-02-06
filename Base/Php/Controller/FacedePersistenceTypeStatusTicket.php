@@ -91,31 +91,31 @@ class FacedePersistenceTypeStatusTicket
 				$stmt->bind_param("s", $TypeStatusTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_USER_DELETE_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_TYPE_STATUS_TICKET_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_TYPE_USER_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_TYPE_STATUS_TICKET_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, $MySqlConnection)
@@ -131,22 +131,22 @@ class FacedePersistenceTypeStatusTicket
 				$stmt->bind_param("s", $TypeStatusTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_CORPORATION_INSERT_FAILED;
+					return Config::DB_ERROR_TYPE_STATUS_TICKET_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug, $MySqlConnection)
@@ -163,7 +163,7 @@ class FacedePersistenceTypeStatusTicket
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceTypeStatusTicket = array();
 					$result = $stmt->get_result();
@@ -171,24 +171,24 @@ class FacedePersistenceTypeStatusTicket
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceTypeStatusTicket = $this->Factory->CreateTypeStatusTicket
-							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_STATUS_TICKET_FIELD_DESCRIPTION]);	
+							                            ($row[Config::TB_FD_REGISTER_DATE],
+														 $row[Config::TB_TYPE_STATUS_TICKET_FD_DESCRIPTION]);	
 						array_push($ArrayInstanceTypeStatusTicket, $InstanceTypeStatusTicket);
 					}
 					if(!empty($ArrayInstanceTypeStatusTicket))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TYPE_USER_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_TYPE_STATUS_TICKET_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_USER_SELECT_FAILED;
+					$return = Config::DB_ERROR_TYPE_STATUS_TICKET_SEL;
 				}
 				return $return;
 			}
@@ -196,10 +196,10 @@ class FacedePersistenceTypeStatusTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, 
@@ -215,27 +215,27 @@ class FacedePersistenceTypeStatusTicket
 			{
 				$stmt->bind_param("s", $TypeStatusTicketDescription);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($registerDate, $TypeStatusTicketDescription);
 					if ($stmt->fetch())
 					{
 						$TypeStatusTicket = $this->Factory->CreateTypeStatusTicket($registerDate, 
 																				   $TypeStatusTicketDescription);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FETCH_FAILED;
+						$return = Config::DB_ERROR_TYPE_STATUS_TICKET_SEL_BY_DESCRIPTION;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_USER_SELECT_BY_ID_FAILED;
+					$return = Config::DB_ERROR_TYPE_STATUS_TICKET_SEL_BY_DESCRIPTION;
 				}
 				return $return;
 			}
@@ -243,10 +243,10 @@ class FacedePersistenceTypeStatusTicket
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription, 
@@ -263,25 +263,25 @@ class FacedePersistenceTypeStatusTicket
 				$stmt->bind_param("ss", $TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_USER_UPDATE_FAILED;
+					return Config::DB_ERROR_TYPE_STATUS_TICKET_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

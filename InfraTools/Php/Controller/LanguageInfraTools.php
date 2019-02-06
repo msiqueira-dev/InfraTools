@@ -33,6 +33,7 @@ if (!class_exists("Language"))
 
 class LanguageInfraTools extends Language 
 {	
+	private $Language;
 	/**                               **/
 	/************* METODOS *************/
 	/**                               **/
@@ -46,8 +47,6 @@ class LanguageInfraTools extends Language
 	/* Constructor */
 	protected function __construct() 
     {
-		if($this->Factory == NULL)
-			$this->Factory = InfraToolsFactory::__create();
 	}
 	
 	protected function GetLanguageInstance($Language)
@@ -87,20 +86,20 @@ class LanguageInfraTools extends Language
 				self::$Instance->InstanceLanguageText = $InfraToolsFactory->CreateInfraToolsLanguagePt();
 		}
 		else exit(basename(__FILE__, '.php') . ': Error Loading Class Language');
+		self::$Instance->Language = str_replace('Language/', '', $Language);
 		return self::$Instance;
     }
 	
 	public function GetConstant($Constant, $Language)
 	{
-		$obj = $this->GetLanguageInstance($Language);
-		return $obj->GetText($Constant);
+		return $this->GetText($Constant);
 	}
 	
 	public function GetPageName($Page)
 	{
 		if($this->InstanceLanguageText != NULL)
 		{
-			return $this->InstanceLanguageText->GetText(strtoupper($Page) . "");
+			return $this->GetText($Page . "");
 		}
 	}
 	
@@ -108,7 +107,7 @@ class LanguageInfraTools extends Language
 	{
 		if($this->InstanceLanguageText != NULL)
 		{
-			return $this->InstanceLanguageText->GetText(strtoupper($Page) . "_ROBOTS");
+			return $this->GetText($Page . "_ROBOTS");
 		}
 	}
 	
@@ -116,7 +115,7 @@ class LanguageInfraTools extends Language
 	{
 		if($this->InstanceLanguageText != NULL)
 		{
-			return $this->InstanceLanguageText->GetText(strtoupper($Page) . "_TITLE");
+			return $this->GetText($Page . "_TITLE");
 		}
 	}
 	
@@ -124,7 +123,41 @@ class LanguageInfraTools extends Language
 	{
 		if($this->InstanceLanguageText != NULL)
 		{
-			return $this->InstanceLanguageText->GetText($Constant);
+			$Language = get_class($this->InstanceLanguageText);
+			if(!defined("$Language::$Constant"))
+			{
+				if(strpos(strtoupper($Constant), 'PAGE') !== FALSE && strpos($Constant, '_') == FALSE)
+				{
+					preg_match_all('/[A-Z]/', $Constant, $matches, PREG_OFFSET_CAPTURE);
+					if(is_array($matches))
+					{
+						foreach($matches as $values)
+							foreach($values as $key => $indexes)
+							{
+								if($indexes[1] != 0)
+									$Constant = substr_replace($Constant, "_", $indexes[1]+$key-1, 0);
+							}
+					}
+				}
+				$Constant = strtoupper($Constant);
+				if(!defined("$Language::$Constant"))
+				{
+					if(strpos($Constant, 'LIST') !== FALSE)
+						$Constant = str_replace ("LIST", "LST" , $Constant);
+					if(strpos($Constant, 'REGISTER') !== FALSE)
+						$Constant = str_replace ("REGISTER", "REG" , $Constant);
+					if(strpos($Constant, 'SELECT') !== FALSE)
+						$Constant = str_replace ("SELECT", "SEL" , $Constant);
+					if(strpos($Constant, 'UPDATE') !== FALSE)
+						$Constant = str_replace ("UPDATE", "UPDT" , $Constant);
+				}
+			}
+			if(defined("$Language::$Constant"))
+			{
+				$text = constant("$Language::$Constant");
+				if(!empty($text)) return $text;
+			}
+			else echo "Constant: " . $Constant;
 		}
 	}
 }

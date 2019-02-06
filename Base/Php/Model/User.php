@@ -614,10 +614,10 @@ class User
 				if($this->ArrayAssocUserTeam == NULL)
 					$this->ArrayAssocUserTeam = array();
 				array_push($this->ArrayAssocUserTeam, $AssocUserTeam);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 

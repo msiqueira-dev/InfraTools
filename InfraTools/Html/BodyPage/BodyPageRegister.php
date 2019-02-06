@@ -2,7 +2,7 @@
 <div class="DivBody">
 	<div class="DivContentBody">
 		<?php 
-			if($this->ReturnClass != ConfigInfraTools::FORM_BACKGROUND_SUCCESS)
+			if($this->ReturnClass != ConfigInfraTools::FM_BACKGROUND_SUCCESS)
 				include_once(REL_PATH . ConfigInfraTools::PATH_FORM . "UserRegister" . ".php");
 			else
 			{

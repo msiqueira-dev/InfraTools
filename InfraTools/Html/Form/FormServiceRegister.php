@@ -18,127 +18,127 @@
 	</label>
 </div>
 <div class="DivClearFloat"></div>
-<form name="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
+<form name="<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
 	<!-- SERVICE_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?>
 				</label>
 			</div>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>" 
 						   class="<?php echo $this->ReturnServiceNameClass; ?>"
-						   onblur="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						   onblur="ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-								    ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+								    ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);
-								    ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+								    ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);"
-						   onchange="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						   onchange="ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-								    ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+								    ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 								               'DivContentBodySubmitBigger',
-								               '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								               '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);
-								    ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+								    ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?>"
 						   value="<?php echo $this->InputValueServiceName; ?>" maxlength="45" />
 	</div>
 	<div class="DivClearFloat"></div>
 	<!-- SERVICE_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'); ?>
 				</label>
 			</div>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>" 
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>" 
 						   class="<?php echo $this->ReturnServiceDescriptionClass; ?>"
-						   onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+						   onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-								   ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+								   ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-				                   ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+				                   ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);"
-						   onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+						   onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-								    ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+								    ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-								    ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+								    ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'); ?>"
 						   value="<?php echo $this->InputValueServiceDescription; ?>" maxlength="200" />
 	 </div>
 	 <div class="DivClearFloat"></div>
-	<!-- FORM_FIELD_SERVICE_TYPE -->
+	<!-- FIELD_SERVICE_TYPE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_TYPE'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>"
-				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+				name="<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>"
+				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);
-						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-					      ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+					      ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>');
-                                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                          SetSelectColor('<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>');
+                                               document.getElementById('<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>')
                                                .disabled = false;
-				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+				                               document.getElementById('<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>')
                                                .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				class="SelectTypeService">
 				<option <?php if ($this->InputValueServiceType == "" 
-								  || $this->InputValueServiceType == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceType == ConfigInfraTools::FIELD_SEL_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsTypeService))
@@ -160,37 +160,37 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- FORM_FIELD_CORPORATION_NAME -->
+	<!-- FIELD_CORPORATION_NAME -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
+				name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
 				class="SelectCorporation"
-				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);
-						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-					      ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+					      ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>');
-                                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                          SetSelectColor('<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');
+                                               document.getElementById('<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>')
                                                .disabled = false;
-				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+				                               document.getElementById('<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>')
                                                .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				<option <?php if ($this->InputValueServiceCorporation == "" 
-								  || $this->InputValueServiceCorporation == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceCorporation == ConfigInfraTools::FIELD_SEL_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsCorporation))
@@ -212,51 +212,51 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE -->
+	<!-- FIELD_SERVICE_CORPORATION_CAN_CHANGE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_CORPORATION_CAN_CHANGE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<input type="checkbox" 
-				   name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE; ?>" 
-				   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE; ?>"
+				   name="<?php echo ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE; ?>" 
+				   value="<?php echo ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE; ?>"
 					<?php echo $this->InputValueServiceCorporationCanChange; ?>
 					/>
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- FORM_FIELD_DEPARTMENT_NAME -->
+	<!-- FIELD_DEPARTMENT_NAME -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
+				name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>"
 				class="SelectDepartment"
-				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+				onchange="ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);
-						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						  ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-					      ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+					      ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 											   '', true);
-                          SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>');
-                                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+                          SetSelectColor('<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>');
+                                               document.getElementById('<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>')
                                                .disabled = false;
-				                               document.getElementById('<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>')
+				                               document.getElementById('<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>')
                                                .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
 				<option <?php if ($this->InputValueServiceDepartment == "" 
-								  || $this->InputValueServiceDepartment == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceDepartment == ConfigInfraTools::FIELD_SEL_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsDepartment))
@@ -278,15 +278,15 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE -->
+	<!-- FIELD_SERVICE_DEPARTMENT_CAN_CHANGE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DEPARTMENT_CAN_CHANGE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<input type="checkbox" 
-				   name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE; ?>" 
-				   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE; ?>"
+				   name="<?php echo ConfigInfraTools::FIELD_SERVICE_DEPARTMENT_CAN_CHANGE; ?>" 
+				   value="<?php echo ConfigInfraTools::FIELD_SERVICE_DEPARTMENT_CAN_CHANGE; ?>"
 					<?php echo $this->InputValueServiceDepartmentCanChange; ?>
 					/>
 		</div>
@@ -295,13 +295,13 @@
 	<!-- SERVICE ACTIVE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ACTIVE'); ?></label>
 			<label>:</label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<input type="checkbox" 
-				   name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE; ?>" 
-				   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE; ?>"
+				   name="<?php echo ConfigInfraTools::FIELD_SERVICE_ACTIVE; ?>" 
+				   value="<?php echo ConfigInfraTools::FIELD_SERVICE_ACTIVE; ?>"
 					<?php echo $this->InputValueServiceActive; ?>
 					/>
 		</div>
@@ -309,20 +309,20 @@
 	<div class="DivClearFloat"></div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainer"
-		 onmouseover="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+		 onmouseover="ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								   '', true);
-					  ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+					  ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								   '', true);
-					  ValidateSelectOption(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>',
+					  ValidateSelectOption(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>',
 								   		       'DivContentBodySubmitBigger',
-								   		       '<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>',
+								   		       '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
 								               '', true);">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>"
 								 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
 								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />

@@ -51,7 +51,6 @@ class FormValidator
 {
 	/* Constantes de Retorno */
 	const ERROR                           = "ERROR";
-	const SUCCESS                         = "Success";
 	const INVALID_BOOL                    = "ReturnInvalidBool";
 	const INVALID_CORPORATION             = "ReturnInvalidCorporation";
 	const INVALID_COUNTRY_NAME            = "ReturnInvalidCountryName";
@@ -117,73 +116,73 @@ class FormValidator
 	
 	public function ExecuteValidation($FunctionName, $Value, $DefaultValue, $ArrayOption = NULL)
 	{
-		if($FunctionName == Config::FORM_VALIDATE_FUNCTION_BOOL)
+		if($FunctionName == Config::FM_VALIDATE_FUNCTION_BOOL)
 			return $this->ValidateBool($Value);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME)
 			return $this->ValidateCorporationName($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_COMPARE_STRING)
 			return $this->ValidateCompareString($Value, $DefaultValue, $ArrayOption);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_NAME)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_COUNTRY_NAME)
 			return $this->ValidateCountryName($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE)
 			return $this->ValidateCountryRegionCode($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_CPF)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_CPF)
 			return $this->ValidateCpf($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DATE)
 			return $this->ValidateDate($Value[0], $Value[1], $Value[2], $DefaultValue[0], $DefaultValue[1], $DefaultValue[2]);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE_DAY)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DATE_DAY)
 			return $this->ValidateDateDay($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE_MONTH)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DATE_MONTH)
 			return $this->ValidateDateMonth($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DATE_YEAR)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DATE_YEAR)
 			return $this->ValidateDateYear($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS)
 			return $this->ValidateDepartmentInitials($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME)
 			return $this->ValidateDepartmentName($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_DESCRIPTION)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_DESCRIPTION)
 			return $this->ValidateDescription($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_EMAIL)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_EMAIL)
 			return $this->ValidateEmail($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_GENDER)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_GENDER)
 			return $this->ValidateGender($Value, $DefaultValue);	
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_HOST)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_HOST)
 			return $this->ValidateHost($Value);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4)
 			return $this->ValidateIpAddressIpv4($Value);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_IP_MASK)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_MASK)
 			return $this->ValidateIpMask($Value);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_MESSAGE)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_MESSAGE)
 			return $this->ValidateMessage($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NAME)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NAME)
 			return $this->ValidateName($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NOT_NULL_OR_EMPTY)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NOT_NULL_OR_EMPTY)
 			return $this->ValidateNotNullOrEmpty($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NOT_NUMBER)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NOT_NUMBER)
 			return $this->ValidateIsNotNumericValue($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_NUMERIC)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NUMERIC)
 			return $this->ValidateNumericValue($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_PASSWORD)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_PASSWORD)
 			return $this->ValidatePassword($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_REGISTRATION_ID)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_REGISTRATION_ID)
 			return $this->ValidateRegistrationId($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_SERVICE_NAME)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_SERVICE_NAME)
 			return $this->ValidateServiceName($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_SUBJECT)
-			return $this->ValidateSubject($Value, $DefaultValue, $ArrayOption);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TEAM_NAME)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_SUBJECT)
+			return $this->ValidateSubject($Value, $DefaultValue);
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_TEAM_NAME)
 			return $this->ValidateTeamName($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TITLE)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_TITLE)
 			return $this->ValidateTitle($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE)
 			return $this->ValidateTypeAssocUserService($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_TYPE_SERVICE)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_TYPE_SERVICE)
 			return $this->ValidateTypeService($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_URL)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_URL)
 			return $this->ValidateURL($Value, $DefaultValue);
-		elseif($FunctionName == Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID)
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_USER_UNIQUE_ID)
 			return $this->ValidateUserUniqueId($Value, $DefaultValue);
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	public function ValidateBool($Bool)
@@ -193,7 +192,7 @@ class FormValidator
 			if(!empty($Bool))
 			{
 				if(is_bool($Bool))
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_BOOL;
 			}
 			else return self::INVALID_NULL;
@@ -210,7 +209,7 @@ class FormValidator
 				if(preg_match(
 	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[*]|[0-9]|[^\x{0000}\x{007F}])*)*$)/', 
 				   $CorporationName) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_CORPORATION;
 			}
 			else return self::INVALID_NULL;
@@ -226,7 +225,7 @@ class FormValidator
 			{
 				if($StringToCompare == $String)
 				{
-					return self::SUCCESS;
+					return Config::RET_OK;
 				}
 				else return self::INVALID_CAPTCHA;
 			}
@@ -244,7 +243,7 @@ class FormValidator
 				if(preg_match(
 	               '/((([A-Z]|([Å])|([(][A-Z]))(([a-z])|([ç])|([ã])|([é])|([í])|([ô])|([(])|([)])|([&])|([’]))+)|([(DRC)])|([(FYROM)])|([U.S.])|([&])|([d’])|([-])|([of])|([ ]))+/', 
 				   $Country) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_COUNTRY_NAME;
 			}
 			else return self::INVALID_NULL;
@@ -259,7 +258,7 @@ class FormValidator
 			if(!is_null($RegionCode) && !empty($RegionCode) && $RegionCode != $DefaultValue)
 			{
 				if(preg_match('/^[A-Z]{2}$/', $RegionCode) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_COUNTRY_REGION_CODE;
 			}
 			else return self::INVALID_NULL;
@@ -295,7 +294,7 @@ class FormValidator
 										if ($Cpf{$c} != $d) 
 											return self::INVALID_CPF;
 									}
-									return self::SUCCESS;
+									return Config::RET_OK;
 								}
 								else return self::INVALID_CPF_SEQUENTIAL_NUMBER;
 							}
@@ -323,7 +322,7 @@ class FormValidator
 				if ($Year != $DefaultValueYear && $Month != $DefaultValueMonth && $Day != $DefaultValueDay)
 				{
 					if(checkdate($Month, $Day, $Year))
-						return self::SUCCESS;
+						return Config::RET_OK;
 					else return self::INVALID_DATE;
 				}
 				else return self::INVALID_DEFAULT_VALUE;
@@ -339,10 +338,10 @@ class FormValidator
 		{
 			if(!is_null($Day) && !empty($Day))
 			{
-				if($this->ValidateNumericValue($Day, "") == self::SUCCESS)
+				if($this->ValidateNumericValue($Day, "") == Config::RET_OK)
 				{
 					if($Day < 32 && $Day > 0)
-						return self::SUCCESS;
+						return Config::RET_OK;
 					else return self::INVALID_DATE_DAY;
 				}
 				else return self::INVALID_DATE_DAY;
@@ -358,10 +357,10 @@ class FormValidator
 		{
 			if(!is_null($Month) && !empty($Month))
 			{
-				if($this->ValidateNumericValue($Month, "") == self::SUCCESS)
+				if($this->ValidateNumericValue($Month, "") == Config::RET_OK)
 				{
 					if($Month < 12 && $Month > 0)
-						return self::SUCCESS;
+						return Config::RET_OK;
 					else return self::INVALID_DATE_MONTH;
 				}
 				else return self::INVALID_DATE_MONTH;
@@ -377,10 +376,10 @@ class FormValidator
 		{
 			if(!is_null($Year) && !empty($Year))
 			{
-				if($this->ValidateNumericValue($Year, "") == self::SUCCESS)
+				if($this->ValidateNumericValue($Year, "") == Config::RET_OK)
 				{
 					if($Year < date("Y") && $Year >= 1940)
-						return self::SUCCESS;
+						return Config::RET_OK;
 					else return self::INVALID_DATE_YEAR;
 				}
 				else return self::INVALID_DATE_YEAR;
@@ -399,7 +398,7 @@ class FormValidator
 				if(preg_match(
 	                '/(^([a-zA-Z]|[.]|[-]|[^\x{0000}-\x{007F}])+$)/', 
 				   $DepartmentInitials) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_DEPARTMENT_INITIALS;
 			}
 			else return self::INVALID_NULL;
@@ -416,7 +415,7 @@ class FormValidator
 				if(preg_match(
 	                '/(^([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
 				   $DepartmentName) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_DEPARTMENT_NAME;
 			}
 			else return self::INVALID_NULL;
@@ -431,7 +430,7 @@ class FormValidator
 			if(!is_null($Description) && !empty($Description))
 			{
 				if(preg_match('/(^([a-zA-Z]|[.]|[-]|[_]|[ ]|[0-9])*)$/', $Description) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_DESCRIPTION;
 			}
 			else return self::INVALID_NULL;
@@ -450,7 +449,7 @@ class FormValidator
 					if ($EmailAddress != $DefaultValue)
 					{
 						if(filter_var($EmailAddress, FILTER_VALIDATE_EMAIL))
-							return self::SUCCESS;
+							return Config::RET_OK;
 						else return self::INVALID_EMAIL_ADDRESS;
 					}
 					else return self::INVALID_DEFAULT_VALUE;
@@ -468,11 +467,11 @@ class FormValidator
 		{
 			if(!is_null($Gender) && !empty($Gender) && $Gender != $DefaultValue)
 			{
-				$arrayGender[0] = "M"; 
-				$arrayGender[1] = "F";
-				$arrayGender[2] = "O";
+				$arrayGender[0] = Config::FIELD_USER_GENDER_MALE; 
+				$arrayGender[1] = Config::FIELD_USER_GENDER_FEMALE;
+				$arrayGender[2] = Config::FIELD_USER_GENDER_OTHER;
 				if(in_array($Gender, $arrayGender))
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_GENDER;
 			}
 			else return self::INVALID_NULL;
@@ -489,7 +488,7 @@ class FormValidator
 				if(strstr($Host, ".") && strlen($Host) > 3 && strlen($Host) < 255 && (!strstr($Host, "..")) && (!strstr($Host, " "))
 				   && preg_match('/[a-zA-Z]+/', $Host) && (!strstr($Host, "@")) &&
 				   !(preg_match('/([^.]*[.][0-9]*$)/', $Host)) && filter_var(FILTER_VALIDATE_URL) == true)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_HOST_NAME;
 			}
 			else return self::INVALID_NULL;
@@ -508,7 +507,7 @@ class FormValidator
 					if ($NonNumeric != $DefaultValue)
 					{
 						if(!is_numeric($NonNumeric))
-							return self::SUCCESS;
+							return Config::RET_OK;
 						else return self::INVALID_NON_NUMERIC;
 					}
 					else return self::INVALID_DEFAULT_VALUE;
@@ -527,7 +526,7 @@ class FormValidator
 			if(!is_null($IpAddressIpv4) && !empty($IpAddressIpv4))
 			{
 				if(preg_match('/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/', $IpAddressIpv4) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_IP_ADDRESS_IPV4;
 			}
 			else return self::INVALID_NULL;
@@ -541,10 +540,10 @@ class FormValidator
 		{
 			if(!is_null($IpMask) && !empty($IpMask))
 			{
-				if($this->ValidateNumericValue($IpMask, "") == self::SUCCESS)
+				if($this->ValidateNumericValue($IpMask, "") == Config::RET_OK)
 				{
 					if($IpMask < 31 && $IpMask > 0)
-						return self::SUCCESS;
+						return Config::RET_OK;
 					else return self::INVALID_IP_MASK;
 				}
 				else return self::INVALID_IP_MASK;
@@ -559,7 +558,7 @@ class FormValidator
 		if(isset($Message))
 		{
 			if(!is_null($Message) && !empty($Message) && $Message != $DefaultValue)
-				return self::SUCCESS;
+				return Config::RET_OK;
 			else return self::INVALID_NULL;
 		}
 		else return self::INVALID_NULL;
@@ -574,7 +573,7 @@ class FormValidator
 				if(preg_match(
 				'/(^([a-zA-Z]|[^\x{0000}-\x{007F}])+(([ ])+([a-zA-Z]|[^\x{0000}-\x{007F}]|(([a-zA-Z]|[^\x{0000}-\x{007F}])[.]))+)+$)/'
 				, $Name) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_NAME;
 			}
 			else return self::INVALID_NULL;
@@ -591,7 +590,7 @@ class FormValidator
 				if ($NotNull != "")
 				{
 					if ($NotNull != $DefaultValue)
-						return self::SUCCESS;
+						return Config::RET_OK;
 					else return self::INVALID_DEFAULT_VALUE;
 				}
 				else return self::INVALID_WHITE_SPACE;
@@ -612,7 +611,7 @@ class FormValidator
 					if ($Numeric != $DefaultValue)
 					{
 						if(is_numeric($Numeric))
-							return self::SUCCESS;
+							return Config::RET_OK;
 						else return self::INVALID_NUMERIC;
 					}
 					else return self::INVALID_DEFAULT_VALUE;
@@ -632,7 +631,7 @@ class FormValidator
 			if(!is_null($Password) && !empty($Password))
 			{
 				if(preg_match('/^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,18}$/', $Password) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_PASSWORD;
 			}
 			else return self::INVALID_NULL;
@@ -647,7 +646,7 @@ class FormValidator
 			if(!is_null($RegistrationId) && !empty($RegistrationId))
 			{
 				if(preg_match('/^(^([a-zA-Z]|[ ]|[0-9])+$)/', $RegistrationId) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_REGISTRATION_ID;
 			}
 			else return self::INVALID_NULL;
@@ -664,7 +663,7 @@ class FormValidator
 				if(preg_match(
 	                '/(^([a-zA-Z]|[.]|[-]|[_]|[0-9]|[^\x{0000}-\x{007F}])+(([ ])*([a-zA-Z]|[.]|[-]|[0-9]|[^\x{0000}-\x{007F}])*)*$)/', 
 				   $Service) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_SERVICE_NAME;
 			}
 			else return self::INVALID_NULL;
@@ -679,7 +678,7 @@ class FormValidator
 			if(!is_null($String) && !empty($String))
 			{
 				if (strlen($String) <= $Size)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_STRING_SIZE;
 			}
 			else return self::INVALID_NULL;
@@ -687,14 +686,14 @@ class FormValidator
 		else return self::INVALID_NULL;
 	}
 	
-	public function ValidateSubject($Subject, $DefaultValue, $ArrayOption)
+	public function ValidateSubject($Subject, $DefaultValue)
 	{
 		if(isset($Subject))
 		{
 			if(!is_null($Subject) && !empty($Subject) && $Subject != $DefaultValue)
 			{
-				if(in_array($Subject, $ArrayOption))
-					return self::SUCCESS;
+				if(preg_match('/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[_]|[*])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[_]|[*])*)*$)/', $Subject) > 0)
+					return Config::RET_OK;
 				else return self::INVALID_SUBJECT;
 			}
 			else return self::INVALID_NULL;
@@ -708,11 +707,10 @@ class FormValidator
 		{
 			if(!is_null($TeamName) && !empty($TeamName))
 			{
-				
 				if(preg_match(
 	               '/(^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])*)*$)/', 
 				   $TeamName) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_TEAM_NAME;
 			}
 			else return self::INVALID_NULL;
@@ -722,13 +720,12 @@ class FormValidator
 	
 	public function ValidateTitle($Title, $DefaultValue)
 	{
-		
 		if(isset($Title))
 		{
 			if(!is_null($Title) && !empty($Title))
 			{
 				if(preg_match('/(^([a-zA-Z]|[ ]|[^\x{0000}-\x{007F}])+$)/', $Title) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_TITLE;
 			}
 			else return self::INVALID_NULL;
@@ -743,7 +740,7 @@ class FormValidator
 			if(!is_null($TypeAssocUserServiceDescription) && !empty($TypeAssocUserServiceDescription))
 			{
 				if(preg_match('/(^([a-zA-Z])+$)/', $TypeAssocUserServiceDescription) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_TYPE_ASSOC_USER_SERVICE;
 			}
 			else return self::INVALID_NULL;
@@ -753,13 +750,12 @@ class FormValidator
 	
 	public function ValidateTypeService($TypeService, $DefaultValue)
 	{
-		
 		if(isset($TypeService))
 		{
 			if(!is_null($TypeService) && !empty($TypeService))
 			{
 				if(preg_match('/(^([a-zA-Z]|[ ]|[_]|[^\x{0000}-\x{007F}])+$)/', $TypeService) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_TYPE_SERVICE;
 			}
 			else return self::INVALID_NULL;
@@ -776,7 +772,7 @@ class FormValidator
 				if(strstr($Url, "http://") == FALSE && strstr($Url, "https://") == FALSE)
 					$Url = "http://" . $Url;
 				if (!filter_var($Url, FILTER_VALIDATE_URL) === false) 
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_URL;
 			}
 			else return self::INVALID_NULL;
@@ -791,7 +787,7 @@ class FormValidator
 			if(!is_null($UserUniqueId) && !empty($UserUniqueId))
 			{
 				if(preg_match('/^[a-zA-Z_.-]{1,25}$/', $UserUniqueId) > 0)
-					return self::SUCCESS;
+					return Config::RET_OK;
 				else return self::INVALID_USER_UNIQUE_ID;
 			}
 			else return self::INVALID_NULL;

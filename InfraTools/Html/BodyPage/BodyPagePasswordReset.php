@@ -2,7 +2,7 @@
 <div class="DivBody">
 	<div class="DivContentBody">
 		<?php 
-			if($this->ReturnClass != ConfigInfraTools::FORM_BACKGROUND_SUCCESS)
+			if($this->ReturnClass != ConfigInfraTools::FM_BACKGROUND_SUCCESS)
 				include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 							 str_replace("Page", "", str_replace("_", "", ConfigInfraTools::PAGE_PASSWORD_RESET)) . ".php");
 			else 

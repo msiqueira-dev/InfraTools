@@ -46,29 +46,29 @@ class PageServiceListByTypeService extends PageInfraTools
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
 			$return = $this->InfraToolsTypeServiceSelectOnUserContextNoLimit($this->User->GetEmail(),
 				                                                   $this->ArrayInstanceInfraToolsTypeService, 
 														           $this->InputValueHeaderDebug);
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT]))
-				$this->InputValueServiceType = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_TYPE_SERVICE_SUBMIT];
+			if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_TYPE_SERVICE_SB]))
+				$this->InputValueServiceType = $_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_TYPE_SERVICE_SB];
 			else $this->InputValueServiceType = NULL;
-			//FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT
-			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT]))
+			//FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB]))
 			{
 
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE_SEL_BY_ID_SB]);
 			}
-			//FORM_SERVICE_LIST_BY_TYPE_SERVICE
+			//FM_SERVICE_LST_BY_TYPE_SERVICE
 			else
 			{
-				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE =>
-							  ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_SERVICE) + $_GET;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE =>
+							  ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_SERVICE) + $_GET;
 				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceTypeOnUserContext', 
 											   array($this->InputValueServiceType,
 													 $this->User->GetEmail(),

@@ -1,8 +1,8 @@
 <?php
 	const INFRATOOLS_MONITORING_ERROR                                   = "INFRATOOLS_MONITORING_ERROR";
-	const INFRATOOLS_MONITORING_DELETE_ERROR                            = "INFRATOOLS_MONITORING_DELETE_ERROR";
-	const INFRATOOLS_MONITORING_DELETE_ERROR_SERVICE_DOES_NOT_EXISTS    = "INFRATOOLS_MONITORING_DELETE_ERROR_SERVICE_DOES_NOT_EXISTS";
-	const INFRATOOLS_MONITORING_DELETE_SUCCESS                          = "INFRATOOLS_MONITORING_DELETE_SUCCESS";
+	const INFRATOOLS_MONITORING_DEL_ERROR                            = "INFRATOOLS_MONITORING_DEL_ERROR";
+	const INFRATOOLS_MONITORING_DEL_ERROR_SERVICE_DOES_NOT_EXISTS    = "INFRATOOLS_MONITORING_DEL_ERROR_SERVICE_DOES_NOT_EXISTS";
+	const INFRATOOLS_MONITORING_DEL_SUCCESS                          = "INFRATOOLS_MONITORING_DEL_SUCCESS";
 	const INFRATOOLS_MONITORING_INSTALL_ERROR                           = "INFRATOOLS_MONITORING_INSTALL_ERROR";
 	const INFRATOOLS_MONITORING_INSTALL_SUCCESS      	                = "INFRATOOLS_MONITORING_INSTALL_SUCCESS";
 	const INFRATOOLS_MONITORING_ERROR_SCRIPT_INIT_PARAMETER_INVALID     = "INFRATOOLS_MONITORING_ERROR_SCRIPT_INIT_PARAMETER_INVALID";
@@ -69,7 +69,7 @@
 		$return = win32_query_service_status('INFRATOOLS_MONITORING');
 		if($return != WIN32_ERROR_SERVICE_DOES_NOT_EXIST)
 		{
-			if($return == WIN32_ERROR_SERVICE_MARKED_FOR_DELETE)
+			if($return == WIN32_ERROR_SERVICE_MARKED_FOR_DEL)
 			{
 				$return = win32_stop_service('INFRATOOLS_MONITORING');
 				echo "RETURN: 0x" . dechex($return) . " | Service stoped...\n";
@@ -78,18 +78,18 @@
 			if($return == WIN32_NO_ERROR)
 			{
 				echo "RETURN: 0x" . dechex($return) . " | Service deleted...\n";
-				return INFRATOOLS_MONITORING_DELETE_SUCCESS;
+				return INFRATOOLS_MONITORING_DEL_SUCCESS;
 			}
 			else 
 			{
 				echo "RETURN: 0x" . dechex($return) . " | Could not delete service...\n";
-				return INFRATOOLS_MONITORING_DELETE_RETURN_ERROR;
+				return INFRATOOLS_MONITORING_DEL_RETURN_ERROR;
 			}
 		}
 		else 
 		{
 			echo "RETURN: 0x" . dechex($return) . " | Could not delete service...\n";
-			return INFRATOOLS_MONITORING_DELETE_ERROR_SERVICE_DOES_NOT_EXISTS;
+			return INFRATOOLS_MONITORING_DEL_ERROR_SERVICE_DOES_NOT_EXISTS;
 		}
 	}
 
@@ -210,7 +210,7 @@
 	function ServiceTerminateProccess()
 	{
 		exec("taskkill /f /t /FI \"Windowtitle eq " . "INFRATOOLS_MONITORING" . "\"", $return);
-		if (strpos($return[0], 'SUCCESS:') !== false) 
+		if (strpos($return[0], 'RET_OK:') !== false) 
 		{
 			echo "The INFRATOOL_MONITORING proccess has been terminated...\n";
 			return INFRATOOLS_MONITORING_TERMINATE_PROCCESS_SUCCESS;

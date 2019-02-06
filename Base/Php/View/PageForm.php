@@ -69,10 +69,10 @@ class PageForm
 	{
 		if(empty($FieldValue))
 		{
-			if($Nullable) return Config::SUCCESS;
+			if($Nullable) return Config::RET_OK;
 			$this->InputFocus      = $FieldId;
 			$ReturnEmptyText = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-			return $ReturnFieldClass = Config::FORM_FIELD_RETURN_ERROR;
+			return $ReturnFieldClass = Config::FIELD_RETURN_ERROR;
 		} else array_pop($ArrayConstants);
 		if($MaxSize != 0 || $MinSize != 0)
 		{
@@ -80,7 +80,7 @@ class PageForm
 			{
 				$this->InputFocus = $FieldId;
 				$ReturnFieldText  = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-				return $ReturnFieldClass = Config::FORM_FIELD_RETURN_ERROR;
+				return $ReturnFieldClass = Config::FIELD_RETURN_ERROR;
 			} else array_pop($ArrayConstants);
 		}
 		if($ExtraFieldSameValue != NULL)
@@ -89,19 +89,19 @@ class PageForm
 			{
 				$this->InputFocus = $FieldId;
 				$ReturnFieldText  = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-				return $ReturnFieldClass = Config::FORM_FIELD_RETURN_ERROR;
+				return $ReturnFieldClass = Config::FIELD_RETURN_ERROR;
 			} else array_pop($ArrayConstants);
 		}
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ExecuteValidation($FunctionName, $FieldValue, $FieldDefaultValue, $ArrayOptions);
-		if($return != Config::SUCCESS)
+		if($return != Config::RET_OK)
 		{
 			$this->InputFocus = $FieldId;
 			$ReturnFieldText  = $InstanceLanguageText->GetConstant(array_pop($ArrayConstants), $Language);
-			return $ReturnFieldClass  = Config::FORM_FIELD_RETURN_ERROR;
+			return $ReturnFieldClass  = Config::FIELD_RETURN_ERROR;
 		}
 		array_pop($ArrayConstants);
-		return Config::SUCCESS;
+		return Config::RET_OK;
 	}
 	
 	public function ValidateFields($ArrayElements, $ArrayElementsDefaultValue, $ArrayElementsInput, 
@@ -115,7 +115,7 @@ class PageForm
 		   count($ArrayElementsText) > 0 && count($ArrayFormFunction) > 0 && count($MatrixConstants) > 0)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-					echo "<b>ValidateFields</b>:<br>";
+					echo "&emsp;&emsp;<b>ValidateFields</b>:<br>";
 			for($index = 0; $index < count($ArrayElements); $index++)
 			{
 				$element             = $ArrayElements[$index];
@@ -151,7 +151,7 @@ class PageForm
 											   $MatrixOptions[$index], $elementExtraFieldSameValue);
 				if($Debug == Config::CHECKBOX_CHECKED)
 				{
-					echo "&#8195;&#8195;<b>$element</b>: $elementInput - $formFunction - $return - $ArrayElementsText[$index]";
+					echo "&emsp;&#8195;&#8195;<b>$element</b>: $elementInput - $formFunction - $return - $ArrayElementsText[$index]";
 					if(isset($ElementEmptyText))
 					{
 						if($ElementEmptyText != NULL)
@@ -168,7 +168,7 @@ class PageForm
 					}
 					echo "<br>";
 				}
-				if($return != Config::SUCCESS)
+				if($return != Config::RET_OK)
 					$ArrayElementsText[$index] = $ArrayElementsText[$index] . "<br>"; 
 				array_push($arrayReturn, $return);
 			}
@@ -181,14 +181,14 @@ class PageForm
 			{
 				for($index = 0; $index < count($arrayReturn); $index++)
 				{
-					if($arrayReturn[$index] != Config::SUCCESS)
-						return Config::RETURN_ERROR;
+					if($arrayReturn[$index] != Config::RET_OK)
+						return Config::RET_ERROR;
 				}
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			else return Config::RETURN_ERROR;
+			else return Config::RET_ERROR;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	public function ValidateSpecificField($FunctionName, $FieldValue, $FieldDefaultValue, $ArrayOptions)

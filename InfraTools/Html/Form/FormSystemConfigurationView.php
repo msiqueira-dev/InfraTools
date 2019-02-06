@@ -10,40 +10,40 @@
 		<?php if(isset($this->ReturnText))      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_SYSTEM_CONFIGURATION_VIEW -->
-<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW; ?>" method="POST" >
-    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER -->
+<!-- FM_SYSTEM_CONFIGURATION_VIEW -->
+<form name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW; ?>" 
+      id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW; ?>" method="POST" >
+    <!-- FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueSystemConfigurationOptionNumber; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME -->
+    <!-- FIELD_SYSTEM_CONFIGURATION_OPTION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueSystemConfigurationOptionName; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION -->
+    <!-- FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueSystemConfigurationOptionDescription; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE -->
+    <!-- FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <img src="
@@ -55,10 +55,10 @@
                  width="20" height="20" />
         </div>
     </div>
-    <!-- FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE -->
+    <!-- FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent">
@@ -83,25 +83,25 @@
 </form>
 <!-- SUBMIT -->
 <div class="DivContentBodyContainer">
-	<!-- FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE -->
-	<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE; ?>" 
+	<!-- FM_SYSTEM_CONFIGURATION_VIEW_UPDT -->
+	<form name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_UPDT; ?>" 
+		  id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_UPDT; ?>" 
 		  class="DivFormHorizontalButtons"
 		  method="post" >
-		  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT; ?>" 
-				 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_UPDATE_SUBMIT; ?>"
+		  <input type="submit" name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_UPDT_SB; ?>" 
+				 id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_UPDT_SB; ?>"
 				 class="DivContentBodySubmitBigger"
-				 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
+				 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
 	</form>
-	<!-- FORM_SYSTEM_CONFIGURATION_VIEW_DELETE -->
-	<form name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE; ?>" 
+	<!-- FM_SYSTEM_CONFIGURATION_VIEW_DEL -->
+	<form name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_DEL; ?>" 
+		  id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_DEL; ?>" 
 		  class="DivFormHorizontalButtons"
 		  method="post" >
-		  <input type="submit" name="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT; ?>" 
-				 id="<?php echo ConfigInfraTools::FORM_SYSTEM_CONFIGURATION_VIEW_DELETE_SUBMIT; ?>"
+		  <input type="submit" name="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_DEL_SB; ?>" 
+				 id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_DEL_SB; ?>"
 				 class="DivContentBodySubmitBigger"
-				 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
+				 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DEL'); ?>"
 				 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 	</form>
 </div>

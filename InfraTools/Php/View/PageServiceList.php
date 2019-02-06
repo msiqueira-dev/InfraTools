@@ -45,21 +45,21 @@ class PageServiceList extends PageService
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
-			//FORM_SERVICE_SELECT_SUBMIT
-			if($this->CheckGetContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+			//FM_SERVICE_SEL_SB
+			if($this->CheckGetContainsKey(ConfigInfraTools::FM_SERVICE_SEL_SB) == ConfigInfraTools::RET_OK)
 			{
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_GET[ConfigInfraTools::FIELD_SERVICE_ID]);
 			}
-			//FORM_SERVICE_LIST
+			//FM_SERVICE_LST
 			else
 			{
-				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_GET;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST => ConfigInfraTools::FM_SERVICE_LST) + $_GET;
 				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectOnUserContext', 
 				 					   array($this->User->GetEmail(),
 											 &$this->ArrayInstanceInfraToolsService),

@@ -92,7 +92,7 @@ class Email
 			)
 		);
 		if($mail->send())
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		return $mail->ErrorInfo;
 	}
  
@@ -147,9 +147,9 @@ class Email
 				$this->_SendMessage("quit", $debug);
 				fclose($this->sock);
 				if ($code == '250')
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif ($code == '451' || $code == '452') 
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else 
 					return self::ReturnEmailDoesNotExist;  
 			} 
@@ -177,11 +177,11 @@ class Email
 				{
 					$returnCode .= $reply[$count];
 				}
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnFailedToSendMessage;
 		}
-		else return Config::PARAMETERS_NULL;
+		else return Config::RET_ERROR;
 	}
 }
 ?>

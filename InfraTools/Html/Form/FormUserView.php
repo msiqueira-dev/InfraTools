@@ -21,28 +21,28 @@
 	</label>
 </div>
 <div class="DivContentBodySided">
-	<!-- FORM_FIELD_USER_NAME -->
+	<!-- FIELD_USER_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserName; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_USER_EMAIL -->
+	<!-- FIELD_USER_EMAIL -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided" id="BodyUserViewEmailDiv">
 			<label id="BodyUserViewEmailLabel" class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_USER_UNIQUE_ID -->
+	<!-- FIELD_USER_UNIQUE_ID -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_UNIQUE_ID').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_UNIQUE_ID').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -50,7 +50,7 @@
 			</div>
 			<div class="DivContentBodyContainerSubmitImage">
 				<img   src="<?php echo $this->InputValueUserUniqueIdActive; ?>" 
-					   name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_USER_UNIQUE_ID; ?>"
+					   name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_USER_UNIQUE_ID; ?>"
 					   alt="UserUniqueIdVerification" width="20" height="20" />
 			</div>
 		</div>
@@ -67,37 +67,37 @@
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateYear; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_USER_GENDER -->
+	<!-- FIELD_USER_GENDER -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_COUNTRY_NAME -->
+	<!-- FIELD_COUNTRY_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCountry; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_USER_REGION -->
+	<!-- FIELD_USER_REGION -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_REGION').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegion; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_USER_PHONE_PRIMARY -->
+	<!-- FIELD_USER_PHONE_PRIMARY -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_PRIMARY').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent">
@@ -106,10 +106,10 @@
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhonePrimary; ?></label>
 		</div>
 	</div>
-	<!-- FORM_FIELD_USER_PHONE_SECONDARY -->
+	<!-- FIELD_USER_PHONE_SECONDARY -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_SECONDARY').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_SECONDARY').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent">
@@ -120,10 +120,10 @@
 	</div>
 </div>
 <div class="DivContentBodySided">
-	<!-- FORM_FIELD_CORPORATION_NAME -->
+	<!-- FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -131,15 +131,15 @@
 			</div>
 			<div class="DivContentBodyContainerSubmitImage">
 				<img   src="<?php echo $this->InputValueCorporationActive; ?>" 
-					   name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+					   name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
 					   alt="CorporationVerification" width="20" height="20" />
 			</div>
 		</div>
 	</div>
-	<!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
+	<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -147,15 +147,15 @@
 			</div>
 			<div class="DivContentBodyContainerSubmitImage">
 				<img   src="<?php echo $this->InputValueAssocUserCorporationRegistrationDateActive; ?>" 
-					   name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+					   name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
 					   alt="CorporationVerification" width="20" height="20" />
 			</div>
 		</div>
 	</div>
-	<!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
+	<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -163,15 +163,15 @@
 			</div>
 			<div class="DivContentBodyContainerSubmitImage">
 				<img   src="<?php echo $this->InputValueAssocUserCorporationRegistrationIdActive; ?>" 
-					   name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+					   name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
 					   alt="CorporationVerification" width="20" height="20" />
 			</div>
 		</div>
 	</div>
-	<!-- FORM_FIELD_DEPARTMENT_NAME -->
+	<!-- FIELD_DEPARTMENT_NAME -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<div>
@@ -179,7 +179,7 @@
 			</div>
 			<div class="DivContentBodyContainerSubmitImage">
 				<img   src="<?php echo $this->InputValueDepartmentActive; ?>" 
-					   name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_DEPARTMENT; ?>"
+					   name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_DEPARTMENT; ?>"
 					   alt="DepartmentVerification" width="20" height="20" />
 			</div>
 		</div>
@@ -197,10 +197,10 @@
 	if($this->ShowTypeUserDescription)
 	{
 		?>
-		<!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
+		<!-- FIELD_TYPE_USER_DESCRIPTION -->
 		<div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>
@@ -211,10 +211,10 @@
 	?>
    <?php if($this->EnableFieldSessionExpires)
 	{?>
-		 <!-- FORM_FIELD_USER_SESSION_EXPIRES -->
+		 <!-- FIELD_USER_SESSION_EXPIRES -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_SESSION_EXPIRES').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_SESSION_EXPIRES').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
@@ -232,10 +232,10 @@
 	<?php } ?>
    <?php if($this->EnableFieldTwoStepVerification)
 	{?>
-		 <!-- FORM_FIELD_USER_TWO_STEP_VERIFICATION -->
+		 <!-- FIELD_USER_TWO_STEP_VERIFICATION -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_TWO_STEP_VERIFICATION').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_TWO_STEP_VERIFICATION').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<div class="DivContentBodyContainerSubmitImage">
@@ -251,10 +251,10 @@
 	<?php } ?>
 	<?php if($this->EnableFieldUserActive)
 	{?>
-		 <!-- FORM_FIELD_USER_ACTIVE -->
+		 <!-- FIELD_USER_ACTIVE -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_ACTIVE').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_ACTIVE').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
@@ -269,10 +269,10 @@
 	<?php } ?>
    <?php if($this->EnableFieldUserConfirmed)
 	{?>
-		 <!-- FORM_FIELD_USER_CONFIRMED -->
+		 <!-- FIELD_USER_CONFIRMED -->
 		 <div class="DivContentBodyContainerSided">
 			<div class="DivContentBodyContainerLabelSided" id="DivContentBodyContainerValueSidedFloat">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_CONFIRMED').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_CONFIRMED').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
@@ -306,30 +306,30 @@
 	{ 
 	?>
 		<?php
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
 		?>
-			<!-- FORM_USER_VIEW_UPDATE -->
-			<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_UPDATE; ?>" 
-				  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_UPDATE; ?>" 
+			<!-- FM_USER_VIEW_UPDT -->
+			<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_UPDT; ?>" 
+				  id="<?php echo ConfigInfraTools::FM_USER_VIEW_UPDT; ?>" 
 				  class="DivFormHorizontalButtons"
 				  method="post" >
-				<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT; ?>" 
-									 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT; ?>"
+				<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_UPDT_SB; ?>" 
+									 id="<?php echo ConfigInfraTools::FM_USER_VIEW_UPDT_SB; ?>"
 									 class="DivContentBodySubmitBigger"
-									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
+									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
 			</form>
 			<?php 
 			if(!isset($this->InstanceInfraToolsUserAdmin))
 			{
 				?>
-				<!-- FORM_USER_VIEW_CHANGE_PASSWORD -->
-				<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD; ?>" 
-					  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD; ?>" 
+				<!-- FM_USER_VIEW_CHANGE_PASSWORD -->
+				<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD; ?>" 
+					  id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD; ?>" 
 					  class="DivFormHorizontalButtons"
 					  method="post" >
-					<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT; ?>" 
-										 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT; ?>"
+					<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD_SB; ?>" 
+										 id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD_SB; ?>"
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_PASSWORD'); ?>"/>
 				</form>
@@ -341,13 +341,13 @@
 			if($ret)
 			{
 			?>
-				<!-- FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE -->
-				<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE; ?>" 
-					  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE; ?>" 
+				<!-- FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE -->
+				<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE; ?>" 
+					  id="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE; ?>" 
 					  class="DivFormHorizontalButtons"
 					  method="post" >
-					<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT; ?>" 
-										 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT; ?>"
+					<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB; ?>" 
+										 id="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB; ?>"
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE'); ?>"
 										 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
@@ -357,13 +357,13 @@
 			else
 			{
 			?>
-				<!-- FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE -->
-				<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE; ?>" 
-					  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE; ?>" 
+				<!-- FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE -->
+				<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE; ?>" 
+					  id="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE; ?>" 
 					  class="DivFormHorizontalButtons"
 					  method="post" >
-					<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT; ?>" 
-										 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT; ?>"
+					<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB; ?>" 
+										 id="<?php echo ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB; ?>"
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_TWO_STEP_VERIFICATION_ACTIVATE'); ?>"
 										 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
@@ -388,36 +388,36 @@
 			if(isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
-				<!-- FORM_USER_VIEW_CHANGE_USER_TYPE -->
-				<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_USER_TYPE; ?>" 
-					  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_USER_TYPE; ?>" 
+				<!-- FM_USER_VIEW_CHANGE_USER_TYPE -->
+				<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_USER_TYPE; ?>" 
+					  id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_USER_TYPE; ?>" 
 					  class="DivFormHorizontalButtons"
 					  method="post" >
-					<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_USER_TYPE_SUBMIT; ?>" 
-										 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_USER_TYPE_SUBMIT; ?>"
+					<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_USER_TYPE_SB; ?>" 
+										 id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_USER_TYPE_SB; ?>"
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_USER_TYPE'); ?>"/>
 				</form>
-				<!-- FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT -->
-				<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_CORPORATION; ?>" 
-					  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_CORPORATION; ?>" 
+				<!-- FM_USER_VIEW_CHANGE_CORPORATION_SB -->
+				<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_CORPORATION; ?>" 
+					  id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_CORPORATION; ?>" 
 					  class="DivFormHorizontalButtons"
 					  method="post" >
-					<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT; ?>" 
-										 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_CORPORATION_SUBMIT; ?>"
+					<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_CORPORATION_SB; ?>" 
+										 id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_CORPORATION_SB; ?>"
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_CORPORATION'); ?>"/>
 				</form>
 				<?php if($this->InstanceInfraToolsUserAdmin->GetCorporation() != NULL)
 						{
 						?>
-						<!-- FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION -->
-						<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION; ?>" 
-							  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION; ?>" 
+						<!-- FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION -->
+						<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION; ?>" 
+							  id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION; ?>" 
 							  class="DivFormHorizontalButtons"
 							  method="post" >
-							<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>" 
-												 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>"
+							<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SB; ?>" 
+												 id="<?php echo ConfigInfraTools::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SB; ?>"
 												 class="DivContentBodySubmitBigger"
 												 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_ASSOC_USER_CORPORATION'); 
 														?>"/>
@@ -425,13 +425,13 @@
 						<?php 
 						} 
 						?>
-						<!-- FORM_USER_VIEW_RESET_PASSWORD -->
-						<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_RESET_PASSWORD; ?>" 
-							  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_RESET_PASSWORD; ?>" 
+						<!-- FM_USER_VIEW_RESET_PASSWORD -->
+						<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_RESET_PASSWORD; ?>" 
+							  id="<?php echo ConfigInfraTools::FM_USER_VIEW_RESET_PASSWORD; ?>" 
 							  class="DivFormHorizontalButtons"
 							  method="post" >
-							<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_RESET_PASSWORD_SUBMIT; ?>" 
-												 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_RESET_PASSWORD_SUBMIT; ?>"
+							<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_RESET_PASSWORD_SB; ?>" 
+												 id="<?php echo ConfigInfraTools::FM_USER_VIEW_RESET_PASSWORD_SB; ?>"
 												 class="DivContentBodySubmitBigger"
 												 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_RESET_PASSWORD'); ?>"
 												 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
@@ -440,13 +440,13 @@
 					if($this->InstanceInfraToolsUserAdmin->GetUserActive())
 					{
 						?>
-						<!-- FORM_USER_VIEW_DEACTIVATE -->
-						<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_DEACTIVATE; ?>" 
-							  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_DEACTIVATE; ?>" 
+						<!-- FM_USER_VIEW_DEACTIVATE -->
+						<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_DEACTIVATE; ?>" 
+							  id="<?php echo ConfigInfraTools::FM_USER_VIEW_DEACTIVATE; ?>" 
 							  class="DivFormHorizontalButtons"
 							  method="post" >
-							<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_DEACTIVATE_SUBMIT; ?>" 
-												 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_DEACTIVATE_SUBMIT; ?>"
+							<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_DEACTIVATE_SB; ?>" 
+												 id="<?php echo ConfigInfraTools::FM_USER_VIEW_DEACTIVATE_SB; ?>"
 												 class="DivContentBodySubmitBigger"
 												 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ACCOUNT_DEACTIVATE'); ?>"
 												 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
@@ -456,13 +456,13 @@
 					else
 					{
 						?>
-						<!-- FORM_USER_VIEW_ACTIVATE -->
-						<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_ACTIVATE; ?>" 
-							  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_ACTIVATE; ?>" 
+						<!-- FM_USER_VIEW_ACTIVATE -->
+						<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_ACTIVATE; ?>" 
+							  id="<?php echo ConfigInfraTools::FM_USER_VIEW_ACTIVATE; ?>" 
 							  class="DivFormHorizontalButtons"
 							  method="post" >
-							<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_ACTIVATE_SUBMIT; ?>" 
-												 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_ACTIVATE_SUBMIT; ?>"
+							<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_ACTIVATE_SB; ?>" 
+												 id="<?php echo ConfigInfraTools::FM_USER_VIEW_ACTIVATE_SB; ?>"
 												 class="DivContentBodySubmitBigger"
 												 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ACCOUNT_ACTIVATE'); ?>"
 												 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
@@ -470,15 +470,15 @@
 						<?php
 					}
 					?>
-					<!-- FORM_USER_VIEW_DELETE -->
-						<form name="<?php echo ConfigInfraTools::FORM_USER_VIEW_DELETE; ?>" 
-							  id="<?php echo ConfigInfraTools::FORM_USER_VIEW_DELETE; ?>" 
+					<!-- FM_USER_VIEW_DEL -->
+						<form name="<?php echo ConfigInfraTools::FM_USER_VIEW_DEL; ?>" 
+							  id="<?php echo ConfigInfraTools::FM_USER_VIEW_DEL; ?>" 
 							  class="DivFormHorizontalButtons"
 							  method="post" >
-							<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_VIEW_DELETE_SUBMIT; ?>" 
-												 id="<?php echo ConfigInfraTools::FORM_USER_VIEW_DELETE_SUBMIT; ?>"
+							<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_VIEW_DEL_SB; ?>" 
+												 id="<?php echo ConfigInfraTools::FM_USER_VIEW_DEL_SB; ?>"
 												 class="DivContentBodySubmitBigger"
-												 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
+												 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DEL'); ?>"
 												 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 						</form>
 					<?php

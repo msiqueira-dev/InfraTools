@@ -92,31 +92,31 @@ class FacedePersistenceTypeAssocUserRequesting
 				$stmt->bind_param("i", $TypeAssocUserRequestingBond);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeAssocUserRequestingInsert($TypeAssocUserRequestingBond, $Debug, $MySqlConnection)
@@ -132,22 +132,22 @@ class FacedePersistenceTypeAssocUserRequesting
 				$stmt->bind_param("s", $TypeAssocUserTeamDescription);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_CORPORATION_INSERT_FAILED;
+					return Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeAssocUserRequestingSelect($Limit1, $Limit2, &$ArrayInstanceAssocUserRequesting,  &$RowCount, 
@@ -165,7 +165,7 @@ class FacedePersistenceTypeAssocUserRequesting
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceAssocUserRequesting = array();
 					$result = $stmt->get_result();
@@ -173,24 +173,24 @@ class FacedePersistenceTypeAssocUserRequesting
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceAssocUserRequesting = $this->Factory->CreateTypeAssocUserTeam
-							                            ($row[Config::TABLE_FIELD_REGISTER_DATE],
-														 $row[Config::TABLE_TYPE_ASSOC_USER_TEAM_FIELD_DESCRIPTION]);	
+							                            ($row[Config::TB_FD_REGISTER_DATE],
+														 $row[Config::TB_TYPE_ASSOC_USER_TEAM_FD_DESCRIPTION]);	
 						array_push($ArrayInstanceAssocUserRequesting, $InstanceAssocUserRequesting);
 					}
 					if(!empty($ArrayInstanceAssocUserRequesting))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED;
+					$return = Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_SEL;
 				}
 				return $return;
 			}
@@ -198,10 +198,10 @@ class FacedePersistenceTypeAssocUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeAssocUserRequestingSelectByTypeBond($TypeAssocUserRequestingBond, &$InstanceTypeAssocUserRequesting, 
@@ -217,26 +217,26 @@ class FacedePersistenceTypeAssocUserRequesting
 			{
 				$stmt->bind_param("s", $TypeAssocUserRequestingBond);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($registerDate, $TypeAssocUserRequestingBond);
 					if ($stmt->fetch())
 					{
 						$InstanceTypeAssocUserRequesting = $this->Factory->CreateTypeAssocUserTeam($registerDate, $TypeAssocUserRequestingBond);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FETCH_FAILED;
+						$return = Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_SEL_BY_DESCRIPTION_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FAILED;
+					$return = Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_SEL_BY_DESCRIPTION;
 				}
 				return $return;
 			}
@@ -244,10 +244,10 @@ class FacedePersistenceTypeAssocUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function TypeAssocUserRequestingUpdateByTypeBond($TypeAssocUserRequestingTypeBond, $Debug, $MySqlConnection)
@@ -263,25 +263,25 @@ class FacedePersistenceTypeAssocUserRequesting
 				$stmt->bind_param("si", $TypeAssocUserTeamDescription, $TypeAssocUserRequestingTypeBond);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_UPDATE_FAILED;
+					return Config::DB_ERROR_TYPE_ASSOC_USER_REQUESTING_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

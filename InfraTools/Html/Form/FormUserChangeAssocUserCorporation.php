@@ -15,22 +15,22 @@
 		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_USER_CHANGE_ASSOC_USER_CORPORATION -->
-<form name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" method="post" >
-	<!-- FORM_FIELD_USER_NAME -->
+<!-- FM_USER_CHANGE_ASSOC_USER_CORPORATION -->
+<form name="<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" 
+      id="<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION; ?>" method="post" >
+	<!-- FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserName; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_EMAIL -->
+    <!-- FIELD_USER_EMAIL -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
@@ -47,37 +47,37 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateYear; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_GENDER -->
+    <!-- FIELD_USER_GENDER -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_COUNTRY_NAME -->
+    <!-- FIELD_COUNTRY_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_COUNTRY_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueCountry; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_REGION -->
+    <!-- FIELD_USER_REGION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_REGION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_REGION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegion; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_PHONE_PRIMARY -->
+    <!-- FIELD_USER_PHONE_PRIMARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_PRIMARY').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_PRIMARY').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
            	<label class="DivContentBodyContainerValueContent">
@@ -86,10 +86,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhonePrimary; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_PHONE_SECONDARY -->
+    <!-- FIELD_USER_PHONE_SECONDARY -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_PHONE_SECONDARY').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_SECONDARY').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
            	<label class="DivContentBodyContainerValueContent">
@@ -98,10 +98,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserPhoneSecondary; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_CORPORATION_NAME -->
+    <!-- FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -109,30 +109,30 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueCorporationActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
     </div>
-    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
+    <!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE'); ?> </label>
 			<label>:</label>
 		</div>
 		<!-- REGISTRATION_DATE_BIRTH_DATE_DAY -->
 		<select style="
-					   <?php if($this->InputValueRegistrationDateDay != ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+					   <?php if($this->InputValueRegistrationDateDay != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateDay != "") 
 							echo 'color:black;'
 						?> " 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>"
+				name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>"
 				class="SelectBirthDateDay <?php echo $this->ReturnRegistrationDateDayClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>');">
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>');">
 			<option <?php if ($this->InputValueRegistrationDateDay == "" 
-							  || $this->InputValueRegistrationDateDay == ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
+							  || $this->InputValueRegistrationDateDay == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
 			</option>
@@ -147,17 +147,17 @@
 		</select>
 		<!-- REGISTRATION_DATE_DATE_MONTH -->
 		<select style="
-						<?php if($this->InputValueRegistrationDateMonth != ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+						<?php if($this->InputValueRegistrationDateMonth != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateMonth != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>"
+				name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>"
 				class="SelectBirthDateMonth <?php echo $this->ReturnRegistrationDateMonthClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>');">
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>');">
 			<option <?php if ($this->InputValueRegistrationDateMonth == "" 
-							  || $this->InputValueRegistrationDateMonth == ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
+							  || $this->InputValueRegistrationDateMonth == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
 			</option>
@@ -172,17 +172,17 @@
 		</select>
 		<!-- REGISTRATION_DATE_DATE_YEAR -->
 		<select style=";
-					   <?php if($this->InputValueRegistrationDateYear != ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+					   <?php if($this->InputValueRegistrationDateYear != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateYear != "") 
 							echo 'color:black;'
 						?> "
-				name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>"
+				name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>"
 				class="SelectBirthDateYear <?php echo $this->ReturnRegistrationDateYearClass; ?>"
-				onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>');">
+				onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>');">
 			<option <?php if ($this->InputValueRegistrationDateYear == "" 
-							  || $this->InputValueRegistrationDateYear == ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
-				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
+							  || $this->InputValueRegistrationDateYear == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
 			</option>
@@ -196,46 +196,46 @@
 			?>
 		</select>
 	</div>
-    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
+    <!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?></label>
             <label>:</label>
         </div>
-        <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
+        <input type="text" name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
+                           id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>" 
                            class="<?php echo $this->ReturnRegistrationIdClass; ?>"
-                           onblur="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>',
+                           onblur="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>',
                                                '', true);"
-                           onclick="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>',
+                           onclick="ValidateRegistrationId(null, '<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>',
                                                '', true);"
-                           title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?>"
+                           title="<?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?>"
                            value="<?php echo $this->InputValueRegistrationId; ?>" maxlength="12" />
      </div>
-     <!-- FORM_FIELD_DEPARTMENT_NAME -->
+     <!-- FIELD_DEPARTMENT_NAME -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
-                id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
+                name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
+                id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>"
                 class="SelectCorporation"
                 onchange="document.getElementById(
-                                        '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>')
+                                        '<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>')
                                          .disabled = false;
 				          document.getElementById(
-                                        '<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>')
+                                        '<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>')
                                          .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
                 <option <?php if ($this->InputValueDepartmentName == "" 
-                                  || $this->InputValueDepartmentName == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+                                  || $this->InputValueDepartmentName == ConfigInfraTools::FIELD_SEL_NONE) 
+                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
                 </option>
                 <?php 
                 if(is_array($this->ArrayInstanceDepartment))
@@ -259,10 +259,10 @@
 	 if($this->ShowTypeUserDescription)
 	 {
 		?>
-        <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
+        <!-- FIELD_TYPE_USER_DESCRIPTION -->
         <div class="DivContentBodyContainer">
             <div class="DivContentBodyContainerLabel">
-                <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
+                <label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
             </div>
             <div class="DivContentBodyContainerValue">
             	<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>
@@ -273,10 +273,10 @@
 	 ?>
      <?php if($this->EnableFieldSessionExpires)
 	 {?>
-	 	 <!-- FORM_FIELD_USER_SESSION_EXPIRES -->
+	 	 <!-- FIELD_USER_SESSION_EXPIRES -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_SESSION_EXPIRES').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_SESSION_EXPIRES').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
@@ -294,10 +294,10 @@
 	 <?php } ?>
      <?php if($this->EnableFieldUserActive)
 	 {?>
-	 	 <!-- FORM_FIELD_USER_ACTIVE -->
+	 	 <!-- FIELD_USER_ACTIVE -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_ACTIVE').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_ACTIVE').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
@@ -315,10 +315,10 @@
 	<?php } ?>
     <?php if($this->EnableFieldUserActive)
 	{?>
-	 	 <!-- FORM_FIELD_USER_CONFIRMED -->
+	 	 <!-- FIELD_USER_CONFIRMED -->
 		 <div class="DivContentBodyContainer">
         	<div class="DivContentBodyContainerLabel">
-            	<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_CONFIRMED').":"; ?></label>
+            	<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_CONFIRMED').":"; ?></label>
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
@@ -345,13 +345,13 @@
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL; ?>" 
-                             id="<?php echo ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL; ?>" 
+                             id="<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_CANCEL; ?>"
                              class="DivContentBodySubmitBigger"
                              value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
 	</div>

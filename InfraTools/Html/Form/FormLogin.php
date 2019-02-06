@@ -22,30 +22,30 @@
 	</label>
 </div>
 <!-- FORM LOGIN -->
-<form name="<?php echo ConfigInfraTools::FORM_LOGIN; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_LOGIN; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FM_LOGIN; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_LOGIN; ?>" method="post" >
 	<div class="DivContentBodyRight">
 		<!-- USER -->
 		<div class="DivContentBodyContainerLogin">
 			<img src="<?php echo $this->Config->DefaultServerImage. 
 							  'Icons/IconInfraToolsUser.png'; ?>" 
 						 alt="IconInfraToolsUser" width="32" height="32"/>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_LOGIN; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_LOGIN; ?>" 
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_LOGIN; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_LOGIN; ?>" 
 							   class="<?php echo $this->ReturnLoginClass; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_LOGIN'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_LOGIN'); ?>"
 							   value="<?php echo $this->InputValueLoginEmail; ?>" maxlength="45"
-							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FORM_FIELD_LOGIN; ?>',
+							   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::FIELD_LOGIN; ?>',
 										   'DivContentBodySubmit',
-										   '<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+										   '<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 										   '');
-									   ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
+									   ValidateMultiplyFields('<?php echo ConfigInfraTools::FM_LOGIN; ?>',
 											'DivContentBodySubmit',
-											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+											'<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 											'');"
-									   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
+									   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::FM_LOGIN; ?>',
 											'DivContentBodySubmit',
-											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+											'<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 											'');"/>
 		</div>
 		<!-- PASSWORD -->
@@ -60,26 +60,26 @@
 								   value="" maxlength="20" 
 								   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::LOGIN_PASSWORD; ?>',
 										   'DivContentBodySubmit',
-										   '<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+										   '<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 										   '');
-								   ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
+								   ValidateMultiplyFields('<?php echo ConfigInfraTools::FM_LOGIN; ?>',
 											'DivContentBodySubmit',
-											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+											'<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 											'');"
-								   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::FORM_LOGIN; ?>',
+								   onkeyup="ValidateMultiplyFields('<?php echo ConfigInfraTools::FM_LOGIN; ?>',
 											'DivContentBodySubmit',
-											'<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+											'<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 											'');"/>
 		</div>
 		<div class="DivClearFloat"></div>
 		<!-- SUBMIT -->
 		<div class="DivContentBodyContainerLogin"
-			 onmouseover="ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+			 onmouseover="ValidateMultiplyFields('<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>',
 												 '');">
-			<input type="submit" name="<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>" 
-									 id="<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>" 
+									 id="<?php echo ConfigInfraTools::LOGIN_FM_SB; ?>"
 									 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
 									 value="<?php echo $this->InstanceLanguageText->GetText('LOGIN_SEND'); ?>"
 									 <?php echo $this->SubmitEnabled; ?> />
@@ -89,8 +89,8 @@
 		<div class="DivContentBodyLeftSpace">
 		</div>
 		<div class="DivContentBodyContainerLogin">
-			<input type="submit" name="<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD; ?>" 
-								 id="<?php echo ConfigInfraTools::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::LOGIN_FM_SB_FORGOT_PASSWORD; ?>" 
+								 id="<?php echo ConfigInfraTools::LOGIN_FM_SB_FORGOT_PASSWORD; ?>"
 								 class="InputSubmitForgotPassword"
 								 value="<?php echo $this->InstanceLanguageText->GetText('LOGIN_FORGOT_PASSWORD_TEXT'); ?>"/>
 		</div>

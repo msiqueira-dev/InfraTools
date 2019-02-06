@@ -48,7 +48,7 @@ class PageAbout extends PageInfraTools
 
 	public function LoadPage()
 	{	
-		if(!$this->PageEnabled) return ConfigInfraTools::RETURN_ERROR;
+		if(!$this->PageEnabled) return ConfigInfraTools::RET_ERROR;
 		$this->LoadHtml(FALSE);
 	}
 }

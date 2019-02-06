@@ -7,20 +7,20 @@
 		?>
 	</label>
 </div>
-<form name="<?php echo ConfigInfraTools::FORM_HEADER_LAYOUT; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_HEADER_LAYOUT; ?>" method="post" class="DivHeaderDivisionContainerInfo">
+<form name="<?php echo ConfigInfraTools::FM_HEADER_LAYOUT; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_HEADER_LAYOUT; ?>" method="post" class="DivHeaderDivisionContainerInfo">
 	<div class="DivHeaderDivisionContainerInfo" >
 		<div class="<?php echo $this->ReturnHeaderLayoutClass; ?> round" id="DivSliderLayout"></div>
 		<label id="SwitchToggle" class="SwitchToggle">
 			<input type="hidden" 
-				   name="<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN ?>"
-				   id="<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN ?>" 
-				   value="<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN ?>"
-				   onclick="ClickHiddenCheckBox('<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT ?>');"/>
+				   name="<?php echo ConfigInfraTools::FIELD_HEADER_LAYOUT_HIDDEN ?>"
+				   id="<?php echo ConfigInfraTools::FIELD_HEADER_LAYOUT_HIDDEN ?>" 
+				   value="<?php echo ConfigInfraTools::FIELD_HEADER_LAYOUT_HIDDEN ?>"
+				   onclick="ClickHiddenCheckBox('<?php echo ConfigInfraTools::FIELD_HEADER_LAYOUT ?>');"/>
 			<input type="checkbox" 
-				   name="<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT ?>"
-				   Id="<?php echo ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT ?>"
-				   onChange="setTimeout(function(){ SubmitForm('<?php echo ConfigInfraTools::FORM_HEADER_LAYOUT ?>'); }, 1000);
+				   name="<?php echo ConfigInfraTools::FIELD_HEADER_LAYOUT ?>"
+				   Id="<?php echo ConfigInfraTools::FIELD_HEADER_LAYOUT ?>"
+				   onChange="setTimeout(function(){ SubmitForm('<?php echo ConfigInfraTools::FM_HEADER_LAYOUT ?>'); }, 1000);
 				             ChangeSliderCssClass('DivSliderLayout', 'SwitchToggleSlider', 'SwitchToggleSliderChange');"
 				   <?php echo $this->InputValueHeaderLayout; ?>/>
 		</label>

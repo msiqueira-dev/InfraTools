@@ -49,7 +49,7 @@ class PageCorporation extends PageInfraTools
 
 	public function LoadPage()
 	{	
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_LOGIN;
+		$this->InputFocus = ConfigInfraTools::FIELD_LOGIN;
 		$this->LoadHtml(FALSE);
 	}
 }

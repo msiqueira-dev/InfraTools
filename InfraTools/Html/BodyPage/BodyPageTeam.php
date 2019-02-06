@@ -9,8 +9,8 @@
 		<div class="DivContentBodyOptions">
 			<div class="DivContentBodyOptionsBox">
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SELECT'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SELECT') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SEL'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SEL') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png';?>"
 							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -43,8 +43,8 @@
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LIST'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LIST') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LST'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LST') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png';?>"
 							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -54,7 +54,7 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('OPERATION_LIST'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('OPERATION_LST'); ?>
 							</i>
 						</div>
 					</a>

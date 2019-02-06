@@ -10,13 +10,13 @@
 		<?php if(isset($this->ReturnTypeTicketDescriptionText)) echo $this->ReturnTypeTicketDescriptionText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_TICKET_VIEW -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW; ?>" method="post" >
-    <!-- FORM_FIELD_TYPE_TICKET_DESCRIPTION -->
+<!-- FM_TYPE_TICKET_VIEW -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW; ?>" 
+      id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW; ?>" method="post" >
+    <!-- FIELD_TYPE_TICKET_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_TICKET_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_TICKET_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeTicketDescription; ?></label>
@@ -34,35 +34,35 @@
 </form>
 <!-- SUBMIT -->
 <div class="DivContentBodyContainer">
-	<!-- FORM_TYPE_TICKET_VIEW_UPDATE -->
-	<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_UPDATE; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_UPDATE; ?>" 
+	<!-- FM_TYPE_TICKET_VIEW_UPDT -->
+	<form name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_UPDT; ?>" 
+		  id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_UPDT; ?>" 
 		  class="DivFormHorizontalButtons"
 		  method="post" >
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT; ?>" 
-							 id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_UPDATE_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_UPDT_SB; ?>" 
+							 id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_UPDT_SB; ?>"
 							 class="DivContentBodySubmitBigger"
-							 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
+							 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
 	</form>
-	<!-- FORM_TYPE_TICKET_VIEW_DELETE -->
-	<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_DELETE; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_DELETE; ?>" 
+	<!-- FM_TYPE_TICKET_VIEW_DEL -->
+	<form name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_DEL; ?>" 
+		  id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_DEL; ?>" 
 		  class="DivFormHorizontalButtons"
 		  method="post" >
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_DELETE_SUBMIT; ?>" 
-				   id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_DELETE_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_DEL_SB; ?>" 
+				   id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_DEL_SB; ?>"
 				   class="DivContentBodySubmitBigger"
-				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
+				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DEL'); ?>"
 			   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 	</form>
-	<!-- FORM_TYPE_TICKET_VIEW_LIST_USERS -->
-	<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS; ?>" 
-		  id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS; ?>" 
+	<!-- FM_TYPE_TICKET_VIEW_LST_USERS -->
+	<form name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_LST_USERS; ?>" 
+		  id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_LST_USERS; ?>" 
 		  class="DivFormHorizontalButtons"
 		  method="post" >
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_SUBMIT; ?>" 
-				   id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_VIEW_LIST_USERS_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_LST_USERS_SB; ?>" 
+				   id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_VIEW_LST_USERS_SB; ?>"
 				   class="DivContentBodySubmitBigger"
-				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
+				   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'); ?>"/>
 	</form>
 </div>

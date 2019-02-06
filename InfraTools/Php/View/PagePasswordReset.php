@@ -50,21 +50,21 @@ class PagePasswordReset extends PageInfraTools
 
 	public function LoadPage()
 	{
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE;
+		$this->InputFocus = ConfigInfraTools::FIELD_PASSWORD_RESET_CODE;
 		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PASSWORD_RECOVERY, $this->InputValueUserEmail);
-		$this->Session->GetSessionValue(ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE, $code);
+		$this->Session->GetSessionValue(ConfigInfraTools::FIELD_PASSWORD_RESET_CODE, $code);
 		if($this->InputValueUserEmail == NULL || $code == NULL)
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
 								          str_replace("_", "", ConfigInfraTools::PAGE_HOME));
-			exit(ConfigInfraTools::RETURN_ERROR);
+			exit(ConfigInfraTools::RET_ERROR);
 		}
-		if (isset($_POST[ConfigInfraTools::PASSWORD_RESET_FORM_SUBMIT]))
+		if (isset($_POST[ConfigInfraTools::FM_PASSWORD_RESET_SB]))
 		{
-			$this->UserUpdatePasswordByUserEmail($_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_RESET_CODE], 
-												 $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW], 
-												 $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT], 
+			$this->UserUpdatePasswordByUserEmail($_POST[ConfigInfraTools::FIELD_PASSWORD_RESET_CODE], 
+												 $_POST[ConfigInfraTools::FIELD_PASSWORD_NEW], 
+												 $_POST[ConfigInfraTools::FIELD_PASSWORD_REPEAT], 
 												 $this->InputValueUserEmail, 
 												 $this->InputValueHeaderDebug);
 		}

@@ -9,13 +9,13 @@
 		<?php if(isset($this->ReturnText))  echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_USER_VIEW -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW; ?>" method="post" >
-    <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
+<!-- FM_TYPE_USER_VIEW -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW; ?>" 
+      id="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW; ?>" method="post" >
+    <!-- FIELD_TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueTypeUserDescription; ?></label>
@@ -36,19 +36,19 @@
 	{ 
 	?>
 		<div class="DivContentBodyContainer">
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_UPDATE_SUBMIT; ?>" 
-									 id="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_UPDATE_SUBMIT; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW_UPDT_SB; ?>" 
+									 id="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW_UPDT_SB; ?>"
 									 class="DivContentBodySubmitBigger"
-									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"/>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_DELETE_SUBMIT; ?>" 
-					   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_DELETE_SUBMIT; ?>"
+									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW_DEL_SB; ?>" 
+					   id="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW_DEL_SB; ?>"
 					   class="DivContentBodySubmitBigger"
-					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DELETE'); ?>"
+					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DEL'); ?>"
 					   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS; ?>" 
-					   id="<?php echo ConfigInfraTools::FORM_TYPE_USER_VIEW_LIST_USERS; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS; ?>" 
+					   id="<?php echo ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS; ?>"
 					   class="DivContentBodySubmitBigger"
-					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST_USERS'); ?>"/>
+					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'); ?>"/>
 		</div>
 	<?php
 	}

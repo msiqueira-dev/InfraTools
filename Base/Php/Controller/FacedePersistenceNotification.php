@@ -90,31 +90,31 @@ class FacedePersistenceNotification
 				$stmt->bind_param("i", $NotificationId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_NOTIFICATION_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_NOTIFICATION_DEL_BY_NOTIFICATION_ID;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_NOTIFICATION_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_NOTIFICATION_DEL_BY_NOTIFICATION_ID;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	public function NotificationInsert($NotificationActive, $NotificationText, $Debug, $MySqlConnection)
 	{
@@ -129,22 +129,22 @@ class FacedePersistenceNotification
 				$stmt->bind_param("is", $NotificationActive, $NotificationText);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_NOTIFICATION_INSERT_FAILED;
+					return Config::DB_ERROR_NOTIFICATION_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;	
+		else return Config::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
 	public function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug, $MySqlConnection)
@@ -161,7 +161,7 @@ class FacedePersistenceNotification
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceNotification = array();
 					$result = $stmt->get_result();
@@ -169,26 +169,26 @@ class FacedePersistenceNotification
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceNotification = $this->Factory->CreateNotification
-							                            ($row[Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ACTIVE],
-														 $row[Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_ID],
-														 $row[Config::TABLE_NOTIFICATION_FIELD_NOTIFICATION_TEXT],
-														 $row[Config::TABLE_FIELD_REGISTER_DATE]);	
+							                            ($row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE],
+														 $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ID],
+														 $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT],
+														 $row[Config::TB_FD_REGISTER_DATE]);	
 						array_push($ArrayInstanceNotification, $InstanceNotification);
 					}
 					if(!empty($ArrayInstanceNotification))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_NOTIFICATION_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED;
+					$return = Config::DB_ERROR_NOTIFICATION_SEL;
 				}
 				return $return;
 			}
@@ -196,10 +196,10 @@ class FacedePersistenceNotification
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug, $MySqlConnection)
@@ -215,37 +215,37 @@ class FacedePersistenceNotification
 			{
 				$stmt->bind_param("i", $NotificationId);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($notificationActive, $NotificationId, $notifcationText, $RegDate);					
 					if ($stmt->fetch()) 
 					{
 						$InstanceNotification = $this->Factory->CreateNotification($notificationActive, $NotificationId, 
 																				   $notifcationText, $RegDate);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_NOTIFICATION_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_NOTIFICATION_SEL_BY_ID_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return Config::MYSQL_NOTIFICATION_SELECT_FAILED;
+					return Config::DB_ERROR_NOTIFICATION_SEL_BY_ID;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, $NotificationId, $Debug, $MySqlConnection)
@@ -261,25 +261,25 @@ class FacedePersistenceNotification
 				$stmt->bind_param("isi", $NotificationActiveNew, $NotificationTextNew, $NotificationId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_NOTIFICATION_UPDATE_FAILED;
+					return Config::DB_ERROR_NOTIFICATION_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

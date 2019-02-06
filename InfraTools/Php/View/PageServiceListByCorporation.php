@@ -46,35 +46,35 @@ class PageServiceListByCorporation extends PageService
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
 			$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
 											                                        $this->ArrayInstanceInfraToolsCorporation, 
 											                                        $this->InputValueHeaderDebug);
-			//FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
+			//FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB
+			if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB]))
 			{
-				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] 
-				   != ConfigInfraTools::FORM_FIELD_SELECT_NONE)
-					$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT];	
+				if($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB] 
+				   != ConfigInfraTools::FIELD_SEL_NONE)
+					$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB];	
 				else $this->InputValueServiceCorporation = NULL;
 			}
 			else $this->InputValueServiceCorporation = NULL;
 			
-			//FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT
-			if(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT]))
+			//FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB]))
 			{
 
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB]);
 			}
-			//FORM_SERVICE_LIST_BY_CORPORATION
+			//FM_SERVICE_LST_BY_CORPORATION
 			else
 			{
-				$_GET = array(ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION => ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION) + $_GET;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION => ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION) + $_GET;
 				$this->ExecuteFunction($_GET, 'ServiceSelectByServiceCorporationOnUserContext', 
 				 					   array($this->InputValueServiceCorporation,
 					                         $this->User->GetEmail(),

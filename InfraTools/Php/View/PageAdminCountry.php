@@ -44,19 +44,15 @@ class PageAdminCountry extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LIST;
-		//FORM SUBMIT BACK
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
-		{
-			$this->PageStackSessionLoad();
-			$PageFormBack = TRUE;
-		}
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST;
+		$this->AdminGoBack($PageFormBack);
+		
 		if(empty($_POST))
-			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_COUNTRY_LIST) != ConfigInfraTools::SUCCESS &&
-			   $this->CheckPostContainsKey(ConfigInfraTools::FORM_COUNTRY_LIST_BACK) != ConfigInfraTools::SUCCESS &&
-			   $this->CheckPostContainsKey(ConfigInfraTools::FORM_COUNTRY_LIST_FORWARD) != ConfigInfraTools::SUCCESS)
-			$_POST = array(ConfigInfraTools::FORM_COUNTRY_LIST => ConfigInfraTools::FORM_COUNTRY_LIST) + $_POST;
+			$_POST = array(ConfigInfraTools::FM_COUNTRY_LST => ConfigInfraTools::FM_COUNTRY_LST) + $_POST;
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_COUNTRY_LST) != ConfigInfraTools::RET_OK &&
+			   $this->CheckPostContainsKey(ConfigInfraTools::FM_COUNTRY_LST_BACK) != ConfigInfraTools::RET_OK &&
+			   $this->CheckPostContainsKey(ConfigInfraTools::FM_COUNTRY_LST_FORWARD) != ConfigInfraTools::RET_OK)
+			$_POST = array(ConfigInfraTools::FM_COUNTRY_LST => ConfigInfraTools::FM_COUNTRY_LST) + $_POST;
 		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayInstanceCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();

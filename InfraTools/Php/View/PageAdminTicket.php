@@ -52,80 +52,76 @@ class PageAdminTicket extends PageAdmin
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
 		$this->InputValueTicketIdRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-		//FORM SUBMIT BACK
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
-		{
-			$this->PageStackSessionLoad();
-			$PageFormBack = TRUE;
-		}
-		//FORM_CORPORATION_SELECT_SUBMIT
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		$this->AdminGoBack($PageFormBack);
+		
+		//FM_CORPORATION_SEL_SB
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
 											&$this->InstanceCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
-		//FORM_DEPARTMENT_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_DEPARTMENT_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
-									  array($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME], 
-											$_POST[ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME],
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
 										    &$this->InstanceInfraToolsDepartment),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//FORM_TICKET_LIST
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_LIST) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_LST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TicketSelect', 
 									  array(&$this->ArrayInstanceTicket),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_LIST;
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_LST;
 		}
-		//FORM_TICKET_REGISTER
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_REGISTER) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_REGISTER) == ConfigInfraTools::RET_OK)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER;
-		//FORM_TICKET_REGISTER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_REGISTER_CANCEL) == ConfigInfraTools::SUCCESS)
-			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
-		//FORM_TICKET_REGISTER_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_REGISTER_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
+		//FM_TICKET_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_REGISTER_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TicketInsert', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION],
-										    $_POST[ConfigInfraTools::FORM_FIELD_TICKET_SUGGESTION],
-										    $_POST[ConfigInfraTools::FORM_FIELD_TICKET_TITLE],
-										    $_POST[ConfigInfraTools::FORM_FIELD_TICKET_STATUS],
-										    $_POST[ConfigInfraTools::FORM_FIELD_TICKET_TYPE]),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
+									  array($_POST[ConfigInfraTools::FIELD_TICKET_DESCRIPTION],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_SUGGESTION],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_TITLE],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_STATUS],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_TYPE]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER;
 		}
-		//FORM_TICKET_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_TICKET_RADIO]))
+			if(isset($_POST[ConfigInfraTools::FIELD_TICKET_RADIO]))
 			{
-				if($_POST[ConfigInfraTools::FORM_FIELD_TICKET_RADIO] == ConfigInfraTools::FORM_FIELD_TICKET_RADIO_NAME)
+				if($_POST[ConfigInfraTools::FIELD_TICKET_RADIO] == ConfigInfraTools::FIELD_TICKET_RADIO_NAME)
 				{
 					if($this->ExecuteFunction($_POST, 'TicketSelectByTicketTitle', 
-											  array($_POST[ConfigInfraTools::FORM_FIELD_TICKET_TITLE],
+											  array($_POST[ConfigInfraTools::FIELD_TICKET_TITLE],
 													&$this->ArrayInstanceTicket),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					{
 
 						if(count($this->ArrayInstanceTicket) > 1)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_LIST;	
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_LST;	
 						else
 						{
 							$this->InstanceTicket = array_pop($this->ArrayInstanceTicket);
 							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
-														  $this->InstanceTicket) == ConfigInfraTools::SUCCESS)
+														  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
 								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
 						}
 					}
@@ -133,90 +129,90 @@ class PageAdminTicket extends PageAdmin
 				else
 				{
 					if($this->ExecuteFunction($_POST, 'TicketSelectByTicketId', 
-										  array($_POST[ConfigInfraTools::FORM_FIELD_TICKET_ID],
+										  array($_POST[ConfigInfraTools::FIELD_TICKET_ID],
 												&$this->InstanceTicket),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
 				}
 			}
 			else
 			{
 				if($this->ExecuteFunction($_POST, 'TicketSelectByTicketId', 
-										  array($_POST[ConfigInfraTools::FORM_FIELD_TICKET_ID],
+										  array($_POST[ConfigInfraTools::FIELD_TICKET_ID],
 												&$this->InstanceTicket),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
 			}
 		}
-		//FORM_TICKET_VIEW_DELETE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
-										  $this->InstanceTicket) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'TicketDeleteByTicketId', 
 										  array($this->InstanceTicket),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SELECT;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
 			}
 		}
-		//FORM_TICKET_VIEW_LIST_USERS_SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TICKET_VIEW_LIST_USERS_SUBMIT]))
+		//FM_TICKET_VIEW_LST_USERS_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_TICKET_VIEW_LST_USERS_SB]))
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, $this->InstanceTicket) 
-			                                   == ConfigInfraTools::SUCCESS)
+			                                   == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTicketId', 
 										  array($this->InstanceTicket->GetTicketId(), 
 										        &$this->ArrayInstanceInfraToolsUser),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW_LIST_USERS;
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW_LST_USERS;
 			}
 		}
-		//FORM_TICKET_VIEW_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_VIEW_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
-										  $this->InstanceTicket) == ConfigInfraTools::SUCCESS)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_UPDATE;
+										  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_UPDT;
 		}
-		//FORM_TICKET_UPDATE_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_UPDATE_CANCEL) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
-										  $this->InstanceTicket) == ConfigInfraTools::SUCCESS)
+										  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
 		}
-		//FORM_TICKET_UPDATE_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TICKET_UPDATE_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TICKET_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, 
-											   $this->InstanceTicket) == ConfigInfraTools::SUCCESS)
+											   $this->InstanceTicket) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'TicketUpdateByTicketId', 
-									      array($_POST[ConfigInfraTools::FORM_FIELD_TICKET_DESCRIPTION],
-					                            $_POST[ConfigInfraTools::FORM_FIELD_TICKET_TITLE],
+									      array($_POST[ConfigInfraTools::FIELD_TICKET_DESCRIPTION],
+					                            $_POST[ConfigInfraTools::FIELD_TICKET_TITLE],
 					                            &$this->InstanceTicket),
-									      $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									      $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;	
 			}
 		}
-		//FORM_TYPE_USER_SELECT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_TYPE_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_TYPE_USER_SEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION],
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
 									        &$this->InstanceTypeUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}
-		//FORM_USER_SELECT_SUBMIT
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_USER_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS)
+		//FM_USER_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
-									  array($_POST[ConfigInfraTools::FORM_FIELD_USER_EMAIL],
+									  array($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
 									        &$this->InstanceUser),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)

@@ -12,63 +12,63 @@
 	</label>
 </div>
 <!-- FORM USER SELECT -->
-<form name="<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FM_USER_SEL_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_USER_SEL_FORM; ?>" method="post" >
 	<!-- SELECT_EMAIL -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_USER_EMAIL; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_USER_EMAIL; ?>"
 						   class="<?php echo $this->ReturnUserEmailClass; ?>"
-						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
+						   onkeyup="ValidateEmail(null, '<?php echo ConfigInfraTools::FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 											 '');"
-						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
+						   onblur="ValidateEmail(null, '<?php echo ConfigInfraTools::FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 											 '');"
-						   onchange="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
+						   onchange="ValidateEmail(null, '<?php echo ConfigInfraTools::FIELD_USER_EMAIL; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'); ?>" 
 						   value="<?php echo $this->InputValueUserEmail; ?>" maxlength="60" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateEmail(null, '<?php echo ConfigInfraTools::FORM_FIELD_USER_EMAIL; ?>',
+		 onmouseover="ValidateEmail(null, '<?php echo ConfigInfraTools::FIELD_USER_EMAIL; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_USER_SELECT_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_USER_SEL_FORM; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_USER_SELECT_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_USER_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

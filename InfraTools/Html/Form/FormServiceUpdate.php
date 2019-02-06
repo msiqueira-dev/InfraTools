@@ -19,12 +19,12 @@
 	</label>
 </div>
 <!-- FORM SERVICE UPDATE -->
-<form name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
-    <!-- FORM_FIELD_SERVICE_ID -->
+<form name="<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>" method="<?php echo $this->InputValueFormMethod ?>" >
+    <!-- FIELD_SERVICE_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueServiceId; ?></label>
@@ -33,101 +33,101 @@
     <!-- SERVICE_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?>
 				</label>
 			</div>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>" 
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>" 
 						   class="<?php echo $this->ReturnServiceNameClass; ?>"
-						   onblur="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						   onblur="ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 											 'DivContentBodySubmitBigger',
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 											 'DivContentBodySubmitBigger',
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											 '');"
-						   onchange="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+						   onchange="ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 											 'DivContentBodySubmitBigger',
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_NAME'); ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'); ?>"
 						   value="<?php echo $this->InputValueServiceName; ?>" maxlength="45" />
 	</div>
 	<div class="DivClearFloat"></div>
     <!-- SERVICE_DESCRIPTION -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'); ?></label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'); ?>
 				</label>
 			</div>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>" 
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>" 
 						   class="<?php echo $this->ReturnServiceDescriptionClass; ?>"
-						   onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+						   onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 											 'DivContentBodySubmitBigger',
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											 '');"
 						   onkeyup="ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 											 'DivContentBodySubmitBigger',
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											 '');"
-						   onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION; ?>',
+						   onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_DESCRIPTION; ?>',
 											   'DivContentBodySubmitBigger',
-											   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 											 'DivContentBodySubmitBigger',
-											 '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_DESCRIPTION'); ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'); ?>"
 						   value="<?php echo $this->InputValueServiceDescription; ?>" maxlength="200" />
 	 </div>
 	 <div class="DivClearFloat"></div>
-    <!-- FORM_FIELD_SERVICE_TYPE -->
+    <!-- FIELD_SERVICE_TYPE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_TYPE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_TYPE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<select 
-				name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>" 
-				id="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_TYPE; ?>"
+				name="<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>" 
+				id="<?php echo ConfigInfraTools::FIELD_SERVICE_TYPE; ?>"
 				class="SelectTypeService">
 				<option <?php if ($this->InputValueServiceType == "" 
-								  || $this->InputValueServiceType == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-						<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+								  || $this->InputValueServiceType == ConfigInfraTools::FIELD_SEL_NONE) 
+					echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+						<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
 				</option>
 				<?php 
 				if(is_array($this->ArrayInstanceInfraToolsTypeService))
@@ -154,10 +154,10 @@
 		 if($this->InputServiceCorporation != NULL) 
 		 {
 			?>
-			<!-- FORM_FIELD_CORPORATION_NAME -->
+			<!-- FIELD_CORPORATION_NAME -->
 			<div class="DivContentBodyContainer">
 				<div class="DivContentBodyContainerLabel">
-					<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+					<label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
 				</div>
 				<div class="DivContentBodyContainerValue">
 					<div>
@@ -181,10 +181,10 @@
 		 if($this->InputServiceDepartment != NULL) 
 		 {
 			?>
-			<!-- FORM_FIELD_DEPARTMENT_NAME -->
+			<!-- FIELD_DEPARTMENT_NAME -->
 			<div class="DivContentBodyContainer">
 				<div class="DivContentBodyContainerLabel">
-					<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME').":"; ?></label>
+					<label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME').":"; ?></label>
 				</div>
 				<div class="DivContentBodyContainerValue">
 					<div>
@@ -205,17 +205,17 @@
     <!-- SERVICE ACTIVE -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SERVICE_ACTIVE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_SERVICE_ACTIVE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValue">
 			<input type="checkbox" 
-				   name="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE; ?>" 
-				   value="<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE; ?>"
+				   name="<?php echo ConfigInfraTools::FIELD_SERVICE_ACTIVE; ?>" 
+				   value="<?php echo ConfigInfraTools::FIELD_SERVICE_ACTIVE; ?>"
 					<?php echo $this->InputValueServiceActive; ?>
 				   onchange="ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 								   '');"
 					/>
 		</div>
@@ -231,22 +231,22 @@
     </div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainer"
-		 onmouseover="ValidateServiceName(null, '<?php echo ConfigInfraTools::FORM_FIELD_SERVICE_NAME; ?>',
+		 onmouseover="ValidateServiceName(null, '<?php echo ConfigInfraTools::FIELD_SERVICE_NAME; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 								   '', true);
 					  ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_FORM; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_SERVICE_UPDT_SB; ?>"
 								 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_SERVICE_UPDATE_CANCEL; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_SERVICE_UPDT_CANCEL; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_SERVICE_UPDT_CANCEL; ?>"
 								 class="DivContentBodySubmitBigger"
 								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
 	</div>

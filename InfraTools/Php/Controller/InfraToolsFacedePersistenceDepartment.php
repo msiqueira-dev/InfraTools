@@ -86,43 +86,43 @@ class InfraToolsFacedePersistenceDepartment
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ssii", $UserCorporation, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION],
-																			$row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TB_DEPARTMENT_FD_CORPORATION],
+																			$row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME],
+																	        $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsDepartment, $InstanceceInfraToolsDepartment);
 					}
 					if(!empty($ArrayInstanceInfraToolsDepartment))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_ERROR_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment, 
@@ -139,39 +139,39 @@ class InfraToolsFacedePersistenceDepartment
 			{ 
 				$stmt->bind_param("ss", $UserCorporation, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_CORPORATION],
-																			$row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[ConfigInfraTools::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TB_DEPARTMENT_FD_CORPORATION],
+																			$row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME],
+																	        $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsDepartment, $InstanceceInfraToolsDepartment);
 					}
 					if(!empty($ArrayInstanceInfraToolsDepartment))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_ERROR_QUERY_PREPARE;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

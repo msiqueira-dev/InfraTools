@@ -1,8 +1,8 @@
 <!-- BODY_PAGE_ADMIN_TYPE_STATUS_MONITORING -->
 <div class="DivBody">
     <div class="DivContentBody">
-    	<form name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING; ?>" 
-			  id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING; ?>" method="post" >
+    	<form name="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING; ?>" 
+			  id="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING; ?>" method="post" >
 			<!-- SUBMIT -->
 			<div class="DivContentBodyOptions">
 				<div class="DivContentBodyOptionsBox">
@@ -19,8 +19,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
+							   name="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
+							   value="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -32,11 +32,11 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_SELECT; ?>"
-							   id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_SELECT; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_SELECT; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+							   name="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_SEL; ?>"
+							   id="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_SEL; ?>"
+							   value="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_SEL; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsFind.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -46,9 +46,9 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_REGISTER; ?>"
-							   id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_REGISTER; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_REGISTER; ?>"
+							   name="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_REGISTER; ?>"
+							   id="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_REGISTER; ?>"
+							   value="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -60,11 +60,11 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_LIST; ?>"
-							   id="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_LIST; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_TYPE_STATUS_MONITORING_LIST; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
+							   name="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_LST; ?>"
+							   id="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_LST; ?>"
+							   value="<?php echo ConfigInfraTools::FM_TYPE_STATUS_MONITORING_LST; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsList.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -76,11 +76,11 @@
 			</div>
 		</form>
 		<?php 
-		//PAGE_ADMIN_TYPE_STATUS_MONITORING_LIST
-		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_LIST)
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_LST
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_LST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_LIST)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_LST)) . ".php");
 		}
 		//PAGE_ADMIN_TYPE_STATUS_MONITORING_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_REGISTER)
@@ -88,17 +88,17 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_REGISTER)) . ".php");
 		}
-		//PAGE_ADMIN_TYPE_STATUS_MONITORING_SELECT
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_SELECT)
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_SEL
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_SEL)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_SELECT)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_SEL)) . ".php");
 		}
-		//PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDATE
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDATE)
+		//PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDT
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDT)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDATE)) . ".php");
+						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_UPDT)) . ".php");
 		}
 		//PAGE_ADMIN_TYPE_STATUS_MONITORING_VIEW
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_STATUS_MONITORING_VIEW)

@@ -11,43 +11,43 @@
 		<?php if(isset($this->ReturnText))                      echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_TICKET_UPDATE_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_FORM; ?>" method="post">
-    <!-- FORM_FIELD_TYPE_TICKET_DESCRIPTION -->
+<!-- FM_TYPE_TICKET_UPDT_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_FORM; ?>" method="post">
+    <!-- FIELD_TYPE_TICKET_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_TICKET_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_TICKET_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_TYPE_TICKET_DESCRIPTION; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_TYPE_TICKET_DESCRIPTION; ?>" 
                                class="<?php echo $this->ReturnTypeTicketDescriptionClass; ?>"
                                onblur="ValidateDescription(null, 
-                                                 '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
+                                                 '<?php echo ConfigInfraTools::FIELD_TYPE_TICKET_DESCRIPTION; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
                                                  '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
                                                  '');"
-                               onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
+                               onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_TYPE_TICKET_DESCRIPTION; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_TICKET_DESCRIPTION'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_TICKET_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueTypeTicketDescription; ?>" maxlength="45" />
         </div>
     </div>
@@ -62,22 +62,22 @@
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_TICKET_DESCRIPTION; ?>',
+         onmouseover="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_TYPE_TICKET_DESCRIPTION; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_TICKET_UPDATE_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_TYPE_TICKET_UPDT_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

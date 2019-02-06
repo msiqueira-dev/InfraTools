@@ -57,18 +57,14 @@ class PageAdminTechInfo extends PageAdmin
 
 	public function LoadPage()
 	{
+		$PageFormBack = FALSE;
 		$InstanceInfraToolsTechInfo = $this->Factory->CreateInfraToolsTechInfo();
 		$InstanceInfraToolsTechInfo->ProcessTechBase();
 		$InstanceInfraToolsTechInfo->ProcessTechInfoInfraTools();
 		$InstanceInfraToolsTechInfo->ProccessTechLanguage();
 		$infraToolsFacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$PageFormBack = FALSE;
-		//FORM SUBMIT BACK
-		if($this->CheckPostContainsKey(ConfigInfraTools::FORM_SUBMIT_BACK) == ConfigInfraTools::SUCCESS)
-		{
-			$this->PageStackSessionLoad();
-			$PageFormBack = TRUE;
-		}
+		$this->AdminGoBack($PageFormBack);
+		
 		$this->ArrayBaseFileType                 = $InstanceInfraToolsTechInfo->GetArrayBaseFileType();
 		$this->ArrayInfraToolsFileType           = $InstanceInfraToolsTechInfo->GetArrayInfraToolsFileType();
 		$this->ArrayTotalFileType                = $InstanceInfraToolsTechInfo->GetArrayTotalFileType();
@@ -85,7 +81,7 @@ class PageAdminTechInfo extends PageAdmin
 		$return = $infraToolsFacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayDataBaseTables,
 																			      $this->DataBaseReturnMessage,
 																			      $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$infraToolsFacedePersistenceInfraTools->InfraToolsDataBaseGetRowCount($this->DataBaseRowCount, $this->InputValueHeaderDebug);
 		}

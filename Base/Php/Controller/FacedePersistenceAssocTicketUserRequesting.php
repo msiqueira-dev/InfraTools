@@ -105,31 +105,31 @@ class FacedePersistenceAssocTicketUserRequesting
 				$stmt->bind_param("i", $AssocTicketUserRequestingTicketId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED_NOT_FOUND;
+					return Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_TYPE_ASSOC_USER_TEAM_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_ASSOC_USER_REQUESTING_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function AssocTicketUserRequestingInsert($AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
@@ -148,22 +148,22 @@ class FacedePersistenceAssocTicketUserRequesting
 								         $AssocUserRequestingTicketId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_CORPORATION_INSERT_FAILED;
+					return Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function AssocTicketUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocTicketUserRequesting, 
@@ -181,7 +181,7 @@ class FacedePersistenceAssocTicketUserRequesting
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayAssocTicketUserRequesting = array();
 					$result = $stmt->get_result();
@@ -189,26 +189,26 @@ class FacedePersistenceAssocTicketUserRequesting
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceAssocTicketUserRequesting = $this->Factory->CreateAssocTicketUserRequesting
-							                                 ($row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_TICKET_ID],
-															  $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_BOND],
-														      $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL],
-														      $row[Config::TABLE_FIELD_REGISTER_DATE]);
+							                                 ($row[Config::TB_ASSOC_TICKET_USER_REQUESTING_FD_TICKET_ID],
+															  $row[Config::TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_BOND],
+														      $row[Config::TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_EMAIL],
+														      $row[Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayAssocTicketUserRequesting, $InstanceAssocTicketUserRequesting);
 					}
 					if(!empty($ArrayAssocTicketUserRequesting))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FAILED;
+					$return = Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_SEL;
 				}
 				return $return;
 			}
@@ -216,10 +216,10 @@ class FacedePersistenceAssocTicketUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function AssocTicketUserRequestingSelectByUserEmail($Limit1, $Limit2, $AssocTicketUserRequestingUserEmail,
@@ -237,7 +237,7 @@ class FacedePersistenceAssocTicketUserRequesting
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("sii", $AssocTicketUserRequestingUserEmail,$Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayAssocTicketUserRequesting = array();
 					$result = $stmt->get_result();
@@ -245,26 +245,26 @@ class FacedePersistenceAssocTicketUserRequesting
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceAssocTicketUserRequesting = $this->Factory->CreateAssocTicketUserRequesting
-							                                 ($row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_TICKET_ID],
-															  $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_BOND],
-														      $row[Config::TABLE_ASSOC_TICKET_USER_REQUESTING_FIELD_USER_EMAIL],
-														      $row[Config::TABLE_FIELD_REGISTER_DATE]);
+							                                 ($row[Config::TB_ASSOC_TICKET_USER_REQUESTING_FD_TICKET_ID],
+															  $row[Config::TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_BOND],
+														      $row[Config::TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_EMAIL],
+														      $row[Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayAssocTicketUserRequesting, $InstanceAssocTicketUserRequesting);
 					}
 					if(!empty($ArrayAssocTicketUserRequesting))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_SEL_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_DESCRIPTION_FAILED;
+					$return = Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_SEL;
 				}
 				return $return;
 			}
@@ -272,10 +272,10 @@ class FacedePersistenceAssocTicketUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function AssocTicketUserRequestingSelectByTicketId($AssocTicketUserRequestingTicketId,
@@ -292,7 +292,7 @@ class FacedePersistenceAssocTicketUserRequesting
 			{
 				$stmt->bind_param("i", $AssocTicketUserRequestingTicketId);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($registerDate, $assocTicketUserRequestingUserBond,
 									   $assocTicketUserRequestingUserEmail, $AssocTicketUserRequestingTicketId);
@@ -303,20 +303,20 @@ class FacedePersistenceAssocTicketUserRequesting
 							                                                         $assocTicketUserRequestingUserBond,
 																			         $assocTicketUserRequestingUserEmail,
 																					 $registerDate);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FETCH_FAILED;
+						$return = Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_SEL_BY_ID_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_TYPE_ASSOC_USER_TEAM_SELECT_BY_ID_FAILED;
+					$return = Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_SEL_BY_ID;
 				}
 				return $return;
 			}
@@ -324,10 +324,10 @@ class FacedePersistenceAssocTicketUserRequesting
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function AssocTicketUserRequestingUpdateByTicketId($AssocTicketUserRequestingUserBond,
@@ -346,25 +346,25 @@ class FacedePersistenceAssocTicketUserRequesting
 								         $AssocUserRequestingTicketId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_TYPE_ASSOC_USER_TEAM_UPDATE_FAILED;
+					return Config::DB_ERROR_ASSOC_TICKET_USER_REQUESTING_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

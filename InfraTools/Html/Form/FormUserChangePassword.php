@@ -11,22 +11,22 @@
 		<?php if(isset($this->ReturnText))         echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- ACCOUNT_CHANGE_PASSWORD_FORM -->
-<form name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>" method="post">
-    <!-- FORM_FIELD_USER_NAME -->
+<!-- FM_ACCOUNT_CHANGE_PASSWORD -->
+<form name="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>" 
+      id="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>" method="post">
+    <!-- FIELD_USER_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserName; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_EMAIL -->
+    <!-- FIELD_USER_EMAIL -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_EMAIL').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
@@ -43,19 +43,19 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateYear; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_USER_GENDER -->
+    <!-- FIELD_USER_GENDER -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_USER_GENDER').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
         </div>
     </div>
-    <!-- FORM_FIELD_CORPORATION_NAME -->
+    <!-- FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -63,15 +63,15 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueCorporationActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
     </div>
-    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
+    <!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -79,15 +79,15 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueAssocUserCorporationRegistrationDateActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
     </div>
-    <!-- FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
+    <!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <div>
@@ -95,7 +95,7 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueAssocUserCorporationRegistrationIdActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>
@@ -122,34 +122,34 @@
                 </label>
             </div>
         </div>
-        <input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>"
+        <input type="password" name="<?php echo ConfigInfraTools::FIELD_PASSWORD_NEW; ?>"
+                           id="<?php echo ConfigInfraTools::FIELD_PASSWORD_NEW; ?>"
                            class=" <?php echo $this->ReturnPasswordClass; ?>"
                            style="margin-right:0px !important;margin-left:23px;"
                            onblur="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
+                                               '<?php echo ConfigInfraTools::FIELD_PASSWORD_NEW; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '', false);
                                     ValidateMultiplyFields(
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
                            onkeyup="ValidateMultiplyFields(
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
                            onchange="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
+                                               '<?php echo ConfigInfraTools::FIELD_PASSWORD_NEW; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '', false);
                                      ValidateMultiplyFields(
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
                            title="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TITLE'); ?>" 
                            value="" maxlength="18" />
@@ -166,61 +166,61 @@
                 </label>
             </div>
         </div>
-        <input type="password" name="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>" 
-                           id="<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>"
+        <input type="password" name="<?php echo ConfigInfraTools::FIELD_PASSWORD_REPEAT; ?>" 
+                           id="<?php echo ConfigInfraTools::FIELD_PASSWORD_REPEAT; ?>"
                            class="DivContentBodyContainerPassword <?php echo $this->ReturnPasswordClass; ?>"
                            style="margin-right:0px !important;margin-left:23px;"
                            onblur="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
+                                               '<?php echo ConfigInfraTools::FIELD_PASSWORD_REPEAT; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '', false);
                                     ValidateMultiplyFields(
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
                            onkeyup="ValidateMultiplyFields(
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
                            onchange="ValidatePassword(null, 
-                                               '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
+                                               '<?php echo ConfigInfraTools::FIELD_PASSWORD_REPEAT; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '', false);
                                      ValidateMultiplyFields(
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                                'DivContentBodySubmitBigger',
-                                               '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                               '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
                            title="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD_TITLE'); ?>" 
                            value="" maxlength="18" />
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_NEW; ?>',
+         onmouseover="ValidatePassword(null, '<?php echo ConfigInfraTools::FIELD_PASSWORD_NEW; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                    '', false);
-                      ValidatePassword(null, '<?php echo ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT; ?>',
+                      ValidatePassword(null, '<?php echo ConfigInfraTools::FIELD_PASSWORD_REPEAT; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                    '', false);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SUBMIT'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SB'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SUBMIT_CANCEL'); ?>" />
+                                 value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SB_CANCEL'); ?>" />
     </div>
 </form>

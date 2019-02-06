@@ -5,10 +5,10 @@
 			 {
 				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
 					  echo "<label class='InputValueLimitTitle'>" . 
-							   $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
+							   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
 						   "</label>" .
 						   "<label class='InputValueLimitValue'>" . 
-							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
+							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
 													   . " " . $this->InputValueLimit2 . 
 						   "</label>";
 			 }

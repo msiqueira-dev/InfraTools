@@ -483,10 +483,10 @@ class Page
 		if($this->Config == NULL && $Config == NULL)
 			$this->Config = $this->Factory->CreateConfig();
 		else $this->Config = $Config;
-		//FORM_FIELD_HEADER_LOG_OUT
-		if(isset($_POST[Config::POST_BACK_FORM]))
+		//FIELD_HEADER_LOG_OUT
+		if(isset($_POST[Config::FIELD_HEADER_LOG_OUT]))
 		{
-			if ($_POST[Config::POST_BACK_FORM] == Config::FORM_FIELD_HEADER_LOG_OUT)
+			if ($_POST[Config::FIELD_HEADER_LOG_OUT] == Config::FIELD_HEADER_LOG_OUT)
 			{
 				$this->Session->DestroyCustomSession();
 				$this->User = NULL;
@@ -497,12 +497,12 @@ class Page
 			if(!get_object_vars($this->Config)[get_class($this).Config::ENABLED])
 			{
 				$this->PageEnabled = FALSE;
-				return Config::RETURN_ERROR;
+				return Config::RET_ERROR;
 			}
 		}
 		$this->PageEnabled = TRUE;
 		$this->Session->SetSessionValue(Config::SESS_LANGUAGE, $Language);
-		if($this->LoadPageDependencies() == Config::SUCCESS)
+		if($this->LoadPageDependencies() == Config::RET_OK)
 		{
 			if($this->PageCheckLogin == TRUE)
 			{
@@ -510,7 +510,7 @@ class Page
 					$this->CheckLogin($this->InputValueHeaderDebug);
 			}
 		}
-		return Config::SUCCESS;
+		return Config::RET_OK;
     }
 	
 	/* Clone */
@@ -532,15 +532,15 @@ class Page
 	/* Métodos */
 	private function CheckPostLanguage()
 	{
-		if(isset($_POST[Config::POST_BACK_FORM]))
+		if(isset($_POST[Config::FM_LANGUAGE]))
 		{
-			if ($_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_ENGLISH ||
-			    $_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_GERMAN ||
-				$_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_PORTUGUESE ||
-				$_POST[Config::POST_BACK_FORM] == Config::LANGUAGE_SPANISH)
+			if ($_POST[Config::FM_LANGUAGE] == Config::LANGUAGE_ENGLISH ||
+			    $_POST[Config::FM_LANGUAGE] == Config::LANGUAGE_GERMAN ||
+				$_POST[Config::FM_LANGUAGE] == Config::LANGUAGE_PORTUGUESE ||
+				$_POST[Config::FM_LANGUAGE] == Config::LANGUAGE_SPANISH)
 			{
 				header("Location: "  . ProjectConfig::$AddressApplication . "/" . str_replace('Language/', '', 
-									   $_POST[Config::POST_BACK_FORM]) . "/"
+									   $_POST[Config::FM_LANGUAGE]) . "/"
 									 . $this->Page);
 			}
 		}
@@ -553,10 +553,10 @@ class Page
 		{
 			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserEmail($this->InputValueLoginEmail, 
 																					 $this->InputValueLoginPassword, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$return = $this->InstanceFacedePersistence->UserSelectByUserEmail($this->InputValueLoginEmail, $user, $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $Debug);
 			}
 		}
@@ -564,14 +564,14 @@ class Page
 		{
 			$return = $this->InstanceFacedePersistence->UserCheckPasswordByUserUniqueId($this->InputValueLoginEmail, 
 					                                                                    $this->InputValueLoginPassword, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, $user, $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,$Debug);
 			}
 		}
-		if($return == Config::SUCCESS || $return == Config::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
+		if($return == Config::RET_OK || $return == Config::DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL_EMPTY)
 		{
 			$this->InstanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 			$this->InstanceFacedeBusiness->GetIpAddressClient(true, $ip);
@@ -600,22 +600,22 @@ class Page
 					if($user->GetTwoStepVerification()) 
 					{
 						if($this->SendTwoStepVerificationCode($this->Config->DefaultApplicationName, 
-															  $user->GetEmail(),$user->GetName(), $Debug) == Config::SUCCESS)
+															  $user->GetEmail(),$user->GetName(), $Debug) == Config::RET_OK)
 							return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
 						else
 						{
 							$this->ShowDivReturnError("LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED");
-							return Config::RETURN_ERROR;
+							return Config::RET_ERROR;
 						}
 					}
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				}
 				else
 				{	
 					$this->User = $user;
 					$this->Session->SetSessionValue(Config::SESS_USER, $this->User);
 					$this->LoadNotConfirmedToolTip();
-					return Config::RETURN_WARNING;
+					return Config::RET_WARNING;
 				}
 			}
 			else $this->ShowDivReturnError("USER_INACTIVE");
@@ -625,13 +625,13 @@ class Page
 	
 	private function ExecuteLoginSecondPhaseVerirication()
 	{
-		if (isset($_POST[Config::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
+		if (isset($_POST[Config::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB]))
 		{
 			$this->InputValueLoginTwoStepVerificationCode = $_POST[Config::LOGIN_TWO_STEP_VERIFICATION_CODE];
 			$this->Session->GetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION, $value);
 			if($this->InputValueLoginTwoStepVerificationCode == $value)
-				return Config::SUCCESS;
-			else return Config::RETURN_ERROR;
+				return Config::RET_OK;
+			else return Config::RET_ERROR;
 		}
 		else
 		{
@@ -650,11 +650,11 @@ class Page
 					include_once(BASE_PATH_PHP_MODEL . "User.php");
 				else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
 			}
-			if($this->Session->GetSessionValue(Config::SESS_USER, $this->User) == Config::SUCCESS)
-				return Config::SUCCESS;
-			else return Config::RETURN_ERROR;
+			if($this->Session->GetSessionValue(Config::SESS_USER, $this->User) == Config::RET_OK)
+				return Config::RET_OK;
+			else return Config::RET_ERROR;
 		}
-		else return Config::SUCCESS;
+		else return Config::RET_OK;
 	}
 	
 	private function SendTwoStepVerificationCode($Application, $UserEmail, $UserName, $Debug)
@@ -664,9 +664,9 @@ class Page
 		$this->Session->SetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION,
 													$code);
 		if($FacedeBusiness->SendEmailLoginTwoStepVerificationCode($Application, 
-																  $UserEmail, $UserName, $code, $Debug) == Config::SUCCESS)
-			return Config::SUCCESS;
-		else return Config::RETURN_ERROR;
+																  $UserEmail, $UserName, $code, $Debug) == Config::RET_OK)
+			return Config::RET_OK;
+		else return Config::RET_ERROR;
 	}
 	
 	public static function TagOnloadFocusField($Form, $Field)
@@ -692,16 +692,16 @@ class Page
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->CorporationDelete($CorporationName, $Debug, NULL, TRUE);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
-			$this->ShowDivReturnSuccess('CORPORATION_DELETE_SUCCESS');
+			$this->ShowDivReturnSuccess('CORPORATION_DEL_SUCCESS');
 			return $return;
 		}
-		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-			$constant = "CORPORATION_DELETE_ERROR_DEPENDENCY_DEPARTMENT";
-		else $constant = "CORPORATION_DELETE_ERROR";
+		if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+			$constant = "CORPORATION_DEL_ERROR_DEPENDENCY_DEPARTMENT";
+		else $constant = "CORPORATION_DEL_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function CorporationInsert($CorporationActive, $CorporationName, $Debug)
@@ -714,38 +714,38 @@ class Page
 		elseif($CorporationActive != FALSE)
 			$CorporationActive = TRUE;
 
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $CorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->CorporationInsert($CorporationActive, $CorporationName, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess('CORPORATION_INSERT_SUCCESS');
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("CORPORATION_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function CorporationLoadData(&$InstanceCorporation)
@@ -758,9 +758,9 @@ class Page
 				$this->InputValueCorporationActive = "";
 			$this->InputValueCorporationName       = $InstanceCorporation->GetCorporationName();
 			$this->InputValueRegisterDate          = $InstanceCorporation->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
@@ -768,15 +768,15 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation, 
 															    $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug)
@@ -797,17 +797,17 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $CorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -815,18 +815,18 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->CorporationSelectByName($CorporationName, $InstanceCorporation, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$return = $this->CorporationLoadData($InstanceCorporation);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug)
@@ -846,16 +846,16 @@ class Page
 			$CorporationActive = TRUE;
 
 		//VALIDA NOME DE CORPORAÇÃO
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $CorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -864,64 +864,63 @@ class Page
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 												$matrixConstants, $Debug, $arrayOptions);
 
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->CorporationUpdateByName($CorporationActive, $CorporationName,
 																          $InstanceCorporation->GetCorporationName(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceCorporation->SetCorporationActive($CorporationActive);
 				$InstanceCorporation->SetCorporationName($CorporationName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_CORPORATION, $InstanceCorporation);
 				$this->CorporationLoadData($InstanceCorporation);
-				$this->ShowDivReturnSuccess('CORPORATION_UPDATE_SUCCESS');
+				$this->ShowDivReturnSuccess('CORPORATION_UPDT_SUCCESS');
 				return $return;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;	
+				return Config::RET_WARNING;	
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
-				$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR_UNIQUE_EXISTS");
-				return Config::RETURN_ERROR;
+				$this->ShowDivReturnError("CORPORATION_UPDT_ERROR_UNIQUE_EXISTS");
+				return Config::RET_ERROR;
 			}
 		}
-		$this->ShowDivReturnError("CORPORATION_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("CORPORATION_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug)
 	{
-		echo "TESTE: Limits: " . $Limit1 . " - " . $Limit2;
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("COUNTRY_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
-			$this->ShowDivReturnSuccess('DEPARTMENT_DELETE_SUCCESS');
-			return Config::SUCCESS;
+			$this->ShowDivReturnSuccess('DEPARTMENT_DEL_SUCCESS');
+			return Config::RET_OK;
 		}
-		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-			$constant = "DEPARTMENT_DELETE_ERROR_DEPENDENCY_USERS";	
-		else $constant = "DEPARTMENT_DELETE_ERROR";
+		if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+			$constant = "DEPARTMENT_DEL_ERROR_DEPENDENCY_USERS";	
+		else $constant = "DEPARTMENT_DEL_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug)
@@ -935,74 +934,74 @@ class Page
 		$arrayElementsInput = array(); $arrayElementsMinValue = array(); $arrayElementsMaxValue = array();
 		$arrayElementsNullable = array(); $arrayElementsText = array(); $arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_DEPARTMENT_INITIALS
-		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_INITIALS;
+		//FIELD_DEPARTMENT_INITIALS
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_INITIALS;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
 		$arrayElementsInput[0]        = $this->InputValueDepartmentInitials; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 8; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnDepartmentInitialsText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_INITIALS', 'FORM_INVALID_DEPARTMENT_INITIALS_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_INITIALS', 'FM_INVALID_DEPARTMENT_INITIALS_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[1]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[1] = "";
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME; 
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME; 
 		$arrayElementsInput[1]        = $this->InputValueDepartmentName;
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = FALSE; 
 		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-        //FORM_FIELD_CORPORATION_NAME
-		$arrayElements[2]             = Config::FORM_FIELD_CORPORATION_NAME;
+        //FIELD_CORPORATION_NAME
+		$arrayElements[2]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[2]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->DepartmentInsert($this->InputValueCorporationName,
 														           $this->InputValueDepartmentInitials,
 														           $this->InputValueDepartmentName, 
 														           $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess('DEPARTMENT_INSERT_SUCCESS');
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_INSERT_RESTRICT)
+			elseif($return == Config::DB_CODE_ERROR_FOREIGN_KEY_INSERT_RESTRICT)
 			{
 				$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR_NO_CORPORATION");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentLoadData($InstanceDepartment)
@@ -1013,9 +1012,9 @@ class Page
 			$this->InputValueDepartmentInitials  = $InstanceDepartment->GetDepartmentInitials();
 			$this->InputValueDepartmentName      = $InstanceDepartment->GetDepartmentName();
 			$this->InputValueRegisterDate        = $InstanceDepartment->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug)
@@ -1025,15 +1024,15 @@ class Page
 															   $ArrayInstanceDepartment,
 															   $RowCount,
 															   $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceDepartment, 
@@ -1043,17 +1042,17 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $CorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -1061,20 +1060,20 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByCorporationName($CorporationName,
 																					$Limit1, $Limit2,
 																		            $ArrayInstanceDepartment,
 																					$RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $ArrayInstanceDepartment);
 				return $return;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug)
@@ -1083,17 +1082,17 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $CorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -1101,19 +1100,19 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByCorporationNameNoLimit($CorporationName,
 																		                   $ArrayInstanceDepartment, 
 																		                   $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $ArrayInstanceDepartment);
 				return $return;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
@@ -1123,32 +1122,32 @@ class Page
 		$this->InputValueDepartmentName = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
 																		   $ArrayInstanceDepartment, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 				return $return;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
@@ -1160,30 +1159,30 @@ class Page
 		$this->InputValueDepartmentName = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[1]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -1192,34 +1191,34 @@ class Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
 		
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentNameAndCorporationName(
 				                                                                     $this->InputValueCorporationName, 
 																				     $this->InputValueDepartmentName,
 																		             $InstanceDepartment, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$return = $this->DepartmentLoadData($InstanceDepartment);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->DepartmentSelectNoLimit($ArrayInstanceDepartment, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->ShowDivReturnEmpty();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew, $DepartmentNameNew, 
@@ -1228,34 +1227,34 @@ class Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueDepartmentInitials = $DepartmentInitialsNew;
 		$this->InputValueDepartmentName  = $DepartmentNameNew;
-		$this->InputFocus = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$this->InputFocus = Config::FIELD_DEPARTMENT_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_DEPARTMENT_INITIALS
-		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_INITIALS;
+		//FIELD_DEPARTMENT_INITIALS
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_INITIALS;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
 		$arrayElementsInput[0]        = $this->InputValueDepartmentInitials; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 8; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnDepartmentInitialsText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_INITIALS', 'FORM_INVALID_DEPARTMENT_INITIALS_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_INITIALS', 'FM_INVALID_DEPARTMENT_INITIALS_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[1]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[1]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
@@ -1263,7 +1262,7 @@ class Page
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->DepartmentUpdateDepartmentByDepartmentAndCorporation(
@@ -1272,23 +1271,23 @@ class Page
 															   $this->InputValueDepartmentName,
 															   $InstanceDepartment->GetDepartmentName(), 
 															   $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceDepartment->SetDepartmentInitials($this->InputValueDepartmentInitials);
 				$InstanceDepartment->SetDepartmentName($this->InputValueDepartmentName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
 				$this->DepartmentLoadData($InstanceDepartment);
-				$this->ShowDivReturnSuccess("DEPARTMENT_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("DEPARTMENT_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("DEPARTMENT_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("DEPARTMENT_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug)
@@ -1296,14 +1295,14 @@ class Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueCorporationName = $CorporationNameNew;
 		$this->InputValueDepartmentName  = $InstanceDepartment->GetDepartmentName();
-		$this->InputFocus = Config::FORM_FIELD_DEPARTMENT_NAME;
+		$this->InputFocus = Config::FIELD_DEPARTMENT_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
@@ -1313,17 +1312,17 @@ class Page
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[1]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[1]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[1]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -1331,7 +1330,7 @@ class Page
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->DepartmentUpdateCorporationByCorporationAndDepartment(
@@ -1339,35 +1338,35 @@ class Page
 															                            $InstanceDepartment->GetDepartmentCorporationName(),
 															                            $InstanceDepartment->GetDepartmentName(),
 															                            $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$return = $this->CorporationSelectByName($this->InputValueCorporationName, $InstanceCorporation, $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$return = $this->DepartmentLoadData($InstanceDepartment);
-					if($return == Config::SUCCESS)
+					if($return == Config::RET_OK)
 					{
 						$InstanceDepartment->SetDepartmentCorporation($InstanceCorporation);
 						$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
 						$this->DepartmentLoadData($InstanceDepartment);
-						$this->ShowDivReturnSuccess("DEPARTMENT_UPDATE_SUCCESS");
-						return Config::SUCCESS;
+						$this->ShowDivReturnSuccess("DEPARTMENT_UPDT_SUCCESS");
+						return Config::RET_OK;
 					}
 					else
 					{
 						$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
-						return Config::RETURN_ERROR;
+						return Config::RET_ERROR;
 					}
 				}
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("DEPARTMENT_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("DEPARTMENT_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = NULL)
@@ -1389,8 +1388,8 @@ class Page
 				$this->InputLimitTwo = 25;
 				if(strpos($postElementKey, 'BACK') !== FALSE)
 				{
-					$this->InputLimitOne = $_POST[Config::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-					$this->InputLimitTwo = $_POST[Config::FORM_LIST_INPUT_LIMIT_TWO] - 25;
+					$this->InputLimitOne = $_POST[Config::FM_LST_INPUT_LIMIT_ONE] - 25;
+					$this->InputLimitTwo = $_POST[Config::FM_LST_INPUT_LIMIT_TWO] - 25;
 					if($this->InputLimitOne < 0)
 						$this->InputLimitOne = 0;
 					if($this->InputLimitTwo <= 0)
@@ -1398,8 +1397,8 @@ class Page
 				}
 				elseif (strpos($postElementKey, 'FORWARD') !== FALSE) 
 				{
-					$this->InputLimitOne = $_POST[Config::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-					$this->InputLimitTwo = $_POST[Config::FORM_LIST_INPUT_LIMIT_TWO] + 25;
+					$this->InputLimitOne = $_POST[Config::FM_LST_INPUT_LIMIT_ONE] + 25;
+					$this->InputLimitTwo = $_POST[Config::FM_LST_INPUT_LIMIT_TWO] + 25;
 					$ArrayParameterTemp = $ArrayParameter;
 					array_unshift($ArrayParameterTemp, $this->InputLimitOne, $this->InputLimitTwo);
 				    $ArrayParameter[count($ArrayParameterTemp)] = &$rowCount;
@@ -1409,7 +1408,7 @@ class Page
 					if($Debug == Config::CHECKBOX_CHECKED)
 					{
 						echo "&emsp;<b>Array Parameter List Forward</b>: ";
-						print_r($ArrayParameterTemp);
+						print_r($ArrayParameterTemp); echo "<br>";
 					}
 					$return = call_user_func_array(array($this, $Function), $ArrayParameterTemp);
 					if($this->InputLimitOne > $rowCount)
@@ -1422,8 +1421,8 @@ class Page
 						$this->InputLimitOne = $this->InputLimitOne - 25;
 						$this->InputLimitTwo = $this->InputLimitTwo - 25;
 					}
-					if($return == Config::SUCCESS)
-						return Config::SUCCESS;
+					if($return == Config::RET_OK)
+						return Config::RET_OK;
 					else 
 					{
 						array_unshift($ArrayParameter, $this->InputLimitOne, $this->InputLimitTwo);
@@ -1433,10 +1432,10 @@ class Page
 						if($Debug == Config::CHECKBOX_CHECKED)
 						{
 							echo "&emsp;<b>Array Parameter List Forward (2)</b>: ";
-							print_r($ArrayParameter);
+							print_r($ArrayParameter); echo "<br>";
 						}
 						$return = call_user_func_array(array($this, $Function), $ArrayParameter);
-						if($return == Config::SUCCESS)
+						if($return == Config::RET_OK)
 							$this->ShowDivReturnEmpty();
 						return $return;
 					}
@@ -1447,8 +1446,8 @@ class Page
 				array_push($ArrayParameter, $StoreSession);
 				if($Debug == Config::CHECKBOX_CHECKED)
 				{
-					echo "&emsp;<b>Array Parameter List</b>: ";
-					print_r($ArrayParameter);
+					echo "&emsp;<b>Array Parameter List</b>:";
+					print_r($ArrayParameter); echo "<br>";
 				}
 				return call_user_func_array(array($this, $Function), $ArrayParameter);
 			}
@@ -1478,7 +1477,7 @@ class Page
 		echo Config::HTML_TAG_DOCTYPE;
 		echo Config::HTML_TAG_START;
 		$return = $this->IncludeHeadAll($HasLoginForm);
-		if ($return == Config::SUCCESS)
+		if ($return == Config::RET_OK)
 		{
 			echo Config::HTML_TAG_BODY_START;
 			echo "<div class='Wrapper'>";
@@ -1489,8 +1488,8 @@ class Page
 				if($loginStatus == Config::USER_NOT_LOGGED_IN || $loginStatus == Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
 				{
 					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_LOGGED_IN) . ".php");
-					$this->InputFocus = Config::FORM_FIELD_LOGIN;
-					echo $this->TagOnloadFocusField(Config::FORM_LOGIN, $this->InputFocus);
+					$this->InputFocus = Config::FIELD_LOGIN;
+					echo $this->TagOnloadFocusField(Config::FM_LOGIN, $this->InputFocus);
 				}
 				elseif($loginStatus == Config::USER_NOT_CONFIRMED)
 				{
@@ -1507,9 +1506,9 @@ class Page
 			include_once(REL_PATH . Config::PATH_FOOTER);
 			echo Config::HTML_TAG_BODY_END;
 			echo Config::HTML_TAG_END;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function LoadDataFromSession($SessionKey, $Function, &$Instance)
@@ -1518,14 +1517,14 @@ class Page
 		{
 			if(!isset($Instance))
 			{
-				if($this->Session->GetSessionValue($SessionKey, $Instance) != Config::SUCCESS)
+				if($this->Session->GetSessionValue($SessionKey, $Instance) != Config::RET_OK)
 				{	
-					return Config::RETURN_ERROR;
+					return Config::RET_ERROR;
 				}
 			}
 			return $this->$Function($Instance);
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function NotificationDeleteByNotificationId($InstanceNotification, $Debug)
@@ -1534,15 +1533,15 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->NotificationDeleteByNotificationId($InstanceNotification->GetNotificationId(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
-				$this->ShowDivReturnSuccess("NOTIFICATION_DELETE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("NOTIFICATION_DEL_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		$this->ShowDivReturnError("NOTIFICATION_DELETE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("NOTIFICATION_DEL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function NotificationInsert($NotificationActive, $NotificationText, $Debug)
@@ -1557,48 +1556,48 @@ class Page
 		$this->InputValueNotificationText   = $NotificationText;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_NOTIFICATION_ACTIVE
-		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ACTIVE;
+		//FIELD_NOTIFICATION_ACTIVE
+		$arrayElements[0]             = Config::FIELD_NOTIFICATION_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnNotificationActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueNotificationActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnNotificationActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_NOTIFICATION_TEXT
-		$arrayElements[1]             = Config::FORM_FIELD_NOTIFICATION_TEXT;
+		//FIELD_NOTIFICATION_TEXT
+		$arrayElements[1]             = Config::FIELD_NOTIFICATION_TEXT;
 		$arrayElementsClass[1]        = &$this->ReturnNotificationTextClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->InputValueNotificationText; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 500; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnNotificationTextText;
-		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_TEXT', 
-				                    'FORM_INVALID_NOTIFICATION_TEXT_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_TEXT', 
+				                    'FM_INVALID_NOTIFICATION_TEXT_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->NotificationInsert($this->InputValueNotificationActive, $this->InputValueNotificationText, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("NOTIFICATION_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("NOTIFICATION_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function NotificationLoadData($InstanceNotification)
@@ -1612,24 +1611,24 @@ class Page
 			$this->InputValueNotificationId   = $InstanceNotification->GetNotificationId();
 			$this->InputValueNotificationText = $InstanceNotification->GetNotificationText();
 			$this->InputValueRegisterDate     = $InstanceNotification->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;	
+		else return Config::RET_ERROR;	
 	}
 	
 	protected function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->NotificationSelect($Limit1, $Limit2, $ArrayInstanceNotification, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("NOTIFICATION_NOT_FOUND");
-		return Config::RETURN_ERROR;	
+		return Config::RET_ERROR;	
 	}
 	
 	protected function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug)
@@ -1639,34 +1638,34 @@ class Page
 		$this->InputValueNotificationId = $NotificationId;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_NOTIFICATION_ID
-		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ID;
+		//FIELD_NOTIFICATION_ID
+		$arrayElements[0]             = Config::FIELD_NOTIFICATION_ID;
 		$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueNotificationId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
-		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->NotificationSelectByNotificationId($this->InputValueNotificationId, $InstanceNotification, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("NOTIFICATION_NOT_FOUND");
-		return Config::RETURN_ERROR;	
+		return Config::RET_ERROR;	
 	}
 	
 	protected function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, &$InstanceNotification, $Debug)
@@ -1678,69 +1677,71 @@ class Page
 			$NotificationActiveNew = TRUE;
 		$this->InputValueNotificationActive = $NotificationActiveNew;
 		$this->NotificationTextNew          = $NotificationTextNew;
-		$this->InputFocus = Config::FORM_FIELD_NOTIFICATION_TEXT;
+		$this->InputFocus = Config::FIELD_NOTIFICATION_TEXT;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_NOTIFICATION_ACTIVE
-		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ACTIVE;
+		//FIELD_NOTIFICATION_ACTIVE
+		$arrayElements[0]             = Config::FIELD_NOTIFICATION_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnNotificationActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueNotificationActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnNotificationActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_NOTIFICATION_TEXT
-		$arrayElements[1]             = Config::FORM_FIELD_NOTIFICATION_TEXT;
+		//FIELD_NOTIFICATION_TEXT
+		$arrayElements[1]             = Config::FIELD_NOTIFICATION_TEXT;
 		$arrayElementsClass[1]        = &$this->ReturnNotificationTextClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->InputValueNotificationText; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 500; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnNotificationTextText;
-		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_TEXT', 'FORM_INVALID_NOTIFICATION_TEXT_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_TEXT', 'FM_INVALID_NOTIFICATION_TEXT_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->NotificationUpdateByNotificationId($this->InputValueNotificationActive, 
 																			         $this->InputValueNotificationText,
 		                                                                             $InstanceNotification->GetNotificationId(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceNotification->UpdateNotification($this->InputValueNotificationActive, $this->InputValueNotificationText, NULL);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
 				$this->SystemConfigurationLoadData($InstanceNotification);
-				$this->ShowDivReturnSuccess("NOTIFICATION_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("NOTIFICATION_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("NOTIFICATION_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("NOTIFICATION_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function PageStackSessionLoad()
 	{
-		$arrayPageForm = array();
-		if($this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber) == Config::SUCCESS)
+	    $arrayPageForm = array();
+		if($this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber) == Config::RET_OK)
 		{
-			if($this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm) == Config::SUCCESS)
+			if($pageFormNumber==0)
+				return Config::RET_ERROR;
+			if($this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm) == Config::RET_OK)
 			{
 				if(isset($arrayPageForm[$pageFormNumber-1]))
 				{
@@ -1750,20 +1751,22 @@ class Page
 				}
 				$this->Session->SetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
 				$this->Session->SetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm);
+				return Config::RET_OK;
 			}
 		}
+		return Config::RET_ERROR;
 	}
 	
 	protected function PageStackSessionRemoveAll()
 	{
 		$arrayPageForm = array();
-		if($this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber) == Config::SUCCESS)
+		if($this->Session->GetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber) == Config::RET_OK)
 		{
-			if($this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm) == Config::SUCCESS)
+			if($this->Session->GetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm) == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_PAGE_STACK_NUMBER);
 				$this->Session->RemoveSessionVariable(Config::SESS_PAGE_SACK);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 	}
@@ -1793,15 +1796,15 @@ class Page
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->SystemConfigurationDeleteBySystemConfigurationOptionNumber(
 				                                        $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
-				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_DELETE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_DEL_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_DELETE_ERROR");
-		return Config::RETURN_ERROR;	
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_DEL_ERROR");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
@@ -1818,84 +1821,84 @@ class Page
 		$this->InputValueSystemConfigurationOptionName        = $SystemConfigurationOptionName;
 		$this->InputValueSystemConfigurationOptionValue       = $SystemConfigurationOptionValue;
 		$arrayConstants = array(); $matrixConstants = array();
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
-		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
+		$arrayElements[0]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION
-		$arrayElements[1]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION
+		$arrayElements[1]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
 		$arrayElementsClass[1]        = &$this->ReturnSystemConfigurationOptionDescriptionClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->InputValueSystemConfigurationOptionDescription; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 100; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnSystemConfigurationOptionDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION', 
-				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION', 
+				                    'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
-		$arrayElements[2]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[2]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnSystemConfigurationOptionClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[2]        = $this->InputValueSystemConfigurationOptionName; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnSystemConfigurationOptionNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 
-				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 
+				                    'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE
-		$arrayElements[3]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE
+		$arrayElements[3]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE;
 		$arrayElementsClass[3]        = &$this->ReturnSystemConfigurationOptionValueClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[3]        = $this->InputValueSystemConfigurationOptionValue; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 45; 
 		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnSystemConfigurationOptionValueText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE',
-				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE',
+				                    'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->SystemConfigurationInsert($this->InputValueSystemConfigurationOptionActive,
 																	        $this->InputValueSystemConfigurationOptionDescription,
 	                                                                        $this->InputValueSystemConfigurationOptionName, 
 																	        $this->InputValueSystemConfigurationOptionValue, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("SYSTEM_CONFIGURATION_INSERT_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
     protected function SystemConfigurationLoadData($InstanceSystemConfiguration)
@@ -1911,24 +1914,24 @@ class Page
 			$this->InputValueSystemConfigurationOptionName        = $InstanceSystemConfiguration->GetSystemConfigurationOptionName();
 			$this->InputValueSystemConfigurationOptionNumber      = $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber();
 			$this->InputValueSystemConfigurationOptionValue       = $InstanceSystemConfiguration->GetSystemConfigurationOptionValue();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;	
+		else return Config::RET_ERROR;	
 	}
 	
 	protected function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->SystemConfigurationSelect($Limit1, $Limit2, $ArrayInstanceSystemConfiguration, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
@@ -1939,17 +1942,17 @@ class Page
 		$this->InputValueSystemConfigurationOptionName = $SystemConfigurationOptionName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[0]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -1957,20 +1960,20 @@ class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
 				                                                                              $this->InputValueSystemConfigurationOptionName, 
 																						      $ArrayInstanceSystemConfiguration, $RowCount,
 																						      $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $ArrayInstanceSystemConfiguration);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
-		return Config::RETURN_ERROR;	
+		return Config::RET_ERROR;	
 	}
 	
 	protected function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
@@ -1981,37 +1984,37 @@ class Page
 		$this->InputValueSystemConfigurationOptionNumber = $SystemConfigurationOptionNumber;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER
-		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER
+		$arrayElements[0]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionNumberClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionNumber; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionNumberText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NUMBER', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NUMBER', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->SystemConfigurationSelectBySystemConfigurationOptionNumber(
 				                                                          $this->InputValueSystemConfigurationOptionNumber, 
 				                                                          $InstanceSystemConfiguration, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
 				$this->SystemConfigurationLoadData($InstanceSystemConfiguration);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
@@ -2029,69 +2032,69 @@ class Page
 		$this->InputValueSystemConfigurationOptionDescription = $SystemConfigurationOptionDescriptionNew;
 		$this->InputValueSystemConfigurationOptionName        = $SystemConfigurationOptionNameNew;
 		$this->InputValueSystemConfigurationOptionValue       = $SystemConfigurationOptionValueNew;
-		$this->InputFocus = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
+		$this->InputFocus = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
-		$arrayElements[0]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE
+		$arrayElements[0]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnSystemConfigurationOptionActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueSystemConfigurationOptionActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnSystemConfigurationOptionActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION
-		$arrayElements[1]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION
+		$arrayElements[1]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION;
 		$arrayElementsClass[1]        = &$this->ReturnSystemConfigurationOptionDescriptionClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->InputValueSystemConfigurationOptionDescription; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 100; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnSystemConfigurationOptionDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION', 
-				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION', 
+				                    'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
-		$arrayElements[2]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_NAME
+		$arrayElements[2]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnSystemConfigurationOptionClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[2]        = $this->InputValueSystemConfigurationOptionName; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnSystemConfigurationOptionNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 
-				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME', 
+				                    'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE
-		$arrayElements[3]             = Config::FORM_FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE;
+		//FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE
+		$arrayElements[3]             = Config::FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE;
 		$arrayElementsClass[3]        = &$this->ReturnSystemConfigurationOptionValueClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[3]        = $this->InputValueSystemConfigurationOptionValue; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 45; 
 		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnSystemConfigurationOptionValueText;
-		array_push($arrayConstants, 'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE',
-				                    'FORM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE',
+				                    'FM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
@@ -2101,7 +2104,7 @@ class Page
 				   		 										 $this->InputValueSystemConfigurationOptionValue,
 		                                                         $InstanceSystemConfiguration->GetSystemConfigurationOptionNumber(), 
 				                                                 $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceSystemConfiguration->UpdateSystemConfiguration(NULL, $this->InputValueSystemConfigurationOptionActive,
 																	    $this->InputValueSystemConfigurationOptionDescription,
@@ -2109,17 +2112,17 @@ class Page
 																	    $this->InputValueSystemConfigurationOptionValue);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_SYSTEM_CONFIGURATION, $InstanceSystemConfiguration);
 				$this->SystemConfigurationLoadData($InstanceSystemConfiguration);
-				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("SYSTEM_CONFIGURATION_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_UPDATE_ERROR");
-		return Config::RETURN_ERROR;	
+		$this->ShowDivReturnError("SYSTEM_CONFIGURATION_UPDT_ERROR");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function TeamDeleteByTeamId($InstanceTeam, $Debug)
@@ -2128,18 +2131,18 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TeamDeleteByTeamId($InstanceTeam->GetTeamId(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TEAM, $InstanceTeam);
-				$this->ShowDivReturnSuccess("TEAM_DELETE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("TEAM_DEL_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-			$constant = "TEAM_DELETE_ERROR_DEPENDENCY_TEAM";
-		else $constant = "TEAM_DELETE_ERROR";
+		if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+			$constant = "TEAM_DEL_ERROR_DEPENDENCY_TEAM";
+		else $constant = "TEAM_DEL_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TeamInsert($TeamDescription, $TeamName, $Debug)
@@ -2150,31 +2153,31 @@ class Page
 		$this->InputValueTeamName = $TeamName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		//FIELD_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TEAM_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 120; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_DESCRIPTION', 'FORM_INVALID_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_DESCRIPTION', 'FM_INVALID_TEAM_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TEAM_NAME
-		$arrayElements[1]             = Config::FORM_FIELD_TEAM_NAME;
+		//FIELD_TEAM_NAME
+		$arrayElements[1]             = Config::FIELD_TEAM_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnTeamNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_TEAM_NAME;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_TEAM_NAME;
 		$arrayElementsInput[1]        = $this->InputValueTeamName; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnTeamNameText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_NAME', 'FORM_INVALID_TEAM_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_NAME', 'FM_INVALID_TEAM_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -2182,22 +2185,22 @@ class Page
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TeamInsert($this->InputValueTeamDescription, $this->InputValueTeamName, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("TEAM_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TEAM_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TeamLoadData(&$InstanceTeam)
@@ -2210,24 +2213,24 @@ class Page
 			$this->InputValueTeamDescription  = $InstanceTeam->GetTeamDescription();
 			$this->InputValueTeamName         = $InstanceTeam->GetTeamName();
 			$this->InputValueRegisterDate     = $InstanceTeam->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TeamSelect($Limit1, $Limit2, $ArrayInstanceTeam, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug)
@@ -2237,35 +2240,35 @@ class Page
 		$this->InputValueTeamId = $TeamId;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TEAM_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TEAM_ID;
+		//FIELD_TEAM_ID
+		$arrayElements[0]             = Config::FIELD_TEAM_ID;
 		$arrayElementsClass[0]        = &$this->ReturnTeamIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueTeamId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 2; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTeamIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TeamSelectByTeamId($this->InputValueTeamId, $InstanceTeam, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
 				$this->TeamLoadData($InstanceTeam);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug)
@@ -2275,32 +2278,32 @@ class Page
 		$this->InputValueTeamName = $TeamName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TEAM_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_TEAM_NAME;
+		//FIELD_TEAM_NAME
+		$arrayElements[0]             = Config::FIELD_TEAM_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnTeamNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_TEAM_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_TEAM_NAME;
 		$arrayElementsInput[0]        = $this->InputValueTeamName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 2; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTeamNameText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_NAME', 'FORM_INVALID_TEAM_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_NAME', 'FM_INVALID_TEAM_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		$return = Config::SUCCESS;
-		if($return == Config::SUCCESS)
+		$return = Config::RET_OK;
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TeamSelectByTeamName($this->InputValueTeamName, $ArrayInstanceTeam, $Debug);
-			if($return == Config::SUCCESS)
-				return Config::SUCCESS;
+			if($return == Config::RET_OK)
+				return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug)
@@ -2308,34 +2311,34 @@ class Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTeamDescription  = $TeamDescriptionNew;
 		$this->InputValueTeamName = $TeamNameNew;
-		$this->InputFocus = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		$this->InputFocus = Config::FIELD_TEAM_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TEAM_DESCRIPTION;
+		//FIELD_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TEAM_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 120; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_DESCRIPTION', 'FORM_INVALID_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_DESCRIPTION', 'FM_INVALID_TEAM_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
-		//FORM_FIELD_TEAM_NAME
-		$arrayElements[1]             = Config::FORM_FIELD_TEAM_NAME;
+		//FIELD_TEAM_NAME
+		$arrayElements[1]             = Config::FIELD_TEAM_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnTeamNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_TEAM_NAME;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_TEAM_NAME;
 		$arrayElementsInput[1]        = $this->InputValueTeamName; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnTeamNameText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_NAME', 'FORM_INVALID_TEAM_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_NAME', 'FM_INVALID_TEAM_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
@@ -2343,28 +2346,28 @@ class Page
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TeamUpdateByTeamId($this->InputValueTeamDescription, $InstanceTeam->GetTeamId(),
 																	 $this->InputValueTeamName, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceTeam->SetTeamDescription($this->InputValueTeamDescription);
 				$InstanceTeam->SetTeamName($this->InputValueTeamName);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TEAM, $InstanceTeam);
 				$this->TeamLoadData($InstanceTeam);
-				$this->ShowDivReturnSuccess("TEAM_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("TEAM_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("TEAM_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("TEAM_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketDeleteByTicketId($InstanceTicket, $Debug)
@@ -2373,17 +2376,17 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TicketDeleteByTicketId($InstanceTicket->GetTicketId(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TICKET, $InstanceTicket);
-				$this->ShowDivReturnSuccess("TICKET_DELETE_SUCCESS");
+				$this->ShowDivReturnSuccess("TICKET_DEL_SUCCESS");
 				return $return;
 			}
-			if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+			if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
 				$constant = "TICKET_ERROR_DEPENDENCY";
-			else $constant = "TICKET_DELETE_ERROR";
+			else $constant = "TICKET_DEL_ERROR";
 			$this->ShowDivReturnError($constant);
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
 	}
 	
@@ -2399,70 +2402,70 @@ class Page
 		$this->InputValueTypeTicketDescription       = $TypeTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TICKET_DESCRIPTION;
+		//FIELD_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 500; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_DESCRIPTION', 'FM_INVALID_TICKET_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TICKET_SUGGESTION
-		$arrayElements[1]             = Config::FORM_FIELD_TICKET_SUGGESTION;
+		//FIELD_TICKET_SUGGESTION
+		$arrayElements[1]             = Config::FIELD_TICKET_SUGGESTION;
 		$arrayElementsClass[1]        = &$this->ReturnTicketSuggestionClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->InputValueTicketSuggestion; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnTicketSuggestionText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_SUGGESTION', 'FM_INVALID_TICKET_SUGGESTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TICKET_TITLE
-		$arrayElements[2]             = Config::FORM_FIELD_TICKET_TITLE;
+		//FIELD_TICKET_TITLE
+		$arrayElements[2]             = Config::FIELD_TICKET_TITLE;
 		$arrayElementsClass[2]        = &$this->ReturnTicketTitleClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_TITLE;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_TITLE;
 		$arrayElementsInput[2]        = $this->InputValueTicketTitle; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 90; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnTicketTitleText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_TITLE', 'FORM_INVALID_TICKET_TITLE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_TITLE', 'FM_INVALID_TICKET_TITLE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
-		$arrayElements[3]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		//FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[3]             = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayElementsClass[3]        = &$this->ReturnTypeStatusTicketDescriptionClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[3]        = $this->InputValueTypeStatusTicketDescription; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 45; 
 		$arrayElementsNullable[3]     = FALSE;
 		$arrayElementsText[3]         = &$this->ReturnTypeStatusTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -2470,22 +2473,22 @@ class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TicketInsert($this->InputValueTicketDescription, $this->InputValueTeamName, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("TICKET_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TICKET_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketLoadData($InstanceTicket)
@@ -2500,24 +2503,24 @@ class Page
 			$this->InputValueTicketDescription = $InstanceTicket->GetTicketDescription();
 			$this->InputValueTitle             = $InstanceTicket->GetTicketTitle();
 			$this->InputValueType              = $InstanceTicket->GetTicketTypeName();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TicketSelect($Limit1, $Limit2, $ArrayInstanceTicket, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug)
@@ -2527,35 +2530,35 @@ class Page
 		$this->InputValueTicketId = $TicketId;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TICKET_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TICKET_ID;
+		//FIELD_TICKET_ID
+		$arrayElements[0]             = Config::FIELD_TICKET_ID;
 		$arrayElementsClass[0]        = &$this->ReturnTicketIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueTicketId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 2; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TicketSelectByTicketId($this->InputValueTicketId, $InstanceTicket, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
 				$this->TicketLoadData($InstanceTicket);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug)
@@ -2565,35 +2568,35 @@ class Page
 		$this->InputValueUserEmail = $RequestingUserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TicketSelectByRequestingUserEmail($this->InputValueUserEmail, $InstanceTicket, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
 				$this->TicketLoadData($InstanceTicket);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug)
@@ -2603,35 +2606,35 @@ class Page
 		$this->InputValueUserEmail = $ResponsibleUserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TicketSelectByResponsibleUserEmail($this->InputValueUserEmail, $InstanceTicket, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
 				$this->TicketLoadData($InstanceTicket);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew,
@@ -2646,73 +2649,73 @@ class Page
 		$this->InputValueTypeTicketDescription       = $TypeTicketDescriptionNew;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TICKET_DESCRIPTION;
+		//FIELD_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->TicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 500; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_DESCRIPTION', 'FORM_INVALID_TICKET_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_DESCRIPTION', 'FM_INVALID_TICKET_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TICKET_SUGGESTION
-		$arrayElements[1]             = Config::FORM_FIELD_TICKET_SUGGESTION;
+		//FIELD_TICKET_SUGGESTION
+		$arrayElements[1]             = Config::FIELD_TICKET_SUGGESTION;
 		$arrayElementsClass[1]        = &$this->ReturnTicketSuggestionClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->TicketSuggestion; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnTicketSuggestionText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_SUGGESTION', 'FM_INVALID_TICKET_SUGGESTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TICKET_TITLE
-		$arrayElements[2]             = Config::FORM_FIELD_TICKET_SUGGESTION;
+		//FIELD_TICKET_TITLE
+		$arrayElements[2]             = Config::FIELD_TICKET_SUGGESTION;
 		$arrayElementsClass[2]        = &$this->ReturnTicketSuggestionClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_TITLE;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_TITLE;
 		$arrayElementsInput[2]        = $this->InputValueTicketTitle; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 90; 
 		$arrayElementsNullable[2]     = TRUE;
 		$arrayElementsText[2]         = &$this->ReturnTicketTitleText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_SUGGESTION', 'FORM_INVALID_TICKET_SUGGESTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_SUGGESTION', 'FM_INVALID_TICKET_SUGGESTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
-		$arrayElements[3]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		//FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[3]             = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayElementsClass[3]        = &$this->ReturnTypeStatusTicketDescriptionClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[3]        = $this->InputValueTypeStatusTicketDescription; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 45; 
 		$arrayElementsNullable[3]     = FALSE;
 		$arrayElementsText[3]         = &$this->ReturnTypeStatusTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-		$arrayElements[4]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[4]             = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayElementsClass[4]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[4]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[4]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 45; 
 		$arrayElementsNullable[4]     = FALSE;
 		$arrayElementsText[4]         = &$this->ReturnTypeTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE', 
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE', 
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -2720,26 +2723,26 @@ class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TicketUpdateByTicketId($this->InputValueTicketDescription, $this->InputValueTicketSuggestion,
 																         $this->InputValueTicketTitle, 
 																		 $this->InputValueTypeStatusTicketDescription,
 																         $this->InputValueTypeTicketDescription, $InstanceTicket, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TICKET, $InstanceTicket);
 				$this->TicketLoadData($InstanceTicket);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;	
+				return Config::RET_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug)
@@ -2758,17 +2761,17 @@ class Page
 			$return = $instanceFacedePersistence->TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription(
 				                                                       $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
 																	   $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
-				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_DELETE_SUCCESS");
+				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_DEL_SUCCESS");
 				return $return;
 			}
-			if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-				$constant = "TYPE_ASSOC_USER_TEAM_DELETE_ERROR_DEPENDENCY_TEAM";
-			else $constant = "TYPE_ASSOC_USER_TEAM_DELETE_ERROR";
+			if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+				$constant = "TYPE_ASSOC_USER_TEAM_DEL_ERROR_DEPENDENCY_TEAM";
+			else $constant = "TYPE_ASSOC_USER_TEAM_DEL_ERROR";
 			$this->ShowDivReturnError($constant);
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
 	}
 	
@@ -2779,39 +2782,39 @@ class Page
 		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		//FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION', 'FM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeAssocUserTeamInsert($this->InputValueTypeAssocUserTeamDescription, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamLoadData(&$InstanceTypeAssocUserTeam)
@@ -2822,24 +2825,24 @@ class Page
 		{
 			$this->InputValueRegisterDate                  = $InstanceTypeAssocUserTeam->GetRegisterDate();
 			$this->InputValueTypeAssocUserTeamDescription  = $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeAssocUserTeamSelect($Limit1, $Limit2, $ArrayInstanceTypeAssocUserTeam, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
@@ -2849,89 +2852,89 @@ class Page
 		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		//FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeAssocUserTeamSelectByTypeAssocUserTeamDescription(
 				                                                                                $this->InputValueTypeAssocUserTeamDescription, 
 																		                        $InstanceTypeAssocUserTeam,
 																		                        $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
-				return Config::SUCCESS;	
+				return Config::RET_OK;	
 			}
 		}
 		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
-		$this->InputFocus = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$this->InputFocus = Config::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		//FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION','FORM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION','FM_INVALID_TYPE_ASSOC_TEAM_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription(
 				                                                             $this->InputValueTypeAssocUserTeamDescription,
 																		     $InstanceTypeAssocUserTeam->GetTypeAssocUserTeamDescription(),
 																		     $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceTypeAssocUserTeam->SetTypeAssocUserTeamDescription($this->InputValueTypeAssocUserTeamDescription);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_ASSOC_USER_TEAM, $InstanceTypeAssocUserTeam);
-				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::SUCCESS)
+				if($this->TypeAssocUserTeamLoadData($InstanceTypeAssocUserTeam) == Config::RET_OK)
 				{
-					$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_UPDATE_SUCCESS");
-					return Config::SUCCESS;
+					$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_TEAM_UPDT_SUCCESS");
+					return Config::RET_OK;
 				}
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_UPDATE_ERROR");
-		return Config::RETURN_ERROR;	
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_TEAM_UPDT_ERROR");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function TypeStatusTicketDeleteByTypeStatusTicketDescription(&$InstanceTypeStatusTicket, $Debug)
@@ -2940,17 +2943,17 @@ class Page
 		$return = $instanceFacedePersistence->TypeStatusTicketDeleteByTypeStatusTicketDescription(
 			                                                                $InstanceTypeStatusTicket->GetTypeStatusTicketDescription(), 
 																            $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
-			$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_DELETE_SUCCESS");
+			$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_DEL_SUCCESS");
 			return $return;
 		}
-		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-			$constant = "TYPE_STATUS_TICKET_DELETE_ERROR_DEPENDENCY_TICKET";
-		else $constant = "TYPE_STATUS_TICKET_DELETE_ERROR";
+		if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+			$constant = "TYPE_STATUS_TICKET_DEL_ERROR_DEPENDENCY_TICKET";
+		else $constant = "TYPE_STATUS_TICKET_DEL_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	
@@ -2961,40 +2964,40 @@ class Page
 		$this->InputValueTypeStatusTicketDescription = $TypeStatusTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		//FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeStatusTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeStatusTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeStatusTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION',
-									'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION',
+									'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeStatusTicketInsert($this->InputValueTypeStatusTicketDescription, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeStatusTicketLoadData($InstanceTypeStatusTicket)
@@ -3003,24 +3006,24 @@ class Page
 		{
 			$this->InputValueTypeStatusTicketDescription  = $InstanceTypeStatusTicket->GetTypeStatusTicketDescription();
 			$this->InputValueRegisterDate                 = $InstanceTypeStatusTicket->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeStatusTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeStatusTicket, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, 
@@ -3031,39 +3034,39 @@ class Page
 		$this->InputValueTypeStatusTicketDescription = $TypeStatusTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		//FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeStatusTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeStatusTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeStatusTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION',
-									'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION',
+									'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeStatusTicketSelectByTypeStatusTicketDescription(
 				                                                                      $this->InputValueTypeStatusTicketDescription, 
 																		              $InstanceTypeStatusTicket,
 																		              $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
 				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_STATUS_TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew,
@@ -3071,21 +3074,21 @@ class Page
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTypeStatusTicketDescription  = $TypeStatusTicketDescriptionNew;
-		$this->InputFocus = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		$this->InputFocus = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
+		//FIELD_TYPE_STATUS_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_STATUS_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeStatusTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeStatusTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeStatusTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION',
-									'FORM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION',
+									'FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -3093,46 +3096,46 @@ class Page
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TypeStatusTicketUpdateByTypeStatusTicketDescription(
 				                                                               $this->InputValueTypeStatusTicketDescription,
 																			   $InstanceTypeStatusTicket->GetTypeStatusTicketDescription(),
 																			   $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceTypeStatusTicket->SetTypeStatusTicketDescription($this->InputValueTypeStatusTicketDescription);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
 				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
-				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeTicketDeleteByTypeTicketDescription($InstanceTypeTicket->GetTypeTicketDescription(), $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
-			$this->ShowDivReturnSuccess("TYPE_TICKET_DELETE_SUCCESS");
-			return Config::SUCCESS;
+			$this->ShowDivReturnSuccess("TYPE_TICKET_DEL_SUCCESS");
+			return Config::RET_OK;
 		}
-		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-			$constant = "TYPE_TICKET_DELETE_ERROR_DEPENDENCY_TICKET";
-		else $constant = "TYPE_TICKET_DELETE_ERROR";
+		if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+			$constant = "TYPE_TICKET_DEL_ERROR_DEPENDENCY_TICKET";
+		else $constant = "TYPE_TICKET_DEL_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeTicketInsert($TypeTicketDescription, $Debug)
@@ -3142,17 +3145,17 @@ class Page
 		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -3160,22 +3163,22 @@ class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return = Config::SUCCESS)
+		if($return = Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeTicketInsert($this->InputValueTypeTicketDescription, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("TYPE_TICKET_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeTicketLoadData($InstanceTypeTicket)
@@ -3184,24 +3187,24 @@ class Page
 		{
 			$this->InputValueTypeTicketDescription  = $InstanceTypeTicket->GetTypeTicketDescription();
 			$this->InputValueRegisterDate           = $InstanceTypeTicket->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeTicket, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$InstanceTypeTicket, $Debug)
@@ -3211,17 +3214,17 @@ class Page
 		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
@@ -3229,39 +3232,39 @@ class Page
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeTicketSelectByTypeTicketDescription($this->InputValueTypeTicketDescription,
 																						  $InstanceTypeTicket, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
 				$this->TypeTicketLoadData($InstanceTypeTicket);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_TICKET_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, &$InstanceTypeTicket, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueTypeTicketDescription  = $TypeTicketDescriptionNew;
-		$this->InputFocus = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		$this->InputFocus = Config::FIELD_TYPE_TICKET_DESCRIPTION;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION',
 									'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
@@ -3269,28 +3272,28 @@ class Page
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TypeTicketUpdateByTypeTicketDescription($this->InputValueTypeTicketDescription, 
 																						  $InstanceTypeTicket->GetTypeTicketDescription(),
 																						  $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$InstanceTypeTicket->SetTypeTicketDescription($this->InputValueTypeTicketDescription);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_TICKET, $InstanceTypeTicket);
 				$this->TypeTicketLoadData($InstanceTypeTicket);
-				$this->ShowDivReturnSuccess("TYPE_TICKET_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("TYPE_TICKET_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("TYPE_TICKET_UPDATE_ERROR");
-		return Config::RETURN_ERROR;	
+		$this->ShowDivReturnError("TYPE_TICKET_UPDT_ERROR");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function TypeUserDeleteByTypeUserDescription($InstanceTypeUser, $Debug)
@@ -3299,18 +3302,18 @@ class Page
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->TypeUserDeleteByTypeUserDescription($InstanceTypeUser->GetTypeUserDescription(), $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
-				$this->ShowDivReturnSuccess("TYPE_USER_DELETE_SUCCESS");
+				$this->ShowDivReturnSuccess("TYPE_USER_DEL_SUCCESS");
 				return $return;
 			}
 		}
-		if($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-			$constant = "TYPE_USER_DELETE_ERROR_DEPENDENCY_USER";
-		else $constant = "TYPE_USER_DELETE_ERROR";
+		if($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+			$constant = "TYPE_USER_DEL_ERROR_DEPENDENCY_USER";
+		else $constant = "TYPE_USER_DEL_ERROR";
 		$this->ShowDivReturnError($constant);
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserInsert($TypeUserDescription, $Debug)
@@ -3320,39 +3323,39 @@ class Page
 		$this->InputValueTypeUserDescription = $TypeUserDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		//FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_ID', 'FORM_INVALID_TYPE_USER_ID_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_ID', 'FM_INVALID_TYPE_USER_ID_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeUserInsert($this->InputValueTypeUserDescription, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("TYPE_USER_INSERT_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserLoadData(&$InstanceTypeUser)
@@ -3361,9 +3364,9 @@ class Page
 		{
 			$this->InputValueTypeUserDescription  = $InstanceTypeUser->GetTypeUserDescription();
 			$this->InputValueRegisterDate         = $InstanceTypeUser->GetRegisterDate();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug)
@@ -3371,15 +3374,15 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeUserSelect($Limit1, $Limit2, $ArrayInstanceTypeUser,
 															 $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug)
@@ -3389,17 +3392,17 @@ class Page
 		$this->InputValueTypeUserDescription = $TypeUserDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		//FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_DESCRIPTION', 'FM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -3407,19 +3410,19 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
 																			          $InstanceTypeUser, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
 				$this->TypeUserLoadData($InstanceTypeUser); 
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug)
@@ -3429,17 +3432,17 @@ class Page
 		$this->InputValueTypeUserDescription = $TypeUserDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		//FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_DESCRIPTION', 'FM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -3447,25 +3450,25 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeUserSelectByTypeUserDescriptionLike($this->InputValueTypeUserDescription, 
 																			               $ArrayInstanceTypeUser, $Debug);
-			if($return == Config::SUCCESS)
-				return Config::SUCCESS;
+			if($return == Config::RET_OK)
+				return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->TypeUserSelectNoLimit($ArrayInstanceTypeUser, $Debug);
-		if($return == Config::SUCCESS)
-			return Config::SUCCESS;
+		if($return == Config::RET_OK)
+			return Config::RET_OK;
 		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, &$InstanceTypeUser, $Debug)
@@ -3474,20 +3477,20 @@ class Page
 		{
 			$PageForm = $this->Factory->CreatePageForm();
 			$this->InputValueTypeUserDescription  = $TypeUserDescriptionNew;
-			$this->InputFocus = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+			$this->InputFocus = Config::FIELD_TYPE_USER_DESCRIPTION;
 			$arrayConstants = array(); $matrixConstants = array();
 			
-			//FORM_FIELD_TYPE_USER_DESCRIPTION
-			$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+			//FIELD_TYPE_USER_DESCRIPTION
+			$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
 			$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+			$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 			$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 			$arrayElementsMinValue[0]     = 0; 
 			$arrayElementsMaxValue[0]     = 45; 
 			$arrayElementsNullable[0]     = FALSE;
 			$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-			array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
+			array_push($arrayConstants, 'FM_INVALID_TYPE_USER_DESCRIPTION', 'FM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
 										'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 
@@ -3495,27 +3498,27 @@ class Page
 											    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 				$return = $instanceFacedePersistence->TypeUserUpdateByTypeUserDescription($this->InputValueTypeUserDescription,
 					                                                                      $InstanceTypeUser->GetTypeUserDescription(), $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$InstanceTypeUser->SetTypeUserDescription($this->InputValueTypeUserDescription);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
 					$this->TypeUserLoadData($InstanceTypeUser);
-					$this->ShowDivReturnSuccess("TYPE_USER_UPDATE_SUCCESS");
-					return Config::SUCCESS;
+					$this->ShowDivReturnSuccess("TYPE_USER_UPDT_SUCCESS");
+					return Config::RET_OK;
 				}
-				elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+				elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 				{
 					$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-					return Config::RETURN_WARNING;
+					return Config::RET_WARNING;
 				}
 			}
-			$this->ShowDivReturnError("TYPE_USER_UPDATE_ERROR");
-			return Config::RETURN_ERROR;
+			$this->ShowDivReturnError("TYPE_USER_UPDT_ERROR");
+			return Config::RET_ERROR;
 		}
 	}
 	
@@ -3526,20 +3529,20 @@ class Page
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->UserUpdateTwoStepVerificationByUserEmail($InstanceUser->GetEmail(), 
 																				       $TwoStepVerification, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$InstanceUser->SetTwoStepVerification($TwoStepVerification);
 			$this->InputValueTwoStepVerification = $InstanceUser->GetTwoStepVerification();
 			$this->ShowDivReturnSuccess("USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS");
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+		elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return Config::RETURN_WARNING;
+			return Config::RET_WARNING;
 		}
 		$this->ShowDivReturnError("USER_TWO_STEP_VERIFICATION_CHANGE_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserDeleteByUserEmail(&$InstanceUser, $Debug)
@@ -3548,53 +3551,53 @@ class Page
 		$this->InputValueUserEmail  = $InstanceUser->GetEmail();
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 60; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			if(!empty($InstanceUser->GetCorporationName()))
 				$return = $instanceFacedePersistence->AssocUserCorporationDelete($InstanceUser->GetCorporationName(),
 			                                                                     $this->InputValueUserEmail,
 														                         $Debug, NULL, TRUE);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 				$return = $instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_USER);
 				unset($InstanceUser);
 				$this->InputValueUserEmail = "";
-				$this->ShowDivReturnSuccess("USER_DELETE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("USER_DEL_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_USER_DELETE_FAILED_NOT_FOUND)
+			elseif($return == Config::DB_ERROR_USER_DEL_BY_USER_EMAIL)
 			{
 				$this->ShowDivReturnError("USER_NOT_FOUND");
-				return Config::RETURN_ERROR;
+				return Config::RET_ERROR;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
+			elseif($return == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
 			{
-				$this->ShowDivReturnWarning("USER_NOT_FOUND");
-				return Config::RETURN_ERROR;
+				$this->ShowDivReturnWarning("USER_DEL_ERROR_DEPENDENCY");
+				return Config::RET_ERROR;
 			}
 		}
-		$this->ShowDivReturnError("USER_DELETE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_DEL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserInsert($Application, $SendEmail, 
@@ -3618,20 +3621,20 @@ class Page
 		$this->InputValueRegion                   = $Region;
 		$this->InputValueNewPassword              = $PasswordNew;
 		$this->InputValueRepeatPassword           = $PasswordRepeat;
-		if(isset($_POST[Config::FORM_FIELD_USER_SESSION_EXPIRES]))
+		if(isset($_POST[Config::FIELD_USER_SESSION_EXPIRES]))
 			$this->InputValueSessionExpires = TRUE;
 		else $this->InputValueSessionExpires = FALSE;
-		if(isset($_POST[Config::FORM_FIELD_USER_TWO_STEP_VERIFICATION]))
+		if(isset($_POST[Config::FIELD_USER_TWO_STEP_VERIFICATION]))
 			$this->InputValueTwoStepVerification = TRUE;
 		else $this->InputValueTwoStepVerification = FALSE;
 		if(is_null($UserActive))
 		{
-			if(isset($_POST[Config::FORM_FIELD_USER_ACTIVE]))
+			if(isset($_POST[Config::FIELD_USER_ACTIVE]))
 				$this->InputValueUserActive = TRUE;
 			else $this->InputValueUserActive = FALSE;
 		}
 		else $this->InputValueUserActive = $UserActive;
-		if(isset($_POST[Config::FORM_FIELD_USER_CONFIRMED]))
+		if(isset($_POST[Config::FIELD_USER_CONFIRMED]))
 			$this->InputValueUserConfirmed = TRUE;
 		else $this->InputValueUserConfirmed = FALSE;
 		if ($SessionExpires == NULL)
@@ -3644,237 +3647,237 @@ class Page
 		$FormValidator      = $this->Factory->CreateFormValidator();
 		$arrayConstants = array(); $matrixConstants = array(); $arrayOptions = array();
 		
-		//FORM_FIELD_USER_NAME
+		//FIELD_USER_NAME
 		$arrayConstants = array();
-		$arrayElements[0]             = Config::FORM_FIELD_USER_NAME;
+		$arrayElements[0]             = Config::FIELD_USER_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueUserName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserNameText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_NAME', 'FM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_EMAIL
+		//FIELD_USER_EMAIL
 		$arrayConstants = array();
-		$arrayElements[1]             = Config::FORM_FIELD_USER_EMAIL;
+		$arrayElements[1]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[1]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 60; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_UNIQUE_ID
+		//FIELD_USER_UNIQUE_ID
 		$arrayConstants = array();
-		$arrayElements[2]             = Config::FORM_FIELD_USER_UNIQUE_ID;
+		$arrayElements[2]             = Config::FIELD_USER_UNIQUE_ID;
 		$arrayElementsClass[2]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
 		$arrayElementsInput[2]        = $this->InputValueUserUniqueId; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 25; 
-		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsNullable[2]     = TRUE;
 		$arrayElementsText[2]         = &$this->ReturnUserUniqueIdText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_UNIQUE_ID', 'FM_INVALID_USER_UNIQUE_ID_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
+		//FIELD_USER_PHONE_PRIMARY_PREFIX
 		$arrayConstants = array();
-		$arrayElements[3]             = Config::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
+		$arrayElements[3]             = Config::FIELD_USER_PHONE_PRIMARY_PREFIX;
 		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryPrefixClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimaryPrefix; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 3; 
 		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_PHONE_PRIMARY
+		//FIELD_USER_PHONE_PRIMARY
 		$arrayConstants = array();
-		$arrayElements[4]             = Config::FORM_FIELD_USER_PHONE_PRIMARY;
+		$arrayElements[4]             = Config::FIELD_USER_PHONE_PRIMARY;
 		$arrayElementsClass[4]        = &$this->ReturnUserPhonePrimaryClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[4]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[4]        = $this->InputValueUserPhonePrimary; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 9; 
 		$arrayElementsNullable[4]     = TRUE;
 		$arrayElementsText[4]         = &$this->ReturnUserPhonePrimaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_PRIMARY', 'FM_INVALID_USER_PHONE_PRIMARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
+		//FIELD_USER_PHONE_SECONDARY_PREFIX
 		$arrayConstants = array();
-		$arrayElements[5]             = Config::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
+		$arrayElements[5]             = Config::FIELD_USER_PHONE_SECONDARY_PREFIX;
 		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
 		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[5]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondaryPrefix; 
 		$arrayElementsMinValue[5]     = 0; 
 		$arrayElementsMaxValue[5]     = 3; 
 		$arrayElementsNullable[5]     = TRUE;
 		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_PHONE_SECONDARY
+		//FIELD_USER_PHONE_SECONDARY
 		$arrayConstants = array();
-		$arrayElements[6]             = Config::FORM_FIELD_USER_PHONE_SECONDARY;
+		$arrayElements[6]             = Config::FIELD_USER_PHONE_SECONDARY;
 		$arrayElementsClass[6]        = &$this->ReturnUserPhoneSecondaryClass;
 		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[6]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[6]        = $this->InputValueUserPhoneSecondary; 
 		$arrayElementsMinValue[6]     = 0; 
 		$arrayElementsMaxValue[6]     = 9; 
 		$arrayElementsNullable[6]     = TRUE;
 		$arrayElementsText[6]         = &$this->ReturnUserPhoneSecondaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_SECONDARY', 'FM_INVALID_USER_PHONE_SECONDARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_BIRTH_DATE_DAY
+		//FIELD_USER_BIRTH_DATE_DAY
 		$arrayConstants = array();
-		$arrayElements[7]             = Config::FORM_FIELD_USER_BIRTH_DATE_DAY;
+		$arrayElements[7]             = Config::FIELD_USER_BIRTH_DATE_DAY;
 		$arrayElementsClass[7]        = &$this->ReturnBirthDateDayClass;
 		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = Config::FORM_VALIDATE_FUNCTION_DATE_DAY;
+		$arrayElementsForm[7]         = Config::FM_VALIDATE_FUNCTION_DATE_DAY;
 		$arrayElementsInput[7]        = $this->InputValueBirthDateDay; 
 		$arrayElementsMinValue[7]     = 0; 
 		$arrayElementsMaxValue[7]     = 0; 
 		$arrayElementsNullable[7]     = FALSE;
 		$arrayElementsText[7]         = &$this->ReturnBirthDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_BIRTH_DATE_MONTH
+		//FIELD_USER_BIRTH_DATE_MONTH
 		$arrayConstants = array();
-		$arrayElements[8]             = Config::FORM_FIELD_USER_BIRTH_DATE_MONTH;
+		$arrayElements[8]             = Config::FIELD_USER_BIRTH_DATE_MONTH;
 		$arrayElementsClass[8]        = &$this->ReturnBirthDateMonthClass;
 		$arrayElementsDefaultValue[8] = ""; 
-		$arrayElementsForm[8]         = Config::FORM_VALIDATE_FUNCTION_DATE_MONTH;
+		$arrayElementsForm[8]         = Config::FM_VALIDATE_FUNCTION_DATE_MONTH;
 		$arrayElementsInput[8]        = $this->InputValueBirthDateMonth; 
 		$arrayElementsMinValue[8]     = 0; 
 		$arrayElementsMaxValue[8]     = 0; 
 		$arrayElementsNullable[8]     = FALSE;
 		$arrayElementsText[8]         = &$this->ReturnBirthDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_BIRTH_DATE_YEAR
+		//FIELD_USER_BIRTH_DATE_YEAR
 		$arrayConstants = array();
-		$arrayElements[9]             = Config::FORM_FIELD_USER_BIRTH_DATE_YEAR;
+		$arrayElements[9]             = Config::FIELD_USER_BIRTH_DATE_YEAR;
 		$arrayElementsClass[9]        = &$this->ReturnBirthDateYearClass;
 		$arrayElementsDefaultValue[9] = ""; 
-		$arrayElementsForm[9]         = Config::FORM_VALIDATE_FUNCTION_DATE_YEAR;
+		$arrayElementsForm[9]         = Config::FM_VALIDATE_FUNCTION_DATE_YEAR;
 		$arrayElementsInput[9]        = $this->InputValueBirthDateYear; 
 		$arrayElementsMinValue[9]     = 0; 
 		$arrayElementsMaxValue[9]     = 0; 
 		$arrayElementsNullable[9]     = FALSE;
 		$arrayElementsText[9]         = &$this->ReturnBirthDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_GENDER
+		//FIELD_USER_GENDER
 		$arrayConstants = array();
-		$arrayElements[10]             = Config::FORM_FIELD_USER_GENDER;
+		$arrayElements[10]             = Config::FIELD_USER_GENDER;
 		$arrayElementsClass[10]        = &$this->ReturnGenderClass;
 		$arrayElementsDefaultValue[10] = ""; 
-		$arrayElementsForm[10]         = Config::FORM_VALIDATE_FUNCTION_GENDER;
+		$arrayElementsForm[10]         = Config::FM_VALIDATE_FUNCTION_GENDER;
 		$arrayElementsInput[10]        = $this->InputValueGender; 
 		$arrayElementsMinValue[10]     = 0; 
 		$arrayElementsMaxValue[10]     = 0; 
 		$arrayElementsNullable[10]     = FALSE;
 		$arrayElementsText[10]         = &$this->ReturnGenderText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_COUNTRY_NAME
+		//FIELD_COUNTRY_NAME
 		$arrayConstants = array();
-		$arrayElements[11]             = Config::FORM_FIELD_COUNTRY_NAME;
+		$arrayElements[11]             = Config::FIELD_COUNTRY_NAME;
 		$arrayElementsClass[11]        = &$this->ReturnCountryClass;
 		$arrayElementsDefaultValue[11] = ""; 
-		$arrayElementsForm[11]         = Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
+		$arrayElementsForm[11]         = Config::FM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
 		$arrayElementsInput[11]        = $this->InputValueCountry; 
 		$arrayElementsMinValue[11]     = 0; 
 		$arrayElementsMaxValue[11]     = 3; 
 		$arrayElementsNullable[11]     = FALSE;
 		$arrayElementsText[11]         = &$this->ReturnCountryText;
-		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_USER_REGION
+		//FIELD_USER_REGION
 		$arrayConstants = array();
-		$arrayElements[12]             = Config::FORM_FIELD_USER_REGION;
+		$arrayElements[12]             = Config::FIELD_USER_REGION;
 		$arrayElementsClass[12]        = &$this->ReturnRegionClass;
 		$arrayElementsDefaultValue[12] = ""; 
-		$arrayElementsForm[12]         = Config::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
+		$arrayElementsForm[12]         = Config::FM_VALIDATE_FUNCTION_NOT_NUMBER;
 		$arrayElementsInput[12]        = $this->InputValueRegion; 
 		$arrayElementsMinValue[12]     = 0; 
 		$arrayElementsMaxValue[12]     = 45; 
 		$arrayElementsNullable[12]     = TRUE;
 		$arrayElementsText[12]         = &$this->ReturnRegionText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_REGION', 'FM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		
-		//FORM_FIELD_PASSWORD_NEW
+		//FIELD_PASSWORD_NEW
 		$arrayConstants = array();
-		$arrayElements[13]             = Config::FORM_FIELD_PASSWORD_NEW;
+		$arrayElements[13]             = Config::FIELD_PASSWORD_NEW;
 		$arrayElementsClass[13]        = &$this->ReturnPasswordClass;
 		$arrayElementsDefaultValue[13] = ""; 
-		$arrayElementsForm[13]         = Config::FORM_VALIDATE_FUNCTION_PASSWORD;
+		$arrayElementsForm[13]         = Config::FM_VALIDATE_FUNCTION_PASSWORD;
 		$arrayElementsInput[13]        = $this->InputValueNewPassword; 
 		$arrayElementsMinValue[13]     = 8; 
 		$arrayElementsMaxValue[13]     = 18; 
 		$arrayElementsNullable[13]     = TRUE;
 		$arrayElementsText[13]         = &$this->ReturnPasswordText;
 		$arrayExtraField[13]           = &$this->InputValueRepeatPassword;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PASSWORD', 'FORM_INVALID_USER_PASSWORD_MATCH',
-				                    'FORM_INVALID_USER_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_PASSWORD', 'FM_INVALID_USER_PASSWORD_MATCH',
+				                    'FM_INVALID_USER_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, "");
 		if($this->ValidateCaptcha)
 		{
 			//VALIDA CAPTCHA
-			$this->InputValueCaptcha       = $_POST[Config::FORM_CAPTCHA_REGISTER];
-			$this->Session->GetSessionValue(Config::FORM_CAPTCHA_REGISTER, $captcha);
-			//FORM_CAPTCHA_REGISTER
-			$arrayElements[14]             = Config::FORM_CAPTCHA_REGISTER;
+			$this->InputValueCaptcha       = $_POST[Config::FIELD_USER_CAPTCHA_REGISTER];
+			$this->Session->GetSessionValue(Config::FIELD_USER_CAPTCHA_REGISTER, $captcha);
+			//FIELD_USER_CAPTCHA_REGISTER
+			$arrayElements[14]             = Config::FIELD_USER_CAPTCHA_REGISTER;
 			$arrayElementsClass[14]        = &$this->ReturnCaptchaClass;
 			$arrayElementsDefaultValue[14] = ""; 
-			$arrayElementsForm[14]         = Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+			$arrayElementsForm[14]         = Config::FM_VALIDATE_FUNCTION_COMPARE_STRING;
 			$arrayElementsInput[14]        = $this->InputValueCaptcha; 
 			$arrayElementsMinValue[14]     = 0; 
 			$arrayElementsMaxValue[14]     = 0; 
 			$arrayElementsNullable[14]     = TRUE;
 			$arrayElementsText[14]         = &$this->ReturnCaptchaText;
-			array_push($arrayConstants, 'FORM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
+			array_push($arrayConstants, 'FM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
 			array_push($matrixConstants, $arrayConstants);
 			array_push($arrayOptions, $captcha);
 		}
@@ -3883,12 +3886,12 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			//CHECA SE E-MAIL JÁ É CADASTRADO
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectExistsByUserEmail($this->InputValueUserEmail, $Debug);
-			if($return != Config::SUCCESS)
+			if($return != Config::RET_OK)
 			{
 				$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth
 							 . "-" . $this->InputValueBirthDateDay;
@@ -3918,7 +3921,7 @@ class Page
 																 $UserType,
 																 $this->InputValueUserUniqueId,
 																 $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					if($SendEmail)
 					{
@@ -3932,39 +3935,39 @@ class Page
 														                     $link, 
 																			 $Debug);
 					}
-					if($return == Config::SUCCESS)
+					if($return == Config::RET_OK)
 					{
 						if($SendEmail) $constant = 'REGISTER_SUCCESS';
 						else $constant = 'REGISTER_SUCCESS_NO_LINK';
 						$this->ShowDivReturnSuccess($constant);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else
 					{
 						$instanceFacedePersistence->UserDeleteByUserEmail($this->InputValueUserEmail, $Debug);
 						$this->ShowDivReturnError("REGISTER_EMAIL_ERROR");
-						return Config::RETURN_ERROR;
+						return Config::RET_ERROR;
 					}
 				}
-				elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+				elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 				{
 					$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
-					return Config::RETURN_WARNING;
+					return Config::RET_WARNING;
 				}
 				else
 				{
 					$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
-					return Config::RETURN_ERROR;
+					return Config::RET_ERROR;
 				}
 			}
 			else
 			{
 				$this->ShowDivReturnWarning("REGISTER_EMAIL_ALREADY_REGISTERED");
-				return Config::RETURN_ERROR;
+				return Config::RET_ERROR;
 			}
 		}
 		$this->ShowDivReturnError("REGISTER_INSERT_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserLoadData($InstanceUser)
@@ -4043,7 +4046,7 @@ class Page
 	{
 		$UniqueHash = NULL;
 		$return = $this->UserSelectHashCodeByUserEmail($UserEmail, $UniqueHash, $this->InputValueHeaderDebug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
 			Page::GetCurrentDomain($domain);
@@ -4053,29 +4056,29 @@ class Page
 																			   $this->User->GetName(),
 																			   $this->User->GetEmail(),
 																			   $link, $this->InputValueHeaderDebug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("RESEND_CONFIRMATION_LINK_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("RESEND_CONFIRMATION_LINK_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$this->InputValueLimit1   = $Limit1;
 			$this->InputValueLimit2   = $Limit2;
 			$this->InputValueRowCount = $RowCount;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("USER_NOT_FOUND");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser, 
@@ -4085,45 +4088,45 @@ class Page
 		$this->InputValueCorporationName = $CorporationName;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByCorporationName($this->InputValueCorporationName, $Limit1, $Limit2,
 																			  $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					if($HideReturnSuccessImage)
 						$this->ShowDivReturnEmpty();
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				}
 				elseif(empty($ArrayInstanceUser))
 				{
-					$this->ShowDivReturnWarning("USER_SELECT_BY_CORPORATION_NAME_WARNING");
-					return Config::RETURN_WARNING;	
+					$this->ShowDivReturnWarning("USER_SEL_BY_CORPORATION_NAME_WARNING");
+					return Config::RET_WARNING;	
 				}
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_CORPORATION_NAME_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_CORPORATION_NAME_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
@@ -4134,59 +4137,59 @@ class Page
 		$this->InputValueDepartmentName  = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_CORPORATION_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByDepartmentName($Limit1, $Limit2, $this->InputValueCorporationName, 
 																	         $this->InputValueDepartmentName, $ArrayInstanceUser, 
 																	         $RowCount,  $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					if($HideReturnSuccessImage)
 						$this->ShowDivReturnEmpty();
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				}
 				elseif(empty($ArrayInstanceUser))
 				{
-					$this->ShowDivReturnWarning("USER_SELECT_BY_DEPARTMENT_NAME_WARNING");
-					return Config::RETURN_WARNING;	
+					$this->ShowDivReturnWarning("USER_SEL_BY_DEPARTMENT_NAME_WARNING");
+					return Config::RET_WARNING;	
 				}
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_DEPARTMENT_NAME_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_DEPARTMENT_NAME_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByHashCode($HashCode, &$UserInstance, $Debug)
@@ -4200,14 +4203,14 @@ class Page
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByHashCode($this->InputValueUserHashCode, 
 																	   $InstanceUser, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_SELECT_BY_HASH_CODE_SUCCESS");
+				$this->ShowDivReturnSuccess("USER_SEL_BY_HASH_CODE_SUCCESS");
 				return $return;
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_HASH_CODE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_HASH_CODE_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4216,41 +4219,41 @@ class Page
 		$this->InputValueNotificationId = $NotificationId;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_NOTIFICATION_ID
-		$arrayElements[0]             = Config::FORM_FIELD_NOTIFICATION_ID;
+		//FIELD_NOTIFICATION_ID
+		$arrayElements[0]             = Config::FIELD_NOTIFICATION_ID;
 		$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueNotificationId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
-		array_push($arrayConstants, 'FORM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByNotificationId($Limit1, $Limit2, $this->InputValueNotificationId, 
 																			 $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("USER_SELECT_BY_NOTIFICATION_ID_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("USER_SEL_BY_NOTIFICATION_ID_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_NOTIFICATION_ID_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_NOTIFICATION_ID_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4259,41 +4262,41 @@ class Page
 		$this->InputValueRoleName = $RoleName;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_ROLE_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_ROLE_NAME;
+		//FIELD_ROLE_NAME
+		$arrayElements[0]             = Config::FIELD_ROLE_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnRoleNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueRoleName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnRoleNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByRoleName($Limit1, $Limit2, $this->InputValueRoleName, 
 																	   $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("USER_SELECT_BY_ROLE_NAME_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("USER_SEL_BY_ROLE_NAME_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_ROLE_NAME_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_ROLE_NAME_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4302,41 +4305,41 @@ class Page
 		$this->InputValueTeamId = $TeamId;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TEAM_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TEAM_ID;
+		//FIELD_TEAM_ID
+		$arrayElements[0]             = Config::FIELD_TEAM_ID;
 		$arrayElementsClass[0]        = &$this->ReturnTeamIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueTeamId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTeamIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $this->InputValueTeamId, $ArrayInstanceUser, 
 																	 $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("USER_SELECT_BY_TEAM_ID_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("USER_SEL_BY_TEAM_ID_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_TEAM_ID_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_TEAM_ID_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4345,41 +4348,41 @@ class Page
 		$this->InputValueTicketId = $TicketId;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TICKET_ID
-		$arrayElements[0]             = Config::FORM_FIELD_TICKET_ID;
+		//FIELD_TICKET_ID
+		$arrayElements[0]             = Config::FIELD_TICKET_ID;
 		$arrayElementsClass[0]        = &$this->ReturnTicketIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[0]        = $this->InputValueTicketId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TICKET_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTicketId($Limit1, $Limit2, $this->InputValueTicketId, 
 																	   $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("TICKET_SELECT_BY_TICKET_ID_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("TICKET_SEL_BY_TICKET_ID_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("TICKET_SELECT_BY_TICKET_ID_ERROR");
-		return Config::RETURN_ERROR;	
+		$this->ShowDivReturnError("TICKET_SEL_BY_TICKET_ID_ERROR");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
@@ -4389,17 +4392,17 @@ class Page
 		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		//FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FORM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -4407,24 +4410,24 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
 																						   $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("USER_SEL_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
@@ -4434,17 +4437,17 @@ class Page
 		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TYPE_TICKET_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_TICKET_DESCRIPTION;
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_TICKET_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_TICKET_DESCRIPTION', 'FORM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -4452,24 +4455,24 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTypeTicketDescription($Limit1, $Limit2, $this->InputValueTypeTicketDescription,
 																	                $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("USER_SEL_BY_TYPE_TICKET_DESCRIPTION_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_TICKET_DESCRIPTION_ERROR");
-		return Config::RETURN_ERROR;	
+		$this->ShowDivReturnError("USER_SEL_BY_TYPE_TICKET_DESCRIPTION_ERROR");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, &$RowCount, $Debug)
@@ -4479,17 +4482,17 @@ class Page
 		$this->InputValueTypeUserDescription = $TypeUserDescription;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		//FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_DESCRIPTION', 'FM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -4497,24 +4500,24 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
 															                      $ArrayInstanceUser, $RowCount, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			elseif(empty($ArrayInstanceUser))
 			{
-				$this->ShowDivReturnWarning("USER_SELECT_BY_TYPE_USER_DESCRIPTION_WARNING");
-				return Config::RETURN_WARNING;	
+				$this->ShowDivReturnWarning("USER_SEL_BY_TYPE_USER_DESCRIPTION_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_TYPE_USER_DESCRIPTION_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_TYPE_USER_DESCRIPTION_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByUserEmail($UserEmail, &$UserInstance, $Debug)
@@ -4523,37 +4526,37 @@ class Page
 		$this->InputValueUserEmail = $UserEmail;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 60; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByUserEmail($this->InputValueUserEmail, 
 																		$InstanceUser, 
 																		$Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_SELECT_BY_USER_EMAIL_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("USER_SEL_BY_USER_EMAIL_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_USER_EMAIL_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug)
@@ -4562,35 +4565,35 @@ class Page
 		$this->InputValueUserEmail = $UserEmail;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_UNIQUE_ID
-		$arrayElements[0]             = Config::FORM_FIELD_USER_UNIQUE_ID;
+		//FIELD_USER_UNIQUE_ID
+		$arrayElements[0]             = Config::FIELD_USER_UNIQUE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
 		$arrayElementsInput[0]        = $this->InputValueUserUniqueId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 25; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserUniqueIdText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_UNIQUE_ID', 'FM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueUserEmail, $InstanceUser, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_SELECT_BY_USER_UNIQUE_ID_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("USER_SEL_BY_USER_UNIQUE_ID_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_BY_USER_UNIQUE_ID_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_BY_USER_UNIQUE_ID_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function  UserSelectExistsByUserEmail($Captcha, $UserEmail, $Debug)
@@ -4598,34 +4601,34 @@ class Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueCaptcha    = $Captcha;
 		$this->InputValueUserEmail  = $UserEmail;
-		$this->Session->GetSessionValue(Config::FORM_FIELD_CAPTCHA, $captcha);
+		$this->Session->GetSessionValue(Config::FIELD_CAPTCHA, $captcha);
 		$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 60; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, NULL);
 		
 		//CAPTCHA
-		$arrayElements[1]             = Config::FORM_FIELD_CAPTCHA;
+		$arrayElements[1]             = Config::FIELD_CAPTCHA;
 		$arrayElementsClass[1]        = &$this->ReturnCaptchaClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_COMPARE_STRING;
 		$arrayElementsInput[1]        = $this->InputValueCaptcha; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 0; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnCaptchaText;
-		array_push($arrayConstants, 'FORM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		array_push($arrayOptions, $captcha);
 		
@@ -4634,18 +4637,18 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectExistsByUserEmail($this->InputValueUserEmail, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_SELECT_EXISTS_BY_USER_EMAIL_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("USER_SEL_EXISTS_BY_USER_EMAIL_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_EXISTS_BY_USER_EMAIL_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_EXISTS_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug)
@@ -4654,35 +4657,35 @@ class Page
 		$this->InputValueUserEmail  = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[0]             = Config::FORM_FIELD_USER_EMAIL;
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 60; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($this->InputValueUserEmail, $HashCode, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_SELECT_HASH_CODE_BY_USER_EMAIL_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS");
+				return Config::RET_OK;
 			}
 		}
-		$this->ShowDivReturnError("USER_SELECT_HASH_CODE_BY_USER_EMAIL_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug)
@@ -4692,8 +4695,8 @@ class Page
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			return $instanceFacedePersistence->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug);
 		}
-		$this->ShowDivReturnError("REGISTER_CONFIRMATION_SELECT_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("REGISTER_CONFIRMATION_SEL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug)
@@ -4702,7 +4705,7 @@ class Page
 		$return = $instanceFacedePersistence->UserUpdateActiveByUserEmail($InstanceUser->GetEmail(),
 																	      $UserActiveNew,
 																		  $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$InstanceUser->SetUserActive($UserActiveNew);
 			$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
@@ -4720,15 +4723,15 @@ class Page
 			}
 			$this->ShowDivReturnSuccess($constant, TRUE);
 			$this->InputFocus = Config::DIV_RETURN;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+		elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return Config::RETURN_WARNING;
+			return Config::RET_WARNING;
 		}
-		$this->ShowDivReturnError("USER_UPDATE_ACTIVE_BY_USER_EMAIL_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_UPDT_ACTIVE_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
@@ -4747,69 +4750,69 @@ class Page
 		$this->InputValueRegistrationId        = $AssocUserCorporationRegistrationIdNew;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
-		$arrayElements[0]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY;
+		//FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+		$arrayElements[0]             = Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY;
 		$arrayElementsClass[0]        = &$this->ReturnRegistrationDateDayClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DATE_DAY;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DATE_DAY;
 		$arrayElementsInput[0]        = $this->InputValueRegistrationDateDay; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 0; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnRegistrationDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_DATE_DAY', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DATE_DAY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
-		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH
-		$arrayElements[1]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH;
+		//FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH
+		$arrayElements[1]             = Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH;
 		$arrayElementsClass[1]        = &$this->ReturnRegistrationDateMonthClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_DATE_MONTH;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DATE_MONTH;
 		$arrayElementsInput[1]        = $this->InputValueRegistrationDateMonth; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 0; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnRegistrationDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR
-		$arrayElements[2]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR;
+		//FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR
+		$arrayElements[2]             = Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR;
 		$arrayElementsClass[2]        = &$this->ReturnRegistrationDateYearClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_DATE_YEAR;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_DATE_YEAR;
 		$arrayElementsInput[2]        = $this->InputValueRegistrationDateYear; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 0; 
 		$arrayElementsNullable[2]     = TRUE;
 		$arrayElementsText[2]         = &$this->ReturnRegistrationDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID
-		$arrayElements[3]             = Config::FORM_FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID;
+		//FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID
+		$arrayElements[3]             = Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID;
 		$arrayElementsClass[3]        = &$this->ReturnRegistrationIdClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_REGISTRATION_ID;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_REGISTRATION_ID;
 		$arrayElementsInput[3]        = $this->InputValueRegistrationId; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 12; 
 		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnRegistrationIdText;
-		array_push($arrayConstants, 'FORM_INVALID_REGISTRATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_REGISTRATION_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[4]             = Config::FORM_FIELD_DEPARTMENT_NAME;
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[4]             = Config::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[4]        = &$this->ReturnDepartmentNameText;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[4]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[4]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 80; 
 		$arrayElementsNullable[4]     = TRUE;
 		$arrayElementsText[4]         = &$this->ReturnDepartmentNameClass;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE',  'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE',  'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -4817,7 +4820,7 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			if($this->InputValueDepartmentName == "")
 				$this->InputValueDepartmentName = NULL;
@@ -4836,19 +4839,19 @@ class Page
 															                                              $InstanceUser->GetCorporationName(),
 															                                              $InstanceUser->GetEmail(),
 															                                              $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("ASSOC_USER_CORPORATION_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("ASSOC_USER_CORPORATION_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("ASSOC_USER_CORPORATION_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("ASSOC_USER_CORPORATION_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserUpdateByUserEmail($BirthDateDayNew, $BirthDateMonthNew, $BirthDateYearNew, 
@@ -4892,167 +4895,167 @@ class Page
 				$this->InputValueTwoStepVerification = TRUE;
 			else $this->InputValueTwoStepVerification = FALSE;
 		
-		$this->InputFocus = Config::FORM_FIELD_USER_NAME;
+		$this->InputFocus = Config::FIELD_USER_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_USER_NAME
-		$arrayElements[0]             = Config::FORM_FIELD_USER_NAME;
+		//FIELD_USER_NAME
+		$arrayElements[0]             = Config::FIELD_USER_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueUserName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnUserNameText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_NAME', 'FM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_UNIQUE_ID
-		$arrayElements[1]             = Config::FORM_FIELD_USER_UNIQUE_ID;
+		//FIELD_USER_UNIQUE_ID
+		$arrayElements[1]             = Config::FIELD_USER_UNIQUE_ID;
 		$arrayElementsClass[1]        = &$this->ReturnUserUniqueIdClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
 		$arrayElementsInput[1]        = $this->InputValueUserUniqueId; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 25; 
-		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnUserUniqueIdText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_UNIQUE_ID', 'FM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
-		$arrayElements[2]             = Config::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
+		//FIELD_USER_PHONE_PRIMARY_PREFIX
+		$arrayElements[2]             = Config::FIELD_USER_PHONE_PRIMARY_PREFIX;
 		$arrayElementsClass[2]        = &$this->ReturnUserPhonePrimaryPrefixClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[2]        = $this->InputValueUserPhonePrimaryPrefix; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 3; 
 		$arrayElementsNullable[2]     = TRUE;
 		$arrayElementsText[2]         = &$this->ReturnUserPhonePrimaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_PHONE_PRIMARY
-		$arrayElements[3]             = Config::FORM_FIELD_USER_PHONE_PRIMARY;
+		//FIELD_USER_PHONE_PRIMARY
+		$arrayElements[3]             = Config::FIELD_USER_PHONE_PRIMARY;
 		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimary; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 9; 
 		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_PRIMARY', 'FM_INVALID_USER_PHONE_PRIMARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
-		$arrayElements[4]             = Config::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
+		//FIELD_USER_PHONE_SECONDARY_PREFIX
+		$arrayElements[4]             = Config::FIELD_USER_PHONE_SECONDARY_PREFIX;
 		$arrayElementsClass[4]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[4]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[4]        = $this->InputValueUserPhoneSecondaryPrefix; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 3; 
 		$arrayElementsNullable[4]     = TRUE;
 		$arrayElementsText[4]         = &$this->ReturnUserPhoneSecondaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_PHONE_SECONDARY
-		$arrayElements[5]             = Config::FORM_FIELD_USER_PHONE_SECONDARY;
+		//FIELD_USER_PHONE_SECONDARY
+		$arrayElements[5]             = Config::FIELD_USER_PHONE_SECONDARY;
 		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryClass;
 		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = Config::FORM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[5]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
 		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondary; 
 		$arrayElementsMinValue[5]     = 0; 
 		$arrayElementsMaxValue[5]     = 9; 
 		$arrayElementsNullable[5]     = TRUE;
 		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_USER_PHONE_SECONDARY', 'FM_INVALID_USER_PHONE_SECONDARY_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_BIRTH_DATE_DAY
-		$arrayElements[6]             = Config::FORM_FIELD_USER_BIRTH_DATE_DAY;
+		//FIELD_USER_BIRTH_DATE_DAY
+		$arrayElements[6]             = Config::FIELD_USER_BIRTH_DATE_DAY;
 		$arrayElementsClass[6]        = &$this->ReturnBirthDateDayClass;
 		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = Config::FORM_VALIDATE_FUNCTION_DATE_DAY;
+		$arrayElementsForm[6]         = Config::FM_VALIDATE_FUNCTION_DATE_DAY;
 		$arrayElementsInput[6]        = $this->InputValueBirthDateDay; 
 		$arrayElementsMinValue[6]     = 0; 
 		$arrayElementsMaxValue[6]     = 0; 
 		$arrayElementsNullable[6]     = FALSE;
 		$arrayElementsText[6]         = &$this->ReturnBirthDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_BIRTH_DATE_MONTH
-		$arrayElements[7]             = Config::FORM_FIELD_USER_BIRTH_DATE_MONTH;
+		//FIELD_USER_BIRTH_DATE_MONTH
+		$arrayElements[7]             = Config::FIELD_USER_BIRTH_DATE_MONTH;
 		$arrayElementsClass[7]        = &$this->ReturnBirthDateMonthClass;
 		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = Config::FORM_VALIDATE_FUNCTION_DATE_MONTH;
+		$arrayElementsForm[7]         = Config::FM_VALIDATE_FUNCTION_DATE_MONTH;
 		$arrayElementsInput[7]        = $this->InputValueBirthDateMonth; 
 		$arrayElementsMinValue[7]     = 0; 
 		$arrayElementsMaxValue[7]     = 0; 
 		$arrayElementsNullable[7]     = FALSE;
 		$arrayElementsText[7]         = &$this->ReturnBirthDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_BIRTH_DATE_YEAR
-		$arrayElements[8]             = Config::FORM_FIELD_USER_BIRTH_DATE_YEAR;
+		//FIELD_USER_BIRTH_DATE_YEAR
+		$arrayElements[8]             = Config::FIELD_USER_BIRTH_DATE_YEAR;
 		$arrayElementsClass[8]        = &$this->ReturnBirthDateYearClass;
 		$arrayElementsDefaultValue[8] = ""; 
-		$arrayElementsForm[8]         = Config::FORM_VALIDATE_FUNCTION_DATE_YEAR;
+		$arrayElementsForm[8]         = Config::FM_VALIDATE_FUNCTION_DATE_YEAR;
 		$arrayElementsInput[8]        = $this->InputValueBirthDateYear; 
 		$arrayElementsMinValue[8]     = 0; 
 		$arrayElementsMaxValue[8]     = 0; 
 		$arrayElementsNullable[8]     = FALSE;
 		$arrayElementsText[8]         = &$this->ReturnBirthDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_GENDER
-		$arrayElements[9]             = Config::FORM_FIELD_USER_GENDER;
+		//FIELD_USER_GENDER
+		$arrayElements[9]             = Config::FIELD_USER_GENDER;
 		$arrayElementsClass[9]        = &$this->ReturnGenderClass;
 		$arrayElementsDefaultValue[9] = ""; 
-		$arrayElementsForm[9]         = Config::FORM_VALIDATE_FUNCTION_GENDER;
+		$arrayElementsForm[9]         = Config::FM_VALIDATE_FUNCTION_GENDER;
 		$arrayElementsInput[9]        = $this->InputValueGender; 
 		$arrayElementsMinValue[9]     = 0; 
 		$arrayElementsMaxValue[9]     = 0; 
 		$arrayElementsNullable[9]     = FALSE;
 		$arrayElementsText[9]         = &$this->ReturnGenderText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 							 
-		//FORM_FIELD_COUNTRY_NAME
-		$arrayElements[10]             = Config::FORM_FIELD_COUNTRY_NAME;
+		//FIELD_COUNTRY_NAME
+		$arrayElements[10]             = Config::FIELD_COUNTRY_NAME;
 		$arrayElementsClass[10]        = &$this->ReturnCountryClass;
 		$arrayElementsDefaultValue[10] = ""; 
-		$arrayElementsForm[10]         = Config::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
+		$arrayElementsForm[10]         = Config::FM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
 		$arrayElementsInput[10]        = $this->InputValueCountry; 
 		$arrayElementsMinValue[10]     = 0; 
 		$arrayElementsMaxValue[10]     = 45; 
 		$arrayElementsNullable[10]     = FALSE;
 		$arrayElementsText[10]         = &$this->ReturnCountryText;
-		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//FORM_FIELD_USER_REGION
-		$arrayElements[11]             = Config::FORM_FIELD_USER_REGION;
+		//FIELD_USER_REGION
+		$arrayElements[11]             = Config::FIELD_USER_REGION;
 		$arrayElementsClass[11]        = &$this->ReturnRegionClass;
 		$arrayElementsDefaultValue[11] = ""; 
-		$arrayElementsForm[11]         = Config::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
+		$arrayElementsForm[11]         = Config::FM_VALIDATE_FUNCTION_NOT_NUMBER;
 		$arrayElementsInput[11]        = $this->InputValueRegion; 
 		$arrayElementsMinValue[11]     = 0; 
 		$arrayElementsMaxValue[11]     = 45; 
 		$arrayElementsNullable[11]     = TRUE;
 		$arrayElementsText[11]         = &$this->ReturnRegionText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_REGION', 'FM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -5060,7 +5063,7 @@ class Page
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions, $arrayExtraField);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth . "-" 
 			 . $this->InputValueBirthDateDay;
@@ -5082,7 +5085,8 @@ class Page
 																	    $this->InputValueUserPhoneSecondaryPrefix,
 																	    $this->InputValueUserUniqueId,
 																	    $Debug);
-			if($return == Config::SUCCESS)
+			
+			if($return == Config::RET_OK)
 			{
 				$InstanceUser->UpdateUser(NULL, NULL, NULL, $birthDate, NULL, $this->InputValueCountry, NULL, NULL,
 										  $this->InputValueGender, NULL, NULL, $this->InputValueUserName, $this->InputValueRegion, 
@@ -5091,22 +5095,22 @@ class Page
 										  $this->InputValueUserConfirmed, $this->InputValueUserPhonePrimary,
 										  $this->InputValueUserPhonePrimaryPrefix, $this->InputValueUserPhoneSecondary,
 										  $this->InputValueUserPhoneSecondaryPrefix, NULL, $this->InputValueUserUniqueId);
-				$this->ShowDivReturnSuccess("ACCOUNT_UPDATE_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("ACCOUNT_UPDT_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
-			elseif($return == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
 				$this->ShowDivReturnError("UPDATE_ERROR_USER_UNIQUE_ID");
-				return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
+				return Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
 			}
 		}
-		$this->ShowDivReturnError("ACCOUNT_UPDATE_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("ACCOUNT_UPDT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserUpdateCorporationByUserEmail($CorporationNameNew, &$InstanceUser, $Debug)
@@ -5115,88 +5119,88 @@ class Page
 		$this->InputValueCorporationName = $CorporationNameNew;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_USER_CORPORATION_SELECT
-		$arrayElements[0]             = Config::FORM_FIELD_CORPORATION_NAME;
+		//FIELD_USER_CORPORATION_SEL
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnUserCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME',
-				                    'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME',
+				                    'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
-			if($this->InputValueCorporationName == Config::FORM_FIELD_SELECT_NONE)
+			if($this->InputValueCorporationName == Config::FIELD_SEL_NONE)
 				$this->InputValueCorporationName = NULL;
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserUpdateCorporationByUserEmail($this->InputValueCorporationName,
 			                                                                     $InstanceUser->GetEmail(),
 																				 $Debug);
-			if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() != NULL)
+			if($return == Config::RET_OK && $InstanceUser->GetCorporationName() != NULL)
 			{
 				$return = $instanceFacedePersistence->AssocUserCorporationDelete(
 					                                     $InstanceUser->GetCorporationName(),
 			                                             $InstanceUser->GetEmail(),
 														 $Debug, NULL, TRUE);
-				if($return == Config::SUCCESS && $this->InputValueCorporationName != NULL)
+				if($return == Config::RET_OK && $this->InputValueCorporationName != NULL)
 					$instanceFacedePersistence->AssocUserCorporationInsert(
 					                                     $this->InputValueCorporationName,
 														 NULL, NULL,
 			                                             $InstanceUser->GetEmail(),
 														 $Debug, NULL, TRUE);
 			}	
-			else if($return == Config::SUCCESS && $InstanceUser->GetCorporationName() == NULL)
+			else if($return == Config::RET_OK && $InstanceUser->GetCorporationName() == NULL)
 				$return = $instanceFacedePersistence->AssocUserCorporationInsert(
 					                                     $this->InputValueCorporationName,
 														 NULL, NULL,
 			                                             $InstanceUser->GetEmail(),
 														 $Debug, NULL, TRUE);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$return = $instanceFacedePersistence->UserUpdateDepartmentByUserEmailAndCorporation(
 					                                                         $this->InputValueCorporationName, 
 																			 NULL, 
 																			 $InstanceUser->GetEmail(), 
 																			 $Debug);
-				if($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
-					$return = Config::SUCCESS;
+				if($return == Config::DB_ERROR_UPDT_SAME_VALUE)
+					$return = Config::RET_OK;
 			}
-			if($return == Config::SUCCESS && $this->InputValueCorporationName != NULL)
+			if($return == Config::RET_OK && $this->InputValueCorporationName != NULL)
 			{
 				$instanceFacedePersistence->CorporationSelectByName($this->InputValueCorporationName, $instanceCorporation, $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$InstanceUser->SetCorporation($instanceCorporation);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
 					$this->UserLoadData($InstanceUser);
 					$this->ShowDivReturnSuccess("USER_CHANGE_CORPORATION_SUCCESS");
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				}
 			}
-			if($return == Config::SUCCESS && $this->InputValueCorporationName == NULL)
+			if($return == Config::RET_OK && $this->InputValueCorporationName == NULL)
 			{
 				$InstanceUser->SetCorporation(NULL);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
 				$this->UserLoadData($InstanceUser);
 				$this->ShowDivReturnSuccess("USER_CHANGE_CORPORATION_SUCCESS");
-				return Config::SUCCESS;	
+				return Config::RET_OK;	
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("USER_CHANGE_CORPORATION_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserUpdatePasswordByUserEmail($ResetCode, $UserPasswordNew, $UserPasswordNewRepeat, $UserEmail, $Debug)
@@ -5206,11 +5210,11 @@ class Page
 		$this->InputValueRepeatPassword  = $UserPasswordNewRepeat;
 		$arrayConstants = array(); $arrayExtraField = array(); $arrayOptions = array(); $matrixConstants = array();
 
-		//FORM_FIELD_PASSWORD_NEW
-		$arrayElements[0]             = Config::FORM_FIELD_PASSWORD_NEW;
+		//FIELD_PASSWORD_NEW
+		$arrayElements[0]             = Config::FIELD_PASSWORD_NEW;
 		$arrayElementsClass[0]        = &$this->ReturnPasswordClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_PASSWORD;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_PASSWORD;
 		$arrayElementsInput[0]        = $this->InputValueNewPassword; 
 		$arrayElementsMinValue[0]     = 8; 
 		$arrayElementsMaxValue[0]     = 18; 
@@ -5222,11 +5226,11 @@ class Page
 		array_push($matrixConstants, $arrayConstants);
 		
 		//RESET_CODE
-		$this->Session->GetSessionValue(Config::FORM_FIELD_PASSWORD_RESET_CODE, $code);
-		$arrayElements[1]             = Config::FORM_FIELD_PASSWORD_RESET_CODE;
+		$this->Session->GetSessionValue(Config::FIELD_PASSWORD_RESET_CODE, $code);
+		$arrayElements[1]             = Config::FIELD_PASSWORD_RESET_CODE;
 		$arrayElementsClass[1]        = &$this->ReturnCodeClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = Config::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_COMPARE_STRING;
 		$arrayElementsInput[1]        = $this->InputValueCode; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 0; 
@@ -5242,23 +5246,23 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug, $arrayOptions,
 											$arrayExtraField);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserUpdatePasswordByUserEmail($UserEmail, $this->InputValueNewPassword, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_UPDATE_USER_PASSWORD_SUCCESS");
-				return Config::SUCCESS;
+				$this->ShowDivReturnSuccess("USER_UPDT_USER_PASSWORD_SUCCESS");
+				return Config::RET_OK;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
-				$this->ShowDivReturnWarning("USER_UPDATE_USER_PASSWORD_WARNING");
-				return Config::RETURN_WARNING;
+				$this->ShowDivReturnWarning("USER_UPDT_USER_PASSWORD_WARNING");
+				return Config::RET_WARNING;
 			}
 		}
-		$this->ShowDivReturnError("USER_UPDATE_USER_PASSWORD_ERROR");
-		return Config::RETURN_ERROR;
+		$this->ShowDivReturnError("USER_UPDT_USER_PASSWORD_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserUpdatePasswordRandomByUserEmail($Application, &$InstanceUser, $Debug)
@@ -5269,27 +5273,27 @@ class Page
 		$return = $instanceFacedePersistence->UserUpdatePasswordByUserEmail($InstanceUser->GetEmail(), 
 		                                                                    $newRandomPassword,
 																		    $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedeBusiness->SendEmailPasswordReset($Application, 
 																	  $InstanceUser->GetName(),
 										                              $InstanceUser->GetEmail(),
 										                              $newRandomPassword, $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("PASSWORD_RESET_SUCCESS");
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			$this->ShowDivReturnError("SEND_EMAIL_ERROR");
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
-		elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+		elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 		{
 			$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-			return Config::RETURN_WARNING;	
+			return Config::RET_WARNING;	
 		}
 		$this->ShowDivReturnError("PASSWORD_RESET_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	protected function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug)
@@ -5298,39 +5302,39 @@ class Page
 		$this->InputValueUserConfirmed = $UserConfirmedNew;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_USER_CONFIRMED
-		$arrayElements[0]             = Config::FORM_FIELD_USER_CONFIRMED;
+		//FIELD_USER_CONFIRMED
+		$arrayElements[0]             = Config::FIELD_USER_CONFIRMED;
 		$arrayElementsClass[0]        = &$this->ReturnUserConfirmedClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueUserConfirmed; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnUserConfirmedText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_CONFIRMED', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_CONFIRMED', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $this->InputValueHeaderDebug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
-				$this->ShowDivReturnSuccess("USER_UPDATE_USER_CONFIRMED_SUCCESS");
+				$this->ShowDivReturnSuccess("USER_UPDT_USER_CONFIRMED_SUCCESS");
 				return $return;
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}	
-		$this->ShowDivReturnError("USER_UPDATE_USER_CONFIRMED_ERROR");
+		$this->ShowDivReturnError("USER_UPDT_USER_CONFIRMED_ERROR");
 		return $return;
 	}
 	
@@ -5340,51 +5344,51 @@ class Page
 		$this->InputValueTypeUserDescription = $TypeUserDescriptionNew;	
 		$arrayConstants = array(); $matrixConstants = array();
 			
-		//FORM_FIELD_TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FORM_FIELD_TYPE_USER_DESCRIPTION;
+		//FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $Debug);
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
-			if($this->InputValueTypeUserDescription == Config::FORM_FIELD_SELECT_NONE)
+			if($this->InputValueTypeUserDescription == Config::FIELD_SEL_NONE)
 				$this->InputValueTypeUserDescription = NULL;
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserUpdateUserTypeByUserEmail($InstanceUser->GetEmail(),
 																			    $this->InputValueTypeUserDescription,
 																			    $Debug);
-			if($return == Config::SUCCESS)
+			if($return == Config::RET_OK)
 			{
 				$instanceFacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
 																				$instanceTypeUser, $Debug);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$InstanceUser->SetUserType($instanceTypeUser);
 					$this->Session->SetSessionValue(Config::SESS_ADMIN_USER, $InstanceUser);
 					$this->ShowDivReturnSuccess("USER_CHANGE_USER_TYPE_SUCCESS");
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				}
 			}
-			elseif($return == Config::MYSQL_ERROR_UPDATE_SAME_VALUE)
+			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
-				return Config::RETURN_WARNING;
+				return Config::RET_WARNING;
 			}
 		}
 		$this->ShowDivReturnError("USER_CHANGE_CORPORATION_ERROR");
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	public function CheckInputImage($Input)
@@ -5403,8 +5407,8 @@ class Page
 			if($this->User->GetUserConfirmed())
 			{
 				if($this->Session->GetSessionValue(Config::SESS_LOGIN_TWO_STEP_VERIFICATION, 
-															   $value) != Config::SUCCESS)
-					return Config::SUCCESS;
+															   $value) != Config::RET_OK)
+					return Config::RET_OK;
 				else return Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED;
 			}
 			else return Config::USER_NOT_CONFIRMED;
@@ -5414,9 +5418,9 @@ class Page
 	
 	public function CheckLogin($Debug)
 	{
-		if (isset($_POST[Config::LOGIN_FORM_SUBMIT]))
+		if (isset($_POST[Config::LOGIN_FM_SB]))
 		{
-			$this->InputValueLoginEmail     = $_POST[Config::FORM_FIELD_LOGIN];
+			$this->InputValueLoginEmail     = $_POST[Config::FIELD_LOGIN];
 			$this->InputValueLoginPassword  = $_POST[Config::LOGIN_PASSWORD];
 			//VALIDA LOGIN
 			if(!empty($this->InputValueLoginEmail) && !empty($this->InputValueLoginPassword))
@@ -5426,7 +5430,7 @@ class Page
 				else
 				{
 					$this->ShowDivReturnError("LOGIN_INVALID_LOGIN");
-					return Config::RETURN_ERROR;
+					return Config::RET_ERROR;
 				}
 			}
 			else
@@ -5435,20 +5439,20 @@ class Page
 				$this->ShowDivReturnError("");
 			}
 		}
-		elseif(isset($_POST[Config::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT]))
+		elseif(isset($_POST[Config::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB]))
 		{
-			if($this->ExecuteLoginSecondPhaseVerirication() == Config::SUCCESS)
+			if($this->ExecuteLoginSecondPhaseVerirication() == Config::RET_OK)
 			{
 				$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);
-				return Config::SUCCESS;	
+				return Config::RET_OK;	
 			}
 			$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);	
 			$this->ShowDivReturnError("LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR");
-			return Config::RETURN_ERROR;
+			return Config::RET_ERROR;
 		}
-		elseif(isset($_POST[Config::LOGIN_FORM_SUBMIT_FORGOT_PASSWORD]))
+		elseif(isset($_POST[Config::LOGIN_FM_SB_FORGOT_PASSWORD]))
 		{
-			$this->InputValueLoginEmail     = $_POST[Config::FORM_FIELD_LOGIN];
+			$this->InputValueLoginEmail     = $_POST[Config::FIELD_LOGIN];
 			Page::GetCurrentDomain($domain);
 			if($this->InputValueLoginEmail != "")
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
@@ -5466,31 +5470,31 @@ class Page
 			if(strpos($getElementKey, $Key) !== false)
 			{
 				if($getElementKey == $Key) 
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($getElementKey == $Key."_x")
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($getElementKey == $Key."Back_x")
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($getElementKey == $Key."Forward_x")
-					return Config::SUCCESS;
+					return Config::RET_OK;
 			}
 		}
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	public function CheckGetOrPostContainsKey($Key)
 	{
-		if($this->CheckGetContainsKey($Key) == Config::SUCCESS)
+		if($this->CheckGetContainsKey($Key) == Config::RET_OK)
 		{
 			$_POST = $_GET;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		elseif($this->CheckPostContainsKey($Key) == Config::SUCCESS)
+		elseif($this->CheckPostContainsKey($Key) == Config::RET_OK)
 		{
 			$_GET = $_POST;
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	public function CheckPostContainsKey($Key)
@@ -5500,16 +5504,16 @@ class Page
 			if(strpos($postElementKey, $Key) !== false)
 			{
 				if($postElementKey == $Key) 
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($postElementKey == $Key."_x")
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($postElementKey == $Key."Back_x")
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($postElementKey == $Key."Forward_x")
-					return Config::SUCCESS;
+					return Config::RET_OK;
 			}
 		}
-		return Config::RETURN_ERROR;
+		return Config::RET_ERROR;
 	}
 	
 	public function GetCurrentPage()
@@ -5527,7 +5531,7 @@ class Page
 		{
 			echo Config::HTML_TAG_HEAD_START;
 			$return = $this->IncludeHeadGeneric();
-			if ($return == Config::SUCCESS)
+			if ($return == Config::RET_OK)
 			{
 				if($this->Device == Page::DEVICE_MOBILE)
 					$prefix = "Mobile";
@@ -5597,7 +5601,7 @@ class Page
 			echo Config::HTML_TAG_HEAD_END;
 			return $return;
 		}
-		else return Config::PARAMETERS_NULL;
+		else return Config::RET_ERROR;
 	}
 	
 	public function IncludeHeadGeneric()
@@ -5605,7 +5609,7 @@ class Page
 		if (file_exists (REL_PATH . Config::PATH_HEAD . Config::HEAD_GENERIC))
 		{
 			include_once(REL_PATH . Config::PATH_HEAD . Config::HEAD_GENERIC);
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		else return self::ERROR_HEAD_GENERIC_NOT_EXISTS;
 	}
@@ -5617,16 +5621,16 @@ class Page
 			if (file_exists (REL_PATH . Config::PATH_HEAD . Config::HEAD_JAVASCRIPT))
 			{
 				include_once(REL_PATH . Config::PATH_HEAD . Config::HEAD_JAVASCRIPT);
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ERROR_HEAD_JAVASCRIPT_NOT_EXISTS;
 		}
-		else return Config::SUCCESS;
+		else return Config::RET_OK;
 	}
 	
 	public function LoadPage()
 	{	
-		if(!$this->PageEnabled) return Config::RETURN_ERROR;
+		if(!$this->PageEnabled) return Config::RET_ERROR;
 		$this->LoadHtml(FALSE);
 	}
 	
@@ -5641,7 +5645,7 @@ class Page
 			$this->LoadInstanceUser();
 			$this->LoadPageDependenciesDevice();
 			$this->LoadPageDependenciesDebug();
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
 		else return self::ERROR_LANGUAGE_INSTANCE_NOT_CREATED;
 	}
@@ -5652,9 +5656,9 @@ class Page
 		{
 			if($this->User->CheckSuperUser())
 			{
-				if(!isset($_POST[Config::FORM_FIELD_HEADER_DEBUG]) && !isset($_POST[Config::FORM_FIELD_HEADER_DEBUG_HIDDEN]))
+				if(!isset($_POST[Config::FIELD_HEADER_DEBUG]) && !isset($_POST[Config::FIELD_HEADER_DEBUG_HIDDEN]))
 					$this->Session->GetSessionValue(Config::SESS_DEBUG, $this->InputValueHeaderDebug);
-				if($this->InputValueHeaderDebug == Config::CHECKBOX_CHECKED || isset($_POST[Config::FORM_FIELD_HEADER_DEBUG]))
+				if($this->InputValueHeaderDebug == Config::CHECKBOX_CHECKED || isset($_POST[Config::FIELD_HEADER_DEBUG]))
 				{
 					$this->StartPageLoadTime();
 					$this->InputValueHeaderDebug = Config::CHECKBOX_CHECKED;
@@ -5680,17 +5684,17 @@ class Page
 			$this->Device = Page::DEVICE_MOBILE;
 		else $this->Device = Page::DEVICE_DESKTOP;
 		
-		if(!isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT]) && !isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT_HIDDEN]))
+		if(!isset($_POST[Config::FIELD_HEADER_LAYOUT]) && !isset($_POST[Config::FIELD_HEADER_LAYOUT_HIDDEN]))
 			$this->Session->GetSessionValue(Config::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
 		
-		if(isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT]))
+		if(isset($_POST[Config::FIELD_HEADER_LAYOUT]))
 		{
 			$this->Device = Page::DEVICE_MOBILE;
 			$this->InputValueHeaderLayout = Config::CHECKBOX_CHECKED;
 			$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
 
 		}
-		elseif(isset($_POST[Config::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
+		elseif(isset($_POST[Config::FIELD_HEADER_LAYOUT_HIDDEN])) 
 			$this->InputValueHeaderLayout = Config::CHECKBOX_UNCHECKED;
 		else
 		{
@@ -5707,7 +5711,7 @@ class Page
 	public function LoadNotConfirmedToolTip()
 	{
 		$this->ShowDivReturnWarning(Config::USER_NOT_CONFIRMED);
-		return Config::RETURN_WARNING;
+		return Config::RET_WARNING;
 	}
 	
 	public function RedirectPage($Page)
@@ -5716,19 +5720,19 @@ class Page
 		if ($Page == NULL)
 		{
 			$return = Page::GetCurrentDomain($Page);
-			if ($return == Config::SUCCESS)
+			if ($return == Config::RET_OK)
 			{
 				header("Location: $Page");
 			}
-			else return Config::RETURN_ERROR;
+			else return Config::RET_ERROR;
 		}
 		else header("Location: $Page");
 	}
 	
 	public function ShowDivReturnError($Constant, $ConstanteIsText = FALSE)
 	{
-		$this->ReturnClass = Config::FORM_BACKGROUND_ERROR;
-		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
+		$this->ReturnClass = Config::FM_BACKGROUND_ERROR;
+		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FM_IMAGE_ERROR . "' alt='ReturnImage'/>";
 		if(isset($Constant))
 		{
 			if(($Constant) != NULL)
@@ -5749,8 +5753,8 @@ class Page
 	
 	public function ShowDivReturnSuccess($Constant, $ConstanteIsText = FALSE)
 	{
-		$this->ReturnClass = Config::FORM_BACKGROUND_SUCCESS;
-		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
+		$this->ReturnClass = Config::FM_BACKGROUND_SUCCESS;
+		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
 		if(isset($Constant))
 		{
 			if(($Constant) != NULL)
@@ -5764,8 +5768,8 @@ class Page
 	
 	public function ShowDivReturnWarning($Constant, $ConstanteIsText = FALSE)
 	{
-		$this->ReturnClass = Config::FORM_BACKGROUND_WARNING;
-		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
+		$this->ReturnClass = Config::FM_BACKGROUND_WARNING;
+		$this->ReturnImage = "<img src='" . $this->Config->DefaultServerImage . Config::FM_IMAGE_WARNING . "' alt='ReturnImage'/>";
 		if(isset($Constant))
 		{
 			if(($Constant) != NULL)
@@ -5819,9 +5823,9 @@ class Page
 			{
 				$pageUrl .= $_SERVER[self::SERVER_NAME].$_SERVER[self::REQUEST_URI];
 			}
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	public static function GetCurrentDomain(&$currentDomain)
@@ -5840,9 +5844,9 @@ class Page
 			$currentDomain .= "://";
 			$currentDomain .= $_SERVER[self::SERVER_NAME];
 			$currentDomain .= "/";
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 	
 	public static function GetCurrentDomainWithPort(&$currentDomain)
@@ -5861,9 +5865,9 @@ class Page
 			$currentDomain .= "://";
 			$currentDomain .= $_SERVER[self::SERVER_NAME] . ":" . $_SERVER[self::SERVER_PORT];
 			$currentDomain .= "/";
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		}
-		else return Config::RETURN_ERROR;
+		else return Config::RET_ERROR;
 	}
 }
 ?>

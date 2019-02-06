@@ -45,30 +45,30 @@ class PageServiceSelect extends PageInfraTools
 
 	public function LoadPage()
 	{
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
 			$this->InputValueServiceIdRadio = ConfigInfraTools::CHECKBOX_CHECKED;
 			$this->ReturnServiceIdRadioClass = "NotHidden";
 			$this->ReturnServiceNameRadioClass = "Hidden";
-			if($this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_SELECT_SUBMIT) == ConfigInfraTools::SUCCESS ||
-			   $this->CheckGetOrPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST_BY_NAME) == ConfigInfraTools::SUCCESS)
+			if($this->CheckGetOrPostContainsKey(ConfigInfraTools::FM_SERVICE_SEL_SB) == ConfigInfraTools::RET_OK ||
+			   $this->CheckGetOrPostContainsKey(ConfigInfraTools::FM_SERVICE_LST_BY_NAME) == ConfigInfraTools::RET_OK)
 			{
-				if(isset($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_RADIO]))
+				if(isset($_POST[ConfigInfraTools::FIELD_SERVICE_RADIO]))
 				{
-					if($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_RADIO] == ConfigInfraTools::FORM_FIELD_SERVICE_ID_RADIO)
+					if($_POST[ConfigInfraTools::FIELD_SERVICE_RADIO] == ConfigInfraTools::FIELD_SERVICE_ID_RADIO)
 					{
 						if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceIdOnUserContext', 
-												  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID],
+												  array($_POST[ConfigInfraTools::FIELD_SERVICE_ID],
 														$this->User->GetEmail(),
 														&$this->InstanceInfraToolsService,
 													    &$this->InputValueTypeAssocUserServiceId),
-												  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+												  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						{
 							Page::GetCurrentDomain($domain);
 							$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_ID]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FIELD_SERVICE_ID]);
 						}
 						else $this->ShowDivReturnError("SERVICE_NOT_FOUND");
 					}
@@ -77,18 +77,18 @@ class PageServiceSelect extends PageInfraTools
 						$this->ReturnServiceIdRadioClass   = "Hidden";
 						$this->ReturnServiceNameRadioClass = "NotHidden";
 						$this->InputValueServiceNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-						$_POST = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_POST;
+						$_POST = array(ConfigInfraTools::FM_SERVICE_LST => ConfigInfraTools::FM_SERVICE_LST) + $_POST;
 						if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
-												  array($_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
+												  array($_POST[ConfigInfraTools::FIELD_SERVICE_NAME],
 														$this->User->GetEmail(),
 														&$this->ArrayInstanceInfraToolsService),
-												  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+												  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						{
 							Page::GetCurrentDomain($domain);
 							$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
-											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_NAME . "=" 
-											. $_POST[ConfigInfraTools::FORM_FIELD_SERVICE_NAME]);
+											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_LST_BY_NAME)
+											. "?" . ConfigInfraTools::FIELD_SERVICE_NAME . "=" 
+											. $_POST[ConfigInfraTools::FIELD_SERVICE_NAME]);
 						}
 						else $this->ShowDivReturnError("SERVICE_NOT_FOUND");
 					}
@@ -98,35 +98,35 @@ class PageServiceSelect extends PageInfraTools
 					$this->ReturnServiceIdRadioClass   = "Hidden";
 					$this->ReturnServiceNameRadioClass = "NotHidden";
 					$this->InputValueServiceNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-					$_POST = array(ConfigInfraTools::FORM_SERVICE_LIST => ConfigInfraTools::FORM_SERVICE_LIST) + $_POST;
+					$_POST = array(ConfigInfraTools::FM_SERVICE_LST => ConfigInfraTools::FM_SERVICE_LST) + $_POST;
 					if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
-											  array($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME],
+											  array($_GET[ConfigInfraTools::FIELD_SERVICE_NAME],
 													$this->User->GetEmail(),
 													&$this->ArrayInstanceInfraToolsService),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					{
-						$this->PageBody = ConfigInfraTools::PAGE_SERVICE_LIST_BY_NAME;
+						$this->PageBody = ConfigInfraTools::PAGE_SERVICE_LST_BY_NAME;
 						$this->ShowDivReturnEmpty();
 					}
 					else $this->ShowDivReturnError("SERVICE_NOT_FOUND");
 				}	
 			}
-			elseif($this->CheckPostContainsKey(ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT) 
-				                               == ConfigInfraTools::SUCCESS)
+			elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB) 
+				                               == ConfigInfraTools::RET_OK)
 			{
 
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB]);
 			}
-			elseif($this->CheckGetContainsKey(ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_SUBMIT) == ConfigInfraTools::SUCCESS)
+			elseif($this->CheckGetContainsKey(ConfigInfraTools::FM_SERVICE_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 			{
-				$return = $this->InfraToolsServiceDeleteByServiceId($_POST[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID], 
+				$return = $this->InfraToolsServiceDeleteByServiceId($_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID], 
 												   $this->User->GetEmail(), 
 												   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$this->InputValueServiceIdRadio = "checked";
 					
@@ -136,13 +136,13 @@ class PageServiceSelect extends PageInfraTools
 					$retImage = $this->ReturnImage;
 					$retClass = $this->ReturnClass;
 					$retText  = $this->ReturnText;
-					$this->InputValueServiceId = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ID];
+					$this->InputValueServiceId = $_GET[ConfigInfraTools::FIELD_SERVICE_ID];
 					$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 																		   $this->User->GetEmail(),
 																		   $this->InstanceInfraToolsService,
 																		   $this->InputValueTypeAssocUserServiceId,
 																		   $this->InputValueHeaderDebug);
-					if($return == ConfigInfraTools::SUCCESS)
+					if($return == ConfigInfraTools::RET_OK)
 					{
 						$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
 						$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
@@ -152,7 +152,7 @@ class PageServiceSelect extends PageInfraTools
 					}
 				}
 			}
-			elseif(isset($_GET[ConfigInfraTools::FORM_SERVICE_VIEW_DELETE_HIDDEN_ID]))
+			elseif(isset($_GET[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID]))
 			{
 				$this->InputValueServiceIdRadio = "checked";
 				$this->ReturnServiceIdRadioClass = "NotHidden";
@@ -162,13 +162,13 @@ class PageServiceSelect extends PageInfraTools
 																	   $this->InstanceInfraToolsService,
 																	   $this->InputValueTypeAssocUserServiceId,
 																	   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
 					$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
 					$this->ShowDivReturnEmpty();
 				}
-				else $this->ShowDivReturnSuccess("SERVICE_DELETE_SUCCESS");
+				else $this->ShowDivReturnSuccess("SERVICE_DEL_SUCCESS");
 			}
 			else
 			{

@@ -335,7 +335,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																					 $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocIpAddressService = $this->Factory->CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4(
@@ -352,7 +352,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocIpAddressService = $this->Factory->CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceInsert(
@@ -369,7 +369,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                              &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocIpAddressService = $this->Factory->CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceSelect(
@@ -389,7 +389,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																					 $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocIpAddressService = $this->Factory->CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4(
@@ -407,7 +407,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	 $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocIpAddressService = $this->Factory->CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceSelectByServiceId(
@@ -425,7 +425,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	 $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocIpAddressService = $this->Factory->CreateInfraToolsFacedePersistenceAssocIpAddressService();
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceSelectByServiceIp(
@@ -442,7 +442,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                             $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceAssocUserService();
 			$return = $InfraToolsFacedePersistenceAssocUserService->InfraToolsAssocUserServiceCheckUserTypeAdministrator(
@@ -460,7 +460,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	            $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceAssocUserService();
 			$return = $InfraToolsFacedePersistenceAssocUserService->InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId(
@@ -476,7 +476,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																						$CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceAssocUserService();
 			$return = $InfraToolsFacedePersistenceAssocUserService->InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail(
@@ -493,7 +493,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 										             $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceAssocUserService();
 			$return = $InfraToolsFacedePersistenceAssocUserService->InfraToolsAssocUserServiceInsert($AssocUserServiceId, 
@@ -512,7 +512,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	           $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceAssocUserService();
 			$return = $InfraToolsFacedePersistenceAssocUserService->InfraToolsAssocUserServiceSelectByAssocUserServiceServiceId(
@@ -530,7 +530,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																			           $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceAssocUserService();
 			$return = $InfraToolsFacedePersistenceAssocUserService->InfraToolsAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit(
@@ -547,7 +547,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 												$Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
 			$return = $InfraToolsFacedePersistenceCorporation->InfraToolsCorporationSelect($Limit1, $Limit2, 
@@ -563,7 +563,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
 			$return = $InfraToolsFacedePersistenceCorporation->InfraToolsCorporationSelectActiveNoLimit($ArrayInstanceCorporation,
@@ -578,7 +578,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
 			$return = $InfraToolsFacedePersistenceCorporation->InfraToolsCorporationSelectByName($CorporationName, $CorporationInstance, 
@@ -593,7 +593,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
 			$return = $InfraToolsFacedePersistenceCorporation->InfraTools($ArrayInstanceCorporation, 
@@ -609,7 +609,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														            &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
 			$return = $InfraToolsFacedePersistenceCorporation->InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2,$UserEmail,
@@ -627,7 +627,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceCorporation = $this->Factory->CreateInfraToolsFacedePersistenceCorporation();
 			$return = $InfraToolsFacedePersistenceCorporation->InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail,
@@ -644,7 +644,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceDepartment = $this->Factory->CreateInfraToolsFacedePersistenceDepartment();
 			$return = $InfraToolsFacedePersistenceDepartment->InfraToolsDepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail,
@@ -660,7 +660,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																          $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceDepartment = $this->Factory->CreateInfraToolsFacedePersistenceDepartment();
 			$return = $InfraToolsFacedePersistenceDepartment->InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation,
@@ -686,8 +686,8 @@ class InfraToolsFacedePersistence extends FacedePersistence
 				         			 ProjectConfig::$MySqlDataBaseName              .  " > " . $FileNamePath;
 		exec($Command);
 		if(file_exists($FileNamePath) && filesize($FileNamePath) > 0)
-			return ConfigInfraTools::SUCCESS;
-		else return ConfigInfraTools::RETURN_ERROR;
+			return ConfigInfraTools::RET_OK;
+		else return ConfigInfraTools::RET_ERROR;
 	}
 	
 	public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug)
@@ -701,13 +701,13 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                     $this->Config->DefaultMySqlSuperUser, 
 												                 $this->Config->DefaultMySqlSuperUserPassword);
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND)
-			return ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND;
-		elseif($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::DB_ERROR_DATABASE_NOT_FOUND)
+			return ConfigInfraTools::DB_ERROR_DATABASE_NOT_FOUND;
+		elseif($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
 			$return = $InfraToolsFacedePersistenceDataBase->InfraToolsDataBaseCheck($ArrayTables, $StringMessage, $Debug, $mySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 				$StringMessage = NULL;
 		}
 		return $return;
@@ -724,578 +724,578 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                     $this->Config->DefaultMySqlSuperUser, 
 												                 $this->Config->DefaultMySqlSuperUserPassword);
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
 			$return = $InfraToolsFacedePersistenceDataBase->DropInfraToolsDataBase($StringMessage, $Debug, $mySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS)
-				$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+			if($return == ConfigInfraTools::RET_OK)
+				$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 			else return $mySqlConnection->rollback();
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBase($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableCorporation($StringMessage,
 																										 $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";		
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";		
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableCountry($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeUser($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableUser($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableDepartment($StringMessage, 
 																										$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeTicket($StringMessage,
 																										$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeService($StringMessage,
 																										 $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableService($StringMessage, 
 																									 $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeStatusTicket($StringMessage,
 																											  $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";		
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";		
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTicket($StringMessage,
 																									$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocTicketUserResponsible($StringMessage,
 																														$Debug,
 																											            $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryTicket($StringMessage,
 																										   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserService($StringMessage,
 																												  $Debug,
 																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserService($StringMessage,
 																											  $Debug,
 																											  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeTimeMonitoring($StringMessage,
 																												$Debug,
 																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeMonitoring($StringMessage,
 																											$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeStatusMonitoring($StringMessage,
 																												  $Debug,
 																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableMonitoring($StringMessage,
 																										$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryService($StringMessage,
 																											$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableHistoryMonitoring($StringMessage,
 																											   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserRequesting($StringMessage,
 																													 $Debug,
 																												     $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocTicketUserRequesting($StringMessage,
 																													   $Debug,
 																												       $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableNotification($StringMessage,
 																										  $Debug,
 																									      $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserNotification($StringMessage,
 																												  $Debug,
 																											      $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserCorporation($StringMessage,
 																												  $Debug,
 																											      $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableSystemConfiguration($StringMessage,
 																												 $Debug,
 																											     $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTeam($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableTypeAssocUserTeam($StringMessage, 
 																											   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserTeam($StringMessage, 
 																										   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableInformationService($StringMessage,
 																												$Debug,
 																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTablePreference($StringMessage,
 																										$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableRole($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserRole($StringMessage,
 																										   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUserPreference($StringMessage,
 																												 $Debug,
 																												 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableNetwork($StringMessage,
 																									   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableIpAddress($StringMessage,
 																									   $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocIpAddressService($StringMessage,
 																												   $Debug,
 																												   $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableUrlAddress($StringMessage,
 																										$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTableAssocUrlAddressService($StringMessage,
 																													$Debug,
 																													$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerServiceAfterInsert($StringMessage,
 																												  $Debug,
 																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerServiceAfterUpdate($StringMessage,
 																												  $Debug,
 																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($StringMessage,
 																													 $Debug,
 																													 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($StringMessage,
 																													 $Debug,
 																													 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertCountry($StringMessage,
 																									  $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertPreference($StringMessage,
 																										 $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertRole($StringMessage, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertSystemConfiguration($StringMessage,
 																												  $Debug,
 																												  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeAssocUserTeam($StringMessage,
 																												$Debug,
 																												$mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeAssocUserService($StringMessage,
 																												   $Debug,
 																												   $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeMonitoring($StringMessage,
 																										     $Debug,
 																										     $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeStatusMonitoring($StringMessage,
 																										           $Debug,
 																										           $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeTimeMonitoring($StringMessage,
 																										           $Debug,
 																										           $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeService($StringMessage,
 																										  $Debug,
 																										  $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeStatusTicket($StringMessage,
 																											   $Debug,
 																										       $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeTicket($StringMessage,
 																										 $Debug,
 																										 $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseInsertTypeUser($StringMessage,
 																									   $Debug,
 																									   $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";
+				if($return == ConfigInfraTools::RET_OK)
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseUserApplication($this->Config->DefaultMySqlUser,
 																							            $this->Config->DefaultMySqlUserPassword,
 																										$StringMessage,
 																										$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS || ConfigInfraTools::MYSQL_ERROR_USER_EXISTS)
+				if($return == ConfigInfraTools::RET_OK || ConfigInfraTools::DB_ERROR_USER_EXISTS)
 				{
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br>";	
-					$return = ConfigInfraTools::SUCCESS;
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br>";	
+					$return = ConfigInfraTools::RET_OK;
 				}
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $InfraToolsFacedePersistenceDataBase->CreateInfraToolsDataBaseUserApplicationImport(
 					                                                                            $this->Config->DefaultMySqlImportUser,
 																							    $this->Config->DefaultMySqlImportUserPassword,
 																								$StringMessage,
 																								$Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS || ConfigInfraTools::MYSQL_ERROR_USER_EXISTS)
+				if($return == ConfigInfraTools::RET_OK || ConfigInfraTools::DB_ERROR_USER_EXISTS)
 				{
-					$StringMessage .= ": " . ConfigInfraTools::SUCCESS . "<br><br>";	
-					$return = ConfigInfraTools::SUCCESS;
+					$StringMessage .= ": " . ConfigInfraTools::RET_OK . "<br><br>";	
+					$return = ConfigInfraTools::RET_OK;
 				}
 				else $mySqlConnection->rollback();
 			}
 			
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 				$mySqlConnection->commit();	
 			else $mySqlConnection->rollback();
 			$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
@@ -1314,13 +1314,13 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                     $this->Config->DefaultMySqlSuperUser, 
 												                 $this->Config->DefaultMySqlSuperUserPassword);
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND)
-			return ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND;
-		elseif($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::DB_ERROR_DATABASE_NOT_FOUND)
+			return ConfigInfraTools::DB_ERROR_DATABASE_NOT_FOUND;
+		elseif($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
 			$return = $InfraToolsFacedePersistenceDataBase->InfraToolsDataBaseGetRowCount($RowCount, $Debug, $mySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 				$StringMessage = NULL;
 		}
 		return $return;
@@ -1337,14 +1337,14 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                     $this->Config->DefaultMySqlImportUser, 
 												                 $this->Config->DefaultMySqlImportUserPassword);
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND)
-			$return = ConfigInfraTools::MYSQL_ERROR_DATABASE_NOT_FOUND;
-		elseif($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::DB_ERROR_DATABASE_NOT_FOUND)
+			$return = ConfigInfraTools::DB_ERROR_DATABASE_NOT_FOUND;
+		elseif($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceDataBase = $this->Factory->CreateInfraToolsFacedePersistenceDataBase();
 			$return = $InfraToolsFacedePersistenceDataBase->InfraToolsDataBaseImport($InsertQueries, $ErrorQueires, $StringMessage, 
 																					 $Debug, $mySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 				$mySqlConnection->commit();
 			else $mySqlConnection->rollback();
 			$StringMessage .= "<br><br>";
@@ -1355,7 +1355,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	public function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug, $MySqlConnection);
@@ -1369,7 +1369,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, 
@@ -1384,7 +1384,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 								              $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsIpAddress,
@@ -1399,7 +1399,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															 &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4,
@@ -1416,7 +1416,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															 &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6,
@@ -1433,7 +1433,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													 $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressSelectNoLimit($ArrayInstanceInfraToolsIpAddress, 
@@ -1449,7 +1449,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew,
@@ -1468,7 +1468,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew,
@@ -1485,7 +1485,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	public function InfraToolsNetworkDeleteByNetworkName($NetworkName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkDeleteByNetworkName($NetworkName, $Debug, $MySqlConnection);
@@ -1499,7 +1499,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask,
@@ -1514,7 +1514,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsNetwork,
@@ -1529,7 +1529,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													   &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp,
@@ -1545,7 +1545,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														 &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName,
@@ -1561,7 +1561,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															&$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask,
@@ -1577,7 +1577,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 												   $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectNoLimit($ArrayInstanceInfraToolsNetwork,
@@ -1592,7 +1592,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew,
@@ -1608,22 +1608,22 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	{
 		$mySqlConnection = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$return = $this->InfraToolsAssocUserServiceCheckUserTypeAdministrator($ServiceId, $UserEmail, $Debug, $mySqlConnection, FALSE);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$mySqlConnection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
 				$return = $this->InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($ServiceId, $Debug, $mySqlConnection, FALSE);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 					$return = $InfraToolsFacedePersistenceService->InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $mySqlConnection);
-					if($return == ConfigInfraTools::SUCCESS)
+					if($return == ConfigInfraTools::RET_OK)
 					{
 						$mySqlConnection->commit();
 						$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
-						$return = ConfigInfraTools::SUCCESS;
+						$return = ConfigInfraTools::RET_OK;
 					}
 					else $mySqlConnection->rollback();
 				}
@@ -1638,23 +1638,23 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	{
 		$mySqlConnection = NULL;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$return = $this->InfraToolsAssocUserServiceCheckUserTypeAdministrator($ServiceId, $UserEmail, $Debug, $mySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$mySqlConnection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
 				$return = $this->InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($ServiceId, $Debug, $mySqlConnection);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 					$return = $InfraToolsFacedePersistenceService->InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, 
 																								  $Debug, $mySqlConnection);
-					if($return == ConfigInfraTools::SUCCESS)
+					if($return == ConfigInfraTools::RET_OK)
 					{
 						$mySqlConnection->commit();
 						$this->MySqlManager->CloseDataBaseConnection($mySqlConnection, NULL);
-						$return = ConfigInfraTools::SUCCESS;
+						$return = ConfigInfraTools::RET_OK;
 					}
 					else $mySqlConnection->rollback();
 				}
@@ -1670,7 +1670,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	{
 		$mySqlConnection;
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceInsert($ServiceActive, $ServiceCorporation,
@@ -1678,11 +1678,11 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																		           $ServiceDepartment, $ServiceDepartmentCanChange,
  																		           $ServiceDescription, $ServiceName, $ServiceType, 
 																		           $Debug, $mySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				$return = $this->InfraToolsAssocUserServiceInsert($mySqlConnection->insert_id, $UserEmail,
 														          1, $Debug, $mySqlConnection, FALSE);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 					$mySqlConnection->commit();
 				else $mySqlConnection->rollback();
 			}
@@ -1694,7 +1694,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 								            $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsService, 
@@ -1709,7 +1709,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                             &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
@@ -1725,7 +1725,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 												           &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive,
@@ -1741,7 +1741,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														          $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceActiveNoLimit($ServiceActive,
@@ -1758,7 +1758,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															            &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, 
@@ -1776,7 +1776,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
@@ -1792,7 +1792,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													  &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation,
@@ -1808,7 +1808,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->ServiceSelectByServiceCorporationNoLimit($ServiceCorporation,
@@ -1826,7 +1826,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2,
@@ -1847,7 +1847,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																		            $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation,
@@ -1867,7 +1867,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceDepartment($Limit1, $Limit2, 
@@ -1885,7 +1885,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															$Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceDepartmentNoLimit($ServiceCorporation,
@@ -1903,7 +1903,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																  $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2,
@@ -1924,7 +1924,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																		           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation,
@@ -1941,7 +1941,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	public function InfraToolsServiceSelectByServiceId($ServiceId, &$Service, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceId($ServiceId, $Service, $Debug, $MySqlConnection);
@@ -1956,7 +1956,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														  $MySqlConnection = NULL, $CloseConnectaion = TRUE)	
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, 
@@ -1972,7 +1972,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											             &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceName($Limit1, $Limit2, $ServiceName,
@@ -1988,7 +1988,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 							 						            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceNameNoLimit($ServiceName, 
@@ -2005,7 +2005,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															          $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName,
@@ -2024,7 +2024,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																             $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail,
@@ -2040,7 +2040,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											             &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceType($Limit1, $Limit2, $ServiceName,
@@ -2056,7 +2056,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceTypeNoLimit($ServiceType,
@@ -2073,7 +2073,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															         $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType,
@@ -2092,7 +2092,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
@@ -2109,7 +2109,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2,
@@ -2127,7 +2127,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 															                        $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit(
@@ -2146,7 +2146,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																						  $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1,
@@ -2166,7 +2166,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																			           $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit(
@@ -2185,7 +2185,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 										          &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByUser($Limit1, $Limit2, $UserEmail,
@@ -2201,7 +2201,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											             $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByUserNoLimit($UserEmail, $ArrayInstanceInfraToolsService, 
@@ -2215,7 +2215,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	public function InfraToolsServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectNoLimit($ArrayInstanceInfraToolsService, $Debug,
@@ -2232,7 +2232,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew,
@@ -2252,7 +2252,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													           $ServiceId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew,
@@ -2271,7 +2271,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                             $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceTypeAssocUserService();
 			$return = $InfraToolsFacedePersistenceTypeAssocUserService->InfraToolsTypeAssocUserServiceSelect(
@@ -2289,7 +2289,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceTypeAssocUserService();
 			$return = $InfraToolsFacedePersistenceTypeAssocUserService->TypeAssocUserServiceSelectNoLimit(
@@ -2306,7 +2306,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														              $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceTypeAssocUserService();
 			$return = $InfraToolsFacedePersistenceTypeAssocUserService->InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2,
@@ -2323,7 +2323,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeAssocUserService = $this->Factory->CreateInfraToolsFacedePersistenceTypeAssocUserService();
 			$return = $InfraToolsFacedePersistenceTypeAssocUserService->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(
@@ -2339,7 +2339,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	 $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$instanceInfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $instanceInfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceDeleteByTypeTypeServiceName($TypeServiceName,
@@ -2354,12 +2354,12 @@ class InfraToolsFacedePersistence extends FacedePersistence
 									             $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$instanceInfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $instanceInfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceInsert($TypServiceName, $TypeServiceSLA, 
 																						           $Debug, $MySqlConnection);
-			if($return == ConfigInfraTools::SUCCESS && $Commit)
+			if($return == ConfigInfraTools::RET_OK && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
@@ -2372,7 +2372,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                    $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $InfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceSelect($Limit1, $Limit2,
@@ -2388,7 +2388,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
  													             $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$instanceInfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $instanceInfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceSelectByTypeServiceName($TypeServiceName,
@@ -2404,7 +2404,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 											           $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $InfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceSelectNoLimit($ArrayInstanceInfraToolsTypeService,
@@ -2419,7 +2419,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $InfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
@@ -2435,7 +2435,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceTypeService = $this->Factory->CreateInfraToolsFacedePersistenceTypeService();
 			$return = $InfraToolsFacedePersistenceTypeService->InfraToolsTypeServiceSelectOnUserContextNoLimit($UserEmail,
@@ -2452,7 +2452,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 										 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, 
@@ -2467,7 +2467,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													      &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName,
@@ -2484,7 +2484,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, 
@@ -2500,7 +2500,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4,
@@ -2516,7 +2516,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 														 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId,
@@ -2531,7 +2531,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 												   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName,
@@ -2547,7 +2547,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId,
@@ -2563,7 +2563,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId,
@@ -2579,7 +2579,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                       $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId,
@@ -2595,7 +2595,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                        &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTypeMonitoringDescription($Limit1, $Limit2,
@@ -2613,7 +2613,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																	   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-	 	if($return == ConfigInfraTools::SUCCESS)
+	 	if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2,
@@ -2630,7 +2630,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																&$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-	 	if($return == ConfigInfraTools::SUCCESS)
+	 	if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
@@ -2646,7 +2646,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			                                                  &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription,
@@ -2663,7 +2663,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 												    $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByUserEmail($UserEmail, $InstanceUser, 
@@ -2678,7 +2678,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 													   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceUser = $this->Factory->CreateInfraToolsFacedePersistenceUser();
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByUserUniqueId($UserUniqueId, $InstanceUser,

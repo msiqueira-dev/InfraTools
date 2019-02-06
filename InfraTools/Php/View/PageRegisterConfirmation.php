@@ -54,17 +54,17 @@ class PageRegisterConfirmation extends PageInfraTools
 		if(!empty($hashCode))
 		{
 			$return = $this->UserSelectUserActiveByHashCode($hashCode, $active, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
 				if ($active)	
 					$this->ShowDivReturnSuccess("REGISTER_CONFIRMATION_ALREADY_CONFIRMED");
 				else
 				{
 					$return = $this->UserUpdateUserConfirmedByHashCode(TRUE, $hashCode, $this->InputValueHeaderDebug);
-					if ($return == ConfigInfraTools::SUCCESS)
+					if ($return == ConfigInfraTools::RET_OK)
 					{
 						$return = $this->UserSelectByHashCode($hashCode, $this->User, $this->InputValueHeaderDebug);
-						if ($return == ConfigInfraTools::SUCCESS)
+						if ($return == ConfigInfraTools::RET_OK)
 						{
 							$this->User = NULL;
 							$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_USER);

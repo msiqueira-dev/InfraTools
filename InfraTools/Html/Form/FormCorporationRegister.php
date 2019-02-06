@@ -11,81 +11,81 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_CORPORATION_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>" method="post">
-    <!-- FORM_FIELD_CORPORATION_NAME -->
+<!-- FM_CORPORATION_REGISTER_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>" method="post">
+    <!-- FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
                                class="<?php echo $this->ReturnCorporationNameClass; ?>"
-                               onblur="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+                               onblur="ValidateCorporation(null, '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
                                                  '');"
-                               onchange="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+                               onchange="ValidateCorporation(null, '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'); ?>"
                                value="<?php echo $this->InputValueCorporationName; ?>" maxlength="80" />
         </div>
     </div>
-    <!-- FORM_FIELD_CORPORATION_ACTIVE -->
+    <!-- FIELD_CORPORATION_ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
             <label><?php echo $this->InstanceLanguageText->GetText('ACTIVE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <input type="checkbox" 
-			           name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>" 
-				       value="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_ACTIVE; ?>"
+			           name="<?php echo ConfigInfraTools::FIELD_CORPORATION_ACTIVE; ?>" 
+				       value="<?php echo ConfigInfraTools::FIELD_CORPORATION_ACTIVE; ?>"
 				        <?php echo $this->InputValueCorporationActive; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
+									   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+									   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
 									   '');"
 				        />
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateCorporation(null, '<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>',
+         onmouseover="ValidateCorporation(null, '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_CORPORATION_REGISTER_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_CORPORATION_REGISTER_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

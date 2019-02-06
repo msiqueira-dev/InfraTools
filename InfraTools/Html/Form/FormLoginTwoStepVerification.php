@@ -12,8 +12,8 @@
 	</label>
 </div>
 <!-- FORM LOGIN TWO STEP VERIFICATION -->
-<form name="<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_FORM; ?>" method="post" >
+<form name="<?php echo ConfigInfraTools::FM_USER_TWO_STEP_VERIFICATION; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_USER_TWO_STEP_VERIFICATION; ?>" method="post" >
 	  <!-- CODE -->
 	<div class="DivContentBodyContainer" id="DivContentBodyContainerLoginTwoStepVerificationCode">
 		<div class="DivContentBodyContainerLabel">
@@ -25,30 +25,30 @@
 						   title="<?php echo $this->InstanceLanguageText->GetText('LOGIN_TWO_STEP_VERIFICATION_CODE'); ?>" 
 						   onblur="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_CODE; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 											 '', false);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_TWO_STEP_VERIFICATION; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 											 '');"
 						   onkeyup="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_CODE; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 											 '', false);
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_TWO_STEP_VERIFICATION; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 											 '');"
 						   onchange="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_CODE; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 											 '', false);
 									 ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_USER_TWO_STEP_VERIFICATION; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 											 '');"
 						   value="<?php echo $this->InputValueLoginTwoStepVerificationCode; ?>" maxlength="16" />
 	</div>
@@ -56,15 +56,15 @@
 	<div class="DivContentBodyContainer"
 		 onmouseover="ValidateHasCharacters(null, '<?php echo ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_CODE; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 								   '', false);     
 					  ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_LOGIN_TWO_STEP_VERIFICATION_CODE_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_LOGIN_TWO_STEP_VERIFICATION_CODE_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
 								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_VALIDATE'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />

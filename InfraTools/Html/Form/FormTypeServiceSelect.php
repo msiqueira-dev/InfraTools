@@ -10,68 +10,68 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_SERVICE_SELECT_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_FORM; ?>" method="post" >
-	<!-- FORM_FIELD_TYPE_SERVICE_NAME -->
+<!-- FM_TYPE_SERVICE_SEL_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_FORM; ?>" method="post" >
+	<!-- FIELD_TYPE_SERVICE_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_SERVICE_NAME'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_SERVICE_NAME'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>" 
-						   id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>"
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_TYPE_SERVICE_NAME; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_TYPE_SERVICE_NAME; ?>"
 						   class="DivContentBodyContainerInputText <?php echo $this->ReturnTypeServiceNameClass; ?>"
 						   onkeyup="ValidateDescription('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
+										       '<?php echo ConfigInfraTools::FIELD_TYPE_SERVICE_NAME; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 											 '');"
 						   onblur="ValidateDescription('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
+										       '<?php echo ConfigInfraTools::FIELD_TYPE_SERVICE_NAME; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 											 '');"
 						   onchange="ValidateDescription('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
+										       '<?php echo ConfigInfraTools::FIELD_TYPE_SERVICE_NAME; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+											   '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_FORM; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_FORM; ?>',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+											 '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_SERVICE_NAME'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_SERVICE_NAME'); ?>" 
 						   value="<?php echo $this->InputValueTypeServiceName; ?>" maxlength="80" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateDescription('DivContentBodyContainerInputText', 
-							       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_SERVICE_NAME; ?>',
+							       '<?php echo ConfigInfraTools::FIELD_TYPE_SERVICE_NAME; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_FORM; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_TYPE_SERVICE_SELECT_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_TYPE_SERVICE_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

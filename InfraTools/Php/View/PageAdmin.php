@@ -60,6 +60,21 @@ class PageAdmin extends PageInfraTools
 		}
 	}
 	
+	protected function AdminGoBack(&$PageFormBack)
+	{
+		//FORM SUBMIT BACK
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_SB_BACK) == ConfigInfraTools::RET_OK)
+		{
+			if($this->PageStackSessionLoad() == ConfigInfraTools::RET_ERROR)
+			{
+				Page::GetCurrentDomain($domain);
+				$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								            . str_replace("_","",ConfigInfraTools::PAGE_ADMIN));
+			}
+			$PageFormBack = TRUE;
+		}
+	}
+	
 	public function LoadPage()
 	{
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_SACK);

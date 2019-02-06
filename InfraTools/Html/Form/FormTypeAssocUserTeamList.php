@@ -1,4 +1,4 @@
-<!-- FORM_TYPE_ASSOC_USER_TEAM_LIST_FORM -->
+<!-- FM_TYPE_ASSOC_USER_TEAM_LST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
 		<?php 
@@ -6,10 +6,10 @@
 			 {
 				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
 					  echo "<label class='InputValueLimitTitle'>" . 
-							   $this->InstanceLanguageText->GetText('TABLE_PAGE_PREFIX') . 
+							   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
 						   "</label>" .
 						   "<label class='InputValueLimitValue'>" . 
-							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TABLE_PAGE') 
+							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
 													   . " " . $this->InputValueLimit2 . 
 						   "</label>";
 			 }
@@ -33,20 +33,20 @@
 <?php
 if(is_array($this->ArrayInstanceTypeAssocUserTeam))
 {
-	echo "<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_FORM . "' method='post' />";
+	echo "<form  name='" . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
-				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE . "'/>";
+				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
 	echo "<input type='hidden' value='$this->InputLimitTwo'
-				 name='" . ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO . "'/>";
+				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
 	echo "<table class='TableGeneric'>";
 	echo "<tr>";
 	echo "<th class='TableGenericThArrow'>" .
 		 "<div class='TableGenericInputLeft'>
 		  <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_BACK . "'
+				  name='"  . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_BACK . "' 
+				  id='"    . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_BACK . "'
+				  value='" . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_BACK . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -61,9 +61,9 @@ if(is_array($this->ArrayInstanceTypeAssocUserTeam))
 		 "<div class='TableGenericInputRight'>
 		 <input  type='image'
 				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_FORWARD . "'
-				  value='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_LIST_FORWARD . "'
+				  name='"  . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_FORWARD . "' 
+				  id='"    . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_FORWARD . "'
+				  value='" . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST_FORWARD . "'
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
@@ -79,13 +79,13 @@ if(is_array($this->ArrayInstanceTypeAssocUserTeam))
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' method='post' />
+					<form  name='" . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB . "' method='post' />
 						<input type='hidden'
-							 name='"   . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' 
-							 id='"     . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "'
-							 value='"  . ConfigInfraTools::FORM_TYPE_ASSOC_USER_TEAM_SELECT_SUBMIT . "' />
-						<input type='submit' name='" . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
-										     id='"   . ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
+							 name='"   . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB . "' 
+							 id='"     . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB . "'
+							 value='"  . ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_SEL_SB . "' />
+						<input type='submit' name='" . ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
+										     id='"   . ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION . "' 
 										     value='" . $typeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' 
 										     title='" . $typeAssocUserTeam->GetTypeAssocUserTeamDescription() . "' />
 					</form>

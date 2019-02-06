@@ -11,64 +11,64 @@
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_TYPE_USER_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_FORM; ?>" method="post">
-    <!-- FORM_FIELD_TYPE_USER_DESCRIPTION -->
+<!-- FM_TYPE_USER_REGISTER_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM; ?>" method="post">
+    <!-- FIELD_TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>" 
-                               id="<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION; ?>" 
                                class="<?php echo $this->ReturnTypeUserDescriptionClass; ?>"
-                               onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>',
+                               onblur="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
                                                  '');"
-                               onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>',
+                               onchange="ValidateDescription(null, '<?php echo ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_TYPE_USER_DESCRIPTION'); ?>"
+                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION'); ?>"
                                value="<?php echo $this->InputValueTypeUserDescription; ?>" maxlength="45" />
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
          onmouseover="ValidateDescription(null, 
-							       '<?php echo ConfigInfraTools::FORM_FIELD_TYPE_USER_DESCRIPTION; ?>',
+							       '<?php echo ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>',
+                                   '<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_SUBMIT; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FORM_TYPE_USER_REGISTER_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_TYPE_USER_REGISTER_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

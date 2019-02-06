@@ -50,67 +50,78 @@ class PageAccount extends PageInfraTools
 	protected function CheckForm()
 	{
 		//PAGE_CORPORATION
-		if (isset($_POST[ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION]))
+		if (isset($_POST[ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION]))
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .
 										  str_replace("_", "", ConfigInfraTools::PAGE_CORPORATION));
 		}
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_UPDT_SB]))
 		{
-			$this->PageBody   = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
-			$this->InputFocus = ConfigInfraTools::FORM_FIELD_USER_NAME;
+			$this->PageBody   = ConfigInfraTools::PAGE_ACCOUNT_UPDT;
+			$this->InputFocus = ConfigInfraTools::FIELD_USER_NAME;
 		}
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD_SB]))
 		{
 			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-			$this->InputFocus = ConfigInfraTools::FORM_FIELD_PASSWORD_NEW;
+			$this->InputFocus = ConfigInfraTools::FIELD_PASSWORD_NEW;
 			$this->SubmitEnabled = 'disabled="disabled"';
 		}
-		//PAGE_ACCOUNT_UPDATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_SUBMIT]))
+		//PAGE_ACCOUNT_UPDT
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_UPDT_SB]))
 		{
-			 if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_DAY], 
-											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_MONTH], 
-											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_BIRTH_DATE_YEAR],
-											 $_POST[ConfigInfraTools::FORM_FIELD_COUNTRY_NAME],
-											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER],
-											 $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME],
-											 $_POST[ConfigInfraTools::FORM_FIELD_USER_REGION],
-					  						 @$_POST[ConfigInfraTools::FORM_FIELD_USER_SESSION_EXPIRES], 
-											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_TWO_STEP_VERIFICATION], 
-											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_ACTIVE], 
-											 @$_POST[ConfigInfraTools::FORM_FIELD_USER_CONFIRMED],
-   										     $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY], 
-											 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX], 
-											 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY],
-											 $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX], 
-										     $_POST[ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID], 
+			 if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR],
+											 $_POST[ConfigInfraTools::FIELD_COUNTRY_NAME],
+											 @$_POST[ConfigInfraTools::FIELD_USER_GENDER],
+											 $_POST[ConfigInfraTools::FIELD_USER_NAME],
+											 $_POST[ConfigInfraTools::FIELD_USER_REGION],
+					  						 @$_POST[ConfigInfraTools::FIELD_USER_SESSION_EXPIRES], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_ACTIVE], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_CONFIRMED],
+   										     $_POST[ConfigInfraTools::FIELD_USER_PHONE_PRIMARY], 
+											 $_POST[ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX], 
+											 $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY],
+											 $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX], 
+										     $_POST[ConfigInfraTools::FIELD_USER_UNIQUE_ID], 
 											 FALSE,
 											 $this->User, 
-											 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+											 $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 			 	$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
-			 else $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
+			 else
+			 {
+				 if($this->InputValueSessionExpires)
+					$this->InputValueSessionExpires = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueUserActive)
+					$this->InputValueUserActive = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueUserConfirmed)
+					$this->InputValueUserConfirmed = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueTwoStepVerification)
+					$this->InputValueTwoStepVerification = Config::CHECKBOX_CHECKED;
+				 $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_UPDT;
+			 }
 		}
 		//PAGE_ACCOUNT_CHANGE_PASSWORD
-		elseif(isset($_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB]))
 		{
 			if($this->UserUpdatePasswordByUserEmail(NULL, 
-												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_NEW], 
-												    $_POST[ConfigInfraTools::FORM_FIELD_PASSWORD_REPEAT],
+												    $_POST[ConfigInfraTools::FIELD_PASSWORD_NEW], 
+												    $_POST[ConfigInfraTools::FIELD_PASSWORD_REPEAT],
 													$this->User->GetEmail(),
-												    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+												    $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 			else $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
 		}
-		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SUBMIT]))
+		//FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB]))
 		{
 			$this->UserChangeTwoStepVerification(NULL, TRUE, $this->InputValueHeaderDebug);
 			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 		}
-		//FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SUBMIT]))
+		//FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB]))
 		{
 			$this->UserChangeTwoStepVerification(NULL, FALSE, $this->InputValueHeaderDebug);
 			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;

@@ -12,118 +12,118 @@
 		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FORM_DEPARTMENT_SELECT_FORM -->
-<form name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>" method="post" >
+<!-- FM_DEPARTMENT_SEL_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>" 
+	  id="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>" method="post" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
-		<!-- FORM_FIELD_RADIO_DEPARTMENT_NAME -->
+		<!-- FIELD_RADIO_DEPARTMENT_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT; ?>"
-					   id="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME; ?>"
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME; ?>"
 					   onclick="this.blur();this.focus();"
 					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>', 
 												 false);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>', 
 														   'Department Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>"  
 					   <?php echo $this->InputValueDepartmentNameRadio; ?>/>
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME -->
+		<!-- FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT; ?>"
-					   id="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME; ?>"
-					   value="<?php echo ConfigInfraTools::FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME; ?>"
 					   onclick="this.blur();this.focus();"
 					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>', 
 												 true);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>');
+								 MakeInputVisible('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
 														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>', 
+														   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>', 
 														   'Corporation Name and Department Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?>"  
+					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?>"  
 					   <?php echo $this->InputValueDepartmentNameAndCorporationNameRadio; ?> />
 				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?></i>
+					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?></i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
-		<!-- FORM_FIELD_DEPARTMENT_NAME -->
+		<!-- FIELD_DEPARTMENT_NAME -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?> </label>
+				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>" 
-							   id="<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>"
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
+							   id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>"
 							   class="DivContentBodyContainerInputText <?php echo $this->ReturnDepartmentNameClass; ?>"
 							   onkeyup="ValidateDepartmentName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 												   '', 'false');
 										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 												 '');"
 							   onblur="ValidateDepartmentName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 												 '');"
 							   onchange="ValidateDepartmentName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 												   '', true);
 									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
+												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
 												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_DEPARTMENT_NAME'); ?>" 
+							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>" 
 							   value="<?php echo $this->InputValueDepartmentName; ?>" maxlength="80" />
 		</div>
-		<!-- FORM_FIELD_CORPORATION_NAME -->
+		<!-- FIELD_CORPORATION_NAME -->
 		<div class="Hidden DivContentBodyContainer" 
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label><?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_CORPORATION_NAME').":"; ?></label>
+				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<select 
-					name="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>" 
-					id="<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>"
+					name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
+					id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
 					class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass; ?>"
-					onchange="SetSelectColor('<?php echo ConfigInfraTools::FORM_FIELD_CORPORATION_NAME; ?>');
-							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>')
+					onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');
+							  document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>')
 											 .disabled = false;
-							  document.getElementById('<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>')
+							  document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>')
 											 .className = 'DivContentBodySubmit SubmitEnabled;'">
 					<option <?php if ($this->InputValueCorporationName == "" 
-									  || $this->InputValueCorporationName == ConfigInfraTools::FORM_FIELD_SELECT_NONE) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FORM_FIELD_SELECT_NONE; ?>" > 
-							<?php echo $this->InstanceLanguageText->GetText('FORM_FIELD_SELECT_NONE'); ?> 
+									  || $this->InputValueCorporationName == ConfigInfraTools::FIELD_SEL_NONE) 
+						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
+							<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
 					</option>
 					<?php 
 					if(is_array($this->ArrayInstanceInfraToolsCorporation))
@@ -145,19 +145,19 @@
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateDepartmentName('DivContentBodyContainerInputText', 
-							       '<?php echo ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME; ?>',
+							       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_FORM; ?>',
+								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>',
+								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>" 
-								 id="<?php echo ConfigInfraTools::FORM_DEPARTMENT_SELECT_SUBMIT; ?>"
+		<input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

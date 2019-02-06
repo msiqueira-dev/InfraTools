@@ -100,30 +100,30 @@ class FacedePersistenceDepartment
 				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_DEPARTMENT_DELETE_FAILED;
+					return Config::DB_ERROR_DEPARTMENT_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_DEPARTMENT_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_DEPARTMENT_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug, $MySqlConnection)
@@ -139,26 +139,26 @@ class FacedePersistenceDepartment
 				$stmt->bind_param("sss", $CorporationName, $DepartmentInitials, $DepartmentName);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_CODE_UNIQUE_KEY_DUPLICATE;
-					if($errorCode == Config::MYSQL_ERROR_CODE_FOREIGN_KEY_INSERT_RESTRICT)
-						return Config::MYSQL_ERROR_CODE_FOREIGN_KEY_INSERT_RESTRICT;
-					else return Config::MYSQL_DEPARTMENT_INSERT_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+						return Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_INSERT_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_INSERT_RESTRICT;
+					else return Config::DB_ERROR_DEPARTMENT_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection)
@@ -175,7 +175,7 @@ class FacedePersistenceDepartment
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
@@ -183,29 +183,29 @@ class FacedePersistenceDepartment
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
-																			$row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                                    $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-																		    $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
+																			$row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                    $row[Config::TB_CORPORATION_FD_NAME], 
+																		    $row["Corporation".Config::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation,
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[Config::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+																			$row[Config::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[Config::TB_DEPARTMENT_FD_NAME],
+																	        $row["Department".Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
 					if(!empty($ArrayInstanceDepartment))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_DEPARTMENT_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_DEPARTMENT_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "Prepare Error: " . $MySqlConnection->error;
-					$return = Config::MYSQL_DEPARTMENT_SELECT_FAILED;
+					$return = Config::DB_ERROR_DEPARTMENT_SEL;
 				}
 				return $return;
 			}
@@ -213,10 +213,10 @@ class FacedePersistenceDepartment
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 		
 	public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
@@ -234,20 +234,20 @@ class FacedePersistenceDepartment
 				$limitResult = $Limit2 - $Limit1;
 				$stmt->bind_param("sii", $CorporationName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())
 					{
 						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
-																		  $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                                  $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-											                              $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
+																		  $row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                  $row[Config::TB_CORPORATION_FD_NAME], 
+											                              $row["Corporation".Config::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation, 
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-																		    $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-																		    $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+																			$row[Config::TB_DEPARTMENT_FD_INITIALS],
+																		    $row[Config::TB_DEPARTMENT_FD_NAME], 
+																		    $row["Department".Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
 				}
@@ -255,20 +255,20 @@ class FacedePersistenceDepartment
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED;
+					$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_CORPORATION_NAME;
 				}
 				if(!empty($ArrayInstanceDepartment))
-					return Config::SUCCESS;
-				else return Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED;
+					return Config::RET_OK;
+				else return Config::DB_ERROR_DEPARTMENT_SEL_BY_CORPORATION_NAME_FETCH;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
@@ -284,20 +284,20 @@ class FacedePersistenceDepartment
 			{
 				$stmt->bind_param("s", $CorporationName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())
 					{
 						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
-																		  $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                                  $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-											                              $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
+																		  $row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                  $row[Config::TB_CORPORATION_FD_NAME], 
+											                              $row["Corporation".Config::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation, 
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-																		    $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-																		    $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+																			$row[Config::TB_DEPARTMENT_FD_INITIALS],
+																		    $row[Config::TB_DEPARTMENT_FD_NAME], 
+																		    $row["Department".Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
 				}
@@ -305,17 +305,17 @@ class FacedePersistenceDepartment
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FAILED;
+					$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_CORPORATION_NAME;
 				}
 				if(!empty($ArrayInstanceDepartment))
-					return Config::SUCCESS;
-				else return Config::MYSQL_DEPARTMENT_SELECT_BY_CORPORATION_NAME_FETCH_FAILED;
+					return Config::RET_OK;
+				else return Config::DB_ERROR_DEPARTMENT_SEL_BY_CORPORATION_NAME_FETCH;
 			}
 			if($Debug == Config::CHECKBOX_CHECKED) 
 				echo "Prepare Error: " . $MySqlConnection->error;
-			return Config::MYSQL_ERROR_QUERY_PREPARE;
+			return Config::DB_ERROR_QUERY_PREPARE;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
@@ -331,7 +331,7 @@ class FacedePersistenceDepartment
 			{
 				$stmt->bind_param("s", $DepartmentName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$ArrayInstanceDepartment = array();
 					$result = $stmt->get_result();
@@ -339,29 +339,29 @@ class FacedePersistenceDepartment
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
-																		   $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                                   $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-											                               $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
+																		   $row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                   $row[Config::TB_CORPORATION_FD_NAME], 
+											                               $row["Corporation".Config::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation,
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-											                                $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+																			$row[Config::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[Config::TB_DEPARTMENT_FD_NAME], 
+											                                $row["Department".Config::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
 					if(!empty($ArrayInstanceDepartment))
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FETCH_FAILED;
+						return Config::DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "Prepare Error: " . $MySqlConnection->error;
-					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_DEPARTMENT_NAME_FAILED;
+					$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME;
 				}
 				return $return;
 			}
@@ -369,10 +369,10 @@ class FacedePersistenceDepartment
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
@@ -388,27 +388,27 @@ class FacedePersistenceDepartment
 			{
 				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
 					$stmt->bind_result($CorporationName, $depIni, $depName, $depRegDate, $corpActive, $corpName, $corpRegDate);
 					if ($stmt->fetch())
 					{
 						$CorporationInstance = $this->Factory->CreateCorporation(NULL, $corpActive, $corpName, $corpRegDate);
 						$DepartmentInstance = $this->Factory->CreateDepartment($CorporationInstance, $depIni, $depName, $depRegDate);
-						return Config::SUCCESS;
+						return Config::RET_OK;
 					}
 					else
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FETCH_FAILED;
+						$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_CORP_DEP_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_DEPARTMENT_SELECT_BY_CORP_DEP_FAILED;
+					$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_CORP_DEP;
 				}
 				return $return;
 			}
@@ -416,10 +416,10 @@ class FacedePersistenceDepartment
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection)
@@ -436,28 +436,28 @@ class FacedePersistenceDepartment
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
-						                                                $row[Config::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                                $row[Config::TABLE_CORPORATION_FIELD_NAME], 
-											                            $row["Corporation".Config::TABLE_FIELD_REGISTER_DATE]);
+						                                                $row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                $row[Config::TB_CORPORATION_FD_NAME], 
+											                            $row["Corporation".Config::TB_FD_REGISTER_DATE]);
 					$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation, 
-																		$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-																		$row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-										                                $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+																		$row[Config::TB_DEPARTMENT_FD_INITIALS],
+																		$row[Config::TB_DEPARTMENT_FD_NAME], 
+										                                $row["Department".Config::TB_FD_REGISTER_DATE]);
 					array_push($ArrayInstanceDepartment, $InstanceDepartment);
 				}
 				if(!empty($ArrayInstanceDepartment))
-					return Config::SUCCESS;
-				else return Config::MYSQL_DEPARTMENT_SELECT_FETCH_FAILED;
+					return Config::RET_OK;
+				else return Config::DB_ERROR_DEPARTMENT_SEL_FETCH;
 			}
 			else 
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = Config::MYSQL_DEPARTMENT_SELECT_FAILED;
+				$return = Config::DB_ERROR_DEPARTMENT_SEL;
 			}
 			return $return;
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
@@ -476,29 +476,29 @@ class FacedePersistenceDepartment
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_DEPARTMENT_UPDATE_FAILED;
+					return Config::DB_ERROR_DEPARTMENT_UPDT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
@@ -515,28 +515,28 @@ class FacedePersistenceDepartment
 				$stmt->bind_param("sss", $DepartmentName, $CorporationNameNew, $CorporationNameOld);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ERROR_UPDATE_SAME_VALUE;
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_DEPARTMENT_UPDATE_CORPORATION_FAILED;
+					return Config::DB_ERROR_DEPARTMENT_UPDT_CORPORATION;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_ERROR_QUERY_PREPARE;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_ERROR_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>
