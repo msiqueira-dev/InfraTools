@@ -50,7 +50,7 @@ class PageAccount extends PageInfraTools
 	protected function CheckForm()
 	{
 		//PAGE_CORPORATION
-		if (isset($_POST[ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION]))
+		if (isset($_POST[ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB]))
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .

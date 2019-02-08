@@ -28,25 +28,26 @@
                 </a>
             </div>
             <div class="DivHeaderContainerMenu">
-              <!-- PAGE SERVICE -->
+              <!-- PAGE_SERVICE -->
                 <?php
 				if($ConfigInfraTools->PageServiceEnabled == true)
 					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_SERVICE) . ".php");
 				?>
-               <!-- PAGE DIAGNOSTIC TOOLS -->
+               <!-- PAGE_DIAGNOSTIC_TOOLS -->
                 <?php
 				if($ConfigInfraTools->PageDiagnosticToolsEnabled == true)
-					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS) . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS) 
+								 . ".php");
 				?>
-                <!-- PAGE ABOUT -->
+                <!-- PAGE_ABOUT -->
                 <?php
 				if($ConfigInfraTools->PageAboutEnabled == true)
 					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_ABOUT) . ".php");
 				?>
-                <!-- PAGE CONTACT -->
+                <!-- PAGE_SUPPORT -->
                 <?php
-				if($ConfigInfraTools->PageContactEnabled == true)
-					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_CONTACT). ".php");
+				if($ConfigInfraTools->PageSupportContactEnabled == true)
+					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_SUPPORT) . ".php");
 				?>
             </div>
         </div>

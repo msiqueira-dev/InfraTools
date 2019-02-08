@@ -31,11 +31,11 @@
 				<?php
 						if($this->InstanceCorporation->GetCorporationActive())
 							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png' . "' 
-                                   name='"  . ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION . "'
+                                   name='"  . ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB . "'
                                    alt='CorporationVerification' width='20' height='20' />";
 						else
 							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png' . "' 
-                                   name='"  . ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION . "'
+                                   name='"  . ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB . "'
                                    alt='CorporationVerification' width='20' height='20' />";
 				?>
         	</label>

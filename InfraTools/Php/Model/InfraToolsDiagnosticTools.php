@@ -86,32 +86,13 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 			$this->InfraToolsFactory = InfraToolsFactory::__create();
     }
 	
-	/**
-	- Recebe um host e verifica se existe algum registro de DNS para o mesmo, caso exista, significa que este Host, já está
-	registrado, retornando que o Domínio já é registrado, caso não retorna que o domínio está disponível.
-	Retornos:
-	    Success - Sucesso, Domínio está disponível.
-		CHECK_AVAILABILITY_NOT_AVAILABLE - Domínio não está disponível.
-	Data: 
-	**/
 	public function CheckAvailability($Host)
 	{
 		if ($this->CheckDnsRecord($Host, self::DnsTypeAny) == ConfigInfraTools::RET_OK)
-			return ConfigInfraTools::CHECK_AVAILABILITY_NOT_AVAILABLE;
+			return ConfigInfraTools::RETURN_CHECK_AVAILABILITY_NOT_AVAILABLE;
 		else return ConfigInfraTools::RET_OK;
 	}
-	
-	/**
-	- Recebe um Host e tenta obter os endereços IP associado ao host,
-	para então, de posse de um endereço de IP, validar se o domínio se encontra na lista negra de algum dos domínios
-	validadores de endereços de IP em lista negra. Cada vez que for encontrar algum registro de lista de negra, este é adicionado
-	ao vetor, que é retornado por referência.
-	Retornos:
-		Success - Sucesso, Host não se encontra em nenhuma lista negra!
-		CHECK_HOST_BLACKLIST_NO_IP_FOR_HOST - Erro, não conseguiu obter nenhum endereço de IP para o dado host, impossível continuar.
-		CHECK_HOST_BLACKLISTED - Erro, Host encontra-se em alguma lista negra.
-	Data: 
-	**/
+
 	public function CheckBlackListHost($HostName, &$ArrayBlackList)
 	{
 		$ArrayBlackList = array();
@@ -128,20 +109,11 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 				}
 			}
 			if (count($ArrayBlackList) == 0) return ConfigInfraTools::RET_OK;
-			else return ConfigInfraTools::CHECK_HOST_BLACKLISTED;
+			else return ConfigInfraTools::RETURN_CHECK_HOST_BLACKLISTED;
 		}
-		else return ConfigInfraTools::CHECK_HOST_BLACKLIST_NO_IP_FOR_HOST;
+		else return ConfigInfraTools::RETURN_CHECK_HOST_BLACKLIST_NO_IP_FOR_HOST;
 	}
-	
-	/**
-	- Recebe um endereço de IP validar se o mesmo se encontra na lista negra de algum dos domínios
-	validadores de endereços de IP em lista negra. Cada vez que for encontrar algum registro de lista de negra, este é adicionado
-	ao vetor, que é retornado por referência.
-	Retornos:
-		Success - Sucesso, endereço de IP não se encontra em nenhuma lista negra!
-		CHECK_HOST_BLACKLISTED - Erro, endereço de IP encontra-se em alguma lista negra.
-	Data: 
-	**/
+
 	public function CheckBlackListIp($IpAddress, &$ArrayBlackList)
 	{
 		$ArrayBlackList = array();
@@ -152,20 +124,9 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 				array_push($ArrayBlackList, $host);
 		}
 		if (count($ArrayBlackList) == 0) return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::CHECK_HOST_BLACKLISTED;
+		else return ConfigInfraTools::RETURN_CHECK_HOST_BLACKLISTED;
 	}
-	
-	/**
-	public function CheckDnsRecord($Host, $RecordType)
-	
-	- Recebe um host e um tipo de registro, caso o registro esteja dentro dos permitidos verifica, se determinado 
-	host possui algum registro para tipo de registro.
-	Retornos:
-		Success - Sucesso, obteve informações do registro para o dado host e o dado tipo de registro!
-		CHECK_HOST_DNS_RECORD_TYPE_FAILED - Não conseguiu obter registro de DNS para o dado host e o dado tipo.
-		CHECK_HOST_DNS_RECORD_TYPE_NOT_ALLOWED - Tipo de registro não é válido.
-	Data: 
-	**/
+
 	public function CheckDnsRecord($Host, $RecordType)
 	{
 		if ($RecordType == self::DnsTypeA || $RecordType == self::DnsTypeMx || $RecordType == self::DnsTypeNs ||
@@ -175,22 +136,11 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		{
 			if (checkdnsrr ($Host, $RecordType))
 				return ConfigInfraTools::RET_OK;
-			else return ConfigInfraTools::CHECK_HOST_DNS_RECORD_TYPE_FAILED;
+			else return ConfigInfraTools::RETURN_CHECK_HOST_DNS_RECORD_TYPE_FAILED;
 		}
-		else return ConfigInfraTools::CHECK_HOST_DNS_RECORD_TYPE_NOT_ALLOWED;
+		else return ConfigInfraTools::RETURN_HOST_DNS_RECORD_TYPE_NOT_ALLOWED;
 	}
-	
-	/**
-	public function CheckIpAddressIsInNetwork($IpAddress, $NetworkWithMask) 
-	
-	- Recebe um endereço de ip e uma rede com a mascara da rede, e então verifica
-	se o endereço de ip está contido dentro da rede..
-	Retornos:
-		Success - Sucesso, obteve informações do registro para o dado host e o dado tipo de registro!
-		CHECK_HOST_DNS_RECORD_TYPE_FAILED - Não conseguiu obter registro de DNS para o dado host e o dado tipo.
-		CHECK_HOST_DNS_RECORD_TYPE_NOT_ALLOWED - Tipo de registro não é válido.
-	Data: 
-	**/
+
 	public function CheckIpAddressIsInNetwork($IpAddress, $NetworkWithMask) 
 	{
 		if ( strpos($NetworkWithMask, '/') == FALSE ) 
@@ -202,40 +152,18 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$netmask_decimal = ~ $wildcard_decimal;
 		if (($ip_decimal & $netmask_decimal) == ($range_decimal & $netmask_decimal))
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::CHECK_IP_ADDRESS_IS_NOT_IN_NETWORK; 
+		else return ConfigInfraTools::RETURN_CHECK_IP_ADDRESS_IS_NOT_IN_NETWORK; 
 	}
 	
-	/**
-	- Recebe um host ou um ip e através desta informação tenta efetuar um ping,
-	utilizando comando de linha em Linux/Unix/Windows. Se o status de retorno for 0
-	significa houve sucesso ao executar o comando e o ping, onde, em caso de falha ou
-	sucesso é retornado por referência as informações da execução do comando ping,
-    armazenadas	em formato de Array na variável arrayOutput.
-	Retornos:
-		Success - Sucesso, ping executado com sucesso.
-		CHECK_PING_SERVER_FAILED - Falha ao executar o comando.
-	Data: 
-	**/
 	public function CheckPingServer($HostOrIp, &$ArrayOutput)
 	{
 		$ArrayOutput = NULL;
 		exec("ping -n 1 " . $HostOrIp, $ArrayOutput, $status);
 		if ($status == 0)
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::CHECK_PING_SERVER_FAILED;
+		else return ConfigInfraTools::RETURN_CHECK_PING_SERVER_FAILED;
 	}
 	
-	/**
-	- Recebe um host e uma porta, verifica se tal porta está aberta para o dado host,
-	onde, em caso de sucesso, tal porta se encontra aberta, e respondendo, então o socket aberto
-	com o host é terminado, indicando o fim da checagem.
-	Retornos:
-		Success - Sucesso, conseguiu verificar a porta.
-		CHECK_HOST_PORT_FAILED_UNKNOWN - Erro, o host fornecido não existe.
-		CHECK_HOST_PORT_FAILED_TIMEOUT - Erro, estorou o tempo limite.
-		CHECK_HOST_PORT_FAILED_REFUSED - Erro, verificação recusada pelo host.
-	Data: 
-	**/
 	public function CheckPortStatus($HostOrIp, $Port)
 	{
 		$fsock = NULL;
@@ -248,25 +176,16 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		else 
 		{
 			if ($errorCode == $this->PING_ERROR_HOST_UNKNOWN)
-				return ConfigInfraTools::CHECK_HOST_PORT_FAILED_UNKNOWN;
+				return ConfigInfraTools::RETURN_CHECK_HOST_PORT_FAILED_UNKNOWN;
 			elseif($errorCode == $this->PING_ERROR_TIME_OUT)
-				return ConfigInfraTools::CHECK_HOST_PORT_FAILED_TIMEOUT;
+				return ConfigInfraTools::RETURN_CHECK_HOST_PORT_FAILED_TIMEOUT;
 			elseif($errorCode == $this->PING_ERROR_CONNECTION_REFUSED)
-				return ConfigInfraTools::CHECK_HOST_PORT_FAILED_REFUSED;
+				return ConfigInfraTools::RETURN_CHECK_HOST_PORT_FAILED_REFUSED;
 			elseif($errorCode == $this->PING_ERROR_CONNECTION_DISALLOWED)
-				return ConfigInfraTools::CHECK_HOST_PORT_FAILED_DISALLOWED;
+				return ConfigInfraTools::RETURN_CHECK_HOST_PORT_FAILED_DISALLOWED;
 		}
 	}
 	
-	
-	/**
-	- Recebe um endereço de ip conjunto a uma mascara e calcula todos os dados de rede a partir desta informação. 
-	  Retorna por referência, o endereço de IP, o endereço da sub-rede, a mascara completa da rede, o endereço de Broadcast,
-	  e o número de endereços de IPs na sub-rede em questão.
-	Retornos:
-	    Success - Sucesso, calculou todos os dados de uma sub-rede.
-	Data: 
-	**/
 	public function GetCalculationNetMask($IpAddress, $Mask, &$SubNetworkIp, &$NetMask, &$BroadCastAddress, &$AvaliableNetworkIps)
 	{
 		$mask_nr = (pow(2, $Mask) - 1) << (32 - $Mask);
@@ -293,51 +212,23 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		return ConfigInfraTools::RET_OK;
 	}
 	
-	/**
-	- Recebe um host e tenta então obter deste host todos os registros de DNS
-	relacionados a E-mail, onde, em caso de sucesso retorna por referência as informações de
-	registro de DNS relacionados a E-mail armazenadas em formato de Array na variável
-	arrayDnsMxRecords.
-	Retornos:
-		Success - Sucesso, conseguiu obter os valores de DNS relacionados a E-mail.
-		GET_DNS_MX_RECORDS_ERROR - Falha ao obter os valores de DNS relacionados a E-mail.
-	Data: 
-	**/
 	public function GetDnsMxRecords($Host, &$ArrayDnsMxRecords)
 	{
 		$ArrayDnsMxRecords = NULL;
 		if (getmxrr($Host, $ArrayDnsMxRecords) == TRUE)
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::GET_DNS_MX_RECORDS_ERROR;
+		else return ConfigInfraTools::RETURN_GET_DNS_MX_RECORDS_ERROR;
 	}
 	
-	/**
-	- Recebe um host e através deste tenta obter todos os registros de DNS do mesmo,
-	onde, em caso de sucesso retorna por referência estes registros armazenados em formato de 
-	Array na variável arrayDnsRecords.
-	Retornos:
-		Success - Sucesso, conseguiu obter os valores de DNS.
-		GET_DNS_RECORDS_ERROR - Falha ao obter os valores de DNS.
-	Data:
-	**/
 	public function GetDnsRecords($Host, &$ArrayDnsRecords)
 	{
 		$ArrayDnsRecords = NULL;
 		$ArrayDnsRecords = dns_get_record($Host);
 		if (!is_null($ArrayDnsRecords))
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::GET_DNS_RECORDS_ERROR;
+		else return ConfigInfraTools::RETURN_GET_DNS_RECORDS_ERROR;
 	}
 	
-		/**
-	- Recebe um endereço de IP e através deste tenta obter o hostname associado a este
-	endereço, onde, em caso de sucesso retorna por referência o nome do host na variável 
-	hostName.
-	Retornos:
-		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOSTNAME_ERROR - Falha ao obter o hostname com o dado endereço de IP.
-	Data:
-	**/
 	public function GetHostName($IpAddress, &$HostName)
 	{
 		$HostName = NULL;
@@ -346,20 +237,11 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		{
 			if (!is_null($HostName) && $HostName != $IpAddress)
 			return ConfigInfraTools::RET_OK;
-			else return ConfigInfraTools::GET_HOSTNAME_ERROR;
+			else return ConfigInfraTools::RETURN_GET_HOSTNAME_ERROR;
 		}
-		else return ConfigInfraTools::GET_HOSTNAME_ERROR;
+		else return ConfigInfraTools::RETURN_GET_HOSTNAME_ERROR;
 	}
 	
-	/**
-	- Recebe um host e através deste tenta obter todos os endereços de IP associados ao mesmo, 
-	onde, em caso de sucesso retorna por referência todos os endereços de IP armazenados em formato
-    de Array na variável arrayIpAddress.
-	Retornos:
-		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOST_IP_ADDRESS_ERROR - Falha ao obter o hostname com o dado endereço de IP.
-	Data:
-	**/
 	public function GetIpAddresses($HostName, &$ArrayIpAddress)
 	{
 		$ArrayIpAddress = NULL;
@@ -372,18 +254,9 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$ArrayIpAddress = gethostbynamel($HostName);
 		if (!is_null($ArrayIpAddress))
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::GET_HOST_IP_ADDRESS_ERROR;
+		else return ConfigInfraTools::RETURN_GET_HOST_IP_ADDRESS_ERROR;
 	}
 		
-	/**
-	- Recebe um host e através deste tenta obter todos os endereços de IP associados ao mesmo, 
-	onde, em caso de sucesso retorna por referência todos os endereços de IP armazenados em formato
-    de Array na variável arrayIpAddress.
-	Retornos:
-		Success - Sucesso, conseguiu obter o hostname.
-		GET_LOCATION_BY_IP_ADDRESS_FAILED - Falha ao obter o hostname com o dado endereço de IP.
-	Data:
-	**/
 	public function GetLocation($IpAddress, &$ArrayLocationInformation)
 	{
 		$ArrayLocationInformation = array(); $content = NULL;
@@ -401,9 +274,9 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 					array_push($ArrayLocationInformation, $ip_data->geoplugin_city);
 				return ConfigInfraTools::RET_OK;
 			}
-			else return ConfigInfraTools::GET_LOCATION_BY_IP_ADDRESS_FAILED;
+			else return ConfigInfraTools::RETURN_GET_LOCATION_BY_IP_ADDRESS_FAILED;
 		}
-		else return ConfigInfraTools::GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS;
+		else return ConfigInfraTools::RETURN_GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS;
 	}
 
 	
@@ -412,7 +285,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$Protocol = getprotobynumber($Number);
 		if ($Protocol != FALSE)
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::GET_PROTOCOL_ERROR;
+		else return ConfigInfraTools::RETURN_GET_PROTOCOL_ERROR;
 	}
 	
 	public function GetRoute($IpAddress, $TimeOut, &$ArrayRoute)
@@ -444,7 +317,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$Service = getservbyport($Port ,$Protocol);
 		if (!is_null($Service))
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::GET_SERVICE_ERROR;
+		else return ConfigInfraTools::RETURN_GET_SERVICE_ERROR;
 	}
 	
 	public function GetWebSiteContent($WebSite, &$Content)
@@ -457,7 +330,7 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 			$Content = "<div>" . htmlspecialchars($Content, ENT_SUBSTITUTE) . "</div>";
 			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::GET_WEBSITE_CONTENT_ERROR;
+		else return ConfigInfraTools::RETURN_GET_WEBSITE_CONTENT_ERROR;
 	}
 	
 	public function GetWebSiteHeaders($WebSite, &$ArrayHeaders)
@@ -466,18 +339,9 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 		$ArrayHeaders = @get_headers($WebSite, 1);
 		if (!is_null($ArrayHeaders))
 			return ConfigInfraTools::RET_OK;
-		else return ConfigInfraTools::GET_WEBSITE_HEADERS_FAILED;
+		else return ConfigInfraTools::RETURN_GET_WEBSITE_HEADERS_FAILED;
 	}
 	
-	/**
-	- Recebe um endereço de IP e através deste tenta obter o hostname associado a este
-	endereço, onde, em caso de sucesso retorna por referência o nome do host na variável 
-	hostName.
-	Retornos:
-		Success - Sucesso, conseguiu obter o hostname.
-		GET_HOSTNAME_ERROR - Falha ao obter o hostname com o dado endereço de IP.
-	Data:
-	**/
 	public function GetWhois($HostName, &$Info)
 	{
 		$InstancePearWhois = $this->InfraToolsFactory->CreateNetWhois();
@@ -492,11 +356,11 @@ class InfraToolsDiagnosticTools extends DiagnosticTools
 					$Info = str_replace("\n", "<br>", $Info);
 					return ConfigInfraTools::RET_OK;
 				}
-				else return ConfigInfraTools::GET_WHOIS_ERROR;
+				else return ConfigInfraTools::RETURN_GET_WHOIS_ERROR;
 			}
-			else return ConfigInfraTools::GET_WHOIS_ERROR;
+			else return ConfigInfraTools::RETURN_GET_WHOIS_ERROR;
 		}
-		else return ConfigInfraTools::GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND;
+		else return ConfigInfraTools::RETURN_GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND;
 	}
 }
 

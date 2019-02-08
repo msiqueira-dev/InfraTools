@@ -57,7 +57,7 @@ class DiagnosticTools
 		if(empty($_SERVER['HTTP_USER_AGENT'])) 
 		{
 			$Browser = 'unrecognized';
-			return Config::GET_BROWSER_CLIENT_INVALID_BROWSER;
+			return Config::RETURN_GET_BROWSER_CLIENT_INVALID_BROWSER;
 		}
 
 		$userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -80,7 +80,7 @@ class DiagnosticTools
 		}
 		if($Browser != "")
 			return Config::RET_OK;
-		else return Config::GET_BROWSER_CLIENT_INVALID_BROWSER;
+		else return Config::RETURN_GET_BROWSER_CLIENT_INVALID_BROWSER;
 	}
 	
 	public function GetIpAddressClient(&$IpAddress) 

@@ -173,7 +173,7 @@ class FacedeBusiness
 			$config = $this->Factory->CreateConfig();
 			$instanceEmail = $this->Factory->CreateEmail();  		
 			$subject = "[" . $Application . "] " . 
-				             Config::PAGE_CONTACT . " " . 
+				             Config::PAGE_SUPPORT_CONTACT . " " . 
 				       $Subject . " - " . 
 				       $Title;
 			$body    = "<b>Name</b>: " . $Name . "<br><b>Email:</b> " . 

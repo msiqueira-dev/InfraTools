@@ -392,21 +392,27 @@ class En
 	const HREF_PAGE_REGISTER_CONFIRMATION                           = "/En/PageRegisterConfirmation";
 	const HREF_PAGE_RESEND_CONFIRMATION_LINK                        = "/En/PageResendConfirmationLink";
 	const HREF_PAGE_SERVICE                                         = "/En/PageService";
-	const HREF_PAGE_SERVICE_LST                                    = "/En/PageServiceList";
-	const HREF_PAGE_SERVICE_LST_BY_CORPORATION                     = "/En/PageServiceListByCorporation";
-	const HREF_PAGE_SERVICE_LST_BY_DEPARTMENT                      = "/En/PageServiceListByDepartment";
-	const HREF_PAGE_SERVICE_LST_BY_NAME                            = "/En/PageServiceListByName";
-	const HREF_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE         = "/En/PageServiceListByTypeAssocUserService";
-	const HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE                    = "/En/PageServiceListByTypeService";
-	const HREF_PAGE_SERVICE_LST_BY_USER                            = "/En/PageServiceListByUser";
+	const HREF_PAGE_SERVICE_LST                                     = "/En/PageServiceList";
+	const HREF_PAGE_SERVICE_LST_BY_CORPORATION                      = "/En/PageServiceListByCorporation";
+	const HREF_PAGE_SERVICE_LST_BY_DEPARTMENT                       = "/En/PageServiceListByDepartment";
+	const HREF_PAGE_SERVICE_LST_BY_NAME                             = "/En/PageServiceListByName";
+	const HREF_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE          = "/En/PageServiceListByTypeAssocUserService";
+	const HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE                     = "/En/PageServiceListByTypeService";
+	const HREF_PAGE_SERVICE_LST_BY_USER                             = "/En/PageServiceListByUser";
 	const HREF_PAGE_SERVICE_REGISTER                                = "/En/PageServiceRegister";
-	const HREF_PAGE_SERVICE_SEL                                  = "/En/PageServiceSelect";
+	const HREF_PAGE_SERVICE_SEL                                     = "/En/PageServiceSelect";
 	const HREF_PAGE_SERVICE_VIEW                                    = "/En/PageServiceView";
 	const HREF_PAGE_SUPPORT                                         = "/En/PageSupport";
+	const HREF_PAGE_SUPPORT_CONTACT                                 = "/En/PageSupportContact";
+	const HREF_PAGE_SUPPORT_LST                                     = "/En/PageSupportList";
+	const HREF_PAGE_SUPPORT_REGISTER                                = "/En/PageSupportRegister";
+	const HREF_PAGE_SUPPORT_SEL                                     = "/En/PageSupportSelect";
+	const HREF_PAGE_SUPPORT_VIEW                                    = "/En/PageSupportView";
+	const HREF_PAGE_SUPPORT_UPDT                                    = "/En/PageSupportUpdate";
 	const HREF_PAGE_TEAM                                            = "/En/PageTeam";
-	const HREF_PAGE_TEAM_LST                                       = "/En/PageTeamList";
+	const HREF_PAGE_TEAM_LST                                        = "/En/PageTeamList";
 	const HREF_PAGE_TEAM_REGISTER                                   = "/En/PageTeamRegister";
-	const HREF_PAGE_TEAM_SEL                                     = "/En/PageTeamSelect";
+	const HREF_PAGE_TEAM_SEL                                        = "/En/PageTeamSelect";
 	const HREF_PAGE_TEAM_VIEW                                       = "/En/PageTeamView";
 	const INSERT_WARNING_EXISTS                                     = "A similar register was already performed";
 	const INSTALL_EXPORT_SUCCESS                                    = "System data exported succesfully";
@@ -1074,12 +1080,40 @@ class En
 	const HEADER_PAGE_REGISTER_TEXT                               = "Register";
 	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TITLE              = "Resend Confirmation Link";
 	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT               = "here";
-	const HEADER_PAGE_SERVICE_TITLE                               = "Service";
-	const HEADER_PAGE_SERVICE_TEXT                                = "SERVICE";
-	const HEADER_PAGE_SUPPORT_TITLE                               = "Requests";
-	const HEADER_PAGE_SUPPORT_TEXT                                = "REQUESTS";
-	const HEADER_PAGE_TEAM_TITLE                                  = "My Teams";
-	const HEADER_PAGE_TEAM_TEXT                                   = "My Teams";
+	const HEADER_PAGE_SERVICE_TITLE                                 = "Service";
+	const HEADER_PAGE_SERVICE_TEXT                                  = "SERVICE";
+	const HEADER_PAGE_SERVICE_LST_TITLE                             = "List Services";
+	const HEADER_PAGE_SERVICE_LST_TEXT                              = "LIST SERVICES";
+	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "List Services by Corporation";
+	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TEXT               = "LIST SERVICES bY CORPORATION";
+	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TITLE               = "List Services by Department";
+	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TEXT                = "LIST SERVICES BY DEPARTMENT";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TITLE  = "List Services by Type of association";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TEXT   = "LIST SERVICES BY TYPE OF ASSOCIATION";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TITLE             = "List Services by Type";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TEXT              = "LIST SERVICES BY TYPE";
+	const HEADER_PAGE_SERVICE_REGISTER_TITLE                        = "Register Service";
+	const HEADER_PAGE_SERVICE_REGISTER_TEXT                         = "REGISTER SERVICE";
+	const HEADER_PAGE_SERVICE_SEL_TITLE                             = "Select Service";
+	const HEADER_PAGE_SERVICE_SEL_TEXT                              = "SELECT SERVICE";
+	const HEADER_PAGE_SUPPORT_TITLE                                 = "Requests";
+	const HEADER_PAGE_SUPPORT_TEXT                                  = "REQUESTS";
+	const HEADER_PAGE_SUPPORT_CONTACT_TITLE                         = "New Request";
+	const HEADER_PAGE_SUPPORT_CONTACT_TEXT                          = "NEW REQUESTS";
+	const HEADER_PAGE_SUPPORT_LST_TITLE                             = "List Requests";
+	const HEADER_PAGE_SUPPORT_LST_TEXT                              = "LIST REQUESTS";
+	const HEADER_PAGE_SUPPORT_REGISTER_TITLE                        = "Register Request";
+	const HEADER_PAGE_SUPPORT_REGISTER_TEXT                         = "REGISTER REQUEST";
+	const HEADER_PAGE_SUPPORT_SEL_TITLE                             = "Select Request";
+	const HEADER_PAGE_SUPPORT_SEL_TEXT                              = "SELECT REQUEST";
+	const HEADER_PAGE_TEAM_TITLE                                    = "My Teams";
+	const HEADER_PAGE_TEAM_TEXT                                     = "My Teams";
+	const HEADER_PAGE_TEAM_LST_TITLE                                = "List Teams";
+	const HEADER_PAGE_TEAM_LST_TEXT                                 = "LIST TEAMS";
+	const HEADER_PAGE_TEAM_REGISTER_TITLE                           = "Register Team";
+	const HEADER_PAGE_TEAM_REGISTER_TEXT                            = "REGISTER TEAM";
+	const HEADER_PAGE_TEAM_SEL_TITLE                                = "Select Team";
+	const HEADER_PAGE_TEAM_SEL_TEXT                                 = "SELECT TEAM";
 	
 	/* Body Page About */
 	const ABOUT_DESCRIPTION_TITLE                                 = "About the System";
@@ -1475,23 +1509,4 @@ class En
 	const RESEND_CONFIRMATION_EMAIL_TEXT                         = "click in the link bellow to finish your register.<br/><br/>Link:";
 	const RESEND_CONFIRMATION_LINK_ERROR                         = "An error has occurred, please try again or contact us";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                       = "Confirmation link resent successfully";
-	
-	public function GetText($Constant)
-	{
-		if(!defined($Constant))
-		{
-			if(strpos($Constant, 'LST') !== false) 
-				$Constant = str_replace ("LST" , "LIST" , $Constant);
-			elseif (strpos($Constant, 'SEL') !== false) 
-				$Constant = str_replace ("SEL" , "SELECT" , $Constant);
-			elseif (strpos($Constant, 'UPDT') !== false) 
-				$Constant = str_replace ("UPDT" , "UPDATE" , $Constant);
-		}
-		if(defined($Constant))
-		{
-			$text = constant("En::$Constant");
-			if(!empty($text)) return $text;
-		}
-		else echo $Constant;
-	}
 }

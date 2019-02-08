@@ -109,7 +109,7 @@
             </div>
             <div class="DivContentBodyContainerSubmitImage">
                 <img   src="<?php echo $this->InputValueCorporationActive; ?>" 
-                       name="<?php echo ConfigInfraTools::ACCOUNT_FM_SB_VERIFIED_CORPORATION; ?>"
+                       name="<?php echo ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB; ?>"
                        alt="CorporationVerification" width="20" height="20" />
             </div>
         </div>

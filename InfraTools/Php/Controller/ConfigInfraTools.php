@@ -306,8 +306,6 @@ class ConfigInfraTools extends Config
 	const FM_INSTALL_REINSTALL_SB                                               = "FmInstallReinstallSb";
 	const FM_INVALID_DNS_RECORD                                                 = "FmInvalidDnsRecord";
 	const FM_INVALID_HOSTNAME                                                   = "FmInvalidHostName";
-	const FM_INVALID_IP_MASK                                                    = "FmInvalidIpMask";
-	const FM_INVALID_NULL                                                       = "FmInvalidNull";
 	const FM_INVALID_PORT                                                       = "FmInvalidPort";
 	const FM_INVALID_PROTOCOL                                                   = "FmInvalidProtocol";
 	const FM_INVALID_PROTOCOL_NUMBER                                            = "FmInvalidProtocolNumber";
@@ -583,6 +581,30 @@ class ConfigInfraTools extends Config
 	const PAGE_SUPPORT_TICKET_SEL                                               = "Page_Admin_Ticket_Select";
 	const PAGE_SUPPORT_TICKET_UPDT                                              = "Page_Admin_Ticket_Update";
 	const PAGE_SUPPORT_TICKET_VIEW                                              = "Page_Admin_Ticket_View";
+	const RETURN_CHECK_HOST_BLACKLISTED                                         = "ReturnCheckHostBlackListed";
+	const RETURN_CHECK_HOST_BLACKLIST_NO_IP_FOR_HOST                            = "ReturnCheckHostBlackListNoIpForHost";
+	const RETURN_HOST_DNS_RECORD_TYPE_NOT_ALLOWED                               = "ReturnCheckHostDnsRecordTypeNotAllowed";
+	const RETURN_CHECK_HOST_DNS_RECORD_TYPE_FAILED                              = "ReturnCheckHostDnsRecordTypeFailed";
+	const RETURN_CHECK_HOST_PORT_FAILED_DISALLOWED                              = "ReturnCheckHostPortFailedDisallowed";
+	const RETURN_CHECK_HOST_PORT_FAILED_REFUSED                                 = "ReturnCheckHostPortFailedRefused";
+	const RETURN_CHECK_HOST_PORT_FAILED_TIMEOUT                                 = "ReturnCheckHostPortFailedTimeOut";
+	const RETURN_CHECK_HOST_PORT_FAILED_UNKNOWN                                 = "ReturnCheckHostPortFailedUnknown";
+	const RETURN_CHECK_IP_ADDRESS_IS_NOT_IN_NETWORK                             = "ReturnCheckIpAddressIsNotInNetwork";
+	const RETURN_CHECK_PING_SERVER_FAILED                                       = "ReturnCheckPingServerFailed";
+	const RETURN_CHECK_AVAILABILITY_NOT_AVAILABLE                               = "ReturnDomainNotAvailable";
+	const RETURN_GET_BROWSER_CLIENT_INVALID_BROWSER                             = "ReturnInvalidBrowserClient";
+	const RETURN_GET_DNS_MX_RECORDS_ERROR                                       = "ReturnGetDnsMxRecordsError";
+	const RETURN_GET_DNS_RECORDS_ERROR                                          = "ReturnGetDnsRecordsError";
+	const RETURN_GET_HOSTNAME_ERROR                                             = "ReturnGetHostNameError";
+	const RETURN_GET_HOST_IP_ADDRESS_ERROR                                      = "ReturnGetHostIpAddressError";
+	const RETURN_GET_LOCATION_BY_IP_ADDRESS_FAILED                              = "ReturnGetLocationByIpAddressError";
+	const RETURN_GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS                 = "ReturnGetLocationByIpAddressErrorGetContents";
+	const RETURN_GET_PROTOCOL_ERROR                                             = "ReturnGEtProtocolError";
+	const RETURN_GET_SERVICE_ERROR                                              = "ReturnGetServiceError";
+	const RETURN_GET_WEBSITE_CONTENT_ERROR                                      = "ReturnGetWebSiteContentError";
+	const RETURN_GET_WEBSITE_HEADERS_FAILED                                     = "ReturnGetWebSiteHeadersError";
+	const RETURN_GET_WHOIS_ERROR                                                = "ReturnGetWhoisError";
+	const RETURN_GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND                          = "ReturnPackageNetWhoisNotFound";
 	const SESS_ADMIN_IP_ADDRESS                                                 = "SessionAdminIpAddress";
 	const SESS_ADMIN_SERVICE                                                    = "SessionAdminService";
 	const SESS_ADMIN_TYPE_SERVICE                                               = "SessionAdminTypeService";
@@ -657,40 +679,6 @@ class ConfigInfraTools extends Config
 	const TB_TYPE_TIME_MONITORING                                               = "TYPE_TIME_MONITORING";
 	const TB_TYPE_TIME_MONITORING_FD_VALUE                                      = "TypeTimeMonitoringValue";
 	const TB_TYPE_TIME_MONITORING_FD_DESCRIPTION                                = "TypeTimeMonitoringDescription";
-	 
-	/* Constantes de Fmulário de Funcionalidades */
-	
-	const ACCOUNT_FM_SB_VERIFIED_CORPORATION                  = "AccountFmSbVerifiedCorporation";
-	const ACCOUNT_FM_SB_VERIFIED_DEPARTMENT                   = "AccountFmSbVerifiedDepartment";
-	const ACCOUNT_FM_SB_VERIFIED_USER_UNIQUE_ID               = "AccountFmSbVerifiedUserUniqueId";
-	
-	/* Constantes de Retornos Funcionalidades: Fachada Negócio */
-	
-	/* Constantes de Retornos Funcionalidades: Network */
-	const CHECK_HOST_BLACKLISTED                                    = "ReturnCheckHostBlackListed";
-	const CHECK_HOST_BLACKLIST_NO_IP_FOR_HOST                       = "ReturnCheckHostBlackListNoIpForHost";
-	const CHECK_HOST_DNS_RECORD_TYPE_NOT_ALLOWED                    = "ReturnCheckHostDnsRecordTypeNotAllowed";
-	const CHECK_HOST_DNS_RECORD_TYPE_FAILED                         = "ReturnCheckHostDnsRecordTypeFailed";
-	const CHECK_HOST_PORT_FAILED_DISALLOWED                         = "ReturnCheckHostPortFailedDisallowed";
-	const CHECK_HOST_PORT_FAILED_REFUSED                            = "ReturnCheckHostPortFailedRefused";
-	const CHECK_HOST_PORT_FAILED_TIMEOUT                            = "ReturnCheckHostPortFailedTimeOut";
-	const CHECK_HOST_PORT_FAILED_UNKNOWN                            = "ReturnCheckHostPortFailedUnknown";
-	const CHECK_IP_ADDRESS_IS_NOT_IN_NETWORK                        = "ReturnCheckIpAddressIsNotInNetwork";
-	const CHECK_PING_SERVER_FAILED                                  = "ReturnCheckPingServerFailed";
-	const CHECK_AVAILABILITY_NOT_AVAILABLE                          = "ReturnDomainNotAvailable";
-	const GET_BROWSER_CLIENT_INVALID_BROWSER                        = "ReturnInvalidBrowserClient";
-	const GET_DNS_MX_RECORDS_ERROR                                  = "ReturnGetDnsMxRecordsError";
-	const GET_DNS_RECORDS_ERROR                                     = "ReturnGetDnsRecordsError";
-	const GET_HOSTNAME_ERROR                                        = "ReturnGetHostNameError";
-	const GET_HOST_IP_ADDRESS_ERROR                                 = "ReturnGetHostIpAddressError";
-	const GET_LOCATION_BY_IP_ADDRESS_FAILED                         = "ReturnGetLocationByIpAddressError";
-	const GET_LOCATION_BY_IP_ADDRESS_FAILED_GET_CONTENTS            = "ReturnGetLocationByIpAddressErrorGetContents";
-	const GET_PROTOCOL_ERROR                                        = "ReturnGEtProtocolError";
-	const GET_SERVICE_ERROR                                         = "ReturnGetServiceError";
-	const GET_WEBSITE_CONTENT_ERROR                                 = "ReturnGetWebSiteContentError";
-	const GET_WEBSITE_HEADERS_FAILED                                = "ReturnGetWebSiteHeadersError";
-	const GET_WHOIS_ERROR                                           = "ReturnGetWhoisError";
-	const GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND                     = "ReturnPackageNetWhoisNotFound";
 	
 	/* Funcionalidades Habilitadas / Desabilitadas */
 	public $FunctionCheckAvailabilityEnabled                        = TRUE;
@@ -735,7 +723,6 @@ class ConfigInfraTools extends Config
 	public $PageAdminTypeUserEnabled                                = TRUE;
 	public $PageAdminUserEnabled                                    = TRUE;
 	public $PageCheckEnabled                                        = TRUE;
-	public $PageContactEnabled                                      = TRUE;
 	public $PageDiagnosticToolsEnabled                              = TRUE;
 	public $PageGetEnabled                                          = TRUE;
 	public $PageHomeEnabled                                         = TRUE;
@@ -761,6 +748,7 @@ class ConfigInfraTools extends Config
 	public $PageServiceUpdateEnabled                                = TRUE;
 	public $PageServiceViewEnabled                                  = TRUE;
 	public $PageSupportEnabled                                      = TRUE;
+	public $PageSupportContactEnabled                               = TRUE;
 	public $PageTeamEnabled                                         = TRUE;
 	public $PageTeamListEnabled                                     = TRUE;
 	public $PageTeamRegisterEnabled                                 = TRUE;

@@ -4,7 +4,7 @@
 .DivContentBodyContainer input[type="text"]{width:180px;height:25px;margin-right:10px;float:left;line-height:26px;}
 .DivContentBodyContainer input[type="radio"]{width:20px;height:15px;float:left;position:relative;top:8px;}
 .DivContentBodyContainerSelect{width:100px;height:30px;float:left;}
-.DivContentBodyContainerSelect select{width:90px;height:30px;font-size:14px;font-weight:bold;}
+.DivContentBodyContainerSelect select{width:90px;height:33px;font-size:14px;font-weight:bold;}
 .DivContentBodyContainerSelectLarger{width:110px;}
 .DivContentBodyContainerSelectLarger select{width:100px;}
 .DivContentBodyContainerLabel{width:105px;height:30px;float:left;}

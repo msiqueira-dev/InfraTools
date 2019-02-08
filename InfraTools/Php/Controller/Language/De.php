@@ -366,13 +366,19 @@ class De
 	const HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE                    = "/De/PageServiceListByTypeService";
 	const HREF_PAGE_SERVICE_LST_BY_USER                            = "/De/PageServiceListByUser";
 	const HREF_PAGE_SERVICE_REGISTER                                = "/De/PageServiceRegister";
-	const HREF_PAGE_SERVICE_SEL                                  = "/De/PageServiceSelect";
+	const HREF_PAGE_SERVICE_SEL                                     = "/De/PageServiceSelect";
 	const HREF_PAGE_SERVICE_VIEW                                    = "/De/PageServiceView";
 	const HREF_PAGE_SUPPORT                                         = "/De/PageSupport";
+	const HREF_PAGE_SUPPORT_CONTACT                                 = "/De/PageSupportContact";
+	const HREF_PAGE_SUPPORT_LST                                     = "/De/PageSupportList";
+	const HREF_PAGE_SUPPORT_REGISTER                                = "/De/PageSupportRegister";
+	const HREF_PAGE_SUPPORT_SEL                                     = "/De/PageSupportSelect";
+	const HREF_PAGE_SUPPORT_VIEW                                    = "/De/PageSupportView";
+	const HREF_PAGE_SUPPORT_UPDT                                    = "/De/PageSupportUpdate";
 	const HREF_PAGE_TEAM                                            = "/De/PageTeam";
-	const HREF_PAGE_TEAM_LST                                       = "/De/PageTeamList";
+	const HREF_PAGE_TEAM_LST                                        = "/De/PageTeamList";
 	const HREF_PAGE_TEAM_REGISTER                                   = "/De/PageTeamRegister";
-	const HREF_PAGE_TEAM_SEL                                     = "/De/PageTeamSelect";
+	const HREF_PAGE_TEAM_SEL                                        = "/De/PageTeamSelect";
 	const HREF_PAGE_TEAM_VIEW                                       = "/De/PageTeamView";
 	const INSERT_WARNING_EXISTS                                     = "";
 	const INSTALL_EXPORT_SUCCESS                                    = "";
@@ -1033,10 +1039,38 @@ class De
 	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT                 = "";
 	const HEADER_PAGE_SERVICE_TITLE                                 = "";
 	const HEADER_PAGE_SERVICE_TEXT                                  = "";
+	const HEADER_PAGE_SERVICE_LST_TITLE                             = "";
+	const HEADER_PAGE_SERVICE_LST_TEXT                              = "";
+	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "";
+	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TEXT               = "";
+	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TITLE               = "";
+	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TEXT                = "";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TITLE  = "";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TEXT   = "";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TITLE             = "";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TEXT              = "";
+	const HEADER_PAGE_SERVICE_REGISTER_TITLE                        = "";
+	const HEADER_PAGE_SERVICE_REGISTER_TEXT                         = "";
+	const HEADER_PAGE_SERVICE_SEL_TITLE                             = "";
+	const HEADER_PAGE_SERVICE_SEL_TEXT                              = "";
 	const HEADER_PAGE_SUPPORT_TITLE                                 = "";
 	const HEADER_PAGE_SUPPORT_TEXT                                  = "";
+	const HEADER_PAGE_SUPPORT_CONTACT_TITLE                         = "";
+	const HEADER_PAGE_SUPPORT_CONTACT_TEXT                          = "";
+	const HEADER_PAGE_SUPPORT_LST_TITLE                             = "";
+	const HEADER_PAGE_SUPPORT_LST_TEXT                              = "";
+	const HEADER_PAGE_SUPPORT_REGISTER_TITLE                        = "";
+	const HEADER_PAGE_SUPPORT_REGISTER_TEXT                         = "";
+	const HEADER_PAGE_SUPPORT_SEL_TITLE                             = "";
+	const HEADER_PAGE_SUPPORT_SEL_TEXT                              = "";
 	const HEADER_PAGE_TEAM_TITLE                                    = "";
 	const HEADER_PAGE_TEAM_TEXT                                     = "";
+	const HEADER_PAGE_TEAM_LST_TITLE                                = "";
+	const HEADER_PAGE_TEAM_LST_TEXT                                 = "";
+	const HEADER_PAGE_TEAM_REGISTER_TITLE                           = "";
+	const HEADER_PAGE_TEAM_REGISTER_TEXT                            = "";
+	const HEADER_PAGE_TEAM_SEL_TITLE                                = "";
+	const HEADER_PAGE_TEAM_SEL_TEXT                                 = "";
 	
 	/* Body Page About */
 	const ABOUT_DESCRIPTION_TITLE                                   = "";
@@ -1380,23 +1414,4 @@ class De
 	const RESEND_CONFIRMATION_EMAIL_TEXT                            = "";
 	const RESEND_CONFIRMATION_LINK_ERROR                            = "";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "";
-	
-	public function GetText($Constant)
-	{
-		if(!defined($Constant))
-		{
-			if(strpos($Constant, 'LST') !== false) 
-				$Constant = str_replace ("LST" , "LIST" , $Constant);
-			elseif (strpos($Constant, 'SEL') !== false) 
-				$Constant = str_replace ("SEL" , "SELECT" , $Constant);
-			elseif (strpos($Constant, 'UPDT') !== false) 
-				$Constant = str_replace ("UPDT" , "UPDATE" , $Constant);
-		}
-		if(defined($Constant))
-		{
-			$text = constant("De::$Constant");
-			if(!empty($text)) return $text;
-		}
-		else echo $Constant;
-	}
 }
