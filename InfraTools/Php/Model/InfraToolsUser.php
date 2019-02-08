@@ -40,14 +40,14 @@ class InfraToolsUser extends User
 	public    $ArrayInstanceInfraToolsUser = NULL;
 
 	/* Constructor */
-	public function __construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
+	public function __construct($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation,
 								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								$TwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
 	{
-		parent::__construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
+		parent::__construct($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation,
 							$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 							$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 							$TwoStepVerification, $UserActive, $UserConfirmed, 

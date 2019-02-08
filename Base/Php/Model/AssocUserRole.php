@@ -9,31 +9,29 @@ Dependencies:
 Description: 
 			Class that deals with association of user and roles.
 Get / Set:
-			public function GetAssocUserRoleRoleName();
-			public function GetAssocUserRoleUserEmail();
+			public function GetAssocUserRoleRole();
+			public function GetAssocUserRoleUser();
 			public function GetRegisterDate();
-			public function SetAssocUserRoleRoleName($AssocUserRoleRoleName);
-			public function SetAssocUserRoleUserEmail($AssocUserRoleUserEmail);
 Methods:
-			public function UpdateAssocUserRoleRole($RoleDescription, $RoleName);
+			public function UpdateAssocUserRole($RoleDescription, $RoleName);
 **************************************************************************/
 
 class AssocUserRole
 {
 	/* Properties */
-	protected $AssocUserRoleRoleName  = NULL;
-	protected $AssocUserRoleUserEmail = NULL;
-	protected $RegisterDate           = NULL;
+	protected $AssocUserRoleRole = NULL;
+	protected $AssocUserRoleUser = NULL;
+	protected $RegisterDate      = NULL;
 
 	/* Constructor */
-	public function __construct($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate) 
+	public function __construct($AssocUserRoleRole, $AssocUserRoleUser, $RegisterDate) 
 	{
-		if(!is_null($AssocUserRoleRoleName))
-			$this->AssocUserRoleRoleName = $AssocUserRoleRoleName;
-		else throw new Exception(Config::EXCEPTION_ASSOC_USER_ROLE_ROLE_NAME);
-		if(!is_null($AssocUserRoleUserEmail))
-			$this->AssocUserRoleUserEmail = $AssocUserRoleUserEmail;
-		else throw new Exception(Config::EXCEPTION_ASSOC_USER_ROLE_USER_EMAIL);
+		if(!is_null($AssocUserRoleRole))
+			$this->AssocUserRoleRole = $AssocUserRoleRole;
+		else throw new Exception(Config::EXCEPTION_ASSOC_USER_ROLE_ROLE);
+		if(!is_null($AssocUserRoleUser))
+			$this->AssocUserRoleUser = $AssocUserRoleUser;
+		else throw new Exception(Config::EXCEPTION_ASSOC_USER_ROLE_USER);
 		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
@@ -46,14 +44,14 @@ class AssocUserRole
 	}
 	
 	/* GET */
-	public function GetAssocUserRoleRoleName()
+	public function GetAssocUserRoleRole()
 	{
-		return $this->AssocUserRoleRoleName;
+		return $this->AssocUserRoleRole;
 	}
 	
-	public function GetAssocUserRoleUserEmail()
+	public function GetAssocUserRoleUser()
 	{
-		return $this->AssocUserRoleUserEmail;	
+		return $this->AssocUserRoleUser;	
 	}
 	
 	public function GetRegisterDate()
@@ -62,23 +60,14 @@ class AssocUserRole
 	}
 	
 	/* SET */
-	public function SetAssocUserRoleRoleName($AssocUserRoleRoleName)
-	{
-		$this->AssocUserRoleRoleName = $AssocUserRoleRoleName;
-	}
-	
-	public function SetAssocUserRoleUserEmail($AssocUserRoleUserEmail)
-	{
-		$this->AssocUserRoleUserEmail = $AssocUserRoleUserEmail;
-	}
 	
 	/* METHODS */
-	public function UpdateAssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail)	
+	public function UpdateAssocUserRole($AssocUserRoleRole, $AssocUserRoleUser)	
 	{
-		if(!is_null($AssocUserRoleRoleName))
-			$this->AssocUserRoleRoleName  = $AssocUserRoleRoleName;
-		if(!is_null($AssocUserRoleUserEmail))
-			$this->AssocUserRoleUserEmail = $AssocUserRoleUserEmail;
+		if(!is_null($AssocUserRoleRole))
+			$this->AssocUserRoleRole  = $AssocUserRoleRole;
+		if(!is_null($AssocUserRoleUser))
+			$this->AssocUserRoleUser = $AssocUserRoleUser;
 	}
 }
 ?>

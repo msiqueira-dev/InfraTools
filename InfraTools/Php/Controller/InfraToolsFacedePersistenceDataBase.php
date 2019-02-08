@@ -2429,14 +2429,12 @@ class InfraToolsFacedePersistenceDataBase
 	public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
-		$ArrayTables = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			echo "<b>Query (SqlInfraToolsDataBaseGetRowCount)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(InfraToolsPersistenceDataBase::SqlInfraToolsDataBaseGetRowCount()))
 			{
-				$ArrayTables = array();
 				if ($row = $result->fetch_assoc()) 
 				{
 					$RowCount = $row['ROW_COUNT'];

@@ -71,10 +71,10 @@ class FormValidator
 	const INVALID_HOST_NAME               = "ReturnInvalidHostName";
 	const INVALID_GENDER                  = "ReturnInvalidGender";
 	const INVALID_IP_ADDRESS_IPV4         = "ReturnInvalidIpAddressIpv4";
-	const INVALID_IP_MASK                 = "ReturnInvalidIpMask";
+	const FM_INVALID_IP_MASK                 = "ReturnInvalidIpMask";
 	const INVALID_NAME                    = "ReturnInvalidName";
 	const INVALID_NON_NUMERIC             = "ReturnInvalidNonNumeric";
-	const INVALID_NULL                    = "ReturnInvalidNull";
+	const FM_INVALID_NULL                    = "ReturnInvalidNull";
 	const INVALID_NUMERIC                 = "ReturnInvalidNumeric";
 	const INVALID_PASSWORD                = "ReturnInvalidPassword";
 	const INVALID_REGISTRATION_ID         = "ReturnInvalidRegistrationId";
@@ -195,9 +195,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_BOOL;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateCorporationName($CorporationName, $DefaultValue)
@@ -212,9 +212,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_CORPORATION;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateCompareString($StringToCompare, $DefaultValue, $String)
@@ -229,9 +229,9 @@ class FormValidator
 				}
 				else return self::INVALID_CAPTCHA;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateCountryName($Country, $DefaultValue)
@@ -246,9 +246,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_COUNTRY_NAME;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateCountryRegionCode($RegionCode, $DefaultValue)
@@ -261,9 +261,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_COUNTRY_REGION_CODE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateCpf($Cpf, $DefaultValue)
@@ -306,9 +306,9 @@ class FormValidator
 				}
 				else return self::INVALID_WHITE_SPACE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDate($Year, $Month, $Day, $DefaultValueYear, $DefaultValueMonth, $DefaultValueDay)
@@ -327,9 +327,9 @@ class FormValidator
 				}
 				else return self::INVALID_DEFAULT_VALUE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDateDay($Day, $DefaultValue)
@@ -346,9 +346,9 @@ class FormValidator
 				}
 				else return self::INVALID_DATE_DAY;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDateMonth($Month, $DefaultValue)
@@ -365,9 +365,9 @@ class FormValidator
 				}
 				else return self::INVALID_DATE_MONTH;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDateYear($Year, $DefaultValue)
@@ -384,9 +384,9 @@ class FormValidator
 				}
 				else return self::INVALID_DATE_YEAR;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDepartmentInitials($DepartmentInitials, $DefaultValue)
@@ -401,9 +401,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_DEPARTMENT_INITIALS;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDepartmentName($DepartmentName, $DefaultValue)
@@ -418,9 +418,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_DEPARTMENT_NAME;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateDescription($Description, $DefaultValue)
@@ -433,9 +433,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_DESCRIPTION;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateEmail($EmailAddress, $DefaultValue)
@@ -454,11 +454,11 @@ class FormValidator
 					}
 					else return self::INVALID_DEFAULT_VALUE;
 				}
-				else return self::INVALID_NULL;
+				else return self::FM_INVALID_NULL;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateGender($Gender, $DefaultValue)
@@ -474,9 +474,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_GENDER;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateHost($Host)
@@ -491,9 +491,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_HOST_NAME;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateIsNotNumericValue($NonNumeric, $DefaultValue)
@@ -514,9 +514,9 @@ class FormValidator
 				}
 				else return self::INVALID_WHITE_SPACE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateIpAddressIpv4($IpAddressIpv4)
@@ -529,9 +529,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_IP_ADDRESS_IPV4;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateIpMask($IpMask)
@@ -544,13 +544,13 @@ class FormValidator
 				{
 					if($IpMask < 31 && $IpMask > 0)
 						return Config::RET_OK;
-					else return self::INVALID_IP_MASK;
+					else return self::FM_INVALID_IP_MASK;
 				}
-				else return self::INVALID_IP_MASK;
+				else return self::FM_INVALID_IP_MASK;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateMessage($Message, $DefaultValue)
@@ -559,9 +559,9 @@ class FormValidator
 		{
 			if(!is_null($Message) && !empty($Message) && $Message != $DefaultValue)
 				return Config::RET_OK;
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateName($Name, $DefaultValue)
@@ -576,9 +576,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_NAME;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateNotNullOrEmpty($NotNullOrEmpty, $DefaultValue)
@@ -595,9 +595,9 @@ class FormValidator
 				}
 				else return self::INVALID_WHITE_SPACE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 
 	public function ValidateNumericValue($Numeric, $DefaultValue)
@@ -618,9 +618,9 @@ class FormValidator
 				}
 				else return self::INVALID_WHITE_SPACE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidatePassword($Password, $DefaultValue)
@@ -634,9 +634,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_PASSWORD;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateRegistrationId($RegistrationId, $DefaultValue)
@@ -649,9 +649,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_REGISTRATION_ID;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateServiceName($Service, $DefaultValue)
@@ -666,9 +666,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_SERVICE_NAME;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateStringSize($String, $Size)
@@ -681,9 +681,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_STRING_SIZE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateSubject($Subject, $DefaultValue)
@@ -696,9 +696,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_SUBJECT;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateTeamName($TeamName, $DefaultValue)
@@ -713,9 +713,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_TEAM_NAME;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateTitle($Title, $DefaultValue)
@@ -728,9 +728,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_TITLE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateTypeAssocUserService($TypeAssocUserServiceDescription, $DefaultValue)
@@ -743,9 +743,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_TYPE_ASSOC_USER_SERVICE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateTypeService($TypeService, $DefaultValue)
@@ -758,9 +758,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_TYPE_SERVICE;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateURL($Url, $DefaultValue)
@@ -775,9 +775,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_URL;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 	
 	public function ValidateUserUniqueId($UserUniqueId, $DefaultValue)
@@ -790,9 +790,9 @@ class FormValidator
 					return Config::RET_OK;
 				else return self::INVALID_USER_UNIQUE_ID;
 			}
-			else return self::INVALID_NULL;
+			else return self::FM_INVALID_NULL;
 		}
-		else return self::INVALID_NULL;
+		else return self::FM_INVALID_NULL;
 	}
 }
 ?>

@@ -31,6 +31,12 @@ if (!class_exists("AssocUserCorporation"))
 		include_once(BASE_PATH_PHP_MODEL . "AssocUserCorporation.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class AssocUserCorporation');
 }
+if (!class_exists("AssocUserNotification"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+		include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class AssocUserNotification');
+}
 if (!class_exists("AssocUserTeam"))
 {
 	if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
@@ -298,6 +304,14 @@ class ConfigInfraTools extends Config
 	const FM_INSTALL_IMPORT_SB_HIDDEN                                           = "FmInstallImportSbHidden";
 	const FM_INSTALL_NEW_SB                                                     = "FmInstallNewSb";
 	const FM_INSTALL_REINSTALL_SB                                               = "FmInstallReinstallSb";
+	const FM_INVALID_DNS_RECORD                                                 = "FmInvalidDnsRecord";
+	const FM_INVALID_HOSTNAME                                                   = "FmInvalidHostName";
+	const FM_INVALID_IP_MASK                                                    = "FmInvalidIpMask";
+	const FM_INVALID_NULL                                                       = "FmInvalidNull";
+	const FM_INVALID_PORT                                                       = "FmInvalidPort";
+	const FM_INVALID_PROTOCOL                                                   = "FmInvalidProtocol";
+	const FM_INVALID_PROTOCOL_NUMBER                                            = "FmInvalidProtocolNumber";
+	const FM_INVALID_WEBSITE                                                    = "FmInvalidWebSite";
 	const FM_IP_ADDRESS                                                         = "FmIpAddress";
 	const FM_IP_ADDRESS_LST                                                     = "FmIpAddressList";
 	const FM_IP_ADDRESS_LST_BACK                                                = "FmIpAddressListBack";
@@ -651,14 +665,6 @@ class ConfigInfraTools extends Config
 	const ACCOUNT_FM_SB_VERIFIED_USER_UNIQUE_ID               = "AccountFmSbVerifiedUserUniqueId";
 	
 	/* Constantes de Retornos Funcionalidades: Fachada Negócio */
-	const INVALID_HOSTNAME                                          = "ReturnInvalidHostName";
-	const INVALID_IP_MASK                                           = "ReturnInvalidIpMask";
-	const INVALID_NULL                                              = "ReturnInvalidNull";
-	const INVALID_PORT                                              = "ReturnInvalidPort";
-	const INVALID_PROTOCOL                                          = "ReturnInvalidProtocol";
-	const INVALID_PROTOCOL_NUMBER                                   = "ReturnInvalidProtocolNumber";
-	const INVALID_WEBSITE                                           = "ReturnInvalidWebSite";
-	const INVALID_DNS_RECORD                                        = "ReturnInvalidDnsRecord";
 	
 	/* Constantes de Retornos Funcionalidades: Network */
 	const CHECK_HOST_BLACKLISTED                                    = "ReturnCheckHostBlackListed";

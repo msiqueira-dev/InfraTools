@@ -134,8 +134,10 @@ class Config
 	const DB_ERROR_USER_SEL_BY_USER_UNIQUE_ID_FETCH                     = "RetMySqlUserSelectByUserUniqueIdFetch";
 	const DB_ERROR_USER_SEL_EXISTS_BY_USER_EMAIL                        = "RetMySqlUserSelectExistsByUserEmail";
 	const DB_ERROR_USER_SEL_HASH_BY_USER_EMAIL                    	    = "RetMySqlUserSelectHashByEmail";
-	const DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL_EMPTY                    = "RetMySqlUserSelectTeamByUserEmailEmpty";
-	const DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL                          = "RetMySqlUserSelectTeamByUserEmail";
+	const DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL                  = "DbErrorUserSelNotificationByUserEmail";
+	const DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY            = "DbErrorUserSelNotificationByUserEmailEmpty";
+	const DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL                          = "DbErrorUserSelTeamByUserEmail";
+	const DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL_EMPTY                    = "DbErrorUserSelTeamByUserEmailEmpty";
 	const DB_ERROR_USER_UPDT_BY_USER_EMAIL                              = "DbErrorUserUpdtByUserEmail";
 	const DB_ERROR_USER_UPDT_CONFIRMED_BY_HASH_CODE                     = "DbErrorUserUpdtConfirmedByHashCode";
 	const DB_ERROR_USER_UPDT_DEPARTMENT_BY_USER_EMAIL_AND_CORPORATION   = "DbErrorUserUpdtDepartmentByUserEmailAndCorporation";
@@ -150,8 +152,11 @@ class Config
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TICKET                 = "ExceptionAssocTicketUserRequestingTicket";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE                   = "ExceptionAssocTicketUserRequestingType";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_USER                   = "ExceptionAssocTicketUserRequestingUser";
-    const EXCEPTION_ASSOC_USER_ROLE_ROLE_NAME                           = "ExceptionAssocUserRoleRoleName";
-	const EXCEPTION_ASSOC_USER_ROLE_USER_EMAIL                          = "ExceptionAssocUserRoleUserEmail";
+    const EXCEPTION_ASSOC_USER_ROLE_ROLE                                = "ExceptionAssocUserRoleRole";
+	const EXCEPTION_ASSOC_USER_ROLE_USER                                = "ExceptionAssocUserRoleUser";
+	const EXCEPTION_ASSOC_USER_NOTIFICATION_NOTIFICATION                = "ExceptionAssocUserNotificationNotification";
+	const EXCEPTION_ASSOC_USER_NOTIFICATION_READ                        = "ExceptionAssocUserNotificationRead";
+	const EXCEPTION_ASSOC_USER_NOTIFICATION_USER                        = "ExceptionAssocUserNotificationUser";
 	const EXCEPTION_ASSOC_USER_TEAM_TEAM                                = "ExceptionAssocUserTeamTeam";
 	const EXCEPTION_ASSOC_USER_TEAM_TYPE                                = "ExceptionAssocUserTeamType";
 	const EXCEPTION_ASSOC_USER_TEAM_USER                                = "ExceptionAssocUserTeamUser";
@@ -876,6 +881,7 @@ class Config
 	const TB_ASSOC_USER_CORPORATION_FD_USER_EMAIL                       = "AssocUserCorporationUserEmail";
 	const TB_ASSOC_USER_NOTIFICATION                                    = "ASSOC_USER_NOTIFICATION";
 	const TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID                 = "AssocUserNotificationNotificationId";
+	const TB_ASSOC_USER_NOTIFICATION_FD_READ                            = "AssocUserNotificationRead";
 	const TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                      = "AssocUserNotificationUserEmail";
 	const TB_ASSOC_USER_ROLE                                            = "ASSOC_USER_ROLE";
 	const TB_ASSOC_USER_ROLE_FD_ROLE_NAME                               = "AssocUserRoleRoleName";
@@ -1074,6 +1080,10 @@ class Config
 					fwrite($htaccessFile, "php_value  post_max_size " . ProjectConfig::$UploadFileMaxSize . "\n");
 					fclose($htaccessFile);
 				}
+			}
+			if(!file_exists(ProjectConfig::$SessionFolder . "/" . ProjectConfig::$ApplicationName))
+			{
+			 	mkdir(ProjectConfig::$SessionFolder . "/" . ProjectConfig::$ApplicationName, 0755, TRUE);
 			}
 			$this->Session = $this->Factory->CreateSession();
 			$this->DefaultApplicationAddress             = ProjectConfig::$AddressApplication;

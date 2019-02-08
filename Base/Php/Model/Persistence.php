@@ -15,6 +15,8 @@ Methods:
 			public static function SqlAssocUserCorporationInsert();
 			public static function SqlAssocUserCorporationUpdateByUserEmailAndCorporationName();
 			public static function SqlAssocUserCorporationUpdateCorporation();
+			public static function SqlAssocUserNotificationInsert();
+			public static function SqlAssocUserNotificationInsertForAllUsers();
 			public static function SqlAssocUserTeamDelete();
 			public static function SqlAssocUserTeamInsert();
 			public static function SqlCorporationDelete();
@@ -108,6 +110,7 @@ Methods:
 			public static function SqlUserSelectByUserUniqueId();
 			public static function SqlUserSelectUserActiveByHashCode();
 			public static function SqlUserSelectHashCodeByUserEmail();
+			public static function SqlUserSelectNotificationByUserEmail();
 			public static function SqlUserSelectTeamByUserEmail();
 			public static function SqlUserUpdateActiveByUserEmail();
 			public static function SqlUserUpdateAssocUserCorporationByUserEmail();
@@ -180,6 +183,27 @@ class Persistence
 		. "SET "   . Config::TB_ASSOC_USER_CORPORATION . "." . Config::TB_ASSOC_USER_CORPORATION_FD_CORPORATION_NAME . " =? "
 		. "WHERE " . Config::TB_ASSOC_USER_CORPORATION . "." . Config::TB_ASSOC_USER_CORPORATION_FD_CORPORATION_NAME. " =? "
 		. "AND "   . Config::TB_ASSOC_USER_CORPORATION . "." . Config::TB_ASSOC_USER_CORPORATION_FD_USER_EMAIL      . " =? ";
+	}
+	
+	public static function SqlAssocUserNotificationInsert()
+	{
+		return "INSERT INTO " . Config::TB_ASSOC_USER_NOTIFICATION          . " "
+			 . "("  . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . ","
+			 . " "  . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL      . ","
+			 . " "  . Config::TB_ASSOC_USER_NOTIFICATION_FD_READ            . ","
+			 . " "  . Config::TB_FD_REGISTER_DATE                           . ")"
+			 . " VALUES (?, ?, ?, NOW())";
+	}
+	
+	public static function SqlAssocUserNotificationInsertForAllUsers()
+	{
+		return "INSERT INTO " . Config::TB_ASSOC_USER_NOTIFICATION                    . "  "
+	         . "("            . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . ", "
+			 . " "            . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL      . ", "
+			 . " "            . Config::TB_ASSOC_USER_NOTIFICATION_FD_READ            . ", "
+			 . " "            . Config::TB_FD_REGISTER_DATE                           . ") "
+		     . "SELECT ?, "   . Config::TB_USER_FD_USER_EMAIL . ", ?, NOW() "         . "  "
+			 . "FROM "        . Config::TB_USER . " AS " . Config::TB_USER;
 	}
 	
 	public static function SqlAssocUserTeamDelete()
@@ -1819,6 +1843,27 @@ class Persistence
 		     . "WHERE "  . Config::TB_USER . "." . Config::TB_USER_FD_USER_EMAIL      . " =UPPER(?) ";
 	}
 	
+	public static function SqlUserSelectNotificationByUserEmail()
+	{
+		return "SELECT "  
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID                        . ",  "
+		     . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_READ                                   . ",  "
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                             . ",  "
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                                                  . "   " 
+			 . "AS AssocUserNotificationRegisterDate, "                                                                                . "   "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE                                          . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID                                              . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT                                            . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                                                             . "   "
+			 . "AS NotificationRegisterDate "                                                                                          . "   "
+		     . "FROM  "           . Config::TB_ASSOC_USER_NOTIFICATION                                                                 . "   " 
+		     . "INNER JOIN "      . Config::TB_NOTIFICATION                                                                            . "   "
+			 . "ON "              . Config::TB_ASSOC_USER_NOTIFICATION . "."   . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . " = "
+			                      . Config::TB_NOTIFICATION            . "."   . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID            . "   "
+		     . "WHERE "  . Config::TB_ASSOC_USER_NOTIFICATION . "."                                                                    . "   " 
+			 . "      "  . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                                                    ." = UPPER(?) ";
+	}
+	
 	public static function SqlUserSelectTeamByUserEmail()
 	{
 		return "SELECT "  
@@ -1826,23 +1871,24 @@ class Persistence
 			 . Config::TB_ASSOC_USER_TEAM . "." . Config::TB_ASSOC_USER_TEAM_FD_USER_EMAIL                                    . ",  "
 		     . Config::TB_ASSOC_USER_TEAM . "." . Config::TB_ASSOC_USER_TEAM_FD_USER_TYPE                                     . ",  "
 			 . Config::TB_ASSOC_USER_TEAM . "." . Config::TB_FD_REGISTER_DATE                                                 . "   " 
-			 . "AS AssocUserTeamRegisterDate, "                                                                                        . "   "
+			 . "AS AssocUserTeamRegisterDate, "                                                                               . "   "
 			 . Config::TB_TEAM . "." . Config::TB_TEAM_FD_TEAM_DESCRIPTION                                                    . ",  "
 			 . Config::TB_TEAM . "." . Config::TB_TEAM_FD_TEAM_ID                                                             . ",  "
 			 . Config::TB_TEAM . "." . Config::TB_TEAM_FD_TEAM_NAME                                                           . ",  "
 			 . Config::TB_TEAM . "." . Config::TB_FD_REGISTER_DATE                                                            . "   "
-			 . "AS TeamRegisterDate, "                                                                                                 . "   "
+			 . "AS TeamRegisterDate, "                                                                                        . "   "
 			 . Config::TB_TYPE_ASSOC_USER_TEAM . "." . Config::TB_TYPE_ASSOC_USER_TEAM_FD_DESCRIPTION                         . ",  "
 			 . Config::TB_TYPE_ASSOC_USER_TEAM . "." . Config::TB_FD_REGISTER_DATE                                            . "   "
-			 . "AS TypeAssocUserTeamRegisterDate "                                                                                     . "   "
-		     . "FROM  "           . Config::TB_ASSOC_USER_TEAM                                                                      . "   " 
-		     . "INNER JOIN "      . Config::TB_TEAM                                                                                 . "   "
+			 . "AS TypeAssocUserTeamRegisterDate "                                                                            . "   "
+		     . "FROM  "           . Config::TB_ASSOC_USER_TEAM                                                                . "   " 
+		     . "INNER JOIN "      . Config::TB_TEAM                                                                           . "   "
 			 . "ON "              . Config::TB_ASSOC_USER_TEAM . "."   . Config::TB_ASSOC_USER_TEAM_FD_TEAM_ID                . " = "
 			                      . Config::TB_TEAM            . "."   . Config::TB_TEAM_FD_TEAM_ID                           . "   "
-			 . "INNER JOIN "      . Config::TB_TYPE_ASSOC_USER_TEAM                                                                 . "   "
+			 . "INNER JOIN "      . Config::TB_TYPE_ASSOC_USER_TEAM                                                           . "   "
 			 . "ON "              . Config::TB_ASSOC_USER_TEAM         . "." . Config::TB_ASSOC_USER_TEAM_FD_USER_TYPE        . " = "
 			                      . Config::TB_TYPE_ASSOC_USER_TEAM    . "." . Config::TB_TYPE_ASSOC_USER_TEAM_FD_DESCRIPTION . "   "
-		     . "WHERE "  . Config::TB_ASSOC_USER_TEAM . "."                                                                         . "   "   . "      "  . Config::TB_ASSOC_USER_TEAM_FD_USER_EMAIL                                                      ." = UPPER(?) ";
+		     . "WHERE "  . Config::TB_ASSOC_USER_TEAM . "."                                                                   . "   "   
+		     . "  "      . Config::TB_ASSOC_USER_TEAM_FD_USER_EMAIL                                                           ." = UPPER(?) ";
 	}
 	
 	public static function SqlUserUpdateActiveByUserEmail()

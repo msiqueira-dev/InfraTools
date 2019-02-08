@@ -46,7 +46,7 @@ Methods:
 			public function CreateInfraToolsTypeAssocUserService();
 			public function CreateInfraToolsTypeService($RegisterDate, $TypeServiceName, $TypeServiceSLA);
 			public function CreateInfraToolsTypeTimeMonitoring();
-			public function CreateInfraToolsUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+			public function CreateInfraToolsUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 								                 $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
          								         $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								                 $TwoStepVerification, $UserActive, $UserConfirmed, 
@@ -609,7 +609,7 @@ class InfraToolsFactory extends Factory
 		return new InfraToolsTypeTimeMonitoring();
 	}
 	
-	public function CreateInfraToolsUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+	public function CreateInfraToolsUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 								         $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								         $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								         $TwoStepVerification, $UserActive, $UserConfirmed, 
@@ -625,7 +625,13 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsUser');
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsUser.php");
-		return new InfraToolsUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserTeam');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserNotification');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+		return new InfraToolsUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 								  $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								  $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								  $TwoStepVerification, $UserActive, $UserConfirmed, 

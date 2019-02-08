@@ -52,7 +52,7 @@
 	                     echo $this->VisibilityFunctionGetWebSiteMessage; ?> DivReturnForm">
     	<div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_WEBSITE_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WEBSITE) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>      

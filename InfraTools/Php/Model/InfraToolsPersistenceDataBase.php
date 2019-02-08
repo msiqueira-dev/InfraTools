@@ -971,7 +971,7 @@ class InfraToolsPersistenceDataBase
 	
 	public static function SqlInfraToolsDataBaseGetRowCount()
 	{
-		return "SELECT sum(TB_ROWS) AS ROW_COUNT FROM INFORMATION_SCHEMA.TABLES WHERE TB_SCHEMA like '%infratools%'";
+		return "SELECT sum(TABLE_ROWS) AS ROW_COUNT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA like '%infratools%'";
 	}
 }
 ?>

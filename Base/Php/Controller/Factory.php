@@ -16,6 +16,8 @@ Methods:
 			                                              $AssocUserCorporationRegistrationId, $CorporationInstance, $RegisterDate,
 								   					      $UserInstance);
 			public    function CreateAssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate);
+			public    function CreateAssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationUser,
+			                                               $AssocUserNotificationRead, $RegisterDate);
 			public    function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance);
 			public    function CreateCaptcha();
 			public    function CreateConfig();
@@ -70,7 +72,7 @@ Methods:
 			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
 			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription);
 			public    function CreateTypeUser($TypeUserDescription, $RegisterDate);
-			public    function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+			public    function CreateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 			                              $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
 							              $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
 							              $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
@@ -177,6 +179,16 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserRole');
 		else include_once(BASE_PATH_PHP_MODEL . "AssocUserRole.php");
 		return new AssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate);
+	}
+	
+	public function CreateAssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationUser,
+			                                    $AssocUserNotificationRead, $RegisterDate)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserNotification');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+		return new AssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationUser,
+			                             $AssocUserNotificationRead, $RegisterDate);
 	}
 	
 	public function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance)
@@ -744,7 +756,7 @@ class Factory
 		return new TypeUser($TypeUserDescription, $RegisterDate);
 	}
 	
-	public function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+	public function CreateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 							   $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
@@ -754,7 +766,14 @@ class Factory
 		if(!file_exists(BASE_PATH_PHP_MODEL . "User.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
 		else include_once(BASE_PATH_PHP_MODEL . "User.php");
-		return new User($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserTeam');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserNotification');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+		
+		return new User($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 						$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 						$TwoStepVerification, $UserActive, $UserConfirmed, 

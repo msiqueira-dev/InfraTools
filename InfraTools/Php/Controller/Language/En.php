@@ -199,17 +199,17 @@ class En
 	const FM_INVALID_CAPTCHA                                      = "The captcha value does not match";
 	const FM_INVALID_CORPORATION_NAME                             = "Invalid Corporation Name";
 	const FM_INVALID_CORPORATION_NAME_SIZE                        = "Quantity of characters exceeds the maximum allowed for "
-	                                                                . "corporation name";
+	                                                              . "corporation name";
 	const FM_INVALID_COUNTRY                                      = "Invalid country, use the Google Maps";
 	const FM_INVALID_DATE_DAY                                     = "Invalid day";
 	const FM_INVALID_DATE_MONTH                                   = "Invalid month";
 	const FM_INVALID_DATE_YEAR                                    = "Invalid year";
 	const FM_INVALID_DEPARTMENT_INITIALS                          = "Invalid department initials";
 	const FM_INVALID_DEPARTMENT_INITIALS_SIZE                     = "Quantity of characters exceeds the maximum allowed for "
-	                                                                . "department initials";
+	                                                              . "department initials";
 	const FM_INVALID_DEPARTMENT_NAME                              = "Invalid department name";
 	const FM_INVALID_DEPARTMENT_NAME_SIZE                         = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "department name" ;
+		                                                          . "department name" ;
 	const FM_INVALID_DESCRIPTION                                  = "Invalid description";
 	const FM_INVALID_HOSTNAME                                     = "Invalid domain";
 	const FM_INVALID_IP_ADDRESS_IPV4                              = "Invalid value for ipv4";
@@ -221,7 +221,10 @@ class En
 	const FM_INVALID_NOTIFICATION_ID                              = "Invalid notification id";
 	const FM_INVALID_NOTIFICATION_TEXT                            = "Invalid notification text";
 	const FM_INVALID_NOTIFICATION_TEXT_SIZE                       = "Quantity of characters exceeds the maximum allowed for notification "
-	                                                                . "text";
+	                                                              . "text";
+	const FM_INVALID_PORT                                         = "Invalid port";
+	const FM_INVALID_PROTOCOL                                     = "Invalid protocol";
+	const FM_INVALID_PROTOCOL_NUMBER                              = "Invalid protocol number";
 	const FM_INVALID_ROLE_DESCRIPTION                             = "Invalid role description";
 	const FM_INVALID_ROLE_DESCRIPTION_SIZE                        = "Quantity of characters exceeds the maximum allowed for role description";
 	const FM_INVALID_REGISTRATION_ID                              = "Invalid registration id";
@@ -229,61 +232,61 @@ class En
 	const FM_INVALID_SERVICE_CORPORATION_CAN_CHANGE               = "Invalid value for checkbox corporation can change";
 	const FM_INVALID_SERVICE_DESCRIPTION                          = "Invalid service description";
 	const FM_INVALID_SERVICE_DESCRIPTION_SIZE                     = "Quantity of characters exceeds the maximum allowed for service "
-	                                                                . "description";
+	                                                              . "description";
 	const FM_INVALID_SERVICE_DEPARTMENT_CAN_CHANGE                = "Invalid value for checkbox department can change";
 	const FM_INVALID_SERVICE_ID                                   = "Invalid service id";
 	const FM_INVALID_SERVICE_NAME                                 = "Invalid service name";
 	const FM_INVALID_SERVICE_NAME_SIZE                            = "Quantity of characters exceeds the maximum allowed for service "
-	                                                                . "name";
+	                                                              . "name";
 	const FM_INVALID_SERVICE_TYPE                                 = "Invalid service type";
 	const FM_INVALID_SERVICE_TYPE_SIZE                            = "Quantity of characters exceeds the maximum allowed for service "
-		                                                            . "description";
+		                                                          . "description";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_ACTIVE           = "Invalid value for checkbox option active service";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION      = "Invalid value for system configuration option description";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION_SIZE = "Quantity of characters exceeds the maximum allowed for system "
-	                                                                . "configuration option description";
+	                                                              . "configuration option description";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME             = "Invalid value for system configuration option name";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_NAME_SIZE        = "Quantity of characters exceeds the maximum allowed for system "
-	                                                                . "configuration option name";
+	                                                              . "configuration option name";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE            = "Invalid value for system configuration option value";
 	const FM_INVALID_SYSTEM_CONFIGURATION_OPTION_VALUE_SIZE       = "Quantity of characters exceeds the maximum allowed for system "
-	                                                                . "configuration option value";
+	                                                              . "configuration option value";
 	const FM_INVALID_TEAM_DESCRIPTION                             = "Invalid team descritpion";
 	const FM_INVALID_TEAM_DESCRIPTION_SIZE                        = "Quantity of characters exceeds the maximum allowed for team "
-	                                                                . "description";
+	                                                              . "description";
 	const FM_INVALID_TEAM_ID                                      = "Team id";
 	const FM_INVALID_TEAM_NAME                                    = "Invalid team name";
 	const FM_INVALID_TEAM_NAME_SIZE                               = "Quantity of characters exceeds the maximum allowed for team "
-		                                                            . "name";
+		                                                          . "name";
 	const FM_INVALID_TICKET_DESCRIPTION                           = "Invalid ticket description";
 	const FM_INVALID_TICKET_DESCRIPTION_SIZE                      = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "ticket description";
+		                                                          . "ticket description";
 	const FM_INVALID_TICKET_ID                                    = "Inválid ticket id";
 	const FM_INVALID_TICKET_TITLE                                 = "Invalid ticket title";
 	const FM_INVALID_TICKET_TITLE_SIZE                            = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "ticket title";
+		                                                          . "ticket title";
 	const FM_INVALID_TICKET_TYPE                                  = "Invalid ticket type";
 	const FM_INVALID_TICKET_TYPE_SIZE                             = "Quantity of characters exceeds the maximum allowed for"
-		                                                            . "ticket type";
+		                                                          . "ticket type";
 	const FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION          = "Invalid description for type of association between user "
-	                                                                . "and service";
+	                                                              . "and service";
 	const FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE     = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "type association description";
+		                                                          . "type association description";
 	const FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION             = "Invalid type assoc user team description";
 	const FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE        = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "type association user team description";
+		                                                          . "type association user team description";
 	const FM_INVALID_TYPE_ASSOC_USER_TEAM_ID                      = "Invalid team id for association between user and team";
 	const FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION               = "Invalid type status ticket description";
 	const FM_INVALID_TYPE_STATUS_TICKET_DESCRIPTION_SIZE          = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "type status ticket description";
+		                                                          . "type status ticket description";
 	const FM_INVALID_TYPE_STATUS_TICKET_ID                        = "Invalid type status ticket id";
 	const FM_INVALID_TYPE_TICKET_DESCRIPTION                      = "Invalid type ticket description";
 	const FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE                 = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "type ticket description";
+		                                                          . "type ticket description";
 	const FM_INVALID_TYPE_TICKET_ID                               = "Invalid type ticket id";
 	const FM_INVALID_TYPE_USER_DESCRIPTION                        = "Invalid type user description";
 	const FM_INVALID_TYPE_USER_DESCRIPTION_SIZE                   = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "type user description";
+		                                                          . "type user description";
 	const FM_INVALID_TYPE_USER_ID                                 = "Invalid type user id";
 	const FM_INVALID_USER_BIRTH_DATE_DAY                          = "Invalid day of birth";
 	const FM_INVALID_USER_BIRTH_DATE_MONTH                        = "Invalid month of birth";
@@ -291,33 +294,34 @@ class En
 	const FM_INVALID_USER_CONFIRMED                               = "Invalid value for user confirmed";
 	const FM_INVALID_USER_EMAIL                                   = "Invalid user e-mail";
 	const FM_INVALID_USER_EMAIL_SIZE                              = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user e-mail";
+		                                                          . "user e-mail";
 	const FM_INVALID_USER_GENDER                                  = "Invalid gender";
 	const FM_INVALID_USER_NAME                                    = "Invalid user name";
 	const FM_INVALID_USER_NAME_SIZE                               = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user name";
+		                                                          . "user name";
 	const FM_INVALID_USER_PASSWORD                                = "Password does not match the criteria";
 	const FM_INVALID_USER_PASSWORD_MATCH                          = "Passwords does not match";
 	const FM_INVALID_USER_PASSWORD_SIZE                           = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user password";
+		                                                          . "user password";
 	const FM_INVALID_USER_PHONE_PREFIX_PRIMARY                    = "Invalid user phone prefix primary";
 	const FM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE               = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user phone prefix primary";
+		                                                          . "user phone prefix primary";
 	const FM_INVALID_USER_PHONE_PREFIX_SECONDARY                  = "Invalid user phone prefix secondary";
 	const FM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE             = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user phone prefix secondary";
+		                                                          . "user phone prefix secondary";
 	const FM_INVALID_USER_PHONE_PRIMARY                           = "Invalid user phone primary";
 	const FM_INVALID_USER_PHONE_PRIMARY_SIZE                      = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user phone primary";
+		                                                          . "user phone primary";
 	const FM_INVALID_USER_PHONE_SECONDARY                         = "Invalid user phone secondary";
 	const FM_INVALID_USER_PHONE_SECONDARY_SIZE                    = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user phone secondary";
+		                                                          . "user phone secondary";
 	const FM_INVALID_USER_REGION                                  = "Invalid user region";
 	const FM_INVALID_USER_REGION_SIZE                             = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user region";
+		                                                          . "user region";
 	const FM_INVALID_USER_UNIQUE_ID                               = "Invalid user unique id";
 	const FM_INVALID_USER_UNIQUE_ID_SIZE                          = "Quantity of characters exceeds the maximum allowed for "
-		                                                            . "user unique id";
+		                                                          . "user unique id";
+	const FM_INVALID_WEBSITE                                      = "Invalid website";
 	const FM_SEL_DEFAULT                                       = "Select";             
 	const FM_SB_RESET_PASSWORD_EMAIL_TAG                      = "InfraTools - Your password has been reseted";
 	const FM_SB_RESET_PASSWORD_EMAIL_TEXT                     = "Your password was reset and your new password is: ";
@@ -418,10 +422,6 @@ class En
 	const INSTALL_SUCCESS                                           = "System database installed succesfully";
 	const INVALID_NETWORK_ADDRESS                                   = "Invalid network address";
 	const INVALID_OPTION                                            = "Invalid option";
-	const INVALID_PORT                                              = "Invalid port";
-	const INVALID_PROTOCOL                                          = "Invalid protocol";
-	const INVALID_PROTOCOL_NUMBER                                   = "Invalid protocol number";
-	const INVALID_WEBSITE                                           = "Invalid website";
 	const IP_ADDRESS_DEL_ERROR                                   = "Error deleting ip address";
 	const IP_ADDRESS_DEL_ERROR_DEPENDENCY_SERVICE                = "Ip address has services associated, delete them first";
 	const IP_ADDRESS_DEL_SUCCESS                                 = "Ip address deleted succesfully";

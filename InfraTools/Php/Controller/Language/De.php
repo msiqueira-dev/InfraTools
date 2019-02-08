@@ -214,6 +214,9 @@ class De
 	const FM_INVALID_NOTIFICATION_ID                              = "";
 	const FM_INVALID_NOTIFICATION_TEXT                            = "";
 	const FM_INVALID_NOTIFICATION_TEXT_SIZE                       = "";
+	const FM_INVALID_PORT                                         = "";
+	const FM_INVALID_PROTOCOL                                     = "";
+	const FM_INVALID_PROTOCOL_NUMBER                              = "";
 	const FM_INVALID_ROLE_DESCRIPTION                             = "";
 	const FM_INVALID_ROLE_DESCRIPTION_SIZE                        = "";
 	const FM_INVALID_REGISTRATION_ID                              = "";
@@ -284,6 +287,7 @@ class De
 	const FM_INVALID_USER_REGION_SIZE                             = "";
 	const FM_INVALID_USER_UNIQUE_ID                               = "";
 	const FM_INVALID_USER_UNIQUE_ID_SIZE                          = "";
+	const FM_INVALID_WEBSITE                                      = "";
 	const FM_SEL_DEFAULT                                       = "";
 	const FM_SB_RESET_PASSWORD_EMAIL_TAG                      = "";
 	const FM_SB_RESET_PASSWORD_EMAIL_TEXT                     = "";
@@ -383,10 +387,6 @@ class De
 	const INSTALL_SUCCESS                                           = "";
 	const INVALID_NETWORK_ADDRESS                                   = "";
 	const INVALID_OPTION                                            = "";
-	const INVALID_PORT                                              = "";
-	const INVALID_PROTOCOL                                          = "";
-	const INVALID_PROTOCOL_NUMBER                                   = "";
-	const INVALID_WEBSITE                                           = "";
 	const IP_ADDRESS_DEL_ERROR                                   = "";
 	const IP_ADDRESS_DEL_ERROR_DEPENDENCY_SERVICE                = "";
 	const IP_ADDRESS_DEL_SUCCESS                                 = "";

@@ -9,10 +9,12 @@ Dependencies:
 Description: 
 			Classe de controle para cada usuário do site.
 Get / Set: 
-			public function GetArrayAssocUserTeam();
-			public function GetArrayNotification();
+			public function GetAssocUserNotificationNotificationIdByIndex($Index);
 			public function GetAssocUserTeamTeamIdByIndex($Index);
 			public function GetAssocUserTeamTeamNameByIndex($Index);
+			public function GetArrayAssocUserNotification();
+			public function GetArrayAssocUserNotificationUnRead();
+			public function GetArrayAssocUserTeam();
 			public function GetAssocUserCorporation();
 			public function GetAssocUserCorporationUserRegistrationDate();
 			public function GetAssocUserCorporationUserRegistrationDateDay();
@@ -49,8 +51,8 @@ Get / Set:
 			public function GetUserPhoneSecondaryPrefix();
 			public function GetUserTypeDescription();
 			public function GetUserUniqueId();
+			public function SetArrayAssocUserNotification($ArrayAssocUserNotification);
 			public function SetArrayAssocUserTeam($ArrayAssocUserTeam);
-			public function SetArrayNotification($ArrayNotification);
 			public function SetAssocUserCorporation($AssocUserCorporation);
 			public function SetBirthDate($BirthDate);
 			public function SetCorporation($CorporationInstance);
@@ -80,7 +82,7 @@ Methods:
 			public function CheckDepartmentExists();
 			public function CheckSuperUser();
 			public function PushArrayAssocUserTeam($AssocUserTeam);
-			public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+			public function UpdateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
 									   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
 									   $TwoStepVerification, $UserActive, $UserConfirmed, 
@@ -92,7 +94,7 @@ class User
 {		
 	/* Properties */
 	protected $ArrayAssocUserTeam          = NULL;
-	protected $ArrayNotification           = NULL;
+	protected $ArrayAssocUserNotification  = NULL;
 	protected $AssocUserCorporation        = NULL;
 	protected $BirthDate                   = NULL;
 	protected $Corporation                 = NULL;
@@ -117,7 +119,7 @@ class User
 	protected $UserUniqueId                = NULL;
 	
 	/* Constructor */
-	public function __construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
+	public function __construct($ArrayAssocUserTeam, $ArrayAssocUserNotification, $AssocUserCorporation,
 								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
 								$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								$TwoStepVerification, $UserActive, $UserConfirmed, 
@@ -129,8 +131,8 @@ class User
 			if(is_array($ArrayAssocUserTeam))
 				$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
 		}
-		if(!is_null($ArrayNotification))
-			$this->ArrayNotification = $ArrayNotification;
+		if(!is_null($ArrayAssocUserNotification))
+			$this->ArrayAssocUserNotification = $ArrayAssocUserNotification;
 		if(!is_null($AssocUserCorporation))
 			$this->AssocUserCorporation = $AssocUserCorporation;
 		if(!is_null($BirthDate))
@@ -188,14 +190,14 @@ class User
     }
 	
 	/* GET */
-	public function GetArrayAssocUserTeam()
+	public function GetAssocUserNotificationNotificationIdByIndex($Index)
 	{
-		return $this->ArrayAssocUserTeam;
-	}
-			
-	public function GetArrayNotification()
-	{
-		return $this->ArrayNotification;
+		if(is_array($this->ArrayAssocUserNotification))
+		{
+			if(count($this->ArrayAssocUserNotification) > 0)
+				return $this->ArrayAssocUserNotification[$Index]->GetNotificationId();
+		}
+		return NULL;
 	}
 	
 	public function GetAssocUserTeamTeamIdByIndex($Index)
@@ -214,6 +216,43 @@ class User
 		{
 			if(count($this->ArrayAssocUserTeam) > 0)
 				return $this->ArrayAssocUserTeam[$Index]->GetTeamName();
+		}
+		return NULL;
+	}
+	
+	public function GetArrayAssocUserNotification()
+	{
+		if(is_array($this->ArrayAssocUserNotification))
+		{
+			if(count($this->ArrayAssocUserNotification) > 0)
+				return $this->ArrayAssocUserNotification;
+		}
+		return NULL;
+	}
+	
+	public function GetArrayAssocUserNotificationUnRead()
+	{
+		if(is_array($this->ArrayAssocUserNotification))
+		{
+			if(count($this->ArrayAssocUserNotification) > 0)
+				$ArrayAssocUserNotificationUnRead = array();
+			else return NULL;
+			foreach($this->ArrayAssocUserNotification as $AssocUserNotification)
+			{
+				if($AssocUserNotification->GetAssocUserNotificationRead() == FALSE)
+					array_push($ArrayAssocUserNotificationUnRead, $AssocUserNotification);
+			}
+			return $ArrayAssocUserNotificationUnRead;
+		}
+		return NULL;
+	}
+	
+	public function GetArrayAssocUserTeam()
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam;
 		}
 		return NULL;
 	}
@@ -447,15 +486,16 @@ class User
 	}
 	
 	/* SET */
+	public function SetArrayAssocUserNotification($ArrayAssocUserNotification)
+	{
+		$this->ArrayAssocUserNotification = $ArrayAssocUserNotification;
+	}
+	
 	public function SetArrayAssocUserTeam($ArrayAssocUserTeam)
 	{
 		$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
 	}
 	
-	public function SetArrayNotification($ArrayNotification)
-	{
-		$this->ArrayNotification = $ArrayNotification;
-	}
 	public function SetAssocUserCorporation($AssocUserCorporation)
 	{
 		$this->AssocUserCorporation = $AssocUserCorporation;
@@ -620,7 +660,7 @@ class User
 		return Config::RET_ERROR;
 	}
 	
-	public function UpdateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
+	public function UpdateUser($ArrayAssocUserTeam, $ArrayAssocUserNotification, $AssocUserCorporation, 
 							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
 							   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
@@ -628,7 +668,7 @@ class User
 							   $UserTypeInstance, $UserUniqueId)
 	{
 		$this->ArrayAssocUserTeam = $ArrayAssocUserTeam;
-		$this->ArrayNotification = $ArrayNotification;
+		$this->ArrayAssocUserNotification = $ArrayAssocUserNotification;
 		$this->AssocUserCorporation = $AssocUserCorporation;
 		if(!is_null($BirthDate))
 			$this->BirthDate = $BirthDate;	

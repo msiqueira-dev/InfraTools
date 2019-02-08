@@ -43,6 +43,7 @@ Functions:
 			public function UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection);
 			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug, $MySqlConnection);
 			public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug, $MySqlConnection);
+			public function UserSelectNotificationByNotificationId(&$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection);
 			public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection);
 			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
@@ -278,8 +279,8 @@ class FacedePersistenceUser
 	
 	public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; 
-		$InstaceBaseTypeUser = NULL; $InstanceDepartment = NULL;
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; $InstanceDepartment = NULL;
 		$InstanceCorporation = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$ArrayInstanceUser = NULL;
@@ -319,8 +320,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row["TypeUser".Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 		   										 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 												 $InstanceCorporation,
@@ -381,7 +382,8 @@ class FacedePersistenceUser
 	
 	public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$ArrayInstanceUser = NULL;
@@ -422,8 +424,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser'.Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -483,9 +485,10 @@ class FacedePersistenceUser
 	}
 	
 	public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, 
-										   &$RowCount, $Debug, $MySqlConnection)
+										       &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$ArrayInstanceUser = NULL;
@@ -526,8 +529,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -620,7 +623,8 @@ class FacedePersistenceUser
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
 														    $usrTypeRegDate);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification, $InstanceArrayAssocUserTeam,
+																   NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
 																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
@@ -703,8 +707,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -766,7 +770,8 @@ class FacedePersistenceUser
 	public function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser,
 										 &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -808,8 +813,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -870,7 +875,8 @@ class FacedePersistenceUser
 	
 	public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -889,7 +895,7 @@ class FacedePersistenceUser
 				{
 					$ArrayInstanceUser = array();
 					$result = $stmt->get_result();
-					while ($row = $result->fetch_assoc()) 
+					while ($row = $result->fetch_assoc())
 					{
 						$RowCount = $row['COUNT'];
 						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
@@ -912,8 +918,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -987,6 +993,7 @@ class FacedePersistenceUser
 	
 	public function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -1028,8 +1035,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser(NULL,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -1091,7 +1098,8 @@ class FacedePersistenceUser
 	public function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
 														     &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL;
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
 		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -1133,8 +1141,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -1210,6 +1218,7 @@ class FacedePersistenceUser
 	public function UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceUser, &$RowCount, 
 													  $Debug, $MySqlConnection)
 	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -1251,8 +1260,8 @@ class FacedePersistenceUser
 						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser(NULL,
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -1314,8 +1323,8 @@ class FacedePersistenceUser
 	public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
 										            &$RowCount, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; 
-		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; 
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL;
+		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL;
 		$InstaceTypeUser = NULL; $InstanceUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$ArrayInstanceUser = NULL;
@@ -1355,8 +1364,8 @@ class FacedePersistenceUser
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
 															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, 
-												 NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification, 
+												 $InstanceArrayAssocUserTeam,
 												 NULL,
 												 $row[Config::TB_USER_FD_USER_BIRTH_DATE],
 							                     $InstanceCorporation,
@@ -1417,7 +1426,8 @@ class FacedePersistenceUser
 	
 	public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL; $InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceArrayAssocUserNotification = NULL;$InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
 		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceDepartment = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1449,7 +1459,8 @@ class FacedePersistenceUser
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
 														    $usrTypeRegDate);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification, $InstanceArrayAssocUserTeam,
+																   NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
 																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
@@ -1489,7 +1500,7 @@ class FacedePersistenceUser
 	
 	public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection)
 	{
-		$InstanceArrayAssocUserTeam = NULL;
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL;
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -1522,7 +1533,8 @@ class FacedePersistenceUser
 						$InstaceTypeUser = $this->Factory->CreateTypeUser
 							                               ($usrTypeDescription,
 														    $usrTypeRegDate);
-						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserTeam, NULL, NULL,
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification, $InstanceArrayAssocUserTeam, 
+																   NULL,
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
 																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
@@ -1665,6 +1677,71 @@ class FacedePersistenceUser
 					$return = Config::DB_ERROR_USER_SEL_HASH_BY_USER_EMAIL;				
 				}
 				return $return;
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmail(&$InstanceUser, $Debug, $MySqlConnection)
+	{
+		$ArrayInstanceAssocUserNotification = NULL; $InstanceNotification = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmail');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmail());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("s", $userEmail);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceAssocUserNotification = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						if($row[Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID]    != NULL &&
+						   $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL] != NULL)
+						{
+							$InstanceNotification = $this->Factory->CreateNotification($row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE], 
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ID],
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT],
+																			   $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+							$InstanceAssocUserNotification = $this->Factory->CreateAssocUserNotification
+								                                        ($InstanceNotification,
+																		 $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_READ],
+																		 $InstanceUser,
+																		 $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+							array_push($ArrayInstanceAssocUserNotification, $InstanceAssocUserNotification);
+						}
+						else $ArrayInstanceAssocUserNotification = NULL;
+					}
+					if(!empty($ArrayInstanceAssocUserNotification))
+					{
+						$InstanceUser->SetArrayAssocUserNotification($ArrayInstanceAssocUserNotification);
+						return Config::RET_OK;
+					}
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
 			}
 			else
 			{

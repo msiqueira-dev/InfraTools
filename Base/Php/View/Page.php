@@ -557,7 +557,10 @@ class Page
 			{
 				$return = $this->InstanceFacedePersistence->UserSelectByUserEmail($this->InputValueLoginEmail, $user, $Debug);
 				if($return == Config::RET_OK)
+				{
+					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmail($user,$Debug);
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $Debug);
+				}
 			}
 		}
 		else
@@ -568,7 +571,10 @@ class Page
 			{
 				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, $user, $Debug);
 				if($return == Config::RET_OK)
+				{
+					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmail($user,$Debug);
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,$Debug);
+				}
 			}
 		}
 		if($return == Config::RET_OK || $return == Config::DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL_EMPTY)

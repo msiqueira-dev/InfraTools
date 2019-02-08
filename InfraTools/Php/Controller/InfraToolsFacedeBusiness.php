@@ -98,7 +98,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -111,13 +111,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			$return = ConfigInfraTools::INVALID_NULL;
+			$return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -126,7 +126,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -150,13 +150,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -165,7 +165,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -192,7 +192,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -201,7 +201,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -225,19 +225,19 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				else 
 				{
 					$ReturnMessage = $this->Language->GetText('INVALID_OPTION');
-					return $return = ConfigInfraTools::INVALID_DNS_RECORD;
+					return $return = ConfigInfraTools::FM_INVALID_DNS_RECORD;
 				}
 			}
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -247,7 +247,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateEmail($EmailAddress, "email@email.com");
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if($return != FormValidator::INVALID_DEFAULT_VALUE)
 			{
@@ -277,13 +277,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else
 			{
 				$ReturnMessage = $this->Language->GetText('DEFAULT_VALUE');
-				return $return = ConfigInfraTools::INVALID_NULL;
+				return $return = ConfigInfraTools::FM_INVALID_NULL;
 			}
 		}
 		else
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 		return $return;
 	}
@@ -293,19 +293,19 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
 				$return = $FormValidator->ValidateIpAddressIpv4($NetworkWithAddress);
-				if ($return != FormValidator::INVALID_NULL)
+				if ($return != FormValidator::FM_INVALID_NULL)
 				{
 					if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 					{
 						$return = $FormValidator->ValidateIpMask($NetworkMask);
-						if ($return != FormValidator::INVALID_NULL)
+						if ($return != FormValidator::FM_INVALID_NULL)
 						{
-							if ($return != FormValidator::INVALID_IP_MASK)
+							if ($return != FormValidator::FM_INVALID_IP_MASK)
 							{
 								$networkWithMask = $NetworkWithAddress . "/" . $NetworkMask;
 								$return = $instanceInfraToolsDiagnosticTools->CheckIpAddressIsInNetwork($IpAddress, $networkWithMask);
@@ -326,13 +326,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 							else 
 							{
 								$ReturnMessage = $this->Language->GetText('FM_INVALID_NETWORK_NETMASK');
-								return $return = ConfigInfraTools::INVALID_IP_MASK;
+								return $return = ConfigInfraTools::FM_INVALID_IP_MASK;
 							}
 						}
 						else 
 						{
 							$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-							return $return = ConfigInfraTools::INVALID_NULL;
+							return $return = ConfigInfraTools::FM_INVALID_NULL;
 						}
 					}
 					else 
@@ -344,7 +344,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				else 
 				{
 					$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-					return $return = ConfigInfraTools::INVALID_NULL;
+					return $return = ConfigInfraTools::FM_INVALID_NULL;
 				}
 			}
 			else 
@@ -356,7 +356,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -365,7 +365,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -382,13 +382,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -397,7 +397,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -420,7 +420,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -429,7 +429,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -466,13 +466,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -481,7 +481,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -524,7 +524,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -533,7 +533,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateURL($WebSiteAddress, "example.com");
-		if($return != FormValidator::INVALID_NULL)
+		if($return != FormValidator::FM_INVALID_NULL)
 		{
 			if($return != FormValidator::INVALID_URL)
 			{
@@ -548,19 +548,19 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				{
 					$ReturnMessage = str_replace('[0]', $Port, 
 										$this->Language->GetText('CHECK_WEBSITE_EXISTS_FAILED'));
-					return $return = ConfigInfraTools::INVALID_WEBSITE;
+					return $return = ConfigInfraTools::FM_INVALID_WEBSITE;
 				}
 			}
 			else 
 			{
-				$ReturnMessage = $this->Language->GetText('INVALID_WEBSITE');
-				return $return = ConfigInfraTools::INVALID_WEBSITE;
+				$ReturnMessage = $this->Language->GetText('FM_INVALID_WEBSITE');
+				return $return = ConfigInfraTools::FM_INVALID_WEBSITE;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -570,14 +570,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$subNetworkIp = NULL; $netMask = NULL; $broadCastAddress = NULL; $availableNetworkIps = NULL;
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
 				$return = $FormValidator->ValidateIpMask($Mask);
-				if ($return != FormValidator::INVALID_NULL)
+				if ($return != FormValidator::FM_INVALID_NULL)
 				{
-					if ($return != FormValidator::INVALID_IP_MASK)
+					if ($return != FormValidator::FM_INVALID_IP_MASK)
 					{
 						$return = $instanceInfraToolsDiagnosticTools->GetCalculationNetMask($IpAddress, $Mask, $subNetworkIp, 
 																		  $netMask, $broadCastAddress, $availableNetworkIps);
@@ -602,13 +602,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					else
 					{
 						$ReturnMessage = $this->Language->GetText('FM_INVALID_NETWORK_NETMASK');
-						return $return = ConfigInfraTools::INVALID_IP_MASK;
+						return $return = ConfigInfraTools::FM_INVALID_IP_MASK;
 					}
 				}
 				else
 				{
 					$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-					return $return = ConfigInfraTools::INVALID_NULL;
+					return $return = ConfigInfraTools::FM_INVALID_NULL;
 				}
 			}
 			else 
@@ -620,7 +620,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -629,7 +629,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -692,13 +692,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME', $language);
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS', $language);
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -707,7 +707,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -731,7 +731,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -740,7 +740,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -758,13 +758,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -773,7 +773,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -800,7 +800,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -809,7 +809,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateNumericValue($Number, "");
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return == ConfigInfraTools::RET_OK)
 			{
@@ -826,14 +826,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			}
 			else 
 			{
-				$ReturnMessage = $this->Language->GetText('INVALID_PROTOCOL_NUMBER');
-				return $return = ConfigInfraTools::INVALID_PROTOCOL_NUMBER;
+				$ReturnMessage = $this->Language->GetText('FM_INVALID_PROTOCOL_NUMBER');
+				return $return = ConfigInfraTools::FM_INVALID_PROTOCOL_NUMBER;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -843,7 +843,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$timeToLive = 30;
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -868,7 +868,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -877,7 +877,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateNumericValue($Port, 0);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return == ConfigInfraTools::RET_OK)
 			{
@@ -887,8 +887,8 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					$Protocol = InfraToolsDiagnosticTools::PROTOCOL_UDP;
 				else 
 				{
-					$ReturnMessage = $this->Language->GetText('INVALID_PROTOCOL');
-					return $return = ConfigInfraTools::INVALID_PROTOCOL;
+					$ReturnMessage = $this->Language->GetText('FM_INVALID_PROTOCOL');
+					return $return = ConfigInfraTools::FM_INVALID_PROTOCOL;
 				}
 				$return = $instanceInfraToolsDiagnosticTools->GetService($Port, $Protocol, $Service);
 				if($return == ConfigInfraTools::RET_OK)
@@ -908,14 +908,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			}
 			else
 			{
-				$ReturnMessage = $this->Language->GetText('INVALID_PORT');
-				return $return = ConfigInfraTools::INVALID_PORT;
+				$ReturnMessage = $this->Language->GetText('FM_INVALID_PORT');
+				return $return = ConfigInfraTools::FM_INVALID_PORT;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -924,7 +924,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateURL($WebSiteAddress, "example.com");
-		if($return != FormValidator::INVALID_NULL)
+		if($return != FormValidator::FM_INVALID_NULL)
 		{
 			if($return != FormValidator::INVALID_URL)
 			{
@@ -943,14 +943,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			}
 			else 
 			{
-				$ReturnMessage = $this->Language->GetText('INVALID_WEBSITE');
-				return $return = ConfigInfraTools::INVALID_WEBSITE;
+				$ReturnMessage = $this->Language->GetText('FM_INVALID_WEBSITE');
+				return $return = ConfigInfraTools::FM_INVALID_WEBSITE;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -959,7 +959,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateURL($WebSiteAddress, "example.com");
-		if($return != FormValidator::INVALID_NULL)
+		if($return != FormValidator::FM_INVALID_NULL)
 		{
 			if($return != FormValidator::INVALID_URL)
 			{
@@ -987,14 +987,14 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			}
 			else 
 			{
-				$ReturnMessage = $this->Language->GetText('INVALID_WEBSITE');
-				return $return = ConfigInfraTools::INVALID_WEBSITE;
+				$ReturnMessage = $this->Language->GetText('FM_INVALID_WEBSITE');
+				return $return = ConfigInfraTools::FM_INVALID_WEBSITE;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -1003,7 +1003,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateHost($HostName);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_HOST_NAME)
 			{
@@ -1021,13 +1021,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_HOSTNAME');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 	
@@ -1036,7 +1036,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		$instanceInfraToolsDiagnosticTools = $this->Factory->CreateInfraToolsDiagnosticTools();
 		$FormValidator = $this->Factory->CreateFormValidator();
 		$return = $FormValidator->ValidateIpAddressIpv4($IpAddress);
-		if ($return != FormValidator::INVALID_NULL)
+		if ($return != FormValidator::FM_INVALID_NULL)
 		{
 			if ($return != FormValidator::INVALID_IP_ADDRESS_IPV4)
 			{
@@ -1054,13 +1054,13 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 			else 
 			{
 				$ReturnMessage = $this->Language->GetText('FM_INVALID_IP_ADDRESS_IPV4');
-				return $return = ConfigInfraTools::INVALID_HOSTNAME;
+				return $return = ConfigInfraTools::FM_INVALID_HOSTNAME;
 			}
 		}
 		else 
 		{
 			$ReturnMessage = $this->Language->GetText('FILL_REQUIRED_FIELDS');
-			return $return = ConfigInfraTools::INVALID_NULL;
+			return $return = ConfigInfraTools::FM_INVALID_NULL;
 		}
 	}
 }

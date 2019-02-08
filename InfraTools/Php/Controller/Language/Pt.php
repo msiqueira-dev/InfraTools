@@ -223,6 +223,9 @@ class Pt
 	const FM_INVALID_NOTIFICATION_TEXT                              = "Texto de notificação inválido";
 	const FM_INVALID_NOTIFICATION_TEXT_SIZE                         = "Quantidade de caracteres excede o tamanho máximo para "
 	                                                                . "texto de notificação";
+	const FM_INVALID_PORT                                           = "Porta inválida";
+	const FM_INVALID_PROTOCOL                                       = "Protocólo inválido";
+	const FM_INVALID_PROTOCOL_NUMBER                                = "Númer de protocolo inváldio";
 	const FM_INVALID_ROLE_DESCRIPTION                               = "Descrição de papel inválida";
 	const FM_INVALID_ROLE_DESCRIPTION_SIZE                          = "Quantidade de caracteres excede o tamanho máximo para descrição de "
 	                                                                . " papel";
@@ -320,6 +323,7 @@ class Pt
 	const FM_INVALID_USER_UNIQUE_ID                                 = "Identificador único inválido";
 	const FM_INVALID_USER_UNIQUE_ID_SIZE                            = "Quantidade de caracteres excede o tamanho máximo para a "
 	                                                                . "identificador único";
+	const FM_INVALID_WEBSITE                                        = "Website inválido";
 	const FM_SEL_DEFAULT                                            = "Selecione";
 	const FM_SB_RESET_PASSWORD_EMAIL_TAG                            = "InfraTools - Sua senha foi restaurada";
 	const FM_SB_RESET_PASSWORD_EMAIL_TEXT                           = "Sua senha foi restaurada e sua nova senha é ";
@@ -420,10 +424,6 @@ class Pt
 	const INSTALL_SUCCESS                                           = "Banco de dados do sistema instalado com sucesso";
 	const INVALID_NETWORK_ADDRESS                                   = "Endereço de rede inválido";
 	const INVALID_OPTION                                            = "Opção inválida";
-	const INVALID_PORT                                              = "Porta inválida";
-	const INVALID_PROTOCOL                                          = "Protocólo inválido";
-	const INVALID_PROTOCOL_NUMBER                                   = "Númer de protocolo inváldio";
-	const INVALID_WEBSITE                                           = "Website inválido";
 	const IP_ADDRESS_DEL_ERROR                                      = "Erro ao excluir endereço de ip";
 	const IP_ADDRESS_DEL_ERROR_DEPENDENCY_SERVICE                   = "Endereço de ip possui serviços associados, exclua-os primeiro";
 	const IP_ADDRESS_DEL_SUCCESS                                    = "Endereço de ip excluido com sucesso";
