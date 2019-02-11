@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: Corporation
-Creation: 25/08/2017
+Creation: 2017/08/25
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para armazenamento de dados de uma corporação.
+			Class for Corporation
 Get / Set: 
 			public function GetArrayDepartment();
 			public function GetCorporationActive();

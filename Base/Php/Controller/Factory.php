@@ -2,14 +2,14 @@
 
 /************************************************************************
 Class: Factory
-Creation: 01/09/2017
+Creation: 2017/09/01
 Creator: Marcus Siqueira
 Dependencies:
 			- Every function will need the file of the class being instaciated included
 			by the whose called it.
 	
 Description: 
-			Classe used to create instance of all elements in the Base Project.
+			Class with the Factory pattern for creating Base classes
 Methods:
 			public    function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
 			public    function CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
@@ -640,7 +640,9 @@ class Factory
 			if($page->InputValueHeaderDebug == Config::CHECKBOX_CHECKED)
 			{
 				$page->StopPageLoadTime();
-				echo "<div class='DivPageLoadTime'><b>Page Load Time: " . $page->GetPageLoadTime() . "</b></div>";
+				echo "<div class='DivPageLoadTime'><b>Page Load Time: " . $page->GetPageLoadTime() . "</b>
+				                               <br><b>Instance Memory: " . Config::GetMemoryUsage(FALSE)  . "</b>
+											   <br><b>PHP System Memory: " . Config::GetMemoryUsage(TRUE) . "</b></div>";
 			}
 			return Config::RET_OK;
 		}

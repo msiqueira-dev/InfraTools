@@ -5,9 +5,10 @@ Class: AssocUserNotification
 Creation: 2019/02/08
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Class that deals with association of user and roles.
+			Class for association between User and Notification
 Get / Set:
 			public function GetAssocUserNotificationNotification();
 			public function GetAssocUserNotificationRead();

@@ -7,7 +7,7 @@ Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Class that deals with ip address.
+			Class for Network
 Get / Set: 
 			public function GetNetworkIp();
 			public function GetNetworkName();

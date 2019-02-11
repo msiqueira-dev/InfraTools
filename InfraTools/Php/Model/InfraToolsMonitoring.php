@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsMonitoring
-Creation: 26/06/2018
+Creation: 2018/06/26
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um serviço.
+			Class for Monitoring
 Get / Set: 
 			public function GetInfraToolsService();
 			public function GetInfraToolsStatusMonitoring();

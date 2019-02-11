@@ -5,9 +5,10 @@ Class: TypeTicket
 Creation: 01/09/2017
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Class for the ticket types.
+			Class for Type Ticket
 Get / Set:
 			public function GetRegisterDate();
 			public function GetTypeTicketDescription();

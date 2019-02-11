@@ -1,7 +1,7 @@
 <?php
 /************************************************************************
 Class: PageInfraTools.php
-Creation: 18/08/2014
+Creation: 2014/08/18
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php

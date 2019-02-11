@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: Country
-Creation: 24/08/2017
+Creation: 2017/08/24
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para controle dos países obtidos pelo Google Maps.
+			Class for Country
 Get / Set:		
 			public function GetCountryAbbreviation();
 			public function GetCountryName();

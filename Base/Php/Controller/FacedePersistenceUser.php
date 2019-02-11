@@ -2,16 +2,17 @@
 
 /************************************************************************
 Class: FacedePersistenceUser
-Creation: 23/10/2017
+Creation: 2017/10/23
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/User.php
 	
 Description: 
-			Classe used to access and deal with information of the database about user.
+			Class with Singleton pattern for dabatabase methods of User
 Functions: 
 			public function UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, $MySqlConnection);

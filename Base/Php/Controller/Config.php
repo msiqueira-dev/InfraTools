@@ -11,6 +11,7 @@ Description:
 			Padroes: Singleton.
 Functions: 
 			public static function GetDefaultLanguageByDir($PageDirName);
+			public static function GetMemoryUsage($System);
 			public static function GetPageConstant($Constant);
 			public function SetApplication();
 **************************************************************************/
@@ -1095,6 +1096,15 @@ class Config
 			return Config::LANGUAGE_PORTUGUESE;
 		else return Config::RET_ERROR;
 	}
+	
+	public static function GetMemoryUsage($System) 
+	{ 
+        $mem_usage = memory_get_usage($System); 
+        if ($mem_usage < 1024) $mem_usage = $mem_usage." B"; 
+        elseif ($mem_usage < 1048576) $mem_usage = round($mem_usage/1024,2)." KB"; 
+        else $mem_usage = round($mem_usage/1048576,2)." MB"; 
+        return $mem_usage; 
+    } 
 	
 	public static function GetPageConstant($Constant)
 	{

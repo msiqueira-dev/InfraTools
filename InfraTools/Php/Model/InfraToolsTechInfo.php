@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsTechInfo
-Creation: 03/01/2017
+Creation: 2017/01/03
 Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe de informações técnicas
+			Class for System Techinical information
 Get / Set: 
 			public function GetArrayInstanceInfraToolsFile();
 			public function GetArrayInfraToolsFileType();

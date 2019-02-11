@@ -2,9 +2,11 @@
 
 /************************************************************************
 Class: TypeAssocUserTeam
-Creation: 24/05/2018
+Creation: 2018/05/24
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
 			The type of a user in a team, working for its role in a team and permission.
 Get / Set:		

@@ -1,7 +1,7 @@
 <?php
 /************************************************************************
 Class: PageAdminTypeMonitoring.php
-Creation: 04/06/2018
+Creation: 2018/06/04
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php

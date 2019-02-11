@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedeBusiness
-Creation: 18/08/2014
+Creation: 2014/08/18
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/FormValidator.php
 			InfraTools - Php/Model/InfraToolsDiagnosticTools.php
 Description: 
-			Classe existente para tratamento do negócio utilizado pelas telas.
+			Class with the Pattern Facede for dealing wuth non database classes
 Functions: 
 			public function ArrayToPipe($array, $delimeter = '|', $parents = array(), $recursive = FALSE);
 			public function CheckAvailability($HostName, &$ReturnMessage);

@@ -2,16 +2,17 @@
 
 /************************************************************************
 Class: FacedePersistenceNotification
-Creation: 23/10/2017
+Creation: 2017/10/23
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/Notification.php
 	
 Description: 
-			Classe used to access and deal with notification.
+			Class with Singleton pattern for dabatabase methods of Notification
 Functions: 
 			public function NotificationDeleteByNotificationId($NotificationId, $Debug, MySqlConnection);
 			public function NotificationInsert($NotificationActive, $NotificationText, $Debug, MySqlConnection);

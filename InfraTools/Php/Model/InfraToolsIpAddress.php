@@ -7,7 +7,7 @@ Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Class that deals with ip address.
+			Class for ip address.
 Get / Set: 
 			public function GetIpAddressDescription();
 			public function GetIpAddressIpv4();

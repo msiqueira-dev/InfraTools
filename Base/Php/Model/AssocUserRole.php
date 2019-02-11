@@ -5,9 +5,10 @@ Class: AssocUserRole
 Creation: 2019/01/21
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Class that deals with association of user and roles.
+			Class for association between User and Role
 Get / Set:
 			public function GetAssocUserRoleRole();
 			public function GetAssocUserRoleUser();

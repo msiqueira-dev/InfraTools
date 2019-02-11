@@ -1,10 +1,10 @@
-.DivHeader{width:100%;height:100%;background-color:#192650;background-repeat:repeat-x;max-height:120px;}
+.DivHeader{width:100%;height:94px;background-color:#192650;background-repeat:repeat-x;max-height:94px;}
 .DivHeaderContainer{width:100%;height:100%;margin:0 auto;}
 .DivHeaderContainerLogo{max-width:320px;max-height:40px;margin:0 auto;}
 .DivHeaderContainerMenu{min-width:80px;max-width:100%;width:auto;height:100%;display:table;margin:0 auto;margin-top:15px;}
 .DivHeaderContainerMenu a{width:auto;text-align:left;letter-spacing:0;text-decoration:none;color:#FFFFFF;font-size:100%;}
 .DivHeaderContainerMenu span{width:auto;text-align:left;display:block;font-size:100%;color:#FFFFFF;font-weight:bold;}
-.DivHeaderContainerMenuLink{width:auto;height:auto;max-width:100px;max-height:50px;margin:0 auto;margin-right:8px;}
+.DivHeaderContainerMenuLink{width:auto;height:27px;max-width:100px;max-height:50px;margin:0 auto;margin-right:8px;}
 .DivHeaderContainerMenuLinkSub{height:auto;}
 .DivHeaderContainerMenuLinkSubContainer{width:auto;max-width:72px;height:auto;max-height:45px;z-index:100;position:relative;top:12px;background-color:#43435d;border-bottom:1px solid #7a7a9f;}
 .DivHeaderContainerMenuLinkSubContainer:hover{background-color:#192650;}
@@ -30,7 +30,7 @@
 .DivHeaderContainerMenuPageGetHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
 .DivHeaderContainerMenuPageGetTop{width:0px;height:0px;}
 .DivHeaderContainerMenuPageGetTopOrange{width:0px;height:0px;}
-.DivHeaderContainerMenuPageService{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
+.DivHeaderContainerMenuPageService{width:72px;max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
 .DivHeaderContainerMenuPageServiceHover{max-width:100px;max-height:38px;min-height:38px;float:left;display:table}
 .DivHeaderContainerMenuPageServiceTop{width:0px;height:0px;}
 .DivHeaderContainerMenuPageServiceTopOrange{width:0px;height:0px;}
@@ -59,3 +59,5 @@
 .DivHeaderPageTitleContentText{max-width:320px;min-width:150px;min-height:20px;margin:0 auto;}
 .DivHeaderPageTitleContentText h1{min-height:20px;color:#211f5e;font-family:sans-serif;font-size:150%;font-weight:bold;text-decoration:none;text-shadow:none;position:relative;left:6px;text-align:center;}
 .DivHeaderPageTitleContentLine{width:100%;max-height:3px;min-height:3px;background-color:#192650;}
+#PageNotification{float:left;}
+#PageNotification span{position:relative;top:-14px;}

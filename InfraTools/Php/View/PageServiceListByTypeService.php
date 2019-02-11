@@ -1,7 +1,7 @@
 <?php
 /************************************************************************
 Class: PageServiceListByTypeService.php
-Creation: 10/07/2018
+Creation: 2018/07/10
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php

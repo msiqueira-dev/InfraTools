@@ -2,12 +2,13 @@
 
 /************************************************************************
 Class: Team
-Creation: 22/02/2018
+Creation: 2018/02/22
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Class that deals with teams.
+			Class for Team
 Get / Set:
 			public function GetTeamDescription();
 			public function GetTeamId();

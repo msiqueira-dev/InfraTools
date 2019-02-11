@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsAssocUserService
-Creation: 26/06/2018
+Creation: 2018/06/26
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um tipo de associação entre usuário e serviço.
+			Class for the association between InfraTools Service and InfraTools User.
 Get / Set: 
 			public function GetInfraToolsService();
 			public function GetInfraToolsServiceId();

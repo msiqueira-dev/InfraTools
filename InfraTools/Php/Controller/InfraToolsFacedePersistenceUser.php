@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceUser
-Creation: 25/06/2018
+Creation: 2018/06/25
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Config.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/InfraToolsUser.php
 	
 Description: 
-			Classe used to access and deal with information of the database about group user.
+			Class with Singleton pattern for dabatabase methods of InfraTools User
 Functions: 
 			public function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, 
 			                                     $Debug, $MySqlConnection);

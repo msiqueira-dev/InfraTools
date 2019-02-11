@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceService
-Creation: 25/06/2018
+Creation: 2018/06/25
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/MySqlManager.php
@@ -11,7 +11,7 @@ Dependencies:
 			InfraTools - Php/Model/Service.php
 	
 Description: 
-			Classe used to access and deal with information of the database about group user.
+			Class with Singleton pattern for dabatabase methods of InfraTools Service
 Functions: 
 			public function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $MySqlConnection);
 			public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection);

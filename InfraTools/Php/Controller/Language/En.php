@@ -2,13 +2,12 @@
 
 /************************************************************************
 Class: En
-Creation: 17/03/2015
+Creation: 2015/03/17
 Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe que contem constantes de textos e mensagens de tela em inglês,
-			acessdas viada método.
+			Class for English language
 Functions: 
 			public function GetConstant($Constant);
 Updates:

@@ -2,13 +2,13 @@
 
 /************************************************************************
 Class: Persistence
-Creation: 01/09/2017
+Creation: 2017/09/01
 Creator: Marcus Siqueira
 Dependencies:
-			Base - Php/Controller/Config.php
-	
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para armazenar queries a serem executadas no banco de dados.
+			Class that can't be constructed for Persistence
 Methods: 
 			public static function ShowQuery($Query);
 			public static function SqlAssocUserCorporationDelete();

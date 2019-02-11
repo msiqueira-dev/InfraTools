@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceDataBase
-Creation: 2018-08-15
+Creation: 2018/08/15
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/MySqlManager.php
@@ -10,7 +10,7 @@ Dependencies:
 			InfraTools - Php/Model/InfraToolsPersistenceDataBase.php
 	
 Description: 
-			Classe used to create the database for the InfraTools System..
+			Class with Singleton pattern for dabatabase for the InfraTools System.
 Functions: 
 			public function CreateInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection);
 			public function CreateInfraToolsDataBaseInsertCountry(&$StringMessage, $Debug, $MySqlConnection);

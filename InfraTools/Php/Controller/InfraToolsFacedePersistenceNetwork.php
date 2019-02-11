@@ -11,7 +11,7 @@ Dependencies:
 			InfraTools - Php/Model/InfraToolsNetwork.php
 	
 Description: 
-			Classe used to deal with network database information.
+			Class with Singleton pattern for dabatabase methods of InfraTools Network
 Functions: 
 			public function InfraToolsNetworkDeleteByNetworkName($NetworkName, $Debug, $MySqlConnection);
 			public function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug, $MySqlConnection);

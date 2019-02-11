@@ -2,17 +2,18 @@
 
 /************************************************************************
 Class: InfraToolsFactory
-Creation: 01/09/2017
+Creation: 2017/09/01
 Creator: Marcus Siqueira
 Dependencies:
 			- Every function will need the file of the class being instaciated included
 			by the whose called it.
 	
 Description: 
-			Classe used to create instance of all elements in the Base Project.
+			Class with the Factory pattern for creating InfraTools classes
 Methods:
 			public static function CreateConfigInfraTools();
-			public function CreateInfraToolsAssocIpAddressService($IpAddressIpv4, $IpAddressIpv6, $RegisterDate);
+			public function CreateInfraToolsAssocIpAddressService($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp, 
+			                                                      $RegisterDate);
 			public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
 								                             $InfraToolsUserInstance, $RegisterDate);
 			public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);	
@@ -160,12 +161,12 @@ class InfraToolsFactory extends Factory
 		return ConfigInfraTools::__create();
 	}
 	
-	public function CreateInfraToolsAssocIpAddressService($IpAddressIpv4, $IpAddressIpv6, $RegisterDate)
+	public function CreateInfraToolsAssocIpAddressService($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp, $RegisterDate)
 	{
-		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
-		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
-		return new InfraToolsIpAddress($IpAddressIpv4, $IpAddressIpv6, $RegisterDate);
+		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsAssocIpAddressService.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsAssocIpAddressService');
+		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsAssocIpAddressService.php");
+		return new InfraToolsAssocIpAddressService($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp, $RegisterDate);
 	}
 	
 	public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 

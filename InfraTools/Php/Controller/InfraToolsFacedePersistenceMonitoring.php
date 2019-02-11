@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceMonitoring
-Creation: 09/07/2018
+Creation: 2018/07/09
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/ConfigInfraTools.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/InfraToolsMonitoring.php
 	
 Description: 
-			Classe used to access and deal with information of the database about informations of monitoring.
+			Class with Singleton pattern for dabatabase methods of InfraTools Monitoring
 Functions: 
 
 **************************************************************************/

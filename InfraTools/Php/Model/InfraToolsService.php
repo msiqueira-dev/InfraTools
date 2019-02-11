@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsService
-Creation: 22/05/2018
+Creation: 2018/05/22
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Class that deals with services.
+			Class for Service
 Get / Set: 
 			public function GetRegisterDate();
 			public function GetServiceActive();

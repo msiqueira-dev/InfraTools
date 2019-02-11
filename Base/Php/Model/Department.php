@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: Department
-Creation: 25/08/2017
+Creation: 2017/08/25
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Corporations Departments.
+			Class for Departments.
 Get / Set:		
 			public function GetDepartmentCorporation();
 			public function GetDepartmentCorporationName();

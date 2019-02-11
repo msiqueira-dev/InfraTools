@@ -2,13 +2,12 @@
 
 /************************************************************************
 Class: De
-Creation: 17/03/2015
+Creation: 2015/03/17
 Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe que contem constantes de textos e mensagens de tela em alemão,
-			acessdas viada método.
+			Class for Portuguese language
 Functions: 
 			public function GetConstant($Constant);
 Updates:

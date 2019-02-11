@@ -2,13 +2,13 @@
 
 /************************************************************************
 Class: InfraToolsCorporation
-Creation: 07/12/2015
+Creation: 2015/07/12
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/Corporation.php
 		    InfraTools - Php/Controller/ConfigInfraTools.php
 Description: 
-			Classe para armazenamento de dados de uma corporação.
+			Class for Corporation.
 Get / Set:  
 			public function GetCorporationActiveImage();
 **************************************************************************/

@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceCorporation
-Creation: 26/06/2018
+Creation: 2018/26/06
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Config.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/InfraToolsCorporation.php
 	
 Description: 
-			Classe used to access and deal with information of the database about group user.
+			Class with Singleton pattern for dabatabase methods of InfraTools Corporation
 Functions: 
 			public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
 			                                            $Debug, $MySqlConnection);

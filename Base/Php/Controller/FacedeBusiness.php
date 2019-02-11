@@ -8,7 +8,7 @@ Dependencies:
 			Base - Php/Controller/Factory.php
 			
 Description: 
-			Classe existente para tratamento do negócio utilizado pelas telas.
+			Class with Singleton pattern for FacedeBusiness
 Methods: 
 			public function GenerateRandomCode();
 			public function GenerateRandomPassword($length = 8);

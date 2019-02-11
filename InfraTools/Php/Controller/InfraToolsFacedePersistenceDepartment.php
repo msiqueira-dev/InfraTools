@@ -1,8 +1,8 @@
 <?php
 
 /************************************************************************
-Class: InfraToolsFacedePersistenceCorporation
-Creation: 15/07/2018
+Class: InfraToolsFacedePersistenceDepartment
+Creation: 2018/07/15
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Config.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/InfraToolsDepartment.php
 	
 Description: 
-			Classe used to access and deal with information of the database about department.
+			Class with Singleton pattern for dabatabase methods of InfraTools Department
 Functions: 
 			public function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
 	                                                                       &$ArrayInstanceInfraToolsDepartment, &$RowCount, 

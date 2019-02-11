@@ -6,8 +6,9 @@ Creation: 26/11/2013
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe de controle para cada usuário do site.
+			Class for User
 Get / Set: 
 			public function GetAssocUserNotificationNotificationIdByIndex($Index);
 			public function GetAssocUserTeamTeamIdByIndex($Index);

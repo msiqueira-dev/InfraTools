@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsUser
-Creation: 02/12/2015
+Creation: 2015/12/02
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/ConfigInfraTools.php

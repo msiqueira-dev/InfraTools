@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: Page.php
-Creation: 05/11/2013
+Creation: 2013/11/05
 Creator: Marcus Siqueira
 Dependencies:
 			Base/Web/Php/Config.php
@@ -10,9 +10,7 @@ Dependencies:
 			Base/Web/Php/Head.php
 
 Description: 
-			Classe que lida com páginas, transição de páginas, URL, Domínios
-            dentre outras funcionalidades ligadas a uma página Web.
-			Padroes: Singleton.
+			Class with Singleton pattern for Pages
 Get / Set:		
 			public function GetPageLoadTime();
 Methods: 

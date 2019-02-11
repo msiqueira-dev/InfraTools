@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: AssocUserCorporation
-Creation: 16/02/2018
+Creation: 2018/02/16
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Association between corporation and employee.
+			Class for association between User and Corporation
 Get / Set:		
 			public function GetAssocUserCorporationCorporation();
 			public function GetAssocUserCorporationCorporationName();

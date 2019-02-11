@@ -2,12 +2,13 @@
 
 /************************************************************************
 Class: TechInfo
-Creation: 03/01/2017
+Creation: 2017/01/03
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe de informações técnicas
+			Class for Technical Information
 Functions: 
 			
 **************************************************************************/

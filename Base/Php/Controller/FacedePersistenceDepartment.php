@@ -2,16 +2,17 @@
 
 /************************************************************************
 Class: FacedePersistenceDepartment
-Creation: 19/02/2018
+Creation: 2018/02/19
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/Department.php
 	
 Description: 
-			Classe used to access and deal with information of the database about a corporation's department.
+			Class with Singleton pattern for dabatabase methods of Department
 Functions: 
 			public function DepartmentDelete($CorporationName, $DepartmentName, $Debug, $MySqlConnection);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug, $MySqlConnection);

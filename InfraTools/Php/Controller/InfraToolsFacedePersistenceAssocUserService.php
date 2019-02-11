@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceAssocUserServiceInfraTools
-Creation: 05/06/2018
+Creation: 2018/06/05
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/MySqlManager.php
@@ -11,7 +11,7 @@ Dependencies:
 			InfraTools - Php/Model/AssocUserService.php
 	
 Description: 
-			Classe used to access and deal with information of the database about the association with user and a service.
+			Class with Singleton pattern for dabatabase methods of association between User and Service
 Functions:
 			public function InfraToolsAssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
 			                                                                     $Debug, $MySqlConnection);

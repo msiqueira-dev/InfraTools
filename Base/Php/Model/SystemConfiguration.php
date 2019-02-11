@@ -5,9 +5,10 @@ Class: SystemConfiguration
 Creation: 2019/01/03
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Class that treats the System Configuration.
+			Class for System Configuration
 Get / Set:
 			public function GetRegisterDate();
 			public function GetSystemConfigurationOptionActive();

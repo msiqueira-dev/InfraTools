@@ -2,16 +2,17 @@
 
 /************************************************************************
 Class: FacedePersistenceTypeStatusTicket
-Creation: 13/11/2017
+Creation: 2017/11/13
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
-			Base       - Php/Model/Ticket.php
+			Base       - Php/Model/TypeStatusTicket.php
 	
 Description: 
-			Classe used to access and deal with information of the database about type status ticket.
+			Class with Singleton pattern for dabatabase methods of Type Status Ticket
 Functions: 
 			public function TypeStatusTicketDeleteByTypeStatusTicketDescription($TypeStatusTicketDescription, $Debug, $MySqlConnection);
 			public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, $MySqlConnection);

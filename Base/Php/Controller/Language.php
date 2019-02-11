@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: Language
-Creation: 17/03/2015
+Creation: 2015/03/07
 Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe que contem métodos de páginas padrões que devem ser implementados
+			Class with Singleton pattern for Language
 Functions: 
 			abstract protected function GetLanguageInstance($Language);
 			abstract public function GetPageName($Page);

@@ -2,13 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsDiagnosticTools.php
-Creation: 21/02/2014
+Creation: 2014/02/21
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
 Description: 
-			Classe que serve para utilizar funcionalidades ligadas a análise
-			e infraestrutura de redes.
+			Class that executes network functions for diagnostic porpuses.
 Functions: 
 			public function CheckAvailability(Host);
 			public function CheckBlackListHost($HostName, &$ArrayBlackList);

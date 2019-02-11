@@ -2,13 +2,13 @@
 
 /************************************************************************
 Class: InfraToolsPersistenceDataBase
-Creation: 2018-08-15
+Creation: 2018/08/15
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
 	
 Description: 
-			Classe para armazenar queries a serem executadas no banco de dados.
+			Classe for System creationg database queries.
 Methods:
 		public static function SqlCreateInfraToolsDataBase();
 		public static function SqlCreateInfraToolsDataBaseTableAssocTicketUserResponsible();

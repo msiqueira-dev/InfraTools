@@ -2,16 +2,17 @@
 
 /************************************************************************
 Class: FacedePersistenceTicket
-Creation: 07/11/2017
+Creation: 2017/11/07
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/Ticket.php
 	
 Description: 
-			Classe used to access and deal with information of the database about tickets.
+			Class with Singleton pattern for dabatabase methods of Ticket
 Functions: 
 			public function TicketDeleteByTicketId($TicketDescription, $Debug, $MySqlConnection);
 			public function TicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);

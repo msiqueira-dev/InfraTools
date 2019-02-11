@@ -2,15 +2,13 @@
 
 /************************************************************************
 Class: Session.php
-Creation: 06/11/2013
+Creation: 2013/11/06
 Creator: Marcus Siqueira
 Dependencies:
 			Base/Php/Controller/Config.php
 			Base/Php/Controller/SessionHandlerCustom.php
 Description: 
-			Classe que cuida da Sessão de usuário, capturando valor, 
-			atribuindo valor, validando valor, e limpando valor da Sessão.
-			Padrões: Singleton.
+			Class with Singleton pattern for Session
 Functions: 
 			public function CheckActivity($ActivityKey, $UserKey, $SessionTime, $UnlimitedSession);
 			public function CreateBasic($Application, $SessionTime);

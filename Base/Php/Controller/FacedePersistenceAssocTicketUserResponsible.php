@@ -2,16 +2,17 @@
 
 /************************************************************************
 Class: FacedePersistenceAssocTicketUserResponsible
-Creation: 14/06/2018
+Creation: 2018/06/14
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/TypeAssocTicketUserResponsible.php
 	
 Description: 
-			Classe used to access and deal with information of the database about type of association betweeen a user and a team.
+			Class with Singleton pattern for dabatabase methods of association between Ticket and User Responsible
 Functions: 
 			public function AssocTicketUserResponsibleDeleteByTicketId($AssocTicketUserResponsibleTicketId, $Debug,
 			                                                           $MySqlConnection);

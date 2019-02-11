@@ -5,7 +5,8 @@ Class: TypeStatusTicket
 Creation: 31/10/2017
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
 			Class for the type of the ticket status.
 Get / Set:

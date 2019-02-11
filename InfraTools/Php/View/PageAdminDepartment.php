@@ -1,7 +1,7 @@
 <?php
 /************************************************************************
 Class: PageAdminDepartment.php
-Creation: 28/02/2018
+Creation: 2018/02/28
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php

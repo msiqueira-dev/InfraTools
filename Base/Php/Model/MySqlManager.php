@@ -2,12 +2,13 @@
 
 /************************************************************************
 Class: MySqlManager.php
-Creation: 03/06/2014
+Creation: 2014/06/03
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe de controle de Banco de Dados MySql
+			Class for MySqlManager
 Functions: 
 			public function CloseDataBaseConnection($MySqlConnection, $Statement);
 			public function DestroyMySqlManagerInstance();

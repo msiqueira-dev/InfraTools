@@ -5,9 +5,10 @@ Class: Role
 Creation: 2019/01/21
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Class that deals with roles.
+			Class for Roles
 Get / Set:
 			public function GetRegisterDate();
 			public function GetRoleDescription();

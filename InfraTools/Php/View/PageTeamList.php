@@ -7,7 +7,7 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Class that list new teams.
+			Class that list teams.
 Functions: 
 			public    function LoadPage();
 			

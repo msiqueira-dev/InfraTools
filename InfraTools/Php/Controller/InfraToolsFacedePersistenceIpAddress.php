@@ -11,7 +11,7 @@ Dependencies:
 			InfraTools - Php/Model/InfraToolsIpAddress.php
 	
 Description: 
-			Classe used to deal with ip addess database information.
+			Class with Singleton pattern for dabatabase methods of InfraTools Ip Address
 Functions: 
 			public function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug, $MySqlConnection);
 			public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, 

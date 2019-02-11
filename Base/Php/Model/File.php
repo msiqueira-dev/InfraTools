@@ -2,13 +2,13 @@
 
 /************************************************************************
 Class: File.php
-Creation: 04/11/2013
+Creation: 2013/11/04
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe que possui funcionalidades para tratar arquivos, podendo
-			escrever, ler e atualizar arquivos.
+			Class for File
 Functions: 
 			public function ReadFile($filePath, &$string);
 			public function ReadFileWithLines($filePath, &$string, &$lines);

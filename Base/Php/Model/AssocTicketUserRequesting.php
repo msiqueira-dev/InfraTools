@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: AssocTicketUserRequesting
-Creation: 05/06/2018
+Creation: 2018/06/05
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Association between user and ticket.
+			Class for association betwteen a Ticket and a User
 Get / Set:		
 			public function GetAssocTicketUserRequestingTicket();
 			public function GetAssocTicketUserRequestingTicketId();

@@ -2,14 +2,14 @@
 
 /************************************************************************
 Class: Log.php
-Creation: 19/11/2013
+Creation: 2013/11/19
 Creator: Marcus Siqueira
 Dependencies:
-			Base/Web/Php/File.php
-			Base/Web/Php/Config.php
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
+			Base       - Php/Model/File.php
 Description: 
-			Classe que serve para gravar log das ações que são efetuadas
-			pelo usuário
+			Class for Log
 Functions: 
 			public function WriteLog($LogName, $ArrayString);
 			public function WriteLogPost();

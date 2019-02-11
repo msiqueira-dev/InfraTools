@@ -5,7 +5,8 @@ Class: Ticket
 Creation: 30/10/2017
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
 			Classe para o tratamento de solicitações.
 Get / Set:

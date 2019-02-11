@@ -2,9 +2,10 @@
 
 /************************************************************************
 Class: FacedePersistence
-Creation: 01/09/2017
+Creation: 2017/09/01
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/Corporation.php
 			Base       - Php/Model/Country.php
@@ -15,7 +16,7 @@ Dependencies:
 			Base       - Php/Model/User.php
 	
 Description: 
-			Classe used to access and deal with information of the database.
+			Class with Singleton pattern for FacedePersistence
 Functions: 
 			public function AssocTicketUserRequestingDeleteByTicketId($AssocTicketUserRequestingTicketId, $Debug, 
 			                                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);

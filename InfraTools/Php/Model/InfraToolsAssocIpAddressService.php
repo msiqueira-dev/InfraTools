@@ -1,13 +1,13 @@
 <?php
 
 /************************************************************************
-Class: InfraToolsAssocUserIpAddress
+Class: InfraToolsAssocIpAddressService
 Creation: 2019/01/23
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Class that deals with ip address.
+			Class for the association between InfraTools Ip Address and InfraTools Service.
 Get / Set: 
 			public function GetAssocIpAddressServiceServiceId();
 			public function GetAssocIpAddressServiceServiceIp();
@@ -15,10 +15,10 @@ Get / Set:
 			public function SetAssocIpAddressServiceServiceId($AssocIpAddressServiceServiceId);
 			public function SetAssocIpAddressServiceServiceIp($AssocIpAddressServiceServiceIp);
 Methods:
-			public function UpdateInfraToolsAssocUserIpAddress($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp);
+			public function UpdateInfraToolsAssocIpAddressService($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp);
 **************************************************************************/
 
-class InfraToolsAssocUserIpAddress
+class InfraToolsAssocIpAddressService
 {
 	/* Properties */
 	protected $AssocIpAddressServiceServiceId = NULL;
@@ -75,7 +75,7 @@ class InfraToolsAssocUserIpAddress
 	}
 	
 	/* METHODS */
-	public function UpdateInfraToolsAssocUserIpAddress($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp)
+	public function UpdateInfraToolsAssocIpAddressService($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp)
 	{
 		if(!is_null($AssocIpAddressServiceServiceId))
 			$this->AssocIpAddressServiceServiceId = $AssocIpAddressServiceServiceId;

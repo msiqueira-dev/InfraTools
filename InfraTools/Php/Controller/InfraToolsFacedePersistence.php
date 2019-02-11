@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistence
-Creation: 02/12/2015
+Creation: 2015/02/12
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
@@ -12,7 +12,7 @@ Dependencies:
 			InfraTools - Php/Model/CorporationInfraTools.php
 	
 Description: 
-			Classe para funcionalidades que irão fazer requisições ao banco de dados.
+			Class with the Pattern Facede for dealing wuth database classes
 Methods: 
 			public function InfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
 			                                                                                 $AssocIpAddressServiceServiceIp,

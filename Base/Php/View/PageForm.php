@@ -1,12 +1,12 @@
 <?php
 /************************************************************************
 Class: PageForm.php
-Creation: 04/06/2018
+Creation: 2018/06/04
 Creator: Marcus Siqueira
 Dependencies:
 			Base - Php/Controller/Factory.php
 Description: 
-			Classe que trata da administração dos equipes.
+			Class with Singleton pattern for PageForm
 Functions: 
 			public Validate();
 			protected function ValidateField($FieldId, $FunctionName, $FieldValue, $FieldDefaultValue, 
@@ -46,7 +46,7 @@ class PageForm
 	}
 	
 	/* Constructor */
-	public function __construct() 
+	private function __construct() 
 	{
 		$this->Factory = Factory::__create();
 	}

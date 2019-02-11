@@ -7,7 +7,7 @@ Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Class that treats the System Configuration.
+			Class for Notification
 Get / Set:
 			public function GetNotificationActive();
 			public function GetNotificationId();

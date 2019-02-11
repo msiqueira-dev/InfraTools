@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceTypeAssocUserService
-Creation: 09/07/2018
+Creation: 2018/07/09
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/ConfigInfraTools.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/InfraToolsServiceInformation.php
 	
 Description: 
-			Classe used to access and deal with information of the database about informations of the type of associantions between users and services.
+			Class with Singleton pattern for dabatabase methods of a type of assocition between InfraTools User and InfraTools Service
 Functions: 
 			public function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService,&$RowCount,
 			                                                     $Debug, $MySqlConnection);

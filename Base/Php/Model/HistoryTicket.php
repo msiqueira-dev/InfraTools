@@ -2,12 +2,13 @@
 
 /************************************************************************
 Class: HistoryTicket
-Creation: 30/10/2017
+Creation: 2017/10/30
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para o tratamento de solicitações.
+			Class for History Ticket
 Get / Set:
 			public function GetHistoryTicketRegisterDate();
 			public function GetHistoryTicketDescription();

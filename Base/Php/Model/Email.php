@@ -2,16 +2,16 @@
 
 /************************************************************************
 Class: Email.php
-Creation: 29/01/2015
+Creation: 2015/01/29
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 			Base       - Php/API/PHPMailer/class.phpmailer.php
 			Base       - Php/API/PHPMailer/class.smtp.php
 			Base       - Php/API/PHPMailer/class.pop3.php
 Description: 
-			Classe que serve para utilizar funcionalidades ligadas a
-			corrêio eletrônico
+			Class for Email	
 Functions:
 			public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailUserReplyTo,
 			                              $ApplicationEmailPassword, $UserName, $UserEmail, $Subject, $Title, $Body);

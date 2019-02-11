@@ -2,16 +2,16 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceTypeService
-Creation: 09/07/2018
+Creation: 2018/07/09
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/ConfigInfraTools.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/InfraToolsPersistence.php
-			Base       - Php/Model/InfraToolsService.php
+			Base       - Php/Model/InfraToolsTypeService.php
 	
 Description: 
-			Classe used to access and deal with information of the database about the service type.
+			Class with Singleton pattern for dabatabase methods of InfraTools Type Service
 Functions: 
 			public function InfraToolsTypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, &$RowCount, 
 			                                            $Debug, $MySqlConnection);

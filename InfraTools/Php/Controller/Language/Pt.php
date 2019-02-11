@@ -2,13 +2,12 @@
 
 /************************************************************************
 Class: Pt
-Creation: 08/04/2015
+Creation: 2015/04/08
 Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe que contem constantes de textos e mensagens de tela em português,
-			acessdas viada método.
+			Class for Portuguese language
 Functions: 
 			public function GetConstant($Constant);
 Updates:

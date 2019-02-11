@@ -1,13 +1,13 @@
 <?php
 /************************************************************************
-Class: PageAdminTypeUser.php
-Creation: 30/09/2016
+Class: PageAdmin.php
+Creation: 2016/06/30
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da administração dos tipos de usuários.
+			Class that opens the main admin page, also serving for methods used on admin pages.
 Functions: 
 			public    function LoadPage();
 **************************************************************************/

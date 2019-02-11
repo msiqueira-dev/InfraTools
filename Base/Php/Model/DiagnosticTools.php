@@ -5,10 +5,10 @@ Class: DiagnosticTools.php
 Creation: 2018/09/20
 Creator: Marcus Siqueira
 Dependencies:
-			Factory - Php/Controller/Factory.php
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe que serve para utilizar funcionalidades ligadas a análise
-			e infraestrutura de redes.
+			Class for Diagnostic Tools
 Functions: 
 			public function GetBrowserClient(&$Browser);
 			public function GetIpAddressClient(&$IpAddress);

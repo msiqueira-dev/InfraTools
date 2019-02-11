@@ -1,7 +1,7 @@
 <?php
 /************************************************************************
 Class: PageContact.php
-Creation: 30/09/2016
+Creation: 2016/09/30
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php

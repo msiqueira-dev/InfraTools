@@ -5,9 +5,10 @@ Class: TypeUser
 Creation: 24/08/2017
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para armazenamento de dados de permissões dos usuários.
+			Class for Type User
 Get / Set:
 			public function GetTypeUserDescription();
 			public function GetRegisterDate();

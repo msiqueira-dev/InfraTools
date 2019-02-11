@@ -2,14 +2,13 @@
 
 /************************************************************************
 Class: FormValidator
-Creation: 18/07/2014
+Creation: 2014/07/18
 Creator: Marcus Siqueira
 Dependencies:
-	
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe FormValidator
-			Classe existente para validar formulários e campos específicos.
-			Exemplo: Validar um Id, que deve apenas ser constituido de números.
+			Class with Singleton pattern for Form Validator
 Functions: 
 			public function ExecuteValidation($FunctionName, $Value, $DefaultValue, $ArrayOption = NULL);
 			public function ValidateBool($Bool);

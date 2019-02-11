@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsInformationService
-Creation: 09/07/2018
+Creation: 2018/07/09
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um tipo de serviço.
+			Class for Information Service
 Get / Set: 
 			public function GetInformationServiceId();
 			public function GetInformationServiceDescription();

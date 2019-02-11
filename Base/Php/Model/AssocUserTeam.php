@@ -5,8 +5,10 @@ Class: AssocUserTeam
 Creation: 26/02/2018
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Association between user and team.
+			Class for association between User and Team
 Get / Set:		
 			public function GetRegisterDate();
 			public function GetTeam();
