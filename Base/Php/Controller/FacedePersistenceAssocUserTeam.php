@@ -5,16 +5,17 @@ Class: FacedePersistenceAssocUserTeam
 Creation: 23/10/2017
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/AssocUserTeam.php
 	
 Description: 
-			Classe used to access and deal with information of the database about the association with user and a team.
+			Class with Singleton pattern for dabatabase methods of association between User and Team
 Functions: 
 			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug);
-			public function AssocUserTeamInsert($TeamName, $TypeAssocUserTeam, $UserEmail, $Debug);
+			public function AssocUserTeamInsert($TeamName, $TypeAssocUserTeamDescription, $UserEmail, $Debug);
 			
 **************************************************************************/
 
@@ -30,20 +31,6 @@ if (!class_exists("Factory"))
 	if(file_exists(BASE_PATH_PHP_CONTROLLER . "Factory.php"))
 		include_once(BASE_PATH_PHP_CONTROLLER . "Factory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
-}
-
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
-}
-
-if (!class_exists("AssocUserTeam"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
-		include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserTeam');
 }
 
 class FacedePersistenceAssocUserTeam
@@ -73,7 +60,7 @@ class FacedePersistenceAssocUserTeam
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -91,73 +78,71 @@ class FacedePersistenceAssocUserTeam
 	public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserTeamDelete)</b> : " . 
-						 Persistence::SqlAssocUserTeamDelete() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserTeamDelete');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserTeamDelete());
 			if ($stmt)
 			{
 				$stmt->bind_param("ss", $TeamName, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_TEAM_DELETE_FAILED;
+					return Config::DB_ERROR_ASSOC_USER_TEAM_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_ASSOC_USER_TEAM_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_ASSOC_USER_TEAM_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserTeamInsert($TeamName, $AssocUserTeamType, $UserEmail, $Debug, $MySqlConnection)
+	public function AssocUserTeamInsert($TeamName, $TypeAssocUserTeamDescription, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($return == Config::SUCCESS)
+		if($return == Config::RET_OK)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserTeamInsert)</b> : " . 
-						 Persistence::SqlAssocUserTeamInsert() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserTeamInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserTeamInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("sis", $TeamName, $AssocUserTeamType, $UserEmail);
+				$stmt->bind_param("sss", $TeamName, $TypeAssocUserTeamDescription, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_TEAM_INSERT_FAILED;
+					return Config::DB_ERROR_ASSOC_USER_TEAM_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>

@@ -2,13 +2,13 @@
 
 /************************************************************************
 Class: File.php
-Creation: 04/11/2013
+Creation: 2013/11/04
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe que possui funcionalidades para tratar arquivos, podendo
-			escrever, ler e atualizar arquivos.
+			Class for File
 Functions: 
 			public function ReadFile($filePath, &$string);
 			public function ReadFileWithLines($filePath, &$string, &$lines);
@@ -20,7 +20,6 @@ Functions:
 class File
 {
 	/* Constantes de Retorno */
-	const SUCCESS = "Success";
 	const ReturnUnableToOpenFile = "Unable to open the file";
 	const ReturnUnableToFindFile = "Unable to find the file";
 	const ReturnUnableToWriteInFile = "Unable to write in the file";
@@ -29,7 +28,7 @@ class File
 	/* Properties */
 	private $Directory          = NULL;
 	private $Extension          = NULL;
-	private $Name               = NULL;
+	private $FileName           = NULL;
 	private $OptionRead         = 'r';
 	private $OptionWrite        = 'w';
 	private $OptionReadWrite    = 'w+';
@@ -55,7 +54,7 @@ class File
 	
 	public function GetName()
 	{
-		return $this->Name;
+		return $this->FileName;
 	}
 	
 	public function GetPath()
@@ -79,9 +78,9 @@ class File
 		$this->Extension = $Extension;
 	}
 	
-	public function SetName($Name)
+	public function SetName($FileName)
 	{
-		$this->Name = $Name;
+		$this->FileName = $FileName;
 	}
 	
 	public function SetPath($Path)
@@ -97,7 +96,7 @@ class File
 	/**
 	- Conta as linhas de um determinado arquivo.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		ReturnUnableToOpenFile - Não foi possível ler o arquivo
 		ReturnUnableToFindFile - Arquivo Inexistente
 	**/
@@ -115,7 +114,7 @@ class File
   					$lines++;
 				}
 				fclose($fileHandle);
-				return self::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnUnableToOpenFile;
 		}
@@ -126,7 +125,7 @@ class File
 	- Lê um dado arquivo de acordo com o a variável $filePath passada por
 	parâmetro, onde a mesma indica o caminho completo do arquivo a ser lido.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		ReturnUnableToOpenFile - Não foi possível ler o arquivo
 		ReturnUnableToFindFile - Arquivo Inexistente
 	**/
@@ -144,7 +143,7 @@ class File
 					$string .= $buffer;
 				}
 				fclose($fileHandle);
-				return self::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnUnableToOpenFile;
 		}
@@ -156,7 +155,7 @@ class File
 	parâmetro, onde a mesma indica o caminho completo do arquivo a ser lido,
 	caso consiga ler o arquivo, armazena também o número de linhas deste arquivo.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		ReturnUnableToOpenFile - Não foi possível ler o arquivo
 		ReturnUnableToFindFile - Arquivo Inexistente
 	**/
@@ -176,7 +175,7 @@ class File
 					$string .= $buffer;
 				}
 				fclose($fileHandle);
-				return self::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnUnableToOpenFile;
 		}
@@ -189,7 +188,7 @@ class File
 	lendo expecificamente uma linha desejada deste arquivo, de acordo com a variável
 	$line.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		ReturnUnableToOpenFile - Não foi possível ler o arquivo
 		ReturnUnableToFindFile - Arquivo Inexistente
 	**/
@@ -213,7 +212,7 @@ class File
 					}
 				}
 				fclose($fileHandle);
-				return self::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnUnableToOpenFile;
 		}
@@ -227,7 +226,7 @@ class File
 	$replace, passada por parâmetro venha como TRUE, e em caso de inexistência do arquivo, 
 	o mesmo é criado.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		ReturnUnableToWriteInFile - Não foi possível escrever no arquivo
 		ReturnUnableToOpenFile - Não foi possível abrir o arquivo
 		ReturnFileExistsAndCantBeOverWritten - Arquivo já existe e não deve ser substituido
@@ -244,7 +243,7 @@ class File
 				if (fwrite($fileHandle, $string) != FALSE)
 				{
 					fclose($fileHandle);
-					return self::SUCCESS;
+					return Config::RET_OK;
 				}
 				else return self::ReturnUnableToWriteInFile;
 			}
@@ -260,7 +259,7 @@ class File
 	esteja no fim do arquivo, esta função irá escrever no fim do arquivo, e em caso de 
 	inexistência do arquivo, esta função irá cria-lo.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		ReturnUnableToWriteInFile - Não foi possível escrever no arquivo
 		ReturnUnableToOpenFile - Não foi possível abrir o arquivo
 	**/
@@ -274,7 +273,7 @@ class File
 			if (fwrite($fileHandle, $string) != FALSE)
 			{
 				fclose($fileHandle);
-				return self::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnUnableToWriteInFile;
 		}

@@ -1,0 +1,26 @@
+.DivContentBody{max-width:320px !important;min-height:380px !important;}
+.DivContentBodyContainer{height:auto !important;min-height:35px !important;clear:both;}
+.DivContentBodyContainerSided{width:100% !important;}
+.DivContentBodyContainerSided{height:auto !important;min-height:20px;display:inline-block;}
+.DivContentBodyContainerValueSided{margin-top:5px;}
+.DivContentBodyContainerValueSided div{float:left;}
+.DivContentBodyContainer input[type="text"]{width:58% !important;}
+.DivContentBodyContainer input[type="password"]{width:50% !important;margin-left:0px !important;}
+.DivContentBodyContainerLabel, .DivContentBodyContainerLabelBig{width:39% !important;}
+.DivContentBodyContainerLabel label, .DivContentBodyContainerValue label{position:relative;top:7px;}
+.DivContentBodyContainerValue div{float:left;}
+.DivContentBodyContainerSubmitImage{float:left;position:relative;top:-4px;height:20px !important;}
+.DivContentBodyContainerValueContent img{position:relative;top:-2px;}
+.SelectBirthDateDay{width:17% !important;}
+.SelectBirthDateMonth{width:17% !important;margin-left:2% !important;}
+.SelectBirthDateYear{width:20% !important;margin-left:2% !important;}
+#AccountUpdateGender{width:60% !important;}
+#DivAccountChangePasswordNewPassword, #DivAccountChangePasswordRepeatPassword{height:60px !important;}
+.DivContentBodyContainersBoxLink{width:165px;min-height:40px;max-height:40px;background-color:#f5821f;border:0;color:white;font-size:90%;font-weight:bolder;margin-top:10px;}
+.DivContentBodyContainersBoxLink:hover{background-color:#ef4e22;}
+.DivContentBodyContainersBoxLink a{color:white;text-decoration:none;font-weight:normal;}
+.DivContentBodyContainersBoxLink a span{width:auto;display:block;color:white;font-size:100%;text-align:center;position:relative;top:12px;}
+#DivContentBodyContainerValueSidedFloat{float:left;}
+#UniqueIdImage{height:20px !important;}
+.DivContentBodyContainerLabelSided{margin-top:10px;}
+.DivContentBodyContainerLabelSided label{color:#ef4e22;}

@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceAssocUserServiceInfraTools
-Creation: 05/06/2018
+Creation: 2018/06/05
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/MySqlManager.php
@@ -11,27 +11,23 @@ Dependencies:
 			InfraTools - Php/Model/AssocUserService.php
 	
 Description: 
-			Classe used to access and deal with information of the database about the association with user and a service.
+			Class with Singleton pattern for dabatabase methods of association between User and Service
 Functions:
-			public function AssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, 
-			                                                           $AssocUserServiceUserEmail,
-			                                                           $Debug, $MySqlConnection);
-			public function AssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, 
-			                                                                  $Debug,
-																			  $MySqlConnection);
-			public function AssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
-			                                                                          $AssocUserServiceUserEmail, 
-															                          $Debug,
+			public function InfraToolsAssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
+			                                                                     $Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug,
+																			            $MySqlConnection);
+			public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
+			                                                                          $AssocUserServiceUserEmail, $Debug,
 																					  $MySqlConnection);
-			public function AssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
-										           $AssocUserServiceUserType, $Debug, $MySqlConnection);
-			public function AssocUserServiceSelectByAssocUserServiceServiceId($AssocUserServiceId, $Limit1, $Limit2, 
-			                                                                  &$ArrayInstanceInfraToolAssocUserService, 
-											                                  &$RowCount, $Debug,
-																			  $MySqlConnection);
-			public function AssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
-			                                                                  &$ArrayInstanceInfraToolAssocUserService, 
-																			  $Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
+										                     $AssocUserServiceUserType, $Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
+			                                                                            &$ArrayInstanceInfraToolAssocUserService, &$RowCount,
+																						$Debug, $MySqlConnection);
+			public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
+			                                                                                   &$ArrayInstanceInfraToolAssocUserService, 
+																			                   $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -75,14 +71,14 @@ class InfraToolsFacedePersistenceAssocUserService
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -91,13 +87,12 @@ class InfraToolsFacedePersistenceAssocUserService
     }
 	
 	
-	public function AssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
-			                                                   $Debug, $MySqlConnection)
+	public function InfraToolsAssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
+			                                                             $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceCheckUserTypeAdministrator)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceCheckUserTypeAdministrator() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceCheckUserTypeAdministrator');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceCheckUserTypeAdministrator());
@@ -105,36 +100,35 @@ class InfraToolsFacedePersistenceAssocUserService
 			{ 
 				$stmt->bind_param("is", $AssocUserServiceServiceId, $AssocUserServiceUserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					if ($stmt->fetch())
-						return ConfigInfraTools::SUCCESS;
-					return ConfigInfraTools::MYSQL_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FETCH_FAILED; 
+						return ConfigInfraTools::RET_OK;
+					return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FETCH; 
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR_FAILED;
+					return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug, 
-																	  $MySqlConnection)
+	public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceServiceId, $Debug, 
+																	            $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceDeleteByAssocUserServiceServiceId)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceId() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceDeleteByAssocUserServiceServiceId');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceId());
@@ -143,84 +137,80 @@ class InfraToolsFacedePersistenceAssocUserService
 				$stmt->bind_param("i", $AssocUserServiceServiceId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_SERVICE_DELETE_BY_ASSOC_USER_SERVICE_ID_FAILED_NOT_FOUND;
+					return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_DEL_BY_ASSOC_USER_SERVICE_ID;
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_ASSOC_USER_SERVICE_DELETE_BY_ASSOC_USER_SERVICE_ID_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_DEL_BY_ASSOC_USER_SERVICE_ID;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, 
-																			  $AssocUserServiceUserEmail, 
-																			  $Debug, $MySqlConnection)
+	public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceServiceId, $AssocUserServiceUserEmail, 
+																			            $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail)</b> : " . 
-				                InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $AssocUserServiceServiceId, $AssocUserServiceUserEmail);
-				$this->MySqlManager->ExecuteInsertOrUpdate($mySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 				{
-					return Config::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				}
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_SERVICE_DELETE_BY_ASSOC_USER_SERVICE_ID_AND_USER_EMAIL_FAILED_NOT_FOUND;
+					return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_DEL_BY_ASSOC_USER_SERVICE_ID_AND_USER_EMAIL;
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_ASSOC_USER_SERVICE_DELETE_BY_ASSOC_USER_SERVICE_ID_AND_USER_EMAIL_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_DEL_BY_ASSOC_USER_SERVICE_ID_AND_USER_EMAIL;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, 
-										   $AssocUserServiceUserType, $Debug, 
-										   $MySqlConnection)
+	public function InfraToolsAssocUserServiceInsert($AssocUserServiceServiceName, $AssocUserServiceUserEmail, $AssocUserServiceUserType,
+													 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceInsert)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceInsert() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceInsert');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceInsert());
@@ -230,42 +220,41 @@ class InfraToolsFacedePersistenceAssocUserService
 								         $AssocUserServiceUserEmail,$AssocUserServiceUserType);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-					return Config::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_SERVICE_INSERT_FAILED;
+					return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_INSERT;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserServiceSelectByAssocUserServiceServiceId($AssocUserServiceId, $Limit1, $Limit2, 
-															          &$ArrayInstanceInfraToolAssocUserService, 
-											                          &$RowCount, $Debug, 
-																	  $MySqlConnection)
+	public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceId($Limit1, $Limit2, $AssocUserServiceId, 
+															                    &$ArrayInstanceInfraToolAssocUserService, 
+											                                    &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolAssocUserService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceSelectByAssocUserServiceServiceId)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceSelectByAssocUserServiceServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceId());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("iii", $AssocUserServiceId, $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iii", $AssocUserServiceId, $Limit1, $limitResult);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolAssocUserService = array();
 					$result = $stmt->get_result();
@@ -273,91 +262,90 @@ class InfraToolsFacedePersistenceAssocUserService
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsAssocUserService = $this->InfraToolsFactory->CreateInfraToolsAssocUserService(
-																	$row[ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID], 
-																	$row[ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE], 
-																	$row[ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL],
-						                                            $row["AssocUserService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+																	$row[ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID], 
+																	$row[ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE], 
+																	$row[ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL],
+						                                            $row["AssocUserService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolAssocUserService, $InstanceInfraToolsAssocUserService);
 					}
 					if(!empty($ArrayInstanceInfraToolAssocUserService))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_ASSOC_USER_SERVICE_SELECT_BY_ASSOC_USER_SERVICE_ID_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_SEL_BY_ASSOC_USER_SERVICE_ID_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_ASSOC_USER_SERVICE_SELECT_BY_ASSOC_USER_SERVICE_ID_FAILED;
+					return ConfigInfraTools::DB_ERROR_ASSOC_USER_SERVICE_SEL_BY_ASSOC_USER_SERVICE_ID;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
-																	         &$ArrayInstanceInfraToolAssocUserService, 
-																	         $Debug, $MySqlConnection)
+	public function InfraToolsAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit($AssocUserServiceId, 
+																	                   &$ArrayInstanceInfraToolAssocUserService, 
+																	                   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolAssocUserService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit)</b> : " . 
-						 InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlAssocUserServiceSelectByAssocUserServiceServiceIdNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("i", $AssocUserServiceId);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolAssocUserService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$InstanceInfraToolsAssocUserService = $this->InfraToolsFactory->CreateInfraToolsAssocUserService(
-																	$row[ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_SERVICE_ID], 
-																	$row[ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_TYPE], 
-																	$row[ConfigInfraTools::TABLE_ASSOC_USER_SERVICE_FIELD_USER_EMAIL],
-						                                            $row["AssocUserService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+																	$row[ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID], 
+																	$row[ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE], 
+																	$row[ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL],
+						                                            $row["AssocUserService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolAssocUserService, $InstanceInfraToolsAssocUserService);
 					}
 					if(!empty($ArrayInstanceInfraToolAssocUserService))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>

@@ -7,44 +7,40 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_ROUTE_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_ROUTE; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_ROUTE; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_ROUTE . '#tabs14';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_ROUTE; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_ROUTE; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_ROUTE . '#tabs14';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label><?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT; ?>"
-                               onblur="ValidateIpAddress(null, '<?php echo ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE; ?>"
+                               onblur="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_ROUTE; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_ROUTE_SB; ?>',
                                                            '', true);"
-                               onkeyup="ValidateIpAddress(null, '<?php echo ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_ROUTE; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_ROUTE_SB; ?>',
                                                            '', false);"
-       			               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_ROUTE_INPUT]; 
+       			               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?>" 
                                maxlength="15" />
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_ROUTE; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_ROUTE; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_ROUTE_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_ROUTE_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_GET'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetRouteMessage))
-	                     echo $this->VisibilityFunctionGetRouteMessage; ?>">
+	                     echo $this->VisibilityFunctionGetRouteMessage; ?> DivReturnForm">
         <div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_ROUTE_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_ROUTE) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>            

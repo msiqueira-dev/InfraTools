@@ -2,18 +2,19 @@
 
 /************************************************************************
 Class: FacedePersistenceCountry
-Creation: 23/10/2017
+Creation: 2017/10/23
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/Country.php
 	
 Description: 
-			Classe used to access and deal with information of the database about country.
+			Class with Singleton pattern for dabatabase methods of County
 Functions: 
-			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, $MySqlConnection);
+			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -28,20 +29,6 @@ if (!class_exists("Factory"))
 	if(file_exists(BASE_PATH_PHP_CONTROLLER . "Factory.php"))
 		include_once(BASE_PATH_PHP_CONTROLLER . "Factory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
-}
-
-if (!class_exists("Country"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Country.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
-}
-
-if (!class_exists("Persistence"))
-{
-	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
 }
 
 class FacedePersistenceCountry
@@ -71,7 +58,7 @@ class FacedePersistenceCountry
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -86,57 +73,59 @@ class FacedePersistenceCountry
         return self::$Instance;
     }
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, $MySqlConnection)
+	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayCountry = array();
+		$ArrayInstanceCountry = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . Persistence::SqlCountrySelect() . "<br>";
+				Persistence::ShowQuery('SqlCountrySelect');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlCountrySelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::SUCCESS)
+				if($return == Config::RET_OK)
 				{
+					$ArrayInstanceCountry = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$Country = $this->Factory->CreateCountry
-							                              ($row[Config::TABLE_COUNTRY_FIELD_ABBREVIATION],
-							                               $row[Config::TABLE_COUNTRY_FIELD_NAME], 
-												      	   $row[Config::TABLE_COUNTRY_FIELD_REGION_CODE], 
-														   $row[Config::TABLE_FIELD_REGISTER_DATE]);
-						array_push($ArrayCountry, $Country);
+						$InstanceCountry = $this->Factory->CreateCountry
+							                              ($row[Config::TB_COUNTRY_FD_ABBREVIATION],
+							                               $row[Config::TB_COUNTRY_FD_NAME], 
+												      	   $row[Config::TB_COUNTRY_FD_REGION_CODE], 
+														   $row[Config::TB_FD_REGISTER_DATE]);
+						array_push($ArrayInstanceCountry, $InstanceCountry);
 					}
-					if(!empty($ArrayCountry))
-						return Config::SUCCESS;
+					if(!empty($ArrayInstanceCountry))
+						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::MYSQL_COUNTRY_SELECT_FETCH_FAILED;
+						return Config::DB_ERROR_COUNTRY_SEL_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::MYSQL_COUNTRY_SELECT_FAILED;
+					$return = Config::DB_ERROR_COUNTRY_SEL;
 				}
 				return $return;
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $mySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>

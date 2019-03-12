@@ -2,23 +2,17 @@
 
 /************************************************************************
 Class: InfraToolsCorporation
-Creation: 07/12/2015
+Creation: 2015/07/12
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/Corporation.php
 		    InfraTools - Php/Controller/ConfigInfraTools.php
 Description: 
-			Classe para armazenamento de dados de uma corporação.
+			Class for Corporation.
 Get / Set:  
 			public function GetCorporationActiveImage();
 **************************************************************************/
 
-if (!class_exists("InfraToolsFactory"))
-{
-	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
-		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
-}
 if (!class_exists("Corporation"))
 {
 	if(file_exists(BASE_PATH_PHP_MODEL . "Corporation.php"))
@@ -33,12 +27,7 @@ class InfraToolsCorporation extends Corporation
 	/* Constructor */
 	public function __construct($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate) 
 	{
-		$this->Factory = InfraToolsFactory::__create();
-		if($ArrayInstanceDepartment != NULL)
-			$this->ArrayDepartment = $ArrayInstanceDepartment;
-		$this->CorporationActive = $CorporationActive;
-		$this->CorporationName   = $CorporationName;
-		$this->RegisterDate      = $RegisterDate;
+		parent::__construct($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);
 	}
 	
 	/* Clone */

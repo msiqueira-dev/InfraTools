@@ -1,4 +1,21 @@
 <?php 
+/************************************************************************
+Class: Captcha
+Creation: 2019/02/11
+Creator: Marcus Siqueira
+Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
+Description: 
+			Class for Captcha
+Get / Set:		
+	
+Methods:
+			public function CreateAndWriteCaptchaImage($string);
+			public function CreateCaptchaImage($string);
+			public function GenerateRandomString($length = 8);
+**************************************************************************/
+
 class Captcha
 {	
 	public function CreateAndWriteCaptchaImage($string) 

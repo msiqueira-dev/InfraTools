@@ -1,4 +1,4 @@
-<!-- BODY PAGE SERVICE -->
+<!-- BODY_PAGE_SERVICE -->
 <div class="DivBody">
     <div class="DivContentBody">
     	<div class="DivContentBodySecondTitle">
@@ -9,8 +9,8 @@
 		<div class="DivContentBodyOptions">
 			<div class="DivContentBodyOptionsBox">
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SELECT'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SELECT') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SEL'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_SEL') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png';?>"
 							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -20,7 +20,7 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_SELECT'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_SEL'); ?>
 							</i>
 						</div>
 					</a>
@@ -43,8 +43,8 @@
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png';?>"
 							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -54,14 +54,14 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST'); ?>
 							</i>
 						</div>
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_CORPORATION'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_CORPORATION') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_CORPORATION'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_CORPORATION') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage
 	                                             .'Icons/IconInfraToolsListByCorporation.png';?>"
@@ -72,14 +72,14 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_CORPORATION'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_CORPORATION'); ?>
 							</i>
 						</div>
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_DEPARTMENT'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_DEPARTMENT') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_DEPARTMENT'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_DEPARTMENT') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage
 	                                             .'Icons/IconInfraToolsListByDepartment.png';?>"
@@ -90,14 +90,14 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_DEPARTMENT'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_DEPARTMENT'); ?>
 							</i>
 						</div>
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage
 	                                             .'Icons/IconInfraToolsListByName.png';?>"
@@ -108,14 +108,14 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE'); ?>
 							</i>
 						</div>
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_SERVICE'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LIST_BY_TYPE_SERVICE') ?>">
+					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="<?php echo $this->Config->DefaultServerImage
 	                                             .'Icons/IconInfraToolsListByType.png';?>"
@@ -126,7 +126,7 @@
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LIST_BY_TYPE_SERVICE'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_TYPE_SERVICE'); ?>
 							</i>
 						</div>
 					</a>

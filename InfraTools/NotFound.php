@@ -6,7 +6,7 @@
 	$InfraToolsFactory = InfraToolsFactory::__create();
 	$Session = $InfraToolsFactory->CreateSession();
 	$Return = $Session->GetSessionValue(ConfigInfraTools::SESS_LANGUAGE, $SessionValue);
-	if($Return == ConfigInfraTools::SUCCESS)
+	if($Return == ConfigInfraTools::RET_OK)
 		include_once(SITE_PATH_PHP_VIEW . "PageNotFound.php");
 	else
 	{

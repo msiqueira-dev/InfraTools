@@ -1,0 +1,71 @@
+*{margin:0;padding:0;}
+html,body{margin:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;margin-top:0px;padding:0px;letter-spacing:0;text-shadow:0 1px 0 rgba(255,255,255,.8);font-size:12px;border:none;}
+html,body{height:100%;background-color:#FFF;}
+img{border:0px;}
+table{border-collapse:separate;border-spacing:0;}
+textarea,label,p,select, i{font-family:sans-serif;padding:0px;letter-spacing:0px;color:#000;font-size:100%;font-weight:normal;font-style:normal;line-height:normal;}
+h1{font-family:sans-serif;font-size:16px;padding:0px;letter-spacing:0;color:#000;font-weight:bold;font-style:normal;line-height:normal;}
+h2{font-family:sans-serif;font-size:16px;padding:0px;letter-spacing:0;color:#000;font-weight:bold;font-style:normal;line-height:normal;}
+h3{font-family:sans-serif;font-size:14px;padding:0px;letter-spacing:0;color:#FFFFFF;}
+a{font-family:sans-serif;font-size:12px;padding:0px;letter-spacing:0;color:#000;}
+input{font-family:sans-serif;font-size:12px;padding:0px;letter-spacing:0;color:#000;}
+div{font-family:sans-serif;font-size:12px;padding:0px;letter-spacing:0;color:#FFFFFF;}
+span{font-family:sans-serif;font-size:12px;padding:0px;letter-spacing:0;color:#000;}
+textarea{resize:none;}
+.Wrapper {min-height:100%;height:auto !important;height:100%;margin:0 auto -50px;}
+.DivHidden{display:none;width:0px;height:0px;}
+.DivBody, .DivBodyLogin{width:100%;max-width:1000px;height:auto;margin:0 auto;background-color:#FFFFFF;}
+.DivClearFloat{width:0px;height:0px;clear:both;}
+.DivDisplayNone{display:none;}
+.DivContentBody{width:950px;min-height:200px;}
+.DivPageDebug{height:auto;position:static;top:15px;left:0;;width:100%;}
+.DivPageDebugContent{height:auto;position:static;top:0;left:0;;width:100%;color:black;}
+.DivPageDebugQuery{height:auto;position:static;top:45px;left:0;width:100%;color:black;}
+.DivPageLoadTime{height:45px;position:fixed;top:92.5%;left:83%;width:100%;color:orangered;font-size:16px;}
+.Hidden{display:none;}
+.InputBeforeText{color:#CCC;}
+.InputAfterText{color:#000000;}
+.InputAlertText{border-color:#c82100 !important;border-style:solid !important;border-width:2px !important;}
+.RequiredField{color:#F00;}
+.SubmitEnabled {background-color:#f5821f !important;}
+.SubmitEnabled:hover{background-color:#ef4e22 !important;}
+.SubmitDisabled{background-color:#cccccc !important;}
+.SubmitDisabled:hover{background-color:#cccccc !important;}
+.SwitchToggle{position:relative;display:inline-block;width:44px;height:22px;top:-18px!important;left:4px !important;}
+.SwitchToggle input{display:none;}
+.SwitchToggleSlider{width:44px;height:22px;position:relative;cursor:pointer;top:4px;left:4px;right:0;bottom:0;background-color:#cccccc;transition:.4s;}
+.SwitchToggleSlider:before{position: absolute;content:"";height:18px;width:18px;left:4px;bottom:2px;background-color:white;transition:.6s;}
+.SwitchToggleSlider:after{position: absolute;content:"";height:18px;width:18px;left:4px;bottom:2px;background-color:white;transition:.6s;}
+.SwitchToggleSlider.round{border-radius:18px;}
+.SwitchToggleSlider.round:before{border-radius:60%;}
+.SwitchToggleSlider.round:after{border-radius:60%;}
+.SwitchToggleSliderChange{background-color:#ef4e22;}
+.SwitchToggleSliderChange{box-shadow: 0 0 1px #ef4e22;}
+.SwitchToggleSliderChange:before{transform: translateX(18px);}
+.SwitchToggleSliderChange:after{transform: translateX(18px);}
+.DivTableGenericHeader{width:auto;height:auto;}
+.InputValueLimitTitle{font-weight:bold;color:orangered;font-size:14px;}
+.InputValueLimitValue{font-weight:bold;font-size:14px;}
+.DivTableGenericHeaderRowCount{width:auto;max-width:170px;height:auto;min-height:30px;min-width:90px;margin-left:17%;margin-right:20%;position:relative;float:left;}
+.DivTableGenericHeaderRowCount label{position:relative;top:7px;margin-left:5px;}
+.DivTableGenericRowCountLabelTitle{font-size:14px;color:orangered;font-weight:bold;text-align:center;}
+.DivTableGenericRowCountLabelValue{font-weight:bold;font-size:14px;text-align:center;}
+.TableGeneric{width:100%;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;}
+.TableGeneric th, .TableGeneric th div{;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
+.TableGeneric th{width:auto;height:35px;}
+.TableGeneric th div{border:none;}
+.TableGenericThDiv{width:100%;height:26px;}
+.TableGenericInputLeft{width:28px;height:28px;position:relative;float:left;}
+.TableGenericInputRight{width:28px;height:28px;position:relative;float:right;}
+.TableGenericThLeft{width:80%;position:relative;top:6px;float:left;}
+.TableGenericThRight{width:80%;position:relative;top:6px;float:right;}
+.TableGenericThArrow{width:100%;}
+.TableGenericThArrowth div{width:100%;}
+.TableGenericThArrowImage{width:28px;height:28px;}
+.TableGenericTr{height:20px;}
+.TableGeneric td{width:150px;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
+.TableGenericTdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;font-size:14px;}
+.TableGenericTdLink a .TableGenericTdLink form input, .TableGenericTdLink input{cursor:pointer;}
+.TableGenericTdLink a, .TableGenericTdLink label, .TableGenericTdLink input{position:relative;left:2px;}
+.TableTdParagraph{display:table-cell;text-align: center;}
+.TableGenericTdLinkImage {margin-left:36%;}

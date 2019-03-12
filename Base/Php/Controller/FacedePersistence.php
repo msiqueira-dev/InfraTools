@@ -2,9 +2,10 @@
 
 /************************************************************************
 Class: FacedePersistence
-Creation: 01/09/2017
+Creation: 2017/09/01
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/Corporation.php
 			Base       - Php/Model/Country.php
@@ -15,144 +16,231 @@ Dependencies:
 			Base       - Php/Model/User.php
 	
 Description: 
-			Classe used to access and deal with information of the database.
+			Class with Singleton pattern for FacedePersistence
 Functions: 
 			public function AssocTicketUserRequestingDeleteByTicketId($AssocTicketUserRequestingTicketId, $Debug, 
-			                                                          $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocTicketUserRequestingInsert($AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
 			                                                $AssocUserRequestingTicketId, $Debug, 
-															$MySqlConnection = NULL, $CloseConnectaion = FALSE);
+															$MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
 			public function AssocTicketUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocTicketUserRequesting, 
-			                                                &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                                &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocTicketUserRequestingSelectByUserEmail($Limit1, $Limit2, $AssocTicketUserRequestingUserEmail,
 			                                                          &$ArrayAssocTicketUserRequesting, &$RowCount,
-			                                                          $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                                          $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocTicketUserRequestingSelectByTicketId($AssocTicketUserRequestingTicketId,
 			                                                          &$AssocTicketUserRequesting, 
-			                                                          $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                                          $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocTicketUserRequestingUpdateByTicketId($AssocTicketUserRequestingUserBond,
 			                                                          $AssocTicketUserRequestingUserEmail, 
 			                                                          $AssocUserRequestingTicketId, $Debug, 
-																	  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function AssocUserCorporationDelete($CorporationName, $Email, $Debug,
-			                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, $Debug,
-			                                           $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug, 
-										        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function CorporationDelete($Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function CorporationInsert($CorporationActive, $Name, $Debug, 
-			                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+																	  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $UserEmail, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+			                                                                        $AssocUserCorporationRegistrationDateNew, 
+			                                                                        $AssocUserCorporationRegistrationIdNew, 
+																					$CorporationName, $UserEmail, $Debug
+																					$MySqlConnection = NULL, $CloseConnectaion = TRUE,
+																					$Commit = TRUE);
+			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, $Debug, 
+										        $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function CorporationDelete($CorporationName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function CorporationInsert($CorporationActive, $CorporationName, $Debug, 
+			                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
 			public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
-			                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug,
-			                                               $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                               $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function CorporationSelectByName($CorporationName, &$CorporationInstance, $Debug,
-			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug,
-			                                         $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug,
-			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug,
+			                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug,
-			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug,
-			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
 			public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug,
-			                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, 
-			                                              &$ArrayInstanceDepartment, &$RowCount, $Debug,
-														  $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
-			                                                    $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
+			                                                  &$ArrayInstanceDepartment, &$RowCount, $Debug,
+														      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
+			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug,
-			                                                 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
 			                                                                   &$DepartmentInstance, $Debug,
-																			   $MySqlConnection = NULL, $CloseConnectaion = FALSE);
+																			   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug,
-			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName,$DepartmentInitaisl,
+			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
 			                                                                     $DepartmentNameNew, $DepartmentNameOld, $Debug,
-																				 $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew,
-																				  $CorporationNameOld, $Debug,
+																				 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, $CorporationNameOld,
+																				  $DepartmentName, $Debug,
 																				  $MySqlConnection = NULL, 
-																				  $CloseConnectaion = FALSE);
-			public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug);
-			public function TeamDeleteByTeamDescription($TeamDescription, $Debug)
-			public function TeamDeleteByTeamId($TeamId, $Debug)
-			public function TeamInsert($TeamDescription, $TeamName, $Debug);
-			public function TeamSelect($Limit1, $Limit2, &A$rrayInstanceTeam, &$RowCount, $Debug);
-			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug);
-			public function TeamSelectByTeamName($TeamName, &$TeamInstance, $Debug);
-			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug);
-			public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug,
-			                                       $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug, 
-			                                        $MySqlConnection = NULL, $CloseConnectaion = FALSE);
-			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug);
-			public function TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeam, &$TypeAssocUserTeam, $Debug);
-			public function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$TypeAssocUserTeam, $Debug);
-			public function TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId, $Debug);
-			public function TypeServiceDelete($TypeServiceName, $Debug);
-			public function TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug);
-			public function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceTypeService, &$RowCount, $Debug);
-			public function TypeServiceSelectNoLimit(&$ArrayInstanceTypeService, $Debug);
-			public function TypeServiceSelectByName($TypeServiceName, &$TypeService, $Debug);
-			public function TypeServiceSelectBySLA($TypeServiceSLA, &$TypeService, $Debug);
-			public function TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug);
-			public function TypeStatusTicketDelete($TypeStatusTicketId, $Debug);
-			public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug);
-			public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayTypeStatusTicket, &$RowCount, $Debug);
-			public function TypeStatusTicketSelectByDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug);
-			public function TypeStatusTicketSelectById($TypeStatusTicketId, &$TypeStatusTicket, $Debug);
-			public function TypeStatusTicketUpdateById($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug);
-			public function TypeTicketDelete($TypeTicketId, $Debug);
-			public function TypeTicketInsert($TypeTicketDescription, $Debug);
-			public function TypeTicketSelect($Limit1, $Limit2, &$ArrayTypeTicket, &$RowCount, $Debug);
-			public function TypeTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug);
-			public function TypeTicketSelectById($TypeTicketId, &$TypeTicket, $Debug);
-			public function TypeTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug);
-			public function TypeUserDelete($Id, $Debug);
-			public function TypeUserInsert($Description, $Debug);
-			public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
-			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
-			public function TypeUserSelectByDescription($Description, &$TypeUser, $Debug);
-			public function TypeUserSelectById($Id, &$TypeUser, $Debug);
-			public function TypeUserUpdateById($Id, $Description, $Debug);
-			public function UserCheckEmail($Email, $Debug);
-			public function UserCheckPasswordByEmail($Email, $Password, $Debug);
-			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
-			public function UserDelete($Email, $Debug);
-			public function UserInsert($BirthDate, $Corporation, $Country, $Department, $Email, $Gender, $HashCode, 
-			                           $Name, $Password, $Region, $SessionExpires, $TwoStepVerification, 
-									   $UserActive, $UserConfirmed, $UserType, $UserUniqueId $Debug);
-			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByEmail($Email, &$InstanceUser, $Debug);
-			public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
-			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug);
-			public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug);
-			public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug);
-			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug);
-			public function UserUpdateActiveByEmail($Email, $UserActive, $Debug);
-			public function UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		        $Email, $Debug);
-			public function UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, $RegistrationDate, 
-																		                        $Email, $Debug);
-			public function UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, $RegistrationId, 
-																		                        $Email, $Debug);
-			public function UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									          $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
-			public function UserUpdateConfirmedByHash($HashCode, $Debug);
-			public function UserUpdateCorporationByEmail($Corporation, $Email, $Debug);
-			public function UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug);
-			public function UserUpdatePasswordByEmail($Email, $Password, $Debug);
-			public function UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug);
-			public function UserUpdateUserTypeByEmail($Email, $TypeId, $Debug);
-			public function UserUpdateUniqueIdByEmail($Email, $UniqueId, $Debug);
+																				  $CloseConnectaion = TRUE);
+			public function NotificationDeleteByNotificationId($NotificationId, $Debug,$MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationInsert($NotificationActive, $NotificationText, $Debug, 
+			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug,
+			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug,
+			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, &$InstanceNotification, $Debug,
+			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+													  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
+													  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+			                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+																					 &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+																					 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+																					   &$InstanceSystemConfiguration, $Debug,
+																					   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, 
+			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+																					   $SystemConfigurationOptionDescriptionNew,
+																					   $SystemConfigurationOptionNameNew,
+																					   $SystemConfigurationOptionValueNew,
+																					   $SystemConfigurationOptionNumber, $Debug,
+																					   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamDeleteByTeamDescription($TeamDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamDeleteByTeamId($TeamId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE,
+			                           $Commit = TRUE);
+			public function TeamSelect($Limit1, $Limit2, &A$rrayInstanceTeam, &$RowCount, $Debug,
+			                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug, 
+			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TicketDeleteByTicketId($TicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+		    public function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
+		                                 $TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug, 
+			                             $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+		    public function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug,
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug,
+			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew,
+										           $TypeStatusTicketDescriptionNew, $TypeTicketDescriptionNew, &$InstanceTicket, 
+										           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+		    public function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug,
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+		    public function TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, &$InstanceTicket, $Debug,
+			                                                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, $Debug,
+			                                                                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug, 
+			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug,
+			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam,
+			                                                                      $Debug,
+			                                                                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescriptionNew,
+			                                                                      $TypeAssocUserTeamDescription, $Debug,
+			                                                                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeStatusTicketDeleteByTypeStatusTicketDescription($TypeStatusTicketDescription, $Debug, 
+			                                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, $MySqlConnection = NULL, 
+			                                       $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function TypeStatusTicketSelect($Limit1, $Limit2, &ArrayInstanceTypeStatusTicket, &$RowCount, $Debug,
+			                                       $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug,
+			                                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription,
+			                                                                    $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug,
+			                                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE,
+			                                 $Commit = TRUE);
+			public function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug,
+			                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug,
+			                                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, $TypeTicketDescription, $Debug,
+			                                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeUserDeleteByTypeUserDescription($TypeUserDescription, $Debug, $MySqlConnection = NULL, 
+			                                                    $CloseConnectaion = TRUE);
+			public function TypeUserInsert($Description, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug,
+			                               $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug,
+			                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug,
+			                                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescriptionNew, $Debug, 
+			                                                    $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, 
+			                                                $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserInsert($BirthDate, $Corporation, $Country, $Department, $UserEmail, $Gender, $HashCode, 
+			                           $UserName, $Password, $Region, $SessionExpires, $TwoStepVerification, 
+									   $UserActive, $UserConfirmed, $UserType, $UserUniqueId, $Debug,
+									   $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
+			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, 
+			                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
+			                                            $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, 
+			                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount,
+			                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, 
+			                                     $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug,
+			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug,
+			                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
+																     &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceUser, &$RowCount, $Debug,
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			                                                &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectNotificationByUserEmail(&$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
+									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug,
+												  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, 
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateCorporationByUserEmail($Corporation, $UserEmail, $Debug);
+			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $UserEmail, $Debug,
+			                                                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug,
+			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection = NULL, 
+			                                              $CloseConnectaion = TRUE);
+			public function UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -203,7 +291,7 @@ class FacedePersistence
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -219,85 +307,98 @@ class FacedePersistence
     }
 	
 	public function AssocTicketUserRequestingDeleteByTicketId($AssocTicketUserRequestingTicketId, $Debug, 
-			                                                  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+			                                                  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocTicketUserRequesting = 
-			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingDeleteByTicketId(
-			                                                                                $AssocUserServiceServiceId,
-																							$AssocUserServiceUserEmail,
-			                                                                                $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
+								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingDeleteByTicketId(
+																								$AssocUserServiceServiceId,
+																								$AssocUserServiceUserEmail,
+																								$Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
 		return $return;
 	}
 	
 	public function AssocTicketUserRequestingInsert($AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
 													$AssocUserRequestingTicketId, $Debug, 
-													$MySqlConnection = NULL, $CloseConnectaion = FALSE)
+													$MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$IFacedePersistenceAssocTicketUserRequesting = 
-			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-		$return = $IFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingInsert(
-			                                                                                $AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
-													                                        $AssocUserRequestingTicketId, 
-			                                                                                $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
+								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingInsert(
+																								$AssocTicketUserRequestingUserBond, $AssocTicketUserRequestingUserEmail,
+																								$AssocUserRequestingTicketId, 
+																								$Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
 		return $return;
 	}
 	
 	public function AssocTicketUserRequestingSelect($Limit1, $Limit2, &$ArrayAssocTicketUserRequesting, 
-													&$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+													&$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$IFacedePersistenceAssocTicketUserRequesting = 
-			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-		$return = $IFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelect(
-			                                                                                $Limit1, $Limit2, $ArrayAssocTicketUserRequesting, 
-			                                                                                $RowCount, $Debug, 
-			                                                                                $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
+								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelect(
+																								$Limit1, $Limit2, $ArrayAssocTicketUserRequesting, 
+																								$RowCount, $Debug, 
+																								$Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
 		return $return;
 	}
 	
 	public function AssocTicketUserRequestingSelectByUserEmail($Limit1, $Limit2, $AssocTicketUserRequestingUserEmail,
 															  &$ArrayAssocTicketUserRequesting, &$RowCount,
-															  $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+															  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocTicketUserRequesting = 
-			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByUserEmail(
-			                                                                                $Limit1, $Limit2,
-			                                                                                $AssocTicketUserRequestingUserEmail,
-			                                                                                $ArrayAssocTicketUserRequesting, 
-			                                                                                $RowCount, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
+								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByUserEmail(
+																								$Limit1, $Limit2,
+																								$AssocTicketUserRequestingUserEmail,
+																								$ArrayAssocTicketUserRequesting, 
+																								$RowCount, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
 		return $return;	
 	}
 	
 	public function AssocTicketUserRequestingSelectByTicketId($AssocTicketUserRequestingTicketId,
 															  &$AssocTicketUserRequesting, $Debug, 
-															  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+															  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocTicketUserRequesting = 
-			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByTicketId(
-			                                                                                $AssocTicketUserRequestingTicketId,
-			                                                                                $AssocTicketUserRequesting, 
-			                                                                                $RowCount, $Debug, 
-			                                                                                $MySqlConnection);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
+								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingSelectByTicketId(
+																								$AssocTicketUserRequestingTicketId,
+																								$AssocTicketUserRequesting, 
+																								$RowCount, $Debug, 
+																								$MySqlConnection);
+		}
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		return $return;	
@@ -306,169 +407,206 @@ class FacedePersistence
 	public function AssocTicketUserRequestingUpdateByTicketId($AssocTicketUserRequestingUserBond,
 															  $AssocTicketUserRequestingUserEmail, 
 															  $AssocUserRequestingTicketId, $Debug, 
-															  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+															  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocTicketUserRequesting = 
-			                 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
-		$return = $FacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingUpdateByTicketId(
-			                                                                                $AssocTicketUserRequestingUserBond,
-			                                                                                $AssocTicketUserRequestingUserEmail, 
-			                                                                                $AssocUserRequestingTicketId, 
-			                                                                                $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		return $return;	
-	}
-	
-	public function AssocUserCorporationDelete($CorporationName, $Email, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
-	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-		$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationDelete($CorporationName, $Email, 
-																				  $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		return $return;	
-	}
-	
-	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, $Debug,
-											   $MySqlConnection = NULL, $CloseConnectaion = FALSE)
-	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
-		$return = $FacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
-																		          $RegistrationId, $Email, $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		return $return;	
-	}
-	
-	public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
-	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
-		$return = $FacedePersistenceAssocUserTeam->AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		return $return;	
-	}
-	
-	public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, $Debug, 
-										$MySqlConnection = NULL, $CloseConnectaion = FALSE)
-	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		$FacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
-		$return = $FacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeam, $UserEmail, 
-		     														   $Debug, $MySqlConnection);
-		if($CloseConnectaion)
-			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
-		return $return;	
-	}
-	
-	public function CorporationDelete($Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
-	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
-			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-			$return = $instanceFacedePersistenceCorporation->CorporationDelete($Name, $Debug, $MySqlConnection);
+			$instanceFacedePersistenceAssocTicketUserRequesting = 
+								 $this->Factory->CreateFacedePersistenceAssocTicketUserRequesting();
+			$return = $instanceFacedePersistenceAssocTicketUserRequesting->AssocTicketUserRequestingUpdateByTicketId(
+																								$AssocTicketUserRequestingUserBond,
+																								$AssocTicketUserRequestingUserEmail, 
+																								$AssocUserRequestingTicketId, 
+																								$Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
+			$return = $instanceFacedePersistenceAssocUserCorporation->AssocUserCorporationDelete($CorporationName, $UserEmail, 
+																					             $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
+	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $UserEmail, $Debug,
+											   $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
+			$return = $instanceFacedePersistenceAssocUserCorporation->AssocUserCorporationInsert($CorporationName, $RegistrationDate, 
+																						 $RegistrationId, $UserEmail, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
+	public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+																			$AssocUserCorporationRegistrationDateNew,
+																			$AssocUserCorporationRegistrationIdNew, 
+																			$CorporationName, $UserEmail, $Debug,
+																			$MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocUserCorporation = $this->Factory->CreateFacedePersistenceAssocUserCorporation();
+			$return = $instanceFacedePersistenceAssocUserCorporation->AssocUserCorporationUpdateByUserEmailAndCorporationName(
+			                                                                            $AssocUserCorporationDepartmentNameNew,
+																						$AssocUserCorporationRegistrationDateNew,
+																						$AssocUserCorporationRegistrationIdNew, 
+																						$CorporationName, $UserEmail, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
+			$return = $instanceFacedePersistenceAssocUserTeam->AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+			return $return;	
+		}
+	}
+	
+	public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, $Debug, 
+										$MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocUserTeam = $this->Factory->CreateFacedePersistenceAssocUserTeam();
+			$return = $instanceFacedePersistenceAssocUserTeam->AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, 
+																		           $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
+	public function CorporationDelete($CorporationName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
-			$return = $instanceFacedePersistenceCorporation->CorporationInsert($CorporationActive, $Name, $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceCorporation->CorporationDelete($CorporationName, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
+	public function CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection = NULL, 
+									  $CloseConnectaion = TRUE, $Commit = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
+			$return = $instanceFacedePersistenceCorporation->CorporationInsert($CorporationActive, $CorporationName, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
-									  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+									  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporation,
 																			   $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug,
-											$MySqlConnection = NULL, $CloseConnectaion = FALSE)
+											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationSelectActive($Limit1, $Limit2, 
 																		             $ArrayInstanceCorporation, $RowCount,
 																		             $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug,
-												   $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+												   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, $Debug,
 																			                $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function CorporationSelectByName($CorporationName, &$CorporationInstance, $Debug, 
-											$MySqlConnection = NULL, $CloseConnectaion = FALSE)
+											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationSelectByName($CorporationName, $CorporationInstance, 
 																		             $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationSelectNoLimit($ArrayInstanceCorporation, $Debug,
@@ -480,127 +618,138 @@ class FacedePersistence
 	}
 	
 	public function CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, $Debug,
-											$MySqlConnection = NULL, $CloseConnectaion = FALSE)
+											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceCorporation = $this->Factory->CreateFacedePersistenceCorporation();
 			$return = $instanceFacedePersistenceCorporation->CorporationUpdateByName($CorporationActive, $NameNew, $NameOld, 
 			  															     $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		if($CloseConnectaion)
 			$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		return $return;	
 	}
 	
-	public function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug, 
-									 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, 
+								  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceCountry = $this->Factory->CreateFacedePersistenceCountry();
+			$return = $instanceFacedePersistenceCountry->CountrySelect($Limit1, $Limit2, $ArrayInstanceCountry, $RowCount, 
+																	   $Debug, $MySqlConnection);
+		
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+	
+	public function DepartmentDelete($DepartmentCorporationName, $DepartmentName, $Debug, 
+									 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentDelete($DepartmentCorporationName, $DepartmentName, 
 																             $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, $Debug,
-									 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+									 $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentInsert($CorporationName, $DepartmentInitials, $DepartmentName, 
 															                 $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	public function DepartmentSelect($Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount, $Debug,
-									 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+									 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentSelect($Limit1, $Limit2, $ArrayInstanceDepartment, 
 																			 $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName, &$ArrayInstanceDepartment, &$RowCount, $Debug,
-												  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceDepartment, &$RowCount,
+													  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporation($Limit1, $Limit2, $CorporationName,
-		    																              $ArrayInstanceDepartment, $RowCount, 
-																				          $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2,
+		    																                  $ArrayInstanceDepartment, $RowCount, 
+																				              $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function DepartmentSelectByCorporationNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
-														 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
+														     $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporationNoLimit($CorporationName, 
-			   																		             $ArrayInstanceDepartment, 
-																					             $Debug, $MySqlConnection);
+			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByCorporationNameNoLimit($CorporationName, 
+			   																		                 $ArrayInstanceDepartment, 
+																					                 $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug,
-													 $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+													 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByDepartmentName($DepartmentName, 
 																					         $ArrayInstanceDepartment, 
 																					         $Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
 	public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, &$DepartmentInstance,
-																	   $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+																	   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByDepartmentNameAndCorporationName($CorporationName,
@@ -609,486 +758,1287 @@ class FacedePersistence
 																									           $Debug,
 																											   $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentSelectNoLimit($ArrayInstanceDepartment, $Debug,
 																					$MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitials, $DepartmentNameNew, 
-																		 $DepartmentNameOld, $Debug, $MySqlConnection = NULL,
-																		 $CloseConnectaion = FALSE)
+	public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
+																		 $DepartmentNameNew, $DepartmentNameOld, $Debug, 
+																		 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName,
-																								         $DepartmentInitials,
+																								         $DepartmentInitialsNew,
 																								         $DepartmentNameNew, 
 																										 $DepartmentNameOld, 
 																		                                 $Debug,
 																								         $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName, $CorporationNameNew, 
-																		  $CorporationNameOld, $Debug,
-																		  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, $CorporationNameOld, 
+																		  $DepartmentName, $Debug,
+																		  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
-			$return = $instanceFacedePersistenceDepartment->DepartmentUpdateCorporationByCorporationAndDepartment($DepartmentName,
+			$return = $instanceFacedePersistenceDepartment->DepartmentUpdateCorporationByCorporationAndDepartment(
 																											$CorporationNameNew,
 																								            $CorporationNameOld,
+				                                                                                            $DepartmentName,
 																								            $Debug,
 																										    $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayCountry, &$RowCount, $Debug, 
-								  $MySqlConnection = NULL, $CloseConnectaion = FALSE)
+	public function NotificationDeleteByNotificationId($NotificationId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		if($MySqlConnection == NULL)
-			$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
-		if($return == Config::SUCCESS)
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
 		{
-			$instanceFacedePersistenceCountry = $this->Factory->CreateFacedePersistenceCountry();
-			$return = $instanceFacedePersistenceCountry->CountrySelect($Limit1, $Limit2, $ArrayCountry, $RowCount, 
-																	   $Debug, $MySqlConnection);
-		
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationDeleteByNotificationId($NotificationId,$Debug, $MySqlConnection);
 			if($CloseConnectaion)
-				$return = $this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;	
 	}
 	
-	public function TeamDeleteByTeamDescription($TeamDescription, $Debug)
+	public function NotificationInsert($NotificationActive, $NotificationText, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamDeleteByTeamDescription($TeamDescription, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationInsert($NotificationActive, $NotificationText,
+																				 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;		
 	}
 	
-	public function TeamDeleteByTeamId($TeamId, $Debug)
+	public function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug, 
+									   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamDeleteByTeamId($TeamId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationSelect($Limit1, $Limit2, $ArrayInstanceNotification, $RowCount,
+																				 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
 	}
 	
-	public function TeamInsert($TeamName, $TeamDescription, $Debug)
+	public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug, 
+													   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamInsert($TeamName, $TeamDescription, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationSelectByNotificationId($NotificationId,
+																								 $InstanceNotification,
+																				                 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug)
+	public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew,
+													   &$InstanceNotification, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamSelect($Limit1, $Limit2, $ArrayInstanceTeam, $RowCount, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
+			$return = $instanceFacedePersistenceNotification->NotificationUpdateByNotificationId($NotificationActiveNew,
+																								 $NotificationTextNew,
+																								 $InstanceNotification,
+																				                 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug)
-	{	
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamSelectByTeamId($TeamId, $TeamInstance, $Debug);
+	public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
+			                                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationDeleteBySystemConfigurationOptionNumber(
+				                                                                            $SystemConfigurationOptionNumber, 
+				                                                                            $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TeamSelectByTeamName($TeamName, &$TeamInstance, $Debug)
+	public function SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+											  $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug,
+											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamSelectByTeamName($TeamName, $TeamInstance, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationInsert(
+				                                                                            $SystemConfigurationOptionActive,
+				                                                                            $SystemConfigurationOptionDescription,
+				                                                                            $SystemConfigurationOptionName, 
+				                                                                            $SystemConfigurationOptionValue, 
+				                                                                            $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug)
+	public function SystemConfigurationSelect($Limit1, $Limit2, &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
-		return $FacedePersistenceTeam->TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelect($Limit1, $Limit2,
+				                                                                               $ArrayInstanceSystemConfiguration,
+				                                                                               $RowCount, 
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug)
+	public function SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2, $SystemConfigurationOptionName, 
+																			 &$ArrayInstanceSystemConfiguration, &$RowCount, $Debug,
+																			 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamDelete($TypeAssocUserTeamTeamId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelectBySystemConfigurationOptionName($Limit1, $Limit2,
+				                                                                               $SystemConfigurationOptionName,
+				                                                                               $ArrayInstanceSystemConfiguration,
+				                                                                               $RowCount, 
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug)
+	public function SystemConfigurationSelectBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, 
+																			   &$InstanceSystemConfiguration, $Debug,
+																			   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamInsert($TypeAssocUserTeamTeamDescription, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelectBySystemConfigurationOptionNumber(
+				                                                                               $SystemConfigurationOptionNumber,
+				                                                                               $InstanceSystemConfiguration,
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayTypeAssocUserTeam, &$RowCount, $Debug)
+	public function SystemConfigurationSelectNoLimit(&$ArrayInstanceSystemConfiguration, $Debug, 
+													 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamSelect($Limit1, $Limit2, $ArrayTypeAssocUserTeam, 
-																		    $RowCount, $Debug);	
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationSelectNoLimit($ArrayInstanceSystemConfiguration,
+				                                                                                      $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeamDescritpion, &$TypeAssocUserTeam, $Debug)
+	public function SystemConfigurationUpdateBySystemConfigurationOptionNumber($SystemConfigurationOptionActiveNew,
+																			   $SystemConfigurationOptionDescriptionNew,
+																			   $SystemConfigurationOptionNameNew,
+																			   $SystemConfigurationOptionValueNew,
+																			   $SystemConfigurationOptionNumber, $Debug,
+																			   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamSelectByTeamDescription($TypeAssocUserTeamTeamDescription,
-																					     $TypeAssocUserTeam, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceSystemConfiguration = $this->Factory->CreateFacedePersistenceSystemConfiguration();
+			$return = $instanceFacedePersistenceSystemConfiguration->SystemConfigurationUpdateBySystemConfigurationOptionNumber(
+				                                                                               $SystemConfigurationOptionActiveNew,
+																			                   $SystemConfigurationOptionDescriptionNew,
+																			                   $SystemConfigurationOptionNameNew,
+ 																			                   $SystemConfigurationOptionValueNew,
+				                                                                               $SystemConfigurationOptionNumber,
+				                                                                               $Debug, 
+				                                                                               $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, &$TypeAssocUserTeam, $Debug)
+	public function TeamDeleteByTeamDescription($TeamDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamSelectByTeamId($TypeAssocUserTeamTeamId, $TypeAssocUserTeam,
-																					$Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamDeleteByTeamDescription($TeamDescription, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
 	}
 	
-	public function TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId, $Debug)
+	public function TeamDeleteByTeamId($TeamId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
-		return $FacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamUpdateByTeamId($TypeAssocUserTeamTeamDescription, 
-																			        $TypeAssocUserTeamTeamId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamDeleteByTeamId($TeamId, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeServiceDelete($TypeServiceName, $Debug)
+	public function TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
-		$FacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-		return $FacedePersistenceTypeService->TypeServiceDelete($TypeServiceName, $Debug);
-	}
-	public function TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug)
-	{
-		$FacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-		return $FacedePersistenceTypeService->TypeServiceInsert($TypServiceName, $TypeServiceSLA, $Debug);
-	}
-	
-	public function TypeServiceSelectNoLimit(&$ArrayInstanceTypeService, $Debug)
-	{
-		$FacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-		return $FacedePersistenceTypeService->TypeServiceSelectNoLimit($ArrayInstanceTypeService, $Debug);
-	}
-	
-	public function TypeServiceSelectByName($TypeServiceName, &$TypeService, $Debug)
-	{
-		$FacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-		return $FacedePersistenceTypeService->TypeServiceSelectByName($TypeServiceName, $TypeService, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamInsert($TeamDescription, $TeamName, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeServiceSelectBySLA($TypeServiceSLA, &$TypeService, $Debug)
+	public function TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-		return $FacedePersistenceTypeService->TypeServiceSelectBySLA($TypeServiceSLA, $TypeService, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamSelect($Limit1, $Limit2, $ArrayInstanceTeam, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug)
+	public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeService = $this->Factory->CreateFacedePersistenceTypeService();
-		return $FacedePersistenceTypeService->TypeServiceUpdateByName($TypeServiceName, $TypeServiceSLA, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamSelectByTeamId($TeamId, $TeamInstance, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeStatusTicketDelete($TypeStatusTicketId, $Debug)
+	public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketDelete($TypeStatusTicketId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamSelectByTeamName($TeamName, $ArrayInstanceTeam, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug)
+	public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug);
-	}
-	public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayTypeStatusTicket, &$RowCount, $Debug)
-	{
-		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelect($Limit1, $Limit2, $ArrayTypeStatusTicket, 
-																		  $RowCount, $Debug);
-	}
-	
-	public function TypeStatusTicketSelectByDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug)
-	{
-		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByDescription($TypeStatusTicketDescription,
-																					   $TypeStatusTicket, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeStatusTicketSelectById($TypeStatusTicketId, &$TypeStatusTicket, $Debug)
-	{	
-		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketSelectById($TypeStatusTicketId, $TypeStatusTicket, $Debug);
+	public function TicketDeleteByTicketId($TicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketDeleteByTicketId($TicketId, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	public function TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
+		                         $TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle,
+																     $TypeStatusTicketDescription, $TypeTicketDescription, 
+																	 $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	public function TicketSelect($Limit1, $Limit2, &$ArrayInstanceTicket, &$RowCount, $Debug, 
+			                     $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketSelect($Limit1, $Limit2, $ArrayInstanceTicket, $RowCount, 
+																	 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeStatusTicketUpdateById($TypeStatusTicketDescription, $TypeStatusTicketId, $Debug)
+	public function TicketSelectByTicketId($TicketId, &$InstanceTicket, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
-		return $FacedePersistenceTypeStatusTicket->TypeStatusTicketUpdateById($TypeStatusTicketDescription, 
-																			  $TypeStatusTicketId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketSelectByTicketId($TicketId, $InstanceTicket, 
+																			   $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	public function TicketSelectByRequestingUserEmail($RequestingUserEmail, &$InstanceTicket, $Debug,
+			                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketSelectByRequestingUserEmail($RequestingUserEmail, $InstanceTicket, 
+																			              $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	public function TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, &$InstanceTicket, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketSelectByResponsibleUserEmail($ResponsibleUserEmail, $InstanceTicket, 
+																			               $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TicketUpdateByTicketId($TicketDescriptionNew, $TicketSuggestionNew, $TicketTitleNew,
+										   $TypeStatusTicketDescriptionNew, $TypeTicketDescriptionNew, &$InstanceTicket, 
+										   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketUpdateByTicketId($TicketDescriptionNew, $TicketStatusNew, 
+																			   $TicketSuggestionNew, $TicketTitleNew, 
+																			   $TicketTypeNew, $InstanceTicket,
+																			   $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TicketUpdateTicketStatusByTicketId($TicketStatusNew, &$InstanceTicket, $Debug,
+			                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketUpdateTicketStatusByTicketId($TicketStatusNew, $InstanceTicket,
+																			               $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, &$InstanceTicket, $Debug)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTicket = $this->Factory->CreateFacedePersistenceTicket();
+			$return = $instanceFacedePersistenceTicket->TicketUpdateResponsibleUserByTicketId($ResponsibleUserEmailNew, $InstanceTicket,
+																			                  $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, $Debug, 
+																		  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
+			$return = $instanceFacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamDeleteByTypeAssocUserTeamDescription(
+				                                                                             $TypeAssocUserTeamDescription, $Debug, 
+																							 $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
+			$return = $instanceFacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamInsert($TypeAssocUserTeamDescription, $Debug,
+																						   $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeAssocUserTeamSelect($Limit1, $Limit2, &$ArrayInstanceTypeAssocUserTeam, &$RowCount, $Debug, 
+											$MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
+			$return = $instanceFacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamSelect($Limit1, $Limit2, $ArrayInstanceTypeAssocUserTeam, 
+																		                   $RowCount, $Debug, $MySqlConnection);	
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeAssocUserTeamSelectByTypeAssocUserTeamDescription($TypeAssocUserTeamDescription, &$InstanceTypeAssocUserTeam, $Debug,
+															              $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
+			$return = $instanceFacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamSelectByTypeAssocUserTeamDescription(
+				                                                                                          $TypeAssocUserTeamDescription,
+																					                      $InstanceTypeAssocUserTeam, $Debug,
+																										  $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription($TypeAssocUserTeamDescriptionNew,
+																		  $TypeAssocUserTeamDescription, $Debug,
+												                          $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeAssocUserTeam = $this->Factory->CreateFacedePersistenceTypeAssocUserTeam();
+			$return = $instanceFacedePersistenceTypeAssocUserTeam->TypeAssocUserTeamUpdateByTypeAssocUserTeamDescription(
+				                                                                                   $TypeAssocUserTeamDescriptionNew, 
+																			                       $TypeAssocUserTeamDescription, $Debug,
+																								   $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeStatusTicketDeleteByTypeStatusTicketDescription($TypeStatusTicketDescription, $Debug,
+															            $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
+			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketDeleteByTypeStatusTicketDescription(
+				                                                                                        $TypeStatusTicketDescription, 
+				                                                                                        $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug,
+										  $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
+			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketInsert($TypeStatusTicketDescription, $Debug, 
+																						 $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	public function TypeStatusTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeStatusTicket, &$RowCount, $Debug,
+										   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
+			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeStatusTicket, 
+																		                 $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeStatusTicketSelectByTypeStatusTicketDescription($TypeStatusTicketDescription, &$TypeStatusTicket, $Debug,
+																	    $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
+			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketSelectByTypeStatusTicketDescription(
+				                                                                                              $TypeStatusTicketDescription,
+																					                          $TypeStatusTicket, $Debug,
+																											  $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TypeStatusTicketUpdateByTypeStatusTicketDescription($TypeStatusTicketDescriptionNew, $TypeStatusTicketDescription, $Debug,
+															            $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeStatusTicket = $this->Factory->CreateFacedePersistenceTypeStatusTicket();
+			$return = $instanceFacedePersistenceTypeStatusTicket->TypeStatusTicketUpdateByTypeStatusTicketDescription(
+				                                                                                             $TypeStatusTicketDescriptionNew,
+				                                                                                             $TypeStatusTicketDescription, 
+																			                                 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 
-	public function TypeTicketDelete($TypeTicketId, $Debug)
+	public function TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-		return $FacedePersistenceTypeTicket->TypeTicketDelete($TypeTicketId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketDeleteByTypeTicketDescription($TypeTicketDescription, 
+																									$Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeTicketInsert($TypeTicketDescription, $Debug)
+	public function TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
-		$FacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-		return $FacedePersistenceTypeTicket->TypeTicketInsert($TypeTicketDescription, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketInsert($TypeTicketDescription, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeTicketSelect($Limit1, $Limit2, &$ArrayTypeTicket, &$RowCount, $Debug)
+	public function TypeTicketSelect($Limit1, $Limit2, &$ArrayInstanceTypeTicket, &$RowCount, $Debug, 
+									 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-		return $FacedePersistenceTypeTicket->TypeTicketSelect($Limit1, $Limit2, $ArrayTypeTicket, $RowCount, $Debug);
-	}
-	public function TypeTicketSelectByDescription($TypeTicketDescription, &$TypeTicket, $Debug)
-	{
-		$FacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-		return $FacedePersistenceTypeTicket->TypeTicketSelectByDescription($TypeTicketDescription, $TypeTicket, $Debug);
-	}
-	public function TypeTicketSelectById($TypeTicketId, &$TypeTicket, $Debug)
-	{
-		$FacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-		return $FacedePersistenceTypeTicket->TypeTicketSelectById($TypeTicketId, $TypeTicket, $Debug);
-	}
-	
-	public function TypeTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug)
-	{
-		$FacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
-		return $FacedePersistenceTypeTicket->TypeTicketUpdateById($TypeTicketDescription, $TypeTicketId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketSelect($Limit1, $Limit2, $ArrayInstanceTypeTicket, $RowCount, 
+																			 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserDelete($Id, $Debug)
+	public function TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, &$TypeTicket, $Debug, 
+												            $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserDelete($Id, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketSelectByTypeTicketDescription($TypeTicketDescription, $TypeTicket, 
+																						            $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserInsert($Description, $Debug)
+	public function TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew, $TypeTicketDescription, $Debug, 
+															$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserInsert($Description, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeTicket = $this->Factory->CreateFacedePersistenceTypeTicket();
+			$return = $instanceFacedePersistenceTypeTicket->TypeTicketUpdateByTypeTicketDescription($TypeTicketDescriptionNew,	
+																									$TypeTicketDescription,
+																									$Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug)
+	public function TypeUserDeleteByTypeUserDescription($TypeUserDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserSelect($Limit1, $Limit2, $ArrayInstanceTypeUser, $RowCount, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			return $instanceFacedePersistenceTypeUser->TypeUserDeleteByTypeUserDescription($TypeUserDescription, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug)
+	public function TypeUserInsert($Description, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserSelectNoLimit($ArrayInstanceTypeUser, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			$return = $instanceFacedePersistenceTypeUser->TypeUserInsert($Description, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserSelectByDescription($Description, &$TypeUser, $Debug)
+	public function TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug, 
+								   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserSelectByDescription($Description, $TypeUser, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			$return = $instanceFacedePersistenceTypeUser->TypeUserSelect($Limit1, $Limit2, $ArrayInstanceTypeUser, $RowCount, $Debug, 
+																		 $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserSelectById($Id, &$TypeUser, $Debug)
+	public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserSelectById($Id, $TypeUser, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			$return = $instanceFacedePersistenceTypeUser->TypeUserSelectNoLimit($ArrayInstanceTypeUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function TypeUserUpdateById($Id, $Description, $Debug)
+	public function TypeUserSelectByTypeUserDescription($Description, &$InstanceTypeUser, $Debug, $MySqlConnection = NULL, 
+														$CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceTypeUser();
-		return $FacedePersistenceUser->TypeUserUpdateById($Id, $Description, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			$return = $instanceFacedePersistenceTypeUser->TypeUserSelectByTypeUserDescription($Description, $InstanceTypeUser, $Debug, 
+																							  $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserCheckEmail($Email, $Debug)
+	public function TypeUserSelectByTypeUserDescriptionLike($Description, &$ArrayInstanceTypeUser, $Debug, 
+															$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserCheckEmail($Email, $Debug);
-		
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			$return = $instanceFacedePersistenceTypeUser->TypeUserSelectByTypeUserDescriptionLike($Description, $ArrayInstanceTypeUser, $Debug, 
+																							      $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserCheckPasswordByEmail($Email, $Password, $Debug)
+	public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, $Debug, 
+														$MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserCheckPasswordByEmail($Email, $Password, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTypeUser = $this->Factory->CreateFacedePersistenceTypeUser();
+			$return = $instanceFacedePersistenceTypeUser->TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, 
+																					          $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug)
+	public function UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserDelete($Email, $Debug)
+	public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserDelete($Email, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserInsert($BirthDate, $Corporation, $Country, $Email, $Gender, $HashCode, $Name, $Password, 
+	public function UserDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $Gender, $HashCode, $UserName, $Password, 
 							   $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
 							   $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
-							   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug)
+							   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE,
+							   $Commit = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserInsert($BirthDate, $Corporation, $Country, 
-												  $Email, $Gender, $HashCode, $Name, $Password, 
-							                      $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
-												  $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
-												  $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserInsert($BirthDate, $Corporation, $Country, 
+												                 $UserEmail, $Gender, $HashCode, $UserName, $Password, 
+							                                     $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
+												                 $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix,
+																 $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
+																 $UserType, $UserUniqueId, $Debug, $MySqlConnection);
+			if($return == Config::RET_OK && $Commit)
+				$MySqlConnection->commit();
+			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
+	public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
-	}
-			
-	public function UserSelectByCorporation($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
-	{
-	 	$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectByCorporation($CorporationName, $Limit1, $Limit2, 
-															   $ArrayInstanceUser, $RowCount, $Debug);
-	}
-	
-	public function UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
-	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectByDepartment($DepartmentName, $Limit1, $Limit2, $ArrayInstanceUser, 
-															  $RowCount, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelect($Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserSelectByEmail($Email, &$InstanceUser, $Debug)
+	public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug,
+										    $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectByEmail($Email, $InstanceUser, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
+															                      $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserSelectByTeamId($TeamId, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug)
+	public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, &$RowCount, $Debug,
+										   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectByTeamId($TeamId, $Limit1, $Limit2, $ArrayInstanceUser, $RowCount, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+																			 $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug)
+	public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectByUserUniqueId($UserUniqueId, $InstanceUser, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByHashCode($HashCode, $InstanceUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount,
+			                                   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, 
+																			     $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, 
+										 $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByRoleName($Limit1, $Limit2, $RoleName, 
+																		   $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug,
+									   $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByTeamId($Limit1, $Limit2, $TeamId, $ArrayInstanceUser, $RowCount, $Debug,
+														                 $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug,
+			                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByTicketId($Limit1, $Limit2, $TicketId, $ArrayInstanceUser, $RowCount, 
+																		   $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
+														     &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, 
+																							   $ArrayInstanceUser, $RowCount, $Debug,
+																							   $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceUser, &$RowCount, $Debug,
+													  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
+																						$ArrayInstanceUser, $RowCount, $Debug,
+														                 $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+										            $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
+																			          $ArrayInstanceUser, $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByUserEmail($UserEmail, $InstanceUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectByUserUniqueId($UserUniqueId, $InstanceUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+		
 	}
 		
-	public function UserSelectConfirmedByHashCode(&$UserActive, $HashCode, $Debug)
+	public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectConfirmedByHashCode($UserActive, $HashCode, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectUserActiveByHashCode($HashCode, $UserActive, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserSelectHashCodeByEmail($Email, &$HashCode, $Debug)
+	public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectHashCodeByEmail($Email, $HashCode, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectHashCodeByUserEmail($UserEmail, $HashCode, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug)
+	public function UserSelectNotificationByUserEmail(&$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserSelectTeamByUserEmail($InstanceUser, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectNotificationByUserEmail($InstanceUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateActiveByEmail($Email, $UserActive, $Debug)
+	public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateActiveByEmail($Email, $UserActive, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectTeamByUserEmail($InstanceUser, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		$Email, $Debug)
+	public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationByEmailAndCorporation($Corporation, $RegistrationDate, 
-																						   $RegistrationId, $Email, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, $RegistrationDate, $RegistrationId, 
-																		$Email, $Debug)
+	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires,
+									      $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+										  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug,
+										  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation($Corporation, 
-																										   $RegistrationDate, $Email, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region,
+																	        $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed,
+																	        $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary,
+																	        $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateAssocUserCorporationRegistrationIdByEmailAndCorporation($Corporation, $RegistrationId, 
-																					  $Email, $Debug)
+	public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateAssocUserCorporationRegistrationIdByEmailAndCorporation($Corporation,
-																						                 $RegistrationId, $Email, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									  $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug)
+	public function UserUpdateCorporationByUserEmail($Corporation, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateByEmail($BirthDate, $Country, $Email, $Gender, $Name, $Region, $SessionExpires, 
-									                     $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateCorporationByUserEmail($Corporation, $UserEmail, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateConfirmedByHash($HashCode, $Debug)
+	public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $UserEmail, $Debug, 
+																  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateConfirmedByHash($HashCode, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, 
+																									$UserEmail, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateCorporationByEmail($Corporation, $Email, $Debug)
+	public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateCorporationByEmail($Corporation, $Email, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug)
+	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug, 
+															 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateDepartmentByEmailAndCorporation($Corporation, $Department, $Email, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, 
+																							   $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdatePasswordByEmail($Email, $Password, $Debug)
+	public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdatePasswordByEmail($Email, $Password, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 	
-	public function UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug)
+	public function UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateTwoStepVerificationByEmail($Email, $TwoStepVerification, $Debug);
-	}
-	
-	public function UserUpdateUserTypeByEmail($Email, $TypeId, $Debug)
-	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateUserTypeByEmail($Email, $TypeId, $Debug);
-	}
-	
-	public function UserUpdateUniqueIdByEmail($Email, $UniqueId, $Debug)
-	{
-		$FacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-		return $FacedePersistenceUser->UserUpdateUserTypeByEmail($Email, $UniqueId, $Debug);
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
 	}
 }

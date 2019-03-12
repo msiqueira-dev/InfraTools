@@ -1,5 +1,6 @@
 <div>
-    <a href="javascript: SubmitPostBackFormForm('<?php echo ConfigInfraTools::LANGUAGE_SPANISH; ?>')" 
+    <a href="javascript: SubmitNewForm('<?php echo ConfigInfraTools::LANGUAGE_SPANISH; ?>', 'POST',
+                                       '<?php echo ConfigInfraTools::FM_LANGUAGE; ?>')" 
        title="Spanish" id="ButtonLanguageSpanish" >
         <img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconLanguageEsp3.png'; ?>"
              onmouseover="this.src='<?php 

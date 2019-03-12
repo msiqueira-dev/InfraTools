@@ -2,15 +2,13 @@
 
 /************************************************************************
 Class: Session.php
-Creation: 06/11/2013
+Creation: 2013/11/06
 Creator: Marcus Siqueira
 Dependencies:
 			Base/Php/Controller/Config.php
 			Base/Php/Controller/SessionHandlerCustom.php
 Description: 
-			Classe que cuida da Sessão de usuário, capturando valor, 
-			atribuindo valor, validando valor, e limpando valor da Sessão.
-			Padrões: Singleton.
+			Class with Singleton pattern for Session
 Functions: 
 			public function CheckActivity($ActivityKey, $UserKey, $SessionTime, $UnlimitedSession);
 			public function CreateBasic($Application, $SessionTime);
@@ -69,7 +67,7 @@ class Session
 	
 	public function CheckActivity($ActivityKey, $UserKey, $SessionTime, $UnlimitedSession)
 	{
-		if($this->GetSessionValue($ActivityKey, $Value) == Config::SUCCESS)
+		if($this->GetSessionValue($ActivityKey, $Value) == Config::RET_OK)
 		{
 			if($Value != $UnlimitedSession)
 			{
@@ -79,7 +77,7 @@ class Session
 					{
 						session_unset();
 						session_destroy();
-						return Config::WARNING;
+						return Config::RET_WARNING;
 					}
 					session_unset();
 					session_destroy();
@@ -88,7 +86,7 @@ class Session
 			}
 		}
 		else $this->SetSessionValue($ActivityKey, time());
-		return Config::SUCCESS;
+		return Config::RET_OK;
 	}
 	
 	public function CreateBasic($Application, $SessionTime)
@@ -119,7 +117,7 @@ class Session
 				session_name($Application);
 				session_id($Id);
 				session_start();
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 		}		
 	}
@@ -141,10 +139,10 @@ class Session
 				if(array_key_exists($Key, $_SESSION))
 				{
 					unset($_SESSION[$Key]);
-					return Config::SUCCESS;
-				} else return Config::ERROR;
-			} else return Config::ERROR;
-		} else return Config::ERROR;
+					return Config::RET_OK;
+				} else return Config::RET_ERROR;
+			} else return Config::RET_ERROR;
+		} else return Config::RET_ERROR;
 	}
 	
 	public function GetSessionValue($Key, &$Value)
@@ -154,7 +152,7 @@ class Session
 			if (isset($_SESSION[$Key]))
 			{
 				$Value = $_SESSION[$Key];
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ERROR_EMPTY_SESSION_VALUE_FOR_PARAMETER;
 		}
@@ -168,7 +166,7 @@ class Session
 			if(isset($Value))
 			{
 				$_SESSION[$Key] = $Value;
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ERROR_EMPTY_PARAMETER_VALUE;
 		}

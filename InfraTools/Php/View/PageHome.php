@@ -1,9 +1,28 @@
 <?php
+/************************************************************************
+Class: PageHome.php
+Creation: 2016/09/30
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for displaying the home page. 
+Functions: 
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
+}
+if (!class_exists("InfraToolsFacedePersistence"))
+{
+	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php"))
+		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFacedePersistence.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFacedePersistence');
 }
 if (!class_exists("PageInfraTools"))
 {
@@ -14,26 +33,28 @@ if (!class_exists("PageInfraTools"))
 
 class PageHome extends PageInfraTools
 {	
+	protected $LinkPageInstallEnabled = FALSE;
+	
 	/* Singleton */
 	protected static $Instance;
 
-	/* Get Instance */
-	public static function __create($Language)
+	/* __create */
+	public static function __create($Config, $Language, $Page)
 	{
 		if (!isset(self::$Instance)) 
 		{
 			$class = __CLASS__;
-			self::$Instance = new $class($Language);
+			self::$Instance = new $class($Config, $Language, $Page);
 		}
 		return self::$Instance;
 	}
 	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = FALSE;
-		parent::__construct($Language);
+		parent::__construct($Config, $Language, $Page);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
@@ -42,39 +63,15 @@ class PageHome extends PageInfraTools
 		}
 	}
 
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-
 	public function LoadPage()
 	{
-		$this->LoadHtml();
+		$this->FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $this->FacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayTables,
+																			  $this->DataBaseReturnMessage,
+																			  ConfigInfraTools::CHECKBOX_CHECKED);
+		if($return != ConfigInfraTools::RET_OK)
+			$this->LinkPageInstallEnabled = TRUE;
+		$this->LoadHtml(FALSE, FALSE);
 	}
 }
 ?>

@@ -2,16 +2,19 @@
 
 /************************************************************************
 Class: Email.php
-Creation: 29/01/2015
+Creation: 2015/01/29
 Creator: Marcus Siqueira
 Dependencies:
-			Php/ConfigInfraTools.php
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
+			Base       - Php/API/PHPMailer/class.phpmailer.php
+			Base       - Php/API/PHPMailer/class.smtp.php
+			Base       - Php/API/PHPMailer/class.pop3.php
 Description: 
-			Classe que serve para utilizar funcionalidades ligadas a
-			corrêio eletrônico
+			Class for Email	
 Functions:
-			public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailPassword, 
-	                                      $UserName, $UserEmail, $Subject, $Title, $Body)
+			public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailUserReplyTo,
+			                              $ApplicationEmailPassword, $UserName, $UserEmail, $Subject, $Title, $Body);
 			public function ValidateEmail($RecipientEmail, $SenderEmail, $debug);
 			private function _SendMessage($message, $debug = FALSE, &$returnCode = NULL);
 **************************************************************************/
@@ -59,7 +62,8 @@ class Email
 	/* Properties */
 	private $sock;
 	
-	public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailPassword, $UserEmail, $Subject, $Body)
+	public function SendFormEmail($Application, $ApplicationEmailUser, $ApplicationEmailUserReplyTo, 
+								  $ApplicationEmailPassword, $UserEmail, $Subject, $Body)
 	{
 		$mail = new PHPMailer;
 		$mail->isSMTP();
@@ -73,7 +77,7 @@ class Email
 		$mail->From = $ApplicationEmailUser;
 		$mail->FromName = $Application;
 		$mail->addAddress($UserEmail, $UserEmail);
-		$mail->addReplyTo($ApplicationEmailUser, 'Support InfraTools');
+		$mail->addReplyTo($ApplicationEmailUser, $ApplicationEmailUserReplyTo);
 		$mail->isHTML(true);
 		$mail->Subject = $Subject;
 		$mail->Body    = $Body;
@@ -88,7 +92,7 @@ class Email
 			)
 		);
 		if($mail->send())
-			return Config::SUCCESS;
+			return Config::RET_OK;
 		return $mail->ErrorInfo;
 	}
  
@@ -143,9 +147,9 @@ class Email
 				$this->_SendMessage("quit", $debug);
 				fclose($this->sock);
 				if ($code == '250')
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif ($code == '451' || $code == '452') 
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else 
 					return self::ReturnEmailDoesNotExist;  
 			} 
@@ -173,11 +177,11 @@ class Email
 				{
 					$returnCode .= $reply[$count];
 				}
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			}
 			else return self::ReturnFailedToSendMessage;
 		}
-		else return Config::PARAMETERS_NULL;
+		else return Config::RET_ERROR;
 	}
 }
 ?>

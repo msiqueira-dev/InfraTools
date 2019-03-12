@@ -120,7 +120,6 @@
         <Member type="Field">DateTime RegisterDate</Member>
         <Member type="Field">String TicketDescription</Member>
         <Member type="Field">Int TicketId</Member>
-        <Member type="Field">Int TicketNumber</Member>
         <Member type="Field">String TicketSuggestion</Member>
         <Member type="Field">String TicketTitle</Member>
         <Modifier>None</Modifier>
@@ -176,7 +175,6 @@
         <Collapsed>False</Collapsed>
         <Member type="Field">String HistoryTicketDescription</Member>
         <Member type="Field">Int HistoryTicketId</Member>
-        <Member type="Field">Int HistoryTicketTicketNumber</Member>
         <Member type="Field">String HistoryTicketSuggestion</Member>
         <Member type="Field">DateTime RegisterDate</Member>
         <Modifier>None</Modifier>
@@ -727,8 +725,6 @@
         <EndMultiplicity>1..*</EndMultiplicity>
       </Relationship>
       <Relationship type="Dependency" first="4" second="20">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -758,8 +754,6 @@
         <EndMultiplicity>0..*</EndMultiplicity>
       </Relationship>
       <Relationship type="Dependency" first="21" second="22">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -772,8 +766,6 @@
         </BendPoint>
       </Relationship>
       <Relationship type="Dependency" first="0" second="22">
-        <Label>
-        </Label>
         <StartOrientation>Vertical</StartOrientation>
         <EndOrientation>Vertical</EndOrientation>
         <BendPoint relativeToStartShape="True">
@@ -867,6 +859,8 @@
         <EndMultiplicity>0..*</EndMultiplicity>
       </Relationship>
       <Relationship type="Dependency" first="0" second="20">
+        <Label>
+        </Label>
         <StartOrientation>Horizontal</StartOrientation>
         <EndOrientation>Horizontal</EndOrientation>
         <BendPoint relativeToStartShape="False">

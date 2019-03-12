@@ -1,4 +1,17 @@
 <?php
+/************************************************************************
+Class: PageRegister.php
+Creation: 2016/09/30
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class used for registering a new user. 
+Functions: 
+			public    function LoadPage();
+			
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -12,15 +25,21 @@ if (!class_exists("PageInfraTools"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
 }
 
-
 class PageRegister extends PageInfraTools
 {	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = FALSE;
-		parent::__construct($Language);
+		parent::__construct($Config, $Language, $Page);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
@@ -29,56 +48,40 @@ class PageRegister extends PageInfraTools
 		}
 	}
 
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-	
-	protected function LoadCaptcha()
-	{
-		$InstanceBaseCaptcha = $this->Factory->CreateCaptcha();
-		$stringCaptcha = $InstanceBaseCaptcha->GenerateRandomString();
-		$this->Session->SetSessionValue(ConfigInfraTools::FORM_CAPTCHA_REGISTER, $stringCaptcha);
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::FORM_USER_REGISTER, $this->InputFocus);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-
 	public function LoadPage()
 	{
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_USER_NAME;
-		if (isset($_POST[ConfigInfraTools::FORM_USER_REGISTER_SUBMIT]))
+		$this->InputFocus = ConfigInfraTools::FIELD_USER_NAME;
+		if (isset($_POST[ConfigInfraTools::FM_USER_REGISTER_SB]))
 		{
 			$this->ValidateCaptcha = TRUE;
-			$this->UserRegister(TRUE, TRUE, FALSE, TRUE, FALSE);	
+			$this->UserInsert(ConfigInfraTools::APPLICATION_INFRATOOLS,
+							  TRUE,
+				              @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY], 
+					  		  @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH], 
+							  @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR],
+							  NULL,
+							  $_POST[ConfigInfraTools::FIELD_COUNTRY_NAME],
+							  $_POST[ConfigInfraTools::FIELD_USER_EMAIL],
+							  @$_POST[ConfigInfraTools::FIELD_USER_GENDER],
+						      NULL,
+							  $_POST[ConfigInfraTools::FIELD_USER_NAME],
+						      $_POST[ConfigInfraTools::FIELD_PASSWORD_NEW],
+							  $_POST[ConfigInfraTools::FIELD_PASSWORD_REPEAT],
+							  $_POST[ConfigInfraTools::FIELD_USER_REGION],
+					  		  @$_POST[ConfigInfraTools::FIELD_USER_SESSION_EXPIRES], 
+						      @$_POST[ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION], 
+						      TRUE, 
+						      @$_POST[ConfigInfraTools::FIELD_USER_CONFIRMED],
+   							  $_POST[ConfigInfraTools::FIELD_USER_PHONE_PRIMARY], 
+						      $_POST[ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX], 
+						      $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY],
+							  $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX], 
+							  ConfigInfraTools::TYPE_USER_DEFAULT, 
+							  NULL,
+							  $this->InputValueHeaderDebug);	
 		}
-		$this->LoadCaptcha();
-		$this->LoadHtml();
+		$this->CaptchaLoad(ConfigInfraTools::FIELD_USER_CAPTCHA_REGISTER, FALSE);
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

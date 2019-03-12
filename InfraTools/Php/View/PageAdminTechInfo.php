@@ -1,4 +1,16 @@
 <?php
+/************************************************************************
+Class: PageAdminTechInfo.php
+Creation: 2018/06/04
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/InfraToolsFactory.php
+			InfraTools - Php/View/AdminInfraTools.php
+Description: 
+			Class for technical details of the system.
+Functions: 
+			public    function LoadPage();	
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -15,10 +27,12 @@ if (!class_exists("PageAdmin"))
 class PageAdminTechInfo extends PageAdmin
 {
 	public $ArrayBaseFileType                 = array();
+	public $ArrayDataBaseTables               = array();
 	public $ArrayInfraToolsFileType           = array();
 	public $ArrayTotalFileType                = array();
 	public $BaseDirectoryCount                = 0;
 	public $BaseFileCount                     = 0;
+	public $DataBaseRowCount                  = 0;
 	public $InfraToolsArrayLanguageConstants  = 0;
 	public $InfraToolsArrayLanguageValueCount = 0;
 	public $InfraToolsDirectoryCount          = 0;
@@ -27,61 +41,30 @@ class PageAdminTechInfo extends PageAdmin
 	public $MatrixLanguageConstant            = 0;
 	public $TotalDirectoryCount               = 0;
 	public $TotalFileCount                    = 0;
-
+	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
+		$PageFormBack = FALSE;
 		$InstanceInfraToolsTechInfo = $this->Factory->CreateInfraToolsTechInfo();
 		$InstanceInfraToolsTechInfo->ProcessTechBase();
 		$InstanceInfraToolsTechInfo->ProcessTechInfoInfraTools();
 		$InstanceInfraToolsTechInfo->ProccessTechLanguage();
-		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
-		{
-			$this->PageFormLoad();
-			$PageFormBack = TRUE;
-		}
+		$infraToolsFacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->AdminGoBack($PageFormBack);
+		
 		$this->ArrayBaseFileType                 = $InstanceInfraToolsTechInfo->GetArrayBaseFileType();
 		$this->ArrayInfraToolsFileType           = $InstanceInfraToolsTechInfo->GetArrayInfraToolsFileType();
 		$this->ArrayTotalFileType                = $InstanceInfraToolsTechInfo->GetArrayTotalFileType();
@@ -95,9 +78,16 @@ class PageAdminTechInfo extends PageAdmin
 		$this->InfraToolsArrayLanguageValueCount = $InstanceInfraToolsTechInfo->GetInfraToolsArrayLanguageValueCount();
 		$this->InfraToolsLanguageFileCount       = $InstanceInfraToolsTechInfo->GetInfraToolsLanguageFileCount();
 		$this->MatrixLanguageConstant            = $InstanceInfraToolsTechInfo->GetInfraToolsMatrixLanguageProblemConstant();
+		$return = $infraToolsFacedePersistenceInfraTools->InfraToolsDataBaseCheck($this->ArrayDataBaseTables,
+																			      $this->DataBaseReturnMessage,
+																			      $this->InputValueHeaderDebug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$infraToolsFacedePersistenceInfraTools->InfraToolsDataBaseGetRowCount($this->DataBaseRowCount, $this->InputValueHeaderDebug);
+		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
-		$this->LoadHtml();
+			$this->PageStackSessionSave();
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

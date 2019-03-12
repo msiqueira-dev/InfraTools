@@ -2,12 +2,13 @@
 
 /************************************************************************
 Class: TechInfo
-Creation: 03/01/2017
+Creation: 2017/01/03
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe de informações técnicas
+			Class for Technical Information
 Functions: 
 			
 **************************************************************************/
@@ -97,15 +98,15 @@ abstract class TechInfo
 		return $this->TotalFileCount;
 	}
 	
-	protected function CreateFile($Directory, $Extension, $Name, $Type, &$File)
+	protected function CreateFile($Directory, $Extension, $FileName, $Type, &$File)
 	{
 		$File = $this->Factory->CreateFile();
 		$File->SetDirectory($Directory);
 		$File->SetExtension($Extension);
-		$File->SetName($Name);
-		$File->SetPath($Directory . "/" . $Name . "." . $Extension);
+		$File->SetName($FileName);
+		$File->SetPath($Directory . "/" . $FileName . "." . $Extension);
 		$File->SetType($Type);
-		return Config::SUCCESS;
+		return Config::RET_OK;
 	}
 	
 	protected function SearchArrayFileType($MultidimensionalArray, $Extension, $Type, &$Key=0)

@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsService
-Creation: 22/05/2018
+Creation: 2018/05/22
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um serviço.
+			Class for Service
 Get / Set: 
 			public function GetRegisterDate();
 			public function GetServiceActive();
@@ -63,7 +63,7 @@ class InfraToolsService
 								$ServiceDescription, $ServiceId, $ServiceName, $InfraToolsTypeServiceInstance) 
 	{
 		$this->InfraToolsFactory  = InfraToolsFactory::__create();
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
 		if(isset($ServiceActive))
@@ -77,17 +77,21 @@ class InfraToolsService
 		if(isset($ServiceDepartmentCanChange))
 			$this->ServiceDepartmentCanChange = $ServiceDepartmentCanChange;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_SERVICE_DEPARTMENT_CAN_CHANGE);
-		if($ServiceDescription != NULL)
+		if(!is_null($ServiceDescription))
 			$this->ServiceDescription = $ServiceDescription;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_SERVICE_DESCRIPTION);
-		if($ServiceId != NULL)
+		if(!is_null($ServiceId))
 			$this->ServiceId = $ServiceId;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_SERVICE_ID);
-		if($ServiceName != NULL)
+		if(!is_null($ServiceName))
 			$this->ServiceName = $ServiceName;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_SERVICE_NAME);
-		if($InfraToolsTypeServiceInstance)
-			$this->InfraToolsTypeService = $InfraToolsTypeServiceInstance;
+		if(!is_null($InfraToolsTypeServiceInstance))
+		{
+			if(is_object($InfraToolsTypeServiceInstance))
+				$this->InfraToolsTypeService = $InfraToolsTypeServiceInstance;
+			else throw new Exception(ConfigInfraTools::EXCEPTION_SERVICE_TYPE);
+		}
 		else throw new Exception(ConfigInfraTools::EXCEPTION_SERVICE_TYPE);
 	}
 	
@@ -131,7 +135,7 @@ class InfraToolsService
 	
 	public function GetServiceCorporationName()
 	{
-		if($this->ServiceCorporation != NULL)
+		if(!is_null($this->ServiceCorporation))
 		{
 			if(is_object($this->ServiceCorporation))
 				return $this->ServiceCorporation->GetCorporationName();
@@ -155,7 +159,7 @@ class InfraToolsService
 	
 	public function GetServiceDepartmentInitials()
 	{
-		if($this->ServiceDepartment != NULL)
+		if(!is_null($this->ServiceDepartment))
 		{
 			if(is_object($this->ServiceDepartment))
 				return $this->ServiceDepartment->GetDepartmentInitials();
@@ -166,7 +170,7 @@ class InfraToolsService
 	
 	public function GetServiceDepartmentName()
 	{
-		if($this->ServiceDepartment != NULL)
+		if(!is_null($this->ServiceDepartment))
 		{
 			if(is_object($this->ServiceDepartment))
 				return $this->ServiceDepartment->GetDepartmentName();
@@ -197,7 +201,7 @@ class InfraToolsService
 	
 	public function GetServiceTypeName()
 	{
-		if($this->InfraToolsTypeService != NULL)
+		if(!is_null($this->InfraToolsTypeService))
 		{
 			if(is_object($this->InfraToolsTypeService))
 				return $this->InfraToolsTypeService->GetTypeServiceName();
@@ -208,40 +212,40 @@ class InfraToolsService
 	
 	public function GetServiceTypeRegisterDate()
 	{
-		if($this->InfraToolsTypeService != NULL)
-			return $this->InfraToolsTypeService->GetTypeRegisterDate();
+		return $this->InfraToolsTypeService->GetTypeRegisterDate();
 	}
 	
 	public function GetServiceTypeSLA()
 	{
-		if($this->InfraToolsTypeService != NULL)
-			return $this->InfraToolsTypeService->GetTypeServiceSLA();
+		return $this->InfraToolsTypeService->GetTypeServiceSLA();
 	}
 	
 	/* SET */
 	public function SetServiceActive($ServiceActive)
 	{
-		$this->ServiceActive = $ServiceActive;
+		if(!is_null($ServiceActive))
+			$this->ServiceActive = $ServiceActive;
 	}
 	
 	public function SetServiceDescription($ServiceDescription)
 	{
-		$this->ServiceDescription = $ServiceDescription;	
-	}
-	
-	public function SetServiceId($ServiceId)
-	{
-		$this->ServiceId = $ServiceId;
+		if(!is_null($ServiceDescription))
+			$this->ServiceDescription = $ServiceDescription;	
 	}
 	
 	public function SetServiceName($ServiceName)
 	{
-		$this->ServiceName = $ServiceName;
+		if(!is_null($ServiceName))
+			$this->ServiceName = $ServiceName;
 	}
 	
 	public function SetServiceType($InfraToolsTypeServiceInstance)
 	{
-		$this->InfraToolsTypeService = $InfraToolsTypeServiceInstance;
+		if(!is_null($InfraToolsTypeServiceInstance))
+		{
+			if(is_object($InfraToolsTypeServiceInstance))
+				$this->InfraToolsTypeService = $InfraToolsTypeServiceInstance;
+		}
 	}
 	
 	/* METHODS */
@@ -249,24 +253,23 @@ class InfraToolsService
 								  $ServiceDepartment, $ServiceDepartmentCanChange, $ServiceDescription,
 								  $ServiceId, $ServiceName, $InfraToolsTypeServiceInstance)
 	{
-		if($ServiceActive != NULL)
+		if(!is_null($ServiceActive))
 			$this->ServiceActive = $ServiceActive;
-		if($ServiceCorporation != NULL)
-			$this->ServiceCorporation = $ServiceCorporation;
-		if($ServiceCorporationCanChange != NULL)
+		$this->ServiceCorporation = $ServiceCorporation;
+		if(!is_null($ServiceCorporationCanChange))
 			$this->ServiceCorporationCanChange = $ServiceCorporationChange;
-		if($ServiceDepartmentCanChange != NULL)
+		if(!is_null($ServiceDepartmentCanChange))
 			$this->ServiceDepartmentCanChange = $ServiceDepartmentCanChange;
-		if($ServiceDepartment != NULL)
-			$this->ServiceDepartment = $ServiceDepartment;
-		if($ServiceDescription != NULL)
+		$this->ServiceDepartment = $ServiceDepartment;
+		if(!is_null($ServiceDescription))
 			$this->ServiceDescription = $ServiceDescription;
-		if($ServiceId != NULL)
-			$this->ServiceId = $ServiceId;
-		if($ServiceName != NULL)
+		if(!is_null($ServiceName))
 			$this->ServiceName = $ServiceName;
-		if($InfraToolsTypeServiceInstance != NULL)
+		if(!is_null($InfraToolsTypeServiceInstance))
+		{
+			if(is_object($InfraToolsTypeServiceInstance))
 			$this->InfraToolsTypeService = $InfraToolsTypeServiceInstance;
+		}
 	}
 }
 ?>

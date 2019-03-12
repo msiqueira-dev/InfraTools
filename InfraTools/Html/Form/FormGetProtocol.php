@@ -7,44 +7,40 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_PROTOCOL_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_PROTOCOL; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_PROTOCOL; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_PROTOCOL . '#tabs13';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_PROTOCOL; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_PROTOCOL; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_PROTOCOL . '#tabs13';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN; ?>" />
-        </div>
        	<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label><?php echo $this->InstanceLanguageText->GetText('TEXT_NUMBER'); ?></label>
 			</div>
-            <input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT; ?>" 
-                   id="<?php echo ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT; ?>" 
-                   onblur="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT; ?>',
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL; ?>" 
+                   id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL; ?>" 
+                   onblur="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL; ?>',
                                                  'DivContentBodySubmit',
-                                                 '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_PROTOCOL; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_PROTOCOL_SB; ?>',
                                          		 '', 255, true);"
-                   onkeyup="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT; ?>',
+                   onkeyup="ValidateNumberSize('InputSmall', '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL; ?>',
                                                  'DivContentBodySubmit',
-                                                 '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_PROTOCOL; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_PROTOCOL_SB; ?>',
                                          		 '', 255, false);"
-                   value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_PROTOCOL_INPUT]; 
+                   value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL]; 
 									  ?>"
                    title="<?php echo $this->InstanceLanguageText->GetText('TEXT_NUMBER'); ?>" maxlength="5"
                    class="InputSmall" />
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_PROTOCOL; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_PROTOCOL; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_PROTOCOL_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_PROTOCOL_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_GET'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetProtocolMessage))
-	                     echo $this->VisibilityFunctionGetProtocolMessage; ?>">
+	                     echo $this->VisibilityFunctionGetProtocolMessage; ?> DivReturnForm">
         <div class="">
  	       <label>
-    	        <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_PROTOCOL_HIDDEN) 
+    	        <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_PROTOCOL) 
         	        echo $this->ExecutedFunctionReturnMessage; 
         	    ?>
        	 	</label>            

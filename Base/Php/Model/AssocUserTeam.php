@@ -5,15 +5,17 @@ Class: AssocUserTeam
 Creation: 26/02/2018
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Association between user and team.
+			Class for association between User and Team
 Get / Set:		
 			public function GetRegisterDate();
 			public function GetTeam();
+			public function GetTeamId();
 			public function GetTeamName();
 			public function GetTypeAssocUserTeam();
-			public function GetTypeAssocUserTeamTeamDescription();	
-			public function GetTypeAssocUserTeamTeamId();
+			public function GetTypeAssocUserTeamTeamDescription();
 			public function GetUser();
 			public function SetRegisterDate($RegisterDate);
 	        public function SetTeam($Team);
@@ -25,21 +27,24 @@ Methods:
 class AssocUserTeam
 {
 	/* Properties */
-	protected $RegisterDate      = NULL;
-	protected $Team              = NULL;
-	protected $TypeAssocUserTeam = NULL;
-	protected $User              = NULL;
+	protected $RegisterDate              = NULL;
+	protected $Team                      = NULL;
+	protected $TypeAssocUserTeam         = NULL;
+	protected $User                      = NULL;
 
 	/* Constructor */
 	public function __construct($RegisterDate, $Team, $TypeAssocUserTeam, $User) 
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($Team != NULL)
+		if(!is_null($Team))
 			$this->Team = $Team;
 		else throw new Exception(Config::EXCEPTION_ASSOC_USER_TEAM_TEAM);
-		if($User != NULL)
+		if(!is_null($TypeAssocUserTeam))
+			$this->TypeAssocUserTeam = $TypeAssocUserTeam;
+		else throw new Exeception(Config::EXCEPTION_ASSOC_USER_TEAM_TYPE);
+		if(!is_null($User))
 			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_ASSOC_USER_TEAM_USER);
 	}
@@ -61,9 +66,15 @@ class AssocUserTeam
 		return $this->Team;
 	}
 	
+	public function GetTeamId()
+	{
+		if(!is_null($this->Team))
+			return $this->Team->GetTeamId();
+	}
+	
 	public function GetTeamName()
 	{
-		if($this->Team != NULL)
+		if(!is_null($this->Team))
 			return $this->Team->GetTeamName();
 	}
 	
@@ -74,14 +85,8 @@ class AssocUserTeam
 	
 	public function GetTypeAssocUserTeamTeamDescription()
 	{
-		if($this->TypeAssocUserTeam != NULL)
+		if(!is_null($this->TypeAssocUserTeam))
 			return $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
-	}
-	
-	public function GetTypeAssocUserTeamTeamId()
-	{
-		if($this->TypeAssocUserTeam != NULL)
-			return $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId();	
 	}
 	
 	public function GetUser()
@@ -91,7 +96,7 @@ class AssocUserTeam
 	
 	public function GetTeamUserEmail()
 	{
-		if($this->User != NULL)
+		if(!is_null($this->User))
 			return $this->User->GetEmail();
 	}
 	
@@ -119,13 +124,13 @@ class AssocUserTeam
 	/* METHODS */
 	public function UpdateAssocUserTeam($RegisterDate, $Team, $TypeAssocUserTeam, $User)
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		if($Team != NULL)
+		if(!is_null($Team))
 			$this->Team = $Team;
-		if($TypeAssocUserTeam != NULL)
+		if(!is_null($TypeAssocUserTeam))
 			$this->TypeAssocUserTeam = $TypeAssocUserTeam;
-		if($User != NULL)
+		if(!is_null($User))
 			$this->User = $User;
 	}
 }

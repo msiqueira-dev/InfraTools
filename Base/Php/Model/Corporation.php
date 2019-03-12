@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: Corporation
-Creation: 25/08/2017
+Creation: 2017/08/25
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para armazenamento de dados de uma corporação.
+			Class for Corporation
 Get / Set: 
 			public function GetArrayDepartment();
 			public function GetCorporationActive();
@@ -34,11 +36,17 @@ class Corporation
 	public function __construct($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate) 
 	{
 		$this->Factory           = Factory::__create();
-		if($ArrayInstanceDepartment != NULL)
+		if(!is_null($ArrayInstanceDepartment))
 			$this->ArrayDepartment = $ArrayInstanceDepartment;
-		$this->CorporationActive = $CorporationActive;
-		$this->CorporationName   = $CorporationName;
-		$this->RegisterDate      = $RegisterDate;
+		if(!is_null($CorporationActive))
+			$this->CorporationActive = $CorporationActive;
+		else throw new Exception(Config::EXCEPTION_CORPORATION_ACTIVE);
+		if(!is_null($CorporationName))
+			$this->CorporationName = $CorporationName;
+		else throw new Exception(Config::EXCEPTION_CORPORATION_NAME);
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 	}
 	
 	/* Clone */
@@ -71,30 +79,36 @@ class Corporation
 	/* SET */
 	public function SetArrayDepartment($ArrayInstanceDepartment)
 	{
-		$this->ArrayDepartament = $ArrayInstanceDepartment;
+		if(!is_null($ArrayInstanceDepartment))
+			$this->ArrayDepartament = $ArrayInstanceDepartment;
 	}
 	
 	public function SetCorporationActive($CorporationActive)
 	{
-		$this->CorporationActive = $CorporationActive;
+		if(!is_null($CorporationActive))
+			$this->CorporationActive = $CorporationActive;
 	}
 	
 	public function SetCorporationName($CorporationName)
 	{
-		$this->CorporationName = $CorporationName;
+		if(!is_null($CorporationName))
+			$this->CorporationName = $CorporationName;
 	}
 	
 	/* METHODS */
-	public function UpdateCorporation($CorporationActive, $ArrayInstanceDepartment, $CorpotaionName)
+	public function UpdateCorporation($CorporationActive, $ArrayInstanceDepartment, $CorporationName)
 	{
-		if(is_bool($CorporationActive))
-			$this->CorporationActive = $CorporationActive;
-		if($ArrayInstanceDepartment != NULL)
-			$this->ArrayDepartment   = $ArrayInstanceDepartment;
-		if($Name != NULL)
-			$this->CorporationName   = $CorporationName;
-		if($RegisterDate != NULL)
-			$this->RegisterDate      = $RegisterDate;
+		if(!is_null($CorporationActive))
+		{
+			if(is_bool($CorporationActive))
+				$this->CorporationActive = $CorporationActive;
+		}
+		if(!is_null($ArrayInstanceDepartment))
+			$this->ArrayDepartment = $ArrayInstanceDepartment;
+		if(!is_null($CorporationName))
+			$this->CorporationName = $CorporationName;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 	}
 }
 ?>

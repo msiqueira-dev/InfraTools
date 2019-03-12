@@ -2,21 +2,25 @@
 
 /************************************************************************
 Class: FacedePersistenceAssocUserCorporation
-Creation: 23/10/2017
+Creation: 2017/10/23
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
 			Base       - Php/Model/AssocUserCorporation.php
 	
 Description: 
-			Classe used to access and deal with information of the database about the association with user and a corporation.
+			Class with Singleton pattern for dabatabase methods of association between User and Corporation
 Functions: 
-			public function AssocUserCorporationDelete($CorporationName, $Email, $Debug, $MySqlConnection);
+			public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug, $MySqlConnection);
 			public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, 
-			                                           $Email, $Debug, $MySqlConnection);
-			
+			                                           $UserEmail, $Debug, $MySqlConnection);
+			public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+			                                                                        $AssocUserCorporationRegistrationDateNew, 
+			                                                                        $AssocUserCorporationRegistrationIdNew, 
+																					$CorporationName, $UserEmail, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Factory"))
@@ -60,7 +64,7 @@ class FacedePersistenceAssocUserCorporation
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
@@ -75,77 +79,116 @@ class FacedePersistenceAssocUserCorporation
         return self::$Instance;
     }
 	
-	public function AssocUserCorporationDelete($CorporationName, $Email, $Debug, $MySqlConnection)
+	public function AssocUserCorporationDelete($CorporationName, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserCorporationDelete)</b> : " . 
-						 Persistence::SqlAssocUserCorporationDelete() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserCorporationDelete');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationDelete());
 			if ($stmt)
 			{
-				$stmt->bind_param("ss", $CorporationName, $Email);
+				$stmt->bind_param("ss", $CorporationName, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_CORPORATION_DELETE_FAILED;
+					return Config::DB_ERROR_ASSOC_USER_CORPORATION_DEL;
 				}
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return Config::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return Config::MYSQL_ASSOC_USER_CORPORATION_DELETE_FAILED;
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_ASSOC_USER_CORPORATION_DEL;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $Email, 
+	public function AssocUserCorporationInsert($CorporationName, $RegistrationDate, $RegistrationId, $UserEmail, 
 											   $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;		
+		$errorCode = NULL; $errorStr = NULL; $mySqlError = NULL; $queryResult = NULL;		
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlAssocUserCorporationInsert)</b> : " . 
-						 Persistence::SqlAssocUserCorporationInsert() . "<br>";
+				Persistence::ShowQuery('SqlAssocUserCorporationInsert');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationInsert());
 			if ($stmt)
 			{
-				$stmt->bind_param("ssss", $CorporationName, $RegistrationDate, $RegistrationId, $Email);
+				$stmt->bind_param("ssss", $CorporationName, $RegistrationDate, $RegistrationId, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 				else
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_ASSOC_USER_CORPORATION_INSERT_FAILED;
+					return Config::DB_ERROR_ASSOC_USER_CORPORATION_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == Config::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return Config::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentNameNew,
+		                                                                    $AssocUserCorporationRegistrationDateNew, 
+																			$AssocUserCorporationRegistrationIdNew, 
+																			$CorporationName, $UserEmail, $Debug, $MySqlConnection)
+	{
+		$errorCode = NULL; $errorStr = NULL; $mySqlError = NULL; $queryResult = NULL;		
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlAssocUserCorporationUpdateByUserEmailAndCorporationName');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserCorporationUpdateByUserEmailAndCorporationName());
+			if ($stmt)
+			{
+				$stmt->bind_param("sssss", $AssocUserCorporationDepartmentNameNew, $AssocUserCorporationRegistrationDateNew, 
+								           $AssocUserCorporationRegistrationIdNew, $CorporationName, $UserEmail);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL && $stmt->affected_rows > 0)
+					return Config::RET_OK;
+				elseif($errorStr == NULL && $stmt->affected_rows == 0)
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_UPDT_ASSOC_USER_CORPORATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 }
 ?>

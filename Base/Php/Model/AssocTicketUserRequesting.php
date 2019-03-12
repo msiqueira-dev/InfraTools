@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: AssocTicketUserRequesting
-Creation: 05/06/2018
+Creation: 2018/06/05
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Association between user and ticket.
+			Class for association betwteen a Ticket and a User
 Get / Set:		
 			public function GetAssocTicketUserRequestingTicket();
 			public function GetAssocTicketUserRequestingTicketId();
@@ -34,16 +36,16 @@ class AssocTicketUserRequesting
 	/* Constructor */
 	public function __construct($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate) 
 	{
-		if($Ticket != NULL)
+		if(!is_null($Ticket))
 			$this->Ticket = $Ticket;
 		else throw new Exception(Config::EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TICKET);
-		if($TypeAssocUserRequesting != NULL)
+		if(!is_null($TypeAssocUserRequesting))
 			$this->TypeAssocUserRequesting = $TypeAssocUserRequesting;
 		else throw new Exception(Config::EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE);
-		if($User != NULL)
+		if(!is_null($User))
 			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_ASSOC_TICKET_USER_REQUESTING_USER);
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_USER);
 	}
@@ -62,7 +64,7 @@ class AssocTicketUserRequesting
 	
 	public function GetAssocTicketUserRequestingTicketId()
 	{
-		if($this->Ticket != NULL)
+		if(!is_null($this->Ticket))
 		{
 			if(is_object($this->Ticket))
 			{
@@ -80,7 +82,7 @@ class AssocTicketUserRequesting
 	
 	public function GetAssocTicketUserRequestingTicketTypeAssocUserRequestingBond()
 	{
-		if($this->TypeAssocUserRequesting != NULL)
+		if(!is_null($this->TypeAssocUserRequesting))
 		{
 			if(is_object($this->TypeAssocUserRequesting))
 			{
@@ -98,7 +100,7 @@ class AssocTicketUserRequesting
 	
 	public function GetAssocTicketUserRequestingUserEmail()
 	{
-		if($this->User != NULL)
+		if(!is_null($this->User))
 		{
 			if(is_object($this->TypeAssocUserRequesting))
 			{
@@ -138,11 +140,11 @@ class AssocTicketUserRequesting
 	/* METHODS */
 	public function UpdateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User) 
 	{
-		if($Ticket != NULL)
+		if(!is_null($Ticket))
 			$this->Ticket  = $Ticket;
-		if($TypeAssocUserRequesting != NULL)
+		if(!is_null($TypeAssocUserRequesting))
 			$this->TypeAssocUserRequesting = $TypeAssocUserRequesting;
-		if($User != NULL)
+		if(!is_null($User))
 			$this->User = $User;
 	}
 }

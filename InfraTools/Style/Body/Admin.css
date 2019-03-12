@@ -1,0 +1,11 @@
+.DivContentBody{width:100%;min-height:500px;height:auto;}
+.DivContentBodySecondTitle{width:100px;height:100px;margin-left:46%;margin-bottom:2px;}
+.DivContentBodySecondTitleImage{position: relative;right:4px;bottom:2px;}
+.DivContentBodySecondTitleLine{width:800px;height:3px;background-color:#f5821f;margin-bottom:10px;margin-left:10%}
+.DivContentBodyContainers{width:910px !important;height:auto !important;position: relative !important;left:5% !important;}
+.DivContentBodyContainersBox{width:150px !important;height:104px !important;float:left !important;margin-right:15px !important;border:3px solid #f5821f !important;border-radius:10px !important;text-align:center !important;margin-bottom:10px !important;}
+.DivContentBodyContainersBoxIcon{width:50px;height:50px;position:relative;left:50px;margin-top:8px;margin-bottom:2px;}
+.DivContentBodyContainersBoxText{width:150px;height:30px;}
+.DivContentBodyOptions{width:100% !important;height:50px !important;margin-top:12px !important;}
+.DivContentBodySectionTitle{width:900px;height:3px;margin-top:35px;position:relative;left:6.1%;background-color:#f4780b;}
+.DivContentBodyAdminIcon{width:48px;height:48px;position:relative;left:50%;top:25px;}

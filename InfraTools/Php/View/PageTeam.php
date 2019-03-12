@@ -1,16 +1,14 @@
 <?php
 /************************************************************************
 Class: PageTeam.php
-Creation: 04/06/2018
+Creation: 2018/06/04
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da administração dos equipes.
+			Class that manages teams.
 Functions: 
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
 			
 **************************************************************************/
@@ -29,63 +27,30 @@ if (!class_exists("PageInfraTools"))
 
 class PageTeam extends PageInfraTools
 {
-	protected static $Instance;
-	public $ArrayCountry = NULL;
-	
 	/* Singleton */
-	public static function __create($Language)
+	protected static $Instance;
+	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
     {
         if (!isset(self::$Instance)) 
 		{
             $class = __CLASS__;
-            self::$Instance = new $class($Language);
+            self::$Instance = new $class($Config, $Language, $Page);
         }
         return self::$Instance;
     }
 
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-	
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

@@ -1,8 +1,8 @@
-<!-- BODY PAGE ADMIN TYPE ASSOC USER SERVICE -->
+<!-- BODY_PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE -->
 <div class="DivBody">
     <div class="DivContentBody">
-    	<form name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE; ?>" 
-			  id="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE; ?>" method="post" >
+    	<form name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE; ?>" 
+			  id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE; ?>" method="post" >
 			<!-- SUBMIT -->
 			<div class="DivContentBodyOptions">
 				<div class="DivContentBodyOptionsBox">
@@ -19,8 +19,8 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
+							   name="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
+							   value="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -32,10 +32,11 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE_SELECT; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE_SELECT; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+							   name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_SEL; ?>"
+							   id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_SEL; ?>"
+							   value="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_SEL; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsFind.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -45,8 +46,9 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE_REGISTER; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE_REGISTER; ?>"
+							   name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_REGISTER; ?>"
+							   id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_REGISTER; ?>"
+							   value="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_REGISTER; ?>"
 							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_INSERT'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
@@ -58,10 +60,11 @@
 					</div>
 					<div class="DivContentBodyContainersBox">
 						<input type="image" 
-							   name="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE_LIST; ?>"
-							   value="<?php echo ConfigInfraTools::FORM_TYPE_ASSOC_USER_SERVICE_LIST; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LIST'); ?>"
+							   name="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_LST; ?>"
+							   id="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_LST; ?>"
+							   value="<?php echo ConfigInfraTools::FM_TYPE_ASSOC_USER_SERVICE_LST; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsList.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -73,32 +76,32 @@
 			</div>
 		</form>
 		<?php 
-		//TYPE_ASSOC_USER_SERVICE LIST
-		if($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_LIST)
+		//PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_LST
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_LST)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_LIST)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_LST)) . ".php");
 		}
-		//TYPE_ASSOC_USER_SERVICE REGISTER
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_REGISTER)
+		//PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_REGISTER
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_REGISTER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_REGISTER)) . ".php");
 		}
-		//TYPE_ASSOC_USER_SERVICE SELECT
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_SELECT)
+		//PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_SEL
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_SEL)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_SELECT)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_SEL)) . ".php");
 		}
-		//TYPE_ASSOC_USER_SERVICE UPDATE
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_UPDATE)
+		//PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_UPDT
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_UPDT)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_UPDATE)) . ".php");
+						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_UPDT)) . ".php");
 		}
-		//TYPE_ASSOC_USER_SERVICE VIEW
-		elseif($this->Page == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_VIEW)
+		//PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_VIEW
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_VIEW)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_TYPE_ASSOC_USER_SERVICE_VIEW)) . ".php");

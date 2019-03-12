@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceMonitoring
-Creation: 09/07/2018
+Creation: 2018/07/09
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/ConfigInfraTools.php
@@ -11,7 +11,7 @@ Dependencies:
 			Base       - Php/Model/InfraToolsMonitoring.php
 	
 Description: 
-			Classe used to access and deal with information of the database about informations of monitoring.
+			Class with Singleton pattern for dabatabase methods of InfraTools Monitoring
 Functions: 
 
 **************************************************************************/
@@ -57,14 +57,14 @@ class InfraToolsFacedePersistenceMonitoring
 			                                                         $this->InfraToolsConfig->DefaultMySqlPort,
 																	 $this->InfraToolsConfig->DefaultMySqlDataBase,
 			                                                         $this->InfraToolsConfig->DefaultMySqlUser, 
-																	 $this->InfraToolsConfig->DefaultMySqlPassword);
+																	 $this->InfraToolsConfig->DefaultMySqlUserPassword);
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;

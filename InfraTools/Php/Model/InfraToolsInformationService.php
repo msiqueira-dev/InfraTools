@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsInformationService
-Creation: 09/07/2018
+Creation: 2018/07/09
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um tipo de serviço.
+			Class for Information Service
 Get / Set: 
 			public function GetInformationServiceId();
 			public function GetInformationServiceDescription();
@@ -44,21 +44,21 @@ class InfraToolsInformationService
 								$InformationServiceValue, $Service) 
 	{
 		$this->InfraToolsFactory = InfraToolsFactory::__create();		
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
-		if($InformationServiceDescription != NULL)
-			$this->InformationServiceDescription    = $InformationServiceDescription;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_DESCRIPTION);
-		if($InformationServiceId != NULL)
-			$this->InformationServiceId    = $InformationServiceId;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_ID);
-		if($InformationServiceValue != NULL)
+		if(!is_null($InformationServiceDescription))
+			$this->InformationServiceDescription = $InformationServiceDescription;
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_DESCRIPTION);
+		if(!is_null($InformationServiceId))
+			$this->InformationServiceId = $InformationServiceId;
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_ID);
+		if(!is_null($InformationServiceValue))
 			$this->InformationServiceVaalue    = $InformationServiceValue;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_VALUE);
-		if($Service != NULL)
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_VALUE);
+		if(!is_null($Service))
 			$this->InfraToolsService    = $InfraToolsService;
-		else throw new Exception(Config::EXCEPTION_INFORMATION_SERVICE_SERVICE);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_INFORMATION_SERVICE_SERVICE);
 	}
 	
 	/* Clone */
@@ -90,13 +90,13 @@ class InfraToolsInformationService
 	
 	public function GetInformationServiceServiceId()
 	{
-		if($this->InfraToolsService != NULL)
+		if(!is_null($this->InfraToolsService))
 			return $this->InfraToolsService->GetServiceId();
 	}
 	
 	public function GetInformationServiceServiceName()
 	{
-		if($this->InfraToolsService != NULL)
+		if(!is_null($this->InfraToolsService))
 			return $this->InfraToolsService->GetServiceName();
 	}
 	
@@ -119,9 +119,9 @@ class InfraToolsInformationService
 	/* METHODS */
 	public function UpdateServiceInformation($InformationServiceDescription, $InformationServiceValue)
 	{
-		if ($InformationServiceDescription != NULL)
+		if (!is_null($InformationServiceDescription))
 			$this->InformationServiceDescription = $InformationServiceDescription;
-		if($InformationServiceValue != NULL)
+		if(!is_null($InformationServiceValue))
 			$this->InformationServiceValue = $InformationServiceValue;
 	}	
 }

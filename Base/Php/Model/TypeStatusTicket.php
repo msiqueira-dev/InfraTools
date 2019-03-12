@@ -5,13 +5,13 @@ Class: TypeStatusTicket
 Creation: 31/10/2017
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
 			Class for the type of the ticket status.
 Get / Set:
 			public function GetRegisterDate();
 			public function GetTypeStatusTicketDescription();
-			public function GetTypeStatusTicketId();
 			public function SetTypeStatusTicketDescription($TypeStatusTicketDescription);
 Methods:
 			private function SetState(TypeStatusTicketState $State);
@@ -35,14 +35,16 @@ class TypeStatusTicket
 	/* Properties */
 	protected $RegisterDate                = NULL;
 	protected $TypeStatusTicketDescription = NULL;
-	protected $TypeStatusTicketId          = NULL;
 
 	/* Constructor */
-	public function __construct($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId) 
+	public function __construct($RegisterDate, $TypeStatusTicketDescription) 
 	{
-		$this->RegisterDate                = $RegisterDate;
-		$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
-		$this->TypeStatusTicketId          = $TypeStatusTicketId;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		if(!is_null($TypeStatusTicketDescription))
+			$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
+		else throw new Exception(Config::EXCEPTION_TYPE_STATUS_TICKET_DESCRIPTION);
 	}
 	
 	/* Clone */
@@ -62,21 +64,18 @@ class TypeStatusTicket
 		return $this->TypeStatusTicketDescription;
 	}
 	
-	public function GetTypeStatusTicketId()
-	{
-		return $this->TypeStatusTicketId;
-	}
-	
 	/* SET */
 	public function SetTypeStatusTicketDescription($TypeStatusTicketDescription)
 	{
-		$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
+		if(!is_null($TypeStatusTicketDescription))
+			$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
 	}
 	
 	/* METHODS */
 	private function SetState(TypeStatusTicketState $State)
 	{
-		$this->State = $State;
+		if(!is_null($State))
+			$this->State = $State;
 	}
 	
 	public function TypeStatusTicketCanceled()
@@ -118,7 +117,7 @@ class TypeStatusTicket
 	
 	public function UpdateTypeStatusTicket($TypeStatusTicketDescription)	
 	{
-		if($this->TypeStatusTicketDescription != NULL)
+		if(!is_null($this->TypeStatusTicketDescription))
 			$this->TypeStatusTicketDescription = $TypeStatusTicketDescription;
 	}
 }

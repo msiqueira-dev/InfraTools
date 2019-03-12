@@ -2,13 +2,13 @@
 
 /************************************************************************
 Class: InfraToolsPersistenceDataBase
-Creation: 2018-08-15
+Creation: 2018/08/15
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
 	
 Description: 
-			Classe para armazenar queries a serem executadas no banco de dados.
+			Classe for System creationg database queries.
 Methods:
 		public static function SqlCreateInfraToolsDataBase();
 		public static function SqlCreateInfraToolsDataBaseTableAssocTicketUserResponsible();
@@ -16,6 +16,7 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTableAssocIpAddressService();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUrlAddressService();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserCorporation();
+		public static function SqlCreateInfraToolsDataBaseTableAssocUserNotification();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserPreference();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserRole();
 		public static function SqlCreateInfraToolsDataBaseTableAssocUserService();
@@ -29,11 +30,11 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTableInformationService();
 		public static function SqlCreateInfraToolsDataBaseTableIpAddress();
 		public static function SqlCreateInfraToolsDataBaseTableMonitoring();
+		public static function SqlCreateInfraToolsDataBaseTableNetwork();
 		public static function SqlCreateInfraToolsDataBaseTableNotification();
 		public static function SqlCreateInfraToolsDataBaseTablePreference();
 		public static function SqlCreateInfraToolsDataBaseTableRole();
 		public static function SqlCreateInfraToolsDataBaseTableService();
-		public static function SqlCreateInfraToolsDataBaseTableStatusMonitoring();
 		public static function SqlCreateInfraToolsDataBaseTableSystemConfiguration();
 		public static function SqlCreateInfraToolsDataBaseTableTeam();
 		public static function SqlCreateInfraToolsDataBaseTableTicket();
@@ -54,7 +55,8 @@ Methods:
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert();
 		public static function SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate();
 		public static function SqlDropInfraToolsDataBase();
-		public static function SqlInfraToolsCheckDataBase();
+		public static function SqlInfraToolsDataBaseCheck();
+		public static function SqlInfraToolsDataBaseGetRowCount();
 **************************************************************************/
 
 class InfraToolsPersistenceDataBase
@@ -134,7 +136,7 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyAssocIpAddressServiceIp
                 FOREIGN KEY (AssocIpAddressServiceIp)
-                REFERENCES INFRATOOLS.IP_ADDRESS (Ip)
+                REFERENCES INFRATOOLS.IP_ADDRESS (IpAddressIpv4)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -199,6 +201,30 @@ class InfraToolsPersistenceDataBase
                 COLLATE = utf8_unicode_ci";
 	}
 	
+	public static function SqlCreateInfraToolsDataBaseTableAssocUserNotification()
+	{
+		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.ASSOC_USER_NOTIFICATION (
+                AssocUserNotificationNotificationId INT NOT NULL,
+                AssocUserNotificationUserEmail VARCHAR(60) NOT NULL,
+                AssocUserNotificationRead TINYINT(1) NOT NULL,
+                RegisterDate DATETIME NOT NULL,
+                PRIMARY KEY (AssocUserNotificationNotificationId, AssocUserNotificationUserEmail),
+                INDEX IndexAssocUserNotificationUserEmail (AssocUserNotificationUserEmail ASC),
+                CONSTRAINT ForeignKeyAssocUserNotificationNotificationId
+                FOREIGN KEY (AssocUserNotificationNotificationId)
+                REFERENCES INFRATOOLS.NOTIFICATION (NotificationId)
+                ON DELETE RESTRICT
+                ON UPDATE CASCADE,
+                CONSTRAINT ForeignKeyAssocUserNotificationUserEmail
+                FOREIGN KEY (AssocUserNotificationUserEmail)
+                REFERENCES INFRATOOLS.USER (Email)
+                ON DELETE RESTRICT
+                ON UPDATE CASCADE)
+                ENGINE = InnoDB
+				DEFAULT CHARACTER SET = utf8
+                COLLATE = utf8_unicode_ci";
+	}
+	
 	public static function SqlCreateInfraToolsDataBaseTableAssocUserPreference()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.ASSOC_USER_PREFERENCE (
@@ -226,8 +252,8 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableAssocUserRole()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.ASSOC_USER_ROLE (
-                AssocUserRoleUserEmail VARCHAR(60) NOT NULL,
                 AssocUserRoleRoleName VARCHAR(45) NOT NULL,
+				AssocUserRoleUserEmail VARCHAR(60) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (AssocUserRoleRoleName, AssocUserRoleUserEmail),
                 INDEX IndexAssocUserRoleUser (AssocUserRoleUserEmail ASC),
@@ -282,23 +308,23 @@ class InfraToolsPersistenceDataBase
                 RegisterDate DATETIME NOT NULL,
                 AssocUserTeamTeamId INT NOT NULL,
                 AssocUserTeamUserEmail VARCHAR(60) NOT NULL,
-                AssocUserTeamUserType INT NOT NULL,
+                AssocUserTeamUserType VARCHAR(45) NOT NULL,
                 PRIMARY KEY (AssocUserTeamTeamId, AssocUserTeamUserEmail),
                 INDEX IndexAssocUserTeamUserEmail (AssocUserTeamUserEmail ASC),
                 INDEX IndexAssocUserTeamUserType (AssocUserTeamUserType ASC),
-                CONSTRAINT ForeignKeyUserTeamUserEmail
+                CONSTRAINT ForeignKeyAssocUserTeamUserEmail
                 FOREIGN KEY (AssocUserTeamUserEmail)
                 REFERENCES INFRATOOLS.USER (Email)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
-                CONSTRAINT ForeignKeyUserTeamTeamId
+                CONSTRAINT ForeignKeyAssocUserTeamTeamId
                 FOREIGN KEY (AssocUserTeamTeamId)
                 REFERENCES INFRATOOLS.TEAM (TeamId)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
-                CONSTRAINT ForeignKeyUserTeamUserType
+                CONSTRAINT ForeignKeyAssocUserTeamUserType
                 FOREIGN KEY (AssocUserTeamUserType)
-                REFERENCES INFRATOOLS.TYPE_ASSOC_USER_TEAM (TypeAssocUserTeamId)
+                REFERENCES INFRATOOLS.TYPE_ASSOC_USER_TEAM (TypeAssocUserTeamDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -381,7 +407,6 @@ class InfraToolsPersistenceDataBase
                 HistoryTicketDescription VARCHAR(500) NOT NULL,
                 HistoryTicketId INT NOT NULL,
                 HistoryTicketTicketId INT NOT NULL,
-                HistoryTicketTicketNumber INT NOT NULL,
                 HistoryTicketService INT NOT NULL,
                 HistoryTicketSuggestion VARCHAR(250) NULL,
                 HistoryTicketTitle VARCHAR(90) NOT NULL,
@@ -410,8 +435,8 @@ class InfraToolsPersistenceDataBase
                 PRIMARY KEY (InformationServiceId),
                 INDEX IndexServiceInformationService (InformationServiceId ASC),
                 UNIQUE INDEX UniqueInformationServiceId (InformationServiceId ASC),
-                CONSTRAINT ForeignKeyServiceInformationService
-                FOREIGN KEY (InformationServiceId)
+                CONSTRAINT ForeignKeyInformationServiceService
+                FOREIGN KEY (InformationServiceServiceId)
                 REFERENCES INFRATOOLS.SERVICE (ServiceId)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
@@ -420,11 +445,21 @@ class InfraToolsPersistenceDataBase
 	
 	public static function SqlCreateInfraToolsDataBaseTableIpAddress()
 	{
-		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.IP_ADDRESS (
-                Ip VARCHAR(15) NOT NULL,
+		return "CREATE TABLE IF NOT EXISTS `INFRATOOLS`.`IP_ADDRESS` (
+                IpAddressDescription VARCHAR(100) NULL,
+                IpAddressIpv4 VARCHAR(15) NOT NULL,
+                IpAddressIpv6 VARCHAR(38) NULL,
+                IpAddressNetwork VARCHAR(60) NULL,
                 RegisterDate DATETIME NOT NULL,
-                PRIMARY KEY (Ip),
-                UNIQUE INDEX UniqueIpAddressIp (Ip ASC))
+                PRIMARY KEY (IpAddressIpv4),
+                UNIQUE INDEX UniqueIpAddressIp (IpAddressIpv4 ASC),
+                UNIQUE INDEX UniqueIpAddressIpv6 (IpAddressIpv6 ASC),
+                INDEX IndexIpAddressNetwork (IpAddressNetwork ASC),
+                CONSTRAINT ForeignKeyIpAddressNetwork
+                FOREIGN KEY (IpAddressNetwork)
+                REFERENCES INFRATOOLS.NETWORK (NetworkName)
+                ON DELETE RESTRICT
+                ON UPDATE CASCADE)
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -438,15 +473,15 @@ class InfraToolsPersistenceDataBase
                 MonitoringName VARCHAR(45) NOT NULL,
                 MonitoringService INT NOT NULL,
                 MonitoringSLA VARCHAR(45) NULL,
-                MonitoringStatus VARCHAR(45) NOT NULL,
-                MonitoringTime DATETIME NOT NULL,
-                MonitoringType VARCHAR(45) NOT NULL,
+                MonitoringStatus VARCHAR(80) NOT NULL,
+                MonitoringTime INT NOT NULL,
+                MonitoringType VARCHAR(80) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (MonitoringId),
                 INDEX IndexMonitoringService (MonitoringService ASC),
                 INDEX IndexMonitoringTypeTimeMonitoring (MonitoringTime ASC),
                 INDEX IndexMonitoringTypeMonitoring (MonitoringType ASC),
-                INDEX IndexMonitoringStatusMonitoring (MonitoringStatus ASC),
+                INDEX IndexMonitoringTypeStatusMonitoring (MonitoringStatus ASC),
                 CONSTRAINT ForeignKeyMonitoringService
                 FOREIGN KEY (MonitoringService)
                 REFERENCES INFRATOOLS.SERVICE (ServiceId)
@@ -459,14 +494,28 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyMonitoringTypeMonitoring
                 FOREIGN KEY (MonitoringType)
-                REFERENCES INFRATOOLS.TYPE_MONITORING (TypeMonitoringName)
+                REFERENCES INFRATOOLS.TYPE_MONITORING (TypeMonitoringDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
-                CONSTRAINT ForergnKeyMonitoringStatusMonitoring
+                CONSTRAINT ForergnKeyMonitoringTypeStatusMonitoring
                 FOREIGN KEY (MonitoringStatus)
-                REFERENCES INFRATOOLS.STATUS_MONITORING (StatusMonitoringName)
+                REFERENCES INFRATOOLS.TYPE_STATUS_MONITORING (TypeStatusMonitoringDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
+                ENGINE = InnoDB
+                DEFAULT CHARACTER SET = utf8
+                COLLATE = utf8_unicode_ci";
+	}
+	
+	public static function SqlCreateInfraToolsDataBaseTableNetwork()
+	{
+		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.NETWORK (
+  			    NetworkIp VARCHAR(15) NOT NULL,
+                NetworkName VARCHAR(60) NOT NULL,
+                NetworkNetmask VARCHAR(2) NOT NULL,
+                RegisterDate DATETIME NOT NULL,
+                UNIQUE INDEX NetworkName_UNIQUE (NetworkName ASC),
+                PRIMARY KEY (NetworkName))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -478,17 +527,10 @@ class InfraToolsPersistenceDataBase
                 NotificationActive TINYINT(1) NOT NULL,
                 NotificationId INT NOT NULL AUTO_INCREMENT,
                 NotificationText VARCHAR(500) NOT NULL,
-                NotificationUserEmail VARCHAR(60) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (NotificationId),
-                INDEX IndexNotificationUser (NotificationUserEmail ASC),
                 UNIQUE INDEX UniqueNotificationText (NotificationText ASC),
-                UNIQUE INDEX UniqueNotificationId (NotificationId ASC),
-                CONSTRAINT ForeignKeyMessageUser
-                FOREIGN KEY (NotificationUserEmail)
-                REFERENCES INFRATOOLS.USER (Email)
-                ON DELETE RESTRICT
-                ON UPDATE CASCADE)
+                UNIQUE INDEX UniqueNotificationId (NotificationId ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -562,23 +604,6 @@ class InfraToolsPersistenceDataBase
                 COLLATE = utf8_unicode_ci";
 	}
 	
-	public static function SqlCreateInfraToolsDataBaseTableStatusMonitoring()
-	{
-		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.STATUS_MONITORING (
-                RegisterDate DATETIME NOT NULL,
-                StatusMonitoringName VARCHAR(45) NOT NULL,
-                PRIMARY KEY (StatusMonitoringName),
-                UNIQUE INDEX UniqueStatusMonitoringStatusMonitoringName (StatusMonitoringName ASC),
-                CONSTRAINT ForeignKeyStatusMonitoringTypeStatusMonitoring
-                FOREIGN KEY (StatusMonitoringName)
-                REFERENCES INFRATOOLS.TYPE_STATUS_MONITORING (TypeStatusMonitoringName)
-                ON DELETE RESTRICT
-                ON UPDATE CASCADE)
-                ENGINE = InnoDB
-                DEFAULT CHARACTER SET = utf8
-                COLLATE = utf8_unicode_ci";
-	}
-	
 	public static function SqlCreateInfraToolsDataBaseTableSystemConfiguration()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.SYSTEM_CONFIGURATION (
@@ -616,12 +641,11 @@ class InfraToolsPersistenceDataBase
                 RegisterDate DATETIME NOT NULL,
                 TicketDescription VARCHAR(500) NOT NULL,
                 TicketId INT NOT NULL AUTO_INCREMENT,
-                TicketNumber INT NOT NULL,
                 TicketService INT NULL,
-                TicketStatus INT NOT NULL,
+                TicketStatus VARCHAR(45) NOT NULL,
                 TicketSuggestion VARCHAR(45) NULL,
                 TicketTitle VARCHAR(90) NOT NULL,
-                TicketType INT NOT NULL,
+                TicketType VARCHAR(45) NOT NULL,
                 PRIMARY KEY (TicketId),
                 UNIQUE INDEX UniqueTicketId (TicketId ASC),
                 INDEX IndexTicketTypeTicket (TicketType ASC),
@@ -629,7 +653,7 @@ class InfraToolsPersistenceDataBase
                 INDEX IndexTicketStatusTicket (TicketStatus ASC),
                 CONSTRAINT ForeignKeyTicketTypeTicket
                 FOREIGN KEY (TicketType)
-                REFERENCES INFRATOOLS.TYPE_TICKET (TypeTicketId)
+                REFERENCES INFRATOOLS.TYPE_TICKET (TypeTicketDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyTicketService
@@ -639,7 +663,7 @@ class InfraToolsPersistenceDataBase
                 ON UPDATE CASCADE,
                 CONSTRAINT ForeignKeyTicketStatusTicket
                 FOREIGN KEY (TicketStatus)
-                REFERENCES INFRATOOLS.TYPE_STATUS_TICKET (TypeStatusTicketId)
+                REFERENCES INFRATOOLS.TYPE_STATUS_TICKET (TypeStatusTicketDescription)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)
                 ENGINE = InnoDB
@@ -678,9 +702,7 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_ASSOC_USER_TEAM (
                 RegisterDate DATETIME NOT NULL,
                 TypeAssocUserTeamDescription VARCHAR(45) NOT NULL,
-                TypeAssocUserTeamId INT NOT NULL AUTO_INCREMENT,
-                PRIMARY KEY (TypeAssocUserTeamId),
-                UNIQUE INDEX UniqueTypeAssocUserTeamId (TypeAssocUserTeamId ASC),
+                PRIMARY KEY (TypeAssocUserTeamDescription),
                 UNIQUE INDEX UniqueTypeAssocUserTeamDescription (TypeAssocUserTeamDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
@@ -690,12 +712,10 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableTypeMonitoring()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_MONITORING (
-			    TypeMonitoringDescription VARCHAR(200) NOT NULL,
-			    TypeMonitoringName VARCHAR(45) NOT NULL,
-			    RegisterDate DATETIME NOT NULL,
-			    PRIMARY KEY (TypeMonitoringName),
-			    UNIQUE INDEX UniqueTypeMonitoringTypeMonitoringDescription (TypeMonitoringDescription ASC),
-			    UNIQUE INDEX UniqueTypeMonitoringTypeMonitoringName (TypeMonitoringName ASC))
+		        RegisterDate DATETIME NOT NULL,
+			    TypeMonitoringDescription VARCHAR(80) NOT NULL,
+			    PRIMARY KEY (TypeMonitoringDescription),
+			    UNIQUE INDEX UniqueTypeMonitoringTypeMonitoringDescription (TypeMonitoringDescription ASC))
 			    ENGINE = InnoDB
 			    DEFAULT CHARACTER SET = utf8
 			    COLLATE = utf8_unicode_ci";	
@@ -717,12 +737,10 @@ class InfraToolsPersistenceDataBase
 	public static function SqlCreateInfraToolsDataBaseTableTypeStatusMonitoring()
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_STATUS_MONITORING (
-                TypeStatusMonitoringDescription VARCHAR(200) NOT NULL,
-                TypeStatusMonitoringName VARCHAR(45) NOT NULL,
-                RegisterDate DATETIME NOT NULL,
-                PRIMARY KEY (TypeStatusMonitoringName),
-                UNIQUE INDEX UniqueTypeStatusMonitoringTypeStatusMonitoringDescription (TypeStatusMonitoringDescription ASC),
-                UNIQUE INDEX UniqueTypeStatusMonitoringTypeStatusMonitoringName (TypeStatusMonitoringName ASC))
+		        RegisterDate DATETIME NOT NULL,
+                TypeStatusMonitoringDescription VARCHAR(80) NOT NULL,
+                PRIMARY KEY (TypeStatusMonitoringDescription),
+                UNIQUE INDEX UniqueTypeStatusMonitoringTypeStatusMonitoringDescription (TypeStatusMonitoringDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -733,10 +751,8 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_STATUS_TICKET (
                 RegisterDate DATETIME NOT NULL,
                 TypeStatusTicketDescription VARCHAR(45) NOT NULL,
-                TypeStatusTicketId INT NOT NULL AUTO_INCREMENT,
-                PRIMARY KEY (TypeStatusTicketId),
-                UNIQUE INDEX UniqueTypeStatusTicketTypeStatusTicketName (TypeStatusTicketDescription ASC),
-                UNIQUE INDEX UniqueTypeStatusTicketTypeStatusTicketId (TypeStatusTicketId ASC))
+				PRIMARY KEY (TypeStatusTicketDescription),
+                UNIQUE INDEX UniqueTypeStatusTicketTypeStatusTicketDescription (TypeStatusTicketDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -746,7 +762,7 @@ class InfraToolsPersistenceDataBase
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_TIME_MONITORING (
                 RegisterDate DATETIME NOT NULL,
-                TypeTimeMonitoringValue DATETIME NOT NULL,
+                TypeTimeMonitoringValue INT NOT NULL,
                 TypeTimeMonitoringDescription VARCHAR(45) NOT NULL,
                 PRIMARY KEY (TypeTimeMonitoringValue),
                 UNIQUE INDEX UniqueTypeTimeMonitoringTypeTimeMonitoringTimeValue (TypeTimeMonitoringValue ASC),
@@ -761,10 +777,8 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_TICKET (
                 RegisterDate DATETIME NOT NULL,
                 TypeTicketDescription VARCHAR(45) NOT NULL,
-                TypeTicketId INT NOT NULL AUTO_INCREMENT,
-                UNIQUE INDEX UniqueTypeTicketName (TypeTicketDescription ASC),
-                PRIMARY KEY (TypeTicketId),
-                UNIQUE INDEX UniqueTypeTicketId (TypeTicketId ASC))
+				PRIMARY KEY (TypeTicketDescription),
+                UNIQUE INDEX UniqueTypeTicketTypeTicketDescription (TypeTicketDescription ASC))
                 ENGINE = InnoDB
                 DEFAULT CHARACTER SET = utf8
                 COLLATE = utf8_unicode_ci";
@@ -793,9 +807,7 @@ class InfraToolsPersistenceDataBase
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.TYPE_USER (
 			    RegisterDate DATETIME NOT NULL,
 			    TypeUserDescription VARCHAR(45) NOT NULL,
-			    TypeUserId INT NOT NULL AUTO_INCREMENT,
-			    PRIMARY KEY (TypeUserId),
-			    UNIQUE INDEX UniqueTypeUserId (TypeUserId ASC),
+			    PRIMARY KEY (TypeUserDescription),
 			    UNIQUE INDEX UniqueTypeUserDescription (TypeUserDescription ASC))
 			    ENGINE = InnoDB
 			    DEFAULT CHARACTER SET = utf8
@@ -836,7 +848,7 @@ class InfraToolsPersistenceDataBase
 	            UserPhonePrimaryPrefix VARCHAR(3) NULL,
 	            UserPhoneSecondary VARCHAR(9) NULL,
 	            UserPhoneSecondaryPrefix VARCHAR(3) NULL,
-	            UserType INT NOT NULL,
+	            UserType VARCHAR(45) NOT NULL,
 	            UserUniqueID VARCHAR(25) NULL,
 	            PRIMARY KEY (Email),
 	            UNIQUE INDEX UniqueUserEmail (Email ASC),
@@ -852,7 +864,7 @@ class InfraToolsPersistenceDataBase
 		        ON UPDATE CASCADE,
 	            CONSTRAINT ForeignKeyUserTypeUser
 		        FOREIGN KEY (UserType)
-		        REFERENCES INFRATOOLS.TYPE_USER (TypeUserId)
+		        REFERENCES INFRATOOLS.TYPE_USER (TypeUserDescription)
 		        ON DELETE RESTRICT
 		        ON UPDATE CASCADE,
 	            CONSTRAINT ForeignKeyUserCountry
@@ -952,23 +964,14 @@ class InfraToolsPersistenceDataBase
 		return "DROP SCHEMA IF EXISTS INFRATOOLS";
 	}
 	
-	public static function SqlInfraToolsCheckDataBase()
+	public static function SqlInfraToolsDataBaseCheck()
 	{
-		return "SELECT " . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE        .", "
-					     . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_DESCRIPTION   .", "
-						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME          .", "
-						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NUMBER        .", "
-						 . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_VALUE         ."  "
-			 . "FROM  "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            ."  "
- 			 . "WHERE "  . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_NAME   . "= 'ENABLE_PAGE_INSTALL' "
-             . "AND "    . ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION                            .".".
-			               ConfigInfraTools::TABLE_SYSTEM_CONFIGURATION_FIELD_OPTION_ACTIVE . "= 1";
+		return "show full tables from Infratools";
+	}
+	
+	public static function SqlInfraToolsDataBaseGetRowCount()
+	{
+		return "SELECT sum(TABLE_ROWS) AS ROW_COUNT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA like '%infratools%'";
 	}
 }
 ?>

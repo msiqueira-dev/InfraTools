@@ -2,18 +2,20 @@
 
 /************************************************************************
 Class: MySqlManager.php
-Creation: 03/06/2014
+Creation: 2014/06/03
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe de controle de Banco de Dados MySql
+			Class for MySqlManager
 Functions: 
-			public function OpenDataBaseConnection(&$mySqlConnection, &$MySqlError);
 			public function CloseDataBaseConnection($MySqlConnection, $Statement);
+			public function DestroyMySqlManagerInstance();
 			public function ExecuteInsertOrUpdate($MySqlConnection, $Statement, &$ErrorCode, &$ErrorString, &$QueryResult)
 			public function ExecuteSqlSelectQuery($Query, $MySqlConnection, &$Statement, &$QueryError);
 			public function GetDataBaseProccess($MySqlConnection, &$ArrayMySqlProccess, &$MySqlError);
+			public function OpenDataBaseConnection(&$MySqlConnection, &$MySqlError);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -25,22 +27,6 @@ if (!class_exists("Config"))
 
 class MySqlManager
 {	
-	/* Constantes de Retorno */
-	const MYSQL_ERROR_CONNECTION_CLOSE      = "RetMySqlErrorConnectionClose";
-	const MYSQL_ERROR_CONNECTION_EMPTY      = "RetMySqlErrorConnectionEmpty";
-	const MYSQL_ERROR_CONNECTION_NOT_EMPTY  = "RetMySqlErrorConnectionNotEmpty";
-	const MYSQL_ERROR_CONNECTION_OPEN       = "RetMySqlErrorConnectionOpen";
-	const MYSQL_ERROR_QUERY_PREPARE         = "RetMySqlErrorQueryPrepare";
- 	const MYSQL_ERROR_QUERY_EMPTY           = "RetMySqlErrorQueryEmpty";
-	const MYSQL_ERROR_QUERY_SQL             = "RetMySqlErrorQuerySql";
-	
-	/* Constantes de Comandos */
-	const MYSQL_CHATSET_UTF8       = "utf8";
-	
-	/* Constantes de Log */
-	const MYSQL_LOG_ERROR          = "LogMySqlError";
-	const MYSQL_LOG_QUERY          = "LogMySqlQuery";
-	
 	/* Instância usadas nessa classe */
 	private $Config;
 	private $Factory = NULL;
@@ -86,111 +72,95 @@ class MySqlManager
         exit(get_class($this) . ": Error! Clone Not Allowed!");
     }
 	
-	public function OpenDataBaseConnection(&$MySqlConnection, &$MySqlError)
-	{
-		$return = NULL; $selectedDataBase = NULL; $MySqlError = NULL;
-		if ($MySqlConnection == NULL)
-		{
-			$MySqlConnection = mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
-			                                  $this->MySqlDataBase, $this->MySqlPort);
-			if ($MySqlConnection != NULL) 
-			{
-				$MySqlConnection->set_charset(self::MYSQL_CHATSET_UTF8);
-				return Config::SUCCESS;
-			}
-			else 
-			{
-				$MySqlError = "Error: " . mysqli_connect_error();
-				return self::MYSQL_ERROR_CONNECTION_OPEN;
-			}
-		}
-		else return self::MYSQL_ERROR_CONNECTION_NOT_EMPTY;
-	}
-	
 	public function CloseDataBaseConnection($MySqlConnection, $Statement)
 	{
-		if ($MySqlConnection != NULL)
+		if (!is_null($MySqlConnection) && is_a($MySqlConnection, "mysqli"))
 		{
-			if($Statement != NULL)
+			if(!is_null($Statement))
 			{
 				if (mysqli_close($MySqlConnection) == TRUE && $Statement->close() == TRUE)
-					return Config::SUCCESS;
+					return Config::RET_OK;
 			}
 			else if (mysqli_close($MySqlConnection))
-				return Config::SUCCESS;
-			return self::MYSQL_ERROR_CONNECTION_CLOSE;
+				return Config::RET_OK;
+			return Config::DB_ERROR_CONNECTION_CLOSE;
 		}
-		else return self::MYSQL_ERROR_CONNECTION_EMPTY;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function DestroyMySqlManagerInstance()
+	{
+		self::$Instance = NULL;
 	}
 	
 	public function ExecuteInsertOrUpdate($MySqlConnection, $Statement, &$ErrorCode, &$ErrorString, &$QueryResult)
 	{
 		$QueryResult = NULL; $ErrorCode = NULL; $ErrorString = NULL;
 
-		if ($Statement != NULL)
+		if (!is_null($Statement))
 		{
 			if ($this->Config->EnableLogMySqlQuery || $this->Config->EnableLogMySqlError)
 			{
 				$Log = $this->Factory->CreateLog($this->Config->DefaultLogPath);
 				if ($this->Config->EnableLogMySqlQuery)
-					$Log->WriteLog(self::MYSQL_LOG_QUERY, $Statement);	
+					$Log->WriteLog(Config::DB_LOG_QUERY, $Statement);	
 			}
 			if($QueryResult = $Statement->execute())
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			else
 			{
 				$ErrorCode = mysqli_errno($MySqlConnection);
 				$ErrorString = $Statement->error;
 				if ($this->Config->EnableLogMySqlError)
-					$Log->WriteLog(self::MYSQL_LOG_ERROR, $ErrorCode . ": " . $ErrorString);
-				return self::MYSQL_ERROR_QUERY_SQL;
+					$Log->WriteLog(Config::DB_LOG_ERROR, $ErrorCode . ": " . $ErrorString);
+				return Config::DB_ERROR_QUERY_SQL;
 			}
 		}
-		else return self::MYSQL_ERROR_CONNECTION_EMPTY;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function ExecuteSqlSelectQuery($Query, $MySqlConnection, &$Statement, &$QueryError)
 	{
 		$QueryResult = NULL; $QueryError = NULL;
 
-		if ($MySqlConnection != NULL)
+		if (!is_null($MySqlConnection))
 		{
 			if ($this->Config->EnableLogMySqlQuery || $this->Config->EnableLogMySqlError)
 			{
 				$Log = $this->Factory->CreateLog($this->Config->DefaultLogPath);
 				if ($this->Config->EnableLogMySqlQuery)
-					$Log->WriteLog(self::MYSQL_LOG_QUERY, $Query);	
+					$Log->WriteLog(Config::DB_LOG_QUERY, $Query);	
 				if ($this->Config->EnableLogMySqlError)
-					$Log->WriteLog(self::MYSQL_LOG_ERROR, $QueryError);
+					$Log->WriteLog(Config::DB_LOG_ERROR, $QueryError);
 			}
 			if($Statement == NULL)
 			{
-				if($Query != NULL)
+				if(!is_null($Query))
 				{
 					if(!($Statement = $MySqlConnection->prepare($Query)))
 					{
 						$QueryError = $MySqlConnection->error;
-						return self::MYSQL_ERROR_QUERY_PREPARE;
+						return Config::DB_ERROR_QUERY_PREPARE;
 					}
 				}
-				else return self::MYSQL_ERROR_QUERY_EMPTY;
+				else return Config::DB_ERROR_QUERY_EMPTY;
 			}
 			if($Statement->execute())
-				return Config::SUCCESS;
+				return Config::RET_OK;
 			else
 			{
 				$QueryError = $Statement->error; 
-				return self::MYSQL_ERROR_QUERY_SQL;
+				return Config::DB_ERROR_QUERY_SQL;
 			}
 		}
-		else return self::MYSQL_ERROR_CONNECTION_EMPTY;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
 	public function GetDataBaseProccess($MySqlConnection, &$ArrayMySqlProccess, &$MySqlError)
 	{
 		$ArrayMySqlProccess = array(); $MySqlConnection = NULL;
 		
-		if ($MySqlConnection != NULL)
+		if (!is_null($MySqlConnection))
 		{
 			$queryResult = mysqli_get_client_stats ($MySqlConnection);
 			while ($row = mysqli_fetch_assoc($queryResult))
@@ -198,7 +168,45 @@ class MySqlManager
 				           . $row["db"] . " " . $row["Command"] . " " . $row["Time"]);
 			mysqli_free_result($queryResult);	
 		}
-		else return self::MYSQL_ERROR_CONNECTION_EMPTY;
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function OpenDataBaseConnection(&$MySqlConnection, &$MySqlError)
+	{
+		$return = NULL; $selectedDataBase = NULL; $MySqlError = NULL;
+		if ($MySqlConnection == NULL || !is_a($MySqlConnection, "mysqli"))
+		{
+			try
+			{
+				
+				$MySqlConnection = @mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
+												   $this->MySqlDataBase, $this->MySqlPort);
+				if (is_object($MySqlConnection)) 
+				{
+					$MySqlConnection->set_charset(Config::DB_CHATSET_UTF8);
+					$MySqlConnection->options(MYSQLI_OPT_CONNECT_TIMEOUT, ProjectConfig::$MySqlOptionTimeOut);
+					return Config::RET_OK;
+				}
+				else 
+				{
+					$MySqlError = "Error: " . mysqli_connect_error() . " - " . mysqli_connect_errno();
+					if(mysqli_connect_errno() == Config::DB_CODE_ERROR_ACCESS_DENIED)
+						return Config::DB_CODE_ERROR_ACCESS_DENIED;
+					return Config::DB_ERROR_CONNECTION_OPEN;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				if(mysqli_connect_errno() == "1049")
+					return Config::DB_ERROR_CONNECTION_REFUSED;
+				elseif(mysqli_connect_errno() == "1049")
+					return Config::DB_ERROR_DATABASE_NOT_FOUND;
+				else return Config::DB_ERROR_CONNECTION_OPEN;
+			}
+		}
+		elseif(is_a($MySqlConnection, "mysqli"))
+			return Config::RET_OK;
+		else return Config::DB_ERROR_CONNECTION_NOT_EMPTY;
 	}
 }
 ?>

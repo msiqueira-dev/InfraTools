@@ -2,14 +2,14 @@
 
 /************************************************************************
 Class: Log.php
-Creation: 19/11/2013
+Creation: 2013/11/19
 Creator: Marcus Siqueira
 Dependencies:
-			Base/Web/Php/File.php
-			Base/Web/Php/Config.php
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
+			Base       - Php/Model/File.php
 Description: 
-			Classe que serve para gravar log das ações que são efetuadas
-			pelo usuário
+			Class for Log
 Functions: 
 			public function WriteLog($LogName, $ArrayString);
 			public function WriteLogPost();
@@ -35,7 +35,6 @@ class Log
 	/* Constantes de Retorno */
 	const ERROR                             = "Error";
 	const LOG_DIRECTORY_DOES_NOT_EXISTS     = "LOG_DIRECTORY_DOES_NOT_EXISTS";
-	const SUCCESS                           = "Success";
 	
 	/* Constantes de Log */
 	const LOG_DATE_DAY_MONTH_YEAR           = "d/m/Y";
@@ -72,7 +71,7 @@ class Log
 	Recebe uma variavel $ArrayString por parâmetro, e escreve na próxima linha do arquivo do log, com data e hora, 
 	cada índice e seu correspondente valor, até que termino todo o conteúdo da variável mesma.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		LOG_DIRECTORY_DOES_NOT_EXISTS - Diretório de Log não existe.
 		ERROR - Não foi possível escrever no arquivo de log.
 	**/
@@ -95,7 +94,7 @@ class Log
 						$val = get_object_vars($val); 
 						while (list($keyObject, $valObjetct) = each ($val))
 						{
-							if ($valObjetct != NULL)
+							if (!is_null($valObjetct))
 								$logString .= $keyObject . ": " . $valObjetct . self::LOG_STRING_DIVISION . " ";
 							else $logString .= $keyObject . ": " . "NULL" . self::LOG_STRING_DIVISION . " ";
 						}		
@@ -105,8 +104,8 @@ class Log
 			else $logString .= $ArrayString;
 			$logString .= self::LOG_STRING_JUMP_LINE;
 			$return = $this->InstanceFile->WriteFileEnd($this->LogPathDirectory . "/" . $LogName . date(self::LOG_DATE_FILE_YEAR_MONTH_DAY) . ".txt", $logString);
-			if ($return == self::SUCCESS) return self::SUCCESS;
-			else return self::ERROR;
+			if ($return == Config::RET_OK) return Config::RET_OK;
+			else return Config::RET_ERROR;
 		}
 		else return self::LOG_DIRECTORY_DOES_NOT_EXISTS;
 	}
@@ -117,9 +116,8 @@ class Log
 	Escreve na próxima linha do arquivo do log, com data e hora, cada índice e seu correspondente valor,
 	até que termino todo o conteúdo do $_POST.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		LOG_DIRECTORY_DOES_NOT_EXISTS - Diretório de Log não existe.
-		POST_IS_NULL - $_POST está nulo ou vázio.
 		ERROR - Não foi possível escrever no arquivo de log.
 	**/
 	public function WriteLogPost()
@@ -128,7 +126,7 @@ class Log
 
 		if (file_exists($this->LogPathDirectory))
 		{
-			if (isset($_POST) && $_POST != NULL)
+			if (isset($_POST) && !is_null($_POST))
 			{
 				$logString .= date(self::LOG_DATE_DAY_MONTH_YEAR) . " - " . date(self::LOG_DATE_HOUR_MINUTES) . " (" . PHP_OS . "): ";
 				while (list($key, $val) = each ($_POST))
@@ -137,10 +135,10 @@ class Log
 				}
 				$logString .= self::LOG_STRING_JUMP_LINE;
 				$return = $this->InstanceFile->WriteFileEnd($this->LogPathDirectory . "/" . self::LOG_FILE_POST . date(self::LOG_DATE_FILE_YEAR_MONTH_DAY) . ".txt", $logString);
-				if ($return == self::SUCCESS) return self::SUCCESS;
-				else return self::ERROR;
+				if ($return == Config::RET_OK) return Config::RET_OK;
+				else return Config::RET_ERROR;
 			}
-			else return Config::POST_IS_NULL;
+			else return Config::RET_ERROR;
 		}
 		else return self::LOG_DIRECTORY_DOES_NOT_EXISTS;
 	}
@@ -151,9 +149,8 @@ class Log
 	Escreve na próxima linha do arquivo do log, com data e hora, cada índice e seu correspondente valor,
 	até que termino todo o conteúdo da $_SESSION.
 	Retornos:
-		SUCCESS - Ok!
+		RET_OK - Ok!
 		LOG_DIRECTORY_DOES_NOT_EXISTS - Diretório de Log não existe.
-		SESSION_IS_NULL - $_SESSION está nulo ou vázio.
 		ERROR - Não foi possível escrever no arquivo de log.
 	**/
 	public function WriteLogSession()
@@ -175,7 +172,7 @@ class Log
 						$val = get_object_vars($val); 
 						while (list($keyObject, $valObjetct) = each ($val))
 						{
-							if ($valObjetct != NULL)
+							if (!is_null($valObjetct))
 								$logString .= $keyObject . ": "  . $valObjetct           . self::LOG_STRING_DIVISION . " ";
 							else $logString .= $keyObject . ": " . "NULL" . self::LOG_STRING_DIVISION . " ";
 						}		
@@ -183,10 +180,10 @@ class Log
 				}
 				$logString .= self::LOG_STRING_JUMP_LINE;
 				$return = $this->InstanceFile->WriteFileEnd($this->LogPathDirectory . "/" . self::LOG_FILE_SESSION . date(self::LOG_DATE_FILE_YEAR_MONTH_DAY) . ".txt", $logString);
-				if ($return == self::SUCCESS) return self::SUCCESS;
-				else return self::ERROR;
+				if ($return == Config::RET_OK) return Config::RET_OK;
+				else return Config::RET_ERROR;
 			}
-			else return Config::SESSION_IS_NULL;
+			else return Config::RET_ERROR;
 		}
 		else return self::LOG_DIRECTORY_DOES_NOT_EXISTS;
 	}

@@ -8,8 +8,8 @@
 	$FacedeBusinessInfraTools->GetOperationalSystem(false, $returnMessageOperationalSystem);
 ?>
 <div class="DivHeader">
-	<form name="<?php echo ConfigInfraTools::FORM_HEADER_PAGES; ?>"
-  	      id="<?php echo ConfigInfraTools::FORM_HEADER_PAGES; ?>" method="post" class="DivHeader">
+	<form name="<?php echo ConfigInfraTools::FM_HEADER_PAGES; ?>"
+  	      id="<?php echo ConfigInfraTools::FM_HEADER_PAGES; ?>" method="post" class="DivHeader">
     	<div class="DivHidden">
         	<input type="hidden" name="HiddenTextForm" id="HiddenTextForm" class="DivHeader"/>
 		</div>
@@ -18,31 +18,36 @@
             	<!-- PÁGINA HOME -->
                 <a href='<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_HOME') ?>' id='PageHome' 
                    title='<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_HOME_TITLE') ?>'>
-                    <img src="<?php echo $this->Config->DefaultServerImage 
-					. 'Logos/LogoInfraTools-2.png'; ?>"
-                    alt="<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_HOME_IMAGE_ALT') ?>" width='300' height='55' />
+                    <img src="<?php echo $this->Config->DefaultServerImage . 'Logos/LogoInfraTools320x40.png'; ?>"
+                         alt="<?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_HOME_IMAGE_ALT') ?>"
+                         onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Logos/LogoInfraTools320x40Hover.png'; ?>'"
+						 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+														.'Logos/LogoInfraTools320x40.png'; ?>'"  
+                         width='320' height='40' />
                 </a>
             </div>
             <div class="DivHeaderContainerMenu">
-              <!-- PAGE SERVICE -->
+              <!-- PAGE_SERVICE -->
                 <?php
 				if($ConfigInfraTools->PageServiceEnabled == true)
 					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_SERVICE) . ".php");
 				?>
-               <!-- PAGE DIAGNOSTIC TOOLS -->
+               <!-- PAGE_DIAGNOSTIC_TOOLS -->
                 <?php
 				if($ConfigInfraTools->PageDiagnosticToolsEnabled == true)
-					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS) . ".php");
+					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_DIAGNOSTIC_TOOLS) 
+								 . ".php");
 				?>
-                <!-- PAGE ABOUT -->
+                <!-- PAGE_ABOUT -->
                 <?php
 				if($ConfigInfraTools->PageAboutEnabled == true)
 					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_ABOUT) . ".php");
 				?>
-                <!-- PAGE CONTACT -->
+                <!-- PAGE_SUPPORT -->
                 <?php
-				if($ConfigInfraTools->PageContactEnabled == true)
-					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_CONTACT). ".php");
+				if($ConfigInfraTools->PageSupportContactEnabled == true)
+					include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . str_replace("_", "",  ConfigInfraTools::PAGE_SUPPORT) . ".php");
 				?>
             </div>
         </div>
@@ -100,8 +105,8 @@
             -->
         </div>
     	<div class="DivHeaderDivisionContainerLanguage">
-        	<form name="<?php echo ConfigInfraTools::FORM_HEADER_LANGUAGE; ?>" 
-                  id="<?php echo ConfigInfraTools::FORM_HEADER_LANGUAGE; ?>" action="#" method="post">
+        	<form name="<?php echo ConfigInfraTools::FM_LANGUAGE; ?>" 
+                  id="<?php echo ConfigInfraTools::FM_LANGUAGE; ?>" action="#" method="post">
                 <!-- Language Portuguese -->
                 <?php
                     if($ConfigInfraTools->LanguagePortugueseEnabled == true)
@@ -184,7 +189,9 @@
         <div class="DivHeaderPageTitleContentText">
             <h1>
                 <?php
-					echo $this->InstanceLanguageText->GetPageName($this->Page);
+					if(empty($this->PageBody))
+					   echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage());
+					else echo $this->InstanceLanguageText->GetPageName($this->PageBody);
                 ?>
             </h1>
         </div>

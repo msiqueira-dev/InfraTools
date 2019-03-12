@@ -7,93 +7,89 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_TEXT_TIP'); ?>
         </label>
     </div>
-	<form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_WHOIS; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_WHOIS; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_WHOIS . '#tabs17';?>" 
+	<form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_WHOIS . '#tabs17';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN; ?>" 
-             	                id="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_GET_WHOIS; ?>">
-            <input type="radio" name="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO; ?>"
-                                id="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO_HOST; ?>"
-                                value="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO_HOST; ?>"
+            <input type="radio" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO; ?>"
+                                id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO_HOST; ?>"
+                                value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO_HOST; ?>"
                                 onclick="this.blur();this.focus();"
-                                onchange="SwitchElementVisibility('<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP; ?>', 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST; ?>');
-                                          MakeInputVisible('<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>');
+                                onchange="SwitchElementVisibility('<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP; ?>', 
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST; ?>');
+                                          MakeInputVisible('<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>');
                                           ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_GET_WHOIS; ?>', 
                                                                    'DivContentBodySubmit', 
-                                                                   '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>', 
+                                                                   '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>', 
                                                                    'Host')"
                                 title="<?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_RADIO_HOST_TITLE'); ?>"  
 								<?php echo $this->CheckedFunctionGetWhoisRadioHost; ?> />
             <div class="DivContentBodyContainerLabelHost">
 				<label><?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_LABEL_HOST'); ?></label> 
 			</div>
-            <input type="radio" name="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO; ?>"
-                                id="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO_IP; ?>"
-                                value="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_RADIO_IP; ?>"
+            <input type="radio" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO; ?>"
+                                id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO_IP; ?>"
+                                value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO_IP; ?>"
                                 onclick="this.blur();this.focus();"
                                 onchange="SwitchElementVisibility(
-                                                          '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST; ?>', 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP; ?>');
-                                          MakeInputVisible('<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>');
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST; ?>', 
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP; ?>');
+                                          MakeInputVisible('<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>');
                                           ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_GET_WHOIS; ?>', 
                                                                    'DivContentBodySubmit', 
-                                                                   '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>', 
+                                                                   '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>', 
                                                                    'Ip')"
                                 title="<?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_RADIO_IP_TITLE'); ?>"  
 								<?php echo $this->CheckedFunctionGetWhoisRadioIp; ?> />
 			<div class="DivContentBodyContainerLabelIp">
 				<label><?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_LABEL_IP'); ?></label>
 			</div>
-            <input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST; ?>" 
                                onblur="ValidateHostName(null, 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST; ?>',
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>',
                                                           '', true);"
                                onkeyup="ValidateHostName(null, 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST; ?>',
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>',
                                                           '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_HOST]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_HOST]; 
 									  ?>"
                                class="<?php echo $this->VisibilityFunctionGetWhoisHost; ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_INPUT_HOST_TITLE'); ?>" />
-            <input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP; ?>" 
-                               onblur="ValidateIpAddress(null, 
-                                                           '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP; ?>',
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP; ?>" 
+                               onblur="ValidateIpAddressIpv4(null, 
+                                                           '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>',
                                                            '', true);"
-                               onkeyup="ValidateIpAddress(null, 
-                                                           '<?php echo ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, 
+                                                           '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>',
                                                            '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_WHOIS_INPUT_IP]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_IP]; 
 									  ?>"
                                class="<?php echo $this->VisibilityFunctionGetWhoisIp; ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('GET_WHOIS_INPUT_IP_TITLE'); ?>" />
-            <input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>"
-            					 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_WHOIS; ?>"
+            <input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>"
+            					 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>"
                                  class="DivContentBodySubmit <?php echo $this->VisibilityFunctionGetWhoisSubmit; ?>"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_GET'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetWhoisMessage)) 
-	                     echo $this->VisibilityFunctionGetWhoisMessage; ?>">
+	                     echo $this->VisibilityFunctionGetWhoisMessage; ?> DivReturnForm">
         <div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_WHOIS_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_WHOIS_RADIO) 
                     echo $this->ExecutedFunctionReturnMessage;  
                 ?>
             </label>

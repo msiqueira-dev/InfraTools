@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsTechInfo
-Creation: 03/01/2017
+Creation: 2017/01/03
 Creator: Marcus Siqueira
 Dependencies:
 
 Description: 
-			Classe de informações técnicas
+			Class for System Techinical information
 Get / Set: 
 			public function GetArrayInstanceInfraToolsFile();
 			public function GetArrayInfraToolsFileType();
@@ -50,10 +50,10 @@ class InfraToolsTechInfo extends TechInfo
 	/* Singleton */
 	private static $Instance;
 	
-	/* Get Instance */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -141,13 +141,10 @@ class InfraToolsTechInfo extends TechInfo
 		array_push($arrayBaseDir, BASE_PATH       . "/Files");
 		array_push($arrayBaseDir, BASE_PATH       . "/Illustrator");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript");
-		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Async");
-		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Facebook");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Form");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Google");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/InternetExplorer");
 		array_push($arrayBaseDir, BASE_PATH       . "/JavaScript/Tabs");
-		array_push($arrayBaseDir, BASE_PATH       . "/Programs");
 		array_push($arrayBaseDir, BASE_PATH       . "/Photoshop");
 		array_push($arrayBaseDir, BASE_PATH       . "/Photoshop/Icons");
 		array_push($arrayBaseDir, BASE_PATH       . "/Photoshop/Logos");
@@ -233,16 +230,11 @@ class InfraToolsTechInfo extends TechInfo
 		array_push($arraySiteDir, SITE_PATH_PHP_CONTROLLER . "/Language");
 		array_push($arraySiteDir, SITE_PATH_PHP_MODEL);
 		array_push($arraySiteDir, SITE_PATH_PT);
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP);
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Body");
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Footer");
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Generic");
-		array_push($arraySiteDir, SITE_PATH_STYLE_DESKTOP . "/Header");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE);
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Body");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Footer");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Generic");
-		array_push($arraySiteDir, SITE_PATH_STYLE_MOBILE . "/Header");
+		array_push($arraySiteDir, SITE_PATH_STYLE);
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Body");
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Footer");
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Generic");
+		array_push($arraySiteDir, SITE_PATH_STYLE . "/Header");
 		foreach($arraySiteDir as $key=>$dir)
 		{
 			$arrayFile = scandir($dir);
@@ -312,7 +304,7 @@ class InfraToolsTechInfo extends TechInfo
 			$arrayConstantProblems = array(); $countValue = 0;
 			foreach($array as $keyArray => $row)
 			{
-				if($row != NULL) $countValue++;
+				if(!is_null($row)) $countValue++;
 				if(count($arrayAux) > 0)
 				{
 					if(array_key_exists($keyArray, $arrayAux) == FALSE)

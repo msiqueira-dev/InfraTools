@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceService
-Creation: 25/06/2018
+Creation: 2018/06/25
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/MySqlManager.php
@@ -11,97 +11,99 @@ Dependencies:
 			InfraTools - Php/Model/Service.php
 	
 Description: 
-			Classe used to access and deal with information of the database about group user.
+			Class with Singleton pattern for dabatabase methods of InfraTools Service
 Functions: 
-			public function ServiceDeleteById($ServiceId, $Debug, $MySqlConnection);
-			public function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection);
-			public function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
-			                              $ServiceDepartment, $ServiceDepartmentCanChange,
-										  $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection);
-			public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                           &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                             &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolService, 
-			                                                    $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
-			                                                          &$ArrayInstanceInfraToolService, 
-			                                                          &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
-			                                                                 &$ArrayInstanceInfraToolService, 
-			                                                                 $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-															  &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolService, 
-			                                                         $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail, 
-			                                                                $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                                                &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
-			                                                                       &$ArrayInstanceInfraToolService, 
-			                                                                       $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2,
-			                                                 &$ArrayInstanceInfraToolService, &$RowCount, 
-															 $Debug, $MySqlConnection);
-	        public function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation $ServiceDepartment,
-			                                                        &$ArrayInstanceInfraToolService, $Debug);
-			public function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-			                                                              $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			public function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $MySqlConnection);
+			public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection);
+			public function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
+			                                        $ServiceDepartment, $ServiceDepartmentCanChange,
+										            $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
+			                                                     &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
+			                                                       &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
 			                                                              $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-			                                                                     &$ArrayInstanceInfraToolService, 
-			                                                                     $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection);	
-			public function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
-			                                                      &$TypeAssocUserServiceId, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                           &$RowCount, $Debug, $MySqlConnection);	
-			public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolService, 
-			                                                  $Debug, $MySqlConnection);	
-			public function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-			                                                        $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                                        &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
-			                                                               &$ArrayInstanceInfraToolService, 
-			                                                               $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                           &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolService, 
-			                                                  $Debug, $MySqlConnection);
-			public function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail, $Limit1, $Limit2, 
-			                                                        &$ArrayInstanceInfraToolService, &$RowCount, 
-																	$Debug, $MySqlConnection);
-			public function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
-			                                                              &$ArrayInstanceInfraToolService, 
-																		  $Debug, $MySqlConnection);
-			public function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                                    &$ArrayInstanceInfraToolService, 
-			                                                    &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
-			                                                           &$ArrayInstanceInfraToolService, 
-																       $Debug, $MySqlConnection);
-			public function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
-			                                                                 $UserEmail, $Limit1, $Limit2, 
-			                                                                 &$ArrayInstanceInfraToolService, &$RowCount, 
-																			 $Debug, $MySqlConnection);
-			public function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
-			                                                                        $UserEmail,
-			                                                                        &$ArrayInstanceInfraToolService, 
-																		            $Debug, $MySqlConnection);
-			public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                    &$RowCount, $Debug, $MySqlConnection);
-			public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolService, 
-			                                           $Debug, $MySqlConnection);
-			public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolService, 
-			                                     $Debug, $MySqlConnection);
-			public function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
-			                                         $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
-											         $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, 
-													 $Debug, $MySqlConnection);	
-			public function ServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, 
-			                                                 $ServiceNameNew, $ServiceTypeNew, 
-													         $ServiceId, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
+			                                                                    &$ArrayInstanceInfraToolsService, 
+			                                                                    &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
+			                                                                           &$ArrayInstanceInfraToolsService, 
+			                                                                           $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation, &$ArrayInstanceInfraToolsService, 
+										    					        &$RowCount, $Debug, $MySqlConnection);
+			public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
+			                                                         $Debug, $MySqlConnection);
+			public function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2,
+			                                                               $ServiceCorporation, $UserEmail, 
+			                                                               &$ArrayInstanceInfraToolsService, 
+			                                                               &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
+			                                                                                &$ArrayInstanceInfraToolsService, 
+			                                                                                $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment,
+			                                                           &$ArrayInstanceInfraToolsService, &$RowCount, 
+															           $Debug, $MySqlConnection);
+	        public function InfraToolsServiceSelectByServiceDepartmentNoLimit($ServiceCorporation $ServiceDepartment,
+			                                                                  &$ArrayInstanceInfraToolsService, $Debug);
+			public function InfraToolsServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, 
+			                                                                        $ServiceDepartment, $UserEmail, 
+			                                                                        &$ArrayInstanceInfraToolsService, 
+			                                                                        $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
+			                                                                               &$ArrayInstanceInfraToolsService, $Debug,
+																						   $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection);	
+			public function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
+			                                                                &$TypeAssocUserServiceId, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
+			                                                     &$RowCount, $Debug, $MySqlConnection);	
+			public function InfraToolsServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
+			                                                            $Debug, $MySqlConnection);	
+			public function InfraToolsServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail, 
+			                                                                  &$ArrayInstanceInfraToolsService, 
+			                                                                 &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
+			                                                                         &$ArrayInstanceInfraToolsService, 
+			                                                                         $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceType($Limit1, $Limit2, $ServiceType, &$ArrayInstanceInfraToolsService, 
+			                                                     &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, 
+			                                                            $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail,
+			                                                                  &$ArrayInstanceInfraToolsService, &$RowCount, 
+																	          $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
+			                                                                         &$ArrayInstanceInfraToolsService, 
+																		             $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription, 
+			                                                                         &$ArrayInstanceInfraToolsService,  &$RowCount, 
+	 																	             $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, 
+			                                                                               &$ArrayInstanceInfraToolsService, 
+																                           $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2,
+			                                                                                     $TypeAssocUserServiceDescription, $UserEmail, 
+			                                                                                     &$ArrayInstanceInfraToolsService, &$RowCount, 
+																			                     $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit(
+			                                                                                   $TypeAssocUserServiceDescription, 
+			                                                                                   $UserEmail,
+			                                                                                   &$ArrayInstanceInfraToolsService, 
+																		                       $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
+			                                              &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, 
+			                                                     $Debug, $MySqlConnection);
+			public function InfraToolsServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection);
+			public function InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
+			                                                   $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
+											                   $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, 
+													           $Debug, $MySqlConnection);	
+			public function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, 
+			                                                           $ServiceNameNew, $ServiceTypeNew, 
+													                   $ServiceId, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -145,14 +147,14 @@ class InfraToolsFacedePersistenceService
 			                                                         $this->InfraToolsConfig->DefaultMySqlPort,
 																	 $this->InfraToolsConfig->DefaultMySqlDataBase,
 			                                                         $this->InfraToolsConfig->DefaultMySqlUser, 
-																	 $this->InfraToolsConfig->DefaultMySqlPassword);
+																	 $this->InfraToolsConfig->DefaultMySqlUserPassword);
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -160,98 +162,96 @@ class InfraToolsFacedePersistenceService
         return self::$Instance;
     }
 	
-	public function ServiceDeleteById($ServiceId, $Debug, $MySqlConnection)
+	public function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceDeleteById)</b> : " . 
-				                InfraToolsPersistence::SqlServiceDeleteById() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceDeleteById');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceDeleteById());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceDeleteById());
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $ServiceId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED_NOT_FOUND;
+					return ConfigInfraTools::DB_ERROR_SERVICE_DEL_BY_SERVICE_ID;
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return ConfigInfraTools::MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_SERVICE_DEL_BY_SERVICE_ID;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection)
+	public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceDeleteByIdOnUserContext)</b> : " . 
-				                InfraToolsPersistence::SqlServiceDeleteByIdOnUserContext() . "<br>";
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceDeleteByIdOnUserContext());
+				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceDeleteByIdOnUserContext');
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceDeleteByIdOnUserContext());
 			if ($stmt)
 			{
 				$stmt->bind_param("is", $ServiceId, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED_NOT_FOUND;
+					return ConfigInfraTools::DB_ERROR_SERVICE_DEL_BY_SERVICE_ID;
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-						return ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT;
-					else return ConfigInfraTools::MYSQL_SERVICE_DELETE_BY_SERVICE_ID_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_SERVICE_DEL_BY_SERVICE_ID;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
-								  $ServiceDepartment, $ServiceDepartmentCanChange,
-								  $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection)
+	public function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
+							  	            $ServiceDepartment, $ServiceDepartmentCanChange,
+								            $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceInsert)</b> : " . InfraToolsPersistence::SqlServiceInsert() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceInsert');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceInsert());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceInsert());
 			if ($stmt)
 			{
 				$stmt->bind_param("isisisss", $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -259,77 +259,77 @@ class InfraToolsFacedePersistenceService
 								              $ServiceName, $ServiceType);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return ConfigInfraTools::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_INSERT_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_INSERT;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelect)</b> : " . 
-				                InfraToolsPersistence::SqlServiceSelect() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelect');
 		if($MySqlConnection != NULL)
 		{
 			
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelect());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelect());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("ii", $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ii", $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else 
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = ConfigInfraTools::MYSQL_SERVICE_SELECT_FAILED;
+					$return = ConfigInfraTools::DB_ERROR_SERVICE_SEL;
 				}
 				return $return;
 			}
@@ -337,65 +337,65 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                  &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
+			                                   &$RowCount, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectOnUserContext)</b> : " . 
-				                InfraToolsPersistence::SqlServiceSelectOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectOnUserContext());
 			if($stmt != NULL)
 			{
-				$stmt->bind_param("sii", $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else 
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = ConfigInfraTools::MYSQL_SERVICE_SELECT_FAILED;
+					$return = ConfigInfraTools::DB_ERROR_SERVICE_SEL;
 				}
 				return $return;
 			}
@@ -403,864 +403,856 @@ class InfraToolsFacedePersistenceService
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-												 &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
+												           &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceActive)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceActive() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActive');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActive());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActive());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("iii", $ServiceActive, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("iii", $ServiceActive, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceActiveNoLimit)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceActiveNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActiveNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActiveNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActiveNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("i", $ServiceActive);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
-															  &$ArrayInstanceInfraToolService, &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
+															            &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceActiveOnUserContext)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceActiveOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActiveOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActiveOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActiveOnUserContext());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("isii", $ServiceActive, $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("isii", $ServiceActive, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail, &$ArrayInstanceInfraToolService, 
+	public function InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                                         $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceActiveOnUserContextNoLimit)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceActiveOnUserContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceActiveOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceActiveOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceActiveOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("is", $ServiceActive, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ACTIVE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	public function InfraToolsServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 													  &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlServiceSelectByServiceCorporation)</b> : " . 
-						 InfraToolsPersistence::SqlServiceSelectByServiceCorporation() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporation');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporation());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporation());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceDepartment = "%".$ServiceCorporation."%";  
-				$stmt->bind_param("sii", $ServiceCorporation, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $ServiceCorporation, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-															    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+															    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+															    $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolService, 
+	public function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 															 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlServiceSelectByServiceCorporationNoLimit)</b> : " . 
-						 InfraToolsPersistence::SqlServiceSelectByServiceCorporationNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporationNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporationNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporationNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceDepartment = "%".$ServiceCorporation."%";  
 				$stmt->bind_param("s", $ServiceCorporation);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																$row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT], 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail,$Limit1, $Limit2,
-																   &$ArrayInstanceInfraToolService, &$RowCount, 
+	public function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2, $ServiceCorporation, $UserEmail,
+																   &$ArrayInstanceInfraToolsService, &$RowCount, 
 																   $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlServiceSelectByServiceCorporationOnUserContext)</b> : " . 
-						 InfraToolsPersistence::SqlServiceSelectByServiceCorporationOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporationOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporationOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporationOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceCorporation = "%".$ServiceCorporation."%";  
-				$stmt->bind_param("ssii", $ServiceCorporation, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceCorporation, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+																$row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT], 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
-																		  &$ArrayInstanceInfraToolService, 
-																		  $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
+																		            &$ArrayInstanceInfraToolsService, 
+																		            $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			echo "<b>Query (SqlServiceSelectByServiceCorporationOnUserContextNoLimit)</b> : " . 
-						 InfraToolsPersistence::SqlServiceSelectByServiceCorporationOnUserContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceCorporationOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceDepartment = "%".$ServiceCorporation."%"; 
 				$stmt->bind_param("ss", $ServiceCorporation, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT], 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																$row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT], 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ACTIVE_CORPORATION_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_CORPORATION_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_CORPORATION;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, 
-													 $Limit1, $Limit2, &$ArrayInstanceInfraToolService,
-													 &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment, 
+													           &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceDepartment)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceDepartment() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartment');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartment());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartment());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceDepartment = "%".$ServiceDepartment."%"; 
-				$stmt->bind_param("ssii", $ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceCorporation, $ServiceDepartment, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+									                                  $InstanceCorporation, 
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME], 
+									                                  $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
 																$InstanceDepartment, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment, 
-															&$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment, 
+															          &$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceDepartmentNoLimit)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceDepartmentNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartmentNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartmentNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartmentNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceDepartment = "%".$ServiceDepartment."%"; 
 				$stmt->bind_param("ss", $ServiceCorporation, $ServiceDepartment);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+									                                  $InstanceCorporation, 
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME], 
+									                                  $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
 																$InstanceDepartment, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, 
-																  $UserEmail, $Limit1, $Limit2,
-																  &$ArrayInstanceInfraToolService, &$RowCount, $Debug,
-																  $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, 
+																			$ServiceDepartment, $UserEmail,
+																            &$ArrayInstanceInfraToolsService, &$RowCount, $Debug,
+																            $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceDepartmentOnUserContext)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceDepartmentOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartmentOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartmentOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartmentOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceDepartment = "%".$ServiceDepartment."%"; 
-				$stmt->bind_param("sssii", $ServiceCorporation, $ServiceDepartment, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("sssii", $ServiceCorporation, $ServiceDepartment, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+									                                  $InstanceCorporation, 
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME], 
+									                                  $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation, 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation, 
+																$row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
 							                                    $InstanceDepartment,  
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail,
-																		 &$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail,
+																		           &$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceDepartmentOnUserContextNoLimit)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceDepartmentOnUserContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceDepartmentOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$ServiceDepartment = "%".$ServiceDepartment."%";
 				$stmt->bind_param("sss", $ServiceCorporation, $ServiceDepartment, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_ACTIVE],
-						                                            $row[ConfigInfraTools::TABLE_CORPORATION_FIELD_NAME],
-																	$row["Corporation".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation(NULL,
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
+						                                            $row[ConfigInfraTools::TB_CORPORATION_FD_NAME],
+																	$row["Corporation".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						$InstanceDepartment = $this->InfraToolsFactory->CreateDepartment(
-									                                  $InstanceInfraToolsCorporation, 
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-									                                  $row[Config::TABLE_DEPARTMENT_FIELD_NAME], 
-									                                  $row["Department".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE]);
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+									                                  $InstanceCorporation, 
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+									                                  $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME], 
+									                                  $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                    $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																$InstanceInfraToolsCorporation,
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
+							                                    $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																$InstanceCorporation,
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
 																$InstanceDepartment, 
-							                                    $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																$row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													            $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																$InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                    $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																$row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													            $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																$InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_DEPARTMENT_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_DEPARTMENT;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceId)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceId() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceId());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("i", $ServiceId);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$stmt->bind_result($serviceActive, $serviceCorporation, $serviceCorporationCanChange, 
 									   $serviceDepartment, $serviceDepartmentCanChange, $serviceDescription,
@@ -1268,7 +1260,7 @@ class InfraToolsFacedePersistenceService
 									   $typeServiceName, $typeServiceSla, $typeServiceRegDate);
 					if ($stmt->fetch())
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $typeServiceRegDate,
 						                                            $serviceName,
 						                                            $typeServiceSla);
@@ -1282,43 +1274,42 @@ class InfraToolsFacedePersistenceService
 								                                    $serviceDescription, 
 																	$serviceId, 
 													                $serviceName,
-																	$InstanceceInfraToolsTypeService);
-						return ConfigInfraTools::SUCCESS;
+																	$InstanceInfraToolsTypeService);
+						return ConfigInfraTools::RET_OK;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ID_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ID;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
-														  &$TypeAssocUserServiceId, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
+														            &$TypeAssocUserServiceId, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$TypeAssocUserServiceId = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceIdOnUserContext)</b> : " . 
-				                InfraToolsPersistence::SqlServiceSelectByServiceIdOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceIdOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceIdOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceIdOnUserContext());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("is", $ServiceId, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$stmt->bind_result($serviceActive, $serviceCorporation, $serviceCorporationCanChange,
 									   $serviceDepartment, $serviceDepartmentCanChange, $serviceDescription,
@@ -1326,7 +1317,7 @@ class InfraToolsFacedePersistenceService
 									   $typeServiceName, $typeServiceSla, $typeServiceRegDate, $TypeAssocUserServiceId);
 					if ($stmt->fetch())
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
 						                                            $typeServiceRegDate,
 						                                            $typeServiceName,
 						                                            $typeServiceSla);
@@ -1340,1010 +1331,999 @@ class InfraToolsFacedePersistenceService
 								                                    $serviceDescription, 
 																	$serviceId, 
 													                $serviceName, 
-																	$InstanceceInfraToolsTypeService);
-						return ConfigInfraTools::SUCCESS;
+																	$InstanceInfraToolsTypeService);
+						return ConfigInfraTools::RET_OK;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_ID_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_ID;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-											   &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
+											             &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceName)</b> : " . 
-				                InfraToolsPersistence::SqlServiceSelectByServiceName() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceName');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceName());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceName());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceName = "%".$ServiceName."%";  
-				$stmt->bind_param("sii", $ServiceName, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $ServiceName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolService, 
-													  $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
+													            $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceNameNoLimit)</b> : " . 
-				                InfraToolsPersistence::SqlServiceSelectByServiceNameNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceNameNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceNameNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceNameNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceName = "%".$ServiceName."%";  
 				$stmt->bind_param("s", $ServiceName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail,$Limit1, $Limit2,
-															&$ArrayInstanceInfraToolService, &$RowCount, 
-															$Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail,
+															          &$ArrayInstanceInfraToolsService, &$RowCount, 
+															          $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceNameOnUserContext)</b> : " . 
-				                InfraToolsPersistence::SqlServiceSelectByServiceNameOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceNameOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceNameOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceNameOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceName = "%".$ServiceName."%";  
-				$stmt->bind_param("ssii", $ServiceName, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceName, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
-																   &$ArrayInstanceInfraToolService, 
-																   $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, &$ArrayInstanceInfraToolsService, 
+																			 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceNameOnUserContextNoLimit)</b> : " .
-				                InfraToolsPersistence::SqlServiceSelectByServiceNameOnUserContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceNameOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceNameOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceNameOnUserContextNoLimit());
 			if($stmt != NULL)
 			{
 				$ServiceName = "%".$ServiceName."%"; 
 				$stmt->bind_param("ss", $ServiceName, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_NAME_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_NAME;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceType($ServiceNType, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-											   &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceType($Limit1, $Limit2, $ServiceNType, &$ArrayInstanceInfraToolsService, 
+											             &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceType)</b> :" . 
-				                InfraToolsPersistence::SqlServiceSelectByServiceType() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceType');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceType());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceType());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceType = "%".$ServiceType."%"; 
-				$stmt->bind_param("sii", $ServiceNType, $Limit1, $Limit2);
+				$stmt->bind_param("sii", $ServiceNType, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolService, 
-													  $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, 
+													            $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceTypeNoLimit)</b>  :" . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceTypeNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceType');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceTypeNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceTypeNoLimit());
 			if($stmt != NULL)
 			{ 
 				$ServiceType = "%".$ServiceType."%";
 				$stmt->bind_param("s", $ServiceType);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail,$Limit1, $Limit2,
-															&$ArrayInstanceInfraToolService, &$RowCount, 
-															$Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail,
+															          &$ArrayInstanceInfraToolsService, &$RowCount, 
+															          $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceTypeOnUserContext)</b>  : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceTypeOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceTypeOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceTypeOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceTypeOnUserContext());
 			if($stmt != NULL)
 			{
+				$limitResult = $Limit2 - $Limit1;
 				$ServiceType = "%".$ServiceType."%";
-				$stmt->bind_param("ssii", $ServiceType, $UserEmail, $Limit1, $Limit2);
+				$stmt->bind_param("ssii", $ServiceType, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail, 
-																   &$ArrayInstanceInfraToolService, 
-																   $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail, 
+																             &$ArrayInstanceInfraToolsService, 
+																             $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByServiceTypeOnUserContextNoLimit)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByServiceTypeOnUserContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByServiceTypeOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByServiceTypeOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByServiceTypeOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$ServiceType = "%".$ServiceType."%";
 				$stmt->bind_param("ss", $ServiceType, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_TYPE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_TYPE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                            &$ArrayInstanceInfraToolService, 
-			                                            &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription,
+			                                                                 &$ArrayInstanceInfraToolsService, &$RowCount, 
+																			 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByTypeAssocUserService)</b> :" . 
-				                InfraToolsPersistence::SqlServiceSelectByTypeAssocUserService() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescription');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserService());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescription());
 			if($stmt != NULL)
 			{
-				$TypeAssocUserService = "%".$TypeAssocUserService."%"; 
-				$stmt->bind_param("sii", $TypeAssocUserService, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%"; 
+				$stmt->bind_param("sii", $TypeAssocUserServiceDescription, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
-			                                                   &$ArrayInstanceInfraToolService, 
-															   $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription,
+																					&$ArrayInstanceInfraToolsService, 
+															                        $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByTypeAssocUserServiceNoLimit)</b>  :" . 
-				             InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit());
 			if($stmt != NULL)
 			{ 
-				$TypeAssocUserService = "%".$TypeAssocUserService."%";
-				$stmt->bind_param("s", $TypeAssocUserService);
+				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%";
+				$stmt->bind_param("s", $TypeAssocUserServiceDescription);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
-			                                                         $UserEmail, $Limit1, $Limit2, 
-			                                                         &$ArrayInstanceInfraToolService, 
-																	 &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2, $TypeAssocUserServiceDescription,
+																						  $UserEmail, &$ArrayInstanceInfraToolsService,
+																						  &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByTypeAssocUserServiceOnUserContext)</b>  : " . 
-				             InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceOnUserContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext());
 			if($stmt != NULL)
 			{
-				$TypeAssocUserService = "%".$TypeAssocUserService."%";
-				$stmt->bind_param("ssii", $TypeAssocUserService, $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%";
+				$stmt->bind_param("ssii", $TypeAssocUserServiceDescription, $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
-			                                                                $UserEmail,
-			                                                                &$ArrayInstanceInfraToolService, 
-																		    $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit($TypeAssocUserServiceDescription, 
+																								 $UserEmail,
+			                                                                                     &$ArrayInstanceInfraToolsService, 
+																								 $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByTypeAssocUserServiceOnUserContextNoLimit)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceOnUserContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByTypeAssocUserServiceOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
-				$TypeAssocUserService = "%".$TypeAssocUserService."%";
-				$stmt->bind_param("ss", $TypeAssocUserService, $UserEmail);
+				$TypeAssocUserServiceDescription = "%".$TypeAssocUserServiceDescription."%";
+				$stmt->bind_param("ss", $TypeAssocUserServiceDescription, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_TYPE_ASSOC_USER_SERVICE_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_TYPE_ASSOC_USER_SERVICE;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-										&$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
+										          &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByUser)</b> : " . 
-				             InfraToolsPersistence::SqlServiceSelectByUser() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByUser');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByUser());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByUser());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("sii", $UserEmail, $Limit1, $Limit2);
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("sii", $UserEmail, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_USER_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_USER_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_USER_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_USER;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolService, 
-											   $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, 
+											             $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectByUserNoLimit)</b> : " . 
-				      InfraToolsPersistence::SqlServiceSelectByUserNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectByUserNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceSelectByUserNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceSelectByUserNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("s", $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceInfraToolService = array();
+					$ArrayInstanceInfraToolsService = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+						$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-						array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+						array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 					}
-					if(!empty($ArrayInstanceInfraToolService))
-						return ConfigInfraTools::SUCCESS;
+					if(!empty($ArrayInstanceInfraToolsService))
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_USER_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_USER_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_SERVICE_SELECT_BY_SERVICE_USER_FAILED;
+					return ConfigInfraTools::DB_ERROR_SERVICE_SEL_BY_SERVICE_USER;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceSelectNoLimit(&$ArrayInstanceInfraToolService, $Debug, $MySqlConnection)
+	public function InfraToolsServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceInfraToolService = NULL;
+		$ArrayInstanceInfraToolsService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceSelectNoLimit)</b> : " .
-				                InfraToolsPersistence::SqlServiceSelectNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlServiceSelectNoLimit()))
+			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlInfraToolsServiceSelectNoLimit()))
 			{
-				$ArrayInstanceInfraToolService = array();
+				$ArrayInstanceInfraToolsService = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
-						                                            $row["TypeService".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_NAME],
-						                                            $row[ConfigInfraTools::TABLE_TYPE_SERVICE_FIELD_SLA]);
+					$InstanceInfraToolsTypeService = $this->InfraToolsFactory->CreateInfraToolsTypeService(
+						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
+						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
 						$InstanceInfraToolsService = $this->InfraToolsFactory->CreateInfraToolsService(
-							                                     $row["Service".ConfigInfraTools::TABLE_FIELD_REGISTER_DATE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ACTIVE], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION], 
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_CORPORATION_CAN_CHANGE],
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT],
-							                                     $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DEPARTMENT_CAN_CHANGE],
-								                                 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_DESCRIPTION], 
-																 $row[ConfigInfraTools::TABLE_SERVICE_FIELD_ID], 
-													             $row[ConfigInfraTools::TABLE_SERVICE_FIELD_NAME], 
-																 $InstanceceInfraToolsTypeService);
-					array_push($ArrayInstanceInfraToolService, $InstanceInfraToolsService);
+							                                     $row["Service".ConfigInfraTools::TB_FD_REGISTER_DATE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_ACTIVE], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION], 
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_CORPORATION_CAN_CHANGE],
+																 $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT],
+							                                     $row[ConfigInfraTools::TB_SERVICE_FD_DEPARTMENT_CAN_CHANGE],
+								                                 $row[ConfigInfraTools::TB_SERVICE_FD_DESCRIPTION], 
+																 $row[ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID], 
+													             $row[ConfigInfraTools::TB_SERVICE_FD_NAME], 
+																 $InstanceInfraToolsTypeService);
+					array_push($ArrayInstanceInfraToolsService, $InstanceInfraToolsService);
 				}
-				if(!empty($ArrayInstanceInfraToolService))
-					return ConfigInfraTools::SUCCESS;
-				else return ConfigInfraTools::MYSQL_SERVICE_SELECT_FETCH_FAILED;
+				if(!empty($ArrayInstanceInfraToolsService))
+					return ConfigInfraTools::RET_OK;
+				else return ConfigInfraTools::DB_ERROR_SERVICE_SEL_FETCH;
 			}
 			else 
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-				$return = ConfigInfraTools::MYSQL_SERVICE_SELECT_FAILED;
+				$return = ConfigInfraTools::DB_ERROR_SERVICE_SEL;
 			}
 			return $return;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
-											 $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
-									         $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, 
-											 $Debug, $MySqlConnection)
+	public function InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
+											           $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
+									                   $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, 
+											           $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceUpdateByServiceId)</b> : " .
-				                InfraToolsPersistence::SqlServiceUpdateByServiceId() . "<br>";
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceUpdateByServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceUpdateByServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceUpdateByServiceId());
 			if ($stmt)
 			{
 				$stmt->bind_param("isisisssi", $ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
@@ -2351,73 +2331,70 @@ class InfraToolsFacedePersistenceService
 								             $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_UPDATE_SAME_VALUE;
+					return ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
-					else return Config::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+						return ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
+					else return ConfigInfraTools::DB_ERROR_USER_UPDT_BY_USER_EMAIL;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function ServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
-													 $ServiceId, $Debug, $MySqlConnection)
-{
+	public function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
+													           $ServiceId, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL;
-		if($Debug == Config::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlServiceUpdateRestrictByServiceId)</b> : " .
-				                InfraToolsPersistence::SqlServiceUpdateRestrictByServiceId() . "<br>";
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsServiceUpdateRestrictByServiceId');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlServiceUpdateRestrictByServiceId());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceUpdateRestrictByServiceId());
 			if ($stmt)
 			{
 				$stmt->bind_param("isssi", $ServiceActiveNew, $ServiceDescriptionNew, 
 								           $ServiceNameNew, $ServiceTypeNew, $ServiceId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return Config::SUCCESS;
+					return ConfigInfraTools::RET_OK;
 				elseif($errorStr == NULL && $stmt->affected_rows == 0)
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::MYSQL_UPDATE_SAME_VALUE;
+					return ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE;
 				}
 				else
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
-						return Config::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE;
-					else return Config::MYSQL_USER_UPDATE_BY_EMAIL_FAILED;
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+						return ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
+					else return ConfigInfraTools::DB_ERROR_SERVICE_UPDT_RESTRICT_BY_SERVICE_ID;
 				}
 			}
 			else
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
-}
 }

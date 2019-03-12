@@ -1,30 +1,15 @@
 <?php
 /************************************************************************
 Class: PageAdminTicket.php
-Creation: 07/11/2017
+Creation: 2017/11/07
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-			Base       - Php/Controller/Session.php
-			Base       - Php/Model/FormValidator.php
-			InfraTools - Php/Controller/FacedePersistenceInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Class for the page AdminTicket
+			Class for Ticket management.
 Functions: 
-			protected function ExecuteTicketDelete();
-			protected function ExecuteTicketInsert();
-			protected function ExecuteTicketSelectById($Id);
-			protected function ExecuteTicketSelectByRequestingUser($RequestingUserEmail);
-			protected function ExecuteTicketSelectByResponsibleUser($ResponsibleUserEmail);
-			protected function ExecuteTicketUpdate();
-			protected function ExecuteTicketUpdateService();
-			protected function ExecuteTicketUpdateStatus();
-			protected function ExecuteTicketUpdateUser();
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -47,96 +32,192 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminTicket extends PageAdmin
 {
-	public $ArrayTicket  = NULL;
+	public $ArrayInstanceTicket = NULL;
+	public $ArrayInstanceInfraToolsUser   = NULL;
+	public $InstanceTicket                = NULL;
+	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
 	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-	
-	protected function ExecuteTicketDelete()
-	{
-	}
-	
-	protected function ExecuteTicketInsert()
-	{
-	}
-	
-	protected function ExecuteTicketSelectById($Id)
-	{
-	}
-	
-	protected function ExecuteTicketSelectByRequestingUser($RequestingUserEmail)
-	{	
-	}
-	
-	protected function ExecuteTicketSelectByResponsibleUser($ResponsibleUserEmail)
-	{
-	}
-	
-	protected function ExecuteTicketUpdate()
-	{		
-	}
-	protected function ExecuteTicketUpdateService()
-	{
-	}
-	
-	protected function ExecuteTicketUpdateStatus()
-	{
-	}
-	
-	protected function ExecuteTicketUpdateUser()
-	{
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
+		$this->InputValueTicketIdRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+		$this->AdminGoBack($PageFormBack);
+		
+		//FM_CORPORATION_SEL_SB
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			$this->PageFormLoad();
-			$PageFormBack = TRUE;
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		}
+		//FM_DEPARTMENT_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
+										    &$this->InstanceInfraToolsDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+		}
+		//FM_TICKET_LST
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_LST) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'TicketSelect', 
+									  array(&$this->ArrayInstanceTicket),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_LST;
+		}
+		//FM_TICKET_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_REGISTER) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER;
+		//FM_TICKET_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
+		//FM_TICKET_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_REGISTER_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'TicketInsert', 
+									  array($_POST[ConfigInfraTools::FIELD_TICKET_DESCRIPTION],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_SUGGESTION],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_TITLE],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_STATUS],
+										    $_POST[ConfigInfraTools::FIELD_TICKET_TYPE]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_REGISTER;
+		}
+		//FM_TICKET_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_SEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if(isset($_POST[ConfigInfraTools::FIELD_TICKET_RADIO]))
+			{
+				if($_POST[ConfigInfraTools::FIELD_TICKET_RADIO] == ConfigInfraTools::FIELD_TICKET_RADIO_NAME)
+				{
+					if($this->ExecuteFunction($_POST, 'TicketSelectByTicketTitle', 
+											  array($_POST[ConfigInfraTools::FIELD_TICKET_TITLE],
+													&$this->ArrayInstanceTicket),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					{
+
+						if(count($this->ArrayInstanceTicket) > 1)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_LST;	
+						else
+						{
+							$this->InstanceTicket = array_pop($this->ArrayInstanceTicket);
+							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
+														  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
+								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
+						}
+					}
+				}
+				else
+				{
+					if($this->ExecuteFunction($_POST, 'TicketSelectByTicketId', 
+										  array($_POST[ConfigInfraTools::FIELD_TICKET_ID],
+												&$this->InstanceTicket),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
+				}
+			}
+			else
+			{
+				if($this->ExecuteFunction($_POST, 'TicketSelectByTicketId', 
+										  array($_POST[ConfigInfraTools::FIELD_TICKET_ID],
+												&$this->InstanceTicket),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
+			}
+		}
+		//FM_TICKET_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
+										  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'TicketDeleteByTicketId', 
+										  array($this->InstanceTicket),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_SEL;
+			}
+		}
+		//FM_TICKET_VIEW_LST_USERS_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_TICKET_VIEW_LST_USERS_SB]))
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, $this->InstanceTicket) 
+			                                   == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByTicketId', 
+										  array($this->InstanceTicket->GetTicketId(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW_LST_USERS;
+			}
+		}
+		//FM_TICKET_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
+										  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_UPDT;
+		}
+		//FM_TICKET_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TICKET, "TicketLoadData", 
+										  $this->InstanceTicket) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;
+		}
+		//FM_TICKET_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TICKET_UPDT_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TICKET, 
+											   $this->InstanceTicket) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'TicketUpdateByTicketId', 
+									      array($_POST[ConfigInfraTools::FIELD_TICKET_DESCRIPTION],
+					                            $_POST[ConfigInfraTools::FIELD_TICKET_TITLE],
+					                            &$this->InstanceTicket),
+									      $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TICKET_VIEW;	
+			}
+		}
+		//FM_TYPE_USER_SEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
+									        &$this->InstanceTypeUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+		}
+		//FM_USER_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
+									        &$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
-		$this->LoadHtml();
+			$this->PageStackSessionSave();
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

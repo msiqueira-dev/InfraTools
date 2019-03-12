@@ -1,8 +1,8 @@
 <?php
 
 /************************************************************************
-Class: InfraToolsFacedePersistenceCorporation
-Creation: 15/07/2018
+Class: InfraToolsFacedePersistenceDepartment
+Creation: 2018/07/15
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Config.php
@@ -11,14 +11,14 @@ Dependencies:
 			Base       - Php/Model/InfraToolsDepartment.php
 	
 Description: 
-			Classe used to access and deal with information of the database about department.
+			Class with Singleton pattern for dabatabase methods of InfraTools Department
 Functions: 
-			public function DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2, 
-	                                                             &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
-																 $Debug, $MySqlConnection);
-			public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
-			                                                            &$ArrayInstanceInfraToolsDepartment, 
-																		$Debug, $MySqlConnection);
+			public function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
+	                                                                       &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
+																           $Debug, $MySqlConnection);
+			public function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
+ 			                                                                      &$ArrayInstanceInfraToolsDepartment, 
+																		          $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("InfraToolsFactory"))
@@ -55,14 +55,14 @@ class InfraToolsFacedePersistenceDepartment
 			                                                         $this->Config->DefaultMySqlPort,
 																	 $this->Config->DefaultMySqlDataBase,
 			                                                         $this->Config->DefaultMySqlUser, 
-																	 $this->Config->DefaultMySqlPassword);
+																	 $this->Config->DefaultMySqlUserPassword);
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -70,70 +70,68 @@ class InfraToolsFacedePersistenceDepartment
         return self::$Instance;
     }
 	
-	public function DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2,
-														 &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
-														 $Debug, $MySqlConnection)
+	public function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail,
+														           &$ArrayInstanceInfraToolsDepartment, &$RowCount, 
+														           $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsDepartment = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectOnUserServiceContext)</b>  : " . 
-				             InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlDepartmentSelectOnUserServiceContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $mySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContext());
 			if($stmt != NULL)
 			{ 
-				$stmt->bind_param("ssii", $UserCorporation, $UserEmail, $Limit1, $Limit2);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $mySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				$limitResult = $Limit2 - $Limit1;
+				$stmt->bind_param("ssii", $UserCorporation, $UserEmail, $Limit1, $limitResult);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION],
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[Config::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TB_DEPARTMENT_FD_CORPORATION],
+																			$row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME],
+																	        $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsDepartment, $InstanceceInfraToolsDepartment);
 					}
 					if(!empty($ArrayInstanceInfraToolsDepartment))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, 
-																&$ArrayInstanceInfraToolsDepartment, 
-																$Debug, $MySqlConnection)
+	public function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment, 
+																          $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsDepartment = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				echo "<b>Query (SqlDepartmentSelectOnUserServiceContextNoLimit)</b>  : " . 
-				             InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContextNoLimit() . "<br>";
+			InfraToolsPersistence::ShowQueryInfraTools('SqlDepartmentSelectOnUserServiceContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlDepartmentSelectOnUserServiceContextNoLimit());
@@ -141,39 +139,39 @@ class InfraToolsFacedePersistenceDepartment
 			{ 
 				$stmt->bind_param("ss", $UserCorporation, $UserEmail);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == ConfigInfraTools::SUCCESS)
+				if($return == ConfigInfraTools::RET_OK)
 				{
 					$ArrayInstanceInfraToolsDepartment = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[Config::TABLE_DEPARTMENT_FIELD_CORPORATION],
-																			$row[Config::TABLE_DEPARTMENT_FIELD_INITIALS],
-						                                                    $row[Config::TABLE_DEPARTMENT_FIELD_NAME],
-																	        $row["Department".Config::TABLE_FIELD_REGISTER_DATE]);
+						$InstanceceInfraToolsDepartment = $this->InfraToolsFactory->CreateDepartment($row[ConfigInfraTools::TB_DEPARTMENT_FD_CORPORATION],
+																			$row[ConfigInfraTools::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[ConfigInfraTools::TB_DEPARTMENT_FD_NAME],
+																	        $row["Department".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsDepartment, $InstanceceInfraToolsDepartment);
 					}
 					if(!empty($ArrayInstanceInfraToolsDepartment))
-						return ConfigInfraTools::SUCCESS;
+						return ConfigInfraTools::RET_OK;
 					else
 					{
 						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FETCH_FAILED;
+						return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL_FETCH;
 					}
 				}
 				else
 				{
 					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					return ConfigInfraTools::MYSQL_TYPE_SERVICE_SELECT_FAILED;
+					return ConfigInfraTools::DB_ERROR_TYPE_SERVICE_SEL;
 				}
 			}
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
 	}

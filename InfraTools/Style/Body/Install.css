@@ -1,0 +1,7 @@
+.DivContentBody{width:1000px;min-height:120px;height:auto;color:black;}
+.DivContentBodyContainer{width:1000px;margin:0 auto;}
+.DivContentBodySecondTitle{width:100px;height:100px;margin-left:46%;margin-bottom:2px;}
+.DivContentBodySecondTitleImage{position: relative;right:4px;bottom:2px;}
+.DivContentBodySecondTitleLine{width:1000px;height:3px;background-color:#f5821f;margin-bottom:10px;}
+.DivContentBody form{min-height:60px !important;}
+#DivReturn{margin:0 auto;width:1000px;}

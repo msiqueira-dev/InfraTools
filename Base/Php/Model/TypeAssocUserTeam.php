@@ -2,41 +2,37 @@
 
 /************************************************************************
 Class: TypeAssocUserTeam
-Creation: 24/05/2018
+Creation: 2018/05/24
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
 			The type of a user in a team, working for its role in a team and permission.
 Get / Set:		
 			public function GetRegisterDate();
-			public function GetTypeAssocUserTeamTeamDescription();
-			public function GetTypeAssocUserTeamTeamId();
+			public function GetTypeAssocUserTeamDescription();
 			public function SetRegisterDate($RegisterDate);
-	        public function SetTypeAssocUserTeamDescription($TypeAssocUserTeamTeamDescription);
-	        public function SetTypeAssocUserTeamId($TypeAssocUserTeamTeamId);
+	        public function SetTypeAssocUserTeamDescription($TypeAssocUserTeamDescription);
 Methods:
-			public function UpdateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
+			public function UpdateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 **************************************************************************/
 
 class TypeAssocUserTeam
 {
 	/* Properties */
 	protected $RegisterDate                     = NULL;
-	protected $TypeAssocUserTeamTeamDescription = NULL;
-	protected $TypeAssocUserTeamTeamId          = NULL;
+	protected $TypeAssocUserTeamDescription     = NULL;
 
 	/* Constructor */
-	public function __construct($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId) 
+	public function __construct($RegisterDate, $TypeAssocUserTeamDescription) 
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($TypeAssocUserTeamTeamDescription != NULL)
-			$this->TypeAssocUserTeamTeamDescription = $TypeAssocUserTeamTeamDescription;
+		if(!is_null($TypeAssocUserTeamDescription))
+			$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 		else throw new Exception(Config::EXCEPTION_TYPE_ASSOC_USER_TEAM_DESCRIPTION);
-		if($TypeAssocUserTeamTeamId != NULL)
-			$this->TypeAssocUserTeamTeamId = $TypeAssocUserTeamTeamId;
-		else throw new Exception(Config::EXCEPTION_TYPE_ASSOC_USER_TEAM_ID);
 	}
 	
 	/* Clone */
@@ -51,41 +47,31 @@ class TypeAssocUserTeam
 		return $this->RegisterDate;
 	}
 	
-	public function GetTypeAssocUserTeamTeamDescription()
+	public function GetTypeAssocUserTeamDescription()
 	{
-		return $this->TypeAssocUserTeamTeamDescription;
-	}
-	
-	public function GetTypeAssocUserTeamTeamId()
-	{
-		return $this->TypeAssocUserTeamTeamId;
+		return $this->TypeAssocUserTeamDescription;
 	}
 	
 	/* SET */	
 	public function SetRegisterDate($RegisterDate)
 	{
-		$this->RegisterDate = $RegisterDate;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 	}
 	
-	public function SetTypeAssocUserTeamDescription($TypeAssocUserTeamTeamDescription)
+	public function SetTypeAssocUserTeamDescription($TypeAssocUserTeamDescription)
 	{
-		$this->TypeAssocUserTeamTeamDescription = $TypeAssocUserTeamTeamDescription;
-	}
-	
-	public function SetTypeAssocUserTeamId($TypeAssocUserTeamTeamId)
-	{
-		$this->TypeAssocUserTeamTeamId = $TypeAssocUserTeamTeamId;	
+		if(!is_null($TypeAssocUserTeamDescription))
+			$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 	}
 	
 	/* METHODS */
-	public function UpdateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId)
+	public function UpdateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription)
 	{
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		if($TypeAssocUserTeamTeamDescription != NULL)
-			$this->TypeAssocUserTeamTeamDescription = $TypeAssocUserTeamTeamDescription;
-		if($TypeAssocUserTeamTeamId != NULL)
-			$this->TypeAssocUserTeamTeamId = $TypeAssocUserTeamTeamId;
+		if(!is_null($TypeAssocUserTeamDescription))
+			$this->TypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;
 	}
 }
 ?>

@@ -7,94 +7,90 @@
         	<?php echo $this->InstanceLanguageText->GetText('CHECK_PING_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_CHECK_PING_SERVER; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_CHECK_PING_SERVER; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::CHECK_PING_SERVER . '#tabs6';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_CHECK_PING_SERVER . '#tabs6';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN; ?>" />
-        </div>
         <div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_CHECK_PING_SERVER; ?>">
-            <input type="radio" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO; ?>"
-                                id="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO_HOST; ?>"
-                                value="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO_HOST; ?>"
+            <input type="radio" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO; ?>"
+                                id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO_HOST; ?>"
+                                value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO_HOST; ?>"
                                 onclick="this.blur();this.focus();"
                                 onchange="SwitchElementVisibility(
-                                                          '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP; ?>', 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST; ?>');
-                                         MakeInputVisible('<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>');
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP; ?>', 
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST; ?>');
+                                         MakeInputVisible('<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>');
                                          ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_CHECK_PING_SERVER; ?>', 
                                                                    'DivContentBodySubmit', 
-                                                                   '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>', 
+                                                                   '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>', 
                                                                    'Host')"
                                 title="<?php echo $this->InstanceLanguageText->GetText('CHECK_PING_RADIO_HOST_TITLE'); ?>" 
 								<?php echo $this->CheckedFunctionCheckPingServerRadioHost; ?> />
             <div class="DivContentBodyContainerLabelHost">
 				<label><?php echo $this->InstanceLanguageText->GetText('CHECK_PING_LABEL_HOST'); ?></label>
 			</div>
-            <input type="radio" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO; ?>"
-                                id="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO_IP; ?>"
-                                value="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_RADIO_IP; ?>"
+            <input type="radio" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO; ?>"
+                                id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO_IP; ?>"
+                                value="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO_IP; ?>"
                                 onclick="this.blur();this.focus();"
                                 onchange="SwitchElementVisibility(
-                                                          '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST; ?>', 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP; ?>');
-                                          MakeInputVisible('<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>');
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST; ?>', 
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP; ?>');
+                                          MakeInputVisible('<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>');
                                           ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_CHECK_PING_SERVER; ?>', 
                                                                     'DivContentBodySubmit', 
-                                                                    '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>', 
+                                                                    '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>', 
                                                                      'Ip')"
                                 title="<?php echo $this->InstanceLanguageText->GetText('CHECK_PING_RADIO_IP_TITLE'); ?>" 
 								<?php echo $this->CheckedFunctionCheckPingServerRadioIp; ?> />
 			<div class="DivContentBodyContainerLabelIp">
 				<label><?php echo $this->InstanceLanguageText->GetText('CHECK_PING_LABEL_IP'); ?></label>
 			</div>
-            <input type="text" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST; ?>" 
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST; ?>" 
                                onblur="ValidateHostName(null, 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST; ?>',
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>',
                                                           '', true);"
                                onkeyup="ValidateHostName(null, 
-                                                          '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST; ?>',
+                                                          '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST; ?>',
                                                           'DivContentBodySubmit',
-                                                          '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>',
+                                                          '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>',
                                                           '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_HOST]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_HOST]; 
 									  ?>"
                                class="<?php echo $this->VisibilityFunctionCheckPingServerHost; ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('CHECK_PING_INPUT_HOST_TITLE'); ?>" />
-            <input type="text" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP; ?>" 
-                               onblur="ValidateIpAddress(null, 
-                                                           '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP; ?>',
+            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP; ?>" 
+                               onblur="ValidateIpAddressIpv4(null, 
+                                                           '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>',
                                                            '', true);"
-                               onkeyup="ValidateIpAddress(null, 
-                                                           '<?php echo ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, 
+                                                           '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>',
                                                            '', false);"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_INPUT_IP]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_IP]; 
 									  ?>"
                                class="<?php echo $this->VisibilityFunctionCheckPingServerIp; ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('CHECK_PING_INPUT_IP_TITLE'); ?>" />
-            <input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>" 
-            					 id="<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_PING_SERVER; ?>"
+            <input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>" 
+            					 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_SB; ?>"
                                  class="DivContentBodySubmit <?php echo $this->VisibilityFunctionCheckPingServerSubmit; ?>"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('CHECK_SUBMIT'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHECK'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckPingServerMessage))
-	                     echo $this->VisibilityFunctionCheckPingServerMessage; ?>">
-    	<div class="">
+	                     echo $this->VisibilityFunctionCheckPingServerMessage; ?> DivReturnForm">
+    	<div>
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_PING_SERVER_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_PING_SERVER_RADIO) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>            

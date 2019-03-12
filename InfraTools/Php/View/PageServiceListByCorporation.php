@@ -7,12 +7,9 @@ Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context by corporation.
 Functions: 
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -30,153 +27,62 @@ if (!class_exists("PageService"))
 class PageServiceListByCorporation extends PageService
 {
 	public $ArrayInstanceInfraToolsCorporation = NULL;
-	public $ArrayInfraToolsService = NULL;
+	public $ArrayInstanceInfraToolsService = NULL;
+	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
 	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-	
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			$loginStatus = $this->CheckInstanceUser();
-			if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-			   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_LOGGED_IN) . ".php");
-				$this->InputFocus = ConfigInfraTools::LOGIN_USER;
-				echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::LOGIN_FORM, $this->InputFocus);
-			}
-			elseif($this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_CONFIRMED) . ".php");
-			}
-			else include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		$this->InputValueFormMethod = "GET";
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
-			$return = $this->CorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
-											 $this->ArrayInstanceInfraToolsCorporation, 
-											 $this->InputValueHeaderDebug);
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT]))
+			$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit($this->User->GetEmail(),
+											                                        $this->ArrayInstanceInfraToolsCorporation, 
+											                                        $this->InputValueHeaderDebug);
+			//FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB
+			if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB]))
 			{
-				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT] != ConfigInfraTools::FORM_SELECT_NONE)
-					$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT];	
+				if($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB] 
+				   != ConfigInfraTools::FIELD_SEL_NONE)
+					$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB];	
 				else $this->InputValueServiceCorporation = NULL;
 			}
 			else $this->InputValueServiceCorporation = NULL;
-
-			//SERVICE LIST BY CORPORATION BACK SUBMIT
-			if($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_BACK))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																	            $this->User->GetEmail(),
-																	            $this->InputLimitOne, 
-																	            $this->InputLimitTwo, 
-																	            $this->ArrayInfraToolsService,
-																	            $rowCount,
-																	            $this->InputValueHeaderDebug);
-			}
-			//SERVICE LIST BY CORPORATION FORWARD SUBMIT
-			elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_FORWARD))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																	            $this->User->GetEmail(),
-																	            $this->InputLimitOne, 
-																	            $this->InputLimitTwo, 
-																	            $this->ArrayInfraToolsService,
-																	            $rowCount,
-																	            $this->InputValueHeaderDebug);
-				if($this->InputLimitTwo > $rowCount)
-				{
-					if(!is_numeric($rowCount))
-					{
-						$this->InputLimitOne = $this->InputLimitOne - 25;
-						$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					}
-					else
-					{
-						$this->InputLimitOne = $rowCount - 25;
-						$this->InputLimitTwo = $rowCount;
-					}
-					$this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																		  $this->User->GetEmail(),
-																		  $this->InputLimitOne, 
-																		  $this->InputLimitTwo, 
-																		  $this->ArrayInfraToolsService,
-																		  $rowCount,
-																		  $this->InputValueHeaderDebug);
-				}
-			}
-			//SERVICE LIST BY CORPORATION SELECT SUBMIT
-			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT]))
+			
+			//FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB]))
 			{
 
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB]);
 			}
-			//SERVICE LIST BY CORPORATION
+			//FM_SERVICE_LST_BY_CORPORATION
 			else
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$return = $this->ServiceSelectByServiceCorporationOnUserContext($this->InputValueServiceCorporation,
-																	            $this->User->GetEmail(),
-																	            $this->InputLimitOne, $this->InputLimitTwo, 
-																	            $this->ArrayInfraToolsService,
-																	            $rowCount,
-																	            $this->InputValueHeaderDebug);
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "_x"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION . "_y"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION] = ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION => ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION) + $_GET;
+				$this->ExecuteFunction($_GET, 'ServiceSelectByServiceCorporationOnUserContext', 
+				 					   array($this->InputValueServiceCorporation,
+					                         $this->User->GetEmail(),
+											 &$this->ArrayInstanceInfraToolsService),
+									   $this->InputValueHeaderDebug);
 			}
 		}
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

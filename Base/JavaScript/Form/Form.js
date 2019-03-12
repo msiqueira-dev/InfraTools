@@ -52,15 +52,34 @@ function MakeInputVisible(InputIdToSee)
 function ShowOrHideElement(ElementToShowOrHide, Show)
 {
 	var $elementToShowOrHide = document.getElementById(ElementToShowOrHide);
+	var $inputs = $elementToShowOrHide.getElementsByTagName('INPUT');
 	if(Show)
 	{
 		if(!$elementToShowOrHide.className.search("NotHidden") != -1)
+		{
 			$elementToShowOrHide.className = $elementToShowOrHide.className.replace("Hidden", "NotHidden");
+			for (var $index = 0; $index < $inputs.length; $index++) 
+			{
+				if($inputs[$index].type == "hidden")
+				{
+					$inputs[$index].type = "input";
+				}
+			}
+		}
 	}
 	else
 	{
 		if($elementToShowOrHide.className.search("NotHidden") != -1)
+		{
 			$elementToShowOrHide.className = $elementToShowOrHide.className.replace("NotHidden", "Hidden");	
+			for (var $index = 0; $index < $inputs.length; $index++) 
+			{
+				if($inputs[$index].type == "text")
+				{
+					$inputs[$index].type = "hidden";
+				}
+			}
+		}
 	}
 }
 
@@ -101,11 +120,18 @@ function SetSelectColor(SelectId)
 	}
 }
 
-function SubmitPostBackFormForm(Id)
+function SubmitNewForm(Id, Method, Name)
 {
-	var $buttonClicked = document.getElementsByName('HiddenTextForm')[0];
-	$buttonClicked.value = Id;
-	document.forms['PostBackForm'].submit();
+	var form = document.createElement("form");
+	var element = document.createElement("input");
+	form.method = Method;
+	form.id = Id;
+	form.name = Name
+	element.value = Id;
+    element.name = Name;
+    form.appendChild(element);  
+	document.body.appendChild(form);
+	form.submit();
 }
 
 function SubmitForm(Form)
@@ -173,7 +199,9 @@ function ValidateCpf(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, D
 {
 	var $soma = 0; 
 	var $resto;
-	var $input = document.getElementsByName(InputId)[0];	
+	var $input = document.getElementsByName(InputId)[0];
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if ($input.value == "00000000000")
@@ -299,10 +327,12 @@ function ValidateDescription(DefaultInputClass, InputId, DefaultSubmitClass, Sub
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
-    var $filter = /^[a-zA-Z _.-]{2,45}$/;
+    var $filter = /(^([a-zA-Z]|[.]|[-]|[_]|[ ]|[0-9])*)$/;
 	
 	if($input.className == "Hidden ")
 		return false;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -341,6 +371,8 @@ function ValidateEmail(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId,
 	{
 		if($input.className == "Hidden ")
 			return false;
+		if($input.className.search('FormFieldNotObligatory') != -1)
+			DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 		if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 		{
 			if (!$filter.test($input.value)) 
@@ -375,6 +407,8 @@ function ValidateHasCharacters(DefaultInputClass, InputId, DefaultSubmitClass, S
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
 	var $value = $input.value;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		$input.className = DefaultInputClass + " InputAfterText";
@@ -533,11 +567,13 @@ function ValidateInputsOnlyOneFilled(DefaultInputClass,InputId1, InputId2, Defau
 	}
 }
 
-function ValidateIpAddress(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
+function ValidateIpAddressIpv4(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
 	var $filter = /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -572,7 +608,7 @@ function ValidateIpAndPort(DefaultInputIpClass, DefaultInputIpPortClass, InputIp
 	var $returnIp;
 	var $returnIpPort;
 	var $submit = document.getElementsByName(SubmitId)[0];
-	$returnIp = ValidateIpAddress(DefaultInputIpClass, InputIpId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightFirstInput);
+	$returnIp = ValidateIpAddressIpv4(DefaultInputIpClass, InputIpId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightFirstInput);
 	$returnIpPort = ValidateNumbersOnly(DefaultInputIpPortClass, InputIpPortId, DefaultSubmitClass, SubmitId, DefaultValue,
 	                                      HighlightSecondtInput);
 	if($returnIp == false || $returnIpPort == false)
@@ -588,6 +624,8 @@ function ValidateLettersOnly(DefaultInputClass, InputId, DefaultSubmitClass, Sub
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!isNaN($input.value))
@@ -638,18 +676,15 @@ function ValidateMultiplyFields(Id, DefaultSubmitClass, SubmitId, DefaultValue)
 	}
 	for (var $index = 0; $index < $inputs.length; $index++) 
 	{
-		if($inputs[$index].type != "submit" && $inputs[$index].type != "hidden" && $inputs[$index].id != "")
+		if($inputs[$index].type != "submit" && $inputs[$index].type != "hidden" && $inputs[$index].type != "radio"
+		   && $inputs[$index].id != "")
 		{
 			if(($inputs[$index].className.search('InputAlertText') != -1 
 			|| $inputs[$index].value == ""
 			|| $inputs[$index].value == DefaultValue
-			|| $inputs[$index].value == $inputs[$index].title)
-			&& $inputs[$index].id != "GoogleMapsSearch"
-			&& $inputs[$index].id != "FormGoogleMapsRegion"
-			&& $inputs[$index].id != "FormFieldUserPhonePrimary"
-			&& $inputs[$index].id != "FormFieldUserPhonePrimaryPrefix"
-			&& $inputs[$index].id != "FormFieldUserPhoneSecondary"
-			&& $inputs[$index].id != "FormFieldUserPhoneSecondaryPrefix")
+			|| $inputs[$index].value == $inputs[$index].title
+			|| $inputs[$index].value.length == 0)
+			&& $inputs[$index].className.search('FormFieldNotObligatory') == -1)
 			{
 				$submit.className = DefaultSubmitClass + " SubmitDisabled";
 				$submit.disabled = true;
@@ -690,6 +725,8 @@ function ValidateName(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, 
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
 	var $filter = /(^([a-zA-Z]|[^\u0000-\u007F])+(([ ])+([a-zA-Z]|[^\u0000-\u007F]|(([a-zA-Z]|[^\u0000-\u007F])[.]))+)+$)/;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -721,6 +758,8 @@ function ValidateNotNull(DefaultInputClass, InputId, DefaultSubmitClass, SubmitI
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		$input.className = DefaultInputClass + " InputAfterText";
@@ -741,6 +780,8 @@ function ValidateNumberSize(DefaultInputClass, InputId, DefaultSubmitClass, Subm
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (isNaN($input.value))
@@ -782,6 +823,8 @@ function ValidateNumbersOnly(DefaultInputClass, InputId, DefaultSubmitClass, Sub
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (isNaN($input.value))
@@ -814,6 +857,8 @@ function ValidatePassword(DefaultInputClass, InputId, DefaultSubmitClass, Submit
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
 	var $filter = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,18}$/;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -846,6 +891,8 @@ function ValidateRegistrationId(DefaultInputClass, InputId, DefaultSubmitClass, 
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
 	var $filter = /(^([a-zA-Z]|[ ]|[0-9])+$)/;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -897,7 +944,7 @@ function ValidateServiceName(DefaultInputClass, InputId, DefaultSubmitClass, Sub
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
-	var $filter = /(^([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[*]|[0-9]|[^\u0000-\u007F])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[*]|[0-9]|[^\u0000-\u007F])*)*$)/;
+	var $filter = /(^([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[_]|[*]|[0-9]|[^\u0000-\u007F])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[']|[-]|[*]|[0-9]|[^\u0000-\u007F])*)*$)/;
 	if ($input.value != $input.title && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -929,7 +976,7 @@ function ValidateTeamName(DefaultInputClass, InputId, DefaultSubmitClass, Submit
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
-	var $filter = /^[a-zA-Z_.-]{2,45}$/;
+	var $filter = /^([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])+(([ ])*([a-zA-Z]|[,]|[.]|[&]|[\']|[-]|[_]|[*]|[0-9])*)*$/;
 	if ($input.value != $input.title && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -962,6 +1009,8 @@ function ValidateTitle(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId,
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
 	var $filter = /(^([a-zA-Z]|[ ]|[^\u0000-\u007F])+$)/;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 
@@ -997,6 +1046,8 @@ function ValidateUserUniqueId(DefaultInputClass, InputId, DefaultSubmitClass, Su
 	
 	if($input.className == "Hidden ")
 		return false;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
 	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
 	{
 		if (!$filter.test($input.value)) 

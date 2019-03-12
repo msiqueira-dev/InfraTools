@@ -1,0 +1,29 @@
+.DivContentBody{width:1000px;min-height:350px;height:auto;}
+.DivContentBodyOptions{width:100%;height:115px;margin-top:-10px;}
+.DivContentBodyOptionsBox{width:auto;height:auto;margin-left:0.5%;}
+.DivContentBodySubmitOption{width:155px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-right:15px;}
+.DivContentBodySubmitOption:hover{background-color:#ef4e22;}
+.DivContentBodyContainer{width:600px !important;}
+.DivContentBodyContainerValue{width:400px !important;}
+.DivContentBodyContainersBox{width:125px;height:95px;float:left;margin-right:5px;margin-left:5px;margin-top:5px;border:3px solid #211f5e;border-radius:10px;text-align:center;}
+.DivContentBodyContainersBox input{position:relative; top:2px;}
+.DivContentBodyContainersBoxIcon{margin-top:5px;}
+.DivContentBodyContainerSubmit{height:45px !important;}
+.DivContentBodyContainerService{width:1000px !important;min-height:50px;margin-top:15px;}
+.DivContentBodyContainerService input[type="radio"]{width:20px;height:15px;float:left;margin-left:0px;}
+.DivContentBodyContainerService input[type="text"], .DivContentBodyContainerSubmit input[type="text"]{width:350px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
+.DivContentBodyContainerRadio{max-width: 100px !important;}
+.DivContentBodyContainerServiceInput{height:95px;}
+.DivContentBodySubmit{margin-right:47px;margin-left:0 !important;}
+.DivContentBody form{min-height:80px;}
+.DivFormServiceView{margin-left:20px;}
+.TableGenericThRight{width:70%!important;}
+.TableGenericTdLink form{height:20px !important;min-height:20px !important;}
+.DivContentBodySecondTitleLine{width:900px;height:3px;background-color:#f5821f;margin-left:6%;margin-bottom:10px;}
+.DivClearFloat{margin:0 !important;}
+.DivFormServiceViewDelete{width:165px !important; height:40px !important;min-height:40px !important;float:left;margin-left:23px;}
+.DivFormServiceViewUpdate{width:165px !important; height:40px !important;min-height:40px !important;float:left;}
+.DivContentBodyContainer form{margin-left:20px;}
+.DivReturnMessageError{margin-left:0 !important;}
+.DivReturnMessageSuccess{margin-left:0 !important;}
+.DivReturnMessageWarning{margin-left:0 !important;}

@@ -2,65 +2,80 @@
 
 /************************************************************************
 Class: Factory
-Creation: 01/09/2017
+Creation: 2017/09/01
 Creator: Marcus Siqueira
 Dependencies:
 			- Every function will need the file of the class being instaciated included
 			by the whose called it.
 	
 Description: 
-			Classe used to create instance of all elements in the Base Project.
+			Class with the Factory pattern for creating Base classes
 Methods:
-			public function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
-			public function CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
-			                                           $AssocUserCorporationRegistrationId, $CorporationInstance, $RegisterDate, $UserInstance);
-			public function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance);
-			public function CreateCaptcha();
-			public function CreateConfig();
-			public function CreateCorporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
-			public function CreateCountry($CountryAbbreviation, $Name, $RegionCode, $RegisterDate);
-			public function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
-			public function CreateEmail();
-			public function CreateFacedeBusiness($LanguageText);
-			public function CreateFacedePersistence();
-			public function CreateFacedePersistenceAssocTicketUserRequesting();
-			public function CreateFacedePersistenceAssocTicketUserResponsible();
-			public function CreateFacedePersistenceAssocUserCorporation();
-			public function CreateFacedePersistenceAssocUserTeam();
-			public function CreateFacedePersistenceCorporation();
-			public function CreateFacedePersistenceCountry();
-			public function CreateFacedePersistenceDepartment();
-			public function CreateFacedePersistenceHistoryTicket();
-			public function CreateFacedePersistenceNotification();
-			public function CreateFacedePersistenceStatusTicket();
-			public function CreateFacedePersistenceTeam();
-			public function CreateFacedePersistenceTicket();
-			public function CreateFacedePersistenceTypeAssocUserTeam();
-			public function CreateFacedePersistenceTypeStatusTicket();
-			public function CreateFacedePersistenceTypeTicket();
-			public function CreateFacedePersistenceTypeUser();
-			public function CreateFacedePersistenceUser();
-			public function CreateFile();
-			public function CreateFormValidator();
-			public function CreateLog($LogPathDirectory);
-			public function CreateNotification($NotificationText, $NotificationUser, $RegisterDate);
-			public function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword);
-			public function CreateMobileDetect();
-			public function CreateNetWhois();
-			public function CreateNetwork();
-			public function CreatePersistence();
-			public function CreateSession();
-			public function CreateSessionHandlerCustom();
-			public function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
-			public function CreateTechInfo();
-			public function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
-			public function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
-			public function CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
-			public function CreateTypeUser($Description, $Id, $RegisterDate);
-			public function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-			                           $BirthDate, $CorporationInstance, $Country, $Department, $Email, 
-							           $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
-							           $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
+			public    function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
+			public    function CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
+			                                              $AssocUserCorporationRegistrationId, $CorporationInstance, $RegisterDate,
+								   					      $UserInstance);
+			public    function CreateAssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate);
+			public    function CreateAssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationUser,
+			                                               $AssocUserNotificationRead, $RegisterDate);
+			public    function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance);
+			public    function CreateCaptcha();
+			public    function CreateConfig();
+			public    function CreateCorporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
+			public    function CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
+			public    function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
+			public    function CreateDiagnosticTools();
+			public    function CreateEmail();
+			public    function CreateFacedeBusiness($LanguageText);
+			public    function CreateFacedePersistence();
+			public    function CreateFacedePersistenceAssocTicketUserRequesting();
+			public    function CreateFacedePersistenceAssocTicketUserResponsible();
+			public    function CreateFacedePersistenceAssocUserCorporation();
+			public    function CreateFacedePersistenceAssocUserRole();
+			public    function CreateFacedePersistenceAssocUserTeam();
+			public    function CreateFacedePersistenceCorporation();
+			public    function CreateFacedePersistenceCountry();
+			public    function CreateFacedePersistenceDepartment();
+			public    function CreateFacedePersistenceHistoryTicket();
+			public    function CreateFacedePersistenceNotification();
+			public    function CreateFacedePersistenceRole();
+			public    function CreateFacedePersistenceStatusTicket();
+			public    function CreateFacedePersistenceSystemConfiguration();
+			public    function CreateFacedePersistenceTeam();
+			public    function CreateFacedePersistenceTicket();
+			public    function CreateFacedePersistenceTypeAssocUserTeam();
+			public    function CreateFacedePersistenceTypeStatusTicket();
+			public    function CreateFacedePersistenceTypeTicket();
+			public    function CreateFacedePersistenceTypeUser();
+			public    function CreateFacedePersistenceUser();
+			public    function CreateFile();
+			public    function CreateFormValidator();
+			public    function CreateLog($LogPathDirectory);
+			public    function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword);
+			public    function CreateMobileDetect();
+			public    function CreateNetWhois();
+			public    function CreateNotificationCreateNotification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate);
+			public    function CreatePage($Page, $Language);
+			public    function CreatePageForm();
+			public    function CreatePersistence();
+			public    function CreateRole($RegisterDate, $RoleDescription, $RoleName);
+			public    function CreateSession();
+			public    function CreateSessionHandlerCustom();
+			public    function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+							                             $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+											             $SystemConfigurationOptionValue);
+			public    function CreateTeam($RegisterDate, $TeamDescription, $TeamId, $TeamName)
+			public    function CreateTechInfo();
+			public    function CreateTicket($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
+								            $TicketSuggestion, $TicketTitle, $TicketType);
+			public    function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
+			public    function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
+			public    function CreateTypeTicket($RegisterDate, $TypeTicketDescription);
+			public    function CreateTypeUser($TypeUserDescription, $RegisterDate);
+			public    function CreateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
+			                              $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
+							              $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
+							              $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
 **************************************************************************/
 
 /* BASE PATH CONSTANTS */
@@ -115,6 +130,7 @@ class Factory
 	/* Instance */
 	protected static $Instance;
 	protected $ClassSystemName = NULL;
+	protected $Config;
 		
 	/* Clone */
 	protected function __clone()
@@ -157,6 +173,24 @@ class Factory
 								        $CorporationInstance, $RegisterDate, $UserInstance);
 	}
 	
+	public function CreateAssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserRole.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserRole');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserRole.php");
+		return new AssocUserRole($AssocUserRoleRoleName, $AssocUserRoleUserEmail, $RegisterDate);
+	}
+	
+	public function CreateAssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationUser,
+			                                    $AssocUserNotificationRead, $RegisterDate)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserNotification');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+		return new AssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationUser,
+			                             $AssocUserNotificationRead, $RegisterDate);
+	}
+	
 	public function CreateAssocUserTeam($RegisterDate, $TeamInstance, $TypeAssocUserTeamInstance, $UserInstance)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
@@ -191,12 +225,12 @@ class Factory
 		return new Corporation($ArrayInstanceDepartment, $CorporationActive, $CoraporationName, $RegisterDate);
 	}
 	
-	public function CreateCountry($CountryAbbreviation, $Name, $RegionCode, $RegisterDate) 
+	public function CreateCountry($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate) 
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
 		else include_once(BASE_PATH_PHP_MODEL . "Country.php");
-		return new Country($CountryAbbreviation, $Name, $RegionCode, $RegisterDate);
+		return new Country($CountryAbbreviation, $CountryName, $RegionCode, $RegisterDate);
 	}
 	
 	public function CreateDepartment($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate) 
@@ -205,6 +239,14 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Department');
 		else include_once(BASE_PATH_PHP_MODEL . "Department.php");
 		return new Department($DepartmentCorporation, $DepartmentInitials, $DepartmentName, $RegisterDate);
+	}
+	
+		public function CreateDiagnosticTools()
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "DiagnosticTools.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class DiagnosticTools');
+		else include_once(BASE_PATH_PHP_MODEL . "DiagnosticTools.php");
+		return DiagnosticTools::__create();	
 	}
 	
 	public function CreateEmail() 
@@ -276,8 +318,29 @@ class Factory
 		return FacedePersistenceAssocUserCorporation::__create();
 	}
 	
+	public function CreateFacedePersistenceAssocUserRole()
+	{
+		if (!class_exists("AssocUserRole"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserRole.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocUserRole.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserRole');
+		}
+		
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserRole.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserRole');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserRole.php");
+		return FacedePersistenceAssocUserRole::__create();
+	}
+	
 	public function CreateFacedePersistenceAssocUserTeam()
 	{
+		if (!class_exists("AssocUserTeam"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserTeam');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserTeam');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserTeam.php");
@@ -292,7 +355,6 @@ class Factory
 				include_once(BASE_PATH_PHP_MODEL . "Corporation.php");
 			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Corporation');
 		}
-		
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCorporation.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceCorporation');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCorporation.php");
@@ -301,6 +363,12 @@ class Factory
 	
 	public function CreateFacedePersistenceCountry()
 	{
+		if (!class_exists("Country"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Country.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCountry.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceCountry');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceCountry.php");
@@ -309,6 +377,12 @@ class Factory
 	
 	public function CreateFacedePersistenceDepartment()
 	{
+		if (!class_exists("Department"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Department.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Department.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Department');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceDepartment.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceDepartment');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceDepartment.php");
@@ -317,6 +391,12 @@ class Factory
 	
 	public function CreateFacedePersistenceHistoryTicket()
 	{
+		if (!class_exists("HistoryTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "HistoryTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "HistoryTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class HistoryTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceHistoryTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceHistoryTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceHistoryTicket.php");
@@ -325,22 +405,68 @@ class Factory
 	
 	public function CreateFacedePersistenceNotification()
 	{
+		if (!class_exists("Notification"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Notification.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceNotification.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceNotification');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceNotification.php");
 		return FacedePersistenceNotification::__create();
 	}
 	
+	public function CreateFacedePersistenceRole()
+	{
+		if (!class_exists("Role"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Role.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
+		}
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceRole.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceRole');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceRole.php");
+		return FacedePersistenceRole::__create();
+	}
+	
 	public function CreateFacedePersistenceStatusTicket()
 	{
+		if (!class_exists("StatusTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "StatusTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "StatusTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class StatusTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceStatusTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceStatusTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceStatusTicket.php");
 		return FacedePersistenceStatusTicket::__create();
 	}
 	
+	public function CreateFacedePersistenceSystemConfiguration()
+	{
+		if (!class_exists("SystemConfiguration"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
+				include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class SystemConfiguration');
+		}
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceSystemConfiguration.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceSystemConfiguration');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceSystemConfiguration.php");
+		return FacedePersistenceSystemConfiguration::__create();
+	}
+	
 	public function CreateFacedePersistenceTeam()
 	{
+		if (!class_exists("Team"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Team.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Team.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Team');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTeam');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTeam.php");
@@ -349,6 +475,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTicket()
 	{
+		if (!class_exists("Ticket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "Ticket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "Ticket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Ticket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTicket.php");
@@ -357,6 +489,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeAssocUserTeam()
 	{
+		if (!class_exists("TypeAssocUserTeam"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeAssocUserTeam');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeAssocUserTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeAssocUserTeam');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeAssocUserTeam.php");
@@ -365,6 +503,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeStatusTicket()
 	{
+		if (!class_exists("TypeStatusTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeStatusTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeStatusTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeStatusTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeStatusTicket.php");
@@ -373,6 +517,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeTicket()
 	{
+		if (!class_exists("TypeTicket"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeTicket.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeTicket.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeTicket');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeTicket');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeTicket.php");
@@ -381,6 +531,12 @@ class Factory
 	
 	public function CreateFacedePersistenceTypeUser()
 	{
+		if (!class_exists("TypeUser"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "TypeUser.php"))
+				include_once(BASE_PATH_PHP_MODEL . "TypeUser.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeUser');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceTypeUser');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceTypeUser.php");
@@ -389,6 +545,12 @@ class Factory
 	
 	public function CreateFacedePersistenceUser()
 	{
+		if (!class_exists("User"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "User.php"))
+				include_once(BASE_PATH_PHP_MODEL . "User.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
+		}
 		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceUser');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceUser.php");
@@ -419,14 +581,6 @@ class Factory
 		return new Log($LogPathDirectory);
 	}
 	
-	public function CreateNotification($NotificationText, $NotificationUser, $RegisterDate)
-	{
-		if(!file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
-		else include_once(BASE_PATH_PHP_MODEL . "Notification.php");
-		return new Notification($NotificationText, $NotificationUser, $RegisterDate);
-	}
-	
 	public function CreateMySqlManager($MySqlAddress, $MySqlPort, $MySqlDataBase, $MySqlUser, $MySqlPassword)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "MySqlManager.php"))
@@ -451,12 +605,48 @@ class Factory
 		return new Net_Whois;
 	}
 	
-	public function CreateNetwork()
+	public function CreateNotification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate)
 	{
-		if(!file_exists(BASE_PATH_PHP_MODEL . "Network.php"))
-			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Network');
-		else include_once(BASE_PATH_PHP_MODEL . "Network.php");
-		return Network::__create();	
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Notification');
+		else include_once(BASE_PATH_PHP_MODEL . "Notification.php");
+		return new Notification($NotificationActive, $NotificationId, $NotificationText, $RegisterDate);
+	}
+	
+	public function CreatePage($Page, $Language)
+	{
+		$Config = NULL;
+		if(!file_exists(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading API Class MobileDetect');
+		else include_once(BASE_PATH_PHP . "API/MobileDetect/MobileDetect.php");	
+		if(file_exists(SITE_PATH_PHP_VIEW . $Page . ".php"))
+			include_once(SITE_PATH_PHP_VIEW . $Page . ".php");
+		elseif(file_exists(BASE_PATH_PHP_VIEW . $Page . ".php"))
+		{
+			include_once(BASE_PATH_PHP_VIEW . $Page . ".php");
+			$Config = $this->CreateConfig();
+		}
+		elseif(file_exists(BASE_PATH_PHP_VIEW . "Page.php"))
+		{
+			include_once(BASE_PATH_PHP_VIEW . "Page.php");
+			$Page = Config::PAGE;
+			$Config = $this->CreateConfig();
+		}
+		else exit(basename(__FILE__, '.php') . ': Not a single View Class available for $Page. Check View Dictories.');
+		$page = $Page::__create($Config, $Language, $Page);
+		if($page != NULL)
+		{
+			$page->LoadPage();
+			if($page->InputValueHeaderDebug == Config::CHECKBOX_CHECKED)
+			{
+				$page->StopPageLoadTime();
+				echo "<div class='DivPageLoadTime'><b>Page Load Time: " . $page->GetPageLoadTime() . "</b>
+				                               <br><b>Instance Memory: " . Config::GetMemoryUsage(FALSE)  . "</b>
+											   <br><b>PHP System Memory: " . Config::GetMemoryUsage(TRUE) . "</b></div>";
+			}
+			return Config::RET_OK;
+		}
+		else return Config::RET_ERROR;
 	}
 	
 	public function CreatePageForm()
@@ -470,6 +660,14 @@ class Factory
 	public function CreatePersistence()
 	{
 		return NULL;
+	}
+	
+	public function CreateRole($RegisterDate, $RoleDescription, $RoleName)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
+		else include_once(BASE_PATH_PHP_MODEL . "Role.php");
+		return new SessionHandler($RegisterDate, $RoleDescription, $RoleName);
 	}
 	
 	public function CreateSession()
@@ -488,12 +686,26 @@ class Factory
 		return new SessionHandler();
 	}
 	
-	public function CreateTeam($TeamDescription, $TeamId, $TeamName, $RegisterDate)
+	public function CreateSystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+							                  $SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+											  $SystemConfigurationOptionValue)
+	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class SystemConfiguration');
+		else include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
+		if(!isset($SystemConfigurationOptionActive))
+			$SystemConfigurationOptionActive = FALSE;
+		return  new SystemConfiguration($RegisterDate, $SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
+										$SystemConfigurationOptionName, $SystemConfigurationOptionNumber,
+										$SystemConfigurationOptionValue);
+	}
+	
+	public function CreateTeam($RegisterDate, $TeamDescription, $TeamId, $TeamName)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Team.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Team');
 		else include_once(BASE_PATH_PHP_MODEL . "Team.php");
-		return new Team($TeamDescription, $TeamId, $TeamName, $RegisterDate);
+		return new Team($RegisterDate, $TeamDescription, $TeamId, $TeamName);
 	}
 	
 	public function CreateTechInfo()
@@ -504,41 +716,51 @@ class Factory
 		return TechInfo::__create();
 	}
 	
-	public function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId)
+	public function CreateTicket($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
+			     	             $TicketSuggestion, $TicketTitle, $TicketType)
+ 	{
+		if(!file_exists(BASE_PATH_PHP_MODEL . "Ticket.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Ticket');
+		else include_once(BASE_PATH_PHP_MODEL . "Ticket.php");
+		return new Ticket($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
+			     	      $TicketSuggestion, $TicketTitle, $TicketType);
+    }
+	
+	public function CreateTypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeAssocUserTeam');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeAssocUserTeam.php");
-		return new TypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamTeamDescription, $TypeAssocUserTeamTeamId);
+		return new TypeAssocUserTeam($RegisterDate, $TypeAssocUserTeamDescription);
 	}
 	
-	public function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId)
+	public function CreateTypeStatusTicket($RegisterDate, $TypeStatusTicketDescription)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeStatusTicket');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeStatusTicket.php");
-		return new TypeStatusTicket($RegisterDate, $TypeStatusTicketDescription, $TypeStatusTicketId);
+		return new TypeStatusTicket($RegisterDate, $TypeStatusTicketDescription);
 	}
 	
-	public function CreateTypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId)
+	public function CreateTypeTicket($RegisterDate, $TypeTicketDescription)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeTicket.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeTicket');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeTicket.php");
-		return new TypeTicket($RegisterDate, $TypeTicketDescription, $TypeTicketId);
+		return new TypeTicket($RegisterDate, $TypeTicketDescription);
 	}
 	
-	public function CreateTypeUser($Description, $Id, $RegisterDate)
+	public function CreateTypeUser($TypeUserDescription, $RegisterDate)
 	{
 		if(!file_exists(BASE_PATH_PHP_MODEL . "TypeUser.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class TypeUser');
 		else include_once(BASE_PATH_PHP_MODEL . "TypeUser.php");
-		return new TypeUser($Description, $Id, $RegisterDate);
+		return new TypeUser($TypeUserDescription, $RegisterDate);
 	}
 	
-	public function CreateUser($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
-							   $Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
+	public function CreateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
+							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
+							   $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 							   $TwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 							   $UserTypeInstance, $UserUniqueId)
@@ -546,9 +768,16 @@ class Factory
 		if(!file_exists(BASE_PATH_PHP_MODEL . "User.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
 		else include_once(BASE_PATH_PHP_MODEL . "User.php");
-		return new User($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation, 
-						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
-						$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserTeam.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserTeam');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserTeam.php");
+		if(!file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserNotification');
+		else include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+		
+		return new User($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
+						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
+						$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 						$TwoStepVerification, $UserActive, $UserConfirmed, 
 						$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 						$UserTypeInstance, $UserUniqueId);

@@ -5,7 +5,8 @@ Class: Ticket
 Creation: 30/10/2017
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
 			Classe para o tratamento de solicitações.
 Get / Set:
@@ -16,11 +17,15 @@ Get / Set:
 			public function GetTicketSuggestion();
 			public function GetTicketType();
 			public function GetTicketTitle();
+			public function GetTypeStatusTicketDescription();
+			public function GetTypeTicketDescription();
 			public function SetTicketDescription($TicketDescription);
 			public function SetTicketStatus($TicketStatus);
 			public function SetTicketSuggestion($TicketSuggestion);
 			public function SetTicketTitle($TicketTitle);
 			public function SetTicketType($TicketType);
+			public function SetTypeStatusTicketDescription($TypeStatusTicketDescription);
+			public function SetTypeTicketDescription($TypeTicketDescription);
 Methods:
 			public function UpdateTicket($TicketDescription, $TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType);
 **************************************************************************/
@@ -40,13 +45,26 @@ class Ticket
 	public function __construct($RegisterDate, $TicketDescription, $TicketId, $TicketStatus, 
 								$TicketSuggestion, $TicketTitle, $TicketType)
 	{
-		$this->RegisterDate       = $RegisterDate;
-		$this->TicketDescription  = $TicketDescription;
-		$this->TicketId           = $TicketId;
-		$this->TicketStatus       = $TicketStatus;
-		$this->TicketSuggestion   = $TicketSuggestion;
-		$this->TicketTitle        = $TicketTitle;
-		$this->TicketType         = $TicketType;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
+		if(!is_null($TicketDescription))
+			$this->TicketDescription = $TicketDescription;
+		else throw new Exception(Config::EXCEPTION_TICKET_DESCRIPTION);
+		if(!is_null($TicketId))
+			$this->TicketId = $TicketId;
+		else throw new Exception(Config::EXCEPTION_TICKET_ID);
+		if(!is_null($TicketStatus))
+			$this->TicketStatus = $TicketStatus;
+		else throw new Exception(Config::EXCEPTION_TICKET_STATUS);
+		if(!is_null($TicketSuggestion))
+			$this->TicketSuggestion = $TicketSuggestion;
+		if(!is_null($TicketTitle))
+			$this->TicketTitle = $TicketTitle;
+		else throw new Exception(Config::EXCEPTION_TICKET_TITLE);
+		if(!is_null($TicketType))
+			$this->TicketType = $TicketType;
+		else throw new Exception(Config::EXCEPTION_TICKET_TYPE);
 	}
 	
 	/* Clone */
@@ -94,12 +112,14 @@ class Ticket
 	/* SET */
 	public function SetTicketDescription($TicketDescription)
 	{
-		$this->TicketDescription = $TicketDescription;
+		if(!is_null($TicketDescription))
+			$this->TicketDescription = $TicketDescription;
 	}
 	
 	public function SetTicketStatus($TicketStatus)
 	{
-		$this->TicketStatus = $TicketStatus;
+		if(!is_null($TicketStatus))
+			$this->TicketStatus = $TicketStatus;
 	}
 	
 	public function SetTicketSuggestion($TicketSuggestion)
@@ -109,27 +129,40 @@ class Ticket
 	
 	public function SetTicketTitle($TicketTitle)
 	{
+		if(!is_null($TicketTitle))
 		$this->TicketTitle = $TicketTitle;
 	}
 	
 	public function SetTicketType($TicketType)
 	{
-		$this->TicketType = $TicketType;
+		if(!is_null($TicketType))
+			$this->TicketType = $TicketType;
+	}
+	
+	public function SetTypeStatusTicketDescription($TypeStatusTicketDescription)
+	{
+		if(!is_null($TypeStatusTicketDescription))
+			$this->TicketStatus->SetTypeStatusTicketDescription($TypeStatusTicketDescription); 
+	}
+	
+	public function SetTypeTicketDescription($TypeTicketDescription)
+	{
+		if(!is_null($TypeTicketDescription))
+			$this->TicketType->SetTypeTicketDescription($TypeStatusTicketDescription); 
 	}
 	
 	/* METHODS */
 	public function UpdateTicket($TicketDescription, $TicketStatus, $TicketSuggestion, $TicketTitle, $TicketType)
 	{
-		if($TicketDescription != NULL)
-			$this->TicketDescription  = $TicketDescription;
-		if($TicketStatus != NULL)
-			$this->TicketStatus       = $TicketStatus;
-		if($TicketSuggestion != NULL)
-			$this->TicketSuggestion   = $TicketSuggestion;
-		if($TicketTitle != NULL)
-			$this->TicketTitle        = $TicketTitle;
-		if($TicketType != NULL)
-			$this->TicketType         = $TicketType;
+		if(!is_null($TicketDescription))
+			$this->TicketDescription = $TicketDescription;
+		if(!is_null($TicketStatus))
+			$this->TicketStatus = $TicketStatus;
+		$this->TicketSuggestion = $TicketSuggestion;
+		if(!is_null($TicketTitle))
+			$this->TicketTitle = $TicketTitle;
+		if(!is_null($TicketType))
+			$this->TicketType = $TicketType;
 	}
 }
 ?>

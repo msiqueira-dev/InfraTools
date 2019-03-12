@@ -1,18 +1,15 @@
 <?php
 /************************************************************************
 Class: PageService.php
-Creation: 19/06/2018
+Creation: 2018/06/19
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageInfraTools.php
 Description: 
-			Classe que trata da página do cadastro de serviços.
+			Class that register a new service.
 Functions: 
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -33,133 +30,82 @@ class PageServiceRegister extends PageInfraTools
 	public $ArrayInstanceInfraToolsDepartment  = NULL;
 	public $ArrayInstanceInfraToolsTypeService = NULL;
 	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
-	}
-	
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			$loginStatus = $this->CheckInstanceUser();
-			if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-			   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_LOGGED_IN) . ".php");
-				$this->InputFocus = ConfigInfraTools::LOGIN_USER;
-				echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::LOGIN_FORM, $this->InputFocus);
-			}
-			elseif($this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_CONFIRMED) . ".php");
-			}
-			else include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
-		$returnClass = "";
-		$returnImage = "";
+		$this->ShowDivReturnEmpty();
+		$returnClass = "DivHidden";
+		$returnImage = "DivDisplayNone";
 		$returnText  = "";
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT]) || 
-			   isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME]))
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_REGISTER_SB]) || 
+			   isset($_POST[ConfigInfraTools::FIELD_SERVICE_NAME]))
 			{
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE]))
-					$this->InputValueServiceActive = TRUE;
-				else $this->InputValueServiceActive = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION]))
+				if(isset($_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME]))
 				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_SELECT_NONE)
-						$this->InputValueServiceCorporation = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION];
-					else $this->InputValueServiceCorporation = NULL; 
+					if($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME] == ConfigInfraTools::FIELD_SEL_NONE)
+						$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME] = NULL; 
 				}
-				else $this->InputValueServiceCorporation = NULL; 
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE]))
-					$this->InputValueServiceCorporationCanChange = TRUE;
-				else $this->InputValueServiceCorporationCanChange = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT]))
-				{
-					if($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION] != ConfigInfraTools::FORM_SELECT_NONE)
-						$this->InputValueServiceDepartment = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT];
-					else $this->InputValueServiceDepartment = NULL; 
-				}
-				else $this->InputValueServiceDepartment = NULL; 
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE]))
-					$this->InputValueServiceDepartmentCanChange = TRUE;
-				else $this->InputValueServiceDepartmentCanChange = FALSE;
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION]))
-					$this->InputValueServiceDescription = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION];
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME]))
-					$this->InputValueServiceName = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_NAME];
-				if(isset($_GET[ConfigInfraTools::FORM_FIELD_SERVICE_TYPE]))
-					$this->InputValueServiceType = $_GET[ConfigInfraTools::FORM_FIELD_SERVICE_TYPE];
-				$return = $this->ServiceInsert($this->InputValueServiceActive, 
-											   $this->InputValueServiceCorporation, 
-											   $this->InputValueServiceCorporationCanChange,
-									           $this->InputValueServiceDepartment, 
-											   $this->InputValueServiceDepartmentCanChange,
-									           $this->InputValueServiceDescription, 
-											   $this->InputValueServiceName, 
-											   $this->InputValueServiceType,
-											   $this->User->GetEmail(),
-											   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					Page::GetCurrentDomain($domain);
-					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
-					   			                  str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SELECT));
-				}
-				
+				$return = $this->InfraToolsServiceInsert(@$_POST[ConfigInfraTools::FIELD_SERVICE_ACTIVE], 
+											             @$_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+											             @$_POST[ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE],
+		 							                     @$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
+											             @$_POST[ConfigInfraTools::FIELD_SERVICE_DEPARTMENT_CAN_CHANGE],
+									                     $_POST[ConfigInfraTools::FIELD_SERVICE_DESCRIPTION], 
+											             $_POST[ConfigInfraTools::FIELD_SERVICE_NAME], 
+											             $_POST[ConfigInfraTools::FIELD_SERVICE_TYPE],
+											             $this->User->GetEmail(),
+											             $this->InputValueHeaderDebug);
 				$returnClass = $this->ReturnClass;
 				$returnImage = $this->ReturnImage;
 				$returnText  = $this->ReturnText;
-			}
-			if(!isset($_GET[ConfigInfraTools::FORM_SERVICE_REGISTER_SUBMIT]) || $return != ConfigInfraTools::SUCCESS)
-			{
-				$return = $this->TypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, 
-														  $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
+				$return = $this->InfraToolsTypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, $this->InputValueHeaderDebug);
+				if($return == ConfigInfraTools::RET_OK)
 				{
-					$return = $this->CorporationSelectOnUserServiceContextNoLimit(
+					$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit(
 						                     $this->User->GetEmail(),
 											 $this->ArrayInstanceInfraToolsCorporation, 
 											 $this->InputValueHeaderDebug);
-					if($return == ConfigInfraTools::SUCCESS)
+					if($return == ConfigInfraTools::RET_OK)
 					{
-						$return = $this->DepartmentSelectOnUserServiceContextNoLimit(
+						$return = $this->InfraToolsDepartmentSelectOnUserServiceContextNoLimit(
+							             $this->User->GetCorporationName(),
+										 $this->User->GetEmail(),
+										 $this->ArrayInstanceInfraToolsDepartment, 
+										 $this->InputValueHeaderDebug);
+					}
+				}
+				$this->ReturnClass = $returnClass;
+				$this->ReturnImage = $returnImage;
+				$this->ReturnText  = $returnText;
+			}
+			if(!isset($_GET[ConfigInfraTools::FM_SERVICE_REGISTER_SB]) || $return != ConfigInfraTools::RET_OK)
+			{
+				$return = $this->InfraToolsTypeServiceSelectNoLimit($this->ArrayInstanceInfraToolsTypeService, $this->InputValueHeaderDebug);
+				if($return == ConfigInfraTools::RET_OK)
+				{
+					$return = $this->InfraToolsCorporationSelectOnUserServiceContextNoLimit(
+						                     $this->User->GetEmail(),
+											 $this->ArrayInstanceInfraToolsCorporation, 
+											 $this->InputValueHeaderDebug);
+					if($return == ConfigInfraTools::RET_OK)
+					{
+						$return = $this->InfraToolsDepartmentSelectOnUserServiceContextNoLimit(
 							             $this->User->GetCorporationName(),
 										 $this->User->GetEmail(),
 										 $this->ArrayInstanceInfraToolsDepartment, 
@@ -171,7 +117,7 @@ class PageServiceRegister extends PageInfraTools
 				}
 			}
 		}
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

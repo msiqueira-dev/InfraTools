@@ -1,18 +1,15 @@
 <?php
 /************************************************************************
 Class: PageAdminSystemConfiguration.php
-Creation: 04/06/2018
+Creation: 2018/06/04
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Classe que trata da administração dos equipes.
+			Class for system configuration management.
 Functions: 
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -26,64 +23,166 @@ if (!class_exists("PageAdmin"))
 		include_once(SITE_PATH_PHP_VIEW . "PageAdmin.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageAdmin');
 }
+if (!class_exists("SystemConfiguration"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "SystemConfiguration.php"))
+		include_once(BASE_PATH_PHP_MODEL . "SystemConfiguration.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class SystemConfiguration');
+}
+
 
 class PageAdminSystemConfiguration extends PageAdmin
 {
-	public $ArrayCountry = NULL;
-
-	/* Constructor */
-	public function __construct($Language) 
+	public $ArrayInstanceSystemConfiguration          = NULL;
+	public $InstanceSystemConfiguration               = NULL;
+	
+	/* __create */
+	public static function __create($Config, $Language, $Page)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
 	}
 	
-	/* Clone */
-	public function __clone()
+	/* Constructor */
+	protected function __construct($Config, $Language, $Page) 
 	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SEL;
+		$this->InputValueSystemConfigurationOptionNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+		$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
+		$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
+		$this->AdminGoBack($PageFormBack);
+		
+		//FM_SYSTEM_CONFIGURATION_LST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_LST) == ConfigInfraTools::RET_OK)
 		{
-			$this->PageFormLoad();
-			$PageFormBack = TRUE;
+			if($this->ExecuteFunction($_POST, 'SystemConfigurationSelect', 
+									  array(&$this->ArrayInstanceSystemConfiguration),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_LST;
+		}
+		//FM_SYSTEM_CONFIGURATION_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_REGISTER) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
+		//FM_SYSTEM_CONFIGURATION_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SEL;
+		//FM_SYSTEM_CONFIGURATION_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_REGISTER_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'SystemConfigurationInsert', 
+									  array(@$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
+											$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
+											$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+											$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SEL;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_REGISTER;
+		}
+		//FM_SYSTEM_CONFIGURATION_SEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SEL;
+		//FM_SYSTEM_CONFIGURATION_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if(isset($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO]))
+			{
+				if($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO] ==
+				          ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NAME)
+				{
+					$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
+					$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";
+					$_POST = array(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_LST => ConfigInfraTools::FM_SYSTEM_CONFIGURATION_LST) 
+						     + $_POST;
+					if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionName', 
+											  array($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+													&$this->ArrayInstanceSystemConfiguration),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					{
+						if(count($this->ArrayInstanceSystemConfiguration) > 1)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_LST;	
+						else
+						{
+							$this->InstanceSystemConfiguration = array_pop($this->ArrayInstanceSystemConfiguration);
+							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+														  $this->InstanceSystemConfiguration) == ConfigInfraTools::RET_OK)
+								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+						}
+					}
+				}
+				else
+				{
+					$this->ReturnSystemConfigurationOptionNameRadioClass   = "Hidden";
+					$this->ReturnSystemConfigurationOptionNumberRadioClass = "NotHidden";
+					$this->InputValueSystemConfigurationOptionNumberRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+					if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionNumber', 
+											  array($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER],
+													&$this->InstanceSystemConfiguration),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+				}
+			}
+			else
+			{
+				$this->InputValueSystemConfigurationOptionNumberRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+				if($this->ExecuteFunction($_POST, 'SystemConfigurationSelectBySystemConfigurationOptionNumber', 
+										  array($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER],
+												&$this->InstanceSystemConfiguration),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+			}
+		}
+		//FM_SYSTEM_CONFIGURATION_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+										  $this->InstanceSystemConfiguration) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'SystemConfigurationDeleteBySystemConfigurationOptionNumber', 
+										  array($this->InstanceSystemConfiguration),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_SEL;
+			}
+		}
+		//FM_SYSTEM_CONFIGURATION_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+										  $this->InstanceSystemConfiguration) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDT;
+		}
+		//FM_SYSTEM_CONFIGURATION_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, "SystemConfigurationLoadData", 
+										  $this->InstanceSystemConfiguration) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;
+		}
+		//FM_SYSTEM_CONFIGURATION_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_UPDT_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_SYSTEM_CONFIGURATION, 
+											   $this->InstanceSystemConfiguration) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'SystemConfigurationUpdateBySystemConfigurationOptionNumber', 
+										  array(@$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_ACTIVE],
+												$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_DESCRIPTION],
+												$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_NAME],
+												$_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE],
+					                            &$this->InstanceSystemConfiguration),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_VIEW;	
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_SYSTEM_CONFIGURATION_UPDT;
+			}
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
-		$this->LoadHtml();
+			$this->PageStackSessionSave();
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

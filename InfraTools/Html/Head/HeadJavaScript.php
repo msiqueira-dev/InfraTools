@@ -49,8 +49,10 @@ function TabsAsync()
 }
 ";
 echo "</script>";
-if($this->Page == ConfigInfraTools::PAGE_REGISTER            || $this->Page == ConfigInfraTools::PAGE_ADMIN_USER_UPDATE || 
-   $this->Page == ConfigInfraTools::PAGE_ADMIN_USER_REGISTER || $this->Page == ConfigInfraTools::PAGE_ACCOUNT_UPDATE)
+if($this->Page == str_replace("_","", ConfigInfraTools::PAGE_REGISTER)            
+    || $this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_UPDT 
+    || $this->PageBody == ConfigInfraTools::PAGE_ADMIN_USER_REGISTER 
+    || $this->PageBody == ConfigInfraTools::PAGE_ACCOUNT_UPDT)
 {
 	echo "<script 
 	              src='http://maps.googleapis.com/maps/api/js?key=" 

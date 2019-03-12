@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsUser
-Creation: 02/12/2015
+Creation: 2015/12/02
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/ConfigInfraTools.php
@@ -40,37 +40,20 @@ class InfraToolsUser extends User
 	public    $ArrayInstanceInfraToolsUser = NULL;
 
 	/* Constructor */
-	public function __construct($ArrayAssocUserTeam, $ArrayNotification, $AssocUserCorporation,
-								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $Email, 
-								$Gender, $HashCode, $Name, $Region, $RegisterDate, $SessionExpires, 
+	public function __construct($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation,
+								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
+								$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
 								$TwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
 	{
+		parent::__construct($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation,
+							$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
+							$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+							$TwoStepVerification, $UserActive, $UserConfirmed, 
+							$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
+							$UserTypeInstance, $UserUniqueId);
 		$this->InfraToolsFactory = InfraToolsFactory::__create();
-		$this->ArrayAssocUserTeam       = $ArrayAssocUserTeam;
-		$this->ArrayNotification        = $ArrayNotification;
-		$this->AssocUserCorporation     = $AssocUserCorporation;
-		$this->BirthDate                = $BirthDate;
-		$this->Corporation              = $CorporationInstance;
-		$this->Country                  = $Country;
-		$this->Department               = $DepartmentInstance;
-		$this->Email                    = $Email;
-		$this->Gender                   = $Gender;
-		$this->HashCode                 = $HashCode;
-		$this->Name                     = $Name;
-		$this->Region                   = $Region;
-		$this->RegisterDate             = $RegisterDate;
-		$this->SessionExpires           = $SessionExpires;
-		$this->TwoStepVerification      = $TwoStepVerification;
-		$this->UserActive               = $UserActive;
-		$this->UserConfirmed            = $UserConfirmed;
-		$this->UserPhonePrimary         = $UserPhonePrimary;
-		$this->UserPhonePrimaryPrefix   = $UserPhonePrimaryPrefix;
-		$this->UserPhoneSecondary       = $UserPhoneSecondary;
-		$this->UserPhoneSecondaryPrefix = $UserPhoneSecondaryPrefix;
-		$this->UserType                 = $UserTypeInstance;
-		$this->UserUniqueId             = $UserUniqueId; 
 	}
 	
 	/* Clone */
@@ -119,7 +102,7 @@ class InfraToolsUser extends User
 	public function GetUserUniqueIdImage()
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
-		if($this->UserUniqueId != NULL)
+		if(!is_null($this->UserUniqueId))
 			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
 		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
 	}

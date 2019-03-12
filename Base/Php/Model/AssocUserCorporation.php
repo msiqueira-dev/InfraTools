@@ -2,11 +2,13 @@
 
 /************************************************************************
 Class: AssocUserCorporation
-Creation: 16/02/2018
+Creation: 2018/02/16
 Creator: Marcus Siqueira
 Dependencies:
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Association between corporation and employee.
+			Class for association between User and Corporation
 Get / Set:		
 			public function GetAssocUserCorporationCorporation();
 			public function GetAssocUserCorporationCorporationName();
@@ -39,18 +41,18 @@ class AssocUserCorporation
 	public function __construct($AssocUserCorporationRegistrationDate, $AssocUserCorporationRegistrationId,
 								$Corporation, $RegisterDate, $User) 
 	{
-		if($AssocUserCorporationRegistrationDate != NULL)
+		if(!is_null($AssocUserCorporationRegistrationDate))
 			$this->AssocUserCorporationRegistrationDate = $AssocUserCorporationRegistrationDate;
-		if($AssocUserCorporationRegistrationId != NULL)
-			$this->AssocUserCorporationRegistrationId   = $AssocUserCorporationRegistrationId;
-		if($RegisterDate != NULL)
-			$this->RegisterDate                         = $RegisterDate;
+		if(!is_null($AssocUserCorporationRegistrationId))
+			$this->AssocUserCorporationRegistrationId = $AssocUserCorporationRegistrationId;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($Corporation != NULL)
-			$this->Corporation                          = $Corporation;
+		if(!is_null($Corporation))
+			$this->Corporation = $Corporation;
 		else throw new Exception(Config::EXCEPTION_CORPORATION);
-		if($User != NULL)
-			$this->User                                 = $User;
+		if(!is_null($User))
+			$this->User = $User;
 		else throw new Exception(Config::EXCEPTION_USER);
 	}
 	
@@ -68,7 +70,7 @@ class AssocUserCorporation
 	
 	public function GetAssocUserCorporationCorporationName()
 	{
-		if($this->Corporation != NULL)
+		if(!is_null($this->Corporation))
 			return $this->Corporation->GetCorporationName();
 	}
 	
@@ -89,7 +91,7 @@ class AssocUserCorporation
 	
 	public function GetAssocUserCorporationUserEmail()
 	{
-		if($this->User != NULL)
+		if(!is_null($this->User))
 			return $this->User->GetEmail();
 	}
 	
@@ -128,16 +130,16 @@ class AssocUserCorporation
 	public function UpdateAssocUserCorporation($AssocUserCorporationRegistrationDate, $AssocUserCorporationRegistrationId,
 								               $Corporation, $RegisterDate, $User) 
 	{
-		if($AssocUserCorporationRegistrationDate != NULL)
-			$this->AssocUserCorporationRegistrationDate  = $AssocUserCorporationRegistrationDate;
-		if($AssocUserCorporationRegistrationId != NULL)
-			$this->AssocUserCorporationRegistrationId    = $AssocUserCorporationRegistrationId;
-		if($Corporation != NULL)
-			$this->Corporation                           = $Corporation;
-		if($RegisterDate != NULL)
-			$this->RegisterDate                          = $RegisterDate;
-		if($User != NULL)
-			$this->User                                  = $User;
+		if(!is_null($AssocUserCorporationRegistrationDate))
+			$this->AssocUserCorporationRegistrationDate = $AssocUserCorporationRegistrationDate;
+		if(!is_null($AssocUserCorporationRegistrationId))
+			$this->AssocUserCorporationRegistrationId = $AssocUserCorporationRegistrationId;
+		if(!is_null($Corporation))
+			$this->Corporation = $Corporation;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		if(!is_null($User))
+			$this->User = $User;
 	}
 }
 ?>

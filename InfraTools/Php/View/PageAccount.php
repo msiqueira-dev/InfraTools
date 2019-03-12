@@ -1,5 +1,16 @@
 <?php
-
+/************************************************************************
+Class: PageAccount.php
+Creation: 2016/30/09
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class that deals about a user's account information.
+Functions: 
+			public    function LoadPage();
+**************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
 	if(file_exists(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php"))
@@ -13,16 +24,21 @@ if (!class_exists("PageInfraTools"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
 }
 
-
-
 class PageAccount extends PageInfraTools
 {
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
+		parent::__construct($Config, $Language, $Page);
 		if(!$this->PageEnabled)
 		{
 			Page::GetCurrentDomain($domain);
@@ -31,178 +47,99 @@ class PageAccount extends PageInfraTools
 		}
 	}
 
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
 	protected function CheckForm()
 	{
 		//PAGE_CORPORATION
-		if (isset($_POST[ConfigInfraTools::ACCOUNT_FORM_SUBMIT_VERIFIED_CORPORATION]))
+		if (isset($_POST[ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB]))
 		{
 			Page::GetCurrentDomain($domain);
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" .
 										  str_replace("_", "", ConfigInfraTools::PAGE_CORPORATION));
 		}
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_UPDATE_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_UPDT_SB]))
 		{
-			$this->Page       = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
-			$this->InputFocus = ConfigInfraTools::ACCOUNT_UPDATE_NAME;
+			$this->PageBody   = ConfigInfraTools::PAGE_ACCOUNT_UPDT;
+			$this->InputFocus = ConfigInfraTools::FIELD_USER_NAME;
 		}
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_CHANGE_PASSWORD_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD_SB]))
 		{
-			$this->Page = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-			$this->InputFocus = ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD;
+			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
+			$this->InputFocus = ConfigInfraTools::FIELD_PASSWORD_NEW;
 			$this->SubmitEnabled = 'disabled="disabled"';
 		}
-		//PAGE_ACCOUNT_UPDATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_UPDATE_SUBMIT]))
+		//PAGE_ACCOUNT_UPDT
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_UPDT_SB]))
 		{
-			 if($this->UserUpdate(FALSE, $this->User) == ConfigInfraTools::SUCCESS)
-			 	$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
-			 else $this->Page = ConfigInfraTools::PAGE_ACCOUNT_UPDATE;
+			 if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR],
+											 $_POST[ConfigInfraTools::FIELD_COUNTRY_NAME],
+											 @$_POST[ConfigInfraTools::FIELD_USER_GENDER],
+											 $_POST[ConfigInfraTools::FIELD_USER_NAME],
+											 $_POST[ConfigInfraTools::FIELD_USER_REGION],
+					  						 @$_POST[ConfigInfraTools::FIELD_USER_SESSION_EXPIRES], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_ACTIVE], 
+											 @$_POST[ConfigInfraTools::FIELD_USER_CONFIRMED],
+   										     $_POST[ConfigInfraTools::FIELD_USER_PHONE_PRIMARY], 
+											 $_POST[ConfigInfraTools::FIELD_USER_PHONE_PRIMARY_PREFIX], 
+											 $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY],
+											 $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX], 
+										     $_POST[ConfigInfraTools::FIELD_USER_UNIQUE_ID], 
+											 FALSE,
+											 $this->User, 
+											 $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+			 	$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
+			 else
+			 {
+				 if($this->InputValueSessionExpires)
+					$this->InputValueSessionExpires = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueUserActive)
+					$this->InputValueUserActive = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueUserConfirmed)
+					$this->InputValueUserConfirmed = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueTwoStepVerification)
+					$this->InputValueTwoStepVerification = Config::CHECKBOX_CHECKED;
+				 $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_UPDT;
+			 }
 		}
 		//PAGE_ACCOUNT_CHANGE_PASSWORD
-		elseif(isset($_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_FORM_SUBMIT]))
+		elseif(isset($_POST[ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB]))
 		{
-			$PageForm = $this->Factory->CreatePageForm();
-			$this->Page = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-			$this->InputValueNewPassword     = $_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD];
-			$this->InputValueRepeatPassword  = $_POST[ConfigInfraTools::ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD];
-			$arrayConstants = array(); $arrayExtraField = array(); $arrayOptions = array(); $matrixConstants = array();
-			
-			//PASSWORD
-			$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_NEW_PASSWORD;
-			$arrayElementsClass[0]        = &$this->ReturnPasswordClass;
-			$arrayElementsDefaultValue[0] = ""; 
-			$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_PASSWORD;
-			$arrayElementsInput[0]        = $this->InputValueNewPassword; 
-			$arrayElementsMinValue[0]     = 8; 
-			$arrayElementsMaxValue[0]     = 18; 
-			$arrayElementsNullable[0]     = FALSE;
-			$arrayElementsText[0]         = &$this->ReturnPasswordText;
-			$arrayExtraField[0]           = &$this->InputValueRepeatPassword;
-			array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD', 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_MATCH');
-			array_push($arrayConstants, 'ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			
-			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants, $arrayOptions,
-											    $arrayExtraField);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-				$return = $FacedePersistenceInfraTools->UserUpdatePasswordByEmail(
-																			$this->User->GetEmail(),
-																			$this->InputValueNewPassword,
-																			$this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					$this->Page          = ConfigInfraTools::PAGE_ACCOUNT;
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																					 'ACCOUNT_CHANGE_PASSWORD_SUCCESS', 
-																					  $this->Language);
-				}
-				elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-				{
-					$this->Page          = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-					$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-					$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-				}
-				else
-				{
-					$this->Page               = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
-					$this->ReturnPasswordText = $this->InstanceLanguageText->
-												   GetConstant('ACCOUNT_CHANGE_PASSWORD_ERROR', 
-																						  $this->Language);
-					$this->ReturnPasswordClass = ConfigInfraTools::FORM_FIELD_ERROR;
-					$this->ReturnClass         = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-										   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-			}
-			else
-			{
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";			
-			}
+			if($this->UserUpdatePasswordByUserEmail(NULL, 
+												    $_POST[ConfigInfraTools::FIELD_PASSWORD_NEW], 
+												    $_POST[ConfigInfraTools::FIELD_PASSWORD_REPEAT],
+													$this->User->GetEmail(),
+												    $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
+			else $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
 		}
-		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_ACTIVATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE]))
+		//FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB]))
 		{
-			$this->UserChangeTwoStepVerification(NULL, TRUE);
-			$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
+			$this->UserChangeTwoStepVerification(NULL, TRUE, $this->InputValueHeaderDebug);
+			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 		}
-		//PAGE_ACCOUNT_TWO_STEP_VERIFICATION_DEACTIVATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE]))
+		//FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB
+		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB]))
 		{
-			$this->UserChangeTwoStepVerification(NULL, FALSE);
-			$this->Page = ConfigInfraTools::PAGE_ACCOUNT;
+			$this->UserChangeTwoStepVerification(NULL, FALSE, $this->InputValueHeaderDebug);
+			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 		}
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			$loginStatus = $this->CheckInstanceUser();
-			if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-			   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_LOGGED_IN) . ".php");
-				$this->InputFocus = ConfigInfraTools::LOGIN_USER;
-				echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::LOGIN_FORM, $this->InputFocus);
-			}
-			else include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
 	}
 
 	public function LoadPage()
 	{
 		if(isset($this->User))
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$this->InputValueAssocUserCorporationRegistrationDate = 
-				$this->User->GetAssocUserCorporationUserRegistrationDate();
-			$this->InputValueAssocUserCorporationRegistrationId = 
-				$this->User->GetAssocUserCorporationUserRegistrationId();
+			$this->InputValueAssocUserCorporationRegistrationDate = $this->User->GetAssocUserCorporationUserRegistrationDate();
+			$this->InputValueAssocUserCorporationRegistrationId = $this->User->GetAssocUserCorporationUserRegistrationId();
 			$this->InputValueBirthDateDay = $this->User->GetBirthDateDay();
 			$this->InputValueBirthDateMonth = $this->User->GetBirthDateMonth();
 			$this->InputValueBirthDateYear = $this->User->GetBirthDateYear();
 			$this->InputValueUserCorporationName = $this->User->GetCorporationName();
 			if($this->User->GetDepartmentInitials() != NULL)
-				$this->InputValueDepartmentName = $this->User->GetDepartmentInitials() 
-				                                . " - " . $this->User->GetDepartmentName();
+				$this->InputValueDepartmentName = $this->User->GetDepartmentInitials() . " - " . $this->User->GetDepartmentName();
 			else
 				$this->InputValueDepartmentName       = $this->User->GetDepartmentName();
 			$this->InputValueCountry = $this->User->GetCountry();
@@ -254,7 +191,7 @@ class PageAccount extends PageInfraTools
 				                                   'Icons/IconInfraToolsNotVerified.png';
 			$this->CheckForm();
 		}
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

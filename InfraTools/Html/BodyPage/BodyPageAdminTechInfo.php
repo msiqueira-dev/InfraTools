@@ -1,8 +1,8 @@
-<!-- BODY PAGE ADMIN TECH INFO -->z
+<!-- BODY_PAGE_ADMIN_TECH_INFO -->z
 <div class="DivBody">
     <div class="DivContentBody">
-    <form name="<?php echo ConfigInfraTools::FORM_TECH_INFO; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_TECH_INFO; ?>" method="post">
+    <form name="<?php echo ConfigInfraTools::FM_TECH_INFO; ?>" 
+          id="<?php echo ConfigInfraTools::FM_TECH_INFO; ?>" method="post">
 		<div class="DivContentBodyOptions">
 			<div class="DivContentBodyOptionsBox">
 				<div class="DivContentBodyContainersBox">
@@ -18,8 +18,8 @@
 				</div>
 				<div class="DivContentBodyContainersBox">
 					<input type="image" 
-						   name="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
-						   value="<?php echo ConfigInfraTools::FORM_SUBMIT_BACK; ?>"
+						   name="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
+						   value="<?php echo ConfigInfraTools::FM_SB_BACK; ?>"
 						   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 						   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_BACK'); ?>"
 						   src="<?php echo $this->Config->DefaultServerImage. 
@@ -31,10 +31,11 @@
 				</div>
 				<div class="DivContentBodyContainersBox">
 					<input type="image" 
-						   name="<?php echo ConfigInfraTools::FORM_TECH_INFO_LIST; ?>"
-						   value="<?php echo ConfigInfraTools::FORM_TECH_INFO_LIST; ?>"
-						   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
-						   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SELECT'); ?>"
+						   name="<?php echo ConfigInfraTools::FM_TECH_INFO_LST; ?>"
+						   id="<?php echo ConfigInfraTools::FM_TECH_INFO_LST; ?>"
+						   value="<?php echo ConfigInfraTools::FM_TECH_INFO_LST; ?>"
+						   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
+						   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
 						   src="<?php echo $this->Config->DefaultServerImage. 
 										   'Icons/IconInfraToolsList.png'; ?>"
 						   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -47,7 +48,42 @@
     </form>
     <div class="DivContentBodySection">
     	<div class="DivContentBodySectionTitle">
-			<div class="DivContentBodySectionTitleTextLanguage">
+			<div class="DivContentBodySectionTitleText">
+				<h2>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE') ?>
+				</h2>
+			</div>
+			<div class="DivContentBodySectionTitleLineLanguage">
+			</div>
+        </div>
+		<div class="DivContentBodySummary">
+			<div class="DivContentBodySummaryTitle">
+				<label>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE_TB_QUANTITY') . ":"; ?>
+				</label>
+			</div>
+			<div class="DivContentBodySummaryValue">
+				<label>
+					<?php echo count($this->ArrayDataBaseTables);
+					?>
+				</label>
+			</div>
+			<div class="DivContentBodySummaryTitle">
+				<label>
+					<?php echo $this->InstanceLanguageText->GetText('DATABASE_ROW_COUNT') . ":"; ?>
+				</label>
+			</div>
+			<div class="DivContentBodySummaryValue">
+				<label>
+					<?php echo $this->DataBaseRowCount;
+					?>
+				</label>
+			</div>
+		</div>
+	</div>
+    <div class="DivContentBodySection">
+    	<div class="DivContentBodySectionTitle">
+			<div class="DivContentBodySectionTitleText">
 				<h2>
 					<?php echo $this->InstanceLanguageText->GetText('LANGUAGES') ?>
 				</h2>
@@ -74,9 +110,9 @@
 			echo "<table class='TableTechInfo'>";
 			echo "<tr>";
 			echo "<th>" . $this->InstanceLanguageText->GetText('LANGUAGES') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_LANGUAGE_QUANTITY_CONSTANT') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_LANGUAGE_QUANTITY_VALUE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_LANGUAGE_QUANTITY_CONSTANT') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_LANGUAGE_QUANTITY_VALUE') . "</th>";
 			echo "</tr>";
 			$i=0;
 			foreach($this->MatrixLanguageConstant as $key=>$array)
@@ -103,7 +139,7 @@
     	<div class="DivContentBodySectionTitle">
 			<div class="DivContentBodySectionTitleText">
 				<h2>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_TITLE_BASE') ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_TITLE_BASE') ?>
 				</h2>
 			</div>
 			<div class="DivContentBodySectionTitleLine">
@@ -112,7 +148,7 @@
 		<div class="DivContentBodySummary">
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_DIRECTORY_COUNT') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_DIRECTORY_COUNT') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">
@@ -122,7 +158,7 @@
 			</div>
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_COUNT') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_FILE_COUNT') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">
@@ -136,9 +172,9 @@
 		{
 			echo "<table class='TableTechInfo'>";
 			echo "<tr>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_EXTENSION') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_TYPE') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_VALUE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_EXTENSION') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_TYPE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_VALUE') . "</th>";
 			echo "</tr>";
 			foreach($this->ArrayBaseFileType as $key=>$ext)
 			{
@@ -156,7 +192,7 @@
     	<div class="DivContentBodySectionTitle">
 			<div class="DivContentBodySectionTitleText">
 				<h2>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_TITLE_INFRATOOLS') ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_TITLE_INFRATOOLS') ?>
 				</h2>
 			</div>
 			<div class="DivContentBodySectionTitleLine">
@@ -165,7 +201,7 @@
 		<div class="DivContentBodySummary">
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_DIRECTORY_COUNT') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_DIRECTORY_COUNT') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">
@@ -175,7 +211,7 @@
 			</div>
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_COUNT') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_FILE_COUNT') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">
@@ -189,9 +225,9 @@
 		{
 			echo "<table class='TableTechInfo'>";
 			echo "<tr>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_EXTENSION') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_TYPE') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_VALUE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_EXTENSION') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_TYPE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_VALUE') . "</th>";
 			echo "</tr>";
 			foreach($this->ArrayInfraToolsFileType as $key=>$ext)
 			{
@@ -207,9 +243,9 @@
 		</div>
 		<div class="DivContentBodySection">
     	<div class="DivContentBodySectionTitle">
-			<div class="DivContentBodySectionTitleText">
+			<div class="DivContentBodySectionTitleTextLanguage">
 				<h2>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_TITLE_TOTAL') ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_TITLE_TOTAL') ?>
 				</h2>
 			</div>
 			<div class="DivContentBodySectionTitleLine">
@@ -218,7 +254,7 @@
 		<div class="DivContentBodySummary">
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_DIRECTORY_COUNT') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_DIRECTORY_COUNT') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">
@@ -228,7 +264,7 @@
 			</div>
 			<div class="DivContentBodySummaryTitle">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_COUNT') . ":"; ?>
+					<?php echo $this->InstanceLanguageText->GetText('TECH_INFO_FILE_COUNT') . ":"; ?>
 				</label>
 			</div>
 			<div class="DivContentBodySummaryValue">
@@ -242,9 +278,9 @@
 		{
 			echo "<table class='TableTechInfo'>";
 			echo "<tr>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_EXTENSION') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_TYPE') . "</th>";
-			echo "<th>" . $this->InstanceLanguageText->GetText('ADMIN_TECH_INFO_FILE_VALUE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_EXTENSION') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_TYPE') . "</th>";
+			echo "<th>" . $this->InstanceLanguageText->GetText('TECH_INFO_FILE_VALUE') . "</th>";
 			echo "</tr>";
 			foreach($this->ArrayTotalFileType as $key=>$ext)
 			{

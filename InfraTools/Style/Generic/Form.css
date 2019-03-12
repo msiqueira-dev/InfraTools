@@ -1,0 +1,83 @@
+.DivContentBody form{min-height:190px;}
+.DivContentBodyContainer{width:550px;min-height:50px;margin-top:12px;}
+.DivContentBodyContainerSided{width:500px !important;height:50px;margin-top:12px;}
+.DivContentBodyContainerValue input[type="checkbox"]{position:relative;top:10px;}
+.DivContentBodyContainerSubmits{width:800px;height:auto;margin-top:12px;}
+.DivContentBodyContainerSmall{width:550px;height:45px;margin-top:10px;}
+.DivContentBodyContainer input[type="text"], .DivContentBodyContainer input[type="hidden"], .DivContentBodyContainerSubmit input[type="text"]{width:350px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
+.DivContentBodyContainer input[type="password"], .DivContentBodyContainerSubmit input[type="password"]{width:350px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3;position:relative;top:8px;}
+.DivContentBodyContainer input[type="file"]{width:0.1px;height:0.1px;opacity:0;overflow:hidden;position:absolute;z-index:-1;}
+.DivContentBodyContainer input[type="file"] + label{;width:165px;height:40px;font-size:12px;font-weight:bolder;color:white;background-color:#f5821f;display:inline-block;margin-top:10px;margin-right:23px;text-align:center;vertical-align:middle;line-height:320%;cursor:pointer;outline: 0.1px solid #f5821f;}
+.DivContentBodyContainer input[type="file"]:focus + label, .DivContentBodyContainer input[type="file"] + label:hover {background-color:#ef4e22;outline: 0.1px solid #ef4e22;}
+.DivContentBodyContainer input[type="submit"]:focus {background-color:#ef4e22;}
+.DivContentBodyContainerInputText{width:350px !important;height:25px !important;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3;}
+.DivContentBodyContainerTextArea{width:550px;height:200px;margin-top:20px;}
+.DivContentBodyContainerTextArea textarea{width:350px;height:200px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3;font-size:14px !important;}
+.DivContentBodyContainerLabel, .DivContentBodyContainerLabelBig{width:170px;height:50px;float:left;}
+.DivContentBodyContainerLabelExtraWidth{width:200px;height:50px;float:left;}
+.DivContentBodyContainerLabelSided{width:160px !important;height:50px;float:left;}
+.DivContentBodyContainerLabel label{position:relative;top:7px;font-size:14px;font-weight:bold;}
+.DivContentBodyContainerLabelBig label{font-size:14px;font-weight:bold;}
+.DivContentBodyContainerLabelExtraWidth label{position:relative;top:5px;font-size:14px;font-weight:bold;}
+.DivContentBodyContainerLabelSided label{position:relative;top:7px;font-size:14px;font-weight:bold;}
+.DivContentBodyContainerLabelTip{width:170px;height:12px;}
+.DivContentBodyContainerLabelTip label{font-size:10px;font-weight:normal;}
+.DivContentBodyContainerPhonePrefix input{width:43px !important;}
+.DivContentBodyContainerPhone input{width:280px !important;margin-left:20px;}
+.DivContentBodyContainerRadio{height:25px;}
+.DivContentBodyContainerRadio label input{float:left;}
+.DivContentBodyContainerRadio label div{position: relative;left:5px;}
+/* Google Maps */
+.DivContentBodyContainerLabelTipMaps{width:550px;height:45px;}
+.DivContentBodyContainerLabelMapsCountry{width:280px;height:30px;float:left;}
+.DivContentBodyContainerLabelMapsEstate{width:250px;height:30px;float:left;}
+.DivContentBodyContainerLabelMapsLabel {width:120px !important;}
+.DivContentBodyContainerLabelMapsCountry input{width:100px !important;float:none !important;}
+.DivContentBodyContainerLabelMapsEstate input{width:120px !important;float:none !important;}
+.DivContentBodyContainerGoogleMaps{width:526px;height:300px;margin-top:0px;}
+.GoogleMapsSearch {width:300px;background-color:#fff;font-size:15px;font-weight:300;margin-left:12px;padding:0 11px 0 13px;}
+.GoogleMapsSearch:focus {border-color:#4d90fe;}
+.GoogleMapsSearchControls {width:280px;height:28px;margin-top:10px;border:1px solid transparent;border-radius:2px 0 0 2px; 
+                           outline:none;box-shadow:0 2px 6px rgba(0, 0, 0, 0.3);}
+.GoogleMapsSubmit{width:80px;height:30px;margin-right:110px;margin-top:10px;}
+#type-selector {color:#fff;background-color:#4d90fe;padding:5px 11px 0px 11px;}
+#type-selector label {font-size: 13px;font-weight: 300;}
+#target {width:345px;}
+/* End Google Maps */
+/* Submits */
+.DivContentBodySubmitBigger{width:165px;height:40px;white-space:normal;vertical-align:top;background-color:#f5821f;border:0;color:white;font-size:12px;font-weight:bolder;margin-right:23px;margin-top:10px;text-align:center !important;}
+.DivContentBodySubmitBigger:hover{background-color:#ef4e22;}
+/* End Submits */
+.DivContentBodyContainerValue{width:350px;height:35px;float:left;}
+.DivContentBodyContainerValueSided{width:340px;height:35px;float:left;}
+.DivContentBodyContainerValueContent{position:relative;top:7px;font-size:14px;float:left;}
+.DivContentBodyContainerSubmitImage{width:26px;height:35px;float:left;}
+.DivContentBodyContainerSubmitImage input{position:relative;top:5px;}
+.DivContentBodyContainerSubmitImage img{position:relative;top:5px;}
+.DivContentBodyContainer select{width:357px;height:26px;font-size:14px;font-weight:600;border:2px groove #F5F2F3;color:graytext;}
+.DivContentBodyContainerSubmit{width:550px;height:50px;margin-top:12px;clear:both;}
+.DivContentBodySubmit{width:120px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-left:140px;}
+.DivContentBodySubmit:hover{background-color:#ef4e22;}
+.DivContentBodyContainerCaptcha{width:550px;height:35px;margin-top:20px;}
+.DivContentBodyContainerCaptcha input[type="text"]{width:150px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
+.DivContentBodyContainerCaptchaImage{clear:both;position:relative;bottom:7px;}
+.DivReturnMessageSuccess{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#8DEE6D;border:none;}
+.DivReturnMessageSuccess div{width:64px !important;height:auto;min-height:100px;float:right; display:block !important;}
+.DivReturnMessageSuccess div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
+.DivReturnMessageSuccess label{width:auto;height:auto;position:relative;left:10px;top:8px;}
+.DivReturnMessageError{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#FFC1C1;}
+.DivReturnMessageError div{width:64px !important;height:auto;min-height:100px;float:right; display:block !important;}
+.DivReturnMessageError div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;float:right !important;min-height:48px !important;}
+.DivReturnMessageError label{width:auto;height:auto;position:relative;left:10px;top:8px;}
+.DivReturnMessageWarning{width:550px;height:auto;min-height:100px;margin-top:10px;margin-bottom:15px;background-color:#faebcc;}
+.DivReturnMessageWarning div{width:64px !important;height:auto;min-height:100px;float:right;display:block !important;}
+.DivReturnMessageWarning div div{width:48px;height:auto;margin:0 auto;position:relative;top:25px;}
+.DivReturnMessageWarning label{width:auto;height:auto;position:relative;left:10px;top:8px;}
+.DivReturnMessageWarning a{width:auto;height:auto;font-weight:bold;position:relative;left:0px;top:-0.5px;}
+.SelectBirthDateDay{width:100px !important;height:30px !important;}
+.SelectBirthDateMonth{width:100px !important;height:30px !important; margin-left:25px}
+.SelectBirthDateYear{width:100px !important;height:30px !important; margin-left:20px}
+.InputSubmitForgotPassword{background-color:transparent;background-repeat:no-repeat;border:none;cursor:pointer;overflow:hidden;outline:none;text-decoration:underline;font-weight:bold;}
+.DivFormHorizontalButtons {width:180px !important;height:50px !important;float:left;}
+.DivContentBodyContainer input{float:left;vertical-align:top;}
+.DivContentBodyContainerValueTextArea{width:500px !important;height:200px !important;}

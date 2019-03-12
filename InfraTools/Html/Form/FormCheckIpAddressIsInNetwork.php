@@ -7,42 +7,38 @@
         	<?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()).'?='.ConfigInfraTools::CHECK_IP_ADDRESS_IS_IN_NETWORK.'#tabs5';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()).'?='.ConfigInfraTools::PAGE_CHECK_IP_ADDRESS_IS_IN_NETWORK.'#tabs5';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN; ?>" />
-        </div>
-        <div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>">
+        <div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabelBig">
 				<label><?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_LABEL_IP'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP; ?>" 
-                               onblur="ValidateIpAddress(null, 
-                                         '<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP; ?>" 
+                               onblur="ValidateIpAddressIpv4(null, 
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '', true);
                                          ValidateMultiplyFields(
                                          'FormFunctionCheckIpAddressIsInNetwork',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '');"
-                               onkeyup="ValidateIpAddress(null, 
-                                         '<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, 
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '', false);
                                          ValidateMultiplyFields(
                                          'FormFunctionCheckIpAddressIsInNetwork',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '');"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_IP'); ?>"
                                maxlength="15" />
@@ -51,70 +47,70 @@
 			<div class="DivContentBodyContainerLabelBig">
 				<label><?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_LABEL_NETWORK'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK; ?>" 
-                               onblur="ValidateIpAddress(null, 
-                                         '<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK; ?>" 
+                               onblur="ValidateIpAddressIpv4(null, 
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '', true);
                                          ValidateMultiplyFields(
                                          'FormFunctionCheckIpAddressIsInNetwork',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '');"
-                               onkeyup="ValidateIpAddress(null, 
-                                         '<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, 
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '', false);
                                			ValidateMultiplyFields(
                                          'FormFunctionCheckIpAddressIsInNetwork',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '');"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_NETWORK]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_NETWORK'); ?>"
                                maxlength="15" />
 			<div class="DivContentBodyContainerLabelSmall">
 				<label><?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_LABEL_MASK'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK; ?>" 
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK; ?>" 
                                onblur="ValidateNumberSize('InputSmall', 
-                                         '<?php echo ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK; ?>',
+                                         '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK; ?>',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '', 30);
                                           ValidateMultiplyFields(
                                          'FormFunctionCheckIpAddressIsInNetwork',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '');"
                                onkeyup="ValidateMultiplyFields(
                                          'FormFunctionCheckIpAddressIsInNetwork',
                                          'DivContentBodySubmit',
-                                         '<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>',
+                                         '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>',
                                          '');"
-                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK]; 
+                               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_MASK]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('CHECK_IP_ADDRESS_IS_IN_NETWORK_INPUT_MASK'); ?>"
                                maxlength="2"
 				               class="InputSmall" />
-            <input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_CHECK_IP_ADDRESS_IS_IN_NETWORK; ?>"
+            <input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('CHECK_SUBMIT'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHECK'); ?>"/>
         </div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckIpAddressIsInNetworkMessage))
-	                     echo $this->VisibilityFunctionCheckIpAddressIsInNetworkMessage; ?>">
+	                     echo $this->VisibilityFunctionCheckIpAddressIsInNetworkMessage; ?> DivReturnForm">
     	<div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_CHECK_IP_ADDRESS_IS_IN_NETWORK_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_IP) 
                     echo $this->ExecutedFunctionReturnMessage;   
                 ?>
             </label>            

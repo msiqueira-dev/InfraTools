@@ -1,18 +1,15 @@
 <?php
 /************************************************************************
 Class: PageServiceListByTypeAssocUserService.php
-Creation: 21/06/2018
+Creation: 2018/06/21
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/PageService.php
 Description: 
-			Classe que trata da página de listagem de serviços.
+			Class that list the all the services in the user's context by type association of a user and a service.
 Functions: 
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -29,161 +26,63 @@ if (!class_exists("PageService"))
 
 class PageServiceListByTypeAssocUserService extends PageService
 {
-	public $ArrayInstanceInfraToolService = NULL;
+	public $ArrayInstanceInfraToolsService = NULL;
 	public $ArrayInstanceInfraToolsTypeAssocUserService = NULL;
 	
-	/* Constructor */
-	public function __construct($Language) 
+	/* __create */
+	public static function __create($Config, $Language, $Page)
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
 	}
 	
-	/* Clone */
-	public function __clone()
+	/* Constructor */
+	protected function __construct($Config, $Language, $Page) 
 	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			$loginStatus = $this->CheckInstanceUser();
-			if($loginStatus == ConfigInfraTools::USER_NOT_LOGGED_IN || 
-			   $loginStatus == ConfigInfraTools::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_LOGGED_IN) . ".php");
-				$this->InputFocus = ConfigInfraTools::LOGIN_USER;
-				echo PageInfraTools::TagOnloadFocusField(ConfigInfraTools::LOGIN_FORM, $this->InputFocus);
-			}
-			elseif($this->CheckInstanceUser() == ConfigInfraTools::USER_NOT_CONFIRMED)
-			{
-				include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE 
-							          . str_replace("_","",ConfigInfraTools::PAGE_NOT_CONFIRMED) . ".php");
-			}
-			else include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		$this->Page = $this->GetCurrentPage();
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
-		if($this->CheckInstanceUser() == ConfigInfraTools::SUCCESS)
+		$this->InputValueFormMethod = "GET";
+		if($this->CheckInstanceUser() == ConfigInfraTools::RET_OK)
 		{
-			$return = $this->TypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 
+			$return = $this->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit($this->ArrayInstanceInfraToolsTypeAssocUserService, 
 														 $this->User->GetEmail(), 
 														 $this->InputValueHeaderDebug);
-			if(isset($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT]))
+			if(isset($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_TYPE_ASSOC_SERVICE_SB]))
 			{
-				if($_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT] 
-				   != ConfigInfraTools::FORM_SELECT_NONE)
+				if($_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_TYPE_ASSOC_SERVICE_SB] 
+				   != ConfigInfraTools::FIELD_SEL_NONE)
 					$this->InputValueTypeAssocUserServiceDescription = 
-					$_GET[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_TYPE_ASSOC_USER_SERVICE_SUBMIT];	
+					$_GET[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_TYPE_ASSOC_SERVICE_SB];	
 				else $this->InputValueTypeAssocUserServiceDescription = NULL;
 			}
 			else $this->InputValueTypeAssocUserServiceDescription = NULL;
-
-			//SERVICE LIST BY TYPE ASSOC USER SERVICE BACK SUBMIT
-			if($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_BACK))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
-															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-			}
-			//SERVICE LIST BY TYPE ASSOC USER SERVICE FORWARD SUBMIT
-			elseif($this->CheckInputImage(ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_FORWARD))
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-				$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
-															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-				if($this->InputLimitTwo > $rowCount)
-				{
-					if(!is_numeric($rowCount))
-					{
-						$this->InputLimitOne = $this->InputLimitOne - 25;
-						$this->InputLimitTwo = $this->InputLimitTwo - 25;
-					}
-					else
-					{
-						$this->InputLimitOne = $rowCount - 25;
-						$this->InputLimitTwo = $rowCount;
-					}
-					$this->ServiceSelectByTypeAssocUserServiceOnUserContext(
-																   $this->InputValueTypeAssocUserServiceDescription,
-																   $this->User->GetEmail(),
-																   $this->InputLimitOne, 
-																   $this->InputLimitTwo, 
-																   $this->ArrayInfraToolsService,
-																   $rowCount,
-																   $this->InputValueHeaderDebug);
-				}
-			}
-			//SERVICE LIST BY TYPE ASSOC USER SERVICE SELECT SUBMIT
-			elseif(isset($_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]))
+			//FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_BY_ID_SB
+			if(isset($_POST[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_BY_ID_SB]))
 			{
 
 				Page::GetCurrentDomain($domain);
 				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
 											. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
-											. "?" . ConfigInfraTools::FORM_FIELD_SERVICE_ID . "=" 
-											. $_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE_SELECT_BY_ID_SUBMIT]);
+											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_SEL_BY_ID_SB]);
 			}
-			//SERVICE LIST BY TYPE
+			//FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE
 			else
 			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				$return = $this->ServiceSelectByTypeAssocUserServiceOnUserContext(
-															   $this->InputValueTypeAssocUserServiceDescription,
-															   $this->User->GetEmail(),
-															   $this->InputLimitOne, 
-															   $this->InputLimitTwo, 
-															   $this->ArrayInfraToolsService,
-															   $rowCount,
-															   $this->InputValueHeaderDebug);
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE . "_x"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE . "_y"] = "1";
-				$_POST[ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE] = ConfigInfraTools::FORM_SERVICE_LIST_BY_TYPE_ASSOC_USER_SERVICE;
+				$_GET = array(ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE =>
+							  ConfigInfraTools::FM_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE) + $_GET;
+				$this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext', 
+											   array($this->InputValueTypeAssocUserServiceDescription,
+													 $this->User->GetEmail(),
+													 &$this->ArrayInstanceInfraToolsService),
+											   $this->InputValueHeaderDebug);
 			}
 		}
-		$this->LoadHtml();
+		$this->LoadHtml(TRUE);
 	}
 }
 ?>

@@ -2,12 +2,13 @@
 
 /************************************************************************
 Class: HistoryTicket
-Creation: 30/10/2017
+Creation: 2017/10/30
 Creator: Marcus Siqueira
 Dependencies:
-
+			Base       - Php/Controller/Config.php
+			Base       - Php/Controller/Factory.php
 Description: 
-			Classe para o tratamento de solicitações.
+			Class for History Ticket
 Get / Set:
 			public function GetHistoryTicketRegisterDate();
 			public function GetHistoryTicketDescription();
@@ -44,14 +45,29 @@ class HistoryTicket
 	public function __construct($HistoryTicketDescription, $HistoryTicketId, $HistoryTicketIdTicket, $HistoryTicketStatus,
 								$HistoryTicketSuggestion, $HistoryTicketTitle, $HistoryTicketType, $RegisterDate)
 	{
-		$this->HistoryTicketDescription = $HistoryTicketDescription;
-		$this->HistoryTicketId          = $HistoryTicketId;
-		$this->HistoryTicketIdTicket    = $HistoryTicketIdTicket;
-		$this->HistoryTicketStatus      = $HistoryTicketStatus;
-		$this->HistoryTicketSuggestion  = $HistoryTicketSuggestion;
-		$this->HistoryTicketTitle       = $HistoryTicketTitle;
-		$this->HistoryTicketType        = $HistoryTicketType;
-		$this->RegisterDate             = $RegisterDate;
+		if(!is_null($HistoryTicketDescription))
+			$this->HistoryTicketDescription = $HistoryTicketDescription;
+		else throw new Exception(Config::EXCEPTION_HISTORY_TICKET_DESCRIPTION);
+		if(!is_null($HistoryTicketId))
+			$this->HistoryTicketId = $HistoryTicketId;
+		else throw new Exception(Config::EXCEPTION_HISTORY_TICKET_DESCRIPTION);
+		if(!is_null($HistoryTicketIdTicket))
+			$this->HistoryTicketIdTicket = $HistoryTicketIdTicket;
+		else throw new Exception(Config::EXCEPTION_HISTORY_TICKET_DESCRIPTION);
+		if(!is_null($HistoryTicketStatus))
+			$this->HistoryTicketStatus = $HistoryTicketStatus;
+		else throw new Exception(Config::EXCEPTION_HISTORY_TICKET_STATUS);
+		if(!is_null($HistoryTicketSuggestion))
+			$this->HistoryTicketSuggestion = $HistoryTicketSuggestion;
+		if(!is_null($HistoryTicketTitle))
+			$this->HistoryTicketTitle = $HistoryTicketTitle;
+		else throw new Exception(Config::EXCEPTION_HISTORY_TICKET_TITLE);
+		if(!is_null($RegisterDate))
+			$this->HistoryTicketType = $HistoryTicketType;
+		else throw new Exception(Config::EXCEPTION_HISTORY_TICKET_TYPE);
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
+		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
 	}
 	
 	/* Clone */
@@ -131,15 +147,15 @@ class HistoryTicket
 	public function UpdateHistoryTicket($HistoryTicketDescription, $HistoryTicketStatus, $HistoryTicketSuggestion, 
 										$HistoryTicketTitle, $HistoryTicketType)
 	{
-		if($this->HistoryTicketDescription != NULL)
+		if(!is_null($this->HistoryTicketDescription))
 			$this->HistoryTicketDescription = $HistoryTicketDescription;
-		if($this->HistoryTicketStatus != NULL)
+		if(!is_null($this->HistoryTicketStatus))
 			$this->HistoryTicketStatus = $HistoryTicketStatus;
-		if($this->HistoryTicketSuggestion != NULL)
+		if(!is_null($this->HistoryTicketSuggestion))
 			$this->HistoryTicketSuggestion = $HistoryTicketSuggestion;
-		if($this->HistoryTicketTitle != NULL)
+		if(!is_null($this->HistoryTicketTitle))
 			$this->HistoryTicketTitle= $HistoryTicketTitle;
-		if($this->HistoryTicketDescription != NULL)
+		if(!is_null($this->HistoryTicketDescription))
 			$this->HistoryTicketType = $HistoryTicketType;
 	}
 }

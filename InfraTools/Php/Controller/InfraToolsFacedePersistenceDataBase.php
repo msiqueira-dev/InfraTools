@@ -2,7 +2,7 @@
 
 /************************************************************************
 Class: InfraToolsFacedePersistenceDataBase
-Creation: 2018-08-15
+Creation: 2018/08/15
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Model/MySqlManager.php
@@ -10,63 +10,73 @@ Dependencies:
 			InfraTools - Php/Model/InfraToolsPersistenceDataBase.php
 	
 Description: 
-			Classe used to create the database for the InfraTools System..
+			Class with Singleton pattern for dabatabase for the InfraTools System.
 Functions: 
-			public function CreateInfraToolsDataBase($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertCountry($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertPreference($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertRole($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertSystemConfiguration($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertTypeAssocUserTeam($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertTypeAssocUserService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertTypeService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertTypeStatusTicket($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertTypeTicket($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseInsertTypeUser($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocTicketUserResponsible($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocTicketUserRequesting($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocIpAddressService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocUrlAddressService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocUserCorporation($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocUserPreference($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocUserRole($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocUserService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableAssocUserTeam($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableCorporation($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableDepartment($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableCountry($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableHistoryMonitoring($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableHistoryService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableHistoryTicket($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableInformationService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableIpAddress($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableMonitoring($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableNotification($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTablePreference($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableRole($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableStatusMonitoring($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableSystemConfiguration($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTeam($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTicket($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeAssocUserRequesting($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeAssocUserService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeAssocUserTeam($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeMonitoring($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeService($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeStatusMonitoring($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeStatusTicket($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeTimeMonitoring($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeTicket($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableTypeUser($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableUrlAddress($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTableUser($Debug, $MySqlConnection);
-		    public function CreateInfraToolsDataBaseTriggerServiceAfterInsert($Debug, $MySqlConnection);
-		    public function CreateInfraToolsDataBaseTriggerServiceAfterUpdate($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug, $MySqlConnection);
-			public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug, $MySqlConnection);
-			public function DropInfraToolsDataBase($Debug, $MySqlConnection);
-			public function InfraToolsCheckDataBase($Debug $MySqlConnection);
+			public function CreateInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertCountry(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertPreference(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertRole(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertSystemConfiguration(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeAssocUserService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeStatusTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeTimeMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseInsertTypeUser(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocTicketUserResponsible(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocTicketUserRequesting(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocIpAddressService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUrlAddressService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserCorporation(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserNotification(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserPreference(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserRole(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableCorporation(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableDepartment(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableCountry(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableHistoryMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableHistoryService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableHistoryTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableInformationService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableIpAddress(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableNetwork(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableNotification(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTablePreference(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableRole(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableSystemConfiguration(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTeam(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeAssocUserRequesting(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeAssocUserService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeService(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeStatusTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeTimeMonitoring(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeTicket(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableTypeUser(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableUrlAddress(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTableUser(&$StringMessage, $Debug, $MySqlConnection);
+		    public function CreateInfraToolsDataBaseTriggerServiceAfterInsert(&$StringMessage, $Debug, $MySqlConnection);
+		    public function CreateInfraToolsDataBaseTriggerServiceAfterUpdate(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate(&$StringMessage, $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseUserApplication($UserApplication, $UserApplicationPassword, &$StringMessage
+			                                                        $Debug, $MySqlConnection);
+			public function CreateInfraToolsDataBaseUserApplicationImport($UserApplicationImport, $UserApplicationImportPassword,
+			                                                              &$StringMessage, $Debug, $MySqlConnection)
+			public function DropInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection);
+			public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug, $MySqlConnection);
+			public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("ConfigInfraTools"))
@@ -110,14 +120,14 @@ class InfraToolsFacedePersistenceDataBase
 			                                                         $this->InfraToolsConfig->DefaultMySqlPort,
 																	 $this->InfraToolsConfig->DefaultMySqlDataBase,
 			                                                         $this->InfraToolsConfig->DefaultMySqlUser, 
-																	 $this->InfraToolsConfig->DefaultMySqlPassword);
+																	 $this->InfraToolsConfig->DefaultMySqlUserPassword);
 		}
     }
 	
-	/* Singleton */
+	/* Create */
 	public static function __create()
     {
-        if (!isset(self::$Instance)) 
+        if (!isset(self::$Instance) || strcmp(get_class(self::$Instance), __CLASS__) != 0) 
 		{
             $class = __CLASS__;
             self::$Instance = new $class;
@@ -125,1598 +135,2363 @@ class InfraToolsFacedePersistenceDataBase
         return self::$Instance;
     }
 	
-	public function CreateInfraToolsDataBase($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBase)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBase)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBase()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertCountry($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertCountry(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertCountry)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertCountry)</b>";
 		if($MySqlConnection != NULL)
 		{	
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AC', 'Ascension Island', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AD', 'Andorra', 376, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AE', 'United Arab Emirates', 971, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AF', 'Afghanistan', 93, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AG', 'Antigua & Barbuda', 1268, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AI', 'Anguilla', 1264, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AL', 'Albania', 355, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AM', 'Armenia', 374, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AN', 'Netherlands Antilles', 599, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AO', 'Angola', 244, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AQ', 'Antarctica', 642, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AR', 'Argentina', 54, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AS', 'American Samoa', 1684, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AT', 'Austria', 43, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AU', 'Australia', 61, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AW', 'Aruba', 297, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AX', 'Åland Islands', 358, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('AZ', 'Azerbaijan', 994, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BA', 'Bosnia & Herzegovina', 387, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BB', 'Barbados', 1246, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BD', 'Bangladesh', 880, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BE', 'Belgium', 32, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BF', 'Burkina Faso', 226, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BG', 'Bulgaria', 359, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BH', 'Bahrain', 973, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BI', 'Burundi', 257, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BJ', 'Benin', 229, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BL', 'St. Barthélemy', 590, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BM', 'Bermuda', 1441, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BN', 'Brunei', 673, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BO', 'Bolivia', 591, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BQ', 'Caribbean Netherlands', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BR', 'Brazil', 55, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BS', 'Bahamas', 1242, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BT', 'Bhutan', 975, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BV', 'Bouvet Island', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BW', 'Botswana', 267, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BY', 'Belarus', 375, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('BZ', 'Belize', 501, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CA', 'Canada', 1, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CC', 'Cocos (Keeling) Islands', 61, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CD', 'Congo (DRC)', 243, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CF', 'Central African Republic', 236, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CG', 'Congo (Republic)', 242, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CH', 'Switzerland', 41, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CI', 'Côte d’Ivoire', 225, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CK', 'Cook Islands', 682, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CL', 'Chile', 56, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CM', 'Cameroon', 237, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CN', 'China', 86, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CO', 'Colombia', 57, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CP', 'Clipperton Island', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CR', 'Costa Rica', 506, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CU', 'Cuba', 53, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CV', 'Cape Verde', 238, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CW', 'Curaçao', 599, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CX', 'Christmas Island', 61, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CY', 'Cyprus', 357, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('CZ', 'Czech Republic', 420, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DE', 'Germany', 49, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DG', 'Diego Garcia', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DJ', 'Djibouti', 253, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DK', 'Denmark', 45, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DM', 'Dominica', 1767, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DO', 'Dominican Republic', 1809, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('DZ', 'Algeria', 213, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EA', 'Ceuta & Melilla', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EC', 'Ecuador', 593, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EE', 'Estonia', 372, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EG', 'Egypt', 20, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('EH', 'Western Sahara', 212, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ER', 'Eritrea', 291, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ES', 'Spain', 34, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ET', 'Ethiopia', 251, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FI', 'Finland', 358, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FJ', 'Fiji', 679, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FK', 'Falkland Islands (Islas Malvinas)', 500, '2017-01-16 
-											09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FM', 'Micronesia', 691, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FO', 'Faroe Islands', 298, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('FR', 'France', 33, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GA', 'Gabon', 241, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GB', 'United Kingdom', 44, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GD', 'Grenada', 1473, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GE', 'Georgia', 995, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GF', 'French Guiana', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GG', 'Guernsey', 441481, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GH', 'Ghana', 233, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GI', 'Gibraltar', 350, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GL', 'Greenland', 299, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GM', 'Gambia', 220, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GN', 'Guinea', 224, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GP', 'Guadeloupe', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GQ', 'Equatorial Guinea', 240, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GR', 'Greece', 30, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GS', 'South Georgia & South Sandwich Islands', NULL, '2017-01-16 
-											09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GT', 'Guatemala', 502, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GU', 'Guam', 1671, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GW', 'Guinea-Bissau', 245, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('GY', 'Guyana', 592, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HK', 'Hong Kong', 852, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HM', 'Heard & McDonald Islands', 509, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HN', 'Honduras', 504, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HR', 'Croatia', 385, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HT', 'Haiti', 509, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('HU', 'Hungary', 36, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IC', 'Canary Islands', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ID', 'Indonesia', 62, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IE', 'Ireland', 353, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IL', 'Israel', 972, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IM', 'Isle of Man', 441624, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IN', 'India', 91, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IO', 'British Indian Ocean Territory', 246, '2017-01-16 
-											09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IQ', 'Iraq', 964, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IR', 'Iran', 98, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IS', 'Iceland', 354, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('IT', 'Italy', 39, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JE', 'Jersey', 441534, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JM', 'Jamaica', 1876, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JO', 'Jordan', 962, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('JP', 'Japan', 81, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KE', 'Kenya', 254, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KG', 'Kyrgyzstan', 996, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KH', 'Cambodia', 855, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KI', 'Kiribati', 686, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KM', 'Comoros', 269, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KN', 'St. Kitts & Nevis', 1869, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KP', 'North Korea', 850, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KR', 'South Korea', 82, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KW', 'Kuwait', 965, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KY', 'Cayman Islands', 1345, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('KZ', 'Kazakhstan', 7, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LA', 'Laos', 856, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LB', 'Lebanon', 961, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LC', 'St. Lucia', 1758, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LI', 'Liechtenstein', 423, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LK', 'Sri Lanka', 94, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LR', 'Liberia', 231, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LS', 'Lesotho', 266, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LT', 'Lithuania', 370, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LU', 'Luxembourg', 352, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LV', 'Latvia', 371, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('LY', 'Libya', 218, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MA', 'Morocco', 212, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MC', 'Monaco', 377, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MD', 'Moldova', 373, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ME', 'Montenegro', 382, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MF', 'St. Martin', 590, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MG', 'Madagascar', 261, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MH', 'Marshall Islands', 692, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MK', 'Macedonia (FYROM)', 389, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ML', 'Mali', 223, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MM', 'Myanmar (Burma)', 95, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MN', 'Mongolia', 976, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MO', 'Macau', 853, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MP', 'Northern Mariana Islands', 1670, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MQ', 'Martinique', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MR', 'Mauritania', 222, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MS', 'Montserrat', 1664, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MT', 'Malta', 356, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MU', 'Mauritius', 230, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MV', 'Maldives', 960, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MW', 'Malawi', 265, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MX', 'Mexico', 52, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MY', 'Malaysia', 60, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('MZ', 'Mozambique', 258, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NA', 'Namibia', 264, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NC', 'New Caledonia', 687, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NE', 'Niger', 227, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NF', 'Norfolk Island', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NG', 'Nigeria', 234, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NI', 'Nicaragua', 505, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NL', 'Netherlands', 31, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NO', 'Norway', 47, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NP', 'Nepal', 977, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NR', 'Nauru', 674, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NU', 'Niue', 683, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('NZ', 'New Zealand', 64, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('OM', 'Oman', 968, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PA', 'Panama', 507, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PE', 'Peru', 51, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PF', 'French Polynesia', 689, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PG', 'Papua New Guinea', 675, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PH', 'Philippines', 63, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PK', 'Pakistan', 92, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PL', 'Poland', 48, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PM', 'St. Pierre & Miquelon', 508, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PN', 'Pitcairn Islands', 64, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PR', 'Puerto Rico', 1787, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PS', 'Palestine', 970, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PT', 'Portugal', 351, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PW', 'Palau', 680, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('PY', 'Paraguay', 595, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('QA', 'Qatar', 974, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RE', 'Réunion', 262, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RO', 'Romania', 40, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RS', 'Serbia', 381, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RU', 'Russia', 7, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('RW', 'Rwanda', 250, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SA', 'Saudi Arabia', 966, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SB', 'Solomon Islands', 677, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SC', 'Seychelles', 248, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SD', 'Sudan', 249, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SE', 'Sweden', 46, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SG', 'Singapore', 65, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SH', 'St. Helena', 290, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SI', 'Slovenia', 386, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SJ', 'Svalbard & Jan Mayen', 47, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SK', 'Slovakia', 421, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SL', 'Sierra Leone', 232, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SM', 'San Marino', 378, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SN', 'Senegal', 221, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SO', 'Somalia', 252, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SR', 'Suriname', 597, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SS', 'South Sudan', 211, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ST', 'São Tomé & Príncipe', 239, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SV', 'El Salvador', 503, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SX', 'Sint Maarten', 1721, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SY', 'Syria', 963, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('SZ', 'Swaziland', 268, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TA', 'Tristan da Cunha', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TC', 'Turks & Caicos Islands', 1649, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TD', 'Chad', 235, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TF', 'French Southern Territories', NULL, 
-											'2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TG', 'Togo', 228, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TH', 'Thailand', 66, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TJ', 'Tajikistan', 992, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TK', 'Tokelau', 690, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TL', 'Timor-Leste', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TM', 'Turkmenistan', 993, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TN', 'Tunisia', 216, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TO', 'Tonga', 676, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TR', 'Turkey', 90, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TT', 'Trinidad & Tobago', 1868, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TV', 'Tuvalu', 688, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TW', 'Taiwan', 886, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('TZ', 'Tanzania', 255, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UA', 'Ukraine', 380, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UG', 'Uganda', 250, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UM', 'U.S. Outlying Islands', NULL, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('US', 'United States', 1, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UY', 'Uruguay', 598, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('UZ', 'Uzbekistan', 998, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VA', 'Vatican City', 379, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VC', 'St. Vincent & Grenadines', 1784, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VE', 'Venezuela', 58, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VG', 'British Virgin Islands', 1284, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VI', 'U.S. Virgin Islands', 1340, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VN', 'Vietnam', 84, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('VU', 'Vanuatu', 678, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('WF', 'Wallis & Futuna', 681, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('WS', 'Samoa', 685, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('XK', 'Kosovo', 383, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('YE', 'Yemen', 967, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('YT', 'Mayotte', 262, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ZA', 'South Africa', 27, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ZM', 'Zambia', 260, '2017-01-16 09:45:18')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
-			                                RegisterDate) VALUES ('ZW', 'Zimbabwe', 263, '2017-01-16 09:45:18')");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AC', 'ASCENSION ISLAND', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AD', 'ANDORRA', 376, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AE', 'UNITED ARAB EMIRATES', 971, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AF', 'AFGHANISTAN', 93, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AG', 'ANTIGUA & BARBUDA', 1268, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AI', 'ANGUILLA', 1264, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AL', 'ALBANIA', 355, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AM', 'ARMENIA', 374, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AN', 'NETHERLANDS ANTILLES', 599, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AO', 'ANGOLA', 244, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AQ', 'ANTARCTICA', 642, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AR', 'ARGENTINA', 54, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AS', 'AMERICAN SAMOA', 1684, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AT', 'AUSTRIA', 43, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AU', 'AUSTRALIA', 61, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AW', 'ARUBA', 297, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AX', 'ÅLAND ISLANDSA', 358, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('AZ', 'AZERBAIJAN', 994, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BA', 'BOSNIA & HERZEGOVINA', 387, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BB', 'BARBADOS', 1246, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BD', 'BANGLADESH', 880, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BE', 'BELGIUM', 32, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BF', 'BURKINA FASO', 226, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BG', 'BULGARIA', 359, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BH', 'BAHRAIN', 973, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BI', 'BURUNDI', 257, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BJ', 'BENIN', 229, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BL', 'ST. BARTHÉLEMY', 590, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BM', 'BERMUDA', 1441, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BN', 'BRUNEI', 673, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BO', 'BOLIVIA', 591, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BQ', 'CARIBBEAN NETHERLANDS', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BR', 'BRAZIL', 55, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BS', 'BAHAMAS', 1242, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BT', 'BHUTAN', 975, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BV', 'BOUVET ISLAND', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BW', 'BOTSWANA', 267, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BY', 'BELARUS', 375, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('BZ', 'BELIZE', 501, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CA', 'CANADA', 1, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CC', 'COCOS (KEELING) ISLANDS', 61, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CD', 'CONGO (DRC)', 243, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CF', 'CENTRAL AFRICAN REPUBLIC', 236, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CG', 'CONGO (REPUBLIC)', 242, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CH', 'SWITZERLAND', 41, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CI', 'CÔTE D’IVOIRE', 225, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CK', 'COOK ISLANDS', 682, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CL', 'CHILE', 56, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CM', 'CAMEROON', 237, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CN', 'CHINA', 86, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CO', 'COLOMBIA', 57, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CP', 'CLIPPERTON ISLAND', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CR', 'Costa Rica', 506, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CU', 'CUBA', 53, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CV', 'CAPE VERDE', 238, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CW', 'CURAÇAO', 599, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CX', 'CHRISTMAS ISLAND', 61, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CY', 'CYPRUS', 357, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('CZ', 'CZECH REPUBLIC', 420, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DE', 'GERMANY', 49, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DG', 'DIEGO GARCIA', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DJ', 'DJIBOUTI', 253, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DK', 'DENMARK', 45, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DM', 'DOMINICA', 1767, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DO', 'DOMINICAN REPUBLIC', 1809, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('DZ', 'ALGERIA', 213, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('EA', 'CEUTA & MELILLA', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('EC', 'ECUADOR', 593, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('EE', 'ESTONIA', 372, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('EG', 'EGYPT', 20, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('EH', 'WESTERN SAHARA', 212, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ER', 'ERITREA', 291, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ES', 'SPAIN', 34, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ET', 'ETHIOPIA', 251, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('FI', 'FINLAND', 358, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('FJ', 'FIJI', 679, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('FK', 'FALKLAND ISLANDS (ISLAS MALVINAS)', 500, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('FM', 'MICRONESIA', 691, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('FO', 'FAROE ISLANDS', 298, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('FR', 'FRANCE', 33, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GA', 'GABON', 241, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GB', 'UNITED KINGDOM', 44, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GD', 'GRENADA', 1473, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GE', 'GEORGIA', 995, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GF', 'FRENCH GUIANA', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GG', 'GUERNSEY', 441481, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GH', 'GHANA', 233, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GI', 'GIBRALTAR', 350, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GL', 'GREENLAND', 299, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GM', 'GAMBIA', 220, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GN', 'GUINEA', 224, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GP', 'GUADELOUPE', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GQ', 'EQUATORIAL GUINEA', 240, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GR', 'GREECE', 30, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GS', 'SOUTH GEORGIA & SOUTH SANDWICH ISLANDS', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GT', 'GUATEMALA', 502, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GU', 'GUAM', 1671, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GW', 'GUINEA-BISSAU', 245, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('GY', 'GUYANA', 592, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('HK', 'HONG KONG', 852, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('HM', 'HEARD & MCDONALD ISLANDS', 509, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('HN', 'HONDURAS', 504, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('HR', 'CROATIA', 385, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('HT', 'HAITI', 509, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('HU', 'HUNGARY', 36, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IC', 'CANARY ISLANDS', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ID', 'INDONESIA', 62, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IE', 'IRELAND', 353, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IL', 'ISRAEL', 972, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IM', 'ISLE OF MAN', 441624, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IN', 'INDIA', 91, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IO', 'BRITISH INDIAN OCEAN TERRITORY', 246, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IQ', 'IRAQ', 964, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IR', 'IRAN', 98, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IS', 'ICELAND', 354, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('IT', 'ITALY', 39, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('JE', 'JERSEY', 441534, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('JM', 'JAMAICA', 1876, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('JO', 'JORDAN', 962, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('JP', 'JAPAN', 81, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KE', 'KENYA', 254, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KG', 'KYRGYZSTAN', 996, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KH', 'CAMBODIA', 855, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KI', 'KIRIBATI', 686, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KM', 'COMOROS', 269, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KN', 'ST. KITTS & NEVIS', 1869, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KP', 'NORTH KOREA', 850, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KR', 'SOUTH KOREA', 82, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KW', 'KUWAIT', 965, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KY', 'CAYMAN ISLANDS', 1345, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('KZ', 'KAZAKHSTAN', 7, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LA', 'LAOS', 856, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LB', 'LEBANON', 961, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LC', 'ST. LUCIA', 1758, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LI', 'LIECHTENSTEIN', 423, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LK', 'SRI LANKA', 94, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LR', 'LIBERIA', 231, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LS', 'LESOTHO', 266, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LT', 'LITHUANIA', 370, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LU', 'LUXEMBOURG', 352, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LV', 'LATVIA', 371, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('LY', 'LIBYA', 218, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MA', 'MOROCCO', 212, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MC', 'MONACO', 377, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MD', 'MOLDOVA', 373, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ME', 'MONTENEGRO', 382, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MF', 'ST. MARTIN', 590, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MG', 'MADAGASCAR', 261, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MH', 'MARSHALL ISLANDS', 692, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MK', 'MACEDONIA (FYROM)', 389, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ML', 'MALI', 223, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MM', 'MYANMAR (BURMA)', 95, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MN', 'MONGOLIA', 976, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MO', 'MACAU', 853, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MP', 'NORTHERN MARIANA ISLANDS', 1670, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MQ', 'MARTINIQUE', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MR', 'MAURITANIA', 222, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MS', 'MONTSERRAT', 1664, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MT', 'MALTA', 356, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MU', 'MAURITIUS', 230, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MV', 'MALDIVES', 960, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MW', 'MALAWI', 265, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MX', 'MEXICO', 52, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MY', 'MALAYSIA', 60, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('MZ', 'MOZAMBIQUE', 258, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NA', 'NAMIBIA', 264, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NC', 'NEW CALEDONIA', 687, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NE', 'NIGER', 227, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NF', 'NORFOLK ISLAND', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NG', 'NIGERIA', 234, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NI', 'NICARAGUA', 505, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NL', 'NETHERLANDS', 31, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NO', 'NORWAY', 47, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NP', 'NEPAL', 977, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NR', 'NAURU', 674, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NU', 'NIUE', 683, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('NZ', 'NEW ZEALAND', 64, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('OM', 'OMAN', 968, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PA', 'PANAMA', 507, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PE', 'PERU', 51, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PF', 'FRENCH POLYNESIA', 689, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PG', 'PAPUA NEW GUINEA', 675, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PH', 'PHILIPPINES', 63, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PK', 'PAKISTAN', 92, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PL', 'POLAND', 48, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PM', 'ST. PIERRE & MIQUELON', 508, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PN', 'PITCAIRN ISLANDS', 64, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PR', 'PUERTO RICO', 1787, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PS', 'PALESTINE', 970, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PT', 'PORTUGAL', 351, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PW', 'PALAU', 680, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('PY', 'PARAGUAY', 595, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('QA', 'QATAR', 974, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('RE', 'RÉUNION', 262, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('RO', 'ROMANIA', 40, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('RS', 'SERBIA', 381, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('RU', 'RUSSIA', 7, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('RW', 'RWANDA', 250, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SA', 'SAUDI ARABIA', 966, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SB', 'SOLOMON ISLANDS', 677, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SC', 'SEYCHELLES', 248, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SD', 'SUDAN', 249, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SE', 'SWEDEN', 46, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SG', 'SINGAPORE', 65, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SH', 'ST. HELENA', 290, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SI', 'SLOVENIA', 386, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SJ', 'SVALBARD & JAN MAYEN', 47, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SK', 'SLOVAKIA', 421, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SL', 'SIERRA LEONE', 232, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SM', 'SAN MARINO', 378, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SN', 'SENEGAL', 221, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SO', 'SOMALIA', 252, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SR', 'SURINAME', 597, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SS', 'SOUTH SUDAN', 211, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ST', 'SÃO TOMÉ & PRÍNCIPE', 239, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SV', 'EL SALVADOR', 503, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SX', 'SINT MAARTEN', 1721, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SY', 'SYRIA', 963, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('SZ', 'SWAZILAND', 268, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TA', 'TRISTAN DA CUNHA', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TC', 'TURKS & CAICOS ISLANDS', 1649, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TD', 'CHAD', 235, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TF', 'FRENCH SOUTHERN TERRITORIES', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TG', 'TOGO', 228, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TH', 'THAILAND', 66, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TJ', 'TAJIKISTAN', 992, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TK', 'TOKELAU', 690, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TL', 'TIMOR-LESTE', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TM', 'TURKMENISTAN', 993, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TN', 'TUNISIA', 216, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TO', 'TONGA', 676, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TR', 'TURKEY', 90, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TT', 'TRINIDAD & TOBAGO', 1868, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TV', 'TUVALU', 688, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TW', 'TAIWAN', 886, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('TZ', 'TANZANIA', 255, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('UA', 'UKRAINE', 380, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('UG', 'UGANDA', 250, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('UM', 'U.S. OUTLYING ISLANDS', NULL, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('US', 'UNITED STATES', 1, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('UY', 'URUGUAY', 598, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('UZ', 'UZBEKISTAN', 998, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VA', 'VATICAN CITY', 379, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VC', 'ST. VINCENT & GRENADINES', 1784, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VE', 'VENEZUELA', 58, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VG', 'BRITISH VIRGIN ISLANDS', 1284, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VI', 'U.S. VIRGIN ISLANDS', 1340, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VN', 'VIETNAM', 84, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('VU', 'VANUATU', 678, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('WF', 'WALLIS & FUTUNA', 681, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('WS', 'SAMOA', 685, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('XK', 'KOSOVO', 383, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('YE', 'YEMEN', 967, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('YT', 'MAYOTTE', 262, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ZA', 'SOUTH AFRICA', 27, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ZM', 'ZAMBIA', 260, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.COUNTRY (CountryAbbreviation, CountryName, CountryRegionCode, 
+			                                RegisterDate) VALUES ('ZW', 'ZIMBABWE', 263, now())") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseInsertPreference($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertPreference(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertPreference)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertPreference)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.PREFERENCE (RegisterDate, PreferenceDescription, 
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.PREFERENCE (RegisterDate, PreferenceDescription, 
 			                                PreferenceName, PreferenceNumber) VALUES (now(), 'DEFAULT_PAGE', 'DEFAULT_PAGE', 
-										    DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.PREFERENCE (RegisterDate, PreferenceDescription, 
-			                                PreferenceName, PreferenceNumber) VALUES (now(), 'TABLE_MAX_ROWS', 'TABLE_MAX_ROWS', 
-										    DEFAULT)");
-			return ConfigInfraTools::SUCCESS;
+										    DEFAULT)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.PREFERENCE (RegisterDate, PreferenceDescription, 
+			                                PreferenceName, PreferenceNumber) VALUES (now(), 'TB_MAX_ROWS', 'TB_MAX_ROWS', 
+										    DEFAULT)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseInsertRole($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertRole(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertRole)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertRole)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.ROLE (RegisterDate, RoleDescription, RoleName) VALUES
-			                                (now(), 'ROLE_CORPORATION_MANAGER', 'ROLE_CORPORATION_MANAGER')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.ROLE (RegisterDate, RoleDescription, RoleName) VALUES 
-			                                (now(), 'ROLE_DEPARTMENT_MANAGER', 'ROLE_DEPARTMENT_MANAGER')");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.ROLE (RegisterDate, RoleDescription, RoleName) VALUES 
-			                                (now(), 'ROLE_SERVICE_TECHNICIAN', 'ROLE_SERVICE_TECHNICIAN')");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.ROLE (RegisterDate, RoleDescription, RoleName) VALUES
+			                                (now(), 'ROLE_CORPORATION_MANAGER', 'ROLE_CORPORATION_MANAGER')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.ROLE (RegisterDate, RoleDescription, RoleName) VALUES 
+			                                (now(), 'ROLE_DEPARTMENT_MANAGER', 'ROLE_DEPARTMENT_MANAGER')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.ROLE (RegisterDate, RoleDescription, RoleName) VALUES 
+			                                (now(), 'ROLE_SERVICE_TECHNICIAN', 'ROLE_SERVICE_TECHNICIAN')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertSystemConfiguration($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertSystemConfiguration(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertSystemConfiguration)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertSystemConfiguration)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.SYSTEM_CONFIGURATION (RegisterDate,
-			                                SystemConfigurationActive, SystemConfigurationOptionDescription, 
-										    SystemConfigurationOptionName, SystemConfigurationOptionNumber) VALUES (now(), 1, 
-										    'ENABLE_GOOGLE_MAPS', 'ENABLE_GOOGLE_MAPS', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.SYSTEM_CONFIGURATION (RegisterDate, 
-			                                SystemConfigurationActive, SystemConfigurationOptionDescription, 
-										    SystemConfigurationOptionName, SystemConfigurationOptionNumber) VALUES (now(), 1, 
-										    'ENABLE_REGISTER', 'ENABLE_REGISTER', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.SYSTEM_CONFIGURATION (RegisterDate, 
-			                                SystemConfigurationActive, SystemConfigurationOptionDescription, 
-										    SystemConfigurationOptionName, SystemConfigurationOptionNumber) VALUES (now(), 1, 
-										    'ENABLE_PAGE_INSTALL', 'ENABLE_PAGE_INSTALL', DEFAULT)");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.SYSTEM_CONFIGURATION (RegisterDate,
+			                                SystemConfigurationOptionActive, SystemConfigurationOptionDescription, 
+										    SystemConfigurationOptionName, SystemConfigurationOptionNumber,
+											SystemConfigurationOptionValue) VALUES (now(), 1, 
+										    'ENABLE_GOOGLE_MAPS', 'ENABLE_GOOGLE_MAPS', DEFAULT, NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.SYSTEM_CONFIGURATION (RegisterDate, 
+			                                SystemConfigurationOptionActive, SystemConfigurationOptionDescription, 
+										    SystemConfigurationOptionName, SystemConfigurationOptionNumber,
+											SystemConfigurationOptionValue) VALUES (now(), 1, 
+										    'ENABLE_REGISTER', 'ENABLE_REGISTER', DEFAULT, NULL)") !== TRUE)
+			   return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertTypeAssocUserTeam($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertTypeAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeAssocUserTeam)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeAssocUserTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 
-										    'Creator', DEFAULT);");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 
-										    'Administrator', DEFAULT);");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate, 
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 'Editor', DEFAULT);");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
-			                                TypeAssocUserTeamDescription, TypeAssocUserTeamId) VALUES (now(), 'Viewer', DEFAULT);");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'CREATOR');") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'ADMINISTRATOR');") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate, 
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'EDITOR');") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_TEAM (RegisterDate,
+			                                TypeAssocUserTeamDescription) VALUES (now(), 'VIEWER');") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertTypeAssocUserService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertTypeAssocUserService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeAssocUserService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeAssocUserService)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'Creator',
-										    DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(),
-										    'Administrator', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'Editor',
-										    DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate, 
-			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'Viewer',
-										    DEFAULT)");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'CREATOR',
+										    DEFAULT)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'ADMINISTRATOR', 
+											DEFAULT)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate,
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'EDITOR',
+										    DEFAULT)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_ASSOC_USER_SERVICE (RegisterDate, 
+			                                TypeAssocUserServiceDescription, TypeAssocUserServiceId) VALUES (now(), 'VIEWER',
+										    DEFAULT)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertTypeService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertTypeMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'ACCESS_POINT', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'APPLICATION_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'AUTHENTICATION_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'BACKUP_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'DATABASE_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'CAMERA_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'DHCP_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'DNS_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'DOMAIN_CONTROLLER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'FILE_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'FIREWALL', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'INTRUSION_DETECTION_SYSTEM', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'HONEYPOT', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'MAIL', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'MONITORING_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'PRINT_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'PROXY_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'ROUTER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'SCANNER_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'STREAMING_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'TRAFFIC_ANALYSER_SYSTEM', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'VERSION_CONTROLLER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
-			                                TypeServiceSLA) VALUES (now(), 'VIRTUALIZATION_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'VOIP_SERVER', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'WEB_APPLICATION', NULL)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
-			                                TypeServiceSLA) VALUES (now(), 'WEB_SERVER', NULL)");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_MONITORING (RegisterDate, TypeMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_MONITORING_PING')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_MONITORING (RegisterDate, TypeMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_MONITORING_HTTP')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_MONITORING (RegisterDate, TypeMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_MONITORING_HTTPS')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
-	}
-	public function CreateInfraToolsDataBaseInsertTypeStatusTicket($Debug, $MySqlConnection)
-	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusTicket)</b>";
-		if($MySqlConnection != NULL)
-		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_ASSIGNED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription,  
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_CANCELED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_COMPLETED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_FINISHED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_IN_PROGRESS', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_NEW', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_NULLFIED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_PAUSED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_REJECTED', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription, 
-			                                TypeStatusTicketId) VALUES (now(), 'TYPE_STATUS_TICKET_WARNING', DEFAULT)");
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertTypeTicket($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertTypeService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeTicket)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeService)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'ACCESS_POINT', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'APPLICATION_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'AUTHENTICATION_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'BACKUP_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'DATABASE_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'CAMERA_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'DHCP_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'DNS_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'DOMAIN_CONTROLLER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'FILE_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'FIREWALL', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'INTRUSION_DETECTION_SYSTEM', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'HONEYPOT', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'MAIL', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'MONITORING_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'PRINT_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'PROXY_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'ROUTER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'SCANNER_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'STREAMING_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'TRAFFIC_ANALYSER_SYSTEM', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'VERSION_CONTROLLER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName,
+			                                TypeServiceSLA) VALUES (now(), 'VIRTUALIZATION_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'VOIP_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'WEB_APPLICATION', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_SERVICE (RegisterDate, TypeServiceName, 
+			                                TypeServiceSLA) VALUES (now(), 'WEB_SERVER', NULL)") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseInsertTypeStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusMonitoring)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_ONLINE')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_OFFLINE')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_WARNING')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_MONITORING (RegisterDate, TypeStatusMonitoringDescription) 
+			                                   VALUES (now(), 'TYPE_STATUS_MONITORING_CRITICAL')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseInsertTypeStatusTicket(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeStatusTicket)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_ASSIGNED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription)  
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_CANCELED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_COMPLETED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_FINISHED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_IN_PROGRESS')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_NEW')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_NULLFIED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_PAUSED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_REJECTED')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_STATUS_TICKET (RegisterDate, TypeStatusTicketDescription) 
+			                                VALUES (now(), 'TYPE_STATUS_TICKET_WARNING')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseInsertTypeTicket(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
 			
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, 
-			                                TypeTicketId) VALUES (now(), 'TYPE_TICKET_ACCOUNT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_BUG', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_COMPLAINT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_DOUBT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_FEATURE_REQUEST', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_GENERAL_COMMERCIAL', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_GENERAL_DOUBT', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_GENERAL_SUGGESTION', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_MONITORING', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_OTHER', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_SECURITY', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription, TypeTicketId) 
-			                                VALUES (now(), 'TYPE_TICKET_SERVICE', DEFAULT)");
-			return ConfigInfraTools::SUCCESS;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_ACCOUNT')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_BUG')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_COMPLAINT')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_DOUBT')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_FEATURE_REQUEST')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_GENERAL_COMMERCIAL')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_GENERAL_DOUBT')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_GENERAL_SUGGESTION')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_MONITORING')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_OTHER')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_SECURITY')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TICKET (RegisterDate, TypeTicketDescription) 
+			                                VALUES (now(), 'TYPE_TICKET_SERVICE')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseInsertTypeUser($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertTypeTimeMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeUser)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeTimeMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'Super Administrator', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES 
-			                                (now(), 'Administrator Technician', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'Administrator Attendant', DEFAULT)");
-			mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription, TypeUserId) VALUES   
-			                                (now(), 'User', DEFAULT)");
-			return ConfigInfraTools::SUCCESS;			 
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TIME_MONITORING (RegisterDate, TypeTimeMonitoringValue,
+			                                   TypeTimeMonitoringDescription) VALUES (now(), 30, 'INTERVAL_30_MINUTES')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TIME_MONITORING (RegisterDate, TypeTimeMonitoringValue,
+			                                   TypeTimeMonitoringDescription) VALUES (now(), 60, 'INTERVAL_1_HOURS')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_TIME_MONITORING (RegisterDate, TypeTimeMonitoringValue,
+			                                   TypeTimeMonitoringDescription) VALUES (now(), 120, 'INTERVAL_2_HOURS')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocTicketUserResponsible($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseInsertTypeUser(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocTicketUserResponsible)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseInsertTypeUser)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES 
+			                                (now(), 'SUPER_ADMINISTRATOR')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES 
+			                                (now(), 'ADMINISTRATOR_TECHNICIAN')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES   
+			                                (now(), 'ADMINISTRATOR_ATTENDANT')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			if(mysqli_query($MySqlConnection, "INSERT INTO INFRATOOLS.TYPE_USER (RegisterDate, TypeUserDescription) VALUES   
+			                                (now(), 'USER')") !== TRUE)
+				return ConfigInfraTools::DB_ERROR_INSERT;
+			return ConfigInfraTools::RET_OK;			 
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseTableAssocTicketUserResponsible(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocTicketUserResponsible)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocTicketUserResponsible()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocTicketUserRequesting($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocTicketUserRequesting(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocTicketUserRequesting)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocTicketUserRequesting)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocTicketUserRequesting()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocIpAddressService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocIpAddressService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocIpAddressService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocIpAddressService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocIpAddressService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocUrlAddressService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocUrlAddressService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUrlAddressService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUrlAddressService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUrlAddressService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocUserCorporation($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocUserCorporation(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserCorporation)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserCorporation)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserCorporation()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocUserPreference($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocUserNotification(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserPreference)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserNotification)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection,
+							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserNotification()))
+				return ConfigInfraTools::RET_OK;
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseTableAssocUserPreference(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserPreference)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserPreference()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocUserRole($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocUserRole(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserRole)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserRole)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserRole()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocUserService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocUserService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableAssocUserTeam($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserTeam)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableAssocUserTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableAssocUserTeam()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableCorporation($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableCorporation(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableCorporation)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableCorporation)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableCorporation()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableDepartment($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableDepartment(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableDepartment)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableDepartment)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableDepartment()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableCountry($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableCountry(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableCountry)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableCountry)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableCountry()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableHistoryMonitoring($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableHistoryMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryMonitoring)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableHistoryMonitoring()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableHistoryService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableHistoryService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableHistoryService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableHistoryTicket($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableHistoryTicket(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryTicket)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableHistoryTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableHistoryTicket()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableInformationService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableInformationService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableInformationService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableInformationService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableInformationService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableIpAddress($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableIpAddress(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableIpAddress)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableIpAddress)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableIpAddress()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableMonitoring($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableMonitoring)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableMonitoring()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableNotification($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableNetwork(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableNotification)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableNetwork)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection,
+							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableNetwork()))
+				return ConfigInfraTools::RET_OK;
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseTableNotification(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableNotification)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableNotification()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTablePreference($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTablePreference(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTablePreference)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTablePreference)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTablePreference()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableRole($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableRole(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableRole)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableRole)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableRole()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableStatusMonitoring($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableSystemConfiguration(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableStatusMonitoring)</b>";
-		if($MySqlConnection != NULL)
-		{
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableStatusMonitoring()))
-				return ConfigInfraTools::SUCCESS;
-			else
-			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
-			}
-		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
-	}
-	
-	public function CreateInfraToolsDataBaseTableSystemConfiguration($Debug, $MySqlConnection)
-	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableSystemConfiguration)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableSystemConfiguration)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableSystemConfiguration()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableTeam($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTeam(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTeam)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTeam()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableTicket($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTicket(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTicket)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTicket()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeAssocUserRequesting($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeAssocUserRequesting(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserRequesting)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserRequesting)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeAssocUserRequesting()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeAssocUserService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeAssocUserService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeAssocUserService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeAssocUserTeam($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeAssocUserTeam(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserTeam)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeAssocUserTeam)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeAssocUserTeam()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeMonitoring($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeMonitoring)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeMonitoring()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeService($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeService(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeService)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeService)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeService()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeStatusMonitoring($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeStatusMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeStatusMonitoring)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeStatusMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeStatusMonitoring()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeStatusTicket($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeStatusTicket(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeStatusTicket)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeStatusTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeStatusTicket()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeTimeMonitoring($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeTimeMonitoring(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeTimeMonitoring)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeTimeMonitoring)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeTimeMonitoring()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeTicket($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeTicket(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeTicket)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeTicket)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeTicket()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableTypeUser($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableTypeUser(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableTypeUser)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableTypeUser)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableTypeUser()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTableUrlAddress($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableUrlAddress(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableUrlAddress)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableUrlAddress)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableUrlAddress()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;	
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;	
 	}
 	
-	public function CreateInfraToolsDataBaseTableUser($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTableUser(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTableUser)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTableUser)</b>";
 		if($MySqlConnection != NULL)
 		{
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableUser()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTableUser()))
+					return ConfigInfraTools::RET_OK;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return ConfigInfraTools::DB_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTriggerServiceAfterInsert($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTriggerServiceAfterInsert(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert)</b>";
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterInsert()))
+					return ConfigInfraTools::RET_OK;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return ConfigInfraTools::DB_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 		
-	public function CreateInfraToolsDataBaseTriggerServiceAfterUpdate($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTriggerServiceAfterUpdate(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate)</b>";
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerServiceAfterUpdate()))
+					return ConfigInfraTools::RET_OK;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return ConfigInfraTools::DB_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTriggerUserGenderAfterInsert(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert)</b>";
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterInsert()))
+					return ConfigInfraTools::RET_OK;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return ConfigInfraTools::DB_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseTriggerUserGenderAfterUpdate(&$StringMessage, $Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate)</b>";
 		if($MySqlConnection != NULL)
 		{
 			mysqli_query($MySqlConnection, "USE INFRATOOLS");
-			if(mysqli_query($MySqlConnection,
-							InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate()))
-				return ConfigInfraTools::SUCCESS;
-			else
+			try
 			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				if(mysqli_query($MySqlConnection,
+								InfraToolsPersistenceDataBase::SqlCreateInfraToolsDataBaseTriggerUserGenderAfterUpdate()))
+					return ConfigInfraTools::RET_OK;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+				}
+			}
+			catch(mysqli_sql_exception $e)
+			{
+				return ConfigInfraTools::DB_ERROR_USER_PERMISSION_DENIED;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function DropInfraToolsDataBase($Debug, $MySqlConnection)
+	public function CreateInfraToolsDataBaseUserApplication($UserApplication, $UserApplicationPassword, &$StringMessage, 
+															$Debug, $MySqlConnection)
 	{
-		echo "<b>Query (SqlDropInfraToolsDataBase)</b>";
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseUserApplication)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "CREATE USER IF NOT EXISTS '$UserApplication' IDENTIFIED BY '$UserApplicationPassword'"))
+			{
+				if(mysqli_query($MySqlConnection, "GRANT INSERT, SELECT, TRIGGER, UPDATE, DELETE ON TABLE INFRATOOLS.USER 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT, UPDATE, TRIGGER, DELETE, SELECT ON TABLE INFRATOOLS.CORPORATION 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+            	if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_USER 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT SELECT, UPDATE, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.COUNTRY 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+            	if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.DEPARTMENT 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, INSERT, SELECT, DELETE, TRIGGER ON TABLE INFRATOOLS.ASSOC_USER_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.HISTORY_TICKET 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.TICKET 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.TYPE_TICKET 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, SELECT, INSERT, DELETE, TRIGGER ON TABLE INFRATOOLS.TYPE_STATUS_TICKET 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT SELECT, UPDATE, TRIGGER, INSERT, DELETE ON TABLE                        
+				                                   INFRATOOLS.ASSOC_TICKET_USER_RESPONSIBLE TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, TRIGGER, SELECT, UPDATE ON TABLE INFRATOOLS.TYPE_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.MONITORING 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.HISTORY_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_TIME_MONITORING 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, INSERT, SELECT, DELETE ON TABLE INFRATOOLS.TYPE_MONITORING 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_STATUS_MONITORING 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.HISTORY_MONITORING 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.TYPE_ASSOC_USER_REQUESTING 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE 
+				                                   INFRATOOLS.ASSOC_TICKET_USER_REQUESTING TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.NOTIFICATION 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_TEAM 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TEAM 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_CORPORATION 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_NOTIFICATION 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TYPE_ASSOC_USER_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.TYPE_ASSOC_USER_TEAM 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.INFORMATION_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_PREFERENCE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_USER_ROLE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ROLE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.PREFERENCE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_IP_ADDRESS_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.ASSOC_URL_ADDRESS_SERVICE 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT UPDATE, TRIGGER, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.URL_ADDRESS 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.NETWORK 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT TRIGGER, UPDATE, SELECT, INSERT, DELETE ON TABLE INFRATOOLS.IP_ADDRESS 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT DELETE, INSERT, SELECT, UPDATE, TRIGGER ON TABLE INFRATOOLS.SYSTEM_CONFIGURATION 
+				                               TO '$UserApplication'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+			}
+			else return ConfigInfraTools::DB_ERROR_USER_EXISTS;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function CreateInfraToolsDataBaseUserApplicationImport($UserApplicationImport, $UserApplicationImportPassword, &$StringMessage, 
+															      $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlCreateInfraToolsDataBaseUserApplicationImport)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if(mysqli_query($MySqlConnection, "CREATE USER IF NOT EXISTS '$UserApplicationImport' IDENTIFIED BY
+			                                  '$UserApplicationImportPassword'"))
+			{
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.USER 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT  ON TABLE INFRATOOLS.CORPORATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_USER 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.COUNTRY 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+            	if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.DEPARTMENT 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.HISTORY_TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_STATUS_TICKET 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE                        
+				                                   INFRATOOLS.ASSOC_TICKET_USER_RESPONSIBLE TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.HISTORY_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_TIME_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_STATUS_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.HISTORY_MONITORING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT, DELETE ON TABLE INFRATOOLS.TYPE_ASSOC_USER_REQUESTING 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE 
+				                                   INFRATOOLS.ASSOC_TICKET_USER_REQUESTING TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.NOTIFICATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_TEAM 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TEAM 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_CORPORATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_NOTIFICATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_ASSOC_USER_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.TYPE_ASSOC_USER_TEAM 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.INFORMATION_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_PREFERENCE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_USER_ROLE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ROLE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.PREFERENCE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_IP_ADDRESS_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.ASSOC_URL_ADDRESS_SERVICE 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.URL_ADDRESS 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.NETWORK 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.IP_ADDRESS 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+				if(mysqli_query($MySqlConnection, "GRANT INSERT ON TABLE INFRATOOLS.SYSTEM_CONFIGURATION 
+				                               TO '$UserApplicationImport'") !== TRUE)
+					return ConfigInfraTools::DB_ERROR_INSERT;
+			}
+			else return ConfigInfraTools::DB_ERROR_USER_EXISTS;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function DropInfraToolsDataBase(&$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Query (SqlDropInfraToolsDataBase)</b>";
 		if($MySqlConnection != NULL)
 		{
 			if(mysqli_query($MySqlConnection,
 							InfraToolsPersistenceDataBase::SqlDropInfraToolsDataBase()))
-				return ConfigInfraTools::SUCCESS;
+				return ConfigInfraTools::RET_OK;
 			else
 			{
 				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
 					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::MYSQL_QUERY_PREPARE_FAILED;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
 			}
 		}
-		else return ConfigInfraTools::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function InfraToolsCheckDataBase($Debug, $MySqlConnection)
+	public function InfraToolsDataBaseCheck(&$ArrayTables, &$StringMessage, $Debug, $MySqlConnection)
 	{
 		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
+		$ArrayTables = NULL;
+		$StringMessage .= "<b>Query (SqlInfraToolsDataBaseCheck)</b>";
 		if($MySqlConnection != NULL)
 		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				echo "Query: " . InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase() . "<br>";
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistenceDataBase::SqlInfraToolsCheckDataBase());
-			if($stmt != NULL)
+			if($result = $MySqlConnection->query(InfraToolsPersistenceDataBase::SqlInfraToolsDataBaseCheck()))
 			{
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if ($stmt->fetch())
-					return Config::SUCCESS;
-				else 
+				$ArrayTables = array();
+				while ($row = $result->fetch_assoc()) 
 				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::ERROR;
+					$table = array();
+					array_push($table, "Tables_in_infratools");
+					array_push($ArrayTables, $table);
 				}
-				return $return;
+				if(!empty($ArrayTables))
+				{
+					if(count($ArrayTables) == 39)
+						return ConfigInfraTools::RET_OK;
+					else return ConfigInfraTools::DB_ERROR_INFRATOOLS_DATABASE_CHECK_TABLES_CORRUPT;
+				}
+				else return ConfigInfraTools::DB_ERROR_INFRATOOLS_DATABASE_CHECK_TABLES_FETCH;
 			}
-			else
+			else 
 			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::MYSQL_QUERY_PREPARE_FAILED;
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				$return = ConfigInfraTools::DB_ERROR_INFRATOOLS_DATABASE_CHECK_TABLES;
 			}
+			return $return;
 		}
-		else return Config::MYSQL_CONNECTION_FAILED;
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug, $MySqlConnection)
+	{
+		$mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			echo "<b>Query (SqlInfraToolsDataBaseGetRowCount)</b>";
+		if($MySqlConnection != NULL)
+		{
+			if($result = $MySqlConnection->query(InfraToolsPersistenceDataBase::SqlInfraToolsDataBaseGetRowCount()))
+			{
+				if ($row = $result->fetch_assoc()) 
+				{
+					$RowCount = $row['ROW_COUNT'];
+					$return = ConfigInfraTools::RET_OK;
+				}
+				else $return = ConfigInfraTools::DB_ERROR_INFRATOOLS_DATABASE_GET_ROW_COUNT_FETCH;
+			}
+			else 
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				$return = ConfigInfraTools::DB_ERROR_INFRATOOLS_DATABASE_GET_ROW_COUNT;
+			}
+			return $return;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug, $MySqlConnection)
+	{
+		$StringMessage .= "<b>Queries (SqlInfraToolsDataBaseImport):</b><br>";
+		if($MySqlConnection != NULL)
+		{
+			if(is_array($InsertQueries))
+			{
+				$ErrorQueires = array();
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+					echo "<b>SET FOREIGN_KEY_CHECKS = 0</b>";
+				$StringMessage .= "SET FOREIGN_KEY_CHECKS = 0";
+				mysqli_query($MySqlConnection, "SET FOREIGN_KEY_CHECKS = 0");
+				foreach($InsertQueries as $key => $insertQuery)
+				{
+					$StringMessage .= "<b>[" . $key . "]:</b> " . $insertQuery . "<br>";
+					try
+					{
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+							echo "<br><b>Insert Query - [" . $key . "]:</b> " . $insertQuery;
+						if(mysqli_query($MySqlConnection, $insertQuery) !== TRUE)
+							array_push($ErrorQueires, $inserQuery);
+					}
+					catch (mysqli_sql_exception $e)
+					{
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+							echo " <b>-- ERROR: " . mysqli_errno($MySqlConnection) . " -- " . mysqli_error($MySqlConnection) . " -- </b> <br>";
+						if(mysqli_errno($MySqlConnection) == ConfigInfraTools::DB_CODE_ERROR_SYNTAX)
+							return ConfigInfraTools::DB_ERROR_IMPORT_QUERY_SYNTAX;
+						else continue;
+					}
+				}
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+					echo "<b>SET FOREIGN_KEY_CHECKS = 1</b>";
+				$StringMessage .= "SET FOREIGN_KEY_CHECKS = 1";
+				mysqli_query($MySqlConnection, "SET FOREIGN_KEY_CHECKS = 1");
+				return ConfigInfraTools::RET_OK;			 
+			}
+			else return ConfigINfraTools::DB_ERROR_IMPORT_NO_INSERTS;
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 }

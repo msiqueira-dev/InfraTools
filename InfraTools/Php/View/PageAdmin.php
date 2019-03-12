@@ -1,4 +1,16 @@
 <?php
+/************************************************************************
+Class: PageAdmin.php
+Creation: 2016/06/30
+Creator: Marcus Siqueira
+Dependencies:
+			InfraTools - Php/Controller/ConfigInfraTools.php
+			InfraTools - Php/View/PageInfraTools.php
+Description: 
+			Class that opens the main admin page, also serving for methods used on admin pages.
+Functions: 
+			public    function LoadPage();
+**************************************************************************/
 
 if (!class_exists("InfraToolsFactory"))
 {
@@ -21,12 +33,19 @@ class PageAdmin extends PageInfraTools
 	public $ArrayInstanceInfraToolsCorporation                           = "";
 	public $ArrayInstanceInfraToolsTypeUser                              = "";
 
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
 		$this->Page = $this->GetCurrentPage();
 		$this->PageCheckLogin = TRUE;
-		parent::__construct($Language);
+		parent::__construct($Config, $Language, $Page);
 		if($this->User != NULL)
 		{
 			if(!$this->User->CheckSuperUser())
@@ -40,44 +59,27 @@ class PageAdmin extends PageInfraTools
 								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
 		}
 	}
-
-	/* Clone */
-	public function __clone()
+	
+	protected function AdminGoBack(&$PageFormBack)
 	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
+		//FORM SUBMIT BACK
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_SB_BACK) == ConfigInfraTools::RET_OK)
 		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php') . ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
+			if($this->PageStackSessionLoad() == ConfigInfraTools::RET_ERROR)
+			{
+				Page::GetCurrentDomain($domain);
+				$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
+								            . str_replace("_","",ConfigInfraTools::PAGE_ADMIN));
+			}
+			$PageFormBack = TRUE;
 		}
-		else return ConfigInfraTools::ERROR;
 	}
-
+	
 	public function LoadPage()
 	{
-		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_FORM);
-		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_FORM_NUMBER);
-		$this->LoadHtml();
+		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_SACK);
+		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_STACK_NUMBER);
+		$this->LoadHtml(FALSE);
 	} 
 }
 ?>

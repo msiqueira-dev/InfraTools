@@ -3,7 +3,7 @@
     <div class="DivContentBody">
     	<div class="DivContentBodySecondTitle">
 			<img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconInfraToolsAdmin100x100.png'; ?>" 
-				 alt="IconInfraToolsSearch" class="DivContentBodySecondTitleImage" width="100" height="100"/>
+				 alt="IconInfraToolsAdmin" class="DivContentBodySecondTitleImage" width="100" height="100"/>
 		</div>
 		<div class="DivContentBodySecondTitleLine"></div>
 		<div class="DivContentBodyContainers">
@@ -208,6 +208,60 @@
 					</div>
 				</div>
 			</a>
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_IP_ADDRESS'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_IP_ADDRESS') ?>">
+				<div class="DivContentBodyContainersBox">
+					<div class="DivContentBodyContainersBoxIcon">
+						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsIpAddress48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsIpAddress48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsIpAddress48x48.png'; ?>'" 
+                             alt="Services" />
+					</div>
+					<div class="DivContentBodyContainersBoxText">
+						<i>
+							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_IP_ADDRESS'); ?> 
+						</i>
+					</div>
+				</div>
+			</a>
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_NOTIFICATION'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_NOTIFICATION') ?>">
+				<div class="DivContentBodyContainersBox">
+					<div class="DivContentBodyContainersBoxIcon">
+						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotification48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsNotification48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsNotification48x48.png'; ?>'" 
+                             alt="Services" />
+					</div>
+					<div class="DivContentBodyContainersBoxText">
+						<i>
+							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_NOTIFICATION'); ?> 
+						</i>
+					</div>
+				</div>
+			</a>
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION') ?>">
+				<div class="DivContentBodyContainersBox">
+					<div class="DivContentBodyContainersBoxIcon">
+						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsSystemPreferences48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsSystemPreferences48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsSystemPreferences48x48.png'; ?>'" 
+                             alt="SystemConfiguration" />
+					</div>
+					<div class="DivContentBodyContainersBoxText">
+						<i>
+							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_SYSTEM_CONFIGURATION'); ?> 
+						</i>
+					</div>
+				</div>
+			</a>
 			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TECH_INFO'); ?>" 
 					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TECH_INFO') ?>">
 				<div class="DivContentBodyContainersBox">
@@ -222,6 +276,24 @@
 					<div class="DivContentBodyContainersBoxText">
 						<i>
 							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TECH_INFO'); ?> 
+						</i>
+					</div>
+				</div>
+			</a>
+			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL'); ?>" 
+					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL') ?>">
+				<div class="DivContentBodyContainersBox">
+					<div class="DivContentBodyContainersBoxIcon">
+						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall48x48.png';?>"
+							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsInstall48x48Hover.png'; ?>'"
+    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsInstall48x48.png'; ?>'" 
+                             alt="TechInfo" />
+					</div>
+					<div class="DivContentBodyContainersBoxText">
+						<i>
+							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'); ?> 
 						</i>
 					</div>
 				</div>

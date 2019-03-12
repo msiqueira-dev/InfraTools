@@ -2,12 +2,12 @@
 
 /************************************************************************
 Class: InfraToolsTypeService
-Creation: 22/05/2018
+Creation: 2018/05/22
 Creator: Marcus Siqueira
 Dependencies:
 		    InfraTools - Php/Controller/InfraToolsFactory.php
 Description: 
-			Classe para armazenamento de dados de um tipo de serviço.
+			Class for Type Service.
 Get / Set: 
 			public function GetRegisterDate();
 			public function GetTypeServiceName();
@@ -38,12 +38,12 @@ class InfraToolsTypeService
 	public function __construct($RegisterDate, $TypeServiceName, $TypeServiceSLA) 
 	{
 		$this->InfraToolsFactory = InfraToolsFactory::__create();		
-		if($RegisterDate != NULL)
+		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
-		else throw new Exception(Config::EXCEPTION_REGISTER_DATE);
-		if($TypeServiceName != NULL)
+		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
+		if(!is_null($TypeServiceName))
 			$this->TypeServiceName    = $TypeServiceName;
-		else throw new Exception(Config::EXCEPTION_TYPE_SERVICE_NAME);
+		else throw new Exception(ConfigInfraTools::EXCEPTION_TYPE_SERVICE_NAME);
 		$this->TypeServiceSLA     = $TypeServiceSLA;
 	}
 	
@@ -72,12 +72,14 @@ class InfraToolsTypeService
 	/* SET */
 	public function SetRegisterDate($RegisterDate)
 	{
-		$this->RegisterDate = $RegisterDate;
+		if(!is_null($RegisterDate))
+			$this->RegisterDate = $RegisterDate;
 	}
 	
 	public function SetTypeServiceName($TypeServiceName)
 	{
-		$this->TypeServiceName = $TypeServiceName;
+		if(!is_null($TypeServiceName))
+			$this->TypeServiceName = $TypeServiceName;
 	}
 	
 	public function SetTypeServiceSLA($TypeServiceSLA)
@@ -88,10 +90,9 @@ class InfraToolsTypeService
 	/* METHODS */
 	public function UpdateTypeService($TypeServiceName, $TypeServiceSLA)
 	{
-		if($TypeServiceName != NULL)
+		if(!is_null($TypeServiceName))
 			$this->TypeServiceName = $TypeServiceName;
-		if($TypeServiceSLA != NULL)
-			$this->TypeServiceSLA  = $TypeServiceSLA;
+		$this->TypeServiceSLA  = $TypeServiceSLA;
 	}
 }
 ?>

@@ -7,45 +7,41 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_HOSTNAME_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_HOSTNAME; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_HOSTNAME; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_HOSTNAME . '#tabs10';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_HOSTNAME; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_HOSTNAME; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_HOSTNAME . '#tabs10';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label> <?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?> </label>
 			</div>
 			<input type="text" 
-                   name="<?php echo ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT; ?>" 
-                   id="<?php echo ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT; ?>"
-                   onblur="ValidateIpAddress(null, '<?php echo ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT; ?>',
+                   name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME; ?>" 
+                   id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME; ?>"
+                   onblur="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME; ?>',
                                                'DivContentBodySubmit',
-                                               '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_HOSTNAME; ?>',
+                                               '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_HOSTNAME_SB; ?>',
                                                '', true);"
-                   onkeyup="ValidateIpAddress(null, '<?php echo ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT; ?>',
+                   onkeyup="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME; ?>',
                                                'DivContentBodySubmit',
-                                               '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_HOSTNAME; ?>',
+                                               '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_HOSTNAME_SB; ?>',
                                                '', false);"
-       			   value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_HOSTNAME_INPUT]; 
+       			   value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME]; 
 									  ?>"
                    title="<?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?>" 
                    maxlength="15" />
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_HOSTNAME; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_HOSTNAME; ?>"  
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_HOSTNAME_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_HOSTNAME_SB; ?>"  
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_GET'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetHostnameMessage))
-	                     echo $this->VisibilityFunctionGetHostnameMessage; ?>">
+	                     echo $this->VisibilityFunctionGetHostnameMessage; ?> DivReturnForm">
         <div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_HOSTNAME_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_HOSTNAME) 
                     echo $this->ExecutedFunctionReturnMessage;
                 ?>
             </label>            

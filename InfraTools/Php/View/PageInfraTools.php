@@ -1,7 +1,7 @@
 <?php
 /************************************************************************
 Class: PageInfraTools.php
-Creation: 18/08/2014
+Creation: 2014/08/18
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/ConfigInfraTools.php
@@ -13,141 +13,178 @@ Dependencies:
 Description: 
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
-			protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
-			                                                         &$ArrayInstanceInfraToolsCorporation, 
-	                                                                 &$RowCount, $Debug)
-			protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation,
-			                                                                $Debug);
-			protected function CorporationSelectUsers($Limit1, $Limit2, &$RowCount);
-			protected function DepartmentLoadData();
-			protected function DepartmentSelectByDepartmentName($DepartmentName);
-			protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName);
-			protected function DepartmentSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
-			                                                         &$ArrayInstanceInfraToolsCorporation, 
-	                                                                 &$RowCount, $Debug)
-			protected function DepartmentSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug);
-			protected function MessageSelectByUserEmail($Email);
-			protected function PageFormLoad();
-			protected function PageFormRemoveLast();
-			protected function PageFormSave();
-			protected function ServiceDeleteById($ServiceId, $UserEmail, $Debug);
-			protected function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug);
-			protected function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
-			                                 $ServiceDepartment, $ServiceDepartmentCanChange, 
-										     $ServiceDescription, $ServiceName, $ServiceType, $Debug);
-			protected function ServiceLoadData();
-			protected function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                              &$RowCount, $Debug);
-			protected function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                                &$RowCount, $Debug);
-			protected function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolService, 
-			                                                       $Debug);
-			protected function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
-			                                                             &$ArrayInstanceInfraToolService, 
-			                                                             &$RowCount, $Debug);
-			protected function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
-			                                                                    &$ArrayInstanceInfraToolService, 
+			private   function InfraToolsLoadInstanceUser();
+			protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 
+			                                                         &$RowCount, $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
+			                                                                                   $AssocIpAddressServiceServiceIp, $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceId($AssocIpAddressServiceServiceId,
 			                                                                    $Debug);
-			protected function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2,
-			                                                     &$ArrayInstanceInfraToolService, 
-															     &$RowCount, $Debug);
-			protected function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolService, 
-			                                                            $Debug);
-			protected function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail, 
-			                                                                  $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                                                  &$RowCount, $Debug);
-			protected function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
-			                                                                         &$ArrayInstanceInfraToolService, 
-			                                                                         $Debug);
-			protected function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2, 
-			                                                    &$ArrayInstanceInfraToolService,
-			                                                    &$RowCount, $Debug);
-	        protected function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
-			                                                           &$ArrayInstanceInfraToolService, $Debug);
-			protected function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation $ServiceDepartment, $UserEmail, 
-			                                                              $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                                              &$RowCount, $Debug);
-			protected function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, 
-			                                                                        $ServiceDepartment, $UserEmail, 
-			                                                                        &$ArrayInstanceInfraToolService, 
-			                                                                        $Debug);
-			protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, &$RowCount, $Debug);	
-			protected function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
-			                                                         &$TypeAssocUserServiceId, $Debug);
-			protected function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                              &$RowCount, $Debug);	
-			protected function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolService, 
-			                                                     $Debug);	
-			protected function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-			                                                        $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-			                                                        &$RowCount, $Debug);
-			protected function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
-			                                                                  &$ArrayInstanceInfraToolService, 
-			                                                                  $Debug);
-			protected function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp,
+			                                                                    $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectNoLimit(&$ArrayInstanceInfraToolsAssocIpAddressService, $Debug);
+			protected function InfraToolsCorporationSelect($Limit1, $Limit2,, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug);
+			protected function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug);
+			protected function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
+			                                                                   &$ArrayInstanceInfraToolsCorporation, 
+	                                                                           &$RowCount, $Debug)
+			protected function InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation,
+			                                                                          $Debug);
+			protected function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
+			                                                                  &$ArrayInstanceInfraToolsCorporation, 
+	                                                                          &$RowCount, $Debug)
+			protected function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
+			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
+			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug);
+			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork $Debug);
+			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
+			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
+															            &$RowCount, $Debug);
+			protected function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug);
+			protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																        $IpAddressNetworkNew, $IpAddressIpv4, $Debug);
+			protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																        $IpAddressNetworkNew, $IpAddressIpv6, $Debug);
+			protected function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug);
+			protected function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug);
+			protected function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork);
+			protected function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
+														         &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
+															       &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug);
+			protected function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug);
+			protected function InfraToolsServiceDeleteByServiceId($ServiceId, $UserEmail, $Debug);
+			protected function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug);
+			protected function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
+			                                           $ServiceDepartment, $ServiceDepartmentCanChange, 
+										               $ServiceDescription, $ServiceName, $ServiceType, $Debug);
+			protected function InfraToolsServiceLoadData($InstanceInfraToolsService);
+			protected function InfraToolsServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, 
+			                                           $StoreSession = FALSE);
+			protected function InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                              &$RowCount, $Debug);
-			protected function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail, $Limit1, $Limit2, 
-			                                                        &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
-			                                                                  &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                                       &$ArrayInstanceInfraToolService, 
+			protected function InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, 
+			                                                          &$ArrayInstanceInfraToolsService, 
+			                                                          &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
+			                                                       $Debug);
+			protected function InfraToolsServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
+			                                                                       &$ArrayInstanceInfraToolsService, 
+			                                                                       &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
+			                                                                              &$ArrayInstanceInfraToolsService, 
+			                                                                              $Debug);
+			protected function InfraToolsServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation,
+			                                                               &$ArrayInstanceInfraToolsService, 
+															               &$RowCount, $Debug);
+			protected function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
+			                                                            $Debug);
+			protected function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2, $ServiceCorporation, $UserEmail,
+			                                                                  &$ArrayInstanceInfraToolsService, 
+			                                                                  &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
+			                                                                                   &$ArrayInstanceInfraToolsService, 
+			                                                                                   $Debug);
+			protected function InfraToolsServiceSelectByServiceDepartment($Limit1, $Limit2,$ServiceCorporation, $ServiceDepartment,
+			                                                              &$ArrayInstanceInfraToolsService, &$RowCount, $Debug);
+	        protected function InfraToolsServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
+			                                                                     &$ArrayInstanceInfraToolsService, $Debug);
+			protected function InfraToolsServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, 
+			                                                                           $ServiceCorporation $ServiceDepartment, $UserEmail, 
+			                                                                           &$ArrayInstanceInfraToolsService, 
+			                                                                           &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, 
+			                                                                                  $ServiceDepartment, $UserEmail, 
+			                                                                                  &$ArrayInstanceInfraToolsService, 
+			                                                                                  $Debug);
+			protected function InfraToolsServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, StoreSession = FALSE);	
+			protected function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
+			                                                                   &$TypeAssocUserServiceId, $Debug, StoreSession = FALSE);
+			protected function InfraToolsServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
+			                                                        &$RowCount, $Debug, StoreSession = FALSE);	
+			protected function InfraToolsServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
+			                                                               $Debug, StoreSession = FALSE);	
+			protected function InfraToolsServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail,
+			                                                                     &$ArrayInstanceInfraToolsService, 
+																	             &$RowCount, $Debug, StoreSession = FALSE);
+			protected function InfraToolsServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
+			                                                                            &$ArrayInstanceInfraToolsService, 
+			                                                                            $Debug, StoreSession = FALSE);
+			protected function InfraToolsServiceSelectByServiceType($Limit1, $Limit2, $ServiceType, &$ArrayInstanceInfraToolsService, 
+			                                                        &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail, 
+			                                                                     &$ArrayInstanceInfraToolsService, &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
+			                                                                            &$ArrayInstanceInfraToolsService, &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription, 
+			                                                                            &$ArrayInstanceInfraToolsService, 
+			                                                                            &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription,
+			                                                                                   &$ArrayInstanceInfraToolsService, 
+																                               $Debug);
+			protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2,
+			                                                                                        $TypeAssocUserServiceDescription, 
+			                                                                                        $UserEmail,
+																									&$ArrayInstanceInfraToolsService, 
+																						            &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit($TypeAssocUserServiceDescription, 
+			                                                                                                $UserEmail,
+			                                                                                                &$ArrayInstanceInfraToolsService, 
+																		                                    $Debug);
+			protected function InfraToolsServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
+			                                                 &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug);
+			protected function InfraToolsServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $StoreSession = FALSE);
+			protected function InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
+			                                                      $ServiceDepartmentNew, ServiceDepartmentCanChangeNew,
+											                      $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
+														          $ServiceId, $Debug);
+			protected function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew,$ServiceNameNew, 
+			                                                              $ServiceTypeNew, $ServiceId, $Debug);
+			protected function InfraToolsTicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug);
+			protected function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug);
+			protected function InfraToolsTypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug);
+			protected function InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, 
+			                                                                     $UserEmail, &$RowCount, $Debug);
+			protected function InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, 
+			                                                                            $UserEmail, $Debug);
+			protected function InfraToolsTypeServiceDeleteByTypeTypeServiceName($TypeServiceName, $Debug);
+			protected function InfraToolsTypeServiceInsert($TypeServiceName, $TypeServiceSLA, $Debug);
+			protected function InfraToolsTypeServiceLoadData(InstanceInfraToolsTypeService);
+			protected function InfraToolsTypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, 
+			                                               &$RowCount, $Debug);
+			protected function InfraToolsTypeServiceSelectNoLimit(&ArrayInstanceInfraToolsTypeService, $Debug);
+			protected function InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, 
+			                                                            $UserEmail, &$RowCount, $Debug);
+			protected function InfraToolsTypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
+			protected function InfraToolsTypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew,
+			                                                                &$InstanceInfraToolsTypeService, $Debug);
+			protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser,
+		                                                             &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName,
+			                                                        &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsUser,
 			                                                       &$RowCount, $Debug);
-			protected function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
-			                                                              &$ArrayInstanceInfraToolService, 
-																          $Debug);
-			protected function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
-			                                                                    $UserEmail, $Limit1, $Limit2, 
-			                                                                    &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
-			                                                                           $UserEmail,
-			                                                                           &$ArrayInstanceInfraToolService, 
-																		               $Debug);
-			protected function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolService, &$RowCount, $Debug);
-			protected function ServiceSelectNoLimit(&$ArrayInstanceInfraToolService, $Debug);
-			protected function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
-			                                            $ServiceDepartmentNew, ServiceDepartmentCanChangeNew,
-											            $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
-														$ServiceId, $Debug);
-			protected function ServiceUpdateRestrictByServiceId($ServiceActiveNew,$ServiceNameNew, 
-			                                                    $ServiceTypeNew, $ServiceId, 
-											                    $Debug);
-			protected function TeamLoadData();
-			protected function TicketLoadData();
-			protected function TypeAssocUserServiceSelect(&$ArrayInstanceInfraToolsTypeService, &$RowCount,
-			                                              $Limit1, $Limit2, $Debug);
-			protected function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug);
-			protected function TypeAssocUserServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeService, 
-			                                                           $UserEmail, &$RowCount,
-			                                                           $Limit1, $Limit2, $Debug);
-			protected function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, 
-			                                                                  $UserEmail, $Debug);
-			protected function TypeAssocUserTeamLoadData();
-			protected function TypeServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsTypeService, 
-			                                     &$RowCount, $Debug);
-			protected function TypeServiceSelectNoLimit(&ArrayInstanceInfraToolsTypeService, $Debug);
-			protected function TypeServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeService, $UserEmail, &$RowCount
-			                                                  $Limit1, $Limit2, $Debug);
-			protected function TypeServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeService, $UserEmail, $Debug);
-			protected function TypeStatusTicketLoadData();
-			protected function TypeTicketLoadData();
-			protected function TypeTicketSelectById($TypeTicketId);
-			protected function TypeUserLoadData();
-			protected function TypeUserSelectByDescription($Description);
-			protected function TypeUserSelectUsers($Limit1, $Limit2, &$RowCount);
-			protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification);
-			protected function UserInfraToolsSelectByEmail($Email);
-			protected function UserLoadData();
-			protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed);
-			protected function UserUpdate($OnAdmin, $SelectedUser);
-			protected function UserUpdateCorporationInformation($SelectedUser);
-			public function CheckInstanceUser();
-			public function CheckLogin();
-			public function LoadPageInfraToolsDependenciesDebug();
-			public function LoadPageInfraToolsDependenciesDevice();
+			protected function InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceInfraToolsUser,
+			                                                        &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceInfraToolsUser,
+			                                                  &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, 
+		                                                                          &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
+		                                                                   &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
+		                                                                 &$RowCount, $Debug);
+			protected function InfraToolsUserSelectByUserEmail($UserEmail, &InstanceInfraToolsUser, $Debug);
+			protected function InfraToolsUserLoadData($InstanceInfraToolsUser);
+			public    function GetCurrentPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -165,40 +202,19 @@ if (!class_exists("Page"))
 abstract class PageInfraTools extends Page
 {
 	/* Instância usadas nessa classe */
-	public    $ArrayInstanceDepartment          = NULL;
 	protected $FacedeBusinessInfraTools         = NULL;
 	protected $InstanceMobileDetectInfraTools   = NULL;
 	protected $Session                          = NULL;
-	public    $InstanceInfraToolsUserAdmin      = NULL;
 	
 	/* Propiedades de página */
-	public $EnableFieldSessionExpires                            = "";
-	public $EnableFieldTwoStepVerification                       = "";                    
-	public $EnableFieldUserActive                                = "";
-	public $EnableFieldUserConfirmed                             = "";
-	public $InputFocus                                           = "";
-	public $InputValueAssocUserCorporationRegistrationDate       = "";
-	public $InputValueAssocUserCorporationRegistrationDateActive = "";
-	public $InputValueAssocUserCorporationRegistrationId         = "";
-	public $InputValueAssocUserCorporationRegistrationIdActive   = "";
-	public $InputValueBirthDateDay                               = "";
-	public $InputValueBirthDateMonth                             = "";
-	public $InputValueBirthDateYear                              = "";
-	public $InputValueCaptcha                                    = "";
-	public $InputValueCode                                       = "";
-	public $InputValueCountry                                    = "";
-	public $InputValueGender                                     = "";
-	public $InputValueHeaderDebug                                = ConfigInfraTools::CHECKBOX_UNCHECKED;
-	public $InputValueHeaderLayout                               = ConfigInfraTools::CHECKBOX_UNCHECKED;
-	public $InputValueId                                         = "";
-	public $InputValueNewPassword                                = "";
-	public $InputValueRegion                                     = "";
-	public $InputValueRegisterDate                               = "";
-	public $InputValueRegistrationDateDay                        = "";
-	public $InputValueRegistrationDateMonth                      = "";
-	public $InputValueRegistrationDateYear                       = "";
-	public $InputValueRegistrationId                             = "";
-	public $InputValueRepeatPassword                             = "";
+	public $InputValueAssocIpAddressServiceServiceId             = "";
+	public $InputValueAssocIpAddressServiceServiceIp             = "";
+	public $InputValueIpAddressDescription                       = "";
+	public $InputValueIpAddressIpv4                              = "";
+	public $InputValueIpAddressIpv4Radio                         = "";
+	public $InputValueIpAddressIpv6                              = "";
+	public $InputValueIpAddressIpv6Radio                         = "";
+	public $InputValueIpAddressNetwork                           = "";
 	public $InputValueServiceActive                              = "";
 	public $InputValueServiceCorporation                         = "";
 	public $InputValueServiceCorporationActive                   = "";
@@ -213,76 +229,21 @@ abstract class PageInfraTools extends Page
 	public $InputValueServiceNameRadio                           = "";
 	public $InputValueServiceType                                = "";
 	public $InputValueSessionExpires                             = "";
-	public $InputValueTeamDescription                            = "";
-	public $InputValueTeamId                                     = "";
-	public $InputValueTeamName                                   = "";
-	public $InputValueTicketDescription                          = "";
-	public $InputValueTicketTitle                                = "";
-	public $InputValueTicketType                                 = "";
-	public $InputValueTwoStepVerification                        = "";
-	public $InputValueTypeAssocUserServiceDescription            = "";
-	public $InputValueTypeAssocUserServiceId                     = "";
-	public $InputValueTypeAssocUserTeamTeamDescription           = "";
-	public $InputValueTypeAssocUserTeamTeamId                    = "";
 	public $InputValueTypeServiceName                            = "";
-	public $InputValueTypeStatusTicketDescription                = "";
-	public $InputValueTypeStatusTicketId                         = "";
-	public $InputValueTypeTicketDescription                      = "";
-	public $InputValueTypeTicketId                               = "";
-	public $InputValueTypeUserDescription                        = "";
-	public $InputValueTypeUserId                                 = "";
-	public $InputValueUserActive                                 = "";
-	public $InputValueUserConfirmed                              = "";
-	public $InputValueUserCorporationName                        = "";
-	public $InputValueUserEmail                                  = "";
-	public $InputValueUserName                                   = "";
-	public $InputValueUserPhonePrimary                           = "";
-	public $InputValueUserPhonePrimaryPrefix                     = "";
-	public $InputValueUserPhoneSecondary                         = "";
-	public $InputValueUserPhoneSecondaryPrefix                   = "";
-	public $InputValueUserTeam                                   = ""; 
-	public $InputValueUserUniqueId                               = "";
-	public $InputValueUserUniqueIdActive                         = "";
+	public $InputValueTypeServiceSLA                             = "";
 	public $Language                                             = "";
-	public $LinkTarget                                           = "target='_blank'";
-	public $LoginStatus                                          = "";
-	public $Page                                                 = "";
-	public $ReturnBirthDateDayClass                              = "";
-	public $ReturnBirthDateDayText                               = "";
-	public $ReturnBirthDateMonthClass                            = "";
-	public $ReturnBirthDateMonthText                             = "";
-	public $ReturnBirthDateYearText                              = "";
-	public $ReturnBirthDateYearClass                             = "";
-	public $ReturnCaptchaClass                                   = "";
-	public $ReturnCaptchaText                                    = "";
-	public $ReturnCodeClass                                      = "";
-	public $ReturnCodeText                                       = "";
-	public $ReturnCountryClass                                   = "";
-	public $ReturnCountryText                                    = "";
-	public $ReturnEmailClass                                     = "";
-	public $ReturnEmailText                                      = "";
-	public $ReturnEmptyText                                      = "";
-	public $ReturnGenderClass                                    = "";
-	public $ReturnGenderText                                     = "";
-	public $ReturnHeaderDebugClass                               = "SwitchToggleSlider";
-	public $ReturnHeaderLayoutClass                              = "SwitchToggleSlider";
-	public $ReturnIdClass                                        = "";
-	public $ReturnIdText                                         = "";
-	public $ReturnNameClass                                      = "";
-	public $ReturnNameText                                       = "";
-	public $ReturnPasswordClass                                  = "";
-	public $ReturnPasswordText                                   = "";
-	public $ReturnRegionClass                                    = "";
-	public $ReturnRegionText                                     = "";
-	public $ReturnRegistrationDateText                           = "";
-	public $ReturnRegistrationDateDayText                        = "";
-	public $ReturnRegistrationDateDayClass                       = "";
-	public $ReturnRegistrationDateMonthText                      = "";
-	public $ReturnRegistrationDateMonthClass                     = "";
-	public $ReturnRegistrationDateYearText                       = "";
-	public $ReturnRegistrationDateYearClass                      = "";
-	public $ReturnRegistrationIdClass                            = "";
-	public $ReturnRegistrationIdText                             = "";
+	public $ReturnAssocIpAddressServiceServiceIdClass            = "";
+	public $ReturnAssocIpAddressServiceServiceIdText             = "";
+	public $ReturnAssocIpAddressServiceServiceIpClass            = "";
+	public $ReturnAssocIpAddressServiceServiceIpText             = "";
+	public $ReturnIpAddressDescriptionClass                      = "";
+	public $ReturnIpAddressDescriptionText                       = "";
+	public $ReturnIpAddressIpv4Class                             = "";
+	public $ReturnIpAddressIpv4Text                              = "";
+	public $ReturnIpAddressIpv6Class                             = "";
+	public $ReturnIpAddressIpv6Text                              = "";
+	public $ReturnIpAddressNetworkClass                          = "";
+	public $ReturnIpAddressNetworkText                           = "";
 	public $ReturnServiceActiveClass                             = "";
 	public $ReturnServiceActiveText                              = "";
 	public $ReturnServiceCorporationClass                        = "";
@@ -303,734 +264,664 @@ abstract class PageInfraTools extends Page
 	public $ReturnServiceNameText                                = "";
 	public $ReturnServiceTypeClass                               = "";
 	public $ReturnServiceTypeText                                = "";
-	public $ReturnTeamDescriptionClass                           = "";
-	public $ReturnTeamDescriptionText                            = "";
-	public $ReturnTeamIdClass                                    = "";
-	public $ReturnTeamIdText                                     = "";
-	public $ReturnTeamNameClass                                  = "";
-	public $ReturnTeamNameText                                   = "";
-	public $ReturnTicketDescriptionClass                         = "";
-	public $ReturnTicketDescriptionText                          = "";
-	public $ReturnTicketTitleClass                               = "";
-	public $ReturnTicketTitleText                                = "";
-	public $ReturnTicketTypeClass                                = "";
-	public $ReturnTicketTypeText                                 = "";
-	public $ReturnText                                           = "";
 	public $ReturnTypeAssocUserServiceDescriptionClass           = "";
 	public $ReturnTypeAssocUserServiceDescriptionText            = "";
 	public $ReturnTypeAssocUserServiceIdClass                    = "";
 	public $ReturnTypeAssocUserServiceIdText                     = "";
-	public $ReturnTypeAssocUserTeamDescriptionClass              = "";
-	public $ReturnTypeAssocUserTeamDescriptionText               = "";
-	public $ReturnTypeAssocUserTeamTeamDescriptionClass          = "";
-	public $ReturnTypeAssocUserTeamTeamDescriptionText           = "";
-	public $ReturnTypeAssocUserTeamTeamIdClass                   = "";
-	public $ReturnTypeAssocUserTeamTeamIdText                    = "";
 	public $ReturnTypeServiceNameClass                           = "";
 	public $ReturnTypeServiceNameText                            = "";
-	public $ReturnTypeStatusTicketDescriptionClass               = "";
-	public $ReturnTypeStatusTicketDescriptionText                = "";
-	public $ReturnTypeStatusTicketIdClass                        = "";
-	public $ReturnTypeStatusTicketIdText                         = "";
-	public $ReturnTypeTicketDescriptionClass                     = "";
-	public $ReturnTypeTicketDescriptionText                      = "";
-	public $ReturnTypeTicketIdClass                              = "";
-	public $ReturnTypeTicketIdText                               = "";
-	public $ReturnTypeUserDescritpionClass                       = "";
-	public $ReturnTypeUserDescriptionText                        = "";
-	public $ReturnTypeUserIdClass                                = "";
-	public $ReturnTypeUserIdText                                 = "";
-	public $ReturnUserCorporationClass                           = "";
-	public $ReturnUserCorporationText                            = "";
-	public $ReturnUserEmailClass                                 = "";
-	public $ReturnUserEmailText                                  = "";
-	public $ReturnUserNameClass                                  = "";
-	public $ReturnUserNameText                                   = "";
-	public $ReturnUserPhonePrimaryClass                          = "";
-	public $ReturnUserPhonePrimaryText                           = "";
-	public $ReturnUserPhonePrimaryPrefixClass                    = "";
-	public $ReturnUserPhonePrimaryPrefixText                     = "";
-	public $ReturnUserPhoneSecondaryClass                        = "";
-	public $ReturnUserPhoneSecondaryText                         = "";
-	public $ReturnUserPhoneSecondaryPrefixClass                  = "";
-	public $ReturnUserPhoneSecondaryPrefixText                   = "";
-	public $ReturnUserTeamClass                                  = "";
-	public $ReturnUserTeamText                                   = "";
-	public $ReturnUserUniqueIdClass                              = "";
-	public $ReturnUserUniqueIdText                               = "";
-	public $SessionUserEmail                                     = "";
-	public $ShowTypeUserDescription                              = FALSE;
-	public $SubmitClass                                          = "SubmitDisabled";
-	public $SubmitEnabled                                        = 'disabled="disabled"';
-	public $ValidateCaptcha                                      = TRUE;
-	
-	/* Singleton */
-	protected static $Instance;
-	
-	/* Get Instance */
-	public static function __create($Language)
-	{
-		if (!isset(self::$Instance)) 
-		{
-			$class = __CLASS__;
-			self::$Instance = new $class;
-		}
-		return self::$Instance;
-	}
+	public $ReturnTypeServiceSLAClass                            = "";
+	public $ReturnTypeServiceSLAText                             = "";
 
 	/* Constructor */
-	protected function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Factory = InfraToolsFactory::__create();
-		$this->Config  = $this->Factory->CreateConfigInfraTools();
-		parent::__construct($Language);
-		$this->LoadPageInfraToolsDependenciesDevice();
-		$this->LoadPageInfraToolsDependenciesDebug();
+		if($this->Factory == NULL)
+			$this->Factory = InfraToolsFactory::__create();
+		if($this->Config == NULL)
+			$Config = $this->Factory->CreateConfigInfraTools();
+		$this->InfraToolsLoadInstanceUser();
+		parent::__construct($Config, $Language, $Page);
 	}
 	
-	/* Clone */
-	public function __clone()
+	private function InfraToolsLoadInstanceUser()
 	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-	
-	protected function CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, 
-	                                                         &$RowCount, $Debug)
-	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->CorporationSelectOnUserServiceContext($UserEmail, $Limit1, $Limit2, 
-			                                                                          $ArrayInstanceInfraToolsCorporation, 
-																                      $RowCount, $Debug);
-		if($return == ConfigInfraTools::SUCCESS)
+		if (!class_exists("User"))
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			if(file_exists(BASE_PATH_PHP_MODEL . "User.php"))
+				include_once(BASE_PATH_PHP_MODEL . "User.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class User');
 		}
-		else
+		if(!class_exists("InfraToolsUser"))
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
+			if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsUser.php"))
+				exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsUser');
+			else include_once(SITE_PATH_PHP_MODEL . "InfraToolsUser.php");
+		}
+		if($this->User==NULL) 
+		{
+			$this->Session = $this->Factory->CreateSession();
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
+			return ConfigInfraTools::RET_OK;
 		}
 	}
 	
-	protected function CorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug)
+	protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 
+															 &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->CorporationSelectOnUserServiceContextNoLimit($UserEmail,
-																			                 $ArrayInstanceInfraToolsCorporation,
-																			                 $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2,
+																							  $ArrayInstanceInfraToolsAssocIpAddressService, 
+															                                  $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('CORPORATION_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function DepartmentLoadData()
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
+																					   $AssocIpAddressServiceServiceIp, $Debug)
 	{
-		if($this->InstanceDepartment != NULL)
-		{
-			$this->InputValueCorporationName     = $this->InstanceDepartment->GetDepartmentCorporationName();
-			$this->InputValueDepartmentInitials  = $this->InstanceDepartment->GetDepartmentInitials();
-			$this->InputValueDepartmentName      = $this->InstanceDepartment->GetDepartmentName();
-			$this->InputValueRegisterDate        = $this->InstanceDepartment->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
-	}
-	
-	protected function DepartmentSelectByDepartmentName($DepartmentName)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueDepartmentName = $DepartmentName;
-		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 80; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
-																		             $this->ArrayInstanceDepartment, 
-																		             $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-				return $return;
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
 	}
 	
-	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName)
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceId($AssocIpAddressServiceServiceId, $Debug)
 	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueCorporationName = $CorporationName;
-		$this->InputValueDepartmentName = $DepartmentName;
-		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_FIELD_CORPORATION_SELECT
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_CORPORATION_SELECT;
-		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 80; 
-		$arrayElementsNullable[0]     = TRUE;
-		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_DEPARTMENT_NAME
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_DEPARTMENT_NAME;
-		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 80; 
-		$arrayElementsNullable[1]     = TRUE;
-		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
-		
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->DepartmentSelectByDepartmentNameAndCorporationName(
-				                                                                     $this->InputValueCorporationName, 
-																				     $this->InputValueDepartmentName,
-																		             $this->InstanceDepartment, 
-																		             $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, $this->InstanceDepartment);
-				return $return;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
 	}
 	
-	protected function DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2, 
-			                                                &$ArrayInstanceInfraToolsCorporation, 
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsAssocIpAddressServiceSelectNoLimit(&$ArrayInstanceInfraToolsAssocIpAddressService, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsAssocIpAddressServiceSelectNoLimit(
+																							  $ArrayInstanceInfraToolsAssocIpAddressService, 
+															                                  $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			return $return;
+		}
+		$this->ShowDivReturnError("ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporationInfraTools, &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsCorporationSelect($Limit1, $Limit2, $ArrayInstanceCorporationInfraTools, 
+															                        $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
+		}
+		$this->ShowDivReturnError("CORPORATION_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		return $instanceInfraToolsFacedePersistence->CorporationSelectActiveNoLimit($ArrayInstanceCorporation, $Debug);
+	}
+	
+	protected function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsCorporation, 
+	                                                                   &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsCorporationSelectOnUserServiceContext(
+			                                                                                    $Limit1, $Limit2, $UserEmail, 
+			                                                                                    $ArrayInstanceInfraToolsCorporation, 
+																                                $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->ShowDivReturnSuccess("CORPORATION_SEL_ON_USER_SERVICE_CONTEXT_SUCCESS");
+			return ConfigInfraTools::RET_OK;
+		}
+		$this->ShowDivReturnError("CORPORATION_SEL_ON_USER_SERVICE_CONTEXT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsCorporationSelectOnUserServiceContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsCorporation, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsCorporationSelectOnUserServiceContextNoLimit(
+			                                                                                            $UserEmail,
+																			                            $ArrayInstanceInfraToolsCorporation,
+																			                            $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->ShowDivReturnSuccess("CORPORATION_SEL_ON_USER_SERVICE_CONTEXT_SUCCESS");
+			return ConfigInfraTools::RET_OK;
+		}
+		$this->ShowDivReturnError("CORPORATION_SEL_ON_USER_SERVICE_CONTEXT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsDepartmentSelectOnUserServiceContext($Limit1, $Limit2, $UserCorporation, $UserEmail, 
+			                                                          &$ArrayInstanceInfraToolsCorporation, 
 	                                                        &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $UserCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $UserCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->DepartmentSelectOnUserServiceContext($UserCorporation, $UserEmail, $Limit1, $Limit2,
-																				   $ArrayInstanceInfraToolsCorporation,
-																				   $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsDepartmentSelectOnUserServiceContext(
+				                                                                         $Limit1, $Limit2, 
+																						 $this->InputValueServiceCorporation, $UserEmail,
+																				         $ArrayInstanceInfraToolsCorporation, $RowCount,
+																						 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnSuccess("DEPARTMENT_SEL_ON_USER_SERVICE_CONTEXT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
+			$this->ShowDivReturnError("DEPARTMENT_SEL_ON_USER_SERVICE_CONTEXT_ERROR");
+			return ConfigInfraTools::RET_ERROR;
 		}
 	}
 	
-	protected function DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment, $Debug)
+	protected function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail, &$ArrayInstanceInfraToolsDepartment,
+																             $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $UserCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_SERVICE_LIST_BY_CORPORATION_SELECT_CORPORATION_SUBMIT;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_CORPORATION_SB;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $UserCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->DepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
-																				   $ArrayInstanceInfraToolsDepartment,
-																				   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsDepartmentSelectOnUserServiceContextNoLimit(
+				                                                                                $this->InputValueServiceCorporation,
+																								$UserEmail,$ArrayInstanceInfraToolsDepartment,
+																				                $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnSuccess("DEPARTMENT_SEL_ON_USER_SERVICE_CONTEXT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('DEPARTMENT_SELECT_ON_USER_SERVICE_CONTEXT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
+			$this->ShowDivReturnError("DEPARTMENT_SEL_ON_USER_SERVICE_CONTEXT_ERROR");
+			return ConfigInfraTools::RET_ERROR;
 		}
 	}
 	
-	protected function MessageSelectByUserEmail($Email)
+	protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug)
 	{
-		if($Email != NULL)
+		if($InfraToolsInstanceIpAddress != NULL)
 		{
-			$return = $this->InstanceInfraToolsFacedePersistence->MessageSelectByUserEmail($this->InputValueLoginEmail, 
-																			               $userInfraTools, 
-																						   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressDeleteByIpAddressIpv4(
+				                                                 $InfraToolsInstanceIpAddress->GetIpAddressIpv4(),$Debug);
+			if($return == Config::RET_OK)
 			{
-					
+				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_IP_ADDRESS, $InfraToolsInstanceIpAddress);
+				$this->ShowDivReturnSuccess("IP_ADDRESS_DEL_SUCCESS");
+				return Config::RET_OK;
 			}
-			else return ConfigInfraTools::ERROR;
 		}
+		$this->ShowDivReturnError("IP_ADDRESS_DEL_ERROR");
+		return Config::RET_ERROR;
 	}
 	
-	protected function PageFormLoad()
+	protected function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug)
 	{
-		$arrayPageForm = array();
-		if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber) 
-		                                               == ConfigInfraTools::SUCCESS)
+		
+	}
+	
+	protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelect($Limit1, $Limit2,$ArrayInstanceInfraToolsIpAddress, 
+															                      $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm) 
-			                                               == ConfigInfraTools::SUCCESS)
-			{
-				if(isset($arrayPageForm[$pageFormNumber-1]))
-				{
-					$_POST = $arrayPageForm[$pageFormNumber-1];
-					array_pop($arrayPageForm);
-					$pageFormNumber--;
-				}
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
-			}
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
 		}
+		$this->ShowDivReturnError("IP_ADDRESS_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function PageFormRemoveLast()
-	{
-		$arrayPageForm = array();
-		if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber) 
-		                                               == ConfigInfraTools::SUCCESS)
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm) 
-			                                               == ConfigInfraTools::SUCCESS)
-			{
-				if(isset($arrayPageForm[$pageFormNumber-1]))
-				{
-					array_pop($arrayPageForm);
-					$pageFormNumber--;
-				}
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
-			}
-		}
-	}
-	
-	protected function PageFormSave()
-	{
-		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
-		if(isset($pageFormNumber)) 
-			$pageFormNumber++;
-		else $pageFormNumber = 0;
-		$this->Session->GetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
-		if(isset($arrayPageForm)) 
-			array_push($arrayPageForm, $_POST);
-		else 
-		{	
-			$arrayPageForm = array();
-			array_push($arrayPageForm, $_POST);
-		}
- 		$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM, $arrayPageForm);
-		$this->Session->SetSessionValue(ConfigInfraTools::SESS_PAGE_FORM_NUMBER, $pageFormNumber);
-	}
-	
-	protected function ServiceDeleteById($ServiceId, $UserEmail, $Debug)
+	protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
+																&$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
+		//FIELD_IP_ADRESS_IPV4
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADRESS_IPV4;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueIpAddressIpv4; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelectByIpAddressIpv4(
+				                                                                             $Limit1, $Limit2, $this->InputValueIpAddressIpv4,
+																							 $ArrayInstanceInfraToolsIpAddress, $RowCount,
+																							 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("IP_ADDRESS_SEL_BY_IP_ADDRESS_IPV4_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_SEL_BY_IP_ADDRESS_IPV4_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
+																&$RowCount, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug)
+	{
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelectNoLimit($ArrayInstanceInfraToolsIpAddress, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																$IpAddressNetworkNew, $IpAddressIpv4, $Debug)
+	{
+		
+	}
+	
+	protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
+																$IpAddressNetworkNew, $IpAddressIpv6, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
+														 &$RowCount, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
+															&$RowCount, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug)
+	{
+		
+	}
+	
+	public function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug)
+	{
+
+	}
+	
+	protected function InfraToolsServiceDeleteByServiceId($ServiceId, $UserEmail, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceId = $ServiceId;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_SERVICE_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $ServiceId; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueServiceId;; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceDeleteByServiceId($this->InputValueServiceId, 
+																						       $UserEmail, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("SERVICE_DEL_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("SERVICE_DEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceId = $ServiceId;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_SERVICE_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ID;
+		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueServiceId;; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 3; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceDeleteById($ServiceId, $UserEmail, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceDeleteByServiceIdOnUserContext(
+				                                                                           $this->InputValueServiceId, 
+				                                                                           $UserEmail, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnSuccess("SERVICE_DEL_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			else
+			elseif($return == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnError("SERVICE_DEL_ERROR_FOREIGN_KEY");
+				return ConfigInfraTools::RET_ERROR;
 			}
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_DEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $Debug)
+	protected function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
+									           $ServiceDepartment, $ServiceDepartmentCanChange,
+									           $ServiceDescription, $ServiceName, $ServiceType, $UserEmail, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$arrayConstants = array(); $matrixConstants = array();
-
-		//SERVICE_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
-		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $ServiceId; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 3; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->ServiceDeleteByIdOnUserContext($ServiceId, $UserEmail, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			elseif($return == ConfigInfraTools::MYSQL_ERROR_FOREIGN_KEY_DELETE_RESTRICT)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR_FOREIGN_KEY', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_DELETE_ERROR', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
-									 $ServiceDepartment, $ServiceDepartmentCanChange,
-									 $ServiceDescription, $ServiceName, $ServiceType, $UserEmail, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		if($ServiceCorporation == ConfigInfraTools::FIELD_SEL_NONE)
+			$ServiceCorporation = NULL;
+		if($ServiceDepartment == ConfigInfraTools::FIELD_SEL_NONE)
+			$ServiceDepartment = NULL;
+		if(isset($ServiceActive))
+			$this->InputValueServiceActive = TRUE;
+		else $this->InputValueServiceActive = FALSE;
+		if(isset($ServiceCorporationCanChange))
+			$this->InputValueServiceCorporationCanChange = TRUE;
+		else $this->InputValueServiceCorporationCanChange = FALSE;
+		if(isset($ServiceDepartmentCanChange))
+			$this->InputValueServiceDepartmentCanChange = TRUE;
+		else $this->InputValueServiceDepartmentCanChange = FALSE;
+		
+		$this->InputValueServiceCorporation          = $ServiceCorporation;
+		$this->InputValueServiceDepartment           = $ServiceDepartment;
+		$this->InputValueServiceDescription          = $ServiceDescription;
+		$this->InputValueServiceName                 = $ServiceName;
+		$this->InputValueServiceType                 = $ServiceType;
+		$this->InputValueUserEmail                   = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $ServiceActive; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_CORPORATION
 		$arrayConstants = array();
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $ServiceCorporation; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[1]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_CORPORATION_CAN_CHANGE
 		$arrayConstants = array();
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION_CAN_CHANGE;
+		$arrayElements[2]             = ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE;
 		$arrayElementsClass[2]        = &$this->ReturnServiceCanChangeClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[2]        = $ServiceCorporationCanChange; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[2]        = $this->InputValueServiceCorporationCanChange; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = TRUE;
 		$arrayElementsText[2]         = &$this->ReturnServiceCorporationCanChangeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_CORPORATION_CAN_CHANGE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_CORPORATION_CAN_CHANGE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DEPARTMENT
 		$arrayConstants = array();
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[3]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[3]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[3]        = $ServiceDepartment; 
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[3]        = $this->InputValueServiceDepartment; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 80; 
 		$arrayElementsNullable[3]     = TRUE;
 		$arrayElementsText[3]         = &$this->ReturnServiceDepartmentText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DEPARTMENT_CAN_CHANGE
 		$arrayConstants = array();
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT_CAN_CHANGE;
+		$arrayElements[4]             = ConfigInfraTools::FIELD_SERVICE_DEPARTMENT_CAN_CHANGE;
 		$arrayElementsClass[4]        = &$this->ReturnServiceDepartmentCanChangeClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[4]        = $ServiceDepartmentCanChange; 
+		$arrayElementsForm[4]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[4]        = $this->InputValueServiceDepartmentCanChange; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 45; 
 		$arrayElementsNullable[4]     = TRUE;
 		$arrayElementsText[4]         = &$this->ReturnServiceDepartmentCanChangeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_DEPARTMENT_CAN_CHANGE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_DEPARTMENT_CAN_CHANGE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DESCRIPTION
 		$arrayConstants = array();
-		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION;
+		$arrayElements[5]             = ConfigInfraTools::FIELD_SERVICE_DESCRIPTION;
 		$arrayElementsClass[5]        = &$this->ReturnServiceDescriptionClass;
 		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[5]        = $ServiceDescription; 
+		$arrayElementsForm[5]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[5]        = $this->InputValueServiceDescription; 
 		$arrayElementsMinValue[5]     = 0; 
 		$arrayElementsMaxValue[5]     = 200; 
 		$arrayElementsNullable[5]     = FALSE;
 		$arrayElementsText[5]         = &$this->ReturnServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_DESCRIPTION', 'FORM_INVALID_SERVICE_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_DESCRIPTION', 'FM_INVALID_SERVICE_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_NAME
 		$arrayConstants = array();
-		$arrayElements[6]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[6]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[6]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[6]        = $ServiceName; 
+		$arrayElementsForm[6]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsInput[6]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[6]     = 0; 
 		$arrayElementsMaxValue[6]     = 45; 
 		$arrayElementsNullable[6]     = FALSE;
 		$arrayElementsText[6]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_TYPE
+		//FIELD_SERVICE_TYPE
 		$arrayConstants = array();
-		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
+		$arrayElements[7]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
 		$arrayElementsClass[7]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[7]        = $ServiceType; 
+		$arrayElementsForm[7]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[7]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[7]     = 0; 
 		$arrayElementsMaxValue[7]     = 45; 
 		$arrayElementsNullable[7]     = FALSE;
 		$arrayElementsText[7]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
-																  $ServiceDepartment, $ServiceDepartmentCanChange,
-									                              $ServiceDescription, $ServiceName, $ServiceType, 
-																  $UserEmail,
-																  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceInsert($this->InputValueServiceActive, 
+																				    $this->InputValueServiceCorporation,
+																                    $this->InputValueServiceCorporationCanChange, 
+																                    $this->InputValueServiceDepartment, 
+																                    $this->InputValueServiceDepartmentCanChange,
+									                                                $this->InputValueServiceDescription, 
+																                    $this->InputValueServiceName, 
+																                    $this->InputValueServiceType, 
+																                    $this->InputValueUserEmail, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_INSERT_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnSuccess("SERVICE_INSERT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			else
+			elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_INSERT_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return ConfigInfraTools::RET_WARNING;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_INSERT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceLoadData()
+	protected function InfraToolsServiceLoadData($InstanceInfraToolsService)
 	{
-		if($this->InstanceInfraToolsService != NULL)
+		if($InstanceInfraToolsService != NULL)
 		{
-			$this->InputValueRegisterDate       = $this->InstanceInfraToolsService->GetRegisterDate();
-			$this->InputValueServiceActive      = $this->InstanceInfraToolsService->GetServiceActive();
-			$this->InputValueServiceCorporation = $this->InstanceInfraToolsService->GetServiceCorporation();
-			$this->InputValueServiceDepartment  = $this->InstanceInfraToolsService->GetServiceDepartment();
-			$this->InputValueServiceDescription = $this->InstanceInfraToolsService->GetServiceDescription();
-			$this->InputValueServiceId          = $this->InstanceInfraToolsService->GetServiceId();
-			$this->InputValueServiceName        = $this->InstanceInfraToolsService->GetServiceName();
-			$this->InputValueServiceType        = $this->InstanceInfraToolsService->GetServiceTypeName();
+			$this->InputValueRegisterDate       = $InstanceInfraToolsService->GetRegisterDate();
+			$this->InputValueServiceActive      = $InstanceInfraToolsService->GetServiceActive();
+			$this->InputValueServiceCorporation = $InstanceInfraToolsService->GetServiceCorporation();
+			$this->InputValueServiceDepartment  = $InstanceInfraToolsService->GetServiceDepartment();
+			$this->InputValueServiceDescription = $InstanceInfraToolsService->GetServiceDescription();
+			$this->InputValueServiceId          = $InstanceInfraToolsService->GetServiceId();
+			$this->InputValueServiceName        = $InstanceInfraToolsService->GetServiceName();
+			$this->InputValueServiceType        = $InstanceInfraToolsService->GetServiceTypeName();
 			if($this->InputValueServiceActive)
 			$this->InputValueServiceActive = $this->Config->DefaultServerImage .
 																  'Icons/IconInfraToolsVerified.png';
@@ -1046,1718 +937,1316 @@ abstract class PageInfraTools extends Page
 																  'Icons/IconInfraToolsVerified.png';
 			else $this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage .
 				                                                  'Icons/IconInfraToolsNotVerified.png';
-			return ConfigInfraTools::SUCCESS;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::ERROR;
+		else return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug)
+	protected function InfraToolsServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug, $StoreSession = FALSE)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		return $return = $FacedePersistenceInfraTools->ServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolService, 
-																	 $RowCount, $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsService, 
+															                    $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
+			return ConfigInfraTools::RET_OK;
+		}
+		$this->ShowDivReturnError("SERVICE_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	protected function InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, 
 			                                      &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		return $return = $FacedePersistenceInfraTools->ServiceSelectOnUserContext($UserEmail, $Limit1, $Limit2,
-																				  $ArrayInstanceInfraToolService, 
-																	              $RowCount, $Debug);
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
+																		                               $ArrayInstanceInfraToolsService, 
+																	                                   $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return ConfigInfraTools::RET_OK;
+		}
+		$this->ShowDivReturnError("SERVICE_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	protected function InfraToolsServiceSelectByServiceActive($Limit1, $Limit2, $ServiceActive, &$ArrayInstanceInfraToolsService, 
 			                                        &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $ServiceActive; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActive($ServiceActive, $Limit1, $Limit2,
-																				 $ArrayInstanceInfraToolService,
-																				 $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActive(
+				                                                                           $Limit1, $Limit2, $this->InputValueServiceActive,
+																				           $ArrayInstanceInfraToolsService,
+																				           $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_ACTIVE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolService, 
+	protected function InfraToolsServiceSelectByServiceActiveNoLimit($ServiceActive, &$ArrayInstanceInfraToolsService, 
 			                                               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $ServiceActive; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActiveNoLimit($ServiceActive,
-																				        $ArrayInstanceInfraToolService,
-																				        $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActiveNoLimit(
+				                                                                                  $this->InputValueServiceActive,
+																				                  $ArrayInstanceInfraToolsService,
+																				                  $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_ACTIVE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
-	protected function ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail, $Limit1, $Limit2,
-															     &$ArrayInstanceInfraToolService, 
-															     &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceActiveOnUserContext($Limit1, $Limit2, $ServiceActive, $UserEmail,
+															               &$ArrayInstanceInfraToolsService, 
+															               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $ServiceActive; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActiveOnUserContext($ServiceActive, $UserEmail,
-																							  $Limit1, $Limit2,
-																				              $ArrayInstanceInfraToolService,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActiveOnUserContext(
+				                                                                              $Limit1, $Limit2,
+																							  $this->InputValueServiceActive, $UserEmail,
+																							  $ArrayInstanceInfraToolsService,
 																				              $RowCount, 
-																							  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+																							  $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_ACTIVE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
-	protected function ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
-			                                                            &$ArrayInstanceInfraToolService, 
+	protected function InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
+			                                                            &$ArrayInstanceInfraToolsService, 
 			                                                            &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceActive = $ServiceActive;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $ServiceActive; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActiveOnUserContextNoLimit($ServiceActive, $UserEmail,
-																				                     $ArrayInstanceInfraToolService,
-																				                     $RowCount, 
-																									 $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActiveOnUserContextNoLimit(
+				                                                                                               $this->InputValueServiceActive,
+																									           $UserEmail,
+																				                               $ArrayInstanceInfraToolsService,
+																				                               $RowCount, 
+																									           $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ACTIVE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_ACTIVE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_ACTIVE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
-	protected function ServiceSelectByServiceCorporation($ServiceCorporation, $Limit1, $Limit2,
-			                                             &$ArrayInstanceInfraToolService, 
-														 &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceCorporation($Limit1, $Limit2, $ServiceCorporation,
+			                                                       &$ArrayInstanceInfraToolsService, 
+														           &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceActive($ServiceCorporation, $Limit1, $Limit2,
-																				 $ArrayInstanceInfraToolService,
-																				 $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceActive(
+				                                                                           $Limit1, $Limit2, 
+																						   $this->InputValueServiceCorporation,
+																				           $ArrayInstanceInfraToolsService,
+																				           $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_CORPORATION_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolService, 
+	protected function ServiceSelectByServiceCorporationNoLimit($ServiceCorporation, &$ArrayInstanceInfraToolsService, 
 															    &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationNoLimit($ServiceCorporation,
-																				             $ArrayInstanceInfraToolService,
-																				             $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->ServiceSelectByServiceCorporationNoLimit(
+				                                                                             $this->InputValueServiceCorporation,
+																				             $ArrayInstanceInfraToolsService,
+																				             $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_CORPORATION_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail, 
-																	  $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
+	protected function ServiceSelectByServiceCorporationOnUserContext($Limit1, $Limit2,
+																	  $ServiceCorporation, $UserEmail, 
+																	  &$ArrayInstanceInfraToolsService, 
 																	  &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationOnUserContext($ServiceCorporation, $UserEmail,
-																							       $Limit1, $Limit2,
-																				                   $ArrayInstanceInfraToolService,
-																				                   $RowCount, 
-																							       $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
-																		   &$ArrayInstanceInfraToolService, 
-																		   &$RowCount, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$arrayConstants = array(); $matrixConstants = array();
-
-		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
-		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = TRUE;
-		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation,
+			$return = $instanceInfraToolsFacedePersistence->ServiceSelectByServiceCorporationOnUserContext(
+				                                                                                   $Limit1, $Limit2,
+																								   $this->InputValueServiceCorporation,
 																								   $UserEmail,
-																				                   $ArrayInstanceInfraToolService,
+																				                   $ArrayInstanceInfraToolsService,
 																				                   $RowCount, 
-																							       $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+																							       $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_CORPORATION_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_CORPORATION_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceDepartment($ServiceCorporation, $ServiceDepartment, $Limit1, $Limit2,
-														&$ArrayInstanceInfraToolService, &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit($ServiceCorporation, $UserEmail, 
+																		               &$ArrayInstanceInfraToolsService, 
+																		               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//SERVICE_CORPORATION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceCorporationOnUserContextNoLimit(
+				                                                                                          $this->InputValueServiceCorporation,
+																								          $UserEmail,
+																				                          $ArrayInstanceInfraToolsService,
+																				                          $RowCount, 
+																							              $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_CORPORATION_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_CORPORATION_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsServiceSelectByServiceDepartment($Limit1, $Limit2, $ServiceCorporation, $ServiceDepartment,
+														          &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
+		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $ServiceDepartment; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueServiceDepartment; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnServiceDepartmentText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartment($ServiceCorporation, 
-																					 $ServiceDepartment,  
-																					 $Limit1, $Limit2,
-																				     $ArrayInstanceInfraToolService,
-																				     $RowCount, 
-																					 $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartment(
+				                                                                               $Limit1, $Limit2,
+																					           $this->InputValueServiceCorporation, 
+																					           $this->InputValueServiceDepartment,
+																				               $ArrayInstanceInfraToolsService,
+																				               $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_DEPARTMENT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
-															   &$ArrayInstanceInfraToolService, $Debug)
+	protected function InfraToolsServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, $ServiceDepartment,
+															             &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
+		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $ServiceDepartment; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueServiceDepartment; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnServiceDepartmentText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartmentNoLimit($ServiceCorporation, 
-																							$ServiceDepartment,
-																				            $ArrayInstanceInfraToolService,
-																					        $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartmentNoLimit(
+				                                                                                      $this->InputValueServiceCorporation, 
+																							          $this->InputValueServiceDepartment,
+																				                      $ArrayInstanceInfraToolsService,
+																					                  $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_DEPARTMENT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-																     $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-																     &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceDepartmentOnUserContext($Limit1, $Limit2, $ServiceCorporation, 
+																			   $ServiceDepartment, $UserEmail, 
+																               &$ArrayInstanceInfraToolsService, 
+																               &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
+		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $ServiceDepartment; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueServiceDepartment; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnServiceDepartmentText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartmentOnUserContext($ServiceCorporation,
-																								  $ServiceDepartment, $UserEmail,
-																							      $Limit1, $Limit2,
-																				                  $ArrayInstanceInfraToolService,
-																								  $RowCount,
-																					              $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartmentOnUserContext(
+				                                                                                            $Limit1, $Limit2,
+																								            $this->InputValueServiceCorporation,
+																								            $this->InputValueServiceDepartment,
+																								            $UserEmail,
+																				                            $ArrayInstanceInfraToolsService,
+																								            $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_DEPARTMENT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
-																		    &$ArrayInstanceInfraToolService, 
-																		    $Debug)
+	protected function InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation, $ServiceDepartment, $UserEmail, 
+																		             &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceCorporation = $ServiceCorporation;
+		$this->InputValueServiceDepartment  = $ServiceDepartment;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_CORPORATION
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[0]        = $ServiceCorporation; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DEPARTMENT
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDepartmentClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $ServiceDepartment; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueServiceDepartment; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 80; 
 		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnServiceDepartmentText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceDepartmentOnUserContextNoLimit($ServiceCorporation,
-				                                                                                  $ServiceDepartment,
-																								  $UserEmail,
-																				                  $ArrayInstanceInfraToolService,
-																					              $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceDepartmentOnUserContextNoLimit(
+				                                                                                         $this->InputValueServiceCorporation,
+				                                                                                         $this->InputValueServiceDepartment,
+																								         $UserEmail,
+																				                         $ArrayInstanceInfraToolsService,
+																					                     $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_DEPARTMENT_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_DEPARTMENT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_DEPARTMENT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
+		//FIELD_SERVICE_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $ServiceId; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueServiceId; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 5; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceId($ServiceId, $InstanceInfraToolsService,
-																			 $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceId($this->InputValueServiceId, 
+				                                                                                         $InstanceInfraToolsService, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_ID_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
-															 &$TypeAssocUserServiceId, $Debug)
+	protected function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
+															           &$TypeAssocUserServiceId, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceId = $ServiceId;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ID;
+		//FIELD_SERVICE_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ID;
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $ServiceId; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueServiceId; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceIdOnUserContext(
+				                                                                          $this->InputValueServiceId, 
+																						  $UserEmail,
 																						  $InstanceInfraToolsService,
 																						  $TypeAssocUserServiceId,
-																						  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+																						  $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_ID_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_ID_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceName($ServiceName, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-												  &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
+												            &$RowCount, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceName($ServiceName,  
-																			   $Limit1, $Limit2,
-																			   $ArrayInstanceInfraToolService,
-																			   $RowCount, 
-																			   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceName(
+				                                                                         $Limit1, $Limit2,
+																			             $this->InputValueServiceName,  
+																			             $ArrayInstanceInfraToolsService,
+																			             $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolService, $Debug)
+	protected function InfraToolsServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, $Debug, 
+																   $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameNoLimit($ServiceName,
-																			   $ArrayInstanceInfraToolService,
-																			   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceNameNoLimit(
+				                                                                                $this->InputValueServiceName,
+																			                    $ArrayInstanceInfraToolsService,
+																			                    $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-															   $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-															   &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceNameOnUserContext($Limit1, $Limit2, $ServiceName, $UserEmail, 
+															             &$ArrayInstanceInfraToolsService, &$RowCount, 
+																		 $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameOnUserContext($ServiceName, $UserEmail, 
-																							$Limit1, $Limit2,
-																			                $ArrayInstanceInfraToolService,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceNameOnUserContext(
+				                                                                            $Limit1, $Limit2,
+																							$this->InputValueServiceName, $UserEmail, 
+																							$ArrayInstanceInfraToolsService,
 																							$RowCount,
-																			                $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+																			                $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, 
-																      &$ArrayInstanceInfraToolService, 
-																      $Debug)
+	protected function InfraToolsServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail, &$ArrayInstanceInfraToolsService, 
+																                $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceName = $ServiceName;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[0]        = $ServiceName; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsInput[0]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 80; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceNameOnUserContextNoLimit($ServiceName, $UserEmail,
-																			                $ArrayInstanceInfraToolService,
-																			                $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceNameOnUserContextNoLimit(
+				                                                                                             $this->InputValueServiceName, 
+																								             $UserEmail,
+																			                                 $ArrayInstanceInfraToolsService,
+																			                                 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_NAME_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, 
-												  &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceType($Limit1, $Limit2, $ServiceType, &$ArrayInstanceInfraToolsService, 
+												            &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
+		//FIELD_SERVICE_TYPE
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[0]        = $ServiceType; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceType($ServiceType, $Limit1, $Limit2,
-											     							   $ArrayInstanceInfraToolService, $RowCount,
-																			   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceType(
+				                                                                         $Limit1, $Limit2,
+																			             $this->InputValueServiceType, 
+																			             $ArrayInstanceInfraToolsService, $RowCount,
+																			             $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolService, $Debug)
+	protected function InfraToolsServiceSelectByServiceTypeNoLimit($ServiceType, &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
+		//FIELD_SERVICE_TYPE
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[0]        = $ServiceType; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceTypeNoLimit($ServiceType,
-											     							          $ArrayInstanceInfraToolService,
-																			          $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceTypeNoLimit(
+				                                                                                           $this->InputValueServiceType,
+											     							                               $ArrayInstanceInfraToolsService,
+																			                               $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail, $Limit1, $Limit2, 
-															   &$ArrayInstanceInfraToolService, &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByServiceTypeOnUserContext($Limit1, $Limit2, $ServiceType, $UserEmail, 
+															             &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceType = $ServiceType;
 		$arrayConstants = array(); $matrixConstants = array();
 
-		//SERVICE_TYPE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
+		//FIELD_SERVICE_TYPE
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[0]        = $ServiceType; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueServiceType; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnServiceTypeText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceTypeOnUserContext(
+				                                                                                      $Limit1, $Limit2,
+																							          $this->InputValueServiceType, 
+																							          $UserEmail,
+											     							                          $ArrayInstanceInfraToolsService,
+																					                  $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
+																                &$ArrayInstanceInfraToolsService, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueServiceType = $ServiceType;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_SERVICE_TYPE
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
+		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceTypeOnUserContext($ServiceType, $UserEmail,
-																					        $Limit1, $Limit2,
-											     							                $ArrayInstanceInfraToolService,
-																					        $RowCount,
-																			                $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceTypeOnUserContextNoLimit(
+				                                                                                             $this->InputValueServiceType, 
+																								             $UserEmail,
+											     							                                 $ArrayInstanceInfraToolsService,
+																			                                 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
-																     &$ArrayInstanceInfraToolService, $Debug)
+	protected function InfraToolsServiceSelectByTypeAssocUserServiceDescription($Limit1, $Limit2, $TypeAssocUserServiceDescription, 
+			                                                                    &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$arrayConstants = array(); $matrixConstants = array();
-
-		//SERVICE_TYPE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
-		$arrayElementsClass[0]        = &$this->ReturnServiceTypeClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[0]        = $ServiceType; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByServiceTypeOnUserContextNoLimit($ServiceType, $UserEmail,
-											     							                $ArrayInstanceInfraToolService,
-																			                $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	protected function ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                               &$ArrayInstanceInfraToolService, 
-			                                               &$RowCount, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserService; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
-				                    'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
+				                    'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserService($TypeAssocUserService, $Limit1, $Limit2, 
-			                                                                            $ArrayInstanceInfraToolService, 
-			                                                                            $RowCount, $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescription(
+				                                                                             $Limit1, $Limit2,
+																							 $this->InputValueTypeAssocUserServiceDescription,  
+			                                                                                 $ArrayInstanceInfraToolsService, 
+			                                                                                 $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByTypeAssocUserServiceNoLimit($TypeAssocUserService, 
-			                                                      &$ArrayInstanceInfraToolService, 
-																  $Debug)
+	protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit($TypeAssocUserServiceDescription, 
+			                                                                           &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserService; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
-				                    'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
+				                    'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceNoLimit(
-				                                                                        $TypeAssocUserService, 
-			                                                                            $ArrayInstanceInfraToolService, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit(
+				                                                                        $this->InputValueTypeAssocUserServiceDescription, 
+			                                                                            $ArrayInstanceInfraToolsService, 
 			                                                                            $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByTypeAssocUserServiceOnUserContext($TypeAssocUserService, 
-			                                                            $UserEmail, $Limit1, $Limit2, 
-			                                                            &$ArrayInstanceInfraToolService, &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext($Limit1, $Limit2, 
+																				             $TypeAssocUserServiceDescription, 
+																							 $UserEmail, &$ArrayInstanceInfraToolsService,
+																							 &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserService; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
-				                    'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
+				                    'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceOnUserContext(
-				                                                                        $TypeAssocUserService,
-				                                                                        $UserEmail,
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContext(
 				                                                                        $Limit1, $Limit2, 
-			                                                                            $ArrayInstanceInfraToolService, 
+				                                                                        $this->InputValueTypeAssocUserServiceDescription,
+				                                                                        $UserEmail,
+			                                                                            $ArrayInstanceInfraToolsService, 
 			                                                                            $RowCount, $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->InputValueLimit1   = $Limit1;
+				$this->InputValueLimit2   = $Limit2;
+				$this->InputValueRowCount = $RowCount;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByTypeAssocUserServiceOnUserContextNoLimit($TypeAssocUserService, 
-			                                                                   $UserEmail,
-			                                                                   &$ArrayInstanceInfraToolService, 
-										  							           $Debug)
+	protected function InfraToolsServiceSelectByTypeAssocUserServiceDescriptionOnUserContextNoLimit($TypeAssocUserServiceDescription, 
+			                                                                                        $UserEmail,
+																									&$ArrayInstanceInfraToolsService, 
+										  							                                $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueTypeAssocUserServiceDescription = $TypeAssocUserServiceDescription;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//TYPE_ASSOC_USER_SERVICE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_ASSOC_USER_SERVICE_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserServiceDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
-		$arrayElementsInput[0]        = $TypeAssocUserService; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_ASSOC_USER_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserServiceDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
-				                    'FORM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION', 
+				                    'FM_INVALID_TYPE_ASSOC_USER_SERVICE_DESCRIPTION_SIZE', 
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByTypeAssocUserServiceNoLimit(
-				                                                                        $TypeAssocUserService, 
-			                                                                            $ArrayInstanceInfraToolService, 
-			                                                                            $Debug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByTypeAssocUserServiceDescriptionNoLimit(
+				                                                                         $this->InputValueTypeAssocUserServiceDescription, 
+			                                                                             $ArrayInstanceInfraToolsService, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ASSOC_USER_SERVICE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByUser($UserEmail, $Limit1, $Limit2, &$ArrayInstanceInfraToolService, &$RowCount, $Debug)
+	protected function InfraToolsServiceSelectByUser($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsService, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueUserEmail = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_USER
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_USER_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
-		$arrayElementsInput[0]        = $UserEmail; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByUser($UserEmail, $Limit1, $Limit2,
-											     						$ArrayInstanceInfraToolService,
-																		$RowCount,
-																		$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByUser(
+				                                                               $Limit1, $Limit2, $this->InputValueUserEmail,
+											     				 		       $ArrayInstanceInfraToolsService,
+																		          $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_USER_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_USER_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolService, $Debug)
+	protected function InfraToolsServiceSelectByUserNoLimit($UserEmail, &$ArrayInstanceInfraToolsService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueUserEmail = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_USER
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_EMAIL;
-		$arrayElementsClass[0]        = &$this->ReturnEmailClass;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_USER_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
-		$arrayElementsInput[0]        = $UserEmail; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->ServiceSelectByUserNoLimit($UserEmail,
-											     						       $ArrayInstanceInfraToolService,
-																		       $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByUserNoLimit($this->InputValueUserEmail,
+											     						                         $ArrayInstanceInfraToolsService, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_SUCCESS', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::SUCCESS;
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_USER_ERROR', 
-																			 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_USER_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_USER_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceSelectNoLimit(&$ArrayInstanceInfraToolService, $Debug)
+	protected function InfraToolsServiceSelectNoLimit(&$ArrayInstanceInfraToolsService, $Debug, $StoreSession = FALSE)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 
-		$return = $FacedePersistenceInfraTools->ServiceSelectNoLimit($ArrayInstanceInfraToolService,
-																	 $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectNoLimit($ArrayInstanceInfraToolsService, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $ArrayInstanceInfraToolsService);
+			$this->ShowDivReturnSuccess("SERVICE_SEL_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
-												$ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
-	  										    $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, $Debug)
+	protected function InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
+												          $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
+	  										              $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueServiceActive = $ServiceActiveNew;
@@ -2769,174 +2258,154 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceName = $ServiceNameNew;
 		$this->InputValueServiceType = $ServiceTypeNew;
 		$this->InputValueServiceId = $ServiceId;
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$this->InputFocus = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
 
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 8; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_CORPORATION
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[1]        = &$this->ReturnCorporationNameClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
 		$arrayElementsInput[1]        = $this->InputValueCorporationName; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnCorporationNameText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_NAME', 'FORM_INVALID_CORPORATION_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_CORPORATION_CAN_CHANGE
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_SERVICE_CORPORATION;
+		$arrayElements[2]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnCorporationCanChangeClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[2]        = $this->InputValueCorporationCanChange; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnCorporationCanChangeText;
-		array_push($arrayConstants, 'FORM_INVALID_CORPORATION_CAN_CHANGE', 'FORM_INVALID_CORPORATION_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_CAN_CHANGE', 'FM_INVALID_CORPORATION_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DEPARTMENT
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[3]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[3]        = &$this->ReturnDepartmentNameClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
 		$arrayElementsInput[3]        = $this->InputValueDepartmentName; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 80; 
 		$arrayElementsNullable[3]     = FALSE;
 		$arrayElementsText[3]         = &$this->ReturnDepartmentNameText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DEPARTMENT_CAN_CHANGE
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_SERVICE_DEPARTMENT;
+		$arrayElements[4]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
 		$arrayElementsClass[4]        = &$this->ReturnDepartmentCanChangeClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[4]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[4]        = $this->InputValueDepartmentCanChange; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 45; 
 		$arrayElementsNullable[4]     = FALSE;
 		$arrayElementsText[4]         = &$this->ReturnDepartmentCanChangeText;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_CAN_CHANGE', 'FORM_INVALID_DEPARTMENT_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_CAN_CHANGE', 'FM_INVALID_DEPARTMENT_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 
 		//SERVICE_DESCRIPTION
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION;
+		$arrayElements[3]             = ConfigInfraTools::FIELD_SERVICE_DESCRIPTION;
 		$arrayElementsClass[3]        = &$this->ReturnServiceDescriptionClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[3]        = $this->InputValueServiceDescription; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 200; 
 		$arrayElementsNullable[3]     = FALSE;
 		$arrayElementsText[3]         = &$this->ReturnServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_DESCRIPTION', 'FORM_INVALID_SERVICE_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_DESCRIPTION', 'FM_INVALID_SERVICE_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_NAME
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[4]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[4]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsForm[4]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
 		$arrayElementsInput[4]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 45; 
 		$arrayElementsNullable[4]     = FALSE;
 		$arrayElementsText[4]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_TYPE
-		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
+		//FIELD_SERVICE_TYPE
+		$arrayElements[5]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
 		$arrayElementsClass[5]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsForm[5]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
 		$arrayElementsInput[5]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[5]     = 0; 
 		$arrayElementsMaxValue[5]     = 45; 
 		$arrayElementsNullable[5]     = FALSE;
 		$arrayElementsText[5]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->ServiceUpdateByServiceId($ServiceActiveNew, 
-																			 $ServiceCoporationNew,
-																			 $ServiceCorporationCanChangeNew,
-																			 $ServiceDepartmentNew,
-																			 $ServiceDepartmentCanChangeNew,
-	  										                                 $ServiceDescriptionNew, 
-																			 $ServiceNameNew, 
-																			 $ServiceTypeNew, 
-																			 $ServiceId,
-															                 $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceUpdateByServiceId($ServiceActiveNew, 
+															   				                   $ServiceCoporationNew,
+																			                   $ServiceCorporationCanChangeNew,
+																			                   $ServiceDepartmentNew,
+																			                   $ServiceDepartmentCanChangeNew,
+	  										                                                   $ServiceDescriptionNew, 
+																			                   $ServiceNameNew, 
+																			                   $ServiceTypeNew, 
+																			                   $ServiceId,
+															                                   $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_BY_ID_SUCCESS', 
-																				$this->Language);
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnSuccess("SERVICE_UPDT_BY_ID_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-				return ConfigInfraTools::WARNING;
-			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_BY_ID_ERROR', 
-																				$this->Language);
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::RET_WARNING;	
 			}
 		}
-		else
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("SERVICE_UPDT_BY_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function ServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, 
-														$ServiceTypeNew, $ServiceId, $Debug)
+	protected function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, 
+														          $ServiceTypeNew, $ServiceId, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueServiceActive = $ServiceActiveNew;
@@ -2944,696 +2413,950 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceName = $ServiceNameNew;
 		$this->InputValueServiceType = $ServiceTypeNew;
 		$this->InputValueServiceId = $ServiceId;
-		$this->InputFocus = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$this->InputFocus = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
-
+		
 		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_SERVICE_ACTIVE;
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
 		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
 		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 8; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsMaxValue[0]     = 0; 
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_DESCRIPTION
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_SERVICE_DESCRIPTION;
+		$arrayElements[1]             = ConfigInfraTools::FIELD_SERVICE_DESCRIPTION;
 		$arrayElementsClass[1]        = &$this->ReturnServiceDescriptionClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[1]        = $this->InputValueServiceDescription; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 200; 
 		$arrayElementsNullable[1]     = FALSE;
 		$arrayElementsText[1]         = &$this->ReturnServiceDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_DESCRIPTION', 'FORM_INVALID_SERVICE_DESCRIPTION_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_DESCRIPTION', 'FM_INVALID_SERVICE_DESCRIPTION_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//SERVICE_NAME
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_SERVICE_NAME;
+		$arrayElements[2]             = ConfigInfraTools::FIELD_SERVICE_NAME;
 		$arrayElementsClass[2]        = &$this->ReturnServiceNameClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
 		$arrayElementsInput[2]        = $this->InputValueServiceName; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = FALSE;
 		$arrayElementsText[2]         = &$this->ReturnServiceNameText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_NAME', 'FORM_INVALID_SERVICE_NAME_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_TYPE
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_SERVICE_TYPE;
+		//FIELD_SERVICE_TYPE
+		$arrayElements[3]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
 		$arrayElementsClass[3]        = &$this->ReturnServiceTypeClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
 		$arrayElementsInput[3]        = $this->InputValueServiceType; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 45; 
 		$arrayElementsNullable[3]     = FALSE;
 		$arrayElementsText[3]         = &$this->ReturnServiceTypeText;
-		array_push($arrayConstants, 'FORM_INVALID_SERVICE_TYPE', 'FORM_INVALID_SERVICE_TYPE_SIZE');
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE');
 		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->ServiceUpdateRestrictByServiceId($ServiceActiveNew, 
-	  										                                         $ServiceDescriptionNew, 
-																			         $ServiceNameNew, 
-																			         $ServiceTypeNew, 
-																			         $ServiceId,
-															                         $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, 
+	  										                                                          $ServiceDescriptionNew, 
+ 																			                          $ServiceNameNew, 
+																			                          $ServiceTypeNew, 
+																			                          $ServiceId,
+															                                          $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_RESTRICT_BY_ID_SUCCESS', 
-																				$this->Language);
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnSuccess("SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
+			elseif($return == ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE)
 			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-				return ConfigInfraTools::WARNING;
-			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('SERVICE_UPDATE_RESTRICTBY_ID_ERROR', 
-																				$this->Language);
-				return ConfigInfraTools::ERROR;
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::RET_WARNING;
 			}
 		}
-		else
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}	
+		$this->ShowDivReturnError("SERVICE_UPDT_RESTRICTBY_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TeamLoadData()
+	protected function InfraToolsTicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug)
 	{
-		if($this->InstanceTeam != NULL)
-		{
-			$this->InputValueTeamId           = $this->InstanceTeam->GetTeamId();
-			$this->InputValueTeamDescription  = $this->InstanceTeam->GetTeamDescription();
-			$this->InputValueTeamName         = $this->InstanceTeam->GetTeamName();
-			$this->InputValueRegisterDate     = $this->InstanceTeam->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
 	}
 	
-	protected function TicketLoadData()
+	protected function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
 	{
-		if($this->Ticket != NULL)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2,
+																					 $ArrayInstanceInfraToolsTypeAssocUserService,
+																		             $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->InputValueId                = $this->Ticket->GetTicketId();
-			$this->InputValueRegisterDate      = $this->Ticket->GetRegisterDate();
-			$this->InputValueServiceName       = $this->Ticket->GetTicketServiceName();
-			$this->InputValueStatusName        = $this->Ticket->GetTicketStatusName();
-			$this->InputValueSuggestion        = $this->Ticket->GetTicketSuggestion();
-			$this->InputValueTicketDescription = $this->Ticket->GetTicketDescription();
-			$this->InputValueTitle             = $this->Ticket->GetTicketTitle();
-			$this->InputValueType              = $this->Ticket->GetTicketTypeName();
-			return ConfigInfraTools::SUCCESS;
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SEL_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::ERROR;
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeAssocUserServiceSelect(&$ArrayInstanceInfraToolsTypeService, &$RowCount,
-			                                       $Limit1, $Limit2, $Debug)
+	protected function InfraToolsTypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelect($ArrayInstanceInfraToolsTypeAssocUserService,
-																			$Limit1, $Limit2, $RowCount,
-																			$this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelectNoLimit(
+			                                                                          $ArrayInstanceInfraToolsTypeAssocUserService,
+																			          $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SEL_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
+	protected function InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeAssocUserService, 
+															             $UserEmail, &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectNoLimit($ArrayInstanceInfraToolsTypeAssocUserService,
-																			      $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelectOnUserContext($Limit1, $Limit2,
+																						          $ArrayInstanceInfraToolsTypeAssocUserService, 
+																						          $UserEmail, $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SEL_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeAssocUserServiceSelectOnUserContext(&$ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail, &$RowCount,
-			                                                   $Limit1, $Limit2, $Debug)
+	protected function InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, 
+																				$UserEmail, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectOnUserContext($ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail,
-																			            $Limit1, $Limit2, $RowCount,
-																			            $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
-		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	protected function TypeAssocUserServiceSelectOnUserContextNoLimit(&$ArrayInstanceInfraToolsTypeAssocUserService, $UserEmail, $Debug)
-	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeAssocUserServiceSelectOnUserContextNoLimit(
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeAssocUserServiceSelectOnUserContextNoLimit(
 			                                                                   $ArrayInstanceInfraToolsTypeAssocUserService, 
 																			   $UserEmail,
-																			   $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+																			   $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_SUCCESS', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			$this->ShowDivReturnSuccess("TYPE_ASSOC_USER_SERVICE_SEL_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant(
-				                               'TYPE_ASSOC_USER_SERVICE_SELECT_ERROR', 
-											   $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_ASSOC_USER_SERVICE_SEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeAssocUserTeamLoadData()
+	protected function InfraToolsTypeServiceDeleteByTypeTypeServiceName($TypeServiceName, $Debug)
 	{
-		if($this->TypeAssocUserTeam != NULL)
-		{
-			$this->InputValueTypeAssocUserTeamTeamDescription  = $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamDescription();
-			$this->InputValueTypeAssocUserTeamTeamId           = $this->TypeAssocUserTeam->GetTypeAssocUserTeamTeamId();
-			$this->InputValueRegisterDate                      = $this->TypeAssocUserTeam->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
-		}
-		else return ConfigInfraTools::ERROR;
+		
 	}
 	
-	protected function TypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, 
-			                             &$RowCount, $Debug)
+	protected function InfraToolsTypeServiceInsert($TypeServiceName, $TypeServiceSLA, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeServiceSelect($Limit1, $Limit2,
-																  $ArrayInstanceInfraToolsTypeService,
-																  $RowCount, $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
-		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		
 	}
 	
-	protected function TypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
+	protected function InfraToolsTypeServiceLoadData($InstanceInfraToolsTypeService)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeServiceSelectNoLimit($ArrayInstanceInfraToolsTypeService,
-																	     $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		if($InstanceInfraToolsTypeService != NULL)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
-		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
+			$this->InputValueRegisterDate    = $InstanceInfraToolsTypeService->GetRegisterDate();
+			$this->InputValueTypeServiceName = $InstanceInfraToolsTypeService->GetTypeServiceName();
+			$this->InputValueTypeServiceSLA  = $InstanceInfraToolsTypeService->GetTypeServiceSLA();
 		}
 	}
 	
-	protected function TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
-													  &$ArrayInstanceInfraToolsTypeService, 
-			                                          $RowCount, $Debug)
+	protected function InfraToolsTypeServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
-			                                                                   $ArrayInstanceInfraToolsTypeService,
-																			   $RowCount,
-																			   $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelect($Limit1, $Limit2,
+																                              $ArrayInstanceInfraToolsTypeService,
+																                              $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug)
+	protected function InfraToolsTypeServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-        $return = $FacedePersistenceInfraTools->TypeServiceSelectOnUserContextNoLimit($UserEmail,
-			                                                                          $ArrayInstanceInfraToolsTypeService,
-																					  $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelectNoLimit($ArrayInstanceInfraToolsTypeService, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_SUCCESS', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::SUCCESS;
+			$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->ReturnText = $this->InstanceLanguageText->GetConstant('SERVICE_SELECT_BY_SERVICE_TYPE_ERROR', 
-																		 $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::ERROR;
-		}
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeStatusTicketLoadData()
+	protected function InfraToolsTypeServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail, &$ArrayInstanceInfraToolsTypeService, 
+			                                                    $RowCount, $Debug)
 	{
-		if($this->TypeStatusTicket != NULL)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelectOnUserContext(
+			                                                                             $Limit1, $Limit2, $UserEmail,
+			                                                                             $ArrayInstanceInfraToolsTypeService,
+																			             $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->InputValueTypeStatusTicketDescription  = $this->TypeStatusTicket->GetTypeStatusTicketDescription();
-			$this->InputValueTypeStatusTicketId           = $this->TypeStatusTicket->GetTypeStatusTicketId();
-			$this->InputValueRegisterDate                 = $this->TypeStatusTicket->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
+			$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::ERROR;
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeTicketLoadData()
+	protected function InfraToolsTypeServiceSelectOnUserContextNoLimit($UserEmail, &$ArrayInstanceInfraToolsTypeService, $Debug)
 	{
-		if($this->TypeTicket != NULL)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+        $return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceSelectOnUserContextNoLimit(
+			                                                                                            $UserEmail,
+																										$ArrayInstanceInfraToolsTypeService,
+																					                    $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->InputValueTypeTicketDescription  = $this->TypeTicket->GetTypeTicketDescription();
-			$this->InputValueTypeTicketId           = $this->TypeTicket->GetTypeTicketId();
-			$this->InputValueRegisterDate           = $this->TypeTicket->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
+			$this->ShowDivReturnSuccess("SERVICE_SEL_BY_SERVICE_TYPE_SUCCESS");
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::ERROR;
+		$this->ShowDivReturnError("SERVICE_SEL_BY_SERVICE_TYPE_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeTicketSelectById($TypeTicketId)
+	protected function InfraToolsTypeServiceUpdateByTypeServiceName($TypeServiceNameNew, $TypeServiceSLANew, 
+																	&$InstanceInfraToolsTypeService, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueTypeTicketId = $TypeTicketId;
+		$this->InputValueTypeServiceName = $TypeServiceNameNew;
+		$this->InputValueTypeServiceSLA  = $TypeServiceSLANew;
+		$this->InputFocus = ConfigInfraTools::FIELD_TYPE_SERVICE_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_TYPE_TICKET_ID
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_TYPE_TICKET_ID;
-		$arrayElementsClass[0]        = &$this->ReturnTypeTicketIdClass;
+
+		//FIELD_TYPE_SERVICE_NAME
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_SERVICE_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnTypeServiceNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueTypeTicketId; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeServiceName; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 3; 
+		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeTicketIdText;
-		array_push($arrayConstants, 'FORM_INVALID_ID', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnTypeServiceNameText;
+		array_push($arrayConstants, 'FM_INVALID_TYPE_SERVICE_NAME',
+									'FM_INVALID_TYPE_SERVICE_NAME_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_TYPE_SERVICE_SLA
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_SERVICE_SLA;
+		$arrayElementsClass[0]        = &$this->ReturnTypeServiceSLAClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[0]        = $this->InputValueTypeServiceName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeServiceSLAText;
+		array_push($arrayConstants, 'FM_INVALID_TYPE_SERVICE_NAME',
+									'FM_INVALID_TYPE_SERVICE_NAME_SIZE');
+		array_push($arrayConstants, 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->TypeTicketSelectById($this->InputValueTypeTicketId, 
-																	     $this->InstanceInfraToolsTypeTicket,
-																		 $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsTypeServiceUpdateByTypeServiceName(
+				                                                               $this->InputValueTypeStatusTicketDescription,
+																			   $InstanceTypeStatusTicket->GetTypeStatusTicketDescription(),
+																			   $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_TICKET, $this->TypeTicket);
-				return ConfigInfraTools::SUCCESS;
+				$InstanceTypeStatusTicket->SetTypeStatusTicketDescription($this->InputValueTypeStatusTicketDescription);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_STATUS_TICKET, $InstanceTypeStatusTicket);
+				$this->TypeStatusTicketLoadData($InstanceTypeStatusTicket);
+				$this->ShowDivReturnSuccess("TYPE_STATUS_TICKET_UPDT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
 			}
-			else
+			elseif($return == ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE)
 			{
-				$this->ReturnIdText = $this->InstanceLanguageText->GetConstant('TYPE_TICKET_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_TYPE_USER_RETURN_NOT_FOUND;
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::RET_WARNING;
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("TYPE_STATUS_TICKET_UPDT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeUserLoadData()
+	protected function InfraToolsUserSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
 	{
-		if($this->InstanceInfraToolsTypeUser != NULL)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$this->InputValueTypeUserDescription  = $this->InstanceInfraToolsTypeUser->GetTypeUserDescription();
-			$this->InputValueTypeUserId           = $this->InstanceInfraToolsTypeUser->GetTypeUserId();
-			$this->InputValueRegisterDate         = $this->InstanceInfraToolsTypeUser->GetRegisterDate();
-			return ConfigInfraTools::SUCCESS;
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return ConfigInfraTools::RET_OK;
 		}
-		else return ConfigInfraTools::ERROR;
+		elseif(empty($ArrayInstanceInfraToolsUser))
+		{
+			$this->ShowDivReturnWarning("USER_NOT_FOUND");
+			return ConfigInfraTools::RET_WARNING;	
+		}
+		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeUserSelectByDescription($TypeUserDescription)
+	protected function InfraToolsUserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceInfraToolsUser, 
+															 &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueTypeUserDescription = $TypeUserDescription;
+		$this->InputValueCorporationName = $CorporationName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByCorporationName($Limit1, $Limit2, 
+																								  $this->InputValueCorporationName, 
+																				                  $ArrayInstanceInfraToolsUser, $RowCount, 
+																							      $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_CORPORATION_NAME_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_CORPORATION_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
+															&$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$this->InputValueDepartmentName = $DepartmentName;
 		$arrayConstants = array(); $matrixConstants = array();
 		
-		//FORM_TYPE_USER_LIST_SELECT
-		$arrayElements[0]             = ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT;
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[1]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[1]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 80; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByDepartmentName($Limit1, $Limit2, 
+																								 $this->InputValueCorporationName,
+																								 $this->InputValueDepartmentName, 
+																				                 $ArrayInstanceInfraToolsUser, $RowCount, 
+																							     $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_DEPARTMENT_NAME_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_DEPARTMENT_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsUser,&$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV4;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
+		$arrayElementsInput[0]        = $this->InputValueIpAddressIpv4; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByIpAddressIpv4($Limit1, $Limit2, 
+																							    $this->InputValueIpAddressIpv4, 
+																				                $ArrayInstanceInfraToolsUser, $RowCount, 
+																							    $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_IP_ADDRESS_IPV4_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_IP_ADDRESS_IPV4_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceInfraToolsUser, 
+															&$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueNotificationId = $NotificationId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_NOTIFICATION_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_NOTIFICATION_ID;
+		$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueNotificationId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
+		array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByNotificationId($Limit1, $Limit2, 
+																							     $this->InputValueNotificationId, 
+																				                 $ArrayInstanceInfraToolsUser, $RowCount, 
+																							     $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_NOTIFICATION_ID_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_NOTIFICATION_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueRoleName = $RoleName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_ROLE_NAME
+		$arrayElements[0]             = ConfigInfraTools::FIELD_ROLE_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnRoleNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueRoleName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnRoleNameText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByRoleName($Limit1, $Limit2, 
+																						   $this->InputValueRoleName, 
+																				           $ArrayInstanceInfraToolsUser, $RowCount, 
+																						   $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_ROLE_NAME_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_ROLE_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByServiceId($Limit1, $Limit2, $ServiceId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueServiceId = $ServiceId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_SERVICE_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ID;
+		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueServiceId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByServiceId($Limit1, $Limit2, 
+																							$this->InputValueServiceId, 
+																				            $ArrayInstanceInfraToolsUser, $RowCount, 
+																							$Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_SERVICE_ID_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_SERVICE_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTeamId = $TeamId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_TEAM_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TEAM_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTeamIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTeamId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTeamIdText;
+		array_push($arrayConstants, 'FM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTeamId($Limit1, $Limit2, $this->InputValueTeamId,
+																	  		             $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_TEAM_ID_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_TEAM_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTicketId = $TicketId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_TICKET_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TICKET_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTicketIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTicketId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTicketIdText;
+		array_push($arrayConstants, 'FM_INVALID_TICKET_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTicketId($Limit1, $Limit2, $this->InputValueTicketId, 
+																	                       $ArrayInstanceInfraToolsUser, $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_TICKET_ID_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_TICKET_ID_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, 
+		                                                              &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeAssocUserTeamDescription = $TypeAssocUserTeamDescription;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeAssocUserTeamDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeAssocUserTeamDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeAssocUserTeamDescriptionText;
+		array_push($arrayConstants, 'FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION', 'FM_INVALID_TYPE_ASSOC_USER_TEAM_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2,
+																									 $TypeAssocUserTeamDescription,
+																						             $ArrayInstanceInfraToolsUser,
+																									 $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_TYPE_ASSOC_USER_TEAM_DESCRIPTION_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	protected function InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, 
+		                                                           &$ArrayInstanceInfraToolsUser, &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeTicketDescription = $TypeTicketDescription;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_TYPE_TICKET_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_TICKET_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnTypeTicketDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueTypeTicketDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTypeTicketDescriptionText;
+		array_push($arrayConstants, 'FM_INVALID_TYPE_TICKET_DESCRIPTION', 'FM_INVALID_TYPE_TICKET_DESCRIPTION_SIZE',
+				                    'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeTicketDescription($Limit1, $Limit2, 
+																							            $this->InputValueTypeTicketDescription,
+																	                                    $ArrayInstanceInfraToolsUser, 
+																										$RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif(empty($ArrayInstanceInfraToolsUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_TYPE_TICKET_DESCRIPTION_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_TYPE_TICKET_DESCRIPTION_ERROR");
+		return ConfigInfraTools::RET_ERROR;	
+	}
+	
+	protected function InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceInfraToolsUser, 
+		                                                         &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTypeUserDescription = $TypeUserDescription;	
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_TYPE_USER_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION;
 		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
 		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FORM_INVALID_TYPE_USER_DESCRIPTION', 'FORM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
+		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_DESCRIPTION', 'FM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                    $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                    $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								                $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-												$matrixConstants);
-		if($return == ConfigInfraTools::SUCCESS)
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $FacedePersistenceInfraTools->TypeUserSelectByDescription($this->InputValueTypeUserDescription, 
-																			    $this->InstanceInfraToolsTypeUser,
-																			    $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByTypeUserDescription( $Limit1, $Limit2,
+																									  $this->InputValueTypeUserDescription,
+															                                          $ArrayInstanceInfraToolsUser, 
+																									  $RowCount, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceInfraToolsTypeUser);
-				return ConfigInfraTools::SUCCESS;
+				$this->ShowDivReturnEmpty();
+				return ConfigInfraTools::RET_OK;
 			}
-			else
+			elseif(empty($ArrayInstanceInfraToolsUser))
 			{
-				$this->ReturnTypeUserDescriptionText = $this->InstanceLanguageText->GetConstant('TYPE_USER_NOT_FOUND', 
-																								$this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_TYPE_USER_RETURN_NOT_FOUND;
+				$this->ShowDivReturnWarning("USER_SEL_BY_TYPE_USER_DESCRIPTION_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
 			}
 		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
+		$this->ShowDivReturnError("USER_SEL_BY_TYPE_USER_DESCRIPTION_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function TypeUserSelectUsers($Limit1, $Limit2, &$RowCount)
+	protected function InfraToolsUserSelectByUserEmail($UserEmail, &$InstanceInfraToolsUser, $Debug)
 	{
-		if($this->InstanceInfraToolsTypeUser != NULL)
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueUserEmail = $UserEmail;
+		if(!empty($UserEmail))
 		{
-			$this->ArrayInstanceInfraToolsTypeUserUsers = NULL;
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByTypeUser(
-				$this->InstanceInfraToolsTypeUser->GetTypeUserId(),
-				$Limit1, $Limit2,
-				$this->ArrayInstanceInfraToolsTypeUserUsers, $RowCount, $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-				return ConfigInfraTools::SUCCESS;
-			else
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsUserSelectByUserEmail($this->InputValueUserEmail, 
+																				  	        $InstanceInfraToolsUser, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('ADMIN_TYPE_USER_SELECT_USERS_ERROR', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-	}
-	
-	protected function UserChangeTwoStepVerification($InstanceUserInfraTools, $TwoStepVerification)
-	{
-		if($InstanceUserInfraTools == NULL)
-			$InstanceUserInfraTools = $this->User;
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $FacedePersistenceInfraTools->UserUpdateTwoStepVerificationByEmail(
-																				   $InstanceUserInfraTools->GetEmail(), 
-																				   $TwoStepVerification, 
-																				   $this->InputValueHeaderDebug);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$InstanceUserInfraTools->SetTwoStepVerification($TwoStepVerification);
-			$this->InputValueTwoStepVerification = $InstanceUserInfraTools->GetTwoStepVerification();
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant(
-																			 'USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS', 
-																			  $this->Language);
-		}
-		elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-						   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-			$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-		}
-		else
-		{
-			$this->ReturnPasswordText = $this->InstanceLanguageText->
-										   GetConstant('USER_TWO_STEP_VERIFICATION_CHANGE_ERROR', 
-																				  $this->Language);
-			$this->ReturnPasswordClass = ConfigInfraTools::FORM_FIELD_ERROR;
-			$this->ReturnClass         = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}
-	}
-	
-	protected function UserInfraToolsSelectByEmail($Email)
-	{
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$this->InputValueUserEmail = $Email;
-		if($Email != $this->User->GetEmail())
-		{
-			$return = $FacedePersistenceInfraTools->UserInfraToolsSelectByEmail($this->InputValueUserEmail, 
-																			    $this->InstanceInfraToolsUserAdmin, 
-																			    $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$return = $FacedePersistenceInfraTools->UserSelectTeamByUserEmail($this->InstanceInfraToolsUserAdmin,
-																				 $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS || $return == ConfigInfraTools::MYSQL_USER_SELECT_TEAM_BY_USER_EMAIL_EMPTY)
+				$return = $instanceInfraToolsFacedePersistence->UserSelectTeamByUserEmail($InstanceInfraToolsUser, $Debug);
+				if($return == ConfigInfraTools::RET_OK || $return == ConfigInfraTools::DB_ERROR_USER_SEL_TEAM_BY_USER_EMAIL_EMPTY)
 				{
-					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-					return ConfigInfraTools::SUCCESS;	
+					$this->InfraToolsUserLoadData($InstanceInfraToolsUser);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $InstanceInfraToolsUser);
+					return ConfigInfraTools::RET_OK;	
 				}
 				else
 				{
-					$this->ReturnEmailText = $this->InstanceLanguageText->GetConstant('USER_TEAM_SELECT_ERROR', $this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-					return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
+					$this->ShowDivReturnError("USER_SEL_TEAM_BY_USER_EMAIL_ERROR");
+					return ConfigInfraTools::RET_ERROR;
 				}
 			}
 			else
 			{
-				$this->ReturnEmailText = $this->InstanceLanguageText->GetConstant('USER_NOT_FOUND', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
+				$this->ShowDivReturnError("USER_NOT_FOUND");
+				return ConfigInfraTools::RET_ERROR;
 			}
 		}
-		else 
-		{
-			$this->ReturnEmailText = $this->InstanceLanguageText->GetConstant('USER_SAME_AS_ADMIN', $this->Language);
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_USER_RETURN_NOT_FOUND;
-		}
+		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function UserLoadData()
+	protected function InfraToolsUserLoadData($InstanceInfraToolsUser)
 	{
-		if($this->InstanceInfraToolsUserAdmin != NULL)
+		if(is_a($InstanceInfraToolsUser, "InfraToolsUser"))
 		{
 			$this->InputValueAssocUserCorporationRegistrationDate = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDate();
+				$InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDate();
 			$this->InputValueAssocUserCorporationRegistrationId = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationId();
-			$this->InputValueBirthDateDay             = $this->InstanceInfraToolsUserAdmin->GetBirthDateDay();
-			$this->InputValueBirthDateMonth           = $this->InstanceInfraToolsUserAdmin->GetBirthDateMonth();
-			$this->InputValueBirthDateYear            = $this->InstanceInfraToolsUserAdmin->GetBirthDateYear();
-			$this->InputValueUserCorporationName      = $this->InstanceInfraToolsUserAdmin->GetCorporationName();
-			$this->InputValueCountry                  = $this->InstanceInfraToolsUserAdmin->GetCountry();
-			if($this->InstanceInfraToolsUserAdmin->GetDepartmentInitials() != NULL)
-				$this->InputValueDepartmentName       = $this->InstanceInfraToolsUserAdmin->GetDepartmentInitials() 
-				                                          . " - " . $this->InstanceInfraToolsUserAdmin->GetDepartmentName();
-			elseif($this->InstanceInfraToolsUserAdmin->GetDepartmentName() != NULL)
-				$this->InputValueDepartmentName       = $this->InstanceInfraToolsUserAdmin->GetDepartmentName();
+				$InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationId();
+			$this->InputValueBirthDateDay             = $InstanceInfraToolsUser->GetBirthDateDay();
+			$this->InputValueBirthDateMonth           = $InstanceInfraToolsUser->GetBirthDateMonth();
+			$this->InputValueBirthDateYear            = $InstanceInfraToolsUser->GetBirthDateYear();
+			$this->InputValueUserCorporationName      = $InstanceInfraToolsUser->GetCorporationName();
+			$this->InputValueCountry                  = $InstanceInfraToolsUser->GetCountry();
+			if($InstanceInfraToolsUser->GetDepartmentInitials() != NULL)
+				$this->InputValueDepartmentName       = $InstanceInfraToolsUser->GetDepartmentInitials() 
+														  . " - " . $InstanceInfraToolsUser->GetDepartmentName();
+			elseif($InstanceInfraToolsUser->GetDepartmentName() != NULL)
+				$this->InputValueDepartmentName       = $InstanceInfraToolsUser->GetDepartmentName();
 			else $this->InputValueDepartmentName = NULL;
-			$this->InputValueGender                   = $this->InstanceInfraToolsUserAdmin->GetGender();
-			$this->InputValueUserName                 = $this->InstanceInfraToolsUserAdmin->GetName();
-			$this->InputValueUserEmail                = $this->InstanceInfraToolsUserAdmin->GetEmail();
-			$this->InputValueUserPhonePrimary         = $this->InstanceInfraToolsUserAdmin->GetUserPhonePrimary();
-			$this->InputValueUserPhonePrimaryPrefix   = $this->InstanceInfraToolsUserAdmin->GetUserPhonePrimaryPrefix();
-			$this->InputValueUserPhoneSecondary       = $this->InstanceInfraToolsUserAdmin->GetUserPhoneSecondary();
-			$this->InputValueUserPhoneSecondaryPrefix = $this->InstanceInfraToolsUserAdmin->GetUserPhoneSecondaryPrefix();
-			$this->InputValueRegion                   = $this->InstanceInfraToolsUserAdmin->GetRegion();
-			$this->InputValueRegisterDate             = $this->InstanceInfraToolsUserAdmin->GetRegisterDate();
-			$this->InputValueRegistrationDate         = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDate();
-			$this->InputValueRegistrationDateDay      = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDateDay();
-			$this->InputValueRegistrationDateMonth    = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDateMonth();
-			$this->InputValueRegistrationDateYear     = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationDateYear();
-			$this->InputValueRegistrationId           = 
-				$this->InstanceInfraToolsUserAdmin->GetAssocUserCorporationUserRegistrationId();
-			if($this->InstanceInfraToolsUserAdmin->GetArrayAssocUserTeam() != NULL)
+			$this->InputValueGender                   = $InstanceInfraToolsUser->GetGender();
+			$this->InputValueUserName                 = $InstanceInfraToolsUser->GetName();
+			$this->InputValueUserEmail                = $InstanceInfraToolsUser->GetEmail();
+			$this->InputValueUserPhonePrimary         = $InstanceInfraToolsUser->GetUserPhonePrimary();
+			$this->InputValueUserPhonePrimaryPrefix   = $InstanceInfraToolsUser->GetUserPhonePrimaryPrefix();
+			$this->InputValueUserPhoneSecondary       = $InstanceInfraToolsUser->GetUserPhoneSecondary();
+			$this->InputValueUserPhoneSecondaryPrefix = $InstanceInfraToolsUser->GetUserPhoneSecondaryPrefix();
+			$this->InputValueRegion                   = $InstanceInfraToolsUser->GetRegion();
+			$this->InputValueRegisterDate             = $InstanceInfraToolsUser->GetRegisterDate();
+			$this->InputValueRegistrationDate         = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDate();
+			$this->InputValueRegistrationDateDay      = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateDay();
+			$this->InputValueRegistrationDateMonth    = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateMonth();
+			$this->InputValueRegistrationDateYear     = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateYear();
+			$this->InputValueRegistrationId           = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationId();
+			if($InstanceInfraToolsUser->GetArrayAssocUserTeam() != NULL)
 			{
-				foreach ($this->User->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
+				foreach ($InstanceInfraToolsUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
 				{
 					if($index == 0)
 						$this->InputValueUserTeam = $assocUserTeam->GetTeamName();
 					else $this->InputValueUserTeam .= ", " . $assocUserTeam->GetTeamName();
 				}
 			}
-			$this->InputValueUserUniqueId             = $this->InstanceInfraToolsUserAdmin->GetUserUniqueId();
-			if($this->InstanceInfraToolsUserAdmin->GetSessionExpires())
+			$this->InputValueUserUniqueId             = $InstanceInfraToolsUser->GetUserUniqueId();
+			if($InstanceInfraToolsUser->GetSessionExpires())
 				$this->InputValueSessionExpires = "checked";
-			if($this->InstanceInfraToolsUserAdmin->GetTwoStepVerification())
+			if($InstanceInfraToolsUser->GetTwoStepVerification())
 				$this->InputValueTwoStepVerification = "checked";
-			if($this->InstanceInfraToolsUserAdmin->GetUserActive())
+			if($InstanceInfraToolsUser->GetUserActive())
 				$this->InputValueUserActive = "checked";
-			if($this->InstanceInfraToolsUserAdmin->GetUserConfirmed())
+			if($InstanceInfraToolsUser->GetUserConfirmed())
 				$this->InputValueUserConfirmed = "checked";
-			$this->InputValueTypeUserDescription = $this->InstanceInfraToolsUserAdmin->GetUserTypeDescription();
-			$this->InputValueTypeUserId = $this->InstanceInfraToolsUserAdmin->GetUserTypeId();
-			
-			if($this->InstanceInfraToolsUserAdmin->CheckAssocUserCorporationRegistrationDateActive())
+			$this->InputValueTypeUserDescription = $InstanceInfraToolsUser->GetUserTypeDescription();
+			if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationDateActive())
 				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsVerified.png';
 			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InstanceInfraToolsUserAdmin->CheckAssocUserCorporationRegistrationIdActive())
+			if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationIdActive())
 				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsVerified.png';
 			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InstanceInfraToolsUserAdmin->CheckCorporationActive())
+			if($InstanceInfraToolsUser->CheckCorporationActive())
 				$this->InputValueCorporationActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsVerified.png';
 			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsNotVerified.png';
-			if($this->InstanceInfraToolsUserAdmin->CheckDepartmentExists())
+			if($InstanceInfraToolsUser->CheckDepartmentExists())
 				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsVerified.png';
 			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
@@ -3642,920 +3365,18 @@ abstract class PageInfraTools extends Page
 				$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
 																'Icons/IconInfraToolsVerified.png';
 			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-				                                   'Icons/IconInfraToolsNotVerified.png';
+												   'Icons/IconInfraToolsNotVerified.png';
+			return ConfigInfraTools::RET_OK;
 		}
+		else return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function UserRegister($SendEmail, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed)
+	public function GetCurrentPage()
 	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueUserName           = $_POST[ConfigInfraTools::FORM_FIELD_USER_NAME];
-		$this->InputValueUserEmail          = $_POST[ConfigInfraTools::FORM_FIELD_EMAIL];
-		if (isset($_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_DAY]))
-			$this->InputValueBirthDateDay = $_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_DAY];
-		if (isset($_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH]))
-			$this->InputValueBirthDateMonth = $_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_MONTH];
-		if (isset($_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR]))
-			$this->InputValueBirthDateYear = $_POST[ConfigInfraTools::REGISTER_BIRTH_DATE_YEAR];
-		if (isset($_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER]))
-			$this->InputValueGender               = $_POST[ConfigInfraTools::FORM_FIELD_USER_GENDER];
-		$this->InputValueUserPhonePrimary         = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY];
-		$this->InputValueUserPhonePrimaryPrefix   = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX];
-		$this->InputValueUserPhoneSecondary       = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY];
-		$this->InputValueUserPhoneSecondaryPrefix = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX];
-		$this->InputValueCountry                  = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN];
-		$this->InputValueRegion                   = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN];
-		$this->InputValueNewPassword              = $_POST[ConfigInfraTools::FORM_FIELD_NEW_PASSWORD];
-		$this->InputValueRepeatPassword           = $_POST[ConfigInfraTools::REGISTER_REPEAT_PASSWORD];
-		if(isset($_POST[ConfigInfraTools::REGISTER_SESSION_EXPIRES]))
-			$this->InputValueSessionExpires = TRUE;
-		else $this->InputValueSessionExpires = FALSE;
-		if(isset($_POST[ConfigInfraTools::REGISTER_TWO_STEP_VERIFICATION]))
-			$this->InputValueTwoStepVerification = TRUE;
-		else $this->InputValueTwoStepVerification = FALSE;
-		if(isset($_POST[ConfigInfraTools::REGISTER_USER_ACTIVE]))
-			$this->InputValueUserActive = TRUE;
-		else $this->InputValueUserActive = FALSE;
-		if(isset($_POST[ConfigInfraTools::REGISTER_USER_CONFIRMED]))
-			$this->InputValueUserConfirmed = TRUE;
-		else $this->InputValueUserConfirmed = FALSE;
-		if ($SessionExpires == NULL)
-			$SessionExpires = $this->InputValueSessionExpires;
-		if($TwoStepVerification == NULL)
-			$TwoStepVerification = $this->InputValueTwoStepVerification;
-		if($UserActive == NULL)
-			$UserActive = $this->InputValueUserActive;
-		if($UserConfirmed == NULL)
-			$UserConfirmed = $this->InputValueUserConfirmed;
-		$this->InputValueUserUniqueId = explode("@", $this->InputValueUserEmail)[0];
-		$FormValidator      = $this->Factory->CreateFormValidator();
-		$arrayConstants = array(); $matrixConstants = array(); $arrayOptions = array();
-		
-		//FORM_FIELD_USER_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueUserName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnUserNameText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_EMAIL
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_EMAIL;
-		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_EMAIL;
-		$arrayElementsInput[1]        = $this->InputValueUserEmail; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 60; 
-		$arrayElementsNullable[1]     = FALSE;
-		$arrayElementsText[1]         = &$this->ReturnUserEmailText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_EMAIL', 'FORM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_UNIQUE_ID
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID;
-		$arrayElementsClass[2]        = &$this->ReturnUserUniqueIdClass;
-		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
-		$arrayElementsInput[2]        = $this->InputValueUserUniqueId; 
-		$arrayElementsMinValue[2]     = 0; 
-		$arrayElementsMaxValue[2]     = 25; 
-		$arrayElementsNullable[2]     = FALSE;
-		$arrayElementsText[2]         = &$this->ReturnUserUniqueIdText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
-		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryPrefixClass;
-		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimaryPrefix; 
-		$arrayElementsMinValue[3]     = 0; 
-		$arrayElementsMaxValue[3]     = 3; 
-		$arrayElementsNullable[3]     = TRUE;
-		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_PRIMARY
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY;
-		$arrayElementsClass[4]        = &$this->ReturnUserPhonePrimaryClass;
-		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[4]        = $this->InputValueUserPhonePrimary; 
-		$arrayElementsMinValue[4]     = 0; 
-		$arrayElementsMaxValue[4]     = 9; 
-		$arrayElementsNullable[4]     = TRUE;
-		$arrayElementsText[4]         = &$this->ReturnUserPhonePrimaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
-		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
-		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
-		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondaryPrefix; 
-		$arrayElementsMinValue[5]     = 0; 
-		$arrayElementsMaxValue[5]     = 3; 
-		$arrayElementsNullable[5]     = TRUE;
-		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_SECONDARY
-		$arrayElements[6]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY;
-		$arrayElementsClass[6]        = &$this->ReturnUserPhoneSecondaryClass;
-		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[6]        = $this->InputValueUserPhoneSecondary; 
-		$arrayElementsMinValue[6]     = 0; 
-		$arrayElementsMaxValue[6]     = 9; 
-		$arrayElementsNullable[6]     = TRUE;
-		$arrayElementsText[6]         = &$this->ReturnUserPhoneSecondaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_DAY
-		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY;
-		$arrayElementsClass[7]        = &$this->ReturnBirthDateDayClass;
-		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_DAY;
-		$arrayElementsInput[7]        = $this->InputValueBirthDateDay; 
-		$arrayElementsMinValue[7]     = 0; 
-		$arrayElementsMaxValue[7]     = 0; 
-		$arrayElementsNullable[7]     = FALSE;
-		$arrayElementsText[7]         = &$this->ReturnBirthDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_MONTH
-		$arrayElements[8]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH;
-		$arrayElementsClass[8]        = &$this->ReturnBirthDateMonthClass;
-		$arrayElementsDefaultValue[8] = ""; 
-		$arrayElementsForm[8]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_MONTH;
-		$arrayElementsInput[8]        = $this->InputValueBirthDateMonth; 
-		$arrayElementsMinValue[8]     = 0; 
-		$arrayElementsMaxValue[8]     = 0; 
-		$arrayElementsNullable[8]     = FALSE;
-		$arrayElementsText[8]         = &$this->ReturnBirthDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_YEAR
-		$arrayElements[9]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR;
-		$arrayElementsClass[9]        = &$this->ReturnBirthDateYearClass;
-		$arrayElementsDefaultValue[9] = ""; 
-		$arrayElementsForm[9]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_YEAR;
-		$arrayElementsInput[9]        = $this->InputValueBirthDateYear; 
-		$arrayElementsMinValue[9]     = 0; 
-		$arrayElementsMaxValue[9]     = 0; 
-		$arrayElementsNullable[9]     = FALSE;
-		$arrayElementsText[9]         = &$this->ReturnBirthDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_GENDER
-		$arrayElements[10]             = ConfigInfraTools::FORM_FIELD_USER_GENDER;
-		$arrayElementsClass[10]        = &$this->ReturnGenderClass;
-		$arrayElementsDefaultValue[10] = ""; 
-		$arrayElementsForm[10]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_GENDER;
-		$arrayElementsInput[10]        = $this->InputValueGender; 
-		$arrayElementsMinValue[10]     = 0; 
-		$arrayElementsMaxValue[10]     = 0; 
-		$arrayElementsNullable[10]     = FALSE;
-		$arrayElementsText[10]         = &$this->ReturnGenderText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_GOOGLE_MAPS_COUNTRY
-		$arrayElements[11]             = ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY;
-		$arrayElementsClass[11]        = &$this->ReturnCountryClass;
-		$arrayElementsDefaultValue[11] = ""; 
-		$arrayElementsForm[11]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
-		$arrayElementsInput[11]        = $this->InputValueCountry; 
-		$arrayElementsMinValue[11]     = 0; 
-		$arrayElementsMaxValue[11]     = 45; 
-		$arrayElementsNullable[11]     = FALSE;
-		$arrayElementsText[11]         = &$this->ReturnCountryText;
-		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_GOOGLE_MAPS_REGION
-		$arrayElements[12]             = ConfigInfraTools::FORM_GOOGLE_MAPS_REGION;
-		$arrayElementsClass[12]        = &$this->ReturnRegionClass;
-		$arrayElementsDefaultValue[12] = ""; 
-		$arrayElementsForm[12]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
-		$arrayElementsInput[12]        = $this->InputValueRegion; 
-		$arrayElementsMinValue[12]     = 0; 
-		$arrayElementsMaxValue[12]     = 45; 
-		$arrayElementsNullable[12]     = TRUE;
-		$arrayElementsText[12]         = &$this->ReturnRegionText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_NEW_PASSWORD
-		$arrayElements[13]             = ConfigInfraTools::FORM_FIELD_NEW_PASSWORD;
-		$arrayElementsClass[13]        = &$this->ReturnPasswordClass;
-		$arrayElementsDefaultValue[13] = ""; 
-		$arrayElementsForm[13]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_PASSWORD;
-		$arrayElementsInput[13]        = $this->InputValueNewPassword; 
-		$arrayElementsMinValue[13]     = 8; 
-		$arrayElementsMaxValue[13]     = 18; 
-		$arrayElementsNullable[13]     = TRUE;
-		$arrayElementsText[13]         = &$this->ReturnPasswordText;
-		$arrayExtraField[13]           = &$this->InputValueRepeatPassword;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PASSWORD', 'FORM_INVALID_USER_PASSWORD_MATCH',
-				                    'FORM_INVALID_USER_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		if($this->ValidateCaptcha)
-		{
-			//VALIDA CAPTCHA
-			$this->InputValueCaptcha       = $_POST[ConfigInfraTools::FORM_CAPTCHA_REGISTER];
-			$this->Session->GetSessionValue(ConfigInfraTools::FORM_CAPTCHA_REGISTER, $captcha);
-			//FORM_CAPTCHA_REGISTER
-			$arrayElements[14]             = ConfigInfraTools::FORM_CAPTCHA_REGISTER;
-			$arrayElementsClass[14]        = &$this->ReturnCaptchaClass;
-			$arrayElementsDefaultValue[14] = ""; 
-			$arrayElementsForm[14]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COMPARE_STRING;
-			$arrayElementsInput[14]        = $this->InputValueCaptcha; 
-			$arrayElementsMinValue[14]     = 0; 
-			$arrayElementsMaxValue[14]     = 0; 
-			$arrayElementsNullable[14]     = TRUE;
-			$arrayElementsText[14]         = &$this->ReturnCaptchaText;
-			array_push($arrayConstants, 'FORM_INVALID_CAPTCHA', 'FILL_REQUIRED_FIELDS');
-			array_push($matrixConstants, $arrayConstants);
-			array_push($arrayOptions, $captcha);
-		}
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions, $arrayExtraField);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			//CHECA SE E-MAIL JÁ É CADASTRADO
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserCheckEmail($this->InputValueUserEmail, $this->InputValueHeaderDebug);
-			if($return != ConfigInfraTools::SUCCESS)
-			{
-				$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth
-							 . "-" . $this->InputValueBirthDateDay;
-				$hashCode  = hash("sha512", $this->InputValueUserName . $this->InputValueUserEmail . 
-								   $this->InputValueGender . $birthDate);
-				$this->InputValueUserName = ucwords($this->InputValueUserName);
-				if($this->ReturnUserUniqueIdText != "")
-					$this->InputValueUserUniqueId = NULL;
-				//CADASTRA USUARIO NO BANCO
-				$return = $FacedePersistenceInfraTools->UserInsert($birthDate,
-																   NULL,
-																   $this->InputValueCountry,
-																   $this->InputValueUserEmail, 
-																   $this->InputValueGender,
-																   $hashCode,
-																   $this->InputValueUserName,
-																   $this->InputValueNewPassword,
-																   $this->InputValueRegion,
-																   $SessionExpires,
-																   $TwoStepVerification,
-																   $UserActive,
-																   $UserConfirmed,
-																   $this->InputValueUserPhonePrimary, 
-																   $this->InputValueUserPhonePrimaryPrefix, 
-																   $this->InputValueUserPhoneSecondary, 
-																   $this->InputValueUserPhoneSecondaryPrefix,
-																   ConfigInfraTools::TYPE_USER_DEFAULT_ID,
-																   $this->InputValueUserUniqueId,
-																   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::SUCCESS)
-				{
-					if($SendEmail)
-					{
-						Page::GetCurrentDomain($domain);
-						$link = $domain . str_replace('Language/', '', $this->Language) . "/" . 
-								str_replace("_", "",ConfigInfraTools::PAGE_REGISTER_CONFIRMATION) . "?=" . $hashCode;
-						$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness
-							                                                                        ($this->InstanceLanguageText);
-						$return = FALSE;
-						$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailRegister($this->InputValueUserName,
-														                                     $this->InputValueUserEmail,
-														                                     $link, 
-																							 $this->InputValueHeaderDebug);
-					}
-					if($return == ConfigInfraTools::SUCCESS)
-					{
-						if($SendEmail)
-							$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_SUCCESS', 
-																			$this->Language);
-						else
-							$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_SUCCESS_NO_LINK', 
-																			$this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-					}
-					else
-					{
-						$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_EMAIL_ERROR', 
-																		$this->Language);
-						$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-						$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-						$FacedePersistenceInfraTools->UserDelete($this->InputValueUserEmail, $this->InputValueHeaderDebug);
-					}
-				}
-				else
-				{
-					$this->ReturnText  = $this->InstanceLanguageText->GetConstant('REGISTER_INSERT_ERROR', 
-																		$this->Language);
-					$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-					$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				}
-			}
-			else
-			{
-				$return = ConfigInfraTools::ERROR;
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('REGISTER_EMAIL_ALREADY_REGISTERED', 
-																		 $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			}
-		}
-		else
-		{
-			$return = ConfigInfraTools::ERROR;
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-		}
-		return $return;
-	}
-	
-	protected function UserUpdate($OnAdmin, $SelectedUser)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$this->InputValueBirthDateDay             = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY];
-		$this->InputValueBirthDateMonth           = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH];
-		$this->InputValueBirthDateYear            = $_POST[ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR];
-		$this->InputValueGender                   = $_POST[ConfigInfraTools::FORM_FIELD_GENDER];
-		$this->InputValueCountry                  = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY_HIDDEN];
-		$this->InputValueRegion                   = $_POST[ConfigInfraTools::FORM_GOOGLE_MAPS_REGION_HIDDEN];
-		$this->InputValueUserName                 = $_POST[ConfigInfraTools::ACCOUNT_UPDATE_NAME];
-		$this->InputValueUserPhonePrimary         = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY];
-		$this->InputValueUserPhonePrimaryPrefix   = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX];
-		$this->InputValueUserPhoneSecondary       = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY];
-		$this->InputValueUserPhoneSecondaryPrefix = $_POST[ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX];
-		$this->InputValueUserUniqueId             = $_POST[ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID];
-		if($OnAdmin)
-		{
-			if(isset($_POST[ConfigInfraTools::ACCOUNT_UPDATE_SESSION_EXPIRES]))
-				$this->InputValueSessionExpires = TRUE;
-			else $this->InputValueSessionExpires = FALSE;
-			if(isset($_POST[ConfigInfraTools::REGISTER_USER_ACTIVE]))
-				$this->InputValueUserActive = TRUE;
-			else $this->InputValueUserActive = FALSE;
-			if(isset($_POST[ConfigInfraTools::REGISTER_USER_CONFIRMED]))
-				$this->InputValueUserConfirmed = TRUE;
-			else $this->InputValueUserConfirmed = FALSE;
-		}
-		else
-		{
-			$this->InputValueSessionExpires = $SelectedUser->GetSessionExpires();
-			$this->InputValueUserActive = $SelectedUser->GetUserActive();
-			$this->InputValueUserConfirmed = $SelectedUser->GetUserConfirmed();
-		}
-		if(isset($_POST[ConfigInfraTools::REGISTER_TWO_STEP_VERIFICATION]))
-				$this->InputValueTwoStepVerification = TRUE;
-			else $this->InputValueTwoStepVerification = FALSE;
-		
-		$this->InputFocus = ConfigInfraTools::ACCOUNT_UPDATE_NAME;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_USER_NAME
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_USER_NAME;
-		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NAME;
-		$arrayElementsInput[0]        = $this->InputValueUserName; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnUserNameText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_NAME', 'FORM_INVALID_USER_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_UNIQUE_ID
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_USER_UNIQUE_ID;
-		$arrayElementsClass[1]        = &$this->ReturnUserUniqueIdClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_USER_UNIQUE_ID;
-		$arrayElementsInput[1]        = $this->InputValueUserUniqueId; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 25; 
-		$arrayElementsNullable[1]     = FALSE;
-		$arrayElementsText[1]         = &$this->ReturnUserUniqueIdText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_UNIQUE_ID', 'FORM_INVALID_USER_UNIQUE_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_PRIMARY_PREFIX
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY_PREFIX;
-		$arrayElementsClass[2]        = &$this->ReturnUserPhonePrimaryPrefixClass;
-		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[2]        = $this->InputValueUserPhonePrimaryPrefix; 
-		$arrayElementsMinValue[2]     = 0; 
-		$arrayElementsMaxValue[2]     = 3; 
-		$arrayElementsNullable[2]     = TRUE;
-		$arrayElementsText[2]         = &$this->ReturnUserPhonePrimaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY', 'FORM_INVALID_USER_PHONE_PREFIX_PRIMARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_PRIMARY
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_PRIMARY;
-		$arrayElementsClass[3]        = &$this->ReturnUserPhonePrimaryClass;
-		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[3]        = $this->InputValueUserPhonePrimary; 
-		$arrayElementsMinValue[3]     = 0; 
-		$arrayElementsMaxValue[3]     = 9; 
-		$arrayElementsNullable[3]     = TRUE;
-		$arrayElementsText[3]         = &$this->ReturnUserPhonePrimaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PRIMARY', 'FORM_INVALID_USER_PHONE_PRIMARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_SECONDARY_PREFIX
-		$arrayElements[4]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY_PREFIX;
-		$arrayElementsClass[4]        = &$this->ReturnUserPhoneSecondaryPrefixClass;
-		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[4]        = $this->InputValueUserPhoneSecondaryPrefix; 
-		$arrayElementsMinValue[4]     = 0; 
-		$arrayElementsMaxValue[4]     = 3; 
-		$arrayElementsNullable[4]     = TRUE;
-		$arrayElementsText[4]         = &$this->ReturnUserPhoneSecondaryPrefixText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY', 'FORM_INVALID_USER_PHONE_PREFIX_SECONDARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_PHONE_SECONDARY
-		$arrayElements[5]             = ConfigInfraTools::FORM_FIELD_USER_PHONE_SECONDARY;
-		$arrayElementsClass[5]        = &$this->ReturnUserPhoneSecondaryClass;
-		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[5]        = $this->InputValueUserPhoneSecondary; 
-		$arrayElementsMinValue[5]     = 0; 
-		$arrayElementsMaxValue[5]     = 9; 
-		$arrayElementsNullable[5]     = TRUE;
-		$arrayElementsText[5]         = &$this->ReturnUserPhoneSecondaryText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_PHONE_SECONDARY', 'FORM_INVALID_USER_PHONE_SECONDARY_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_DAY
-		$arrayElements[6]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_DAY;
-		$arrayElementsClass[6]        = &$this->ReturnBirthDateDayClass;
-		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_DAY;
-		$arrayElementsInput[6]        = $this->InputValueBirthDateDay; 
-		$arrayElementsMinValue[6]     = 0; 
-		$arrayElementsMaxValue[6]     = 0; 
-		$arrayElementsNullable[6]     = FALSE;
-		$arrayElementsText[6]         = &$this->ReturnBirthDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_DAY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_MONTH
-		$arrayElements[7]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_MONTH;
-		$arrayElementsClass[7]        = &$this->ReturnBirthDateMonthClass;
-		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_MONTH;
-		$arrayElementsInput[7]        = $this->InputValueBirthDateMonth; 
-		$arrayElementsMinValue[7]     = 0; 
-		$arrayElementsMaxValue[7]     = 0; 
-		$arrayElementsNullable[7]     = FALSE;
-		$arrayElementsText[7]         = &$this->ReturnBirthDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_BIRTH_DATE_YEAR
-		$arrayElements[8]             = ConfigInfraTools::FORM_FIELD_BIRTH_DATE_YEAR;
-		$arrayElementsClass[8]        = &$this->ReturnBirthDateYearClass;
-		$arrayElementsDefaultValue[8] = ""; 
-		$arrayElementsForm[8]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_YEAR;
-		$arrayElementsInput[8]        = $this->InputValueBirthDateYear; 
-		$arrayElementsMinValue[8]     = 0; 
-		$arrayElementsMaxValue[8]     = 0; 
-		$arrayElementsNullable[8]     = FALSE;
-		$arrayElementsText[8]         = &$this->ReturnBirthDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_BIRTH_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_USER_GENDER
-		$arrayElements[9]             = ConfigInfraTools::FORM_FIELD_USER_GENDER;
-		$arrayElementsClass[9]        = &$this->ReturnGenderClass;
-		$arrayElementsDefaultValue[9] = ""; 
-		$arrayElementsForm[9]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_GENDER;
-		$arrayElementsInput[9]        = $this->InputValueGender; 
-		$arrayElementsMinValue[9]     = 0; 
-		$arrayElementsMaxValue[9]     = 0; 
-		$arrayElementsNullable[9]     = FALSE;
-		$arrayElementsText[9]         = &$this->ReturnGenderText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_GENDER', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-							 
-		//FORM_GOOGLE_MAPS_COUNTRY
-		$arrayElements[10]             = ConfigInfraTools::FORM_GOOGLE_MAPS_COUNTRY;
-		$arrayElementsClass[10]        = &$this->ReturnCountryClass;
-		$arrayElementsDefaultValue[10] = ""; 
-		$arrayElementsForm[10]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_COUNTRY_REGION_CODE;
-		$arrayElementsInput[10]        = $this->InputValueCountry; 
-		$arrayElementsMinValue[10]     = 0; 
-		$arrayElementsMaxValue[10]     = 45; 
-		$arrayElementsNullable[10]     = FALSE;
-		$arrayElementsText[10]         = &$this->ReturnCountryText;
-		array_push($arrayConstants, 'FORM_INVALID_COUNTRY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_GOOGLE_MAPS_REGION
-		$arrayElements[11]             = ConfigInfraTools::FORM_GOOGLE_MAPS_REGION;
-		$arrayElementsClass[11]        = &$this->ReturnRegionClass;
-		$arrayElementsDefaultValue[11] = ""; 
-		$arrayElementsForm[11]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_NOT_NUMBER;
-		$arrayElementsInput[11]        = $this->InputValueRegion; 
-		$arrayElementsMinValue[11]     = 0; 
-		$arrayElementsMaxValue[11]     = 45; 
-		$arrayElementsNullable[11]     = TRUE;
-		$arrayElementsText[11]         = &$this->ReturnRegionText;
-		array_push($arrayConstants, 'FORM_INVALID_USER_REGION', 'FORM_INVALID_USER_REGION_SIZE', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions, $arrayExtraField);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth . "-" 
-			 . $this->InputValueBirthDateDay;
-			$this->InputValueUserName = ucwords($this->InputValueUserName);
-			$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-			$return = $FacedePersistenceInfraTools->UserUpdateByEmail($birthDate,
-																	  $this->InputValueCountry,
-																	  $SelectedUser->GetEmail(),
-																	  $this->InputValueGender,
-																	  $this->InputValueUserName,
-																	  $this->InputValueRegion,
-																	  $this->InputValueSessionExpires,
-																	  $this->InputValueTwoStepVerification,
-																	  $this->InputValueUserActive,
-																	  $this->InputValueUserConfirmed,
-																	  $this->InputValueUserPhonePrimary,
-																	  $this->InputValueUserPhonePrimaryPrefix,
-																	  $this->InputValueUserPhoneSecondary,
-																	  $this->InputValueUserPhoneSecondaryPrefix,
-																	  $this->InputValueUserUniqueId,
-																	  $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$SelectedUser->UpdateUser(NULL, NULL, NULL, $birthDate, NULL, $this->InputValueCountry, NULL, NULL,
-										  $this->InputValueGender, NULL, NULL, $this->InputValueUserName, $this->InputValueRegion, 
-										  NULL, $this->InputValueSessionExpires, $this->InputValueTwoStepVerification, 
-										  $this->InputValueUserActive, 
-										  $this->InputValueUserConfirmed, $this->InputValueUserPhonePrimary,
-										  $this->InputValueUserPhonePrimaryPrefix, $this->InputValueUserPhoneSecondary,
-										  $this->InputValueUserPhoneSecondaryPrefix, NULL, $this->InputValueUserUniqueId);
-				$this->Page          = ConfigInfraTools::PAGE_ACCOUNT;
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);															  
-			}
-			elseif($return == ConfigInfraTools::MYSQL_ERROR_UNIQUE_KEY_DUPLICATE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_USER_UNIQUE_ID', 
-																				$this->Language);
-			}
-			else
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('ACCOUNT_UPDATE_ERROR', 
-																					  $this->Language);
-			}
-			return $return;
-		}
-		else
-		{
-			$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-									   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			$this->SubmitEnabled = 'disabled="disabled"';
-			return ConfigInfraTools::ERROR;
-		}
-	}
-	
-	protected function UserUpdateCorporationInformation($SelectedUser)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		$registrationDate = NULL;
-		if(isset($_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY]))
-			$this->InputValueRegistrationDateDay   = $_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY];
-		else $this->InputValueRegistrationDateDay = NULL;
-		if(isset($_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH]))
-			$this->InputValueRegistrationDateMonth = $_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH];
-		else $this->InputValueRegistrationDateMonth = NULL;
-		if(isset($_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR]))
-			$this->InputValueRegistrationDateYear  = $_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR];
-		else $this->InputValueRegistrationDateYear = NULL;
-		$this->InputValueRegistrationId = $_POST[ConfigInfraTools::FORM_FIELD_REGISTRATION_ID];
-		$this->InputValueDepartmentName = $_POST[ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_DEPARTMENT_SELECT];
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FORM_FIELD_REGISTRATION_DATE_SELECT_DAY
-		$arrayElements[0]             = ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_DAY;
-		$arrayElementsClass[0]        = &$this->ReturnRegistrationDateDayClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_DAY;
-		$arrayElementsInput[0]        = $this->InputValueRegistrationDateDay; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 0; 
-		$arrayElementsNullable[0]     = TRUE;
-		$arrayElementsText[0]         = &$this->ReturnRegistrationDateDayText;
-		array_push($arrayConstants, 'FORM_INVALID_DATE_DAY', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-
-		//FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH
-		$arrayElements[1]             = ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_MONTH;
-		$arrayElementsClass[1]        = &$this->ReturnRegistrationDateMonthClass;
-		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_MONTH;
-		$arrayElementsInput[1]        = $this->InputValueRegistrationDateMonth; 
-		$arrayElementsMinValue[1]     = 0; 
-		$arrayElementsMaxValue[1]     = 0; 
-		$arrayElementsNullable[1]     = FALSE;
-		$arrayElementsText[1]         = &$this->ReturnRegistrationDateMonthText;
-		array_push($arrayConstants, 'FORM_INVALID_DATE_MONTH', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR
-		$arrayElements[2]             = ConfigInfraTools::FORM_FIELD_REGISTRATION_DATE_SELECT_YEAR;
-		$arrayElementsClass[2]        = &$this->ReturnRegistrationDateYearClass;
-		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DATE_YEAR;
-		$arrayElementsInput[2]        = $this->InputValueRegistrationDateYear; 
-		$arrayElementsMinValue[2]     = 0; 
-		$arrayElementsMaxValue[2]     = 0; 
-		$arrayElementsNullable[2]     = FALSE;
-		$arrayElementsText[2]         = &$this->ReturnRegistrationDateYearText;
-		array_push($arrayConstants, 'FORM_INVALID_DATE_YEAR', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_FIELD_REGISTRATION_ID
-		$arrayElements[3]             = ConfigInfraTools::FORM_FIELD_REGISTRATION_ID;
-		$arrayElementsClass[3]        = &$this->ReturnRegistrationIdClass;
-		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_REGISTRATION_ID;
-		$arrayElementsInput[3]        = $this->InputValueRegistrationId; 
-		$arrayElementsMinValue[3]     = 0; 
-		$arrayElementsMaxValue[3]     = 12; 
-		$arrayElementsNullable[3]     = FALSE;
-		$arrayElementsText[3]         = &$this->ReturnRegistrationIdText;
-		array_push($arrayConstants, 'FORM_INVALID_REGISTRATION_ID', 'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		//FORM_USER_CHANGE_ASSOC_USER_CORPORATION_DEPARTMENT_SELECT
-		$arrayElements[4]             = ConfigInfraTools::FORM_USER_CHANGE_ASSOC_USER_CORPORATION_DEPARTMENT_SELECT;
-		$arrayElementsClass[4]        = &$this->ReturnDepartmentNameText;
-		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FORM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[4]        = $this->InputValueDepartmentName; 
-		$arrayElementsMinValue[4]     = 0; 
-		$arrayElementsMaxValue[4]     = 80; 
-		$arrayElementsNullable[4]     = FALSE;
-		$arrayElementsText[4]         = &$this->ReturnDepartmentNameClass;
-		array_push($arrayConstants, 'FORM_INVALID_DEPARTMENT_NAME', 'FORM_INVALID_DEPARTMENT_NAME_SIZE',  'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $arrayOptions, $arrayExtraField);
-		if($return == ConfigInfraTools::SUCCESS)
-		{
-			if($this->InputValueRegistrationDateYear != "" && $this->InputValueRegistrationDateMonth != "" 
-			   && $this->InputValueRegistrationDateDay != "")
-			{
-				$registrationDate = $this->InputValueRegistrationDateYear . "-" . $this->InputValueRegistrationDateMonth . "-" 
-				         	        . $this->InputValueRegistrationDateDay;
-			}
-			//ATUALIZA DATA DE INGRESSO E MATRÍCULA
-			if($registrationDate != NULL && $this->InputValueRegistrationId != NULL)
-			{
-				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationByEmailAndCorporation
-															 ($SelectedUser->GetCorporationName(),
-															  $registrationDate,
-															  $this->InputValueRegistrationId,
-															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
-			}
-			//ATUALIZA SOMENTE DATA DE INGRESSO
-			elseif($registrationDate != NULL && $this->InputValueRegistrationId == NULL)
-			{
-				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationRegistrationDateByEmailAndCorporation
-															 ($SelectedUser->GetCorporationName(),
-															  $registrationDate,
-															  $this->InputValueRegistrationId,
-															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
-			}
-			//ATUALIZA SOMENTE MATRICULA
-			elseif($registrationDate == NULL && $this->InputValueRegistrationId != NULL)
-			{
-				$return = $FacedePersistenceInfraTools->UserUpdateAssocUserCorporationRegistrationIdByEmailAndCorporation
-															 ($SelectedUser->GetCorporationName(),
-															  $registrationDate,
-															  $this->InputValueRegistrationId,
-															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
-			}
-			elseif($this->InputValueDepartmentName != NULL) 
-				$return = ConfigInfraTools::SUCCESS;
-			else $return = ConfigInfraTools::ERROR;
-			//ATUALIZA DEPARTAMENTO	
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				if($this->InputValueDepartmentName != NULL && $this->InputValueDepartmentName != $SelectedUser->GetDepartmentName())
-				{
-					if($this->InputValueDepartmentName == ConfigInfraTools::FORM_SELECT_NONE)
-						$this->InputValueDepartmentName = NULL;	
-					$return = $FacedePersistenceInfraTools->UserUpdateDepartmentByEmailAndCorporation
-				                                             ($SelectedUser->GetCorporationName(),
-															  $this->InputValueDepartmentName,
-															  $SelectedUser->GetEmail(),
-															  $this->InputValueHeaderDebug);
-				}
-			}
-			
-			if($return == ConfigInfraTools::SUCCESS)
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_SUCCESS', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_SUCCESS;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_SUCCESS . "' alt='ReturnImage'/>";
-				return $return;
-			}
-			elseif($return == ConfigInfraTools::MYSQL_UPDATE_SAME_VALUE)
-			{
-				$this->ReturnClass   = ConfigInfraTools::FORM_BACKGROUND_WARNING;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_WARNING . "' alt='ReturnImage'/>";
-				$this->ReturnText    = $this->InstanceLanguageText->GetConstant('UPDATE_WARNING_SAME_VALUE', $this->Language);
-			}
-			else
-			{
-				$this->ReturnText = $this->InstanceLanguageText->GetConstant('UPDATE_ERROR_ASSOC_USER_CORPORATION', $this->Language);
-				$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-				$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-								   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-				return ConfigInfraTools::ERROR;
-			}
-		}
-		else
-		{
-			$this->ReturnClass = ConfigInfraTools::FORM_BACKGROUND_ERROR;
-			$this->ReturnImage   = "<img src='" . $this->Config->DefaultServerImage . 
-							   ConfigInfraTools::FORM_IMAGE_ERROR . "' alt='ReturnImage'/>";
-			return ConfigInfraTools::FORM_FIELD_ERROR;
-		}
-	}
-	
-	public function LoadPageInfraToolsDependenciesDebug()
-	{
-		if(isset($this->User))
-		{
-			if($this->User->CheckSuperUser())
-			{
-				if(!isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG]) && !isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG_HIDDEN]))
-					$this->Session->GetSessionValue(ConfigInfraTools::SESS_DEBUG, $this->InputValueHeaderDebug);
-				if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_DEBUG]))
-				{
-					$this->InputValueHeaderDebug = ConfigInfraTools::CHECKBOX_CHECKED;
-					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				$this->Session->SetSessionValue(ConfigInfraTools::SESS_DEBUG, $this->InputValueHeaderDebug);
-				if($this->InputValueHeaderDebug == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->ReturnHeaderDebugClass = "SwitchToggleSlider SwitchToggleSliderChange";
-					echo "<b>GET</b>: "; print_r($_GET); echo "<br>";
-					echo "<b>POST</b>: "; print_r($_POST); echo "<br>";
-					echo "<div class='DivClearFloat'></div>";
-				}
-			}
-		}
-	}
-	
-	public function LoadPageInfraToolsDependenciesDevice()
-	{
-		$this->InstanceMobileDetectInfraTools = $this->Factory->CreateMobileDetect();
-		if($this->InstanceMobileDetectInfraTools->isTablet()) 
-			$this->Device = Page::DEVICE_TABLET;
-		elseif ($this->InstanceMobileDetectInfraTools->isMobile())			
-			$this->Device = Page::DEVICE_MOBILE;
-		else $this->Device = Page::DEVICE_DESKTOP;
-		
-		if(!isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]) && !isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN]))
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
-		if($this->Device == Page::DEVICE_DESKTOP)
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
-			{
-				$this->Device = Page::DEVICE_MOBILE;
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_CHECKED;
-				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				
-			}
-			elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_UNCHECKED;
-			else
-			{
-				if($this->InputValueHeaderLayout == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->Device = Page::DEVICE_MOBILE;
-					$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				else $this->Device = Page::DEVICE_DESKTOP;
-			}
-		}
-		elseif($this->Device == Page::DEVICE_MOBILE)
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
-			{
-				$this->Device = Page::DEVICE_DESKTOP;
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_CHECKED;
-				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-			}
-			elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_UNCHECKED;
-			else
-			{
-				if($this->InputValueHeaderLayout == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->Device = Page::DEVICE_DESKTOP;
-					$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				else $this->Device = Page::DEVICE_MOBILE;
-			}
-		}
-		else
-		{
-			if(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT]))
-			{
-				$this->Device = Page::DEVICE_DESKTOP;
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_CHECKED;
-				$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-			}
-			elseif(isset($_POST[ConfigInfraTools::FORM_FIELD_HEADER_LAYOUT_HIDDEN])) 
-				$this->InputValueHeaderLayout = ConfigInfraTools::CHECKBOX_UNCHECKED;
-			else
-			{
-				if($this->InputValueHeaderLayout == ConfigInfraTools::CHECKBOX_CHECKED)
-				{
-					$this->Device = Page::DEVICE_DESKTOP;
-					$this->ReturnHeaderLayoutClass = "SwitchToggleSlider SwitchToggleSliderChange";
-				}
-				else $this->Device = Page::DEVICE_TABLET;
-			}
-		}
-		$this->Session->SetSessionValue(ConfigInfraTools::SESS_DEVICE_LAYOUT, $this->InputValueHeaderLayout);
+		$pageConstant = ConfigInfraTools::GetPageConstant($this->Page);
+		if($pageConstant)
+			return $pageConstant;
+		else return $this->Page;
 	}
 }
 ?>

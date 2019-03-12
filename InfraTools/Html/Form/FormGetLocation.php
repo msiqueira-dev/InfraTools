@@ -7,44 +7,40 @@
         	<?php echo $this->InstanceLanguageText->GetText('GET_LOCATION_TEXT_TIP'); ?>
         </label>
     </div>
-    <form name="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_LOCATION; ?>" 
-          id="<?php echo ConfigInfraTools::FORM_FUNCTION_GET_LOCATION; ?>" 
-          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::GET_LOCATION . '#tabs12';?>" 
+    <form name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_LOCATION; ?>" 
+          id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_LOCATION; ?>" 
+          action="<?php echo str_replace("_", "", $this->GetCurrentPage()) . '?=' .  ConfigInfraTools::PAGE_GET_LOCATION . '#tabs12';?>" 
           method="post" >
-    	<div class="DivHidden">
-			<input type="hidden" name="<?php echo ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN; ?>" 
-            	                 id="<?php echo ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN; ?>" />
-        </div>
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
 				<label><?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?></label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT; ?>" 
-                               id="<?php echo ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT; ?>"
-                               onblur="ValidateIpAddress(null, '<?php echo ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT; ?>',
+			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION; ?>" 
+                               id="<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION; ?>"
+                               onblur="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_LOCATION; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_LOCATION_SB; ?>',
                                                            '', true);"
-                               onkeyup="ValidateIpAddress(null, '<?php echo ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT; ?>',
+                               onkeyup="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION; ?>',
                                                            'DivContentBodySubmit',
-                                                           '<?php echo ConfigInfraTools::FORM_SUBMIT_GET_LOCATION; ?>',
+                                                           '<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_LOCATION_SB; ?>',
                                                            '', false);"
-       			               value="<?php if(isset($GLOBALS[ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT]))
-							   			echo $GLOBALS[ConfigInfraTools::FUNCTION_GET_LOCATION_INPUT]; 
+       			               value="<?php if(isset($GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION]))
+							   			echo $GLOBALS[ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION]; 
 									  ?>"
                                title="<?php echo $this->InstanceLanguageText->GetText('TEXT_IP_ADDRESS'); ?>"
                                maxlength="15" />
-			<input type="submit" name="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_LOCATION; ?>"
-                                 id="<?php echo ConfigInfraTools::FORM_SUBMIT_GET_LOCATION; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_LOCATION_SB; ?>"
+                                 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_LOCATION_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_GET'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetLocationMessage))
-	                     echo $this->VisibilityFunctionGetLocationMessage; ?>">
+	                     echo $this->VisibilityFunctionGetLocationMessage; ?> DivReturnForm">
         <div class="">
             <label>
-                <?php if($this->ExecutedFunction == ConfigInfraTools::FUNCTION_GET_LOCATION_HIDDEN) 
+                <?php if($this->ExecutedFunction == ConfigInfraTools::FIELD_DIAGNOSTIC_TOOLS_GET_LOCATION) 
                     echo $this->ExecutedFunctionReturnMessage; 
                 ?>
             </label>            

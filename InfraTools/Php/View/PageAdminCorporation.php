@@ -1,21 +1,15 @@
 <?php
 /************************************************************************
 Class: PageAdminCorporation.php
-Creation: 30/09/2016
+Creation: 2016/30/09
 Creator: Marcus Siqueira
 Dependencies:
-			InfraTools - Php/Controller/ConfigInfraTools.php
-			Base       - Php/Controller/Session.php
-			Base       - Php/Model/FormValidator.php
-			InfraTools - Php/Controller/FacedePersistenceInfraTools.php
+			InfraTools - Php/Controller/InfraToolsFactory.php
 			InfraTools - Php/View/AdminInfraTools.php
 Description: 
-			Classe que trata da administração dos tipos de usuários.
+			Class for corporation management.
 Functions: 
-			protected function LoadHtml();
-			public    function GetCurrentPage();
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -32,410 +26,150 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminCorporation extends PageAdmin
 {
-	protected $ArrayInstanceInfraToolsCorporationUsers = NULL;
-	protected $InstanceInfraToolsCorporation           = NULL;
+	protected $ArrayInstanceInfraToolsUser = NULL;
+	protected $InstanceCorporation         = NULL;
+	protected $InstanceTypeUser            = NULL;
 
+	/* __create */
+	public static function __create($Config, $Language, $Page)
+	{
+		$class = __CLASS__;
+		return new $class($Config, $Language, $Page);
+	}
+	
 	/* Constructor */
-	public function __construct($Language) 
+	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Page = $this->GetCurrentPage();
-		parent::__construct($Language);
-	}
-
-	/* Clone */
-	public function __clone()
-	{
-		exit(get_class($this) . ": Error! Clone Not Allowed!");
-	}
-
-	public function GetCurrentPage()
-	{
-		return ConfigInfraTools::GetPageConstant(get_class($this));
-	}
-
-	protected function LoadHtml()
-	{
-		$return = NULL;
-		echo ConfigInfraTools::HTML_TAG_DOCTYPE;
-		echo ConfigInfraTools::HTML_TAG_START;
-		$return = $this->IncludeHeadAll(basename(__FILE__, '.php'));
-		if ($return == ConfigInfraTools::SUCCESS)
-		{
-			echo ConfigInfraTools::HTML_TAG_BODY_START;
-			echo "<div class='Wrapper'>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_HEADER . ".php");
-			include_once(REL_PATH . ConfigInfraTools::PATH_BODY_PAGE . basename(__FILE__, '.php'). ".php");
-			echo "<div class='DivPush'></div>";
-			echo "</div>";
-			include_once(REL_PATH . ConfigInfraTools::PATH_FOOTER);
-			echo ConfigInfraTools::HTML_TAG_BODY_END;
-			echo ConfigInfraTools::HTML_TAG_END;
-		}
-		else return ConfigInfraTools::ERROR;
+		parent::__construct($Config, $Language, $Page);
 	}
 
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
-		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
-		$FacedePersistenceInfraTools = $this->Factory->CreateInfraToolsFacedePersistence();
-		//FORM SUBMIT BACK
-		if($this->CheckInputImage(ConfigInfraTools::FORM_SUBMIT_BACK))
+		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SEL;
+		$this->AdminGoBack($PageFormBack);
+		
+		//FM_CORPORATION_LST
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_LST) == ConfigInfraTools::RET_OK)
 		{
-			$this->PageFormLoad();
-			$PageFormBack = TRUE;
+			if($this->ExecuteFunction($_POST, 'InfraToolsCorporationSelect', 
+									  array(&$this->ArrayInstanceInfraToolsCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_LST;
 		}
-		//CORPORATION LIST
-		if($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_LIST))
+		//FM_CORPORATION_REGISTER
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_REGISTER) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER;
+		//FM_CORPORATION_REGISTER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SEL;
+		//FM_CORPORATION_REGISTER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_REGISTER_SB) == ConfigInfraTools::RET_OK)
 		{
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_CORPORATION);
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_LIST;
-			$this->InputLimitOne = 0;
-			$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->CorporationInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceInfraToolsCorporation,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
+			if($this->ExecuteFunction($_POST, 'CorporationInsert', 
+									  array(@$_POST[ConfigInfraTools::FIELD_CORPORATION_ACTIVE],
+				                            $_POST[ConfigInfraTools::FIELD_CORPORATION_NAME]),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SEL;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER;
 		}
-		//CORPORATION LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_LIST_BACK))
+		//FM_CORPORATION_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-			if($this->InputLimitOne < 0)
-				$this->InputLimitOne = 0;
-			if($this->InputLimitTwo <= 0)
-				$this->InputLimitTwo = 25;
-			$FacedePersistenceInfraTools->CorporationInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceInfraToolsCorporation,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
+			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+											&$this->InstanceCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
-		//CORPORATION LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_LIST_FORWARD))
-		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_LIST;
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] + 25;
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] + 25;
-			$FacedePersistenceInfraTools->CorporationInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceInfraToolsCorporation,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
-			if($this->InputLimitTwo > $rowCount)
+		//FM_CORPORATION_VIEW_DEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
+		{				
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation)
+			                                   == ConfigInfraTools::RET_OK)
 			{
-				if(!is_numeric($rowCount))
-				{
-					$this->InputLimitOne = $this->InputLimitOne - 25;
-					$this->InputLimitTwo = $this->InputLimitTwo - 25;
-				}
-				else
-				{
-					$this->InputLimitOne = $rowCount - 25;
-					$this->InputLimitTwo = $rowCount;
-				}
-				$FacedePersistenceInfraTools->CorporationInfraToolsSelect($this->InputLimitOne, $this->InputLimitTwo, 
-																	$this->ArrayInstanceInfraToolsCorporation,
-																	$rowCount,
-																    $this->InputValueHeaderDebug);
+				if($this->ExecuteFunction($_POST, 'CorporationDelete', 
+									      array($this->InstanceCorporation->GetCorporationName()),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SEL;
+				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
+												  $this->InstanceCorporation) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+			} 
+		}
+		//FM_CORPORATION_VIEW_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
+										  $this->InstanceCorporation) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDT;
+		}
+		//FM_CORPORATION_UPDT_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
+										  $this->InstanceCorporation) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+		}
+		//FM_CORPORATION_UPDT_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_UPDT_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation) 
+			                                   == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'CorporationUpdateByName', 
+										  array(@$_POST[ConfigInfraTools::FIELD_CORPORATION_ACTIVE],
+					                            $_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+										        &$this->InstanceCorporation),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDT;
 			}
 		}
-		//CORPORATION LIST SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_LIST_SELECT]))
+		//FM_CORPORATION_VIEW_LST_USERS_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB) == ConfigInfraTools::RET_OK)
 		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_CORPORATION_LIST_SELECT],
-											  $this->InstanceInfraToolsCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation) 
+			                                   == ConfigInfraTools::RET_OK)
 			{
-				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION REGISTER
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_REGISTER))
-		{
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_CORPORATION);
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER;
-		}
-		//CORPORATION REGISTER CANCEL
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_REGISTER_CANCEL]))
-		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION REGISTER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_REGISTER_SUBMIT]))
-		{
-			$this->InputValueCorporationName = $_POST[Config::FORM_FIELD_CORPORATION_NAME];
-			if(isset($_POST[Config::FORM_FIELD_CORPORATION_ACITVE]))
-				$this->InputValueCorporationActive = TRUE;
-			else $this->InputValueCorporationActive = FALSE;
-			if($this->CorporationInsert($this->InputValueCorporationActive,
-									    $this->InputValueCorporationName,
-									    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-			else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_REGISTER;
-		}
-		//CORPORATION SELECT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_SELECT))
-		{
-			$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_CORPORATION);
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION SELECT SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_SELECT_SUBMIT]))
-		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME],
-											  $this->InstanceInfraToolsCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW DELETE SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_DELETE_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-														$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationDelete($this->InstanceInfraToolsCorporation->GetCorporationName(),
-											$this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				{
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-					$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_CORPORATION);
-				} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW UPDATE
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_UPDATE_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-											   $this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE;
-				else 
-				{
-					if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-													   $this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					{
-						if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-							$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					    else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-					} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				}
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW UPDATE CANCEL
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_UPDATE_CANCEL]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-											   $this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW UPDATE SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_UPDATE_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-														$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputValueCorporationName = $_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_NAME];
-				if(isset($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE]))
-					$this->InputValueCorporationActive = TRUE;
-				else $this->InputValueCorporationActive = FALSE;
-				if($this->CorporationUpdate($this->InputValueCorporationActive,
-										    $this->InputValueCorporationName,
-											$this->InstanceInfraToolsCorporation,
-										    $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-				{
-					if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE;
-				} 
-				else
-				{
-					if(isset($_POST[ConfigInfraTools::FORM_FIELD_CORPORATION_ACITVE]))
-						$this->InputValueCorporationActive = "checked";
-					else $this->InputValueCorporationActive = "";
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDATE;
-				}
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW USERS
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_SELECT_USERS_SUBMIT]))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-														$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputLimitOne = 0;
-				$this->InputLimitTwo = 25;
-				if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceInfraToolsCorporation,
-												 $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-				else
-				{
-					if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				}
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW USERS LIST BACK SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_BACK))
-		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-														$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE] - 25;
-				$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO] - 25;
-				if($this->InputLimitOne < 0)
-					$this->InputLimitOne = 0;
-				if($this->InputLimitTwo <= 0)
-					$this->InputLimitTwo = 25;
-				if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceInfraToolsCorporation,
-												 $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-				else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-			}
-			else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW USERS LIST FORWARD SUBMIT
-		elseif($this->CheckInputImage(ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_LIST_FORWARD))
-		{
-			$this->InputLimitOne = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_ONE];
-			$this->InputLimitTwo = $_POST[ConfigInfraTools::FORM_LIST_INPUT_LIMIT_TWO];
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-														$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, $this->InstanceInfraToolsCorporation,
-												 $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												 $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-				else 
-				{
-					if($this->InputLimitTwo > $rowCount)
-					{
-						if(!is_numeric($rowCount))
-						{
-							$this->InputLimitOne = $this->InputLimitOne - 25;
-							$this->InputLimitTwo = $this->InputLimitTwo - 25;
-						}
-						else
-						{
-							$this->InputLimitOne = $rowCount - 25;
-							$this->InputLimitTwo = $rowCount;
-						}
-						if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, 
-														 $this->InstanceInfraToolsCorporation,
-												         $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												         $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-							$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-						else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-				}
-			} else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-		}
-		//CORPORATION VIEW USERS SELECT CORPORATION SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION]))
-		{
-			if($this->CorporationSelectByName($_POST[ConfigInfraTools::FORM_CORPORATION_VIEW_USERS_SELECT_CORPORATION],
-											  $this->InstanceInfraToolsCorporation,
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-			{
-				if($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-			}
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW)
-			{
-				if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-											 $this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-				{
-					$this->InputLimitOne = 0;
-					$this->InputLimitTwo = 25;
-					if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, 
-													 $this->InstanceInfraToolsCorporation,
-												     $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												     $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-					elseif($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				}
+				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByCorporationName', 
+										  array($this->InstanceCorporation->GetCorporationName(), 
+										        &$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
 			}
 		}
-		//CORPORATION VIEW USERS SELECT TYPE USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT]))
+		//FM_DEPARTMENT_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			if($this->TypeUserSelectByDescription($_POST[ConfigInfraTools::FORM_TYPE_USER_LIST_SELECT]) 
-			          == ConfigInfraTools::SUCCESS)
-			{
-				if($this->TypeUserLoadData() == ConfigInfraTools::SUCCESS)
-					$this->Page = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
-			}
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW)
-			{
-				if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-															$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-				{
-					$this->InputLimitOne = 0;
-					$this->InputLimitTwo = 25;
-					if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, 
-													 $this->InstanceInfraToolsCorporation,
-												     $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												     $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-					elseif($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				}
-			}
+			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
+									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
+											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
+										    &$this->InstanceInfraToolsDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//CORPORATION VIEW USERS SELECT USER SUBMIT
-		elseif(isset($_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT]))
+		//FM_TYPE_USER_SEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			$this->InputValueUserEmail = $_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT];
-			if($this->UserInfraToolsSelectByEmail($_POST[ConfigInfraTools::FORM_USER_LIST_SELECT_SUBMIT]) 
-			                                      == ConfigInfraTools::SUCCESS)
-			{
-				$this->UserLoadData();
-				$this->Page = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
-			}
-			if($this->Page != ConfigInfraTools::PAGE_ADMIN_USER_VIEW)
-			{
-				if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, 
-															$this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-				{
-					$this->InputLimitOne = 0;
-					$this->InputLimitTwo = 25;
-					if($this->CorporationSelectUsers($this->InputLimitOne, $this->InputLimitTwo, 
-													 $this->InstanceInfraToolsCorporation,
-												     $this->ArrayInstanceInfraToolsCorporationUsers, $rowCount,
-												     $this->InputValueHeaderDebug) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
-					elseif($this->CorporationLoadData($this->InstanceInfraToolsCorporation) == ConfigInfraTools::SUCCESS)
-						$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
-					else $this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-				}
-			}
+			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
+									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
+									        &$this->InstanceTypeUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}
-		else 
+		//FM_USER_SEL_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			$this->Page = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SELECT;
-			$_POST[ConfigInfraTools::FORM_CORPORATION_SELECT . "_x"] = "1";
-			$_POST[ConfigInfraTools::FORM_CORPORATION_SELECT . "_y"] = "1";
-			$_POST[ConfigInfraTools::FORM_CORPORATION_SELECT] = ConfigInfraTools::FORM_CORPORATION_SELECT;
+			if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByUserEmail', 
+									  array($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
+									        &$this->InstanceUser),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		if(!$PageFormBack != FALSE)
-			$this->PageFormSave();
-		$this->LoadHtml();
+			$this->PageStackSessionSave();
+		$this->LoadHtml(FALSE);
 	}
 }
 ?>

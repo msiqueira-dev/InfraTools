@@ -1,4 +1,21 @@
 <?php
+/************************************************************************
+Class: SessionHandlerCustom.php
+Creation: 2013/11/06
+Creator: Marcus Siqueira
+Dependencies:
+			Base       - Php/Controller/Factory.php
+			Base       - Php/Controller/Config.php
+Description: 
+			Class with Singleton pattern for SessionHandlerCustom
+Functions: 
+			public function destroy($id);
+			public function gc($maxlifetime);
+			public function open($savePath, $sessionName);
+			public function read($id);
+			public function write($id, $data);
+**************************************************************************/
+
 class SessionHandlerCustom implements SessionHandlerInterface
 {	
 	/* Instances */
