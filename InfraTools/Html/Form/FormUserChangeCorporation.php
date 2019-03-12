@@ -32,10 +32,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
         </div>
     </div>
-    <!-- BIRTH_DATE -->
+    <!-- FIELD_USER_BIRTH_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateDay . " /"; ?></label>

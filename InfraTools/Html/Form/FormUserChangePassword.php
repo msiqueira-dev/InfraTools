@@ -32,10 +32,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
         </div>
     </div>
-    <!-- BIRTH_DATE -->
+    <!-- FIELD_USER_BIRTH_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateDay . " /"; ?></label>
@@ -113,12 +113,12 @@
     <!-- NEW PASSWORD -->
     <div class="DivContentBodyContainer">
         <div id="DivAccountChangePasswordNewPassword" class="DivContentBodyContainerLabelBig">
-            <label> <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD'); ?> </label>
+            <label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?> </label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
                 <label>
-                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TIP'); ?>
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?>
                 </label>
             </div>
         </div>
@@ -151,18 +151,18 @@
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
-                           title="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TITLE'); ?>" 
+                           title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TITLE'); ?>" 
                            value="" maxlength="18" />
     </div>
     <!-- REPEAT PASSWORD -->
     <div class="DivContentBodyContainer">
         <div id="DivAccountChangePasswordRepeatPassword" class="DivContentBodyContainerLabelBig">
-            <label> <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD'); ?> </label>
+            <label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_REPEAT'); ?> </label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
                 <label>
-                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD_TIP'); ?>
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?>
                 </label>
             </div>
         </div>
@@ -195,7 +195,7 @@
                                                'DivContentBodySubmitBigger',
                                                '<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>',
                                                '');"
-                           title="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD_TITLE'); ?>" 
+                           title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TITLE'); ?>" 
                            value="" maxlength="18" />
     </div>
     <!-- SUBMIT -->
@@ -216,11 +216,11 @@
         <input type="submit" name="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>" 
                                  id="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SB'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
         <input type="submit" name="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB_CANCEL; ?>" 
                                  id="<?php echo ConfigInfraTools::FM_ACCOUNT_CHANGE_PASSWORD_SB_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('ACCOUNT_CHANGE_PASSWORD_SB_CANCEL'); ?>" />
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>
 </form>

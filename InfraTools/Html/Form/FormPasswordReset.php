@@ -65,12 +65,12 @@
 	<!-- NEW PASSWORD -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label> <?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_NEW_PASSWORD'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_NEW'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_NEW_PASSWORD_TIP'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?>
 				</label>
 			</div>
 		</div>
@@ -100,19 +100,19 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FM_PASSWORD_RESET_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_NEW_PASSWORD'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_NEW'); ?>" 
 						   value="" maxlength="18" />
 	</div>
 	<div class="DivClearFloat"></div>
 	<!-- REPEAT PASSWORD -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label> <?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_REPEAT_PASSWORD'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_REPEAT'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_REPEAT_PASSWORD_TIP'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?>
 				</label>
 			</div>
 		</div>
@@ -142,7 +142,7 @@
 											 'DivContentBodySubmit',
 											 '<?php echo ConfigInfraTools::FM_PASSWORD_RESET_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RESET_TEXT_REPEAT_PASSWORD'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_REPEAT'); ?>" 
 						   value="" maxlength="18" />
 	</div>
 	<div class="DivClearFloat"></div>

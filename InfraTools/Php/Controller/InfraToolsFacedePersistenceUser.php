@@ -1210,6 +1210,21 @@ class InfraToolsFacedePersistenceUser
 											  $InstanceCorporation,															   
 											  $row["AssocUserCorporation".ConfigInfraTools::TB_FD_REGISTER_DATE],
 							                  $InstanceInfraToolsUser);
+						$InstanceTeam = $this->Factory->CreateTeam($row["Team".Config::TB_FD_REGISTER_DATE],
+							                                       $row[Config::TB_TEAM_FD_TEAM_DESCRIPTION], 
+						                                           $row[Config::TB_TEAM_FD_TEAM_ID], 
+														           $row[Config::TB_TEAM_FD_TEAM_NAME]);
+						$InstanceTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam(
+							                             $row["TypeAssocUserTeam".Config::TB_FD_REGISTER_DATE],
+														 $row[Config::TB_TYPE_ASSOC_USER_TEAM_FD_DESCRIPTION]);
+						$InstanceAssocUserTeam = $this->Factory->CreateAssocUserTeam
+							                               ($row['AssocUserTeam'.Config::TB_FD_REGISTER_DATE],
+														    $InstanceTeam,
+						                                    $InstanceTypeAssocUserTeam,
+														    $InstanceInfraToolsUser);
+						$ArrayInstanceAssocUserTeam = array();
+						array_push($ArrayInstanceAssocUserTeam, $InstanceAssocUserTeam);
+						$InstanceInfraToolsUser->SetArrayAssocUserTeam($ArrayInstanceAssocUserTeam);
 						$InstanceInfraToolsUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
 						array_push($ArrayInstanceInfraToolsUser, $InstanceInfraToolsUser);
 					}

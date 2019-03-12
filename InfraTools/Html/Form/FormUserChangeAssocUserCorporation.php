@@ -36,10 +36,10 @@
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserEmail; ?></label>
         </div>
     </div>
-    <!-- BIRTH_DATE -->
+    <!-- FIELD_USER_BIRTH_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE').":"; ?></label>
+            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateDay . " /"; ?></label>
@@ -120,7 +120,7 @@
 			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE'); ?> </label>
 			<label>:</label>
 		</div>
-		<!-- REGISTRATION_DATE_BIRTH_DATE_DAY -->
+		<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY -->
 		<select style="
 					   <?php if($this->InputValueRegistrationDateDay != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateDay != "") 
@@ -134,7 +134,7 @@
 							  || $this->InputValueRegistrationDateDay == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
-					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_DAY'); ?> 
 			</option>
 			<?php for($i=1; $i<32; $i++)
 				  {
@@ -145,7 +145,7 @@
 				  }
 			?>
 		</select>
-		<!-- REGISTRATION_DATE_DATE_MONTH -->
+		<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH -->
 		<select style="
 						<?php if($this->InputValueRegistrationDateMonth != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateMonth != "") 
@@ -159,7 +159,7 @@
 							  || $this->InputValueRegistrationDateMonth == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
-					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_MONTH'); ?> 
 			</option>
 			<?php for($i=1; $i<13; $i++)
 				  {
@@ -170,7 +170,7 @@
 				  }
 			?>
 		</select>
-		<!-- REGISTRATION_DATE_DATE_YEAR -->
+		<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR -->
 		<select style=";
 					   <?php if($this->InputValueRegistrationDateYear != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
 								 && $this->InputValueRegistrationDateYear != "") 
@@ -184,7 +184,7 @@
 							  || $this->InputValueRegistrationDateYear == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
-					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_YEAR'); ?> 
 			</option>
 			<?php for($i=1940; $i<2016; $i++)
 				  {

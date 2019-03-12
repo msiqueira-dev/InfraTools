@@ -115,7 +115,7 @@
 		<input type="submit" name="<?php echo ConfigInfraTools::FM_PASSWORD_RECOVERY_SB; ?>" 
 								 id="<?php echo ConfigInfraTools::FM_PASSWORD_RECOVERY_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('PASSWORD_RECOVERY_TEXT_SEND'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEND'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

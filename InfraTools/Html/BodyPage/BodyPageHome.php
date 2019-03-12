@@ -35,7 +35,7 @@
                         <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_CHECK') ?>" title=''>
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $this->InstanceLanguageText->GetText('HOME_CHECK_BUTTON_TEXT'); ?>
+                                <?php echo $this->InstanceLanguageText->GetText('SUBMIT_GO'); ?>
                             </span>
                          </a>
                     </div>
@@ -74,7 +74,7 @@
                         <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_GET') ?>" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $this->InstanceLanguageText->GetText('HOME_GET_BUTTON_TEXT'); ?>
+                                <?php echo $this->InstanceLanguageText->GetText('SUBMIT_GO'); ?>
                             </span>
                         </a>
                     </div>
@@ -113,7 +113,7 @@
                         <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SERVICE') ?>" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $this->InstanceLanguageText->GetText('HOME_CLOUD_BUTTON_TEXT'); ?>
+                                <?php echo $this->InstanceLanguageText->GetText('SUBMIT_GO'); ?>
                             </span>
                         </a>
                     </div>
@@ -152,7 +152,7 @@
                         <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL') ?>" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $this->InstanceLanguageText->GetText('HOME_INSTALL_BUTTON_TEXT'); ?>
+                                <?php echo $this->InstanceLanguageText->GetText('SUBMIT_GO'); ?>
                             </span>
                         </a>
                     </div>

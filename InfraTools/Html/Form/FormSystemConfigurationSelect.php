@@ -17,16 +17,16 @@
 	  id="<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_FORM; ?>" method="post" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
-		<!-- FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME -->
+		<!-- FIELD_SYSTEM_CONFIGURATION_RADIO -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION; ?>"
-					   id="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
-					   value="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NAME; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NAME; ?>"
 					   onclick="this.blur();this.focus();"
-					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>', 
+					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NUMBER; ?>', 
 												 false);
-								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>', 
+								 ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NAME; ?>', 
 												 true);
 								 MakeInputVisible('<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
@@ -44,13 +44,13 @@
 		<!-- FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION; ?>"
-					   id="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
-					   value="<?php echo ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>"
+				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO; ?>"
+					   id="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NUMBER; ?>"
+					   value="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NUMBER; ?>"
 					   onclick="this.blur();this.focus();"
-					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>', 
+					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NUMBER; ?>', 
 												 true);
-								 ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>', 
+								 ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NAME; ?>', 
 												 false);
 								 MakeInputVisible('<?php echo ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB; ?>');
 								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
@@ -67,7 +67,7 @@
 		<div class="DivClearFloat"></div>
 		<!-- FIELD_SYSTEM_CONFIGURATION_OPTION_NAME -->
 		<div class="<?php echo $this->ReturnSystemConfigurationOptionNameRadioClass ?> DivContentBodyContainer"
-		     id="<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME; ?>">
+		     id="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NAME; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
 				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NAME'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>
@@ -111,7 +111,7 @@
 		</div>
 		<!-- FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER -->
 		<div class="<?php echo $this->ReturnSystemConfigurationOptionNumberRadioClass ?> DivContentBodyContainer"
-		     id="<?php echo ConfigInfraTools::DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER; ?>">
+		     id="<?php echo ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NUMBER; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
 				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER'); ?> </label>
 				<label class="RequiredField">&nbsp;*</label>

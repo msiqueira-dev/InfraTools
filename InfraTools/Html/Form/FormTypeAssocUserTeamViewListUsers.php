@@ -73,10 +73,10 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_TEAM_DESCRIPTION') . "</div></th>";
+		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_USER_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_USER_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_TEAM_DESCRIPTION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
 	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME') . "</div>" .
@@ -123,7 +123,22 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 							             value='" . $user->GetEmail() . "' title='" . $user->GetEmail() . "' />
 				</form>
 		      </td>";
-		echo "<td>"     . $user->GetName()             . "</td>";
+		echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FM_TEAM_SEL_SB . "' method='post' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FM_TEAM_SEL_SB . "' 
+							 id='"     . ConfigInfraTools::FM_TEAM_SEL_SB . "'
+							 value='"  . ConfigInfraTools::FM_TEAM_SEL_SB . "' />
+						<input type='hidden'
+							 name='"   . ConfigInfraTools::FIELD_TEAM_ID . "' 
+							 id='"     . ConfigInfraTools::FIELD_TEAM_ID . "'
+							 value='"  . $user->GetAssocUserTeamTeamIdByIndex(0) . "' />
+						<input type='submit' name='" . ConfigInfraTools::FIELD_TEAM_NAME . "' 
+										 id='"       . ConfigInfraTools::FIELD_TEAM_NAME . "' 
+										 value='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' 
+										 title='" . $user->GetAssocUserTeamTeamNameByIndex(0) . "' />
+						</form>
+				  </td>";
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FM_TYPE_USER_SEL_SB . "' method='post' />
 					<input type='hidden'

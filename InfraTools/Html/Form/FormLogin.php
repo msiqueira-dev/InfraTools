@@ -56,7 +56,7 @@
 			<input type="password" name="<?php echo ConfigInfraTools::LOGIN_PASSWORD; ?>" 
 								   id="<?php echo ConfigInfraTools::LOGIN_PASSWORD; ?>"
 								   class="<?php echo $this->ReturnLoginClass; ?>"
-								   title="<?php echo $this->InstanceLanguageText->GetText('LOGIN_PASSWORD'); ?>" 
+								   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD'); ?>" 
 								   value="" maxlength="20" 
 								   onblur="ValidateNotNull(null, '<?php echo ConfigInfraTools::LOGIN_PASSWORD; ?>',
 										   'DivContentBodySubmit',

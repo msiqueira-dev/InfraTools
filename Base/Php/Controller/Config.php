@@ -149,6 +149,8 @@ class Config
 	const DB_LOG_ERROR                                                  = "LogMySqlError";
 	const DB_LOG_QUERY                                                  = "LogMySqlQuery";
 	const DIV_RETURN                                                    = "DivReturn";
+	const DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER                  = "DivRadioSystemConfigurationOptionNumber";
+	const DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME                    = "DivRadioSystemConfigurationOptionName";
 	const ENABLED                                                       = "Enabled";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TICKET                 = "ExceptionAssocTicketUserRequestingTicket";
 	const EXCEPTION_ASSOC_TICKET_USER_REQUESTING_TYPE                   = "ExceptionAssocTicketUserRequestingType";
@@ -237,9 +239,6 @@ class Config
 	const FIELD_RADIO_DEPARTMENT                                        = "FieldRadioDepartment";
 	const FIELD_RADIO_DEPARTMENT_NAME                                   = "FieldRadioDepartmentName";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME              = "FieldRadioDepartmentNameAndCorporationName";
-	const FIELD_RADIO_SYSTEM_CONFIGURATION                              = "FieldRadioSystemConfiguration";
-	const FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME                  = "FieldRadioSystemConfigurationOptionName";
-	const FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER                = "FieldRadioSystemConfigurationOptionNumber";
 	const FIELD_RETURN_ERROR                                            = "FieldReturnError";
 	const FIELD_ROLE_DESCRIPTION                                        = "FieldRoleDescription";
 	const FIELD_ROLE_NAME                                               = "FieldRoleName";
@@ -249,6 +248,11 @@ class Config
 	const FIELD_SYSTEM_CONFIGURATION_OPTION_NAME                        = "FieldSystemConfigurationOptionName";
 	const FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER                      = "FieldSystemConfigurationOptionNumber";
 	const FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE                       = "FieldSystemConfigurationOptionValue";
+	const FIELD_SYSTEM_CONFIGURATION_RADIO                              = "FieldSystemConfigurationRadio";
+	const FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NAME              = "FieldSystemConfigurationRadioDivOptionName";
+	const FIELD_SYSTEM_CONFIGURATION_RADIO_DIV_OPTION_NUMBER            = "FieldSystemConfigurationRadioDivOptionNumber";
+	const FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NAME                  = "FieldSystemConfigurationRadioOptionName";
+	const FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NUMBER                = "FieldSystemConfigurationRadioOptionNumber";
 	const FIELD_TEAM_DESCRIPTION                                        = "FieldTeamDescription";
 	const FIELD_TEAM_ID                                                 = "FieldTeamId";
 	const FIELD_TEAM_NAME                                               = "FieldTeamName";

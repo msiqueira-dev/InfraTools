@@ -92,7 +92,7 @@
 			<input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SB; ?>" 
                                  id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_DNS_RECORD_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('CHECK_SB'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHECK'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckDnsRecordMessage))

@@ -278,7 +278,7 @@
 		<input type="submit" name="<?php echo ConfigInfraTools::FM_TICKET_CONTACT_SB; ?>" 
 								 id="<?php echo ConfigInfraTools::FM_TICKET_CONTACT_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('CONTACT_TEXT_SEND'); ?>"
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEND'); ?>"
 								 <?php echo $this->SubmitEnabled; ?> />
 	</div>
 </form>

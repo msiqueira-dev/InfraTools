@@ -32,7 +32,7 @@
             <label>:</label>
             <div class="DivContentBodyContainerLabelTip">
                 <label>
-                    <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDT_NAME_TIP'); ?>
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME_TIP'); ?>
                 </label>
             </div>
         </div>
@@ -119,7 +119,7 @@
      <!-- ACCOUNT_UPDT_BIRTH_DATE -->
      <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label> <?php echo $this->InstanceLanguageText->GetText('ACCOUNT_UPDT_TEXT_BIRTH_DATE'); ?> </label>
+            <label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE'); ?> </label>
             <label class="RequiredField">&nbsp;*</label>
             <label>:</label>
         </div>
@@ -142,7 +142,7 @@
                               || $this->InputValueBirthDateDay == ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY) 
                 echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>" 
                 disabled="disabled"> 
-                    <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_DAY'); ?> 
             </option>
             <?php for($i=1; $i<32; $i++)
                   {
@@ -172,7 +172,7 @@
                               || $this->InputValueBirthDateMonth == ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH) 
                 echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH; ?>" 
                 disabled="disabled"> 
-                    <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_MONTH'); ?> 
             </option>
             <?php for($i=1; $i<13; $i++)
                   {
@@ -202,7 +202,7 @@
                               || $this->InputValueBirthDateYear == ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR) 
                 echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_YEAR; ?>" 
                 disabled="disabled"> 
-                    <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
+                    <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_YEAR'); ?> 
             </option>
             <?php for($i=1940; $i<2016; $i++)
                   {

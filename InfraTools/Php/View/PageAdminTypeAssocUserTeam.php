@@ -80,44 +80,11 @@ class PageAdminTypeAssocUserTeam extends PageAdmin
 		//FM_TEAM_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TEAM_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			if(isset($_POST[ConfigInfraTools::FIELD_TEAM_RADIO]))
-			{
-				if($_POST[ConfigInfraTools::FIELD_TEAM_RADIO] == ConfigInfraTools::FIELD_TEAM_RADIO_NAME)
-				{
-					if($this->ExecuteFunction($_POST, 'TeamSelectByTeamName', 
-											  array($_POST[ConfigInfraTools::FIELD_TEAM_NAME],
-													&$this->ArrayInstanceTeam),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					{
-
-						if(count($this->ArrayInstanceTeam) > 1)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_LST;	
-						else
-						{
-							$this->InstanceTeam = array_pop($this->ArrayInstanceTeam);
-							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TEAM, "TeamLoadData", 
-														  $this->InstanceTeam) == ConfigInfraTools::RET_OK)
-								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-						}
-					}
-				}
-				else
-				{
-					if($this->ExecuteFunction($_POST, 'TeamSelectByTeamId', 
-										  array($_POST[ConfigInfraTools::FIELD_TEAM_ID],
-												&$this->InstanceTeam),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-				}
-			}
-			else
-			{
-				if($this->ExecuteFunction($_POST, 'TeamSelectByTeamId', 
-										  array($_POST[ConfigInfraTools::FIELD_TEAM_ID],
-												&$this->InstanceTeam),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;
-			}
+			if($this->ExecuteFunction($_POST, 'TeamSelectByTeamId', 
+								  array($_POST[ConfigInfraTools::FIELD_TEAM_ID],
+										&$this->InstanceTeam),
+								  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TEAM_VIEW;	
 		}
 		//FM_TYPE_ASSOC_USER_TEAM_LST
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_ASSOC_USER_TEAM_LST) == ConfigInfraTools::RET_OK)

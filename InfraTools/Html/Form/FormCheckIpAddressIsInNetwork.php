@@ -103,7 +103,7 @@
             <input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>"
                                  id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_CHECK_IP_ADDRESS_IS_IN_NETWORK_SB; ?>"
                                  class="DivContentBodySubmit"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('CHECK_SB'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHECK'); ?>"/>
         </div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionCheckIpAddressIsInNetworkMessage))

@@ -5225,8 +5225,8 @@ class Page
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnPasswordText;
 		$arrayExtraField[0]           = &$this->InputValueRepeatPassword;
-		array_push($arrayConstants, 'PASSWORD_RESET_INVALID_PASSWORD', 'PASSWORD_RESET_INVALID_PASSWORD_MATCH');
-		array_push($arrayConstants, 'PASSWORD_RESET_INVALID_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($arrayConstants, 'FM_INVALID_USER_PASSWORD', 'FM_INVALID_USER_PASSWORD_MATCH');
+		array_push($arrayConstants, 'FM_INVALID_USER_PASSWORD_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//RESET_CODE

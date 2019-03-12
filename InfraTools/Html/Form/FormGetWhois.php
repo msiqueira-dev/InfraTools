@@ -82,7 +82,7 @@
             <input type="submit" name="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>"
             					 id="<?php echo ConfigInfraTools::FM_DIAGNOSTIC_TOOLS_GET_WHOIS_SB; ?>"
                                  class="DivContentBodySubmit <?php echo $this->VisibilityFunctionGetWhoisSubmit; ?>"
-				                 value="<?php echo $this->InstanceLanguageText->GetText('TEXT_BUTTON_GET'); ?>"/>
+				                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_GET'); ?>"/>
 		</div>
 	</form>
     <div class="<?php if(isset($this->VisibilityFunctionGetWhoisMessage)) 

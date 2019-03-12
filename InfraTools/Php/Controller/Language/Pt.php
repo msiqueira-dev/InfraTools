@@ -67,10 +67,6 @@ class Pt
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "Associação entre endereço de ip e serviço não encontrada";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "Erro ao atualizar informações de corporação";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "Informações de corporação alterada com sucesso";
-	const BIRTH_DATE                                                = "Data de nascimento";
-	const BIRTH_DATE_DAY                                            = "Dia";
-	const BIRTH_DATE_MONTH                                          = "Mês";
-	const BIRTH_DATE_YEAR                                           = "Ano";
 	const CHECK_AVAILABILITY_FREE                                   = "Domínio está livre";
 	const CHECK_AVAILABILITY_TAKEN                                  = "Domínio já registrado";
 	const CHECK_BLACKLIST_HOST_NOT_LSTED                            = "Domínio [0] não está em nenhuma das listas negras: uceprotect, "
@@ -168,6 +164,9 @@ class Pt
 	const FIELD_SYSTEM_CONFIGURATION_OPTION_NAME                    = "Nome";
 	const FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER                  = "Número";
 	const FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE                   = "Valor";
+	const FIELD_TICKET_CONTACT_SEL_COMMERCIAL                       = "Comercial";
+	const FIELD_TICKET_CONTACT_SEL_DOUBT                            = "Dúvida";
+	const FIELD_TICKET_CONTACT_SEL_SUGGESTION                       = "Sugestão";
 	const FIELD_TEAM_DESCRIPTION                                    = "Descrição de equipe";
 	const FIELD_TEAM_ID                                             = "Id da equipe";
 	const FIELD_TEAM_NAME                                           = "Nome da equipe";
@@ -185,10 +184,24 @@ class Pt
 	const FIELD_TYPE_TICKET_DESCRIPTION                             = "Descrição";
 	const FIELD_TYPE_USER_DESCRIPTION                               = "Descrição";
 	const FIELD_USER_ACTIVE                                         = "Conta ativa";
+	const FIELD_USER_BIRTH_DATE                                     = "Data de nascimento";
+	const FIELD_USER_BIRTH_DATE_DAY                                 = "Dia";
+	const FIELD_USER_BIRTH_DATE_MONTH                               = "Mês";
+	const FIELD_USER_BIRTH_DATE_YEAR                                = "Ano";
 	const FIELD_USER_CONFIRMED                                      = "Conta confirmada";
 	const FIELD_USER_EMAIL                                          = "E-mail";
 	const FIELD_USER_GENDER                                         = "Gênero";
+	const FIELD_USER_GENDER_FEMALE                                  = "Femino";
+	const FIELD_USER_GENDER_MALE                                    = "Masculino";
+	const FIELD_USER_GENDER_OTHER                                   = "Outro";
 	const FIELD_USER_NAME                                           = "Nome";
+	const FIELD_USER_NAME_TIP                                       = "(Nome e sobrenome)";
+	const FIELD_USER_PASSWORD                                       = "Senha";
+	const FIELD_USER_PASSWORD_NEW                                   = "Nova senha";
+	const FIELD_USER_PASSWORD_REPEAT                                = "Repetir senha";
+	const FIELD_USER_PASSWORD_TIP                                   = "(Pelo menos 1 número e uma letra maiúscula, entre 8 e 18 dígitos)";
+	const FIELD_USER_PASSWORD_TITLE                                 = "A senha deve conter pelo menos 1 número e uma letra maiúscula, entre 8 "
+		                                                            . "e 18 dígitos";
 	const FIELD_USER_PHONE_PRIMARY                                  = "Telefone Primário";
 	const FIELD_USER_PHONE_SECONDARY                                = "Telefone Secundário";
 	const FIELD_USER_REGION                                         = "Localização";
@@ -358,6 +371,69 @@ class Pt
 	const GET_WEBSITE_CONTENT_SUCCESS                               = "Conteúdo para o web site [0]<br><br>";
 	const GET_WEBSITE_HEADER_ERROR                                  = "Falha ao obter o cabeçalho do web site [0]";
 	const GET_WEBSITE_HEADER_SUCCESS                                = "Cabeçalho para o web site [0]<br><br>";
+	const HEADER_CHANGE_LAYOUT                                      = "Requisitar Layout [0]:";
+	const HEADER_DEBUG                                              = "Depurar:";
+	const HEADER_PAGE_ABOUT_TITLE                                   = "Sobre";
+	const HEADER_PAGE_ABOUT_TEXT                                    = "SOBRE";
+	const HEADER_PAGE_ACCOUNT_TITLE                                 = "Meu Cadastro";
+	const HEADER_PAGE_ACCOUNT_TEXT                                  = "Meu Cadastro";
+	const HEADER_PAGE_ADMIN_TITLE                                   = "Gerência";
+	const HEADER_PAGE_ADMIN_TEXT                                    = "GERÊNCIA";
+	const HEADER_PAGE_CHECK_TITLE                                   = "Funções de verificação";
+	const HEADER_PAGE_CHECK_TEXT                                    = "FUNÇÕES DE VERIFICAÇÃO";
+	const HEADER_PAGE_CONTACT_TITLE                                 = "Contato";
+	const HEADER_PAGE_CONTACT_TEXT                                  = "CONTATO";
+	const HEADER_PAGE_CORPORATION_TITLE                             = "Minha empresa";
+	const HEADER_PAGE_CORPORATION_TEXT                              = "Minha empresa";
+	const HEADER_PAGE_DIAGNOSTIC_TOOLS_TITLE                        = "Ferramentas de Diagnóstico";
+	const HEADER_PAGE_DIAGNOSTIC_TOOLS_TEXT                         = "FERRAMENTAS DE DIAGNÓSTICO";
+	const HEADER_PAGE_GET_TITLE                                     = "Funções de obtenção";
+	const HEADER_PAGE_GET_TEXT                                      = "FUNÇÕES DE OBTENÇÃO";
+	const HEADER_PAGE_HOME_TITLE                                    = "InfraTools";
+	const HEADER_PAGE_HOME_IMAGE_ALT                                = "InfraTools";
+	const HEADER_PAGE_LOGIN_TITLE                                   = "Entrar";
+	const HEADER_PAGE_LOGIN_TEXT                                    = "Entrar";
+	const HEADER_PAGE_LOGOUT                                        = "Sair";
+	const HEADER_PAGE_NOTIFICATION_TITLE                            = "Notificações";
+	const HEADER_PAGE_NOTIFICATION_TEXT                             = "NOTIFICAÇÕES";
+	const HEADER_PAGE_REGISTER_TITLE                                = "Registrar";
+	const HEADER_PAGE_REGISTER_TEXT                                 = "Registrar";
+	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TITLE                = "Reenviar link de confirmação";
+	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT                 = "aqui";
+	const HEADER_PAGE_SERVICE_TITLE                                 = "Serviços";
+	const HEADER_PAGE_SERVICE_TEXT                                  = "SERVIÇOS";
+	const HEADER_PAGE_SERVICE_LST_TITLE                             = "Listagem de Serviços";
+	const HEADER_PAGE_SERVICE_LST_TEXT                              = "LISTAGEM DE SERVIÇOS";
+	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "Listagem de Serviços por Corporação";
+	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TEXT               = "LISTAGEM DE SERVIÇOS POR CORPORAÇÃO";
+	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TITLE               = "Listagem de Serviços por Departamento";
+	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TEXT                = "LISTAGEM DE SERVIÇOS POR DEPARTAMENTO";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TITLE  = "Listagem de Serviços por Tipo de Associação";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TEXT   = "LISTAGEM DE SERVIÇOS POR TIPO DE ASSOCIAÇÃO";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TITLE             = "Listagem de Serviços por Tipo";
+	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TEXT              = "LISTAGEM DE SERVIÇOS POR TIPO";
+	const HEADER_PAGE_SERVICE_REGISTER_TITLE                        = "Cadastrar Serviço";
+	const HEADER_PAGE_SERVICE_REGISTER_TEXT                         = "CADASTRAR SERVIÇO";
+	const HEADER_PAGE_SERVICE_SEL_TITLE                             = "Selecionar Serviço";
+	const HEADER_PAGE_SERVICE_SEL_TEXT                              = "SELECIONAR SERVIÇO";
+	const HEADER_PAGE_SUPPORT_TITLE                                 = "Solicitações";
+	const HEADER_PAGE_SUPPORT_TEXT                                  = "SOLICITAÇÕES";
+	const HEADER_PAGE_SUPPORT_CONTACT_TITLE                         = "Nova Solicitação";
+	const HEADER_PAGE_SUPPORT_CONTACT_TEXT                          = "NOVA SOLICITAÇÃO";
+	const HEADER_PAGE_SUPPORT_LST_TITLE                             = "Listar Solicitações";
+	const HEADER_PAGE_SUPPORT_LST_TEXT                              = "LISTAR SOLICITAÇÕES";
+	const HEADER_PAGE_SUPPORT_REGISTER_TITLE                        = "CADASTRAR Solicitação";
+	const HEADER_PAGE_SUPPORT_REGISTER_TEXT                         = "CADASTRAR SOLICITAÇÃO";
+	const HEADER_PAGE_SUPPORT_SEL_TITLE                             = "Selecionar Solicitação";
+	const HEADER_PAGE_SUPPORT_SEL_TEXT                              = "SELECIONAR SOLICITAÇÃO";
+	const HEADER_PAGE_TEAM_TITLE                                    = "Minhas equipes";
+	const HEADER_PAGE_TEAM_TEXT                                     = "Minhas equipes";
+	const HEADER_PAGE_TEAM_LST_TITLE                                = "Listar Equipes";
+	const HEADER_PAGE_TEAM_LST_TEXT                                 = "LISTAR EQUIPES";
+	const HEADER_PAGE_TEAM_REGISTER_TITLE                           = "Cadastrar Equipe";
+	const HEADER_PAGE_TEAM_REGISTER_TEXT                            = "CADASTRAR EQUIPE";
+	const HEADER_PAGE_TEAM_SEL_TITLE                                = "Selecionar Equipe";
+	const HEADER_PAGE_TEAM_SEL_TEXT                                 = "Selecionar EQUIPE";
 	const HREF_PAGE_ABOUT                                           = "/Pt/PageAbout";
 	const HREF_PAGE_ACCOUNT                                         = "/Pt/PageAccount";
 	const HREF_PAGE_ADMIN                                           = "/Pt/PageAdmin";
@@ -688,6 +764,7 @@ class Pt
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDT_ROBOTS               = "noindex";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_UPDT_TITLE                = "InfraTools - Gerência de tipo de associação de usuario e equipe";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW                      = "Gerência de tipo de associação de usuario e equipe - Vizualizar";
+	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_LST_USERS            = "Gerência de tipo de associação de usuario e equipe - Listar Usuários";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_ROBOTS               = "noindex";
 	const PAGE_ADMIN_TYPE_ASSOC_USER_TEAM_VIEW_TITLE                = "InfraTools - Gerência de tipo de associação de usuario e equipe";
 	const PAGE_ADMIN_TYPE_SERVICE                                   = "Gerência de Tipo de Serviços";
@@ -897,6 +974,23 @@ class Pt
 	const PAGE_TEAM_VIEW_TITLE                                      = "InfraTools - Vizualização de Equipes";
 	const PHONE_PREFIX                                              = "Prefixo";
 	const REGISTER_DATE                                             = "Data de registro";
+	const REGISTER_EMAIL_ALREADY_REGISTERED                         = "E-mail já cadastrado";
+	const REGISTER_EMAIL_ERROR                                      = "Ocorreu um erro ao enviar a mensagem";
+	const REGISTER_EMAIL_TAG                                        = "InfraTools - Cadastro";
+	const REGISTER_EMAIL_TEXT                                       = "clique no link abaixo para finalizar seu cadastro.<br/>"
+	                                                                . "<br/>Link:";
+	const REGISTER_INSERT_ERROR                                     = "Erro ao tentar registrar usuário";
+	const REGISTER_SUCCESS                                          = "Cadastro efetuado com sucesso. Um link foi enviado ao seu e-mail para "
+	                                                                . "ativar sua conta";
+	const REGISTER_SUCCESS_NO_LINK                                  = "Cadastro efetuado com sucesso.";
+	const REGISTER_TEXT_CAPTCHA                                     = "Digite a palavra";
+	const REGISTER_CONFIRMATION_ALREADY_CONFIRMED                   = "Este cadastro já está ativo";
+	const REGISTER_CONFIRMATION_SEL_ERROR                           = "Não foi possível obter uma conta associada ao código fornecido.";
+	const REGISTER_CONFIRMATION_SUCCESS                             = "Cadastro ativado com sucesso";
+	const RESEND_CONFIRMATION_EMAIL_TAG                             = "InfraTools - Reenvio de Link de Confirmação";
+	const RESEND_CONFIRMATION_EMAIL_TEXT                            = "clique no link abaixo para finalizar seu cadastro.<br/><br/>Link:";
+	const RESEND_CONFIRMATION_LINK_ERROR                            = "Um erro ocorreu, por favor tente novamente ou entre em contato";
+	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "Link de confirmação reenviado com sucesso";
 	const ROW_COUNT                                                 = "Valor total: ";
 	const SEND_EMAIL_ERROR                                          = "Erro ao enviar e-mail para o usuário";
 	const SERVICE_DEL_ERROR                                         = "Erro ao excluir serviço";
@@ -946,9 +1040,12 @@ class Pt
 	const SUBMIT_CHANGE_CORPORATION                                 = "ALTERAR CORPORAÇÃO";
 	const SUBMIT_CHANGE_PASSWORD                                    = "ALTERAR SENHA";
 	const SUBMIT_CHANGE_USER_TYPE                                   = "ALTERAR TIPO DE USUÁRIO";
-	const SUBMIT_DEL                                                = "EXCLUIR";
+	const SUBMIT_CHECK                                              = "VERIFICAR";
 	const SUBMIT_CONFIRM                                            = "Confirma ?";
+	const SUBMIT_DEL                                                = "EXCLUIR";
 	const SUBMIT_FORWARD                                            = "AVANÇAR";
+	const SUBMIT_GET                                                = "OBTER";
+	const SUBMIT_GO                                                 = "IR";
 	const SUBMIT_INSERT                                             = "ADICIONAR";
 	const SUBMIT_INSTALL_EXPORT                                     = "Exportar dados do sistema";
 	const SUBMIT_INSTALL_IMPORT                                     = "Importar Dados ao Sistema";
@@ -959,6 +1056,7 @@ class Pt
 	const SUBMIT_REGISTER                                           = "CADASTRAR";
 	const SUBMIT_RESET_PASSWORD                                     = "RESTAURAR SENHA";
 	const SUBMIT_SEL                                                = "OBTER";
+	const SUBMIT_SEND                                               = "ENVIAR";
 	const SUBMIT_TWO_STEP_VERIFICATION_ACTIVATE                     = "ATIVAR VERIFICAÇÃO DUAS ETAPAS";
 	const SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE                   = "DESATIVAR VERIFICAÇÃO DUAS ETAPAS";
 	const SUBMIT_UPDT                                               = "ATUALIZAR";
@@ -974,10 +1072,26 @@ class Pt
 	const TB_PAGE_PREFIX                                            = "De:";
 	const TB_PAGE                                                   = "até";
 	const TEAM                                                      = "Equipe";
+	const TEAM_DEL_ERROR                                            = "Erro ao excluir equipe";
+	const TEAM_DEL_ERROR_DEPENDENCY_TEAM                            = "Equipe possui usuários associados, exclua-os primeiro";
+	const TEAM_DEL_SUCCESS                                          = "Equipe excluida com sucesso";
 	const TEAM_NOT_FOUND                                            = "Equipe não encontrada";
+	const TEAM_INSERT_ERROR                                         = "Erro ao cadastrar equipe";
+	const TEAM_INSERT_SUCCESS                                       = "Equipe cadastrada com sucesso";
+	const TEAM_UPDT_ERROR                                           = "Erro ao atualizar equipe";
+	const TEAM_UPDT_SUCCESS                                         = "Equipe atualizada com sucesso";
 	const TEAMS                                                     = "Equipes";
-	const TEXT_BUTTON_GET                                           = "OBTER";
-	const TEXT_BUTTON_VERIFY                                        = "VERIFICAR";
+	const TECH_INFO_DIRECTORY_COUNT                                 = "Quantidade de Diretórios";
+	const TECH_INFO_FILE_COUNT                                      = "Quantidade de Arquivos";
+	const TECH_INFO_FILE_EXTENSION                                  = "Extensão";
+	const TECH_INFO_FILE_TYPE                                       = "Tipo";
+	const TECH_INFO_FILE_VALUE                                      = "Valor";
+	const TECH_INFO_LANGUAGE_QUANTITY_CONSTANT                      = "Quantidade de constantes";
+	const TECH_INFO_LANGUAGE_QUANTITY_VALUE                         = "Quantidade de textos";
+	const TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM                      = "Contantes com possívels problemas";
+	const TECH_INFO_TITLE_BASE                                      = "Base";
+	const TECH_INFO_TITLE_INFRATOOLS                                = "InfraTools";
+	const TECH_INFO_TITLE_TOTAL                                     = "Total";
 	const TEXT_HOSTNAME                                             = "Domínio";
 	const TEXT_IP_ADDRESS                                           = "Endereço de ip";
 	const TEXT_MASK                                                 = "Mascara";
@@ -989,21 +1103,64 @@ class Pt
 	const TICKET_INSERT_ERROR                                       = "Erro ao tentar cadastrar solicitação";
 	const TICKET_INSERT_SUCCESS                                     = "Solicitação cadastrada com sucesso";
 	const TICKET_NOT_FOUND                                          = "Solicitação não encontrada";
+	const TYPE_ASSOC_USER_TEAM_DEL_ERROR                            = "Erro ao excluir tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_DEL_ERROR_DEPENDENCY_TEAM            = "Tipo de associação está sendo usada entre usuários e equipes, "
+		                                                            . "faça desassociações necessárias primeiro";
+	const TYPE_ASSOC_USER_TEAM_DEL_SUCCESS                          = "Tipo de associação excluida com sucesso";
+	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR                         = "Erro ao cadastrar tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS                       = "Tipo de associação cadastrado com sucesso";
+	const TYPE_ASSOC_USER_TEAM_UPDT_ERROR                           = "Erro ao atualizar tipo de associação";
+	const TYPE_ASSOC_USER_TEAM_UPDT_SUCCESS                         = "Tipo de associação atualizada com sucesso";
 	const TYPE_ASSOC_USER_SERVICE_SEL_ERROR                         = "Erro ao obter tipos de associação";
 	const TYPE_ASSOC_USER_SERVICE_SEL_SUCCESS                       = "Tipos de associação obtidos com sucesso";
 	const TYPE_ASSOC_USER_TEAM_DESCRIPTION                          = "Descrição";
+	const TYPE_STATUS_TICKET_DEL_ERROR                              = "Erro ao excluir tipo de estado de solicitação";
+	const TYPE_STATUS_TICKET_DEL_ERROR_DEPENDENCY_TICKET            = "Tipo de estado de solicitação está em uso em solcitações, "
+		                                                            . "faça as desassociações necessárias primeiro";
+	const TYPE_STATUS_TICKET_DEL_SUCCESS                            = "Tipo de estado de solicitação excluido com sucesso";
 	const TYPE_ASSOC_USER_TEAM_NOT_FOUND                            = "Tipo de associação entre usuário e equipe não "
 		                                                            . "encontrada";
+	const TYPE_STATUS_TICKET_INSERT_ERROR                           = "Erro ao cadastrar tip ode estado de solicitação";
+	const TYPE_STATUS_TICKET_INSERT_SUCCESS                         = "Tipo de estado de solicitação cadastrado com sucesso";
 	const TYPE_STATUS_TICKET_NOT_FOUND                              = "Tipo de estado de solicitação não encontrado";
+	const TYPE_STATUS_TICKET_UPDT_ERROR                             = "Erro ao atualizar tipo de estado de solicitação";
+	const TYPE_STATUS_TICKET_UPDT_SUCCESS                           = "Tipo de solicitação atualizado com sucesso";
+	const TYPE_TICKET_DEL_ERROR                                     = "Erro ao excluir tipo de solcitação";
+	const TYPE_TICKET_DEL_ERROR_DEPENDENCY_TICKET                   = "Tipo de solicitação está em uso em solcitações, "
+		                                                            . "faça as desassociações necessárias primeiro";
+	const TYPE_TICKET_DEL_SUCCESS                                   = "Tipo de solcitação excluída com sucesso";
+	const TYPE_TICKET_INVALID_DESCRIPTION                           = "Descrição inválida";
+	const TYPE_TICKET_INVALID_DESCRIPTION_SIZE                      = "Quantidade de caracteres excede o tamanho máximo na descrição";
+	const TYPE_TICKET_INSERT_ERROR                                  = "Erro ao cadastrar tipo de solcitação";
+	const TYPE_TICKET_INSERT_SUCCESS                                = "Tipo de solcitação cadastrado com sucesso";
 	const TYPE_TICKET_NOT_FOUND                                     = "Tipo de solicitação não encontrado";
+	const TYPE_TICKET_UPDT_ERROR                                    = "Erro ao atualizar tipo de solcitação";
+	const TYPE_TICKET_UPDT_SUCCESS                                  = "Tipo de solcitação atualizada com sucesso";
+	const TYPE_USER_DEL_SUCCESS                                     = "Tipo de usuário excluído com sucesso";
+	const TYPE_USER_DEL_ERROR                                       = "Erro ao excluir tipo de usuário";
+	const TYPE_USER_DEL_ERROR_DEPENDENCY_USER                       = "Tipo de usuário possui usuários associados, exclua-os antes";
 	const TYPE_USER_NOT_FOUND                                       = "Tipo de usuário não encontrado";
+	const TYPE_USER_INVALID_DESCRIPTION                             = "Descrição inválida";
+	const TYPE_USER_INVALID_DESCRIPTION_SIZE                        = "Quantidade de caracteres excede o tamanho máximo na descrição";
+	const TYPE_USER_INSERT_ERROR                                    = "Erro ao cadastrar tipo de usuário";
+	const TYPE_USER_INSERT_SUCCESS                                  = "Tipo de usuário cadastrado com sucesso";
+	const TYPE_USER_UPDT_ERROR                                      = "Error ao atualizar tipo de usuário";
+	const TYPE_USER_UPDT_SUCCESS                                    = "Tipo de usuário atualizado com sucesso";
 	const UPDATE_ERROR_ASSOC_USER_CORPORATION                       = "Erro ao tentar atualizar informações de corporação do usuário";
 	const UPDATE_ERROR_USER_UNIQUE_ID                               = "ID único já foi escolhido por outro usuário, por favor "
 		                                                            . "escolha outro";
 	const UPDATE_SUCCESS                                            = "Dados atualizados";
 	const UPDATE_WARNING_SAME_VALUE                                 = "Dados com os mesmo valores dos antigos";
-	const USER_DEL_FAILED_RESTRICTION                               = "Existem associações a este usuário, por favor exclua as " 
-	                                                                . "associações antes";
+    const USER_ACTIVATE_ERROR                                       = "Erro ao tentar [0] usuário";
+	const USER_ACTIVATE_ERROR_NO_USER_SELED                         = "Nenhum usuário foi selecionado";
+	const USER_ACTIVATE_SUCCESS                                     = "Usuário [0] com sucesso";
+	const USER_CHANGE_CORPORATION_ERROR                             = "Erro ao tentar alterar corporação do usuário";
+	const USER_CHANGE_CORPORATION_SUCCESS                           = "Corporação do usuário alterada com sucesso";
+	const USER_CHANGE_USER_TYPE_ERROR                               = "Erro ao tentar alterar tipo de usuário";
+	const USER_CHANGE_USER_TYPE_SUCCESS                             = "Tipo de usuário alterado com sucesso";
+	const USER_DEL_ERROR                                            = "Erro ao tentar excluir usuário"; 
+	const USER_DEL_ERROR_DEPENDENCY                                 = "Usuário tem associações, exclu-as antes";
+	const USER_DEL_SUCCESS                                          = "Usuário excluido com sucesso";
 	const USER_INACTIVE                                             = "Esta conta foi desativada por um administrador";
 	const USER_NOT_CONFIRMED                                        = "Sua conta não foi confirmada, por favor confirme através do "
 	                                                                . "e-mail  que lhe foi enviado. Se você perdeu o e-mail enviado ou "
@@ -1055,206 +1212,6 @@ class Pt
 	const USER_UPDT_USER_PASSWORD_SUCCESS                           = "Erro ao tentar atualizar a senha do usuário";
 	const USER_UPDT_USER_PASSWORD_WARNING                           = "Senha fornecida é a mesma da atual";
 	
-	/* Header */
-	const HEADER_CHANGE_LAYOUT                                      = "Requisitar Layout [0]:";
-	const HEADER_DEBUG                                              = "Depurar:";
-	const HEADER_PAGE_ABOUT_TITLE                                   = "Sobre";
-	const HEADER_PAGE_ABOUT_TEXT                                    = "SOBRE";
-	const HEADER_PAGE_ACCOUNT_TITLE                                 = "Meu Cadastro";
-	const HEADER_PAGE_ACCOUNT_TEXT                                  = "Meu Cadastro";
-	const HEADER_PAGE_ADMIN_TITLE                                   = "Gerência";
-	const HEADER_PAGE_ADMIN_TEXT                                    = "GERÊNCIA";
-	const HEADER_PAGE_CHECK_TITLE                                   = "Funções de verificação";
-	const HEADER_PAGE_CHECK_TEXT                                    = "FUNÇÕES DE VERIFICAÇÃO";
-	const HEADER_PAGE_CONTACT_TITLE                                 = "Contato";
-	const HEADER_PAGE_CONTACT_TEXT                                  = "CONTATO";
-	const HEADER_PAGE_CORPORATION_TITLE                             = "Minha empresa";
-	const HEADER_PAGE_CORPORATION_TEXT                              = "Minha empresa";
-	const HEADER_PAGE_DIAGNOSTIC_TOOLS_TITLE                        = "Ferramentas de Diagnóstico";
-	const HEADER_PAGE_DIAGNOSTIC_TOOLS_TEXT                         = "FERRAMENTAS DE DIAGNÓSTICO";
-	const HEADER_PAGE_GET_TITLE                                     = "Funções de obtenção";
-	const HEADER_PAGE_GET_TEXT                                      = "FUNÇÕES DE OBTENÇÃO";
-	const HEADER_PAGE_HOME_TITLE                                    = "InfraTools";
-	const HEADER_PAGE_HOME_IMAGE_ALT                                = "InfraTools";
-	const HEADER_PAGE_LOGIN_TITLE                                   = "Entrar";
-	const HEADER_PAGE_LOGIN_TEXT                                    = "Entrar";
-	const HEADER_PAGE_LOGOUT                                        = "Sair";
-	const HEADER_PAGE_NOTIFICATION_TITLE                            = "Notificações";
-	const HEADER_PAGE_NOTIFICATION_TEXT                             = "NOTIFICAÇÕES";
-	const HEADER_PAGE_REGISTER_TITLE                                = "Registrar";
-	const HEADER_PAGE_REGISTER_TEXT                                 = "Registrar";
-	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TITLE                = "Reenviar link de confirmação";
-	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT                 = "aqui";
-	const HEADER_PAGE_SERVICE_TITLE                                 = "Serviços";
-	const HEADER_PAGE_SERVICE_TEXT                                  = "SERVIÇOS";
-	const HEADER_PAGE_SERVICE_LST_TITLE                             = "Listagem de Serviços";
-	const HEADER_PAGE_SERVICE_LST_TEXT                              = "LISTAGEM DE SERVIÇOS";
-	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "Listagem de Serviços por Corporação";
-	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TEXT               = "LISTAGEM DE SERVIÇOS POR CORPORAÇÃO";
-	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TITLE               = "Listagem de Serviços por Departamento";
-	const HEADER_PAGE_SERVICE_LST_BY_DEPARTMENT_TEXT                = "LISTAGEM DE SERVIÇOS POR DEPARTAMENTO";
-	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TITLE  = "Listagem de Serviços por Tipo de Associação";
-	const HEADER_PAGE_SERVICE_LST_BY_TYPE_ASSOC_USER_SERVICE_TEXT   = "LISTAGEM DE SERVIÇOS POR TIPO DE ASSOCIAÇÃO";
-	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TITLE             = "Listagem de Serviços por Tipo";
-	const HEADER_PAGE_SERVICE_LST_BY_TYPE_SERVICE_TEXT              = "LISTAGEM DE SERVIÇOS POR TIPO";
-	const HEADER_PAGE_SERVICE_REGISTER_TITLE                        = "Cadastrar Serviço";
-	const HEADER_PAGE_SERVICE_REGISTER_TEXT                         = "CADASTRAR SERVIÇO";
-	const HEADER_PAGE_SERVICE_SEL_TITLE                             = "Selecionar Serviço";
-	const HEADER_PAGE_SERVICE_SEL_TEXT                              = "SELECIONAR SERVIÇO";
-	const HEADER_PAGE_SUPPORT_TITLE                                 = "Solicitações";
-	const HEADER_PAGE_SUPPORT_TEXT                                  = "SOLICITAÇÕES";
-	const HEADER_PAGE_SUPPORT_CONTACT_TITLE                         = "Nova Solicitação";
-	const HEADER_PAGE_SUPPORT_CONTACT_TEXT                          = "NOVA SOLICITAÇÃO";
-	const HEADER_PAGE_SUPPORT_LST_TITLE                             = "Listar Solicitações";
-	const HEADER_PAGE_SUPPORT_LST_TEXT                              = "LISTAR SOLICITAÇÕES";
-	const HEADER_PAGE_SUPPORT_REGISTER_TITLE                        = "CADASTRAR Solicitação";
-	const HEADER_PAGE_SUPPORT_REGISTER_TEXT                         = "CADASTRAR SOLICITAÇÃO";
-	const HEADER_PAGE_SUPPORT_SEL_TITLE                             = "Selecionar Solicitação";
-	const HEADER_PAGE_SUPPORT_SEL_TEXT                              = "SELECIONAR SOLICITAÇÃO";
-	const HEADER_PAGE_TEAM_TITLE                                    = "Minhas equipes";
-	const HEADER_PAGE_TEAM_TEXT                                     = "Minhas equipes";
-	const HEADER_PAGE_TEAM_LST_TITLE                                = "Listar Equipes";
-	const HEADER_PAGE_TEAM_LST_TEXT                                 = "LISTAR EQUIPES";
-	const HEADER_PAGE_TEAM_REGISTER_TITLE                           = "Cadastrar Equipe";
-	const HEADER_PAGE_TEAM_REGISTER_TEXT                            = "CADASTRAR EQUIPE";
-	const HEADER_PAGE_TEAM_SEL_TITLE                                = "Selecionar Equipe";
-	const HEADER_PAGE_TEAM_SEL_TEXT                                 = "Selecionar EQUIPE";
-	
-	/* Body Page About */
-	const ABOUT_DESCRIPTION_TITLE                                   = "Sobre o sistema";
-	const ABOUT_DESCRIPTION_TEXT                                    = "O sistema InfraTools oferece diversas funcionalidades para "
-	                                                                . "auxílio de infraestrutura sendo baseado em computação na nuvem. <br/> "
-													   			    . "Oferecemos funcionalidades personalizadas e agendamento das  mesmas. "
-																    . "Caso queira algum serviço específico, entre em contato.";
-	const ABOUT_SERVICE_TITLE                                       = "Auxílio Corporativo";
-	const ABOUT_SERVICE_TEXT                                        = "Trabalhamos diretamente em cima do conceito de computação na "
-	                                                                . "nuvem, e prestamos serviços de infraestrutura para empresas que "
-		                                                            . "queiram auxílio "
-																    . "com soluções na núvem";
-	const ABOUT_PERSONALIZED_TITLE                                  = "Funcionalidades Personalizadas";
-	const ABOUT_PERSONALIZED_TEXT                                   = "Podemos oferecer rotinas de monitoramento e agendamento de "
-	                                                                . "funcionalidade, assim como funcionalidades personalizadas.";
-	
-	/* Body Page Account Update */
-	const ACCOUNT_UPDT_INVALID_BIRTH_DATE                           = "Data de nascimento inválida";
-	const ACCOUNT_UPDT_INVALID_BIRTH_DATE_DAY                       = "Dia de nascimento inválido";
-	const ACCOUNT_UPDT_INVALID_BIRTH_DATE_MONTH                     = "Mês de nascimento inválido";
-	const ACCOUNT_UPDT_INVALID_BIRTH_DATE_YEAR                      = "Ano de nascimento inválido";
-	const ACCOUNT_UPDT_INVALID_GENDER                               = "Gênero inválido, selecione um gênero valido da lista fornecido";
-	const ACCOUNT_UPDT_INVALID_NAME                                 = "Favor preencher um nome válido";
-	const ACCOUNT_UPDT_INVALID_NAME_SIZE                            = "Quantidade de caracteres excede o tamanho máximo no nome";
-	const ACCOUNT_UPDT_INVALID_USER_UNIQUE_ID                       = "Favor preencher um ID único válido";
-	const ACCOUNT_UPDT_INVALID_USER_UNIQUE_ID_SIZE                  = "Quantidade de caracteres excede o tamanho máximo no "
-		                                                            . "ID único";
-	const ACCOUNT_UPDT_NAME_TIP                                     = "(Nome e sobrenome)";
-	const ACCOUNT_UPDT_SEL_BIRTH_DATE_DAY                           = "Dia";
-	const ACCOUNT_UPDT_SEL_BIRTH_DATE_MONTH                         = "Mês";
-	const ACCOUNT_UPDT_SEL_BIRTH_DATE_YEAR                          = "Ano";
-	const FIELD_USER_GENDER_MALE                      = "Masculino";
-	const FIELD_USER_GENDER_FEMALE                    = "Femino";
-	const ACCOUNT_UPDT_TEXT_BIRTH_DATE                         = "Data de nascimento";
-	
-	/* Body Page Account Change Password */
-	const ACCOUNT_CHANGE_PASSWORD_ERROR                          = "Erro ao atualizar dado";
-	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD               = "Senha inválida, digite uma senha válida que atenda aos critérios";
-	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_MATCH         = "Senhas não coincidem";
-	const ACCOUNT_CHANGE_PASSWORD_INVALID_PASSWORD_SIZE          = "A Senha deve possuir um mínimo de 8 caracteres e um máximo de "                                                                      . "16 caracteres";
-	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD                   = "Nova senha";
-	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TIP               = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 digitos)";
-	const ACCOUNT_CHANGE_PASSWORD_NEW_PASSWORD_TITLE             = "A senha deve conter pelo menos 1 número e uma letra maíuscula, "
-	                                                             . "possuindo entre 8 e 18 caracteres";
-	const ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD                = "Repetir senha";
-	const ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD_TIP            = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 digitos)";
-	const ACCOUNT_CHANGE_PASSWORD_REPEAT_PASSWORD_TITLE          = "A senha deve conter pelo menos 1 número e uma letra maíuscula, "
-	                                                             . "possuindo entre 8 e 18 caracteres";
-	const ACCOUNT_CHANGE_PASSWORD_SB                         = "ATUALIZAR";
-	const ACCOUNT_CHANGE_PASSWORD_SB_CANCEL                  = "CANCELAR";
-	const ACCOUNT_CHANGE_PASSWORD_SUCCESS                        = "Sucesso";
-	
-	/* Body Page AdminTeam */
-	const TEAM_DEL_ERROR                                 = "Erro ao excluir equipe";
-	const TEAM_DEL_ERROR_DEPENDENCY_TEAM                 = "Equipe possui usuários associados, exclua-os primeiro";
-	const TEAM_DEL_SUCCESS                               = "Equipe excluida com sucesso";
-	const TEAM_INVALID_DESCRIPTION                          = "Descrição inválida";
-	const TEAM_INVALID_DESCRIPTION_SIZE                     = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const TEAM_INSERT_ERROR                                 = "Erro ao cadastrar equipe";
-	const TEAM_INSERT_SUCCESS                               = "Equipe cadastrada com sucesso";
-	const TEAM_UPDT_ERROR                                 = "Erro ao atualizar equipe";
-	const TEAM_UPDT_SUCCESS                               = "Equipe atualizada com sucesso";
-	
-	/* Body Page Admin Tech Info */
-	const TECH_INFO_DIRECTORY_COUNT                         = "Quantidade de Diretórios";
-	const TECH_INFO_FILE_COUNT                              = "Quantidade de Arquivos";
-	const TECH_INFO_FILE_EXTENSION                          = "Extensão";
-	const TECH_INFO_FILE_TYPE                               = "Tipo";
-	const TECH_INFO_FILE_VALUE                              = "Valor";
-	const TECH_INFO_LANGUAGE_QUANTITY_CONSTANT              = "Quantidade de constantes";
-	const TECH_INFO_LANGUAGE_QUANTITY_VALUE                 = "Quantidade de textos";
-	const TECH_INFO_LANGUAGE_CONSTANTS_PROBLEM              = "Contantes com possívels problemas";
-	const TECH_INFO_TITLE_BASE                              = "Base";
-	const TECH_INFO_TITLE_INFRATOOLS                        = "InfraTools";
-	const TECH_INFO_TITLE_TOTAL                             = "Total";	
-	
-	/* Body Page AdminTypeAssocUserTeam */
-	const TYPE_ASSOC_USER_TEAM_DEL_ERROR                 = "Erro ao excluir tipo de associação";
-	const TYPE_ASSOC_USER_TEAM_DEL_ERROR_DEPENDENCY_TEAM = "Tipo de associação está sendo usada entre usuários e equipes, "
-		                                                    . "faça desassociações necessárias primeiro";
-	const TYPE_ASSOC_USER_TEAM_DEL_SUCCESS               = "Tipo de associação excluida com sucesso";
-	const TYPE_ASSOC_USER_TEAM_INSERT_ERROR                 = "Erro ao cadastrar tipo de associação";
-	const TYPE_ASSOC_USER_TEAM_INSERT_SUCCESS               = "Tipo de associação cadastrado com sucesso";
-	const TYPE_ASSOC_USER_TEAM_UPDT_ERROR                 = "Erro ao atualizar tipo de associação";
-	const TYPE_ASSOC_USER_TEAM_UPDT_SUCCESS               = "Tipo de associação atualizada com sucesso";
-	
-	/* Body Page AdminTypeStatusTicket */
-	const TYPE_STATUS_TICKET_DEL_ERROR                   = "Erro ao excluir tipo de estado de solicitação";
-	const TYPE_STATUS_TICKET_DEL_ERROR_DEPENDENCY_TICKET = "Tipo de estado de solicitação está em uso em solcitações, "
-		                                                    . "faça as desassociações necessárias primeiro";
-	const TYPE_STATUS_TICKET_DEL_SUCCESS                 = "Tipo de estado de solicitação excluido com sucesso";
-	const TYPE_STATUS_TICKET_INSERT_ERROR                   = "Erro ao cadastrar tip ode estado de solicitação";
-	const TYPE_STATUS_TICKET_INSERT_SUCCESS                 = "Tipo de estado de solicitação cadastrado com sucesso";
-	const TYPE_STATUS_TICKET_UPDT_ERROR                   = "Erro ao atualizar tipo de estado de solicitação";
-	const TYPE_STATUS_TICKET_UPDT_SUCCESS                 = "Tipo de solicitação atualizado com sucesso";
-	
-	/* Body Page AdminTypeTicket */
-	const TYPE_TICKET_DEL_ERROR                          = "Erro ao excluir tipo de solcitação";
-	const TYPE_TICKET_DEL_ERROR_DEPENDENCY_TICKET        = "Tipo de solicitação está em uso em solcitações, "
-		                                                    . "faça as desassociações necessárias primeiro";
-	const TYPE_TICKET_DEL_SUCCESS                        = "Tipo de solcitação excluída com sucesso";
-	const TYPE_TICKET_INVALID_DESCRIPTION                   = "Descrição inválida";
-	const TYPE_TICKET_INVALID_DESCRIPTION_SIZE              = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const TYPE_TICKET_INSERT_ERROR                          = "Erro ao cadastrar tipo de solcitação";
-	const TYPE_TICKET_INSERT_SUCCESS                        = "Tipo de solcitação cadastrado com sucesso";
-	const TYPE_TICKET_UPDT_ERROR                          = "Erro ao atualizar tipo de solcitação";
-	const TYPE_TICKET_UPDT_SUCCESS                        = "Tipo de solcitação atualizada com sucesso";
-	
-	/* Body Page AdminTypeUser */
-	const TYPE_USER_DEL_ERROR                            = "Erro ao excluir tipo de usuário";
-	const TYPE_USER_DEL_ERROR_DEPENDENCY_USER            = "Tipo de usuário possui usuários associados, exclua-os antes";
-	const TYPE_USER_DEL_SUCCESS                          = "Tipo de usuário excluído com sucesso";
-	const TYPE_USER_INVALID_DESCRIPTION                     = "Descrição inválida";
-	const TYPE_USER_INVALID_DESCRIPTION_SIZE                = "Quantidade de caracteres excede o tamanho máximo na descrição";
-	const TYPE_USER_INSERT_ERROR                            = "Erro ao cadastrar tipo de usuário";
-	const TYPE_USER_INSERT_SUCCESS                          = "Tipo de usuário cadastrado com sucesso";
-	const TYPE_USER_UPDT_ERROR                            = "Error ao atualizar tipo de usuário";
-	const TYPE_USER_UPDT_SUCCESS                          = "Tipo de usuário atualizado com sucesso";
-	
-	/* Body Page AdminUser */
-	const USER_ACTIVATE_ERROR                               = "Erro ao tentar [0] usuário";
-	const USER_ACTIVATE_ERROR_NO_USER_SELED              = "Nenhum usuário foi selecionado";
-	const USER_ACTIVATE_SUCCESS                             = "Usuário [0] com sucesso";
-	const USER_CHANGE_CORPORATION_ERROR                     = "Erro ao tentar alterar corporação do usuário";
-	const USER_CHANGE_CORPORATION_SUCCESS                   = "Corporação do usuário alterada com sucesso";
-	const USER_CHANGE_USER_TYPE_ERROR                       = "Erro ao tentar alterar tipo de usuário";
-	const USER_CHANGE_USER_TYPE_SUCCESS                     = "Tipo de usuário alterado com sucesso";
-	const USER_DEL_ERROR                                 = "Erro ao tentar excluir usuário"; 
-	const USER_DEL_ERROR_DEPENDENCY                             = "Usuário tem associações, exclu-as antes";
-	const USER_DEL_SUCCESS                               = "Usuário excluido com sucesso";
-	const USER_SEARCH_RESULT_NUMBER                         = "Resultado máximo da busca é 20";
-	const USER_SEARCH_RANGE_START                           = "Alcance do início";
-	const USER_SEARCH_RANGE_END                             = "Alcance do fim";
-	
-	/* Body Page Check */
-	const CHECK_SB                                            = "VERIFICAR";
 	const CHECK_AVAILABILITY_INPUT_HOST_TITLE                     = "Domínio";
 	const CHECK_AVAILABILITY_LABEL_HOST                           = "Domínio";
 	const CHECK_AVAILABILITY_TITLE                                = "Verificar disponibilidade de domínio";
@@ -1341,14 +1298,9 @@ class Pt
 	const CONTACT_INVALID_TITLE                                   = "Favor preencher um título válido";
 	const CONTACT_INVALID_TITLE_SIZE                              = "Quantidade de caracteres excede o tamanho máximo no titulo";
 	const CONTACT_SUCCESS                                         = "Mensagem enviada com sucesso";
-	const FIELD_TICKET_CONTACT_SEL_COMMERCIAL                               = "Comercial";
-	const FIELD_TICKET_CONTACT_SEL_DOUBT                                    = "Dúvida";
-	const FIELD_TICKET_CONTACT_SEL_SUGGESTION                               = "Sugestão";
 	const CONTACT_TEXT_CAPTCHA                                    = "Digite a Palavra";
 	const CONTACT_TEXT_MESSAGE                                    = "Mensagem";
 	const CONTACT_TEXT_NAME                                       = "Nome";
-	const CONTACT_TEXT_NAME_TIP                                   = "(Nome e sobrenome)";
-	const CONTACT_TEXT_SEND                                       = "ENVIAR";
 	const CONTACT_TEXT_SUBJECT                                    = "Assunto";
 	const CONTACT_TEXT_TITLE                                      = "Título";
 	const CONTACT_TEXT_TITLE_TIP                                  = "(Não pode conter números)";
@@ -1416,45 +1368,30 @@ class Pt
 																  . "endereço fornecido. Se o endereço for um domínio registrado,  "
 																  . "por exemplo, a função irá prover as informações associadas a " 
 																  . "esse domínio.";
-	
-	/* Body Page Home */
 	const HOME_CHECK_1                                            = "Conjunto de funcionalidades para auxiliar";
 	const HOME_CHECK_2                                            = "em verificações de rede, para teste";
 	const HOME_CHECK_3                                            = "ou diagnostico de problemas.";
-	const HOME_CHECK_BUTTON_TEXT                                  = "Ir";
 	const HOME_CLOUD_1                                            = "Página voltada";
 	const HOME_CLOUD_2                                            = "para documentação e monitoramento";
 	const HOME_CLOUD_3                                            = "de serviços na web.";
-	const HOME_CLOUD_BUTTON_TEXT                                  = "Ir";
 	const HOME_GET_1                                              = "Conjunto de funcionalidades voltadas";
 	const HOME_GET_2                                              = "para obtenção de dados sobre";
 	const HOME_GET_3                                              = "rede e web.";
-	const HOME_GET_BUTTON_TEXT                                    = "Ir";
 	const HOME_INSTALL_1                                          = "Página que instala, ";
 	const HOME_INSTALL_2                                          = "importa dados ou reinstala";
 	const HOME_INSTALL_3                                          = "a base dados do sistema ";
-	const HOME_INSTALL_BUTTON_TEXT                                = "Ir";
-	const HOME_API_1                                              = "Conjunto de funcionalidades que utilizam";
-	const HOME_API_2                                              = "serviços externos para prover";
-	const HOME_API_3                                              = "informações adicionais";
-	const HOME_API_BUTTON_TEXT                                    = "Ir";
 	const HOME_CERTIFICATION                                      = "Certificações";
 	
 	/* Body Page Login */
-	const LOGIN_ERROR                                             = "Erro ao tentar entrar";
 	const LOGIN_FORGOT_PASSWORD_TEXT                              = "Esqueceu a senha?";
 	const LOGIN_NEW_TEXT                                          = "Novo? Cadastre-se";
-	const LOGIN_PASSWORD                                          = "Senha";
 	const LOGIN_INVALID_LOGIN                                     = "Login ou senha inválidos";
-	const LOGIN_SUCCESS                                           = "Successo";
 	const LOGIN_SEND                                              = "ENTRAR";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE                        = "Código de verificação";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_ERROR                  = "Código de verificação está errado!";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_FAILED           = "Falha ao enviar código para seu e-mail, por favor tente de novo";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TAG              = "InfraTools - Login Verificação duas etapas";
 	const LOGIN_TWO_STEP_VERIFICATION_CODE_EMAIL_TEXT             = "Aqui está o código necessário para efetuar login";
-	
-	/* Body Page Not Found */
 	
 	/* Body Page Password Recovery */
 	const PASSWORD_RECOVERY_EMAIL_ALREADY_SENT                    = "A senha já foi enviada para este e-mail, favor aguardar um "   
@@ -1467,58 +1404,11 @@ class Pt
 	const PASSWORD_RECOVERY_ERROR                                 = "Erro ao validar campos";
 	const PASSWORD_RECOVERY_SUCCESS                               = "Senha enviada para o e-mail";
 	const PASSWORD_RECOVERY_TEXT_CAPTCHA                          = "Digite a Palavra";
-	const PASSWORD_RECOVERY_TEXT_SEND                             = "ENVIAR";
 	
 	/* Body Page Password Reset */
 	const PASSWORD_RESET_INVALID_CODE                            = "Código inválido";
-	const PASSWORD_RESET_INVALID_PASSWORD                        = "Senha inválida, digite uma senha válida que atenda aos critérios";
-	const PASSWORD_RESET_INVALID_PASSWORD_MATCH                  = "Senhas não coincidem";
-	const PASSWORD_RESET_INVALID_PASSWORD_SIZE                   = "A Senha deve possuir um mínimo de 8 caracteres e um máximo de "                                                                          . "16 caracteres";
 	const PASSWORD_RESET_ERROR                                   = "Erro ao tentar alterar senha, tente novamente";
 	const PASSWORD_RESET_SUCCESS                                 = "Senha alterada com sucesso";
 	const PASSWORD_RESET_TEXT_CODE                               = "Codigo de alteração";
-	const PASSWORD_RESET_TEXT_NEW_PASSWORD                       = "Nova senha";
-	const PASSWORD_RESET_TEXT_NEW_PASSWORD_TIP                   = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 dígitos)";
-	const PASSWORD_RESET_TEXT_REPEAT_PASSWORD                    = "Repetir nova senha";
-	const PASSWORD_RESET_TEXT_REPEAT_PASSWORD_TIP                = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 dígitos)";
 	const PASSWORD_RESET_TEXT_SEND                               = "ALTERAR";
-	const PASSWORD_RESET_WARNING                                 = "Senha não alterada, a senha digitada é a atual";
-		
-	/* Body Page Register */
-	const REGISTER_EMAIL_ALREADY_REGISTERED                      = "E-mail já cadastrado";
-	const REGISTER_EMAIL_ALREADY_SENT                            = "A senha já foi enviada para este e-mail, favor aguardar um "                                                                    
-	                                                             . "tempo para enviar novamente";
-	const REGISTER_EMAIL_ERROR                                   = "Ocorreu um erro ao enviar a mensagem";
-	const REGISTER_EMAIL_TAG                                     = "InfraTools - Cadastro";
-	const REGISTER_EMAIL_TEXT                                    = "clique no link abaixo para finalizar seu cadastro.<br/>"
-	                                                             . "<br/>Link:";
-	const REGISTER_INSERT_ERROR                                  = "Erro ao tentar registrar usuário";
-	const FIELD_USER_GENDER_OTHER                           = "Outro";
-	const REGISTER_SUCCESS                                       = "Cadastro efetuado com sucesso. Um link foi enviado ao seu e-mail para "                                                                  
-	                                                             . "ativar sua conta";
-	const REGISTER_SUCCESS_NO_LINK                               = "Cadastro efetuado com sucesso.";
-	const REGISTER_TEXT_BIRTH_DATE                               = "Data de nascimento";
-	const REGISTER_TEXT_CAPTCHA                                  = "Digite a palavra";
-	const REGISTER_TEXT_NAME_TIP                                 = "(Nome e sobrenome)";
-	const REGISTER_TEXT_NEW_PASSWORD                             = "Senha";
-	const REGISTER_TEXT_NEW_PASSWORD_TIP                         = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 dígitos)";
-	const REGISTER_TEXT_NEW_PASSWORD_TITLE                       = "A senha deve conter pelo menos 1 número e uma letra maíuscula, "
-	                                                             . "possuindo entre 8 e 18 dígitos";
-	const REGISTER_TEXT_REPEAT_PASSWORD                          = "Repetir senha";
-	const REGISTER_TEXT_REPEAT_PASSWORD_TIP                      = "(Pelo menos 1 número e uma letra maíuscula, entre 8 e 18 dígitos)";
-	const REGISTER_TEXT_REPEAT_PASSWORD_TITLE                    = "A senha deve conter pelo menos 1 número e uma letra maíuscula, " 
-	                                                             . "possuindo entre 8 e 18 dígitos";
-	
-	/* Body Page Register Confirmation */
-	const REGISTER_CONFIRMATION_ALREADY_CONFIRMED                = "Este cadastro já está ativo";
-	const REGISTER_CONFIRMATION_SEL_ERROR                     = "Não foi possível obter uma conta associada ao código fornecido.";
-	const REGISTER_CONFIRMATION_SUCCESS                          = "Cadastro ativado com sucesso";
-	const REGISTER_CONFIRMATION_UPDT_ERROR                     = "Erro ao ativar cadastro";
-	const REGISTER_CONFIRMATION_WARNING                          = "Não foi necessário ativar esta conta";
-	
-	/* Body Page Resend Confirmation Link */
-	const RESEND_CONFIRMATION_EMAIL_TAG                          = "InfraTools - Reenvio de Link de Confirmação";
-	const RESEND_CONFIRMATION_EMAIL_TEXT                         = "clique no link abaixo para finalizar seu cadastro.<br/><br/>Link:";
-	const RESEND_CONFIRMATION_LINK_ERROR                         = "Um erro ocorreu, por favor tente novamente ou entre em contato";
-	const RESEND_CONFIRMATION_LINK_SUCCESS                       = "Link de confirmação reenviado com sucesso";
 }

@@ -90,10 +90,10 @@ class PageAdminSystemConfiguration extends PageAdmin
 		//FM_SYSTEM_CONFIGURATION_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_SYSTEM_CONFIGURATION_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			if(isset($_POST[ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION]))
+			if(isset($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO]))
 			{
-				if($_POST[ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION] ==
-				          ConfigInfraTools::FIELD_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME)
+				if($_POST[ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO] ==
+				          ConfigInfraTools::FIELD_SYSTEM_CONFIGURATION_RADIO_OPTION_NAME)
 				{
 					$this->ReturnSystemConfigurationOptionNameRadioClass   = "NotHidden";
 					$this->ReturnSystemConfigurationOptionNumberRadioClass = "Hidden";

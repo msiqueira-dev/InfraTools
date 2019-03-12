@@ -33,7 +33,7 @@
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_NAME_TIP'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_NAME_TIP'); ?>
 				</label>
 			</div>
 		</div>
@@ -108,10 +108,10 @@
 						   value="<?php echo $this->InputValueUserEmail; ?>" maxlength="60" />
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- REGISTER_BIRTH_DATE -->
+	<!-- FIELD_USER_BIRTH_DATE -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label> <?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
@@ -134,7 +134,7 @@
 							  || $this->InputValueBirthDateDay == ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>" 
 				disabled="disabled"> 
-					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_DAY'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_DAY'); ?> 
 			</option>
 			<?php for($i=1; $i<32; $i++)
 				  {
@@ -164,7 +164,7 @@
 							  || $this->InputValueBirthDateMonth == ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>" 
 				disabled="disabled"> 
-					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_MONTH'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_MONTH'); ?> 
 			</option>
 			<?php for($i=1; $i<13; $i++)
 				  {
@@ -194,7 +194,7 @@
 							  || $this->InputValueBirthDateYear == ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY; ?>" 
 				disabled="disabled"> 
-					<?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE_YEAR'); ?> 
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_YEAR'); ?> 
 			</option>
 			<?php for($i=1940; $i<2016; $i++)
 				  {
@@ -486,12 +486,12 @@
 	<!-- NEW PASSWORD -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label> <?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_NEW_PASSWORD'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_NEW_PASSWORD_TIP'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?>
 				</label>
 			</div>
 		</div>
@@ -521,19 +521,19 @@
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FM_USER_REGISTER_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_NEW_PASSWORD_TITLE'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TITLE'); ?>" 
 						   value="" maxlength="18" />
 	</div>
 	<div class="DivClearFloat"></div>
 	<!-- REPEAT PASSWORD -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabelBig">
-			<label> <?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_REPEAT_PASSWORD'); ?> </label>
+			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_REPEAT'); ?> </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 			<div class="DivContentBodyContainerLabelTip">
 				<label>
-					<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_REPEAT_PASSWORD_TIP'); ?>
+					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TIP'); ?>
 				</label>
 			</div>
 		</div>
@@ -563,7 +563,7 @@
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FM_USER_REGISTER_SB; ?>',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('REGISTER_TEXT_REPEAT_PASSWORD_TITLE'); ?>" 
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_PASSWORD_TITLE'); ?>" 
 						   value="" maxlength="18" />
 	</div>
 	<?php if($this->ValidateCaptcha) 

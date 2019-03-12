@@ -42,7 +42,7 @@
 .DivHeaderDivisionContainerInfo label{color:white;}
 .DivHeaderDivisionContainerLogin{min-width:320px;min-height:30px;max-height:30px;}
 .DivHeaderDivisionContainerLoginElements{min-width:320px;min-height:30px;max-height:30px;display:table;text-align:center;margin:0 auto;}
-.DivHeaderDivisionContainerLoginElement{width:auto;min-height:30px;max-height:30px;float:left;display:inline;display:table-cell;vertical-align:middle;padding-right:5px;margin-left:2%;}
+.DivHeaderDivisionContainerLoginElement{width:auto;min-height:30px;max-height:30px;float:left;display:inline;display:table-cell;vertical-align:middle;padding-right:5px;}
 .DivHeaderDivisionContainerLoginElement:hover{font-weight:bolder;}
 .DivHeaderDivisionContainerLoginElement a{text-decoration:underline;color:#FFFFFF;font-size:100%;position:relative;top:5px;}
 .DivHeaderDivisionContainerLoginElement a img{position: relative;bottom:6px;}

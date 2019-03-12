@@ -56,10 +56,10 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
-	<!-- BIRTH_DATE -->
+	<!-- FIELD_USER_BIRTH_DATE -->
 	<div class="DivContentBodyContainerSided">
 		<div class="DivContentBodyContainerLabelSided">
-			<label><?php echo $this->InstanceLanguageText->GetText('BIRTH_DATE').":"; ?></label>
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE').":"; ?></label>
 		</div>
 		<div class="DivContentBodyContainerValueSided">
 			<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueBirthDateDay . " /"; ?></label>
