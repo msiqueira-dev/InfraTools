@@ -154,6 +154,10 @@ Methods:
 		protected     function        UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug);
 		protected     function        UserSelectExistsByUserEmail($Capcha, $UserEmail, $Debug);
 		protected     function        UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug);
+		protected     function        UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceNotification, 
+		                                                                &$RowCount, $Debug);
+		protected     function        UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug);
+		protected     function        UserSelectNotificationByUserEmailNoLimit($InstanceUser, &$ArrayInstanceNotification, $Debug);
 		protected     function        UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug);
 		protected     function        UserUpdateActiveByUserEmail($UserActiveNew, &$InstanceUser, $Debug);
 		protected     function        AssocUserCorporationUpdateByUserEmailAndCorporationName($AssocUserCorporationDepartmentName,
@@ -556,7 +560,9 @@ class Page
 				$return = $this->InstanceFacedePersistence->UserSelectByUserEmail($this->InputValueLoginEmail, $user, $Debug);
 				if($return == Config::RET_OK)
 				{
-					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmail($user,$Debug);
+					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmailCount($user, $count, $Debug);
+					if($return == Config::RET_OK)
+						$user->SetAssocUserNotificationCount($count);
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $Debug);
 				}
 			}
@@ -570,7 +576,9 @@ class Page
 				$return = $this->InstanceFacedePersistence->UserSelectByUserUniqueId($this->InputValueLoginEmail, $user, $Debug);
 				if($return == Config::RET_OK)
 				{
-					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmail($user,$Debug);
+					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmailCount($user, $count, $Debug);
+					if($return == Config::RET_OK)
+						$user->SetAssocUserNotificationCount($count);
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,$Debug);
 				}
 			}
@@ -4507,7 +4515,7 @@ class Page
 		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2,
+			$return = $instanceFacedePersistence->UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription,
 															                      $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::RET_OK)
 			{
@@ -4681,10 +4689,124 @@ class Page
 		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($this->InputValueUserEmail, $HashCode, $Debug);
+			$return = $instanceFacedePersistence->UserSelectHashCodeByUserEmail($InstanceUser, $HashCode, $Debug);
 			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS");
+				return Config::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceAssocUserNotification, 
+														 &$RowCount, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail  = $InstanceUser->GetEmail();
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, 
+																					$ArrayInstanceAssocUserNotification, $RowCount, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS");
+				return Config::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail  = $InstanceUser->GetEmail();
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectNotificationByUserEmailCount($InstanceUser, $Count, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS");
+				return Config::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectNotificationByUserEmailNoLimit($InstanceUser, &$ArrayInstanceAssocUserNotification, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueUserEmail  = $$InstanceUser->GetEmail();
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_USER_EMAIL
+		$arrayElements[0]             = Config::FIELD_USER_EMAIL;
+		$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnUserEmailText;
+		array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectNotificationByUserEmail($InstanceUser, 
+																					$ArrayInstanceAssocUserNotification, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS");
 				return Config::RET_OK;
 			}
 		}

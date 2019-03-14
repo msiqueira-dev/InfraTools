@@ -6,6 +6,9 @@
 .DivHeaderContainerMenu a{width:auto;height:67px;text-align:center;letter-spacing:0;text-decoration:none;color:#FFFFFF;font-size:14px;}
 .DivHeaderContainerMenu span{width:auto;height:52px;text-align:center;display:block;font-size:14px;color:#FFFFFF;font-weight:bold;}
 .HeaderSpace{width:auto;height:25px !important;}
+.DivHeaderContainerMenu div div:hover{color:#e6e6e6;}
+.DivHeaderContainerMenu div div a:hover{width:140px;height:67px;color:#e6e6e6;}
+.DivHeaderContainerMenu div div a span:hover{color:#e6e6e6;}
 .DivHeaderContainerMenuLink{width:auto;height:67px;max-width:140px;margin:0 auto;}
 .DivHeaderContainerMenuLinkSubContainer{width:auto;height:35px;z-index:100;position:relative;top:12px;background-color:#43435d;border-bottom:2px solid #7a7a9f;border-left:2px solid #7a7a9f;border-right:2px solid #7a7a9f;}
 .DivHeaderContainerMenuLinkSubContainer:hover{background-color:#192650;}

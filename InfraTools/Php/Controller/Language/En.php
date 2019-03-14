@@ -130,6 +130,7 @@ class En
 	const FILL_REQUIRED_FIELDS                                      = "Please fill the necessary fields";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE            = "Registration date";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID              = "Registration ID";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                        = "Notification read";
 	const FIELD_CORPORATION_ACTIVE                                  = "Active";
 	const FIELD_CORPORATION_NAME                                    = "Corporation name";
 	const FIELD_COUNTRY_ABBREVIATION                                = "Country Initials";
@@ -530,6 +531,7 @@ class En
 	const NOTIFICATION_UPDT_SUCCESS                                 = "Notification updated successfully";
 	const NULL_EMPTY                                                = "No value associated";
 	const NULL_OPTION                                               = "Please select an option";
+	const OPERATION_CONTACT                                         = "Contact";
 	const OPERATION_LST                                             = "Listing";
 	const OPERATION_REGISTER                                        = "Register";
 	const OPERATION_SEARCH                                          = "Search";	
@@ -1143,6 +1145,8 @@ class En
 	const USER_SEL_EXISTS_BY_USER_EMAIL_SUCCESS                     = "User exists";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR                    = "Error trying to obtain user's hash code with the given e-mail";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "Hash code obtained sucessfully";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "Error trying to obtain user's notifications with the given e-mail";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "Notifications obtained sucessfully";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "Error trying to obtain teams associated with this e-mail";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "This user has not team";
 	const USER_TEAM_SEL_ERROR                                       = "Error trying to get the user teams";

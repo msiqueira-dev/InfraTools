@@ -131,6 +131,7 @@ class Pt
 	const FILL_REQUIRED_FIELDS                                      = "Por favor preencha os campos necessários";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE            = "Data de contratação";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID              = "Matrícula";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                        = "Notificação lida";
 	const FIELD_CORPORATION_ACTIVE                                  = "Ativo";
 	const FIELD_CORPORATION_NAME                                    = "Nome da corporação";
 	const FIELD_COUNTRY_ABBREVIATION                                = "Sigla do País";
@@ -535,6 +536,7 @@ class Pt
 	const NOTIFICATION_UPDT_SUCCESS                                 = "Notificação atualizada com sucesso";
 	const NULL_EMPTY                                                = "Nenhum valor associado";
 	const NULL_OPTION                                               = "Por favor escolha uma opção";
+	const OPERATION_CONTACT                                         = "Entre em contato";
 	const OPERATION_LST                                             = "Listagem";
 	const OPERATION_REGISTER                                        = "Cadastro";
 	const OPERATION_SEARCH                                          = "Busca";
@@ -1200,6 +1202,8 @@ class Pt
 	const USER_SEL_EXISTS_BY_USER_EMAIL_SUCCESS                     = "Usuário existe";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR                    = "Erro ao obter hash code de usuário com o e-mail fornecido";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "Código hash obtido com sucesso";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "Erro ao obter notificações do usuário com o e-mail fornecido";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "Notificações obtidas com sucesso";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "Erro ao obter equipes desse usuário";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "Esse usuário não possui equipes";
 	const USER_TEAM_SEL_ERROR                                       = "Erro ao obter equipes do usuário";

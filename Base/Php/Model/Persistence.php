@@ -111,6 +111,8 @@ Methods:
 			public static function SqlUserSelectUserActiveByHashCode();
 			public static function SqlUserSelectHashCodeByUserEmail();
 			public static function SqlUserSelectNotificationByUserEmail();
+			public static function SqlUserSelectNotificationByUserEmailCount();
+			public static function SqlUserSelectNotificationByUserEmailNoLimit();
 			public static function SqlUserSelectTeamByUserEmail();
 			public static function SqlUserUpdateActiveByUserEmail();
 			public static function SqlUserUpdateAssocUserCorporationByUserEmail();
@@ -1844,6 +1846,38 @@ class Persistence
 	}
 	
 	public static function SqlUserSelectNotificationByUserEmail()
+	{
+		return "SELECT "  
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID                        . ",  "
+		     . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_READ                                   . ",  "
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                             . ",  "
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                                                  . "   " 
+			 . "AS AssocUserNotificationRegisterDate, "                                                                                . "   "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE                                          . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID                                              . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT                                            . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                                                             . "   "
+			 . "AS NotificationRegisterDate "                                                                                          . ",  "
+		     . "(SELECT COUNT(*) FROM " . Config::TB_ASSOC_USER_NOTIFICATION                                                           . "   "
+		     . "WHERE "                 . Config::TB_ASSOC_USER_NOTIFICATION                                                           .".". 
+				                          Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                                      ."= UPPER(?) "
+		     . ") AS COUNT "
+		     . "FROM  "           . Config::TB_ASSOC_USER_NOTIFICATION                                                                 . "   " 
+		     . "INNER JOIN "      . Config::TB_NOTIFICATION                                                                            . "   "
+			 . "ON "              . Config::TB_ASSOC_USER_NOTIFICATION . "."   . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . " = "
+			                      . Config::TB_NOTIFICATION            . "."   . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID            . "   "
+		     . "WHERE "  . Config::TB_ASSOC_USER_NOTIFICATION . "."                                                                    . "   " 
+			 . "      "  . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                                                    ." = UPPER(?) "
+			 . " LIMIT ?,?";
+	}
+	
+	public static function SqlUserSelectNotificationByUserEmailCount()
+	{
+		return "SELECT COUNT(*) AS COUNT FROM " . Config::TB_ASSOC_USER_NOTIFICATION                                          . "   "
+		     . "WHERE "           . Config::TB_ASSOC_USER_NOTIFICATION .".". Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL . "= UPPER(?) ";
+	}
+	
+	public static function SqlUserSelectNotificationByUserEmailNoLimit()
 	{
 		return "SELECT "  
 			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID                        . ",  "

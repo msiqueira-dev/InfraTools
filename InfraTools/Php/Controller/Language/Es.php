@@ -126,6 +126,7 @@ class Es
 	const FILL_REQUIRED_FIELDS                                      = "";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE            = "";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID              = "";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                        = "";
 	const FIELD_CORPORATION_ACTIVE                                  = "";
 	const FIELD_CORPORATION_NAME                                    = "";
 	const FIELD_COUNTRY_ABBREVIATION                                = "";
@@ -495,6 +496,7 @@ class Es
 	const NOTIFICATION_UPDT_SUCCESS                                 = "";
 	const NULL_EMPTY                                                = "";
 	const NULL_OPTION                                               = "";
+	const OPERATION_CONTACT                                         = "";
 	const OPERATION_LST                                             = "";
 	const OPERATION_REGISTER                                        = "";
 	const OPERATION_SEARCH                                          = "";
@@ -1146,6 +1148,8 @@ class Es
 	const USER_SEL_EXISTS_BY_USER_EMAIL_SUCCESS                     = "";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR                    = "";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "";
 	const USER_TEAM_SEL_ERROR                                       = "";

@@ -23,11 +23,23 @@ if (!class_exists("PageInfraTools"))
 		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
 }
+if (!class_exists("Notification"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "Notification.php"))
+		include_once(BASE_PATH_PHP_MODEL . "Notification.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class Notification');
+}
+if (!class_exists("AssocUserNotification"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+		include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class AssocUserNotification');
+}
 
 class PageNotification extends PageInfraTools
 {
-	public $ArrayInstanceNotification = NULL;
-	public $InstanceNotification      = NULL;
+	public $ArrayInstanceAssocUserNotification = NULL;
+	public $InstanceNotification               = NULL;
 	
 	/* Singleton */
 	protected static $Instance;
@@ -59,6 +71,19 @@ class PageNotification extends PageInfraTools
 
 	public function LoadPage()
 	{
+		if(isset($this->User))
+		{
+			//FM_NOTIFICATION_LST
+			unset($_POST);
+			$_POST[ConfigInfraTools::FM_NOTIFICATION_LST] = ConfigInfraTools::FM_NOTIFICATION_LST; 
+			if($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_LST) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'UserSelectNotificationByUserEmail', 
+										  array($this->User, &$this->ArrayInstanceAssocUserNotification),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LST;
+			}
+		}
 		$this->LoadHtml(TRUE);
 	}
 }

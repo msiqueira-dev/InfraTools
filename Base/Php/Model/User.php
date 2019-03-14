@@ -17,6 +17,7 @@ Get / Set:
 			public function GetArrayAssocUserNotificationUnRead();
 			public function GetArrayAssocUserTeam();
 			public function GetAssocUserCorporation();
+			public function GetAssocUserNotificationCount();
 			public function GetAssocUserCorporationUserRegistrationDate();
 			public function GetAssocUserCorporationUserRegistrationDateDay();
 			public function GetAssocUserCorporationUserRegistrationDateMonth();
@@ -55,6 +56,7 @@ Get / Set:
 			public function SetArrayAssocUserNotification($ArrayAssocUserNotification);
 			public function SetArrayAssocUserTeam($ArrayAssocUserTeam);
 			public function SetAssocUserCorporation($AssocUserCorporation);
+			public function SetAssocUserNotificationCount($AssocUserNotificationCount);
 			public function SetBirthDate($BirthDate);
 			public function SetCorporation($CorporationInstance);
 			public function SetCountry($Country);
@@ -94,30 +96,31 @@ Methods:
 class User
 {		
 	/* Properties */
-	protected $ArrayAssocUserTeam          = NULL;
-	protected $ArrayAssocUserNotification  = NULL;
-	protected $AssocUserCorporation        = NULL;
-	protected $BirthDate                   = NULL;
-	protected $Corporation                 = NULL;
-	protected $Country                     = NULL;
-	protected $Department                  = NULL;
-	protected $UserEmail                   = NULL;
-	protected $Gender                      = NULL;
-	protected $HashCode                    = NULL;
-	protected $LoggedIn                    = NULL;
-	protected $UserName                    = NULL;
-	protected $Region                      = NULL;
-	protected $RegisterDate                = NULL;
-	protected $SessionExpires              = NULL;
-	protected $TwoStepVerification         = NULL;
-	protected $UserActive                  = NULL;
-	protected $UserConfirmed               = NULL;
-	protected $UserPhonePrimary            = NULL;
-	protected $UserPhonePrimaryPrefix      = NULL;
-	protected $UserPhoneSecondary          = NULL;
-	protected $UserPhoneSecondaryPrefix    = NULL;
-	protected $UserType                    = NULL;
-	protected $UserUniqueId                = NULL;
+	protected $ArrayAssocUserTeam              = NULL;
+	protected $ArrayAssocUserNotification      = NULL;
+	protected $AssocUserCorporation            = NULL;
+	protected $AssocUserNotificationCount      = NULL;
+	protected $BirthDate                       = NULL;
+	protected $Corporation                     = NULL;
+	protected $Country                         = NULL;
+	protected $Department                      = NULL;
+	protected $UserEmail                       = NULL;
+	protected $Gender                          = NULL;
+	protected $HashCode                        = NULL;
+	protected $LoggedIn                        = NULL;
+	protected $UserName                        = NULL;
+	protected $Region                          = NULL;
+	protected $RegisterDate                    = NULL;
+	protected $SessionExpires                  = NULL;
+	protected $TwoStepVerification             = NULL;
+	protected $UserActive                      = NULL;
+	protected $UserConfirmed                   = NULL;
+	protected $UserPhonePrimary                = NULL;
+	protected $UserPhonePrimaryPrefix          = NULL;
+	protected $UserPhoneSecondary              = NULL;
+	protected $UserPhoneSecondaryPrefix        = NULL;
+	protected $UserType                        = NULL;
+	protected $UserUniqueId                    = NULL;
 	
 	/* Constructor */
 	public function __construct($ArrayAssocUserTeam, $ArrayAssocUserNotification, $AssocUserCorporation,
@@ -231,6 +234,15 @@ class User
 		return NULL;
 	}
 	
+	public function GetAssocUserNotificationCount()
+	{
+		if(empty($this->ArrayAssocUserNotification))
+		{
+			return $this->AssocUserNotificationCount;
+		}
+		else return count($this->ArrayAssocUserNotification);
+	}
+	
 	public function GetArrayAssocUserNotificationUnRead()
 	{
 		if(is_array($this->ArrayAssocUserNotification))
@@ -245,6 +257,8 @@ class User
 			}
 			return $ArrayAssocUserNotificationUnRead;
 		}
+		elseif(isset($this->AssocUserNotificationCount))
+			return $this->AssocUserNotificationCount;
 		return NULL;
 	}
 	
@@ -500,6 +514,14 @@ class User
 	public function SetAssocUserCorporation($AssocUserCorporation)
 	{
 		$this->AssocUserCorporation = $AssocUserCorporation;
+	}
+	
+	public function SetAssocUserNotificationCount($AssocUserNotiticationCount)
+	{
+		if(empty($this->ArrayAssocUserNotification))
+		{
+			$this->AssocUserNotificationCount = $AssocUserNotiticationCount;
+		}		
 	}
 	
 	public function SetBirthDate($BirthDate)
