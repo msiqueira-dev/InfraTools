@@ -569,7 +569,7 @@ class Page
 				{
 					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmailCountUnRead($user, $count, $Debug);
 					if($return == Config::RET_OK)
-						$user->SetAssocUserNotificationCount($count);
+						$user->SetAssocUserNotificationCountUnRead($count);
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user, $Debug);
 				}
 			}
@@ -585,7 +585,7 @@ class Page
 				{
 					$return = $this->InstanceFacedePersistence->UserSelectNotificationByUserEmailCountUnRead($user, $count, $Debug);
 					if($return == Config::RET_OK)
-						$user->SetAssocUserNotificationCount($count);
+						$user->SetAssocUserNotificationCountUnRead($count);
 					$return = $this->InstanceFacedePersistence->UserSelectTeamByUserEmail($user,$Debug);
 				}
 			}
