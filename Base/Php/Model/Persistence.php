@@ -17,6 +17,7 @@ Methods:
 			public static function SqlAssocUserCorporationUpdateCorporation();
 			public static function SqlAssocUserNotificationInsert();
 			public static function SqlAssocUserNotificationInsertForAllUsers();
+			public static function SqlAssocUserNotificationUpdateByUserEmailAndNotificationId();
 			public static function SqlAssocUserTeamDelete();
 			public static function SqlAssocUserTeamInsert();
 			public static function SqlCorporationDelete();
@@ -111,7 +112,9 @@ Methods:
 			public static function SqlUserSelectUserActiveByHashCode();
 			public static function SqlUserSelectHashCodeByUserEmail();
 			public static function SqlUserSelectNotificationByUserEmail();
+			public static function SqlUserSelectNotificationByUserEmailAndNotificationId();
 			public static function SqlUserSelectNotificationByUserEmailCount();
+			public static function SqlUserSelectNotificationByUserEmailCountUnRead();
 			public static function SqlUserSelectNotificationByUserEmailNoLimit();
 			public static function SqlUserSelectTeamByUserEmail();
 			public static function SqlUserUpdateActiveByUserEmail();
@@ -206,6 +209,16 @@ class Persistence
 			 . " "            . Config::TB_FD_REGISTER_DATE                           . ") "
 		     . "SELECT ?, "   . Config::TB_USER_FD_USER_EMAIL . ", ?, NOW() "         . "  "
 			 . "FROM "        . Config::TB_USER . " AS " . Config::TB_USER;
+	}
+	
+	public static function SqlAssocUserNotificationUpdateByUserEmailAndNotificationId()
+	{
+		return "UPDATE " . Config::TB_ASSOC_USER_NOTIFICATION . " "  
+		     . "SET    " . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . "= ? "
+			 . ",      " . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL      . " = UPPER(?) "
+			 . ",      " . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_READ            . " = ? "
+		     . "WHERE "  . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . " = ? "
+			 . "AND   "  . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL      . " = UPPER(?)";
 	}
 	
 	public static function SqlAssocUserTeamDelete()
@@ -1871,10 +1884,39 @@ class Persistence
 			 . " LIMIT ?,?";
 	}
 	
+	public static function SqlUserSelectNotificationByUserEmailAndNotificationId()
+	{
+		return "SELECT "  
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID                        . ",  "
+		     . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_READ                                   . ",  "
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                             . ",  "
+			 . Config::TB_ASSOC_USER_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                                                  . "   " 
+			 . "AS AssocUserNotificationRegisterDate, "                                                                                . "   "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE                                          . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID                                              . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT                                            . ",  "
+			 . Config::TB_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                                                             . "   "
+			 . "AS NotificationRegisterDate "                                                                                          . "   "
+		     . "FROM  "           . Config::TB_ASSOC_USER_NOTIFICATION                                                                 . "   " 
+		     . "INNER JOIN "      . Config::TB_NOTIFICATION                                                                            . "   "
+			 . "ON "              . Config::TB_ASSOC_USER_NOTIFICATION . "."   . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID . " = "
+			                      . Config::TB_NOTIFICATION            . "."   . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID            . "   "
+		     . "WHERE "  . Config::TB_ASSOC_USER_NOTIFICATION . "."                                                                    . "   " 
+			 . "      "  . Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL                                                    ." = UPPER(?) "
+			 . "AND   "  . Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID                                               ." = ?";
+	}
+	
 	public static function SqlUserSelectNotificationByUserEmailCount()
 	{
 		return "SELECT COUNT(*) AS COUNT FROM " . Config::TB_ASSOC_USER_NOTIFICATION                                          . "   "
 		     . "WHERE "           . Config::TB_ASSOC_USER_NOTIFICATION .".". Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL . "= UPPER(?) ";
+	}
+	
+	public static function SqlUserSelectNotificationByUserEmailCountUnRead()
+	{
+		return "SELECT COUNT(*) AS COUNT FROM " . Config::TB_ASSOC_USER_NOTIFICATION                                          . "   "
+		     . "WHERE "           . Config::TB_ASSOC_USER_NOTIFICATION .".". Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL . "= UPPER(?) "
+			 . "AND   "           . Config::TB_ASSOC_USER_NOTIFICATION .".". Config::TB_ASSOC_USER_NOTIFICATION_FD_READ       . " = FALSE ";
 	}
 	
 	public static function SqlUserSelectNotificationByUserEmailNoLimit()

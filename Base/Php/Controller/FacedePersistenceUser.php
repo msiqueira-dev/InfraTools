@@ -46,7 +46,10 @@ Functions:
 			public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug, $MySqlConnection);
 			public function UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceAssocUserNotification, &$RowCount, 
 													          $Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId, &$InstanceAssocUserNotification, 
+													                           $Debug, $MySqlConnection);
 			public function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmailCountUnRead($InstanceUser, &$Count, $Debug, $MySqlConnection);
 			public function UserSelectNotificationByUserEmailNoLimit($InstanceUser, &$ArrayInstanceAssocUserNotification, 
 			                                                         $Debug, $MySqlConnection);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection);
@@ -1756,6 +1759,66 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
+	public function UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId, &$InstanceAssocUserNotification, 
+													                   $Debug, $MySqlConnection)
+	{
+		$InstanceAssocUserNotification = NULL; $InstanceNotification = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailAndNotificationId');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailAndNotificationId());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("si", $userEmail, $NotificationId);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$result = $stmt->get_result();
+					if($row = $result->fetch_assoc()) 
+					{
+						if($row[Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID]    != NULL &&
+						   $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL] != NULL)
+						{
+							$InstanceNotification = $this->Factory->CreateNotification($row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE], 
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ID],
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT],
+																			   $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+							$InstanceAssocUserNotification = $this->Factory->CreateAssocUserNotification
+								                                        ($InstanceNotification,
+																		 $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_READ],
+																		 $InstanceUser,
+																		 $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+						}
+					}
+					if(!empty($InstanceAssocUserNotification))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
 	public function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -1764,6 +1827,51 @@ class FacedePersistenceUser
 			if($Debug == Config::CHECKBOX_CHECKED)
 				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailCount');
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailCount());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("s", $userEmail);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$result = $stmt->get_result();
+					if($row = $result->fetch_assoc()) 
+					{
+						$Count = $row['COUNT'];
+						return Config::RET_OK;
+					}
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmailCountUnRead($InstanceUser, &$Count, $Debug, $MySqlConnection)
+	{
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailCountUnRead');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailCountUnRead());
 			if($stmt != NULL)
 			{ 
 				$userEmail = $InstanceUser->GetEmail();

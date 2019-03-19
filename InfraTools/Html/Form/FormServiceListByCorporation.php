@@ -148,13 +148,13 @@ if(!empty($this->ArrayInstanceInfraToolsService))
 			 	     "<p class='TableTdParagraph'>" .  $infraToolsService->GetServiceCorporationName()  . "</p></td>";
 		else echo "<td class='TableGenericTdLink'>"   . 
 			         "<img class='TableGenericTdLinkImage' src='" . $this->Config->DefaultServerImage 
-			                                     . 'Icons/IconInfraToolsNotVerified.png' . "'/></td>";
+			                                     . 'Icons/IconNotVerified.png' . "'/></td>";
 		if($infraToolsService->GetServiceDepartment())
 			echo "<td class='TableGenericTdLink'>"   . 
 			 	     "<p class='TableTdParagraph'>" .  $infraToolsService->GetServiceDepartmentName()  . "</p></td>";
 		else echo "<td class='TableGenericTdLink'>"   . 
 			         "<img class='TableGenericTdLinkImage' src='" . $this->Config->DefaultServerImage 
-			                                     . 'Icons/IconInfraToolsNotVerified.png' . "'/></td>";
+			                                     . 'Icons/IconNotVerified.png' . "'/></td>";
 		echo "<td class='TableGenericTdLink'>"   . 
 			"<img class='TableGenericTdLinkImage' src='" . $infraToolsService->GetServiceActiveIcon() . "'/>"  . "</td>";
 		echo "<td class= 'TableGenericTdLink'>" . $infraToolsService->GetRegisterDate() . "</td>";

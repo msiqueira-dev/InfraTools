@@ -67,6 +67,8 @@ class En
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "Association between ip address and service was not found";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "Error updating corporation information";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "Corporation information updated succesfully";
+	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "Association between user and notification update error";
+	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "Association between user and notificatio nupdated succesfully";
 	const CHECK_AVAILABILITY_FREE                                   = "Domain is free";
 	const CHECK_AVAILABILITY_TAKEN                                  = "Domain already taken";
 	const CHECK_BLACKLIST_HOST_NOT_LSTED                            = "Domain [0] is not on the following black lists: uceprotect, dronebl, "
@@ -206,6 +208,7 @@ class En
 	const FIELD_USER_TYPE                                           = "Type";
 	const FIELD_USER_TWO_STEP_VERIFICATION                          = "Two step verification";
 	const FIELD_USER_UNIQUE_ID                                      = "Unique ID";
+	const FM_INVALID_ASSOC_USER_NOTIFICATION_READ                   = "Invalid value for field read";
 	const FM_INVALID_CAPTCHA                                        = "The captcha value does not match";
 	const FM_INVALID_CORPORATION_NAME                               = "Invalid Corporation Name";
 	const FM_INVALID_CORPORATION_NAME_SIZE                          = "Quantity of characters exceeds the maximum allowed for "
@@ -459,6 +462,7 @@ class En
 	const HREF_PAGE_LOGIN                                           = "/En/PageLogin";
 	const HREF_PAGE_NOT_FOUND                                       = "/En/PageNotFound";
 	const HREF_PAGE_NOTIFICATION                                    = "/En/PageNotification";
+	const HREF_PAGE_NOTIFICATION_VIEW                               = "/En/PageNotificationView";
 	const HREF_PAGE_PASSWORD_RECOVERY                               = "/En/PagePasswordRecovery";
 	const HREF_PAGE_PASSWORD_RESET                                  = "/En/PagePasswordReset";
 	const HREF_PAGE_REGISTER                                        = "/En/PageRegister";
@@ -620,6 +624,9 @@ class En
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools - Admin Ip Address";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Admin Notification";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "Admin Notification - Associate Users";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools - Admin Notification";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "Admin Notification - List";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools - Admin Notification";
@@ -893,9 +900,12 @@ class En
 	const PAGE_NOT_FOUND                                            = "Error";
 	const PAGE_NOT_FOUND_ROBOTS                                     = "noindex";
 	const PAGE_NOT_FOUND_TITLE                                      = "InfraTools - Not Found";
-	const PAGE_NOTIFICATION                                  	    = "Notification";
+	const PAGE_NOTIFICATION                                  	    = "Notifications";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "ALL";
-	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools - Notification";
+	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools - Notifications";
+	const PAGE_NOTIFICATION_VIEW                                    = "View Notification";
+	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
+	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools - View Notification";
 	const PAGE_PASSWORD_RECOVERY                                    = "Password Recovery";
 	const PAGE_PASSWORD_RECOVERY_ROBOTS                             = "noindex";
 	const PAGE_PASSWORD_RECOVERY_TITLE                              = "InfraTools - Password Recovery";
@@ -1028,6 +1038,7 @@ class En
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "Service updated succesfully";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ACTIVATE ACCOUNT";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DEACTIVATE ACCOUNT";
+	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIATE TO USERS";
 	const SUBMIT_BACK                                               = "BACK";
 	const SUBMIT_CANCEL                                             = "CANCEL";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "CHANGE USER CORPORATION INFO";

@@ -57,8 +57,8 @@ if(isset($this->ArrayInstanceNotification))
 							   . "Icons/IconInfraToolsArrowBackHover28.png'\"
 					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
 							   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-			 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_NUMBER') . "</div></th>";
-		echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_SYSTEM_CONFIGURATION_OPTION_VALUE') . "</th>";
+			 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID') . "</div></th>";
+		echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE') . "</th>";
 		echo "<th  class='TableGenericThArrow'>
 			 <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 			 "<div class='TableGenericInputRight'>
@@ -95,9 +95,9 @@ if(isset($this->ArrayInstanceNotification))
 				  </td>";
 			echo "<td class='TableGenericTdLink'>";
 			if($notification->GetNotificationActive())
-				echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsVerified.png'
+				echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconVerified.png'
 						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
-			else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsNotVerified.png' 
+			else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconNotVerified.png' 
 						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
 			echo "<td class= 'TableGenericTdLink'>" . $notification->GetRegisterDate() . "</td>";
 			echo "</tr>";
@@ -157,21 +157,23 @@ elseif(isset($this->ArrayInstanceAssocUserNotification))
 			echo "<tr>";
 			echo "<td class='TableGenericTdLink'>
 					<form  name='" . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' method='post' />
-						<input type='hidden'
-								 name='"   . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' 
-								 id='"     . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "'
-								 value='"  . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' />
-						  <input type='submit' name='" . ConfigInfraTools::FIELD_NOTIFICATION_ID . "' 
-									   id='"   . ConfigInfraTools::FIELD_NOTIFICATION_ID . "' 
-									   value='" . $assocUserNotification->GetAssocUserNotificationNotification()->GetNotificationId() . "' 
-									   title='" . $assocUserNotification->GetAssocUserNotificationNotification()->GetNotificationId() . "' />
+						<a href='" . $this->InstanceLanguageText->GetText('HREF_PAGE_NOTIFICATION_VIEW') . "?" 
+						           . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "=" . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "&"
+							       . ConfigInfraTools::FIELD_NOTIFICATION_ID . "="
+								   . $assocUserNotification->GetAssocUserNotificationNotification()->GetNotificationId() . "' 
+						   target=''
+						   title=''>
+						    <i>"
+								. $assocUserNotification->GetAssocUserNotificationNotification()->GetNotificationId() .
+							"</i>
+						</a>
 					</form>
 				  </td>";
 			echo "<td class='TableGenericTdLink'>";
 			if($assocUserNotification->GetAssocUserNotificationRead())
-				echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsVerified.png'
+				echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconVerified.png'
 						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
-			else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsNotVerified.png' 
+			else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconNotVerified.png' 
 						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
 			echo "<td class= 'TableGenericTdLink'>" . $assocUserNotification->GetRegisterDate() . "</td>";
 			echo "</tr>";

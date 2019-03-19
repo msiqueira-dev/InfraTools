@@ -1,6 +1,6 @@
 <?php
 /************************************************************************
-Class: PageNotification.php
+Class: PageNotificationView.php
 Creation: 2018/06/04
 Creator: Marcus Siqueira
 Dependencies:
@@ -36,9 +36,10 @@ if (!class_exists("AssocUserNotification"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class AssocUserNotification');
 }
 
-class PageNotification extends PageInfraTools
+class PageNotificationView extends PageInfraTools
 {
-	public $ArrayInstanceAssocUserNotification = NULL;
+	public $InstanceAssocUserNotification               = NULL;
+	public $InstanceNotification                        = NULL;
 	
 	/* Singleton */
 	protected static $Instance;
@@ -72,15 +73,33 @@ class PageNotification extends PageInfraTools
 	{
 		if(isset($this->User))
 		{
-			//FM_NOTIFICATION_LST
-			unset($_POST);
-			$_POST[ConfigInfraTools::FM_NOTIFICATION_LST] = ConfigInfraTools::FM_NOTIFICATION_LST; 
-			if($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_LST) == ConfigInfraTools::RET_OK)
+			//FM_NOTIFICATION_SEL_SB
+			if($this->CheckGetContainsKey(ConfigInfraTools::FM_NOTIFICATION_SEL_SB) == ConfigInfraTools::RET_OK)
 			{
-				if($this->ExecuteFunction($_POST, 'UserSelectNotificationByUserEmail', 
-										  array($this->User, &$this->ArrayInstanceAssocUserNotification),
+				if($this->ExecuteFunction($_GET, 'UserSelectNotificationByUserEmailAndNotificationId', 
+										  array($this->User, $_GET[ConfigInfraTools::FIELD_NOTIFICATION_ID],
+												&$this->InstanceAssocUserNotification),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LST;
+				{
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+					$this->InstanceNotification = $this->InstanceAssocUserNotification->GetAssocUserNotificationNotification();
+					if(!$this->InstanceAssocUserNotification->GetAssocUserNotificationRead())
+					{
+						if($this->ExecuteFunction($_GET, 'AssocUserNotificationUpdateByUserEmailAndNotificationId', 
+										  array(TRUE, $this->InstanceNotification->GetNotificationId(), $this->User->GetEmail(),
+												&$this->InstanceAssocUserNotification),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						{
+							if($this->ExecuteFunction($_GET, 'UserSelectNotificationByUserEmailCountUnRead', 
+										  array($this->User, &$count),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+								$this->User->SetAssocUserNotificationCountUnRead($count);
+						}
+					}
+					$this->NotificationLoadData($this->InstanceNotification);
+					$this->AssocUserNotificationLoadData($this->InstanceAssocUserNotification);
+					$this->ShowDivReturnEmpty();
+				}
 			}
 		}
 		$this->LoadHtml(TRUE);

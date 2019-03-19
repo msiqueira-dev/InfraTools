@@ -49,8 +49,8 @@
             <img src="
                     <?php  
 						if($this->InputValueSystemConfigurationOptionActive)
-							echo $this->Config->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
-						else echo $this->Config->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
+							echo $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+						else echo $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 					?>" alt="SystemConfigurationOptionActive" 
                  width="20" height="20" />
         </div>

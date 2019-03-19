@@ -216,6 +216,7 @@ class Config
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH          = "FieldAssocUserCorporationRegistrationDateMonth";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR           = "FieldAssocUserCorporationRegistrationDateYear";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID                  = "FieldAssocUserCorporationRegistrationId";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                            = "FieldAssocUserNotificationActive";
 	const FIELD_CAPTCHA                                                 = "FieldCaptcha";
 	const FIELD_CORPORATION_ACTIVE                                      = "FieldCorporationActive";
 	const FIELD_CORPORATION_NAME                                        = "FieldCorporationName";
@@ -396,6 +397,8 @@ class Config
 	const FM_NOTIFICATION_UPDT_CANCEL                                   = "FormNotificationUpdateCancel";
 	const FM_NOTIFICATION_UPDT_SB                                       = "FormNotificationUpdateSubmit";
 	const FM_NOTIFICATION_VIEW                                          = "FormNotificationView";
+	const FM_NOTIFICATION_VIEW_ASSOCIATE_USERS                          = "FormNotificationViewAssociateUsers";
+	const FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB                       = "FormNotificationViewAssociateUsersSubmit";
 	const FM_NOTIFICATION_VIEW_DEL                                      = "FormNotificationViewDelete";
 	const FM_NOTIFICATION_VIEW_DEL_SB                                   = "FormNotificationViewDeleteSubmit";
 	const FM_NOTIFICATION_VIEW_LST_USERS                                = "FormNotificationViewListUsers";
@@ -779,6 +782,7 @@ class Config
 	const PAGE_ADMIN_DEPARTMENT_VIEW                                    = "Page_Admin_Department_View";
 	const PAGE_ADMIN_DEPARTMENT_VIEW_USERS                              = "Page_Admin_Department_View_Users";
 	const PAGE_ADMIN_NOTIFICATION                                       = "Page_Admin_Notification";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                       = "Page_Admin_Notification_Associate_Users";
 	const PAGE_ADMIN_NOTIFICATION_LST                                   = "Page_Admin_Notification_List";
 	const PAGE_ADMIN_NOTIFICATION_REGISTER                              = "Page_Admin_Notification_Register";
 	const PAGE_ADMIN_NOTIFICATION_SEL                                   = "Page_Admin_Notification_Select";
@@ -895,6 +899,7 @@ class Config
 	const RET_OK                                                        = "ReturnOk";
 	const RET_WARNING                                                   = "ReturnWarning";
 	const SEND_EMAIL_ALREADY_SENT                                       = "SEND_EMAIL_ALREADY_SENT";
+	const SESS_ADMIN_ASSOC_USER_NOTIFICATION                            = "SessionAdminAssocUserNotification";
 	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
 	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
 	const SESS_ADMIN_NOTIFICATION                                       = "SessionAdminNotification";

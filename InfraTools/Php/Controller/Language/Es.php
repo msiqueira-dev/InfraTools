@@ -66,6 +66,8 @@ class Es
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "";
+	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "";
+	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "";
 	const CHECK_AVAILABILITY_FREE                                   = "";
 	const CHECK_AVAILABILITY_TAKEN                                  = "";
 	const CHECK_BLACKLIST_HOST_NOT_LSTED                            = "";
@@ -204,6 +206,7 @@ class Es
 	const FIELD_USER_TYPE                                           = "";
 	const FIELD_USER_TWO_STEP_VERIFICATION                          = "";
 	const FIELD_USER_UNIQUE_ID                                      = "";
+	const FM_INVALID_ASSOC_USER_NOTIFICATION_READ                   = "";
 	const FM_INVALID_CAPTCHA                                        = "";
 	const FM_INVALID_CORPORATION_NAME                               = "";
 	const FM_INVALID_CORPORATION_NAME_SIZE                          = "";
@@ -427,6 +430,7 @@ class Es
 	const HREF_PAGE_LOGIN                                           = "/Es/PageLogin";
 	const HREF_PAGE_NOT_FOUND                                       = "/Es/PageNotFound";
 	const HREF_PAGE_NOTIFICATION                                    = "/Es/PageNotification";
+	const HREF_PAGE_NOTIFICATION_VIEW                               = "/Es/PageNotificationView";
 	const HREF_PAGE_PASSWORD_RECOVERY                               = "/Es/PagePasswordRecovery";
 	const HREF_PAGE_PASSWORD_RESET                                  = "/Es/PagePasswordReset";
 	const HREF_PAGE_REGISTER                                        = "/Es/PageRegister";
@@ -585,6 +589,9 @@ class Es
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION                                   = "";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools -";
@@ -861,6 +868,9 @@ class Es
 	const PAGE_NOTIFICATION                                         = "";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "noindex";
 	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools -";
+	const PAGE_NOTIFICATION_VIEW                                    = "";
+	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
+	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools -";
 	const PAGE_PASSWORD_RECOVERY                                    = "";
 	const PAGE_PASSWORD_RECOVERY_ROBOTS                             = "noindex";
 	const PAGE_PASSWORD_RECOVERY_TITLE                              = "InfraTools -";
@@ -991,6 +1001,7 @@ class Es
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "";
+	const SUBMIT_ASSOCIATE_USERS                                    = "";
 	const SUBMIT_BACK                                               = "";
 	const SUBMIT_CANCEL                                             = "";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "";

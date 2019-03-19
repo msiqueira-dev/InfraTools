@@ -30,11 +30,11 @@
             <label class="DivContentBodyContainerValueContent">
 				<?php
 						if($this->InstanceCorporation->GetCorporationActive())
-							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png' . "' 
+							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconVerified.png' . "' 
                                    name='"  . ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB . "'
                                    alt='CorporationVerification' width='20' height='20' />";
 						else
-							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png' . "' 
+							echo "<img src='"   . $this->Config->DefaultServerImage.'Icons/IconNotVerified.png' . "' 
                                    name='"  . ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB . "'
                                    alt='CorporationVerification' width='20' height='20' />";
 				?>

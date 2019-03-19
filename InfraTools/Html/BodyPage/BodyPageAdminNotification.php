@@ -88,6 +88,13 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
 		}
+		//PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS)) 
+						 . ".php");
+		}
 		//PAGE_ADMIN_NOTIFICATION_LST
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LST)
 		{

@@ -923,20 +923,14 @@ abstract class PageInfraTools extends Page
 			$this->InputValueServiceName        = $InstanceInfraToolsService->GetServiceName();
 			$this->InputValueServiceType        = $InstanceInfraToolsService->GetServiceTypeName();
 			if($this->InputValueServiceActive)
-			$this->InputValueServiceActive = $this->Config->DefaultServerImage .
-																  'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueServiceActive = $this->Config->DefaultServerImage .
-				                                                  'Icons/IconInfraToolsNotVerified.png';
+			$this->InputValueServiceActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueServiceActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->InputValueServiceCorporation != NULL)
-				$this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage .
-																  'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage .
-				                                                  'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->InputValueServiceDepartment != NULL)
-				$this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage .
-																  'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage .
-				                                                  'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			return ConfigInfraTools::RET_OK;
 		}
 		else return ConfigInfraTools::RET_ERROR;
@@ -3342,30 +3336,20 @@ abstract class PageInfraTools extends Page
 				$this->InputValueUserConfirmed = "checked";
 			$this->InputValueTypeUserDescription = $InstanceInfraToolsUser->GetUserTypeDescription();
 			if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationDateActive())
-				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationIdActive())
-				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($InstanceInfraToolsUser->CheckCorporationActive())
-				$this->InputValueCorporationActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($InstanceInfraToolsUser->CheckDepartmentExists())
-				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->InputValueUserUniqueId != NULL)
-				$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-												   'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			return ConfigInfraTools::RET_OK;
 		}
 		else return ConfigInfraTools::RET_ERROR;

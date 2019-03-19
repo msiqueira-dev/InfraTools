@@ -45,6 +45,10 @@ Functions:
 																					$CorporationName, $UserEmail, $Debug
 																					$MySqlConnection = NULL, $CloseConnectaion = TRUE,
 																					$Commit = TRUE);
+			public function AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew, 
+		                                                                            $NotificationIdNew, $UserEmailNew, 
+		                                                                            &$InstanceAssocUserNotification, $Debug,
+																					$MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocUserTeamDelete($TeamId, $UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function AssocUserTeamInsert($TeamId, $TypeAssocUserTeamDescription, $UserEmail, $Debug, 
 										        $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
@@ -225,8 +229,13 @@ Functions:
 			public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &ArrayInstanceAssocUserNotification, 
 			                                                  &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId,
+			                                                                   &$InstanceAssocUserNotification, 
+			                                                                   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug, $MySqlConnection = NULL, 
 			                                                       $CloseConnectaion = TRUE);
+			public function UserSelectNotificationByUserEmailCountUnRead($InstanceUser, &$Count, $Debug, $MySqlConnection = NULL, 
+			                                                             $CloseConnectaion = TRUE);
 			public function UserSelectNotificationByUserEmailNoLimit($InstanceUser, &ArrayInstanceAssocUserNotification, $Debug, 
 			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -480,6 +489,27 @@ class FacedePersistence
 			if($return == Config::RET_OK && $Commit)
 				$MySqlConnection->commit();
 			else $MySqlConnection->rollback();
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew, 
+		                                                                    $NotificationIdNew, $UserEmailNew, 
+		                                                                    &$InstanceAssocUserNotification, $Debug,
+																		    $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceAssocUserNotification = $this->Factory->CreateFacedePersistenceAssocUserNotification();
+			$return = $instanceFacedePersistenceAssocUserNotification->AssocUserNotificationUpdateByUserEmailAndNotificationId(
+			                                                                            $AssocUserNotificationReadNew,
+																						$NotificationIdNew,
+																						$UserEmailNew, 
+																						$InstanceAssocUserNotification, 
+				                                                                        $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1910,6 +1940,22 @@ class FacedePersistence
 		return $return;
 	}
 	
+	public function UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId, &$InstanceAssocUserNotification, 
+			                                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId,
+																						                 $InstanceAssocUserNotification,
+																						                 $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
 	public function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
@@ -1917,6 +1963,21 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 			$return = $instanceFacedePersistenceUser->UserSelectNotificationByUserEmailCount($InstanceUser, $Count, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function UserSelectNotificationByUserEmailCountUnRead($InstanceUser, &$Count, $Debug, $MySqlConnection = NULL, 
+																 $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+	 	if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
+			$return = $instanceFacedePersistenceUser->UserSelectNotificationByUserEmailCountUnRead($InstanceUser, $Count, 
+																								   $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

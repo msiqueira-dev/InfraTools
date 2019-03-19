@@ -165,30 +165,20 @@ class PageAccount extends PageInfraTools
 			$this->InputValueUserUniqueId = $this->User->GetUserUniqueId();
 			$this->EnableFieldTwoStepVerification = TRUE;
 			if($this->User->CheckCorporationActive())
-				$this->InputValueCorporationActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueCorporationActive = $this->Config->DefaultServerImage .'Icons/IconVerified.png';
+			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
 			if($this->User->CheckAssocUserCorporationRegistrationDateActive())
-				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->User->CheckAssocUserCorporationRegistrationIdActive())
-				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->User->CheckDepartmentExists())
-				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .'Icons/IconVerified.png';
+			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
 			if($this->InputValueUserUniqueId != NULL)
-				$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-																'Icons/IconInfraToolsVerified.png';
-			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .
-				                                   'Icons/IconInfraToolsNotVerified.png';
+				$this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .'Icons/IconVerified.png';
+			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
 			$this->CheckForm();
 		}
 		$this->LoadHtml(TRUE);

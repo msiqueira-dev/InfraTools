@@ -220,9 +220,9 @@
 				<label class="DivContentBodyContainerValueContent">
 					<?php  if($this->InputValueSessionExpires)
 								$this->InputValueSessionExpires = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsVerified.png';
+																		'Icons/IconVerified.png';
 							else $this->InputValueSessionExpires = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsNotVerified.png';
+																		'Icons/IconNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueSessionExpires; ?>"
 							alt="CorporationVerification" width="20" height="20" />
@@ -240,8 +240,8 @@
 			<div class="DivContentBodyContainerValueSided">
 				<div class="DivContentBodyContainerSubmitImage">
 					<?php  if($this->InputValueTwoStepVerification)
-								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
-							else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
+								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconVerified.png';
+							else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueTwoStepVerification; ?>"
 								alt="TwoStepVerification" width="20" height="20" />
@@ -259,8 +259,8 @@
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
 					<?php  if($this->InputValueUserActive)
-								$this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
-							else $this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
+								$this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconVerified.png';
+							else $this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconNotVerified.png';
 					?>
 					<img src="<?php echo $this->InputValueUserActive; ?>" alt="UserActive" width="20" height="20" />
 				</label>
@@ -278,9 +278,9 @@
 				<label class="DivContentBodyContainerValueContent">
 					<?php  if($this->InputValueUserConfirmed)
 								$this->InputValueUserConfirmed = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsVerified.png';
+																		'Icons/IconVerified.png';
 							else $this->InputValueUserConfirmed = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsNotVerified.png';
+																		'Icons/IconNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueUserConfirmed; ?>"
 							alt="UserConfirmed" width="20" height="20" />

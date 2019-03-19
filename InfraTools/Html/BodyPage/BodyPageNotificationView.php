@@ -7,6 +7,6 @@
 		</div>
 		<div class="DivContentBodySecondTitleLine"></div>
 		<?php include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("Page", "", str_replace("_", "", ConfigInfraTools::PAGE_NOTIFICATION_LST)) . ".php"); ?>
+						 str_replace("Page", "", str_replace("_", "", ConfigInfraTools::PAGE_NOTIFICATION_VIEW)) . ".php"); ?>
 	</div>
 </div>

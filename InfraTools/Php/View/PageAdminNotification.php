@@ -113,6 +113,13 @@ class PageAdminNotification extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
+		//FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+										  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+		}
 		//FM_NOTIFICATION_VIEW_DEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{
