@@ -960,6 +960,15 @@ class En
 	const PAGE_SUPPORT                                              = "Support";
 	const PAGE_SUPPORT_ROBOTS                                       = "noindex";
 	const PAGE_SUPPORT_TITLE                                        = "InfraTools - Support";
+	const PAGE_SUPPORT_CONTACT                                      = "New Support Ticket";
+	const PAGE_SUPPORT_CONTACT_ROBOTS                               = "noindex";
+	const PAGE_SUPPORT_CONTACT_TITLE                                = "InfraTools - New Support Ticket";
+	const PAGE_SUPPORT_LST                                          = "List Tickets";
+	const PAGE_SUPPORT_LST_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_LST_TITLE                                    = "InfraTools - List Tickets";
+	const PAGE_SUPPORT_SEL                                          = "Select Tickets";
+	const PAGE_SUPPORT_SEL_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_SEL_TITLE                                    = "InfraTools - Select Tickets";
 	const PAGE_TEAM                                                 = "Team";
 	const PAGE_TEAM_ROBOTS                                          = "noindex";
 	const PAGE_TEAM_TITLE                                           = "InfraTools - Team";

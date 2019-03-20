@@ -183,7 +183,7 @@ class FacedeBusiness
 							                $config->DefaultEmailNoReplyFormAddress,
 											$config->DefaultEmailNoReplyFormAddressReplyTo,
 							                $config->DefaultEmailNoReplyFormPassword, 
-							                $EmailAddress, $subject, $body);
+							                $config->DefaultEmailNoReplyFormAddress, $subject, $body);
 			if($return == Config::RET_OK)
 			{
 				$Session->SetSessionValue(Config::SESS_CONTACT_EMAIL, $emailHourMinute);

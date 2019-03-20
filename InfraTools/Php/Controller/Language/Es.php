@@ -925,6 +925,15 @@ class Es
 	const PAGE_SUPPORT                                              = "";
 	const PAGE_SUPPORT_ROBOTS                                       = "noindex";
 	const PAGE_SUPPORT_TITLE                                        = "InfraTools -";
+	const PAGE_SUPPORT_CONTACT                                      = "";
+	const PAGE_SUPPORT_CONTACT_ROBOTS                               = "noindex";
+	const PAGE_SUPPORT_CONTACT_TITLE                                = "InfraTools -";
+	const PAGE_SUPPORT_LST                                          = "";
+	const PAGE_SUPPORT_LST_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_LST_TITLE                                    = "InfraTools -";
+	const PAGE_SUPPORT_SEL                                          = "";
+	const PAGE_SUPPORT_SEL_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_SEL_TITLE                                    = "InfraTools -";
 	const PAGE_TEAM                                                 = "";
 	const PAGE_TEAM_ROBOTS                                          = "noindex";
 	const PAGE_TEAM_TITLE                                           = "InfraTools -";

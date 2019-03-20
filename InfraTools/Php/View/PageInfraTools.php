@@ -3358,7 +3358,7 @@ abstract class PageInfraTools extends Page
 	public function GetCurrentPage()
 	{
 		$pageConstant = ConfigInfraTools::GetPageConstant($this->Page);
-		if($pageConstant)
+		if(!empty($pageConstant))
 			return $pageConstant;
 		else return $this->Page;
 	}

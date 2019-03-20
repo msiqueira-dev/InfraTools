@@ -54,7 +54,7 @@
 											 '');"
 						   onclick="ValidateName(null, '<?php echo ConfigInfraTools::FIELD_USER_NAME; ?>',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_TICKET_CONTACT; ?>',
+											   '<?php echo ConfigInfraTools::FM_TICKET_CONTACT_SB; ?>',
 											   '', true);
 								   ValidateMultiplyFields(
 											 '<?php echo ConfigInfraTools::FM_TICKET_CONTACT; ?>',

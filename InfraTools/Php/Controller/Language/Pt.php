@@ -966,6 +966,15 @@ class Pt
 	const PAGE_SUPPORT                                              = "Suporte";
 	const PAGE_SUPPORT_ROBOTS                                       = "noindex";
 	const PAGE_SUPPORT_TITLE                                        = "InfraTools - Suporte";
+	const PAGE_SUPPORT_CONTACT                                      = "Nova Solicitação de Suporte";
+	const PAGE_SUPPORT_CONTACT_ROBOTS                               = "noindex";
+	const PAGE_SUPPORT_CONTACT_TITLE                                = "InfraTools - Nova Solicitação de Suporte";
+	const PAGE_SUPPORT_LST                                          = "Listar Solicações";
+	const PAGE_SUPPORT_LST_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_LST_TITLE                                    = "InfraTools - Listar Solicitações";
+	const PAGE_SUPPORT_SEL                                          = "Selecionar Solicitações";
+	const PAGE_SUPPORT_SEL_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_SEL_TITLE                                    = "InfraTools - Selecionar Solicitações";
 	const PAGE_TEAM                                                 = "Equipes";
 	const PAGE_TEAM_ROBOTS                                          = "noindex";
 	const PAGE_TEAM_TITLE                                           = "InfraTools - Equipes";

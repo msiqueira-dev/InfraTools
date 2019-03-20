@@ -6,7 +6,7 @@
 <meta name="Reply-To" content="" />
 <meta name="Keywords" content="Infrastructure, Networks, Technology, WebTools" />
 <meta name="Copyright" content="2014 - InfraTools - Dual-Developers" />
-<meta name="Description" content="InfraTools: <?php echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage()); ?>" />
+<meta name="Description" content="InfraTools: <?php echo $this->InstanceLanguageText->GetPageName($this->Page); ?>" />
 <meta name="Company" content="Dual-Developers" />
 <meta name="Url" content="https://dual-developers.com" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,26 +17,25 @@
 
 <meta property="og:url"          content="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" />
 <meta property="og:type"         content="website" />
-<meta property="og:title"        content="<?php echo $this->InstanceLanguageText->GetPageTitle($this->GetCurrentPage()); ?>" />
-<meta property="og:description"  content="<?php echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage()); ?>" />
-<meta property="og:image"        content="<?php echo $this->Config->DefaultServerImage 
-                                         . 'Logos/LogoTypeInfraToolsBlack.png'; ?>" />
+<meta property="og:title"        content="<?php echo $this->InstanceLanguageText->GetPageTitle($this->Page); ?>" />
+<meta property="og:description"  content="<?php echo $this->InstanceLanguageText->GetPageName($this->Page); ?>" />
+<meta property="og:image"        content="<?php echo $this->Config->DefaultServerImage . 'Logos/LogoTypeInfraToolsBlack.png'; ?>" />
 <meta property="fb:app_id" content="503426086535044" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@Dual-Developers" />
 <meta name="twitter:creator" content="@Dual-Developers" />
-<meta name="twitter:title" content="<?php echo $this->InstanceLanguageText->GetPageTitle($this->GetCurrentPage()); ?>" />
-<meta name="twitter:description" content="<?php echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage()); ?>" />
+<meta name="twitter:title" content="<?php echo $this->InstanceLanguageText->GetPageTitle($this->Page); ?>" />
+<meta name="twitter:description" content="<?php echo $this->InstanceLanguageText->GetPageName($this->Page); ?>" />
 <meta name="twitter:domain" content="https://dual-developers.com" />
 <meta name="twitter:image" content="" />
-<meta name="Robots" content="<?php echo $this->InstanceLanguageText->GetPageRobots($this->GetCurrentPage());  ?>" />
-<meta name="DC.Title" content="<?php echo $this->InstanceLanguageText->GetPageTitle($this->GetCurrentPage()); ?>" />
+<meta name="Robots" content="<?php echo $this->InstanceLanguageText->GetPageRobots($this->Page);  ?>" />
+<meta name="DC.Title" content="<?php echo $this->InstanceLanguageText->GetPageTitle($this->Page); ?>" />
 <meta name="DC.Source" content="https://dual-developers.com" />
 <meta name="DC.Creator" content="Dual-Developers" />
 <meta name="DC.Keywords" content="Infrastructure, Networks, Technology, WebTools" />
 <meta name="DC.Subject" content="InfraTools - Infrastructure Web Tool" />
-<meta name="DC.Description" content="<?php echo $this->InstanceLanguageText->GetPageName($this->GetCurrentPage()); ?>" />
-<title> <?php echo $this->InstanceLanguageText->GetPageTitle($this->GetCurrentPage()); ?></title>
+<meta name="DC.Description" content="<?php echo $this->InstanceLanguageText->GetPageName($this->Page); ?>" />
+<title> <?php echo $this->InstanceLanguageText->GetPageTitle($this->Page); ?></title>
 <link href="<?php echo "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" rel="canonical" />
 <link href="<?php echo $this->Config->DefaultServerImage. 'Icons/FavIconInfraTools32x32.ico'; ?>" rel="icon" type="image/x-icon"/>
 <?php
