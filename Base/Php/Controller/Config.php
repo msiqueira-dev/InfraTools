@@ -231,6 +231,12 @@ class Config
 	const FIELD_HEADER_LOG_OUT                                          = "FieldHeaderLogOut";
 	const FIELD_LOGIN                                                   = "FieldLogin";
 	const FIELD_NOT_OBLIGATORY                                          = "FieldNotObligatory";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION                   = "FormNotificationAssociateByCorporation";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                    = "FormNotificationAssociateByDepartment";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                          = "FormNotificationAssociateByRole";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                          = "FormNotificationAssociateByTeam";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                          = "FormNotificationAssociateForAll";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL                = "FormNotificationAssociateForAllValueAll";
 	const FIELD_NOTIFICATION_ACTIVE                                     = "FieldNotificationActive";
 	const FIELD_NOTIFICATION_ID                                         = "FieldNotificationId";
 	const FIELD_NOTIFICATION_TEXT                                       = "FieldNotificationText";
@@ -381,6 +387,10 @@ class Config
 	const FM_LANGUAGE                                                   = "FmLanguage";
 	const FM_LOGIN                                                      = "FormLogin";
 	const FM_NOTIFICATION                                               = "FormNotification";
+	const FM_NOTIFICATION_ASSOCIATE_USERS                               = "FormNotificationAssociateUsers";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL                        = "FormNotificationAssociateUsersCancel";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_FORM                          = "FormNotificationAssociateUsersForm";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB                            = "FormNotificationAssociateUsersSb";
 	const FM_NOTIFICATION_LST                                           = "FormNotificationList";
 	const FM_NOTIFICATION_LST_BACK                                      = "FormNotificationListBack";
 	const FM_NOTIFICATION_LST_FORM                                      = "FormNotificationListForm";

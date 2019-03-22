@@ -150,6 +150,12 @@ class Pt
 	const FIELD_NETWORK_NAME                                        = "Nome da rede";
 	const FIELD_NETWORK_NETMASK                                     = "Mascara de rede";
 	const FIELD_NOTIFICATION_ACTIVE                                 = "Ativo";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION               = "Associar por corporação";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                = "Associar por departmento";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                      = "Associar por papel";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                      = "Associar por equipe";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                      = "Associar para todos ou nenhum";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL            = "Todos";
 	const FIELD_NOTIFICATION_ID                                     = "Id";
 	const FIELD_NOTIFICATION_TEXT                                   = "Texto";
 	const FIELD_ROLE_DESCRIPTION                                    = "Descrição";

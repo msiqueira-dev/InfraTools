@@ -130,6 +130,7 @@ Functions:
 			                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TeamSelectByTeamId($TeamId, &$TeamInstance, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function TeamSelectNoLimit(&$ArrayInstanceTeam, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TeamUpdateByTeamId($TeamDescription, $TeamName, $TeamId, $Debug, 
 			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function TicketDeleteByTicketId($TicketId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -1135,6 +1136,19 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
 			$return = $instanceFacedePersistenceTeam->TeamSelectByTeamName($TeamName, $ArrayInstanceTeam, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function TeamSelectNoLimit(&$ArrayInstanceTeam, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceTeam = $this->Factory->CreateFacedePersistenceTeam();
+			$return = $instanceFacedePersistenceTeam->TeamSelectNoLimit($ArrayInstanceTeam, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

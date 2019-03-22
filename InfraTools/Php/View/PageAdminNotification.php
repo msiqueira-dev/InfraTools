@@ -33,8 +33,17 @@ if (!class_exists("Notification"))
 
 class PageAdminNotification extends PageAdmin
 {
-	public $ArrayInstanceNotification = NULL;
-	public $InstanceNotification      = NULL;
+	public $ArrayInstanceNotification               = NULL;
+	public $InstanceNotification                    = NULL;
+	public $InputValueNotificationForAll            = NULL;
+	public $InputValueNotificationByCorporationName = NULL;
+	public $InputValueNotificationByDepartmentName  = NULL;
+	public $InputValueNotificationByRole            = NULL;
+	public $InputValueNotificationByTeamName        = NULL;
+	public $ReturnNotificationByCorporationClass    = NULL;
+	public $ReturnNotificationByDepartmentNameClass = NULL;
+	public $ReturnNotificationByRoleClass           = NULL;
+	public $ReturnNotificationByTeamNameClass       = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -116,9 +125,31 @@ class PageAdminNotification extends PageAdmin
 		//FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB) == ConfigInfraTools::RET_OK)
 		{
+			$this->InputValueNotificationByCorporationName = NULL;
+			$this->InputValueNotificationByDepartmentName  = NULL;
+			$this->InputValueNotificationByRole            = NULL;
+			$this->InputValueNotificationByTeamName        = NULL;
+			if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+									  array(&$this->ArrayInstanceSelectNotificationByCorporation),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'DepartmentSelectNoLimit', 
+									  array(&$this->ArrayInstanceSelectNotificationByDepartment),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				{
+					if($this->ExecuteFunction($_POST, 'TeamSelectNoLimit', 
+									  array(&$this->ArrayInstanceSelectNotificationByTeam),
+									  $this->InputValueHeaderDebug) != ConfigInfraTools::RET_OK)
+					{
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+					}
+				} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+			}
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
 										  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
 		//FM_NOTIFICATION_VIEW_DEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)

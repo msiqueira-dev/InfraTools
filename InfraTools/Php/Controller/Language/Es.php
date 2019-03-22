@@ -145,6 +145,12 @@ class Es
 	const FIELD_NETWORK_NAME                                        = "";
 	const FIELD_NETWORK_NETMASK                                     = "";
 	const FIELD_NOTIFICATION_ACTIVE                                 = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION               = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                      = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                      = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                      = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL            = "";
 	const FIELD_NOTIFICATION_ID                                     = "";
 	const FIELD_NOTIFICATION_TEXT                                   = "";
 	const FIELD_ROLE_DESCRIPTION                                    = "";

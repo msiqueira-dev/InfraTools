@@ -149,6 +149,12 @@ class En
 	const FIELD_NETWORK_NAME                                        = "Network Name";
 	const FIELD_NETWORK_NETMASK                                     = "Network Netmask";
 	const FIELD_NOTIFICATION_ACTIVE                                 = "Active";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION               = "Associate by Corporation";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                = "Associate by Department";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                      = "Associate by Role";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                      = "Associate by Team";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                      = "Associate for all or none";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL            = "All";
 	const FIELD_NOTIFICATION_ID                                     = "Id";
 	const FIELD_NOTIFICATION_TEXT                                   = "Text";
 	const FIELD_ROLE_DESCRIPTION                                    = "Description";

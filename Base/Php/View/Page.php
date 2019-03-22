@@ -85,6 +85,7 @@ Methods:
 		protected     function        TeamSelect($Limit1, $Limit2, &$ArrayInstanceTeam, &$RowCount, $Debug);
 		protected     function        TeamSelectByTeamId($TeamId, &$InstanceTeam, $Debug);
 		protected     function        TeamSelectByTeamName($TeamName, &$ArrayInstanceTeam, $Debug);
+		protected     function        TeamSelectNoLimit(&$ArrayInstanceTeam, $Debug);
 		protected     function        TeamUpdateByTeamId($TeamDescriptionNew, $TeamNameNew, &$InstanceTeam, $Debug);
 		protected     function        TicketDeleteByTicketId($InstanceTicket, $Debug);
 		protected     function        TicketInsert($TicketDescription, $TicketSuggestion, $TicketTitle, $TypeStatusTicketDescription, 
@@ -2535,6 +2536,18 @@ class Page
 			$return = $instanceFacedePersistence->TeamSelectByTeamName($this->InputValueTeamName, $ArrayInstanceTeam, $Debug);
 			if($return == Config::RET_OK)
 				return Config::RET_OK;
+		}
+		$this->ShowDivReturnError("TEAM_NOT_FOUND");
+		return Config::RET_ERROR;
+	}
+	
+	protected function TeamSelectNoLimit(&$ArrayInstanceTeam, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->TeamSelectNoLimit($ArrayInstanceTeam, $Debug);
+		if($return == Config::RET_OK)
+		{
+			return Config::RET_OK;
 		}
 		$this->ShowDivReturnError("TEAM_NOT_FOUND");
 		return Config::RET_ERROR;
