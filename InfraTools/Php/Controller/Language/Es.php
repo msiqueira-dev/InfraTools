@@ -66,6 +66,10 @@ class Es
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "";
+	const ASSOC_USER_NOTIFICATION_DELETE_ERROR                      = "";
+	const ASSOC_USER_NOTIFICATION_DELETE_SUCCESS                    = "";
+	const ASSOC_USER_NOTIFICATION_INSERT_ERROR                      = "";
+	const ASSOC_USER_NOTIFICATION_INSERT_SUCCESS                    = "";
 	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "";
 	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "";
 	const CHECK_AVAILABILITY_FREE                                   = "";
@@ -976,6 +980,7 @@ class Es
 	const RESEND_CONFIRMATION_LINK_ERROR                            = "";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "";
 	const ROW_COUNT                                                 = "";
+	const ROLE_NOT_FOUND                                            = "";
 	const SEND_EMAIL_ERROR                                          = "";
 	const SERVICE_DEL_ERROR                                         = "";
 	const SERVICE_DEL_ERROR_FOREIGN_KEY                             = "";
@@ -1017,6 +1022,7 @@ class Es
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "";
 	const SUBMIT_ASSOCIATE_USERS                                    = "";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "";
 	const SUBMIT_BACK                                               = "";
 	const SUBMIT_CANCEL                                             = "";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "";
@@ -1052,6 +1058,7 @@ class Es
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "";
 	const SYSTEM_CONFIGURATION_UPDT_ERROR                           = "";
 	const SYSTEM_CONFIGURATION_UPDT_SUCCESS                         = "";
+	const TABLE_EMPTY                                               = "";
 	const TB_PAGE_PREFIX                                            = "";
 	const TB_PAGE                                                   = "";
 	const TEAM                                                      = "";

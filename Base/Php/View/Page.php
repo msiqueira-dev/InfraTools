@@ -19,6 +19,8 @@ Methods:
 		private       function        ExecuteLoginSecondPhaseVerirication();
 		private       function        LoadInstanceUser();
 		private       function        SendTwoStepVerificationCode($Application, $UserEmail, $UserName, $Debug);
+		protected     function        AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug);
+		protected     function        AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug);
 		protected     function        AssocUserNotificationLoadData($InstanceAssocUserNotification);
 		protected     function        AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew, 
 		                                                                                      $NotificationIdNew, $UserEmailNew, 
@@ -29,7 +31,7 @@ Methods:
 		protected     function        CorporationLoadData(&$InstanceCorporation);
 		protected     function        CorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug);
 		protected     function        CorporationSelectActive($Limit1, $Limit2, &$ArrayInstanceCorporation, 
-															  &$RowCount, $Debug)
+															  &$RowCount, $Debug);
 		protected     function        CorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug)
 		protected     function        CorporationSelectByName($CorporationName, &$InstanceCorporation, $Debug);
 		protected     function        CorporationSelectNoLimit(&$ArrayInstanceCorporation, $Debug);
@@ -62,6 +64,7 @@ Methods:
 		protected     function        PageStackSessionLoad();
 		protected     function        PageStackSessionRemoveAll();
 		protected     function        PageStackSessionSave();
+		protected     function        RoleSelectNoLimit(&$ArrayInstanceRole, $Debug);
 		protected     function        SystemConfigurationDeleteBySystemConfigurationOptionNumber($InstanceSystemConfiguration, $Debug);
 		protected     function        SystemConfigurationInsert($SystemConfigurationOptionActive, $SystemConfigurationOptionDescription,
 		                                                        $SystemConfigurationOptionName, $SystemConfigurationOptionValue, $Debug);
@@ -143,12 +146,18 @@ Methods:
 		protected     function        UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser,
 		                                                          &$RowCount, $Debug, $HideReturnSuccessImage = TRUE);
+		protected     function        UserSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceUser,
+		                                                                 $Debug, $HideReturnSuccessImage = TRUE);
 		protected     function        UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, 
-		                                                         &$ArrayInstanceUser, &$RowCount, Debug, $HideReturnSuccessImage = TRUE);
+		                                                         &$ArrayInstanceUser, &$RowCount, $Debug, $HideReturnSuccessImage = TRUE);
+		protected     function        UserSelectByDepartmentNameNoLimit($CorporationName, $DepartmentName, 
+		                                                                &$ArrayInstanceUser, $Debug, $HideReturnSuccessImage = TRUE);
 		protected     function        UserSelectByHashCode($HashCode, &$UserInstance, $Debug);
 		protected     function        UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByRoleNameNoLimit($RoleName, &$ArrayInstanceUser, $Debug);
 		protected     function        UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug);
+		protected     function        UserSelectByTeamIdNoLimit($TeamId, &$ArrayInstanceUser, $Debug);
 		protected     function        UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug);
 		protected     function        UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription,
 		                                                                       &$ArrayInstanceUser, &$RowCount, $Debug);
@@ -160,6 +169,7 @@ Methods:
 		protected     function        UserSelectByUserUniqueId($UniqueId, &$UserInstance, $Debug);
 		protected     function        UserSelectExistsByUserEmail($Capcha, $UserEmail, $Debug);
 		protected     function        UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug);
+		protected     function        UserSelectNoLimit(&$ArrayInstanceUser, $Debug);
 		protected     function        UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceAssocUserNotification, 
 		                                                                &$RowCount, $Debug);
 		protected     function        UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId,
@@ -689,6 +699,152 @@ class Page
 																  $UserEmail, $UserName, $code, $Debug) == Config::RET_OK)
 			return Config::RET_OK;
 		else return Config::RET_ERROR;
+	}
+	
+	protected function AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$arrayConstants = array(); $matrixConstants = array();
+		if(empty($ArrayInstanceNotification) || empty($ArrayInstanceUser))
+		{
+			$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_DELETE_ERROR");
+			return Config::RET_ERROR;
+		}
+		foreach($ArrayInstanceNotification as $InstanceNotification)
+		{
+			$this->InputValueNotificationId = $InstanceNotification->GetNotificationId();
+			//FIELD_NOTIFICATION_ID
+			$arrayElements[0]             = Config::FIELD_NOTIFICATION_TEXT;
+			$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
+			$arrayElementsDefaultValue[0] = ""; 
+			$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
+			$arrayElementsInput[0]        = $this->InputValueNotificationId; 
+			$arrayElementsMinValue[0]     = 0; 
+			$arrayElementsMaxValue[0]     = 5; 
+			$arrayElementsNullable[0]     = FALSE;
+			$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
+			array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+			array_push($matrixConstants, $arrayConstants);
+			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+			if($return != Config::RET_OK)
+			{
+				$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_DELETE_ERROR");
+				return Config::RET_ERROR;
+			}
+		}
+		foreach($ArrayInstanceUser as $InstanceUser)
+		{
+			$this->InputValueUserEmail = $InstanceUser->GetEmail();
+			//FIELD_USER_EMAIL
+			$arrayElements[0]             = Config::FIELD_USER_EMAIL;
+			$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
+			$arrayElementsDefaultValue[0] = ""; 
+			$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
+			$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+			$arrayElementsMinValue[0]     = 0; 
+			$arrayElementsMaxValue[0]     = 60; 
+			$arrayElementsNullable[0]     = FALSE;
+			$arrayElementsText[0]         = &$this->ReturnValueUserEmailText;
+			array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+			array_push($matrixConstants, $arrayConstants);
+			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+			if($return != Config::RET_OK)
+			{
+				$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_DELETE_ERROR");
+				return Config::RET_ERROR;
+			}
+		}
+		if($return == Config::RET_OK)
+		{
+			$return = $instanceFacedePersistence->AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnSuccess('ASSOC_USER_NOTIFICATION_DELETE_SUCCESS');
+				return Config::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_DELETE_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$arrayConstants = array(); $matrixConstants = array();
+		if(empty($ArrayInstanceNotification) || empty($ArrayInstanceUser))
+		{
+			$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_INSERT_ERROR");
+			return Config::RET_ERROR;
+		}
+		foreach($ArrayInstanceNotification as $InstanceNotification)
+		{
+			$this->InputValueNotificationId = $InstanceNotification->GetNotificationId();
+			//FIELD_NOTIFICATION_ID
+			$arrayElements[0]             = Config::FIELD_NOTIFICATION_TEXT;
+			$arrayElementsClass[0]        = &$this->ReturnNotificationIdClass;
+			$arrayElementsDefaultValue[0] = ""; 
+			$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
+			$arrayElementsInput[0]        = $this->InputValueNotificationId; 
+			$arrayElementsMinValue[0]     = 0; 
+			$arrayElementsMaxValue[0]     = 5; 
+			$arrayElementsNullable[0]     = FALSE;
+			$arrayElementsText[0]         = &$this->ReturnNotificationIdText;
+			array_push($arrayConstants, 'FM_INVALID_NOTIFICATION_ID', 'FILL_REQUIRED_FIELDS');
+			array_push($matrixConstants, $arrayConstants);
+			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+			if($return != Config::RET_OK)
+			{
+				$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_INSERT_ERROR");
+				return Config::RET_ERROR;
+			}
+		}
+		foreach($ArrayInstanceUser as $InstanceUser)
+		{
+			$this->InputValueUserEmail = $InstanceUser->GetEmail();
+			//FIELD_USER_EMAIL
+			$arrayElements[0]             = Config::FIELD_USER_EMAIL;
+			$arrayElementsClass[0]        = &$this->ReturnUserEmailClass;
+			$arrayElementsDefaultValue[0] = ""; 
+			$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
+			$arrayElementsInput[0]        = $this->InputValueUserEmail; 
+			$arrayElementsMinValue[0]     = 0; 
+			$arrayElementsMaxValue[0]     = 60; 
+			$arrayElementsNullable[0]     = FALSE;
+			$arrayElementsText[0]         = &$this->ReturnValueUserEmailText;
+			array_push($arrayConstants, 'FM_INVALID_USER_EMAIL', 'FM_INVALID_USER_EMAIL_SIZE', 'FILL_REQUIRED_FIELDS');
+			array_push($matrixConstants, $arrayConstants);
+			$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+												$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+												$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+												$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+			if($return != Config::RET_OK)
+			{
+				$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_INSERT_ERROR");
+				return Config::RET_ERROR;
+			}
+		}
+		if($return == Config::RET_OK)
+		{
+			$return = $instanceFacedePersistence->AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnSuccess('ASSOC_USER_NOTIFICATION_INSERT_SUCCESS');
+				return Config::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_INSERT_ERROR");
+		return Config::RET_ERROR;
 	}
 	
 	protected function AssocUserNotificationLoadData($InstanceAssocUserNotification)
@@ -1901,6 +2057,18 @@ class Page
 		}
  		$this->Session->SetSessionValue(Config::SESS_PAGE_SACK, $arrayPageForm);
 		$this->Session->SetSessionValue(Config::SESS_PAGE_STACK_NUMBER, $pageFormNumber);
+	}
+	
+	protected function RoleSelectNoLimit(&$ArrayInstanceRole, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->RoleSelectNoLimit($ArrayInstanceRole, $Debug);
+		if($return == Config::RET_OK)
+		{
+			return Config::RET_OK;
+		}
+		$this->ShowDivReturnError("ROLE_NOT_FOUND");
+		return Config::RET_ERROR;
 	}
 	
 	protected function SystemConfigurationDeleteBySystemConfigurationOptionNumber($InstanceSystemConfiguration, $Debug)
@@ -4355,21 +4523,62 @@ class Page
 		if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-			$return = $instanceFacedePersistence->UserSelectByCorporationName($this->InputValueCorporationName, $Limit1, $Limit2,
+			$return = $instanceFacedePersistence->UserSelectByCorporationName($Limit1, $Limit2, $this->InputValueCorporationName,
 																			  $ArrayInstanceUser, $RowCount, $Debug);
 			if($return == Config::RET_OK)
 			{
-				if($return == Config::RET_OK)
-				{
-					if($HideReturnSuccessImage)
-						$this->ShowDivReturnEmpty();
-					return Config::RET_OK;
-				}
-				elseif(empty($ArrayInstanceUser))
-				{
-					$this->ShowDivReturnWarning("USER_SEL_BY_CORPORATION_NAME_WARNING");
-					return Config::RET_WARNING;	
-				}
+				if($HideReturnSuccessImage)
+					$this->ShowDivReturnEmpty();
+				return Config::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_CORPORATION_NAME_WARNING");
+				return Config::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_CORPORATION_NAME_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceUser, $Debug, $HideReturnSuccessImage = TRUE)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByCorporationNameNoLimit($this->InputValueCorporationName,
+																			         $ArrayInstanceUser, $Debug);
+			if($return == Config::RET_OK)
+			{
+				if($HideReturnSuccessImage)
+					$this->ShowDivReturnEmpty();
+				return Config::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_CORPORATION_NAME_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SEL_BY_CORPORATION_NAME_ERROR");
@@ -4422,17 +4631,74 @@ class Page
 																	         $RowCount,  $Debug);
 			if($return == Config::RET_OK)
 			{
-				if($return == Config::RET_OK)
-				{
-					if($HideReturnSuccessImage)
-						$this->ShowDivReturnEmpty();
-					return Config::RET_OK;
-				}
-				elseif(empty($ArrayInstanceUser))
-				{
-					$this->ShowDivReturnWarning("USER_SEL_BY_DEPARTMENT_NAME_WARNING");
-					return Config::RET_WARNING;	
-				}
+				if($HideReturnSuccessImage)
+					$this->ShowDivReturnEmpty();
+				return Config::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_DEPARTMENT_NAME_WARNING");
+				return Config::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_DEPARTMENT_NAME_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectByDepartmentNameNoLimit($CorporationName, $DepartmentName, &$ArrayInstanceUser, 
+														 $Debug, $HideReturnSuccessImage = TRUE)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueCorporationName = $CorporationName;
+		$this->InputValueDepartmentName  = $DepartmentName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_DEPARTMENT_NAME
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnDepartmentNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[0]        = $this->InputValueDepartmentName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnDepartmentNameText;
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByDepartmentNameNoLimit($this->InputValueCorporationName, 
+																	                $this->InputValueDepartmentName, $ArrayInstanceUser,
+																					$Debug);
+			if($return == Config::RET_OK)
+			{
+				if($HideReturnSuccessImage)
+					$this->ShowDivReturnEmpty();
+				return Config::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_DEPARTMENT_NAME_WARNING");
+				return Config::RET_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SEL_BY_DEPARTMENT_NAME_ERROR");
@@ -4546,6 +4812,49 @@ class Page
 		return Config::RET_ERROR;
 	}
 	
+	protected function UserSelectByRoleNameNoLimit($RoleName, &$ArrayInstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueRoleName = $RoleName;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_ROLE_NAME
+		$arrayElements[0]             = Config::FIELD_ROLE_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnRoleNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueRoleName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnRoleNameText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByRoleNameNoLimit($this->InputValueRoleName, 
+																	          $ArrayInstanceUser, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return Config::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_ROLE_NAME_WARNING");
+				return Config::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_ROLE_NAME_ERROR");
+		return Config::RET_ERROR;
+	}
+	
 	protected function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
@@ -4574,6 +4883,48 @@ class Page
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->UserSelectByTeamId($Limit1, $Limit2, $this->InputValueTeamId, $ArrayInstanceUser, 
 																	 $RowCount, $Debug);
+			if($return == Config::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				return Config::RET_OK;
+			}
+			elseif(empty($ArrayInstanceUser))
+			{
+				$this->ShowDivReturnWarning("USER_SEL_BY_TEAM_ID_WARNING");
+				return Config::RET_WARNING;	
+			}
+		}
+		$this->ShowDivReturnError("USER_SEL_BY_TEAM_ID_ERROR");
+		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectByTeamIdNoLimit($TeamId, &$ArrayInstanceUser, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueTeamId = $TeamId;
+		$arrayConstants = array(); $matrixConstants = array();
+			
+		//FIELD_TEAM_ID
+		$arrayElements[0]             = Config::FIELD_TEAM_ID;
+		$arrayElementsClass[0]        = &$this->ReturnTeamIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueTeamId; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnTeamIdText;
+		array_push($arrayConstants, 'FM_INVALID_TEAM_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+			$return = $instanceFacedePersistence->UserSelectByTeamIdNoLimit($this->InputValueTeamId, $ArrayInstanceUser, $Debug);
 			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnEmpty();
@@ -4933,6 +5284,16 @@ class Page
 		}
 		$this->ShowDivReturnError("USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR");
 		return Config::RET_ERROR;
+	}
+	
+	protected function UserSelectNoLimit(&$ArrayInstanceUser, $Debug)
+	{
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$return = $instanceFacedePersistence->UserSelectNoLimit($ArrayInstanceUser, $Debug);
+		if($return == Config::RET_OK)
+			return Config::RET_OK;
+		$this->ShowDivReturnError("USER_NOT_FOUND");
+		return Config::RET_ERROR;	
 	}
 	
 	protected function UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceAssocUserNotification, 

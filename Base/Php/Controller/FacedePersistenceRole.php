@@ -1,20 +1,21 @@
 <?php
 
 /************************************************************************
-Class: FacedePersistenceCountry
-Creation: 2017/10/23
+Class: FacedePersistenceRole
+Creation: 2019/03/26
 Creator: Marcus Siqueira
 Dependencies:
 			Base       - Php/Controller/Factory.php
 			Base       - Php/Controller/Config.php
 			Base       - Php/Model/MySqlManager.php
 			Base       - Php/Model/Persistence.php
-			Base       - Php/Model/Country.php
+			Base       - Php/Model/Role.php
 	
 Description: 
 			Class with Singleton pattern for dabatabase methods of County
 Functions: 
-			public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection);
+			public function RoleSelect($Limit1, $Limit2, &$ArrayInstanceRole, &$RowCount, $Debug, $MySqlConnection);
+			public function RoleSelectNoLimit(&$ArrayInstanceRole, $Debug, $MySqlConnection);
 **************************************************************************/
 
 if (!class_exists("Config"))
@@ -45,14 +46,14 @@ if (!class_exists("Persistence"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
 }
 
-if (!class_exists("Country"))
+if (!class_exists("Role"))
 {
-	if(file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
-		include_once(BASE_PATH_PHP_MODEL . "Country.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
+	if(file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
+		include_once(BASE_PATH_PHP_MODEL . "Role.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
 }
 
-class FacedePersistenceCountry
+class FacedePersistenceRole
 {	
 	/* Instance */
 	protected static $Instance;
@@ -94,15 +95,15 @@ class FacedePersistenceCountry
         return self::$Instance;
     }
 	
-	public function CountrySelect($Limit1, $Limit2, &$ArrayInstanceCountry, &$RowCount, $Debug, $MySqlConnection)
+	public function RoleSelect($Limit1, $Limit2, &$ArrayInstanceRole, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
-		$ArrayInstanceCountry = NULL;
+		$ArrayInstanceRole = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlCountrySelect');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlCountrySelect());
+				Persistence::ShowQuery('SqlRoleSelect');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlRoleSelect());
 			if($stmt != NULL)
 			{
 				$limitResult = $Limit2 - $Limit1;
@@ -110,32 +111,82 @@ class FacedePersistenceCountry
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::RET_OK)
 				{
-					$ArrayInstanceCountry = array();
+					$ArrayInstanceRole = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceCountry = $this->Factory->CreateCountry
-							                              ($row[Config::TB_COUNTRY_FD_ABBREVIATION],
-							                               $row[Config::TB_COUNTRY_FD_NAME], 
-												      	   $row[Config::TB_COUNTRY_FD_REGION_CODE], 
-														   $row[Config::TB_FD_REGISTER_DATE]);
-						array_push($ArrayInstanceCountry, $InstanceCountry);
+						$InstanceRole = $this->Factory->CreateRole
+							                              ($row[Config::TB_FD_REGISTER_DATE],
+							                               $row[Config::TB_ROLE_FD_DESCRIPTION], 
+												      	   $row[Config::TB_ROLE_FD_NAME]);
+						array_push($ArrayInstanceRole, $InstanceRole);
 					}
-					if(!empty($ArrayInstanceCountry))
+					if(!empty($ArrayInstanceRole))
 						return Config::RET_OK;
 					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						return Config::DB_ERROR_COUNTRY_SEL_FETCH;
+						return Config::DB_ERROR_ROLE_SEL_FETCH;
 					}
 				}
 				else 
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::DB_ERROR_COUNTRY_SEL;
+					$return = Config::DB_ERROR_ROLE_SEL;
+				}
+				return $return;
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function RoleSelectNoLimit(&$ArrayInstanceRole, $Debug, $MySqlConnection)
+	{
+		$errorStr = NULL; $mySqlError = NULL;
+		$ArrayInstanceRole = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlRoleSelectNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlRoleSelectNoLimit());
+			if($stmt != NULL)
+			{
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceRole = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$InstanceRole = $this->Factory->CreateRole
+							                              ($row[Config::TB_FD_REGISTER_DATE],
+							                               $row[Config::TB_ROLE_FD_DESCRIPTION], 
+												      	   $row[Config::TB_ROLE_FD_NAME]);
+						array_push($ArrayInstanceRole, $InstanceRole);
+					}
+					if(!empty($ArrayInstanceRole))
+						return Config::RET_OK;
+					else 
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_ROLE_SEL_FETCH;
+					}
+				}
+				else 
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					$return = Config::DB_ERROR_ROLE_SEL;
 				}
 				return $return;
 			}

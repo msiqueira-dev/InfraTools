@@ -33,17 +33,22 @@ if (!class_exists("Notification"))
 
 class PageAdminNotification extends PageAdmin
 {
-	public $ArrayInstanceNotification               = NULL;
-	public $InstanceNotification                    = NULL;
-	public $InputValueNotificationForAll            = NULL;
-	public $InputValueNotificationByCorporationName = NULL;
-	public $InputValueNotificationByDepartmentName  = NULL;
-	public $InputValueNotificationByRole            = NULL;
-	public $InputValueNotificationByTeamName        = NULL;
-	public $ReturnNotificationByCorporationClass    = NULL;
-	public $ReturnNotificationByDepartmentNameClass = NULL;
-	public $ReturnNotificationByRoleClass           = NULL;
-	public $ReturnNotificationByTeamNameClass       = NULL;
+	public $ArrayInstanceNotification                    = NULL;
+	public $ArrayInstanceInfraToolsUser                  = NULL;
+	public $ArrayInstanceSelectNotificationByCorporation = NULL;
+	public $ArrayInstanceSelectNotificationByDepartment  = NULL;
+	public $ArrayInstanceSelectNotificationByRole        = NULL;
+	public $ArrayInstanceSelectNotificationByTeam        = NULL;
+	public $InstanceNotification                         = NULL;
+	public $InputValueNotificationForAll                 = NULL;
+	public $InputValueNotificationByCorporationName      = NULL;
+	public $InputValueNotificationByDepartmentName       = NULL;
+	public $InputValueNotificationByRole                 = NULL;
+	public $InputValueNotificationByTeamName             = NULL;
+	public $ReturnNotificationByCorporationClass         = NULL;
+	public $ReturnNotificationByDepartmentNameClass      = NULL;
+	public $ReturnNotificationByRoleClass                = NULL;
+	public $ReturnNotificationByTeamNameClass            = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -56,6 +61,34 @@ class PageAdminNotification extends PageAdmin
 	protected function __construct($Config, $Language, $Page) 
 	{
 		parent::__construct($Config, $Language, $Page);
+	}
+	
+	protected function LoadAssociationsSelect()
+	{
+		$this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+									  array(&$this->ArrayInstanceSelectNotificationByCorporation),
+									  $this->InputValueHeaderDebug);
+		$this->ExecuteFunction($_POST, 'DepartmentSelectNoLimit', 
+								  array(&$this->ArrayInstanceSelectNotificationByDepartment),
+								  $this->InputValueHeaderDebug);
+		$this->ExecuteFunction($_POST, 'RoleSelectNoLimit', 
+								  array(&$this->ArrayInstanceSelectNotificationByRole),
+								  $this->InputValueHeaderDebug);
+		$this->ExecuteFunction($_POST, 'TeamSelectNoLimit', 
+								  array(&$this->ArrayInstanceSelectNotificationByTeam),
+								  $this->InputValueHeaderDebug);
+		if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+		{
+			$_POST = NULL;
+			$_POST[ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB] = ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB;
+			$this->ExecuteFunction($_POST, 'InfraToolsUserSelectByNotificationId', 
+								   array($this->InstanceNotification->GetNotificationId(), 
+										 &$this->ArrayInstanceInfraToolsUser),
+								   $this->InputValueHeaderDebug);
+			return ConfigInfraTools::RET_OK;
+		}
+		else return ConfigInfraTools::RET_ERROR;
 	}
 
 	public function LoadPage()
@@ -85,6 +118,271 @@ class PageAdminNotification extends PageAdmin
 										    &$this->InstanceInfraToolsDepartment),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+		}
+		//FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+										  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+		}
+		//FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE) == ConfigInfraTools::RET_OK)
+		{
+			$ret = NULL;
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL) == ConfigInfraTools::RET_OK)
+			{
+				if($_POST[ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL] != Config::FIELD_SEL_NONE)
+				{
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectNoLimit',
+										  array(&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationInsert',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_CORPORATION_NAME) == ConfigInfraTools::RET_OK 
+			   && $ret != ConfigInfraTools::RET_OK)
+			{
+				if($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByCorporationNameNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationInsert',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_DEPARTMENT_NAME) == ConfigInfraTools::RET_OK
+				  && ($ret != ConfigInfraTools::RET_OK || $ret != ConfigInfraTools::RET_WARNING))
+			{
+				if($_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$array = explode(" - ", $_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME]);
+					$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME] = $array[0];
+					$_POST[ConfigInfraTools::FIELD_CORPORATION_NAME] = $array[1];
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByDepartmentNameNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+												$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationInsert',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_ROLE_NAME) == ConfigInfraTools::RET_OK
+				  && ($ret != ConfigInfraTools::RET_OK || $ret != ConfigInfraTools::RET_WARNING))
+			{
+				if($_POST[ConfigInfraTools::FIELD_ROLE_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByRoleNameNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_ROLE_NAME],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationInsert',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_TEAM_NAME) == ConfigInfraTools::RET_OK
+				  && ($ret != ConfigInfraTools::RET_OK || $ret != ConfigInfraTools::RET_WARNING))
+			{
+				if($_POST[ConfigInfraTools::FIELD_TEAM_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$array = explode(" - ", $_POST[ConfigInfraTools::FIELD_TEAM_NAME]);
+					$_POST[ConfigInfraTools::FIELD_TEAM_NAME] = $array[0];
+					$_POST[ConfigInfraTools::FIELD_TEAM_ID] = $array[1];
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByTeamIdNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_TEAM_ID],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationInsert',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if ($ret == ConfigInfraTools::RET_OK || $ret == ConfigInfraTools::RET_WARNING)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+			else 
+			{
+				if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+			}
+			
+		}
+		//FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE) == ConfigInfraTools::RET_OK)
+		{
+			$ret = NULL;
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL) == ConfigInfraTools::RET_OK)
+			{
+				if($_POST[ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL] != Config::FIELD_SEL_NONE)
+				{
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectNoLimit',
+										  array(&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationDelete',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_CORPORATION_NAME) == ConfigInfraTools::RET_OK 
+			   && $ret != ConfigInfraTools::RET_OK)
+			{
+				if($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByCorporationNameNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationDelete',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_DEPARTMENT_NAME) == ConfigInfraTools::RET_OK
+				  && ($ret != ConfigInfraTools::RET_OK || $ret != ConfigInfraTools::RET_WARNING))
+			{
+				if($_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$array = explode(" - ", $_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME]);
+					$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME] = $array[0];
+					$_POST[ConfigInfraTools::FIELD_CORPORATION_NAME] = $array[1];
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByDepartmentNameNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+												$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationDelete',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_ROLE_NAME) == ConfigInfraTools::RET_OK
+				  && ($ret != ConfigInfraTools::RET_OK || $ret != ConfigInfraTools::RET_WARNING))
+			{
+				if($_POST[ConfigInfraTools::FIELD_ROLE_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByRoleNameNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_ROLE_NAME],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationDelete',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_TEAM_NAME) == ConfigInfraTools::RET_OK
+				  && ($ret != ConfigInfraTools::RET_OK || $ret != ConfigInfraTools::RET_WARNING))
+			{
+				if($_POST[ConfigInfraTools::FIELD_TEAM_NAME] != Config::FIELD_SEL_NONE)
+				{
+					$array = explode(" - ", $_POST[ConfigInfraTools::FIELD_TEAM_NAME]);
+					$_POST[ConfigInfraTools::FIELD_TEAM_NAME] = $array[0];
+					$_POST[ConfigInfraTools::FIELD_TEAM_ID] = $array[1];
+					$ret = $this->ExecuteFunction($_POST, 'UserSelectByTeamIdNoLimit',
+										  array($_POST[ConfigInfraTools::FIELD_TEAM_ID],
+												&$this->ArrayInstanceInfraToolsUser),
+										  $this->InputValueHeaderDebug);
+					if($ret == ConfigInfraTools::RET_OK)
+					{
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
+								  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+						{
+							$ret = $this->ExecuteFunction($_POST, 'AssocUserNotificationDelete',
+														  array(array($this->InstanceNotification),
+																$this->ArrayInstanceInfraToolsUser),
+														  $this->InputValueHeaderDebug);
+						}
+					}
+				}
+			}
+			if ($ret == ConfigInfraTools::RET_OK || $ret == ConfigInfraTools::RET_WARNING)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+			else 
+			{
+				if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
+			}
+			
 		}
 		//FM_NOTIFICATION_LST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_LST) == ConfigInfraTools::RET_OK)
@@ -129,25 +427,7 @@ class PageAdminNotification extends PageAdmin
 			$this->InputValueNotificationByDepartmentName  = NULL;
 			$this->InputValueNotificationByRole            = NULL;
 			$this->InputValueNotificationByTeamName        = NULL;
-			if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
-									  array(&$this->ArrayInstanceSelectNotificationByCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-			{
-				if($this->ExecuteFunction($_POST, 'DepartmentSelectNoLimit', 
-									  array(&$this->ArrayInstanceSelectNotificationByDepartment),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				{
-					if($this->ExecuteFunction($_POST, 'TeamSelectNoLimit', 
-									  array(&$this->ArrayInstanceSelectNotificationByTeam),
-									  $this->InputValueHeaderDebug) != ConfigInfraTools::RET_OK)
-					{
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
-					}
-				} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
-			}
-			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
-			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
-										  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
+			if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}

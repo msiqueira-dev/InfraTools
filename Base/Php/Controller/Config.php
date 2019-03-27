@@ -35,6 +35,9 @@ class Config
 	const DB_CODE_ERROR_ACCESS_DENIED                                   = "1045";
 	const DB_ERROR_ASSOC_USER_CORPORATION_DEL                           = "RetMySqlAssocUserCorporationDelete";
 	const DB_ERROR_ASSOC_USER_CORPORATION_INSERT                        = "RetMySqlAssocUserCorporationInsert";
+	const DB_ERROR_ASSOC_USER_NOTIFICATION_DELETE                       = "DbErrorAssocUserNotificationDelete";
+	const DB_ERROR_ASSOC_USER_NOTIFICATION_INSERT                       = "DbErrorAssocUserNotificationInsert";
+	const DB_ERROR_ASSOC_USER_NOTIFICATION_UPDATE                       = "DbErrorAssocUserNotificationUpdate";
 	const DB_ERROR_USER_UPDT_ASSOC_USER_CORPORATION_BY_USER_EMAIL       = "DbErrorUserUpdtAssocUserCorporationByUserEmail";
 	const DB_ERROR_CORPORATION_DEL                                      = "RetMySqlCorporationDelete";
 	const DB_ERROR_CORPORATION_INSERT                                   = "RetMySqlCorporationInsert";
@@ -69,6 +72,8 @@ class Config
 	const DB_ERROR_QUERY_PREPARE                                        = "RetMySqlErrorQueryPrepare";
  	const DB_ERROR_QUERY_EMPTY                                          = "RetMySqlErrorQueryEmpty";
 	const DB_ERROR_QUERY_SQL                                            = "RetMySqlErrorQuerySql";
+	const DB_ERROR_ROLE_SEL                                             = "RetMySqlRoleSelect";
+	const DB_ERROR_ROLE_SEL_FETCH                                       = "RetMySqlRoleSelectFetch";
 	const DB_ERROR_UPDT_SAME_VALUE                                      = "RetMySqlErrorUpdateSameValue";
 	const DB_ERROR_USER_EXISTS                                          = "RetMySqlErrorUserExists";
 	const DB_ERROR_USER_PERMISSION_DENIED                               = "RetMySqlErrorUserPermissionDenied";
@@ -390,7 +395,8 @@ class Config
 	const FM_NOTIFICATION_ASSOCIATE_USERS                               = "FormNotificationAssociateUsers";
 	const FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL                        = "FormNotificationAssociateUsersCancel";
 	const FM_NOTIFICATION_ASSOCIATE_USERS_FORM                          = "FormNotificationAssociateUsersForm";
-	const FM_NOTIFICATION_ASSOCIATE_USERS_SB                            = "FormNotificationAssociateUsersSb";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE                  = "FormNotificationAssociateUsersSbAssociate";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE               = "FormNotificationAssociateUsersSbDisAssociate";
 	const FM_NOTIFICATION_LST                                           = "FormNotificationList";
 	const FM_NOTIFICATION_LST_BACK                                      = "FormNotificationListBack";
 	const FM_NOTIFICATION_LST_FORM                                      = "FormNotificationListForm";

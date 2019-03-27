@@ -67,8 +67,12 @@ class En
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "Association between ip address and service was not found";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "Error updating corporation information";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "Corporation information updated succesfully";
+	const ASSOC_USER_NOTIFICATION_DELETE_ERROR                      = "Association between user and notification delete error";
+	const ASSOC_USER_NOTIFICATION_DELETE_SUCCESS                    = "Association between user and notification delete succesfully";
+	const ASSOC_USER_NOTIFICATION_INSERT_ERROR                      = "Association between user and notification insert error";
+	const ASSOC_USER_NOTIFICATION_INSERT_SUCCESS                    = "Association between user and notification insert succesfully";
 	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "Association between user and notification update error";
-	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "Association between user and notificatio nupdated succesfully";
+	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "Association between user and notification updated succesfully";
 	const CHECK_AVAILABILITY_FREE                                   = "Domain is free";
 	const CHECK_AVAILABILITY_TAKEN                                  = "Domain already taken";
 	const CHECK_BLACKLIST_HOST_NOT_LSTED                            = "Domain [0] is not on the following black lists: uceprotect, dronebl, "
@@ -159,7 +163,7 @@ class En
 	const FIELD_NOTIFICATION_TEXT                                   = "Text";
 	const FIELD_ROLE_DESCRIPTION                                    = "Description";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "Department name and corporation name";
-	const FIELD_SEL_NONE                                            = "None";
+	const FIELD_SEL_NONE                                            = "Select";
 	const FIELD_SERVICE_ACTIVE                                      = "Active";
 	const FIELD_SERVICE_CORPORATION_CAN_CHANGE                      = "Corporation can change?";
 	const FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                       = "Department can change?";
@@ -1012,6 +1016,7 @@ class En
 	const RESEND_CONFIRMATION_EMAIL_TEXT                            = "click in the link bellow to finish your register.<br/><br/>Link:";
 	const RESEND_CONFIRMATION_LINK_ERROR                            = "An error has occurred, please try again or contact us";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "Confirmation link resent successfully";
+	const ROLE_NOT_FOUND                                            = "Role not found";
 	const ROW_COUNT                                                 = "Total Amount: ";
 	const SEND_EMAIL_ERROR                                          = "Error while sending email to user";
 	const SERVICE_DEL_ERROR                                         = "Error deleting service";
@@ -1054,6 +1059,7 @@ class En
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ACTIVATE ACCOUNT";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DEACTIVATE ACCOUNT";
 	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIATE TO USERS";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "DISASSOCIATE TO USERS";
 	const SUBMIT_BACK                                               = "BACK";
 	const SUBMIT_CANCEL                                             = "CANCEL";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "CHANGE USER CORPORATION INFO";
@@ -1089,6 +1095,7 @@ class En
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "System configuration not found";
 	const SYSTEM_CONFIGURATION_UPDT_ERROR                           = "Error updating system configuration";
 	const SYSTEM_CONFIGURATION_UPDT_SUCCESS                         = "System configuration updated successfully";
+	const TABLE_EMPTY                                               = "No records were found for the search performed";
 	const TB_PAGE_PREFIX                                            = "From:";
 	const TB_PAGE                                                   = "of";
 	const TEAM                                                      = "Team";

@@ -13,6 +13,7 @@ Dependencies:
 Description: 
 			Class with Singleton pattern for dabatabase methods of association between User and Notification
 Functions: 
+			public function AssocUserNotificationInsert($NotificationId, $UserEmail, $Debug, $MySqlConnection);
 			public function AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew,
 																				    $NotificationIdNew, $UserEmailNew, 
 																					$InstanceAssocUserNotification, 
@@ -75,6 +76,83 @@ class FacedePersistenceAssocUserNotification
         return self::$Instance;
     }
 	
+	public function AssocUserNotificationDelete($NotificationId, $UserEmail, $Debug, $MySqlConnection)
+	{
+		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlAssocUserNotificationDelete');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserNotificationDelete());
+			if ($stmt)
+			{
+				$stmt->bind_param("is", $NotificationId, $UserEmail);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL && $stmt->affected_rows > 0)
+					return Config::RET_OK;
+				elseif($errorStr == NULL && $stmt->affected_rows == 0)
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return Config::DB_ERROR_ASSOC_USER_NOTIFICATION_DELETE;
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					if($errorCode == Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return Config::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return Config::DB_ERROR_ASSOC_USER_NOTIFICATION_DELETE;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function AssocUserNotificationInsert($NotificationId, $UserEmail, $Debug, $MySqlConnection)
+	{
+		$errorCode = NULL; $errorStr = NULL; $mySqlError = NULL; $queryResult = NULL;		
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlAssocUserNotificationInsert');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlAssocUserNotificationInsert());
+			if ($stmt)
+			{
+				$read = FALSE;
+				$stmt->bind_param("isi", $NotificationId, $UserEmail, $read);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL && $stmt->affected_rows > 0)
+					return Config::RET_OK;
+				elseif($errorStr == NULL && $stmt->affected_rows == 0)
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return Config::DB_ERROR_UPDT_SAME_VALUE;
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return Config::DB_ERROR_ASSOC_USER_NOTIFICATION_INSERT;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
 	public function AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew, $NotificationIdNew, $UserEmailNew, 
 																		    $InstanceAssocUserNotification, $Debug, $MySqlConnection)
 	{
@@ -102,7 +180,7 @@ class FacedePersistenceAssocUserNotification
 				{
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return Config::DB_ERROR_USER_UPDT_ASSOC_USER_CORPORATION_BY_USER_EMAIL;
+					return Config::DB_ERROR_ASSOC_USER_NOTIFICATION_UPDATE;
 				}
 			}
 			else

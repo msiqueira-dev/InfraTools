@@ -683,7 +683,7 @@ class Factory
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
 		else include_once(BASE_PATH_PHP_MODEL . "Role.php");
-		return new SessionHandler($RegisterDate, $RoleDescription, $RoleName);
+		return new Role($RegisterDate, $RoleDescription, $RoleName);
 	}
 	
 	public function CreateSession()

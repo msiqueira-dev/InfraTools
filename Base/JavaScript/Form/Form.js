@@ -49,6 +49,24 @@ function MakeInputVisible(InputIdToSee)
 	$inputToSee.className = $inputToSee.className.replace("Hidden", "NotHidden");
 }
 
+function ResetOtherSelectValuesByForm(FormId, SelectId)
+{
+	var $index=0;
+	var $form = document.getElementById(FormId);
+	var $select = document.getElementById(SelectId);
+	for ($index = 0; $index < $form.length; $index++) 
+	{
+		if($form[$index].tagName == "SELECT")
+		{
+			if($form[$index].name != $select.name)
+			{
+				$form[$index].selectedIndex = 0;
+				$form[$index].style.color = "graytext";
+			}
+		}
+	}
+}
+
 function ShowOrHideElement(ElementToShowOrHide, Show)
 {
 	var $elementToShowOrHide = document.getElementById(ElementToShowOrHide);
@@ -118,6 +136,7 @@ function SetSelectColor(SelectId)
 		$select.style.color = "black";
 		$select.className = $select.className.replace("InputAlertText" , "");
 	}
+	else $select.style.color = "graytext";
 }
 
 function SubmitNewForm(Id, Method, Name)

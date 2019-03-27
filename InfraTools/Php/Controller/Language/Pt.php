@@ -67,6 +67,10 @@ class Pt
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "Associação entre endereço de ip e serviço não encontrada";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "Erro ao atualizar informações de corporação";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "Informações de corporação alterada com sucesso";
+	const ASSOC_USER_NOTIFICATION_DELETE_ERROR                      = "Erro ao excluir associação entre usuário e notificação";
+	const ASSOC_USER_NOTIFICATION_DELETE_SUCCESS                    = "Associação entre usuário e notificação excluida com sucesso";
+	const ASSOC_USER_NOTIFICATION_INSERT_ERROR                      = "Erro ao cadastrar associação entre usuário e notificação";
+	const ASSOC_USER_NOTIFICATION_INSERT_SUCCESS                    = "Associação entre usuário e notificação cadastrada com sucesso";
 	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "Erro ao atualizar associação entre usuário e notificação";
 	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "Associação entre usuário e notificação atualizada com sucesso";
 	const CHECK_AVAILABILITY_FREE                                   = "Domínio está livre";
@@ -160,7 +164,7 @@ class Pt
 	const FIELD_NOTIFICATION_TEXT                                   = "Texto";
 	const FIELD_ROLE_DESCRIPTION                                    = "Descrição";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "Nome do departamento e nome da corporação";
-	const FIELD_SEL_NONE                                            = "Nenhuma";
+	const FIELD_SEL_NONE                                            = "Selecione";
 	const FIELD_SERVICE_ACTIVE                                      = "Ativo";
 	const FIELD_SERVICE_CORPORATION_CAN_CHANGE                      = "Corporação pode mudar?";
 	const FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                       = "Departamento pode mudar?";
@@ -1019,6 +1023,7 @@ class Pt
 	const RESEND_CONFIRMATION_LINK_ERROR                            = "Um erro ocorreu, por favor tente novamente ou entre em contato";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "Link de confirmação reenviado com sucesso";
 	const ROW_COUNT                                                 = "Valor total: ";
+	const ROLE_NOT_FOUND                                            = "Papel não encontrado";
 	const SEND_EMAIL_ERROR                                          = "Erro ao enviar e-mail para o usuário";
 	const SERVICE_DEL_ERROR                                         = "Erro ao excluir serviço";
 	const SERVICE_DEL_ERROR_FOREIGN_KEY                             = "Erro ao excluir serviço, exclua as associações primeiro";
@@ -1062,6 +1067,7 @@ class Pt
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ATIVAR CONTA";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DESATIVAR CONTA";
 	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIAR A USUÁRIOS";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "DESASSOCIAR USUÁRIOS";
 	const SUBMIT_BACK                                               = "VOLTAR";
 	const SUBMIT_CANCEL                                             = "CANCELAR";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "ALTERAR INFO DE USUÀRIO CORPORAÇÃO";
@@ -1097,6 +1103,7 @@ class Pt
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "Configuração do sistema não encontrada";
 	const SYSTEM_CONFIGURATION_UPDT_ERROR                           = "Erro ao atualizar configuração do sistema";
 	const SYSTEM_CONFIGURATION_UPDT_SUCCESS                         = "Configuração do sistema atualizada com sucesso";
+	const TABLE_EMPTY                                               = "Nenhum registro encontrado para a busca realizada";
 	const TB_PAGE_PREFIX                                            = "De:";
 	const TB_PAGE                                                   = "até";
 	const TEAM                                                      = "Equipe";

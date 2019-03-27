@@ -13,41 +13,37 @@
 		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
 	</label>
 </div>
-<div class="DivTableGenericHeader">
-	<div class="DivTableGenericHeaderRowCount">
-	<?php 
-		 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-		 {
-			 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-				  echo "<label class='InputValueLimitTitle'>" . 
-						   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
-					   "</label>" .
-					   "<label class='InputValueLimitValue'>" . 
-						   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
-												   . " " . $this->InputValueLimit2 . 
-					   "</label>";
-		 }
-	?>
-	</div>
-	<div class="DivTableGenericHeaderRowCount">
-	<?php
-		 if(isset($this->InputValueRowCount)) 
-		  {
-			  if($this->InputValueRowCount != "") 
-				  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-						   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-					   "</label>" .
-					   "<label class='DivTableGenericRowCountLabelValue'>" . 
-						   $this->InputValueRowCount . 
-					   "</label>";
-		  } 
-	?>
-	</div>
-</div>
 <!-- FM_NOTIFICATION_VIEW_LST_USERS_FORM -->
 <?php
-if(is_array($this->ArrayInstanceInfraToolsUser))
+if(is_array($this->ArrayInstanceInfraToolsUser) && !empty($this->ArrayInstanceInfraToolsUser))
 {
+	echo "<div class='DivTableGenericHeader'>";
+		 echo "<div class='DivTableGenericHeaderRowCount'>";
+			 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
+			 {
+				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+					  echo "<label class='InputValueLimitTitle'>" . 
+							   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
+						   "</label>" .
+						   "<label class='InputValueLimitValue'>" . 
+							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
+													   . " " . $this->InputValueLimit2 . 
+						   "</label>";
+			 }
+		echo "</div>";
+		echo "<div class='DivTableGenericHeaderRowCount'>";
+			 if(isset($this->InputValueRowCount)) 
+			 {
+				 if($this->InputValueRowCount != "") 
+					echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
+						   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
+						 "</label>" .
+						 "<label class='DivTableGenericRowCountLabelValue'>" . 
+						   $this->InputValueRowCount . 
+						 "</label>";
+			 } 
+		echo "</div>";
+	echo "</div>";
 	echo "<form  name='" . ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
 				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
@@ -76,9 +72,9 @@ if(is_array($this->ArrayInstanceInfraToolsUser))
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_USER_TYPE') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME') . "</th>";
 	echo "<th  class= 'TableGenericThArrow'> 
-	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME') . "</div>" .
+		  <div class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME') . "</div>" .
 		 "<div class='TableGenericInputRight'>
-		          <input  type='image'
+				  <input  type='image'
 				  class='TableGenericThArrowImage'
 				  name='"  . ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB_FORWARD . "' 
 				  id='"    . ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB_FORWARD . "'
