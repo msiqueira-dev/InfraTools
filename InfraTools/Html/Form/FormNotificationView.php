@@ -44,7 +44,7 @@
 			<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
 					<?php
-						echo "<img src='" . $this->InputValueNotificationActive . "' 
+						echo "<img src='" . $this->InputValueNotificationActiveIcon . "' 
 							   name='"    . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE') . "'
 							   alt='NotificationActive' width='20' height='20' />";
 					?>

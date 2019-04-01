@@ -11,9 +11,9 @@
 		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
 	</label>
 </div>
-<!-- FM_NOTIFICATION_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>" method="post">
+<!-- FM_NOTIFICATION_UPDT_FORM -->
+<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>" 
+      id="<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>" method="post">
     <!-- FIELD_NOTIFICATION_TEXT -->
     <div class="DivContentBodyContainerTextArea">
         <div class="DivContentBodyContainerLabel">
@@ -26,27 +26,27 @@
                                onblur="ValidateDescription('DivContentBodyContainerValueTextArea', 
                                                    '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
                                                  '');"
                                onchange="ValidateDescription(DivContentBodyContainerValueTextArea, 
                                                    '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
                                                  '');"
                                title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_TEXT'); ?>"
                                maxlength="500"><?php echo $this->InputValueNotificationText; ?></textarea>
@@ -63,9 +63,9 @@
 				       value="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ACTIVE; ?>"
 				        <?php echo $this->InputValueNotificationActive; ?>
 					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
+									   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>',
 									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+									   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
 									   '');"
 				        />
         </div>
@@ -75,20 +75,20 @@
          onmouseover="ValidateDescription('DivContentBodyContainerValueTextArea', 
 							       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+								   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
 								   '', true);
                       ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
+                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM; ?>',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_SB; ?>"
                                  class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
+                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDATE'); ?>"
                                  <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_CANCEL; ?>"
+        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_CANCEL; ?>" 
+                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_UPDT_CANCEL; ?>"
                                  class="DivContentBodySubmitBigger"
                                  value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
     </div>

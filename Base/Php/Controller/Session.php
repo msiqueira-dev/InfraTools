@@ -130,6 +130,20 @@ class Session
 		session_start();
 	}
 	
+	public function GetSessionValue($Key, &$Value)
+	{
+		if($Key != NULL)
+		{
+			if (isset($_SESSION[$Key]))
+			{
+				$Value = $_SESSION[$Key];
+				return Config::RET_OK;
+			}
+			else return self::ERROR_EMPTY_SESSION_VALUE_FOR_PARAMETER;
+		}
+		else return self::ERROR_EMPTY_PARAMETER_VARIABLE;
+	}
+	
 	public function RemoveSessionVariable($Key)
 	{
 		if(isset($Key))
@@ -145,20 +159,6 @@ class Session
 		} else return Config::RET_ERROR;
 	}
 	
-	public function GetSessionValue($Key, &$Value)
-	{
-		if($Key != NULL)
-		{
-			if (isset($_SESSION[$Key]))
-			{
-				$Value = $_SESSION[$Key];
-				return Config::RET_OK;
-			}
-			else return self::ERROR_EMPTY_SESSION_VALUE_FOR_PARAMETER;
-		}
-		else return self::ERROR_EMPTY_PARAMETER_VARIABLE;
-	}
-	
 	public function SetSessionValue($Key, $Value)
 	{
 		if ($Key != NULL)
@@ -171,6 +171,60 @@ class Session
 			else return self::ERROR_EMPTY_PARAMETER_VALUE;
 		}
 		else return self::ERROR_EMPTY_PARAMETER_VARIABLE;
+	}
+	
+	public function SessionFileGetValueByHashCode(&$Value, $Application, $SessionId, $Key)
+	{
+		$Value = NULL;
+		if(isset($Application) && !empty($Application) && isset($SessionId) && !empty($SessionId) && isset($Key) && !empty($Key))
+		{
+			$file = SESSION_PATH . $Application . "/sess_" . $SessionId;
+			if(file_exists(($file)))
+			{
+				$str = $this->InstanceSessionHandlerCustom->read($SessionId);
+				$start = strpos($str, $Key);
+				$end=$start;
+				while($str[$end] != '"')
+				{
+					$Value .= $str[$end];
+					$end++;
+				}
+				$Value .= '"';
+				$end++;
+				while($str[$end] != '"')
+				{
+					$Value .= $str[$end];
+					$end++;
+				}
+				$Value .= '"';
+				if($Value != NULL)
+					return Config::RET_OK;
+			}
+		}
+		return Config::RET_ERROR;
+	}
+	
+	public function SessionFileUpdateValueByHashCode($Application, $SessionId, $OldValue, $NewValue)
+	{
+		if(isset($Application) && !empty($Application) && isset($SessionId) && !empty($SessionId) 
+		                       && isset($OldValue) && !empty($OldValue) && isset($NewValue) && !empty($NewValue))
+		{
+			$file = SESSION_PATH . $Application . "/sess_" . $SessionId;
+			if(file_exists(($file)))
+			{
+				$str = $this->InstanceSessionHandlerCustom->read($SessionId);
+				$str = str_replace($OldValue, $NewValue, $str, $count);
+				if($count > 0)
+				{
+					$str = $this->InstanceSessionHandlerCustom->destroy($SessionId);
+					$this->CreatePersonalized($Application, $SessionId, 3600);
+					//$handle = fopen($file, 'w');
+					//fwrite($handle, $str);
+					//fclose($handle);
+				}
+			}
+		}
+		return Config::RET_ERROR;
 	}
 }
 

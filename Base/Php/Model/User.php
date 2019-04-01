@@ -10,19 +10,20 @@ Dependencies:
 Description: 
 			Class for User
 Get / Set: 
-			public function GetAssocUserNotificationNotificationIdByIndex($Index);
-			public function GetAssocUserTeamTeamIdByIndex($Index);
-			public function GetAssocUserTeamTeamNameByIndex($Index);
 			public function GetArrayAssocUserNotification();
 			public function GetArrayAssocUserNotificationUnRead();
 			public function GetArrayAssocUserTeam();
 			public function GetAssocUserCorporation();
-			public function GetAssocUserNotificationCount();
 			public function GetAssocUserCorporationUserRegistrationDate();
 			public function GetAssocUserCorporationUserRegistrationDateDay();
 			public function GetAssocUserCorporationUserRegistrationDateMonth();
 			public function GetAssocUserCorporationUserRegistrationDateYear();
 			public function GetAssocUserCorporationUserRegistrationId();
+			public function GetAssocUserNotificationCount();
+			public function GetAssocUserNotificationCountUnRead();
+			public function GetAssocUserNotificationNotificationIdByIndex($Index);
+			public function GetAssocUserTeamTeamIdByIndex($Index);
+			public function GetAssocUserTeamTeamNameByIndex($Index);
 			public function GetBirthDate();
 			public function GetBirthDateDay();
 			public function GetBirthDateMonth();
@@ -195,36 +196,6 @@ class User
     }
 	
 	/* GET */
-	public function GetAssocUserNotificationNotificationIdByIndex($Index)
-	{
-		if(is_array($this->ArrayAssocUserNotification))
-		{
-			if(count($this->ArrayAssocUserNotification) > 0)
-				return $this->ArrayAssocUserNotification[$Index]->GetNotificationId();
-		}
-		return NULL;
-	}
-	
-	public function GetAssocUserTeamTeamIdByIndex($Index)
-	{
-		if(is_array($this->ArrayAssocUserTeam))
-		{
-			if(count($this->ArrayAssocUserTeam) > 0)
-				return $this->ArrayAssocUserTeam[$Index]->GetTeamId();
-		}
-		return NULL;
-	}
-	
-	public function GetAssocUserTeamTeamNameByIndex($Index)
-	{
-		if(is_array($this->ArrayAssocUserTeam))
-		{
-			if(count($this->ArrayAssocUserTeam) > 0)
-				return $this->ArrayAssocUserTeam[$Index]->GetTeamName();
-		}
-		return NULL;
-	}
-	
 	public function GetArrayAssocUserNotification()
 	{
 		if(is_array($this->ArrayAssocUserNotification))
@@ -233,27 +204,6 @@ class User
 				return $this->ArrayAssocUserNotification;
 		}
 		return NULL;
-	}
-	
-	public function GetAssocUserNotificationCount()
-	{
-		if(empty($this->ArrayAssocUserNotification))
-			return $this->AssocUserNotificationCount;
-		else return count($this->ArrayAssocUserNotification);
-	}
-	
-	public function GetAssocUserNotificationCountUnRead()
-	{
-		if(empty($this->ArrayAssocUserNotification))
-			return $this->AssocUserNotificationCountUnRead;
-		else 
-		{
-			foreach($this->ArrayAssocUserNotification as $assocUserNotification)
-			{
-				if(!$assocUserNotification->GetAssocUserNotificationRead())
-					$this->AssocUserNotificationCountUnRead++;
-			}
-		}
 	}
 	
 	public function GetArrayAssocUserNotificationUnRead()
@@ -339,6 +289,57 @@ class User
 		if(!is_null($this->AssocUserCorporation))
 			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationId();
 		else return NULL;
+	}
+	
+	public function GetAssocUserNotificationCount()
+	{
+		if(empty($this->ArrayAssocUserNotification))
+			return $this->AssocUserNotificationCount;
+		else return count($this->ArrayAssocUserNotification);
+	}
+	
+	public function GetAssocUserNotificationCountUnRead()
+	{
+		if(empty($this->ArrayAssocUserNotification))
+			return $this->AssocUserNotificationCountUnRead;
+		else 
+		{
+			foreach($this->ArrayAssocUserNotification as $assocUserNotification)
+			{
+				if(!$assocUserNotification->GetAssocUserNotificationRead())
+					$this->AssocUserNotificationCountUnRead++;
+			}
+		}
+	}
+	
+	public function GetAssocUserNotificationNotificationIdByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserNotification))
+		{
+			if(count($this->ArrayAssocUserNotification) > 0)
+				return $this->ArrayAssocUserNotification[$Index]->GetNotificationId();
+		}
+		return NULL;
+	}
+	
+	public function GetAssocUserTeamTeamIdByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam[$Index]->GetTeamId();
+		}
+		return NULL;
+	}
+	
+	public function GetAssocUserTeamTeamNameByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam[$Index]->GetTeamName();
+		}
+		return NULL;
 	}
 	
 	public function GetBirthDate()

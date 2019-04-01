@@ -385,7 +385,7 @@ class PageAdminNotification extends PageAdmin
 			
 		}
 		//FM_NOTIFICATION_LST
-		if($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_LST) == ConfigInfraTools::RET_OK)
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'NotificationSelect', 
 									  array(&$this->ArrayInstanceNotification),

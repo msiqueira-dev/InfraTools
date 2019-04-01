@@ -51,7 +51,7 @@ Methods:
 		protected     function        DepartmentUpdateDepartmentByDepartmentAndCorporation($DepartmentInitialsNew,$DepartmentNameNew, 
 		         															               &$InstanceDepartment, $Debug)
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
-		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = FALSENULL);
+		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = NULL);
 		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE);
 		protected     function        LoadDataFromSession($SessionKey, $Function, &$Instance);
 		protected     function        NotificationDeleteByNotificationId($InstanceNotification, $Debug);
@@ -270,6 +270,7 @@ class Page
 	protected $Factory                                = NULL;
 	protected $Config                                 = NULL;
 	protected $User                                   = NULL;
+	protected $InstanceUserAdmin                      = NULL;
 	
 	/* Properties */
 	protected $Language                                             = NULL;
@@ -314,6 +315,7 @@ class Page
 	public    $InputValueLoginTwoStepVerificationCode               = "";
 	public    $InputValueNewPassword                                = "";
 	public    $InputValueNotificationActive                         = "";
+	public    $InputValueNotificationActiveIcon                     = "";
 	public    $InputValueNotificationId                             = "";
 	public    $InputValueNotificationText                           = "";
 	public    $InputValueRegion                                     = "";
@@ -609,10 +611,7 @@ class Page
 			$this->InstanceFacedeBusiness->GetIpAddressClient(true, $ip);
 			$this->InstanceFacedeBusiness->GetOperationalSystem(true, $operationalSystem);
 			$this->InstanceFacedeBusiness->GetBrowserClient(true, $browser);
-			$sessionId = $user->GetHashCode() . "-" .		
-						 $ip . "-" .
-						 $operationalSystem . "-" .
-						 $browser;
+			$sessionId = $user->GetHashCode();
 			$this->Session->CreatePersonalized($this->Config->DefaultApplicationName,
 											   $sessionId,
 											   $this->Config->SessionTime);
@@ -763,7 +762,8 @@ class Page
 		}
 		if($return == Config::RET_OK)
 		{
-			$return = $instanceFacedePersistence->AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug);
+			$return = $instanceFacedePersistence->AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug, 
+																			  NULL, TRUE, $this->User);
 			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess('ASSOC_USER_NOTIFICATION_DELETE_SUCCESS');
@@ -836,7 +836,8 @@ class Page
 		}
 		if($return == Config::RET_OK)
 		{
-			$return = $instanceFacedePersistence->AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug);
+			$return = $instanceFacedePersistence->AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug,
+																			 NULL, TRUE, $this->User);
 			if($return == Config::RET_OK)
 			{
 				$this->ShowDivReturnSuccess('ASSOC_USER_NOTIFICATION_INSERT_SUCCESS');
@@ -1875,8 +1876,15 @@ class Page
 		if($InstanceNotification != NULL)
 		{
 			if($InstanceNotification->GetNotificationActive())
-				$this->InputValueNotificationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueNotificationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+			{
+				$this->InputValueNotificationActive = "checked";
+				$this->InputValueNotificationActiveIcon = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
+			}
+			else
+			{
+				$this->InputValueNotificationActive = FALSE;
+				$this->InputValueNotificationActiveIcon = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+			}
 			$this->InputValueNotificationId   = $InstanceNotification->GetNotificationId();
 			$this->InputValueNotificationText = $InstanceNotification->GetNotificationText();
 			$this->InputValueRegisterDate     = $InstanceNotification->GetRegisterDate();

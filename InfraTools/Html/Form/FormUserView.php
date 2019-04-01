@@ -320,7 +320,7 @@
 									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
 			</form>
 			<?php 
-			if(!isset($this->InstanceInfraToolsUserAdmin))
+			if(!isset($this->InstanceUserAdmin))
 			{
 				?>
 				<!-- FM_USER_VIEW_CHANGE_PASSWORD -->
@@ -335,8 +335,8 @@
 				</form>
 				<?php
 			}
-			if(isset($this->InstanceInfraToolsUserAdmin))
-				$ret = $this->InstanceInfraToolsUserAdmin->GetTwoStepVerification();
+			if(isset($this->InstanceUserAdmin))
+				$ret = $this->InstanceUserAdmin->GetTwoStepVerification();
 			else $ret = $this->User->GetTwoStepVerification();
 			if($ret)
 			{
@@ -370,7 +370,7 @@
 				</form>
 			<?php
 			}	
-			if(!isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
+			if(!isset($this->InstanceUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
 				<!-- HREF_PAGE_ADMIN -->
@@ -385,7 +385,7 @@
 				</form>
 				<?php
 			}
-			if(isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
+			if(isset($this->InstanceUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
 				<!-- FM_USER_VIEW_CHANGE_USER_TYPE -->
@@ -408,7 +408,7 @@
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_CORPORATION'); ?>"/>
 				</form>
-				<?php if($this->InstanceInfraToolsUserAdmin->GetCorporation() != NULL)
+				<?php if($this->InstanceUserAdmin->GetCorporation() != NULL)
 						{
 						?>
 						<!-- FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION -->
@@ -437,7 +437,7 @@
 												 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 						</form>
 				<?php 
-					if($this->InstanceInfraToolsUserAdmin->GetUserActive())
+					if($this->InstanceUserAdmin->GetUserActive())
 					{
 						?>
 						<!-- FM_USER_VIEW_DEACTIVATE -->
@@ -487,7 +487,7 @@
 			</div>
 		<?php
 		}
-		else { if(!isset($this->InstanceInfraToolsUserAdmin)) $this->LoadNotConfirmedToolTip();}
+		else { if(!isset($this->InstanceUserAdmin)) $this->LoadNotConfirmedToolTip();}
 		?>
 	<?php
 	}

@@ -46,9 +46,9 @@ Functions:
 																					$MySqlConnection = NULL, $CloseConnectaion = TRUE,
 																					$Commit = TRUE);
 			public function AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug,
-														$MySqlConnection = NULL, $CloseConnectaion = TRUE);
+														$MySqlConnection = NULL, $CloseConnectaion = TRUE, $InstanceUser = NULL);
 			public function AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug,
-														$MySqlConnection = NULL, $CloseConnectaion = TRUE);
+														$MySqlConnection = NULL, $CloseConnectaion = TRUE, $InstanceUser = NULL);
 			public function AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew, 
 		                                                                            $NotificationIdNew, $UserEmailNew, 
 		                                                                            &$InstanceAssocUserNotification, $Debug,
@@ -532,7 +532,7 @@ class FacedePersistence
 	}
 	
 	public function AssocUserNotificationDelete($ArrayInstanceNotification, $ArrayInstanceUser, $Debug,
-											    $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+											    $MySqlConnection = NULL, $CloseConnectaion = TRUE, $InstanceUser = NULL)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::RET_OK)
@@ -548,6 +548,20 @@ class FacedePersistence
 			                                                                            $notificationId,
 																						$userEmail,
 				                                                                        $Debug, $MySqlConnection);
+					if($return == Config::RET_OK)
+					{
+						$instanceSession = $this->Factory->CreateSession();
+						$return = $instanceSession->SessionFileGetValueByHashCode($oldString, 
+																	   ProjectConfig::$ApplicationName, 
+																	   $instanceUser->GetHashCode(), 
+																	   Config::SESS_VALUE_NOTIFICATION_UNREAD);
+						if($return == Config::RET_OK)
+						{
+							if($instanceUser->GetEmail() == $InstanceUser->GetEmail())
+								$InstanceUser->SetAssocUserNotificationCountUnRead($InstanceUser->GetAssocUserNotificationCountUnRead()-1);
+							else $instanceSession->InstanceSessionHandlerCustom->destroy($instanceUser->GetHashCode());
+						}
+					}
 				}
 			}
 			if($CloseConnectaion)
@@ -557,7 +571,7 @@ class FacedePersistence
 	}
 	
 	public function AssocUserNotificationInsert($ArrayInstanceNotification, $ArrayInstanceUser, $Debug,
-											    $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+											    $MySqlConnection = NULL, $CloseConnectaion = TRUE, $InstanceUser = NULL)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::RET_OK)
@@ -573,6 +587,20 @@ class FacedePersistence
 			                                                                            $notificationId,
 																						$userEmail,
 				                                                                        $Debug, $MySqlConnection);
+					if($return == Config::RET_OK)
+					{
+						$instanceSesion = $this->Factory->CreateSession();
+						$return = $instanceSesion->SessionFileGetValueByHashCode($oldString, 
+																	   ProjectConfig::$ApplicationName, 
+																	   $instanceUser->GetHashCode(), 
+																	   Config::SESS_VALUE_NOTIFICATION_UNREAD);
+						if($return == Config::RET_OK)
+						{
+							if($instanceUser->GetEmail() == $InstanceUser->GetEmail())
+								$InstanceUser->SetAssocUserNotificationCountUnRead($InstanceUser->GetAssocUserNotificationCountUnRead()+1);
+							else $instanceSession->InstanceSessionHandlerCustom->destroy($instanceUser->GetHashCode());
+						}
+					}
 				}
 			}
 			if($CloseConnectaion)

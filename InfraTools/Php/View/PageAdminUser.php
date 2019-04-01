@@ -67,8 +67,8 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
 				if($this->AssocUserCorporationUpdateByUserEmailAndCorporationName(
 					                                      @$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
@@ -76,18 +76,18 @@ class PageAdminUser extends PageAdmin
 					                                      @$_POST[ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH],
 					                                      @$_POST[ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR],
 					                                      @$_POST[ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID],
-					                                      $this->InstanceInfraToolsUserAdmin, 
+					                                      $this->InstanceUserAdmin, 
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				{
-					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
-												           $this->InstanceInfraToolsUserAdmin, 
+					if($this->InfraToolsUserSelectByUserEmail($this->InstanceUserAdmin->GetEmail(),
+												           $this->InstanceUserAdmin, 
 														   $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
 				{
-					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(), 
+					$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
+					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceUserAdmin->GetCorporationName(), 
 					                                                $this->ArrayInstanceDepartment,
 																    $this->InputValueHeaderDebug);
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
@@ -116,7 +116,7 @@ class PageAdminUser extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
-												      $this->InstanceInfraToolsUserAdmin, 
+												      $this->InstanceUserAdmin, 
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
@@ -162,43 +162,43 @@ class PageAdminUser extends PageAdmin
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_SEL_SB]))
 		{
 			if($this->InfraToolsUserSelectByUserEmail($_POST[ConfigInfraTools::FIELD_USER_EMAIL],
-												      $this->InstanceInfraToolsUserAdmin, 
+												      $this->InstanceUserAdmin, 
 												      $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
 		//FM_USER_VIEW_ACTIVATE_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_ACTIVATE_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->UserUpdateActiveByUserEmail(true, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug);
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->UserUpdateActiveByUserEmail(true, $this->InstanceUserAdmin, $this->InputValueHeaderDebug);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
 		}
 		//FM_USER_VIEW_DEACTIVATE_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_DEACTIVATE_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->UserUpdateActiveByUserEmail(false, $this->InstanceInfraToolsUserAdmin, $this->InputValueHeaderDebug);
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->UserUpdateActiveByUserEmail(false, $this->InstanceUserAdmin, $this->InputValueHeaderDebug);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			}
 		}
 		//FM_USER_VIEW_DEL_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_DEL_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				if($this->UserDeleteByUserEmail($this->InstanceInfraToolsUserAdmin, 
+				if($this->UserDeleteByUserEmail($this->InstanceUserAdmin, 
 												$this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_USER, "InfraToolsUserLoadData", 
-										          $this->InstanceInfraToolsUserAdmin) == ConfigInfraTools::RET_OK)
+										          $this->InstanceUserAdmin) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
@@ -206,12 +206,12 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_VIEW_RESET_PASSWORD_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_RESET_PASSWORD_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				if($this->UserUpdatePasswordRandomByUserEmail(ConfigInfraTools::APPLICATION_INFRATOOLS,
-															  $this->InstanceInfraToolsUserAdmin, 
+															  $this->InstanceUserAdmin, 
 															  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
@@ -219,10 +219,10 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_VIEW_CHANGE_CORPORATION_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_CHANGE_CORPORATION_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->InfraToolsCorporationSelectActiveNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
@@ -233,21 +233,21 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_CHANGE_CORPORATION_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_CHANGE_CORPORATION_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
 				if($this->UserUpdateCorporationByUserEmail($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
-					                                   $this->InstanceInfraToolsUserAdmin, 
+					                                   $this->InstanceUserAdmin, 
 													   $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				{
-					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
-												              $this->InstanceInfraToolsUserAdmin, 
+					if($this->InfraToolsUserSelectByUserEmail($this->InstanceUserAdmin->GetEmail(),
+												              $this->InstanceUserAdmin, 
 														      $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
 				{
-					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+					$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 					$this->CorporationSelectNoLimit($this->ArrayInstanceInfraToolsCorporation, $this->InputValueHeaderDebug);
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_CORPORATION;
 				}
@@ -258,11 +258,11 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceInfraToolsUserAdmin->GetCorporationName(),
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
+				$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceUserAdmin->GetCorporationName(),
 					                                            $this->ArrayInstanceDepartment,
 																$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = '';
@@ -275,10 +275,10 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_VIEW_CHANGE_USER_TYPE_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_CHANGE_USER_TYPE_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser,$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = 'disabled="disabled"';
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
@@ -289,21 +289,21 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_CHANGE_USER_TYPE_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_CHANGE_USER_TYPE_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
 				if($this->UserUpdateUserTypeByUserEmail($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
-											        $this->InstanceInfraToolsUserAdmin,
+											        $this->InstanceUserAdmin,
 											        $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				{
-					if($this->InfraToolsUserSelectByUserEmail($this->InstanceInfraToolsUserAdmin->GetEmail(),
-												          $this->InstanceInfraToolsUserAdmin, 
+					if($this->InfraToolsUserSelectByUserEmail($this->InstanceUserAdmin->GetEmail(),
+												          $this->InstanceUserAdmin, 
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				}
 				else 
 				{
-					$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+					$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 					$this->TypeUserSelectNoLimit($this->ArrayInstanceInfraToolsTypeUser, $this->InputValueHeaderDebug);
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_USER_TYPE;
 				}
@@ -314,32 +314,32 @@ class PageAdminUser extends PageAdmin
 		//FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, TRUE, $this->InputValueHeaderDebug);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
+				$this->UserChangeTwoStepVerification($this->InstanceUserAdmin, TRUE, $this->InputValueHeaderDebug);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 		}
 		//FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
-				$this->UserChangeTwoStepVerification($this->InstanceInfraToolsUserAdmin, FALSE, $this->InputValueHeaderDebug);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
+				$this->UserChangeTwoStepVerification($this->InstanceUserAdmin, FALSE, $this->InputValueHeaderDebug);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 		}
 		//FM_USER_VIEW_UPDT_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_UPDT_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_UPDT;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 		}
@@ -347,18 +347,18 @@ class PageAdminUser extends PageAdmin
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_UPDT_CANCEL]) ||
 			   isset($_POST[ConfigInfraTools::FM_USER_CHANGE_CORPORATION_CANCEL]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 		}
 		//FM_USER_UPDT_SB
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_UPDT_SB]))
 		{
-			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceInfraToolsUserAdmin);
-			if($this->InstanceInfraToolsUserAdmin != NULL)
+			$this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_USER, $this->InstanceUserAdmin);
+			if($this->InstanceUserAdmin != NULL)
 			{
 				if($this->UserUpdateByUserEmail(@$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_DAY], 
 												@$_POST[ConfigInfraTools::FIELD_USER_BIRTH_DATE_MONTH], 
@@ -377,7 +377,7 @@ class PageAdminUser extends PageAdmin
 											    $_POST[ConfigInfraTools::FIELD_USER_PHONE_SECONDARY_PREFIX], 
 												$_POST[ConfigInfraTools::FIELD_USER_UNIQUE_ID], 
 												TRUE,
-												$this->InstanceInfraToolsUserAdmin, 
+												$this->InstanceUserAdmin, 
 												$this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				else
@@ -392,7 +392,7 @@ class PageAdminUser extends PageAdmin
 						$this->InputValueTwoStepVerification = Config::CHECKBOX_CHECKED;
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_UPDT;
 				}
-				$this->InfraToolsUserLoadData($this->InstanceInfraToolsUserAdmin);
+				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 			} else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
 		}
 		else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_SEL;
