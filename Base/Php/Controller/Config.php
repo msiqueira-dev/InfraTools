@@ -940,6 +940,7 @@ class Config
 	const SESS_UNLIMITED                                                = "SessionUnlimited";
 	const SESS_USER                                                     = "SessionUser";
 	const SESS_VALUE_NOTIFICATION_UNREAD                                = "AssocUserNotificationCountUnRead";
+	const SESSION_TIME                                                  = 3600;
 	const TB_ASSOC_TICKET_USER_REQUESTING                               = "ASSOC_TICKET_USER_REQUESTING";
 	const TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_BOND                  = "AssocTicketUserRequestingUserBond";
 	const TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_EMAIL                 = "AssocTicketUserRequestingUserEmail"; 

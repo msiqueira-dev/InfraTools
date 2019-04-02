@@ -551,15 +551,22 @@ class FacedePersistence
 					if($return == Config::RET_OK)
 					{
 						$instanceSession = $this->Factory->CreateSession();
-						$return = $instanceSession->SessionFileGetValueByHashCode($oldString, 
-																	   ProjectConfig::$ApplicationName, 
-																	   $instanceUser->GetHashCode(), 
-																	   Config::SESS_VALUE_NOTIFICATION_UNREAD);
+						$return = $instanceSession->SessionGetValueBySessionId($user, ProjectConfig::$ApplicationName, 
+																	           $instanceUser->GetHashCode(), Config::SESS_USER);
 						if($return == Config::RET_OK)
 						{
-							if($instanceUser->GetEmail() == $InstanceUser->GetEmail())
-								$InstanceUser->SetAssocUserNotificationCountUnRead($InstanceUser->GetAssocUserNotificationCountUnRead()-1);
-							else $instanceSession->InstanceSessionHandlerCustom->destroy($instanceUser->GetHashCode());
+							$instanceUser->SetAssocUserNotificationCountUnRead($user->GetAssocUserNotificationCountUnRead()-1);
+							$return = $instanceSession->SessionUpdateValueBySessionId($instanceUser, 
+																					  ProjectConfig::$ApplicationName,
+																					  $instanceUser->GetHashCode(), 
+																					  Config::SESS_USER);
+							if($return == Config::RET_OK)
+							{
+								if($InstanceUser->GetHashCode() == $instanceUser->GetHashCode())
+								{
+									$InstanceUser->SetAssocUserNotificationCountUnRead($user->GetAssocUserNotificationCountUnRead()-1);
+								}
+							}
 						}
 					}
 				}
@@ -589,16 +596,23 @@ class FacedePersistence
 				                                                                        $Debug, $MySqlConnection);
 					if($return == Config::RET_OK)
 					{
-						$instanceSesion = $this->Factory->CreateSession();
-						$return = $instanceSesion->SessionFileGetValueByHashCode($oldString, 
-																	   ProjectConfig::$ApplicationName, 
-																	   $instanceUser->GetHashCode(), 
-																	   Config::SESS_VALUE_NOTIFICATION_UNREAD);
+						$instanceSession = $this->Factory->CreateSession();
+						$return = $instanceSession->SessionGetValueBySessionId($user, ProjectConfig::$ApplicationName, 
+																	           $instanceUser->GetHashCode(), Config::SESS_USER);
 						if($return == Config::RET_OK)
 						{
-							if($instanceUser->GetEmail() == $InstanceUser->GetEmail())
-								$InstanceUser->SetAssocUserNotificationCountUnRead($InstanceUser->GetAssocUserNotificationCountUnRead()+1);
-							else $instanceSession->InstanceSessionHandlerCustom->destroy($instanceUser->GetHashCode());
+							$instanceUser->SetAssocUserNotificationCountUnRead($user->GetAssocUserNotificationCountUnRead()+1);
+							$return = $instanceSession->SessionUpdateValueBySessionId($instanceUser, 
+																					  ProjectConfig::$ApplicationName,
+																					  $instanceUser->GetHashCode(), 
+																					  Config::SESS_USER);
+							if($return == Config::RET_OK)
+							{
+								if($InstanceUser->GetHashCode() == $instanceUser->GetHashCode())
+								{
+									$InstanceUser->SetAssocUserNotificationCountUnRead($user->GetAssocUserNotificationCountUnRead()+1);
+								}
+							}
 						}
 					}
 				}

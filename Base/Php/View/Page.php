@@ -614,7 +614,7 @@ class Page
 			$sessionId = $user->GetHashCode();
 			$this->Session->CreatePersonalized($this->Config->DefaultApplicationName,
 											   $sessionId,
-											   $this->Config->SessionTime);
+											   Config::SESSION_TIME);
 			$this->Session->SetSessionValue(Config::SESS_DEVICE_LAYOUT, 
 														   $this->InputValueHeaderLayout);
 			$this->Session->RemoveSessionVariable(Config::SESS_LOGIN_TWO_STEP_VERIFICATION);
