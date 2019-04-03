@@ -14,16 +14,18 @@ It consists in modules that treats the following: Help Desk, Technical Documenta
 <br>
 <h3>Requirements:</h3><br>
 <ul>
-<li>PHP 7+</li>
-<li>MySql 5.7+</li>
-<li>Pear Module Package for PHP</li><br>
-<li>Apache 2.4+<br></li>
+  <li>Ubuntu Server 14.04 / Windows 7 / Windows 10</li>
+  <li>MySql 5.7+</li>
+  <li>Apache 2.4+</li>
+  <li>PHP 7+</li>
+  <li>Pear Module Package for PHP</li>
 </ul>
 
 <h3>My Test Enviroments:</h3><br>
 <ul>
-<li>Windows 7 / Windows 10</li>
-<li>MySql 8.0.13</li>
-<li>Pear Module Package for PHP 1.10.1</li><br>
-<li>Apache 2.4.25<br></li>
+  <li>Windows 7 / Windows 10</li>
+  <li>MySql 8.0.13</li>
+  <li>Apache 2.4.25</li>
+  <li>PHP 7.1.1</li>
+  <li>Pear Module Package for PHP 1.10.1</li>
 </ul>
