@@ -116,8 +116,8 @@ class InfraToolsService
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->ServiceActive == FALSE)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
 	}
 	
 	public function GetServiceCorporation()
@@ -129,8 +129,8 @@ class InfraToolsService
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->ServiceCorporation == NULL)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
 	}
 	
 	public function GetServiceCorporationName()
@@ -153,8 +153,8 @@ class InfraToolsService
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->ServiceDepartment == NULL)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
 	}
 	
 	public function GetServiceDepartmentInitials()

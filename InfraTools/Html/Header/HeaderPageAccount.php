@@ -18,7 +18,7 @@
             title=" <?php echo $this->InstanceLanguageText->GetText('HEADER_PAGE_NOTIFICATION_TITLE'); ?>"
             alt="UnReadNotifications" />
     	<span>
-            <?php echo "(" . count($this->User->GetArrayAssocUserNotificationUnRead()) . ")" ?> 
+            <?php echo "(" . $this->User->GetAssocUserNotificationCountUnRead() . ")" ?> 
         <span>
     </a>
 </div>

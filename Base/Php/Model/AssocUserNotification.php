@@ -15,7 +15,8 @@ Get / Set:
 			public function GetAssocUserNotificationUser();
 			public function GetRegisterDate();
 Methods:
-			public function UpdateAssocUserNotification($RoleDescription, $RoleName);
+			public function UpdateAssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationRead,
+			                                            $AssocUserNotificationUser);
 **************************************************************************/
 
 class AssocUserNotification
@@ -71,6 +72,15 @@ class AssocUserNotification
 	}
 	
 	/* SET */
+	public function SetAssocUserNotificationNotification($AssocUserNotificationNotification)
+	{
+		$this->AssocUserNotificationNotification = $AssocUserNotificationNotification;
+	}
+	
+	public function SetAssocUserNotificationUser($AssocUserNotificationUser)
+	{
+		$this->AssocUserNotificationUser = $AssocUserNotificationUser;
+	}
 	
 	/* METHODS */
 	public function UpdateAssocUserNotification($AssocUserNotificationNotification, $AssocUserNotificationRead, $AssocUserNotificationUser)	

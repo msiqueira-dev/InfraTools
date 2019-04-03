@@ -49,7 +49,7 @@
                                                  '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
                                                  '');"
                                title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_TEXT'); ?>"
-                               value="<?php echo $this->InputValueNotificationText; ?>" maxlength="500"></textarea>
+                               maxlength="500"><?php echo $this->InputValueNotificationText; ?></textarea>
         </div>
     </div>
     <!-- FIELD_NOTIFICATION_ACTIVE -->

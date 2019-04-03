@@ -66,6 +66,12 @@ class De
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "";
+	const ASSOC_USER_NOTIFICATION_DELETE_ERROR                      = "";
+	const ASSOC_USER_NOTIFICATION_DELETE_SUCCESS                    = "";
+	const ASSOC_USER_NOTIFICATION_INSERT_ERROR                      = "";
+	const ASSOC_USER_NOTIFICATION_INSERT_SUCCESS                    = "";
+	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "";
+	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "";
 	const CHECK_AVAILABILITY_FREE                                   = "";
 	const CHECK_AVAILABILITY_TAKEN                                  = "";
 	const CHECK_BLACKLIST_HOST_NOT_LSTED                            = "";
@@ -126,6 +132,7 @@ class De
 	const FILL_REQUIRED_FIELDS                                      = "";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE            = "";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID              = "";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                        = "";
 	const FIELD_CORPORATION_ACTIVE                                  = "";
 	const FIELD_CORPORATION_NAME                                    = "";
 	const FIELD_COUNTRY_ABBREVIATION                                = "";
@@ -142,6 +149,12 @@ class De
 	const FIELD_NETWORK_NAME                                        = "";
 	const FIELD_NETWORK_NETMASK                                     = "";
 	const FIELD_NOTIFICATION_ACTIVE                                 = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION               = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                      = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                      = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                      = "";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL            = "";
 	const FIELD_NOTIFICATION_ID                                     = "";
 	const FIELD_NOTIFICATION_TEXT                                   = "";
 	const FIELD_ROLE_DESCRIPTION                                    = "";
@@ -200,6 +213,7 @@ class De
 	const FIELD_USER_TYPE                                           = "";
 	const FIELD_USER_TWO_STEP_VERIFICATION                          = "";
 	const FIELD_USER_UNIQUE_ID                                      = "";
+	const FM_INVALID_ASSOC_USER_NOTIFICATION_READ                   = "";
 	const FM_INVALID_CAPTCHA                                        = "";
 	const FM_INVALID_CORPORATION_NAME                               = "";
 	const FM_INVALID_CORPORATION_NAME_SIZE                          = "";
@@ -423,6 +437,7 @@ class De
 	const HREF_PAGE_LOGIN                                           = "/De/PageLogin";
 	const HREF_PAGE_NOT_FOUND                                       = "/De/PageNotFound";
 	const HREF_PAGE_NOTIFICATION                                    = "/De/PageNotification";
+	const HREF_PAGE_NOTIFICATION_VIEW                               = "/De/PageNotificationView";
 	const HREF_PAGE_PASSWORD_RECOVERY                               = "/De/PagePasswordRecovery";
 	const HREF_PAGE_PASSWORD_RESET                                  = "/De/PagePasswordReset";
 	const HREF_PAGE_REGISTER                                        = "/De/PageRegister";
@@ -492,6 +507,7 @@ class De
 	const NOTIFICATION_UPDT_SUCCESS                                 = "";
 	const NULL_EMPTY                                                = "";
 	const NULL_OPTION                                               = "";
+	const OPERATION_CONTACT                                         = "";
 	const OPERATION_LST                                             = "";
 	const OPERATION_REGISTER                                        = "";
 	const OPERATION_SEARCH                                          = "";
@@ -580,6 +596,9 @@ class De
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION                                   = "";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools -";
@@ -856,6 +875,9 @@ class De
 	const PAGE_NOTIFICATION                                         = "";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "noindex";
 	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools -";
+	const PAGE_NOTIFICATION_VIEW                                    = "";
+	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
+	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools -";
 	const PAGE_PASSWORD_RECOVERY                                    = "";
 	const PAGE_PASSWORD_RECOVERY_ROBOTS                             = "noindex";
 	const PAGE_PASSWORD_RECOVERY_TITLE                              = "InfraTools -";
@@ -910,6 +932,15 @@ class De
 	const PAGE_SUPPORT                                              = "";
 	const PAGE_SUPPORT_ROBOTS                                       = "noindex";
 	const PAGE_SUPPORT_TITLE                                        = "InfraTools -";
+	const PAGE_SUPPORT_CONTACT                                      = "";
+	const PAGE_SUPPORT_CONTACT_ROBOTS                               = "noindex";
+	const PAGE_SUPPORT_CONTACT_TITLE                                = "InfraTools -";
+	const PAGE_SUPPORT_LST                                          = "";
+	const PAGE_SUPPORT_LST_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_LST_TITLE                                    = "InfraTools -";
+	const PAGE_SUPPORT_SEL                                          = "";
+	const PAGE_SUPPORT_SEL_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_SEL_TITLE                                    = "InfraTools -";
 	const PAGE_TEAM                                                 = "";
 	const PAGE_TEAM_ROBOTS                                          = "noindex";
 	const PAGE_TEAM_TITLE                                           = "InfraTools -";
@@ -930,6 +961,7 @@ class De
 	const PAGE_TEAM_VIEW_TITLE                                      = "InfraTools -";
 	const PHONE_PREFIX                                              = "";
 	const REGISTER_DATE                                             = "";
+	const ROLE_NOT_FOUND                                            = "";
 	const ROW_COUNT                                                 = "";
 	const SEND_EMAIL_ERROR                                          = "";
 	const SERVICE_DEL_ERROR                                         = "";
@@ -971,6 +1003,8 @@ class De
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "";
+	const SUBMIT_ASSOCIATE_USERS                                    = "";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "";
 	const SUBMIT_BACK                                               = "";
 	const SUBMIT_CANCEL                                             = "";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "";
@@ -1006,6 +1040,7 @@ class De
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "";
 	const SYSTEM_CONFIGURATION_UPDT_ERROR                           = "";
 	const SYSTEM_CONFIGURATION_UPDT_SUCCESS                         = "";
+	const TABLE_EMPTY                                               = "";
 	const TB_PAGE_PREFIX                                            = "";
 	const TB_PAGE                                                   = "";
 	const TEAM                                                      = "";
@@ -1081,7 +1116,9 @@ class De
 	const USER_SEL_EXISTS_BY_USER_EMAIL_ERROR                       = "";
 	const USER_SEL_EXISTS_BY_USER_EMAIL_SUCCESS                     = "";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR                    = "";
-	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = ""; 
+	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "";
 	const USER_TEAM_SEL_ERROR                                       = "";

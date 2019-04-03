@@ -36,7 +36,7 @@ class PageCorporation extends PageInfraTools
 	/* Constructor */
 	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Page = $this->GetCurrentPage($Language);
+		$this->Page = $Page;
 		$this->PageCheckLogin = TRUE;
 		parent::__construct($Config, $Language, $Page);
 		if(!$this->PageEnabled)

@@ -71,40 +71,40 @@ class InfraToolsUser extends User
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->Corporation == NULL)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
 	}
 	
 	public function GetDepartmentActiveIcon()
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->Department == NULL)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
 	}
 	
 	public function GetTwoStepVerificationImage()
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->TwoStepVerification)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
 	}
 	
 	public function GetUserActiveImage()
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if($this->UserActive)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
 	}
 	
 	public function GetUserUniqueIdImage()
 	{
 		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
 		if(!is_null($this->UserUniqueId))
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
 	}
 	
 	/* SET */

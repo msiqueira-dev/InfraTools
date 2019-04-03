@@ -31,6 +31,27 @@ if (!class_exists("Factory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Factory');
 }
 
+if (!class_exists("MySqlManager"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "MySqlManager.php"))
+		include_once(BASE_PATH_PHP_MODEL . "MySqlManager.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class MySqlManager');
+}
+
+if (!class_exists("Persistence"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "Persistence.php"))
+		include_once(BASE_PATH_PHP_MODEL . "Persistence.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Persistence');
+}
+
+if (!class_exists("Country"))
+{
+	if(file_exists(BASE_PATH_PHP_MODEL . "Country.php"))
+		include_once(BASE_PATH_PHP_MODEL . "Country.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Base Class Country');
+}
+
 class FacedePersistenceCountry
 {	
 	/* Instance */

@@ -1,4 +1,5 @@
 .DivContentBody{max-width:320px !important;min-height:380px !important;}
+.DivContentBody form{min-height:0px !important;}
 .DivContentBodyContainer{height:auto !important;min-height:35px !important;clear:both;}
 .DivContentBodyContainerSided{width:100% !important;}
 .DivContentBodyContainerSided{height:auto !important;min-height:20px;display:inline-block;}

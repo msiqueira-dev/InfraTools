@@ -220,9 +220,9 @@
 				<label class="DivContentBodyContainerValueContent">
 					<?php  if($this->InputValueSessionExpires)
 								$this->InputValueSessionExpires = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsVerified.png';
+																		'Icons/IconVerified.png';
 							else $this->InputValueSessionExpires = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsNotVerified.png';
+																		'Icons/IconNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueSessionExpires; ?>"
 							alt="CorporationVerification" width="20" height="20" />
@@ -240,8 +240,8 @@
 			<div class="DivContentBodyContainerValueSided">
 				<div class="DivContentBodyContainerSubmitImage">
 					<?php  if($this->InputValueTwoStepVerification)
-								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
-							else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
+								$this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconVerified.png';
+							else $this->InputValueTwoStepVerification = $this->Config->DefaultServerImage.'Icons/IconNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueTwoStepVerification; ?>"
 								alt="TwoStepVerification" width="20" height="20" />
@@ -259,8 +259,8 @@
 			<div class="DivContentBodyContainerValueSided">
 				<label class="DivContentBodyContainerValueContent">
 					<?php  if($this->InputValueUserActive)
-								$this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconInfraToolsVerified.png';
-							else $this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotVerified.png';
+								$this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconVerified.png';
+							else $this->InputValueUserActive = $this->Config->DefaultServerImage.'Icons/IconNotVerified.png';
 					?>
 					<img src="<?php echo $this->InputValueUserActive; ?>" alt="UserActive" width="20" height="20" />
 				</label>
@@ -278,9 +278,9 @@
 				<label class="DivContentBodyContainerValueContent">
 					<?php  if($this->InputValueUserConfirmed)
 								$this->InputValueUserConfirmed = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsVerified.png';
+																		'Icons/IconVerified.png';
 							else $this->InputValueUserConfirmed = $this->Config->DefaultServerImage .
-																		'Icons/IconInfraToolsNotVerified.png';
+																		'Icons/IconNotVerified.png';
 					?>
 					<img	src="<?php echo $this->InputValueUserConfirmed; ?>"
 							alt="UserConfirmed" width="20" height="20" />
@@ -320,7 +320,7 @@
 									 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
 			</form>
 			<?php 
-			if(!isset($this->InstanceInfraToolsUserAdmin))
+			if(!isset($this->InstanceUserAdmin))
 			{
 				?>
 				<!-- FM_USER_VIEW_CHANGE_PASSWORD -->
@@ -335,8 +335,8 @@
 				</form>
 				<?php
 			}
-			if(isset($this->InstanceInfraToolsUserAdmin))
-				$ret = $this->InstanceInfraToolsUserAdmin->GetTwoStepVerification();
+			if(isset($this->InstanceUserAdmin))
+				$ret = $this->InstanceUserAdmin->GetTwoStepVerification();
 			else $ret = $this->User->GetTwoStepVerification();
 			if($ret)
 			{
@@ -370,7 +370,7 @@
 				</form>
 			<?php
 			}	
-			if(!isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
+			if(!isset($this->InstanceUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
 				<!-- HREF_PAGE_ADMIN -->
@@ -385,7 +385,7 @@
 				</form>
 				<?php
 			}
-			if(isset($this->InstanceInfraToolsUserAdmin) && $this->User->CheckSuperUser())
+			if(isset($this->InstanceUserAdmin) && $this->User->CheckSuperUser())
 			{
 				?>
 				<!-- FM_USER_VIEW_CHANGE_USER_TYPE -->
@@ -408,7 +408,7 @@
 										 class="DivContentBodySubmitBigger"
 										 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_CORPORATION'); ?>"/>
 				</form>
-				<?php if($this->InstanceInfraToolsUserAdmin->GetCorporation() != NULL)
+				<?php if($this->InstanceUserAdmin->GetCorporation() != NULL)
 						{
 						?>
 						<!-- FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION -->
@@ -437,7 +437,7 @@
 												 onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
 						</form>
 				<?php 
-					if($this->InstanceInfraToolsUserAdmin->GetUserActive())
+					if($this->InstanceUserAdmin->GetUserActive())
 					{
 						?>
 						<!-- FM_USER_VIEW_DEACTIVATE -->
@@ -487,7 +487,7 @@
 			</div>
 		<?php
 		}
-		else { if(!isset($this->InstanceInfraToolsUserAdmin)) $this->LoadNotConfirmedToolTip();}
+		else { if(!isset($this->InstanceUserAdmin)) $this->LoadNotConfirmedToolTip();}
 		?>
 	<?php
 	}

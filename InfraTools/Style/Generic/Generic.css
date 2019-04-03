@@ -69,3 +69,7 @@ textarea{resize:none;}
 .TableGenericTdLink a, .TableGenericTdLink label, .TableGenericTdLink input{position:relative;left:2px;}
 .TableTdParagraph{display:table-cell;text-align: center;}
 .TableGenericTdLinkImage {margin-left:36%;}
+.DivEmptyTable{width:700px;height:100px;margin-top:20px;margin-bottom:20px;background-color:#faebcc;}
+.DivEmptyTableText{width:350px;height:25px;margin: 0 auto;}
+.DivEmptyTableText label{position:relative;top:10px;font-size:14px;font-weight:bold;}
+.DivEmptyTableImg{width:48px !important;height:48px !important;margin: 0 auto;}

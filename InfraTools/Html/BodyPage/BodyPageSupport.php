@@ -12,20 +12,19 @@
 					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SUPPORT_CONTACT'); ?>" 
 					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SUPPORT_CONTACT') ?>">
 						<div class="DivContentBodyContainersBoxIcon">
-							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png';?>"
+							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsEmail48x48.png';?>"
 							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsFindHover.png'; ?>'"
+															.'Icons/IconInfraToolsEmail48x48Hover.png'; ?>'"
     			                 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsFind.png'; ?>'" />
+															.'Icons/IconInfraToolsEmail48x48.png'; ?>'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('OPERATION_REGISTER'); ?>
+								<?php echo $this->InstanceLanguageText->GetText('OPERATION_CONTACT'); ?>
 							</i>
 						</div>
 					</a>
 				</div>
-			<div class="DivContentBodyOptionsBox">
 				<div class="DivContentBodyContainersBox">
 					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SUPPORT_SEL'); ?>" 
 					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_SUPPORT_SEL') ?>">

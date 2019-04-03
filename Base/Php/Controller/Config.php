@@ -35,6 +35,9 @@ class Config
 	const DB_CODE_ERROR_ACCESS_DENIED                                   = "1045";
 	const DB_ERROR_ASSOC_USER_CORPORATION_DEL                           = "RetMySqlAssocUserCorporationDelete";
 	const DB_ERROR_ASSOC_USER_CORPORATION_INSERT                        = "RetMySqlAssocUserCorporationInsert";
+	const DB_ERROR_ASSOC_USER_NOTIFICATION_DELETE                       = "DbErrorAssocUserNotificationDelete";
+	const DB_ERROR_ASSOC_USER_NOTIFICATION_INSERT                       = "DbErrorAssocUserNotificationInsert";
+	const DB_ERROR_ASSOC_USER_NOTIFICATION_UPDATE                       = "DbErrorAssocUserNotificationUpdate";
 	const DB_ERROR_USER_UPDT_ASSOC_USER_CORPORATION_BY_USER_EMAIL       = "DbErrorUserUpdtAssocUserCorporationByUserEmail";
 	const DB_ERROR_CORPORATION_DEL                                      = "RetMySqlCorporationDelete";
 	const DB_ERROR_CORPORATION_INSERT                                   = "RetMySqlCorporationInsert";
@@ -69,6 +72,8 @@ class Config
 	const DB_ERROR_QUERY_PREPARE                                        = "RetMySqlErrorQueryPrepare";
  	const DB_ERROR_QUERY_EMPTY                                          = "RetMySqlErrorQueryEmpty";
 	const DB_ERROR_QUERY_SQL                                            = "RetMySqlErrorQuerySql";
+	const DB_ERROR_ROLE_SEL                                             = "RetMySqlRoleSelect";
+	const DB_ERROR_ROLE_SEL_FETCH                                       = "RetMySqlRoleSelectFetch";
 	const DB_ERROR_UPDT_SAME_VALUE                                      = "RetMySqlErrorUpdateSameValue";
 	const DB_ERROR_USER_EXISTS                                          = "RetMySqlErrorUserExists";
 	const DB_ERROR_USER_PERMISSION_DENIED                               = "RetMySqlErrorUserPermissionDenied";
@@ -216,6 +221,7 @@ class Config
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH          = "FieldAssocUserCorporationRegistrationDateMonth";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR           = "FieldAssocUserCorporationRegistrationDateYear";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID                  = "FieldAssocUserCorporationRegistrationId";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                            = "FieldAssocUserNotificationActive";
 	const FIELD_CAPTCHA                                                 = "FieldCaptcha";
 	const FIELD_CORPORATION_ACTIVE                                      = "FieldCorporationActive";
 	const FIELD_CORPORATION_NAME                                        = "FieldCorporationName";
@@ -230,6 +236,12 @@ class Config
 	const FIELD_HEADER_LOG_OUT                                          = "FieldHeaderLogOut";
 	const FIELD_LOGIN                                                   = "FieldLogin";
 	const FIELD_NOT_OBLIGATORY                                          = "FieldNotObligatory";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION                   = "FormNotificationAssociateByCorporation";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                    = "FormNotificationAssociateByDepartment";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                          = "FormNotificationAssociateByRole";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                          = "FormNotificationAssociateByTeam";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                          = "FormNotificationAssociateForAll";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL                = "FormNotificationAssociateForAllValueAll";
 	const FIELD_NOTIFICATION_ACTIVE                                     = "FieldNotificationActive";
 	const FIELD_NOTIFICATION_ID                                         = "FieldNotificationId";
 	const FIELD_NOTIFICATION_TEXT                                       = "FieldNotificationText";
@@ -380,6 +392,11 @@ class Config
 	const FM_LANGUAGE                                                   = "FmLanguage";
 	const FM_LOGIN                                                      = "FormLogin";
 	const FM_NOTIFICATION                                               = "FormNotification";
+	const FM_NOTIFICATION_ASSOCIATE_USERS                               = "FormNotificationAssociateUsers";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL                        = "FormNotificationAssociateUsersCancel";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_FORM                          = "FormNotificationAssociateUsersForm";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE                  = "FormNotificationAssociateUsersSbAssociate";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE               = "FormNotificationAssociateUsersSbDisAssociate";
 	const FM_NOTIFICATION_LST                                           = "FormNotificationList";
 	const FM_NOTIFICATION_LST_BACK                                      = "FormNotificationListBack";
 	const FM_NOTIFICATION_LST_FORM                                      = "FormNotificationListForm";
@@ -396,6 +413,8 @@ class Config
 	const FM_NOTIFICATION_UPDT_CANCEL                                   = "FormNotificationUpdateCancel";
 	const FM_NOTIFICATION_UPDT_SB                                       = "FormNotificationUpdateSubmit";
 	const FM_NOTIFICATION_VIEW                                          = "FormNotificationView";
+	const FM_NOTIFICATION_VIEW_ASSOCIATE_USERS                          = "FormNotificationViewAssociateUsers";
+	const FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB                       = "FormNotificationViewAssociateUsersSubmit";
 	const FM_NOTIFICATION_VIEW_DEL                                      = "FormNotificationViewDelete";
 	const FM_NOTIFICATION_VIEW_DEL_SB                                   = "FormNotificationViewDeleteSubmit";
 	const FM_NOTIFICATION_VIEW_LST_USERS                                = "FormNotificationViewListUsers";
@@ -779,6 +798,7 @@ class Config
 	const PAGE_ADMIN_DEPARTMENT_VIEW                                    = "Page_Admin_Department_View";
 	const PAGE_ADMIN_DEPARTMENT_VIEW_USERS                              = "Page_Admin_Department_View_Users";
 	const PAGE_ADMIN_NOTIFICATION                                       = "Page_Admin_Notification";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                       = "Page_Admin_Notification_Associate_Users";
 	const PAGE_ADMIN_NOTIFICATION_LST                                   = "Page_Admin_Notification_List";
 	const PAGE_ADMIN_NOTIFICATION_REGISTER                              = "Page_Admin_Notification_Register";
 	const PAGE_ADMIN_NOTIFICATION_SEL                                   = "Page_Admin_Notification_Select";
@@ -895,6 +915,7 @@ class Config
 	const RET_OK                                                        = "ReturnOk";
 	const RET_WARNING                                                   = "ReturnWarning";
 	const SEND_EMAIL_ALREADY_SENT                                       = "SEND_EMAIL_ALREADY_SENT";
+	const SESS_ADMIN_ASSOC_USER_NOTIFICATION                            = "SessionAdminAssocUserNotification";
 	const SESS_ADMIN_CORPORATION                                        = "SessionAdminCorporation";
 	const SESS_ADMIN_DEPARTMENT                                         = "SessionAdminDepartment";
 	const SESS_ADMIN_NOTIFICATION                                       = "SessionAdminNotification";
@@ -918,6 +939,8 @@ class Config
 	const SESS_PASSWORD_RECOVERY                                        = "SessionPasswordRecovery";
 	const SESS_UNLIMITED                                                = "SessionUnlimited";
 	const SESS_USER                                                     = "SessionUser";
+	const SESS_VALUE_NOTIFICATION_UNREAD                                = "AssocUserNotificationCountUnRead";
+	const SESSION_TIME                                                  = 3600;
 	const TB_ASSOC_TICKET_USER_REQUESTING                               = "ASSOC_TICKET_USER_REQUESTING";
 	const TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_BOND                  = "AssocTicketUserRequestingUserBond";
 	const TB_ASSOC_TICKET_USER_REQUESTING_FD_USER_EMAIL                 = "AssocTicketUserRequestingUserEmail"; 

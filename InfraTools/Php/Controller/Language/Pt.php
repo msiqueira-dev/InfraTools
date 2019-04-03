@@ -67,6 +67,12 @@ class Pt
 	const ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND                        = "Associação entre endereço de ip e serviço não encontrada";
 	const ASSOC_USER_CORPORATION_UPDT_ERROR                         = "Erro ao atualizar informações de corporação";
 	const ASSOC_USER_CORPORATION_UPDT_SUCCESS                       = "Informações de corporação alterada com sucesso";
+	const ASSOC_USER_NOTIFICATION_DELETE_ERROR                      = "Erro ao excluir associação entre usuário e notificação";
+	const ASSOC_USER_NOTIFICATION_DELETE_SUCCESS                    = "Associação entre usuário e notificação excluida com sucesso";
+	const ASSOC_USER_NOTIFICATION_INSERT_ERROR                      = "Erro ao cadastrar associação entre usuário e notificação";
+	const ASSOC_USER_NOTIFICATION_INSERT_SUCCESS                    = "Associação entre usuário e notificação cadastrada com sucesso";
+	const ASSOC_USER_NOTIFICATION_UPDT_ERROR                        = "Erro ao atualizar associação entre usuário e notificação";
+	const ASSOC_USER_NOTIFICATION_UPDT_SUCCESS                      = "Associação entre usuário e notificação atualizada com sucesso";
 	const CHECK_AVAILABILITY_FREE                                   = "Domínio está livre";
 	const CHECK_AVAILABILITY_TAKEN                                  = "Domínio já registrado";
 	const CHECK_BLACKLIST_HOST_NOT_LSTED                            = "Domínio [0] não está em nenhuma das listas negras: uceprotect, "
@@ -131,6 +137,7 @@ class Pt
 	const FILL_REQUIRED_FIELDS                                      = "Por favor preencha os campos necessários";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE            = "Data de contratação";
 	const FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID              = "Matrícula";
+	const FIELD_ASSOC_USER_NOTIFICATION_READ                        = "Notificação lida";
 	const FIELD_CORPORATION_ACTIVE                                  = "Ativo";
 	const FIELD_CORPORATION_NAME                                    = "Nome da corporação";
 	const FIELD_COUNTRY_ABBREVIATION                                = "Sigla do País";
@@ -147,11 +154,17 @@ class Pt
 	const FIELD_NETWORK_NAME                                        = "Nome da rede";
 	const FIELD_NETWORK_NETMASK                                     = "Mascara de rede";
 	const FIELD_NOTIFICATION_ACTIVE                                 = "Ativo";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION               = "Associar por corporação";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT                = "Associar por departmento";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE                      = "Associar por papel";
+	const FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM                      = "Associar por equipe";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL                      = "Associar para todos ou nenhum";
+	const FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL            = "Todos";
 	const FIELD_NOTIFICATION_ID                                     = "Id";
 	const FIELD_NOTIFICATION_TEXT                                   = "Texto";
 	const FIELD_ROLE_DESCRIPTION                                    = "Descrição";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "Nome do departamento e nome da corporação";
-	const FIELD_SEL_NONE                                            = "Nenhuma";
+	const FIELD_SEL_NONE                                            = "Selecione";
 	const FIELD_SERVICE_ACTIVE                                      = "Ativo";
 	const FIELD_SERVICE_CORPORATION_CAN_CHANGE                      = "Corporação pode mudar?";
 	const FIELD_SERVICE_DEPARTMENT_CAN_CHANGE                       = "Departamento pode mudar?";
@@ -209,6 +222,7 @@ class Pt
 	const FIELD_USER_TYPE                                           = "Tipo";
 	const FIELD_USER_TWO_STEP_VERIFICATION                          = "Verificação duas etapas";
 	const FIELD_USER_UNIQUE_ID                                      = "ID Único";
+	const FM_INVALID_ASSOC_USER_NOTIFICATION_READ                   = "Valor inválido para campo de lido";
 	const FM_INVALID_CAPTCHA                                        = "O valor catpcha não confere";
 	const FM_INVALID_CORPORATION_NAME                               = "Nome de corporação inválida";
 	const FM_INVALID_CORPORATION_NAME_SIZE                          = "Quantidade de caracteres excede o tamanho máximo para " 
@@ -463,6 +477,7 @@ class Pt
 	const HREF_PAGE_LOGIN                                           = "/Pt/PageLogin";
 	const HREF_PAGE_NOT_FOUND                                       = "/Pt/PageNotFound";
 	const HREF_PAGE_NOTIFICATION                                    = "/Pt/PageNotification";
+	const HREF_PAGE_NOTIFICATION_VIEW                               = "/Pt/PageNotificationView";
 	const HREF_PAGE_PASSWORD_RECOVERY                               = "/Pt/PagePasswordRecovery";
 	const HREF_PAGE_PASSWORD_RESET                                  = "/Pt/PagePasswordReset";
 	const HREF_PAGE_REGISTER                                        = "/Pt/PageRegister";
@@ -535,6 +550,7 @@ class Pt
 	const NOTIFICATION_UPDT_SUCCESS                                 = "Notificação atualizada com sucesso";
 	const NULL_EMPTY                                                = "Nenhum valor associado";
 	const NULL_OPTION                                               = "Por favor escolha uma opção";
+	const OPERATION_CONTACT                                         = "Entre em contato";
 	const OPERATION_LST                                             = "Listagem";
 	const OPERATION_REGISTER                                        = "Cadastro";
 	const OPERATION_SEARCH                                          = "Busca";
@@ -623,7 +639,10 @@ class Pt
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools - Gerência de Endereços de Ip";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Gerência de Notificações";
-	const PAGE_ADMIN_NOTIFICATION_LST                               = "Gerência de Notificações - 	Listar";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "Gerência de Notificações - Associação de Usuários";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools - Gerência de Notificações";
+	const PAGE_ADMIN_NOTIFICATION_LST                               = "Gerência de Notificações - Listar";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools - Gerência de Notificações";
 	const PAGE_ADMIN_NOTIFICATION_REGISTER                          = "Gerência de Notificações - Cadastrar";
@@ -900,6 +919,9 @@ class Pt
 	const PAGE_NOTIFICATION                                         = "Notificações";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "ALL";
 	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools - Notificações";
+	const PAGE_NOTIFICATION_VIEW                                    = "Vizualizar Notificação";
+	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
+	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools - Vizualizar Notificação";
 	const PAGE_PASSWORD_RECOVERY                                    = "Recuperação de senha";
 	const PAGE_PASSWORD_RECOVERY_ROBOTS                             = "noindex";
 	const PAGE_PASSWORD_RECOVERY_TITLE                              = "InfraTools - Recuperação de senha";
@@ -954,6 +976,15 @@ class Pt
 	const PAGE_SUPPORT                                              = "Suporte";
 	const PAGE_SUPPORT_ROBOTS                                       = "noindex";
 	const PAGE_SUPPORT_TITLE                                        = "InfraTools - Suporte";
+	const PAGE_SUPPORT_CONTACT                                      = "Nova Solicitação de Suporte";
+	const PAGE_SUPPORT_CONTACT_ROBOTS                               = "noindex";
+	const PAGE_SUPPORT_CONTACT_TITLE                                = "InfraTools - Nova Solicitação de Suporte";
+	const PAGE_SUPPORT_LST                                          = "Listar Solicações";
+	const PAGE_SUPPORT_LST_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_LST_TITLE                                    = "InfraTools - Listar Solicitações";
+	const PAGE_SUPPORT_SEL                                          = "Selecionar Solicitações";
+	const PAGE_SUPPORT_SEL_ROBOTS                                   = "noindex";
+	const PAGE_SUPPORT_SEL_TITLE                                    = "InfraTools - Selecionar Solicitações";
 	const PAGE_TEAM                                                 = "Equipes";
 	const PAGE_TEAM_ROBOTS                                          = "noindex";
 	const PAGE_TEAM_TITLE                                           = "InfraTools - Equipes";
@@ -992,6 +1023,7 @@ class Pt
 	const RESEND_CONFIRMATION_LINK_ERROR                            = "Um erro ocorreu, por favor tente novamente ou entre em contato";
 	const RESEND_CONFIRMATION_LINK_SUCCESS                          = "Link de confirmação reenviado com sucesso";
 	const ROW_COUNT                                                 = "Valor total: ";
+	const ROLE_NOT_FOUND                                            = "Papel não encontrado";
 	const SEND_EMAIL_ERROR                                          = "Erro ao enviar e-mail para o usuário";
 	const SERVICE_DEL_ERROR                                         = "Erro ao excluir serviço";
 	const SERVICE_DEL_ERROR_FOREIGN_KEY                             = "Erro ao excluir serviço, exclua as associações primeiro";
@@ -1034,6 +1066,8 @@ class Pt
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "Serviceço atualizado com sucesso";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ATIVAR CONTA";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DESATIVAR CONTA";
+	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIAR A USUÁRIOS";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "DESASSOCIAR USUÁRIOS";
 	const SUBMIT_BACK                                               = "VOLTAR";
 	const SUBMIT_CANCEL                                             = "CANCELAR";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "ALTERAR INFO DE USUÀRIO CORPORAÇÃO";
@@ -1069,6 +1103,7 @@ class Pt
 	const SYSTEM_CONFIGURATION_NOT_FOUND                            = "Configuração do sistema não encontrada";
 	const SYSTEM_CONFIGURATION_UPDT_ERROR                           = "Erro ao atualizar configuração do sistema";
 	const SYSTEM_CONFIGURATION_UPDT_SUCCESS                         = "Configuração do sistema atualizada com sucesso";
+	const TABLE_EMPTY                                               = "Nenhum registro encontrado para a busca realizada";
 	const TB_PAGE_PREFIX                                            = "De:";
 	const TB_PAGE                                                   = "até";
 	const TEAM                                                      = "Equipe";
@@ -1200,6 +1235,8 @@ class Pt
 	const USER_SEL_EXISTS_BY_USER_EMAIL_SUCCESS                     = "Usuário existe";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_ERROR                    = "Erro ao obter hash code de usuário com o e-mail fornecido";
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "Código hash obtido com sucesso";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "Erro ao obter notificações do usuário com o e-mail fornecido";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "Notificações obtidas com sucesso";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "Erro ao obter equipes desse usuário";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "Esse usuário não possui equipes";
 	const USER_TEAM_SEL_ERROR                                       = "Erro ao obter equipes do usuário";

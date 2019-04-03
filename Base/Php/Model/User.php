@@ -10,9 +10,6 @@ Dependencies:
 Description: 
 			Class for User
 Get / Set: 
-			public function GetAssocUserNotificationNotificationIdByIndex($Index);
-			public function GetAssocUserTeamTeamIdByIndex($Index);
-			public function GetAssocUserTeamTeamNameByIndex($Index);
 			public function GetArrayAssocUserNotification();
 			public function GetArrayAssocUserNotificationUnRead();
 			public function GetArrayAssocUserTeam();
@@ -22,6 +19,11 @@ Get / Set:
 			public function GetAssocUserCorporationUserRegistrationDateMonth();
 			public function GetAssocUserCorporationUserRegistrationDateYear();
 			public function GetAssocUserCorporationUserRegistrationId();
+			public function GetAssocUserNotificationCount();
+			public function GetAssocUserNotificationCountUnRead();
+			public function GetAssocUserNotificationNotificationIdByIndex($Index);
+			public function GetAssocUserTeamTeamIdByIndex($Index);
+			public function GetAssocUserTeamTeamNameByIndex($Index);
 			public function GetBirthDate();
 			public function GetBirthDateDay();
 			public function GetBirthDateMonth();
@@ -55,6 +57,7 @@ Get / Set:
 			public function SetArrayAssocUserNotification($ArrayAssocUserNotification);
 			public function SetArrayAssocUserTeam($ArrayAssocUserTeam);
 			public function SetAssocUserCorporation($AssocUserCorporation);
+			public function SetAssocUserNotificationCount($AssocUserNotificationCount);
 			public function SetBirthDate($BirthDate);
 			public function SetCorporation($CorporationInstance);
 			public function SetCountry($Country);
@@ -94,30 +97,32 @@ Methods:
 class User
 {		
 	/* Properties */
-	protected $ArrayAssocUserTeam          = NULL;
-	protected $ArrayAssocUserNotification  = NULL;
-	protected $AssocUserCorporation        = NULL;
-	protected $BirthDate                   = NULL;
-	protected $Corporation                 = NULL;
-	protected $Country                     = NULL;
-	protected $Department                  = NULL;
-	protected $UserEmail                   = NULL;
-	protected $Gender                      = NULL;
-	protected $HashCode                    = NULL;
-	protected $LoggedIn                    = NULL;
-	protected $UserName                    = NULL;
-	protected $Region                      = NULL;
-	protected $RegisterDate                = NULL;
-	protected $SessionExpires              = NULL;
-	protected $TwoStepVerification         = NULL;
-	protected $UserActive                  = NULL;
-	protected $UserConfirmed               = NULL;
-	protected $UserPhonePrimary            = NULL;
-	protected $UserPhonePrimaryPrefix      = NULL;
-	protected $UserPhoneSecondary          = NULL;
-	protected $UserPhoneSecondaryPrefix    = NULL;
-	protected $UserType                    = NULL;
-	protected $UserUniqueId                = NULL;
+	protected $ArrayAssocUserTeam               = NULL;
+	protected $ArrayAssocUserNotification       = NULL;
+	protected $AssocUserCorporation             = NULL;
+	protected $AssocUserNotificationCount       = NULL;
+	protected $AssocUserNotificationCountUnRead = NULL;
+	protected $BirthDate                        = NULL;
+	protected $Corporation                      = NULL;
+	protected $Country                          = NULL;
+	protected $Department                       = NULL;
+	protected $UserEmail                        = NULL;
+	protected $Gender                           = NULL;
+	protected $HashCode                         = NULL;
+	protected $LoggedIn                         = NULL;
+	protected $UserName                         = NULL;
+	protected $Region                           = NULL;
+	protected $RegisterDate                     = NULL;
+	protected $SessionExpires                   = NULL;
+	protected $TwoStepVerification              = NULL;
+	protected $UserActive                       = NULL;
+	protected $UserConfirmed                    = NULL;
+	protected $UserPhonePrimary                 = NULL;
+	protected $UserPhonePrimaryPrefix           = NULL;
+	protected $UserPhoneSecondary               = NULL;
+	protected $UserPhoneSecondaryPrefix         = NULL;
+	protected $UserType                         = NULL;
+	protected $UserUniqueId                     = NULL;
 	
 	/* Constructor */
 	public function __construct($ArrayAssocUserTeam, $ArrayAssocUserNotification, $AssocUserCorporation,
@@ -191,36 +196,6 @@ class User
     }
 	
 	/* GET */
-	public function GetAssocUserNotificationNotificationIdByIndex($Index)
-	{
-		if(is_array($this->ArrayAssocUserNotification))
-		{
-			if(count($this->ArrayAssocUserNotification) > 0)
-				return $this->ArrayAssocUserNotification[$Index]->GetNotificationId();
-		}
-		return NULL;
-	}
-	
-	public function GetAssocUserTeamTeamIdByIndex($Index)
-	{
-		if(is_array($this->ArrayAssocUserTeam))
-		{
-			if(count($this->ArrayAssocUserTeam) > 0)
-				return $this->ArrayAssocUserTeam[$Index]->GetTeamId();
-		}
-		return NULL;
-	}
-	
-	public function GetAssocUserTeamTeamNameByIndex($Index)
-	{
-		if(is_array($this->ArrayAssocUserTeam))
-		{
-			if(count($this->ArrayAssocUserTeam) > 0)
-				return $this->ArrayAssocUserTeam[$Index]->GetTeamName();
-		}
-		return NULL;
-	}
-	
 	public function GetArrayAssocUserNotification()
 	{
 		if(is_array($this->ArrayAssocUserNotification))
@@ -245,6 +220,8 @@ class User
 			}
 			return $ArrayAssocUserNotificationUnRead;
 		}
+		elseif(isset($this->AssocUserNotificationCount))
+			return $this->AssocUserNotificationCount;
 		return NULL;
 	}
 	
@@ -312,6 +289,57 @@ class User
 		if(!is_null($this->AssocUserCorporation))
 			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationId();
 		else return NULL;
+	}
+	
+	public function GetAssocUserNotificationCount()
+	{
+		if(empty($this->ArrayAssocUserNotification))
+			return $this->AssocUserNotificationCount;
+		else return count($this->ArrayAssocUserNotification);
+	}
+	
+	public function GetAssocUserNotificationCountUnRead()
+	{
+		if(empty($this->ArrayAssocUserNotification))
+			return $this->AssocUserNotificationCountUnRead;
+		else 
+		{
+			foreach($this->ArrayAssocUserNotification as $assocUserNotification)
+			{
+				if(!$assocUserNotification->GetAssocUserNotificationRead())
+					$this->AssocUserNotificationCountUnRead++;
+			}
+		}
+	}
+	
+	public function GetAssocUserNotificationNotificationIdByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserNotification))
+		{
+			if(count($this->ArrayAssocUserNotification) > 0)
+				return $this->ArrayAssocUserNotification[$Index]->GetNotificationId();
+		}
+		return NULL;
+	}
+	
+	public function GetAssocUserTeamTeamIdByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam[$Index]->GetTeamId();
+		}
+		return NULL;
+	}
+	
+	public function GetAssocUserTeamTeamNameByIndex($Index)
+	{
+		if(is_array($this->ArrayAssocUserTeam))
+		{
+			if(count($this->ArrayAssocUserTeam) > 0)
+				return $this->ArrayAssocUserTeam[$Index]->GetTeamName();
+		}
+		return NULL;
 	}
 	
 	public function GetBirthDate()
@@ -500,6 +528,27 @@ class User
 	public function SetAssocUserCorporation($AssocUserCorporation)
 	{
 		$this->AssocUserCorporation = $AssocUserCorporation;
+	}
+	
+	public function SetAssocUserNotificationCount($AssocUserNotiticationCount)
+	{
+		if(empty($this->ArrayAssocUserNotification))
+			$this->AssocUserNotificationCount = $AssocUserNotiticationCount;	
+	}
+	
+	public function SetAssocUserNotificationCountUnRead($AssocUserNotificationCountUnRead)
+	{
+		if(empty($this->ArrayAssocUserNotification))
+			$this->AssocUserNotificationCountUnRead = $AssocUserNotificationCountUnRead;
+		else
+		{
+			$this->AssocUserNotificationCountUnRead = 0;
+			foreach($this->ArrayAssocUserNotification as $assocUserNotification)
+			{
+				if(!$assocUserNotification->GetAssocUserNotificationRead())
+					$this->AssocUserNotificationCountUnRead++;	
+			}
+		}
 	}
 	
 	public function SetBirthDate($BirthDate)

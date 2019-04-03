@@ -44,7 +44,7 @@ class PageTeamRegister extends PageTeam
 	/* Constructor */
 	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Page = $this->GetCurrentPage();
+		$this->Page = $Page;
 		parent::__construct($Config, $Language, $Page);
 	}
 

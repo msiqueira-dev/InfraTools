@@ -107,7 +107,7 @@ class LanguageInfraTools extends Language
 	{
 		if($this->InstanceLanguageText != NULL)
 		{
-			return $this->GetText($Page . "_ROBOTS");
+			return $this->GetText($Page . "Robots");
 		}
 	}
 	
@@ -115,7 +115,7 @@ class LanguageInfraTools extends Language
 	{
 		if($this->InstanceLanguageText != NULL)
 		{
-			return $this->GetText($Page . "_TITLE");
+			return $this->GetText($Page . "Title");
 		}
 	}
 	
@@ -139,6 +139,7 @@ class LanguageInfraTools extends Language
 							}
 					}
 				}
+				
 				$Constant = strtoupper($Constant);
 				if(!defined("$Language::$Constant"))
 				{

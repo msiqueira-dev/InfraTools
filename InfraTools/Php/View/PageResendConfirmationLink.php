@@ -36,7 +36,7 @@ class PageResendConfirmationLink extends PageInfraTools
 	/* Constructor */
 	protected function __construct($Config, $Language, $Page) 
 	{
-		$this->Page = $this->GetCurrentPage();
+		$this->Page = $Page;
 		$this->PageCheckLogin = FALSE;
 		parent::__construct($Config, $Language, $Page);
 		if(!$this->PageEnabled)

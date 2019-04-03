@@ -31,6 +31,7 @@ Methods:
 			public    function CreateFacedePersistenceAssocTicketUserRequesting();
 			public    function CreateFacedePersistenceAssocTicketUserResponsible();
 			public    function CreateFacedePersistenceAssocUserCorporation();
+			public    function CreateFacedePersistenceAssocUserNotification();
 			public    function CreateFacedePersistenceAssocUserRole();
 			public    function CreateFacedePersistenceAssocUserTeam();
 			public    function CreateFacedePersistenceCorporation();
@@ -316,6 +317,21 @@ class Factory
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserCorporation');
 		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserCorporation.php");
 		return FacedePersistenceAssocUserCorporation::__create();
+	}
+	
+	public function CreateFacedePersistenceAssocUserNotification()
+	{
+		if (!class_exists("AssocUserNotification"))
+		{
+			if(file_exists(BASE_PATH_PHP_MODEL . "AssocUserNotification.php"))
+				include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
+			else exit(basename(__FILE__, '.php') . ': Error Loading Base Class AssocUserNotification');
+		}
+		
+		if(!file_exists(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserNotification.php"))
+			exit(basename(__FILE__, '.php') . ': Error Loading Base Class FacedePersistenceAssocUserNotification');
+		else include_once(BASE_PATH_PHP_CONTROLLER . "FacedePersistenceAssocUserNotification.php");
+		return FacedePersistenceAssocUserNotification::__create();
 	}
 	
 	public function CreateFacedePersistenceAssocUserRole()
@@ -667,7 +683,7 @@ class Factory
 		if(!file_exists(BASE_PATH_PHP_MODEL . "Role.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Base Class Role');
 		else include_once(BASE_PATH_PHP_MODEL . "Role.php");
-		return new SessionHandler($RegisterDate, $RoleDescription, $RoleName);
+		return new Role($RegisterDate, $RoleDescription, $RoleName);
 	}
 	
 	public function CreateSession()

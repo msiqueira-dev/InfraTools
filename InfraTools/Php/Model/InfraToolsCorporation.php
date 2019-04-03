@@ -41,8 +41,8 @@ class InfraToolsCorporation extends Corporation
 	{
 		$ConfigInfraTools = $this->Factory->CreateConfigInfraTools();
 		if($this->CorporationActive)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconInfraToolsNotVerified.png';
+			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
+		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
 	}
 }
 ?>

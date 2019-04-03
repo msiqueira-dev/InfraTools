@@ -115,9 +115,9 @@ if(is_array($this->ArrayInstanceSystemConfiguration))
 		      </td>";
 		echo "<td class='TableGenericTdLink'>";
 		if($systemConfiguration->GetSystemConfigurationOptionActive())
-			echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsVerified.png'
+			echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconVerified.png'
 			           'alt='SystemConfigurationOptionActive' width='20' height='20' />" . "</td>";
-		else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconInfraToolsNotVerified.png' 
+		else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconNotVerifiedw.png' 
 			           'alt='SystemConfigurationOptionActive' width='20' height='20' />" . "</td>";
 		if($systemConfiguration->GetSystemConfigurationOptionValue() != NULL)
 			echo "<td class= 'TableGenericTdLink'>" . $systemConfiguration->GetSystemConfigurationOptionValue() . "</td>";

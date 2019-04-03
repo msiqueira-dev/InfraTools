@@ -22,29 +22,43 @@ Functions:
 									   $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 									   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug, $MySqlConnection);
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
-			public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, 
+			public function UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser, &$RowCount, 
 			                                            $Debug, $MySqlConnection);
+			public function UserSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceUser, 
+			                                                   $Debug, $MySqlConnection);
 			public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, 
 			                                           &$RowCount, $Debug, $MySqlConnection);
+		    public function UserSelectByDepartmentNameNoLimit($CorporationName, $DepartmentName, &$ArrayInstanceUser, 
+										                      $Debug, $MySqlConnection);
 			public function UserSelectByHashCode($HashCode, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectByNotificationId($Limit1, $Limit2, $NotificationId, &$ArrayInstanceUser,
 			                                            &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByRoleName($Limit1, $Limit2, $RoleName, &$ArrayInstanceUser,
 			                                     &$RowCount, $Debug, $MySqlConnection);
+			public function UserSelectByRoleNameNoLimit($RoleName, &$ArrayInstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
+			public function UserSelectByTeamIdNoLimit($TeamId, &$ArrayInstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectByTicketId($Limit1, $Limit2, $TicketId, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByTypeTicketDescription($Limit1, $Limit2, $TypeTicketDescription, &$ArrayInstanceUser, &$RowCount, 
 			                                                  $Debug, $MySqlConnection);
 			public function UserSelectByTypeAssocUserTeamDescription($Limit1, $Limit2, $TypeAssocUserTeamDescription, &$ArrayInstanceUser,
 														             &$RowCount, $Debug, $MySqlConnection);
-			public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
+			public function UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, 
 			                                                &$RowCount, $Debug, $MySqlConnection);
 			public function UserSelectByUserEmail($UserEmail, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectByUserUniqueId($UserUniqueId, &$InstanceUser, $Debug, $MySqlConnection);
 			public function UserSelectExistsByUserEmail($UserEmail, $Debug, $MySqlConnection);
 			public function UserSelectUserActiveByHashCode($HashCode, &$UserActive, $Debug, $MySqlConnection);
 			public function UserSelectHashCodeByUserEmail($UserEmail, &$HashCode, $Debug, $MySqlConnection);
-			public function UserSelectNotificationByNotificationId(&$InstanceUser, $Debug, $MySqlConnection);
+			public function UserSelectNoLimit(&$ArrayInstanceUser,$Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceAssocUserNotification, &$RowCount, 
+													          $Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId, &$InstanceAssocUserNotification, 
+													                           $Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmailCountUnRead($InstanceUser, &$Count, $Debug, $MySqlConnection);
+			public function UserSelectNotificationByUserEmailNoLimit($InstanceUser, &$ArrayInstanceAssocUserNotification, 
+			                                                         $Debug, $MySqlConnection);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection);
 			public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection);
 			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
@@ -381,7 +395,7 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function UserSelectByCorporationName($CorporationName, $Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
+	public function UserSelectByCorporationName($Limit1, $Limit2, $CorporationName, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
 		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
@@ -485,6 +499,108 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
+	public function UserSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceUser, $Debug, $MySqlConnection)
+	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectByCorporationNameNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByCorporationNameNoLimit());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("s", $CorporationName);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
+						   $row[Config::TB_CORPORATION_FD_NAME] != NULL 
+						   && $row['Corporation' . Config::TB_FD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateCorporation
+								                                        (NULL, 
+																		 $row[Config::TB_CORPORATION_FD_ACTIVE],
+																		 $row[Config::TB_CORPORATION_FD_NAME],
+									                                     $row['Corporation'.Config::TB_FD_REGISTER_DATE]);
+							if($row[Config::TB_DEPARTMENT_FD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[Config::TB_DEPARTMENT_FD_INITIALS],
+									          $row[Config::TB_DEPARTMENT_FD_NAME], 
+									          $row['Department'.Config::TB_FD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
+															$row['TypeUser'.Config::TB_FD_REGISTER_DATE]);
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
+												 NULL,
+							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
+							                     $InstanceCorporation,
+						                         $row[Config::TB_USER_FD_USER_COUNTRY],
+												 $InstanceDepartment,
+							                     $row[Config::TB_USER_FD_USER_EMAIL], 
+						                         $row[Config::TB_USER_FD_USER_GENDER], 
+												 $row[Config::TB_USER_FD_USER_HASH_CODE],
+												 $row[Config::TB_USER_FD_USER_NAME], 
+												 $row[Config::TB_USER_FD_USER_REGION],
+												 $row['User'.Config::TB_FD_REGISTER_DATE],
+												 $row[Config::TB_USER_FD_USER_SESSION_EXPIRES],
+												 $row[Config::TB_USER_FD_USER_TWO_STEP_VERIFICATION],
+						                         $row[Config::TB_USER_FD_USER_ACTIVE],
+						                         $row[Config::TB_USER_FD_USER_CONFIRMED],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[Config::TB_USER_FD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceUser != NULL 
+						       && isset($row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_DATE],
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE],
+							                  $InstanceUser);
+						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						array_push($ArrayInstanceUser, $InstanceUser);
+					}
+					if(!empty($ArrayInstanceUser))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
 	public function UserSelectByDepartmentName($Limit1, $Limit2, $CorporationName, $DepartmentName, &$ArrayInstanceUser, 
 										       &$RowCount, $Debug, $MySqlConnection)
 	{
@@ -501,7 +617,7 @@ class FacedePersistenceUser
 			if($stmt != NULL)
 			{
 				$limitResult = $Limit2 - $Limit1;
-				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $limitResult);
+				$stmt->bind_param("ssssii", $CorporationName, $DepartmentName, $CorporationName, $DepartmentName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::RET_OK)
 				{
@@ -510,6 +626,109 @@ class FacedePersistenceUser
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
+						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
+						   $row[Config::TB_CORPORATION_FD_NAME] != NULL 
+						   && $row['Corporation' . Config::TB_FD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateCorporation
+								                                        (NULL, 
+																		 $row[Config::TB_CORPORATION_FD_ACTIVE],
+																		 $row[Config::TB_CORPORATION_FD_NAME],
+									                                     $row['Corporation'.Config::TB_FD_REGISTER_DATE]);
+							if($row[Config::TB_DEPARTMENT_FD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[Config::TB_DEPARTMENT_FD_INITIALS],
+									          $row[Config::TB_DEPARTMENT_FD_NAME], 
+									          $row['Department'.Config::TB_FD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
+															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
+												 NULL,
+							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
+							                     $InstanceCorporation,
+						                         $row[Config::TB_USER_FD_USER_COUNTRY],
+												 $InstanceDepartment,
+							                     $row[Config::TB_USER_FD_USER_EMAIL], 
+						                         $row[Config::TB_USER_FD_USER_GENDER], 
+												 $row[Config::TB_USER_FD_USER_HASH_CODE],
+												 $row[Config::TB_USER_FD_USER_NAME], 
+												 $row[Config::TB_USER_FD_USER_REGION],
+												 $row['User'.Config::TB_FD_REGISTER_DATE],
+												 $row[Config::TB_USER_FD_USER_SESSION_EXPIRES],
+												 $row[Config::TB_USER_FD_USER_TWO_STEP_VERIFICATION],
+						                         $row[Config::TB_USER_FD_USER_ACTIVE],
+						                         $row[Config::TB_USER_FD_USER_CONFIRMED],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[Config::TB_USER_FD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceUser != NULL 
+						       && isset($row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_DATE],
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE],
+							                  $InstanceUser);
+						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						array_push($ArrayInstanceUser, $InstanceUser);
+					}
+					if(!empty($ArrayInstanceUser))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectByDepartmentNameNoLimit($CorporationName, $DepartmentName, &$ArrayInstanceUser, 
+										              $Debug, $MySqlConnection)
+	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceUser = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectByDepartmentNameNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByDepartmentNameNoLimit());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
 						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
 						   $row[Config::TB_CORPORATION_FD_NAME] != NULL 
 						   && $row['Corporation' . Config::TB_FD_REGISTER_DATE] != NULL)
@@ -874,6 +1093,109 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
+	public function UserSelectByRoleNameNoLimit($RoleName, &$ArrayInstanceUser, $Debug, $MySqlConnection)
+	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
+		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectByRoleNameNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByRoleNameNoLimit());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("ssii", $RoleName);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
+						   $row[Config::TB_CORPORATION_FD_NAME] != NULL 
+						   && $row['Corporation' . Config::TB_FD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateCorporation
+								                                        (NULL, 
+																		 $row[Config::TB_CORPORATION_FD_ACTIVE],
+																		 $row[Config::TB_CORPORATION_FD_NAME],
+									                                     $row['Corporation'.Config::TB_FD_REGISTER_DATE]);
+							if($row[Config::TB_DEPARTMENT_FD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[Config::TB_DEPARTMENT_FD_INITIALS],
+									          $row[Config::TB_DEPARTMENT_FD_NAME], 
+									          $row["Department".Config::TB_FD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
+															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
+												 NULL,
+							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
+							                     $InstanceCorporation,
+						                         $row[Config::TB_USER_FD_USER_COUNTRY],
+												 $InstanceDepartment,
+							                     $row[Config::TB_USER_FD_USER_EMAIL], 
+						                         $row[Config::TB_USER_FD_USER_GENDER], 
+												 $row[Config::TB_USER_FD_USER_HASH_CODE],
+												 $row[Config::TB_USER_FD_USER_NAME], 
+												 $row[Config::TB_USER_FD_USER_REGION],
+												 $row["User".Config::TB_FD_REGISTER_DATE],
+												 $row[Config::TB_USER_FD_USER_SESSION_EXPIRES],
+												 $row[Config::TB_USER_FD_USER_TWO_STEP_VERIFICATION],
+						                         $row[Config::TB_USER_FD_USER_ACTIVE],
+						                         $row[Config::TB_USER_FD_USER_CONFIRMED],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[Config::TB_USER_FD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceUser != NULL 
+						       && isset($row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_DATE],
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE],
+							                  $InstanceUser);
+						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						array_push($ArrayInstanceUser, $InstanceUser);
+					}
+					if(!empty($ArrayInstanceUser))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
 	public function UserSelectByTeamId($Limit1, $Limit2, $TeamId, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
@@ -899,6 +1221,122 @@ class FacedePersistenceUser
 					while ($row = $result->fetch_assoc())
 					{
 						$RowCount = $row['COUNT'];
+						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
+						   $row[Config::TB_CORPORATION_FD_NAME] != NULL 
+						   && $row['Corporation' . Config::TB_FD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateCorporation
+								                                        (NULL, 
+																		 $row[Config::TB_CORPORATION_FD_ACTIVE],
+																		 $row[Config::TB_CORPORATION_FD_NAME],
+									                                     $row['Corporation'.Config::TB_FD_REGISTER_DATE]);
+							if($row[Config::TB_DEPARTMENT_FD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[Config::TB_DEPARTMENT_FD_INITIALS],
+									          $row[Config::TB_DEPARTMENT_FD_NAME], 
+									          $row["Department".Config::TB_FD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
+															$row['TypeUser' . Config::TB_FD_REGISTER_DATE]);
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
+												 NULL,
+							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
+							                     $InstanceCorporation,
+						                         $row[Config::TB_USER_FD_USER_COUNTRY],
+												 $InstanceDepartment,
+							                     $row[Config::TB_USER_FD_USER_EMAIL], 
+						                         $row[Config::TB_USER_FD_USER_GENDER], 
+												 $row[Config::TB_USER_FD_USER_HASH_CODE],
+												 $row[Config::TB_USER_FD_USER_NAME], 
+												 $row[Config::TB_USER_FD_USER_REGION],
+												 $row["User".Config::TB_FD_REGISTER_DATE],
+												 $row[Config::TB_USER_FD_USER_SESSION_EXPIRES],
+												 $row[Config::TB_USER_FD_USER_TWO_STEP_VERIFICATION],
+						                         $row[Config::TB_USER_FD_USER_ACTIVE],
+						                         $row[Config::TB_USER_FD_USER_CONFIRMED],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[Config::TB_USER_FD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceUser != NULL 
+						       && isset($row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_DATE],
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE],
+							                  $InstanceUser);
+						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						$InstaceBaseTeam = $this->Factory->CreateTeam
+							                               ($row['Team' . Config::TB_FD_REGISTER_DATE],
+															$row[Config::TB_TEAM_FD_TEAM_DESCRIPTION],
+						                                    $row[Config::TB_TEAM_FD_TEAM_ID],
+															$row[Config::TB_TEAM_FD_TEAM_NAME]);
+						$InstaceBaseTypeAssocUserTeam = $this->Factory->CreateTypeAssocUserTeam
+							                               ($row['TypeAssocUserTeam' . Config::TB_FD_REGISTER_DATE],
+														    $row[Config::TB_TYPE_ASSOC_USER_TEAM_FD_DESCRIPTION]);
+						$InstaceBaseAssocUserTeam = $this->Factory->CreateAssocUserTeam
+							                               ($row['AssocUserTeam' . Config::TB_FD_REGISTER_DATE],
+														    $InstaceBaseTeam,
+						                                    $InstaceBaseTypeAssocUserTeam,
+														    $InstanceUser);
+						array_push($ArrayInstanceUser, $InstanceUser);
+					}
+					if(!empty($ArrayInstanceUser))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectByTeamIdNoLimit($TeamId, &$ArrayInstanceUser, $Debug, $MySqlConnection)
+	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; 
+		$InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstanceTeam = NULL; $InstanceUser = NULL;
+		$InstaceBaseTeam = NULL; $InstaceBaseTypeAssocUserTeam = NULL; $InstaceBaseAssocUserTeam = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectByTeamIdNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectByTeamIdNoLimit());
+			if($stmt != NULL)
+			{
+				$stmt->bind_param("i", $TeamId);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc())
+					{
 						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL &&
 						   $row[Config::TB_CORPORATION_FD_NAME] != NULL 
 						   && $row['Corporation' . Config::TB_FD_REGISTER_DATE] != NULL)
@@ -1321,7 +1759,7 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function UserSelectByTypeUserDescription($TypeUserDescription, $Limit1, $Limit2, &$ArrayInstanceUser, 
+	public function UserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription, &$ArrayInstanceUser, 
 										            &$RowCount, $Debug, $MySqlConnection)
 	{
 		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL;
@@ -1689,7 +2127,108 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function UserSelectNotificationByUserEmail(&$InstanceUser, $Debug, $MySqlConnection)
+	public function UserSelectNoLimit(&$ArrayInstanceUser,$Debug, $MySqlConnection)
+	{
+		$InstanceArrayAssocUserNotification = NULL; $InstanceArrayAssocUserTeam = NULL; 
+		$InstanceAssocUserCorporation = NULL; $InstaceBaseTypeUser = NULL; $InstanceDepartment = NULL;
+		$InstanceCorporation = NULL; $InstanceUser = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		$ArrayInstanceUser = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNoLimit());
+			if($stmt != NULL)
+			{
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceUser = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						if($row[Config::TB_CORPORATION_FD_ACTIVE] != NULL && $row[Config::TB_CORPORATION_FD_NAME] != NULL 
+						   && $row["Corporation".Config::TB_FD_REGISTER_DATE] != NULL)
+						{
+							$InstanceCorporation = $this->Factory->CreateCorporation
+								                                       (NULL, 
+																		$row[Config::TB_CORPORATION_FD_ACTIVE],
+							                                            $row[Config::TB_CORPORATION_FD_NAME],
+												                        $row["Corporation".Config::TB_FD_REGISTER_DATE]);
+							if($row[Config::TB_DEPARTMENT_FD_CORPORATION] != NULL)
+								$InstanceDepartment = $this->Factory->CreateDepartment(
+									          $InstanceCorporation, 
+									          $row[Config::TB_DEPARTMENT_FD_INITIALS],
+									          $row[Config::TB_DEPARTMENT_FD_NAME], 
+									          $row["Department".Config::TB_FD_REGISTER_DATE]);
+						}
+						else $InstanceCorporation = NULL;
+						$InstaceBaseTypeUser = $this->Factory->CreateTypeUser
+							                               ($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
+															$row["TypeUser".Config::TB_FD_REGISTER_DATE]);
+						$InstanceUser = $this->Factory->CreateUser($InstanceArrayAssocUserNotification,
+												 $InstanceArrayAssocUserTeam,
+		   										 NULL,
+							                     $row[Config::TB_USER_FD_USER_BIRTH_DATE],
+												 $InstanceCorporation,
+						                         $row[Config::TB_USER_FD_USER_COUNTRY],
+												 $InstanceDepartment,
+												 $row[Config::TB_USER_FD_USER_EMAIL], 
+						                         $row[Config::TB_USER_FD_USER_GENDER], 
+												 $row[Config::TB_USER_FD_USER_HASH_CODE],
+												 $row[Config::TB_USER_FD_USER_NAME], 
+												 $row[Config::TB_USER_FD_USER_REGION],
+												 $row["User".Config::TB_FD_REGISTER_DATE],
+												 $row[Config::TB_USER_FD_USER_SESSION_EXPIRES],
+												 $row[Config::TB_USER_FD_USER_TWO_STEP_VERIFICATION],
+						                         $row[Config::TB_USER_FD_USER_ACTIVE],
+						                         $row[Config::TB_USER_FD_USER_CONFIRMED],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_PRIMARY_PREFIX],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY],
+												 $row[Config::TB_USER_FD_USER_PHONE_SECONDARY_PREFIX],
+												 $InstaceBaseTypeUser,
+												 $row[Config::TB_USER_FD_USER_UNIQUE_ID]);
+						if($InstanceCorporation != NULL && $InstanceUser != NULL 
+						       && isset($row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE]))
+								$InstanceAssocUserCorporation = $this->Factory->CreateAssocUserCorporation(
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_DATE],
+							                  $row[Config::TB_ASSOC_USER_CORPORATION_FD_REGISTRATION_ID],
+											  $InstanceCorporation,															   
+											  $row["AssocUserCorporation".Config::TB_FD_REGISTER_DATE],
+							                  $InstanceUser);
+						$InstanceUser->SetAssocUserCorporation($InstanceAssocUserCorporation);
+						array_push($ArrayInstanceUser, $InstanceUser);
+					}
+					if(!empty($ArrayInstanceUser))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmail($Limit1, $Limit2, $InstanceUser, &$ArrayInstanceAssocUserNotification, &$RowCount, 
+													  $Debug, $MySqlConnection)
 	{
 		$ArrayInstanceAssocUserNotification = NULL; $InstanceNotification = NULL;
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -1701,7 +2240,7 @@ class FacedePersistenceUser
 			if($stmt != NULL)
 			{ 
 				$userEmail = $InstanceUser->GetEmail();
-				$stmt->bind_param("s", $userEmail);
+				$stmt->bind_param("ssii", $userEmail, $userEmail, $Limit1, $Limit2);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::RET_OK)
 				{
@@ -1726,10 +2265,220 @@ class FacedePersistenceUser
 						else $ArrayInstanceAssocUserNotification = NULL;
 					}
 					if(!empty($ArrayInstanceAssocUserNotification))
+						return Config::RET_OK;
+					else
 					{
-						$InstanceUser->SetArrayAssocUserNotification($ArrayInstanceAssocUserNotification);
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmailAndNotificationId($InstanceUser, $NotificationId, &$InstanceAssocUserNotification, 
+													                   $Debug, $MySqlConnection)
+	{
+		$InstanceAssocUserNotification = NULL; $InstanceNotification = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailAndNotificationId');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailAndNotificationId());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("si", $userEmail, $NotificationId);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$result = $stmt->get_result();
+					if($row = $result->fetch_assoc()) 
+					{
+						if($row[Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID]    != NULL &&
+						   $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL] != NULL)
+						{
+							$InstanceNotification = $this->Factory->CreateNotification($row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE], 
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ID],
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT],
+																			   $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+							$InstanceAssocUserNotification = $this->Factory->CreateAssocUserNotification
+								                                        ($InstanceNotification,
+																		 $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_READ],
+																		 $InstanceUser,
+																		 $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+						}
+					}
+					if(!empty($InstanceAssocUserNotification))
+						return Config::RET_OK;
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmailCount($InstanceUser, &$Count, $Debug, $MySqlConnection)
+	{
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailCount');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailCount());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("s", $userEmail);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$result = $stmt->get_result();
+					if($row = $result->fetch_assoc()) 
+					{
+						$Count = $row['COUNT'];
 						return Config::RET_OK;
 					}
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmailCountUnRead($InstanceUser, &$Count, $Debug, $MySqlConnection)
+	{
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailCountUnRead');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailCountUnRead());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("s", $userEmail);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$result = $stmt->get_result();
+					if($row = $result->fetch_assoc()) 
+					{
+						$Count = $row['COUNT'];
+						return Config::RET_OK;
+					}
+					else
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL;
+				}
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+	
+	public function UserSelectNotificationByUserEmailNoLimit($InstanceUser, &$ArrayInstanceAssocUserNotification, $Debug, $MySqlConnection)
+	{
+		$ArrayInstanceAssocUserNotification = NULL; $InstanceNotification = NULL;
+		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlUserSelectNotificationByUserEmailNoLimit');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlUserSelectNotificationByUserEmailNoLimit());
+			if($stmt != NULL)
+			{ 
+				$userEmail = $InstanceUser->GetEmail();
+				$stmt->bind_param("s", $userEmail);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceAssocUserNotification = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$RowCount = $row['COUNT'];
+						if($row[Config::TB_ASSOC_USER_NOTIFICATION_FD_NOTIFICATION_ID]    != NULL &&
+						   $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_USER_EMAIL] != NULL)
+						{
+							$InstanceNotification = $this->Factory->CreateNotification($row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE], 
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_ID],
+																			   $row[Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT],
+																			   $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+							$InstanceAssocUserNotification = $this->Factory->CreateAssocUserNotification
+								                                        ($InstanceNotification,
+																		 $row[Config::TB_ASSOC_USER_NOTIFICATION_FD_READ],
+																		 $InstanceUser,
+																		 $row['AssocUserNotification'.Config::TB_FD_REGISTER_DATE]);
+							array_push($ArrayInstanceAssocUserNotification, $InstanceAssocUserNotification);
+						}
+						else $ArrayInstanceAssocUserNotification = NULL;
+					}
+					if(!empty($ArrayInstanceAssocUserNotification))
+						return Config::RET_OK;
 					else
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
