@@ -10,6 +10,7 @@ Dependencies:
 Description: 
 			Class with Singleton pattern for Session
 Functions: 
+			private function SessionInit($Application, $SessionId);
 			public function CheckActivity($ActivityKey, $UserKey, $SessionTime, $UnlimitedSession);
 			public function CreateBasic($Application, $SessionTime);
 			public function CreatePersonalized($Application, $Id, $SessionTime);
@@ -67,6 +68,16 @@ class Session
         }
         return self::$Instance;
     }
+	
+	private function SessionInit($Application, $SessionId)
+	{
+		session_write_close();
+		session_set_save_handler($this->InstanceSessionHandlerCustom, true);
+		ini_set("session.gc_maxlifetime", Config::SESSION_TIME);
+		session_name($Application);
+		session_id($SessionId);
+		session_start();
+	}
 	
 	public function CheckActivity($ActivityKey, $UserKey, $SessionTime, $UnlimitedSession)
 	{
@@ -184,12 +195,7 @@ class Session
 			$file = SESSION_PATH . $Application . "/sess_" . $SessionId;
 			if(file_exists(($file)))
 			{
-				session_write_close();
-				session_set_save_handler($this->InstanceSessionHandlerCustom, true);
-				ini_set("session.gc_maxlifetime", Config::SESSION_TIME);
-				session_name($Application);
-				session_id($SessionId);
-				session_start();
+				$this->SessionInit($Application, $SessionId);
 				if($this->GetSessionValue($Key, $Value) == Config::RET_OK)
 				{
 					session_write_close();
@@ -207,12 +213,7 @@ class Session
 			$file = SESSION_PATH . $Application . "/sess_" . $SessionId;
 			if(file_exists(($file)))
 			{
-				session_write_close();
-				session_set_save_handler($this->InstanceSessionHandlerCustom, true);
-				ini_set("session.gc_maxlifetime", Config::SESSION_TIME);
-				session_name($Application);
-				session_id($SessionId);
-				session_start();
+				$this->SessionInit($Application, $SessionId);
 				return Config::RET_OK;
 			}
 		}
@@ -226,13 +227,7 @@ class Session
 			$file = SESSION_PATH . $Application . "/sess_" . $SessionId;
 			if(file_exists(($file)))
 			{
-				session_write_close();
-				session_set_save_handler($this->InstanceSessionHandlerCustom, true);
-				ini_set("session.gc_maxlifetime", Config::SESSION_TIME);
-				session_name($Application);
-				session_id($SessionId);
-				session_start();
-				
+				$this->SessionInit($Application, $SessionId);
 				if($this->SetSessionValue($Key, $NewValue) == Config::RET_OK)
 				{
 					session_write_close();

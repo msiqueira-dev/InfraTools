@@ -919,6 +919,9 @@ class Pt
 	const PAGE_NOTIFICATION                                         = "Notificações";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "ALL";
 	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools - Notificações";
+	const PAGE_NOTIFICATION_LST                                     = "Listar Notificações";
+	const PAGE_NOTIFICATION_LST_ROBOTS                              = "noindex";
+	const PAGE_NOTIFICATION_LST_TITLE                               = "InfraTools - Listar Notificações";
 	const PAGE_NOTIFICATION_VIEW                                    = "Vizualizar Notificação";
 	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
 	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools - Vizualizar Notificação";

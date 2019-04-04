@@ -50,7 +50,7 @@ textarea{resize:none;}
 .DivTableGenericHeaderRowCount label{position:relative;top:7px;margin-left:5px;}
 .DivTableGenericRowCountLabelTitle{font-size:14px;color:orangered;font-weight:bold;text-align:center;}
 .DivTableGenericRowCountLabelValue{font-weight:bold;font-size:14px;text-align:center;}
-.TableGeneric{width:100%;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;}
+.TableGeneric{width:100%;height:auto;margin-top:10px;margin-bottom:20px;table-layout:fixed;max-width:1000px;}
 .TableGeneric th, .TableGeneric th div{;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
 .TableGeneric th{width:auto;height:35px;}
 .TableGeneric th div{border:none;}
@@ -63,11 +63,11 @@ textarea{resize:none;}
 .TableGenericThArrowth div{width:100%;}
 .TableGenericThArrowImage{width:28px;height:28px;}
 .TableGenericTr{height:20px;}
-.TableGeneric td{width:150px;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
-.TableGenericTdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;font-size:14px;}
+.TableGeneric td{width:150px;height:26px;color:black;font-size:12px;text-align:left;border:2px solid #192650;word-break:break-word;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+.TableGenericTdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;font-size:12px;width:100%;}
 .TableGenericTdLink a .TableGenericTdLink form input, .TableGenericTdLink input{cursor:pointer;}
 .TableGenericTdLink a, .TableGenericTdLink label, .TableGenericTdLink input{position:relative;left:2px;}
-.TableTdParagraph{display:table-cell;text-align: center;}
+.TableTdParagraph{text-align: center;}
 .TableGenericTdLinkImage {margin-left:36%;}
 .DivEmptyTable{width:700px;height:100px;margin-top:20px;margin-bottom:20px;background-color:#faebcc;}
 .DivEmptyTableText{width:350px;height:25px;margin: 0 auto;}

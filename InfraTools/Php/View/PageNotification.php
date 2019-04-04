@@ -80,7 +80,7 @@ class PageNotification extends PageInfraTools
 				if($this->ExecuteFunction($_POST, 'UserSelectNotificationByUserEmail', 
 										  array($this->User, &$this->ArrayInstanceAssocUserNotification),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_LST;
+					$this->PageBody = ConfigInfraTools::PAGE_NOTIFICATION_LST;
 			}
 		}
 		$this->LoadHtml(TRUE);

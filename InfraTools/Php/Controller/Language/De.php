@@ -875,6 +875,9 @@ class De
 	const PAGE_NOTIFICATION                                         = "";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "noindex";
 	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools -";
+	const PAGE_NOTIFICATION_LST                                     = "";
+	const PAGE_NOTIFICATION_LST_ROBOTS                              = "noindex";
+	const PAGE_NOTIFICATION_LST_TITLE                               = "InfraTools - ";
 	const PAGE_NOTIFICATION_VIEW                                    = "";
 	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
 	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools -";

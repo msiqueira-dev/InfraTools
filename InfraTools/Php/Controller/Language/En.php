@@ -913,6 +913,9 @@ class En
 	const PAGE_NOTIFICATION                                  	    = "Notifications";
 	const PAGE_NOTIFICATION_ROBOTS                                  = "ALL";
 	const PAGE_NOTIFICATION_TITLE                                   = "InfraTools - Notifications";
+	const PAGE_NOTIFICATION_LST                                     = "List Notifications";
+	const PAGE_NOTIFICATION_LST_ROBOTS                              = "noindex";
+	const PAGE_NOTIFICATION_LST_TITLE                               = "InfraTools - List Notifications";
 	const PAGE_NOTIFICATION_VIEW                                    = "View Notification";
 	const PAGE_NOTIFICATION_VIEW_ROBOTS                             = "noindex";
 	const PAGE_NOTIFICATION_VIEW_TITLE                              = "InfraTools - View Notification";
