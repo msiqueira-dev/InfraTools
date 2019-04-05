@@ -509,8 +509,8 @@ class Persistence
 	{
 		return "UPDATE " . Config::TB_NOTIFICATION . " "  
 		     . "SET    " . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE     . " =?, "
-			 . "SET    " . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT       . " =UPPER(?), "	
-		     . "WHERE "  . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID         . " =? ";
+			 . "       " . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT       . " =UPPER(?) "	
+		     . "WHERE  " . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID         . " =? ";
 	}
 	
 	public static function SqlRoleSelect()

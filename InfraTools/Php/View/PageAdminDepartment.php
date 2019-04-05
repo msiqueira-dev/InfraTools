@@ -26,9 +26,10 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminDepartment extends PageAdmin
 {
-	public    $ArrayInstanceDepartment     = NULL;
-	protected $ArrayInstanceInfraToolsUser = NULL;
-	protected $InstanceDepartment          = NULL;
+	public    $ArrayInstanceDepartment         = NULL;
+	protected $ArrayInstanceInfraToolsUser     = NULL;
+	protected $InstanceDepartment              = NULL;
+	protected $InputValueCorporationNameHidden = "Hidden";
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -116,7 +117,7 @@ class PageAdminDepartment extends PageAdmin
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					{
 						if(count($this->ArrayInstanceDepartment) > 1)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;	
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
 						else
 						{
 							$this->InstanceDepartment = array_pop($this->ArrayInstanceDepartment);
@@ -135,17 +136,20 @@ class PageAdminDepartment extends PageAdmin
 													&$this->InstanceDepartment),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					else
+					{
+						$this->InputValueCorporationNameSelectCss = "SelectColorBlack";
+						$this->InputValueCorporationNameHidden = "NotHidden";
+					}
 				}
-			}
-			else
-			{
-				$this->InputValueDepartmentNameAndCorporationNameRadio = ConfigInfraTools::CHECKBOX_CHECKED;
-				if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
-										  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
-												$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
-												&$this->InstanceDepartment),
+				if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW && 
+				   $this->PageBody != ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST)
+				{
+					if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+										  array(&$this->ArrayInstanceInfraToolsCorporation),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL;
+				}
 			}
 		}
 		//FM_DEPARTMENT_VIEW_DEL_SB

@@ -37,6 +37,7 @@ Methods:
 			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
 			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug);
 			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork $Debug);
+			protected function InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress);
 			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
 															            &$RowCount, $Debug);
@@ -214,7 +215,9 @@ abstract class PageInfraTools extends Page
 	public $InputValueIpAddressIpv4Radio                         = "";
 	public $InputValueIpAddressIpv6                              = "";
 	public $InputValueIpAddressIpv6Radio                         = "";
-	public $InputValueIpAddressNetwork                           = "";
+	public $InputValueNetworkIp                                  = "";
+	public $InputValueNetworkName                                = "";
+	public $InputValueNetworkNetmask                             = "";
 	public $InputValueServiceActive                              = "";
 	public $InputValueServiceCorporation                         = "";
 	public $InputValueServiceCorporationActive                   = "";
@@ -523,6 +526,22 @@ abstract class PageInfraTools extends Page
 		
 	}
 	
+	protected function InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress)
+	{
+		if($InstanceInfraToolsIpAddress != NULL)
+		{
+			$this->InputValueIpAddressDescription = $InstanceInfraToolsIpAddress->GetIpAddressDescription();
+			$this->InputValueIpAddressIpv4        = $InstanceInfraToolsIpAddress->GetIpAddressIpv4();
+			$this->InputValueIpAddressIpv6        = $InstanceInfraToolsIpAddress->GetIpAddressIpv6();
+			$this->InputValueNetworkIp            = $InstanceInfraToolsIpAddress->GetIpAddressNetworkIp();
+			$this->InputValueNetworkName          = $InstanceInfraToolsIpAddress->GetIpAddressNetworkName();
+			$this->InputValueNetworkNetmask       = $InstanceInfraToolsIpAddress->GetIpAddressNetworkNetmask();
+			$this->InputValueRegisterDate         = $InstanceInfraToolsIpAddress->GetRegisterDate();
+			return ConfigInfraTools::RET_OK;
+		}
+		else return ConfigInfraTools::RET_ERROR;
+	}
+	
 	protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug)
 	{
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -549,15 +568,14 @@ abstract class PageInfraTools extends Page
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
 		$arrayConstants = array(); $matrixConstants = array();
-
-		//FIELD_IP_ADRESS_IPV4
-		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADRESS_IPV4;
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV4;
 		$arrayElementsClass[0]        = &$this->ReturnIpAddressIpv4Class;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
 		$arrayElementsInput[0]        = $this->InputValueIpAddressIpv4; 
 		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 5; 
+		$arrayElementsMaxValue[0]     = 15; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnIpAddressIpv4Text;
 		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
@@ -574,7 +592,6 @@ abstract class PageInfraTools extends Page
 																							 $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
-				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
 				$this->ShowDivReturnSuccess("IP_ADDRESS_SEL_BY_IP_ADDRESS_IPV4_SUCCESS");
 				return ConfigInfraTools::RET_OK;
 			}

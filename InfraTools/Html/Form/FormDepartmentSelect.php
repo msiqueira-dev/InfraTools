@@ -75,37 +75,22 @@
 											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												   '', 'false');
-										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												 '');"
+												   '', 'false');"
 							   onblur="ValidateDepartmentName('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												 '');"
+												   '', true);"
 							   onchange="ValidateDepartmentName('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												 '');"
+												   '', true);"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>" 
 							   value="<?php echo $this->InputValueDepartmentName; ?>" maxlength="80" />
 		</div>
 		<!-- FIELD_CORPORATION_NAME -->
-		<div class="Hidden DivContentBodyContainer" 
+		<div class="<?php echo $this->InputValueCorporationNameHidden; ?> DivContentBodyContainer" 
 		     id="<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>">
 			<div class="DivContentBodyContainerLabelExtraWidth">
 				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
@@ -114,7 +99,8 @@
 				<select 
 					name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
 					id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
-					class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass; ?>"
+					class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass . 
+	                       $this->InputValueCorporationNameSelectCss; ?>"
 					onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');
 							  document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>')
 											 .disabled = false;
@@ -148,12 +134,7 @@
 							       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-								   '', true);
-					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>',
-								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-								   '');">
+								   '', true);">
 		<input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>" 
 								 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"

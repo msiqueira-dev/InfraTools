@@ -31,7 +31,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInstanceIpAddress))
+if(is_array($this->ArrayInstanceInfraToolsIpAddress))
 {
 	echo "<form  name='" . ConfigInfraTools::FM_IP_ADDRESS_LST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -78,7 +78,7 @@ if(is_array($this->ArrayInstanceIpAddress))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceIpAddress as $key=>$ipAddress)
+	foreach($this->ArrayInstanceInfraToolsIpAddress as $key=>$ipAddress)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

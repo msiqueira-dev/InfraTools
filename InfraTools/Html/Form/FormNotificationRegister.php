@@ -38,7 +38,7 @@
                                                  'DivContentBodySubmitBigger ',
                                                  '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
                                                  '');"
-                               onchange="ValidateDescription(DivContentBodyContainerValueTextArea, 
+                               onchange="ValidateDescription('DivContentBodyContainerValueTextArea', 
                                                    '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
                                                    'DivContentBodySubmitBigger ',
                                                    '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',

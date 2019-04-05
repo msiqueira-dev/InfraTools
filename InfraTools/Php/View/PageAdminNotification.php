@@ -477,7 +477,7 @@ class PageAdminNotification extends PageAdmin
 											   $this->InstanceNotification) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'NotificationUpdateByNotificationId', 
-										  array(@$_POST[ConfigInfraTools::FIELD_NOTICATION_ACTIVE],
+										  array(@$_POST[ConfigInfraTools::FIELD_NOTIFICATION_ACTIVE],
 												$_POST[ConfigInfraTools::FIELD_NOTIFICATION_TEXT],
 					                            &$this->InstanceNotification),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)

@@ -235,7 +235,8 @@ class InfraToolsFacedePersistenceIpAddress
 			if($stmt != NULL)
 			{ 
 				$limitResult = $Limit2 - $Limit1;
-				$stmt->bind_param("sii", $IpAddressIpv4, $Limit1, $limitResult);
+				$IpAddressIpv4Like = "%".$IpAddressIpv4."%";
+				$stmt->bind_param("ssii", $IpAddressIpv4, $IpAddressIpv4Like, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::RET_OK)
 				{

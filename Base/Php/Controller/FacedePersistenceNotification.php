@@ -18,7 +18,7 @@ Functions:
 			public function NotificationInsert($NotificationActive, $NotificationText, $Debug, MySqlConnection);
 			public function NotificationSelect($Limit1, $Limit2, &$ArrayInstanceNotification, &$RowCount, $Debug, MySqlConnection);
 			public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug, MySqlConnection);
-			public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, $InstanceNotification, 
+			public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, $NotificationId, 
 			                                                   $Debug, $MySqlConnection);
 **************************************************************************/
 

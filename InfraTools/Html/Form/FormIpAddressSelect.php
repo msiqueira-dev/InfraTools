@@ -77,32 +77,17 @@
 											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', 'false');
-										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												 '');"
+												   '', 'false');"
 							   onblur="ValidateIpAddressIpv4('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												 '');"
+												   '', true);"
 							   onchange="ValidateIpAddressIpv4('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												 '');"
+												   '', true);"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?>" 
 							   value="<?php echo $this->InputValueIpAddressIpv4; ?>" maxlength="15" />
 		</div>
@@ -120,43 +105,23 @@
 											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', 'false');
-										ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												 '');"
+												   '', 'false');"
 							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												 '');"
+												   '', true);"
 							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
 											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>',
 												   'DivContentBodySubmit',
 												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-												 'DivContentBodySubmit',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												 '');"
+												   '', true);"
 							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'); ?>" 
 							   value="<?php echo $this->InputValueIpAddressIpv6; ?>" maxlength="38" />
 		</div>
 	</div>
 	<!-- SUBMIT -->
-	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>',
-								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-								   '');">
+	<div class="DivContentBodyContainerSubmit">
 		<input type="submit" name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>" 
 								 id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>"
 								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"

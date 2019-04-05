@@ -103,7 +103,7 @@ Functions:
 			                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function NotificationSelectByNotificationId($NotificationId, &$InstanceNotification, $Debug,
 			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, &$InstanceNotification, $Debug,
+			public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew, &$NotificationId, $Debug,
 			                                                   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function RoleSelectNoLimit(&$ArrayInstanceRole, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function SystemConfigurationDeleteBySystemConfigurationOptionNumber($SystemConfigurationOptionNumber, $Debug,
@@ -1018,7 +1018,7 @@ class FacedePersistence
 	}
 	
 	public function NotificationUpdateByNotificationId($NotificationActiveNew, $NotificationTextNew,
-													   &$InstanceNotification, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+													   &$NotificationId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == Config::RET_OK)
@@ -1026,7 +1026,7 @@ class FacedePersistence
 			$instanceFacedePersistenceNotification = $this->Factory->CreateFacedePersistenceNotification();
 			$return = $instanceFacedePersistenceNotification->NotificationUpdateByNotificationId($NotificationActiveNew,
 																								 $NotificationTextNew,
-																								 $InstanceNotification,
+																								 $NotificationId,
 																				                 $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);

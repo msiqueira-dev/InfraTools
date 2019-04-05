@@ -346,7 +346,7 @@ function ValidateDescription(DefaultInputClass, InputId, DefaultSubmitClass, Sub
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];
-    var $filter = /(^([a-zA-Z]|[.]|[-]|[_]|[ ]|[0-9])*)$/;
+    var $filter = /(^([a-zA-Z]|[.]|[-]|[_]|[.]|[!]|[?]|[:]|[,]|["]|[']|[(]|[)]|[ ]|[0-9])*)$/;
 	
 	if($input.className == "Hidden ")
 		return false;

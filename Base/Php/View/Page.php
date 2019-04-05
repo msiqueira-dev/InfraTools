@@ -14,6 +14,7 @@ Description:
 Get / Set:		
 			public function GetPageLoadTime();
 Methods: 
+		private       function        CheckMethodHasParameterName($ParameterName, $MethodName);
 		private       function        CheckPostLanguage();
 		private       function        ExecuteLoginFirstPhaseVerification($Debug);
 		private       function        ExecuteLoginSecondPhaseVerirication();
@@ -554,6 +555,19 @@ class Page
 	}
 	
 	/* Métodos */
+	
+	private function CheckMethodHasParameterName($ParameterName, $MethodName)
+	{
+		$method = new ReflectionMethod($this, $MethodName);
+    	$result = array();
+    	foreach ($method->getParameters() as $parameterName) 
+		{
+        	if(strcmp($parameterName->name, $ParameterName)==0)
+				return Config::RET_OK;
+    	}
+		return Config::RET_ERROR;
+	}
+	
 	private function CheckPostLanguage()
 	{
 		if(isset($_POST[Config::FM_LANGUAGE]))
@@ -1647,7 +1661,8 @@ class Page
 		foreach($PostForm as $postElementKey=>$postElementValue)
 		{
 			$postElementKey = strtoupper($postElementKey);
-			if((strpos($postElementKey, 'LIST') !== FALSE) && strpos($postElementKey, 'LIMIT') == FALSE)
+			if(((strpos($postElementKey, 'LIST') !== FALSE) && strpos($postElementKey, 'LIMIT') == FALSE) || 
+			    $this->CheckMethodHasParameterName("Limit1", $Function) == Config::RET_OK)
 			{
 				if($Debug == Config::CHECKBOX_CHECKED)
 				{
@@ -1990,24 +2005,29 @@ class Page
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == Config::RET_OK)
 		{
+			$notificationId = $InstanceNotification->GetNotificationId();
 			$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 			$return = $instanceFacedePersistence->NotificationUpdateByNotificationId($this->InputValueNotificationActive, 
 																			         $this->InputValueNotificationText,
-		                                                                             $InstanceNotification->GetNotificationId(), $Debug);
+		                                                                             $notificationId, $Debug);
 			if($return == Config::RET_OK)
 			{
 				$InstanceNotification->UpdateNotification($this->InputValueNotificationActive, $this->InputValueNotificationText, NULL);
 				$this->Session->SetSessionValue(Config::SESS_ADMIN_NOTIFICATION, $InstanceNotification);
-				$this->SystemConfigurationLoadData($InstanceNotification);
+				$this->NotificationLoadData($InstanceNotification);
 				$this->ShowDivReturnSuccess("NOTIFICATION_UPDT_SUCCESS");
 				return Config::RET_OK;
 			}
 			elseif($return == Config::DB_ERROR_UPDT_SAME_VALUE)
 			{
+				if($this->InputValueNotificationActive)
+					$this->InputValueNotificationActive = Config::CHECKBOX_CHECKED;
 				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
 				return Config::RET_WARNING;
 			}
 		}
+		if($this->InputValueNotificationActive)
+			$this->InputValueNotificationActive = Config::CHECKBOX_CHECKED;
 		$this->ShowDivReturnError("NOTIFICATION_UPDT_ERROR");
 		return Config::RET_ERROR;
 	}

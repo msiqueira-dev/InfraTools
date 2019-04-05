@@ -408,20 +408,20 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6        . ",  "
 			   . " "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK     . ",  "
 			   . " "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_FD_REGISTER_DATE                     . "   "
-			   . " as IpAddressRegisterDate, "                                                                                     . "   "
+			   . " as IpAddressRegisterDate, "                                                                            . "   "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP                   . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                 . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK              . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_FD_REGISTER_DATE                        . "   "
-			   . " as NetworkRegisterDate, "                                                                                       . "   "
-			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_IP_ADDRESS                                                    . "   "
-			   . " ) AS COUNT "                                                                                                    . "   "
-			   . "FROM "       . ConfigInfraTools::TB_IP_ADDRESS                                                                . "   "
-			   . "LEFT JOIN "  . ConfigInfraTools::TB_NETWORK                                                                   ."    "
-			   . "ON "         . ConfigInfraTools::TB_IP_ADDRESS                                                                .".". 
-								 ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK                                       ."    "
-			   . "=  "         . ConfigInfraTools::TB_NETWORK                                                                   .".". 
-								 ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                                                ."    "
+			   . " as NetworkRegisterDate, "                                                                              . "   "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_IP_ADDRESS                                              . "   "
+			   . " ) AS COUNT "                                                                                           . "   "
+			   . "FROM "       . ConfigInfraTools::TB_IP_ADDRESS                                                          . "   "
+			   . "LEFT JOIN "  . ConfigInfraTools::TB_NETWORK                                                             ."    "
+			   . "ON "         . ConfigInfraTools::TB_IP_ADDRESS                                                          .".". 
+								 ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK                                    ."    "
+			   . "=  "         . ConfigInfraTools::TB_NETWORK                                                             .".". 
+								 ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                                             ."    "
 			   . "ORDER BY "   . ConfigInfraTools::TB_IP_ADDRESS.".". ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4  . "   "
 			   . "LIMIT ?, ?";
 	}
@@ -433,20 +433,24 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6        . ",  "
 			   . " "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK     . ",  "
 			   . " "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_FD_REGISTER_DATE                     . "   "
-			   . " as IpAddressRegisterDate "                                                                                      . ",  "
+			   . " as IpAddressRegisterDate "                                                                             . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP                   . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                 . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK              . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_FD_REGISTER_DATE                        . "   "
-			   . " as NetworkRegisterDate "                                                                                        . "   "
-			   . "FROM "       . ConfigInfraTools::TB_IP_ADDRESS                                                                . "   "
-			   . "LEFT JOIN "  . ConfigInfraTools::TB_NETWORK                                                                   ."    "
-			   . "ON "         . ConfigInfraTools::TB_IP_ADDRESS                                                                .".". 
-								 ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK                                       ."    "
-			   . "=  "         . ConfigInfraTools::TB_NETWORK                                                                   .".". 
-								  ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                                               ."    "
-			   . "WHERE "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4   . "=? "
-			   . "ORDER BY "   . ConfigInfraTools::TB_IP_ADDRESS.".". ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4  . "   ";
+			   . " as NetworkRegisterDate "                                                                               . ",  "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_IP_ADDRESS                                              . "   "
+			   . "WHERE "      .  ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4  . "=? "
+			   . " ) AS COUNT "                                                                                           . "   "
+			   . "FROM "       . ConfigInfraTools::TB_IP_ADDRESS                                                          . "   "
+			   . "LEFT JOIN "  . ConfigInfraTools::TB_NETWORK                                                             ."    "
+			   . "ON "         . ConfigInfraTools::TB_IP_ADDRESS                                                          ."."  . 
+								 ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK                                    ."    "
+			   . "=  "         . ConfigInfraTools::TB_NETWORK                                                             ."."  . 
+								  ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                                            ."    "
+			   . "WHERE "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4   ." LIKE ? "
+			   . "ORDER BY "   . ConfigInfraTools::TB_IP_ADDRESS.".". ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4  . "   "
+			   . "LIMIT ?, ?";
 	}
 	
 	public static function SqlInfraToolsIpAddressSelectByIpAddressIpv6()
