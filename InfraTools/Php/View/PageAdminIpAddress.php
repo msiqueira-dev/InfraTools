@@ -150,7 +150,6 @@ class PageAdminIpAddress extends PageAdmin
 				if(!empty($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4]) && 
 				   (!empty($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6]) || !empty($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION])))
 				{
-					print_r($_POST);
 					if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressInsert', 
 											  array(@$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION],
 													$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
