@@ -698,9 +698,10 @@ class Config
 	const FM_VALIDATE_FUNCTION_GENDER                                   = "FM_VALIDATE_FUNCTION_GENDER";
 	const FM_VALIDATE_FUNCTION_HOST                                     = "FM_VALIDATE_FUNCTION_HOST";
 	const FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4                          = "FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4";
-	const FM_VALIDATE_FUNCTION_IP_MASK                                  = "FM_VALIDATE_FUNCTION_IP_MASK";
+	const FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV6                          = "FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV6";
 	const FM_VALIDATE_FUNCTION_MESSAGE                                  = "FM_VALIDATE_FUNCTION_MESSAGE";
 	const FM_VALIDATE_FUNCTION_NAME                                     = "FM_VALIDATE_FUNCTION_NAME";
+	const FM_VALIDATE_FUNCTION_NETMASK                                  = "FM_VALIDATE_FUNCTION_NETMASK";
 	const FM_VALIDATE_FUNCTION_NOT_NULL_OR_EMPTY                        = "FM_VALIDATE_FUNCTION_NOT_NULL_OR_EMPTY";
 	const FM_VALIDATE_FUNCTION_NOT_NUMBER                               = "FM_VALIDATE_FUNCTION_NOT_NUMBER";
 	const FM_VALIDATE_FUNCTION_NUMERIC                                  = "FM_VALIDATE_FUNCTION_NUMERIC";
@@ -748,8 +749,8 @@ class Config
 	const INVALID_HOST_NAME                                             = "ReturnInvalidHostName";
 	const INVALID_GENDER                                                = "ReturnInvalidGender";
 	const INVALID_IP_ADDRESS_IPV4                                       = "ReturnInvalidIpAddressIpv4";
-	const INVALID_IP_MASK                                               = "ReturnInvalidIpMask";
 	const INVALID_NAME                                                  = "ReturnInvalidName";
+	const INVALID_NETMASK                                               = "ReturnInvalidNetmask";
 	const INVALID_NON_NUMERIC                                           = "ReturnInvalidNonNumeric";
 	const INVALID_NULL                                                  = "ReturnInvalidNull";
 	const INVALID_NUMERIC                                               = "ReturnInvalidNumeric";

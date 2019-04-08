@@ -720,10 +720,11 @@ function ValidateMultiplyFields(Id, DefaultSubmitClass, SubmitId, DefaultValue)
 	{
 		if($textAreas[$index].type != 'submit' && $textAreas[$index].type != 'hidden')
 		{
-			if($textAreas[$index].className.search('InputAlertText') != -1 
+			if(($textAreas[$index].className.search('InputAlertText') != -1 
 			|| $textAreas[$index].value == ""
 			|| $textAreas[$index].value == DefaultValue
 			|| $textAreas[$index].value == $textAreas[$index].title)
+			&& $textAreas[$index].className.search('FormFieldNotObligatory') == -1)
 			{
 				$submit.className = DefaultSubmitClass + " SubmitDisabled";
 				$submit.disabled = true;
@@ -750,6 +751,40 @@ function ValidateName(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, 
 	{
 		if (!$filter.test($input.value)) 
 		{
+			if(HighlightInput == true)
+				$input.className = DefaultInputClass + " InputAlertText";
+			$submit.className = DefaultSubmitClass + " SubmitDisabled";
+			$submit.disabled = true;
+			return false;
+		}
+		else
+		{
+			$input.className = DefaultInputClass + " InputAfterText";
+			$submit.className = DefaultSubmitClass + " SubmitEnabled";
+			$submit.disabled = false;
+			return true;
+		}
+	}
+	else
+	{
+		$input.className = DefaultInputClass + " InputAfterText";
+		$submit.className = DefaultSubmitClass + " SubmitDisabled";
+		$submit.disabled = true;
+		return false;
+	}
+}
+
+function ValidateNetmask(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
+{
+	var $input = document.getElementsByName(InputId)[0];
+	var $submit = document.getElementsByName(SubmitId)[0];
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
+	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
+	{
+		if($input.value > 31 || $input.value < 1)
+		{
+			$input.focus();
 			if(HighlightInput == true)
 				$input.className = DefaultInputClass + " InputAlertText";
 			$submit.className = DefaultSubmitClass + " SubmitDisabled";

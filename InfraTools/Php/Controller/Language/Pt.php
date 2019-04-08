@@ -239,10 +239,15 @@ class Pt
 	                                                                . "de departamento";
 	const FM_INVALID_DESCRIPTION                                    = "Descrição inválida";
 	const FM_INVALID_HOSTNAME                                       = "Domínio inválido";
+	const FM_INVALID_IP_ADDRESS_DESCRIPTION                         = "Descrição de endereço de ip inválida";
+	const FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE                    = "Quantidade de caracteres excede o tamanho máximo para descrição "
+	                                                                . "de endereço de ip";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "Campo de endereço de ipv4 inválido";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "Campo de endereço de ipv6 inválido";
 	const FM_INVALID_NETWORK_IP                                     = "Campo de endereço de rede inválido";
 	const FM_INVALID_NETWORK_NAME                                   = "Campo de nome de rede inválido";
+	const FM_INVALID_NETWORK_NAME_SIZE                              = "Quantidade de caracteres excede o tamanho máximo para "
+	                                                                . "nome de rede";
 	const FM_INVALID_NETWORK_NETMASK                                = "Campo de mascara de rede inválido";
 	const FM_INVALID_NOTIFICATION_ACTIVE                            = "Campo ativo de notificação inválido";
 	const FM_INVALID_NOTIFICATION_ID                                = "Id de notificação inválido";
@@ -540,6 +545,12 @@ class Pt
 	const MAPS_TIP                                                  = "Digite a sua localização na caixa de texto ou clique no mapa, "
                                                                     . "os campos abaixo serão preenchidos com seu país "
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
+	const NETWORK_INSERT_ERROR                                      = "Erro ao cadastrar rede";
+	const NETWORK_INSERT_SUCCESS                                    = "Rede cadastrada com sucesso";
+	const NETWORK_SEL_BY_NETWORK_NAME_ERROR                         = "Erro ao tentar obter rede com o nome fornecido";
+    const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "Rede obtida com sucesso";	
+	const NETWORK_SEL_ERROR                                         = "Erro ao tentar obter rede";
+	const NETWORK_SEL_SUCCESS                                       = "Rede obtida com sucesso";
 	const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
 	const NOTIFICATION_DEL_ERROR                                    = "Erro ao excluir notificação";
 	const NOTIFICATION_DEL_SUCCESS                                  = "Notificação excluida com sucesso";

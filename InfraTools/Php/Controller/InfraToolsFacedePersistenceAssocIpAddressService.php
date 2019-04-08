@@ -87,7 +87,7 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsTypeServiceSelect');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelect');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsTypeServiceSelect());
@@ -140,7 +140,7 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsTypeServiceSelectNoLimit');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlInfraToolsTypeServiceSelectNoLimit()))
@@ -179,7 +179,7 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsTypeServiceSelectOnUserContext');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelectOnUserContext');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsTypeServiceSelectOnUserContext());
@@ -233,7 +233,7 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsTypeServiceSelectOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelectOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsTypeServiceSelectOnUserContextNoLimit());

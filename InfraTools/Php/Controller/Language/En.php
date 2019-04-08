@@ -235,10 +235,15 @@ class En
 		                                                            . "department name" ;
 	const FM_INVALID_DESCRIPTION                                    = "Invalid description";
 	const FM_INVALID_HOSTNAME                                       = "Invalid domain";
+	const FM_INVALID_IP_ADDRESS_DESCRIPTION                         = "Invalid value for ip address description";
+	const FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE                    = "Quantity of characters exceeds the maximum allowed for "
+	                                                                . "ip address description";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "Invalid value for ipv4";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "Invalid value for ipv6";
 	const FM_INVALID_NETWORK_IP                                     = "Invalid value for network ip";
 	const FM_INVALID_NETWORK_NAME                                   = "Invalid value for network name";
+	const FM_INVALID_NETWORK_NAME_SIZE                              = "Quantity of characters exceeds the maximum allowed for "
+	                                                                . "network name";
 	const FM_INVALID_NETWORK_NETMASK                                = "Invalid value for network netmask";
 	const FM_INVALID_NOTIFICATION_ACTIVE                            = "Invalid notification active";
 	const FM_INVALID_NOTIFICATION_ID                                = "Invalid notification id";
@@ -501,7 +506,7 @@ class En
 	const HREF_PAGE_TEAM_REGISTER                                   = "/En/PageTeamRegister";
 	const HREF_PAGE_TEAM_SEL                                        = "/En/PageTeamSelect";
 	const HREF_PAGE_TEAM_VIEW                                       = "/En/PageTeamView";
-	const INSERT_WARNING_EXISTS                                     = "A similar register was already performed";
+	const INSERT_WARNING_EXISTS                                     = "A similar register was already registered";
 	const INSTALL_EXPORT_SUCCESS                                    = "System data exported succesfully";
 	const INSTALL_IMPORT_ERROR_FILE_EXTENSION                       = "Invalid valid Extension";
 	const INSTALL_IMPORT_ERROR_INSERTS                              = "Error while trying to insert data into the system database";
@@ -535,6 +540,12 @@ class En
 	const MAPS_TIP                                                  = "Type your location in the text field or click on the map, "
                                                                     . "the fields above will be filled with your country "
                                                                     . "and a location that can be either a estate or a county.";
+	const NETWORK_INSERT_ERROR                                      = "Error while trying to register network";
+	const NETWORK_INSERT_SUCCESS                                    = "Network registered succesfully";
+	const NETWORK_SEL_BY_NETWORK_NAME_ERROR                         = "Error while trying to obtain network with given network name";
+    const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "Network obtained successfully";	
+	const NETWORK_SEL_ERROR                                         = "Error trying to obtain network";
+	const NETWORK_SEL_SUCCESS                                       = "Network obtained successfully";
 	const NOT_LOGGED_IN                                             = "You must be authenticated to access this page";
 	const NOTIFICATION_DEL_ERROR                                    = "Error deleting notification";
 	const NOTIFICATION_DEL_SUCCESS                                  = "Notification deleted successfully";

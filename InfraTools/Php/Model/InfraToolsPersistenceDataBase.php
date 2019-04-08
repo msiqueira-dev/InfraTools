@@ -449,14 +449,14 @@ class InfraToolsPersistenceDataBase
                 IpAddressDescription VARCHAR(100) NULL,
                 IpAddressIpv4 VARCHAR(15) NOT NULL,
                 IpAddressIpv6 VARCHAR(38) NULL,
-                IpAddressNetwork VARCHAR(60) NULL,
+                IpAddressNetworkName VARCHAR(60) NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (IpAddressIpv4),
                 UNIQUE INDEX UniqueIpAddressIp (IpAddressIpv4 ASC),
                 UNIQUE INDEX UniqueIpAddressIpv6 (IpAddressIpv6 ASC),
-                INDEX IndexIpAddressNetwork (IpAddressNetwork ASC),
+                INDEX IndexIpAddressNetwork (IpAddressNetworkName ASC),
                 CONSTRAINT ForeignKeyIpAddressNetwork
-                FOREIGN KEY (IpAddressNetwork)
+                FOREIGN KEY (IpAddressNetworkName)
                 REFERENCES INFRATOOLS.NETWORK (NetworkName)
                 ON DELETE RESTRICT
                 ON UPDATE CASCADE)

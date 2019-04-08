@@ -318,6 +318,7 @@ class ConfigInfraTools extends Config
 	const FM_IP_ADDRESS_REGISTER                                                = "FmIpAddressRegister";
 	const FM_IP_ADDRESS_REGISTER_CANCEL                                         = "FmIpAddressRegisterCancel";
 	const FM_IP_ADDRESS_REGISTER_FORM                                           = "FmIpAddressRegisterFm";
+	const FM_IP_ADDRESS_REGISTER_FORM_NETWORK                                   = "FmIpAddressRegisterFmNetwork";
 	const FM_IP_ADDRESS_REGISTER_SB                                             = "FmIpAddressRegisterSb";
 	const FM_IP_ADDRESS_RETURN_NOT_FOUND                                        = "FmIpAddressNotFound";
 	const FM_IP_ADDRESS_SEL                                                     = "FmIpAddressSel";
@@ -606,6 +607,7 @@ class ConfigInfraTools extends Config
 	const RETURN_GET_WHOIS_ERROR                                                = "ReturnGetWhoisError";
 	const RETURN_GET_WHOIS_PACKAGE_NET_WHOIS_NOT_FOUND                          = "ReturnPackageNetWhoisNotFound";
 	const SESS_ADMIN_IP_ADDRESS                                                 = "SessionAdminIpAddress";
+	const SESS_ADMIN_NETWORK                                                    = "SessionAdminNetwork";
 	const SESS_ADMIN_SERVICE                                                    = "SessionAdminService";
 	const SESS_ADMIN_TYPE_SERVICE                                               = "SessionAdminTypeService";
 	const TB_ASSOC_IP_ADDRESS_SERVICE                                           = "ASSOC_IP_ADDRESS_SERVICE";
@@ -642,7 +644,7 @@ class ConfigInfraTools extends Config
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_DESCRIPTION                               = "IpAddressDescription";
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4                                      = "IpAddressIpv4";
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6                                      = "IpAddressIpv6";
-	const TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK                                   = "IpAddressNetwork";
+	const TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME                              = "IpAddressNetworkName";
 	const TB_MONITORING                                                         = "MONITORING";
 	const TB_MONITORING_FD_DESCRIPTION                                          = "MonitoringDescription";
 	const TB_MONITORING_FD_ID                                                   = "MonitoringId";

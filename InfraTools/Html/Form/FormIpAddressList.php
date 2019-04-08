@@ -57,8 +57,9 @@ if(is_array($this->ArrayInstanceInfraToolsIpAddress))
 						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_DESCRIPTION') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME') . "</th>";
+	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_NETWORK_IP') . "</th>";
 	echo "<th  class='TableGenericThArrow'>
 	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
 		 "<div class='TableGenericInputRight'>
@@ -106,7 +107,8 @@ if(is_array($this->ArrayInstanceInfraToolsIpAddress))
 				</form>
 		      </td>";
 		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressDescription() . "</td>";
-		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressNetwork() . "</td>";
+		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressInstanceInfraToolsNetworkNetworkName() . "</td>";
+		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressInstanceInfraToolsNetworkNetworkIp() . "</td>";
 		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetRegisterDate() . "</td>";
 		echo "</tr>";
 	}

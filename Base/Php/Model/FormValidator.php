@@ -29,9 +29,9 @@ Functions:
 			public function ValidateHost($Host);
 			public function ValidateIsNotNumericValue($NonNumeric, $DefaultValue);
 			public function ValidateIpAddressIpv4(IpAddressIpv4);
-			public function ValidateIpMask($IpMask);
 			public function ValidateMessage($Message, $DefaultValue);
 			public function ValidateName($Name, $DefaultValue);
+			public function ValidateNetmask($Netmask);
 			public function ValidateNotNullOrEmpty($NotNullOrEmpty, $DefaultValue);
 			public function ValidateNumericValue($Numeric, $DefaultValue);
 			public function ValidatePassword($Password, $DefaultValue);
@@ -112,12 +112,12 @@ class FormValidator
 			return $this->ValidateHost($Value);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4)
 			return $this->ValidateIpAddressIpv4($Value);
-		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_MASK)
-			return $this->ValidateIpMask($Value);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_MESSAGE)
 			return $this->ValidateMessage($Value, $DefaultValue);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NAME)
 			return $this->ValidateName($Value, $DefaultValue);
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NETMASK)
+			return $this->ValidateNetmask($Value);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NOT_NULL_OR_EMPTY)
 			return $this->ValidateNotNullOrEmpty($Value, $DefaultValue);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NOT_NUMBER)
@@ -496,25 +496,6 @@ class FormValidator
 		else return Config::INVALID_NULL;
 	}
 	
-	public function ValidateIpMask($IpMask)
-	{
-		if(isset($IpMask))
-		{
-			if(!is_null($IpMask) && !empty($IpMask))
-			{
-				if($this->ValidateNumericValue($IpMask, "") == Config::RET_OK)
-				{
-					if($IpMask < 31 && $IpMask > 0)
-						return Config::RET_OK;
-					else return Config::INVALID_IP_MASK;
-				}
-				else return Config::INVALID_IP_MASK;
-			}
-			else return Config::INVALID_NULL;
-		}
-		else return Config::INVALID_NULL;
-	}
-	
 	public function ValidateMessage($Message, $DefaultValue)
 	{
 		if(isset($Message))
@@ -537,6 +518,25 @@ class FormValidator
 				, $Name) > 0)
 					return Config::RET_OK;
 				else return Config::INVALID_NAME;
+			}
+			else return Config::INVALID_NULL;
+		}
+		else return Config::INVALID_NULL;
+	}
+	
+	public function ValidateNetmask($Netmask)
+	{
+		if(isset($Netmask))
+		{
+			if(!is_null($Netmask) && !empty($Netmask))
+			{
+				if($this->ValidateNumericValue($Netmask, "") == Config::RET_OK)
+				{
+					if($Netmask < 31 && $Netmask > 0)
+						return Config::RET_OK;
+					else return Config::INVALID_NETMASK;
+				}
+				else return Config::INVALID_NETMASK;
 			}
 			else return Config::INVALID_NULL;
 		}

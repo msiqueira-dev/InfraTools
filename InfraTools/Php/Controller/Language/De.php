@@ -227,10 +227,13 @@ class De
 	const FM_INVALID_DEPARTMENT_NAME_SIZE                           = "";
 	const FM_INVALID_DESCRIPTION                                    = "";
 	const FM_INVALID_HOSTNAME                                       = "";
+	const FM_INVALID_IP_ADDRESS_DESCRIPTION                         = "";
+	const FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE                    = "";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "";
 	const FM_INVALID_NETWORK_IP                                     = "";
 	const FM_INVALID_NETWORK_NAME                                   = "";
+	const FM_INVALID_NETWORK_NAME_SIZE                              = "";
 	const FM_INVALID_NETWORK_NETMASK                                = "";
 	const FM_INVALID_NOTIFICATION_ACTIVE                            = "";
 	const FM_INVALID_NOTIFICATION_ID                                = "";
@@ -497,6 +500,12 @@ class De
 	const LANGUAGES_FILES                                           = "";
 	const MAPS_SEARCH                                               = "";
 	const MAPS_TIP                                                  = "";
+	const NETWORK_INSERT_ERROR                                      = "";
+	const NETWORK_INSERT_SUCCESS                                    = "";
+	const NETWORK_SEL_BY_NETWORK_NAME_ERROR                         = "";
+    const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "";
+	const NETWORK_SEL_ERROR                                         = "";
+	const NETWORK_SEL_SUCCESS                                       = "";
 	const NOT_LOGGED_IN                                             = "";
 	const NOTIFICATION_DEL_ERROR                                    = "";
 	const NOTIFICATION_DEL_SUCCESS                                  = "";

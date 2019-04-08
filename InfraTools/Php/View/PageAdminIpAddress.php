@@ -29,12 +29,20 @@ if (!class_exists("InfraToolsIpAddress"))
 		include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
 }
+if (!class_exists("InfraToolsNetwork"))
+{
+	if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsNetwork.php"))
+		include_once(SITE_PATH_PHP_MODEL . "InfraToolsNetwork.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsNetwork');
+}
 
 
 class PageAdminIpAddress extends PageAdmin
 {
 	public $ArrayInstanceInfraToolsIpAddress = NULL;
+	public $ArrayInstanceInfraToolsNetwork   = NULL;
 	public $InstanceIpAddress                = NULL;
+	public $InstanceInfraToolsNetwork        = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -85,20 +93,74 @@ class PageAdminIpAddress extends PageAdmin
 		}
 		//FM_IP_ADDRESS_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER) == ConfigInfraTools::RET_OK)
+		{
+				$this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectNoLimit', 
+									  array(&$this->ArrayInstanceInfraToolsNetwork),
+									  $this->InputValueHeaderDebug);
+				$this->ShowDivReturnEmpty();
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
+		}
 		//FM_IP_ADDRESS_REGISTER_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER_CANCEL) == ConfigInfraTools::RET_OK)
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SEL;
+		//FM_IP_ADDRESS_REGISTER_FORM_NETWORK
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK) == ConfigInfraTools::RET_OK)
+		{
+			$this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectByNetworkName', 
+								   array($_POST[ConfigInfraTools::FIELD_NETWORK_NAME],
+										 &$this->ArrayInstanceInfraToolsNetwork),
+								   $this->InputValueHeaderDebug);
+			$this->InstanceInfraToolsNetwork = array_pop($this->ArrayInstanceInfraToolsNetwork);
+			$this->ArrayInstanceInfraToolsNetwork = NULL;
+			$this->InfraToolsNetworkLoadData($this->InstanceInfraToolsNetwork);
+			$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_NETWORK, $this->InstanceInfraToolsNetwork);
+			$this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectNoLimit', 
+									  array(&$this->ArrayInstanceInfraToolsNetwork),
+									  $this->InputValueHeaderDebug);
+			$this->ShowDivReturnEmpty();
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
+		}
 		//FM_IP_ADDRESS_REGISTER_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB) == ConfigInfraTools::RET_OK)
 		{
-			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressInsert', 
-									  array(@$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION],
-											$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
-										    $_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6],
-										    $_POST[ConfigInfraTools::FIELD_NETWORK_NAME]),
+			$return = NULL;
+			if(isset($_POST[ConfigInfraTools::FIELD_NETWORK_IP]))
+			{
+				if($this->ExecuteFunction($_POST, 'InfraToolsNetworkInsert', 
+									  array($_POST[ConfigInfraTools::FIELD_NETWORK_IP],
+											$_POST[ConfigInfraTools::FIELD_NETWORK_NAME],
+										    $_POST[ConfigInfraTools::FIELD_NETWORK_NETMASK]),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SEL;
+				{
+					$this->InstanceInfraToolsNetwork = $this->Factory->CreateInfraToolsNetwork($_POST[ConfigInfraTools::FIELD_NETWORK_IP],
+											                                              $_POST[ConfigInfraTools::FIELD_NETWORK_NAME],
+										                                                  $_POST[ConfigInfraTools::FIELD_NETWORK_NETMASK],
+																						  date("Y-m-d H:i:s"));
+					$return = ConfigInfraTools::RET_OK;
+				}
+				else $return = ConfigInfraTools::RET_ERROR;
+			}
+			else
+			{
+				$this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NETWORK, "InfraToolsNetworkLoadData", $this->InstanceInfraToolsNetwork);
+				$return = ConfigInfraTools::RET_OK;
+			}
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				if(!empty($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4]) && 
+				   (!empty($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6]) || !empty($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION])))
+				{
+					print_r($_POST);
+					if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressInsert', 
+											  array(@$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION],
+													$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
+													$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6],
+													$this->InstanceInfraToolsNetwork),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SEL;
+				}
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
+			}
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
 		}
 		//FM_IP_ADDRESS_SEL
@@ -111,38 +173,42 @@ class PageAdminIpAddress extends PageAdmin
 			{
 				if($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_RADIO] == ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV4)
 				{
-					$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
+					if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
 							  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
 									&$this->ArrayInstanceInfraToolsIpAddress),
-							  $this->InputValueHeaderDebug);
+							  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->ShowDivReturnEmpty();
+					
 				}
 				elseif($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_RADIO] == ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV6)
 				{
-					$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv6', 
+					if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv6', 
 							  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6],
 									&$this->ArrayInstanceInfraToolsIpAddress),
-							  $this->InputValueHeaderDebug);
+							  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+						$this->ShowDivReturnEmpty();
 				}
 			}
 			elseif(isset($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4]))
 			{
-				$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
+				if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
 							  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
 									&$this->ArrayInstanceInfraToolsIpAddress),
-							  $this->InputValueHeaderDebug);
+							  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->ShowDivReturnEmpty();
 			}
 			if(!empty($this->ArrayInstanceInfraToolsIpAddress))
+			{
+				if(count($this->ArrayInstanceInfraToolsIpAddress) > 1)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST;
+				else
 				{
-					if(count($this->ArrayInstanceInfraToolsIpAddress) > 1)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST;
-					else
-					{
-						$this->InstanceIpAddress = array_pop($this->ArrayInstanceInfraToolsIpAddress);
-						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
-													  $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
-							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;
-					}
+					$this->InstanceIpAddress = array_pop($this->ArrayInstanceInfraToolsIpAddress);
+					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
+												  $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;
 				}
+			}
 		}
 		//FM_IP_ADDRESS_VIEW_DEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)

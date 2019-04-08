@@ -103,7 +103,7 @@ class InfraToolsFacedePersistenceUser
 		$dateNow = NULL; $mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelect');
+			InfraToolsPersistence::ShowQuery('SqlUserSelect');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelect());
@@ -207,7 +207,7 @@ class InfraToolsFacedePersistenceUser
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByCorporationName');
+			InfraToolsPersistence::ShowQuery('SqlUserSelectByCorporationName');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByCorporationName());
@@ -311,7 +311,7 @@ class InfraToolsFacedePersistenceUser
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByDepartmentName');
+			InfraToolsPersistence::ShowQuery('SqlUserSelectByDepartmentName');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByDepartmentName());
@@ -416,7 +416,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsUserSelectByIpAddressIpv4');
+				InfraToolsPersistence::ShowQuery('SqlInfraToolsUserSelectByIpAddressIpv4');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByIpAddressIpv4());
 			if($stmt != NULL)
 			{
@@ -520,7 +520,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByNotificationId');
+				InfraToolsPersistence::ShowQuery('SqlUserSelectByNotificationId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByNotificationId());
 			if($stmt != NULL)
 			{
@@ -624,7 +624,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByRoleName');
+				InfraToolsPersistence::ShowQuery('SqlUserSelectByRoleName');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByRoleName());
 			if($stmt != NULL)
 			{
@@ -728,7 +728,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsUserSelectByServiceId');
+				InfraToolsPersistence::ShowQuery('SqlInfraToolsUserSelectByServiceId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByServiceId());
 			if($stmt != NULL)
 			{
@@ -832,7 +832,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTeamId');
+				InfraToolsPersistence::ShowQuery('SqlUserSelectByTeamId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTeamId());
 			if($stmt != NULL)
 			{
@@ -936,7 +936,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTicketId');
+				InfraToolsPersistence::ShowQuery('SqlUserSelectByTicketId');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTicketId());
 			if($stmt != NULL)
 			{
@@ -1040,7 +1040,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlInfraToolsUserSelectByTypeMonitoringDescription');
+				InfraToolsPersistence::ShowQuery('SqlInfraToolsUserSelectByTypeMonitoringDescription');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsUserSelectByTypeMonitoringDescription());
 			if($stmt != NULL)
 			{
@@ -1145,7 +1145,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeAssocUserTeamDescription');
+				InfraToolsPersistence::ShowQuery('SqlUserSelectByTypeAssocUserTeamDescription');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeAssocUserTeamDescription());
 			if($stmt != NULL)
 			{
@@ -1264,7 +1264,7 @@ class InfraToolsFacedePersistenceUser
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeTicketDescription');
+				InfraToolsPersistence::ShowQuery('SqlUserSelectByTypeTicketDescription');
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeTicketDescription());
 			if($stmt != NULL)
 			{
@@ -1367,7 +1367,7 @@ class InfraToolsFacedePersistenceUser
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsUser = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByTypeUserDescription');
+			InfraToolsPersistence::ShowQuery('SqlUserSelectByTypeUserDescription');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByTypeUserDescription());
@@ -1469,7 +1469,7 @@ class InfraToolsFacedePersistenceUser
 		$dateNow = NULL; $mySqlError = NULL; $queryResult = NULL; $errorStr = NULL;
 		
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByUserEmail');
+			InfraToolsPersistence::ShowQuery('SqlUserSelectByUserEmail');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByUserEmail());
@@ -1544,7 +1544,7 @@ class InfraToolsFacedePersistenceUser
 		$InstanceAssocUserCorporation = NULL; $InstanceCorporation = NULL; $InstanceDepartment = NULL; $InstaceTypeUser = NULL;
 		$dateNow = NULL; $queryResult = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQueryInfraTools('SqlUserSelectByUserUniqueId');
+			InfraToolsPersistence::ShowQuery('SqlUserSelectByUserUniqueId');
 		if($MySqlConnection != NULL)
 		{
 			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlUserSelectByUserUniqueId());

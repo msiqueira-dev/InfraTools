@@ -10,32 +10,32 @@ Description:
 			Class for ip address.
 Get / Set: 
 			public function GetIpAddressDescription();
+			public function GetIpAddressInstanceInfraToolsNetwork();
+			public function GetIpAddressInstanceInfraToolsNetworkNetworkIp();
+			public function GetIpAddressInstanceInfraToolsNetworkNetworkName();
+			public function GetIpAddressInstanceInfraToolsNetworkNetworkNetmask();
 			public function GetIpAddressIpv4();
 			public function GetIpAddressIpv6();
-			public function GetIpAddressNetwork();
-			public function GetIpAddressNetworkIp();
-			public function GetIpAddressNetworkName();
-			public function GetIpAddressNetworkNetmask();
 			public function GetRegisterDate();
 			public function SetIpAddressDescription($IpAddressDescription);
+			public function SetIpAddressInstanceInfraToolsNetwork($InstanceInfraToolsNetwork);
 			public function SetIpAddressIpv4($IpAddressIpv4);
 			public function SetIpAddressIpv6($IpAddressIpv6);
-			public function SetIpAddressNetwork($IpAddressNetwork);
 Methods:
-			public function UpdateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork);
+			public function UpdateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork);
 **************************************************************************/
 
 class InfraToolsIpAddress
 {
 	/* Properties */
-	protected $IpAddressDescription = NULL;
-	protected $IpAddressIpv4        = NULL;
-	protected $IpAddressIpv6        = NULL;
-	protected $IpAddressNetwork     = NULL;
-	protected $RegisterDate         = NULL;
+	protected $IpAddressDescription      = NULL;
+	protected $IpAddressIpv4             = NULL;
+	protected $IpAddressIpv6             = NULL;
+	protected $InstanceInfraToolsNetwork = NULL;
+	protected $RegisterDate              = NULL;
 
 	/* Constructor */
-	public function __construct($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetmask, $RegisterDate) 
+	public function __construct($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork, $RegisterDate) 
 	{
 		if(!is_null($IpAddressDescription))
 			$this->IpAddressDescription = $IpAddressDescription;
@@ -44,8 +44,8 @@ class InfraToolsIpAddress
 		else throw new Exception(ConfigInfraTools::EXCEPTION_IP_ADDRESS_IPV4);
 		if(!is_null($IpAddressIpv6))
 			$this->IpAddressIpv6 = $IpAddressIpv6;
-		if(!is_null($IpAddressNetmask))
-			$this->IpAddressNetmask = $IpAddressNetmask;	
+		if(!is_null($InstanceInfraToolsNetwork))
+			$this->InstanceInfraToolsNetwork = $InstanceInfraToolsNetwork;	
 		if(!is_null($RegisterDate))
 			$this->RegisterDate = $RegisterDate;
 		else throw new Exception(ConfigInfraTools::EXCEPTION_REGISTER_DATE);
@@ -63,6 +63,35 @@ class InfraToolsIpAddress
 		return $this->IpAddressDescription;
 	}
 	
+	public function GetIpAddressInstanceInfraToolsNetwork()
+	{
+		return $this->InstanceInfraToolsNetwork;
+	}
+	
+	public function GetIpAddressInstanceInfraToolsNetworkNetworkIp()
+	{
+		if(is_object($this->InstanceInfraToolsNetwork))
+		{
+			return $this->InstanceInfraToolsNetwork->GetNetworkIp();
+		}
+	}
+	
+	public function GetIpAddressInstanceInfraToolsNetworkNetworkName()
+	{
+		if(is_object($this->InstanceInfraToolsNetwork))
+		{
+			return $this->InstanceInfraToolsNetwork->GetNetworkName();
+		}
+	}
+	
+	public function GetIpAddressInstanceInfraToolsNetworkNetworkNetmask()
+	{
+		if(is_object($this->InstanceInfraToolsNetwork))
+		{
+			return $this->InstanceInfraToolsNetwork->GetNetworkNetmask();
+		}
+	}
+	
 	public function GetIpAddressIpv4()
 	{
 		return $this->IpAddressIpv4;
@@ -71,35 +100,6 @@ class InfraToolsIpAddress
 	public function GetIpAddressIpv6()
 	{
 		return $this->IpAddressIpv6;
-	}
-	
-	public function GetIpAddressNetwork()
-	{
-		return $this->IpAddressNetwork;
-	}
-	
-	public function GetIpAddressNetworkIp()
-	{
-		if(is_object($this->IpAddressNetwork))
-		{
-			return $this->IpAddressNetwork->GetNetworkIp();
-		}
-	}
-	
-	public function GetIpAddressNetworkName()
-	{
-		if(is_object($this->IpAddressNetwork))
-		{
-			return $this->IpAddressNetwork->GetNetworkName();
-		}
-	}
-	
-	public function GetIpAddressNetworkNetmask()
-	{
-		if(is_object($this->IpAddressNetwork))
-		{
-			return $this->IpAddressNetwork->GetNetworkNetmask();
-		}
 	}
 	
 	public function GetRegisterDate()
@@ -114,6 +114,12 @@ class InfraToolsIpAddress
 			$this->IpAddressDescription = $IpAddressDescription;
 	}
 	
+	public function SetIpAddressInstanceInfraToolsNetwork($InstanceInfraToolsNetwork)
+	{
+		if(!is_null($InstanceInfraToolsNetwork))
+			$this->InstanceInfraToolsNetwork = $InstanceInfraToolsNetwork;
+	}
+	
 	public function SetIpAddressIpv4($IpAddressIpv4)
 	{
 		if(!is_null($IpAddressIpv4))
@@ -126,14 +132,8 @@ class InfraToolsIpAddress
 			$this->IpAddressIpv6 = $IpAddressIpv6;
 	}
 	
-	public function SetIpAddressNetwork($IpAddressNetwork)
-	{
-		if(!is_null($IpAddressNetwork))
-			$this->IpAddressNetwork = $IpAddressNetwork;
-	}
-	
 	/* METHODS */
-	public function UpdateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork)
+	public function UpdateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork)
 	{
 		if(!is_null($IpAddressDescription))
 			$this->IpAddressDescription = $IpAddressDescription;
@@ -141,8 +141,8 @@ class InfraToolsIpAddress
 			$this->IpAddressIpv4 = $IpAddressIpv4;
 		if(!is_null($IpAddressIpv6))
 			$this->IpAddressIpv6 = $IpAddressIpv6;
-		if(!is_null($IpAddressNetwork))
-			$this->IpAddressNetwork = $IpAddressNetwork;
+		if(!is_null($InstanceInfraToolsNetwork))
+			$this->InstanceInfraToolsNetwork = $InstanceInfraToolsNetwork;
 	}
 }
 ?>

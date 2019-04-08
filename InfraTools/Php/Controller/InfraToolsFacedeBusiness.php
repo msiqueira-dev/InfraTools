@@ -302,10 +302,10 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 				{
 					if ($return != ConfigInfraTools::INVALID_IP_ADDRESS_IPV4)
 					{
-						$return = $FormValidator->ValidateIpMask($NetworkMask);
+						$return = $FormValidator->ValidateNetmask($NetworkMask);
 						if ($return != ConfigInfraTools::INVALID_NULL)
 						{
-							if ($return != ConfigInfraTools::INVALID_IP_MASK)
+							if ($return != ConfigInfraTools::INVALID_NETMASK)
 							{
 								$networkWithMask = $NetworkWithAddress . "/" . $NetworkMask;
 								$return = $instanceInfraToolsDiagnosticTools->CheckIpAddressIsInNetwork($IpAddress, $networkWithMask);
@@ -326,7 +326,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 							else 
 							{
 								$ReturnMessage = $this->Language->GetText('FM_INVALID_NETWORK_NETMASK');
-								return $return = ConfigInfraTools::INVALID_IP_MASK;
+								return $return = ConfigInfraTools::INVALID_NETMASK;
 							}
 						}
 						else 
@@ -574,10 +574,10 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 		{
 			if ($return != ConfigInfraTools::INVALID_IP_ADDRESS_IPV4)
 			{
-				$return = $FormValidator->ValidateIpMask($Mask);
+				$return = $FormValidator->ValidateNetmask($Mask);
 				if ($return != ConfigInfraTools::INVALID_NULL)
 				{
-					if ($return != ConfigInfraTools::INVALID_IP_MASK)
+					if ($return != ConfigInfraTools::INVALID_NETMASK)
 					{
 						$return = $instanceInfraToolsDiagnosticTools->GetCalculationNetMask($IpAddress, $Mask, $subNetworkIp, 
 																		  $netMask, $broadCastAddress, $availableNetworkIps);
@@ -602,7 +602,7 @@ class InfraToolsFacedeBusiness extends FacedeBusiness
 					else
 					{
 						$ReturnMessage = $this->Language->GetText('FM_INVALID_NETWORK_NETMASK');
-						return $return = ConfigInfraTools::INVALID_IP_MASK;
+						return $return = ConfigInfraTools::INVALID_NETMASK;
 					}
 				}
 				else

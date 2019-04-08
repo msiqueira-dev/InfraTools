@@ -77,7 +77,8 @@ Methods:
 			public function InfraToolsDataBaseGetRowCount(&$RowCount, $Debug);
 			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug);
 			public function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $Debug, 
+			public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6,
+			                                          $InstanceInfraToolsNetwork, $Debug, 
 			                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug, 
 								                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -104,6 +105,8 @@ Methods:
 															   &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork, 
 													             &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function InfraToolsNetworkSelectByNetworkNameNoLimit($NetworkName, &$ArrayInstanceInfraToolsNetwork, 
+														                $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
 															        &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug, $MySqlConnection = NULL, 
@@ -1365,15 +1368,29 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $Debug, 
-											  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork,
+											  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
+			$networkName = NULL;
+			if(is_object($InstanceInfraToolsNetwork))
+			{
+				if (is_a($InstanceInfraToolsNetwork, "InfraToolsNetwork"))
+				{
+					$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
+					$InfraToolsFacedePersistenceNetwork->InfraToolsNetworkInsert($InstanceInfraToolsNetwork->GetNetworkIp(), 
+																				 $InstanceInfraToolsNetwork->GetNetworkName(), 
+																				 $InstanceInfraToolsNetwork->GetNetworkNetmask(), 
+																				 $Debug, $MySqlConnection);
+					$networkName = $InstanceInfraToolsNetwork->GetNetworkName();
+				}
+			}
+			elseif($InstanceInfraToolsNetwork != NULL) $networkName = $InstanceInfraToolsNetwork;
 			$InfraToolsFacedePersistenceIpAddress = $this->Factory->CreateInfraToolsFacedePersistenceIpAddress();
 			$return = $InfraToolsFacedePersistenceIpAddress->InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, 
-																					   $IpAddressNetwork, $Debug, $MySqlConnection);
+																					   $networkName, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1487,7 +1504,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkDeleteByNetworkName($NetworkName, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
@@ -1501,7 +1518,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask,
 																				   $Debug, $MySqlConnection);
 			if($CloseConnectaion)
@@ -1516,7 +1533,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsNetwork,
 																				   $RowCount, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
@@ -1531,7 +1548,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp,
 																				              $ArrayInstanceInfraToolsNetwork,
 																				              $RowCount, $Debug, $MySqlConnection);
@@ -1547,10 +1564,26 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName,
 																				                $ArrayInstanceInfraToolsNetwork,
 																				                $RowCount, $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkNameNoLimit($NetworkName, &$ArrayInstanceInfraToolsNetwork, 
+														        $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
+			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkNameNoLimit($NetworkName,
+																				                       $ArrayInstanceInfraToolsNetwork,
+																				                       $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1563,7 +1596,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask,
 																				                   $ArrayInstanceInfraToolsNetwork,
 																				                   $RowCount, $Debug, $MySqlConnection);
@@ -1579,7 +1612,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkSelectNoLimit($ArrayInstanceInfraToolsNetwork,
 																				          $Debug, $MySqlConnection);
 			if($CloseConnectaion)
@@ -1594,7 +1627,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedeNetwork();
+			$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
 			$return = $InfraToolsFacedePersistenceNetwork->InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew,
 																								$NetworkNetmaskNew, $NetworkName,
 																								$Debug, $MySqlConnection);

@@ -36,7 +36,8 @@ Methods:
 			public function CreateInfraToolsHistoryTicket();
 			public function CreateInfraToolsInformationService($RegisterDate, $InformationServiceDescription, $InformationServiceId, 
 								                               $InformationServiceValue, $Service);
-			public function CreateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $RegisterDate);
+			public function CreateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, 
+			                                          $InstanceInfraToolsNetwork, $RegisterDate);
 			public function CreateInfraToolsMonitoring();
 			public function CreateInfraToolsNetwork($NetworkIp, $NetworkName, $NetworkNetmask, $RegisterDate);
 			public function CreateInfraToolsService($RegisterDate, $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange, 
@@ -516,12 +517,12 @@ class InfraToolsFactory extends Factory
 								                $InformationServiceValue, $Service);
 	}
 	
-	public function CreateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $RegisterDate)
+	public function CreateInfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork, $RegisterDate)
 	{
 		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsIpAddress');
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsIpAddress.php");
-		return new InfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork, $RegisterDate);
+		return new InfraToolsIpAddress($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork, $RegisterDate);
 	}
 	
 	public function CreateInfraToolsMonitoring()

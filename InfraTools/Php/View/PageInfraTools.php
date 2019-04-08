@@ -36,7 +36,8 @@ Methods:
 			protected function InfraToolsDepartmentSelectOnUserServiceContextNoLimit($UserCorporation, $UserEmail,
 			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
 			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug);
-			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $IpAddressNetwork $Debug);
+			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6,  
+			                                             $InstanceInfraToolsNetwork, $Debug);
 			protected function InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress);
 			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
@@ -48,10 +49,12 @@ Methods:
 																        $IpAddressNetworkNew, $IpAddressIpv6, $Debug);
 			protected function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug);
 			protected function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug);
+			protected function InfraToolsNetworkLoadData($InstanceInfraToolsNetwork);
 			protected function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug);
 			protected function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork);
-			protected function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
-														         &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit1, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
+			                                                        &$RowCount, $Debug);
+			protected function InfraToolsNetworkSelectByNetworkNameNoLimit($NetworkName, &$ArrayInstanceInfraToolsNetwork, $Debug);
 			protected function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
 															       &$RowCount, $Debug);
 			protected function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug);
@@ -247,6 +250,12 @@ abstract class PageInfraTools extends Page
 	public $ReturnIpAddressIpv6Text                              = "";
 	public $ReturnIpAddressNetworkClass                          = "";
 	public $ReturnIpAddressNetworkText                           = "";
+	public $ReturnNetworkIpClass                                 = "";
+	public $ReturnNetworkIpText                                  = "";
+	public $ReturnNetworkNameClass                               = "";
+	public $ReturnNetworkNameText                                = "";
+	public $ReturnNetworkNetmaskClass                            = "";
+	public $ReturnNetworkNetmaskText                             = "";
 	public $ReturnServiceActiveClass                             = "";
 	public $ReturnServiceActiveText                              = "";
 	public $ReturnServiceCorporationClass                        = "";
@@ -510,32 +519,119 @@ abstract class PageInfraTools extends Page
 			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressDeleteByIpAddressIpv4(
 				                                                 $InfraToolsInstanceIpAddress->GetIpAddressIpv4(),$Debug);
-			if($return == Config::RET_OK)
+			if($return == ConfigInfraTools::RET_OK)
 			{
-				$this->Session->RemoveSessionVariable(Config::SESS_ADMIN_IP_ADDRESS, $InfraToolsInstanceIpAddress);
+				$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, $InfraToolsInstanceIpAddress);
 				$this->ShowDivReturnSuccess("IP_ADDRESS_DEL_SUCCESS");
-				return Config::RET_OK;
+				return ConfigInfraTools::RET_OK;
 			}
 		}
 		$this->ShowDivReturnError("IP_ADDRESS_DEL_ERROR");
-		return Config::RET_ERROR;
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function InfraToolsIpAddressInsert($IpAddressIpv4, $IpAddressIpv6, $Debug)
+	protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, 
+												 $InstanceInfraToolsNetwork, $Debug)
 	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueIpAddressDescription = $IpAddressDescription;
+		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
+		$this->InputValueIpAddressIpv6 = $IpAddressIpv6;
+		$arrayConstants = array(); $matrixConstants = array();
 		
+		//FIELD_IP_ADDRESS_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueIpAddressDescription; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressDescriptionText;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_DESCRIPTION', 'FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[1]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV4;
+		$arrayElementsClass[1]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
+		$arrayElementsInput[1]        = $this->InputValueIpAddressIpv4; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 15; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_IP_ADDRESS_IPV6
+		$arrayElements[2]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV6;
+		$arrayElementsClass[2]        = &$this->ReturnIpAddressIpv6Class;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV6;
+		$arrayElementsInput[2]        = $this->InputValueIpAddressIpv6; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 38; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnIpAddressIpv6Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV6', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
+			if(is_a($InstanceInfraToolsNetwork, "InfraToolsNetwork"))
+			{
+				$return = $instanceInfraToolsFacedeBusiness->CheckIpAddressIsInNetwork($IpAddressIpv4, 
+																					$InstanceInfraToolsNetwork->GetNetworkIp(), 
+																					$InstanceInfraToolsNetwork->GetNetworkNetmask(), 
+																					$message);
+				if($return != ConfigInfraTools::RET_OK)
+				{
+					$this->ShowDivReturnError($message, TRUE);
+					return ConfigInfraTools::RET_ERROR;
+				}
+			}
+			else $return = ConfigInfraTools::RET_ERROR;
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressInsert($this->InputValueIpAddressDescription, 
+																						  $this->InputValueIpAddressIpv4, 
+																						  $this->InputValueIpAddressIpv6, 
+																						  $InstanceInfraToolsNetwork, $Debug);
+				if($return == ConfigInfraTools::RET_OK)
+				{
+					$this->ShowDivReturnSuccess("IP_ADDRESS_INSERT_SUCCESS");
+					return ConfigInfraTools::RET_OK;
+				}
+				elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE || 
+					   $return == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_INSERT_RESTRICT)
+				{
+					$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+					return ConfigInfraTools::RET_WARNING;
+				}
+			}
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_INSERT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	protected function InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress)
 	{
-		if($InstanceInfraToolsIpAddress != NULL)
+		if(is_object($InstanceInfraToolsIpAddress))
 		{
 			$this->InputValueIpAddressDescription = $InstanceInfraToolsIpAddress->GetIpAddressDescription();
+			$this->InputValueNetworkIp            = $InstanceInfraToolsIpAddress->GetIpAddressInstanceInfraToolsNetworkNetworkIp();
+			$this->InputValueNetworkName          = $InstanceInfraToolsIpAddress->GetIpAddressInstanceInfraToolsNetworkNetworkName();
+			$this->InputValueNetworkNetmask       = $InstanceInfraToolsIpAddress->GetIpAddressInstanceInfraToolsNetworkNetworkNetmask();
 			$this->InputValueIpAddressIpv4        = $InstanceInfraToolsIpAddress->GetIpAddressIpv4();
 			$this->InputValueIpAddressIpv6        = $InstanceInfraToolsIpAddress->GetIpAddressIpv6();
-			$this->InputValueNetworkIp            = $InstanceInfraToolsIpAddress->GetIpAddressNetworkIp();
-			$this->InputValueNetworkName          = $InstanceInfraToolsIpAddress->GetIpAddressNetworkName();
-			$this->InputValueNetworkNetmask       = $InstanceInfraToolsIpAddress->GetIpAddressNetworkNetmask();
 			$this->InputValueRegisterDate         = $InstanceInfraToolsIpAddress->GetRegisterDate();
 			return ConfigInfraTools::RET_OK;
 		}
@@ -643,7 +739,85 @@ abstract class PageInfraTools extends Page
 	
 	public function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug)
 	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueNetworkIp = $NetworkIp;
+		$this->InputValueNetworkName = $NetworkName;
+		$this->InputValueNetworkNetmask = $NetworkNetmask;
+		$arrayConstants = array(); $matrixConstants = array();
 		
+		//FIELD_NETWORK_IP
+		$arrayElements[0]             = ConfigInfraTools::FIELD_NETWORK_IP;
+		$arrayElementsClass[0]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueNetworkIp; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 15; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNetworkIpText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_IP', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_NETWORK_NAME
+		$arrayElements[1]             = ConfigInfraTools::FIELD_NETWORK_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->InputValueNetworkName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 60; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnNetworkNameText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NAME', 'FM_INVALID_NETWORK_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_NETWORK_NETMASK
+		$arrayElements[2]             = ConfigInfraTools::FIELD_NETWORK_NETMASK;
+		$arrayElementsClass[2]        = &$this->ReturnNetworkNetmaskClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NETMASK;
+		$arrayElementsInput[2]        = $this->InputValueNetworkNetmask; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 2; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnNetworkNetmaskText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NETMASK', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsNetworkInsert($this->InputValueNetworkIp, 
+										    								        $this->InputValueNetworkName, 
+																		            $this->InputValueNetworkNetmask, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("NETWORK_INSERT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return ConfigInfraTools::RET_WARNING;
+			}
+		}
+		$this->ShowDivReturnError("NETWORK_INSERT_ERROR");
+		return ConfigInfraTools::RET_ERROR;	
+	}
+	
+	protected function InfraToolsNetworkLoadData($InstanceInfraToolsNetwork)
+	{
+		if(is_object($InstanceInfraToolsNetwork))
+		{
+			$this->InputValueNetworkIp      = $InstanceInfraToolsNetwork->GetNetworkIp();
+			$this->InputValueNetworkName    = $InstanceInfraToolsNetwork->GetNetworkName();
+			$this->InputValueNetworkNetmask = $InstanceInfraToolsNetwork->GetNetworkNetmask();
+			$this->InputValueRegisterDate   = $InstanceInfraToolsNetwork->GetRegisterDate();
+		}
 	}
 	
 	public function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug)
@@ -656,10 +830,79 @@ abstract class PageInfraTools extends Page
 		
 	}
 	
-	public function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork,
-														 &$RowCount, $Debug)
+	public function InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $NetworkName, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug)
 	{
-		
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValuenetworkName = $NetworkName;
+		$arrayConstants = array(); $matrixConstants = array();
+		//FIELD_NETWORK_NAME
+		$arrayElements[0]             = ConfigInfraTools::FIELD_NETWORK_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValuenetworkName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNetworkNameText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NAME', 'FM_INVALID_NETWORK_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsNetworkSelectByNetworkName($Limit1, $Limit2, $this->InputValuenetworkName,
+																				                 $ArrayInstanceInfraToolsNetwork, $RowCount,
+																				                 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("NETWORK_SEL_BY_NETWORK_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("NETWORK_SEL_BY_NETWORK_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
+	}
+	
+	public function InfraToolsNetworkSelectByNetworkNameNoLimit($NetworkName, &$ArrayInstanceInfraToolsNetwork, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValuenetworkName = $NetworkName;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_NETWORK_NAME
+		$arrayElements[0]             = ConfigInfraTools::FIELD_NETWORK_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValuenetworkName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 60; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNetworkNameText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NAME', 'FM_INVALID_NETWORK_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsNetworkSelectByNetworkNameNoLimit($this->InputValuenetworkName,
+																				                        $ArrayInstanceInfraToolsNetwork,
+																				                        $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("NETWORK_SEL_BY_NETWORK_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+		}
+		$this->ShowDivReturnError("NETWORK_SEL_BY_NETWORK_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	public function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
@@ -668,9 +911,19 @@ abstract class PageInfraTools extends Page
 		
 	}
 	
-	public function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug)
+	public function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug, $StoreSession = FALSE)
 	{
-		
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsNetworkSelectNoLimit($ArrayInstanceInfraToolsNetwork, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_NETWORK, $ArrayInstanceInfraToolsNetwork);
+			$this->ShowDivReturnSuccess("NETWORK_SEL_SUCCESS");
+			return ConfigInfraTools::RET_OK;
+		}
+		$this->ShowDivReturnError("NETWORK_SEL_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	public function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug)
@@ -929,7 +1182,7 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsServiceLoadData($InstanceInfraToolsService)
 	{
-		if($InstanceInfraToolsService != NULL)
+		if(is_object($InstanceInfraToolsService))
 		{
 			$this->InputValueRegisterDate       = $InstanceInfraToolsService->GetRegisterDate();
 			$this->InputValueServiceActive      = $InstanceInfraToolsService->GetServiceActive();
@@ -2591,7 +2844,7 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsTypeServiceLoadData($InstanceInfraToolsTypeService)
 	{
-		if($InstanceInfraToolsTypeService != NULL)
+		if(is_object($InstanceInfraToolsTypeService))
 		{
 			$this->InputValueRegisterDate    = $InstanceInfraToolsTypeService->GetRegisterDate();
 			$this->InputValueTypeServiceName = $InstanceInfraToolsTypeService->GetTypeServiceName();
