@@ -502,6 +502,7 @@ class De
 	const MAPS_TIP                                                  = "";
 	const NETWORK_INSERT_ERROR                                      = "";
 	const NETWORK_INSERT_SUCCESS                                    = "";
+	const NETWORK_NOT_FOUND                                         = "";
 	const NETWORK_SEL_BY_NETWORK_NAME_ERROR                         = "";
     const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "";
 	const NETWORK_SEL_ERROR                                         = "";
@@ -585,6 +586,12 @@ class De
 	const PAGE_ADMIN_DEPARTMENT_VIEW_USERS_TITLE                    = "InfraTools -";
 	const PAGE_ADMIN_IP_ADDRESS                                     = "";
 	const PAGE_ADMIN_IP_ADDRESS_LST                                 = "";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS                   = "";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS_TITLE             = "InfraTools -";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK                      = "";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK_ROBOTS               = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK_TITLE                = "InfraTools -";
 	const PAGE_ADMIN_IP_ADDRESS_LST_ROBOTS                          = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_LST_TITLE                           = "InfraTools -";
 	const PAGE_ADMIN_IP_ADDRESS_REGISTER                            = "";

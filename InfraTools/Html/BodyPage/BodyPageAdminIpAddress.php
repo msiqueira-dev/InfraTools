@@ -72,6 +72,34 @@
 							   onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
 															.'Icons/IconInfraToolsList.png'; ?>'"/>
 					</div>
+					<div class="DivContentBodyContainersBox">
+						<input type="image" 
+							   name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK; ?>" 
+							   id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK; ?>"
+							   value="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   src="<?php echo $this->Config->DefaultServerImage. 
+											   'Icons/IconInfraToolsListByNetwork48x48.png'; ?>"
+							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsListByNetwork48x48Hover.png'; ?>'"
+							   onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsListByNetwork48x48.png'; ?>'"/>
+					</div>
+					<div class="DivContentBodyContainersBox">
+						<input type="image" 
+							   name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS; ?>" 
+							   id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS; ?>"
+							   value="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS; ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   src="<?php echo $this->Config->DefaultServerImage. 
+											   'Icons/IconInfraToolsListByIpAddress48x48.png'; ?>"
+							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsListByIpAddress48x48Hover.png'; ?>'"
+							   onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
+															.'Icons/IconInfraToolsListByIpAddress48x48.png'; ?>'"/>
+					</div>
 				</div>
 			</div>
 		</form>
@@ -93,6 +121,19 @@
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST)) . ".php");
+		}
+		//PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS)) 
+						 . ".php");
+		}
+		//PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK)) . ".php");
 		}
 		//PAGE_ADMIN_IP_ADDRESS_REGISTER
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER)

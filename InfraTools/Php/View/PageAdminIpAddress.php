@@ -91,6 +91,22 @@ class PageAdminIpAddress extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST;
 		}
+		//FM_IP_ADDRESS_LST_BY_IP_ADDRESS
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelect', 
+									  array(&$this->ArrayInstanceInfraToolsIpAddress),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS;
+		}
+		//FM_IP_ADDRESS_LST_BY_NETWORK
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsNetworkSelect', 
+									  array(&$this->ArrayInstanceInfraToolsNetwork),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK;
+		}
 		//FM_IP_ADDRESS_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER) == ConfigInfraTools::RET_OK)
 		{

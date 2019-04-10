@@ -312,6 +312,14 @@ class ConfigInfraTools extends Config
 	const FM_INVALID_WEBSITE                                                    = "FmInvalidWebSite";
 	const FM_IP_ADDRESS                                                         = "FmIpAddress";
 	const FM_IP_ADDRESS_LST                                                     = "FmIpAddressList";
+	const FM_IP_ADDRESS_LST_BY_IP_ADDRESS                                       = "FmIpAddressListByIpAddress";
+	const FM_IP_ADDRESS_LST_BY_IP_ADDRESS_BACK                                  = "FmIpAddressListByIpAddressBack";
+	const FM_IP_ADDRESS_LST_BY_IP_ADDRESS_FORM                                  = "FmIpAddressListByIpAddressFm";
+	const FM_IP_ADDRESS_LST_BY_IP_ADDRESS_FORWARD                               = "FmIpAddressListByIpAddressForward";
+	const FM_IP_ADDRESS_LST_BY_NETWORK                                          = "FmIpAddressListByNetwork";
+	const FM_IP_ADDRESS_LST_BY_NETWORK_BACK                                     = "FmIpAddressListByNetworkBack";
+	const FM_IP_ADDRESS_LST_BY_NETWORK_FORM                                     = "FmIpAddressListByNetworkFm";
+	const FM_IP_ADDRESS_LST_BY_NETWORK_FORWARD                                  = "FmIpAddressListByNetworkForward";
 	const FM_IP_ADDRESS_LST_BACK                                                = "FmIpAddressListBack";
 	const FM_IP_ADDRESS_LST_FORM                                                = "FmIpAddressListFm";
 	const FM_IP_ADDRESS_LST_FORWARD                                             = "FmIpAddressListForward";
@@ -336,7 +344,10 @@ class ConfigInfraTools extends Config
 	const FM_IP_ADDRESS_VIEW_LST_USERS_SB_BACK                                  = "FmIpAddressViewListUsersSbBack";
 	const FM_IP_ADDRESS_VIEW_LST_USERS_SB_FORWARD                               = "FmIpAddressViewListUsersSbForward";
 	const FM_IP_ADDRESS_VIEW_UPDT                                               = "FmIpAddressViewUpdate";
-	const FM_IP_ADDRESS_VIEW_UPDT_SB                                            = "FmIpAddressViewUpdateSb";	
+	const FM_IP_ADDRESS_VIEW_UPDT_SB                                            = "FmIpAddressViewUpdateSb";
+	const FM_NETWORK_SEL                                                        = "FmNetworkSel";
+	const FM_NETWORK_SEL_FORM                                                   = "FmNetworkSelFm";
+	const FM_NETWORK_SEL_SB                                                     = "FmNetworkSelSb";
 	const FM_SERVICE                                                            = "FmService";
 	const FM_SERVICE_LST                                                        = "FmServiceList";
 	const FM_SERVICE_LST_BACK                                                   = "FmServiceListBack";
@@ -494,6 +505,8 @@ class ConfigInfraTools extends Config
 	const FM_TYPE_STATUS_MONITORING_VIEW_UPDT_SB                                = "FmTypeStatusMonitoringViewUpdateSb";
 	const PAGE_ADMIN_IP_ADDRESS                                                 = "Page_Admin_Ip_Address";
 	const PAGE_ADMIN_IP_ADDRESS_LST                                             = "Page_Admin_Ip_Address_List";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS                               = "Page_Admin_Ip_Address_List_By_Ip_Address";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK                                  = "Page_Admin_Ip_Address_List_By_Network";
 	const PAGE_ADMIN_IP_ADDRESS_REGISTER                                        = "Page_Admin_Ip_Address_Register";
 	const PAGE_ADMIN_IP_ADDRESS_SEL                                             = "Page_Admin_Ip_Address_Select";
 	const PAGE_ADMIN_IP_ADDRESS_UPDT                                            = "Page_Admin_Ip_Address_Update";

@@ -547,6 +547,7 @@ class Pt
                                                                     . "e sua localização, que pode ser seu estado ou seu condado.";
 	const NETWORK_INSERT_ERROR                                      = "Erro ao cadastrar rede";
 	const NETWORK_INSERT_SUCCESS                                    = "Rede cadastrada com sucesso";
+	const NETWORK_NOT_FOUND                                         = "Rede não encontrada";
 	const NETWORK_SEL_BY_NETWORK_NAME_ERROR                         = "Erro ao tentar obter rede com o nome fornecido";
     const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "Rede obtida com sucesso";	
 	const NETWORK_SEL_ERROR                                         = "Erro ao tentar obter rede";
@@ -630,6 +631,12 @@ class Pt
 	const PAGE_ADMIN_DEPARTMENT_VIEW_USERS_TITLE                    = "InfraTools - Gerência de Departamentos";
 	const PAGE_ADMIN_IP_ADDRESS                                     = "Gerência de Endereços de Ip";
 	const PAGE_ADMIN_IP_ADDRESS_LST                                 = "Gerência de Endereços de Ip - Listar";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS                   = "Gerência de Endereços de Ip - Listar por Endereço de Ip";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS_TITLE             = "InfraTools - Gerência de Endereços de Ip";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK                      = "Gerência de Endereços de Ip - Listar por Rede";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK_ROBOTS               = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK_TITLE                = "InfraTools - Gerência de Endereços de Ip";
 	const PAGE_ADMIN_IP_ADDRESS_LST_ROBOTS                          = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_LST_TITLE                           = "InfraTools - Gerência de Endereços de Ip";
 	const PAGE_ADMIN_IP_ADDRESS_REGISTER                            = "Gerência de Endereços de Ip - Cadastrar";

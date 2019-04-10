@@ -542,6 +542,7 @@ class En
                                                                     . "and a location that can be either a estate or a county.";
 	const NETWORK_INSERT_ERROR                                      = "Error while trying to register network";
 	const NETWORK_INSERT_SUCCESS                                    = "Network registered succesfully";
+	const NETWORK_NOT_FOUND                                         = "Network not found";
 	const NETWORK_SEL_BY_NETWORK_NAME_ERROR                         = "Error while trying to obtain network with given network name";
     const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "Network obtained successfully";	
 	const NETWORK_SEL_ERROR                                         = "Error trying to obtain network";
@@ -625,6 +626,12 @@ class En
 	const PAGE_ADMIN_DEPARTMENT_VIEW_USERS_TITLE                    = "InfraTools - Admin Department";
 	const PAGE_ADMIN_IP_ADDRESS                                     = "Admin Ip Address";
 	const PAGE_ADMIN_IP_ADDRESS_LST                                 = "Admin Ip Address - List";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS                   = "Admin Ip Address - List By Ip Address";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS_TITLE             = "InfraTools - Admin Ip Address";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK                      = "Admin Ip Address - List By Network";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK_ROBOTS               = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK_TITLE                = "InfraTools - Admin Ip Address";
 	const PAGE_ADMIN_IP_ADDRESS_LST_ROBOTS                          = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_LST_TITLE                           = "InfraTools - Admin Ip Address";
 	const PAGE_ADMIN_IP_ADDRESS_REGISTER                            = "Admin Ip Address - Register";

@@ -641,7 +641,7 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug)
 	{
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
-		$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelect($Limit1, $Limit2,$ArrayInstanceInfraToolsIpAddress, 
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsIpAddress, 
 															                      $RowCount, $Debug);
 		if($return == ConfigInfraTools::RET_OK)
 		{
@@ -822,7 +822,21 @@ abstract class PageInfraTools extends Page
 	
 	public function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug)
 	{
-		
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$return = $instanceInfraToolsFacedePersistence->InfraToolsNetworkSelect($Limit1, $Limit2, $ArrayInstanceInfraToolsNetwork, 
+															                    $RowCount, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$this->ReturnText  = "";
+			$this->ReturnClass = "DivHidden";
+			$this->ReturnImage = "DivDisplayNone";
+			$this->InputValueLimit1   = $Limit1;
+			$this->InputValueLimit2   = $Limit2;
+			$this->InputValueRowCount = $RowCount;
+			return $return;
+		}
+		$this->ShowDivReturnError("NETWORK_NOT_FOUND");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	public function InfraToolsNetworkSelectByNetworkIp($Limit1, $Limit2, $NetworkIp, &$ArrayInstanceInfraToolsNetwork)
