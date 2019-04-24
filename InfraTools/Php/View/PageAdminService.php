@@ -206,7 +206,7 @@ class PageAdminService extends PageAdmin
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_SERVICE_VIEW;	
 			}
 		}
-		//FM_TYPE_USER_SEL
+		//FM_TYPE_USER_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 

@@ -817,7 +817,9 @@ abstract class PageInfraTools extends Page
 			$this->InputValueNetworkName    = $InstanceInfraToolsNetwork->GetNetworkName();
 			$this->InputValueNetworkNetmask = $InstanceInfraToolsNetwork->GetNetworkNetmask();
 			$this->InputValueRegisterDate   = $InstanceInfraToolsNetwork->GetRegisterDate();
+			return ConfigInfraTools::RET_OK;
 		}
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	public function InfraToolsNetworkSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsNetwork, &$RowCount, $Debug)

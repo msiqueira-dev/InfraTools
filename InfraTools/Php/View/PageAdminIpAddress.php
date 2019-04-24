@@ -39,10 +39,11 @@ if (!class_exists("InfraToolsNetwork"))
 
 class PageAdminIpAddress extends PageAdmin
 {
-	public $ArrayInstanceInfraToolsIpAddress = NULL;
-	public $ArrayInstanceInfraToolsNetwork   = NULL;
-	public $InstanceIpAddress                = NULL;
-	public $InstanceInfraToolsNetwork        = NULL;
+	public $ArrayInstanceInfraToolsIpAddress        = NULL;
+	public $ArrayInstanceInfraToolsIpAddressNetwork = NULL;
+	public $ArrayInstanceInfraToolsNetwork          = NULL;
+	public $InstanceInfraToolsIpAddress             = NULL;
+	public $InstanceInfraToolsNetwork               = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -86,10 +87,39 @@ class PageAdminIpAddress extends PageAdmin
 		//FM_IP_ADDRESS_LST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_LST) == ConfigInfraTools::RET_OK)
 		{
-			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelect', 
+			$return1 = NULL; $return2 = NULL; $found = false;
+			$return1 = $this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelect', 
 									  array(&$this->ArrayInstanceInfraToolsIpAddress),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+									  $this->InputValueHeaderDebug);
+			$return2 = $this->ExecuteFunction($_POST, 'InfraToolsNetworkSelect', 
+									  array(&$this->ArrayInstanceInfraToolsNetwork),
+									  $this->InputValueHeaderDebug);
+			if($return1 == ConfigInfraTools::RET_OK || $return2 == ConfigInfraTools::RET_OK)
+			{
+				$this->ArrayInstanceInfraToolsIpAddressNetwork = array();
+				if(count($this->ArrayInstanceInfraToolsIpAddress) > 0)
+				{
+					$this->ArrayInstanceInfraToolsIpAddressNetwork = $this->ArrayInstanceInfraToolsIpAddress;
+					if(count($this->ArrayInstanceInfraToolsNetwork) > 0)
+					{
+						foreach($this->ArrayInstanceInfraToolsNetwork as $network)
+						{
+							foreach($this->ArrayInstanceInfraToolsIpAddress as $ipAddressNetwork)
+							{
+								if($ipAddressNetwork->GetIpAddressInstanceInfraToolsNetworkNetworkName() == $network->GetNetworkName())
+									$found = true;
+							}
+							if(!$found) array_push($this->ArrayInstanceInfraToolsIpAddressNetwork, $network);
+							$found = false;
+						}	
+					}
+				}
+				elseif(count($this->ArrayInstanceInfraToolsNetwork) > 0)
+					$this->ArrayInstanceInfraToolsIpAddressNetwork = $this->ArrayInstanceInfraToolsNetwork;
+				else{$this->ArrayInstanceInfraToolsIpAddressNetwork = NULL;}
+				$this->InputValueRowCount = count($this->ArrayInstanceInfraToolsIpAddressNetwork);
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST;
+			}
 		}
 		//FM_IP_ADDRESS_LST_BY_IP_ADDRESS
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS) == ConfigInfraTools::RET_OK)
@@ -218,10 +248,10 @@ class PageAdminIpAddress extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST;
 				else
 				{
-					$this->InstanceIpAddress = array_pop($this->ArrayInstanceInfraToolsIpAddress);
+					$this->InstanceInfraToolsIpAddress = array_pop($this->ArrayInstanceInfraToolsIpAddress);
 					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
-												  $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;
+												  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS;
 				}
 			}
 		}
@@ -229,44 +259,94 @@ class PageAdminIpAddress extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
-										  $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
+										  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressDeleteByIpAddressIpv4', 
-										  array($this->InstanceIpAddress),
+										  array($this->InstanceInfraToolsIpAddress),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SEL;
 			}
 		}
-		//FM_IP_ADDRESS_VIEW_UPDT_SB
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
+		//FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
-										  $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT;
+										  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_IP_ADDRESS;
 		}
-		//FM_IP_ADDRESS_UPDT_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
+		//FM_IP_ADDRESS_VIEW_UPDT_NETWORK_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_NETWORK_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
-										  $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;
+										  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_NETWORK;
 		}
-		//FM_IP_ADDRESS_UPDT_SB
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_UPDT_SB) == ConfigInfraTools::RET_OK)
+		//FM_IP_ADDRESS_UPDT_IP_ADDRESS_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_UPDT_IP_ADDRESS_CANCEL) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
+										  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS;
+		}
+		//FM_IP_ADDRESS_UPDT_NETWORK_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_UPDT_NETWORK_CANCEL) == ConfigInfraTools::RET_OK)
+		{
+			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
+										  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK;
+		}
+		//FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, 
-											   $this->InstanceIpAddress) == ConfigInfraTools::RET_OK)
+											   $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressUpdateByIpAddressIpv4', 
 										  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
 												@$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6],
-												&$this->InstanceIpAddress),
+												&$this->InstanceInfraToolsIpAddress),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW;	
-				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS;	
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_IP_ADDRESS;
 			}
 		}
-		//FM_TYPE_USER_SEL
+		//FM_IP_ADDRESS_VIEW_UPDT_NETWORK_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_NETWORK_SB) == ConfigInfraTools::RET_OK)
+		{
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, 
+											   $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_POST, 'InfraToolsNetworkUpdateByNetworkName', 
+										  array($_POST[ConfigInfraTools::FIELD_NETWORK_IP],
+												$_POST[ConfigInfraTools::FIELD_NETWORK_NAME],
+												$_POST[ConfigInfraTools::FIELD_NETWORK_NETMASK],
+												&$this->InstanceInfraToolsIpAddress),
+										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK;	
+				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_NETWORK;
+			}
+		}
+		//FIELD_NETWORK_NAME
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NETWORK_NAME) == ConfigInfraTools::RET_OK)
+		{
+			if($this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectByNetworkName', 
+									  array($_POST[ConfigInfraTools::FIELD_NETWORK_NAME],
+									        &$this->ArrayInstanceInfraToolsNetwork),
+									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnEmpty();
+				if(count($this->ArrayInstanceInfraToolsNetwork) > 1)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK;
+				else
+				{
+					$this->ArrayInstanceInfraToolsNetwork = array_pop($this->ArrayInstanceInfraToolsNetwork);
+					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NETWORK, "InfraToolsNetworkLoadData", 
+												  $this->ArrayInstanceInfraToolsNetwork) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK;
+				}
+			}
+		}
+		//FM_TYPE_USER_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 

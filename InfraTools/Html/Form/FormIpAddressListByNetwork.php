@@ -82,6 +82,10 @@ if(is_array($this->ArrayInstanceInfraToolsNetwork))
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>
 				<form  name='" . ConfigInfraTools::FM_NETWORK_SEL_SB . "' method='post' />
+					  <input type='hidden'
+						   name='"   . ConfigInfraTools::FM_NETWORK_SEL_SB . "' 
+						   id='"     . ConfigInfraTools::FM_NETWORK_SEL_SB . "'
+						   value='"  . ConfigInfraTools::FM_NETWORK_SEL_SB . "' />
 					  <input type='submit' name='" . ConfigInfraTools::FIELD_NETWORK_NAME . "' 
 		                           id='"   . ConfigInfraTools::FIELD_NETWORK_NAME . "' 
 							       value='" . $network->GetNetworkName() . "' 

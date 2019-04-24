@@ -77,8 +77,8 @@
 							   name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK; ?>" 
 							   id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK; ?>"
 							   value="<?php echo ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK; ?>"
-							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
-							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST'); ?>"
+							   title="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST_BY_IP_ADDRESS'); ?>"
+							   alt="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST_BY_IP_ADDRESS'); ?>"
 							   src="<?php echo $this->Config->DefaultServerImage. 
 											   'Icons/IconInfraToolsListByNetwork48x48.png'; ?>"
 							   onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
@@ -147,17 +147,29 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_SEL)) . ".php");
 		}
-		//PAGE_ADMIN_IP_ADDRESS_UPDT
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT)
+		//PAGE_ADMIN_IP_ADDRESS_UPDT_IP_ADDRESS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_IP_ADDRESS)
 		{
 			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT)) . ".php");
+						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_IP_ADDRESS)) . ".php");
 		}
-		//PAGE_ADMIN_IP_ADDRESS_VIEW
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW)
+		//PAGE_ADMIN_IP_ADDRESS_UPDT_NETWORK
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_NETWORK)
+		{
+			 include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						  str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_UPDT_NETWORK)) . ".php");
+		}
+		//PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW)) . ".php");
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS)) . ".php");
+		}
+		//PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK)
+		{
+			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK)) . ".php");
 		}
 		//PAGE_ADMIN_IP_ADDRESS_VIEW_LST_USERS
 		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_LST_USERS)

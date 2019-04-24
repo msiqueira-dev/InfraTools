@@ -87,7 +87,7 @@ Methods:
 			public function InfraToolsIpAddressSelectByIpAddressIpv6($Limit1, $Limit2, $IpAddressIpv6, &$ArrayInstanceInfraToolsIpAddress, 
 															         &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug, $MySqlConnection = NULL,
-													         $CloseConnectaion = TRUE)
+													         $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressSelect(&$ArrayInstanceInfraToolsIpAddress, $Debug, 
 								                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,

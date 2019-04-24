@@ -31,7 +31,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInstanceInfraToolsIpAddress))
+if(is_array($this->ArrayInstanceInfraToolsIpAddressNetwork))
 {
 	echo "<form  name='" . ConfigInfraTools::FM_IP_ADDRESS_LST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -79,37 +79,71 @@ if(is_array($this->ArrayInstanceInfraToolsIpAddress))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceInfraToolsIpAddress as $key=>$ipAddress)
+	foreach($this->ArrayInstanceInfraToolsIpAddressNetwork as $key=>$ipAddressNetwork)
 	{
 		echo "<tr>";
-		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' method='post' />
-					 <input type='hidden'
-							 name='"   . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' 
-							 id='"     . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "'
-							 value='"  . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' />
-					  <input type='submit' name='" . ConfigInfraTools::FIELD_IP_ADDRESS_IPV4 . "' 
-		                           id='"   . ConfigInfraTools::FIELD_IP_ADDRESS_IPV4 . "' 
-							       value='" . $ipAddress->GetIpAddressIpv4() . "' 
-								   title='" . $ipAddress->GetIpAddressIpv4() . "' />
-				</form>
-		      </td>";
-		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' method='post' />
-					<input type='hidden'
-						   name='"   . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' 
-						   id='"     . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "'
-						   value='"  . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' />
-					<input type='submit' name='" . ConfigInfraTools::FIELD_IP_ADDRESS_IPV6 . "' 
-		                   id='"   . ConfigInfraTools::FIELD_IP_ADDRESS_IPV6 . "' 
-						   value='" . $ipAddress->GetIpAddressIpv6() . "' 
-						   title='" . $ipAddress->GetIpAddressIpv6() . "' />
-				</form>
-		      </td>";
-		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressDescription() . "</td>";
-		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressInstanceInfraToolsNetworkNetworkName() . "</td>";
-		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetIpAddressInstanceInfraToolsNetworkNetworkIp() . "</td>";
-		echo "<td class= 'TableGenericTdLink'>" . $ipAddress->GetRegisterDate() . "</td>";
+		if(is_a($ipAddressNetwork, "InfraToolsIpAddress"))
+		{
+			echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' method='post' />
+						 <input type='hidden'
+								 name='"   . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' 
+								 id='"     . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "'
+								 value='"  . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' />
+						  <input type='submit' name='" . ConfigInfraTools::FIELD_IP_ADDRESS_IPV4 . "' 
+									   id='"   . ConfigInfraTools::FIELD_IP_ADDRESS_IPV4 . "' 
+									   value='" . $ipAddressNetwork->GetIpAddressIpv4() . "' 
+									   title='" . $ipAddressNetwork->GetIpAddressIpv4() . "' />
+					</form>
+				  </td>";
+			echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' method='post' />
+						<input type='hidden'
+							   name='"   . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' 
+							   id='"     . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "'
+							   value='"  . ConfigInfraTools::FM_IP_ADDRESS_SEL_SB . "' />
+						<input type='submit' name='" . ConfigInfraTools::FIELD_IP_ADDRESS_IPV6 . "' 
+							   id='"   . ConfigInfraTools::FIELD_IP_ADDRESS_IPV6 . "' 
+							   value='" . $ipAddressNetwork->GetIpAddressIpv6() . "' 
+							   title='" . $ipAddressNetwork->GetIpAddressIpv6() . "' />
+					</form>
+				  </td>";
+			echo "<td class= 'TableGenericTdLink'>" . $ipAddressNetwork->GetIpAddressDescription() . "</td>";
+			echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FM_NETWORK_SEL_SB . "' method='post' />
+						  <input type='hidden'
+							   name='"   . ConfigInfraTools::FM_NETWORK_SEL_SB . "' 
+							   id='"     . ConfigInfraTools::FM_NETWORK_SEL_SB . "'
+							   value='"  . ConfigInfraTools::FM_NETWORK_SEL_SB . "' />
+						  <input type='submit' name='" . ConfigInfraTools::FIELD_NETWORK_NAME . "' 
+									   id='"   . ConfigInfraTools::FIELD_NETWORK_NAME . "' 
+									   value='" . $ipAddressNetwork->GetIpAddressInstanceInfraToolsNetworkNetworkName() . "' 
+									   title='" . $ipAddressNetwork->GetIpAddressInstanceInfraToolsNetworkNetworkName() . "' />
+					</form>
+				  </td>";
+			echo "<td class= 'TableGenericTdLink'>" . $ipAddressNetwork->GetIpAddressInstanceInfraToolsNetworkNetworkIp() . "</td>";
+			echo "<td class= 'TableGenericTdLink'>" . $ipAddressNetwork->GetRegisterDate() . "</td>";
+		}
+		elseif(is_a($ipAddressNetwork, "InfraToolsNetwork"))
+		{
+			echo "<td class= 'TableGenericTdLink'></td>";
+			echo "<td class= 'TableGenericTdLink'></td>";
+			echo "<td class= 'TableGenericTdLink'></td>";
+			echo "<td class='TableGenericTdLink'>
+					<form  name='" . ConfigInfraTools::FM_NETWORK_SEL_SB . "' method='post' />
+						  <input type='hidden'
+							   name='"   . ConfigInfraTools::FM_NETWORK_SEL_SB . "' 
+							   id='"     . ConfigInfraTools::FM_NETWORK_SEL_SB . "'
+							   value='"  . ConfigInfraTools::FM_NETWORK_SEL_SB . "' />
+						  <input type='submit' name='" . ConfigInfraTools::FIELD_NETWORK_NAME . "' 
+									   id='"   . ConfigInfraTools::FIELD_NETWORK_NAME . "' 
+									   value='" . $ipAddressNetwork->GetNetworkName() . "' 
+									   title='" . $ipAddressNetwork->GetNetworkName() . "' />
+					</form>
+				  </td>";
+			echo "<td class= 'TableGenericTdLink'>" . $ipAddressNetwork->GetNetworkIp() . "</td>";
+			echo "<td class= 'TableGenericTdLink'>" . $ipAddressNetwork->GetRegisterDate() . "</td>";
+		}
 		echo "</tr>";
 	}
 	echo "</table>";
