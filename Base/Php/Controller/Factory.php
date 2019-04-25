@@ -11,6 +11,7 @@ Dependencies:
 Description: 
 			Class with the Factory pattern for creating Base classes
 Methods:
+			public    function CreateAPISmarty();
 			public    function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate);
 			public    function CreateAssocUserCorporation($AssocUserCorporationRegistrationDate,      
 			                                              $AssocUserCorporationRegistrationId, $CorporationInstance, $RegisterDate,
@@ -155,6 +156,14 @@ class Factory
         }
         return self::$Instance;
     }
+	
+	public function CreateAPISmarty()
+	{
+		if(file_exists(BASE_PATH_PHP . "API/Smarty/smarty-3.1.33/libs/Smarty.class.php"))
+			include_once(BASE_PATH_PHP . "API/Smarty/smarty-3.1.33/libs/Smarty.class.php");
+		else exit(basename(__FILE__, '.php') . ': Error Loading Class Smarty: Smarty');
+		return new Smarty();
+	}
 	
 	public function CreateAssocTicketUserRequesting($Ticket, $TypeAssocUserRequesting, $User, $RegisterDate)
 	{

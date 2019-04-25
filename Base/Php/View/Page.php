@@ -266,12 +266,13 @@ class Page
 	const REQUEST_URI = "REQUEST_URI";
 	
 	/* Instância usadas nessa classe */
-	protected $InstanceLanguageText                   = NULL;
-	protected $Session                                = NULL;
-	protected $Factory                                = NULL;
 	protected $Config                                 = NULL;
-	protected $User                                   = NULL;
+	protected $Factory                                = NULL;
+	protected $InstanceLanguageText                   = NULL;
 	protected $InstanceUserAdmin                      = NULL;
+	protected $Session                                = NULL;
+	protected $Smarty                                 = NULL;
+	protected $User                                   = NULL;
 	
 	/* Properties */
 	protected $Language                                             = NULL;
@@ -508,6 +509,8 @@ class Page
 		if($this->Config == NULL && $Config == NULL)
 			$this->Config = $this->Factory->CreateConfig();
 		else $this->Config = $Config;
+		if($this->Smarty == NULL)
+			$this->Smarty = $this->Factory->CreateAPISmarty();
 		//FIELD_HEADER_LOG_OUT
 		if(isset($_POST[Config::FIELD_HEADER_LOG_OUT]))
 		{
@@ -1739,7 +1742,7 @@ class Page
 			{
 				array_push($ArrayParameter, $Debug);
 				array_push($ArrayParameter, $StoreSession);
-				if($Debug)
+				if($Debug == Config::CHECKBOX_CHECKED)
 				{
 					echo "<b>ArrayParameter</b>:<br>";
 					foreach ($ArrayParameter as $key => $value)
@@ -1782,6 +1785,56 @@ class Page
 				else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
 			}
 			else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+			if($EnableDivPush)
+			{
+				echo "<div class='DivPush'></div>";
+				echo "</div>";
+			}
+			include_once(REL_PATH . Config::PATH_FOOTER);
+			echo Config::HTML_TAG_BODY_END;
+			echo Config::HTML_TAG_END;
+			return Config::RET_OK;
+		}
+		else return Config::RET_ERROR;
+	}
+	
+	protected function LoadHtmlSmarty($HasLoginForm, $Debug, $EnableDivPush = TRUE)
+	{
+		if(is_a($this->Smarty, "Smarty"))
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				$this->Smarty->debugging = true;
+		}
+		else return Config::RET_ERROR;
+		$page = str_replace("_", "", $this->GetCurrentPage());
+		echo Config::HTML_TAG_DOCTYPE;
+		echo Config::HTML_TAG_START;
+		$return = $this->IncludeHeadAll($HasLoginForm);
+		if ($return == Config::RET_OK)
+		{
+			echo Config::HTML_TAG_BODY_START;
+			echo "<div class='Wrapper'>";
+			include_once(REL_PATH . Config::PATH_HEADER . ".php");
+			if($HasLoginForm)
+			{
+				$loginStatus = $this->CheckInstanceUser();
+				if($loginStatus == Config::USER_NOT_LOGGED_IN || $loginStatus == Config::LOGIN_TWO_STEP_VERIFICATION_ACTIVATED)
+				{
+					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_LOGGED_IN) . ".php");
+					$this->InputFocus = Config::FIELD_LOGIN;
+					echo $this->TagOnloadFocusField(Config::FM_LOGIN, $this->InputFocus);
+				}
+				elseif($loginStatus == Config::USER_NOT_CONFIRMED)
+				{
+					include_once(REL_PATH . Config::PATH_BODY_PAGE . str_replace("_","",Config::PAGE_NOT_CONFIRMED) . ".php");
+				}
+				else include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+			}
+			else 
+			{
+				$this->Smarty->display(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+				//include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+			}
 			if($EnableDivPush)
 			{
 				echo "<div class='DivPush'></div>";
@@ -6512,6 +6565,11 @@ class Page
 					echo "<div class='DivPageDebugContent'>&emsp;<b>POST</b>: "; print_r($_POST); echo "</div></div>";
 					echo "<div class='DivPageDebugContent'>&emsp;<b>FILES</b>: "; print_r($_FILES); echo "</div></div>";
 					echo "<div class='DivClearFloat'></div>";
+					if($this->Smarty != NULL)
+					{
+						if(is_a($this->Smarty, "Smarty"))
+							$this->Smarty->debugging = true;
+					}
 				}
 				$this->Session->SetSessionValue(Config::SESS_DEBUG, $this->InputValueHeaderDebug);
 			}
