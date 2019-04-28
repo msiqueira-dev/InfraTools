@@ -5,7 +5,7 @@
         	<div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                       	<a href="HREF_PAGE_CHECK" title=''> 
+                       	<a href="{$HREF_PAGE_CHECK}" title=''> 
 							<img src="{$IconInfraToolsSearch}"
 								 onmouseover="this.src='{$IconInfraToolsSearchHover}'"
 								 onmouseout="this.src='{$IconInfraToolsSearch}'" 
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="DivContentBodyContainersBoxLink">
-                        <a href="HREF_PAGE_CHECK" title=''> 
+                        <a href="{$HREF_PAGE_CHECK}" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
                                {$SubmitGo}
@@ -42,7 +42,7 @@
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                        <a href="HREF_PAGE_GET" title=''> 
+                        <a href="{$HREF_PAGE_GET}" title=''> 
 							<img src="{$IconInfraToolsReport}"
 								 onmouseover="this.src='{$IconInfraToolsReportHover}'"
 								 onmouseout="this.src='{$IconInfraToolsReport}'" 
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="DivContentBodyContainersBoxLink">
-                        <a href="HREF_PAGE_GET" title=''> 
+                        <a href="{$HREF_PAGE_GET}" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
                                 {$SubmitGo}
@@ -79,7 +79,7 @@
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                       	<a href="HREF_PAGE_SERVICE" title=''> 
+                       	<a href="{$HREF_PAGE_SERVICE}" title=''> 
 							<img src="{$IconInfraToolsService}"
 								 onmouseover="this.src='{$IconInfraToolsServiceHover}'"
 								 onmouseout="this.src='{$IconInfraToolsService}'" 
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="DivContentBodyContainersBoxLink">
-                        <a href="HREF_PAGE_SERVICE" title=''> 
+                        <a href="{$HREF_PAGE_SERVICE}" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
                                 {$SubmitGo}

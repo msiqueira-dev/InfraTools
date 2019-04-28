@@ -56,7 +56,7 @@ class PageAdminTypeService extends PageAdmin
 		$this->AdminGoBack($PageFormBack);
 		
 		//FM_TYPE_SERVICE_LST
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_LST) == ConfigInfraTools::RET_OK)
+		if($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_SERVICE_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'InfraToolsTypeServiceSelect', 
 									  array(&$this->ArrayInstanceTypeService),

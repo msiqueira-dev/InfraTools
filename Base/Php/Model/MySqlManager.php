@@ -178,7 +178,6 @@ class MySqlManager
 		{
 			try
 			{
-				
 				$MySqlConnection = @mysqli_connect($this->MySqlAddress, $this->MySqlUser, $this->MySqlPassword,
 												   $this->MySqlDataBase, $this->MySqlPort);
 				if (is_object($MySqlConnection)) 
