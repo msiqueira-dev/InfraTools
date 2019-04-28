@@ -279,9 +279,8 @@ class ProjectConfig
 		Description: The address of the MySql DataBase
 		             NOTE: This application will only work with MySql Databases.
 		Examples:
-			$MySqlDataBaseAddress = "http://localhost/";
-			$MySqlDataBaseAddress = "http://domain.com/";
-			$MySqlDataBaseAddress = "https://domain.com/";
+			$MySqlDataBaseAddress = "localhost";
+			$MySqlDataBaseAddress = "domain.com";
 			$MySqlDataBaseAddress = "139.82.1.2";
 	*/
 	public static $MySqlDataBaseAddress = "";
