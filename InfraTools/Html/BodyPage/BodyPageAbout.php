@@ -2,41 +2,37 @@
 <div class="DivBody">
     <div class="DivContentBody">
     	<div class="DivContentBodySecondTitle">
-			<img src="<?php echo $this->Config->DefaultServerImage. 'Logos/LogoInfraTools-765x95WhiteBackground.png'; ?>" 
+			<img src="{$LOGO_INFRATOOLS}" 
 				 alt="IconInfraToolsSearch" class="DivContentBodySecondTitleImage" width="765" height="95"/>
 		</div>
 		<div class="DivContentBodySecondTitleLine"></div>
 		<div class="DivContentBodyContainers">
-			<a href="https://github.com/msiqueira-dev/InfraTools" target="_blank" title="GIT HUB - INFRATOOLS">
+			<a href="https://github.com/msiqueira-dev/InfraTools" target="_blank" title="{$INFRATOOLS_GITHUB}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Logos/LogoGitHub48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Logos/LogoGitHub48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Logos/LogoGitHub48x48.png'; ?>'" 
-                             alt="World" />
+						<img src="{$LOGO_GITHUB}"
+						     onmouseover="this.src='{$LOGO_GITHUB_HOVER}'"
+    			             onmouseout="this.src='{$LOGO_GITHUB}'" 
+                             alt="{$INFRATOOLS_GITHUB}" />
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							GITHUB - INFRATOOLS
+							{$INFRATOOLS_GITHUB}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="https://infratools-it.blogspot.com/" target="_blank" title="BLOGGER - INFRATOOLS">
+			<a href="https://infratools-it.blogspot.com/" target="_blank" title="{$INFRATOOLS_BLOGGER}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Logos/LogoBlogger48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Logos/LogoBlogger48x48Hover.png'; ?>'"
-							 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Logos/LogoBlogger48x48.png'; ?>'" 
-							 alt="World" />
+						<img src="{$LOGO_BLOGGER}"
+							 onmouseover="this.src='{$LOGO_BLOGGER_HOVER}'"
+    			             onmouseout="this.src='{$LOGO_BLOGGER}'" 
+							 alt="{$INFRATOOLS_BLOGGER}" />
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							GITHUB - INFRATOOLS
+							{$INFRATOOLS_BLOGGER}
 						</i>
 					</div>
 				</div>

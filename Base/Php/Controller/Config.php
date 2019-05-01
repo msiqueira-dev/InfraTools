@@ -1062,6 +1062,7 @@ class Config
 	public $DefaultLogPath                   = NULL;
 	public $DefaultMySqlAddress              = NULL;
 	public $DefaultMySqlDataBase             = NULL;
+	public $DefaultMySqlDumpPath             = NULL;
 	public $DefaultMySqlPort                 = NULL;
 	public $DefaultMySqlImportUser           = NULL;
 	public $DefaultMySqlImportUserPassword   = NULL;
@@ -1072,6 +1073,7 @@ class Config
 	public $DefaultServerFile                = NULL;
 	public $DefaultServerImage               = NULL;
 	public $DefaultServerJavaScript          = NULL;
+	public $DefaultUploadDirectory           = NULL;
 	public $EnableLogMySqlQuery              = FALSE;
 	public $EnableLogMySqlError              = FALSE;
 	public $SessionTime                      = 3600;
@@ -1173,9 +1175,19 @@ class Config
 			$this->Session = $this->Factory->CreateSession();
 			$this->DefaultApplicationAddress             = ProjectConfig::$AddressApplication;
 			$this->DefaultApplicationName                = ProjectConfig::$ApplicationName;
+			$this->DefaultEmailNoReplyFormAddress        = ProjectConfig::$EmailNoReplyAccount;
+			$this->DefaultEmailNoReplyFormAddressReplyTo = ProjectConfig::$EmailNoReplyAccountReplyTo;
+			$this->DefaultEmailNoReplyFormPassword       = ProjectConfig::$EmailNoReplyPassword;
+			$this->DefaultEmailSupportFormAddress        = ProjectConfig::$EmailSupportAccount;
+			$this->DefaultGoogleMapsApiKey               = ProjectConfig::$GoogleMapsApiKey;
+			$this->DefaultLanguage                       = ProjectConfig::$DefaultLanguage;
+			$this->DefaultLogPath                        = ProjectConfig::$LogFolder;
 			$this->DefaultMySqlAddress                   = ProjectConfig::$MySqlDataBaseAddress;
 			$this->DefaultMySqlPort                      = ProjectConfig::$MySqlDataBasePort;
 			$this->DefaultMySqlDataBase                  = ProjectConfig::$MySqlDataBaseName;
+			if(strpos(ProjectConfig::$MySqlDumpCompletePath, ' ') !== false)
+				$this->DefaultMySqlDumpPath  = '"' . ProjectConfig::$MySqlDumpCompletePath . '"';
+			else $this->DefaultMySqlDumpPath                  = ProjectConfig::$MySqlDumpCompletePath;
 			$this->DefaultMySqlImportUser                = ProjectConfig::$MysqlDataBaseImportUser;
 			$this->DefaultMySqlImportUserPassword        = ProjectConfig::$MysqlDataBaseImportUserPassword;
 			$this->DefaultMySqlSuperUser                 = ProjectConfig::$MySqlDataBaseSuperUser;
@@ -1185,13 +1197,7 @@ class Config
 			$this->DefaultServerFile                     = ProjectConfig::$AddressFileServer;
 			$this->DefaultServerImage                    = ProjectConfig::$AddressImageServer;
 			$this->DefaultServerJavaScript               = ProjectConfig::$AddressJavaScriptServer;
-			$this->DefaultEmailNoReplyFormAddress        = ProjectConfig::$EmailNoReplyAccount;
-			$this->DefaultEmailNoReplyFormAddressReplyTo = ProjectConfig::$EmailNoReplyAccountReplyTo;
-			$this->DefaultEmailNoReplyFormPassword       = ProjectConfig::$EmailNoReplyPassword;
-			$this->DefaultEmailSupportFormAddress        = ProjectConfig::$EmailSupportAccount;
-			$this->DefaultGoogleMapsApiKey               = ProjectConfig::$GoogleMapsApiKey;
-			$this->DefaultLanguage                       = ProjectConfig::$DefaultLanguage;
-			$this->DefaultLogPath                        = ProjectConfig::$LogFolder;
+			$this->DefaultUploadDirectory                = ProjectConfig::$UploadDirectory;
 			$this->Session->CreateBasic($this->DefaultApplicationName, $this->SessionTime);
 			return $this->Session->CheckActivity(self::SESS_LAST_ACTIVITY, self::SESS_USER, 
 												 $this->SessionTime, self::SESS_UNLIMITED);

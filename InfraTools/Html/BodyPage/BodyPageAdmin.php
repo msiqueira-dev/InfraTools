@@ -2,298 +2,279 @@
 <div class="DivBody">
     <div class="DivContentBody">
     	<div class="DivContentBodySecondTitle">
-			<img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconInfraToolsAdmin100x100.png'; ?>" 
-				 alt="IconInfraToolsAdmin" class="DivContentBodySecondTitleImage" width="100" height="100"/>
+			<img src="{$ICON_INFRATOOLS_ADMIN}" 
+				   alt="IconInfraToolsAdmin" class="DivContentBodySecondTitleImage" width="100" height="100"/>
 		</div>
 		<div class="DivContentBodySecondTitleLine"></div>
 		<div class="DivContentBodyContainers">
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_COUNTRY'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_COUNTRY') ?>">
+			<a href="{$HREF_PAGE_ADMIN_COUNTRY}" 
+				 title="{$ADMIN_TEXT_COUNTRY}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsWorld48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsWorld48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsWorld48x48.png'; ?>'" 
-                             alt="World" />
+						<img src="{$ICON_INFRATOOLS_COUNTRY}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_COUNTRY_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_COUNTRY}'" 
+                 alt="{$ADMIN_TEXT_COUNTRY}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_COUNTRY'); ?>
+							{$ADMIN_TEXT_COUNTRY}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_CORPORATION'); ?>"
-			   title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_CORPORATION') ?>"> 
+			<a href="{$HREF_PAGE_ADMIN_CORPORATION}"
+			   title="{$ADMIN_TEXT_CORPORATION}"> 
 				<div class="DivContentBodyContainersBox">                    
 					<div class="DivContentBodyContainersBoxIcon">  
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsCorporation.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsCorporationHover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsCorporation.png'; ?>'" 
-                             alt="Corporation" />
+						<img src="{$ICON_INFRATOOLS_CORPORATION}"
+								 onmouseover="this.src='{$ICON_INFRATOOLS_CORPORATION_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_CORPORATION}'"
+                 alt="{$ADMIN_TEXT_CORPORATION}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_CORPORATION'); ?> 
+							{$ADMIN_TEXT_CORPORATION}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_DEPARTMENT'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_DEPARTMENT') ?>">
+			<a href="{$HREF_PAGE_ADMIN_DEPARTMENT}" 
+				 title="{$ADMIN_TEXT_DEPARTMENT}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsDepartment.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsDepartmentHover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsDepartment.png'; ?>'" 
-                             alt="Department" />
+						<img src="{$ICON_INFRATOOLS_DEPARTMENT}"
+								 onmouseover="this.src='{$ICON_INFRATOOLS_DEPARTMENT_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_DEPARTMENT}'" 
+                alt="{$ADMIN_TEXT_DEPARTMENT}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_DEPARTMENT'); ?> 
+							{$ADMIN_TEXT_DEPARTMENT}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_USER'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_USER') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TYPE_USER}" 
+				 title="{$ADMIN_TEXT_TYPE_USER}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">			   
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTypeUser48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeUser48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeUser48x48.png'; ?>'" 
-                             alt="Department" />
+						<img src="{$ICON_INFRATOOLS_TYPE_USER}"
+								 onmouseover="this.src='{$ICON_INFRATOOLS_TYPE_USER_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TYPE_USER}'" 
+                 alt="{$ADMIN_TEXT_TYPE_USER}"/>
 				</div>
 				<div class="DivContentBodyContainersBoxText">
 					<i>
-						<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TYPE_USER'); ?> 
+						{$ADMIN_TEXT_TYPE_USER}
 					</i>
 				</div>
 			</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_USER'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_USER') ?>">
+			<a href="{$HREF_PAGE_ADMIN_USER}" 
+				 title="{$ADMIN_TEXT_USER}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsUser.png';?>" />
+							<img src="{$ICON_INFRATOOLS_USER}"
+							     onmouseover="this.src='{$ICON_INFRATOOLS_USER_HOVER}'"
+    			         onmouseout="this.src='{$ICON_INFRATOOLS_USER}'" 
+                   alt="{$ADMIN_TEXT_USER}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_USER'); ?> 
+							{$ADMIN_TEXT_USER}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_ASSOC_USER_TEAM'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_ASSOC_USER_TEAM') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TYPE_ASSOC_USER_TEAM}" 
+				 title="{$ADMIN_TEXT_TYPE_ASSOC_USER_TEAM}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTypeAssocUserTeam.png';?>" />
+						<img src="{$ICON_INFRATOOLS_TYPE_ASSOC_USER_TEAM}"
+						       onmouseover="this.src='{$ICON_INFRATOOLS_TYPE_ASSOC_USER_TEAM_HOVER}'"
+    			         onmouseout="this.src='{$ICON_INFRATOOLS_TYPE_ASSOC_USER_TEAM}'" 
+                 alt="{$ADMIN_TEXT_TYPE_ASSOC_USER_TEAM}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TYPE_ASSOC_USER_TEAM'); ?> 
+							{$ADMIN_TEXT_TYPE_ASSOC_USER_TEAM}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TEAM'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TEAM') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TEAM}" 
+				 title="{$ADMIN_TEXT_TEAM}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTeam.png';?>" />
+						<img src="{$ICON_INFRATOOLS_TEAM}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_TEAM_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TEAM}'" 
+                 alt="{$ADMIN_TEXT_TYPE_ASSOC_USER_TEAM}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TEAM'); ?> 
+							{$ADMIN_TEXT_TEAM}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_TICKET'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_TICKET') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TYPE_TICKET}" 
+				 title="{$ADMIN_TEXT_TYPE_TICKET}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTypeTicket48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeTicket48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeTicket48x48.png'; ?>'" 
-                             alt="TypeTicket" />
+						<img src="{$ICON_INFRATOOLS_TYPE_TICKET}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_TYPE_TICKET_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TYPE_TICKET}'"
+                 alt="{$ADMIN_TEXT_TYPE_TICKET}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TYPE_TICKET'); ?> 
+							{$ADMIN_TEXT_TYPE_TICKET}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_STATUS_TICKET'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_STATUS_TICKET') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TYPE_STATUS_TICKET}" 
+				 title="{$ADMIN_TEXT_TYPE_STATUS_TICKET}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTypeStatusTicket48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeStatusTicket48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeStatusTicket48x48.png'; ?>'" 
-                             alt="TypeStatusTicket" />
+						<img src="{$ICON_INFRATOOLS_TYPE_STATUS_TICKET}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_TYPE_STATUS_TICKET_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TYPE_STATUS_TICKET}'"
+                 alt="{$ADMIN_TEXT_TYPE_STATUS_TICKET}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TYPE_STATUS_TICKET'); ?> 
+							{$ADMIN_TEXT_TYPE_STATUS_TICKET}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TICKET'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TICKET') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TICKET}" 
+				 title="{$ADMIN_TEXT_TICKET}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTicket48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTicket48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTicket48x48.png'; ?>'" 
-                             alt="Ticket" />	
+						<img src="{$ICON_INFRATOOLS_TICKET}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_TICKET_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TICKET}'" 
+                 alt="{$ADMIN_TEXT_TICKET}"/>	
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TICKET'); ?> 
+							{$ADMIN_TEXT_TICKET}
 						</i>
 					</div>
 				</div>
 			</a>
-     	    <a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_SERVICE'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TYPE_SERVICE') ?>">
+     	    <a href="{$HREF_PAGE_ADMIN_TYPE_SERVICE}" 
+					   title="{$ADMIN_TEXT_TYPE_SERVICE}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTypeService48x48.png';?>"
-						     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeService48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTypeService48x48.png'; ?>'" 
-                             alt="TypeService" />
+						<img src="{$ICON_INFRATOOLS_TYPE_SERVICE}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_TYPE_SERVICE_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TYPE_SERVICE}'"
+                 alt="{$ADMIN_TEXT_TYPE_SERVICE}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TYPE_SERVICE'); ?> 
+							{$ADMIN_TEXT_TYPE_SERVICE}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SERVICE'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SERVICE') ?>">
+			<a href="{$HREF_PAGE_ADMIN_SERVICE}" 
+				 title="{$ADMIN_TEXT_SERVICE}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsService48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsService48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsService48x48.png'; ?>'" 
-                             alt="Services" />
+						<img src="{$ICON_INFRATOOLS_SERVICE}"
+					       onmouseover="this.src='{$ICON_INFRATOOLS_SERVICE_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_SERVICE}'" 
+                 alt="{$ADMIN_TEXT_SERVICE} "/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_SERVICE'); ?> 
+							{$ADMIN_TEXT_SERVICE}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_IP_ADDRESS'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_IP_ADDRESS') ?>">
+			<a href="{$HREF_PAGE_ADMIN_IP_ADDRESS}" 
+				 title="{$ADMIN_TEXT_IP_ADDRESS}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsIpAddress48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsIpAddress48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsIpAddress48x48.png'; ?>'" 
-                             alt="Services" />
+						<img src="{$ICON_INFRATOOLS_IP_ADDRESS}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_IP_ADDRESS_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_IP_ADDRESS}'"
+                 alt="{$ADMIN_TEXT_IP_ADDRESS}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_IP_ADDRESS'); ?> 
+							{$ADMIN_TEXT_IP_ADDRESS}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_NOTIFICATION'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_NOTIFICATION') ?>">
+			<a href="{$HREF_PAGE_ADMIN_NOTIFICATION}" 
+				 title="{$ADMIN_TEXT_NOTIFICATION}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotification48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsNotification48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsNotification48x48.png'; ?>'" 
-                             alt="Services" />
+						<img src="{$ICON_INFRATOOLS_NOTIFICATION}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_NOTIFICATION_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_NOTIFICATION}'"
+                 alt="{$ADMIN_TEXT_NOTIFICATION}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_NOTIFICATION'); ?> 
+							{$ADMIN_TEXT_NOTIFICATION}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION') ?>">
+			<a href="{$HREF_PAGE_ADMIN_SYSTEM_CONFIGURATION}" 
+				 title="{$ADMIN_TEXT_SYSTEM_CONFIGURATION}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsSystemPreferences48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsSystemPreferences48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsSystemPreferences48x48.png'; ?>'" 
-                             alt="SystemConfiguration" />
+						<img src="{$ICON_INFRATOOLS_SYSTEM_CONFIGURATION}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_SYSTEM_CONFIGURATION_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_SYSTEM_CONFIGURATION}'"
+                 alt="{$ADMIN_TEXT_SYSTEM_CONFIGURATION}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_SYSTEM_CONFIGURATION'); ?> 
+							{$ADMIN_TEXT_SYSTEM_CONFIGURATION}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TECH_INFO'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_TECH_INFO') ?>">
+			<a href="{$HREF_PAGE_ADMIN_TECH_INFO}" 
+				 title="{$ADMIN_TEXT_TECH_INFO}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsTechInfo48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTechInfo48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsTechInfo48x48.png'; ?>'" 
-                             alt="TechInfo" />
+						<img src="{$ICON_INFRATOOLS_TECH_INFO}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_TECH_INFO_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_TECH_INFO}'"
+                 alt="{$ADMIN_TEXT_TECH_INFO}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_TECH_INFO'); ?> 
+							{$ADMIN_TEXT_TECH_INFO}
 						</i>
 					</div>
 				</div>
 			</a>
-			<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_INSTALL') ?>">
+			<a href="{$HREF_PAGE_INSTALL}" 
+				 title="{$ADMIN_TEXT_INSTALL}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
-						<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall48x48.png';?>"
-							 onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsInstall48x48Hover.png'; ?>'"
-    			             onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsInstall48x48.png'; ?>'" 
-                             alt="TechInfo" />
+						<img src="{$ICON_INFRATOOLS_INSTALL}"
+						     onmouseover="this.src='{$ICON_INFRATOOLS_INSTALL_HOVER}'"
+    			       onmouseout="this.src='{$ICON_INFRATOOLS_INSTALL}'"
+                 alt="{$ADMIN_TEXT_INSTALL}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							<?php echo $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'); ?> 
+							{$ADMIN_TEXT_INSTALL}
 						</i>
 					</div>
 				</div>

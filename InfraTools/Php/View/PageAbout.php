@@ -49,7 +49,14 @@ class PageAbout extends PageInfraTools
 	public function LoadPage()
 	{	
 		if(!$this->PageEnabled) return ConfigInfraTools::RET_ERROR;
-		$this->LoadHtml(FALSE);
+		$this->Smarty->assign('INFRATOOLS_GITHUB', 'InfraTools - GitHub');
+		$this->Smarty->assign('INFRATOOLS_BLOGGER', 'InfraTools - Blogger');
+		$this->Smarty->assign('LOGO_INFRATOOLS', $this->Config->DefaultServerImage.'Logos/LogoInfraTools-765x95WhiteBackground.png');
+		$this->Smarty->assign('LOGO_GITHUB', $this->Config->DefaultServerImage.'Logos/LogoGitHub48x48.png');
+		$this->Smarty->assign('LOGO_GITHUB_HOVER', $this->Config->DefaultServerImage.'Logos/LogoGitHub48x48Hover.png');
+		$this->Smarty->assign('LOGO_BLOGGER', $this->Config->DefaultServerImage.'Logos/LogoBlogger48x48.png');
+		$this->Smarty->assign('LOGO_BLOGGER_HOVER', $this->Config->DefaultServerImage.'Logos/LogoBlogger48x48Hover.png');
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

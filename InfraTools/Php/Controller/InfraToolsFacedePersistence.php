@@ -678,15 +678,15 @@ class InfraToolsFacedePersistence extends FacedePersistence
 	
 	public function InfraToolsDataBackup(&$FileName, &$FileNamePath, $Debug)
 	{
-		$FileName = ProjectConfig::$ApplicationName . "-Dump-".date("Y-m-d-H-i") . ".sql";
-		$FileNamePath = ProjectConfig::$UploadDirectory . "/" . $FileName;
-		$Command = "    "     .      ProjectConfig::$MySqlDumpCompletePath          . " --extended-insert=FALSE  " .
-			       " -u "     .      ProjectConfig::$MySqlDataBaseSuperUser         .
-			       "  -p"     .      ProjectConfig::$MySqlDataBaseSuperUserPassword .
-			       " --port=" .      ProjectConfig::$MySqlDataBasePort              .
-			       " -h "     .      ProjectConfig::$MySqlDataBaseAddress           . " --no-create-info --skip-triggers --complete-insert" .
+		$FileName = $this->Config->DefaultApplicationName . "-Dump-".date("Y-m-d-H-i") . ".sql";
+		$FileNamePath = $this->Config->DefaultUploadDirectory . "/" . $FileName;
+		$Command = "    "     .      $this->Config->DefaultMySqlDumpPath          . " --extended-insert=FALSE  " .
+			       " -u "     .      $this->Config->DefaultMySqlSuperUser         .
+			       "  -p"     .      $this->Config->DefaultMySqlSuperUserPassword .
+			       " --port=" .      $this->Config->DefaultMySqlPort              .
+			       " -h "     .      $this->Config->DefaultMySqlAddress           . " --no-create-info --skip-triggers --complete-insert" .
 					                                                                  " --order-by-primary " .
-				         			 ProjectConfig::$MySqlDataBaseName              .  " > " . $FileNamePath;
+									  $this->Config->DefaultMySqlDataBase          .  " > " . $FileNamePath;
 		exec($Command);
 		if(file_exists($FileNamePath) && filesize($FileNamePath) > 0)
 			return ConfigInfraTools::RET_OK;

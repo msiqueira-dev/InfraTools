@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-04-24 13:46:06
+/* Smarty version 3.1.33, created on 2019-04-30 23:53:35
   from 'C:\Web\Sites\Development\InfraTools\Html\BodyPage\BodyPageHome.php' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cc092ce716a07_00782758',
+  'unifunc' => 'content_5cc90a2f7f5811_06515001',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b391ff292621902206dd00ce92cbbd974a8ba388' => 
     array (
       0 => 'C:\\Web\\Sites\\Development\\InfraTools\\Html\\BodyPage\\BodyPageHome.php',
-      1 => 1556124363,
+      1 => 1556678828,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5cc90a2f7f5811_06515001 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- BODY PAGE HOME -->
 <div class="DivBody">
     <div class="DivContentBody">
@@ -28,12 +28,13 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
         	<div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                       	<a href="HREF_PAGE_CHECK" title=''> 
-							<img src="<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsSearch']->value;?>
+                       	<a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_CHECK']->value;?>
+" title=''> 
+							<img src="<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_SEARCH']->value;?>
 "
-								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsSearchHover']->value;?>
+								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_SEARCH_HOVER']->value;?>
 '"
-								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsSearch']->value;?>
+								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_SEARCH']->value;?>
 '" 
 								 alt="CheckTools" />
 						</a>
@@ -41,28 +42,29 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeCheck1']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_CHECK_01']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText2">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeCheck2']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_CHECK_02']->value;?>
  
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText3">
                             <label>
-                                 <?php echo $_smarty_tpl->tpl_vars['HomeCheck3']->value;?>
+                                 <?php echo $_smarty_tpl->tpl_vars['HOME_CHECK_03']->value;?>
 
                             </label>
                         </div>
                     </div>
                     <div class="DivContentBodyContainersBoxLink">
-                        <a href="HREF_PAGE_CHECK" title=''> 
+                        <a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_CHECK']->value;?>
+" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                               <?php echo $_smarty_tpl->tpl_vars['SubmitGo']->value;?>
+                               <?php echo $_smarty_tpl->tpl_vars['SUBMIT_GO']->value;?>
 
                             </span>
                          </a>
@@ -72,12 +74,13 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                        <a href="HREF_PAGE_GET" title=''> 
-							<img src="<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsReport']->value;?>
+                        <a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_GET']->value;?>
+" title=''> 
+							<img src="<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_REPORT']->value;?>
 "
-								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsReportHover']->value;?>
+								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_REPORT_HOVER']->value;?>
 '"
-								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsReport']->value;?>
+								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_REPORT']->value;?>
 '" 
 								 alt="Services" />
 						</a>
@@ -85,28 +88,29 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeGet1']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_GET_01']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText2">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeGet2']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_GET_01']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText3">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeGet3']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_GET_03']->value;?>
 
                             </label>
                         </div>
                     </div>
                     <div class="DivContentBodyContainersBoxLink">
-                        <a href="HREF_PAGE_GET" title=''> 
+                        <a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_GET']->value;?>
+" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $_smarty_tpl->tpl_vars['SubmitGo']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['SUBMIT_GO']->value;?>
 
                             </span>
                         </a>
@@ -116,12 +120,13 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
             <div class="DivContentBodyContainersBox">
                 <div class="DivContentBodyContainersBoxBackground">
                     <div class="DivContentBodyContainersBoxIcon">
-                       	<a href="HREF_PAGE_SERVICE" title=''> 
-							<img src="<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsService']->value;?>
+                       	<a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_SERVICE']->value;?>
+" title=''> 
+							<img src="<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_SERVICE']->value;?>
 "
-								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsServiceHover']->value;?>
+								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_SERVICE_HOVER']->value;?>
 '"
-								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsService']->value;?>
+								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_SERVICE']->value;?>
 '" 
 								 alt="Services" />
 						</a>
@@ -129,28 +134,29 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeCloud1']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_CLOUD_01']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText2">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeCloud2']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_CLOUD_02']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText3">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeCloud3']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_CLOUD_03']->value;?>
 
                             </label>
                         </div>
                     </div>
                     <div class="DivContentBodyContainersBoxLink">
-                        <a href="HREF_PAGE_SERVICE" title=''> 
+                        <a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_SERVICE']->value;?>
+" title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $_smarty_tpl->tpl_vars['SubmitGo']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['SUBMIT_GO']->value;?>
 
                             </span>
                         </a>
@@ -162,11 +168,11 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="DivContentBodyContainersBoxIcon">
                        <a href="<?php echo $_smarty_tpl->tpl_vars['HREF_PAGE_INSTALL']->value;?>
 " title=''> 
-							<img src="<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsInstall']->value;?>
+							<img src="<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_INSTALL']->value;?>
 "
-								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsInstallHover']->value;?>
+								 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_INSTALL_HOVER']->value;?>
 '"
-								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconInfraToolsInstall']->value;?>
+								 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_INFRATOOLS_INSTALL']->value;?>
 '" 
 								 alt="Install" />
 						</a>
@@ -174,19 +180,19 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
                     <div class="DivContentBodyContainersBoxText">
                         <div class="DivContentBodyContainersBoxText1">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeInstall1']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_INSTALL_01']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText2">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeInstall2']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_INSTALL_02']->value;?>
 
                             </label>
                         </div>
                         <div class="DivContentBodyContainersBoxText3">
                             <label>
-                                <?php echo $_smarty_tpl->tpl_vars['HomeInstall3']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['HOME_INSTALL_03']->value;?>
 
                             </label>
                         </div>
@@ -196,7 +202,7 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
 " title=''> 
                             <span class="DivContentBodyContainersBoxLinkSpace"></span>
                             <span> 
-                                <?php echo $_smarty_tpl->tpl_vars['SubmitGo']->value;?>
+                                <?php echo $_smarty_tpl->tpl_vars['SUBMIT_GO']->value;?>
 
                             </span>
                         </a>
@@ -223,11 +229,11 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
         <div class="DivContentBodyCertificationHtml">
             <p>
                 <a href="http://validator.w3.org/check?uri=referer">
-                    <img src="<?php echo $_smarty_tpl->tpl_vars['IconW3CHtml5']->value;?>
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['ICON_W3C_HTML5']->value;?>
 " 
-                         onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconW3CHtml5Hover']->value;?>
+                         onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_W3C_HTML5_HOVER']->value;?>
 '"
-						 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconW3CHtml5']->value;?>
+						 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_W3C_HTML5']->value;?>
 '"
                          alt="Valid HTML5" width="88" height="31" />
                 </a>
@@ -236,11 +242,11 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
         <div class="DivContentBodyCertificationCss">
             <p>
                 <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                    <img src="<?php echo $_smarty_tpl->tpl_vars['IconW3CCss']->value;?>
+                    <img src="<?php echo $_smarty_tpl->tpl_vars['ICON_W3C_CSS']->value;?>
 "
-                         onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconW3CCssHover']->value;?>
+                         onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_W3C_CSS_HOVER']->value;?>
 '"
-						 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconW3CCss']->value;?>
+						 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_W3C_CSS']->value;?>
 '" 
                          alt="Valid CSS3" width="88" height="31" />
                 </a>
@@ -249,11 +255,11 @@ function content_5cc092ce716a07_00782758 (Smarty_Internal_Template $_smarty_tpl)
         <div class="DivContentBodyCertificationValidRobots">
         	<p>
                 <a href="http://tool.motoricerca.info/robots-checker.phtml?checkreferer=1">
-					<img src="<?php echo $_smarty_tpl->tpl_vars['IconRobots']->value;?>
+					<img src="<?php echo $_smarty_tpl->tpl_vars['ICON_ROBOTS']->value;?>
 "
-						 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['IconRobotsHover']->value;?>
+						 onmouseover="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_ROBOTS_HOVER']->value;?>
 '"
-						 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['IconRobots']->value;?>
+						 onmouseout="this.src='<?php echo $_smarty_tpl->tpl_vars['ICON_ROBOTS']->value;?>
 "
 						 alt="Valid Robots.txt" width="88" height="31"/> 
                	</a>
