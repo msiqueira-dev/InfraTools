@@ -14,6 +14,7 @@ Description:
 			Classe existente para tratamento do negócio utilizado pelas telas.
 Methods: 
 			private   function InfraToolsLoadInstanceUser();
+			protected function BuildSmartyTags();
 			protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 
 			                                                         &$RowCount, $Debug);
 			protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
@@ -315,6 +316,79 @@ abstract class PageInfraTools extends Page
 			$this->Session = $this->Factory->CreateSession();
 			$this->Session->GetSessionValue(ConfigInfraTools::SESS_USER, $this->User);
 			return ConfigInfraTools::RET_OK;
+		}
+	}
+
+	protected function BuildSmartyTags()
+	{
+		$this->Smarty->assign('DIV_RETURN', ConfigInfraTools::DIV_RETURN);
+		$this->Smarty->assign('FM_LST_INPUT_LIMIT_ONE', ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE);
+		$this->Smarty->assign('FM_LST_INPUT_LIMIT_TWO', ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO);
+		if(isset($this->ReturnClass)) 
+			$this->Smarty->assign('RETURN_CLASS', $this->ReturnClass);
+		else $this->Smarty->assign('RETURN_CLASS', NULL);
+		if(isset($this->ReturnImage)) 
+			$this->Smarty->assign('RETURN_IMAGE', $this->ReturnImage);
+		else $this->Smarty->assign('RETURN_IMAGE', NULL);
+		if(isset($this->ReturnEmptyText)) 
+			$this->Smarty->assign('RETURN_EMPTY_TEXT', $this->ReturnEmptyText);
+		else $this->Smarty->assign('RETURN_EMPTY_TEXT', NULL);
+		if(isset($this->ReturnText)) 
+			$this->Smarty->assign('RETURN_TEXT', $this->ReturnText);
+		else $this->Smarty->assign('RETURN_TEXT', NULL);
+		if(isset($this->SubmitClass)) 
+			$this->Smarty->assign('SUBMIT_CLASS', $this->SubmitClass);
+		else $this->Smarty->assign('SUBMIT_CLASS', NULL);
+		if(isset($this->SubmitEnabled)) 
+			$this->Smarty->assign('SUBMIT_ENABLED', $this->SubmitEnabled);
+		else $this->Smarty->assign('SUBMIT_ENABLED', NULL);
+		$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
+		$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28.png");
+		$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28Hover.png");
+		$this->Smarty->assign('SUBMIT_FORWARD', $this->InstanceLanguageText->GetText('SUBMIT_FORWARD'));
+		$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28.png");
+		$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28Hover.png");
+		if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
+		{
+			if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+			{
+				$this->Smarty->assign('TB_PAGE_PREFIX', $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX'));
+				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', $this->InputValueLimit1);
+				$this->Smarty->assign('TB_PAGE', $this->InstanceLanguageText->GetText('TB_PAGE'));
+				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', $this->InputValueLimit2);
+			}
+			else
+			{
+				$this->Smarty->assign('TB_PAGE_PREFIX', NULL);
+				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', NULL);
+				$this->Smarty->assign('TB_PAGE', NULL);
+				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', NULL);
+			}
+		}
+		else
+		{
+			$this->Smarty->assign('TB_PAGE_PREFIX', NULL);
+			$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', NULL);
+			$this->Smarty->assign('TB_PAGE', NULL);
+			$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', NULL);
+		}
+		if(isset($this->InputValueRowCount)) 
+		{
+			if($this->InputValueRowCount != "") 
+			{
+				$this->Smarty->assign('ROW_COUNT', $this->InstanceLanguageText->GetText('ROW_COUNT'));
+				$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', $this->InputValueRowCount);
+			}
+			else
+			{
+				$this->Smarty->assign('ROW_COUNT', NULL);
+				$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', NULL);
+			}
+		}
+		else
+		{
+			$this->Smarty->assign('ROW_COUNT', NULL);
+			$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', NULL);
 		}
 	}
 	

@@ -1,77 +1,75 @@
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))           echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnCorporationNameText)) echo $this->ReturnCorporationNameText; ?>
-		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_CORPORATION_NAME_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_CORPORATION_SEL_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_CORPORATION_SEL_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FM_CORPORATION_SEL_FORM; ?>" method="post" >
+<form name="{$FM_CORPORATION_SEL_FORM}" id="{$FM_CORPORATION_SEL_FORM}" method="post" >
 	<!-- FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'); ?> </label>
+			<label> {$FIELD_CORPORATION_NAME_TEXT} </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
-						   id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
-						   class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass; ?>"
+		<input type="text" name="{$FIELD_CORPORATION_NAME}" 
+						   id="{$FIELD_CORPORATION_NAME}"
+						   class="DivContentBodyContainerInputText {$RETURN_CORPORATION_NAME_CLASS}"
 						   onkeyup="ValidateCorporation('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
+										       '{$FIELD_CORPORATION_NAME}',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+											   '{$FM_CORPORATION_SEL_SB}',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_FORM; ?>',
+											 '{$FM_CORPORATION_SEL_FORM}',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+											 '{$FM_CORPORATION_SEL_SB}',
 											 '');"
 						   onblur="ValidateCorporation('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
+										       '{$FIELD_CORPORATION_NAME}',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+											   '{$FM_CORPORATION_SEL_SB}',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_FORM; ?>',
+											 '{$FM_CORPORATION_SEL_FORM}',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+											 '{$FM_CORPORATION_SEL_SB}',
 											 '');"
 						   onchange="ValidateCorporation('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
+										       '{$FIELD_CORPORATION_NAME}',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+											   '{$FM_CORPORATION_SEL_SB}',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_FORM; ?>',
+											 '{$FM_CORPORATION_SEL_FORM}',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+											 '{$FM_CORPORATION_SEL_SB}',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'); ?>" 
-						   value="<?php echo $this->InputValueCorporationName; ?>" maxlength="80" />
+						   title="{$FIELD_CORPORATION_NAME_TEXT}" 
+						   value="{$FIELD_CORPORATION_NAME_VALUE}" maxlength="80" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateCorporation('DivContentBodyContainerInputText', 
-							       '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
+							       '{$FIELD_CORPORATION_NAME}',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+								   '{$FM_CORPORATION_SEL_SB}',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_FORM; ?>',
+								   '{$FM_CORPORATION_SEL_FORM}',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>',
+								   '{$FM_CORPORATION_SEL_SB}',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_CORPORATION_SEL_SB; ?>"
-								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
-								 <?php echo $this->SubmitEnabled; ?> />
+		<input type="submit" name="{$FM_CORPORATION_SEL_SB}" 
+								 id="{$FM_CORPORATION_SEL_SB}"
+								 class="DivContentBodySubmit {$SUBMIT_CLASS}"
+								 value="{$SUBMIT_SEL}" {$SUBMIT_ENABLED} />
 	</div>
 </form>

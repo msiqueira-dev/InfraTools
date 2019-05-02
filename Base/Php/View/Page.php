@@ -54,6 +54,7 @@ Methods:
 		protected     function        DepartmentUpdateCorporationByCorporationAndDepartment($CorporationNameNew, &$InstanceDepartment, $Debug);
 		protected     function        ExecuteFunction($PostForm, $Function, $ArrayParameter, $Debug, $StoreSession = NULL);
 		protected     function        LoadHtml($HasLoginForm, $EnableDivPush = TRUE);
+		protected     function        LoadHtmlSmarty($HasLoginForm, $Debug, $EnableDivPush = TRUE);
 		protected     function        LoadDataFromSession($SessionKey, $Function, &$Instance);
 		protected     function        NotificationDeleteByNotificationId($InstanceNotification, $Debug);
 		protected     function        NotificationInsert($NotificationActive, $NotificationText, $Debug);
@@ -275,6 +276,7 @@ class Page
 	protected $User                                   = NULL;
 	
 	/* Properties */
+	protected $ArrayPageBodyForm                                    = "";
 	protected $Language                                             = NULL;
 	protected $PageEnabled                                          = NULL;
 	protected $PageCheckLogin                                       = NULL;
@@ -1798,7 +1800,7 @@ class Page
 		else return Config::RET_ERROR;
 	}
 	
-	protected function LoadHtmlSmarty($HasLoginForm, $Debug, $EnableDivPush = TRUE)
+	protected function LoadHtmlSmarty($HasLoginForm, $Debug, $ArrayPageForm = NULL, $EnableDivPush = TRUE)
 	{
 		if(is_a($this->Smarty, "Smarty"))
 		{
@@ -1832,8 +1834,19 @@ class Page
 			}
 			else 
 			{
+				echo "<div class='DivBody'><div class='DivContentBody'>";
 				$this->Smarty->display(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
-				//include_once(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+				if($ArrayPageForm != NULL)
+				{
+					if(is_array($ArrayPageForm))
+					{
+						foreach ($ArrayPageForm as $pageForm)
+							$this->Smarty->display($pageForm);
+					}
+					else $this->Smarty->display($ArrayPageForm);
+
+				}
+				echo "</div></div>";
 			}
 			if($EnableDivPush)
 			{
