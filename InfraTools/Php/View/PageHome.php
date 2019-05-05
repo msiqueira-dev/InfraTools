@@ -103,7 +103,7 @@ class PageHome extends PageInfraTools
 		$this->Smarty->assign('ICON_W3C_CSS_HOVER', $this->Config->DefaultServerImage.'Icons/W3CCssLevel3Hover.png');
 		$this->Smarty->assign('ICON_ROBOTS', $this->Config->DefaultServerImage.'Icons/ValidRobots.png');
 		$this->Smarty->assign('ICON_ROBOTS_HOVER', $this->Config->DefaultServerImage.'Icons/ValidRobotsHover.png');
-		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, NULL, FALSE);
 	}
 }
 ?>

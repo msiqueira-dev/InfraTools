@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class for countries management.
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -40,11 +41,26 @@ class PageAdminCountry extends PageAdmin
 	{
 		parent::__construct($Config, $Language, $Page);
 	}
+
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign('FM_COUNTRY', ConfigInfraTools::FM_COUNTRY);
+			$this->Smarty->assign('FM_COUNTRY_LST', ConfigInfraTools::FM_COUNTRY_LST);
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_COUNTRY", array($this->ArrayInstanceCountry));
+			return ConfigInfraTools::RET_OK;
+		}
+		return ConfigInfraTools::RET_ERROR;
+
+	}
 	
 	public function LoadPage()
 	{
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST;
+		$this->ArrayPageBodyForm = REL_PATH . ConfigInfraTools::PATH_FORM.str_replace("PageAdmin", "",
+		                                      str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST)) . ".php";
 		$this->AdminGoBack($PageFormBack);
 		
 		if(empty($_POST))
@@ -56,7 +72,8 @@ class PageAdminCountry extends PageAdmin
 		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayInstanceCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
-		$this->LoadHtml(FALSE);
+			$this->BuildSmartyTags();
+			$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

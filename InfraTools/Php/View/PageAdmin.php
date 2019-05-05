@@ -79,31 +79,33 @@ class PageAdmin extends PageInfraTools
 	
 	protected function BuildSmartyTags()
 	{
-		parent::BuildSmartyTags();
-		$this->Smarty->assign('FIELD_CORPORATION_NAME', ConfigInfraTools::FIELD_CORPORATION_NAME);
-		$this->Smarty->assign('FIELD_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'));
-		$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
-		$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
-		$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
-		$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
-		$this->Smarty->assign('REGISTER_DATE_TEXT', $this->InstanceLanguageText->GetText('REGISTER_DATE'));
-		$this->Smarty->assign('FM_SB_BACK', ConfigInfraTools::FM_SB_BACK);
-		$this->Smarty->assign('HREF_PAGE_ADMIN', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN'));
-		$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48Hover.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBack.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBackHover.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_REGISTER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdd.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
-		$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
-		$this->Smarty->assign('PAGE_ADMIN', $this->InstanceLanguageText->GetText('PAGE_ADMIN'));
-		$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
-		$this->Smarty->assign('SUBMIT_LST', $this->InstanceLanguageText->GetText('SUBMIT_LST'));
-		$this->Smarty->assign('SUBMIT_INSERT', $this->InstanceLanguageText->GetText('SUBMIT_INSERT'));
-		$this->Smarty->assign('SUBMIT_SEL', $this->InstanceLanguageText->GetText('SUBMIT_SEL'));
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN);
+			$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
+			$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
+			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
+			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
+			$this->Smarty->assign('FM_SB_BACK', ConfigInfraTools::FM_SB_BACK);
+			$this->Smarty->assign('HREF_PAGE_ADMIN', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN'));
+			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48Hover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBack.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBackHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdd.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
+			$this->Smarty->assign('PAGE_ADMIN', $this->InstanceLanguageText->GetText('PAGE_ADMIN'));
+			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
+			$this->Smarty->assign('SUBMIT_LST', $this->InstanceLanguageText->GetText('SUBMIT_LST'));
+			$this->Smarty->assign('SUBMIT_INSERT', $this->InstanceLanguageText->GetText('SUBMIT_INSERT'));
+			$this->Smarty->assign('SUBMIT_SEL', $this->InstanceLanguageText->GetText('SUBMIT_SEL'));
+			return ConfigInfraTools::RET_OK;
+		}
+		return ConfigInfraTools::RET_ERROR;
 	}
 
 	public function LoadPage()

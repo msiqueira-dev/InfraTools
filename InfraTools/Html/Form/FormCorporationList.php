@@ -37,7 +37,9 @@
 			<th class="TableGenericThArrow">
 				<div class="TableGenericInputLeft">
 					<input  type="image" class="TableGenericThArrowImage"
-					        name="{$FM_CORPORATION_LST_BACK}" id="{$FM_CORPORATION_LST_BACK}" value="{$FM_CORPORATION_LST_BACK}"
+							name="{$FM_CORPORATION_LST_BACK}" 
+							id="{$FM_CORPORATION_LST_BACK}" 
+							value="{$FM_CORPORATION_LST_BACK}"
 					        title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
 					        src="{$SUBMIT_BACK_ICON}"
 					        onmouseover="this.src='{$SUBMIT_BACK_ICON_HOVER}'"
@@ -52,11 +54,13 @@
 			</th>
 			<th  class="TableGenericThArrow">
 				<div  class="TableGenericThLeft">
-					{$REGISTER_DATE_TEXT}
+					{$FIELD_REGISTER_DATE_TEXT}
 				</div>
 				<div class="TableGenericInputRight">
 					<input  type="image" class="TableGenericThArrowImage"
-							name="{$FM_CORPORATION_LST_FORWARD}" id="{$FM_CORPORATION_LST_FORWARD}" value="{$FM_CORPORATION_LST_FORWARD}"
+							name="{$FM_CORPORATION_LST_FORWARD}" 
+							id="{$FM_CORPORATION_LST_FORWARD}" 
+							value="{$FM_CORPORATION_LST_FORWARD}"
 							title="{$SUBMIT_FORWARD}" alt="{$SUBMIT_FORWARD}"
 							src="{$SUBMIT_FORWARD_ICON}"
 							onmouseover="this.src='{$SUBMIT_FORWARD_ICON_HOVER}'"
@@ -68,13 +72,24 @@
 	{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_CORPORATION item=INSTANCE_CORPORATION}
 		{foreach key=key item=item from=$INSTANCE_CORPORATION}
 			<tr>
-				<td>
+				<td class="TableGenericTdLink">
 					{$item->GetCorporationActive()}
 				</td>
-				<td>
-					{$item->GetCorporationName()}
+				<td class="TableGenericTdLink">
+					<form name="{$FM_CORPORATION_SEL_SB}" method="post">
+						<input type="hidden" 
+						       name="{$FM_CORPORATION_SEL_SB}" 
+							   id="{$FM_CORPORATION_SEL_SB}"
+							   value="{$FM_CORPORATION_SEL_SB}">
+						<input type="submit" 
+						       name="{$FIELD_CORPORATION_NAME}" 
+							   id="{$FIELD_CORPORATION_NAME}"
+							   value="{$item->GetCorporationName()}"
+							   title="{$item->GetCorporationName()}"
+							   maxlength="80" />	
+					</form>
 				</td>
-				<td>
+				<td class="TableGenericTdLink">
 					{$item->GetRegisterDate()}
 				</td>
 			</tr>

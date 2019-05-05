@@ -321,41 +321,46 @@ abstract class PageInfraTools extends Page
 
 	protected function BuildSmartyTags()
 	{
-		$this->Smarty->assign('DIV_RETURN', ConfigInfraTools::DIV_RETURN);
-		$this->Smarty->assign('FM_LST_INPUT_LIMIT_ONE', ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE);
-		$this->Smarty->assign('FM_LST_INPUT_LIMIT_TWO', ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO);
-		if(isset($this->ReturnClass)) 
-			$this->Smarty->assign('RETURN_CLASS', $this->ReturnClass);
-		else $this->Smarty->assign('RETURN_CLASS', NULL);
-		if(isset($this->ReturnImage)) 
-			$this->Smarty->assign('RETURN_IMAGE', $this->ReturnImage);
-		else $this->Smarty->assign('RETURN_IMAGE', NULL);
-		if(isset($this->ReturnEmptyText)) 
-			$this->Smarty->assign('RETURN_EMPTY_TEXT', $this->ReturnEmptyText);
-		else $this->Smarty->assign('RETURN_EMPTY_TEXT', NULL);
-		if(isset($this->ReturnText)) 
-			$this->Smarty->assign('RETURN_TEXT', $this->ReturnText);
-		else $this->Smarty->assign('RETURN_TEXT', NULL);
-		if(isset($this->SubmitClass)) 
-			$this->Smarty->assign('SUBMIT_CLASS', $this->SubmitClass);
-		else $this->Smarty->assign('SUBMIT_CLASS', NULL);
-		if(isset($this->SubmitEnabled)) 
-			$this->Smarty->assign('SUBMIT_ENABLED', $this->SubmitEnabled);
-		else $this->Smarty->assign('SUBMIT_ENABLED', NULL);
-		$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
-		$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28.png");
-		$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28Hover.png");
-		$this->Smarty->assign('SUBMIT_FORWARD', $this->InstanceLanguageText->GetText('SUBMIT_FORWARD'));
-		$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28.png");
-		$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28Hover.png");
-		if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
-			if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+			$this->Smarty->assign('DIV_RETURN', ConfigInfraTools::DIV_RETURN);
+			$this->Smarty->assign('FM_LST_INPUT_LIMIT_ONE', ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE);
+			$this->Smarty->assign('FM_LST_INPUT_LIMIT_TWO', ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO);
+			$this->Smarty->assign('FIELD_CORPORATION_NAME', ConfigInfraTools::FIELD_CORPORATION_NAME);
+			$this->Smarty->assign('FIELD_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'));
+			$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
+			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
+			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION', ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION);
+			$this->Smarty->assign('FIELD_USER_EMAIL', ConfigInfraTools::FIELD_USER_EMAIL);
+			$this->Smarty->assign('FIELD_USER_EMAIL_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'));
+			$this->Smarty->assign('FIELD_USER_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_NAME'));
+			$this->Smarty->assign('FIELD_USER_TYPE_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_TYPE'));
+			$this->Smarty->assign('FM_CORPORATION_SEL_SB', ConfigInfraTools::FM_CORPORATION_SEL_SB);
+			$this->Smarty->assign('FM_DEPARTMENT_SEL_SB', ConfigInfraTools::FM_DEPARTMENT_SEL_SB);
+			$this->Smarty->assign('FM_TYPE_USER_SEL_SB', ConfigInfraTools::FM_TYPE_USER_SEL_SB);
+			$this->Smarty->assign('FM_USER_SEL_SB', ConfigInfraTools::FM_USER_SEL_SB);
+			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
+			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28.png");
+			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28Hover.png");
+			$this->Smarty->assign('SUBMIT_FORWARD', $this->InstanceLanguageText->GetText('SUBMIT_FORWARD'));
+			$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28.png");
+			$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28Hover.png");
+			if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
 			{
-				$this->Smarty->assign('TB_PAGE_PREFIX', $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX'));
-				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', $this->InputValueLimit1);
-				$this->Smarty->assign('TB_PAGE', $this->InstanceLanguageText->GetText('TB_PAGE'));
-				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', $this->InputValueLimit2);
+				if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
+				{
+					$this->Smarty->assign('TB_PAGE_PREFIX', $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX'));
+					$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', $this->InputValueLimit1);
+					$this->Smarty->assign('TB_PAGE', $this->InstanceLanguageText->GetText('TB_PAGE'));
+					$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', $this->InputValueLimit2);
+				}
+				else
+				{
+					$this->Smarty->assign('TB_PAGE_PREFIX', NULL);
+					$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', NULL);
+					$this->Smarty->assign('TB_PAGE', NULL);
+					$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', NULL);
+				}
 			}
 			else
 			{
@@ -364,32 +369,28 @@ abstract class PageInfraTools extends Page
 				$this->Smarty->assign('TB_PAGE', NULL);
 				$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', NULL);
 			}
-		}
-		else
-		{
-			$this->Smarty->assign('TB_PAGE_PREFIX', NULL);
-			$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_ONE', NULL);
-			$this->Smarty->assign('TB_PAGE', NULL);
-			$this->Smarty->assign('TB_PAGE_INPUT_VALUE_LIMIT_TWO', NULL);
-		}
-		if(isset($this->InputValueRowCount)) 
-		{
-			if($this->InputValueRowCount != "") 
+			if(isset($this->InputValueRowCount)) 
 			{
-				$this->Smarty->assign('ROW_COUNT', $this->InstanceLanguageText->GetText('ROW_COUNT'));
-				$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', $this->InputValueRowCount);
+				if($this->InputValueRowCount != "") 
+				{
+					$this->Smarty->assign('ROW_COUNT', $this->InstanceLanguageText->GetText('ROW_COUNT'));
+					$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', $this->InputValueRowCount);
+				}
+				else
+				{
+					$this->Smarty->assign('ROW_COUNT', NULL);
+					$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', NULL);
+				}
 			}
 			else
 			{
 				$this->Smarty->assign('ROW_COUNT', NULL);
 				$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', NULL);
 			}
+			return ConfigInfraTools::RET_OK;
 		}
-		else
-		{
-			$this->Smarty->assign('ROW_COUNT', NULL);
-			$this->Smarty->assign('INPUT_VALUE_ROW_COUNT', NULL);
-		}
+		return ConfigInfraTools::RET_ERROR;
+
 	}
 	
 	protected function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, 

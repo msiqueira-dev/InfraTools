@@ -13,7 +13,7 @@
 			</a>
 		</div>
 		<div class="DivContentBodyContainersBox">
-			<input type="image" name="{$FM_SB_BACK}" id="{$FM_CORPORATION_SEL}" value="{$FM_SB_BACK}"
+			<input type="image" name="{$FM_SB_BACK}" id="{$FM_SB_BACK}" value="{$FM_SB_BACK}"
 							title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
 							src="{$ICON_INFRATOOLS_ARROW_BACK}"
 							onmouseover="this.src='{$ICON_INFRATOOLS_ARROW_BACK_HOVER}'"

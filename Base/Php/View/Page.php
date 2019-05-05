@@ -25,7 +25,8 @@ Methods:
 		protected     function        AssocUserNotificationLoadData($InstanceAssocUserNotification);
 		protected     function        AssocUserNotificationUpdateByUserEmailAndNotificationId($AssocUserNotificationReadNew, 
 		                                                                                      $NotificationIdNew, $UserEmailNew, 
-		                                                                                      &$InstanceAssocUserNotification, $Debug);
+																							  &$InstanceAssocUserNotification, $Debug);
+		protected     function        BuildSmartyTags();
 		protected     function        CaptchaLoad(SessionCaptchaKey);
 		protected     function        CorporationDelete($CorporationName, $Debug);
 		protected     function        CorporationInsert($CorporationActive, $CorporationName, $Debug);
@@ -966,7 +967,38 @@ class Page
 		$this->ShowDivReturnError("ASSOC_USER_NOTIFICATION_UPDT_ERROR");
 		return Config::RET_ERROR;
 	}
-	
+
+	protected function BuildSmartyTags()
+	{
+		$this->Smarty->assign('FIELD_REGISTER_DATE_TEXT', $this->InstanceLanguageText->GetText('REGISTER_DATE'));
+		$this->Smarty->assign('FIELD_REGISTER_DATE_VALUE', $this->InputValueRegisterDate);
+		if(isset($this->ReturnClass)) 
+				$this->Smarty->assign('RETURN_CLASS', $this->ReturnClass);
+		else $this->Smarty->assign('RETURN_CLASS', NULL);
+		if(isset($this->ReturnImage)) 
+			$this->Smarty->assign('RETURN_IMAGE', $this->ReturnImage);
+		else $this->Smarty->assign('RETURN_IMAGE', NULL);
+		if(isset($this->ReturnEmptyText)) 
+			$this->Smarty->assign('RETURN_EMPTY_TEXT', $this->ReturnEmptyText);
+		else $this->Smarty->assign('RETURN_EMPTY_TEXT', NULL);
+		if(isset($this->ReturnText)) 
+			$this->Smarty->assign('RETURN_TEXT', $this->ReturnText);
+		else $this->Smarty->assign('RETURN_TEXT', NULL);
+		if(isset($this->SubmitClass)) 
+			$this->Smarty->assign('SUBMIT_CLASS', $this->SubmitClass);
+		else $this->Smarty->assign('SUBMIT_CLASS', NULL);
+		if(isset($this->SubmitEnabled)) 
+			$this->Smarty->assign('SUBMIT_ENABLED', $this->SubmitEnabled);
+		else $this->Smarty->assign('SUBMIT_ENABLED', NULL);
+		$this->Smarty->assign('SUBMIT_CANCEL', $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'));
+		$this->Smarty->assign('SUBMIT_CONFIRM', $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM'));
+		$this->Smarty->assign('SUBMIT_DEL', $this->InstanceLanguageText->GetText('SUBMIT_DEL'));
+		$this->Smarty->assign('SUBMIT_LST_USERS', $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'));
+		$this->Smarty->assign('SUBMIT_REGISTER', $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'));
+		$this->Smarty->assign('SUBMIT_UPDT', $this->InstanceLanguageText->GetText('SUBMIT_UPDT'));
+		return Config::RET_OK;
+	}
+
 	protected function CaptchaLoad($SessionCaptchaKey, $Debug)
 	{
 		$InstanceBaseCaptcha = $this->Factory->CreateCaptcha();
@@ -1844,7 +1876,13 @@ class Page
 							$this->Smarty->display($pageForm);
 					}
 					else $this->Smarty->display($ArrayPageForm);
-
+				}
+				else 
+				{
+					$pageForm = REL_PATH . ConfigInfraTools::PATH_FORM . 
+							str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody)) . ".php";	
+					if(file_exists($pageForm))
+						$this->Smarty->display($pageForm);
 				}
 				echo "</div></div>";
 			}
