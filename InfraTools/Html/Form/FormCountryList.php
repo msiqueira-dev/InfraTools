@@ -1,91 +1,81 @@
 <!-- FM_COUNTRY_LST_FORM -->
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
-	<?php 
-		 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-		 {
-			 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-				  echo "<label class='InputValueLimitTitle'>" . 
-						   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
-					   "</label>" .
-					   "<label class='InputValueLimitValue'>" . 
-						   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
-												   . " " . $this->InputValueLimit2 . 
-					   "</label>";
-		 }
-	?>
+		<label class='InputValueLimitTitle'>
+			{$TB_PAGE_PREFIX}
+		</label>
+		<label class='InputValueLimitValue'> 
+			{$TB_PAGE_INPUT_VALUE_LIMIT_ONE} {$TB_PAGE} {$TB_PAGE_INPUT_VALUE_LIMIT_TWO}
+		</label>
 	</div>
 	<div class="DivTableGenericHeaderRowCount">
-	<?php
-		 if(isset($this->InputValueRowCount)) 
-		  {
-			  if($this->InputValueRowCount != "") 
-				  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-						   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-					   "</label>" .
-					   "<label class='DivTableGenericRowCountLabelValue'>" . 
-						   $this->InputValueRowCount . 
-					   "</label>";
-		  } 
-	?>
+		<label class='DivTableGenericRowCountLabelTitle'>
+			{$ROW_COUNT} 
+		</label>
+		<label class='DivTableGenericRowCountLabelValue'>
+			{$INPUT_VALUE_ROW_COUNT}
+		</label>
 	</div>
 </div>
-<?php
-	if(is_array($this->ArrayInstanceCountry))
-	{
-		echo "<form  name='" . ConfigInfraTools::FM_COUNTRY_LST_FORM . "' method='post' />";
-		echo "<input type='hidden' value='$this->InputLimitOne' 
-				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
-		echo "<input type='hidden' value='$this->InputLimitTwo'
-				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
-		echo "<table class='TableGeneric'>";
-		echo "<tr>";
-		echo "<th class='TableGenericThArrow'>" .
-			 "<div class='TableGenericInputLeft'>
-			 <input  type='image'
-				    class='TableGenericThArrowImage'
-				    name='"  . ConfigInfraTools::FM_COUNTRY_LST_BACK . "' 
-				    id='"    . ConfigInfraTools::FM_COUNTRY_LST_BACK . "'
-				    value='" . ConfigInfraTools::FM_COUNTRY_LST_BACK . "'
-				    title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-				    alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-				    src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowBack28.png'
-				    onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
-				    onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
-		     "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME') . "</div></th>";
-		echo "<th>" . $this->InstanceLanguageText->GetText('FIELD_COUNTRY_ABBREVIATION') . "</th>";
-		echo "<th>" . $this->InstanceLanguageText->GetText('FIELD_REGION_CODE') . "</th>";
-		echo "<th  class='TableGenericThArrow'>
-	         <div  class='TableGenericThDiv'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-		     "<div class='TableGenericInputRight'>
-		     <input  type='image'
-			   	     class='TableGenericThArrowImage'
-				     name='"  . ConfigInfraTools::FM_COUNTRY_LST_FORWARD . "' 
-				     id='"    . ConfigInfraTools::FM_COUNTRY_LST_FORWARD . "'
-				     value='" . ConfigInfraTools::FM_COUNTRY_LST_FORWARD . "'
-				     title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-				     alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-				     src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowForward28.png'
-				     onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
-				     onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
-		echo "</th>";
-		echo "</tr>";
-		echo "</form>";
-		foreach($this->ArrayInstanceCountry as $key=>$country)
-		{
-			echo "<tr>";
-			echo "<td>" . $country->GetCountryName()          . "</td>";
-			echo "<td>" . $country->GetCountryAbbreviation()  . "</td>";
-			echo "<td>" . $country->GetRegionCode()           . "</td>";
-			echo "<td>" . $country->GetRegisterDate()         . "</td>";
-			echo "</tr>";
-		}
-		echo "</table>";
-	}
-?>
+<table class='TableGeneric'>
+	<tr>
+		<form  name="{$FM_CORPORATION_LST_FORM}" method='post'>
+			<input type="hidden" value="{$INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
+			<input type="hidden" value="{$INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
+			<th class="TableGenericThArrow">
+				<div class="TableGenericInputLeft">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_COUNTRY_LST_BACK}" 
+							id="{$FM_COUNTRY_LST_BACK}" 
+							value="{$FM_COUNTRY_LST_BACK}"
+					        title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
+					        src="{$SUBMIT_BACK_ICON}"
+					        onmouseover="this.src='{$SUBMIT_BACK_ICON_HOVER}'"
+					        onmouseout="this.src='{$SUBMIT_BACK_ICON}'" />
+				</div>
+				<div class="TableGenericThRight">
+					{$FIELD_COUNTRY_NAME_TEXT}
+				</div>
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_COUNTRY_ABBREVIATION_TEXT}
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_REGION_CODE_TEXT}
+			</th>
+			<th  class="TableGenericThArrow">
+				<div  class="TableGenericThLeft">
+					{$FIELD_REGISTER_DATE_TEXT}
+				</div>
+				<div class="TableGenericInputRight">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_COUNTRY_LST_FORWARD}" 
+							id="{$FM_COUNTRY_LST_FORWARD}" 
+							value="{$FM_COUNTRY_LST_FORWARD}"
+							title="{$SUBMIT_FORWARD}" alt="{$SUBMIT_FORWARD}"
+							src="{$SUBMIT_FORWARD_ICON}"
+							onmouseover="this.src='{$SUBMIT_FORWARD_ICON_HOVER}'"
+							onmouseout="this.src='{$SUBMIT_FORWARD_ICON}'" />
+				</div>
+			</th>
+		</form>
+	</tr>
+	{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_COUNTRY item=INSTANCE_COUNTRY}
+		{foreach key=key item=item from=$INSTANCE_COUNTRY}
+			<tr>
+				<td class="TableGenericTdLink">
+					{$item->GetCountryName()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetCountryAbbreviation()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetRegionCode()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetRegisterDate()}
+				</td>
+			</tr>
+		{/foreach}
+	{/foreach}
+</table>

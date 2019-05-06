@@ -9,8 +9,8 @@ Dependencies:
 Description: 
 			Class that manages teams.
 Functions: 
+			protected function BuildSmartyTags()
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -48,9 +48,26 @@ class PageTeam extends PageInfraTools
 		parent::__construct($Config, $Language, $Page);
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign('HREF_PAGE_TEAM_LST', $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LST'));
+			$this->Smarty->assign('HREF_PAGE_TEAM_REGISTER', $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_REGISTER'));
+			$this->Smarty->assign('HREF_PAGE_TEAM_SEL', $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SEL'));
+			$this->Smarty->assign('ICON_INFRATOOLS_TEAM', $this->Config->DefaultServerImage. 'Icons/IconInfraToolsTeam136x90.png');
+			$this->Smarty->assign('OPERATION_LST', $this->InstanceLanguageText->GetText('OPERATION_LST'));
+			$this->Smarty->assign('OPERATION_REGISTER', $this->InstanceLanguageText->GetText('OPERATION_REGISTER'));
+			$this->Smarty->assign('OPERATION_SEARCH', $this->InstanceLanguageText->GetText('OPERATION_SEARCH'));
+			return ConfigInfraTools::RET_OK;
+		}
+		return ConfigInfraTools::RET_ERROR;
+	}
+
 	public function LoadPage()
 	{
-		$this->LoadHtml(TRUE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

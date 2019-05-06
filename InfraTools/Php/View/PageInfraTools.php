@@ -339,6 +339,12 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FM_DEPARTMENT_SEL_SB', ConfigInfraTools::FM_DEPARTMENT_SEL_SB);
 			$this->Smarty->assign('FM_TYPE_USER_SEL_SB', ConfigInfraTools::FM_TYPE_USER_SEL_SB);
 			$this->Smarty->assign('FM_USER_SEL_SB', ConfigInfraTools::FM_USER_SEL_SB);
+			$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdd.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28.png");
 			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28Hover.png");

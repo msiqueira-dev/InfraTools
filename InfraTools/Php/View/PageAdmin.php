@@ -92,12 +92,6 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48Hover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBack.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBackHover.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdd.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
 			$this->Smarty->assign('PAGE_ADMIN', $this->InstanceLanguageText->GetText('PAGE_ADMIN'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_LST', $this->InstanceLanguageText->GetText('SUBMIT_LST'));

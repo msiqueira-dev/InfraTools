@@ -2,59 +2,53 @@
 <div class="DivBody">
     <div class="DivContentBody">
 		<div class="DivContentBodySecondTitle">
-			<img src="<?php echo $this->Config->DefaultServerImage. 'Icons/IconInfraToolsTeam136x90.png'; ?>" 
+			<img src="{$ICON_INFRATOOLS_TEAM}" 
 				 alt="IconInfraToolsSearch" class="DivContentBodySecondTitleImage" width="136" height="90"/>
 		</div>
 		<div class="DivContentBodySecondTitleLine"></div>
 		<div class="DivContentBodyOptions">
 			<div class="DivContentBodyOptionsBox">
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SEL'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_SEL') ?>">
+					<a href="{$HREF_PAGE_TEAM_SEL}" 
+					  title="{$HREF_PAGE_TEAM_SEL}">
 						<div class="DivContentBodyContainersBoxIcon">
-							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png';?>"
-							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsFindHover.png'; ?>'"
-    			                 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsFind.png'; ?>'" />
+							<img src="{$ICON_INFRATOOLS_SEL}"
+							     onmouseover="this.src='{$ICON_INFRATOOLS_SEL_HOVER}'"
+    			         onmouseout="this.src='{$ICON_INFRATOOLS_SEL}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('OPERATION_SEARCH'); ?>
+								{$OPERATION_SEARCH}
 							</i>
 						</div>
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_REGISTER'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_REGISTER') ?>">
+					<a href="{$HREF_PAGE_TEAM_REGISTER}" 
+					  title="{$HREF_PAGE_TEAM_REGISTER}">
 						<div class="DivContentBodyContainersBoxIcon">
-							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdd.png';?>"
-							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsAddHover.png'; ?>'"
-    			                 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsAdd.png'; ?>'" />
+							<img src="{$ICON_INFRATOOLS_REGISTER}"
+							     onmouseover="this.src='{$ICON_INFRATOOLS_REGISTER_HOVER}'"
+    			         onmouseout="this.src='{$ICON_INFRATOOLS_REGISTER}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('OPERATION_REGISTER'); ?>
+								{$OPERATION_REGISTER}
 							</i>
 						</div>
 					</a>
 				</div>
 				<div class="DivContentBodyContainersBox">
-					<a href="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LST'); ?>" 
-					  title="<?php echo $this->InstanceLanguageText->GetText('HREF_PAGE_TEAM_LST') ?>">
+					<a href="{$HREF_PAGE_TEAM_LST}" 
+					  title="{$HREF_PAGE_TEAM_LST}">
 						<div class="DivContentBodyContainersBoxIcon">
-							<img src="<?php echo $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png';?>"
-							     onmouseover="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsListHover.png'; ?>'"
-    			                 onmouseout="this.src='<?php echo $this->Config->DefaultServerImage
-															.'Icons/IconInfraToolsList.png'; ?>'" />
+							<img src="{$ICON_INFRATOOLS_LST}"
+							     onmouseover="this.src='{$ICON_INFRATOOLS_LST_HOVER}'"
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_LST}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
-								<?php echo $this->InstanceLanguageText->GetText('OPERATION_LST'); ?>
+								{$OPERATION_LST}
 							</i>
 						</div>
 					</a>

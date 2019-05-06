@@ -48,11 +48,14 @@ class PageAdminCountry extends PageAdmin
 		{
 			$this->Smarty->assign('FM_COUNTRY', ConfigInfraTools::FM_COUNTRY);
 			$this->Smarty->assign('FM_COUNTRY_LST', ConfigInfraTools::FM_COUNTRY_LST);
+			$this->Smarty->assign('FIELD_COUNTRY_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME'));
+			$this->Smarty->assign('FIELD_COUNTRY_ABBREVIATION_TEXT', $this->InstanceLanguageText->GetText('FIELD_COUNTRY_ABBREVIATION'));
+			$this->Smarty->assign('FIELD_REGION_CODE_TEXT', $this->InstanceLanguageText->GetText('FIELD_REGION_CODE'));
+			
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_COUNTRY", array($this->ArrayInstanceCountry));
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;
-
 	}
 	
 	public function LoadPage()
@@ -72,8 +75,8 @@ class PageAdminCountry extends PageAdmin
 		$this->ExecuteFunction($_POST, 'CountrySelect', array(&$this->ArrayInstanceCountry), $this->InputValueHeaderDebug);
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
-			$this->BuildSmartyTags();
-			$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>
