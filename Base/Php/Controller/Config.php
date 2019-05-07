@@ -1041,6 +1041,7 @@ class Config
 	const TB_USER_FD_USER_TWO_STEP_VERIFICATION                         = "TwoStepVerification";
 	const TB_USER_FD_TYPE                                               = "UserType";
 	const TB_USER_FD_USER_UNIQUE_ID                                     = "UserUniqueID";
+	const TIMEZONE_SAO_PAULO                                            = "America/Sao_Paulo";
 	const TYPE_USER_DEFAULT                                             = "USER";
 	const TYPE_USER_SUPER                                               = "SUPER_ADMINISTRATOR";
 	const USER_NOT_CONFIRMED                                            = "USER_NOT_CONFIRMED";
@@ -1148,7 +1149,9 @@ class Config
 		if(class_exists("ProjectConfig"))
 		{
 			error_reporting(E_ALL);
-			date_default_timezone_set(ProjectConfig::$TimeZone);
+			if(!empty(ProjectConfig::$TimeZone))
+				date_default_timezone_set(ProjectConfig::$TimeZone);
+			else date_default_timezone_set(Config::TIMEZONE_SAO_PAULO);
 			setlocale(LC_ALL, 'UTF8');
 			if(ini_set("display_errors", ProjectConfig::$DisplayErrors) === FALSE)
 				exit(Config::INI_SET_FATAL_ERROR_DISPLAY_ERRORS);
@@ -1199,6 +1202,18 @@ class Config
 			$this->DefaultServerJavaScript               = ProjectConfig::$AddressJavaScriptServer;
 			$this->DefaultUploadDirectory                = ProjectConfig::$UploadDirectory;
 			$this->Session->CreateBasic($this->DefaultApplicationName, $this->SessionTime);
+			if(empty(ProjectConfig::$AddressImageServer) || empty(ProjectConfig::$AddressJavaScriptServer) ||
+			   empty(ProjectConfig::$MySqlDataBaseUser)  || empty(ProjectConfig::$MySqlDataBaseUserPassword) ||
+			   empty(ProjectConfig::$MySqlDataBaseSuperUser)  || empty(ProjectConfig::$MySqlDataBaseSuperUserPassword) ||
+			   empty(ProjectConfig::$MysqlDataBaseImportUser)  || empty(ProjectConfig::$MysqlDataBaseImportUserPassword) ||
+			   empty(ProjectConfig::$MySqlDumpCompletePath)  || empty(ProjectConfig::$MySqlDataBaseName) ||
+			   empty(ProjectConfig::$MySqlDataBasePort)  || empty(ProjectConfig::$MySqlDataBaseAddress) ||
+			   empty(ProjectConfig::$EmailSupportAccount)  || empty(ProjectConfig::$EmailNoReplyAccount) ||
+			   empty(ProjectConfig::$EmailNoReplyAccountReplyTo)  || empty(ProjectConfig::$EmailNoReplyPassword) ||
+			   empty(ProjectConfig::$AddressApplication)  || empty(ProjectConfig::$ApplicationName))
+			{
+				echo "<h3 style='color:black'><b>Please fill the ProjectConfig.php file or the System will not work properly</b></h3>";
+			}
 			return $this->Session->CheckActivity(self::SESS_LAST_ACTIVITY, self::SESS_USER, 
 												 $this->SessionTime, self::SESS_UNLIMITED);
 			
