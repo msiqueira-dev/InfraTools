@@ -416,6 +416,8 @@ class En
 	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT                 = "here";
 	const HEADER_PAGE_SERVICE_TITLE                                 = "Service";
 	const HEADER_PAGE_SERVICE_TEXT                                  = "SERVICE";
+	const HEADER_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TITLE            = "Association of Services and Ip Addresses";
+	const HEADER_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TEXT             = "ASSOCIATION OF SERVICES AND IP ADDRESSES";
 	const HEADER_PAGE_SERVICE_LST_TITLE                             = "List Services";
 	const HEADER_PAGE_SERVICE_LST_TEXT                              = "LIST SERVICES";
 	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "List Services by Corporation";
@@ -484,6 +486,7 @@ class En
 	const HREF_PAGE_REGISTER_CONFIRMATION                           = "/En/PageRegisterConfirmation";
 	const HREF_PAGE_RESEND_CONFIRMATION_LINK                        = "/En/PageResendConfirmationLink";
 	const HREF_PAGE_SERVICE                                         = "/En/PageService";
+	const HREF_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS                    = "/En/PageServiceAssociateIpAddress";
 	const HREF_PAGE_SERVICE_LST                                     = "/En/PageServiceList";
 	const HREF_PAGE_SERVICE_LST_BY_CORPORATION                      = "/En/PageServiceListByCorporation";
 	const HREF_PAGE_SERVICE_LST_BY_DEPARTMENT                       = "/En/PageServiceListByDepartment";
@@ -658,9 +661,9 @@ class En
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools - Admin Ip Address";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Admin Notification";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "Admin Notification - Associate Users";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools - Admin Notification";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "Admin Notification - Associate Users";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_TITLE              = "InfraTools - Admin Notification";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "Admin Notification - List";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools - Admin Notification";
@@ -961,6 +964,9 @@ class En
 	const PAGE_SERVICE                                      	    = "Service";
 	const PAGE_SERVICE_ROBOTS                                       = "ALL";
 	const PAGE_SERVICE_TITLE                                        = "InfraTools - Service";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS                         = "Association of Service and Ip Address";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_ROBOTS                  = "noindex";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TITLE                   = "InfraTools - Association of Service and Ip Address";
 	const PAGE_SERVICE_LST                                          = "List Services";
 	const PAGE_SERVICE_LST_BY_CORPORATION                           = "List Services by Corporations";
 	const PAGE_SERVICE_LST_BY_CORPORATION_ROBOTS                    = "noindex";
@@ -1085,8 +1091,8 @@ class En
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "Service updated succesfully";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ACTIVATE ACCOUNT";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DEACTIVATE ACCOUNT";
-	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIATE TO USERS";
-	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "DISASSOCIATE TO USERS";
+	const SUBMIT_ASSOCIATE_USER                                     = "ASSOCIATE TO USERS";
+	const SUBMIT_ASSOCIATE_USER_DISASSOCIATE                        = "DISASSOCIATE TO USERS";
 	const SUBMIT_BACK                                               = "BACK";
 	const SUBMIT_CANCEL                                             = "CANCEL";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "CHANGE USER CORPORATION INFO";

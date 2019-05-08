@@ -421,6 +421,8 @@ class Pt
 	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT                 = "aqui";
 	const HEADER_PAGE_SERVICE_TITLE                                 = "Serviços";
 	const HEADER_PAGE_SERVICE_TEXT                                  = "SERVIÇOS";
+	const HEADER_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TITLE            = "Associação de Serviços e Endereços de Ip";
+	const HEADER_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TEXT             = "ASSOCIAÇÃO DE SERVIÇOS E ENDEREÇOS DE IP";
 	const HEADER_PAGE_SERVICE_LST_TITLE                             = "Listagem de Serviços";
 	const HEADER_PAGE_SERVICE_LST_TEXT                              = "LISTAGEM DE SERVIÇOS";
 	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "Listagem de Serviços por Corporação";
@@ -489,6 +491,7 @@ class Pt
 	const HREF_PAGE_REGISTER_CONFIRMATION                           = "/Pt/PageRegisterConfirmation";
 	const HREF_PAGE_RESEND_CONFIRMATION_LINK                        = "/Pt/PageResendConfirmationLink";
 	const HREF_PAGE_SERVICE                                         = "/Pt/PageService";
+	const HREF_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS                    = "/Pt/PageServiceAssociateIpAddress";
 	const HREF_PAGE_SERVICE_LST                                     = "/Pt/PageServiceList";
 	const HREF_PAGE_SERVICE_LST_BY_CORPORATION                      = "/Pt/PageServiceListByCorporation";
 	const HREF_PAGE_SERVICE_LST_BY_DEPARTMENT                       = "/Pt/PageServiceListByDepartment";
@@ -663,9 +666,9 @@ class Pt
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools - Gerência de Endereços de Ip";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Gerência de Notificações";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "Gerência de Notificações - Associação de Usuários";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools - Gerência de Notificações";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "Gerência de Notificações - Associação de Usuários";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_TITLE              = "InfraTools - Gerência de Notificações";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "Gerência de Notificações - Listar";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools - Gerência de Notificações";
@@ -967,6 +970,9 @@ class Pt
 	const PAGE_SERVICE                                              = "Serviços";
 	const PAGE_SERVICE_ROBOTS                                       = "ALL";
 	const PAGE_SERVICE_TITLE                                        = "InfraTools - Serviços";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS                         = "Associação de Serviços e endereços de Ip";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_ROBOTS                  = "noindex";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TITLE                   = "InfraTools - Associação de Serviços e Endereços de Ip";
 	const PAGE_SERVICE_LST                                          = "Listagem de Serviços";
 	const PAGE_SERVICE_LST_BY_CORPORATION                           = "Listagem de Serviços por Corporações";
 	const PAGE_SERVICE_LST_BY_CORPORATION_ROBOTS                    = "noindex";
@@ -1093,8 +1099,8 @@ class Pt
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "Serviceço atualizado com sucesso";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ATIVAR CONTA";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DESATIVAR CONTA";
-	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIAR A USUÁRIOS";
-	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "DESASSOCIAR USUÁRIOS";
+	const SUBMIT_ASSOCIATE_USER                                     = "ASSOCIAR A USUÁRIOS";
+	const SUBMIT_ASSOCIATE_USER_DISASSOCIATE                        = "DESASSOCIAR USUÁRIOS";
 	const SUBMIT_BACK                                               = "VOLTAR";
 	const SUBMIT_CANCEL                                             = "CANCELAR";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "ALTERAR INFO DE USUÀRIO CORPORAÇÃO";

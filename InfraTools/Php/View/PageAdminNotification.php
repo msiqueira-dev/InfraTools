@@ -119,15 +119,15 @@ class PageAdminNotification extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 		}
-		//FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_ASSOCIATE_USER_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
 										  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
-		//FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE) == ConfigInfraTools::RET_OK)
 		{
 			$ret = NULL;
 			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL) == ConfigInfraTools::RET_OK)
@@ -250,13 +250,13 @@ class PageAdminNotification extends PageAdmin
 			else 
 			{
 				if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 			}
 			
 		}
-		//FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE) == ConfigInfraTools::RET_OK)
 		{
 			$ret = NULL;
 			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL) == ConfigInfraTools::RET_OK)
@@ -379,7 +379,7 @@ class PageAdminNotification extends PageAdmin
 			else 
 			{
 				if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 			}
 			
@@ -420,15 +420,15 @@ class PageAdminNotification extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
-		//FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB) == ConfigInfraTools::RET_OK)
 		{
 			$this->InputValueNotificationByCorporationName = NULL;
 			$this->InputValueNotificationByDepartmentName  = NULL;
 			$this->InputValueNotificationByRole            = NULL;
 			$this->InputValueNotificationByTeamName        = NULL;
 			if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
 		//FM_NOTIFICATION_VIEW_DEL_SB

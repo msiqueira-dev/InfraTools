@@ -350,6 +350,16 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_CORPORATION', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByCorporation.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_CORPORATION_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByCorporationHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_DEPARTMENT', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByDepartment.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_DEPARTMENT_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByDepartmentHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_IP_ADDRESS', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByIpAddress48x48.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_IP_ADDRESS_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByIpAddress48x48Hover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_ASSOC', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByName.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_ASSOC_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByNameHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByType.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByTypeHover.png');
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
 			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28Hover.png");

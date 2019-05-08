@@ -382,6 +382,8 @@ class Es
 	const HEADER_PAGE_RESEND_CONFIRMATION_LINK_TEXT                 = "";
 	const HEADER_PAGE_SERVICE_TITLE                                 = "";
 	const HEADER_PAGE_SERVICE_TEXT                                  = "";
+	const HEADER_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TITLE            = "";
+	const HEADER_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TEXT             = "";
 	const HEADER_PAGE_SERVICE_LST_TITLE                             = "";
 	const HEADER_PAGE_SERVICE_LST_TEXT                              = "";
 	const HEADER_PAGE_SERVICE_LST_BY_CORPORATION_TITLE              = "";
@@ -450,6 +452,7 @@ class Es
 	const HREF_PAGE_REGISTER_CONFIRMATION                           = "/Es/PageRegisterConfirmation";
 	const HREF_PAGE_RESEND_CONFIRMATION_LINK                        = "/Es/PageResendConfirmationLink";
 	const HREF_PAGE_SERVICE                                         = "/Es/PageService";
+	const HREF_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS                    = "/Es/PageServiceAssociateIpAddress";
 	const HREF_PAGE_SERVICE_LST                                     = "/Es/PageServiceList";
 	const HREF_PAGE_SERVICE_LST_BY_CORPORATION                      = "/Es/PageServiceListByCorporation";
 	const HREF_PAGE_SERVICE_LST_BY_DEPARTMENT                       = "/Es/PageServiceListByDepartment";
@@ -621,9 +624,9 @@ class Es
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION                                   = "";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools -";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_TITLE              = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools -";
@@ -924,6 +927,9 @@ class Es
 	const PAGE_SERVICE                                              = "";
 	const PAGE_SERVICE_ROBOTS                                       = "noindex";
 	const PAGE_SERVICE_TITLE                                        = "InfraTools -";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS                         = "";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_ROBOTS                  = "noindex";
+	const PAGE_SERVICE_ASSOCIATE_IP_ADDRESS_TITLE                   = "InfraTools -";
 	const PAGE_SERVICE_LST                                          = "";
 	const PAGE_SERVICE_LST_BY_CORPORATION                           = "";
 	const PAGE_SERVICE_LST_BY_CORPORATION_ROBOTS                    = "noindex";
@@ -1046,8 +1052,8 @@ class Es
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "";
-	const SUBMIT_ASSOCIATE_USERS                                    = "";
-	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "";
+	const SUBMIT_ASSOCIATE_USER                                     = "";
+	const SUBMIT_ASSOCIATE_USER_DISASSOCIATE                        = "";
 	const SUBMIT_BACK                                               = "";
 	const SUBMIT_CANCEL                                             = "";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "";

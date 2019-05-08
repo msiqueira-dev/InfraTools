@@ -88,14 +88,14 @@
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW)) . ".php");
 		}
-		//PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS
-		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS)
+		//PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER
+		elseif($this->PageBody == ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER)
 		{
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
 						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW_USERS)) . ".php");
 			echo $this->ShowDivReturnEmpty();
 			include_once(REL_PATH . ConfigInfraTools::PATH_FORM . 
-						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS)) 
+						 str_replace("PageAdmin", "", str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER)) 
 						 . ".php");
 		}
 		//PAGE_ADMIN_NOTIFICATION_LST

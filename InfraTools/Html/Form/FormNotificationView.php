@@ -120,15 +120,15 @@
 					   class="DivContentBodySubmitBigger"
 					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'); ?>"/>
 		</form>
-		<!-- FM_NOTIFICATION_VIEW_ASSOCIATE_USERS -->
-		<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS; ?>" 
-			  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS; ?>" 
+		<!-- FM_NOTIFICATION_VIEW_ASSOCIATE_USER -->
+		<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER; ?>" 
+			  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER; ?>" 
 			  class="DivFormHorizontalButtons"
 			  method="post" >
-			<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB; ?>"
+			<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB; ?>" 
+								 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB; ?>"
 								 class="DivContentBodySubmitBigger"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USERS'); ?>"/>
+								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USER'); ?>"/>
 		</form>
 	</div>
 <?php } ?>
