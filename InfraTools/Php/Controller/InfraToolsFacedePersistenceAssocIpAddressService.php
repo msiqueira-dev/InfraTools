@@ -13,8 +13,20 @@ Dependencies:
 Description: 
 			Class with Singleton pattern for dabatabase methods of association between InfraTools Ip Address and InfraTools Service
 Functions: 
+			public function InfraToolsAssocIpAddressServiceDeleteByServiceId($AssocIpAddressServiceServiceId, $Debug, $MySqlConnection);
+			public function InfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
+			                                                                                 $AssocIpAddressServiceServiceIp, 
+			                                                                                 $Debug, $MySqlConnection);
+			public function InfraToolsAssocIpAddressServiceInsert($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp,
+													              $Debug, $MySqlConnection)
 			public function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &ArrayInstanceInfraToolsAssocIpAddressService, 
-			                                                      &$RowCount, $Debug, $MySqlConnection);
+																  &$RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsAssocIpAddressServiceSelectByServiceId($Limit1, $Limit2, $AssocIpAddressServiceServiceId,
+			                                                                 &$ArrayInstanceInfraToolsAssocIpAddressService,
+			                                                                 $RowCount, $Debug, $MySqlConnection);
+			public function InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($AssocIpAddressServiceServiceId,
+			                                                                        &$ArrayInstanceInfraToolsAssocIpAddressService,
+			                                                                        $Debug, $MySqlConnection);
 	        public function InfraToolsAssocIpAddressServiceSelectNoLimit(&ArrayInstanceInfraToolsAssocIpAddressService,
 			                                                             $Debug, $MySqlConnection);
 			public function InfraToolsAssocIpAddressServiceSelectOnUserContext($Limit1, $Limit2, $UserEmail,
@@ -39,7 +51,7 @@ if (!class_exists("InfraToolsFactory"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
 
-class InfraToolsFacedePersistenceTypeService
+class InfraToolsFacedePersistenceAssocIpAddressService
 {	
 	/* Instance */
 	protected static $Instance;
@@ -79,18 +91,130 @@ class InfraToolsFacedePersistenceTypeService
             self::$Instance = new $class;
         }
         return self::$Instance;
-    }
+	}
+
+	public function InfraToolsAssocIpAddressServiceDeleteByServiceId($AssocIpAddressServiceServiceId, $Debug, $MySqlConnection)
+	{
+		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceDeleteByServiceId');
+		if($MySqlConnection != NULL)
+		{
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceDeleteByServiceId());
+			if ($stmt)
+			{
+				$stmt->bind_param("i", $AssocIpAddressServiceServiceId);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL && $stmt->affected_rows > 0)
+					return ConfigInfraTools::RET_OK;
+				elseif($errorStr == NULL && $stmt->affected_rows == 0)
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_DEL_BY_SERVICE_ID;
+				}
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_DEL_BY_SERVICE_ID;
+				}
+			}
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
 	
+	public function InfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
+			                                                                         $AssocIpAddressServiceServiceIp, 
+																					 $Debug, $MySqlConnection)
+	{
+		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4');
+		if($MySqlConnection != NULL)
+		{
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4());
+			if ($stmt)
+			{
+				$stmt->bind_param("is", $AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL && $stmt->affected_rows > 0)
+					return ConfigInfraTools::RET_OK;
+				elseif($errorStr == NULL && $stmt->affected_rows == 0)
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_DEL_BY_IP_ADDRESS_AND_SERVICE_ID;
+				}
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
+						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
+					else return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_DEL_BY_IP_ADDRESS_AND_SERVICE_ID;
+				}
+			}
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+
+	public function InfraToolsAssocIpAddressServiceInsert($AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp,
+													      $Debug, $MySqlConnection)
+	{
+		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceInsert');
+		if($MySqlConnection != NULL)
+		{
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceInsert());
+			if ($stmt)
+			{
+				$stmt->bind_param("is", $AssocIpAddressServiceServiceId, $AssocIpAddressServiceServiceIp);
+				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
+				if($errorStr == NULL)
+					return ConfigInfraTools::RET_OK;
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
+					return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_INSERT;
+				}
+			}
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+
 	public function InfraToolsAssocIpAddressServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsAssocIpAddressService, &$RowCount, 
 														  $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelect');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceSelect');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsTypeServiceSelect());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceSelect());
 			if($stmt != NULL)
 			{ 
 				$limitResult = $Limit2 - $Limit1;
@@ -104,9 +228,68 @@ class InfraToolsFacedePersistenceTypeService
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsAssocIpAddressService = $this->InfraToolsFactory->CreateInfraToolsAssocIpAddressService(
-						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
-						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
+													$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID],
+													$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4],
+													$row["AssocIpAddressService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
+						array_push($ArrayInstanceInfraToolsAssocIpAddressService, $InstanceInfraToolsAssocIpAddressService);
+					}
+					if(!empty($ArrayInstanceInfraToolsAssocIpAddressService))
+						return ConfigInfraTools::RET_OK;
+					else
+					{
+						if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_SEL_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+					return ConfigInfraTools::DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_SEL;
+				}
+			}
+			else
+			{
+				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
+					echo "Prepare Error: " . $MySqlConnection->error;
+				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
+			}
+		}
+		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
+	}
+
+	public function InfraToolsAssocIpAddressServiceSelectByServiceId($Limit1, $Limit2, $AssocIpAddressServiceServiceId,
+			                                                                 &$ArrayInstanceInfraToolsAssocIpAddressService,
+																			 $RowCount, $Debug, $MySqlConnection)
+	{
+
+	}
+	public function InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($AssocIpAddressServiceServiceId,
+																			&$ArrayInstanceInfraToolsAssocIpAddressService,
+																			$Debug, $MySqlConnection)
+	{
+		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
+		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
+		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit');
+		if($MySqlConnection != NULL)
+		{
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit());
+			if($stmt != NULL)
+			{ 
+				$stmt->bind_param("i", $AssocIpAddressServiceServiceId);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == ConfigInfraTools::RET_OK)
+				{
+					$ArrayInstanceInfraToolsAssocIpAddressService = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$InstanceInfraToolsAssocIpAddressService = $this->InfraToolsFactory->CreateInfraToolsAssocIpAddressService(
+																	$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID],
+																	$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4],
+						                                            $row["AssocIpAddressService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsAssocIpAddressService, $InstanceInfraToolsAssocIpAddressService);
 					}
 					if(!empty($ArrayInstanceInfraToolsAssocIpAddressService))
@@ -140,18 +323,18 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelectNoLimit');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlInfraToolsTypeServiceSelectNoLimit()))
+			if($result = $MySqlConnection->query(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceSelectNoLimit()))
 			{
 				$ArrayInstanceInfraToolsAssocIpAddressService = array();
 				while ($row = $result->fetch_assoc()) 
 				{
 					$InstanceInfraToolsAssocIpAddressService = $this->InfraToolsFactory->CreateInfraToolsAssocIpAddressService(
-																$row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
-																$row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
-																$row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
+											$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID],
+											$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4],
+											$row["AssocIpAddressService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 					array_push($ArrayInstanceInfraToolsAssocIpAddressService, $InstanceInfraToolsAssocIpAddressService);
 				}
 				if(!empty($ArrayInstanceInfraToolsAssocIpAddressService))
@@ -179,10 +362,10 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelectOnUserContext');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceSelectOnUserContext');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsTypeServiceSelectOnUserContext());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::InfraToolsAssocIpAddressServiceSelectOnUserContext());
 			if($stmt != NULL)
 			{ 
 				$limitResult = $Limit2 - $Limit1;
@@ -196,9 +379,9 @@ class InfraToolsFacedePersistenceTypeService
 					{
 						$RowCount = $row['COUNT'];
 						$InstanceInfraToolsAssocIpAddressService = $this->InfraToolsFactory->CreateInfraToolsAssocIpAddressService(
-						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
-						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
+													$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID],
+													$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4],
+													$row["AssocIpAddressService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsAssocIpAddressService, $InstanceInfraToolsAssocIpAddressService);
 					}
 					if(!empty($ArrayInstanceInfraToolsAssocIpAddressService))
@@ -233,10 +416,10 @@ class InfraToolsFacedePersistenceTypeService
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		$ArrayInstanceInfraToolsAssocIpAddressService = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-			InfraToolsPersistence::ShowQuery('SqlInfraToolsTypeServiceSelectOnUserContextNoLimit');
+			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceSelectOnUserContextNoLimit');
 		if($MySqlConnection != NULL)
 		{
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsTypeServiceSelectOnUserContextNoLimit());
+			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsAssocIpAddressServiceSelectOnUserContextNoLimit());
 			if($stmt != NULL)
 			{ 
 				$stmt->bind_param("s", $UserEmail);
@@ -248,9 +431,9 @@ class InfraToolsFacedePersistenceTypeService
 					while ($row = $result->fetch_assoc()) 
 					{
 						$InstanceInfraToolsAssocIpAddressService = $this->InfraToolsFactory->CreateInfraToolsAssocIpAddressService(
-						                                            $row["TypeService".ConfigInfraTools::TB_FD_REGISTER_DATE],
-						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_NAME],
-						                                            $row[ConfigInfraTools::TB_TYPE_SERVICE_FD_SLA]);
+													$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID],
+													$row[ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4],
+													$row["AssocIpAddressService".ConfigInfraTools::TB_FD_REGISTER_DATE]);
 						array_push($ArrayInstanceInfraToolsAssocIpAddressService, $InstanceInfraToolsAssocIpAddressService);
 					}
 					if(!empty($ArrayInstanceInfraToolsAssocIpAddressService))

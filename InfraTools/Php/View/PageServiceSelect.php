@@ -121,60 +121,22 @@ class PageServiceSelect extends PageInfraTools
 											. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
 											. $_POST[ConfigInfraTools::FM_SERVICE_LST_BY_CORPORATION_SEL_BY_ID_SB]);
 			}
-			elseif($this->CheckGetContainsKey(ConfigInfraTools::FM_SERVICE_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
+			elseif($this->CheckGetContainsKey(ConfigInfraTools::FIELD_SERVICE_ID) == ConfigInfraTools::RET_OK)
 			{
-				$return = $this->InfraToolsServiceDeleteByServiceId($_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID], 
-												   $this->User->GetEmail(), 
-												   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::RET_OK)
+				if($this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceIdOnUserContext', 
+												  array($_GET[ConfigInfraTools::FIELD_SERVICE_ID],
+														$this->User->GetEmail(),
+														&$this->InstanceInfraToolsService,
+													    &$this->InputValueTypeAssocUserServiceId),
+												  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				{
-					$this->InputValueServiceIdRadio = "checked";
-					
+					Page::GetCurrentDomain($domain);
+					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
+									. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW)
+									. "?" . ConfigInfraTools::FIELD_SERVICE_ID . "=" 
+									. $_GET[ConfigInfraTools::FIELD_SERVICE_ID]);
 				}
-				else
-				{
-					$retImage = $this->ReturnImage;
-					$retClass = $this->ReturnClass;
-					$retText  = $this->ReturnText;
-					$this->InputValueServiceId = $_GET[ConfigInfraTools::FIELD_SERVICE_ID];
-					$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-																		   $this->User->GetEmail(),
-																		   $this->InstanceInfraToolsService,
-																		   $this->InputValueTypeAssocUserServiceId,
-																		   $this->InputValueHeaderDebug);
-					if($return == ConfigInfraTools::RET_OK)
-					{
-						$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
-						$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
-						$this->ReturnImage = $retImage;
-						$this->ReturnClass = $retClass;
-						$this->ReturnText  = $retText;
-					}
-				}
-			}
-			elseif(isset($_GET[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID]))
-			{
-				$this->InputValueServiceIdRadio = "checked";
-				$this->ReturnServiceIdRadioClass = "NotHidden";
-				$this->ReturnServiceNameRadioClass = "Hidden";
-				$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-																	   $this->User->GetEmail(), 
-																	   $this->InstanceInfraToolsService,
-																	   $this->InputValueTypeAssocUserServiceId,
-																	   $this->InputValueHeaderDebug);
-				if($return == ConfigInfraTools::RET_OK)
-				{
-					$this->PageBody = ConfigInfraTools::PAGE_SERVICE_VIEW;
-					$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
-					$this->ShowDivReturnEmpty();
-				}
-				else $this->ShowDivReturnSuccess("SERVICE_DEL_SUCCESS");
-			}
-			else
-			{
-				$this->InputValueServiceIdRadio = "checked";
-				$this->ReturnServiceIdRadioClass = "NotHidden";
-				$this->ReturnServiceNameRadioClass = "Hidden";
+				else $this->ShowDivReturnError("SERVICE_NOT_FOUND");
 			}
 		}
 		$this->LoadHtml(TRUE);

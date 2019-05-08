@@ -82,6 +82,9 @@ class ConfigInfraTools extends Config
 	/* Constantes gerais usadas pelo site */
 	const ADDRESS_INFRATOOLS_DOMAIN                                             = "";
 	const APPLICATION_INFRATOOLS                                                = "InfraTools";
+	const DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_DEL_BY_SERVICE_ID                   = "DbErrorAssocIpAddressServiceDelbyServiceId";
+	const DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_DEL_BY_IP_ADDRESS_AND_SERVICE_ID    = "DbErrorAssocIpAddressServiceDelbyIpAddressAndServiceId";
+	const DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_INSERT                              = "DbErrorAssocIpAddressServiceInsert";
 	const DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_SEL                                 = "DbErrorAssocIpAddressServiceSel";
 	const DB_ERROR_ASSOC_IP_ADDRESS_SERVICE_SEL_FETCH                           = "DbErrorAssocIpAddressServiceSelFetch";
 	const DB_ERROR_ASSOC_USER_SERVICE_CHECK_USER_TYPE_ADMINISTRATOR             = "DbErrorAssocUserServiceCheckUserTypeAdministrator";
@@ -631,6 +634,7 @@ class ConfigInfraTools extends Config
 	const SESS_ADMIN_NETWORK                                                    = "SessionAdminNetwork";
 	const SESS_ADMIN_SERVICE                                                    = "SessionAdminService";
 	const SESS_ADMIN_TYPE_SERVICE                                               = "SessionAdminTypeService";
+	const SESS_SERVICE                                                          = "SessionService";
 	const TB_ASSOC_IP_ADDRESS_SERVICE                                           = "ASSOC_IP_ADDRESS_SERVICE";
 	const TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID                             = "AssocIpAddressServiceServiceId";
 	const TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4                        = "AssocIpAddressServiceIp";

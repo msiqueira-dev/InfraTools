@@ -6,7 +6,8 @@
 	</div>
 	<label>
     	<?php if(isset($this->ReturnEmptyText))                       echo $this->ReturnEmptyText ?>
-	    <?php if(isset($this->ReturnServiceActiveText))               echo $this->ReturnServiceActiveText; ?>
+	    <?php if(isset($this->ReturnIpAddressIpv4Text))               echo $this->ReturnIpAddressIpv4Text; ?>
+			<?php if(isset($this->ReturnServiceActiveText))               echo $this->ReturnServiceActiveText; ?>
 	    <?php if(isset($this->ReturnServiceCorporationText))          echo $this->ReturnServiceCorporationText; ?>
 	    <?php if(isset($this->ReturnServiceCorporationCanChangeText)) echo $this->ReturnServiceCorporationCanChangeText; ?>
 	    <?php if(isset($this->ReturnServiceDepartmentText))           echo $this->ReturnServiceDepartmentText; ?>
@@ -14,7 +15,7 @@
 	    <?php if(isset($this->ReturnServiceDescriptionText))          echo $this->ReturnServiceDescriptionText; ?>
 	    <?php if(isset($this->ReturnServiceNameText))                 echo $this->ReturnServiceNameText; ?>
 	    <?php if(isset($this->ReturnServiceTypeText))                 echo $this->ReturnServiceTypeText; ?>
-		<?php if(isset($this->ReturnText))                            echo $this->ReturnText; ?>
+		<?php if(isset($this->ReturnText))                              echo $this->ReturnText; ?>
 	</label>
 </div>
 <div class="DivClearFloat"></div>
@@ -160,6 +161,27 @@
 		</div>
 	</div>
 	<div class="DivClearFloat"></div>
+	<!-- FIELD_IP_ADDRESS_IPV4 -->
+	<div class="DivContentBodyContainer">
+		<div class="DivContentBodyContainerLabelBig">
+			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?></label>
+			<label>:</label>
+		</div>
+		<input type="text" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>" 
+						   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>" 
+						   class="<?php echo $this->ReturnIpAddressIpv4Class; ?>"
+						   onblur="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
+											   'DivContentBodySubmitBigger',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
+											   '', true);"
+						   onchange="ValidateIpAddressIpv4(null, '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
+											   'DivContentBodySubmitBigger',
+											   '<?php echo ConfigInfraTools::FM_SERVICE_REGISTER_SB; ?>',
+											   '', true);"
+						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?>"
+						   value="<?php echo $this->InputValueIpAddressIpv4; ?>" maxlength="15" />
+	 </div>
+	 <div class="DivClearFloat"></div>
 	<!-- FIELD_CORPORATION_NAME -->
 	 <div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">

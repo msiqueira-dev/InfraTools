@@ -34,8 +34,8 @@
 <table class='TableGeneric'>
 	<tr>
 		<form  name="{$FM_CORPORATION_VIEW_LST_USERS_FORM}" method='post'>
-			<input type="hidden" value="{$INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
-			<input type="hidden" value="{$INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
 			<th class="TableGenericThArrow">
 				<div class="TableGenericInputLeft">
 					<input  type="image" class="TableGenericThArrowImage"

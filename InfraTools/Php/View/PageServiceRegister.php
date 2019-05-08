@@ -61,7 +61,8 @@ class PageServiceRegister extends PageInfraTools
 					if($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME] == ConfigInfraTools::FIELD_SEL_NONE)
 						$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME] = NULL; 
 				}
-				$return = $this->InfraToolsServiceInsert(@$_POST[ConfigInfraTools::FIELD_SERVICE_ACTIVE], 
+				$return = $this->InfraToolsServiceInsert(@$_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
+					                                     @$_POST[ConfigInfraTools::FIELD_SERVICE_ACTIVE], 
 											             @$_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
 											             @$_POST[ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE],
 		 							                     @$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],

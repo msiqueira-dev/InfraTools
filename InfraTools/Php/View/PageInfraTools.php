@@ -19,8 +19,13 @@ Methods:
 			                                                         &$RowCount, $Debug);
 			protected function InfraToolsAssocIpAddressServiceSelectByServiceIdAndIpAddressIpv4($AssocIpAddressServiceServiceId,
 			                                                                                   $AssocIpAddressServiceServiceIp, $Debug);
-			protected function InfraToolsAssocIpAddressServiceSelectByServiceId($AssocIpAddressServiceServiceId,
-			                                                                    $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceId($Limit1, $Limit2, 
+	                                                                            $AssocIpAddressServiceServiceId,
+	                                                                            &$ArrayInstanceInfraToolsAssocIpAddressService, 
+																				&$RowCount, $Debug);
+			protected function InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($AssocIpAddressServiceServiceId, 
+	                                                                                   &$ArrayInstanceInfraToolsAssocIpAddressService,
+	                                                                                   $Debug);
 			protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp,
 			                                                                    $Debug);
 			protected function InfraToolsAssocIpAddressServiceSelectNoLimit(&$ArrayInstanceInfraToolsAssocIpAddressService, $Debug);
@@ -60,9 +65,9 @@ Methods:
 															       &$RowCount, $Debug);
 			protected function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug);
 			protected function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug);
-			protected function InfraToolsServiceDeleteByServiceId($ServiceId, $UserEmail, $Debug);
+			protected function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug);
 			protected function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug);
-			protected function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
+			protected function InfraToolsServiceInsert($IpaddressIvp4, $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 			                                           $ServiceDepartment, $ServiceDepartmentCanChange, 
 										               $ServiceDescription, $ServiceName, $ServiceType, $Debug);
 			protected function InfraToolsServiceLoadData($InstanceInfraToolsService);
@@ -346,11 +351,11 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
-			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28.png");
-			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28Hover.png");
+			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
+			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28Hover.png");
 			$this->Smarty->assign('SUBMIT_FORWARD', $this->InstanceLanguageText->GetText('SUBMIT_FORWARD'));
-			$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28.png");
-			$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28Hover.png");
+			$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28x28.png");
+			$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28x28Hover.png");
 			if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
 			{
 				if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
@@ -425,10 +430,50 @@ abstract class PageInfraTools extends Page
 	{
 		
 	}
-	
-	protected function InfraToolsAssocIpAddressServiceSelectByServiceId($AssocIpAddressServiceServiceId, $Debug)
+
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceId($Limit1, $Limit2, 
+	                                                                    $AssocIpAddressServiceServiceId,
+	                                                                    &$ArrayInstanceInfraToolsAssocIpAddressService, 
+																		&$RowCount, $Debug)
 	{
-		
+
+	}
+	
+	protected function InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($AssocIpAddressServiceServiceId, 
+	                                                                           &$ArrayInstanceInfraToolsAssocIpAddressService,
+	                                                                           $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$this->InputValueServiceId = $AssocIpAddressServiceServiceId;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_SERVICE_ID
+		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ID;
+		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
+		$arrayElementsInput[0]        = $this->InputValueServiceId;; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 4; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($this->InputValueServiceId,
+																							  $ArrayInstanceInfraToolsAssocIpAddressService, 
+																							  $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+				return $return;
+			else $this->ShowDivReturnError("ASSOC_IP_ADDRESS_SERVICE_NOT_FOUND");
+		}
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	protected function InfraToolsAssocIpAddressServiceSelectByServiceIp($AssocIpAddressServiceServiceIp, $Debug)
@@ -1028,7 +1073,7 @@ abstract class PageInfraTools extends Page
 
 	}
 	
-	protected function InfraToolsServiceDeleteByServiceId($ServiceId, $UserEmail, $Debug)
+	protected function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -1040,11 +1085,12 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[0]        = &$this->ReturnServiceIdClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NUMERIC;
-		$arrayElementsInput[0]        = $this->InputValueServiceId;; 
+		$arrayElementsInput[0]        = $this->InputValueServiceId;;
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 4; 
 		$arrayElementsNullable[0]     = FALSE;
 		$arrayElementsText[0]         = &$this->ReturnServiceIdText;
+
 		array_push($arrayConstants, 'FM_INVALID_SERVICE_ID', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -1053,8 +1099,7 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceDeleteByServiceId($this->InputValueServiceId, 
-																						       $UserEmail, $Debug);
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceDeleteByServiceId($this->InputValueServiceId, $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
 				$this->ShowDivReturnSuccess("SERVICE_DEL_SUCCESS");
@@ -1108,7 +1153,7 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
+	protected function InfraToolsServiceInsert($IpAddressIpv4, $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 									           $ServiceDepartment, $ServiceDepartmentCanChange,
 									           $ServiceDescription, $ServiceName, $ServiceType, $UserEmail, $Debug)
 	{
@@ -1118,6 +1163,8 @@ abstract class PageInfraTools extends Page
 			$ServiceCorporation = NULL;
 		if($ServiceDepartment == ConfigInfraTools::FIELD_SEL_NONE)
 			$ServiceDepartment = NULL;
+		if(isset($IpAddressIpv4))
+			$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
 		if(isset($ServiceActive))
 			$this->InputValueServiceActive = TRUE;
 		else $this->InputValueServiceActive = FALSE;
@@ -1135,116 +1182,129 @@ abstract class PageInfraTools extends Page
 		$this->InputValueServiceType                 = $ServiceType;
 		$this->InputValueUserEmail                   = $UserEmail;
 		$arrayConstants = array(); $matrixConstants = array();
-		
-		//SERVICE_ACTIVE
-		$arrayElements[0]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
-		$arrayElementsClass[0]        = &$this->ReturnServiceActiveClass;
+
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV4;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressIpv4Class;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[0]        = $this->InputValueServiceActive; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
+		$arrayElementsInput[0]        = $this->InputValueIpAddressIpv4; 
+		$arrayElementsMinValue[0]     = 9; 
+		$arrayElementsMaxValue[0]     = 15; 
 		$arrayElementsNullable[0]     = TRUE;
-		$arrayElementsText[0]         = &$this->ReturnServiceActiveText;
-		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[0]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_CORPORATION
-		$arrayConstants = array();
-		$arrayElements[1]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
-		$arrayElementsClass[1]        = &$this->ReturnServiceCorporationClass;
+		//FIELD_SERVICE_ACTIVE
+		$arrayElements[1]             = ConfigInfraTools::FIELD_SERVICE_ACTIVE;
+		$arrayElementsClass[1]        = &$this->ReturnServiceActiveClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
-		$arrayElementsInput[1]        = $this->InputValueServiceCorporation; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[1]        = $this->InputValueServiceActive; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 45; 
 		$arrayElementsNullable[1]     = TRUE;
-		$arrayElementsText[1]         = &$this->ReturnServiceCorporationText;
-		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		$arrayElementsText[1]         = &$this->ReturnServiceActiveText;
+		array_push($arrayConstants, 'FM_INVALID_SERVICE_ACTIVE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_CORPORATION_CAN_CHANGE
+		//FIELD_CORPORATION_NAME
 		$arrayConstants = array();
-		$arrayElements[2]             = ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE;
-		$arrayElementsClass[2]        = &$this->ReturnServiceCanChangeClass;
+		$arrayElements[2]             = ConfigInfraTools::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[2]        = &$this->ReturnServiceCorporationClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[2]        = $this->InputValueServiceCorporationCanChange; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[2]        = $this->InputValueServiceCorporation; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
 		$arrayElementsNullable[2]     = TRUE;
-		$arrayElementsText[2]         = &$this->ReturnServiceCorporationCanChangeText;
+		$arrayElementsText[2]         = &$this->ReturnServiceCorporationText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_SERVICE_CORPORATION_CAN_CHANGE
+		$arrayConstants = array();
+		$arrayElements[3]             = ConfigInfraTools::FIELD_SERVICE_CORPORATION_CAN_CHANGE;
+		$arrayElementsClass[3]        = &$this->ReturnServiceCanChangeClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[3]        = $this->InputValueServiceCorporationCanChange; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 45; 
+		$arrayElementsNullable[3]     = TRUE;
+		$arrayElementsText[3]         = &$this->ReturnServiceCorporationCanChangeText;
 		array_push($arrayConstants, 'FM_INVALID_SERVICE_CORPORATION_CAN_CHANGE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_DEPARTMENT
+		//FIELD_DEPARTMENT_NAME
 		$arrayConstants = array();
-		$arrayElements[3]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
-		$arrayElementsClass[3]        = &$this->ReturnServiceDepartmentClass;
-		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
-		$arrayElementsInput[3]        = $this->InputValueServiceDepartment; 
-		$arrayElementsMinValue[3]     = 0; 
-		$arrayElementsMaxValue[3]     = 80; 
-		$arrayElementsNullable[3]     = TRUE;
-		$arrayElementsText[3]         = &$this->ReturnServiceDepartmentText;
+		$arrayElements[4]             = ConfigInfraTools::FIELD_DEPARTMENT_NAME;
+		$arrayElementsClass[4]        = &$this->ReturnServiceDepartmentClass;
+		$arrayElementsDefaultValue[4] = ""; 
+		$arrayElementsForm[4]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DEPARTMENT_NAME;
+		$arrayElementsInput[4]        = $this->InputValueServiceDepartment; 
+		$arrayElementsMinValue[4]     = 0; 
+		$arrayElementsMaxValue[4]     = 80; 
+		$arrayElementsNullable[4]     = TRUE;
+		$arrayElementsText[4]         = &$this->ReturnServiceDepartmentText;
 		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_NAME', 'FM_INVALID_DEPARTMENT_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_DEPARTMENT_CAN_CHANGE
+		//FIELD_SERVICE_DEPARTMENT_CAN_CHANGE
 		$arrayConstants = array();
-		$arrayElements[4]             = ConfigInfraTools::FIELD_SERVICE_DEPARTMENT_CAN_CHANGE;
-		$arrayElementsClass[4]        = &$this->ReturnServiceDepartmentCanChangeClass;
-		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
-		$arrayElementsInput[4]        = $this->InputValueServiceDepartmentCanChange; 
-		$arrayElementsMinValue[4]     = 0; 
-		$arrayElementsMaxValue[4]     = 45; 
-		$arrayElementsNullable[4]     = TRUE;
-		$arrayElementsText[4]         = &$this->ReturnServiceDepartmentCanChangeText;
+		$arrayElements[5]             = ConfigInfraTools::FIELD_SERVICE_DEPARTMENT_CAN_CHANGE;
+		$arrayElementsClass[5]        = &$this->ReturnServiceDepartmentCanChangeClass;
+		$arrayElementsDefaultValue[5] = ""; 
+		$arrayElementsForm[5]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_BOOL;
+		$arrayElementsInput[5]        = $this->InputValueServiceDepartmentCanChange; 
+		$arrayElementsMinValue[5]     = 0; 
+		$arrayElementsMaxValue[5]     = 45; 
+		$arrayElementsNullable[5]     = TRUE;
+		$arrayElementsText[5]         = &$this->ReturnServiceDepartmentCanChangeText;
 		array_push($arrayConstants, 'FM_INVALID_SERVICE_DEPARTMENT_CAN_CHANGE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_DESCRIPTION
+		//FIELD_SERVICE_DESCRIPTION
 		$arrayConstants = array();
-		$arrayElements[5]             = ConfigInfraTools::FIELD_SERVICE_DESCRIPTION;
-		$arrayElementsClass[5]        = &$this->ReturnServiceDescriptionClass;
-		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[5]        = $this->InputValueServiceDescription; 
-		$arrayElementsMinValue[5]     = 0; 
-		$arrayElementsMaxValue[5]     = 200; 
-		$arrayElementsNullable[5]     = FALSE;
-		$arrayElementsText[5]         = &$this->ReturnServiceDescriptionText;
+		$arrayElements[6]             = ConfigInfraTools::FIELD_SERVICE_DESCRIPTION;
+		$arrayElementsClass[6]        = &$this->ReturnServiceDescriptionClass;
+		$arrayElementsDefaultValue[6] = ""; 
+		$arrayElementsForm[6]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[6]        = $this->InputValueServiceDescription; 
+		$arrayElementsMinValue[6]     = 0; 
+		$arrayElementsMaxValue[6]     = 200; 
+		$arrayElementsNullable[6]     = FALSE;
+		$arrayElementsText[6]         = &$this->ReturnServiceDescriptionText;
 		array_push($arrayConstants, 'FM_INVALID_SERVICE_DESCRIPTION', 'FM_INVALID_SERVICE_DESCRIPTION_SIZE',
 				                    'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
-		//SERVICE_NAME
+		//FIELD_SERVICE_NAME
 		$arrayConstants = array();
-		$arrayElements[6]             = ConfigInfraTools::FIELD_SERVICE_NAME;
-		$arrayElementsClass[6]        = &$this->ReturnServiceNameClass;
-		$arrayElementsDefaultValue[6] = ""; 
-		$arrayElementsForm[6]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
-		$arrayElementsInput[6]        = $this->InputValueServiceName; 
-		$arrayElementsMinValue[6]     = 0; 
-		$arrayElementsMaxValue[6]     = 45; 
-		$arrayElementsNullable[6]     = FALSE;
-		$arrayElementsText[6]         = &$this->ReturnServiceNameText;
+		$arrayElements[7]             = ConfigInfraTools::FIELD_SERVICE_NAME;
+		$arrayElementsClass[7]        = &$this->ReturnServiceNameClass;
+		$arrayElementsDefaultValue[7] = ""; 
+		$arrayElementsForm[7]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SERVICE_NAME;
+		$arrayElementsInput[7]        = $this->InputValueServiceName; 
+		$arrayElementsMinValue[7]     = 0; 
+		$arrayElementsMaxValue[7]     = 45; 
+		$arrayElementsNullable[7]     = FALSE;
+		$arrayElementsText[7]         = &$this->ReturnServiceNameText;
 		array_push($arrayConstants, 'FM_INVALID_SERVICE_NAME', 'FM_INVALID_SERVICE_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		
 		//FIELD_SERVICE_TYPE
 		$arrayConstants = array();
-		$arrayElements[7]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
-		$arrayElementsClass[7]        = &$this->ReturnServiceTypeClass;
-		$arrayElementsDefaultValue[7] = ""; 
-		$arrayElementsForm[7]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
-		$arrayElementsInput[7]        = $this->InputValueServiceType; 
-		$arrayElementsMinValue[7]     = 0; 
-		$arrayElementsMaxValue[7]     = 45; 
-		$arrayElementsNullable[7]     = FALSE;
-		$arrayElementsText[7]         = &$this->ReturnServiceTypeText;
+		$arrayElements[8]             = ConfigInfraTools::FIELD_SERVICE_TYPE;
+		$arrayElementsClass[8]        = &$this->ReturnServiceTypeClass;
+		$arrayElementsDefaultValue[8] = ""; 
+		$arrayElementsForm[8]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TYPE_SERVICE;
+		$arrayElementsInput[8]        = $this->InputValueServiceType; 
+		$arrayElementsMinValue[8]     = 0; 
+		$arrayElementsMaxValue[8]     = 45; 
+		$arrayElementsNullable[8]     = FALSE;
+		$arrayElementsText[8]         = &$this->ReturnServiceTypeText;
 		array_push($arrayConstants, 'FM_INVALID_SERVICE_TYPE', 'FM_INVALID_SERVICE_TYPE_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
@@ -1253,7 +1313,8 @@ abstract class PageInfraTools extends Page
 								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceInsert($this->InputValueServiceActive, 
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceInsert($this->InputValueIpAddressIpv4,
+				                                                                    $this->InputValueServiceActive, 
 																				    $this->InputValueServiceCorporation,
 																                    $this->InputValueServiceCorporationCanChange, 
 																                    $this->InputValueServiceDepartment, 

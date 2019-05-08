@@ -50,11 +50,11 @@ if(is_array($this->ArrayInstanceTicket))
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowBack28.png'
+						   . "Icons/IconInfraToolsArrow28x28Back.png'
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
+						   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+						   . "Icons/IconInfraToolsArrowBack28x28.png'\" /></div>" .
 		 "<div class='TableGenericThLeft'>"    . $this->InstanceLanguageText->GetText('FIELD_TICKET_ID') . "</div></th>";
 	echo "<th  class='TableGenericThDiv'>"     . $this->InstanceLanguageText->GetText('FIELD_TICKET_TITLE') . "</th>";
 	echo "<th  class='TableGenericThDiv'>"     . $this->InstanceLanguageText->GetText('FIELD_TICKET_TYPE') . "</th>";
@@ -69,11 +69,11 @@ if(is_array($this->ArrayInstanceTicket))
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowForward28.png'
+						   . "Icons/IconInfraToolsArrowForward28x28.png'
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
+						   . "Icons/IconInfraToolsArrowForwardHover28x28.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
+						   . "Icons/IconInfraToolsArrowForward28x28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";

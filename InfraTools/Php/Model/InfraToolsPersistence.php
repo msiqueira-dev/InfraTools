@@ -11,7 +11,15 @@ Description:
 			Classe para armazenar queries a serem executadas no banco de dados.
 Methods:
 		public static function ShowQuery($Query);
+		public static function SqlInfraToolsAssocIpAddressServiceDeleteByServiceId();
+		public static function SqlInfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4();
+		public static function SqlInfraToolsAssocIpAddressServiceInsert();
 		public static function SqlInfraToolsAssocIpAddressServiceSelect();
+		public static function SqlInfraToolsAssocIpAddressServiceSelectByServiceId();
+		public static function SqlInfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit();
+		public static function SqlInfraToolsAssocIpAddressServiceSelectNoLimit();
+		public static function SqlInfraToolsAssocIpAddressServiceSelectOnUserContext();
+		public static function SqlInfraToolsAssocIpAddressServiceSelectOnUserContextNoLimit();
 		public static function SqlInfraToolsIpAddressServiceSelectNoLimit();
 		public static function SqlInfraToolsIpAddressServiceSelectOnUserContext();
 		public static function SqlInfraToolsIpAddressServiceSelectOnUserContextNoLimit();
@@ -116,38 +124,96 @@ class InfraToolsPersistence extends Persistence
 	{
 		echo "<div class='DivPageDebugQuery'><b>Query ($Query)</b>:" . InfraToolsPersistence::$Query() . "</div>";
 	}
+
+	public static function SqlInfraToolsAssocIpAddressServiceDeleteByServiceId()
+	{
+		return "DELETE FROM " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    . "   "
+			     . "WHERE "     . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .  ".".
+														ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . " =? ";
+	}
+
+	public static function SqlInfraToolsAssocIpAddressServiceDeleteByServiceIdAndIpAddressIpv4()
+	{
+		return "DELETE FROM " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    . "   "
+			     . "WHERE "     . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .  ".".
+														ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . " =? "
+					 . "AND   "     . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .  ".".
+					                  ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4 . " =? ";
+	}
+
+	public static function SqlInfraToolsAssocIpAddressServiceInsert()
+	{
+		return "INSERT INTO " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    . " "
+			     . "("          . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . ","
+			     . " "          . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4 . "," 
+			     . " "          . ConfigInfraTools::TB_FD_REGISTER_DATE                            . ")"
+			     . " VALUES (?, ?, NOW())";
+	}
 	
 	public static function SqlInfraToolsAssocIpAddressServiceSelect()
 	{
-		return "SELECT  " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                      .".".
-			                ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID                                        . ",  "
-			   . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                      .".".
-				            ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4                                   . ",  "
-			   . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                      .".".
-				            ConfigInfraTools::TB_FD_REGISTER_DATE                                                              . "   "
-			   . " as AssocIpAddressServiceRegisterDate, "                                                                     . "   "
-			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                     . "   "
-			   . " ) AS COUNT "                                                                                                . "   "
-			   . "FROM "       . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                 . "   "
-			   . "ORDER BY "   . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                 .".". 
-				                 ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID                                   . "   "
-			   . "LIMIT ?, ?";
+		return "SELECT  " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+			                  ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4 . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_FD_REGISTER_DATE                            . "   "
+			     . " as AssocIpAddressServiceRegisterDate, "                                   . "   "
+			     . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE   . "   "
+			     . " ) AS COUNT "                                                              . "   "
+			     . "FROM "       . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               . "   "
+			     . "ORDER BY "   . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               .".". 
+				                 ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID     . "   "
+			     . "LIMIT ?, ?";
+	}
+
+	public static function SqlInfraToolsAssocIpAddressServiceSelectByServiceId()
+	{
+		return "SELECT  " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+			                  ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4 . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_FD_REGISTER_DATE                            . "   "
+			     . " as AssocIpAddressServiceRegisterDate, "                                   . "   "
+			     . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE   . "   "
+			     . " ) AS COUNT "                                                              . "   "
+					 . "FROM "       . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               . "   "
+					 . "WHERE "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               .".".
+														 ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID . " = ? "
+			     . "ORDER BY "   . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               .".". 
+														 ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID . "   "
+					 . "LIMIT ?, ?";
+	}
+
+	public static function SqlInfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit()
+	{
+		return "SELECT  " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+			                  ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4 . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_FD_REGISTER_DATE                            . "   "
+			     . " as AssocIpAddressServiceRegisterDate "                                    . "   "
+					 . "FROM "       . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               . "   "
+					 . "WHERE "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               .".".
+														 ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID . " = ? "
+ 			     . "ORDER BY "   . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               .".". 
+				                     ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID . "   ";
 	}
 	
 	public static function SqlInfraToolsAssocIpAddressServiceSelectNoLimit()
 	{
-		return "SELECT  " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                      .".".
-			                ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID                                        . ",  "
-			   . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                      .".".
-				            ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4                                   . ",  "
-			   . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                      .".".
-				            ConfigInfraTools::TB_FD_REGISTER_DATE                                                              . "   "
-			   . " as AssocIpAddressServiceRegisterDate, "                                                                     . "   "
-			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                     . "   "
-			   . " ) AS COUNT "                                                                                                . "   "
-			   . "FROM "       . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                 . "   "
-			   . "ORDER BY "   . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                                                 .".". 
-				                 ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID                                   . "   ";
+		return "SELECT  " . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+			                  ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID      . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_IP_ADDRESS_IPV4 . ",  "
+			     . " "      . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE                    .".".
+				                ConfigInfraTools::TB_FD_REGISTER_DATE                            . "   "
+			     . " as AssocIpAddressServiceRegisterDate "                                    . "   "                                                             . "   "
+			     . "FROM "       . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               . "   "
+			     . "ORDER BY "   . ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE               .".". 
+				                     ConfigInfraTools::TB_ASSOC_IP_ADDRESS_SERVICE_FD_SERVICE_ID . "   ";
 	}
 	
 	public static function SqlInfraToolsAssocIpAddressServiceSelectOnUserContext()
@@ -236,30 +302,30 @@ class InfraToolsPersistence extends Persistence
 	
 	public static function SqlAssocUserServiceDeleteByAssocUserServiceServiceId()
 	{
-		return "DELETE FROM " . ConfigInfraTools::TB_ASSOC_USER_SERVICE                          . "   "
-			   . "WHERE "     . ConfigInfraTools::TB_ASSOC_USER_SERVICE                          .  ".".
+		return "DELETE FROM " . ConfigInfraTools::TB_ASSOC_USER_SERVICE                     . "   "
+			   . "WHERE "     . ConfigInfraTools::TB_ASSOC_USER_SERVICE                       .  ".".
 			                    ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID         . " =?";
 	}
 	
 	public static function SqlAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail()
 	{
-		return "DELETE FROM " . ConfigInfraTools::TB_ASSOC_USER_SERVICE                          . "   "
-			   . "WHERE "     . ConfigInfraTools::TB_ASSOC_USER_SERVICE                          .  ".".
-			                    ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID         . " =?"
-			   . "  "		  . ConfigInfraTools::TB_ASSOC_USER_SERVICE                          .  ".".
-				                ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL         . " =?"
-			   . "  "		  . ConfigInfraTools::TB_ASSOC_USER_SERVICE                          .  ".".
-				                ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE               . "<=2";
+		return "DELETE FROM " . ConfigInfraTools::TB_ASSOC_USER_SERVICE                  . "   "
+			     . "WHERE "     . ConfigInfraTools::TB_ASSOC_USER_SERVICE                  .  ".".
+			                      ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID    . " =?"
+			     . "  "		      . ConfigInfraTools::TB_ASSOC_USER_SERVICE                  .  ".".
+				                    ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL    . " =?"
+			     . "  "		      . ConfigInfraTools::TB_ASSOC_USER_SERVICE                  .  ".".
+				                    ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE          . "<=2";
 	}
 	
 	public static function SqlAssocUserServiceInsert()
 	{
 		return "INSERT INTO " . ConfigInfraTools::TB_ASSOC_USER_SERVICE                  . " "
-			 . "("            . ConfigInfraTools::TB_FD_REGISTER_DATE                 . ","
-			 . " "            . ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID . "," 
-			 . " "            . ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL . "," 
-		     . " "            . ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE       . ")"
-			 . " VALUES (NOW(), ?, ?, ?)";
+			     . "("          . ConfigInfraTools::TB_FD_REGISTER_DATE                    . ","
+			     . " "          . ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID    . "," 
+			     . " "          . ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL    . "," 
+		       . " "          . ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE          . ")"
+			    . " VALUES (NOW(), ?, ?, ?)";
 	}
 	
 	public static function SqlAssocUserServiceSelectByAssocUserServiceServiceId()

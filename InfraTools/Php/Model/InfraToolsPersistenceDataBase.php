@@ -125,7 +125,7 @@ class InfraToolsPersistenceDataBase
 	{
 		return "CREATE TABLE IF NOT EXISTS INFRATOOLS.ASSOC_IP_ADDRESS_SERVICE (
                 AssocIpAddressServiceServiceId INT NOT NULL,
-                AssocIpAddressServiceIp VARCHAR(45) NOT NULL,
+                AssocIpAddressServiceIp VARCHAR(15) NOT NULL,
                 RegisterDate DATETIME NOT NULL,
                 PRIMARY KEY (AssocIpAddressServiceServiceId, AssocIpAddressServiceIp),
                 INDEX IndexAssocIpAddressServiceIp (AssocIpAddressServiceIp ASC),

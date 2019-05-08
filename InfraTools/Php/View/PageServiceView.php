@@ -23,12 +23,19 @@ if (!class_exists("PageInfraTools"))
 		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
 }
+if (!class_exists("InfraToolsService"))
+{
+	if(file_exists(SITE_PATH_PHP_MODEL . "InfraToolsService.php"))
+		include_once(SITE_PATH_PHP_MODEL . "InfraToolsService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsService');
+}
 
 class PageServiceView extends PageInfraTools
 {
-	public $ArrayInstanceInfraToolsCorporation = NULL;
-	public $ArrayInstanceInfraToolsDepartment  = NULL;
-	public $ArrayInstanceInfraToolsTypeService = NULL;
+	public $ArrayInstanceInfraToolsCorporation           = NULL;
+	public $ArrayInstanceInfraToolsDepartment            = NULL;
+	public $ArrayInstanceInfraToolsTypeService           = NULL;
+
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -46,6 +53,7 @@ class PageServiceView extends PageInfraTools
 
 	public function LoadPage()
 	{
+		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_SERVICE);
 		if(isset($_GET[ConfigInfraTools::FIELD_SERVICE_ID]) &&
 		   !isset($_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_SB]) &&
 		   !isset($_POST[ConfigInfraTools::FM_SERVICE_VIEW_UPDT_SB]) &&
@@ -62,6 +70,7 @@ class PageServiceView extends PageInfraTools
 			{
 				$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
 				$this->InfraToolsServiceLoadData($this->InstanceInfraToolsService);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_SERVICE, $this->InstanceInfraToolsService);
 				$this->ReturnImage = "DivDisplayNone";
 				$this->ReturnClass = "DivHidden";
 				$this->ReturnText  = "";
@@ -70,28 +79,28 @@ class PageServiceView extends PageInfraTools
 		elseif(isset($_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_SB]) && 
 			  isset($_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID]))
 		{
-			$return = $this->InfraToolsServiceDeleteByServiceId($_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID], 
-											   $this->User->GetEmail(), 
-											   $this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::RET_OK)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_SERVICE, $this->InstanceInfraToolsService) == ConfigInfraTools::RET_OK)
 			{
-				Page::GetCurrentDomain($domain);
-				$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
-									        . str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SEL)
-								            . "?" . ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID . "=" 
-											. $_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID]);
-			}
-			else
-			{
+				$return = $this->InfraToolsServiceDeleteByServiceIdOnUserContext($this->InstanceInfraToolsService->GetServiceId(),
+				                                                                 $this->User->GetEmail(),
+												                                 $this->InputValueHeaderDebug);
+				if($return == ConfigInfraTools::RET_OK)
+				{
+					Page::GetCurrentDomain($domain);
+					$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" 
+												. str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SEL)
+												. "?" . ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID . "=" 
+												. $_POST[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID]);
+				}
 				$retImage = $this->ReturnImage;
 				$retClass = $this->ReturnClass;
 				$retText  = $this->ReturnText;
 				$this->InputValueServiceId = $_GET[ConfigInfraTools::FIELD_SERVICE_ID];
 				$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-															                     $this->User->GetEmail(), 
-															                     $this->InstanceInfraToolsService, 
-																	             $this->InputValueTypeAssocUserServiceId,
-															                     $this->InputValueHeaderDebug);
+																				$this->User->GetEmail(), 
+																				$this->InstanceInfraToolsService, 
+																				$this->InputValueTypeAssocUserServiceId,
+																				$this->InputValueHeaderDebug);
 				if($return == ConfigInfraTools::RET_OK)
 				{
 					$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_VIEW);
@@ -101,6 +110,7 @@ class PageServiceView extends PageInfraTools
 					$this->ReturnText  = $retText;
 				}
 			}
+			
 		}
 		elseif(isset($_POST[ConfigInfraTools::FM_SERVICE_VIEW_UPDT_SB]))
 		{

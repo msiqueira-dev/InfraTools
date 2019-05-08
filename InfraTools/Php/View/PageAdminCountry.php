@@ -48,6 +48,8 @@ class PageAdminCountry extends PageAdmin
 		{
 			$this->Smarty->assign('FM_COUNTRY', ConfigInfraTools::FM_COUNTRY);
 			$this->Smarty->assign('FM_COUNTRY_LST', ConfigInfraTools::FM_COUNTRY_LST);
+			$this->Smarty->assign('FM_COUNTRY_LST_BACK', ConfigInfraTools::FM_COUNTRY_LST_BACK);
+			$this->Smarty->assign('FM_COUNTRY_LST_FORWARD', ConfigInfraTools::FM_COUNTRY_LST_FORWARD);
 			$this->Smarty->assign('FIELD_COUNTRY_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME'));
 			$this->Smarty->assign('FIELD_COUNTRY_ABBREVIATION_TEXT', $this->InstanceLanguageText->GetText('FIELD_COUNTRY_ABBREVIATION'));
 			$this->Smarty->assign('FIELD_REGION_CODE_TEXT', $this->InstanceLanguageText->GetText('FIELD_REGION_CODE'));

@@ -50,11 +50,11 @@ if(is_array($this->ArrayInstanceTypeUser))
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowBack28.png'
+						   . "Icons/IconInfraToolsArrow28x28Back.png'
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBackHover28.png'\"
+						   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+						   . "Icons/IconInfraToolsArrow28x28Back.png'\" /></div>" .
 		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION') . "</div></th>";
 	echo "<th  class='TableGenericThArrow'>
 	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
@@ -67,11 +67,11 @@ if(is_array($this->ArrayInstanceTypeUser))
 				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowForward28.png'
+						   . "Icons/IconInfraToolsArrowForward28x28.png'
 				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
+						   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
 				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
+						   . "Icons/IconInfraToolsArrowForward28x28.png'\" /></div>";
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";

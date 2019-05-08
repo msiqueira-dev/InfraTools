@@ -52,11 +52,11 @@ if(isset($this->ArrayInstanceNotification))
 					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowBack28.png'
+							   . "Icons/IconInfraToolsArrowBack28x28.png'
 					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBackHover28.png'\"
+							   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
 					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+							   . "Icons/IconInfraToolsArrowBack28x28.png'\" /></div>" .
 			 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID') . "</div></th>";
 		echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE') . "</th>";
 		echo "<th  class='TableGenericThArrow'>
@@ -70,11 +70,11 @@ if(isset($this->ArrayInstanceNotification))
 					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowForward28.png'
+							   . "Icons/IconInfraToolsArrowForward28x28.png'
 					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
+							   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
 					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
+							   . "Icons/IconInfraToolsArrow28x28Forward.png'\" /></div>";
 		echo "</th>";
 		echo "</tr>";
 		echo "</form>";
@@ -126,11 +126,11 @@ elseif(isset($this->ArrayInstanceAssocUserNotification))
 					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
 					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowBack28.png'
+							   . "Icons/IconInfraToolsArrowBack28x28.png'
 					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBackHover28.png'\"
+							   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
 					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBack28.png'\" /></div>" .
+							   . "Icons/IconInfraToolsArrowBack28x28.png'\" /></div>" .
 			 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID') . "</div></th>";
 		echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ') . "</th>";
 		echo "<th  class='TableGenericThArrow'>
@@ -144,11 +144,11 @@ elseif(isset($this->ArrayInstanceAssocUserNotification))
 					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
 					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowForward28.png'
+							   . "Icons/IconInfraToolsArrowForward28x28.png'
 					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForwardHover28.png'\"
+							   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
 					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForward28.png'\" /></div>";
+							   . "Icons/IconInfraToolsArrowForward28x28.png'\" /></div>";
 		echo "</th>";
 		echo "</tr>";
 		echo "</form>";
