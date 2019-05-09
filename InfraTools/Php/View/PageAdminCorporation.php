@@ -53,9 +53,6 @@ class PageAdminCorporation extends PageAdmin
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_ACTIVE'));
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_VALUE', $this->InputValueCorporationActive);
-			if($this->InputValueCorporationActive)
-				$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
-			else $this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			$this->Smarty->assign('FM_CORPORATION', ConfigInfraTools::FM_CORPORATION);
 			$this->Smarty->assign('FM_CORPORATION_LST', ConfigInfraTools::FM_CORPORATION_LST);
 			$this->Smarty->assign('FM_CORPORATION_LST_BACK', ConfigInfraTools::FM_CORPORATION_LST_BACK);

@@ -5,7 +5,7 @@ Creation: 2018/06/19
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Class that view a service.
 Functions: 
@@ -17,11 +17,11 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 if (!class_exists("InfraToolsService"))
 {
@@ -30,7 +30,7 @@ if (!class_exists("InfraToolsService"))
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsService');
 }
 
-class PageServiceView extends PageInfraTools
+class PageServiceView extends PageService
 {
 	public $ArrayInstanceInfraToolsCorporation           = NULL;
 	public $ArrayInstanceInfraToolsDepartment            = NULL;
@@ -51,6 +51,18 @@ class PageServiceView extends PageInfraTools
 		parent::__construct($Config, $Language, $Page);
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			if(!empty($this->ArrayInstanceInfraToolsAssocIpAddressService))
+			{
+				$this->Smarty->assign('FIELD_ASSOC_IP_ADDRESS_SERVICE_IP_CHECK', TRUE);
+				$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_ASSOC_IP_ADDRESS_SERVICE", array($this->ArrayInstanceInfraToolsAssocIpAddressService));
+			}
+		}
+	}
+
 	public function LoadPage()
 	{
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_ADMIN_SERVICE);
@@ -62,7 +74,8 @@ class PageServiceView extends PageInfraTools
 		{
 			$this->InputValueServiceId = $_GET[ConfigInfraTools::FIELD_SERVICE_ID];
 			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->User->GetEmail(), 
+																   $this->User->GetEmail(), 
+																   $this->ArrayInstanceInfraToolsAssocIpAddressService,
 														           $this->InstanceInfraToolsService,
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);
@@ -98,6 +111,7 @@ class PageServiceView extends PageInfraTools
 				$this->InputValueServiceId = $_GET[ConfigInfraTools::FIELD_SERVICE_ID];
 				$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
 																				$this->User->GetEmail(), 
+																				$this->ArrayInstanceInfraToolsAssocIpAddressService,
 																				$this->InstanceInfraToolsService, 
 																				$this->InputValueTypeAssocUserServiceId,
 																				$this->InputValueHeaderDebug);
@@ -117,7 +131,8 @@ class PageServiceView extends PageInfraTools
 			$this->Page = str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_UPDT);
 			$this->InputValueServiceId = $_POST[ConfigInfraTools::FM_SERVICE_VIEW_UPDT_HIDDEN_ID];
 			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														           $this->User->GetEmail(), 
+																   $this->User->GetEmail(), 
+																   $this->ArrayInstanceInfraToolsAssocIpAddressService,
 														           $this->InstanceInfraToolsService, 
 																   $this->InputValueTypeAssocUserServiceId,
 			                                                       $this->InputValueHeaderDebug);
@@ -152,7 +167,8 @@ class PageServiceView extends PageInfraTools
 		{
 			$this->InputValueServiceId = $_GET[ConfigInfraTools::FIELD_SERVICE_ID];
 			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-														                     $this->User->GetEmail(), 
+																			 $this->User->GetEmail(), 
+																			 $this->ArrayInstanceInfraToolsAssocIpAddressService,
 														                     $this->InstanceInfraToolsService,
 																             $this->InputValueTypeAssocUserServiceId,
 			                                                                 $this->InputValueHeaderDebug);
@@ -197,7 +213,8 @@ class PageServiceView extends PageInfraTools
 				$this->ReturnText  = "";
 			}
 			$return = $this->InfraToolsServiceSelectByServiceIdOnUserContext($this->InputValueServiceId, 
-															                 $this->User->GetEmail(), 
+																			 $this->User->GetEmail(), 
+																			 $this->ArrayInstanceInfraToolsAssocIpAddressService,
 														   		             $this->InstanceInfraToolsService,
 														                     $this->InputValueTypeAssocUserServiceId,
 														                     $this->InputValueHeaderDebug);
@@ -227,7 +244,10 @@ class PageServiceView extends PageInfraTools
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
 								          str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SEL));
 		}
-		$this->LoadHtml(TRUE);
+		$this->ArrayPageBodyForm = REL_PATH . ConfigInfraTools::PATH_FORM . str_replace("Page", "", str_replace("_", "", 
+		                                      ConfigInfraTools::PAGE_SERVICE_VIEW) . ".php");
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, $this->ArrayPageBodyForm);
 	}
 }
 ?>

@@ -38,9 +38,10 @@ if (!class_exists("InfraToolsTypeService"))
 
 class PageAdminService extends PageAdmin
 {
-	public $ArrayInstanceInfraToolsService = NULL;
-	public $ArrayInstanceInfraToolsUser    = NULL;
-	public $InstanceInfraToolsService      = NULL;
+	public $ArrayInstanceInfraToolsAssocIpAddressService = NULL;
+	public $ArrayInstanceInfraToolsService               = NULL;
+	public $ArrayInstanceInfraToolsUser                  = NULL;
+	public $InstanceInfraToolsService                    = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -115,6 +116,7 @@ class PageAdminService extends PageAdmin
 					$this->ReturnServiceNameRadioClass = "Hidden";
 					if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceId', 
 											  array($_POST[ConfigInfraTools::FIELD_SERVICE_ID],
+											        &$this->ArrayInstanceInfraToolsAssocIpAddressService,
 													&$this->InstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::RET_OK)
 					{
@@ -146,6 +148,7 @@ class PageAdminService extends PageAdmin
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceId', 
 											  array($_POST[ConfigInfraTools::FIELD_SERVICE_ID],
+											        &$this->ArrayInstanceInfraToolsAssocIpAddressService,
 													&$this->InstanceInfraToolsService),
 											  $this->InputValueHeaderDebug, TRUE) == ConfigInfraTools::RET_OK)
 					{

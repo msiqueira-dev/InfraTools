@@ -53,7 +53,6 @@ Methods:
 		public static function SqlInfraToolsUserSelectByServiceId();
 		public static function SqlInfraToolsUserSelectByTypeMonitoringDescription();
 		public static function SqlInfraToolsServiceDeleteById();
-		public static function SqlInfraToolsServiceDeleteByIdOnUserContext();
 		public static function SqlInfraToolsServiceInsert();
 		public static function SqlInfraToolsServiceSelect();
 		public static function SqlInfraToolsServiceSelectOnUserContext();
@@ -1087,22 +1086,6 @@ class InfraToolsPersistence extends Persistence
 	{
 		return "DELETE FROM " . ConfigInfraTools::TB_SERVICE ." "
 		       . "WHERE "     . ConfigInfraTools::TB_SERVICE .".". ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID . " =? ";
-	}
-	
-	public static function SqlInfraToolsServiceDeleteByIdOnUserContext()
-	{
-		return "DELETE "      . ConfigInfraTools::TB_SERVICE                                                        . "    "
-			   . "FROM  "     . ConfigInfraTools::TB_ASSOC_USER_SERVICE                                             . "    "
-			   . "INNER JOIN ". ConfigInfraTools::TB_SERVICE                                                        . "    "
-               . "ON "        . ConfigInfraTools::TB_SERVICE.".".ConfigInfraTools::TB_SERVICE_FD_SERVICE_ID   . "    "
-               . "=  "        . ConfigInfraTools::TB_ASSOC_USER_SERVICE                                             .   ".".
-				                ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID                            . "    "
-			   . "WHERE "     . ConfigInfraTools::TB_ASSOC_USER_SERVICE                                             .   ".".
-				                ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_SERVICE_ID                            . " =? "
-			   . "AND "       . ConfigInfraTools::TB_ASSOC_USER_SERVICE                                             .   ".".
-				                ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_USER_EMAIL                            . " =? "
-			   . "AND "       . ConfigInfraTools::TB_ASSOC_USER_SERVICE                                             .   ".".
-				                ConfigInfraTools::TB_ASSOC_USER_SERVICE_FD_TYPE                                  . "<=2";
 	}
 	
 	public static function SqlInfraToolsServiceInsert()

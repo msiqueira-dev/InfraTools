@@ -5,7 +5,7 @@ Creation: 2018/06/19
 Creator: Marcus Siqueira
 Dependencies:
 			InfraTools - Php/Controller/InfraToolsFactory.php
-			InfraTools - Php/View/PageInfraTools.php
+			InfraTools - Php/View/PageService.php
 Description: 
 			Class that select a service.
 Functions: 
@@ -17,14 +17,14 @@ if (!class_exists("InfraToolsFactory"))
 		include_once(SITE_PATH_PHP_CONTROLLER . "InfraToolsFactory.php");
 	else exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsFactory');
 }
-if (!class_exists("PageInfraTools"))
+if (!class_exists("PageService"))
 {
-	if(file_exists(SITE_PATH_PHP_VIEW . "PageInfraTools.php"))
-		include_once(SITE_PATH_PHP_VIEW . "PageInfraTools.php");
-	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageInfraTools');
+	if(file_exists(SITE_PATH_PHP_VIEW . "PageService.php"))
+		include_once(SITE_PATH_PHP_VIEW . "PageService.php");
+	else exit(basename(__FILE__, '.php') . ': Error Loading Class PageService');
 }
 
-class PageServiceSelect extends PageInfraTools
+class PageServiceSelect extends PageService
 {
 	public $ArrayInstanceInfraToolsService    = NULL;
 	public $InstanceInfraToolsService = NULL;
@@ -60,6 +60,7 @@ class PageServiceSelect extends PageInfraTools
 						if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceIdOnUserContext', 
 												  array($_POST[ConfigInfraTools::FIELD_SERVICE_ID],
 														$this->User->GetEmail(),
+														&$this->ArrayInstanceInfraToolsAssocIpAddressService,
 														&$this->InstanceInfraToolsService,
 													    &$this->InputValueTypeAssocUserServiceId),
 												  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
@@ -81,6 +82,7 @@ class PageServiceSelect extends PageInfraTools
 						if($this->ExecuteFunction($_POST, 'InfraToolsServiceSelectByServiceNameOnUserContext', 
 												  array($_POST[ConfigInfraTools::FIELD_SERVICE_NAME],
 														$this->User->GetEmail(),
+														&$this->ArrayInstanceInfraToolsAssocIpAddressService,
 														&$this->ArrayInstanceInfraToolsService),
 												  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 						{
@@ -137,6 +139,16 @@ class PageServiceSelect extends PageInfraTools
 									. $_GET[ConfigInfraTools::FIELD_SERVICE_ID]);
 				}
 				else $this->ShowDivReturnError("SERVICE_NOT_FOUND");
+			}
+			elseif($this->CheckGetContainsKey(ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID) == ConfigInfraTools::RET_OK)
+			{
+				if($this->ExecuteFunction($_GET, 'InfraToolsServiceSelectByServiceId', 
+											  array($_GET[ConfigInfraTools::FM_SERVICE_VIEW_DEL_HIDDEN_ID],
+											        &$this->ArrayInstanceInfraToolsAssocIpAddressService,
+													&$this->InstanceInfraToolsService),
+											  $this->InputValueHeaderDebug, TRUE) != ConfigInfraTools::RET_OK)
+					$this->ShowDivReturnSuccess("SERVICE_DEL_SUCCESS");
+				
 			}
 		}
 		$this->LoadHtml(TRUE);

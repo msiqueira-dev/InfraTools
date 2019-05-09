@@ -972,6 +972,10 @@ class Page
 	{
 		$this->Smarty->assign('FIELD_REGISTER_DATE_TEXT', $this->InstanceLanguageText->GetText('REGISTER_DATE'));
 		$this->Smarty->assign('FIELD_REGISTER_DATE_VALUE', $this->InputValueRegisterDate);
+		if(!empty($this->InputValueFormMethod))
+			$this->Smarty->assign('FORM_METHOD', $this->InputValueFormMethod);
+		else $this->Smarty->assign('FORM_METHOD', '$_POST');
+		
 		if(isset($this->ReturnClass)) 
 				$this->Smarty->assign('RETURN_CLASS', $this->ReturnClass);
 		else $this->Smarty->assign('RETURN_CLASS', NULL);
@@ -996,6 +1000,7 @@ class Page
 		$this->Smarty->assign('SUBMIT_LST_USERS', $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'));
 		$this->Smarty->assign('SUBMIT_REGISTER', $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'));
 		$this->Smarty->assign('SUBMIT_UPDT', $this->InstanceLanguageText->GetText('SUBMIT_UPDT'));
+		$this->Smarty->assign('SUPER_USER', $this->User->CheckSuperUser());
 		return Config::RET_OK;
 	}
 

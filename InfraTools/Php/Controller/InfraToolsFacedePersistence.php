@@ -43,7 +43,7 @@ Methods:
 			public function InfraToolsAssocUserServiceCheckUserTypeAdministrator($AssocUserServiceServiceId, $AssocUserServiceUserEmail,
 			                                                                     $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($AssocUserServiceId, $Debug,
-			                                                                           $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			                                                                            $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceIdAndEmail($AssocUserServiceId, 
 			                                                                                    $AssocUserServiceEmail, $Debug, 
 																					            $MySqlConnection = NULL, 
@@ -167,9 +167,12 @@ Methods:
 																				 &$ArrayInstanceInfraToolsService, 
 																				 $Debug, $MySqlConnection = NULL, 
 																				 $CloseConnectaion = TRUE);
-			public function InfraToolsServiceSelectByServiceId($ServiceId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);	
-			public function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$Service, &$TypeAssocUserServiceId,
-			                                                                $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);	
+			public function InfraToolsServiceSelectByServiceId($ServiceId, &$ArrayInstanceInfraToolsAssocIpAddressService, &$Service,
+	                                                           $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)	
+			public function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, 
+																	        &$ArrayInstanceInfraToolsAssocIpAddressService, 
+																	        &$Service, &$TypeAssocUserServiceId, $Debug, 
+														                    $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 			public function InfraToolsServiceSelectByServiceName($Limit1, $Limit2, $ServiceName, &$ArrayInstanceInfraToolsService, 
 			                                                     &$RowCount, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);	
 			public function InfraToolsServiceSelectByServiceNameNoLimit($ServiceName, &$ArrayInstanceInfraToolsService, 
@@ -459,7 +462,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			$return = $InfraToolsFacedePersistenceAssocIpAddressService->InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit(
 																							 $AssocIpAddressServiceServiceId,
 																							 $ArrayInstanceInfraToolsAssocIpAddressService,
-				                                                                             $Debug, $MySqlConnection);
+																							 $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
@@ -1710,17 +1713,17 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		$return = $this->MySqlManager->OpenDataBaseConnection($mySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
-			$return = $this->InfraToolsAssocUserServiceCheckUserTypeAdministrator($ServiceId, $UserEmail, $Debug, $mySqlConnection);
+			$return = $this->InfraToolsAssocUserServiceCheckUserTypeAdministrator($ServiceId, $UserEmail, $Debug, $mySqlConnection, FALSE);
 			if($return == ConfigInfraTools::RET_OK)
 			{
 				$mySqlConnection->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
-				$return = $this->InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($ServiceId, $Debug, $mySqlConnection);
+				$return = $this->InfraToolsAssocUserServiceDeleteByAssocUserServiceServiceId($ServiceId, $Debug, $mySqlConnection, FALSE);
 				if($return == ConfigInfraTools::RET_OK)
 				{
 					$return = $this->InfraToolsAssocIpAddressServiceDeleteByServiceId($ServiceId, $Debug, $mySqlConnection, FALSE);
 					$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
-					$return = $InfraToolsFacedePersistenceService->InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, 
-																								  $Debug, $mySqlConnection);
+					$return = $InfraToolsFacedePersistenceService->InfraToolsServiceDeleteByServiceId($ServiceId, 
+																									  $Debug, $mySqlConnection);
 					if($return == ConfigInfraTools::RET_OK)
 					{
 						$mySqlConnection->commit();
@@ -2019,22 +2022,30 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function InfraToolsServiceSelectByServiceId($ServiceId, &$Service, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function InfraToolsServiceSelectByServiceId($ServiceId, &$ArrayInstanceInfraToolsAssocIpAddressService, &$Service,
+	                                                   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
 		{
 			$InfraToolsFacedePersistenceService = $this->Factory->CreateInfraToolsFacedePersistenceService();
 			$return = $InfraToolsFacedePersistenceService->InfraToolsServiceSelectByServiceId($ServiceId, $Service, $Debug, $MySqlConnection);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($ServiceId,
+																			   $ArrayInstanceInfraToolsAssocIpAddressService,
+																			   $Debug, $MySqlConnection, FALSE);
+			}
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}
 		return $return;
 	}
 	
-	public function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$Service, 
-														  &$TypeAssocUserServiceId, $Debug, 
-														  $MySqlConnection = NULL, $CloseConnectaion = TRUE)	
+	public function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, 
+																	&$ArrayInstanceInfraToolsAssocIpAddressService, 
+																	&$Service, &$TypeAssocUserServiceId, $Debug, 
+														            $MySqlConnection = NULL, $CloseConnectaion = TRUE)	
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
@@ -2044,6 +2055,12 @@ class InfraToolsFacedePersistence extends FacedePersistence
 																								 $Service, 
 																								 $TypeAssocUserServiceId,
 																								 $Debug, $MySqlConnection);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->InfraToolsAssocIpAddressServiceSelectByServiceIdNoLimit($ServiceId,
+																			   $ArrayInstanceInfraToolsAssocIpAddressService,
+																			   $Debug, $MySqlConnection, FALSE);
+			}
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

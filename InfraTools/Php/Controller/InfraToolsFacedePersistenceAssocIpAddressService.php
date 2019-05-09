@@ -95,7 +95,7 @@ class InfraToolsFacedePersistenceAssocIpAddressService
 
 	public function InfraToolsAssocIpAddressServiceDeleteByServiceId($AssocIpAddressServiceServiceId, $Debug, $MySqlConnection)
 	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
+	    $errorStr = NULL; $errorCode = NULL; $mySqlError = NULL; $queryResult = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQuery('SqlInfraToolsAssocIpAddressServiceDeleteByServiceId');
 		if($MySqlConnection != NULL)

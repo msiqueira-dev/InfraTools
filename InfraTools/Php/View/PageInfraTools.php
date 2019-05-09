@@ -331,10 +331,19 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('DIV_RETURN', ConfigInfraTools::DIV_RETURN);
 			$this->Smarty->assign('FM_LST_INPUT_LIMIT_ONE', ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE);
 			$this->Smarty->assign('FM_LST_INPUT_LIMIT_TWO', ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO);
+			if($this->InputValueCorporationActive)
+				$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			$this->Smarty->assign('FIELD_CORPORATION_NAME', ConfigInfraTools::FIELD_CORPORATION_NAME);
 			$this->Smarty->assign('FIELD_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'));
+			$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
+			if($this->InputValueDepartmentActive)
+				$this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
+			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'));
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION', ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION);
 			$this->Smarty->assign('FIELD_USER_EMAIL', ConfigInfraTools::FIELD_USER_EMAIL);
 			$this->Smarty->assign('FIELD_USER_EMAIL_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'));
@@ -1364,11 +1373,29 @@ abstract class PageInfraTools extends Page
 			$this->InputValueServiceActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
 			else $this->InputValueServiceActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->InputValueServiceCorporation != NULL)
+			{
+				$this->InputValueCorporationName = $this->InputValueServiceCorporation;
+				$this->InputValueCorporationActive = TRUE;
 				$this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+			}
+			else 
+			{
+				$this->InputValueCorporationName = NULL;
+				$this->InputValueCorporationActive = FALSE;
+				$this->InputValueServiceCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+			}
 			if($this->InputValueServiceDepartment != NULL)
+			{
+				$this->InputValueDepartmentName = $this->InputValueServiceDepartment;
+				$this->InputValueDepartmentActive = TRUE;
 				$this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+			}
+			else 
+			{
+				$this->InputValueDepartmentName = NULL;
+				$this->InputValueDepartmentActive = FALSE;
+				$this->InputValueServiceDepartmentActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
+			}
 			return ConfigInfraTools::RET_OK;
 		}
 		else return ConfigInfraTools::RET_ERROR;
@@ -1980,7 +2007,8 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function InfraToolsServiceSelectByServiceId($ServiceId, &$InstanceInfraToolsService, $Debug, $StoreSession = FALSE)
+	protected function InfraToolsServiceSelectByServiceId($ServiceId, &$ArrayInstanceInfraToolsAssocIpAddressService, 
+	                                                      &$InstanceInfraToolsService, $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -2006,7 +2034,8 @@ abstract class PageInfraTools extends Page
 		if($return == ConfigInfraTools::RET_OK)
 		{
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceId($this->InputValueServiceId, 
-				                                                                                         $InstanceInfraToolsService, $Debug);
+			                                                                                   $ArrayInstanceInfraToolsAssocIpAddressService,
+				                                                                               $InstanceInfraToolsService, $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
 				if($StoreSession) $this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
@@ -2018,8 +2047,9 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	protected function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$InstanceInfraToolsService, 
-															           &$TypeAssocUserServiceId, $Debug, $StoreSession = FALSE)
+	protected function InfraToolsServiceSelectByServiceIdOnUserContext($ServiceId, $UserEmail, &$ArrayInstanceInfraToolsAssocIpAddressService,
+																	   &$InstanceInfraToolsService, &$TypeAssocUserServiceId,
+																	   $Debug, $StoreSession = FALSE)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -2047,6 +2077,7 @@ abstract class PageInfraTools extends Page
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsServiceSelectByServiceIdOnUserContext(
 				                                                                          $this->InputValueServiceId, 
 																						  $UserEmail,
+																						  $ArrayInstanceInfraToolsAssocIpAddressService,
 																						  $InstanceInfraToolsService,
 																						  $TypeAssocUserServiceId,
 																						  $Debug);

@@ -14,7 +14,6 @@ Description:
 			Class with Singleton pattern for dabatabase methods of InfraTools Service
 Functions: 
 			public function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug, $MySqlConnection);
-			public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection);
 			public function InfraToolsServiceInsert($ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
 			                                        $ServiceDepartment, $ServiceDepartmentCanChange,
 										            $ServiceDescription, $ServiceName, $ServiceType, $Debug, $MySqlConnection);
@@ -173,46 +172,6 @@ class InfraToolsFacedePersistenceService
 			if ($stmt)
 			{
 				$stmt->bind_param("i", $ServiceId);
-				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
-				if($errorStr == NULL && $stmt->affected_rows > 0)
-					return ConfigInfraTools::RET_OK;
-				elseif($errorStr == NULL && $stmt->affected_rows == 0)
-				{
-					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					return ConfigInfraTools::DB_ERROR_SERVICE_DEL_BY_SERVICE_ID;
-				}
-				else
-				{
-					if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
-					if($errorCode == ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT)
-						return ConfigInfraTools::DB_CODE_ERROR_FOREIGN_KEY_DEL_RESTRICT;
-					else return ConfigInfraTools::DB_ERROR_SERVICE_DEL_BY_SERVICE_ID;
-				}
-			}
-			else
-			{
-				if($Debug == ConfigInfraTools::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return ConfigInfraTools::DB_ERROR_QUERY_PREPARE;
-			}
-
-		}
-		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
-	}
-	
-	public function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug, $MySqlConnection)
-	{
-		$queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($MySqlConnection != NULL)
-		{
-			if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
-				InfraToolsPersistence::ShowQuery('SqlInfraToolsServiceDeleteByIdOnUserContext');
-			$stmt = $MySqlConnection->prepare(InfraToolsPersistence::SqlInfraToolsServiceDeleteByIdOnUserContext());
-			if ($stmt)
-			{
-				$stmt->bind_param("is", $ServiceId, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return ConfigInfraTools::RET_OK;

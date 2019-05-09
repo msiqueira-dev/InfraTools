@@ -12,7 +12,7 @@
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_SEL}"
 							     onmouseover="this.src='{$ICON_INFRATOOLS_SEL_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_SEL}'" />
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_SEL}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -26,7 +26,7 @@
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_REGISTER}"
 							     onmouseover="this.src='{$ICON_INFRATOOLS_REGISTER_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_REGISTER}'; ?>'" />
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_REGISTER}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -39,8 +39,8 @@
 					<a href="{$HREF_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS}" title="{$HREF_PAGE_SERVICE_ASSOCIATE_IP_ADDRESS}">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_LST_BY_IP_ADDRESS}"
-						       onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_IP_ADDRESS_HOVERR}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_IP_ADDRESS}'" />
+						       onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_IP_ADDRESS_HOVER}'"
+    			               onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_IP_ADDRESS}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -54,7 +54,7 @@
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_LST}"
 							     onmouseover="this.src='{$ICON_INFRATOOLS_LST_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_LST}'" />
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_LST}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -68,7 +68,7 @@
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_LST_BY_CORPORATION}"
 							     onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_CORPORATION_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_CORPORATION}'" />
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_CORPORATION}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -82,7 +82,7 @@
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_LST_BY_DEPARTMENT}"
 							     onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_DEPARTMENT_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_DEPARTMENT}'" />
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_DEPARTMENT}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -96,7 +96,7 @@
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_LST_BY_TYPE_ASSOC}"
 							     onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE_ASSOC_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE_ASSOC}'" />
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE_ASSOC}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>
@@ -109,8 +109,8 @@
 					<a href="{$HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE}" title="{$HREF_PAGE_SERVICE_LST_BY_TYPE_SERVICE}">
 						<div class="DivContentBodyContainersBoxIcon">
 							<img src="{$ICON_INFRATOOLS_LST_BY_TYPE}"
-						       onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE_HOVER}'"
-    			         onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE}'" />
+						         onmouseover="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE_HOVER}'"
+    			                 onmouseout="this.src='{$ICON_INFRATOOLS_LST_BY_TYPE}'" />
 						</div>
 						<div class="DivContentBodyContainersBoxText">
 							<i>

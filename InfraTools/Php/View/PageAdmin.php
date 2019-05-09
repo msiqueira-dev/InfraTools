@@ -82,10 +82,6 @@ class PageAdmin extends PageInfraTools
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN);
-			$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
-			$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
-			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
-			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
 			$this->Smarty->assign('FM_SB_BACK', ConfigInfraTools::FM_SB_BACK);
 			$this->Smarty->assign('HREF_PAGE_ADMIN', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN'));
 			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48.png');
