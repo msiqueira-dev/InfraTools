@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class that view a service.
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -56,10 +57,8 @@ class PageServiceView extends PageService
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			if(!empty($this->ArrayInstanceInfraToolsAssocIpAddressService))
-			{
-				$this->Smarty->assign('FIELD_ASSOC_IP_ADDRESS_SERVICE_IP_CHECK', TRUE);
 				$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_ASSOC_IP_ADDRESS_SERVICE", array($this->ArrayInstanceInfraToolsAssocIpAddressService));
-			}
+			else $this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_ASSOC_IP_ADDRESS_SERVICE", FALSE);
 		}
 	}
 
@@ -244,10 +243,8 @@ class PageServiceView extends PageService
 			$this->RedirectPage($domain . str_replace('Language/', '', $this->Language) . "/" . 
 								          str_replace("_", "", ConfigInfraTools::PAGE_SERVICE_SEL));
 		}
-		$this->ArrayPageBodyForm = REL_PATH . ConfigInfraTools::PATH_FORM . str_replace("Page", "", str_replace("_", "", 
-		                                      ConfigInfraTools::PAGE_SERVICE_VIEW) . ".php");
 		$this->BuildSmartyTags();
-		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, $this->ArrayPageBodyForm);
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

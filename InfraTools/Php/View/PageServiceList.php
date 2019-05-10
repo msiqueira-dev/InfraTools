@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class that list the all the services in the user's context.
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -42,6 +43,17 @@ class PageServiceList extends PageService
 		parent::__construct($Config, $Language, $Page);
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			if(!empty($this->ArrayInstanceInfraToolsService))
+				$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_SERVICE", array($this->ArrayInstanceInfraToolsService));
+			else $this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_SERVICE", FALSE);
+			$this->Smarty->assign("FORM_METHOD", "GET");
+		}
+	}
+
 	public function LoadPage()
 	{
 		$this->InputValueFormMethod = "GET";
@@ -66,7 +78,8 @@ class PageServiceList extends PageService
 									   $this->InputValueHeaderDebug);
 			}
 		}
-		$this->LoadHtml(TRUE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

@@ -46,7 +46,7 @@
             <label class="DivContentBodyContainerValueContent">{$FIELD_SERVICE_TYPE_VALUE}</label>
         </div>
     </div>
-	{if $FIELD_ASSOC_IP_ADDRESS_SERVICE_IP_CHECK eq true}
+	{if $ARRAY_INSTANCE_INFRATOOLS_ASSOC_IP_ADDRESS_SERVICE eq true}
 		<!-- FIELD_SERVICE_TYPE -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">

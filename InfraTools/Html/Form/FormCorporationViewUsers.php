@@ -132,6 +132,10 @@
 								name="{$FM_DEPARTMENT_SEL_SB}" 
 								id="{$FM_DEPARTMENT_SEL_SB}"
 								value="{$FM_DEPARTMENT_SEL_SB}">
+								<input type="hidden" 
+								name="{$FIELD_CORPORATION_NAME}" 
+								id="{$FIELD_CORPORATION_NAME}"
+								value="{$item->GetCorporationName()}">
 							<input type="submit" 
 								name="{$FIELD_DEPARTMENT_NAME}" 
 								id="{$FIELD_DEPARTMENT_NAME}"

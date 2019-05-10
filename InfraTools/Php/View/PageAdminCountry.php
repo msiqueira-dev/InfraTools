@@ -64,8 +64,6 @@ class PageAdminCountry extends PageAdmin
 	{
 		$PageFormBack = FALSE;
 		$this->PageBody = ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST;
-		$this->ArrayPageBodyForm = REL_PATH . ConfigInfraTools::PATH_FORM.str_replace("PageAdmin", "",
-		                                      str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_COUNTRY_LST)) . ".php";
 		$this->AdminGoBack($PageFormBack);
 		
 		if(empty($_POST))

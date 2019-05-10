@@ -68,13 +68,16 @@ class PageService extends PageInfraTools
 			else $this->Smarty->assign('FIELD_SERVICE_ACTIVE_VALUE', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			$this->Smarty->assign('FIELD_SERVICE_DESCRIPTION_TEXT', $this->InstanceLanguageText->GetText('FIELD_SERVICE_DESCRIPTION'));
 			$this->Smarty->assign('FIELD_SERVICE_DESCRIPTION_VALUE', $this->InputValueServiceDescription);
+			$this->Smarty->assign('FIELD_SERVICE_ID', ConfigInfraTools::FIELD_SERVICE_ID);
 			$this->Smarty->assign('FIELD_SERVICE_ID_TEXT', $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID'));
 			$this->Smarty->assign('FIELD_SERVICE_ID_VALUE', $this->InputValueServiceId);
+			$this->Smarty->assign('FIELD_SERVICE_NAME', ConfigInfraTools::FIELD_SERVICE_NAME);
 			$this->Smarty->assign('FIELD_SERVICE_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME'));
 			$this->Smarty->assign('FIELD_SERVICE_NAME_VALUE', $this->InputValueServiceName);
 			$this->Smarty->assign('FIELD_SERVICE_TYPE_TEXT', $this->InstanceLanguageText->GetText('FIELD_SERVICE_TYPE'));
 			$this->Smarty->assign('FIELD_SERVICE_TYPE_VALUE', $this->InputValueServiceType);
 			$this->Smarty->assign('FIELD_TYPE_ASSOC_USER_SERVICE_SERVICE_ID', $this->InputValueTypeAssocUserServiceId);
+			$this->Smarty->assign('FM_SERVICE_SEL_SB', ConfigInfraTools::FM_SERVICE_SEL_SB);
 			$this->Smarty->assign('FM_SERVICE_VIEW', ConfigInfraTools::FM_SERVICE_VIEW);
 			$this->Smarty->assign('FM_SERVICE_VIEW_UPDT', ConfigInfraTools::FM_SERVICE_VIEW_UPDT);
 			$this->Smarty->assign('FM_SERVICE_VIEW_UPDT_SB', ConfigInfraTools::FM_SERVICE_VIEW_UPDT_SB);
@@ -100,6 +103,8 @@ class PageService extends PageInfraTools
 			$this->Smarty->assign('PAGE_SERVICE_LST_BY_TYPE_SERVICE', $this->InstanceLanguageText->GetText('PAGE_SERVICE_LST_BY_TYPE_SERVICE'));
 			$this->Smarty->assign('PAGE_SERVICE_REGISTER', $this->InstanceLanguageText->GetText('PAGE_SERVICE_REGISTER'));
 			$this->Smarty->assign('PAGE_SERVICE_SEL', $this->InstanceLanguageText->GetText('PAGE_SERVICE_SEL'));
+			$this->Smarty->assign('RETURN_SERVICE_ID_TEXT', $this->ReturnServiceNameText);
+			$this->Smarty->assign('RETURN_SERVICE_NAME_TEXT', $this->ReturnServiceIdText);
 			return ConfigInfraTools::RET_OK;
 		}
 	}

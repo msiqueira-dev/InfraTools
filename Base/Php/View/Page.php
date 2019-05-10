@@ -277,7 +277,6 @@ class Page
 	protected $User                                   = NULL;
 	
 	/* Properties */
-	protected $ArrayPageBodyForm                                    = "";
 	protected $Language                                             = NULL;
 	protected $PageEnabled                                          = NULL;
 	protected $PageCheckLogin                                       = NULL;
@@ -1873,6 +1872,14 @@ class Page
 			{
 				echo "<div class='DivBody'><div class='DivContentBody'>";
 				$this->Smarty->display(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
+				if(file_exists(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $page) . ".php")))
+					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $page) . ".php"));
+				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $this->PageBody) . ".php")))
+					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $this->PageBody) . ".php"));
+				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php")))
+					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php"));
+				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php")))
+					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php"));	
 				if($ArrayPageForm != NULL)
 				{
 					if(is_array($ArrayPageForm))
@@ -1882,13 +1889,6 @@ class Page
 					}
 					else $this->Smarty->display($ArrayPageForm);
 				}
-				else 
-				{
-					$pageForm = REL_PATH . ConfigInfraTools::PATH_FORM . 
-							str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody)) . ".php";	
-					if(file_exists($pageForm))
-						$this->Smarty->display($pageForm);
-				}
 				echo "</div></div>";
 			}
 			if($EnableDivPush)
@@ -1896,7 +1896,7 @@ class Page
 				echo "<div class='DivPush'></div>";
 				echo "</div>";
 			}
-			include_once(REL_PATH . Config::PATH_FOOTER);
+			$this->Smarty->display(REL_PATH . Config::PATH_FOOTER);
 			echo Config::HTML_TAG_BODY_END;
 			echo Config::HTML_TAG_END;
 			return Config::RET_OK;

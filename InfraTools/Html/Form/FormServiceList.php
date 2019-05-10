@@ -1,138 +1,145 @@
 <!-- BODY SERVICE LIST -->
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
+	<div>
+		<div>
+			{$RETURN_IMAGE}
+		</div>
+	</div>
+	<label>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_SERVICE_ID_TEXT}
+		{$RETURN_SERVICE_NAME_TEXT}
+		{$RETURN_TEXT}
+	</label>
+</div>
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
-		<?php 
-		     if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-			 {
-				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-					  echo "<label class='InputValueLimitTitle'>" . 
-					           $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
-					       "</label>" .
-						   "<label class='InputValueLimitValue'>" . 
-					           $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
-					                                   . " " . $this->InputValueLimit2 . 
-					       "</label>";
-			 }
-		?>
+		<label class='InputValueLimitTitle'>
+			{$TB_PAGE_PREFIX}
+		</label>
+		<label class='InputValueLimitValue'> 
+			{$TB_PAGE_INPUT_VALUE_LIMIT_ONE} {$TB_PAGE} {$TB_PAGE_INPUT_VALUE_LIMIT_TWO}
+		</label>
 	</div>
 	<div class="DivTableGenericHeaderRowCount">
-		<?php
-			 if(isset($this->InputValueRowCount)) 
-			  {
-				  if($this->InputValueRowCount != "") 
-					  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-					           $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-					       "</label>" .
-						   "<label class='DivTableGenericRowCountLabelValue'>" . 
-					           $this->InputValueRowCount . 
-					       "</label>";
-			  } 
-		?>
+		<label class='DivTableGenericRowCountLabelTitle'>
+			{$ROW_COUNT} 
+		</label>
+		<label class='DivTableGenericRowCountLabelValue'>
+			{$INPUT_VALUE_ROW_COUNT}
+		</label>
 	</div>
 </div>
-<?php
-if(!empty($this->ArrayInstanceInfraToolsService))
-{
-	echo "<form  name='" . ConfigInfraTools::FM_SERVICE_LST . "' method='" . $this->InputValueFormMethod . "' />";
-	echo "<input type='hidden' value='$this->InputLimitOne' 
-				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
-	echo "<input type='hidden' value='$this->InputLimitTwo'
-				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
-	echo "<table class='TableGeneric'>";
-	echo "<tr>";
-	echo "<th class='TableGenericThArrow'>" .
-		 "<div class='TableGenericInputLeft'>
-		  <input  type='image'
-				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FM_SERVICE_LST_BACK . "' 
-				  id='"    . ConfigInfraTools::FM_SERVICE_LST_BACK . "'
-				  value='" . ConfigInfraTools::FM_SERVICE_LST_BACK . "'
-				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowBack28x28.png'
-				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
-				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28x28.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_SERVICE_ID') . "</div></th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_SERVICE_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_SERVICE_TYPE') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME') . "</th>";
-	echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_SERVICE_ACTIVE') . "</th>";
-	echo "<th  class= 'TableGenericThArrow'> 
-	      <div  class='TableGenericThLeft'>" . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-		 "<div class='TableGenericInputRight'>
-		          <input  type='image'
-				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FM_SERVICE_LST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FM_SERVICE_LST_FORWARD . "'
-				  value='" . ConfigInfraTools::FM_SERVICE_LST_FORWARD . "'
-				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowForward28x28.png'
-				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
-				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28x28.png'\" /></div>";
-	echo "</th>";
-	echo "</tr>";
-	echo "</form>";
-	foreach($this->ArrayInstanceInfraToolsService as $key=>$infraToolsService)
-	{
-		echo "<tr>";
-		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FM_SERVICE_SEL_SB . "' method='" . $this->InputValueFormMethod . "' />
-					<input type='hidden' name='" . ConfigInfraTools::FM_SERVICE_SEL_SB . "' 
-			  					   id='"   . ConfigInfraTools::FM_SERVICE_SEL_SB . "' 
-								   value='" . $ConfigInfraTools::FM_SERVICE_SEL_SB . "' />
-					<input type='submit' name='" . ConfigInfraTools::FIELD_SERVICE_ID . "' 
-									   id='"   . ConfigInfraTools::FIELD_SERVICE_ID . "' 
-									   value='" . $infraToolsService->GetServiceId() . "' 
-									   title='" . $infraToolsService->GetServiceId() . "' />
-			  	</form>
-		      </td>";
-		echo "<td class='TableGenericTdLink'>
-			  	<form  name='" . ConfigInfraTools::FM_SERVICE_SEL_SB . "' method='" . $this->InputValueFormMethod . "' />
-					<input type='hidden' name='" . ConfigInfraTools::FM_SERVICE_SEL_SB . "' 
-			  					   id='"   . ConfigInfraTools::FM_SERVICE_SEL_SB . "' 
-								   value='" . ConfigInfraTools::FM_SERVICE_SEL_SB . "' />
-			    	<input type='hidden' name='" . ConfigInfraTools::FIELD_SERVICE_ID . "' 
-			  					   id='"   . ConfigInfraTools::FIELD_SERVICE_ID . "' 
-								   value='" . $infraToolsService->GetServiceId() . "' />
-								   
-		      		<input type='submit' name='" . ConfigInfraTools::FIELD_SERVICE_NAME . "' 
-		                           id='"   . ConfigInfraTools::FIELD_SERVICE_NAME . "' 
-							       value='" . $infraToolsService->GetServiceName() . "' 
-								   title='" . $infraToolsService->GetServiceName() . "' />
-				</form>
-		      </td>";
-		echo "<td class='TableGenericTdLink'>"   . 
-			 $infraToolsService->GetServiceTypeName()  . "</td>";
-		if($infraToolsService->GetServiceCorporation())
-			echo "<td class='TableGenericTdLink'>"   . 
-			 	     "<p class='TableTdParagraph'>" .  $infraToolsService->GetServiceCorporationName()  . "</p></td>";
-		else echo "<td class='TableGenericTdLink'>"   . 
-			         "<img class='TableGenericTdLinkImage' src='" . $this->Config->DefaultServerImage 
-			                                     . 'Icons/IconNotVerified.png' . "'/></td>";
-		if($infraToolsService->GetServiceDepartment())
-			echo "<td class='TableGenericTdLink'>"   . 
-			 	     "<p class='TableTdParagraph'>" .  $infraToolsService->GetServiceDepartmentName()  . "</p></td>";
-		else echo "<td class='TableGenericTdLink'>"   . 
-			         "<img class='TableGenericTdLinkImage' src='" . $this->Config->DefaultServerImage 
-			                                     . 'Icons/IconNotVerified.png' . "'/></td>";
-		echo "<td class='TableGenericTdLink'>"   . 
-			"<img class='TableGenericTdLinkImage' src='" . $infraToolsService->GetServiceActiveIcon() . "'/>"  . "</td>";
-		echo "<td class= 'TableGenericTdLink'>" . $infraToolsService->GetRegisterDate() . "</td>";
-		echo "</tr>";
-	}
-	echo "</table>";
-}
-else
-{
-	echo "<div class='DivContentBodyServiceSubTitle'><h2>" . 
-		$this->InstanceLanguageText->GetText('SERVICE_NOT_FOUND_FOR_USER') . "</h2></div>";
-}
-?>
+<table class='TableGeneric'>
+	<tr>
+		<form  name="{$FM_CORPORATION_LST_FORM}" method='{$FORM_METHOD}'>
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
+			<th class="TableGenericThArrow">
+				<div class="TableGenericInputLeft">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_SERVICE_LST_BACK}" 
+							id="{$FM_SERVICE_LST_BACK}" 
+							value="{$FM_SERVICE_LST_BACK}"
+					        title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
+					        src="{$SUBMIT_BACK_ICON}"
+					        onmouseover="this.src='{$SUBMIT_BACK_ICON_HOVER}'"
+					        onmouseout="this.src='{$SUBMIT_BACK_ICON}'" />
+				</div>
+				<div class="TableGenericThRight">
+					{$FIELD_SERVICE_ID_TEXT}
+				</div>
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_SERVICE_NAME_TEXT}
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_SERVICE_TYPE_TEXT}
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_CORPORATION_NAME_TEXT}
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_DEPARTMENT_NAME_TEXT}
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_SERVICE_ACTIVE_TEXT}
+			</th>
+			<th  class="TableGenericThArrow">
+				<div  class="TableGenericThLeft">
+					{$FIELD_REGISTER_DATE_TEXT}
+				</div>
+				<div class="TableGenericInputRight">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_SERVICE_LST_FORWARD}" 
+							id="{$FM_SERVICE_LST_FORWARD}" 
+							value="{$FM_SERVICE_LST_FORWARD}"
+							title="{$SUBMIT_FORWARD}" alt="{$SUBMIT_FORWARD}"
+							src="{$SUBMIT_FORWARD_ICON}"
+							onmouseover="this.src='{$SUBMIT_FORWARD_ICON_HOVER}'"
+							onmouseout="this.src='{$SUBMIT_FORWARD_ICON}'" />
+				</div>
+			</th>
+		</form>
+	</tr>
+	{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_SERVICE item=INSTANCE_SERVICE}
+		{foreach key=key item=item from=$INSTANCE_SERVICE}
+			<tr>
+				<td class="TableGenericTdLink">
+					<form name="{$FM_SERVICE_SEL_SB}" method="{$FORM_METHOD}">
+						<input type="hidden" 
+						       name="{$FM_SERVICE_SEL_SB}" 
+							   id="{$FM_SERVICE_SEL_SB}"
+							   value="{$FM_SERVICE_SEL_SB}"/>
+						<input type="submit" 
+						       name="{$FIELD_SERVICE_ID}" 
+							   id="{$FIELD_SERVICE_ID}"
+							   value="{$item->GetServiceId()}"
+							   title="{$item->GetServiceId()}"
+							   maxlength="5" />	
+					</form>
+				</td>
+				<td class="TableGenericTdLink">
+					<form name="{$FM_SERVICE_SEL_SB}" method="{$FORM_METHOD}">
+						<input type="hidden" 
+						       name="{$FM_SERVICE_SEL_SB}" 
+							   id="{$FM_SERVICE_SEL_SB}"
+							   value="{$FM_SERVICE_SEL_SB}"/>
+						<input type="hidden"
+						       name="{$FIELD_SERVICE_ID}" 
+							   id="{$FIELD_SERVICE_ID}" 
+							   value="{$item->GetServiceId()}"/>
+						<input type="submit" 
+						       name="{$FIELD_SERVICE_NAME}" 
+							   id="{$FIELD_SERVICE_NAME}"
+							   value="{$item->GetServiceName()}"
+							   title="{$item->GetServiceName()}"
+							   maxlength="5" />	
+					</form>
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetServiceTypeName()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetServiceCorporationName()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetServiceDepartmentName()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetServiceActive()}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetRegisterDate()}
+				</td>
+			</tr>
+		{/foreach}
+	{/foreach}
+	{if $ARRAY_INSTANCE_INFRATOOLS_SERVICE eq false}
+		<div class='DivContentBodyServiceSubTitle'>
+			<h2>
+				{$SERVICE_NOT_FOUND_FOR_USER}
+			</h2>
+		</div>";
+	{/if}
+</table>

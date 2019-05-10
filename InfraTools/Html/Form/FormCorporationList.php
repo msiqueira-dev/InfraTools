@@ -80,7 +80,7 @@
 						<input type="hidden" 
 						       name="{$FM_CORPORATION_SEL_SB}" 
 							   id="{$FM_CORPORATION_SEL_SB}"
-							   value="{$FM_CORPORATION_SEL_SB}">
+							   value="{$FM_CORPORATION_SEL_SB}"/>
 						<input type="submit" 
 						       name="{$FIELD_CORPORATION_NAME}" 
 							   id="{$FIELD_CORPORATION_NAME}"
