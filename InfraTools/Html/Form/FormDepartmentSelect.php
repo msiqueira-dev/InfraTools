@@ -1,40 +1,34 @@
-<!-- DIV_RETURN -->
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))           echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnCorporationNameText)) echo $this->ReturnCorporationNameText; ?>
-		<?php if(isset($this->ReturnDepartmentNameText))  echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnText))                echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_CORPORATION_NAME_TEXT}
+		{$RETURN_DEPARTMENT_NAME_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_DEPARTMENT_SEL_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_FORM; ?>" method="post" >
+<form name="{$FM_DEPARTMENT_SEL_FORM}" id="{$FM_DEPARTMENT_SEL_FORM}" method="post" >
 	<!-- RADIO BUTTON -->
-	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
+	<div class="DivContentBodyContainer" id="{$DIV_RADIO}">
 		<!-- FIELD_RADIO_DEPARTMENT_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT; ?>"
-					   id="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME; ?>"
-					   value="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME; ?>"
+				<input type="radio" name="{$FIELD_RADIO_DEPARTMENT}"
+					   id="{$FIELD_RADIO_DEPARTMENT_NAME}"
+					   value="{$FIELD_RADIO_DEPARTMENT_NAME}"
 					   onclick="this.blur();this.focus();"
-					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>', 
-												 false);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>');
-								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
-														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>', 
-														   'Department Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>"  
-					   <?php echo $this->InputValueDepartmentNameRadio; ?>/>
+					   onchange="ShowOrHideElement('{$DIV_RADIO_CORPORATION}', false);
+								 MakeInputVisible('{$FM_DEPARTMENT_SEL_SB}');
+								 ValidateInputChangedRadio('{$DIV_RADIO}', 'DivContentBodySubmit', '{$FM_DEPARTMENT_SEL_SB}', 'Department Name')"
+					   title="{$FIELD_DEPARTMENT_NAME_TEXT}"  
+					   {$FIELD_RADIO_DEPARTMENT_NAME_VALUE}/>
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?></i>
+					<i>{$FIELD_DEPARTMENT_NAME_TEXT}</i>
 				</div>
 			</label>
 		</div>
@@ -42,21 +36,17 @@
 		<!-- FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT; ?>"
-					   id="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME; ?>"
-					   value="<?php echo ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME; ?>"
+				<input type="radio" name="{$FIELD_RADIO_DEPARTMENT}"
+					   id="{$FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME}"
+					   value="{$FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME}"
 					   onclick="this.blur();this.focus();"
-					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>', 
-												 true);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>');
-								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
-														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>', 
-														   'Corporation Name and Department Name')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?>"  
-					   <?php echo $this->InputValueDepartmentNameAndCorporationNameRadio; ?> />
+					   onchange="ShowOrHideElement('{$DIV_RADIO_CORPORATION}', true);
+								 MakeInputVisible('{$FM_DEPARTMENT_SEL_SB}');
+								 ValidateInputChangedRadio('{$DIV_RADIO}', 'DivContentBodySubmit', '{$FM_DEPARTMENT_SEL_SB}', '')"
+					   title="{$FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME_TEXT}"  
+					   {$FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME_VALUE} />
 				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'); ?></i>
+					<i>{$FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME_TEXT}</i>
 				</div>
 			</label>
 		</div>
@@ -64,66 +54,63 @@
 		<!-- FIELD_DEPARTMENT_NAME -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?> </label>
+				<label>{$FIELD_DEPARTMENT_NAME_TEXT}</label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
-							   id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>"
-							   class="DivContentBodyContainerInputText <?php echo $this->ReturnDepartmentNameClass; ?>"
+			<input type="text" name="{$FIELD_DEPARTMENT_NAME}" 
+							   id="{$FIELD_DEPARTMENT_NAME}"
+							   class="DivContentBodyContainerInputText {$RETURN_DEPARTMENT_NAME_CLASS}"
 							   onkeyup="ValidateDepartmentName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
+											       '{$FIELD_DEPARTMENT_NAME}',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												   '', 'false');"
+												   '{$FM_DEPARTMENT_SEL_SB}', '', false);"
 							   onblur="ValidateDepartmentName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
+											       '{$FIELD_DEPARTMENT_NAME}',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												   '', true);"
+												   '{$FM_DEPARTMENT_SEL_SB}','', true);"
 							   onchange="ValidateDepartmentName('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
-												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
-												   '', true);"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>" 
-							   value="<?php echo $this->InputValueDepartmentName; ?>" maxlength="80" />
+											                    '{$FIELD_DEPARTMENT_NAME}',
+												                'DivContentBodySubmit',
+												                '{$FM_DEPARTMENT_SEL_SB}','', true);"
+							   title="{$FIELD_DEPARTMENT_NAME_TEXT}" 
+							   value="{$FIELD_DEPARTMENT_NAME_VALUE}" maxlength="80" />
 		</div>
 		<!-- FIELD_CORPORATION_NAME -->
-		<div class="<?php echo $this->InputValueCorporationNameHidden; ?> DivContentBodyContainer" 
-		     id="<?php echo ConfigInfraTools::DIV_RADIO_CORPORATION; ?>">
+		<div class="{$HIDE_CORPORATION_NAME_CLASS} DivContentBodyContainer" id="{$DIV_RADIO_CORPORATION}">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
+				<label>{$FIELD_CORPORATION_NAME_TEXT} :</label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<select 
-					name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
-					id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
-					class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass . 
-	                       $this->InputValueCorporationNameSelectCss; ?>"
-					onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');
-							  document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>')
-											 .disabled = false;
-							  document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>')
-											 .className = 'DivContentBodySubmit SubmitEnabled;'">
-					<option <?php if ($this->InputValueCorporationName == "" 
-									  || $this->InputValueCorporationName == ConfigInfraTools::FIELD_SEL_NONE) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-							<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-					</option>
-					<?php 
-					if(is_array($this->ArrayInstanceInfraToolsCorporation))
-					{
-						foreach($this->ArrayInstanceInfraToolsCorporation as $key=>$corporation)
-						{
-							echo "<option ";
-							  if($this->InputValueCorporationName == $corporation->GetCorporationName())
-								echo "selected='selected' ";
-							echo "value='" . $corporation->GetCorporationName() . "'>" . $corporation->GetCorporationName() 
-										   . "</option>";
-						}
-					}
-					?>
+					name="{$FIELD_CORPORATION_NAME}" 
+					id="{$FIELD_CORPORATION_NAME}"
+					class="DivContentBodyContainerInputText {$RETURN_CORPORATION_NAME_CLASS}"
+					onchange="SetSelectColor('{$FIELD_CORPORATION_NAME}');
+							  document.getElementById('{$FM_DEPARTMENT_SEL_SB}').disabled = false;
+							  document.getElementById('{$FM_DEPARTMENT_SEL_SB}').className = 'DivContentBodySubmit SubmitEnabled;'">
+					{if $FIELD_SEL_NONE neq FALSE}
+                    <option value="{$FIELD_SEL_NONE}" selected='selected' >
+                        {$FIELD_SEL_NONE_TEXT}
+                    </option>
+					{else}
+						<option value="{$FIELD_SEL_NONE}">
+							{$FIELD_SEL_NONE_TEXT}
+						</option>
+					{/if}
+					{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_CORPORATION item=INSTANCE_CORPORATION}
+						{foreach key=key item=item from=$INSTANCE_CORPORATION}
+							{if FIELD_CORPORATION_NAME_VALUE eq $item->GetCorporationName()}
+								<option  selected='selected' value="{$item->GetCorporationName()}">
+									{$item->GetCorporationName()}
+								</option>
+							{else}
+								<option  value="{$item->GetCorporationName()}">
+									{$item->GetCorporationName()}
+								</option>
+							{/if}
+						{/foreach}
+					{/foreach}
 				</select>
 			</div>
 		</div>
@@ -131,14 +118,13 @@
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateDepartmentName('DivContentBodyContainerInputText', 
-							       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
+							       '{$FIELD_DEPARTMENT_NAME}',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>',
+								   '{$FM_DEPARTMENT_SEL_SB}',
 								   '', true);">
-		<input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_SEL_SB; ?>"
-								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
-								 <?php echo $this->SubmitEnabled; ?> />
+		<input type="submit" name="{$FM_DEPARTMENT_SEL_SB}" 
+								 id="{$FM_DEPARTMENT_SEL_SB}"
+								 class="DivContentBodySubmit {$SUBMIT_CLASS}"
+								 value="{$SUBMIT_SEL}" {$SUBMIT_ENABLED} />
 	</div>
 </form>

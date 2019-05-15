@@ -182,7 +182,7 @@ function SwitchElementVisibility(ElementIdToHideId, ElementIdToSeeId, InputId)
 	}
 }
 
-function ValidateCorporation(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
+function ValidateCorporationName(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
 {
 	var $input = document.getElementsByName(InputId)[0];
 	var $submit = document.getElementsByName(SubmitId)[0];

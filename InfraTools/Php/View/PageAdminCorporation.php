@@ -64,27 +64,21 @@ class PageAdminCorporation extends PageAdmin
 			$this->Smarty->assign('FM_CORPORATION_REGISTER_CANCEL', ConfigInfraTools::FM_CORPORATION_REGISTER_CANCEL);
 			$this->Smarty->assign('FM_CORPORATION_REGISTER_FORM', ConfigInfraTools::FM_CORPORATION_REGISTER_FORM);
 			$this->Smarty->assign('FM_CORPORATION_REGISTER_SB', ConfigInfraTools::FM_CORPORATION_REGISTER_SB);
+			$this->Smarty->assign('FM_CORPORATION_UPDT_CANCEL', ConfigInfraTools::FM_CORPORATION_UPDT_CANCEL);
+			$this->Smarty->assign('FM_CORPORATION_UPDT_FORM', ConfigInfraTools::FM_CORPORATION_UPDT_FORM);
+			$this->Smarty->assign('FM_CORPORATION_UPDT_SB', ConfigInfraTools::FM_CORPORATION_UPDT_SB);
 			$this->Smarty->assign('FM_CORPORATION_VIEW', ConfigInfraTools::FM_CORPORATION_VIEW);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_DEL', ConfigInfraTools::FM_CORPORATION_VIEW_DEL);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_DEL_SB', ConfigInfraTools::FM_CORPORATION_VIEW_DEL_SB);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_UPDT', ConfigInfraTools::FM_CORPORATION_VIEW_UPDT);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_UPDT_SB', ConfigInfraTools::FM_CORPORATION_VIEW_UPDT_SB);
-			$this->Smarty->assign('FM_CORPORATION_LST_VIEW_USERS_BACK', ConfigInfraTools::FM_CORPORATION_LST_VIEW_USERS_BACK);
-			$this->Smarty->assign('FM_CORPORATION_LST_VIEW_USERS_FORWARD', ConfigInfraTools::FM_CORPORATION_LST_VIEW_USERS_FORWARD);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_FORM', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_FORM);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_SB', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB);
-			$this->Smarty->assign('FM_CORPORATION_UPDT_CANCEL', ConfigInfraTools::FM_CORPORATION_UPDT_CANCEL);
-			$this->Smarty->assign('FM_CORPORATION_UPDT_FORM', ConfigInfraTools::FM_CORPORATION_UPDT_FORM);
-			$this->Smarty->assign('FM_CORPORATION_UPDT_SB', ConfigInfraTools::FM_CORPORATION_UPDT_SB);
+			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB_BACK);
+			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD);
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_CORPORATION", array($this->ArrayInstanceInfraToolsCorporation));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
-			if(isset($this->ReturnCorporationNameClass)) 
-				$this->Smarty->assign('RETURN_CORPORATION_NAME_CLASS', $this->ReturnCorporationNameClass);
-			else $this->Smarty->assign('RETURN_CORPORATION_NAME_CLASS', NULL);
-			if(isset($this->ReturnCorporationNameText)) 
-				$this->Smarty->assign('RETURN_CORPORATION_NAME_TEXT', $this->ReturnCorporationNameText);
-			else $this->Smarty->assign('RETURN_CORPORATION_NAME_TEXT', NULL);
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;

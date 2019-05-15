@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class for department management.
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -26,10 +27,10 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminDepartment extends PageAdmin
 {
-	public    $ArrayInstanceDepartment         = NULL;
-	protected $ArrayInstanceInfraToolsUser     = NULL;
-	protected $InstanceDepartment              = NULL;
-	protected $InputValueCorporationNameHidden = "Hidden";
+	public    $ArrayInstanceInfraToolsDepartment = NULL;
+	protected $ArrayInstanceInfraToolsUser      = NULL;
+	protected $InstanceDepartment               = NULL;
+	protected $InputValueCorporationNameHidden  = "Hidden";
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -42,6 +43,63 @@ class PageAdminDepartment extends PageAdmin
 	protected function __construct($Config, $Language, $Page) 
 	{
 		parent::__construct($Config, $Language, $Page);
+	}
+
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_CORPORATION", array($this->ArrayInstanceInfraToolsCorporation));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_DEPARTMENT", array($this->ArrayInstanceInfraToolsDepartment));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
+			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
+			$this->Smarty->assign('DIV_RADIO_CORPORATION', ConfigInfraTools::DIV_RADIO_CORPORATION);
+			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS', ConfigInfraTools::FIELD_DEPARTMENT_INITIALS);
+			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS'));
+			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_VALUE', $this->InputValueDepartmentInitials);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT', ConfigInfraTools::FIELD_RADIO_DEPARTMENT);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME', ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentNameRadio);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME', ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME'));
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME_VALUE', $this->InputValueDepartmentNameAndCorporationNameRadio);
+			$this->Smarty->assign('FM_DEPARTMENT', ConfigInfraTools::FM_DEPARTMENT);
+			$this->Smarty->assign('FM_DEPARTMENT_LST', ConfigInfraTools::FM_DEPARTMENT_LST);
+			$this->Smarty->assign('FM_DEPARTMENT_LST_BACK', ConfigInfraTools::FM_DEPARTMENT_LST_BACK);
+			$this->Smarty->assign('FM_DEPARTMENT_LST_FORWARD', ConfigInfraTools::FM_DEPARTMENT_LST_FORWARD);
+			$this->Smarty->assign('FM_DEPARTMENT_LST_FORM', ConfigInfraTools::FM_DEPARTMENT_LST_FORM);
+			$this->Smarty->assign('FM_DEPARTMENT_SEL', ConfigInfraTools::FM_DEPARTMENT_SEL);
+			$this->Smarty->assign('FM_DEPARTMENT_SEL_FORM', ConfigInfraTools::FM_DEPARTMENT_SEL_FORM);
+			$this->Smarty->assign('FM_DEPARTMENT_REGISTER', ConfigInfraTools::FM_DEPARTMENT_REGISTER);
+			$this->Smarty->assign('FM_DEPARTMENT_REGISTER_CANCEL', ConfigInfraTools::FM_DEPARTMENT_REGISTER_CANCEL);
+			$this->Smarty->assign('FM_DEPARTMENT_REGISTER_FORM', ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM);
+			$this->Smarty->assign('FM_DEPARTMENT_REGISTER_SB', ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW', ConfigInfraTools::FM_DEPARTMENT_VIEW);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_DEL', ConfigInfraTools::FM_DEPARTMENT_VIEW_DEL);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_DEL_SB', ConfigInfraTools::FM_DEPARTMENT_VIEW_DEL_SB);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_UPDT', ConfigInfraTools::FM_DEPARTMENT_VIEW_UPDT);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_UPDT_SB', ConfigInfraTools::FM_DEPARTMENT_VIEW_UPDT_SB);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_LST_USERS', ConfigInfraTools::FM_DEPARTMENT_VIEW_LST_USERS);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_LST_USERS_FORM', ConfigInfraTools::FM_DEPARTMENT_VIEW_LST_USERS_FORM);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_LST_USERS_SB', ConfigInfraTools::FM_DEPARTMENT_VIEW_LST_USERS_SB);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_DEPARTMENT_VIEW_LST_USERS_SB_BACK);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_DEPARTMENT_VIEW_LST_USERS_SB_FORWARD);
+			$this->Smarty->assign('FM_DEPARTMENT_UPDT_CANCEL', ConfigInfraTools::FM_DEPARTMENT_UPDT_CANCEL);
+			$this->Smarty->assign('FM_DEPARTMENT_UPDT_FORM', ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM);
+			$this->Smarty->assign('FM_DEPARTMENT_UPDT_SB', ConfigInfraTools::FM_DEPARTMENT_UPDT_SB);
+			$this->Smarty->assign('HIDE_CORPORATION_NAME_CLASS', $this->InputValueCorporationNameHidden);
+			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
+			if($this->InputValueCorporationName != "" && $this->InputValueCorporationName != ConfigInfraTools::FIELD_SEL_NONE)
+				$this->Smarty->assign('FIELD_SEL_NONE', FALSE);
+			if(isset($this->ReturnDepartmentInitialsClass)) 
+				$this->Smarty->assign('RETURN_DEPARTMENT_INITIALS_CLASS', $this->ReturnDepartmentInitialsClass);
+			else $this->Smarty->assign('RETURN_DEPARTMENT_INITIALS_CLASS', NULL);
+			if(isset($this->ReturnDepartmentInitialsText)) 
+				$this->Smarty->assign('RETURN_DEPARTMENT_INITIALS_TEXT', $this->ReturnDepartmentInitialsText);
+			else $this->Smarty->assign('RETURN_DEPARTMENT_INITIALS_TEXT', NULL);
+			return ConfigInfraTools::RET_OK;
+		} 
+		return ConfigInfraTools::RET_ERROR;
 	}
 
 	public function LoadPage()
@@ -64,7 +122,7 @@ class PageAdminDepartment extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_LST) == ConfigInfraTools::RET_OK)
 		{
 			if($this->ExecuteFunction($_POST, 'DepartmentSelect', 
-									  array(&$this->ArrayInstanceDepartment),
+									  array(&$this->ArrayInstanceInfraToolsDepartment),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
 		}
@@ -96,14 +154,6 @@ class PageAdminDepartment extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_REGISTER;
 			}
 		}
-		//FM_DEPARTMENT_SEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL) == ConfigInfraTools::RET_OK)
-		{
-			if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
-									  array(&$this->ArrayInstanceInfraToolsCorporation),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL;
-		}
 		//FM_DEPARTMENT_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
@@ -113,14 +163,14 @@ class PageAdminDepartment extends PageAdmin
 				{
 					if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentName', 
 											  array($_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
-													&$this->ArrayInstanceDepartment),
+													&$this->ArrayInstanceInfraToolsDepartment),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					{
-						if(count($this->ArrayInstanceDepartment) > 1)
+						if(count($this->ArrayInstanceInfraToolsDepartment) > 1)
 							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
 						else
 						{
-							$this->InstanceDepartment = array_pop($this->ArrayInstanceDepartment);
+							$this->InstanceDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
 							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
 														  $this->InstanceDepartment) == ConfigInfraTools::RET_OK)
 								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
@@ -136,11 +186,7 @@ class PageAdminDepartment extends PageAdmin
 													&$this->InstanceDepartment),
 											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-					else
-					{
-						$this->InputValueCorporationNameSelectCss = "SelectColorBlack";
-						$this->InputValueCorporationNameHidden = "NotHidden";
-					}
+					else $this->InputValueCorporationNameHidden = "NotHidden";
 				}
 				if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW && 
 				   $this->PageBody != ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST)
@@ -149,6 +195,22 @@ class PageAdminDepartment extends PageAdmin
 										  array(&$this->ArrayInstanceInfraToolsCorporation),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL;
+				}
+			}
+			else
+			{
+				if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
+											  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
+													$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
+													&$this->InstanceDepartment),
+											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+				else
+				{
+					$_POST[ConfigInfraTools::FM_DEPARTMENT_SEL] = ConfigInfraTools::FM_DEPARTMENT_SEL;
+					$this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
+											array(&$this->ArrayInstanceInfraToolsCorporation),
+											$this->InputValueHeaderDebug);
 				}
 			}
 		}
@@ -234,7 +296,8 @@ class PageAdminDepartment extends PageAdmin
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
-		$this->LoadHtml(FALSE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

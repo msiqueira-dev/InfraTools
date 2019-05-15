@@ -120,7 +120,7 @@
 	</div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateCorporation(null, '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
+         onmouseover="ValidateCorporationName(null, '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>',
 								   'DivContentBodySubmit',
 								   '<?php echo ConfigInfraTools::FM_CORPORATION_UPDT_SB; ?>',
 								   '', true);

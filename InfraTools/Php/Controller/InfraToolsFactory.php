@@ -16,7 +16,7 @@ Methods:
 			                                                      $RegisterDate);
 			public function CreateInfraToolsAssocUserService($InfraToolsServiceInstance, $InfraToolsTypeAssocUserServiceInstance, 
 								                             $InfraToolsUserInstance, $RegisterDate);
-			public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);	
+			public function CreateInfraToolsCorporation($ArrayInstanceInfraToolsDepartment, $CorporationActive, $CorporationName, $RegisterDate);	
 			public function CreateInfraToolsDiagnosticTools();
 			public function CreateInfraToolsFacedeBusiness($LanguageText);
 			public function CreateInfraToolsFacedePersistence();
@@ -180,7 +180,7 @@ class InfraToolsFactory extends Factory
 								              $InfraToolsUserInstance, $RegisterDate);
 	}
 	
-	public function CreateInfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate)
+	public function CreateInfraToolsCorporation($ArrayInstanceInfraToolsDepartment, $CorporationActive, $CorporationName, $RegisterDate)
 	{
 		if (!class_exists("Corporation"))
 		{
@@ -191,7 +191,7 @@ class InfraToolsFactory extends Factory
 		if(!file_exists(SITE_PATH_PHP_MODEL . "InfraToolsCorporation.php"))
 			exit(basename(__FILE__, '.php') . ': Error Loading Class InfraToolsCorporation');
 		else include_once(SITE_PATH_PHP_MODEL . "InfraToolsCorporation.php");
-		return new InfraToolsCorporation($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);
+		return new InfraToolsCorporation($ArrayInstanceInfraToolsDepartment, $CorporationActive, $CorporationName, $RegisterDate);
 	}
 	
 	public function CreateInfraToolsDiagnosticTools()

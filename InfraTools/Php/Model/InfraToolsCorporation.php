@@ -25,9 +25,9 @@ class InfraToolsCorporation extends Corporation
 	/* Properties */
 
 	/* Constructor */
-	public function __construct($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate) 
+	public function __construct($ArrayInstanceInfraToolsDepartment, $CorporationActive, $CorporationName, $RegisterDate) 
 	{
-		parent::__construct($ArrayInstanceDepartment, $CorporationActive, $CorporationName, $RegisterDate);
+		parent::__construct($ArrayInstanceInfraToolsDepartment, $CorporationActive, $CorporationName, $RegisterDate);
 	}
 	
 	/* Clone */

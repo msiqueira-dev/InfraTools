@@ -969,8 +969,11 @@ class Page
 
 	protected function BuildSmartyTags()
 	{
+		$this->Smarty->assign('DIV_RADIO', ConfigInfraTools::DIV_RADIO);
 		$this->Smarty->assign('FIELD_REGISTER_DATE_TEXT', $this->InstanceLanguageText->GetText('REGISTER_DATE'));
 		$this->Smarty->assign('FIELD_REGISTER_DATE_VALUE', $this->InputValueRegisterDate);
+		$this->Smarty->assign('FIELD_SEL_NONE', ConfigInfraTools::FIELD_SEL_NONE);
+		$this->Smarty->assign('FIELD_SEL_NONE_TEXT', $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'));
 		if(!empty($this->InputValueFormMethod))
 			$this->Smarty->assign('FORM_METHOD', $this->InputValueFormMethod);
 		else $this->Smarty->assign('FORM_METHOD', '$_POST');

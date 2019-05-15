@@ -22,7 +22,7 @@
             <input type="text" name="{$FIELD_CORPORATION_NAME}" 
                                id="{$FIELD_CORPORATION_NAME}" 
                                class="{$RETURN_CORPORATION_NAME_CLASS}"
-                               onblur="ValidateCorporation(null, '{$FIELD_CORPORATION_NAME}',
+                               onblur="ValidateCorporationName(null, '{$FIELD_CORPORATION_NAME}',
                                                    'DivContentBodySubmitBigger ',
                                                    '{$FM_CORPORATION_UPDT_SB}',
                                                    '', true);
@@ -36,7 +36,7 @@
                                                  'DivContentBodySubmitBigger ',
                                                  '{$FM_CORPORATION_UPDT_SB}',
                                                  '');"
-                               onchange="ValidateCorporation(null, '{$FIELD_CORPORATION_NAME}',
+                               onchange="ValidateCorporationName(null, '{$FIELD_CORPORATION_NAME}',
                                                    'DivContentBodySubmitBigger ',
                                                    '{$FM_CORPORATION_UPDT_SB}',
                                                    '', true);
@@ -74,7 +74,7 @@
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateCorporation(null, '{$FIELD_CORPORATION_NAME}',
+         onmouseover="ValidateCorporationName(null, '{$FIELD_CORPORATION_NAME}',
 								   'DivContentBodySubmit',
 								   '{$FM_CORPORATION_UPDT_SB}',
 								   '', true);

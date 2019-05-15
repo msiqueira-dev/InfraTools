@@ -34,14 +34,12 @@
 <table class='TableGeneric'>
 	<tr>
 		<form  name="{$FM_CORPORATION_VIEW_LST_USERS_FORM}" method='post'>
-			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
-			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
 			<th class="TableGenericThArrow">
 				<div class="TableGenericInputLeft">
 					<input  type="image" class="TableGenericThArrowImage"
-							name="{$FM_CORPORATION_LST_VIEW_USERS_BACK}" 
-							id="{$FM_CORPORATION_LST_VIEW_USERS_BACK}" 
-							value="{$FM_CORPORATION_LST_VIEW_USERS_BACK}"
+							name="{$FM_CORPORATION_VIEW_LST_USERS_SB_BACK}" 
+							id="{$FM_CORPORATION_VIEW_LST_USERS_SB_BACK}" 
+							value="{$FM_CORPORATION_VIEW_LST_USERS_SB_BACK}"
 					        title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
 					        src="{$SUBMIT_BACK_ICON}"
 					        onmouseover="this.src='{$SUBMIT_BACK_ICON_HOVER}'"
@@ -66,15 +64,17 @@
 				</div>
 				<div class="TableGenericInputRight">
 					<input  type="image" class="TableGenericThArrowImage"
-							name="{$FM_CORPORATION_LST_VIEW_USERS_FORWARD}" 
-							id="{$FM_CORPORATION_LST_VIEW_USERS_FORWARD}" 
-							value="{$FM_CORPORATION_LST_VIEW_USERS_FORWARD}"
+							name="{$FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD}" 
+							id="{$FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD}" 
+							value="{$FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD}"
 							title="{$SUBMIT_FORWARD}" alt="{$SUBMIT_FORWARD}"
 							src="{$SUBMIT_FORWARD_ICON}"
 							onmouseover="this.src='{$SUBMIT_FORWARD_ICON_HOVER}'"
 							onmouseout="this.src='{$SUBMIT_FORWARD_ICON}'" />
 				</div>
 			</th>
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
 		</form>
 	</tr>
 	{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_USER item=INSTANCE_USER}

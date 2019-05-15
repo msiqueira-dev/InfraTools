@@ -93,6 +93,18 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('SUBMIT_LST', $this->InstanceLanguageText->GetText('SUBMIT_LST'));
 			$this->Smarty->assign('SUBMIT_INSERT', $this->InstanceLanguageText->GetText('SUBMIT_INSERT'));
 			$this->Smarty->assign('SUBMIT_SEL', $this->InstanceLanguageText->GetText('SUBMIT_SEL'));
+			if(isset($this->ReturnCorporationNameClass)) 
+				$this->Smarty->assign('RETURN_CORPORATION_NAME_CLASS', $this->ReturnCorporationNameClass);
+			else $this->Smarty->assign('RETURN_CORPORATION_NAME_CLASS', NULL);
+			if(isset($this->ReturnCorporationNameText)) 
+				$this->Smarty->assign('RETURN_CORPORATION_NAME_TEXT', $this->ReturnCorporationNameText);
+			else $this->Smarty->assign('RETURN_CORPORATION_NAME_TEXT', NULL);
+			if(isset($this->ReturnDepartmentNameClass)) 
+				$this->Smarty->assign('RETURN_DEPARTMENT_NAME_CLASS', $this->ReturnDepartmentNameClass);
+			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_CLASS', NULL);
+			if(isset($this->ReturnDepartmentNameText)) 
+				$this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', $this->ReturnDepartmentNameText);
+			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', NULL);
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;

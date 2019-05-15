@@ -1,155 +1,156 @@
-<!-- DIV_RETURN -->
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnCorporationNameText))    echo $this->ReturnCorporationNameText; ?>
-		<?php if(isset($this->ReturnDepartmentInitialsText)) echo $this->ReturnDepartmentInitialsText; ?>
-		<?php if(isset($this->ReturnDepartmentNameText))     echo $this->ReturnDepartmentNameText; ?>
-		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+        {$RETURN_CORPORATION_NAME_TEXT}
+        {$RETURN_DEPARTMENT_INITIALS_TEXT}
+		{$RETURN_DEPARTMENT_NAME_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_DEPARTMENT_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>" method="post">
+<form name="{$FM_DEPARTMENT_REGISTER_FORM}" 
+      id="{$FM_DEPARTMENT_REGISTER_FORM}" method="post">
     <!-- FIELD_DEPARTMENT_INITIALS -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS').":"; ?></label>
+            <label>{$FIELD_DEPARTMENT_INITIALS_TEXT} :</label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>" 
-                               id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>" 
-                               class="<?php echo $this->ReturnDepartmentInitialsClass; ?>"
-                               onblur="ValidateDepartmentInitials(null, 
-                                                   '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>',
+            <input type="text" name="{$FIELD_DEPARTMENT_INITIALS}" 
+                               id="{$FIELD_DEPARTMENT_INITIALS}" 
+                               class="{$RETURN_DEPARTMENT_INITIALS_CLASS}"
+                               onblur="ValidateDepartmentInitials(null, '{$FIELD_DEPARTMENT_INITIALS}',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                   '{$FM_DEPARTMENT_REGISTER_SB}',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_SB}',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_SB}',
                                                  '');"
-                               onchange="ValidateDepartmentInitials(null, 
-                                                  '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>',
+                               onchange="ValidateDepartmentInitials(null, '{$FIELD_DEPARTMENT_INITIALS}',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                   '{$FM_DEPARTMENT_REGISTER_SB}',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_SB}',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS'); ?>"
-                               value="<?php echo $this->InputValueDepartmentInitials; ?>" maxlength="8" />
+                               title="{$FIELD_DEPARTMENT_INITIALS_TEXT}"
+                               value="{$FIELD_DEPARTMENT_INITIALS_VALUE}" maxlength="80" />
         </div>
     </div>
     <!-- FIELD_DEPARTMENT_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME').":"; ?></label>
+            <label>{$FIELD_DEPARTMENT_NAME_TEXT} :</label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="text" name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
-                               id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
-                               class="<?php echo $this->ReturnDepartmentNameClass; ?>"
-                               onblur="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
+            <input type="text" name="{$FIELD_DEPARTMENT_NAME}" 
+                               id="{$FIELD_DEPARTMENT_NAME}" 
+                               class="{$RETURN_DEPARTMENT_NAME_CLASS}"
+                               onblur="ValidateDepartmentName(null, '{$FIELD_DEPARTMENT_NAME}',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                   '{$FM_DEPARTMENT_REGISTER_SB}',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_SB}',
                                                  '');"
                                onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_SB}',
                                                  '');"
-                               onchange="ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
+                               onchange="ValidateDepartmentName(null, '{$FIELD_DEPARTMENT_NAME}',
                                                    'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                   '{$FM_DEPARTMENT_REGISTER_SB}',
                                                    '', true);
                                        ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                                 '{$FM_DEPARTMENT_REGISTER_SB}',
                                                  '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'); ?>"
-                               value="<?php echo $this->InputValueDepartmentName; ?>" maxlength="80" />
+                               title="{$FIELD_DEPARTMENT_NAME_TEXT}"
+                               value="{$FIELD_DEPARTMENT_NAME_VALUE}" maxlength="80" />
         </div>
     </div>
-   <!-- FIELD_CORPORATION_NAME -->
+    <!-- FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME').":"; ?></label>
+            <label>{$FIELD_CORPORATION_NAME}</label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
-                id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
-                class="<?php echo $this->ReturnCorporationNameClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');
-                          document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'">
-                <option <?php if ($this->InputValueCorporationName == "" 
-                                  || $this->InputValueCorporationName == ConfigInfraTools::FIELD_SEL_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-                </option>
-                <?php 
-                if(is_array($this->ArrayInstanceInfraToolsCorporation))
-                {
-                    foreach($this->ArrayInstanceInfraToolsCorporation as $key=>$corporation)
-                    {
-                        echo "<option ";
-                          if($this->InputValueCorporationName == $corporation->GetCorporationName())
-                            echo "selected='selected' ";
-                        echo "value='" . $corporation->GetCorporationName() . "'>" . $corporation->GetCorporationName() 
-							           . "</option>";
-                    }
-                }
-                ?>
+                name="{$FIELD_CORPORATION_NAME}" 
+                id="{$FIELD_CORPORATION_NAME}"
+                class="{$RETURN_CORPORATION_NAME_CLASS}"
+                onchange="SetSelectColor('{$FIELD_CORPORATION_NAME}');
+                          document.getElementById('{$FM_DEPARTMENT_REGISTER_SB}').disabled = false;
+				          document.getElementById('{$FM_DEPARTMENT_REGISTER_SB}').className = 'DivContentBodySubmitBigger SubmitEnabled;'">
+                {if $FIELD_SEL_NONE neq FALSE}
+                    <option value="{$FIELD_SEL_NONE}" selected='selected' >
+                        {$FIELD_SEL_NONE_TEXT}
+                    </option>
+                {else}
+                    <option value="{$FIELD_SEL_NONE}">
+                        {$FIELD_SEL_NONE_TEXT}
+                    </option>
+                {/if}
+                {foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_CORPORATION item=INSTANCE_CORPORATION}
+                    {foreach key=key item=item from=$INSTANCE_CORPORATION}
+                        {if FIELD_CORPORATION_NAME_VALUE eq $item->GetCorporationName()}
+                            <option  selected='selected' value="{$item->GetCorporationName()}">
+                                {$item->GetCorporationName()}
+                            </option>
+                        {else}
+                            <option  value="{$item->GetCorporationName()}">
+                                {$item->GetCorporationName()}
+                            </option>
+                        {/if}
+                    {/foreach}
+	            {/foreach}
             </select>
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateDepartmentInitials(null, 
-								  '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_INITIALS; ?>',
-								   'DivContentBodySubmitBigger ',
-								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
-								   '', true);
-					  ValidateDepartmentName(null, '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>',
+         onmouseover="ValidateCorporationName(null, '{$FIELD_CORPORATION_NAME}',
 								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
-								   '', true);
-                      ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_FORM; ?>',
+								   '{$FM_DEPARTMENT_REGISTER_SB}',
+                                   '', true);
+                      ValidateDepartmentInitials(null, '{$FIELD_DEPARTMENT_INITIALS}',
                                    'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>',
+                                   '{$FM_DEPARTMENT_REGISTER_SB}',
+                                   '', true);
+                     ValidateDepartmentName(null, '{$FIELD_DEPARTMENT_NAME}',
+                                   'DivContentBodySubmitBigger',
+                                   '{$FM_DEPARTMENT_REGISTER_SB}',
+                                   '', true);
+                      ValidateMultiplyFields(
+                                   '{$FM_DEPARTMENT_REGISTER_FORM}',
+                                   'DivContentBodySubmitBigger',
+                                   '{$FM_DEPARTMENT_REGISTER_SB}',
                                    '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_SB; ?>"
-                                 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
-                                 <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_DEPARTMENT_REGISTER_CANCEL; ?>"
+        <input type="submit" name="{$FM_DEPARTMENT_REGISTER_SB}" 
+                                 id="{$FM_DEPARTMENT_REGISTER_SB}"
+                                 class="DivContentBodySubmitBigger {$SUBMIT_CLASS}"
+                                 value="{$SUBMIT_REGISTER}" {$SUBMIT_ENABLED} />
+        <input type="submit" name="{$FM_DEPARTMENT_REGISTER_CANCEL}" 
+                                 id="{$FM_DEPARTMENT_REGISTER_CANCEL}"
                                  class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
+                                 value="{$SUBMIT_CANCEL}" />
     </div>
 </form>

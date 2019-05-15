@@ -88,7 +88,7 @@ class PageAdminUser extends PageAdmin
 				{
 					$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 					$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceUserAdmin->GetCorporationName(), 
-					                                                $this->ArrayInstanceDepartment,
+					                                                $this->ArrayInstanceInfraToolsDepartment,
 																    $this->InputValueHeaderDebug);
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_CHANGE_ASSOC_USER_CORPORATION;
 				}
@@ -263,7 +263,7 @@ class PageAdminUser extends PageAdmin
 			{
 				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);
 				$this->DepartmentSelectByCorporationNameNoLimit($this->InstanceUserAdmin->GetCorporationName(),
-					                                            $this->ArrayInstanceDepartment,
+					                                            $this->ArrayInstanceInfraToolsDepartment,
 																$this->InputValueHeaderDebug);
 				$this->SubmitEnabled = '';
 				$this->SubmitClass = 'SubmitEnabled';

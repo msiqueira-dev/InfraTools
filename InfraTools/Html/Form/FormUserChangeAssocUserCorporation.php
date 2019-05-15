@@ -238,9 +238,9 @@
                         <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
                 </option>
                 <?php 
-                if(is_array($this->ArrayInstanceDepartment))
+                if(is_array($this->ArrayInstanceInfraToolsDepartment))
                 {
-                    foreach($this->ArrayInstanceDepartment as $key=>$department)
+                    foreach($this->ArrayInstanceInfraToolsDepartment as $key=>$department)
                     {
                         echo "<option ";
                           if($this->InputValueDepartmentName == $department->GetDepartmentName() ||

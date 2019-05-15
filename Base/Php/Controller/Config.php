@@ -336,9 +336,6 @@ class Config
 	const FM_CORPORATION_LST_BACK                                       = "FormCorporationListBack";
 	const FM_CORPORATION_LST_FORM                                       = "FormCorporationListForm";
 	const FM_CORPORATION_LST_FORWARD                                    = "FormCorporationListForward";
-	const FM_CORPORATION_LST_VIEW_USERS                                 = "FormCorporationListViewUsers";
-	const FM_CORPORATION_LST_VIEW_USERS_BACK                            = "FormCorporationListViewUsersBack";
-	const FM_CORPORATION_LST_VIEW_USERS_FORWARD                         = "FormCorporationListViewUsersForward";
 	const FM_CORPORATION_REGISTER                                       = "FormCorporationRegister";
 	const FM_CORPORATION_REGISTER_CANCEL                                = "FormCorporationRegisterCancel";
 	const FM_CORPORATION_REGISTER_FORM                                  = "FormCorporationRegisterForm";

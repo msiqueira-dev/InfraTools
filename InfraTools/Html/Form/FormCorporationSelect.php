@@ -22,7 +22,7 @@
 		<input type="text" name="{$FIELD_CORPORATION_NAME}" 
 						   id="{$FIELD_CORPORATION_NAME}"
 						   class="DivContentBodyContainerInputText {$RETURN_CORPORATION_NAME_CLASS}"
-						   onkeyup="ValidateCorporation('DivContentBodyContainerInputText', 
+						   onkeyup="ValidateCorporationName('DivContentBodyContainerInputText', 
 										       '{$FIELD_CORPORATION_NAME}',
 											   'DivContentBodySubmit',
 											   '{$FM_CORPORATION_SEL_SB}',
@@ -32,7 +32,7 @@
 											 'DivContentBodySubmit',
 											 '{$FM_CORPORATION_SEL_SB}',
 											 '');"
-						   onblur="ValidateCorporation('DivContentBodyContainerInputText', 
+						   onblur="ValidateCorporationName('DivContentBodyContainerInputText', 
 										       '{$FIELD_CORPORATION_NAME}',
 											   'DivContentBodySubmit',
 											   '{$FM_CORPORATION_SEL_SB}',
@@ -42,7 +42,7 @@
 											 'DivContentBodySubmit',
 											 '{$FM_CORPORATION_SEL_SB}',
 											 '');"
-						   onchange="ValidateCorporation('DivContentBodyContainerInputText', 
+						   onchange="ValidateCorporationName('DivContentBodyContainerInputText', 
 										       '{$FIELD_CORPORATION_NAME}',
 											   'DivContentBodySubmit',
 											   '{$FM_CORPORATION_SEL_SB}',
@@ -57,7 +57,7 @@
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
-		 onmouseover="ValidateCorporation('DivContentBodyContainerInputText', 
+		 onmouseover="ValidateCorporationName('DivContentBodyContainerInputText', 
 							       '{$FIELD_CORPORATION_NAME}',
 								   'DivContentBodySubmit',
 								   '{$FM_CORPORATION_SEL_SB}',
