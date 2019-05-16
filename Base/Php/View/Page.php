@@ -1478,7 +1478,7 @@ class Page
 	}
 	
 	protected function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-																		  &$InstanceDepartment, $Debug)
+																		  &$ArrayInstanceDepartment, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -1523,13 +1523,9 @@ class Page
 			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentNameAndCorporationName(
 				                                                                     $this->InputValueCorporationName, 
 																				     $this->InputValueDepartmentName,
-																		             $InstanceDepartment, $Debug);
+																		             $ArrayInstanceDepartment, $Debug);
 			if($return == Config::RET_OK)
-			{
-				$return = $this->DepartmentLoadData($InstanceDepartment);
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_DEPARTMENT, $InstanceDepartment);
-				return Config::RET_OK;
-			}
+				return $return;
 		}
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
 		return Config::RET_ERROR;

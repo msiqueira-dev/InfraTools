@@ -85,7 +85,7 @@ Functions:
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug,
 			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-			                                                                   &$DepartmentInstance, $Debug,
+			                                                                   &$ArrayInstanceDepartment, $Debug,
 																			   $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug,
 			                                        $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -887,7 +887,7 @@ class FacedePersistence
 		return $return;	
 	}
 	
-	public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, &$DepartmentInstance,
+	public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, &$ArrayInstanceDepartment,
 																	   $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
@@ -896,7 +896,7 @@ class FacedePersistence
 			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
 			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByDepartmentNameAndCorporationName($CorporationName,
 																									           $DepartmentName,
-																						                       $DepartmentInstance, 
+																						                       $ArrayInstanceDepartment, 
 																									           $Debug,
 																											   $MySqlConnection);
 			if($CloseConnectaion)

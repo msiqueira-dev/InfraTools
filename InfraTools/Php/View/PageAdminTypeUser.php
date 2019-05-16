@@ -28,8 +28,6 @@ if (!class_exists("PageAdmin"))
 class PageAdminTypeUser extends PageAdmin
 {
 	protected $ArrayInstanceInfraToolsUser     = NULL;
-	protected $ArrayInstanceInfraToolsTypeUser = NULL;
-	protected $InstanceInfraToolsTypeUser      = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -50,32 +48,30 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_TYPE_USER", array($this->ArrayInstanceInfraToolsTypeUser));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
-			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
-			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
-			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_VALUE', $this->InputValueCorporationActive);
+			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
 			$this->Smarty->assign('FM_TYPE_USER', ConfigInfraTools::FM_TYPE_USER);
 			$this->Smarty->assign('FM_TYPE_USER_LST', ConfigInfraTools::FM_TYPE_USER_LST);
-			$this->Smarty->assign('FM_TYPE_USER_LST_BACK', ConfigInfraTools::FM_CORPORATION_LST_BACK);
-			$this->Smarty->assign('FM_TYPE_USER_LST_FORWARD', ConfigInfraTools::FM_CORPORATION_LST_FORWARD);
-			$this->Smarty->assign('FM_TYPE_USER_LST_FORM', ConfigInfraTools::FM_CORPORATION_LST_FORM);
-			$this->Smarty->assign('FM_TYPE_USER_SEL', ConfigInfraTools::FM_CORPORATION_SEL);
-			$this->Smarty->assign('FM_TYPE_USER_SEL_FORM', ConfigInfraTools::FM_CORPORATION_SEL_FORM);
-			$this->Smarty->assign('FM_TYPE_USER_REGISTER', ConfigInfraTools::FM_CORPORATION_REGISTER);
-			$this->Smarty->assign('FM_TYPE_USER_REGISTER_CANCEL', ConfigInfraTools::FM_CORPORATION_REGISTER_CANCEL);
-			$this->Smarty->assign('FM_TYPE_USER_REGISTER_FORM', ConfigInfraTools::FM_CORPORATION_REGISTER_FORM);
-			$this->Smarty->assign('FM_TYPE_USER_REGISTER_SB', ConfigInfraTools::FM_CORPORATION_REGISTER_SB);
-			$this->Smarty->assign('FM_TYPE_USER_UPDT_CANCEL', ConfigInfraTools::FM_CORPORATION_UPDT_CANCEL);
-			$this->Smarty->assign('FM_TYPE_USER_UPDT_FORM', ConfigInfraTools::FM_CORPORATION_UPDT_FORM);
-			$this->Smarty->assign('FM_TYPE_USER_UPDT_SB', ConfigInfraTools::FM_CORPORATION_UPDT_SB);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_DEL', ConfigInfraTools::FM_CORPORATION_VIEW_DEL);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_DEL_SB', ConfigInfraTools::FM_CORPORATION_VIEW_DEL_SB);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_UPDT', ConfigInfraTools::FM_CORPORATION_VIEW_UPDT);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_UPDT_SB', ConfigInfraTools::FM_CORPORATION_VIEW_UPDT_SB);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_FORM', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_FORM);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_SB', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB_BACK);
-			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD);
+			$this->Smarty->assign('FM_TYPE_USER_LST_BACK', ConfigInfraTools::FM_TYPE_USER_LST_BACK);
+			$this->Smarty->assign('FM_TYPE_USER_LST_FORWARD', ConfigInfraTools::FM_TYPE_USER_LST_FORWARD);
+			$this->Smarty->assign('FM_TYPE_USER_LST_FORM', ConfigInfraTools::FM_TYPE_USER_LST_FORM);
+			$this->Smarty->assign('FM_TYPE_USER_SEL', ConfigInfraTools::FM_TYPE_USER_SEL);
+			$this->Smarty->assign('FM_TYPE_USER_SEL_FORM', ConfigInfraTools::FM_TYPE_USER_SEL_FORM);
+			$this->Smarty->assign('FM_TYPE_USER_REGISTER', ConfigInfraTools::FM_TYPE_USER_REGISTER);
+			$this->Smarty->assign('FM_TYPE_USER_REGISTER_CANCEL', ConfigInfraTools::FM_TYPE_USER_REGISTER_CANCEL);
+			$this->Smarty->assign('FM_TYPE_USER_REGISTER_FORM', ConfigInfraTools::FM_TYPE_USER_REGISTER_FORM);
+			$this->Smarty->assign('FM_TYPE_USER_REGISTER_SB', ConfigInfraTools::FM_TYPE_USER_REGISTER_SB);
+			$this->Smarty->assign('FM_TYPE_USER_UPDT_CANCEL', ConfigInfraTools::FM_TYPE_USER_UPDT_CANCEL);
+			$this->Smarty->assign('FM_TYPE_USER_UPDT_FORM', ConfigInfraTools::FM_TYPE_USER_UPDT_FORM);
+			$this->Smarty->assign('FM_TYPE_USER_UPDT_SB', ConfigInfraTools::FM_TYPE_USER_UPDT_SB);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_DEL', ConfigInfraTools::FM_TYPE_USER_VIEW_DEL);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_DEL_SB', ConfigInfraTools::FM_TYPE_USER_VIEW_DEL_SB);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_UPDT', ConfigInfraTools::FM_TYPE_USER_VIEW_UPDT);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_UPDT_SB', ConfigInfraTools::FM_TYPE_USER_VIEW_UPDT_SB);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS', ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_FORM', ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS_FORM);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_SB', ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS_SB);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS_SB_BACK);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS_SB_FORWARD);
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;
@@ -92,7 +88,7 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
-											&$this->InstanceCorporation),
+											&$this->InstanceInfraToolsCorporation),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
@@ -102,9 +98,17 @@ class PageAdminTypeUser extends PageAdmin
 			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
 											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
-										    &$this->InstanceInfraToolsDepartment),
+										    &$this->ArrayInstanceInfraToolsDepartment),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+				{
+					if(count($this->ArrayInstanceInfraToolsDepartment) == 1)
+					{
+						$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+														$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					}
+				}
 		}
 		//FM_TYPE_USER_LST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_LST) == ConfigInfraTools::RET_OK)
@@ -214,7 +218,8 @@ class PageAdminTypeUser extends PageAdmin
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
-		$this->LoadHtml(FALSE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

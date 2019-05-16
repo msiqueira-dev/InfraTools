@@ -23,7 +23,7 @@ Functions:
 			                                                         $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-			                                                                   &$DepartmentInstance, $Debug, $MySqlConnection);
+			                                                                   &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentSelectNoLimit(&$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentUpdateDepartmentByDepartmentAndCorporation($CorporationName, $DepartmentInitialsNew,
 			                                                                     $DepartmentNameNew, $DepartmentNameOld, 
@@ -378,7 +378,7 @@ class FacedePersistenceDepartment
 	}
 	
 	public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
-																	   &$DepartmentInstance, $Debug, $MySqlConnection)
+																	   &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
 	{
 		$errorStr = NULL; $mySqlError = NULL;
 		if($MySqlConnection != NULL)
@@ -388,22 +388,33 @@ class FacedePersistenceDepartment
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentNameAndCorporationName());
 			if($stmt != NULL)
 			{
+				$DepartmentName = "%".$DepartmentName."%"; 
 				$stmt->bind_param("ss", $CorporationName, $DepartmentName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::RET_OK)
 				{
-					$stmt->bind_result($CorporationName, $depIni, $depName, $depRegDate, $corpActive, $corpName, $corpRegDate);
-					if ($stmt->fetch())
+					$ArrayInstanceDepartment = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
 					{
-						$CorporationInstance = $this->Factory->CreateCorporation(NULL, $corpActive, $corpName, $corpRegDate);
-						$DepartmentInstance = $this->Factory->CreateDepartment($CorporationInstance, $depIni, $depName, $depRegDate);
-						return Config::RET_OK;
+						$RowCount = $row['COUNT'];
+						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
+																		   $row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                   $row[Config::TB_CORPORATION_FD_NAME], 
+											                               $row["Corporation".Config::TB_FD_REGISTER_DATE]);
+						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation,
+																			$row[Config::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[Config::TB_DEPARTMENT_FD_NAME], 
+											                                $row["Department".Config::TB_FD_REGISTER_DATE]);
+						array_push($ArrayInstanceDepartment, $InstanceDepartment);
 					}
-					else
+					if(!empty($ArrayInstanceDepartment))
+						return Config::RET_OK;
+					else 
 					{
 						if($Debug == Config::CHECKBOX_CHECKED) 
 							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_CORP_DEP_FETCH;
+						return Config::DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME_FETCH;
 					}
 				}
 				else

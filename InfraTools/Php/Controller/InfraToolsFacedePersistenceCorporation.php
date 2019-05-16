@@ -13,13 +13,13 @@ Dependencies:
 Description: 
 			Class with Singleton pattern for dabatabase methods of InfraTools Corporation
 Functions: 
-			public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, 
+			public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, &$RowCount, 
 			                                            $Debug, $MySqlConnection);
-			public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, 
+			public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceInfraToolsCorporation, 
 			                                                         $Debug, $MySqlConnection);
 			public function InfraToolsCorporationSelectByName($CorporationName, &$CorporationInstance, 
 			                                                  $Debug, $MySqlConnection);
-			public function InfraTools(&$ArrayInstanceCorporation, $Debug, $MySqlConnection);
+			public function InfraTools(&$ArrayInstanceInfraToolsCorporation, $Debug, $MySqlConnection);
 			public function InfraToolsCorporationSelectOnUserServiceContext($Limit1, $Limit2, $UserEmail, 
 			                                                                &$ArrayInstanceInfraToolsCorporation, 
 																            &$RowCount, $Debug, $MySqlConnection);
@@ -76,7 +76,7 @@ class InfraToolsFacedePersistenceCorporation
         return self::$Instance;
     }
 	
-	public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceCorporation, &$RowCount, $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsCorporation, &$RowCount, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
@@ -91,18 +91,18 @@ class InfraToolsFacedePersistenceCorporation
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::RET_OK)
 				{
-					$ArrayInstanceCorporation = array();
+					$ArrayInstanceInfraToolsCorporation = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
 						$RowCount = $row['COUNT'];
-						$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
+						$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
 							                             (NULL, $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
 						                                  $row[ConfigInfraTools::TB_CORPORATION_FD_NAME], 
 											              $row[ConfigInfraTools::TB_FD_REGISTER_DATE]);
-						array_push($ArrayInstanceCorporation, $InstanceCorporation);
+						array_push($ArrayInstanceInfraToolsCorporation, $InstanceInfraToolsCorporation);
 					}
-					if(!empty($ArrayInstanceCorporation))
+					if(!empty($ArrayInstanceInfraToolsCorporation))
 						return ConfigInfraTools::RET_OK;
 					else 
 					{
@@ -129,26 +129,26 @@ class InfraToolsFacedePersistenceCorporation
 		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
+	public function InfraToolsCorporationSelectActiveNoLimit(&$ArrayInstanceInfraToolsCorporation, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceCorporation = NULL;
+		$ArrayInstanceInfraToolsCorporation = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQuery('SqlCorporationSelectActiveNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectActiveNoLimit()))
 			{
-				$ArrayInstanceCorporation = array();
+				$ArrayInstanceInfraToolsCorporation = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
+					$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
 						                                    (NULL, $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
 					                                         $row[ConfigInfraTools::TB_CORPORATION_FD_NAME], 
 										                     $row[ConfigInfraTools::TB_FD_REGISTER_DATE]);
-					array_push($ArrayInstanceCorporation, $InstanceCorporation);
+					array_push($ArrayInstanceInfraToolsCorporation, $InstanceInfraToolsCorporation);
 				}
-				if(!empty($ArrayInstanceCorporation))
+				if(!empty($ArrayInstanceInfraToolsCorporation))
 					return ConfigInfraTools::RET_OK;
 				else return ConfigInfraTools::DB_ERROR_CORPORATION_SEL_FETCH;
 			}
@@ -209,27 +209,27 @@ class InfraToolsFacedePersistenceCorporation
 		else return ConfigInfraTools::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function InfraTools(&$ArrayInstanceCorporation, $Debug, $MySqlConnection)
+	public function InfraTools(&$ArrayInstanceInfraToolsCorporation, $Debug, $MySqlConnection)
 	{
 		$queryResult = NULL; $mySqlError = NULL; $errorStr = NULL;
-		$ArrayInstanceCorporation = NULL;
+		$ArrayInstanceInfraToolsCorporation = NULL;
 		if($Debug == ConfigInfraTools::CHECKBOX_CHECKED)
 			InfraToolsPersistence::ShowQuery('SqlCorporationSelectNoLimit');
 		if($MySqlConnection != NULL)
 		{
 			if($result = $MySqlConnection->query(Persistence::SqlCorporationSelectNoLimit()))
 			{
-				$ArrayInstanceCorporation = array();
+				$ArrayInstanceInfraToolsCorporation = array();
 				while ($row = $result->fetch_assoc()) 
 				{
-					$InstanceCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
+					$InstanceInfraToolsCorporation = $this->InfraToolsFactory->CreateInfraToolsCorporation
 						                                                      (NULL,
 																			   $row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE],
 																			   $row[ConfigInfraTools::TB_CORPORATION_FD_NAME], 
 										                                       $row[ConfigInfraTools::TB_FD_REGISTER_DATE]);
-					array_push($ArrayInstanceCorporation, $InstanceCorporation);
+					array_push($ArrayInstanceInfraToolsCorporation, $InstanceInfraToolsCorporation);
 				}
-				if(!empty($ArrayInstanceCorporation))
+				if(!empty($ArrayInstanceInfraToolsCorporation))
 					return ConfigInfraTools::RET_OK;
 				else return ConfigInfraTools::DB_ERROR_CORPORATION_SEL_FETCH;
 			}

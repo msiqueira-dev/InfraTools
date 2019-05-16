@@ -27,9 +27,6 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminCorporation extends PageAdmin
 {
-	protected $ArrayInstanceInfraToolsUser = NULL;
-	protected $InstanceCorporation         = NULL;
-
 	/* __create */
 	public static function __create($Config, $Language, $Page)
 	{
@@ -117,22 +114,22 @@ class PageAdminCorporation extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
-											&$this->InstanceCorporation),
+											&$this->InstanceInfraToolsCorporation),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
 		//FM_CORPORATION_VIEW_DEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_VIEW_DEL_SB) == ConfigInfraTools::RET_OK)
 		{				
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation)
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceInfraToolsCorporation)
 			                                   == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'CorporationDelete', 
-									      array($this->InstanceCorporation->GetCorporationName()),
+									      array($this->InstanceInfraToolsCorporation->GetCorporationName()),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_SEL;
 				elseif($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
-												  $this->InstanceCorporation) == ConfigInfraTools::RET_OK)
+												  $this->InstanceInfraToolsCorporation) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 					
 			} 
@@ -141,26 +138,26 @@ class PageAdminCorporation extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_VIEW_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
-										  $this->InstanceCorporation) == ConfigInfraTools::RET_OK)
+										  $this->InstanceInfraToolsCorporation) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDT;
 		}
 		//FM_CORPORATION_UPDT_CANCEL
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_UPDT_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_CORPORATION, "CorporationLoadData", 
-										  $this->InstanceCorporation) == ConfigInfraTools::RET_OK)
+										  $this->InstanceInfraToolsCorporation) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
 		//FM_CORPORATION_UPDT_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_UPDT_SB) == ConfigInfraTools::RET_OK)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation) 
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceInfraToolsCorporation) 
 			                                   == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'CorporationUpdateByName', 
 										  array(@$_POST[ConfigInfraTools::FIELD_CORPORATION_ACTIVE],
 					                            $_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
-										        &$this->InstanceCorporation),
+										        &$this->InstanceInfraToolsCorporation),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_UPDT;
@@ -169,11 +166,11 @@ class PageAdminCorporation extends PageAdmin
 		//FM_CORPORATION_VIEW_LST_USERS_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB) == ConfigInfraTools::RET_OK)
 		{
-			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceCorporation) 
+			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_CORPORATION, $this->InstanceInfraToolsCorporation) 
 			                                   == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByCorporationName', 
-										  array($this->InstanceCorporation->GetCorporationName(), 
+										  array($this->InstanceInfraToolsCorporation->GetCorporationName(), 
 										        &$this->ArrayInstanceInfraToolsUser),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW_USERS;
@@ -185,9 +182,17 @@ class PageAdminCorporation extends PageAdmin
 			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
 											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
-										    &$this->InstanceInfraToolsDepartment),
+										    &$this->ArrayInstanceInfraToolsDepartment),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+				{
+					if(count($this->ArrayInstanceInfraToolsDepartment) == 1)
+					{
+						$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+														$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					}
+				}
 		}
 		//FM_TYPE_USER_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_SEL_SB) == ConfigInfraTools::RET_OK)

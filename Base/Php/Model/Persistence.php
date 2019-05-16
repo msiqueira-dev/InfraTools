@@ -423,13 +423,14 @@ class Persistence
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_ACTIVE      . ", "
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME        . ", "
 						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE           . "  "
-							 . "as CorporationRegisterDate "                                        . "  "
+							 . "as CorporationRegisterDate, "                                       . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT . ") AS COUNT "                     . "  "
 		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                         . "  "
 			 . "INNER JOIN " . Config::TB_CORPORATION . " "                                         . "  " 
 			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . "  "
 			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME        . "  "
 	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . " = ? "
-			 . "AND   "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME         . " = ? ";
+			 . "AND   "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME         . " LIKE ? ";
 	}
 	
 	public static function SqlDepartmentSelectNoLimit()
@@ -438,16 +439,16 @@ class Persistence
 			                 . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS    . ", "
 		                     . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME        . ", "
 					         . Config::TB_DEPARTMENT  . "." . Config::TB_FD_REGISTER_DATE          . "  "
-							 . "as DepartmentRegisterDate, "
+							 . "as DepartmentRegisterDate, "                                       . "  "
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_ACTIVE     . ", "
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . ", "
 						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE          . "  "
-							 . "as CorporationRegisterDate "
-		     . "FROM  "      . Config::TB_DEPARTMENT  . " "
-			 . "INNER JOIN " . Config::TB_CORPORATION                                                    . "  " 
+							 . "as CorporationRegisterDate "                                       . "  "
+		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                        . "  "
+			 . "INNER JOIN " . Config::TB_CORPORATION                                              . "  " 
 			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION . "  "
 			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . "  " 
-			 . "ORDER BY "   . Config::TB_DEPARTMENT_FD_CORPORATION                                   . ", "
+			 . "ORDER BY "   . Config::TB_DEPARTMENT_FD_CORPORATION                                . ", "
 			 . "    "        . Config::TB_DEPARTMENT_FD_NAME;
 	}
 	
@@ -476,7 +477,7 @@ class Persistence
 	
 	public static function SqlNotificationInsert()
 	{
-		return "INSERT INTO " . Config::TB_NOTIFICATION                . " "
+		return "INSERT INTO " . Config::TB_NOTIFICATION             . " "
 			 . "(" . Config::TB_NOTIFICATION_FD_NOTIFICATION_ACTIVE . ","
 		     . " " . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID     . ","
 			 . " " . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT   . ","
@@ -490,8 +491,8 @@ class Persistence
 			               . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID          . ", "
 			               . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT        . ", "
 					       . Config::TB_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                         . ", "
-			 . "(SELECT COUNT(*) FROM " . Config::TB_NOTIFICATION . ") AS COUNT "
-		     . "FROM  "    . Config::TB_NOTIFICATION . " " .                                                           "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_NOTIFICATION . ") AS COUNT "                                . "  "
+		     . "FROM  "    . Config::TB_NOTIFICATION . " "                                                       . "  "
 			 . "ORDER BY " . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID          . " LIMIT ?,?";
 	}
 	
@@ -501,7 +502,7 @@ class Persistence
 			             . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID          . ", "
 			             . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_TEXT        . ", "
 					     . Config::TB_NOTIFICATION . "." . Config::TB_FD_REGISTER_DATE                         . "  " 
-		     . "FROM  "  . Config::TB_NOTIFICATION . " " 
+		     . "FROM  "  . Config::TB_NOTIFICATION . " "                                                       . "  "
 	         . "WHERE "  . Config::TB_NOTIFICATION . "." . Config::TB_NOTIFICATION_FD_NOTIFICATION_ID          . " = ?";
 	}
 	
@@ -540,7 +541,7 @@ class Persistence
 	
 	public static function SqlSystemConfigurationInsert()
 	{
-		return "INSERT INTO " . Config::TB_SYSTEM_CONFIGURATION               . " "
+		return "INSERT INTO " . Config::TB_SYSTEM_CONFIGURATION            . " "
 			 . "(" . Config::TB_FD_REGISTER_DATE                           . ","
 		     . " " . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_ACTIVE      . ","
 		     . " " . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_DESCRIPTION . ","
@@ -554,7 +555,7 @@ class Persistence
 	{
 		return "SELECT *,  (SELECT COUNT(*) FROM   " . Config::TB_SYSTEM_CONFIGURATION . ") AS COUNT "
 			 . "FROM "                               . Config::TB_SYSTEM_CONFIGURATION . " ORDER BY " 
-			 . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER . " LIMIT ?,?";
+			 . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER                        . " LIMIT ?,?";
 	}
 	
 	public static function SqlSystemConfigurationSelectBySystemConfigurationOptionName()
@@ -565,10 +566,10 @@ class Persistence
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER      . ",  "
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_VALUE       . ",  "
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_FD_REGISTER_DATE                           . ",  "
-			 . "(SELECT COUNT(*) FROM " . Config::TB_SYSTEM_CONFIGURATION . ") AS COUNT "
-		     . "FROM  "    . Config::TB_SYSTEM_CONFIGURATION . " "
-	         . "WHERE "    . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NAME . " LIKE ? "
-		     . "ORDER BY " . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER . " LIMIT ?,?";
+			 . "(SELECT COUNT(*) FROM " . Config::TB_SYSTEM_CONFIGURATION . ") AS COUNT "                                  . "   "
+		     . "FROM  "    . Config::TB_SYSTEM_CONFIGURATION . " "                                                         . "   "
+	         . "WHERE "    . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NAME        . " LIKE ? "
+		     . "ORDER BY " . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER                                              . " LIMIT ?,?";
 	}
 	
 	public static function SqlSystemConfigurationSelectBySystemConfigurationOptionNumber()
@@ -579,7 +580,7 @@ class Persistence
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER      . ",  "
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_VALUE       . ",  "
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_FD_REGISTER_DATE                           . "   "
-		     . "FROM  "    . Config::TB_SYSTEM_CONFIGURATION . " "
+		     . "FROM  "    . Config::TB_SYSTEM_CONFIGURATION . " "                                                         . "   "
 	         . "WHERE "    . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER      . "=?";
 	}
 	
@@ -590,10 +591,10 @@ class Persistence
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NAME        . ",  "
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER      . ",  "
 						   . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_VALUE       . ",  "
-					       . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_FD_REGISTER_DATE           . ",  "
-			 . "(SELECT COUNT(*) FROM " . Config::TB_SYSTEM_CONFIGURATION . ") AS COUNT "
-			 . "FROM  "    . Config::TB_SYSTEM_CONFIGURATION . " " 
-			 . "ORDER BY " . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER;	
+					       . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_FD_REGISTER_DATE                           . ",  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_SYSTEM_CONFIGURATION . ") AS COUNT "                                  . "   "
+			 . "FROM  "    . Config::TB_SYSTEM_CONFIGURATION . " "                                                         . "   "
+			 . "ORDER BY " . Config::TB_SYSTEM_CONFIGURATION . "." . Config::TB_SYSTEM_CONFIGURATION_FD_OPTION_NUMBER;
 	}
 	
 	public static function SqlSystemConfigurationUpdateBySystemConfigurationOptionNumber()

@@ -30,11 +30,18 @@ if (!class_exists("PageInfraTools"))
 
 class PageAdmin extends PageInfraTools
 {	
+	protected $ArrayInstanceInfraToolsCorporation                        = NULL;
+	protected $ArrayInstanceInfraToolsDepartment                         = NULL;
+	protected $ArrayInstanceInfraToolsTeam                               = NULL;
+	protected $ArrayInstanceInfraToolsTypeUser                           = NULL;
+	protected $ArrayInstanceInfraToolsUser                               = NULL;
+	protected $InstanceInfraToolsCorporation                             = NULL;
+	protected $InstanceInfraToolsDepartment                              = NULL;
+	protected $InstanceInfraToolsTeam                                    = NULL;
+	protected $InstanceInfraToolsTypeUser                                = NULL;
+	protected $InstanceInfraToolsUser                                    = NULL;
 	public $InputLimitOne                                                = NULL;
 	public $InputLimitTwo                                                = NULL;
-	public $ArrayInstanceInfraToolsCorporation                           = "";
-	public $ArrayInstanceInfraToolsTypeUser                              = "";
-	public $InstanceInfraToolsTypeUser                                   = "";
 
 	/* __create */
 	public static function __create($Config, $Language, $Page)

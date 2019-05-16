@@ -59,7 +59,7 @@ class PageAdminUser extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
-											&$this->InstanceCorporation),
+											&$this->InstanceInfraToolsCorporation),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}

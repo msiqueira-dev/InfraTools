@@ -60,7 +60,7 @@ class PageAdminRole extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'CorporationSelectByName', 
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
-											&$this->InstanceCorporation),
+											&$this->InstanceInfraToolsCorporation),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_CORPORATION_VIEW;
 		}
@@ -70,9 +70,17 @@ class PageAdminRole extends PageAdmin
 			if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName',
 									  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME], 
 											$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
-										    &$this->InstanceInfraToolsDepartment),
+										    &$this->ArrayInstanceInfraToolsDepartment),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+				{
+					if(count($this->ArrayInstanceInfraToolsDepartment) == 1)
+					{
+						$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+														$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					}
+				}
 		}
 		//FM_ROLE_LST
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_ROLE_LST) == ConfigInfraTools::RET_OK)
