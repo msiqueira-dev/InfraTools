@@ -28,7 +28,6 @@ class PageAdminUser extends PageAdmin
 {
 	/* Instance */
 	public    $ArrayInstanceInfraToolsUser = NULL;
-	protected $InstanceTypeUser            = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -108,7 +107,7 @@ class PageAdminUser extends PageAdmin
 		elseif(isset($_POST[ConfigInfraTools::FM_TYPE_USER_SEL_SB]))
 		{
 			if($this->TypeUserSelectByTypeUserDescription($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION], 
-														  $this->InstanceTypeUser,
+														  $this->InstanceInfraToolsTypeUser,
 														  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}

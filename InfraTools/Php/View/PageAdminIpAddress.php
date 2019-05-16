@@ -351,7 +351,7 @@ class PageAdminIpAddress extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
 									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
-									        &$this->InstanceTypeUser),
+									        &$this->InstanceInfraToolsTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}

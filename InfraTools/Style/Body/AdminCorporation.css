@@ -1,13 +1,3 @@
-.TableCorporation{width:550px;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;margin-left:23%;}
-.TableCorporationUser{width:auto;height:auto;margin-top:10px;margin-bottom:20px;white-space:nowrap;}
-.TableCorporation th, .TableCorporation th div, .TableCorporationUser th, .TableCorporationUser th div{width:150px;color:black;font-size:14px;text-align:center;border-bottom:3px solid #192650;border:2px solid #192650;}
-.TableCorporation th, .TableCorporationUser th{width:266px;height:35px;}
-.TableCorporation th div, .TableCorporationUser th div{width:110px;height:25px;border:none;position:relative;top:6px;}
-.TableCorporationInputLeft{position:relative;right:5px;}
-.TableCorporationInputRight{position:relative;left:5px;}
-.TableCorporationThLeft{float:left;}
-.TableCorporationThRight{float:right;position:relative;right:12px;}
-.TableCorporation td, .TableCorporationUser td{width:150px;height:26px;color:black;font-size:14px;text-align:left;border:2px solid #192650;}
-.TableCorporation td img, .TableCorporationUser td img{position:relative;left:50%;top:2px;}
 .TdLink input{outline-width:0;border:none;outline:none;border-radius:0;background:none;width:auto;text-decoration:underline;color:#0000EE;}
 .DivContentBodySided{width:500px !important; float:left;}
+.DivContentBodyContainerLabel{width:180px !important;}

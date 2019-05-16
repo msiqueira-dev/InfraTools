@@ -318,7 +318,7 @@ class InfraToolsFacedePersistenceUser
 			if($stmt != NULL)
 			{
 				$limitResult = $Limit2 - $Limit1;
-				$stmt->bind_param("ssii", $CorporationName, $DepartmentName, $Limit1, $limitResult);
+				$stmt->bind_param("ssssii", $CorporationName, $DepartmentName, $CorporationName, $DepartmentName, $Limit1, $limitResult);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::RET_OK)
 				{

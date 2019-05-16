@@ -39,37 +39,37 @@
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent">{$FIELD_REGISTER_DATE_VALUE}</label>
         </div>
-    </div>
-    <!-- SUBMIT -->
-	{if $CURRENT_PAGE eq $PAGE_ADMIN_CORPORATION}
-		<div class="DivContentBodyContainer">
-			<!-- FM_CORPORATION_VIEW_UPDT -->
-			<form name="{$FM_CORPORATION_VIEW_UPDT}" id="{$FM_CORPORATION_VIEW_UPDT}" 
-				  class="DivFormHorizontalButtons" method="post" >
-				<input type="submit" name="{$FM_CORPORATION_VIEW_UPDT_SB}" 
-									 id="{$FM_CORPORATION_VIEW_UPDT_SB}"
-									 class="DivContentBodySubmitBigger"
-									 value="{$SUBMIT_UPDT}"/>
-			</form>
-			<!-- FM_CORPORATION_VIEW_DEL -->
-			<form name="{$FM_CORPORATION_VIEW_DEL}" id="{$FM_CORPORATION_VIEW_DEL}" 
-				  class="DivFormHorizontalButtons" method="post" >
-				<input type="submit" 
-					   name="{$FM_CORPORATION_VIEW_DEL_SB}" 
-					   id="{$FM_CORPORATION_VIEW_DEL_SB}"
-					   class="DivContentBodySubmitBigger"
-					   value="{$SUBMIT_DEL}"
-					   onclick="return confirm('{$SUBMIT_CONFIRM}');"/>
-			</form>
-			<!-- FM_CORPORATION_VIEW_LST_USERS -->
-			<form name="{$FM_CORPORATION_VIEW_LST_USERS}" id="{$FM_CORPORATION_VIEW_LST_USERS}" 
-				  class="DivFormHorizontalButtons"method="post" >
-				<input type="submit" 
-				       name="{$FM_CORPORATION_VIEW_LST_USERS_SB}" 
-					   id="{$FM_CORPORATION_VIEW_LST_USERS_SB}"
-					   class="DivContentBodySubmitBigger"
-					   value="{$SUBMIT_LST_USERS}"/>
-			</form>
-		</div>
-	{/if}
+	</div>
 </form>
+<!-- SUBMIT -->
+{if $CURRENT_PAGE eq $PAGE_ADMIN_CORPORATION}
+	<div class="DivContentBodyContainer">
+		<!-- FM_CORPORATION_VIEW_UPDT -->
+		<form name="{$FM_CORPORATION_VIEW_UPDT}" id="{$FM_CORPORATION_VIEW_UPDT}" 
+				class="DivFormHorizontalButtons" method="post" >
+			<input type="submit" name="{$FM_CORPORATION_VIEW_UPDT_SB}" 
+									id="{$FM_CORPORATION_VIEW_UPDT_SB}"
+									class="DivContentBodySubmitBigger"
+									value="{$SUBMIT_UPDT}"/>
+		</form>
+		<!-- FM_CORPORATION_VIEW_DEL -->
+		<form name="{$FM_CORPORATION_VIEW_DEL}" id="{$FM_CORPORATION_VIEW_DEL}" 
+				class="DivFormHorizontalButtons" method="post" >
+			<input type="submit" 
+					name="{$FM_CORPORATION_VIEW_DEL_SB}" 
+					id="{$FM_CORPORATION_VIEW_DEL_SB}"
+					class="DivContentBodySubmitBigger"
+					value="{$SUBMIT_DEL}"
+					onclick="return confirm('{$SUBMIT_CONFIRM}');"/>
+		</form>
+		<!-- FM_CORPORATION_VIEW_LST_USERS -->
+		<form name="{$FM_CORPORATION_VIEW_LST_USERS}" id="{$FM_CORPORATION_VIEW_LST_USERS}" 
+				class="DivFormHorizontalButtons"method="post" >
+			<input type="submit" 
+					name="{$FM_CORPORATION_VIEW_LST_USERS_SB}" 
+					id="{$FM_CORPORATION_VIEW_LST_USERS_SB}"
+					class="DivContentBodySubmitBigger"
+					value="{$SUBMIT_LST_USERS}"/>
+		</form>
+	</div>
+{/if}

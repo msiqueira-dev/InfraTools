@@ -29,7 +29,6 @@ class PageAdminCorporation extends PageAdmin
 {
 	protected $ArrayInstanceInfraToolsUser = NULL;
 	protected $InstanceCorporation         = NULL;
-	protected $InstanceTypeUser            = NULL;
 
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -49,10 +48,6 @@ class PageAdminCorporation extends PageAdmin
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
-			$this->Smarty->assign('PAGE_ADMIN_CORPORATION', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
-			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
-			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_ACTIVE'));
-			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_VALUE', $this->InputValueCorporationActive);
 			$this->Smarty->assign('FM_CORPORATION', ConfigInfraTools::FM_CORPORATION);
 			$this->Smarty->assign('FM_CORPORATION_LST', ConfigInfraTools::FM_CORPORATION_LST);
 			$this->Smarty->assign('FM_CORPORATION_LST_BACK', ConfigInfraTools::FM_CORPORATION_LST_BACK);
@@ -67,7 +62,6 @@ class PageAdminCorporation extends PageAdmin
 			$this->Smarty->assign('FM_CORPORATION_UPDT_CANCEL', ConfigInfraTools::FM_CORPORATION_UPDT_CANCEL);
 			$this->Smarty->assign('FM_CORPORATION_UPDT_FORM', ConfigInfraTools::FM_CORPORATION_UPDT_FORM);
 			$this->Smarty->assign('FM_CORPORATION_UPDT_SB', ConfigInfraTools::FM_CORPORATION_UPDT_SB);
-			$this->Smarty->assign('FM_CORPORATION_VIEW', ConfigInfraTools::FM_CORPORATION_VIEW);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_DEL', ConfigInfraTools::FM_CORPORATION_VIEW_DEL);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_DEL_SB', ConfigInfraTools::FM_CORPORATION_VIEW_DEL_SB);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_UPDT', ConfigInfraTools::FM_CORPORATION_VIEW_UPDT);
@@ -200,7 +194,7 @@ class PageAdminCorporation extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
 									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
-									        &$this->InstanceTypeUser),
+									        &$this->InstanceInfraToolsTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}

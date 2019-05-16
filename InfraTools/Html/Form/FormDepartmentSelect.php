@@ -12,7 +12,7 @@
 	</label>
 </div>
 <!-- FM_DEPARTMENT_SEL_FORM -->
-<form name="{$FM_DEPARTMENT_SEL_FORM}" id="{$FM_DEPARTMENT_SEL_FORM}" method="post" >
+<form name="{$FM_DEPARTMENT_SEL_FORM}" id="{$FM_DEPARTMENT_SEL_FORM}" method="{$FORM_METHOD}" >
 	<!-- RADIO BUTTON -->
 	<div class="DivContentBodyContainer" id="{$DIV_RADIO}">
 		<!-- FIELD_RADIO_DEPARTMENT_NAME -->

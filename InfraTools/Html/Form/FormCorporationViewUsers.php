@@ -8,6 +8,7 @@
 	<label>
 		{$RETURN_EMPTY_TEXT}
 		{$RETURN_CORPORATION_NAME_TEXT}
+		{$RETURN_DEPARTMENT_NAME_TEXT}
 		{$RETURN_TYPE_USER_DESCRIPTION_TEXT}
 		{$RETURN_USER_EMAIL_TEXT}
 		{$RETURN_TEXT}
@@ -94,6 +95,9 @@
 							   maxlength="80" />	
 					</form>
 				</td>
+				<td>
+					{$item->GetName()}
+				</td>
 				<td class="TableGenericTdLink">
 					<form name="{$FM_TYPE_USER_SEL_SB}" method="post">
 						<input type="hidden" 
@@ -107,9 +111,6 @@
 							   title="{$item->GetUserTypeDescription()}"
 							   maxlength="80" />	
 					</form>
-				</td>
-				<td class="TableGenericTdLink">
-					{$item->GetName()}
 				</td>
 				<td class="TableGenericTdLink">
 					<form name="{$FM_CORPORATION_SEL_SB}" method="post">

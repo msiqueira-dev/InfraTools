@@ -34,6 +34,7 @@ class PageAdmin extends PageInfraTools
 	public $InputLimitTwo                                                = NULL;
 	public $ArrayInstanceInfraToolsCorporation                           = "";
 	public $ArrayInstanceInfraToolsTypeUser                              = "";
+	public $InstanceInfraToolsTypeUser                                   = "";
 
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -82,6 +83,11 @@ class PageAdmin extends PageInfraTools
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN);
+			$this->Smarty->assign('FM_CORPORATION_VIEW', ConfigInfraTools::FM_CORPORATION_VIEW);
+			$this->Smarty->assign('FM_DEPARTMENT_VIEW', ConfigInfraTools::FM_DEPARTMENT_VIEW);
+			$this->Smarty->assign('FM_TEAM_VIEW', ConfigInfraTools::FM_TEAM_VIEW);
+			$this->Smarty->assign('FM_TYPE_USER_VIEW', ConfigInfraTools::FM_TYPE_USER_VIEW);
+			$this->Smarty->assign('FM_USER_VIEW', ConfigInfraTools::FM_USER_VIEW);
 			$this->Smarty->assign('FM_SB_BACK', ConfigInfraTools::FM_SB_BACK);
 			$this->Smarty->assign('HREF_PAGE_ADMIN', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN'));
 			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48.png');

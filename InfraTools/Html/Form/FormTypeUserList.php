@@ -31,7 +31,7 @@
 	</div>
 </div>
 <?php
-if(is_array($this->ArrayInstanceTypeUser))
+if(is_array($this->ArrayInstanceInfraToolsTypeUser))
 {
 	echo "<form  name='" . ConfigInfraTools::FM_TYPE_USER_LST_FORM . "' method='post' />";
 	echo "<input type='hidden' value='$this->InputLimitOne' 
@@ -75,7 +75,7 @@ if(is_array($this->ArrayInstanceTypeUser))
 	echo "</th>";
 	echo "</tr>";
 	echo "</form>";
-	foreach($this->ArrayInstanceTypeUser as $key=>$typeUser)
+	foreach($this->ArrayInstanceInfraToolsTypeUser as $key=>$typeUser)
 	{
 		echo "<tr>";
 		echo "<td class='TableGenericTdLink'>

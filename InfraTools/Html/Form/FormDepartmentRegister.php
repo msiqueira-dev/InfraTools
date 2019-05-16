@@ -14,7 +14,7 @@
 </div>
 <!-- FM_DEPARTMENT_REGISTER_FORM -->
 <form name="{$FM_DEPARTMENT_REGISTER_FORM}" 
-      id="{$FM_DEPARTMENT_REGISTER_FORM}" method="post">
+      id="{$FM_DEPARTMENT_REGISTER_FORM}" method="{$FORM_METHOD}">
     <!-- FIELD_DEPARTMENT_INITIALS -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">

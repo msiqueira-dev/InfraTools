@@ -330,6 +330,7 @@ class FacedePersistenceDepartment
 			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentName());
 			if($stmt != NULL)
 			{
+				$DepartmentName = "%".$DepartmentName."%"; 
 				$stmt->bind_param("s", $DepartmentName);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::RET_OK)

@@ -55,8 +55,6 @@ class PageAdminDepartment extends PageAdmin
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
 			$this->Smarty->assign('DIV_RADIO_CORPORATION', ConfigInfraTools::DIV_RADIO_CORPORATION);
 			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS', ConfigInfraTools::FIELD_DEPARTMENT_INITIALS);
-			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS'));
-			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_VALUE', $this->InputValueDepartmentInitials);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT', ConfigInfraTools::FIELD_RADIO_DEPARTMENT);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME', ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentNameRadio);
@@ -88,7 +86,6 @@ class PageAdminDepartment extends PageAdmin
 			$this->Smarty->assign('FM_DEPARTMENT_UPDT_FORM', ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM);
 			$this->Smarty->assign('FM_DEPARTMENT_UPDT_SB', ConfigInfraTools::FM_DEPARTMENT_UPDT_SB);
 			$this->Smarty->assign('HIDE_CORPORATION_NAME_CLASS', $this->InputValueCorporationNameHidden);
-			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
 			if($this->InputValueCorporationName != "" && $this->InputValueCorporationName != ConfigInfraTools::FIELD_SEL_NONE)
 				$this->Smarty->assign('FIELD_SEL_NONE', FALSE);
 			if(isset($this->ReturnDepartmentInitialsClass)) 
@@ -274,7 +271,7 @@ class PageAdminDepartment extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
 									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
-					                        &$this->InstanceTypeUser),
+					                        &$this->InstanceInfraToolsTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 		}

@@ -32,7 +32,7 @@
 </div>
 <table class='TableGeneric'>
 	<tr>
-		<form  name="{$FM_DEPARTMENT_LST_FORM}" method='post'>
+		<form  name="{$FM_DEPARTMENT_LST_FORM}" method="{$FORM_METHOD}">
 			<th class="TableGenericThArrow">
 				<div class="TableGenericInputLeft">
 					<input  type="image" class="TableGenericThArrowImage"
@@ -77,7 +77,7 @@
 		{foreach key=key item=item from=$INSTANCE_DEPARTMENT}
 			<tr>
 				<td class="TableGenericTdLink">
-					<form name="{$FM_CORPORATION_SEL_SB}" method="post">
+					<form name="{$FM_CORPORATION_SEL_SB}" method="{$FORM_METHOD}">
 						<input type="hidden" 
 						       name="{$FM_CORPORATION_SEL_SB}" 
 							   id="{$FM_CORPORATION_SEL_SB}"
@@ -94,7 +94,7 @@
 					<label>{$item->GetDepartmentInitials()}</label> 
 				</td>
 				<td class="TableGenericTdLink">
-					<form name="{$FM_DEPARTMENT_SEL_SB}" method="post">
+					<form name="{$FM_DEPARTMENT_SEL_SB}" method="{$FORM_METHOD}">
 						<input type="hidden" 
 						       name="{$FM_DEPARTMENT_SEL_SB}" 
 							   id="{$FM_DEPARTMENT_SEL_SB}"

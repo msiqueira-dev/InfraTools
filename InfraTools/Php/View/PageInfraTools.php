@@ -331,20 +331,21 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('DIV_RETURN', ConfigInfraTools::DIV_RETURN);
 			$this->Smarty->assign('FM_LST_INPUT_LIMIT_ONE', ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE);
 			$this->Smarty->assign('FM_LST_INPUT_LIMIT_TWO', ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO);
-			if($this->InputValueCorporationActive)
-				$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
-			else $this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
+			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_VALUE', $this->InputValueCorporationActive);
+			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_ACTIVE'));
 			$this->Smarty->assign('FIELD_CORPORATION_NAME', ConfigInfraTools::FIELD_CORPORATION_NAME);
 			$this->Smarty->assign('FIELD_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'));
 			$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
-			if($this->InputValueDepartmentActive)
-				$this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
-			else $this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS'));
+			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_VALUE', $this->InputValueDepartmentInitials);
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
 			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'));
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION', ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION);
+			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION'));
+			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_VALUE', $this->InputValueTypeUserDescription);
 			$this->Smarty->assign('FIELD_USER_EMAIL', ConfigInfraTools::FIELD_USER_EMAIL);
 			$this->Smarty->assign('FIELD_USER_EMAIL_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'));
 			$this->Smarty->assign('FIELD_USER_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_NAME'));
@@ -369,12 +370,23 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_ASSOC_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByNameHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByType.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByTypeHover.png');
+			$this->Smarty->assign('PAGE_ADMIN_CORPORATION', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
+			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
+			$this->Smarty->assign('PAGE_ADMIN_TEAM', ConfigInfraTools::PAGE_ADMIN_TEAM);
+			$this->Smarty->assign('PAGE_ADMIN_TYPE_USER', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
+			$this->Smarty->assign('PAGE_ADMIN_USER', ConfigInfraTools::PAGE_ADMIN_USER);
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
 			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28Hover.png");
 			$this->Smarty->assign('SUBMIT_FORWARD', $this->InstanceLanguageText->GetText('SUBMIT_FORWARD'));
 			$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28x28.png");
 			$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28x28Hover.png");
+			if($this->InputValueCorporationActive)
+				$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueDepartmentActive)
+				$this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
 			{
 				if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
