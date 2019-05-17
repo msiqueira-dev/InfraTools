@@ -34,6 +34,7 @@ Methods:
 			public static function SqlDepartmentSelect();
 			public static function SqlDepartmentSelectByCorporationName();
 			public static function SqlDepartmentSelectByCorporationNameNoLimit();
+			public static function SqlDepartmentSelectByDepartmentInitials();
 			public static function SqlDepartmentSelectByDepartmentName();
 			public static function SqlDepartmentSelectByDepartmentNameAndCorporationName();
 			public static function SqlDepartmentSelectNoLimit();
@@ -391,6 +392,26 @@ class Persistence
 			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . "  "
 	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . " = ? "
 			 . "ORDER BY "   . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME;
+	}
+
+	public static function SqlDepartmentSelectByDepartmentInitials()
+	{
+		return "SELECT "     . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION . ", "
+			                 . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS    . ", "
+		                     . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME        . ", "
+					         . Config::TB_DEPARTMENT  . "." . Config::TB_FD_REGISTER_DATE          . "  "
+							 . "as DepartmentRegisterDate, "                                       . "  "
+							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_ACTIVE     . ", "
+							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . ", "
+						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE          . "  "
+							 . "as CorporationRegisterDate, "                                      . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT . ") AS COUNT "                    . "  "
+		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                        . "  " 
+			 . "INNER JOIN " . Config::TB_CORPORATION . " "                                        . "  " 
+			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION . "  "
+			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . "  "
+	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS    . " LIKE ? "
+			 . "ORDER BY "   . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION;
 	}
 	
 	public static function SqlDepartmentSelectByDepartmentName()

@@ -73,7 +73,7 @@ function ShowOrHideElement(ElementToShowOrHide, Show)
 	var $inputs = $elementToShowOrHide.getElementsByTagName('INPUT');
 	if(Show)
 	{
-		if(!$elementToShowOrHide.className.search("NotHidden") != -1)
+		if($elementToShowOrHide.className.search("NotHidden") == -1)
 		{
 			$elementToShowOrHide.className = $elementToShowOrHide.className.replace("Hidden", "NotHidden");
 			for (var $index = 0; $index < $inputs.length; $index++) 

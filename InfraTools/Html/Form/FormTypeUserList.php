@@ -1,99 +1,91 @@
-<!-- FM_TYPE_USER_LST_FORM -->
+<!-- FM_CORPORATION_LST_FORM -->
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
+	<div>
+		<div>
+			{$RETURN_IMAGE}
+		</div>
+	</div>
+	<label>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_TEXT}
+	</label>
+</div>
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
-		<?php 
-			 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-			 {
-				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-					  echo "<label class='InputValueLimitTitle'>" . 
-							   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
-						   "</label>" .
-						   "<label class='InputValueLimitValue'>" . 
-							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
-													   . " " . $this->InputValueLimit2 . 
-						   "</label>";
-			 }
-		?>
+		<label class='InputValueLimitTitle'>
+			{$TB_PAGE_PREFIX}
+		</label>
+		<label class='InputValueLimitValue'> 
+			{$TB_PAGE_INPUT_VALUE_LIMIT_ONE} {$TB_PAGE} {$TB_PAGE_INPUT_VALUE_LIMIT_TWO}
+		</label>
 	</div>
 	<div class="DivTableGenericHeaderRowCount">
-		<?php
-			 if(isset($this->InputValueRowCount)) 
-			  {
-				  if($this->InputValueRowCount != "") 
-					  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-							   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-						   "</label>" .
-						   "<label class='DivTableGenericRowCountLabelValue'>" . 
-							   $this->InputValueRowCount . 
-						   "</label>";
-			  } 
-		?>
+		<label class='DivTableGenericRowCountLabelTitle'>
+			{$ROW_COUNT} 
+		</label>
+		<label class='DivTableGenericRowCountLabelValue'>
+			{$INPUT_VALUE_ROW_COUNT}
+		</label>
 	</div>
 </div>
-<?php
-if(is_array($this->ArrayInstanceInfraToolsTypeUser))
-{
-	echo "<form  name='" . ConfigInfraTools::FM_TYPE_USER_LST_FORM . "' method='post' />";
-	echo "<input type='hidden' value='$this->InputLimitOne' 
-				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
-	echo "<input type='hidden' value='$this->InputLimitTwo'
-				 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
-	echo "<table class='TableGeneric'>";
-	echo "<tr>";
-	echo "<th class='TableGenericThArrow'>" .
-		 "<div class='TableGenericInputLeft'>
-		 <input  type='image'
-				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FM_TYPE_USER_LST_BACK . "' 
-				  id='"    . ConfigInfraTools::FM_TYPE_USER_LST_BACK . "'
-				  value='" . ConfigInfraTools::FM_TYPE_USER_LST_BACK . "'
-				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrow28x28Back.png'
-				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
-				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrow28x28Back.png'\" /></div>" .
-		 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION') . "</div></th>";
-	echo "<th  class='TableGenericThArrow'>
-	     <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-		 "<div class='TableGenericInputRight'>
-		  <input  type='image'
-				  class='TableGenericThArrowImage'
-				  name='"  . ConfigInfraTools::FM_TYPE_USER_LST_FORWARD . "' 
-				  id='"    . ConfigInfraTools::FM_TYPE_USER_LST_FORWARD . "'
-				  value='" . ConfigInfraTools::FM_TYPE_USER_LST_FORWARD . "'
-				  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-				  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-				  src='"   . $this->Config->DefaultServerImage 
-						   . "Icons/IconInfraToolsArrowForward28x28.png'
-				  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
-				  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-						   . "Icons/IconInfraToolsArrowForward28x28.png'\" /></div>";
-	echo "</th>";
-	echo "</tr>";
-	echo "</form>";
-	foreach($this->ArrayInstanceInfraToolsTypeUser as $key=>$typeUser)
-	{
-		echo "<tr>";
-		echo "<td class='TableGenericTdLink'>
-				<form  name='" . ConfigInfraTools::FM_TYPE_USER_SEL_SB . "' method='post' />
-					  <input type='hidden'
-							 name='"   . ConfigInfraTools::FM_TYPE_USER_SEL_SB . "' 
-							 id='"     . ConfigInfraTools::FM_TYPE_USER_SEL_SB . "'
-							 value='"  . ConfigInfraTools::FM_TYPE_USER_SEL_SB . "' />
-					  <input type='submit' name='" . ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION . "' 
-		                           id='"   . ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION . "' 
-							       value='" . $typeUser->GetTypeUserDescription() . "' 
-								   title='" . $typeUser->GetTypeUserDescription() . "' />
-				</form>
-		      </td>";
-		echo "<td class= 'TableGenericTdLink'>" . $typeUser->GetRegisterDate() . "</td>";
-		echo "</tr>";
-	}
-	echo "</table>";
-}
-?>
-</form>
+<table class='TableGeneric'>
+	<tr>
+		<form  name="{$FM_DEPARTMENT_LST_FORM}" method="{$FORM_METHOD}">
+			<th class="TableGenericThArrow">
+				<div class="TableGenericInputLeft">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_DEPARTMENT_LST_BACK}" 
+							id="{$FM_DEPARTMENT_LST_BACK}" 
+							value="{$FM_DEPARTMENT_LST_BACK}"
+					        title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
+					        src="{$SUBMIT_BACK_ICON}"
+					        onmouseover="this.src='{$SUBMIT_BACK_ICON_HOVER}'"
+					        onmouseout="this.src='{$SUBMIT_BACK_ICON}'" />
+				</div>
+				<div class="TableGenericThRight">
+					{$FIELD_TYPE_USER_DESCRIPTION_TEXT}
+				</div>
+			</th>
+			<th  class="TableGenericThArrow">
+				<div  class="TableGenericThLeft">
+					{$FIELD_REGISTER_DATE_TEXT}
+				</div>
+				<div class="TableGenericInputRight">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_DEPARTMENT_LST_FORWARD}" 
+							id="{$FM_DEPARTMENT_LST_FORWARD}" 
+							value="{$FM_DEPARTMENT_LST_FORWARD}"
+							title="{$SUBMIT_FORWARD}" alt="{$SUBMIT_FORWARD}"
+							src="{$SUBMIT_FORWARD_ICON}"
+							onmouseover="this.src='{$SUBMIT_FORWARD_ICON_HOVER}'"
+							onmouseout="this.src='{$SUBMIT_FORWARD_ICON}'" />
+				</div>
+			</th>
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
+		</form>
+	</tr>
+	{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_TYPE_USER item=INSTANCE_TYPE_USER}
+		{foreach key=key item=item from=$INSTANCE_TYPE_USER}
+			<tr>
+				<td class="TableGenericTdLink">
+					<form name="{$FM_TYPE_USER_SEL_SB}" method="{$FORM_METHOD}">
+						<input type="hidden" 
+						       name="{$FM_TYPE_USER_SEL_SB}" 
+							   id="{$FM_TYPE_USER_SEL_SB}"
+							   value="{$FM_TYPE_USER_SEL_SB}"/>
+						<input type="submit" 
+						       name="{$FIELD_TYPE_USER_DESCRIPTION}" 
+							   id="{$FIELD_TYPE_USER_DESCRIPTION}"
+							   value="{$item->GetTypeUserDescription()}"
+							   title="{$item->GetTypeUserDescription()}"
+							   maxlength="80" />	
+					</form>
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetRegisterDate()}
+				</td>
+			</tr>
+		{/foreach}
+	{/foreach}
+</table>

@@ -27,9 +27,11 @@ if (!class_exists("PageAdmin"))
 
 class PageAdminDepartment extends PageAdmin
 {
-	public    $ArrayInstanceInfraToolsDepartment = NULL;
-	protected $ArrayInstanceInfraToolsUser      = NULL;
-	protected $InputValueCorporationNameHidden  = "Hidden";
+	public    $ArrayInstanceInfraToolsDepartment  = NULL;
+	protected $ArrayInstanceInfraToolsUser        = NULL;
+	protected $InputValueCorporationNameHidden    = "Hidden";
+	protected $InputValueDepartmentInitialsHidden = "Hidden";
+	protected $InputValueDepartmentNameHidden     = "NotHidden";
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -52,9 +54,13 @@ class PageAdminDepartment extends PageAdmin
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_DEPARTMENT", array($this->ArrayInstanceInfraToolsDepartment));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
-			$this->Smarty->assign('DIV_RADIO_CORPORATION', ConfigInfraTools::DIV_RADIO_CORPORATION);
+			$this->Smarty->assign('DIV_RADIO_CORPORATION_NAME', ConfigInfraTools::DIV_RADIO_CORPORATION_NAME);
+			$this->Smarty->assign('DIV_RADIO_DEPARTMENT_INITIALS', ConfigInfraTools::DIV_RADIO_DEPARTMENT_INITIALS);
+			$this->Smarty->assign('DIV_RADIO_DEPARTMENT_NAME', ConfigInfraTools::DIV_RADIO_DEPARTMENT_NAME);
 			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS', ConfigInfraTools::FIELD_DEPARTMENT_INITIALS);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT', ConfigInfraTools::FIELD_RADIO_DEPARTMENT);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_INITIALS', ConfigInfraTools::FIELD_RADIO_DEPARTMENT_INITIALS);
+			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_INITIALS_VALUE', $this->InputValueDepartmentInitialsRadio);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME', ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentNameRadio);
 			$this->Smarty->assign('FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME', ConfigInfraTools::FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME);
@@ -85,6 +91,8 @@ class PageAdminDepartment extends PageAdmin
 			$this->Smarty->assign('FM_DEPARTMENT_UPDT_FORM', ConfigInfraTools::FM_DEPARTMENT_UPDT_FORM);
 			$this->Smarty->assign('FM_DEPARTMENT_UPDT_SB', ConfigInfraTools::FM_DEPARTMENT_UPDT_SB);
 			$this->Smarty->assign('HIDE_CORPORATION_NAME_CLASS', $this->InputValueCorporationNameHidden);
+			$this->Smarty->assign('HIDE_DEPARTMENT_INITIALS_CLASS', $this->InputValueDepartmentInitialsHidden);
+			$this->Smarty->assign('HIDE_DEPARTMENT_NAME_CLASS', $this->InputValueDepartmentNameHidden);
 			if($this->InputValueCorporationName != "" && $this->InputValueCorporationName != ConfigInfraTools::FIELD_SEL_NONE)
 				$this->Smarty->assign('FIELD_SEL_NONE', FALSE);
 			if(isset($this->ReturnDepartmentInitialsClass)) 
@@ -159,19 +167,18 @@ class PageAdminDepartment extends PageAdmin
 				{
 					if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentName', 
 											  array($_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
-													&$this->ArrayInstanceInfraToolsDepartment),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					{
-						if(count($this->ArrayInstanceInfraToolsDepartment) > 1)
-							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
-						else
-						{
-							$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
-							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
-														  $this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
-								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-						}
-					}
+											        &$this->ArrayInstanceInfraToolsDepartment),
+											  $this->InputValueHeaderDebug) != ConfigInfraTools::RET_OK)
+						$this->InputValueDepartmentNameHidden = "NotHidden";
+				}
+				elseif($_POST[ConfigInfraTools::FIELD_RADIO_DEPARTMENT] == ConfigInfraTools::FIELD_RADIO_DEPARTMENT_INITIALS)
+				{
+					$this->InputValueDepartmentInitialsRadio = ConfigInfraTools::CHECKBOX_CHECKED;
+					if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentInitials', 
+											  array($_POST[ConfigInfraTools::FIELD_DEPARTMENT_INITIALS],
+											        &$this->ArrayInstanceInfraToolsDepartment),
+											  $this->InputValueHeaderDebug) != ConfigInfraTools::RET_OK)
+						$this->InputValueDepartmentInitialsHidden = "NotHidden";
 				}
 				else
 				{
@@ -180,53 +187,29 @@ class PageAdminDepartment extends PageAdmin
 											  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
 													$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
 													&$this->ArrayInstanceInfraToolsDepartment),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					{
-						if(count($this->ArrayInstanceInfraToolsDepartment) > 1)
-							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
-						else
-						{
-							$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
-							if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
-															$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
-								$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-						}
-					}
-					else $this->InputValueCorporationNameHidden = "NotHidden";
-				}
-				if($this->PageBody != ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW && 
-				   $this->PageBody != ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST)
-				{
-					if($this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
-										  array(&$this->ArrayInstanceInfraToolsCorporation),
-										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL;
+											  $this->InputValueHeaderDebug) != ConfigInfraTools::RET_OK)
+						$this->InputValueCorporationNameHidden = "NotHidden";
 				}
 			}
-			else
+			elseif($this->CheckPostContainsKey(ConfigInfraTools::FIELD_CORPORATION_NAME) == ConfigInfraTools::RET_OK
+				   && $this->CheckPostContainsKey(ConfigInfraTools::FIELD_DEPARTMENT_NAME) == ConfigInfraTools::RET_OK)
 			{
-				if($this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
+				$this->ExecuteFunction($_POST, 'DepartmentSelectByDepartmentNameAndCorporationName', 
 											  array($_POST[ConfigInfraTools::FIELD_CORPORATION_NAME],
 													$_POST[ConfigInfraTools::FIELD_DEPARTMENT_NAME],
 													&$this->ArrayInstanceInfraToolsDepartment),
-											  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				{
-					if(count($this->ArrayInstanceInfraToolsDepartment) > 1)
-						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
-					else
-					{
-						$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
-						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
-														$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
-							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
-					}
-				}
+											  $this->InputValueHeaderDebug);
+			}
+			if(!empty($this->ArrayInstanceInfraToolsDepartment))
+			{
+				if(count($this->ArrayInstanceInfraToolsDepartment) > 1)
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_LST;
 				else
 				{
-					$_POST[ConfigInfraTools::FM_DEPARTMENT_SEL] = ConfigInfraTools::FM_DEPARTMENT_SEL;
-					$this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 
-											array(&$this->ArrayInstanceInfraToolsCorporation),
-											$this->InputValueHeaderDebug);
+					$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
+					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
+													$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
+						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
 				}
 			}
 		}
@@ -303,7 +286,7 @@ class PageAdminDepartment extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 		}
-		else
+		if($this->PageBody == ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_SEL)
 		{
 			$_POST[ConfigInfraTools::FM_DEPARTMENT_SEL] = ConfigInfraTools::FM_DEPARTMENT_SEL;
 			$this->ExecuteFunction($_POST, 'CorporationSelectNoLimit', 

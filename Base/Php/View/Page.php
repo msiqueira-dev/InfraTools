@@ -46,6 +46,7 @@ Methods:
 		protected     function        DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
 													                    &$ArrayInstanceDepartment, &$RowCount, $Debug);
 		protected     function        DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug);
+		protected     function        DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
 																		                 &$InstanceDepartment, $Debug);
@@ -305,6 +306,7 @@ class Page
 	public    $InputValueCountry                                    = "";
 	public    $InputValueDepartmentActive                           = "";
 	public    $InputValueDepartmentInitials                         = "";
+	public    $InputValueDepartmentInitialsRadio                    = "";
 	public    $InputValueDepartmentName                             = "";
 	public    $InputValueDepartmentNameAndCorporationNameRadio      = "";
 	public    $InputValueDepartmentNameRadio                        = "";
@@ -1441,6 +1443,41 @@ class Page
 		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
 		return Config::RET_ERROR;
 	}
+
+	protected function DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueDepartmentInitials = $DepartmentInitials;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FIELD_DEPARTMENT_INITIALS
+		$arrayElements[0]             = Config::FIELD_DEPARTMENT_INITIALS;
+		$arrayElementsClass[0]        = &$this->ReturnDepartmentInitialsClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
+		$arrayElementsInput[0]        = $this->InputValueDepartmentInitials; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 8; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnDepartmentInitialsText;
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_INITIALS', 'FM_INVALID_DEPARTMENT_INITIALS_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+											$arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug, $arrayOptions);
+		if($return == Config::RET_OK)
+		{
+			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentInitials($this->InputValueDepartmentInitials, 
+																		               $ArrayInstanceDepartment, $Debug);
+			if($return == Config::RET_OK)
+				return $return;
+		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::RET_ERROR;
+	}
 	
 	protected function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug)
 	{
@@ -1469,7 +1506,7 @@ class Page
 		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentName($this->InputValueDepartmentName, 
-																		   $ArrayInstanceDepartment, $Debug);
+																		           $ArrayInstanceDepartment, $Debug);
 			if($return == Config::RET_OK)
 				return $return;
 		}

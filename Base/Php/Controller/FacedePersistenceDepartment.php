@@ -20,7 +20,8 @@ Functions:
 			public function DepartmentSelectByCorporationName($CorporationName, $Limit1, $Limit2, 
 			                                                  &$ArrayInstanceDepartment, &$RowCount, $Debug, $MySqlConnection);
 			public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, 
-			                                                         $Debug, $MySqlConnection);
+																	 $Debug, $MySqlConnection);
+			public function DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
 			                                                                   &$ArrayInstanceDepartment, $Debug, $MySqlConnection);
@@ -315,6 +316,64 @@ class FacedePersistenceDepartment
 			if($Debug == Config::CHECKBOX_CHECKED) 
 				echo "Prepare Error: " . $MySqlConnection->error;
 			return Config::DB_ERROR_QUERY_PREPARE;
+		}
+		else return Config::DB_ERROR_CONNECTION_EMPTY;
+	}
+
+	public function DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug, $MySqlConnection)
+	{
+		$mySqlError = NULL; $errorStr = NULL;
+		$ArrayInstanceDepartment = NULL;
+		if($MySqlConnection != NULL)
+		{
+			if($Debug == Config::CHECKBOX_CHECKED)
+				Persistence::ShowQuery('SqlDepartmentSelectByDepartmentInitials');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlDepartmentSelectByDepartmentInitials());
+			if($stmt != NULL)
+			{
+				$DepartmentInitials = "%".$DepartmentInitials."%"; 
+				$stmt->bind_param("s", $DepartmentInitials);
+				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
+				if($return == Config::RET_OK)
+				{
+					$ArrayInstanceDepartment = array();
+					$result = $stmt->get_result();
+					while ($row = $result->fetch_assoc()) 
+					{
+						$RowCount = $row['COUNT'];
+						$InstanceCorporation = $this->Factory->CreateCorporation(NULL,
+																		   $row[Config::TB_CORPORATION_FD_ACTIVE],
+						                                                   $row[Config::TB_CORPORATION_FD_NAME], 
+											                               $row["Corporation".Config::TB_FD_REGISTER_DATE]);
+						$InstanceDepartment = $this->Factory->CreateDepartment($InstanceCorporation,
+																			$row[Config::TB_DEPARTMENT_FD_INITIALS],
+						                                                    $row[Config::TB_DEPARTMENT_FD_NAME], 
+											                                $row["Department".Config::TB_FD_REGISTER_DATE]);
+						array_push($ArrayInstanceDepartment, $InstanceDepartment);
+					}
+					if(!empty($ArrayInstanceDepartment))
+						return Config::RET_OK;
+					else 
+					{
+						if($Debug == Config::CHECKBOX_CHECKED) 
+							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+						return Config::DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME_FETCH;
+					}
+				}
+				else
+				{
+					if($Debug == Config::CHECKBOX_CHECKED) 
+						echo "Prepare Error: " . $MySqlConnection->error;
+					$return = Config::DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME;
+				}
+				return $return;
+			}
+			else
+			{
+				if($Debug == Config::CHECKBOX_CHECKED) 
+					echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
+				return Config::DB_ERROR_QUERY_PREPARE;
+			}
 		}
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}

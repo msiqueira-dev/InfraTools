@@ -249,6 +249,7 @@ class Config
 	const FIELD_PASSWORD_REPEAT                                         = "FieldPasswordRepeat";
 	const FIELD_PASSWORD_RESET_CODE                                     = "FieldPasswordResetCode";
 	const FIELD_RADIO_DEPARTMENT                                        = "FieldRadioDepartment";
+	const FIELD_RADIO_DEPARTMENT_INITIALS                               = "FieldRadioDepartmentInitials";
 	const FIELD_RADIO_DEPARTMENT_NAME                                   = "FieldRadioDepartmentName";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME              = "FieldRadioDepartmentNameAndCorporationName";
 	const FIELD_RETURN_ERROR                                            = "FieldReturnError";

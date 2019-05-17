@@ -81,7 +81,9 @@ Functions:
 			                                                  &$ArrayInstanceDepartment, &$RowCount, $Debug,
 														      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug,
-			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+																	 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
+			public function DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug,
+			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug,
 			                                                 $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
@@ -871,6 +873,22 @@ class FacedePersistence
 		return $return;	
 	}
 	
+	public function DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug,
+	                                                     $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	{
+		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
+		if($return == Config::RET_OK)
+		{
+			$instanceFacedePersistenceDepartment = $this->Factory->CreateFacedePersistenceDepartment();
+			$return = $instanceFacedePersistenceDepartment->DepartmentSelectByDepartmentInitials($DepartmentInitials, 
+																					             $ArrayInstanceDepartment, 
+																					             $Debug, $MySqlConnection);
+			if($CloseConnectaion)
+				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
+		}
+		return $return;	
+	}
+
 	public function DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug,
 													 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{

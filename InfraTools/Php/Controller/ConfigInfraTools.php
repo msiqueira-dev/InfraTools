@@ -146,7 +146,9 @@ class ConfigInfraTools extends Config
 	const DIV_GET_CALCULATION_NETMASK                                           = "DivGetCalculationNetMask";
 	const DIV_GET_WHOIS                                                         = "DivGetWhois";
 	const DIV_RADIO                                                             = "DivRadio";
-	const DIV_RADIO_CORPORATION                                                 = "DivRadioCorporation";
+	const DIV_RADIO_CORPORATION_NAME                                            = "DivRadioCorporationName";
+	const DIV_RADIO_DEPARTMENT_INITIALS                                         = "DivRadioDepartmentInitials";
+	const DIV_RADIO_DEPARTMENT_NAME                                             = "DivRadioDepartmentName";
 	const DIV_RADIO_SERVICE_ID                                                  = "DivRadioServiceId";
 	const DIV_RADIO_SERVICE_NAME                                                = "DivRadioServiceName";
 	const EXCEPTION_ASSOC_IP_ADDRESS_SERVICE_SERVICE_ID                         = "ExceptionAssocIpAddressServiceServiceId";
