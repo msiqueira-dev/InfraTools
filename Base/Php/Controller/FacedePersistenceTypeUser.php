@@ -18,8 +18,7 @@ Functions:
 			public function TypeUserInsert($TypeUserDescription, $Debug, $MySqlConnection);
 			public function TypeUserSelect($Limit1, $Limit2, &ArrayInstanceTypeUser, &$RowCount, $Debug, $MySqlConnection);
 			public function TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
-			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug, $MySqlConnection);
-			public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
+			public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection);
 			public function TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, $TypeUserDescription, $Debug, $MySqlConnection);
 **************************************************************************/
 
@@ -235,64 +234,19 @@ class FacedePersistenceTypeUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug, $MySqlConnection)
-	{
-		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
-		if($MySqlConnection != NULL)
-		{
-			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeUserSelectByDescription');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelectByDescription());
-			if($stmt != NULL)
-			{
-				$stmt->bind_param("s", $TypeUserDescription);
-				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
-				if($return == Config::RET_OK)
-				{
-					$stmt->bind_result($TypeUserDescription, $registerDate);
-					if ($stmt->fetch())
-					{
-						$InstanceTypeUser = $this->Factory->CreateTypeUser($TypeUserDescription, $registerDate);
-						return Config::RET_OK;
-					}
-					else 
-					{
-						if($Debug == Config::CHECKBOX_CHECKED) 
-							echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-						$return = Config::DB_ERROR_TYPE_USER_SEL_BY_DESCRIPTION_FETCH;
-					}
-				}
-				else 
-				{
-					if($Debug == Config::CHECKBOX_CHECKED) 
-						echo "MySql Error:  " . $mySqlError . "<br>Query Error: " . $errorStr . "<br>";
-					$return = Config::DB_ERROR_TYPE_USER_SEL_BY_DESCRIPTION;
-				}
-				return $return;
-			}
-			else
-			{
-				if($Debug == Config::CHECKBOX_CHECKED) 
-					echo "Prepare Error: " . $MySqlConnection->error;
-				return Config::DB_ERROR_QUERY_PREPARE;
-			}
-		}
-		else return Config::DB_ERROR_CONNECTION_EMPTY;
-	}
-	
-	public function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
+	public function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		$ArrayInstanceTypeUser = NULL;
 		if($MySqlConnection != NULL)
 		{
 			if($Debug == Config::CHECKBOX_CHECKED)
-				Persistence::ShowQuery('SqlTypeUserSelectByDescriptionLike');
-			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelectByDescriptionLike());
+				Persistence::ShowQuery('SqlTypeUserSelectByTypeUserDescription');
+			$stmt = $MySqlConnection->prepare(Persistence::SqlTypeUserSelectByTypeUserDescription());
 			if($stmt != NULL)
 			{
-				$TypeUserDescription = "%".$TypeUserDescription."%"; 
-				$stmt->bind_param("s", $TypeUserDescription);
+				$TypeUserDescription = "%".$TypeUserDescription."%";
+				$stmt->bind_param("ss", $TypeUserDescription, $TypeUserDescription);
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == Config::RET_OK)
 				{
@@ -300,12 +254,12 @@ class FacedePersistenceTypeUser
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc())  
 					{
+						$RowCount = $row['COUNT'];
 						$InstanceTypeUser = $this->Factory->CreateTypeUser($row[Config::TB_TYPE_USER_FD_DESCRIPTION],
-										                                   $row[Config::TB_FD_REGISTER_DATE]);
+						                                                   $row["TypeUser".Config::TB_FD_REGISTER_DATE]);;
 						array_push($ArrayInstanceTypeUser, $InstanceTypeUser);
-						return Config::RET_OK;
 					}
-					if(!empty($ArrayInstanceTeam))
+					if(!empty($ArrayInstanceTypeUser))
 						return Config::RET_OK;
 					else return Config::DB_ERROR_TYPE_USER_SEL_BY_DESCRIPTION_FETCH;
 				}

@@ -118,6 +118,18 @@ class PageAdmin extends PageInfraTools
 			if(isset($this->ReturnDepartmentNameText)) 
 				$this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', $this->ReturnDepartmentNameText);
 			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', NULL);
+			if(isset($this->ReturnTypeUserDescriptionClass)) 
+				$this->Smarty->assign('RETURN_TYPE_USER_DESCRIPTION_CLASS', $this->ReturnTypeUserDescriptionClass);
+			else $this->Smarty->assign('RETURN_TYPE_USER_DESCRIPTION_CLASS', NULL);
+			if(isset($this->ReturnTypeUserDescriptionText)) 
+				$this->Smarty->assign('RETURN_TYPE_USER_DESCRIPTION_TEXT', $this->ReturnTypeUserDescriptionText);
+			else $this->Smarty->assign('RETURN_TYPE_USER_DESCRIPTION_TEXT', NULL);
+			if(isset($this->ReturnUserEmailClass)) 
+				$this->Smarty->assign('RETURN_USER_EMAIL_CLASS', $this->ReturnUserEmailClass);
+			else $this->Smarty->assign('RETURN_USER_EMAIL_CLASS', NULL);
+			if(isset($this->ReturnUserEmailText)) 
+				$this->Smarty->assign('RETURN_USER_EMAIL_TEXT', $this->ReturnUserEmailText);
+			else $this->Smarty->assign('RETURN_USER_EMAIL_TEXT', NULL);
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;

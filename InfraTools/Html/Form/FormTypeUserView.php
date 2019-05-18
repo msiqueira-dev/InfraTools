@@ -10,7 +10,7 @@
 	</label>
 </div>
 <!-- FM_TYPE_USER_VIEW -->
-<form name="{$FM_TYPE_USER_VIEW}" id="{$FM_TYPE_USER_VIEW}" method="{$FORM_METHOD}">
+<form name="{$FM_TYPE_USER_VIEW}" id="{$FM_TYPE_USER_VIEW}" method="{$FORM_METHOD}" >
     <!-- FIELD_TYPE_USER_DESCRIPTION -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">

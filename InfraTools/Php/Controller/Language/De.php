@@ -158,6 +158,7 @@ class De
 	const FIELD_NOTIFICATION_ID                                     = "";
 	const FIELD_NOTIFICATION_TEXT                                   = "";
 	const FIELD_ROLE_DESCRIPTION                                    = "";
+	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME      = "";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "";
 	const FIELD_SEL_NONE                                            = "";
 	const FIELD_SERVICE_ACTIVE                                      = "";

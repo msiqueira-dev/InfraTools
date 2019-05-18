@@ -54,6 +54,8 @@ class Config
 	const DB_ERROR_DEPARTMENT_SEL_BY_CORP_DEP_FETCH                     = "RetMySqlDepartmentSelectByCorpDepFetch";
 	const DB_ERROR_DEPARTMENT_SEL_BY_CORPORATION_NAME                   = "RetMySqlDepartmentSelectByCorporation";
 	const DB_ERROR_DEPARTMENT_SEL_BY_CORPORATION_NAME_FETCH             = "RetMySqlDepartmentSelectByCorporationFetch";
+	const DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_INITIALS                = "RetMySqlDepartmentSelectByDepartmentInitials";
+	const DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_INITIALS_FETCH          = "RetMySqlDepartmentSelectByDepartmentInitialsFetch";
 	const DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME                    = "RetMySqlDepartmentSelectByDepartmentName";
 	const DB_ERROR_DEPARTMENT_SEL_BY_DEPARTMENT_NAME_FETCH              = "RetMySqlDepartmentSelectByDepartmentNameFetch";
 	const DB_ERROR_DEPARTMENT_SEL                                       = "RetMySqlDepartmentSelect";
@@ -250,6 +252,7 @@ class Config
 	const FIELD_PASSWORD_RESET_CODE                                     = "FieldPasswordResetCode";
 	const FIELD_RADIO_DEPARTMENT                                        = "FieldRadioDepartment";
 	const FIELD_RADIO_DEPARTMENT_INITIALS                               = "FieldRadioDepartmentInitials";
+	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME          = "FieldRadioDepartmentInitialsAndCorporationName";
 	const FIELD_RADIO_DEPARTMENT_NAME                                   = "FieldRadioDepartmentName";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME              = "FieldRadioDepartmentNameAndCorporationName";
 	const FIELD_RETURN_ERROR                                            = "FieldReturnError";

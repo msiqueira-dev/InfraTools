@@ -55,6 +55,26 @@
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
+		<!-- FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME -->
+		<div class="DivContentBodyContainerRadio">
+			<label>
+				<input type="radio" name="{$FIELD_RADIO_DEPARTMENT}"
+					   id="{$FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME}"
+					   value="{$FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME}"
+					   onclick="this.blur();this.focus();"
+					   onchange="ShowOrHideElement('{$DIV_RADIO_CORPORATION_NAME}', true);
+					             ShowOrHideElement('{$DIV_RADIO_DEPARTMENT_NAME}', false);
+					             ShowOrHideElement('{$DIV_RADIO_DEPARTMENT_INITIALS}', true);
+								 MakeInputVisible('{$FM_DEPARTMENT_SEL_SB}');
+								 ValidateInputChangedRadio('{$DIV_RADIO}', 'DivContentBodySubmit', '{$FM_DEPARTMENT_SEL_SB}', '')"
+					   title="{$FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME_TEXT}"  
+					   {$FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME_VALUE} />
+				<div class="DivContentBodyContainerLabelIp">
+					<i>{$FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME_TEXT}</i>
+				</div>
+			</label>
+		</div>
+		<div class="DivClearFloat"></div>
 		<!-- FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
@@ -167,8 +187,7 @@
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit">
 		<input type="submit" name="{$FM_DEPARTMENT_SEL_SB}" 
-								 id="{$FM_DEPARTMENT_SEL_SB}"
-								 class="DivContentBodySubmit {$SUBMIT_CLASS}"
-								 value="{$SUBMIT_SEL}" {$SUBMIT_ENABLED} />
+			   id="{$FM_DEPARTMENT_SEL_SB}" class="DivContentBodySubmit {$SUBMIT_CLASS}"
+			   value="{$SUBMIT_SEL}" {$SUBMIT_ENABLED} />
 	</div>
 </form>

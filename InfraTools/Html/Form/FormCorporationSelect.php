@@ -11,7 +11,7 @@
 	</label>
 </div>
 <!-- FM_CORPORATION_SEL_FORM -->
-<form name="{$FM_CORPORATION_SEL_FORM}" id="{$FM_CORPORATION_SEL_FORM}" method="post" >
+<form name="{$FM_CORPORATION_SEL_FORM}" id="{$FM_CORPORATION_SEL_FORM}" method="{$FORM_METHOD}" >
 	<!-- FIELD_CORPORATION_NAME -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">

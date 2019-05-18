@@ -162,6 +162,7 @@ class En
 	const FIELD_NOTIFICATION_ID                                     = "Id";
 	const FIELD_NOTIFICATION_TEXT                                   = "Text";
 	const FIELD_ROLE_DESCRIPTION                                    = "Description";
+	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME      = "Department initials and corporation name";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "Department name and corporation name";
 	const FIELD_SEL_NONE                                            = "Select";
 	const FIELD_SERVICE_ACTIVE                                      = "Active";

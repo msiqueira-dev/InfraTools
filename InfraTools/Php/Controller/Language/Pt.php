@@ -163,6 +163,7 @@ class Pt
 	const FIELD_NOTIFICATION_ID                                     = "Id";
 	const FIELD_NOTIFICATION_TEXT                                   = "Texto";
 	const FIELD_ROLE_DESCRIPTION                                    = "Descrição";
+	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME      = "Código do departamento e nome da corporação";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "Nome do departamento e nome da corporação";
 	const FIELD_SEL_NONE                                            = "Selecione";
 	const FIELD_SERVICE_ACTIVE                                      = "Ativo";

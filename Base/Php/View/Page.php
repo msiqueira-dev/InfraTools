@@ -47,6 +47,8 @@ Methods:
 													                    &$ArrayInstanceDepartment, &$RowCount, $Debug);
 		protected     function        DepartmentSelectByCorporationNameNoLimit($CorporationName, &$ArrayInstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentInitials($DepartmentInitials, &$ArrayInstanceDepartment, $Debug);
+		protected     function        DepartmentSelectByDepartmentInitialsAndCorporationName($CorporationName, $DepartmentInitials, 
+																		                     &$InstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentName($DepartmentName, &$ArrayInstanceDepartment, $Debug);
 		protected     function        DepartmentSelectByDepartmentNameAndCorporationName($CorporationName, $DepartmentName, 
 																		                 &$InstanceDepartment, $Debug);
@@ -133,8 +135,7 @@ Methods:
 		protected     function        TypeUserInsert($TypeUserDescription, $Debug);
 		protected     function        TypeUserLoadData(&$InstanceTypeUser);
 		protected     function        TypeUserSelect($Limit1, $Limit2, &$ArrayInstanceTypeUser, &$RowCount, $Debug);
-		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug);
-		protected     function        TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug);
+		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, &$InstanceTypeUser, $Debug);
 		protected     function        UserChangeTwoStepVerification($InstanceUser, $TwoStepVerification, $Debug);
@@ -306,6 +307,7 @@ class Page
 	public    $InputValueCountry                                    = "";
 	public    $InputValueDepartmentActive                           = "";
 	public    $InputValueDepartmentInitials                         = "";
+	public    $InputValueDepartmentInitialsAndCorporationNameRadio  = "";
 	public    $InputValueDepartmentInitialsRadio                    = "";
 	public    $InputValueDepartmentName                             = "";
 	public    $InputValueDepartmentNameAndCorporationNameRadio      = "";
@@ -1472,6 +1474,60 @@ class Page
 		{
 			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentInitials($this->InputValueDepartmentInitials, 
 																		               $ArrayInstanceDepartment, $Debug);
+			if($return == Config::RET_OK)
+				return $return;
+		}
+		$this->ShowDivReturnError("DEPARTMENT_NOT_FOUND");
+		return Config::RET_ERROR;
+	}
+
+	protected function DepartmentSelectByDepartmentInitialsAndCorporationName($CorporationName, $DepartmentInitials, 
+																		      &$ArrayInstanceDepartment, $Debug)
+	{
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
+		$this->InputValueCorporationName = $CorporationName;
+		$this->InputValueDepartmentInitials = $DepartmentInitials;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FIELD_CORPORATION_NAME
+		$arrayElements[0]             = Config::FIELD_CORPORATION_NAME;
+		$arrayElementsClass[0]        = &$this->ReturnCorporationNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_CORPORATION_NAME;
+		$arrayElementsInput[0]        = $this->InputValueCorporationName; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 80; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnCorporationNameText;
+		array_push($arrayConstants, 'FM_INVALID_CORPORATION_NAME', 'FM_INVALID_CORPORATION_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_DEPARTMENT_INITIALS
+		$arrayElements[1]             = Config::FIELD_DEPARTMENT_INITIALS;
+		$arrayElementsClass[1]        = &$this->ReturnDepartmentInitialsClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DEPARTMENT_INITIALS;
+		$arrayElementsInput[1]        = $this->InputValueDepartmentInitials; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 8; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnDepartmentInitialsText;
+		array_push($arrayConstants, 'FM_INVALID_DEPARTMENT_INITIALS', 'FM_INVALID_DEPARTMENT_INITIALS_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
+											$matrixConstants, $Debug);
+		
+		if($return == Config::RET_OK)
+		{
+			$return = $instanceFacedePersistence->DepartmentSelectByDepartmentInitialsAndCorporationName(
+				                                                                     $this->InputValueCorporationName, 
+																				     $this->InputValueDepartmentInitials,
+																		             $ArrayInstanceDepartment, $Debug);
 			if($return == Config::RET_OK)
 				return $return;
 		}
@@ -3973,7 +4029,7 @@ class Page
 		return Config::RET_ERROR;
 	}
 	
-	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$InstanceTypeUser, $Debug)
+	protected function TypeUserSelectByTypeUserDescription($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
@@ -4001,47 +4057,7 @@ class Page
 		if($return == Config::RET_OK)
 		{
 			$return = $instanceFacedePersistence->TypeUserSelectByTypeUserDescription($this->InputValueTypeUserDescription, 
-																			          $InstanceTypeUser, $Debug);
-			if($return == Config::RET_OK)
-			{
-				$this->Session->SetSessionValue(Config::SESS_ADMIN_TYPE_USER, $InstanceTypeUser);
-				$this->TypeUserLoadData($InstanceTypeUser); 
-				return Config::RET_OK;
-			}
-		}
-		$this->ShowDivReturnError("TYPE_USER_NOT_FOUND");
-		return Config::RET_ERROR;
-	}
-	
-	protected function TypeUserSelectByTypeUserDescriptionLike($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug)
-	{
-		$PageForm = $this->Factory->CreatePageForm();
-		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
-		$this->InputValueTypeUserDescription = $TypeUserDescription;
-		$arrayConstants = array(); $matrixConstants = array();
-		
-		//FIELD_TYPE_USER_DESCRIPTION
-		$arrayElements[0]             = Config::FIELD_TYPE_USER_DESCRIPTION;
-		$arrayElementsClass[0]        = &$this->ReturnTypeUserDescriptionClass;
-		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[0]        = $this->InputValueTypeUserDescription; 
-		$arrayElementsMinValue[0]     = 0; 
-		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
-		$arrayElementsText[0]         = &$this->ReturnTypeUserDescriptionText;
-		array_push($arrayConstants, 'FM_INVALID_TYPE_USER_DESCRIPTION', 'FM_INVALID_TYPE_USER_DESCRIPTION_SIZE',
-				                    'FILL_REQUIRED_FIELDS');
-		array_push($matrixConstants, $arrayConstants);
-		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
-							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
-							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
-											$matrixConstants, $Debug);
-		if($return == Config::RET_OK)
-		{
-			$return = $instanceFacedePersistence->TypeUserSelectByTypeUserDescriptionLike($this->InputValueTypeUserDescription, 
-																			               $ArrayInstanceTypeUser, $Debug);
+																			          $ArrayInstanceTypeUser, $Debug);
 			if($return == Config::RET_OK)
 				return Config::RET_OK;
 		}

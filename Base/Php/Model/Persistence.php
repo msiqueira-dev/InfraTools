@@ -35,6 +35,7 @@ Methods:
 			public static function SqlDepartmentSelectByCorporationName();
 			public static function SqlDepartmentSelectByCorporationNameNoLimit();
 			public static function SqlDepartmentSelectByDepartmentInitials();
+			public static function SqlDepartmentSelectByDepartmentInitialsAndCorporationName();
 			public static function SqlDepartmentSelectByDepartmentName();
 			public static function SqlDepartmentSelectByDepartmentNameAndCorporationName();
 			public static function SqlDepartmentSelectNoLimit();
@@ -90,8 +91,6 @@ Methods:
 			public static function SqlTypeUserInsert();
 			public static function SqlTypeUserSelect();
 			public static function SqlTypeUserSelectNoLimit();
-			public static function SqlTypeUserSelectByDescription();
-			public static function SqlTypeUserSelectByDescriptionLike();
 			public static function SqlTypeUserSelectByTypeUserDescription();
 			public static function SqlTypeUserUpdateByTypeUserDescription();
 			public static function SqlUserSelectExistsByUserEmail();
@@ -405,13 +404,38 @@ class Persistence
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . ", "
 						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE          . "  "
 							 . "as CorporationRegisterDate, "                                      . "  "
-			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT . ") AS COUNT "                    . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT                                    . "  "
+			 . "WHERE "    . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS      . " LIKE ? "
+			 . " ) AS COUNT"                                                                       . "  "
 		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                        . "  " 
 			 . "INNER JOIN " . Config::TB_CORPORATION . " "                                        . "  " 
 			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION . "  "
 			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . "  "
 	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS    . " LIKE ? "
 			 . "ORDER BY "   . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION;
+	}
+
+	public static function SqlDepartmentSelectByDepartmentInitialsAndCorporationName()
+	{
+		return "SELECT "     . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . ", "
+			                 . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS     . ", "
+     		                 . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME         . ", "
+					         . Config::TB_DEPARTMENT  . "." . Config::TB_FD_REGISTER_DATE           . "  "
+							 . "as DepartmentRegisterDate, "                                        . "  "
+							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_ACTIVE      . ", "
+							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME        . ", "
+						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE           . "  "
+							 . "as CorporationRegisterDate, "                                       . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT                                     . "  "
+			 . "WHERE "    . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME          . " LIKE ? "
+			 . "AND   "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS     . " LIKE ? "
+			 . " ) AS COUNT"                                                                        . "  "
+		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                         . "  "
+			 . "INNER JOIN " . Config::TB_CORPORATION . " "                                         . "  " 
+			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . "  "
+			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME        . "  "
+	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . " LIKE ? "
+			 . "AND   "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_INITIALS     . " LIKE ? ";
 	}
 	
 	public static function SqlDepartmentSelectByDepartmentName()
@@ -425,7 +449,9 @@ class Persistence
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME       . ", "
 						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE          . "  "
 							 . "as CorporationRegisterDate, "                                      . "  "
-			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT . ") AS COUNT "                    . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT                                    . "  "
+			 . "WHERE "    . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME          . " LIKE ? "
+			 . " ) AS COUNT"                                                                       . "  "
 		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                        . "  " 
 			 . "INNER JOIN " . Config::TB_CORPORATION . " "                                        . "  " 
 			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION . "  "
@@ -445,12 +471,15 @@ class Persistence
 							 . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME        . ", "
 						     . Config::TB_CORPORATION . "." . Config::TB_FD_REGISTER_DATE           . "  "
 							 . "as CorporationRegisterDate, "                                       . "  "
-			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT . ") AS COUNT "                     . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_DEPARTMENT                                     . "  "
+			 . "WHERE "    . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME          . " LIKE ? "
+			 . "AND   "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME         . " LIKE ? "
+			 . " ) AS COUNT"                                                                        . "  "
 		     . "FROM  "      . Config::TB_DEPARTMENT  . " "                                         . "  "
 			 . "INNER JOIN " . Config::TB_CORPORATION . " "                                         . "  " 
 			 . "ON "         . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . "  "
 			 . "= "          . Config::TB_CORPORATION . "." . Config::TB_CORPORATION_FD_NAME        . "  "
-	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . " = ? "
+	         . "WHERE "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_CORPORATION  . " LIKE ? "
 			 . "AND   "      . Config::TB_DEPARTMENT  . "." . Config::TB_DEPARTMENT_FD_NAME         . " LIKE ? ";
 	}
 	
@@ -905,20 +934,16 @@ class Persistence
 			 . "ORDER BY " . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION;
 	}
 	
-	public static function SqlTypeUserSelectByDescription()
+	public static function SqlTypeUserSelectByTypeUserDescription()
 	{
-		return "SELECT " . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION   . ", "
-					     . Config::TB_TYPE_USER . "." . Config::TB_FD_REGISTER_DATE           . "  " 
-		     . "FROM  "  . Config::TB_TYPE_USER . " " 
-	         . "WHERE "  . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION   . " =UPPER(?)";
-	}
-	
-	public static function SqlTypeUserSelectByDescriptionLike()
-	{
-		return "SELECT " . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION   . ", "
-					     . Config::TB_TYPE_USER . "." . Config::TB_FD_REGISTER_DATE           . "  " 
-		     . "FROM  "  . Config::TB_TYPE_USER . " " 
-	         . "WHERE "  . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION   . " LIKE UPPER(?) ";
+		return "SELECT " . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION       . ", "
+						 . Config::TB_TYPE_USER . "." . Config::TB_FD_REGISTER_DATE               . "  "
+		                 . "as TypeUserRegisterDate, "                                            . "  "
+			 . "(SELECT COUNT(*) FROM " . Config::TB_TYPE_USER                                    . "  "
+	         . "WHERE "  . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION       . " LIKE UPPER(?) "
+			 . " ) AS COUNT"                                                                      . "  " 
+		     . "FROM  "  . Config::TB_TYPE_USER . " "                                             . "  "
+	         . "WHERE "  . Config::TB_TYPE_USER . "." . Config::TB_TYPE_USER_FD_DESCRIPTION       . " LIKE UPPER(?) ";
 	}
 	
 	public static function SqlTypeUserUpdateByTypeUserDescription()
@@ -1003,10 +1028,10 @@ class Persistence
 		. Config::TB_USER                   .".". Config::TB_USER_FD_USER_PHONE_SECONDARY_PREFIX         . ", "
 		. Config::TB_USER                   .".". Config::TB_USER_FD_USER_UNIQUE_ID                      . ", "
 		. Config::TB_USER                   .".". Config::TB_FD_REGISTER_DATE                            . "  "
-		. "as UserRegisterDate, "	                                                                              . "  "
+		. "as UserRegisterDate, "	                                                                     . "  "
 		. Config::TB_TYPE_USER              .".". Config::TB_TYPE_USER_FD_DESCRIPTION                    . ", "
 		. Config::TB_TYPE_USER              .".". Config::TB_FD_REGISTER_DATE                            . "  "
-		. "as TypeUserRegisterDate, "                                                                             . "  "
+		. "as TypeUserRegisterDate, "                                                                    . "  "
 		. Config::TB_CORPORATION            .".". Config::TB_CORPORATION_FD_ACTIVE                       . ", "
 		. Config::TB_CORPORATION            .".". Config::TB_CORPORATION_FD_NAME                         . ", "
 		. Config::TB_CORPORATION            .".". Config::TB_FD_REGISTER_DATE                            . "  "

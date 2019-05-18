@@ -222,9 +222,18 @@ class PageAdminService extends PageAdmin
 		{
 			if($this->ExecuteFunction($_POST, 'TypeUserSelectByTypeUserDescription', 
 									  array($_POST[ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION],
-									        &$this->InstanceInfraToolsTypeUser),
+									        &$this->ArrayInstanceInfraToolsTypeUser),
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+				{
+					
+					if(count($this->ArrayInstanceInfraToolsTypeUser) == 1)
+					{
+						$this->InstanceInfraToolsTypeUser = array_pop($this->ArrayInstanceInfraToolsTypeUser);
+						if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_TYPE_USER, "TypeUserLoadData", 
+														$this->InstanceInfraToolsTypeUser) == ConfigInfraTools::RET_OK)
+							$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
+					}
+				}
 		}
 		//FM_USER_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_USER_SEL_SB) == ConfigInfraTools::RET_OK)

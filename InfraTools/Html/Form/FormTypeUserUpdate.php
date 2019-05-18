@@ -1,14 +1,13 @@
-<!-- DIV_RETURN -->
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnTypeUserDescriptionText)) echo $this->ReturnTypeUserDescriptionText; ?>
-		<?php if(isset($this->ReturnText))                    echo $this->ReturnText; ?>
+        {$RETURN_EMPTY_TEXT}
+        {$RETURN_TYPE_USER_DESCRIPTION_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_TYPE_USER_UPDT_FORM -->
