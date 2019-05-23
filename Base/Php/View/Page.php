@@ -2080,6 +2080,11 @@ class Page
 				$this->ShowDivReturnSuccess("NOTIFICATION_INSERT_SUCCESS");
 				return Config::RET_OK;
 			}
+			elseif($return == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("INSERT_WARNING_EXISTS");
+				return Config::RET_WARNING;
+			}
 		}
 		$this->ShowDivReturnError("NOTIFICATION_INSERT_ERROR");
 		return Config::RET_ERROR;

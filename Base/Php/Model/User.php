@@ -301,14 +301,20 @@ class User
 	public function GetAssocUserNotificationCountUnRead()
 	{
 		if(empty($this->ArrayAssocUserNotification))
+		{
+			if(empty($this->AssocUserNotificationCountUnRead))
+				$this->AssocUserNotificationCountUnRead = 0;
 			return $this->AssocUserNotificationCountUnRead;
+		}
 		else 
 		{
+			$this->AssocUserNotificationCountUnRead = 0;
 			foreach($this->ArrayAssocUserNotification as $assocUserNotification)
 			{
 				if(!$assocUserNotification->GetAssocUserNotificationRead())
 					$this->AssocUserNotificationCountUnRead++;
 			}
+			return $this->AssocUserNotificationCountUnRead;
 		}
 	}
 	

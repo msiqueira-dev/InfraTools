@@ -133,6 +133,8 @@ class FacedePersistenceNotification
 					return Config::RET_OK;
 				else
 				{
+					if($errorCode == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+						return Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE;
 					if($Debug == Config::CHECKBOX_CHECKED) 
 						echo "MySql Error:  " . $mySqlError . "<br>Query Error: [" . $errorCode . "] - " . $errorStr . "<br>";
 					return Config::DB_ERROR_NOTIFICATION_INSERT;
