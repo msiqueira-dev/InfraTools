@@ -192,6 +192,7 @@ class En
 	const FIELD_TICKET_TYPE                                         = "Ticket Type";
 	const FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION                    = "Description";
 	const FIELD_TYPE_SERVICE_NAME                                   = "Type service";
+	const FIELD_TYPE_SERVICE_SLA                                    = "SLA";
 	const FIELD_TYPE_USER_DESCRIPTION                               = "Description";
 	const FIELD_USER_ACTIVE                                         = "Account active";
 	const FIELD_USER_BIRTH_DATE                                     = "Birth date";

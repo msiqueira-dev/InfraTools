@@ -56,7 +56,7 @@ class InfraToolsTypeService
 	/* GET */
 	public function GetRegisterDate()
 	{
-		return $this->RegisterDate();
+		return $this->RegisterDate;
 	}
 	
 	public function GetTypeServiceName()

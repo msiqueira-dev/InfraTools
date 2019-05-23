@@ -185,6 +185,7 @@ class De
 	const FIELD_TICKET_TYPE                                         = "";
 	const FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION                    = "";
 	const FIELD_TYPE_SERVICE_NAME                                   = "";
+	const FIELD_TYPE_SERVICE_SLA                                    = "";
 	const FIELD_TYPE_STATUS_TICKET_DESCRIPTION                      = "";
 	const FIELD_TYPE_STATUS_TICKET_ID                               = "";
 	const FIELD_TYPE_TICKET_DESCRIPTION                             = "";

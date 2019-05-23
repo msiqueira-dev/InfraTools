@@ -193,6 +193,7 @@ class Pt
 	const FIELD_TICKET_TYPE                                         = "Tipo de solicitação";
 	const FIELD_TYPE_ASSOC_USER_TEAM_DESCRIPTION                    = "Descrição";
 	const FIELD_TYPE_SERVICE_NAME                                   = "Tipo de serviço";
+	const FIELD_TYPE_SERVICE_SLA                                    = "SLA";
 	const FIELD_TYPE_STATUS_TICKET_DESCRIPTION                      = "Descrição";
 	const FIELD_TYPE_STATUS_TICKET_ID                               = "Id";
 	const FIELD_TYPE_TICKET_DESCRIPTION                             = "Descrição";

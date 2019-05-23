@@ -90,6 +90,12 @@ class PageAdmin extends PageInfraTools
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN);
+			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME', ConfigInfraTools::FIELD_TYPE_SERVICE_NAME);
+			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_SERVICE_NAME'));
+			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME_VALUE', $this->InputValueTypeServiceName);
+			$this->Smarty->assign('FIELD_TYPE_SERVICE_SLA', ConfigInfraTools::FIELD_TYPE_SERVICE_SLA);
+			$this->Smarty->assign('FIELD_TYPE_SERVICE_SLA_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_SERVICE_SLA'));
+			$this->Smarty->assign('FIELD_TYPE_SERVICE_SLA_VALUE', $this->InputValueTypeServiceSLA);
 			$this->Smarty->assign('FM_CORPORATION_VIEW', ConfigInfraTools::FM_CORPORATION_VIEW);
 			$this->Smarty->assign('FM_DEPARTMENT_VIEW', ConfigInfraTools::FM_DEPARTMENT_VIEW);
 			$this->Smarty->assign('FM_TEAM_VIEW', ConfigInfraTools::FM_TEAM_VIEW);
@@ -117,7 +123,13 @@ class PageAdmin extends PageInfraTools
 			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_CLASS', NULL);
 			if(isset($this->ReturnDepartmentNameText)) 
 				$this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', $this->ReturnDepartmentNameText);
-			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', NULL);
+			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', NULL); 
+			if(isset($this->ReturnTypeServiceNameClass)) 
+				$this->Smarty->assign('RETURN_TYPE_SERVICE_NAME_CLASS', $this->ReturnTypeServiceNameClass);
+			else $this->Smarty->assign('RETURN_TYPE_SERVICE_NAME_CLASS', NULL);
+			if(isset($this->ReturnTypeServiceNameText)) 
+				$this->Smarty->assign('RETURN_TYPE_SERVICE_NAME_TEXT', $this->ReturnTypeServiceNameText);
+			else $this->Smarty->assign('RETURN_TYPE_SERVICE_NAME_TEXT', NULL);
 			if(isset($this->ReturnTypeUserDescriptionClass)) 
 				$this->Smarty->assign('RETURN_TYPE_USER_DESCRIPTION_CLASS', $this->ReturnTypeUserDescriptionClass);
 			else $this->Smarty->assign('RETURN_TYPE_USER_DESCRIPTION_CLASS', NULL);
