@@ -31,7 +31,7 @@ class ProjectConfig
 			$AddressApplication = "139.82.1.2";
 			$AddressApplication = "139.82.1.2:8080";
 	*/
-	public static $AddressApplication = "";
+	public static $AddressApplication = "aaaa";
 	/***********************************************************************/
 	
 	/***********************************************************************/
