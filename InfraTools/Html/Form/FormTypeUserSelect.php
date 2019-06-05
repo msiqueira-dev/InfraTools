@@ -53,7 +53,7 @@
 											 '{$FM_TYPE_USER_SEL_SB}',
 											 '');"
 						   title="{$FIELD_TYPE_USER_DESCRIPTION_TEXT}" 
-						   value="{$FIELD_TYPE_USER_DESCRIPTION_VALUE}" maxlength="80" />
+						   value="{$FIELD_TYPE_USER_DESCRIPTION_VALUE}" maxlength="45" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"

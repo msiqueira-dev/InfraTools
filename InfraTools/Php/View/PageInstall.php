@@ -10,7 +10,6 @@ Description:
 			Class used for creating the database structure. 
 Functions: 
 			public    function LoadPage();
-			
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
 {
@@ -67,6 +66,32 @@ class PageInstall extends PageInfraTools
 			$this->RedirectPage($domain . str_replace("Language/","",$this->Language) . "/" 
 								        . str_replace("_","",ConfigInfraTools::PAGE_HOME));
 		}
+	}
+
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign("ARRAY_IMPORT_ERROR_QUERIES", array($this->DataBaseImportErrorQueries));
+			$this->Smarty->assign("BUTTON_INSTALL_ENABLED", $this->ButtonInstallEnabled);
+			$this->Smarty->assign("BUTTON_IMPORT_ENABLED", $this->ButtonImportEnabled);
+			$this->Smarty->assign("BUTTON_EXPORT_ENABLED", $this->ButtonExportEnabled);
+			$this->Smarty->assign("BUTTON_REINSTALL_ENABLED", $this->ButtonReinstallEnabled);
+			$this->Smarty->assign("FM_INSTALL_IMPORT_SB", ConfigInfraTools::FM_INSTALL_IMPORT_SB);
+			$this->Smarty->assign("FM_INSTALL_IMPORT_SB_HIDDEN", ConfigInfraTools::FM_INSTALL_IMPORT_SB_HIDDEN);
+			$this->Smarty->assign("FM_INSTALL_EXPORT_SB", ConfigInfraTools::FM_INSTALL_EXPORT_SB);
+			$this->Smarty->assign("FM_INSTALL_NEW_SB", ConfigInfraTools::FM_INSTALL_NEW_SB);
+			$this->Smarty->assign("FM_INSTALL_REINSTALL_SB", ConfigInfraTools::FM_INSTALL_REINSTALL_SB);
+			$this->Smarty->assign("SUBMIT_INSTALL_IMPORT", ConfigInfraTools::SUBMIT_INSTALL_IMPORT);
+			$this->Smarty->assign("SUBMIT_INSTALL_EXPORT", ConfigInfraTools::SUBMIT_INSTALL_EXPORT);
+			$this->Smarty->assign("SUBMIT_INSTALL_NEW", ConfigInfraTools::SUBMIT_INSTALL_NEW);
+			$this->Smarty->assign("SUBMIT_INSTALL_REINSTALL", ConfigInfraTools::SUBMIT_INSTALL_REINSTALL);
+			if(isset($this->DataBaseReturnMessage))
+				$this->Smarty->assign("DATABASE_RETURN_MESSAGE", $this->DataBaseReturnMessage);
+			else $this->Smarty->assign("DATABASE_RETURN_MESSAGE", NULL);
+			return ConfigInfraTools::RET_OK;
+		}
+		return ConfigInfraTools::RET_ERROR;
 	}
 
 	public function LoadPage()
@@ -176,7 +201,8 @@ class PageInstall extends PageInfraTools
 				else $this->ShowDivReturnError("INSTALL_ERROR");
 			}
 		}
-		$this->LoadHtml(FALSE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, NULL, FALSE);
 	}
 }
 ?>

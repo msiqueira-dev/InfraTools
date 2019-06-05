@@ -166,8 +166,8 @@ class PageAdminTypeUser extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_TYPE_USER_VIEW;
 			} 
 		}
-		//FM_TYPE_USER_VIEW_LST_USERS
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS) == ConfigInfraTools::RET_OK)
+		//FM_TYPE_USER_VIEW_LST_USERS_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_TYPE_USER_VIEW_LST_USERS_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_TYPE_USER, $this->InstanceInfraToolsTypeUser) == ConfigInfraTools::RET_OK)
 			{
