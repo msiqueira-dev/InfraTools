@@ -362,6 +362,10 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_IP_ADDRESS', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByIpAddress48x48.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_IP_ADDRESS_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByIpAddress48x48Hover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_NETWORK', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByNetwork48x48.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_NETWORK_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByNetwork48x48Hover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_CORPORATION', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByCorporation.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_CORPORATION_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByCorporationHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_DEPARTMENT', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByDepartment.png');

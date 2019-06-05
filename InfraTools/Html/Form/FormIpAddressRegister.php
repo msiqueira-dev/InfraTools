@@ -1,338 +1,203 @@
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))            echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnIpAddressDescription)) echo $this->ReturnIpAddressDescription; ?>
-		<?php if(isset($this->ReturnIpAddressIpv4))        echo $this->ReturnIpAddressIpv4; ?>
-		<?php if(isset($this->ReturnIpAddressIpv6))        echo $this->ReturnIpAddressIpv6; ?>
-		<?php if(isset($this->ReturnNetworkIp))            echo $this->ReturnNetworkIp; ?>
-		<?php if(isset($this->ReturnNetworkName))          echo $this->ReturnNetworkName; ?>
-		<?php if(isset($this->ReturnNetworkNetmask))       echo $this->ReturnNetworkNetmask; ?>
-		<?php if(isset($this->ReturnText))                 echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_IP_ADDRESS_DESCRIPTION_TEXT}
+		{$RETURN_IP_ADDRESS_IPV4_TEXT}
+		{$RETURN_IP_ADDRESS_IPV6_TEXT}
+		{$RETURN_NETWORK_IP_TEXT}
+		{$RETURN_NETWORK_NAME_TEXT}
+		{$RETURN_NETWORK_NETMASK_TEXT}
+		{$RETURN_NETWORK_NAME_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
-<?php if(is_array($this->ArrayInstanceInfraToolsNetwork))
-{?>
-	<!-- FM_IP_ADDRESS_REGISTER_FORM_NETWORK -->
-	<form name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK; ?>" 
-		  id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK; ?>" method="post">
-
-		<input type="hidden" name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK; ?>" 
-						 id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK; ?>"
-						 value="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK; ?>"/>
-		<!-- FIELD_NETWORK_NAME -->
-		<div class="DivContentBodyContainer">
-			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME').":"; ?></label>
-			</div>
-			<div class="DivContentBodyContainerValue">
-				<select 
-					name="<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>" 
-					id="<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>"
-					class="<?php echo $this->ReturnNetworkNameClass; ?>"
-					onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>');
-							  document.getElementById('<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>')
-											 .disabled = false;
-							  document.getElementById('<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>')
-											 .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-							  this.form.submit()">
-					<option <?php if ($this->InputValueNetworkName == "" 
-									  || $this->InputValueNetworkName == ConfigInfraTools::FIELD_SEL_NONE) 
-						echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-							<?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-					</option>
-					<?php 
-					foreach($this->ArrayInstanceInfraToolsNetwork as $key=>$network)
-					{
-						echo "<option ";
-						  if($this->InputValueNetworkName == $network->GetNetworkName())
-							echo "selected='selected' ";
-						echo "value='" . $network->GetNetworkName() . "'>" . $network->GetNetworkName() . " - " . $network->GetNetworkIp() 
-									   . "/" . $network->GetNetworkNetmask() . "</option>";
-					}
-					?>
-				</select>
-			</div>
+<!-- FM_IP_ADDRESS_REGISTER_FORM_NETWORK -->
+<form name="{$FM_IP_ADDRESS_REGISTER_FORM_NETWORK}" id="{$FM_IP_ADDRESS_REGISTER_FORM_NETWORK}" method="{$FORM_METHOD}">
+	<input type="hidden" name="{$FM_IP_ADDRESS_REGISTER_FORM_NETWORK}" id="{$FM_IP_ADDRESS_REGISTER_FORM_NETWORK}" value="{$FM_IP_ADDRESS_REGISTER_FORM_NETWORK}"/>
+	<!-- FIELD_NETWORK_NAME -->
+	<div class="DivContentBodyContainer">
+		<div class="DivContentBodyContainerLabel">
+			<label>{$FIELD_NETWORK_NAME_TEXT} : </label>
 		</div>
-	</form>
-<?php } ?>
+		<select name="{$FIELD_NETWORK_NAME}" id="{$FIELD_NETWORK_NAME}" class="{$RETURN_NETWORK_NAME_CLASS}"
+				    onchange="SetSelectColor('{$FIELD_NETWORK_NAME}');
+				              document.getElementById('{$FM_IP_ADDRESS_REGISTER_SB}').disabled = false;
+				              document.getElementById('{$FM_IP_ADDRESS_REGISTER_SB}').className = 'DivContentBodySubmitBigger SubmitEnabled'; this.form.submit()">
+			{if $FIELD_SEL_NONE neq FALSE}
+						<option value="{$FIELD_SEL_NONE}" selected='selected' >
+								{$FIELD_SEL_NONE_TEXT}
+						</option>
+				{else}
+						<option value="{$FIELD_SEL_NONE}">
+								{$FIELD_SEL_NONE_TEXT}
+						</option>
+				{/if}
+				{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_NETWORK item=INSTANCE_NETWORK}
+					{foreach key=key item=item from=$INSTANCE_NETWORK}
+							{if $FIELD_NETWORK_NAME_VALUE eq $item->GetNetworkName()}
+									<option  selected='selected' value="{$item->GetNetworkName()}">
+											{$item->GetNetworkName()}
+									</option>
+							{else}
+									<option  value="{$item->GetNetworkName()}">
+											{$item->GetNetworkName()}
+									</option>
+							{/if}
+					{/foreach}
+				{/foreach}
+			</select>
+		</div>
+	</div>
+</form>
 <!-- FM_IP_ADDRESS_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>" method="post">
-	<?php if(is_object($this->InstanceInfraToolsNetwork)) 
-	{?>
+<form name="{$FM_IP_ADDRESS_REGISTER_FORM}" id="{$FM_IP_ADDRESS_REGISTER_FORM}" method="{$FORM_METHOD}">
+	{if $FIELD_NETWORK_NAME_VALUE neq ""}
 		<!-- FIELD_NETWORK_IP -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_IP').":"; ?></label>
+				<label>{$FIELD_NETWORK_IP_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
-				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueNetworkIp; ?></label>
+				<label class="DivContentBodyContainerValueContent">{$FIELD_NETWORK_IP_VALUE}</label>
 			</div>
 		</div>
 		<!-- FIELD_NETWORK_NAME -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME').":"; ?></label>
+				<label>{$FIELD_NETWORK_NAME_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
-				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueNetworkName; ?></label>
+				<label class="DivContentBodyContainerValueContent">{$FIELD_NETWORK_NAME_VALUE}</label>
 			</div>
 		</div>
 		<!-- FIELD_NETWORK_NETMASK -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NETMASK').":"; ?></label>
+				<label>{$FIELD_NETWORK_NETMASK_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
-				<label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueNetworkNetmask; ?></label>
+				<label class="DivContentBodyContainerValueContent">{$FIELD_NETWORK_NETMASK_VALUE}</label>
 			</div>
 		</div>
-    <?php }
-	else {?>
-    <!-- FIELD_NETWORK_IP -->
+	{/if}
+	{if $FIELD_NETWORK_NAME_VALUE eq ""}
+		<!-- FIELD_NETWORK_IP -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_IP').":"; ?></label>
+				<label>{$FIELD_NETWORK_IP_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
-				<input type="text" name="<?php echo ConfigInfraTools::FIELD_NETWORK_IP; ?>" 
-								   id="<?php echo ConfigInfraTools::FIELD_NETWORK_IP; ?>" 
-								   class="<?php echo $this->ReturnNetworkIpClass; ?>"
-								   onblur="ValidateIpAddressIpv4(null, 
-                                                   '<?php echo ConfigInfraTools::FIELD_NETWORK_IP; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                   '', true);
-										   ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   onkeyup="ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   onchange="ValidateIpAddressIpv4(null, 
-                                                   '<?php echo ConfigInfraTools::FIELD_NETWORK_IP; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                   '', true);
-											 ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_IP'); ?>"
-								   value="<?php echo $this->InputValueNetworkIp; ?>" maxlength="15" />
+			<input type="text" name="{$FIELD_NETWORK_IP}" id="{$FIELD_NETWORK_IP}" 
+						 class="FormFieldNotObligatory {$RETURN_NETWORK_IP_CLASS}"
+						 onblur="ValidateIpAddressIpv4(null, '{$FIELD_NETWORK_IP}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+										 ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+						 onkeyup="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+						 onchange="ValidateIpAddressIpv4(null, '{$FIELD_NETWORK_IP}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+											 ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ','{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+						 title="{$FIELD_NETWORK_IP_TEXT}" value="{$FIELD_NETWORK_IP_VALUE}" maxlength="15" />
 			</div>
 		</div>
 		<!-- FIELD_NETWORK_NAME -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME').":"; ?></label>
+				<label>{$FIELD_NETWORK_NAME_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
-				<input type="text" name="<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>" 
-								   id="<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>" 
-								   class="<?php echo $this->ReturnNetworkNameClass; ?>"
-								   onblur="ValidateDescription(null, 
-													   '<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>',
-													   'DivContentBodySubmitBigger ',
-													   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													   '', true);
-										   ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   onkeyup="ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   onchange="ValidateDescription(null, 
-													  '<?php echo ConfigInfraTools::FIELD_NETWORK_NAME; ?>',
-													   'DivContentBodySubmitBigger ',
-													   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													   '', true);
-										   ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME'); ?>"
-								   value="<?php echo $this->InputValueNetworkName; ?>" maxlength="60" />
+				<input type="text" name="{$FIELD_NETWORK_NAME}" id="{$FIELD_NETWORK_NAME}" 
+										class="FormFieldNotObligatory {$RETURN_NETWORK_NAME_TEXT}"
+										onblur="ValidateDescription(null, '{$FIELD_NETWORK_NAME}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+												ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										onkeyup="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ','{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										onchange="ValidateDescription(null, '{$FIELD_NETWORK_NAME}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+												ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										title="{$FIELD_NETWORK_NAME_TEXT}"
+										value="{$FIELD_NETWORK_NAME_VALUE}" maxlength="60" />
 			</div>
 		</div>
-   		<!-- FIELD_NETWORK_NETMASK -->
+		<!-- FIELD_NETWORK_NETMASK -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NETMASK').":"; ?></label>
+				<label>{$FIELD_NETWORK_NETMASK_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
-				<input type="text" name="<?php echo ConfigInfraTools::FIELD_NETWORK_NETMASK; ?>" 
-								   id="<?php echo ConfigInfraTools::FIELD_NETWORK_NETMASK; ?>" 
-								   class="<?php echo $this->ReturnNetworkNetmaskClass; ?>"
-								   onblur="ValidateNetmask(null, 
-													   '<?php echo ConfigInfraTools::FIELD_NETWORK_NETMASK; ?>',
-													   'DivContentBodySubmitBigger ',
-													   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													   '', true);
-										   ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   onkeyup="ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   onchange="ValidateNetmask(null, 
-													   '<?php echo ConfigInfraTools::FIELD_NETWORK_NETMASK; ?>',
-													   'DivContentBodySubmitBigger ',
-													   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													   '', true);
-											 ValidateMultiplyFields(
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-													 'DivContentBodySubmitBigger ',
-													 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-													 '');"
-								   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NETWORK_NETMASK'); ?>"
-								   value="<?php echo $this->InputValueNetworkNetmask; ?>" maxlength="2" />
+				<input type="text" name="{$FIELD_NETWORK_NETMASK}" id="{$FIELD_NETWORK_NETMASK}" 
+										class="FormFieldNotObligatory {$RETURN_NETWORK_NETMASK_CLASS}"
+										onblur="ValidateNetmask(null, '{$FIELD_NETWORK_NETMASK}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+														ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										onkeyup="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										onchange="ValidateNetmask(null, '{$FIELD_NETWORK_NETMASK}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+															ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										title="{$FIELD_NETWORK_NETMASK_TEXT}"
+										value="{$FIELD_NETWORK_NETMASK_VALUE}" maxlength="2" />
 			</div>
 		</div>
-    <?php } ?>
-    <!-- FIELD_IP_ADDRESS_DESCRIPTION -->
-    <div class="DivContentBodyContainerTextArea">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_DESCRIPTION').":"; ?></label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-            <textarea name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION; ?>" 
-                               id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION; ?>" 
-                               class="FormFieldNotObligatory DivContentBodyContainerValueTextArea <?php echo $this->ReturnIpAddressClass; ?>"
-                               onblur="ValidateDescription('DivContentBodyContainerValueTextArea', 
-                                                   '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                   '', true);
-                                       ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-                                                 'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                 '');"
-                               onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-                                                 'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                 '');"
-                               onchange="ValidateDescription('DivContentBodyContainerValueTextArea', 
-                                                   '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                   '', true);
-                                       ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-                                                 'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                 '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_DESCRIPTION'); ?>"
-                               maxlength="500"><?php echo $this->InputValueIpAddressDescription; ?></textarea>
-        </div>
-    </div>
-    <!-- FIELD_IP_ADDRESS_IPV4 -->
-	<div class="DivContentBodyContainer">
-		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4').":"; ?></label>
-		</div>
-		<div class="DivContentBodyContainerValue">
-			<input type="text" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>" 
-							   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>" 
-							   class="FormFieldNotObligatory <?php echo $this->ReturnIpAddressIpv4Class; ?>"
-							   onblur="ValidateIpAddressIpv4(null, 
-                                                   '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                   '', true);
-									   ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-												 'DivContentBodySubmitBigger ',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-												 '');"
-							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-												 'DivContentBodySubmitBigger ',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-												 '');"
-							   onchange="ValidateIpAddressIpv4(null, 
-                                                   '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                                   '', true);
-										 ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-												 'DivContentBodySubmitBigger ',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?>"
-							   value="<?php echo $this->InputValueIpAddressIpv4; ?>" maxlength="15" />
-		</div>
+	{/if}
+	<!-- FIELD_IP_ADDRESS_DESCRIPTION -->
+	<div class="DivContentBodyContainerTextArea">
+			<div class="DivContentBodyContainerLabel">
+					<label>{$FIELD_IP_ADDRESS_DESCRIPTION_TEXT} : </label>
+			</div>
+			<div class="DivContentBodyContainerValue">
+					<textarea name="{$FIELD_IP_ADDRESS_DESCRIPTION}" id="{$FIELD_IP_ADDRESS_DESCRIPTION}" 
+										class="FormFieldNotObligatory DivContentBodyContainerValueTextArea <?php echo $this->ReturnIpAddressClass; ?>"
+										onblur="ValidateDescription('DivContentBodyContainerValueTextArea', '{$FIELD_IP_ADDRESS_DESCRIPTION}', 'DivContentBodySubmitBigger ',
+																								'{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+														ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										onkeyup="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}','DivContentBodySubmitBigger ','{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										onchange="ValidateDescription('DivContentBodyContainerValueTextArea', '{$FIELD_IP_ADDRESS_DESCRIPTION}', 'DivContentBodySubmitBigger ',
+															                              '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+															ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+										title="{$FIELD_IP_ADDRESS_DESCRIPTION_TEXT}"
+										maxlength="500">{$FIELD_IP_ADDRESS_DESCRIPTION_VALUE}</textarea>
+			</div>
 	</div>
-  	<!-- FIELD_IP_ADDRESS_IPV6 -->
-	<div class="DivContentBodyContainer">
-		<div class="DivContentBodyContainerLabel">
-			<label><?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6').":"; ?></label>
-		</div>
-		<div class="DivContentBodyContainerValue">
-			<input type="text" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>" 
-							   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>" 
-							   class="FormFieldNotObligatory <?php echo $this->ReturnIpAddressIpv6Class; ?>"
-							   onblur="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-												 'DivContentBodySubmitBigger ',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-												 '');"
-							   onkeyup="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-												 'DivContentBodySubmitBigger ',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-												 '');"
-							   onchange="ValidateMultiplyFields(
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-												 'DivContentBodySubmitBigger ',
-												 '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-												 '');"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'); ?>"
-							   value="<?php echo $this->InputValueIpAddressIpv6; ?>" maxlength="15" />
-		</div>
+	<!-- FIELD_IP_ADDRESS_IPV4 -->
+<div class="DivContentBodyContainer">
+	<div class="DivContentBodyContainerLabel">
+		<label>{$FIELD_IP_ADDRESS_IPV4}</label>
 	</div>
-    <!-- SUBMIT -->
-    <div class="DivContentBodyContainer"
-         onmouseover="ValidateDescription('DivContentBodyContainerValueTextArea', 
-							       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION; ?>',
-								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-								   '', true);
-                      ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM; ?>',
-                                   'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>',
-                                   '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB; ?>"
-                                 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
-                                 <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_REGISTER_CANCEL; ?>"
-                                 class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
-    </div>
+	<div class="DivContentBodyContainerValue">
+		<input type="text" name="{$FIELD_IP_ADDRESS_IPV4}" id="{$FIELD_IP_ADDRESS_IPV4}" 
+					 class="FormFieldNotObligatory {$RETURN_IP_ADDRESS_IPV4_CLASS}"
+					 onblur="ValidateIpAddressIpv4(null, '{$FIELD_IP_ADDRESS_IPV4}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+									 ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+					 onkeyup="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+					 onchange="ValidateIpAddressIpv4(null, '{$FIELD_IP_ADDRESS_IPV4}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+										      ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+					 title="{$FIELD_IP_ADDRESS_IPV4_TEXT}"
+					 value="{$FIELD_IP_ADDRESS_IPV4_VALUE}" maxlength="15" />
+	</div>
+</div>
+	<!-- FIELD_IP_ADDRESS_IPV6 -->
+<div class="DivContentBodyContainer">
+	<div class="DivContentBodyContainerLabel">
+		<label>{$FIELD_IP_ADDRESS_IPV6_TEXT} : </label>
+	</div>
+	<div class="DivContentBodyContainerValue">
+		<input type="text" name="{$FIELD_IP_ADDRESS_IPV6}" id="{$FIELD_IP_ADDRESS_IPV6}" 
+					 class="FormFieldNotObligatory {$RETURN_IP_ADDRESS_IPV6_CLASS}"
+					 onblur="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+					 onkeyup="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+					 onchange="ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger ', '{$FM_IP_ADDRESS_REGISTER_SB}', '');"
+					 title="{$FIELD_IP_ADDRESS_IPV6_TEXT}"
+					 value="{$FIELD_IP_ADDRESS_IPV6_VALUE}" maxlength="15" />
+	</div>
+</div>
+	<!-- SUBMIT -->
+	<div class="DivContentBodyContainer"
+				onmouseover="ValidateDescription('DivContentBodyContainerValueTextArea', '{$FIELD_IP_ADDRESS_DESCRIPTION}',
+									                       'DivContentBodySubmitBigger', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+										 ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger', '{$FM_IP_ADDRESS_REGISTER_SB}', '');">
+			<input type="submit" name="{$FM_IP_ADDRESS_REGISTER_SB}" id="{$FM_IP_ADDRESS_REGISTER_SB}"
+						 class="DivContentBodySubmitBigger {$SUBMIT_CLASS}"
+						 value="{$SUBMIT_REGISTER}" {$SUBMIT_ENABLED} />
+			<input type="submit" name="{$FM_IP_ADDRESS_REGISTER_CANCEL}" id="{$FM_IP_ADDRESS_REGISTER_CANCEL}"
+						 class="DivContentBodySubmitBigger"
+					   value="{$SUBMIT_CANCEL}" />
+	</div>
 </form>

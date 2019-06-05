@@ -337,11 +337,11 @@ class ConfigInfraTools extends Config
 	const FM_IP_ADDRESS_SEL                                                     = "FmIpAddressSel";
 	const FM_IP_ADDRESS_SEL_FORM                                                = "FmIpAddressSelFm";
 	const FM_IP_ADDRESS_SEL_SB                                                  = "FmIpAddressSelSb";
-	const FM_IP_ADDRESS_UPDT_IP_ADDRESS_FORM                                    = "FmIpAddressUpdateIpAddressFm";
 	const FM_IP_ADDRESS_UPDT_IP_ADDRESS_CANCEL                                  = "FmIpAddressUpdateIpAddressCancel";
+	const FM_IP_ADDRESS_UPDT_IP_ADDRESS_FORM                                    = "FmIpAddressUpdateIpAddressFm";
 	const FM_IP_ADDRESS_UPDT_IP_ADDRESS_SB                                      = "FmIpAddressUpdateIpAddressSb";
-	const FM_IP_ADDRESS_UPDT_NETWORK_FORM                                       = "FmIpAddressUpdateNetworkFm";
 	const FM_IP_ADDRESS_UPDT_NETWORK_CANCEL                                     = "FmIpAddressUpdateNetworkCancel";
+	const FM_IP_ADDRESS_UPDT_NETWORK_FORM                                       = "FmIpAddressUpdateNetworkFm";
 	const FM_IP_ADDRESS_UPDT_NETWORK_SB                                         = "FmIpAddressUpdateNetworkSb";
 	const FM_IP_ADDRESS_VIEW_DEL                                                = "FmIpAddressViewDelete";
 	const FM_IP_ADDRESS_VIEW_DEL_SB                                             = "FmIpAddressViewDeleteSb";
@@ -681,7 +681,7 @@ class ConfigInfraTools extends Config
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_DESCRIPTION                               = "IpAddressDescription";
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4                                      = "IpAddressIpv4";
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6                                      = "IpAddressIpv6";
-	const TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME                              = "IpAddressNetworkName";
+	const TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME                              = "IpAddressNetwork";
 	const TB_MONITORING                                                         = "MONITORING";
 	const TB_MONITORING_FD_DESCRIPTION                                          = "MonitoringDescription";
 	const TB_MONITORING_FD_ID                                                   = "MonitoringId";

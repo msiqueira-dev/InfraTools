@@ -90,6 +90,24 @@ class PageAdmin extends PageInfraTools
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_DESCRIPTION', ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_DESCRIPTION_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_DESCRIPTION'));
+			$this->Smarty->assign('FIELD_IP_ADDRESS_DESCRIPTION_VALUE', $this->InputValueIpAddressDescription);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4', ConfigInfraTools::FIELD_IP_ADDRESS_IPV4);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'));
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_VALUE', $this->InputValueIpAddressIpv4);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV6', ConfigInfraTools::FIELD_IP_ADDRESS_IPV6);
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV6_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'));
+			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV6_VALUE', $this->InputValueIpAddressIpv6);
+			$this->Smarty->assign('FIELD_NETWORK_IP', ConfigInfraTools::FIELD_NETWORK_IP);
+			$this->Smarty->assign('FIELD_NETWORK_IP_TEXT', $this->InstanceLanguageText->GetText('FIELD_NETWORK_IP'));
+			$this->Smarty->assign('FIELD_NETWORK_IP_VALUE', $this->InputValueNetworkIp);
+			$this->Smarty->assign('FIELD_NETWORK_NAME', ConfigInfraTools::FIELD_NETWORK_NAME);
+			$this->Smarty->assign('FIELD_NETWORK_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_NETWORK_NAME'));
+			$this->Smarty->assign('FIELD_NETWORK_NAME_VALUE', $this->InputValueNetworkName);
+			$this->Smarty->assign('FIELD_NETWORK_NETMASK', ConfigInfraTools::FIELD_NETWORK_NETMASK);
+			$this->Smarty->assign('FIELD_NETWORK_NETMASK_TEXT', $this->InstanceLanguageText->GetText('FIELD_NETWORK_NETMASK'));
+			$this->Smarty->assign('FIELD_NETWORK_NETMASK_VALUE', $this->InputValueNetworkNetmask);
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME', ConfigInfraTools::FIELD_TYPE_SERVICE_NAME);
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_SERVICE_NAME'));
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME_VALUE', $this->InputValueTypeServiceName);
@@ -98,6 +116,7 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_SLA_VALUE', $this->InputValueTypeServiceSLA);
 			$this->Smarty->assign('FM_CORPORATION_VIEW', ConfigInfraTools::FM_CORPORATION_VIEW);
 			$this->Smarty->assign('FM_DEPARTMENT_VIEW', ConfigInfraTools::FM_DEPARTMENT_VIEW);
+			$this->Smarty->assign('FM_NETWORK_SEL_SB', ConfigInfraTools::FM_NETWORK_SEL_SB);
 			$this->Smarty->assign('FM_TEAM_VIEW', ConfigInfraTools::FM_TEAM_VIEW);
 			$this->Smarty->assign('FM_TYPE_USER_VIEW', ConfigInfraTools::FM_TYPE_USER_VIEW);
 			$this->Smarty->assign('FM_USER_VIEW', ConfigInfraTools::FM_USER_VIEW);
@@ -110,6 +129,8 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('PAGE_ADMIN', $this->InstanceLanguageText->GetText('PAGE_ADMIN'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_LST', $this->InstanceLanguageText->GetText('SUBMIT_LST'));
+			$this->Smarty->assign('SUBMIT_LST_BY_IP_ADDRESS', $this->InstanceLanguageText->GetText('SUBMIT_LST_BY_IP_ADDRESS'));
+			$this->Smarty->assign('SUBMIT_LST_BY_NETWORK', $this->InstanceLanguageText->GetText('SUBMIT_LST_BY_NETWORK'));
 			$this->Smarty->assign('SUBMIT_INSERT', $this->InstanceLanguageText->GetText('SUBMIT_INSERT'));
 			$this->Smarty->assign('SUBMIT_SEL', $this->InstanceLanguageText->GetText('SUBMIT_SEL'));
 			if(isset($this->ReturnCorporationNameClass)) 
@@ -123,7 +144,31 @@ class PageAdmin extends PageInfraTools
 			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_CLASS', NULL);
 			if(isset($this->ReturnDepartmentNameText)) 
 				$this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', $this->ReturnDepartmentNameText);
-			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', NULL); 
+			else $this->Smarty->assign('RETURN_DEPARTMENT_NAME_TEXT', NULL);
+			if(isset($this->ReturnIpAddressDescriptionClass)) 
+				$this->Smarty->assign('RETURN_IP_ADDRESS_DESCRIPTION_CLASS', $this->ReturnIpAddressDescriptionClass);
+			else $this->Smarty->assign('RETURN_IP_ADDRESS_DESCRIPTION_CLASS', NULL);
+			if(isset($this->ReturnIpAddressDescriptionText)) 
+				$this->Smarty->assign('RETURN_IP_ADDRESS_DESCRIPTION_TEXT', $this->ReturnIpAddressDescriptionText);
+			else $this->Smarty->assign('RETURN_IP_ADDRESS_DESCRIPTION_TEXT', NULL); 
+			if(isset($this->ReturnIpAddressIpv4Class)) 
+				$this->Smarty->assign('RETURN_IP_ADDRESS_IPV4_CLASS', $this->ReturnIpAddressIpv4Class);
+			else $this->Smarty->assign('RETURN_IP_ADDRESS_IPV4_CLASS', NULL);
+			if(isset($this->ReturnIpAddressIpv4Text)) 
+				$this->Smarty->assign('RETURN_IP_ADDRESS_IPV4_TEXT', $this->ReturnIpAddressIpv4Text);
+			else $this->Smarty->assign('RETURN_IP_ADDRESS_IPV4_TEXT', NULL); 
+			if(isset($this->ReturnIpAddressIpv6Class)) 
+				$this->Smarty->assign('RETURN_IP_ADDRESS_IPV6_CLASS', $this->ReturnIpAddressIpv6Class);
+			else $this->Smarty->assign('RETURN_IP_ADDRESS_IPV6_CLASS', NULL);
+			if(isset($this->ReturnIpAddressIpv6Text)) 
+				$this->Smarty->assign('RETURN_IP_ADDRESS_IPV6_TEXT', $this->ReturnIpAddressIpv6Text);
+			else $this->Smarty->assign('RETURN_IP_ADDRESS_IPV6_TEXT', NULL); 
+			if(isset($this->ReturnNetworkNameClass)) 
+				$this->Smarty->assign('RETURN_NETWORK_NAME_CLASS', $this->ReturnNetworkNameClass);
+			else $this->Smarty->assign('RETURN_NETWORK_NAME_CLASS', NULL);
+			if(isset($this->ReturnNetworkNameText)) 
+				$this->Smarty->assign('RETURN_NETWORK_NAME_TEXT', $this->ReturnNetworkNameText);
+			else $this->Smarty->assign('RETURN_NETWORK_NAME_TEXT', NULL); 
 			if(isset($this->ReturnTypeServiceNameClass)) 
 				$this->Smarty->assign('RETURN_TYPE_SERVICE_NAME_CLASS', $this->ReturnTypeServiceNameClass);
 			else $this->Smarty->assign('RETURN_TYPE_SERVICE_NAME_CLASS', NULL);

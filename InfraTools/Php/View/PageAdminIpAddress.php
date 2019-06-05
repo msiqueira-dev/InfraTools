@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class for ip address management.
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -56,6 +57,79 @@ class PageAdminIpAddress extends PageAdmin
 	protected function __construct($Config, $Language, $Page) 
 	{
 		parent::__construct($Config, $Language, $Page);
+	}
+
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
+			$this->Smarty->assign('FM_IP_ADDRESS', ConfigInfraTools::FM_IP_ADDRESS);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST', ConfigInfraTools::FM_IP_ADDRESS_LST);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_IP_ADDRESS', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_IP_ADDRESS_BACK', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS_BACK);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_IP_ADDRESS_FORM', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_IP_ADDRESS_FORWARD', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS_FORWARD);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_NETWORK', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_NETWORK_BACK', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK_BACK);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_NETWORK_FORM', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_NETWORK_FORWARD', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK_FORWARD);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_BACK', ConfigInfraTools::FM_IP_ADDRESS_LST_BACK);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_FORWARD', ConfigInfraTools::FM_IP_ADDRESS_LST_FORWARD);
+			$this->Smarty->assign('FM_IP_ADDRESS_LST_FORM', ConfigInfraTools::FM_IP_ADDRESS_LST_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_SEL', ConfigInfraTools::FM_IP_ADDRESS_SEL);
+			$this->Smarty->assign('FM_IP_ADDRESS_SEL_FORM', ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_SEL_SB', ConfigInfraTools::FM_IP_ADDRESS_SEL_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_REGISTER', ConfigInfraTools::FM_IP_ADDRESS_REGISTER);
+			$this->Smarty->assign('FM_IP_ADDRESS_REGISTER_CANCEL', ConfigInfraTools::FM_IP_ADDRESS_REGISTER_CANCEL);
+			$this->Smarty->assign('FM_IP_ADDRESS_REGISTER_FORM', ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_REGISTER_FORM_NETWORK', ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK);
+			$this->Smarty->assign('FM_IP_ADDRESS_REGISTER_SB', ConfigInfraTools::FM_IP_ADDRESS_REGISTER_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_UPDT_CANCEL', ConfigInfraTools::FM_IP_ADDRESS_UPDT_IP_ADDRESS_CANCEL);
+			$this->Smarty->assign('FM_IP_ADDRESS_UPDT_FORM', ConfigInfraTools::FM_IP_ADDRESS_UPDT_IP_ADDRESS_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_UPDT_SB', ConfigInfraTools::FM_IP_ADDRESS_UPDT_IP_ADDRESS_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_UPDT_CANCEL', ConfigInfraTools::FM_IP_ADDRESS_UPDT_NETWORK_CANCEL);
+			$this->Smarty->assign('FM_IP_ADDRESS_UPDT_FORM', ConfigInfraTools::FM_IP_ADDRESS_UPDT_NETWORK_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_UPDT_SB', ConfigInfraTools::FM_IP_ADDRESS_UPDT_NETWORK_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_DEL', ConfigInfraTools::FM_IP_ADDRESS_VIEW_DEL);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_DEL_SB', ConfigInfraTools::FM_IP_ADDRESS_VIEW_DEL_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS', ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS_SB', ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_IP_ADDRESS_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_UPDT_NETWORK', ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_NETWORK);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_UPDT_NETWORK_SB;', ConfigInfraTools::FM_IP_ADDRESS_VIEW_UPDT_NETWORK_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_FORM', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_FORM);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_SB', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_SB);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_SB_BACK);
+			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_SB_FORWARD);
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_IP_ADDRESS", array($this->ArrayInstanceInfraToolsIpAddress));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NETWORK", array($this->ArrayInstanceInfraToolsNetwork));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NETWORK_IP", array($this->ArrayInstanceInfraToolsIpAddressNetwork));
+			if(!is_array($this->ArrayInstanceInfraToolsIpAddress))
+				$this->ArrayInstanceInfraToolsIpAddress = array();
+			if(!is_array($this->ArrayInstanceInfraToolsNetwork))
+				$this->ArrayInstanceInfraToolsNetwork = array();
+			if(!is_array($this->ArrayInstanceInfraToolsIpAddressNetwork))
+				$this->ArrayInstanceInfraToolsIpAddressNetwork = array();
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
+			if(isset($this->ReturnNetworkIpClass)) 
+				$this->Smarty->assign('RETURN_NETWORK_IP_CLASS', $this->ReturnNetworkIpClass);
+			else $this->Smarty->assign('RETURN_NETWORK_IP_CLASS', NULL);
+			if(isset($this->ReturnNetworkIpText)) 
+				$this->Smarty->assign('RETURN_NETWORK_IP_TEXT', $this->ReturnNetworkIpText);
+			else $this->Smarty->assign('RETURN_NETWORK_IP_TEXT', NULL); 
+			if(isset($this->ReturnNetworkNetmaskClass)) 
+				$this->Smarty->assign('RETURN_NETWORK_NETMASK_CLASS', $this->ReturnNetworkNetmaskClass);
+			else $this->Smarty->assign('RETURN_NETWORK_NETMASK_CLASS', NULL);
+			if(isset($this->ReturnNetworkNetmaskText)) 
+				$this->Smarty->assign('RETURN_NETWORK_NETMASK_TEXT', $this->ReturnNetworkNetmaskText);
+			else $this->Smarty->assign('RETURN_NETWORK_NETMASK_TEXT', NULL); 
+			if($this->InputValueNetworkName != ConfigInfraTools::FIELD_SEL_NONE)
+				$this->Smarty->assign('FIELD_SEL_NONE', FALSE);
+			if(isset($this->ReturnDepartmentInitialsClass)) 
+			return ConfigInfraTools::RET_OK;
+		}
+		return ConfigInfraTools::RET_ERROR;
 	}
 
 	public function LoadPage()
@@ -132,18 +206,18 @@ class PageAdminIpAddress extends PageAdmin
 		//FM_IP_ADDRESS_LST_BY_IP_ADDRESS
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS) == ConfigInfraTools::RET_OK)
 		{
-			if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelect', 
-									  array(&$this->ArrayInstanceInfraToolsIpAddress),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS;
+			$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelect', 
+									        array(&$this->ArrayInstanceInfraToolsIpAddress),
+												  $this->InputValueHeaderDebug);
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_IP_ADDRESS;
 		}
 		//FM_IP_ADDRESS_LST_BY_NETWORK
 		if($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_LST_BY_NETWORK) == ConfigInfraTools::RET_OK)
 		{
-			if($this->ExecuteFunction($_POST, 'InfraToolsNetworkSelect', 
-									  array(&$this->ArrayInstanceInfraToolsNetwork),
-									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK;
+			$this->ExecuteFunction($_POST, 'InfraToolsNetworkSelect', 
+								            array(&$this->ArrayInstanceInfraToolsNetwork),
+								                  $this->InputValueHeaderDebug);
+			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_LST_BY_NETWORK;
 		}
 		//FM_IP_ADDRESS_REGISTER
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER) == ConfigInfraTools::RET_OK)
@@ -160,17 +234,18 @@ class PageAdminIpAddress extends PageAdmin
 		//FM_IP_ADDRESS_REGISTER_FORM_NETWORK
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_REGISTER_FORM_NETWORK) == ConfigInfraTools::RET_OK)
 		{
-			$this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectByNetworkName', 
+			if($this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectByNetworkName', 
 								   array($_POST[ConfigInfraTools::FIELD_NETWORK_NAME],
 										 &$this->ArrayInstanceInfraToolsNetwork),
-								   $this->InputValueHeaderDebug);
-			$this->InstanceInfraToolsNetwork = array_pop($this->ArrayInstanceInfraToolsNetwork);
-			$this->ArrayInstanceInfraToolsNetwork = NULL;
-			$this->InfraToolsNetworkLoadData($this->InstanceInfraToolsNetwork);
-			$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_NETWORK, $this->InstanceInfraToolsNetwork);
+								   $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+			{
+				$this->InstanceInfraToolsNetwork = array_pop($this->ArrayInstanceInfraToolsNetwork);
+				$this->ArrayInstanceInfraToolsNetwork = NULL;
+				$this->InfraToolsNetworkLoadData($this->InstanceInfraToolsNetwork);
+				$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_NETWORK, $this->InstanceInfraToolsNetwork);
+			}
 			$this->ExecuteFunction($_POST, 'InfraToolsNetworkSelectNoLimit', 
-									  array(&$this->ArrayInstanceInfraToolsNetwork),
-									  $this->InputValueHeaderDebug);
+			                       array(&$this->ArrayInstanceInfraToolsNetwork), $this->InputValueHeaderDebug);
 			$this->ShowDivReturnEmpty();
 			$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_REGISTER;
 		}
@@ -383,7 +458,8 @@ class PageAdminIpAddress extends PageAdmin
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
-		$this->LoadHtml(FALSE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>
