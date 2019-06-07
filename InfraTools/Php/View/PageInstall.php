@@ -82,13 +82,25 @@ class PageInstall extends PageInfraTools
 			$this->Smarty->assign("FM_INSTALL_EXPORT_SB", ConfigInfraTools::FM_INSTALL_EXPORT_SB);
 			$this->Smarty->assign("FM_INSTALL_NEW_SB", ConfigInfraTools::FM_INSTALL_NEW_SB);
 			$this->Smarty->assign("FM_INSTALL_REINSTALL_SB", ConfigInfraTools::FM_INSTALL_REINSTALL_SB);
-			$this->Smarty->assign("SUBMIT_INSTALL_IMPORT", ConfigInfraTools::SUBMIT_INSTALL_IMPORT);
-			$this->Smarty->assign("SUBMIT_INSTALL_EXPORT", ConfigInfraTools::SUBMIT_INSTALL_EXPORT);
-			$this->Smarty->assign("SUBMIT_INSTALL_NEW", ConfigInfraTools::SUBMIT_INSTALL_NEW);
-			$this->Smarty->assign("SUBMIT_INSTALL_REINSTALL", ConfigInfraTools::SUBMIT_INSTALL_REINSTALL);
+			$this->Smarty->assign("SUBMIT_INSTALL_IMPORT", $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_IMPORT'));
+			$this->Smarty->assign("SUBMIT_INSTALL_EXPORT", $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_EXPORT'));
+			$this->Smarty->assign("SUBMIT_INSTALL_NEW", $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_NEW'));
+			$this->Smarty->assign("SUBMIT_INSTALL_REINSTALL", $this->InstanceLanguageText->GetText('SUBMIT_INSTALL_REINSTALL'));
 			if(isset($this->DataBaseReturnMessage))
 				$this->Smarty->assign("DATABASE_RETURN_MESSAGE", $this->DataBaseReturnMessage);
 			else $this->Smarty->assign("DATABASE_RETURN_MESSAGE", NULL);
+			if(isset($this->DataBaseImportErrorQueries))
+			{
+				if(is_array($this->DataBaseImportErrorQueries))
+				{
+					$errorQuery = "";
+					foreach($this->DataBaseImportErrorQueries as $key => $errorQuery)
+						$errorQuery = $errorQuery . "<br>";
+					$this->Smarty->assign("DATABASE_RETURN_QUERIES", $errorQuery);
+				}
+				else $this->Smarty->assign("DATABASE_RETURN_QUERIES", NULL);
+			}
+			else $this->Smarty->assign("DATABASE_RETURN_QUERIES", NULL);
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;

@@ -40,11 +40,13 @@ if (!class_exists("InfraToolsNetwork"))
 
 class PageAdminIpAddress extends PageAdmin
 {
-	public $ArrayInstanceInfraToolsIpAddress        = NULL;
-	public $ArrayInstanceInfraToolsIpAddressNetwork = NULL;
-	public $ArrayInstanceInfraToolsNetwork          = NULL;
-	public $InstanceInfraToolsIpAddress             = NULL;
-	public $InstanceInfraToolsNetwork               = NULL;
+	protected $InputValueIpAddressIpv4Hidden        = "NotHidden";
+	protected $InputValueIpAddressIpv6Hidden        = "Hidden";
+	public    $ArrayInstanceInfraToolsIpAddress        = NULL;
+	public    $ArrayInstanceInfraToolsIpAddressNetwork = NULL;
+	public    $ArrayInstanceInfraToolsNetwork          = NULL;
+	public    $InstanceInfraToolsIpAddress             = NULL;
+	public    $InstanceInfraToolsNetwork               = NULL;
 	
 	/* __create */
 	public static function __create($Config, $Language, $Page)
@@ -63,7 +65,24 @@ class PageAdminIpAddress extends PageAdmin
 	{
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_IP_ADDRESS", array($this->ArrayInstanceInfraToolsIpAddress));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NETWORK", array($this->ArrayInstanceInfraToolsNetwork));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NETWORK_IP", array($this->ArrayInstanceInfraToolsIpAddressNetwork));
+			if(!is_array($this->ArrayInstanceInfraToolsIpAddress))
+				$this->ArrayInstanceInfraToolsIpAddress = array();
+			if(!is_array($this->ArrayInstanceInfraToolsNetwork))
+				$this->ArrayInstanceInfraToolsNetwork = array();
+			if(!is_array($this->ArrayInstanceInfraToolsIpAddressNetwork))
+				$this->ArrayInstanceInfraToolsIpAddressNetwork = array();
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
 			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
+			$this->Smarty->assign('DIV_RADIO_IP_ADDRESS_IPV4', ConfigInfraTools::DIV_RADIO_IP_ADDRESS_IPV4);
+			$this->Smarty->assign('DIV_RADIO_IP_ADDRESS_IPV6', ConfigInfraTools::DIV_RADIO_IP_ADDRESS_IPV6);
+			$this->Smarty->assign('FIELD_RADIO_IP_ADDRESS', ConfigInfraTools::FIELD_RADIO_IP_ADDRESS);
+			$this->Smarty->assign('FIELD_RADIO_IP_ADDRESS_IPV4', ConfigInfraTools::FIELD_RADIO_IP_ADDRESS_IPV4);
+			$this->Smarty->assign('FIELD_RADIO_IP_ADDRESS_IPV4_VALUE', $this->InputValueIpAddressIpv4Radio);
+			$this->Smarty->assign('FIELD_RADIO_IP_ADDRESS_IPV6', ConfigInfraTools::FIELD_RADIO_IP_ADDRESS_IPV6);
+			$this->Smarty->assign('FIELD_RADIO_IP_ADDRESS_IPV6_VALUE', $this->InputValueIpAddressIpv6Radio);
 			$this->Smarty->assign('FM_IP_ADDRESS', ConfigInfraTools::FM_IP_ADDRESS);
 			$this->Smarty->assign('FM_IP_ADDRESS_LST', ConfigInfraTools::FM_IP_ADDRESS_LST);
 			$this->Smarty->assign('FM_IP_ADDRESS_LST_BY_IP_ADDRESS', ConfigInfraTools::FM_IP_ADDRESS_LST_BY_IP_ADDRESS);
@@ -102,16 +121,8 @@ class PageAdminIpAddress extends PageAdmin
 			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_SB', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_SB);
 			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_SB_BACK);
 			$this->Smarty->assign('FM_IP_ADDRESS_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_IP_ADDRESS_VIEW_LST_USERS_SB_FORWARD);
-			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_IP_ADDRESS", array($this->ArrayInstanceInfraToolsIpAddress));
-			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NETWORK", array($this->ArrayInstanceInfraToolsNetwork));
-			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NETWORK_IP", array($this->ArrayInstanceInfraToolsIpAddressNetwork));
-			if(!is_array($this->ArrayInstanceInfraToolsIpAddress))
-				$this->ArrayInstanceInfraToolsIpAddress = array();
-			if(!is_array($this->ArrayInstanceInfraToolsNetwork))
-				$this->ArrayInstanceInfraToolsNetwork = array();
-			if(!is_array($this->ArrayInstanceInfraToolsIpAddressNetwork))
-				$this->ArrayInstanceInfraToolsIpAddressNetwork = array();
-			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
+			$this->Smarty->assign('HIDE_IP_ADDRESS_IPV4_CLASS', $this->InputValueIpAddressIpv4Hidden);
+			$this->Smarty->assign('HIDE_IP_ADDRESS_IPV6_CLASS', $this->InputValueIpAddressIpv6Hidden);
 			if(isset($this->ReturnNetworkIpClass)) 
 				$this->Smarty->assign('RETURN_NETWORK_IP_CLASS', $this->ReturnNetworkIpClass);
 			else $this->Smarty->assign('RETURN_NETWORK_IP_CLASS', NULL);
@@ -126,7 +137,6 @@ class PageAdminIpAddress extends PageAdmin
 			else $this->Smarty->assign('RETURN_NETWORK_NETMASK_TEXT', NULL); 
 			if($this->InputValueNetworkName != ConfigInfraTools::FIELD_SEL_NONE)
 				$this->Smarty->assign('FIELD_SEL_NONE', FALSE);
-			if(isset($this->ReturnDepartmentInitialsClass)) 
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;
@@ -297,33 +307,37 @@ class PageAdminIpAddress extends PageAdmin
 		//FM_IP_ADDRESS_SEL_SB
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_IP_ADDRESS_SEL_SB) == ConfigInfraTools::RET_OK)
 		{
-			if(isset($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_RADIO]))
+			if(isset($_POST[ConfigInfraTools::FIELD_RADIO_IP_ADDRESS]))
 			{
-				if($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_RADIO] == ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV4)
+				if($_POST[ConfigInfraTools::FIELD_RADIO_IP_ADDRESS] == ConfigInfraTools::FIELD_RADIO_IP_ADDRESS_IPV4)
 				{
-					if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
-							  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
-									&$this->ArrayInstanceInfraToolsIpAddress),
-							  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-						$this->ShowDivReturnEmpty();
-					
+					$this->InputValueIpAddressIpv4Radio = ConfigInfraTools::CHECKBOX_CHECKED;
+					$this->InputValueIpAddressIpv6Radio = "";
+					$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
+										   array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
+											     &$this->ArrayInstanceInfraToolsIpAddress),
+										   $this->InputValueHeaderDebug);
+					$this->InputValueIpAddressIpv4Hidden = "NotHidden";
+					$this->InputValueIpAddressIpv6Hidden = "Hidden";
 				}
-				elseif($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_RADIO] == ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV6)
+				elseif($_POST[ConfigInfraTools::FIELD_RADIO_IP_ADDRESS] == ConfigInfraTools::FIELD_RADIO_IP_ADDRESS_IPV6)
 				{
-					if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv6', 
-							  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6],
-									&$this->ArrayInstanceInfraToolsIpAddress),
-							  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-						$this->ShowDivReturnEmpty();
+					$this->InputValueIpAddressIpv4Radio = "";
+					$this->InputValueIpAddressIpv6Radio = ConfigInfraTools::CHECKBOX_CHECKED;
+					$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv6', 
+										   array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV6],
+											     &$this->ArrayInstanceInfraToolsIpAddress),
+										   $this->InputValueHeaderDebug);
+					$this->InputValueIpAddressIpv4Hidden = "Hidden";
+					$this->InputValueIpAddressIpv6Hidden = "NotHidden";
 				}
 			}
-			elseif(isset($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4]))
+			elseif($this->CheckPostContainsKey(ConfigInfraTools::FIELD_IP_ADDRESS_IPV4) == ConfigInfraTools::RET_OK)
 			{
-				if($this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
-							  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
-									&$this->ArrayInstanceInfraToolsIpAddress),
-							  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
-					$this->ShowDivReturnEmpty();
+				$this->ExecuteFunction($_POST, 'InfraToolsIpAddressSelectByIpAddressIpv4', 
+											  array($_POST[ConfigInfraTools::FIELD_IP_ADDRESS_IPV4],
+													&$this->ArrayInstanceInfraToolsIpAddress),
+											  $this->InputValueHeaderDebug);
 			}
 			if(!empty($this->ArrayInstanceInfraToolsIpAddress))
 			{
@@ -333,7 +347,7 @@ class PageAdminIpAddress extends PageAdmin
 				{
 					$this->InstanceInfraToolsIpAddress = array_pop($this->ArrayInstanceInfraToolsIpAddress);
 					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, "InfraToolsIpAddressLoadData", 
-												  $this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
+													$this->InstanceInfraToolsIpAddress) == ConfigInfraTools::RET_OK)
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS_VIEW_IP_ADDRESS;
 				}
 			}

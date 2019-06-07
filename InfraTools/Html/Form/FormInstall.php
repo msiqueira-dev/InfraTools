@@ -2,7 +2,7 @@
 <!-- SUBMIT -->
 	<div class="DivContentBodyContainer">
 		{if $BUTTON_INSTALL_ENABLED eq TRUE}
-			<input type="submit" name="{FM_INSTALL_NEW_SB}" id="{$FM_INSTALL_NEW_SB}"
+			<input type="submit" name="{$FM_INSTALL_NEW_SB}" id="{$FM_INSTALL_NEW_SB}"
 				   class="DivContentBodySubmitBigger" value="{$SUBMIT_INSTALL_NEW}" />
 		{/if}
 		{if $BUTTON_IMPORT_ENABLED eq TRUE}
@@ -23,7 +23,7 @@
 		{/if}
 		{if $BUTTON_EXPORT_ENABLED eq TRUE}
 			<input type="submit" name="{$FM_INSTALL_EXPORT_SB}" id="{$FM_INSTALL_EXPORT_SB}"
-				   class="DivContentBodySubmitBigger" value="{$SUBMIT_INSTALL_EXPORT'}" />
+				   class="DivContentBodySubmitBigger" value="{$SUBMIT_INSTALL_EXPORT}" />
 		{/if}
 	</div>
 </form>
@@ -37,15 +37,6 @@
 		{$RETURN_EMPTY_TEXT}
 		{$RETURN_TEXT}
 		{$DATABASE_RETURN_MESSAGE}
-		<?php if(isset($this->DataBaseReturnMessage))      echo $this->DataBaseReturnMessage ?>
-		<?php if(isset($this->DataBaseImportErrorQueries))
-			  {
-				  if(is_array($this->DataBaseImportErrorQueries))
-				  {
-					  foreach($this->DataBaseImportErrorQueries as $key => $errorQuery)
-						  echo $errorQuery . "<br>";
-				  }
-			  }
-		?>	
+		{$DATABASE_RETURN_QUERIES}	
 	</label>
 </div>

@@ -264,17 +264,17 @@
 				</div>
 			</a>
 			<a href="{$HREF_PAGE_INSTALL}" 
-				 title="{$ADMIN_TEXT_INSTALL}">
+				 title="{$PAGE_INSTALL_TEXT}">
 				<div class="DivContentBodyContainersBox">
 					<div class="DivContentBodyContainersBoxIcon">
 						<img src="{$ICON_INFRATOOLS_INSTALL}"
 						     onmouseover="this.src='{$ICON_INFRATOOLS_INSTALL_HOVER}'"
     			       onmouseout="this.src='{$ICON_INFRATOOLS_INSTALL}'"
-                 alt="{$ADMIN_TEXT_INSTALL}"/>
+                 alt="{$PAGE_INSTALL_TEXT}"/>
 					</div>
 					<div class="DivContentBodyContainersBoxText">
 						<i>
-							{$ADMIN_TEXT_INSTALL}
+							{$PAGE_INSTALL_TEXT}
 						</i>
 					</div>
 				</div>

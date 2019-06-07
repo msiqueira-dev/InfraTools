@@ -145,12 +145,6 @@ class ConfigInfraTools extends Config
 	const DIV_CHECK_PORT_STATUS                                                 = "DivCheckPortStatus";
 	const DIV_GET_CALCULATION_NETMASK                                           = "DivGetCalculationNetMask";
 	const DIV_GET_WHOIS                                                         = "DivGetWhois";
-	const DIV_RADIO                                                             = "DivRadio";
-	const DIV_RADIO_CORPORATION_NAME                                            = "DivRadioCorporationName";
-	const DIV_RADIO_DEPARTMENT_INITIALS                                         = "DivRadioDepartmentInitials";
-	const DIV_RADIO_DEPARTMENT_NAME                                             = "DivRadioDepartmentName";
-	const DIV_RADIO_SERVICE_ID                                                  = "DivRadioServiceId";
-	const DIV_RADIO_SERVICE_NAME                                                = "DivRadioServiceName";
 	const EXCEPTION_ASSOC_IP_ADDRESS_SERVICE_SERVICE_ID                         = "ExceptionAssocIpAddressServiceServiceId";
 	const EXCEPTION_ASSOC_IP_ADDRESS_SERVICE_SERVICE_IP                         = "ExceptionAssocIpAddressServiceServiceIp";
 	const EXCEPTION_INFORMATION_SERVICE_DESCRIPTION                             = "ExceptionInformationServiceDescription";
@@ -681,7 +675,7 @@ class ConfigInfraTools extends Config
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_DESCRIPTION                               = "IpAddressDescription";
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_IPV4                                      = "IpAddressIpv4";
 	const TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6                                      = "IpAddressIpv6";
-	const TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME                              = "IpAddressNetwork";
+	const TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME                              = "IpAddressNetworkName";
 	const TB_MONITORING                                                         = "MONITORING";
 	const TB_MONITORING_FD_DESCRIPTION                                          = "MonitoringDescription";
 	const TB_MONITORING_FD_ID                                                   = "MonitoringId";

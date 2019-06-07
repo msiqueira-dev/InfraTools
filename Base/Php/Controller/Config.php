@@ -156,6 +156,14 @@ class Config
 	const DB_LOG_ERROR                                                  = "LogMySqlError";
 	const DB_LOG_QUERY                                                  = "LogMySqlQuery";
 	const DIV_RETURN                                                    = "DivReturn";
+	const DIV_RADIO                                                     = "DivRadio";
+	const DIV_RADIO_CORPORATION_NAME                                    = "DivRadioCorporationName";
+	const DIV_RADIO_DEPARTMENT_INITIALS                                 = "DivRadioDepartmentInitials";
+	const DIV_RADIO_DEPARTMENT_NAME                                     = "DivRadioDepartmentName";
+	const DIV_RADIO_IP_ADDRESS_IPV4                                     = "DivRadioIpAddressIpv4";
+	const DIV_RADIO_IP_ADDRESS_IPV6                                     = "DivRadioIpAddressIpv6";
+	const DIV_RADIO_SERVICE_ID                                          = "DivRadioServiceId";
+	const DIV_RADIO_SERVICE_NAME                                        = "DivRadioServiceName";
 	const DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NUMBER                  = "DivRadioSystemConfigurationOptionNumber";
 	const DIV_RADIO_SYSTEM_CONFIGURATION_OPTION_NAME                    = "DivRadioSystemConfigurationOptionName";
 	const ENABLED                                                       = "Enabled";
@@ -255,6 +263,9 @@ class Config
 	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME          = "FieldRadioDepartmentInitialsAndCorporationName";
 	const FIELD_RADIO_DEPARTMENT_NAME                                   = "FieldRadioDepartmentName";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME              = "FieldRadioDepartmentNameAndCorporationName";
+	const FIELD_RADIO_IP_ADDRESS                                        = "FieldRadioIpAddress";
+	const FIELD_RADIO_IP_ADDRESS_IPV4                                   = "FieldRadioIpAddressIpv4";
+	const FIELD_RADIO_IP_ADDRESS_IPV6                                   = "FieldRadioIpAddressIpv6";
 	const FIELD_RETURN_ERROR                                            = "FieldReturnError";
 	const FIELD_ROLE_DESCRIPTION                                        = "FieldRoleDescription";
 	const FIELD_ROLE_NAME                                               = "FieldRoleName";

@@ -531,7 +531,10 @@ class InfraToolsPersistence extends Persistence
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                  . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK               . ",  "
 			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_FD_REGISTER_DATE                         . "   "
-			   . " as NetworkRegisterDate, "                                                                               . "   "
+			   . " as NetworkRegisterDate "                                                                                . ",  "
+			   . " (SELECT COUNT(*) FROM " . ConfigInfraTools::TB_IP_ADDRESS                                               . "   "
+			   . "WHERE "      .  ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6   . "=? "
+			   . " ) AS COUNT "                                                                                            . "   "
 			   . "FROM "       . ConfigInfraTools::TB_IP_ADDRESS                                                           . "   "
 			   . "LEFT JOIN "  . ConfigInfraTools::TB_NETWORK                                                              . "   "
 			   . "ON "         . ConfigInfraTools::TB_IP_ADDRESS                                                           . ".". 
@@ -539,7 +542,8 @@ class InfraToolsPersistence extends Persistence
 			   . "=  "         . ConfigInfraTools::TB_NETWORK                                                              . ".". 
 								  ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                                             . "   "
 			   . "WHERE "      . ConfigInfraTools::TB_IP_ADDRESS.".".ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6    . "=? "
-			   . "ORDER BY "   . ConfigInfraTools::TB_IP_ADDRESS.".". ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6   . "   ";
+			   . "ORDER BY "   . ConfigInfraTools::TB_IP_ADDRESS.".". ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_IPV6   . "   "
+			   . "LIMIT ?, ?";
 	}
 	
 	public static function SqlInfraToolsIpAddressSelectNoLimit()

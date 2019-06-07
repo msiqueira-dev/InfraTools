@@ -621,6 +621,41 @@ function ValidateIpAddressIpv4(DefaultInputClass, InputId, DefaultSubmitClass, S
 	}
 }
 
+function ValidateIpAddressIpv6(DefaultInputClass, InputId, DefaultSubmitClass, SubmitId, DefaultValue, HighlightInput)
+{
+	var $input = document.getElementsByName(InputId)[0];
+	var $submit = document.getElementsByName(SubmitId)[0];
+	var $filter = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/;
+	if($input.className.search('FormFieldNotObligatory') != -1)
+		DefaultInputClass = DefaultInputClass + " " + "FormFieldNotObligatory" + " ";
+	if ($input.value != $input.title && $input.value != "" && $input.value != DefaultValue)
+	{
+		if (!$filter.test($input.value)) 
+		{
+			$input.focus();
+			if(HighlightInput == true)
+				$input.className = DefaultInputClass + " InputAlertText";
+			$submit.className = DefaultSubmitClass + " SubmitDisabled";
+			$submit.disabled = true;
+			return false;
+		}
+		else
+		{
+			$input.className = DefaultInputClass + " InputAfterText";
+			$submit.className = DefaultSubmitClass + " SubmitEnabled";
+			$submit.disabled = false;
+			return true;
+		}
+	}
+	else
+	{
+		$input.className = DefaultInputClass + " InputAfterText";
+		$submit.className = DefaultSubmitClass + " SubmitDisabled";
+		$submit.disabled = true;
+		return false;
+	}
+}
+
 function ValidateIpAndPort(DefaultInputIpClass, DefaultInputIpPortClass, InputIpId, InputIpPortId, DefaultSubmitClass, SubmitId, 
                            DefaultValue, HighlightFirstInput, HighlightSecondtInput)
 {

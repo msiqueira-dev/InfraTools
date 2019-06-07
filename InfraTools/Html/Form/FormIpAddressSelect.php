@@ -1,131 +1,111 @@
-<!-- DIV_RETURN -->	
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))         echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnIpAddressIpv4Text)) echo $this->ReturnIpAddressIpv4Text; ?>
-		<?php if(isset($this->ReturnIpAddressIpv6Text)) echo $this->ReturnIpAddressIpv6Text; ?>
-		<?php if(isset($this->ReturnText))              echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_IP_ADDRESS_IPV4_TEXT}
+		{$RETURN_IP_ADDRESS_IPV6_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_IP_ADDRESS_SEL_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_FORM; ?>" method="post" >
-	<!-- FIELD_IP_ADDRESS_RADIO -->
-	<div class="DivContentBodyContainer" id="<?php echo ConfigInfraTools::DIV_RADIO; ?>">
+<form name="{$FM_IP_ADDRESS_SEL_FORM}" id="{$FM_IP_ADDRESS_SEL_FORM}" method="{$FORM_METHOD}">
+	<div class="DivContentBodyContainer" id="{$DIV_RADIO}">
+		<!-- FIELD_RADIO_IP_ADDRESS_IPV4 -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO; ?>"
-					   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV4; ?>"
-					   value="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV4; ?>"
-					   onclick="this.blur();this.focus();"
-					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_DIV_IPV6; ?>', 
-												 false);
-								 ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_DIV_IPV4; ?>', 
-												 true);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>');
-								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
-														   'DivContentBodySubmit',
-														   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>', 
-														   '')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?>"  
-					   <?php echo $this->InputValueIpAddressIpv4Radio; ?> checked/>
+				<input type="radio" name="{$FIELD_RADIO_IP_ADDRESS}"
+						id="{$FIELD_RADIO_IP_ADDRESS_IPV4}"
+						value="{$FIELD_RADIO_IP_ADDRESS_IPV4}"
+						onclick="this.blur();this.focus();"
+						onchange="ShowOrHideElement('{$DIV_RADIO_IP_ADDRESS_IPV4}', true);
+								  ShowOrHideElement('{$DIV_RADIO_IP_ADDRESS_IPV6}', false);	
+								  MakeInputVisible('{$FM_IP_ADDRESS_SEL_SB}');
+								  ValidateInputChangedRadio('{$DIV_RADIO}', 'DivContentBodySubmit', '{$FM_IP_ADDRESS_SEL_SB}', 'Ip Address')"
+						title="{$FIELD_IP_ADDRESS_IPV4_TEXT}"  
+						{$FIELD_RADIO_IP_ADDRESS_IPV4_VALUE}/>
 				<div class="DivContentBodyContainerLabelHost">
-					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?></i>
+					<i>{$FIELD_IP_ADDRESS_IPV4_TEXT}</i>
 				</div>
 			</label>
 		</div>
 		<div class="DivClearFloat"></div>
+		<!-- FIELD_RADIO_IP_ADDRESS_IPV6 -->
 		<div class="DivContentBodyContainerRadio">
 			<label>
-				<input type="radio" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO; ?>"
-					   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV6; ?>"
-					   value="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_IPV6; ?>"
-					   onclick="this.blur();this.focus();"
-					   onchange="ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_DIV_IPV6; ?>', 
-												 true);
-								 ShowOrHideElement('<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_DIV_IPV4; ?>', 
-												 false);
-								 MakeInputVisible('<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>');
-								 ValidateInputChangedRadio('<?php echo ConfigInfraTools::DIV_RADIO; ?>', 
-														   'DivContentBodySubmit', 
-														   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>', 
-														   '')"
-					   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'); ?>"  
-					   <?php echo $this->InputValueIpAddressIpv6Radio; ?> />
-				<div class="DivContentBodyContainerLabelIp">
-					<i><?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'); ?></i>
+				<input type="radio" name="{$FIELD_RADIO_IP_ADDRESS}"
+						id="{$FIELD_RADIO_IP_ADDRESS_IPV6}"
+						value="{$FIELD_RADIO_IP_ADDRESS_IPV6}"
+						onclick="this.blur();this.focus();"
+						onchange="ShowOrHideElement('{$DIV_RADIO_IP_ADDRESS_IPV4}', false);
+								  ShowOrHideElement('{$DIV_RADIO_IP_ADDRESS_IPV6}', true);
+								  MakeInputVisible('{$FM_IP_ADDRESS_SEL_SB}');
+							  	  ValidateInputChangedRadio('{$DIV_RADIO}', 'DivContentBodySubmit', '{$FM_IP_ADDRESS_SEL_SB}', 'Ip Address')"
+						title="{$FIELD_IP_ADDRESS_IPV6_TEXT}"  
+						{$FIELD_RADIO_IP_ADDRESS_IPV6_VALUE}/>
+				<div class="DivContentBodyContainerLabelHost">
+					<i>{$FIELD_IP_ADDRESS_IPV6_TEXT}</i>
 				</div>
 			</label>
 		</div>
+		<div class="DivClearFloat"></div>
 		<div class="DivClearFloat"></div>
 		<!-- FIELD_IP_ADDRESS_IPV4 -->
-		<div class="NotHidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_DIV_IPV4; ?>">
+		<div class="{$HIDE_IP_ADDRESS_IPV4_CLASS} DivContentBodyContainer" id="{$DIV_RADIO_IP_ADDRESS_IPV4}">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?> </label>
+				<label>{$FIELD_IP_ADDRESS_IPV4_TEXT}</label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>" 
-							   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>"
-							   class="DivContentBodyContainerInputText <?php echo $this->ReturnIpAddressIpv4Class; ?>"
-							   onkeyup="ValidateIpAddressIpv4('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
-												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', 'false');"
+			<input type="text" name="{$FIELD_IP_ADDRESS_IPV4}" 
+							   id="{$FIELD_IP_ADDRESS_IPV4}"
+							   class="DivContentBodyContainerInputText {$RETURN_IP_ADDRESS_IPV4_CLASS}"
+							   onkeyup="ValidateIpAddressIpv4('DivContentBodyContainerInputText', '{$FIELD_IP_ADDRESS_IPV4}',
+												              'DivContentBodySubmit', '{$FM_IP_ADDRESS_SEL_SB}', '', false);"
 							   onblur="ValidateIpAddressIpv4('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
+											       '{$FIELD_IP_ADDRESS_IPV4}',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);"
+												   '{$FM_IP_ADDRESS_SEL_SB}','', true);"
 							   onchange="ValidateIpAddressIpv4('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV4; ?>',
-												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'); ?>" 
-							   value="<?php echo $this->InputValueIpAddressIpv4; ?>" maxlength="15" />
+											                    '{$FIELD_IP_ADDRESS_IPV4}',
+												                'DivContentBodySubmit',
+												                '{$FM_IP_ADDRESS_SEL_SB}','', true);"
+							   title="{$FIELD_IP_ADDRESS_IPV4_TEXT}" 
+							   value="{$FIELD_IP_ADDRESS_IPV4_VALUE}" maxlength="15" />
 		</div>
 		<!-- FIELD_IP_ADDRESS_IPV6 -->
-		<div class="Hidden DivContentBodyContainer" id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_RADIO_DIV_IPV6 ?>">
+		<div class="{$HIDE_IP_ADDRESS_IPV6_CLASS} DivContentBodyContainer" id="{$DIV_RADIO_IP_ADDRESS_IPV6}">
 			<div class="DivContentBodyContainerLabelExtraWidth">
-				<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'); ?> </label>
+				<label>{$FIELD_IP_ADDRESS_IPV6_TEXT}</label>
 				<label class="RequiredField">&nbsp;*</label>
 				<label>:</label>
 			</div>
-			<input type="text" name="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>" 
-							   id="<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>"
-							   class="DivContentBodyContainerInputText <?php echo $this->ReturnIpAddressIpv6Class; ?>"
-							   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>',
+			<input type="text" name="{$FIELD_IP_ADDRESS_IPV6}" 
+							   id="{$FIELD_IP_ADDRESS_IPV6}"
+							   class="DivContentBodyContainerInputText {$RETURN_IP_ADDRESS_IPV6_CLASS}"
+							   onkeyup="ValidateIpAddressIpv6('DivContentBodyContainerInputText', 
+											       '{$FIELD_IP_ADDRESS_IPV6}',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', 'false');"
-							   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>',
+												   '{$FM_IP_ADDRESS_SEL_SB}', '', false);"
+							   onblur="ValidateIpAddressIpv6('DivContentBodyContainerInputText', 
+											       '{$FIELD_IP_ADDRESS_IPV6}',
 												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);"
-							   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-											       '<?php echo ConfigInfraTools::FIELD_IP_ADDRESS_IPV6; ?>',
-												   'DivContentBodySubmit',
-												   '<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>',
-												   '', true);"
-							   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV6'); ?>" 
-							   value="<?php echo $this->InputValueIpAddressIpv6; ?>" maxlength="38" />
+												   '{$FM_IP_ADDRESS_SEL_SB}','', true);"
+							   onchange="ValidateIpAddressIpv6('DivContentBodyContainerInputText', 
+											                    '{$FIELD_IP_ADDRESS_IPV6}',
+												                'DivContentBodySubmit',
+												                '{$FM_IP_ADDRESS_SEL_SB}','', true);"
+							   title="{$FIELD_IP_ADDRESS_IPV6_TEXT}" 
+							   value="{$FIELD_IP_ADDRESS_IPV6_VALUE}" maxlength="38" />
 		</div>
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit">
-		<input type="submit" name="<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_IP_ADDRESS_SEL_SB; ?>"
-								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
-								 <?php echo $this->SubmitEnabled; ?> />
+		<input type="submit" name="{$FM_IP_ADDRESS_SEL_SB}" 
+			   id="{$FM_IP_ADDRESS_SEL_SB}" class="DivContentBodySubmit {$SUBMIT_CLASS}"
+			   value="{$SUBMIT_SEL}" {$SUBMIT_ENABLED} />
 	</div>
 </form>

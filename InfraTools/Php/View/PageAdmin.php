@@ -196,6 +196,7 @@ class PageAdmin extends PageInfraTools
 	{
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_SACK);
 		$this->Session->RemoveSessionVariable(ConfigInfraTools::SESS_PAGE_STACK_NUMBER);
+		$this->BuildSmartyTags();
 		$this->Smarty->assign('ADMIN_TEXT_COUNTRY', $this->InstanceLanguageText->GetText('ADMIN_TEXT_COUNTRY'));
 		$this->Smarty->assign('ADMIN_TEXT_CORPORATION', $this->InstanceLanguageText->GetText('ADMIN_TEXT_CORPORATION'));	
 		$this->Smarty->assign('ADMIN_TEXT_DEPARTMENT', $this->InstanceLanguageText->GetText('ADMIN_TEXT_DEPARTMENT'));	
@@ -212,7 +213,6 @@ class PageAdmin extends PageInfraTools
 		$this->Smarty->assign('ADMIN_TEXT_NOTIFICATION', $this->InstanceLanguageText->GetText('ADMIN_TEXT_NOTIFICATION'));
 		$this->Smarty->assign('ADMIN_TEXT_SYSTEM_CONFIGURATION', $this->InstanceLanguageText->GetText('ADMIN_TEXT_SYSTEM_CONFIGURATION'));
 		$this->Smarty->assign('ADMIN_TEXT_TECH_INFO', $this->InstanceLanguageText->GetText('ADMIN_TEXT_TECH_INFO'));
-		$this->Smarty->assign('ADMIN_TEXT_INSTALL', $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'));
 		$this->Smarty->assign('HREF_PAGE_ADMIN_COUNTRY', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_COUNTRY'));
 		$this->Smarty->assign('HREF_PAGE_ADMIN_CORPORATION', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_CORPORATION'));	
 		$this->Smarty->assign('HREF_PAGE_ADMIN_DEPARTMENT', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN_DEPARTMENT'));	

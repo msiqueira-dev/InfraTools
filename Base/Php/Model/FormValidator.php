@@ -29,6 +29,7 @@ Functions:
 			public function ValidateHost($Host);
 			public function ValidateIsNotNumericValue($NonNumeric, $DefaultValue);
 			public function ValidateIpAddressIpv4(IpAddressIpv4);
+			public function ValidateIpAddressIpv6(IpAddressIpv6);
 			public function ValidateMessage($Message, $DefaultValue);
 			public function ValidateName($Name, $DefaultValue);
 			public function ValidateNetmask($Netmask);
@@ -112,6 +113,8 @@ class FormValidator
 			return $this->ValidateHost($Value);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4)
 			return $this->ValidateIpAddressIpv4($Value);
+		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV6)
+			return $this->ValidateIpAddressIpv6($Value);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_MESSAGE)
 			return $this->ValidateMessage($Value, $DefaultValue);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_NAME)
@@ -487,7 +490,22 @@ class FormValidator
 		{
 			if(!is_null($IpAddressIpv4) && !empty($IpAddressIpv4))
 			{
-				if(preg_match('/^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/', $IpAddressIpv4) > 0)
+				if(filter_var($IpAddressIpv4, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4))
+					return Config::RET_OK;
+				else return Config::INVALID_IP_ADDRESS_IPV4;
+			}
+			else return Config::INVALID_NULL;
+		}
+		else return Config::INVALID_NULL;
+	}
+
+	public function ValidateIpAddressIpv6($IpAddressIpv6)
+	{
+		if(isset($IpAddressIpv6))
+		{
+			if(!is_null($IpAddressIpv6) && !empty($IpAddressIpv6))
+			{
+				if(filter_var($IpAddressIpv6, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6))
 					return Config::RET_OK;
 				else return Config::INVALID_IP_ADDRESS_IPV4;
 			}
