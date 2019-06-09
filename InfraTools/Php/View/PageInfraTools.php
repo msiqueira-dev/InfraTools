@@ -43,7 +43,7 @@ Methods:
 			                                                                         &$ArrayInstanceInfraToolsCorporation, $Debug);
 			protected function InfraToolsIpAddressDeleteByIpAddressIpv4($InfraToolsInstanceIpAddress, $Debug);
 			protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6,  
-			                                             $InstanceInfraToolsNetwork, $Debug);
+			                                             $InstanceInfraToolsNetwork, $StopIfNotInSameNetwork, $Debug);
 			protected function InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress);
 			protected function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectByIpAddressIpv4($Limit1, $Limit2, $IpAddressIpv4, &$ArrayInstanceInfraToolsIpAddress, 
@@ -380,11 +380,6 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
-			$this->Smarty->assign('PAGE_ADMIN_CORPORATION', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
-			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
-			$this->Smarty->assign('PAGE_ADMIN_TEAM', ConfigInfraTools::PAGE_ADMIN_TEAM);
-			$this->Smarty->assign('PAGE_ADMIN_TYPE_USER', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
-			$this->Smarty->assign('PAGE_ADMIN_USER', ConfigInfraTools::PAGE_ADMIN_USER);
 			$this->Smarty->assign('PAGE_INSTALL_TEXT', $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
@@ -699,7 +694,7 @@ abstract class PageInfraTools extends Page
 	}
 	
 	protected function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, 
-												 $InstanceInfraToolsNetwork, $Debug)
+												 $InstanceInfraToolsNetwork, $StopIfNotInSameNetwork, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -716,7 +711,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsInput[0]        = $this->InputValueIpAddressDescription; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
-		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsNullable[0]     = TRUE;
 		$arrayElementsText[0]         = &$this->ReturnIpAddressDescriptionText;
 		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_DESCRIPTION', 'FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
@@ -729,7 +724,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsInput[1]        = $this->InputValueIpAddressIpv4; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 15; 
-		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsNullable[1]     = TRUE;
 		$arrayElementsText[1]         = &$this->ReturnIpAddressIpv4Text;
 		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
 		array_push($matrixConstants, $arrayConstants);
@@ -750,7 +745,7 @@ abstract class PageInfraTools extends Page
 		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
 							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
 							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
-								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
 		if($return == ConfigInfraTools::RET_OK)
 		{
 			$instanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
@@ -762,20 +757,40 @@ abstract class PageInfraTools extends Page
 																					$message);
 				if($return != ConfigInfraTools::RET_OK)
 				{
-					$this->ShowDivReturnError($message, TRUE);
-					return ConfigInfraTools::RET_ERROR;
+					if($StopIfNotInSameNetwork == TRUE)
+					{ 
+						$this->ShowDivReturnError($message, TRUE);
+						return ConfigInfraTools::RET_ERROR;
+					}
+					else 
+					{
+						$InstanceInfraToolsNetwork = NULL;
+						$return = ConfigInfraTools::RET_OK;
+					}
 				}
 			}
 			else $return = ConfigInfraTools::RET_ERROR;
 			if($return == ConfigInfraTools::RET_OK)
 			{
-				$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressInsert($this->InputValueIpAddressDescription, 
-																						  $this->InputValueIpAddressIpv4, 
-																						  $this->InputValueIpAddressIpv6, 
-																						  $InstanceInfraToolsNetwork, $Debug);
+				if(is_object($InstanceInfraToolsNetwork))
+				{
+					if (is_a($InstanceInfraToolsNetwork, "InfraToolsNetwork"))
+						$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressInsert($this->InputValueIpAddressDescription, 
+																							      $this->InputValueIpAddressIpv4, 
+																							      $this->InputValueIpAddressIpv6, 
+																							      $InstanceInfraToolsNetwork, false, $Debug);
+				}
+				else
+				{
+					$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressInsert($this->InputValueIpAddressDescription, 
+																							  $this->InputValueIpAddressIpv4, 
+																							  $this->InputValueIpAddressIpv6, 
+																							  $InstanceInfraToolsNetwork, true, $Debug);
+				}
 				if($return == ConfigInfraTools::RET_OK)
 				{
 					$this->ShowDivReturnSuccess("IP_ADDRESS_INSERT_SUCCESS");
+					$this->ReturnEmptyText = "";
 					return ConfigInfraTools::RET_OK;
 				}
 				elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE || 

@@ -85,7 +85,7 @@ Methods:
 			public function InfraToolsDataBaseImport($InsertQueries, &$ErrorQueires, &$StringMessage, $Debug);
 			public function InfraToolsIpAddressDeleteByIpAddressIpv4($IpAddressIpv4, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6,
-			                                          $InstanceInfraToolsNetwork, $Debug, 
+			                                          $InstanceInfraToolsNetwork, $InsertNetwork, $Debug, 
 			                                          $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function InfraToolsIpAddressSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsIpAddress, &$RowCount, $Debug, 
 								                      $MySqlConnection = NULL, $CloseConnectaion = TRUE);
@@ -1414,8 +1414,8 @@ class InfraToolsFacedePersistence extends FacedePersistence
 		return $return;
 	}
 	
-	public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork,
-											  $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
+	public function InfraToolsIpAddressInsert($IpAddressDescription, $IpAddressIpv4, $IpAddressIpv6, $InstanceInfraToolsNetwork, 
+	                                          $InsertNetwork, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 		if($return == ConfigInfraTools::RET_OK)
@@ -1425,11 +1425,14 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			{
 				if (is_a($InstanceInfraToolsNetwork, "InfraToolsNetwork"))
 				{
-					$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
-					$InfraToolsFacedePersistenceNetwork->InfraToolsNetworkInsert($InstanceInfraToolsNetwork->GetNetworkIp(), 
-																				 $InstanceInfraToolsNetwork->GetNetworkName(), 
-																				 $InstanceInfraToolsNetwork->GetNetworkNetmask(), 
-																				 $Debug, $MySqlConnection);
+					if($InsertNetwork == TRUE)
+					{
+						$InfraToolsFacedePersistenceNetwork = $this->Factory->CreateInfraToolsFacedePersistenceNetwork();
+						$InfraToolsFacedePersistenceNetwork->InfraToolsNetworkInsert($InstanceInfraToolsNetwork->GetNetworkIp(), 
+																					$InstanceInfraToolsNetwork->GetNetworkName(), 
+																					$InstanceInfraToolsNetwork->GetNetworkNetmask(), 
+																					$Debug, $MySqlConnection);
+					}
 					$networkName = $InstanceInfraToolsNetwork->GetNetworkName();
 				}
 			}

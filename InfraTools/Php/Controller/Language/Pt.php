@@ -243,9 +243,11 @@ class Pt
 	const FM_INVALID_HOSTNAME                                       = "Domínio inválido";
 	const FM_INVALID_IP_ADDRESS_DESCRIPTION                         = "Descrição de endereço de ip inválida";
 	const FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE                    = "Quantidade de caracteres excede o tamanho máximo para descrição "
-	                                                                . "de endereço de ip";
+																	. "de endereço de ip";
+	const FM_INVALID_IP_ADDRESS_EMPTY                               = "O formulário de endereço de ip deve ser preenchido";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "Campo de endereço de ipv4 inválido";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "Campo de endereço de ipv6 inválido";
+	const FM_INVALID_NETWOR_EMPTY                                   = "O formulário de rede deve ser preenchido";
 	const FM_INVALID_NETWORK_IP                                     = "Campo de endereço de rede inválido";
 	const FM_INVALID_NETWORK_NAME                                   = "Campo de nome de rede inválido";
 	const FM_INVALID_NETWORK_NAME_SIZE                              = "Quantidade de caracteres excede o tamanho máximo para "
@@ -530,6 +532,7 @@ class Pt
 	const INSTALL_SUCCESS                                           = "Banco de dados do sistema instalado com sucesso";
 	const INVALID_NETWORK_ADDRESS                                   = "Endereço de rede inválido";
 	const INVALID_OPTION                                            = "Opção inválida";
+	const IP_ADDRESS                                                = "Endereço de IP";
 	const IP_ADDRESS_DEL_ERROR                                      = "Erro ao excluir endereço de ip";
 	const IP_ADDRESS_DEL_ERROR_DEPENDENCY_SERVICE                   = "Endereço de ip possui serviços associados, exclua-os primeiro";
 	const IP_ADDRESS_DEL_SUCCESS                                    = "Endereço de ip excluido com sucesso";
@@ -549,7 +552,8 @@ class Pt
 	const MAPS_SEARCH                                               = "Buscar";
 	const MAPS_TIP                                                  = "Digite a sua localização na caixa de texto ou clique no mapa, "
                                                                     . "os campos abaixo serão preenchidos com seu país "
-                                                                    . "e sua localização, que pode ser seu estado ou seu condado.";
+																	. "e sua localização, que pode ser seu estado ou seu condado.";
+	const NETWORK                                                   = "Rede";
 	const NETWORK_INSERT_ERROR                                      = "Erro ao cadastrar rede";
 	const NETWORK_INSERT_SUCCESS                                    = "Rede cadastrada com sucesso";
 	const NETWORK_NOT_FOUND                                         = "Rede não encontrada";
@@ -664,9 +668,12 @@ class Pt
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK                        = "Gerência de Endereços de Ip - Vizualizar Endereços de Rede";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK_ROBOTS                 = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK_TITLE                  = "InfraTools - Gerência de Endereços de Ip";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS                          = "Gerência de Endereços de Ip - Vizualiar usuários";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools - Gerência de Endereços de Ip";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS               = "Gerência de Endereços de Ip - Vizualiar usuários por endereço de ip";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS_ROBOTS        = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS_TITLE         = "InfraTools - Gerência de Endereços de Ip";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK                  = "Gerência de Endereços de Ip - Vizualiar usuários´por rede";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_ROBOTS           = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_TITLE            = "InfraTools - Gerência de Endereços de Ip";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Gerência de Notificações";
 	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "Gerência de Notificações - Associação de Usuários";
 	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";

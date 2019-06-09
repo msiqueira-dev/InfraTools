@@ -234,8 +234,10 @@ class Es
 	const FM_INVALID_HOSTNAME                                       = "";
 	const FM_INVALID_IP_ADDRESS_DESCRIPTION                         = "";
 	const FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE                    = "";
+	const FM_INVALID_IP_ADDRESS_EMPTY                               = "";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "";
+	const FM_INVALID_NETWOR_EMPTY                                   = "";
 	const FM_INVALID_NETWORK_IP                                     = "";
 	const FM_INVALID_NETWORK_NAME                                   = "";
 	const FM_INVALID_NETWORK_NAME_SIZE                              = "";
@@ -490,6 +492,7 @@ class Es
 	const INSTALL_SUCCESS                                           = "";
 	const INVALID_NETWORK_ADDRESS                                   = "";
 	const INVALID_OPTION                                            = "";
+	const IP_ADDRESS                                                = "";
 	const IP_ADDRESS_DEL_ERROR                                      = "";
 	const IP_ADDRESS_DEL_ERROR_DEPENDENCY_SERVICE                   = "";
 	const IP_ADDRESS_DEL_SUCCESS                                    = "";
@@ -508,6 +511,7 @@ class Es
 	const LANGUAGES_FILES                                           = "";
 	const MAPS_SEARCH                                               = "";
 	const MAPS_TIP                                                  = "";
+	const NETWORK                                                   = "";
 	const NETWORK_INSERT_ERROR                                      = "";
 	const NETWORK_INSERT_SUCCESS                                    = "";
 	const NETWORK_NOT_FOUND                                         = "";
@@ -622,9 +626,12 @@ class Es
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK                        = "";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK_ROBOTS                 = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK_TITLE                  = "InfraTools -";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS                          = "";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools -";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS               = "";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS_ROBOTS        = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS_TITLE         = "InfraTools -";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK                  = "";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_ROBOTS           = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_TITLE            = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION                                   = "";
 	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "";
 	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";

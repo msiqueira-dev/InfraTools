@@ -43,6 +43,7 @@ Methods:
 		public static function SqlInfraToolsNetworkDeleteByNetworkName();
 		public static function SqlInfraToolsNetworkInsert();
 		public static function SqlInfraToolsNetworkSelect();
+		public static function SqlInfraToolsNetworkSelectByIpAddressNetworkName();
 		public static function SqlInfraToolsNetworkSelectByNetworkIp();
 		public static function SqlInfraToolsNetworkSelectByNetworkName();
 		public static function SqlInfraToolsNetworkSelectByNetworkNameNoLimit();
@@ -618,6 +619,24 @@ class InfraToolsPersistence extends Persistence
 			   . "ORDER BY "   . ConfigInfraTools::TB_NETWORK.".". ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME . "   "
 			   . "LIMIT ?, ?";
 	}
+
+	public static function SqlInfraToolsNetworkSelectByIpAddressNetworkName()
+	{
+		return "SELECT  " . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP         . ",  "
+			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME       . ",  "
+			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK    . ",  "
+			   . " "      . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_FD_REGISTER_DATE              . "   "
+			   . " as NetworkRegisterDate  "                                                                    . "   "
+			   . "FROM "       . ConfigInfraTools::TB_NETWORK                                                   . "   "
+			   . "INNER JOIN " . ConfigInfraTools::TB_IP_ADDRESS                                                ."    "
+			   . "ON "         . ConfigInfraTools::TB_IP_ADDRESS                                                .".". 
+			                     ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME                     ."    "
+			   . "=  "         . ConfigInfraTools::TB_NETWORK                                                   .".". 
+								ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME                                    ." "
+			   . "WHERE "      . ConfigInfraTools::TB_IP_ADDRESS                                                .".". 
+			                     ConfigInfraTools::TB_IP_ADDRESS_FD_IP_ADDRESS_NETWORK_NAME   . " = UPPER(?)";
+	}
+
 	public static function SqlInfraToolsNetworkSelectByNetworkIp()
 	{
 		return "SELECT  " . ConfigInfraTools::TB_NETWORK.".".ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP         . ",  "

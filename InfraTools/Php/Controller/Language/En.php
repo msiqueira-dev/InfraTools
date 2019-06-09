@@ -240,8 +240,10 @@ class En
 	const FM_INVALID_IP_ADDRESS_DESCRIPTION                         = "Invalid value for ip address description";
 	const FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE                    = "Quantity of characters exceeds the maximum allowed for "
 	                                                                . "ip address description";
+	const FM_INVALID_IP_ADDRESS_EMPTY                               = "The ip address form must be filled";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "Invalid value for ipv4";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "Invalid value for ipv6";
+	const FM_INVALID_NETWOR_EMPTY                                   = "The network form must be filled";
 	const FM_INVALID_NETWORK_IP                                     = "Invalid value for network ip";
 	const FM_INVALID_NETWORK_NAME                                   = "Invalid value for network name";
 	const FM_INVALID_NETWORK_NAME_SIZE                              = "Quantity of characters exceeds the maximum allowed for "
@@ -525,6 +527,7 @@ class En
 	const INSTALL_SUCCESS                                           = "System database installed succesfully";
 	const INVALID_NETWORK_ADDRESS                                   = "Invalid network address";
 	const INVALID_OPTION                                            = "Invalid option";
+	const IP_ADDRESS                                                = "Ip Address";
 	const IP_ADDRESS_DEL_ERROR                                      = "Error deleting ip address";
 	const IP_ADDRESS_DEL_ERROR_DEPENDENCY_SERVICE                   = "Ip address has services associated, delete them first";
 	const IP_ADDRESS_DEL_SUCCESS                                    = "Ip address deleted succesfully";
@@ -544,7 +547,8 @@ class En
 	const MAPS_SEARCH                                               = "Search";
 	const MAPS_TIP                                                  = "Type your location in the text field or click on the map, "
                                                                     . "the fields above will be filled with your country "
-                                                                    . "and a location that can be either a estate or a county.";
+																	. "and a location that can be either a estate or a county.";
+	const NETWORK                                                   = "Network";
 	const NETWORK_INSERT_ERROR                                      = "Error while trying to register network";
 	const NETWORK_INSERT_SUCCESS                                    = "Network registered succesfully";
 	const NETWORK_NOT_FOUND                                         = "Network not found";
@@ -659,9 +663,12 @@ class En
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK                        = "Admin Ip Address - View Network";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK_ROBOTS                 = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_NETWORK_TITLE                  = "InfraTools - Admin Ip Address";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS                          = "Admin Ip Address - View Users";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_ROBOTS                   = "noindex";
-	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_TITLE                    = "InfraTools - Admin Ip Address";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS               = "Admin Ip Address - View Users By Ip Address";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS_ROBOTS        = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_IP_ADDRESS_TITLE         = "InfraTools - Admin Ip Address";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK                  = "Admin Ip Address - View Users By Network";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_ROBOTS           = "noindex";
+	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_TITLE            = "InfraTools - Admin Ip Address";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Admin Notification";
 	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "Admin Notification - Associate Users";
 	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";

@@ -127,6 +127,13 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBack.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBackHover.png');
 			$this->Smarty->assign('PAGE_ADMIN', $this->InstanceLanguageText->GetText('PAGE_ADMIN'));
+			$this->Smarty->assign('PAGE_ADMIN_CORPORATION', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
+			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
+			$this->Smarty->assign('PAGE_ADMIN_IP_ADDRESS', ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS);
+			$this->Smarty->assign('PAGE_ADMIN_NOTIFICATION', ConfigInfraTools::PAGE_ADMIN_NOTIFICATION);
+			$this->Smarty->assign('PAGE_ADMIN_TEAM', ConfigInfraTools::PAGE_ADMIN_TEAM);
+			$this->Smarty->assign('PAGE_ADMIN_TYPE_USER', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
+			$this->Smarty->assign('PAGE_ADMIN_USER', ConfigInfraTools::PAGE_ADMIN_USER);
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_LST', $this->InstanceLanguageText->GetText('SUBMIT_LST'));
 			$this->Smarty->assign('SUBMIT_LST_BY_IP_ADDRESS', $this->InstanceLanguageText->GetText('SUBMIT_LST_BY_IP_ADDRESS'));
