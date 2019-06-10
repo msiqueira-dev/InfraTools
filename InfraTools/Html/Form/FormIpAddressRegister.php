@@ -221,8 +221,8 @@
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainer"
 				onmouseover="ValidateDescription('DivContentBodyContainerValueTextArea', '{$FIELD_IP_ADDRESS_DESCRIPTION}',
-									                       'DivContentBodySubmitBigger', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
-										 ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger', '{$FM_IP_ADDRESS_REGISTER_SB}', '');">
+									             'DivContentBodySubmitBigger', '{$FM_IP_ADDRESS_REGISTER_SB}', '', true);
+							 ValidateMultiplyFields('{$FM_IP_ADDRESS_REGISTER_FORM}', 'DivContentBodySubmitBigger', '{$FM_IP_ADDRESS_REGISTER_SB}', '');">
 			<input type="submit" name="{$FM_IP_ADDRESS_REGISTER_SB}" id="{$FM_IP_ADDRESS_REGISTER_SB}"
 						 class="DivContentBodySubmitBigger {$SUBMIT_CLASS}"
 						 value="{$SUBMIT_REGISTER}" {$SUBMIT_ENABLED} />

@@ -394,7 +394,7 @@ class FormValidator
 		{
 			if(!is_null($Description) && !empty($Description))
 			{
-				if(preg_match('/(^([a-zA-Z]|[.]|[-]|[_]|[.]|[!]|[?]|[:]|[,]|["]|[\']|[(]|[)]|[ ]|[0-9])*)$/', $Description) > 0)
+				if(preg_match('/(^([a-zA-Z]|[.]|[-]|[_]|[\/]|[.]|[!]|[?]|[:]|[,]|["]|[\']|[(]|[)]|[ ]|[0-9])*)$/', $Description) > 0)
 					return Config::RET_OK;
 				else return Config::INVALID_DESCRIPTION;
 			}

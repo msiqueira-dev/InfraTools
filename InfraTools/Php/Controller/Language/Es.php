@@ -1084,6 +1084,8 @@ class Es
 	const SUBMIT_LST_BY_IP_ADDRESS                                  = "";
 	const SUBMIT_LST_BY_NETWORK                                     = "";
 	const SUBMIT_LST_USERS                                          = "";
+	const SUBMIT_LST_USERS_IP_ADDRESS                               = "";
+	const SUBMIT_LST_USERS_NETWORK                                  = "";
 	const SUBMIT_REGISTER                                           = "";
 	const SUBMIT_RESET_PASSWORD                                     = "";
 	const SUBMIT_SEL                                                = "";

@@ -243,7 +243,7 @@ class En
 	const FM_INVALID_IP_ADDRESS_EMPTY                               = "The ip address form must be filled";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "Invalid value for ipv4";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "Invalid value for ipv6";
-	const FM_INVALID_NETWOR_EMPTY                                   = "The network form must be filled";
+	const FM_INVALID_NETWOR_EMPTY                                   = "The network form must be filled, or a network must be selected";
 	const FM_INVALID_NETWORK_IP                                     = "Invalid value for network ip";
 	const FM_INVALID_NETWORK_NAME                                   = "Invalid value for network name";
 	const FM_INVALID_NETWORK_NAME_SIZE                              = "Quantity of characters exceeds the maximum allowed for "
@@ -1123,6 +1123,8 @@ class En
 	const SUBMIT_LST_BY_IP_ADDRESS                                  = "LIST BY IP ADDRESS";
 	const SUBMIT_LST_BY_NETWORK                                     = "LIST BY NETWORK";
 	const SUBMIT_LST_USERS                                          = "LIST USERS";
+	const SUBMIT_LST_USERS_IP_ADDRESS                               = "LIST USERS BY IP ADDRESS";
+	const SUBMIT_LST_USERS_NETWORK                                  = "LIST USERS BY NETWORK";
 	const SUBMIT_REGISTER                                           = "REGISTER";
 	const SUBMIT_RESET_PASSWORD                                     = "RESET PASSWORD";
 	const SUBMIT_SEL                                                = "SELECT";

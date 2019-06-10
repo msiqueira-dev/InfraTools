@@ -68,7 +68,7 @@
 		<form name="{$FM_IP_ADDRESS_VIEW_NETWORK_ST_USERS}" id="{$FM_IP_ADDRESS_VIEW_NETWORK_ST_USERS}" 
 				class="DivFormHorizontalButtons" method="{$FORM_METHOD}">
 			<input type="submit" name="{$FM_IP_ADDRESS_VIEW_NETWORK_ST_USERS_SB}" id="{$FM_IP_ADDRESS_VIEW_NETWORK_ST_USERS_SB}"
-					class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS}"/>
+					class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS_NETWORK}"/>
 		</form>
 	</div>
 {/if}

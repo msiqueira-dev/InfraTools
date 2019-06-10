@@ -11,15 +11,6 @@
 </div>
 <!-- FM_IP_ADDRESS_VIEW_IP_ADDRESS -->
 <form name="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS}" id="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS}" method="{$FORM_METHOD}" >
-    <!-- FIELD_IP_ADDRESS_DESCRIPTION -->
-    <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label>{$FIELD_IP_ADDRESS_DESCRIPTION_TEXT} : </label>
-        </div>
-        <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent">{$FIELD_IP_ADDRESS_DESCRIPTION_VALUE}</label>
-        </div>
-    </div>
     <!-- FIELD_IP_ADDRESS_IPV4 -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
@@ -37,8 +28,17 @@
         <div class="DivContentBodyContainerValue">
             <label class="DivContentBodyContainerValueContent">{$FIELD_IP_ADDRESS_IPV6_VALUE}</label>
         </div>
+	</div>
+	<!-- FIELD_IP_ADDRESS_DESCRIPTION -->
+    <div class="DivContentBodyContainer">
+        <div class="DivContentBodyContainerLabel">
+            <label>{$FIELD_IP_ADDRESS_DESCRIPTION_TEXT} : </label>
+        </div>
+        <div class="DivContentBodyContainerValue">
+            <label class="DivContentBodyContainerValueContent">{$FIELD_IP_ADDRESS_DESCRIPTION_VALUE}</label>
+        </div>
     </div>
-    {if isset($FIELD_NETWORK_NAME_TEXT) }
+    {if $FIELD_NETWORK_NAME_VALUE neq ""}
 		<!-- FIELD_NETWORK_IP -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
@@ -86,7 +86,7 @@
 			<input type="submit" name="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS_UPDT_SB}" id="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS_UPDT_SB}"
 				   class="DivContentBodySubmitBigger" value="{$SUBMIT_UPDT_IP_ADDRESS}"/>
 		</form>
-		{if isset($FIELD_NETWORK_NAME_TEXT) }
+		{if $FIELD_NETWORK_NAME_VALUE neq ""}
 			<!-- FM_IP_ADDRESS_VIEW_NETWORK_UPDT -->
 			<form name="{$FM_IP_ADDRESS_VIEW_NETWORK_UPDT}" id="{$FM_IP_ADDRESS_VIEW_NETWORK_UPDT}"
 			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}" >
@@ -105,14 +105,14 @@
 		<form name="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS_LST_USERS}" id="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS_LST_USERS}" 
 			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}">
 			<input type="submit" name="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS_LST_USERS_SB}" id="{$FM_IP_ADDRESS_VIEW_IP_ADDRESS_LST_USERS_SB}"
-					class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS}"/>
+					class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS_IP_ADDRESS}"/>
 		</form>
-		{if isset($FIELD_NETWORK_NAME_TEXT) }
+		{if $FIELD_NETWORK_NAME_VALUE neq ""}
 			<!-- FM_IP_ADDRESS_VIEW_NETWORK_LST_USERS -->
 			<form name="{$FM_IP_ADDRESS_VIEW_NETWORK_LST_USERS}" id="{$FM_IP_ADDRESS_VIEW_NETWORK_LST_USERS}" 
 				class="DivFormHorizontalButtons" method="{$FORM_METHOD}">
 				<input type="submit" name="{$FM_IP_ADDRESS_VIEW_NETWORK_LST_USERS_SB}" id="{$FM_IP_ADDRESS_VIEW_NETWORK_LST_USERS_SB}"
-						class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS}"/>
+						class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS_NETWORK}"/>
 			</form>
 		{/if}
 	</div>

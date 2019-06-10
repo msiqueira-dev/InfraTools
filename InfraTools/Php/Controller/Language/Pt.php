@@ -247,7 +247,7 @@ class Pt
 	const FM_INVALID_IP_ADDRESS_EMPTY                               = "O formulário de endereço de ip deve ser preenchido";
 	const FM_INVALID_IP_ADDRESS_IPV4                                = "Campo de endereço de ipv4 inválido";
 	const FM_INVALID_IP_ADDRESS_IPV6                                = "Campo de endereço de ipv6 inválido";
-	const FM_INVALID_NETWOR_EMPTY                                   = "O formulário de rede deve ser preenchido";
+	const FM_INVALID_NETWOR_EMPTY                                   = "O formulário de rede deve ser preenchido, ou uma rede deve ser selecionada";
 	const FM_INVALID_NETWORK_IP                                     = "Campo de endereço de rede inválido";
 	const FM_INVALID_NETWORK_NAME                                   = "Campo de nome de rede inválido";
 	const FM_INVALID_NETWORK_NAME_SIZE                              = "Quantidade de caracteres excede o tamanho máximo para "
@@ -1131,6 +1131,8 @@ class Pt
 	const SUBMIT_LST_BY_IP_ADDRESS                                  = "LISTAR POR ENDEREÇO DE IP";
 	const SUBMIT_LST_BY_NETWORK                                     = "LISTAR POR REDE";
 	const SUBMIT_LST_USERS                                          = "LISTAR USUÁRIOS";
+	const SUBMIT_LST_USERS_IP_ADDRESS                               = "LISTAR USUÁRIOS POR ENDEREÇO DE IP";
+	const SUBMIT_LST_USERS_NETWORK                                  = "LISTAR USUÁRIOS POR REDE";
 	const SUBMIT_REGISTER                                           = "CADASTRAR";
 	const SUBMIT_RESET_PASSWORD                                     = "RESTAURAR SENHA";
 	const SUBMIT_SEL                                                = "OBTER";

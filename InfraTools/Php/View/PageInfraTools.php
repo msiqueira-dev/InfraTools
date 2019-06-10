@@ -752,9 +752,9 @@ abstract class PageInfraTools extends Page
 			if(is_a($InstanceInfraToolsNetwork, "InfraToolsNetwork"))
 			{
 				$return = $instanceInfraToolsFacedeBusiness->CheckIpAddressIsInNetwork($IpAddressIpv4, 
-																					$InstanceInfraToolsNetwork->GetNetworkIp(), 
-																					$InstanceInfraToolsNetwork->GetNetworkNetmask(), 
-																					$message);
+																					   $InstanceInfraToolsNetwork->GetNetworkIp(), 
+																					   $InstanceInfraToolsNetwork->GetNetworkNetmask(), 
+																					   $message);
 				if($return != ConfigInfraTools::RET_OK)
 				{
 					if($StopIfNotInSameNetwork == TRUE)
@@ -949,13 +949,173 @@ abstract class PageInfraTools extends Page
 	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
 																$IpAddressNetworkNew, $IpAddressIpv4, $Debug)
 	{
-		
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueIpAddressIpv4 = $IpAddressIpv4;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_IP_ADDRESS_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $IpAddressDescriptionNew; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 15; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressDescriptionText;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_DESCRIPTION', 'FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[1]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV4;
+		$arrayElementsClass[1]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
+		$arrayElementsInput[1]        = $IpAddressIpv4New; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 15; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[2]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV6;
+		$arrayElementsClass[2]        = &$this->ReturnIpAddressIpv6Class;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV6;
+		$arrayElementsInput[2]        = $IpAddressIpv6New; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 38; 
+		$arrayElementsNullable[2]     = FALSE;
+		$arrayElementsText[2]         = &$this->ReturnIpAddressIpv6Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV6', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FIELD_NETWORK_NAME
+		$arrayElements[3]             = ConfigInfraTools::FIELD_NETWORK_NAME;
+		$arrayElementsClass[3]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[3]        = $IpAddressNetworkNew; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 60; 
+		$arrayElementsNullable[3]     = FALSE;
+		$arrayElementsText[3]         = &$this->ReturnNetworkNameText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NAME', 'FM_INVALID_NETWORK_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, 
+																									 $IpAddressIpv4New, 
+																									 $IpAddressIpv6New,
+																									 $IpAddressNetworkNew, 
+																									 $this->InputValueIpAddressIpv4, 
+																									 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("IP_ADDRESS_UPDT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("IP_ADDRESS_UPDT_ERROR_UNIQUE_EXISTS");
+				return ConfigInfraTools::RET_WARNING;
+			}
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_UPDT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
 																$IpAddressNetworkNew, $IpAddressIpv6, $Debug)
 	{
-		
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueIpAddressIpv6 = $IpAddressIpv6;
+		$arrayConstants = array(); $matrixConstants = array();
+
+		//FIELD_IP_ADDRESS_DESCRIPTION
+		$arrayElements[0]             = ConfigInfraTools::FIELD_IP_ADDRESS_DESCRIPTION;
+		$arrayElementsClass[0]        = &$this->ReturnIpAddressDescriptionClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $IpAddressDescriptionNew; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 15; 
+		$arrayElementsNullable[0]     = TRUE;
+		$arrayElementsText[0]         = &$this->ReturnIpAddressDescriptionText;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_DESCRIPTION', 'FM_INVALID_IP_ADDRESS_DESCRIPTION_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FIELD_IP_ADDRESS_IPV4
+		$arrayElements[1]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV4;
+		$arrayElementsClass[1]        = &$this->ReturnIpAddressIpv4Class;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4;
+		$arrayElementsInput[1]        = $IpAddressIpv4New; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 15; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnIpAddressIpv4Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV4', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FIELD_IP_ADDRESS_IPV6
+		$arrayElements[2]             = ConfigInfraTools::FIELD_IP_ADDRESS_IPV6;
+		$arrayElementsClass[2]        = &$this->ReturnIpAddressIpv6Class;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV6;
+		$arrayElementsInput[2]        = $IpAddressIpv6New; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 38; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnIpAddressIpv6Text;
+		array_push($arrayConstants, 'FM_INVALID_IP_ADDRESS_IPV6', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+
+		//FIELD_NETWORK_NAME
+		$arrayElements[3]             = ConfigInfraTools::FIELD_NETWORK_NAME;
+		$arrayElementsClass[3]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[3] = ""; 
+		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[3]        = $IpAddressNetworkNew; 
+		$arrayElementsMinValue[3]     = 0; 
+		$arrayElementsMaxValue[3]     = 60; 
+		$arrayElementsNullable[3]     = FALSE;
+		$arrayElementsText[3]         = &$this->ReturnNetworkNameText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NAME', 'FM_INVALID_NETWORK_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, 
+																									 $IpAddressIpv4New, 
+																									 $IpAddressIpv6New,
+																									 $IpAddressNetworkNew, 
+																									 $this->InputValueIpAddressIpv6, 
+																									 $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				$this->ShowDivReturnSuccess("IP_ADDRESS_UPDT_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("IP_ADDRESS_UPDT_ERROR_UNIQUE_EXISTS");
+				return ConfigInfraTools::RET_WARNING;
+			}
+		}
+		$this->ShowDivReturnError("IP_ADDRESS_UPDT_ERROR");
+		return ConfigInfraTools::RET_ERROR;
 	}
 	
 	public function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug)

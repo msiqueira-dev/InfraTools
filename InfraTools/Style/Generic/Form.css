@@ -45,8 +45,10 @@
 #target {width:345px;}
 /* End Google Maps */
 /* Submits */
+.DivContentBodySubmit{width:120px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-left:140px;}
+.DivContentBodySubmit:hover{background-color:#ef4e22;cursor: pointer;}
 .DivContentBodySubmitBigger{width:165px;height:40px;white-space:normal;vertical-align:top;background-color:#f5821f;border:0;color:white;font-size:12px;font-weight:bolder;margin-right:23px;margin-top:10px;text-align:center !important;}
-.DivContentBodySubmitBigger:hover{background-color:#ef4e22;}
+.DivContentBodySubmitBigger:hover{background-color:#ef4e22;cursor: pointer;}
 /* End Submits */
 .DivContentBodyContainerValue{width:350px;height:35px;float:left;}
 .DivContentBodyContainerValueSided{width:340px;height:35px;float:left;}
@@ -56,8 +58,6 @@
 .DivContentBodyContainerSubmitImage img{position:relative;top:5px;}
 .DivContentBodyContainer select{width:357px;height:26px;font-size:14px;font-weight:600;border:2px groove #F5F2F3;color:graytext;}
 .DivContentBodyContainerSubmit{width:550px;height:50px;margin-top:12px;clear:both;}
-.DivContentBodySubmit{width:120px;height:30px;background-color:#f5821f;border:0;color:white;font-size:14px;margin-left:140px;}
-.DivContentBodySubmit:hover{background-color:#ef4e22;}
 .DivContentBodyContainerCaptcha{width:550px;height:35px;margin-top:20px;}
 .DivContentBodyContainerCaptcha input[type="text"]{width:150px;height:25px;float:left;line-height:26px;padding-left:3px;border:2px groove #F5F2F3}
 .DivContentBodyContainerCaptchaImage{clear:both;position:relative;bottom:7px;}
