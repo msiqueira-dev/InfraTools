@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class used for displaying the home page. 
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -54,9 +55,17 @@ class PageNotFound extends PageInfraTools
 		}
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+		}
+	}
+
 	public function LoadPage()
 	{
-		$this->LoadHtml(FALSE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, NULL, TRUE);
 	}
 }
 ?>

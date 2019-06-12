@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class used for creating the database structure. 
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))

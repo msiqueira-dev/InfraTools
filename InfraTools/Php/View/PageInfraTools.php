@@ -345,6 +345,9 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
 			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ID', ConfigInfraTools::FIELD_NOTIFICATION_ID);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ID_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE'));
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION', ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION);
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION'));
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_VALUE', $this->InputValueTypeUserDescription);
@@ -356,6 +359,11 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FIELD_USER_TYPE_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_TYPE'));
 			$this->Smarty->assign('FM_CORPORATION_SEL_SB', ConfigInfraTools::FM_CORPORATION_SEL_SB);
 			$this->Smarty->assign('FM_DEPARTMENT_SEL_SB', ConfigInfraTools::FM_DEPARTMENT_SEL_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_LST', ConfigInfraTools::FM_NOTIFICATION_LST);
+			$this->Smarty->assign('FM_NOTIFICATION_LST_FORM', ConfigInfraTools::FM_NOTIFICATION_LST_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_LST_BACK', ConfigInfraTools::FM_NOTIFICATION_LST_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_LST_FORWARD', ConfigInfraTools::FM_NOTIFICATION_LST_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_SEL_SB', ConfigInfraTools::FM_NOTIFICATION_SEL_SB);
 			$this->Smarty->assign('FM_TYPE_USER_SEL_SB', ConfigInfraTools::FM_TYPE_USER_SEL_SB);
 			$this->Smarty->assign('FM_USER_SEL_SB', ConfigInfraTools::FM_USER_SEL_SB);
 			$this->Smarty->assign('ICON_INFRATOOLS_INSTALL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall100x100.png');
@@ -376,10 +384,13 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_ASSOC_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByNameHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByType.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST_BY_TYPE_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsListByTypeHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_NOTIFICATION', $this->Config->DefaultServerImage.'Icons/IconInfraToolsNotification136x90.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdd.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED', $this->Config->DefaultServerImage.'Icons/Icons/IconNotVerified.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED_NOT', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
 			$this->Smarty->assign('PAGE_INSTALL_TEXT', $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
@@ -387,6 +398,9 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('SUBMIT_FORWARD', $this->InstanceLanguageText->GetText('SUBMIT_FORWARD'));
 			$this->Smarty->assign('SUBMIT_FORWARD_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28x28.png");
 			$this->Smarty->assign('SUBMIT_FORWARD_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowForward28x28Hover.png");
+			if(isset($this->ReturnNotificationIdText)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_ID_TEXT', $this->ReturnNotificationIdText);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_ID_TEXT', NULL);
 			if($this->InputValueCorporationActive)
 				$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
 			else $this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');

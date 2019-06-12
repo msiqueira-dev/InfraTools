@@ -1285,6 +1285,7 @@ class Pt
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "Código hash obtido com sucesso";
 	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "Erro ao obter notificações do usuário com o e-mail fornecido";
 	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "Notificações obtidas com sucesso";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_WARNING               = "Nenhuma notificação foi encontrada";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "Erro ao obter equipes desse usuário";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "Esse usuário não possui equipes";
 	const USER_TEAM_SEL_ERROR                                       = "Erro ao obter equipes do usuário";

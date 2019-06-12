@@ -981,7 +981,6 @@ class Page
 		if(!empty($this->InputValueFormMethod))
 			$this->Smarty->assign('FORM_METHOD', $this->InputValueFormMethod);
 		else $this->Smarty->assign('FORM_METHOD', '$_POST');
-		
 		if(isset($this->ReturnClass)) 
 				$this->Smarty->assign('RETURN_CLASS', $this->ReturnClass);
 		else $this->Smarty->assign('RETURN_CLASS', NULL);
@@ -1971,7 +1970,7 @@ class Page
 				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php")))
 					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php"));
 				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php")))
-					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php"));	
+					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php"));
 				if($ArrayPageForm != NULL)
 				{
 					if(is_array($ArrayPageForm))
@@ -5523,6 +5522,11 @@ class Page
 			{
 				$this->ShowDivReturnSuccess("USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS");
 				return Config::RET_OK;
+			}
+			elseif($return == Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY)
+			{
+				$this->ShowDivReturnWarning("USER_SEL_NOTIFICATION_BY_USER_EMAIL_WARNING");
+				return ConfigInfraTools::RET_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR");

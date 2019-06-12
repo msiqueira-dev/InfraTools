@@ -1229,6 +1229,7 @@ class Es
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "";
 	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "";
 	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_WARNING               = "";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "";
 	const USER_TEAM_SEL_ERROR                                       = "";

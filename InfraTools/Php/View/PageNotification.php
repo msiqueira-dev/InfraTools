@@ -38,7 +38,7 @@ if (!class_exists("AssocUserNotification"))
 
 class PageNotification extends PageInfraTools
 {
-	public $ArrayInstanceAssocUserNotification = NULL;
+	public $ArrayInstanceNotification = NULL;
 	
 	/* Singleton */
 	protected static $Instance;
@@ -68,6 +68,16 @@ class PageNotification extends PageInfraTools
 		}
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION", array($this->ArrayInstanceNotification));
+			$this->Smarty->assign("FIELD_ASSUC_USER_NOTIFICATION_READ_TEXT", $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ'));
+			
+		}
+	}
+
 	public function LoadPage()
 	{
 		if(isset($this->User))
@@ -78,12 +88,18 @@ class PageNotification extends PageInfraTools
 			if($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_LST) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'UserSelectNotificationByUserEmail', 
-										  array($this->User, &$this->ArrayInstanceAssocUserNotification),
+										  array($this->User, &$this->ArrayInstanceNotification),
 										  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
+				{
+					$this->ShowDivReturnEmpty();
 					$this->PageBody = ConfigInfraTools::PAGE_NOTIFICATION_LST;
+				}
 			}
 		}
-		$this->LoadHtml(TRUE);
+
+		$ArrayPageForm = array(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", ConfigInfraTools::PAGE_NOTIFICATION_LST) . ".php"));
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, $ArrayPageForm, TRUE);
 	}
 }
 ?>

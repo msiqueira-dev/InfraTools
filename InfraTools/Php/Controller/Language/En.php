@@ -1228,6 +1228,7 @@ class En
 	const USER_SEL_HASH_CODE_BY_USER_EMAIL_SUCCESS                  = "Hash code obtained sucessfully";
 	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR                 = "Error trying to obtain user's notifications with the given e-mail";
 	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_SUCCESS               = "Notifications obtained sucessfully";
+	const USER_SEL_NOTIFICATION_BY_USER_EMAIL_WARNING               = "No notification was found";
 	const USER_SEL_TEAM_BY_USER_EMAIL_ERROR                         = "Error trying to obtain teams associated with this e-mail";
 	const USER_SEL_TEAM_BY_USER_EMAIL_WARNING                       = "This user has not team";
 	const USER_TEAM_SEL_ERROR                                       = "Error trying to get the user teams";

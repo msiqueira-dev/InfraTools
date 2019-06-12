@@ -1,185 +1,109 @@
 <!-- FM_NOTIFICATION_LST_FORM -->
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
+	<div>
+		<div>
+			{$RETURN_IMAGE}
+		</div>
+	</div>
+	<label>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_NOTIFICATION_ID_TEXT}
+		{$RETURN_TEXT}
+	</label>
+</div>
 <div class="DivTableGenericHeader">
 	<div class="DivTableGenericHeaderRowCount">
-		<?php 
-			 if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
-			 {
-				 if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 
-					  echo "<label class='InputValueLimitTitle'>" . 
-							   $this->InstanceLanguageText->GetText('TB_PAGE_PREFIX') . 
-						   "</label>" .
-						   "<label class='InputValueLimitValue'>" . 
-							   $this->InputValueLimit1 . " " . $this->InstanceLanguageText->GetText('TB_PAGE') 
-													   . " " . $this->InputValueLimit2 . 
-						   "</label>";
-			 }
-		?>
+		<label class='InputValueLimitTitle'>
+			{$TB_PAGE_PREFIX}
+		</label>
+		<label class='InputValueLimitValue'> 
+			{$TB_PAGE_INPUT_VALUE_LIMIT_ONE} {$TB_PAGE} {$TB_PAGE_INPUT_VALUE_LIMIT_TWO}
+		</label>
 	</div>
 	<div class="DivTableGenericHeaderRowCount">
-		<?php
-			 if(isset($this->InputValueRowCount)) 
-			  {
-				  if($this->InputValueRowCount != "") 
-					  echo "<label class='DivTableGenericRowCountLabelTitle'>" . 
-							   $this->InstanceLanguageText->GetText('ROW_COUNT') . 
-						   "</label>" .
-						   "<label class='DivTableGenericRowCountLabelValue'>" . 
-							   $this->InputValueRowCount . 
-						   "</label>";
-			  } 
-		?>
+		<label class='DivTableGenericRowCountLabelTitle'>
+			{$ROW_COUNT} 
+		</label>
+		<label class='DivTableGenericRowCountLabelValue'>
+			{$INPUT_VALUE_ROW_COUNT}
+		</label>
 	</div>
 </div>
-<?php
-if(isset($this->ArrayInstanceNotification))
-{
-	if(is_array($this->ArrayInstanceNotification))
-	{
-		echo "<form  name='" . ConfigInfraTools::FM_NOTIFICATION_LST_FORM . "' method='post' />";
-		echo "<input type='hidden' value='$this->InputLimitOne' 
-					 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
-		echo "<input type='hidden' value='$this->InputLimitTwo'
-					 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
-		echo "<table class='TableGeneric'>";
-		echo "<tr>";
-		echo "<th class='TableGenericThArrow'>" .
-			 "<div class='TableGenericInputLeft'>
-			 <input  type='image'
-					  class='TableGenericThArrowImage'
-					  name='"  . ConfigInfraTools::FM_NOTIFICATION_LST_BACK . "' 
-					  id='"    . ConfigInfraTools::FM_NOTIFICATION_LST_BACK . "'
-					  value='" . ConfigInfraTools::FM_NOTIFICATION_LST_BACK . "'
-					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowBack28x28.png'
-					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
-					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBack28x28.png'\" /></div>" .
-			 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID') . "</div></th>";
-		echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE') . "</th>";
-		echo "<th  class='TableGenericThArrow'>
-			 <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-			 "<div class='TableGenericInputRight'>
-			  <input  type='image'
-					  class='TableGenericThArrowImage'
-					  name='"  . ConfigInfraTools::FM_NOTIFICATION_LST_FORWARD . "' 
-					  id='"    . ConfigInfraTools::FM_NOTIFICATION_LST_FORWARD . "'
-					  value='" . ConfigInfraTools::FM_NOTIFICATION_LST_FORWARD . "'
-					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowForward28x28.png'
-					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
-					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrow28x28Forward.png'\" /></div>";
-		echo "</th>";
-		echo "</tr>";
-		echo "</form>";
-		foreach($this->ArrayInstanceNotification as $key=>$notification)
-		{
-			echo "<tr>";
-			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' method='post' />
+
+<table class='TableGeneric'>
+	<tr>
+		<form  name="{$FM_NOTIFICATION_LST_FORM}" method="{$FORM_METHOD}">
+			<th class="TableGenericThArrow">
+				<div class="TableGenericInputLeft">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_NOTIFICATION_LST_BACK}" 
+							id="{$FM_NOTIFICATION_LST_BACK}" 
+							value="{$FM_NOTIFICATION_LST_BACK}"
+					        title="{$SUBMIT_BACK}" alt="{$SUBMIT_BACK}"
+					        src="{$SUBMIT_BACK_ICON}"
+					        onmouseover="this.src='{$SUBMIT_BACK_ICON_HOVER}'"
+					        onmouseout="this.src='{$SUBMIT_BACK_ICON}'" />
+				</div>
+				<div class="TableGenericThRight">
+					{$FIELD_NOTIFICATION_ID_TEXT}
+				</div>
+			</th>
+			<th  class="TableGenericThDiv">
+				{$FIELD_NOTIFICATION_ACTIVE_TEXT}
+			</th>
+			<th  class="TableGenericThArrow">
+				<div  class="TableGenericThLeft">
+					{$FIELD_REGISTER_DATE_TEXT}
+				</div>
+				<div class="TableGenericInputRight">
+					<input  type="image" class="TableGenericThArrowImage"
+							name="{$FM_NOTIFICATION_LST_FORWARD}" 
+							id="{$FM_NOTIFICATION_LST_FORWARD}" 
+							value="{$FM_NOTIFICATION_LST_FORWARD}"
+							title="{$SUBMIT_FORWARD}" alt="{$SUBMIT_FORWARD}"
+							src="{$SUBMIT_FORWARD_ICON}"
+							onmouseover="this.src='{$SUBMIT_FORWARD_ICON_HOVER}'"
+							onmouseout="this.src='{$SUBMIT_FORWARD_ICON}'" />
+				</div>
+			</th>
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_ONE}" name="{$FM_LST_INPUT_LIMIT_ONE}" />
+			<input type="hidden" value="{$TB_PAGE_INPUT_VALUE_LIMIT_TWO}" name="{$FM_LST_INPUT_LIMIT_TWO}" />
+		</form>
+	</tr>
+	{foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION item=INSTANCE_NOTIFICATION}
+		{foreach key=key item=item from=$INSTANCE_NOTIFICATION}
+			<tr>
+				<td class='TableGenericTdLink'>
+					<form  name="{$FM_NOTIFICATION_SEL_SB}" ethod="{$FORM_METHOD}">
 						<input type='hidden'
-								 name='"   . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' 
-								 id='"     . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "'
-								 value='"  . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' />
-						  <input type='submit' name='" . ConfigInfraTools::FIELD_NOTIFICATION_ID . "' 
-									   id='"   . ConfigInfraTools::FIELD_NOTIFICATION_ID . "' 
-									   value='" . $notification->GetNotificationId() . "' 
-									   title='" . $notification->GetNotificationId() . "' />
+								 name="{$FM_NOTIFICATION_SEL_SB}"
+								 id="{$FM_NOTIFICATION_SEL_SB}"
+								 value="{$FM_NOTIFICATION_SEL_SB}" />
+							{if $item|is_a:'Notification'}
+								<input type='submit' name="{$FIELD_NOTIFICATION_ID}" id="{$FIELD_NOTIFICATION_ID}" 
+										value="{$item->GetNotificationId()}" 
+										title="{$item->GetNotificationId()}"/>
+							{/if}
+							{if $item|is_a:'AssocUserNotification'}
+								<input type='submit' name="{$FIELD_NOTIFICATION_ID}" id="{$FIELD_NOTIFICATION_ID}" 
+										value="{$item->GetAssocUserNotificationNotification()}" 
+										title="{$item->GetAssocUserNotificationNotification()}"/>
+							{/if}
 					</form>
-				  </td>";
-			echo "<td class='TableGenericTdLink'>";
-			if($notification->GetNotificationActive())
-				echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconVerified.png'
-						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
-			else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconNotVerified.png' 
-						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
-			echo "<td class= 'TableGenericTdLink'>" . $notification->GetRegisterDate() . "</td>";
-			echo "</tr>";
-		}
-		echo "</table>";
-	}
-}
-elseif(isset($this->ArrayInstanceAssocUserNotification))
-{
-	if(is_array($this->ArrayInstanceAssocUserNotification))
-	{
-		echo "<form  name='" . ConfigInfraTools::FM_NOTIFICATION_LST_FORM . "' method='post' />";
-		echo "<input type='hidden' value='$this->InputLimitOne' 
-					 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE . "'/>";
-		echo "<input type='hidden' value='$this->InputLimitTwo'
-					 name='" . ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO . "'/>";
-		echo "<table class='TableGeneric'>";
-		echo "<tr>";
-		echo "<th class='TableGenericThArrow'>" .
-			 "<div class='TableGenericInputLeft'>
-			 <input  type='image'
-					  class='TableGenericThArrowImage'
-					  name='"  . ConfigInfraTools::FM_NOTIFICATION_LST_BACK . "' 
-					  id='"    . ConfigInfraTools::FM_NOTIFICATION_LST_BACK . "'
-					  value='" . ConfigInfraTools::FM_NOTIFICATION_LST_BACK . "'
-					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_BACK') . "'
-					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowBack28x28.png'
-					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBack28x28Hover.png'\"
-					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowBack28x28.png'\" /></div>" .
-			 "<div class='TableGenericThRight'>" . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID') . "</div></th>";
-		echo "<th  class='TableGenericThDiv'>"   . $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ') . "</th>";
-		echo "<th  class='TableGenericThArrow'>
-			 <div  class='TableGenericThLeft'>"  . $this->InstanceLanguageText->GetText('REGISTER_DATE') . "</div>" .
-			 "<div class='TableGenericInputRight'>
-			  <input  type='image'
-					  class='TableGenericThArrowImage'
-					  name='"  . ConfigInfraTools::FM_NOTIFICATION_LST_FORWARD . "' 
-					  id='"    . ConfigInfraTools::FM_NOTIFICATION_LST_FORWARD . "'
-					  value='" . ConfigInfraTools::FM_NOTIFICATION_LST_FORWARD . "'
-					  title='" . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-					  alt='"   . $this->InstanceLanguageText->GetText('SUBMIT_FORWARD') . "'
-					  src='"   . $this->Config->DefaultServerImage 
-							   . "Icons/IconInfraToolsArrowForward28x28.png'
-					  onmouseover=\"this.src='" . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForward28x28Hover.png'\"
-					  onmouseout=\"this.src='"  . $this->Config->DefaultServerImage
-							   . "Icons/IconInfraToolsArrowForward28x28.png'\" /></div>";
-		echo "</th>";
-		echo "</tr>";
-		echo "</form>";
-		foreach($this->ArrayInstanceAssocUserNotification as $key=>$assocUserNotification)
-		{
-			echo "<tr>";
-			echo "<td class='TableGenericTdLink'>
-					<form  name='" . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "' method='post' />
-						<a href='" . $this->InstanceLanguageText->GetText('HREF_PAGE_NOTIFICATION_VIEW') . "?" 
-						           . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "=" . ConfigInfraTools::FM_NOTIFICATION_SEL_SB . "&"
-							       . ConfigInfraTools::FIELD_NOTIFICATION_ID . "="
-								   . $assocUserNotification->GetAssocUserNotificationNotification()->GetNotificationId() . "' 
-						   target=''
-						   title=''>
-						    <i>"
-								. $assocUserNotification->GetAssocUserNotificationNotification()->GetNotificationId() .
-							"</i>
-						</a>
-					</form>
-				  </td>";
-			echo "<td class='TableGenericTdLink'>";
-			if($assocUserNotification->GetAssocUserNotificationRead())
-				echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconVerified.png'
-						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
-			else echo "<img src='" . $this->Config->DefaultServerImage . "Icons/IconNotVerified.png' 
-						   'alt='NotificationActive' width='20' height='20' />" . "</td>";
-			echo "<td class= 'TableGenericTdLink'>" . $assocUserNotification->GetRegisterDate() . "</td>";
-			echo "</tr>";
-		}
-		echo "</table>";
-	}
-}
-?>
-</form>
+				</td>
+				<td class="TableGenericTdLink">
+					{if $item|is_a:'AssocUserNotification'}
+						{if $item->GetAssocUserNotificationRead() eq true}
+							{$ICON_INFRATOOLS_VERIFIED}
+						{else}
+							{$ICON_INFRATOOLS_VERIFIED_NOT}
+						{/if}
+					{/if}
+				</td>
+				<td class="TableGenericTdLink">
+					{$item->GetRegisterDate()}
+				</td>
+			</tr>
+		{/foreach}
+	{/foreach}
+</table>
