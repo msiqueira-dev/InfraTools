@@ -11,6 +11,8 @@ Description:
 			Class for association between User and Notification
 Get / Set:
 			public function GetAssocUserNotificationNotification();
+			public function GetAssocUserNotificationNotificationId();
+			public function GetAssocUserNotificationNotificationText();
 			public function GetAssocUserNotificationRead();
 			public function GetAssocUserNotificationUser();
 			public function GetRegisterDate();
@@ -54,6 +56,19 @@ class AssocUserNotification
 	public function GetAssocUserNotificationNotification()
 	{
 		return $this->AssocUserNotificationNotification;
+	}
+
+	public function GetAssocUserNotificationNotificationId()
+	{
+		if(is_object($this->AssocUserNotificationNotification))
+			return $this->AssocUserNotificationNotification->GetNotificationId();
+		else return NULL;
+	}
+	public function GetAssocUserNotificationNotificationText()
+	{
+		if(is_object($this->AssocUserNotificationNotification))
+			return $this->AssocUserNotificationNotification->GetNotificationText();
+		else return NULL;
 	}
 	
 	public function GetAssocUserNotificationRead()

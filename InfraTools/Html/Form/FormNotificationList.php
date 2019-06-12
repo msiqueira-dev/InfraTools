@@ -74,7 +74,7 @@
 		{foreach key=key item=item from=$INSTANCE_NOTIFICATION}
 			<tr>
 				<td class='TableGenericTdLink'>
-					<form  name="{$FM_NOTIFICATION_SEL_SB}" ethod="{$FORM_METHOD}">
+					<form  name="{$FM_NOTIFICATION_SEL_SB}" method="{$FORM_METHOD}">
 						<input type='hidden'
 								 name="{$FM_NOTIFICATION_SEL_SB}"
 								 id="{$FM_NOTIFICATION_SEL_SB}"
@@ -85,18 +85,25 @@
 										title="{$item->GetNotificationId()}"/>
 							{/if}
 							{if $item|is_a:'AssocUserNotification'}
-								<input type='submit' name="{$FIELD_NOTIFICATION_ID}" id="{$FIELD_NOTIFICATION_ID}" 
-										value="{$item->GetAssocUserNotificationNotification()}" 
-										title="{$item->GetAssocUserNotificationNotification()}"/>
+								<a href="{$HREF_PAGE_NOTIFICATION_VIEW}{$item->GetAssocUserNotificationNotificationId()}"
+								   target='' title=''>
+									<i>
+										{$item->GetAssocUserNotificationNotificationId()}
+									</i>
+								</a>
 							{/if}
 					</form>
 				</td>
 				<td class="TableGenericTdLink">
 					{if $item|is_a:'AssocUserNotification'}
 						{if $item->GetAssocUserNotificationRead() eq true}
-							{$ICON_INFRATOOLS_VERIFIED}
+							<img src="{$ICON_INFRATOOLS_VERIFIED}" 
+								 alt='Verified' />
+							
 						{else}
-							{$ICON_INFRATOOLS_VERIFIED_NOT}
+							<img src="{$ICON_INFRATOOLS_VERIFIED_NOT}" 
+								 alt='NotVerified' />
+							
 						{/if}
 					{/if}
 				</td>

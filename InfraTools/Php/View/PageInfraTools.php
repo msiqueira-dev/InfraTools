@@ -366,6 +366,7 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FM_NOTIFICATION_SEL_SB', ConfigInfraTools::FM_NOTIFICATION_SEL_SB);
 			$this->Smarty->assign('FM_TYPE_USER_SEL_SB', ConfigInfraTools::FM_TYPE_USER_SEL_SB);
 			$this->Smarty->assign('FM_USER_SEL_SB', ConfigInfraTools::FM_USER_SEL_SB);
+			$this->Smarty->assign('HREF_PAGE_NOTIFICATION_VIEW', $this->InstanceLanguageText->GetText('HREF_PAGE_NOTIFICATION_VIEW'));
 			$this->Smarty->assign('ICON_INFRATOOLS_INSTALL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall100x100.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_INSTALL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsInstall100x100Hover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_LST', $this->Config->DefaultServerImage.'Icons/IconInfraToolsList.png');
@@ -389,8 +390,8 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_REGISTER_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAddHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFind.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED', $this->Config->DefaultServerImage.'Icons/Icons/IconNotVerified.png');
-			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED_NOT', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED_NOT', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			$this->Smarty->assign('PAGE_INSTALL_TEXT', $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
