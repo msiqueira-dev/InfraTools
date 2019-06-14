@@ -75,7 +75,6 @@ class PageAdminIpAddress extends PageAdmin
 			if(!is_array($this->ArrayInstanceInfraToolsIpAddressNetwork))
 				$this->ArrayInstanceInfraToolsIpAddressNetwork = array();
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
-			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS);
 			$this->Smarty->assign('DIV_RADIO_IP_ADDRESS_IPV4', ConfigInfraTools::DIV_RADIO_IP_ADDRESS_IPV4);
 			$this->Smarty->assign('DIV_RADIO_IP_ADDRESS_IPV6', ConfigInfraTools::DIV_RADIO_IP_ADDRESS_IPV6);
 			$this->Smarty->assign('FIELD_RADIO_IP_ADDRESS', ConfigInfraTools::FIELD_RADIO_IP_ADDRESS);

@@ -44,7 +44,8 @@ class PageAdminCorporation extends PageAdmin
 	{
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
-			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_CORPORATION", array($this->ArrayInstanceInfraToolsCorporation));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
 			$this->Smarty->assign('FM_CORPORATION', ConfigInfraTools::FM_CORPORATION);
 			$this->Smarty->assign('FM_CORPORATION_LST', ConfigInfraTools::FM_CORPORATION_LST);
 			$this->Smarty->assign('FM_CORPORATION_LST_BACK', ConfigInfraTools::FM_CORPORATION_LST_BACK);
@@ -68,8 +69,6 @@ class PageAdminCorporation extends PageAdmin
 			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_SB', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB_BACK);
 			$this->Smarty->assign('FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_CORPORATION_VIEW_LST_USERS_SB_FORWARD);
-			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_CORPORATION", array($this->ArrayInstanceInfraToolsCorporation));
-			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;

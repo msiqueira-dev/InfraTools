@@ -2753,7 +2753,7 @@ class InfraToolsFacedePersistence extends FacedePersistence
 			$return = $InfraToolsFacedePersistenceUser->InfraToolsUserSelectByTypeUserDescription($Limit1, $Limit2, $TypeUserDescription,
 																							      $ArrayInstanceInfraToolsUser, 
 																								  $RowCount, $Debug,
-																							      $MySqlConnection);
+																								  $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);
 		}

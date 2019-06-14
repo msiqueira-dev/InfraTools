@@ -1,5 +1,5 @@
 <!-- BODY_PAGE_ADMIN_COUNTRY -->
-<form name="{$FM_COUNTRY}" id="{$FM_COUNTRY}" method="post">
+<form name="{$FM_COUNTRY}" id="{$FM_COUNTRY}" method="{$FORM_METHOD}" >
 	<!-- SUBMIT -->
 	<div class="DivContentBodyOptions">
 		<div class="DivContentBodyOptionsBox">

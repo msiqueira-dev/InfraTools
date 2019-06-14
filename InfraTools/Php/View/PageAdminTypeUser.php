@@ -48,7 +48,6 @@ class PageAdminTypeUser extends PageAdmin
 		{
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_TYPE_USER", array($this->ArrayInstanceInfraToolsTypeUser));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
-			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
 			$this->Smarty->assign('FM_TYPE_USER', ConfigInfraTools::FM_TYPE_USER);
 			$this->Smarty->assign('FM_TYPE_USER_LST', ConfigInfraTools::FM_TYPE_USER_LST);
 			$this->Smarty->assign('FM_TYPE_USER_LST_BACK', ConfigInfraTools::FM_TYPE_USER_LST_BACK);

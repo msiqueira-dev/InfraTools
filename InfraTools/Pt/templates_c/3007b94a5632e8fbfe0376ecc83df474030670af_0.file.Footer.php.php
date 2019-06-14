@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.33, created on 2019-06-09 08:55:39
+/* Smarty version 3.1.33, created on 2019-06-13 23:22:01
   from 'C:\Web\Sites\Development\InfraTools\Html\Footer\Footer.php' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.33',
-  'unifunc' => 'content_5cfcf3bb00f3f4_64727708',
+  'unifunc' => 'content_5d0304c967de20_65333237',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5cfcf3bb00f3f4_64727708 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5d0304c967de20_65333237 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="DivFooter">
 	<div class="DivFooterContent">
         <div class="DivFooterContentCopyright">

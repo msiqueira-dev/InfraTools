@@ -83,8 +83,7 @@
 								<input type='submit' name="{$FIELD_NOTIFICATION_ID}" id="{$FIELD_NOTIFICATION_ID}" 
 										value="{$item->GetNotificationId()}" 
 										title="{$item->GetNotificationId()}"/>
-							{/if}
-							{if $item|is_a:'AssocUserNotification'}
+							{else}
 								<a href="{$HREF_PAGE_NOTIFICATION_VIEW}{$item->GetAssocUserNotificationNotificationId()}"
 								   target='' title=''>
 									<i>
@@ -95,7 +94,17 @@
 					</form>
 				</td>
 				<td class="TableGenericTdLink">
-					{if $item|is_a:'AssocUserNotification'}
+					{if $item|is_a:'Notification'}
+						{if $item->GetNotificationActive() eq true}
+							<img src="{$ICON_INFRATOOLS_VERIFIED}" 
+								 alt='Verified' />
+							
+						{else}
+							<img src="{$ICON_INFRATOOLS_VERIFIED_NOT}" 
+								 alt='NotVerified' />
+							
+						{/if}
+					{else}
 						{if $item->GetAssocUserNotificationRead() eq true}
 							<img src="{$ICON_INFRATOOLS_VERIFIED}" 
 								 alt='Verified' />

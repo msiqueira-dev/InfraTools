@@ -333,6 +333,11 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('DIV_RETURN', ConfigInfraTools::DIV_RETURN);
 			$this->Smarty->assign('FM_LST_INPUT_LIMIT_ONE', ConfigInfraTools::FM_LST_INPUT_LIMIT_ONE);
 			$this->Smarty->assign('FM_LST_INPUT_LIMIT_TWO', ConfigInfraTools::FM_LST_INPUT_LIMIT_TWO);
+			$this->Smarty->assign('FIELD_ASSOC_USER_NOTIFICATION_NOTIFICATION_ID_VALUE', $this->InputValueAssocUserNotificationNotificationId);
+			$this->Smarty->assign('FIELD_ASSOC_USER_NOTIFICATION_READ', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
+			$this->Smarty->assign('FIELD_ASSOC_USER_NOTIFICATION_READ_VALUE', $this->InputValueAssocUserNotificationRead);
+			$this->Smarty->assign('FIELD_ASSOC_USER_NOTIFICATION_READ_TEXT', $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ'));
+			$this->Smarty->assign('FIELD_ASSOC_USER_NOTIFICATION_USER_EMAIL_VALUE', $this->InputValueAssocUserNotificationUserEmail);
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_VALUE', $this->InputValueCorporationActive);
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_ACTIVE'));
@@ -345,9 +350,15 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
 			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
 			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE', ConfigInfraTools::FIELD_NOTIFICATION_ACTIVE);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE_VALUE', $this->InputValueNotificationActive);
 			$this->Smarty->assign('FIELD_NOTIFICATION_ID', ConfigInfraTools::FIELD_NOTIFICATION_ID);
 			$this->Smarty->assign('FIELD_NOTIFICATION_ID_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID'));
-			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ID_VALUE', $this->InputValueNotificationId);
+			$this->Smarty->assign('FIELD_NOTIFICATION_TEXT', ConfigInfraTools::FIELD_NOTIFICATION_TEXT);
+			$this->Smarty->assign('FIELD_NOTIFICATION_TEXT_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_TEXT'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_TEXT_VALUE', $this->InputValueNotificationText);
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION', ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION);
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION'));
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_VALUE', $this->InputValueTypeUserDescription);
@@ -363,7 +374,10 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FM_NOTIFICATION_LST_FORM', ConfigInfraTools::FM_NOTIFICATION_LST_FORM);
 			$this->Smarty->assign('FM_NOTIFICATION_LST_BACK', ConfigInfraTools::FM_NOTIFICATION_LST_FORM);
 			$this->Smarty->assign('FM_NOTIFICATION_LST_FORWARD', ConfigInfraTools::FM_NOTIFICATION_LST_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_SEL', ConfigInfraTools::FM_NOTIFICATION_SEL);
+			$this->Smarty->assign('FM_NOTIFICATION_SEL_FORM', ConfigInfraTools::FM_NOTIFICATION_SEL_FORM);
 			$this->Smarty->assign('FM_NOTIFICATION_SEL_SB', ConfigInfraTools::FM_NOTIFICATION_SEL_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW', ConfigInfraTools::FM_NOTIFICATION_VIEW);
 			$this->Smarty->assign('FM_TYPE_USER_SEL_SB', ConfigInfraTools::FM_TYPE_USER_SEL_SB);
 			$this->Smarty->assign('FM_USER_SEL_SB', ConfigInfraTools::FM_USER_SEL_SB);
 			$this->Smarty->assign('HREF_PAGE_NOTIFICATION_VIEW', $this->InstanceLanguageText->GetText('HREF_PAGE_NOTIFICATION_VIEW'));
@@ -392,7 +406,16 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED_NOT', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			$this->Smarty->assign('PAGE_ADMIN_CORPORATION', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
+			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
+			$this->Smarty->assign('PAGE_ADMIN_IP_ADDRESS', ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS);
+			$this->Smarty->assign('PAGE_ADMIN_NOTIFICATION', ConfigInfraTools::PAGE_ADMIN_NOTIFICATION);
+			$this->Smarty->assign('PAGE_ADMIN_SERVICE', ConfigInfraTools::PAGE_ADMIN_SERVICE);
+			$this->Smarty->assign('PAGE_ADMIN_TEAM', ConfigInfraTools::PAGE_ADMIN_TEAM);
+			$this->Smarty->assign('PAGE_ADMIN_TYPE_USER', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
+			$this->Smarty->assign('PAGE_ADMIN_USER', ConfigInfraTools::PAGE_ADMIN_USER);
 			$this->Smarty->assign('PAGE_INSTALL_TEXT', $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'));
+			$this->Smarty->assign('SUBMIT_ASSOCIATE_USER', $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USER'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
 			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28Hover.png");
@@ -408,6 +431,24 @@ abstract class PageInfraTools extends Page
 			if($this->InputValueDepartmentActive)
 				$this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
 			else $this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if(isset($this->ReturnNotificationActiveClass)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_ACTIVE_CLASS', $this->ReturnNotificationActiveClass);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_ACTIVE_CLASS', NULL);
+			if(isset($this->ReturnNotificationActiveText)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_ACTIVE_TEXT', $this->ReturnNotificationActiveText);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_ACTIVE_TEXT', NULL); 
+			if(isset($this->ReturnNotificationIdClass)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_ID_CLASS', $this->ReturnNotificationIdClass);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_ID_CLASS', NULL);
+			if(isset($this->ReturnNotificationIdText)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_ID_TEXT', $this->ReturnNotificationIdText);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_ID_TEXT', NULL); 
+			if(isset($this->ReturnNotificationTextClass)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_TEXT_CLASS', $this->ReturnNotificationTextClass);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_TEXT_CLASS', NULL);
+			if(isset($this->ReturnNotificationTextText)) 
+				$this->Smarty->assign('RETURN_NOTIFICATION_TEXT_TEXT', $this->ReturnNotificationTextText);
+			else $this->Smarty->assign('RETURN_NOTIFICATION_TEXT_TEXT', NULL);
 			if(isset($this->InputValueLimit1) && isset($this->InputValueLimit2)) 
 			{
 				if($this->InputValueLimit1 != "" || $this->InputValueLimit2 != "") 

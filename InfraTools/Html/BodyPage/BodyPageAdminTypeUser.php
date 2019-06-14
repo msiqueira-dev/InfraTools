@@ -1,6 +1,5 @@
 <!-- BODY_PAGE_ADMIN_TYPE_USER -->
-<form name="{$FM_TYPE_USER}" 
-			id="{$FM_TYPE_USER}" method="post" >
+<form name="{$FM_TYPE_USER}" id="{$FM_TYPE_USER}" method="{$FORM_METHOD}" >
 	<!-- SUBMIT -->
 	<div class="DivContentBodyOptions">
 		<div class="DivContentBodyOptionsBox">

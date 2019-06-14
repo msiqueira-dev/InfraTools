@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class for notification management.
 Functions: 
+			protected function BuildSmartyTags();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -89,6 +90,34 @@ class PageAdminNotification extends PageAdmin
 			return ConfigInfraTools::RET_OK;
 		}
 		else return ConfigInfraTools::RET_ERROR;
+	}
+
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION", array($this->ArrayInstanceNotification));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
+			$this->Smarty->assign('FM_NOTIFICATION', ConfigInfraTools::FM_NOTIFICATION);
+			$this->Smarty->assign('FM_NOTIFICATION_REGISTER', ConfigInfraTools::FM_NOTIFICATION_REGISTER);
+			$this->Smarty->assign('FM_NOTIFICATION_REGISTER_CANCEL', ConfigInfraTools::FM_NOTIFICATION_REGISTER_CANCEL);
+			$this->Smarty->assign('FM_NOTIFICATION_REGISTER_FORM', ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_REGISTER_SB', ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_UPDT_CANCEL', ConfigInfraTools::FM_NOTIFICATION_UPDT_CANCEL);
+			$this->Smarty->assign('FM_NOTIFICATION_UPDT_FORM', ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_UPDT_SB', ConfigInfraTools::FM_NOTIFICATION_UPDT_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_DEL', ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_DEL_SB', ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_UPDT', ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_UPDT_SB', ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_FORM', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_SB', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB_BACK);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB_FORWARD);
+			return ConfigInfraTools::RET_OK;
+		}
+		return ConfigInfraTools::RET_ERROR;
 	}
 
 	public function LoadPage()
@@ -522,7 +551,8 @@ class PageAdminNotification extends PageAdmin
 		}
 		if(!$PageFormBack != FALSE)
 			$this->PageStackSessionSave();
-		$this->LoadHtml(FALSE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

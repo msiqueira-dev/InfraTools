@@ -1,134 +1,115 @@
-<!-- DIV_RETURN -->	
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnText))             echo $this->ReturnText; ?>
-		<?php if(isset($this->ReturnNotificationId))   echo $this->ReturnNotificationId; ?>
-		<?php if(isset($this->ReturnNotificationText)) echo $this->ReturnNotificationText; ?>
-		<?php if(isset($this->ReturnNotificationActive)) echo $this->ReturnNotificationActive; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_NOTIFICATION_ACTIVE_TEXT}
+		{$RETURN_NOTIFICATION_ID_TEXT}
+		{$RETURN_NOTIFICATION_TEXT_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_NOTIFICATION_VIEW -->
-<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW; ?>" 
-      id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW; ?>" method="post" >
+<form name="{$FM_NOTIFICATION_VIEW}" id="{$FM_NOTIFICATION_VIEW}" method="{$FORM_METHOD}">
     <!-- FIELD_NOTIFICATION_ID -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php  echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID').":"; ?></label>
+            <label>{$FIELD_NOTIFICATION_ID_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueNotificationId; ?></label>
+            <label class="DivContentBodyContainerValueContent">{$FIELD_NOTIFICATION_ID_VALUE}</label>
         </div>
     </div>
     <!-- FIELD_NOTIFICATION_TEXT -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_TEXT').":"; ?></label>
+            <label>{$FIELD_NOTIFICATION_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueNotificationText; ?></label>
+            <label class="DivContentBodyContainerValueContent">{$FIELD_NOTIFICATION_TEXT_VALUE}</label>
         </div>
     </div>
-    <?php if($this->Page == str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION)) 
-	{
-	?>
+    {if $CURRENT_PAGE eq $PAGE_ADMIN_NOTIFICATION}
 		<!-- FIELD_NOTIFICATION_ACTIVE -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE').":"; ?></label>
+				<label>{$FIELD_NOTIFICATION_ACTIVE} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
-					<?php
-						echo "<img src='" . $this->InputValueNotificationActiveIcon . "' 
-							   name='"    . $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE') . "'
-							   alt='NotificationActive' width='20' height='20' />";
-					?>
+					{if $FIELD_NOTIFICATION_ACTIVE_VALUE eq true}	
+						<img src="{$ICON_INFRATOOLS_VERIFIED}" 
+							 name="{$FIELD_NOTIFICATION_ACTIVE_TEXT}"
+							 alt='NotificationActive' width='20' height='20' />
+					{else}
+						<img src="{$ICON_INFRATOOLS_VERIFIED_NOT}" 
+							 name="{$FIELD_NOTIFICATION_ACTIVE_TEXT}"
+							 alt='NotificationActive' width='20' height='20' />
+					{/if}
 				</label>
 			</div>
 		</div>
-    <?php 
-	}
-	else 
-	{
-	?>
+	{else}
     	<!-- FIELD_ASSOC_USER_NOTIFICATION_READ -->
 		<div class="DivContentBodyContainer">
 			<div class="DivContentBodyContainerLabel">
-				<label><?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ').":"; ?></label>
+				<label>{$FIELD_ASSOC_USER_NOTIFICATION_READ_TEXT} : </label>
 			</div>
 			<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
-					<?php
-						echo "<img src='" . $this->InputValueAssocUserNotificationRead . "' 
-							   name='"    . $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ') . "'
-							   alt='NotificationActive' width='20' height='20' />";
-					?>
+					{if $FIELD_ASSOC_USER_NOTIFICATION_READ_VALUE eq true}	
+						<img src="{$ICON_INFRATOOLS_VERIFIED}" 
+							 name="{$FIELD_ASSOC_USER_NOTIFICATION_READ_TEXT}"
+							 alt='NotificationActive' width='20' height='20' />
+					{else}
+						<img src="{$ICON_INFRATOOLS_VERIFIED_NOT}" 
+							 name="{$FIELD_ASSOC_USER_NOTIFICATION_READ_TEXT}"
+							 alt='NotificationActive' width='20' height='20' />
+					{/if}
 				</label>
 			</div>
 		</div>
-    <?php 
-	}
-	?>
+	{/if}
     <!-- REGISTER_DATE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('REGISTER_DATE').":"; ?></label>
+            <label>{$FIELD_REGISTER_DATE_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueRegisterDate; ?></label>
+            <label class="DivContentBodyContainerValueContent">{$FIELD_REGISTER_DATE_VALUE}</label>
         </div>
     </div>
  </form>
 <!-- SUBMIT -->
-<?php if($this->Page == str_replace("_", "", ConfigInfraTools::PAGE_ADMIN_NOTIFICATION)) 
-{
-?>
+{if $CURRENT_PAGE eq $PAGE_ADMIN_NOTIFICATION}
 	<div class="DivContentBodyContainer">
 		<!-- FM_NOTIFICATION_VIEW_UPDT -->
-		<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT; ?>" 
-			  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT; ?>" 
-			  class="DivFormHorizontalButtons"
-			  method="post" >
-			<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT_SB; ?>"
-								 class="DivContentBodySubmitBigger"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_UPDT'); ?>"/>
+		<form name="{$FM_NOTIFICATION_VIEW_UPDT}" id="{$FM_NOTIFICATION_VIEW_UPDT}" 
+			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}" >
+			<input type="submit" name="{$FM_NOTIFICATION_VIEW_UPDT_SB}" id="{$FM_NOTIFICATION_VIEW_UPDT_SB}" 
+			       class="DivContentBodySubmitBigger" value="{$SUBMIT_UPDT}"/>
 		</form>
 		<!-- FM_NOTIFICATION_VIEW_DEL -->
-		<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL; ?>" 
-			  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL; ?>" 
-			  class="DivFormHorizontalButtons"
-			  method="post" >
-			<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL_SB; ?>" 
-					   id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL_SB; ?>"
-					   class="DivContentBodySubmitBigger"
-					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_DEL'); ?>"
-				   onclick="return confirm('<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM');?>');"/>
+		<form name="{$FM_NOTIFICATION_VIEW_DEL}" id="{$FM_NOTIFICATION_VIEW_DEL}" 
+			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}" >
+			<input type="submit" name="{$FM_NOTIFICATION_VIEW_DEL_SB}" id="{$FM_NOTIFICATION_VIEW_DEL_SB}"
+				   class="DivContentBodySubmitBigger" value="{$SUBMIT_DEL}" 
+				   onclick="return confirm('{$SUBMIT_CONFIRM}');"/>
 		</form>
 		<!-- FM_NOTIFICATION_VIEW_LST_USERS -->
-		<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS; ?>" 
-			  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS; ?>" 
-			  class="DivFormHorizontalButtons"
-			  method="post" >
-			<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB; ?>" 
-					   id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB; ?>"
-					   class="DivContentBodySubmitBigger"
-					   value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'); ?>"/>
+		<form name="{$FM_NOTIFICATION_VIEW_LST_USERS}" id="{$FM_NOTIFICATION_VIEW_LST_USERS}" 
+			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}" >
+			<input type="submit" name="{$FM_NOTIFICATION_VIEW_LST_USERS_SB}" id="{$FM_NOTIFICATION_VIEW_LST_USERS_SB}"
+				   class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS}"/>
 		</form>
 		<!-- FM_NOTIFICATION_VIEW_ASSOCIATE_USER -->
-		<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER; ?>" 
-			  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER; ?>" 
-			  class="DivFormHorizontalButtons"
-			  method="post" >
-			<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB; ?>"
-								 class="DivContentBodySubmitBigger"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USER'); ?>"/>
+		<form name="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER}" id="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER}" 
+			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}" >
+			<input type="submit" name="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB}" id="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB}"
+				   class="DivContentBodySubmitBigger" value="{$SUBMIT_ASSOCIATE_USER}"/>
 		</form>
 	</div>
-<?php } ?>
+{/if}

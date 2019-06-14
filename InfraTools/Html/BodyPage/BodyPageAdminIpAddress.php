@@ -1,6 +1,5 @@
-<!-- BODY_PAGE_ADMIN_CORPORATION -->
-<form name="{$FM_IP_ADDRESS}" 
-			id="{$FM_IP_ADDRESS}" method="post" >
+<!-- BODY_PAGE_ADMIN_IP_ADDRESS -->
+<form name="{$FM_IP_ADDRESS}" id="{$FM_IP_ADDRESS}" method="{$FORM_METHOD}" >
 	<!-- SUBMIT -->
 	<div class="DivContentBodyOptions">
 		<div class="DivContentBodyOptionsBox">

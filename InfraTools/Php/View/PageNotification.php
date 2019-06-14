@@ -74,7 +74,8 @@ class PageNotification extends PageInfraTools
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION", array($this->ArrayInstanceNotification));
-			$this->Smarty->assign("FIELD_ASSUC_USER_NOTIFICATION_READ_TEXT", $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ'));
+			$this->Smarty->assign("FIELD_ASSUC_USER_NOTIFICATION_READ_TEXT", 
+			                      $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_NOTIFICATION_READ'));
 			$this->Smarty->assign("HREF_PAGE_NOTIFICATION_VIEW", $this->IdHref);
 		}
 	}

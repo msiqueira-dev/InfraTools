@@ -323,7 +323,6 @@ class Page
 	public    $InputValueLoginTwoStepVerificationCode               = "";
 	public    $InputValueNewPassword                                = "";
 	public    $InputValueNotificationActive                         = "";
-	public    $InputValueNotificationActiveIcon                     = "";
 	public    $InputValueNotificationId                             = "";
 	public    $InputValueNotificationText                           = "";
 	public    $InputValueRegion                                     = "";
@@ -973,6 +972,7 @@ class Page
 
 	protected function BuildSmartyTags()
 	{
+		$this->Smarty->assign('CURRENT_PAGE', $this->GetCurrentPage());
 		$this->Smarty->assign('DIV_RADIO', ConfigInfraTools::DIV_RADIO);
 		$this->Smarty->assign('FIELD_REGISTER_DATE_TEXT', $this->InstanceLanguageText->GetText('REGISTER_DATE'));
 		$this->Smarty->assign('FIELD_REGISTER_DATE_VALUE', $this->InputValueRegisterDate);
@@ -2096,15 +2096,8 @@ class Page
 		if($InstanceNotification != NULL)
 		{
 			if($InstanceNotification->GetNotificationActive())
-			{
 				$this->InputValueNotificationActive = "checked";
-				$this->InputValueNotificationActiveIcon = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			}
-			else
-			{
-				$this->InputValueNotificationActive = FALSE;
-				$this->InputValueNotificationActiveIcon = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
-			}
+			else $this->InputValueNotificationActive = FALSE;
 			$this->InputValueNotificationId   = $InstanceNotification->GetNotificationId();
 			$this->InputValueNotificationText = $InstanceNotification->GetNotificationText();
 			$this->InputValueRegisterDate     = $InstanceNotification->GetRegisterDate();

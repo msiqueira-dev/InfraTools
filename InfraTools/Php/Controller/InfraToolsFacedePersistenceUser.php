@@ -1378,10 +1378,10 @@ class InfraToolsFacedePersistenceUser
 				$return = $this->MySqlManager->ExecuteSqlSelectQuery(NULL, $MySqlConnection, $stmt, $errorStr);
 				if($return == ConfigInfraTools::RET_OK)
 				{
+					$ArrayInstanceInfraToolsUser = array();
 					$result = $stmt->get_result();
 					while ($row = $result->fetch_assoc()) 
 					{
-						$ArrayInstanceInfraToolsUser = array();
 						$RowCount = $row['COUNT'];
 						if($row[ConfigInfraTools::TB_CORPORATION_FD_ACTIVE] != NULL &&
 						   $row[ConfigInfraTools::TB_CORPORATION_FD_NAME] != NULL 

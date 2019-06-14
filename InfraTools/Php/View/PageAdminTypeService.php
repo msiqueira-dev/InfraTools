@@ -54,7 +54,6 @@ class PageAdminTypeService extends PageAdmin
 	{
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
-			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_TYPE_SERVICE);
 			$this->Smarty->assign('FM_TYPE_SERVICE', ConfigInfraTools::FM_TYPE_SERVICE);
 			$this->Smarty->assign('FM_TYPE_SERVICE_LST', ConfigInfraTools::FM_TYPE_SERVICE_LST);
 			$this->Smarty->assign('FM_TYPE_SERVICE_LST_BACK', ConfigInfraTools::FM_TYPE_SERVICE_LST_BACK);

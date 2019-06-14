@@ -53,7 +53,6 @@ class PageAdminDepartment extends PageAdmin
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_CORPORATION", array($this->ArrayInstanceInfraToolsCorporation));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_DEPARTMENT", array($this->ArrayInstanceInfraToolsDepartment));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
-			$this->Smarty->assign('CURRENT_PAGE', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
 			$this->Smarty->assign('DIV_RADIO_CORPORATION_NAME', ConfigInfraTools::DIV_RADIO_CORPORATION_NAME);
 			$this->Smarty->assign('DIV_RADIO_DEPARTMENT_INITIALS', ConfigInfraTools::DIV_RADIO_DEPARTMENT_INITIALS);
 			$this->Smarty->assign('DIV_RADIO_DEPARTMENT_NAME', ConfigInfraTools::DIV_RADIO_DEPARTMENT_NAME);

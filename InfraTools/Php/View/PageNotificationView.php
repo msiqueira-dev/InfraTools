@@ -9,6 +9,7 @@ Dependencies:
 Description: 
 			Class for notifications and alett for all system users.
 Functions: 
+			protected function BuildSmartyTags()
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -69,6 +70,13 @@ class PageNotificationView extends PageInfraTools
 		}
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+		}
+	}
+
 	public function LoadPage()
 	{
 		if(isset($this->User))
@@ -102,7 +110,8 @@ class PageNotificationView extends PageInfraTools
 				}
 			}
 		}
-		$this->LoadHtml(TRUE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>
