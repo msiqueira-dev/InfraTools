@@ -516,6 +516,9 @@ class De
     const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "";
 	const NETWORK_SEL_ERROR                                         = "";
 	const NETWORK_SEL_SUCCESS                                       = "";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_ERROR                      = "";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_SUCCESS                    = "";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_WARNING                    = "";
 	const NOT_LOGGED_IN                                             = "";
 	const NOTIFICATION_DEL_ERROR                                    = "";
 	const NOTIFICATION_DEL_SUCCESS                                  = "";

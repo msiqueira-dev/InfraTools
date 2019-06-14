@@ -561,6 +561,9 @@ class Pt
     const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "Rede obtida com sucesso";	
 	const NETWORK_SEL_ERROR                                         = "Erro ao tentar obter rede";
 	const NETWORK_SEL_SUCCESS                                       = "Rede obtida com sucesso";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_ERROR                      = "Erro ao tentar atualizar rede";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_SUCCESS                    = "Rede atualizada com sucesso";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_WARNING                    = "Uma rede já existe com esse nome";
 	const NOT_LOGGED_IN                                             = "É preciso estar autenticado para acessar esta página";
 	const NOTIFICATION_DEL_ERROR                                    = "Erro ao excluir notificação";
 	const NOTIFICATION_DEL_SUCCESS                                  = "Notificação excluida com sucesso";

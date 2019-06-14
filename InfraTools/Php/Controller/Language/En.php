@@ -556,6 +556,9 @@ class En
     const NETWORK_SEL_BY_NETWORK_NAME_SUCCESS                       = "Network obtained successfully";	
 	const NETWORK_SEL_ERROR                                         = "Error trying to obtain network";
 	const NETWORK_SEL_SUCCESS                                       = "Network obtained successfully";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_ERROR                      = "Error trying to update network";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_SUCCESS                    = "Network updated successfully";
+	const NETWORK_UPDATE_BY_NETWORK_NAME_WARNING                    = "A network already exists with that name";
 	const NOT_LOGGED_IN                                             = "You must be authenticated to access this page";
 	const NOTIFICATION_DEL_ERROR                                    = "Error deleting notification";
 	const NOTIFICATION_DEL_SUCCESS                                  = "Notification deleted successfully";

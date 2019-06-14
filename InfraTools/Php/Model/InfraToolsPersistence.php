@@ -708,10 +708,10 @@ class InfraToolsPersistence extends Persistence
 	
 	public static function SqlInfraToolsNetworkUpdateByNetworkName()
 	{
-		return "UPDATE  " . ConfigInfraTools::TB_NETWORK                       . "     "
+		return "UPDATE  " . ConfigInfraTools::TB_NETWORK                    . "     "
 			   . "SET "   . ConfigInfraTools::TB_NETWORK_FD_NETWORK_IP      . "=?,  "
 			   . " "      . ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME    . "=?,  "
-        	   . " "      . ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK . "=?,  "
+        	   . " "      . ConfigInfraTools::TB_NETWORK_FD_NETWORK_NETMASK . "=?   "
 			   . "WHERE " . ConfigInfraTools::TB_NETWORK_FD_NETWORK_NAME    . "=?   ";
 	}
 	

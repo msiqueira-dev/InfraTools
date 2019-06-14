@@ -215,7 +215,7 @@ class PageInstall extends PageInfraTools
 			}
 		}
 		$this->BuildSmartyTags();
-		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, NULL, FALSE);
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug);
 	}
 }
 ?>

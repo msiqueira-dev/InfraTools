@@ -70,26 +70,33 @@ class InfraToolsIpAddress
 	
 	public function GetIpAddressInstanceInfraToolsNetworkNetworkIp()
 	{
-		if(is_object($this->InstanceInfraToolsNetwork))
+		if(!is_null($this->InstanceInfraToolsNetwork))
 		{
-			return $this->InstanceInfraToolsNetwork->GetNetworkIp();
+			if(is_object($this->InstanceInfraToolsNetwork))
+				return $this->InstanceInfraToolsNetwork->GetNetworkIp();
 		}
+		else return NULL;
 	}
 	
 	public function GetIpAddressInstanceInfraToolsNetworkNetworkName()
 	{
-		if(is_object($this->InstanceInfraToolsNetwork))
+		if(!is_null($this->InstanceInfraToolsNetwork))
 		{
-			return $this->InstanceInfraToolsNetwork->GetNetworkName();
+			if(is_object($this->InstanceInfraToolsNetwork))
+				return $this->InstanceInfraToolsNetwork->InstanceInfraToolsNetwork();
+			else return $this->InstanceInfraToolsNetwork;
 		}
+		else return NULL;
 	}
 	
 	public function GetIpAddressInstanceInfraToolsNetworkNetworkNetmask()
 	{
-		if(is_object($this->InstanceInfraToolsNetwork))
+		if(!is_null($this->InstanceInfraToolsNetwork))
 		{
-			return $this->InstanceInfraToolsNetwork->GetNetworkNetmask();
+			if(is_object($this->InstanceInfraToolsNetwork))
+				return $this->InstanceInfraToolsNetwork->GetNetworkNetmask();
 		}
+		else return NULL;
 	}
 	
 	public function GetIpAddressIpv4()

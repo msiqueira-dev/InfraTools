@@ -52,9 +52,9 @@ Methods:
 															            &$RowCount, $Debug);
 			protected function InfraToolsIpAddressSelectNoLimit(&$ArrayInstanceInfraToolsIpAddress, $Debug);
 			protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
-																        $IpAddressNetworkNew, $IpAddressIpv4, $Debug);
+																        $IpAddressNetworkNameNew, $IpAddressIpv4, $Debug);
 			protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
-																        $IpAddressNetworkNew, $IpAddressIpv6, $Debug);
+																        $IpAddressNetworkNameNew, $IpAddressIpv6, $Debug);
 			protected function InfraToolsNetworkDeleteByNetworkName($InfraToolsInstanceNetwork, $Debug);
 			protected function InfraToolsNetworkInsert($NetworkIp, $NetworkName, $NetworkNetmask, $Debug);
 			protected function InfraToolsNetworkLoadData($InstanceInfraToolsNetwork);
@@ -66,7 +66,8 @@ Methods:
 			protected function InfraToolsNetworkSelectByNetworkNetmask($Limit1, $Limit2, $NetworkNetmask, &$ArrayInstanceInfraToolsNetwork, 
 															       &$RowCount, $Debug);
 			protected function InfraToolsNetworkSelectNoLimit(&$ArrayInstanceInfraToolsNetwork, $Debug);
-			protected function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug);
+			protected function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName,
+			                                                        &$InstanceInfraToolsNetwork, $StoreSession, $Debug);
 			protected function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug);
 			protected function InfraToolsServiceDeleteByServiceIdOnUserContext($ServiceId, $UserEmail, $Debug);
 			protected function InfraToolsServiceInsert($IpaddressIvp4, $ServiceActive, $ServiceCorporation, $ServiceCorporationCanChange,
@@ -153,9 +154,10 @@ Methods:
 			protected function InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
 			                                                      $ServiceDepartmentNew, ServiceDepartmentCanChangeNew,
 											                      $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, 
-														          $ServiceId, $Debug);
+														          $ServiceId, $InstanceInfraToolsService, $StoreSession, $Debug);
 			protected function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew,$ServiceNameNew, 
-			                                                              $ServiceTypeNew, $ServiceId, $Debug);
+																		  $ServiceTypeNew, $ServiceId, $InstanceInfraToolsService, $StoreSession, 
+																		  $Debug);
 			protected function InfraToolsTicketUpdateTicketServiceByTicketId($TicketServiceNew, &$InstanceTicket, $Debug);
 			protected function InfraToolsTypeAssocUserServiceSelect($Limit1, $Limit2, &$ArrayInstanceInfraToolsTypeService, &$RowCount, $Debug);
 			protected function InfraToolsTypeAssocUserServiceSelectNoLimit(&$ArrayInstanceInfraToolsTypeService, $Debug);
@@ -1003,7 +1005,7 @@ abstract class PageInfraTools extends Page
 	}
 	
 	protected function InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
-																$IpAddressNetworkNew, $IpAddressIpv4, $Debug)
+																$IpAddressNetworkNameNew, $IpAddressIpv4, $InstanceInfraToolsIpAddress, $StoreSession, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -1054,7 +1056,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[3]        = &$this->ReturnNetworkNameClass;
 		$arrayElementsDefaultValue[3] = ""; 
 		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[3]        = $IpAddressNetworkNew; 
+		$arrayElementsInput[3]        = $IpAddressNetworkNameNew; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 60; 
 		$arrayElementsNullable[3]     = FALSE;
@@ -1070,11 +1072,17 @@ abstract class PageInfraTools extends Page
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressUpdateByIpAddressIpv4($IpAddressDescriptionNew, 
 																									 $IpAddressIpv4New, 
 																									 $IpAddressIpv6New,
-																									 $IpAddressNetworkNew, 
+																									 $IpAddressNetworkNameNew, 
 																									 $this->InputValueIpAddressIpv4, 
 																									 $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
+				if($StoreSession)
+				{
+					$InstanceInfraToolsIpAddress->UpdateInfraToolsIpAddress($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New, $IpAddressNetworkNameNew);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, $InstanceInfraToolsIpAddress);
+					$this->InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress);
+				}
 				$this->ShowDivReturnSuccess("IP_ADDRESS_UPDT_SUCCESS");
 				return ConfigInfraTools::RET_OK;
 			}
@@ -1089,7 +1097,7 @@ abstract class PageInfraTools extends Page
 	}
 	
 	protected function InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New,
-																$IpAddressNetworkNew, $IpAddressIpv6, $Debug)
+																$IpAddressNetworkNameNew, $IpAddressIpv6, $InstanceInfraToolsIpAddress, $StoreSession, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
@@ -1140,7 +1148,7 @@ abstract class PageInfraTools extends Page
 		$arrayElementsClass[3]        = &$this->ReturnNetworkNameClass;
 		$arrayElementsDefaultValue[3] = ""; 
 		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
-		$arrayElementsInput[3]        = $IpAddressNetworkNew; 
+		$arrayElementsInput[3]        = $IpAddressNetworkNameNew; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 60; 
 		$arrayElementsNullable[3]     = FALSE;
@@ -1156,11 +1164,17 @@ abstract class PageInfraTools extends Page
 			$return = $instanceInfraToolsFacedePersistence->InfraToolsIpAddressUpdateByIpAddressIpv6($IpAddressDescriptionNew, 
 																									 $IpAddressIpv4New, 
 																									 $IpAddressIpv6New,
-																									 $IpAddressNetworkNew, 
+																									 $IpAddressNetworkNameNew, 
 																									 $this->InputValueIpAddressIpv6, 
 																									 $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
+				if($StoreSession)
+				{
+					$InstanceInfraToolsIpAddress->UpdateInfraToolsIpAddress($IpAddressDescriptionNew, $IpAddressIpv4New, $IpAddressIpv6New, $IpAddressNetworkNameNew);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_IP_ADDRESS, $InstanceInfraToolsIpAddress);
+					$this->InfraToolsIpAddressLoadData($InstanceInfraToolsIpAddress);
+				}
 				$this->ShowDivReturnSuccess("IP_ADDRESS_UPDT_SUCCESS");
 				return ConfigInfraTools::RET_OK;
 			}
@@ -1384,9 +1398,88 @@ abstract class PageInfraTools extends Page
 		return ConfigInfraTools::RET_ERROR;
 	}
 	
-	public function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, $Debug)
+	public function InfraToolsNetworkUpdateByNetworkName($NetworkIpNew, $NetworkNameNew, $NetworkNetmaskNew, $NetworkName, &$InstanceInfraToolsNetwork, $StoreSession,  $Debug)
 	{
-
+		$PageForm = $this->Factory->CreatePageForm();
+		$instanceInfraToolsFacedePersistence = $this->Factory->CreateInfraToolsFacedePersistence();
+		$this->InputValueNetworkIp = $NetworkIpNew;
+		$this->InputValueNetworkName = $NetworkNameNew;
+		$this->InputValueNetworkNetmask = $NetworkNetmaskNew;
+		$arrayConstants = array(); $matrixConstants = array();
+		
+		//FIELD_NETWORK_IP
+		$arrayElements[0]             = ConfigInfraTools::FIELD_NETWORK_IP;
+		$arrayElementsClass[0]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[0] = ""; 
+		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[0]        = $this->InputValueNetworkIp; 
+		$arrayElementsMinValue[0]     = 0; 
+		$arrayElementsMaxValue[0]     = 15; 
+		$arrayElementsNullable[0]     = FALSE;
+		$arrayElementsText[0]         = &$this->ReturnNetworkIpText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_IP', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_NETWORK_NAME
+		$arrayElements[1]             = ConfigInfraTools::FIELD_NETWORK_NAME;
+		$arrayElementsClass[1]        = &$this->ReturnNetworkNameClass;
+		$arrayElementsDefaultValue[1] = ""; 
+		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_DESCRIPTION;
+		$arrayElementsInput[1]        = $this->InputValueNetworkName; 
+		$arrayElementsMinValue[1]     = 0; 
+		$arrayElementsMaxValue[1]     = 60; 
+		$arrayElementsNullable[1]     = FALSE;
+		$arrayElementsText[1]         = &$this->ReturnNetworkNameText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NAME', 'FM_INVALID_NETWORK_NAME_SIZE', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		//FIELD_NETWORK_NETMASK
+		$arrayElements[2]             = ConfigInfraTools::FIELD_NETWORK_NETMASK;
+		$arrayElementsClass[2]        = &$this->ReturnNetworkNetmaskClass;
+		$arrayElementsDefaultValue[2] = ""; 
+		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NETMASK;
+		$arrayElementsInput[2]        = $this->InputValueNetworkNetmask; 
+		$arrayElementsMinValue[2]     = 0; 
+		$arrayElementsMaxValue[2]     = 2; 
+		$arrayElementsNullable[2]     = TRUE;
+		$arrayElementsText[2]         = &$this->ReturnNetworkNetmaskText;
+		array_push($arrayConstants, 'FM_INVALID_NETWORK_NETMASK', 'FILL_REQUIRED_FIELDS');
+		array_push($matrixConstants, $arrayConstants);
+		
+		$return = $PageForm->ValidateFields($arrayElements, $arrayElementsDefaultValue, $arrayElementsInput, 
+							                $arrayElementsMinValue, $arrayElementsMaxValue, $arrayElementsNullable, 
+							                $arrayElementsForm, $this->InstanceLanguageText, $this->Language,
+								            $arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, $matrixConstants, $Debug);
+		if($return == ConfigInfraTools::RET_OK)
+		{
+			$return = $instanceInfraToolsFacedePersistence->InfraToolsNetworkUpdateByNetworkName($this->InputValueNetworkIp, 
+										    								                     $this->InputValueNetworkName, 
+																								 $this->InputValueNetworkNetmask,
+																								 $NetworkName, $Debug);
+			if($return == ConfigInfraTools::RET_OK)
+			{
+				if($StoreSession)
+				{
+					$InstanceInfraToolsNetwork->UpdateNetwork($this->InputValueNetworkIp, $this->InputValueNetworkName, $this->InputValueNetworkNetmask);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_NETWORK, $InstanceInfraToolsNetwork);
+					$this->InfraToolsNetworkLoadData($InstanceInfraToolsNetwork);
+				}
+				$this->ShowDivReturnSuccess("NETWORK_UPDATE_BY_NETWORK_NAME_SUCCESS");
+				return ConfigInfraTools::RET_OK;
+			}
+			elseif($return == ConfigInfraTools::DB_ERROR_UPDT_SAME_VALUE)
+			{
+				$this->ShowDivReturnWarning("UPDATE_WARNING_SAME_VALUE");
+				return ConfigInfraTools::RET_WARNING;	
+			}
+			elseif($return == ConfigInfraTools::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
+			{
+				$this->ShowDivReturnWarning("NETWORK_UPDATE_BY_NETWORK_NAME_WARNING");
+				return ConfigInfraTools::RET_WARNING;
+			}
+		}
+		$this->ShowDivReturnError("NETWORK_UPDATE_BY_NETWORK_NAME_ERROR");
+		return ConfigInfraTools::RET_ERROR;	
 	}
 	
 	protected function InfraToolsServiceDeleteByServiceId($ServiceId, $Debug)
@@ -3006,7 +3099,8 @@ abstract class PageInfraTools extends Page
 	
 	protected function InfraToolsServiceUpdateByServiceId($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew,
 												          $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew,
-	  										              $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId, $Debug)
+														  $ServiceDescriptionNew, $ServiceNameNew, $ServiceTypeNew, $ServiceId,
+														  $InstanceInfraToolsService, $StoreSession, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueServiceActive = $ServiceActiveNew;
@@ -3147,10 +3241,18 @@ abstract class PageInfraTools extends Page
 	  										                                                   $ServiceDescriptionNew, 
 																			                   $ServiceNameNew, 
 																			                   $ServiceTypeNew, 
-																			                   $ServiceId,
+																			                   $this->InputValueServiceId,
 															                                   $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
+				if($StoreSession)
+				{
+					$InstanceInfraToolsService->UpdateService($ServiceActiveNew, $ServiceCoporationNew, $ServiceCorporationCanChangeNew, 
+					                                          $ServiceDepartmentNew, $ServiceDepartmentCanChangeNew, $ServiceDescriptionNew,
+					                                          $this->InputValueServiceId, $ServiceNameNew, $ServiceTypeNew);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
+					$this->InfraToolsServiceLoadData($InstanceInfraToolsService);
+				}
 				$this->ShowDivReturnSuccess("SERVICE_UPDT_BY_ID_SUCCESS");
 				return ConfigInfraTools::RET_OK;
 			}
@@ -3165,7 +3267,7 @@ abstract class PageInfraTools extends Page
 	}
 	
 	protected function InfraToolsServiceUpdateRestrictByServiceId($ServiceActiveNew, $ServiceDescriptionNew, $ServiceNameNew, 
-														          $ServiceTypeNew, $ServiceId, $Debug)
+														          $ServiceTypeNew, $ServiceId, $InstanceInfraToolsService, $StoreSession, $Debug)
 	{
 		$PageForm = $this->Factory->CreatePageForm();
 		$this->InputValueServiceActive = $ServiceActiveNew;
@@ -3241,10 +3343,17 @@ abstract class PageInfraTools extends Page
 	  										                                                          $ServiceDescriptionNew, 
  																			                          $ServiceNameNew, 
 																			                          $ServiceTypeNew, 
-																			                          $ServiceId,
+																			                          $this->InputValueServiceId,
 															                                          $Debug);
 			if($return == ConfigInfraTools::RET_OK)
 			{
+				if($StoreSession)
+				{
+					$InstanceInfraToolsService->UpdateService($ServiceActiveNew, $ServiceDescriptionNew,
+					                                          $this->InputValueServiceId, $ServiceNameNew, $ServiceTypeNew);
+					$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_SERVICE, $InstanceInfraToolsService);
+					$this->InfraToolsServiceLoadData($InstanceInfraToolsService);
+				}
 				$this->ShowDivReturnSuccess("SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS");
 				return ConfigInfraTools::RET_OK;
 			}
