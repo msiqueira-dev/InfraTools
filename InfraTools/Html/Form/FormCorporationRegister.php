@@ -56,13 +56,10 @@
             <label>{$FIELD_CORPORATION_ACTIVE_TEXT} :</label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="checkbox" 
-			           name="{$FIELD_CORPORATION_ACTIVE}" 
-				       value="{$FIELD_CORPORATION_ACTIVE}"
-				       {$FIELD_CORPORATION_ACTIVE_VALUE}
-					   onchange="ValidateMultiplyFields('{$FM_CORPORATION_REGISTER_FORM}',
-									                    'DivContentBodySubmitBigger',
-									                    '{$FM_CORPORATION_REGISTER_SB}','');"/>
+            <input type="checkbox" name="{$FIELD_CORPORATION_ACTIVE}" value="{$FIELD_CORPORATION_ACTIVE}" {$FIELD_CORPORATION_ACTIVE_VALUE}
+				   onchange="ValidateMultiplyFields('{$FM_CORPORATION_REGISTER_FORM}',
+									                'DivContentBodySubmitBigger',
+									                '{$FM_CORPORATION_REGISTER_SB}','');"/>
         </div>
     </div>
     <!-- SUBMIT -->

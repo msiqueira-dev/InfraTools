@@ -404,11 +404,11 @@ class Config
 	const FM_LANGUAGE                                                   = "FmLanguage";
 	const FM_LOGIN                                                      = "FormLogin";
 	const FM_NOTIFICATION                                               = "FormNotification";
-	const FM_NOTIFICATION_ASSOCIATE_USER                                = "FormNotificationAssociateUser";
-	const FM_NOTIFICATION_ASSOCIATE_USER_CANCEL                         = "FormNotificationAssociateUserCancel";
-	const FM_NOTIFICATION_ASSOCIATE_USER_FORM                           = "FormNotificationAssociateUserForm";
-	const FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE                   = "FormNotificationAssociateUserSbAssociate";
-	const FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE                = "FormNotificationAssociateUserSbDisAssociate";
+	const FM_NOTIFICATION_ASSOCIATE_USERS                               = "FormNotificationAssociateUsers";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL                        = "FormNotificationAssociateUsersCancel";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_FORM                          = "FormNotificationAssociateUsersForm";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE                  = "FormNotificationAssociateUsersSbAssociate";
+	const FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE               = "FormNotificationAssociateUsersSbDisAssociate";
 	const FM_NOTIFICATION_LST                                           = "FormNotificationList";
 	const FM_NOTIFICATION_LST_BACK                                      = "FormNotificationListBack";
 	const FM_NOTIFICATION_LST_FORM                                      = "FormNotificationListForm";
@@ -425,8 +425,8 @@ class Config
 	const FM_NOTIFICATION_UPDT_CANCEL                                   = "FormNotificationUpdateCancel";
 	const FM_NOTIFICATION_UPDT_SB                                       = "FormNotificationUpdateSubmit";
 	const FM_NOTIFICATION_VIEW                                          = "FormNotificationView";
-	const FM_NOTIFICATION_VIEW_ASSOCIATE_USER                           = "FormNotificationViewAssociateUser";
-	const FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB                        = "FormNotificationViewAssociateUserSubmit";
+	const FM_NOTIFICATION_VIEW_ASSOCIATE_USERS                          = "FormNotificationViewAssociateUsers";
+	const FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB                       = "FormNotificationViewAssociateUsersSubmit";
 	const FM_NOTIFICATION_VIEW_DEL                                      = "FormNotificationViewDelete";
 	const FM_NOTIFICATION_VIEW_DEL_SB                                   = "FormNotificationViewDeleteSubmit";
 	const FM_NOTIFICATION_VIEW_LST_USERS                                = "FormNotificationViewListUsers";
@@ -814,7 +814,7 @@ class Config
 	const PAGE_ADMIN_DEPARTMENT_VIEW                                    = "Page_Admin_Department_View";
 	const PAGE_ADMIN_DEPARTMENT_VIEW_USERS                              = "Page_Admin_Department_View_Users";
 	const PAGE_ADMIN_NOTIFICATION                                       = "Page_Admin_Notification";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                       = "Page_Admin_Notification_Associate_User";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                       = "Page_Admin_Notification_Associate_Users";
 	const PAGE_ADMIN_NOTIFICATION_LST                                   = "Page_Admin_Notification_List";
 	const PAGE_ADMIN_NOTIFICATION_REGISTER                              = "Page_Admin_Notification_Register";
 	const PAGE_ADMIN_NOTIFICATION_SEL                                   = "Page_Admin_Notification_Select";

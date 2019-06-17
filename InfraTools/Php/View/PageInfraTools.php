@@ -417,7 +417,7 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('PAGE_ADMIN_TYPE_USER', ConfigInfraTools::PAGE_ADMIN_TYPE_USER);
 			$this->Smarty->assign('PAGE_ADMIN_USER', ConfigInfraTools::PAGE_ADMIN_USER);
 			$this->Smarty->assign('PAGE_INSTALL_TEXT', $this->InstanceLanguageText->GetText('ADMIN_TEXT_INSTALL'));
-			$this->Smarty->assign('SUBMIT_ASSOCIATE_USER', $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USER'));
+			$this->Smarty->assign('SUBMIT_ASSOCIATE_USERS', $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USERS'));
 			$this->Smarty->assign('SUBMIT_BACK', $this->InstanceLanguageText->GetText('SUBMIT_BACK'));
 			$this->Smarty->assign('SUBMIT_BACK_ICON', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28.png");
 			$this->Smarty->assign('SUBMIT_BACK_ICON_HOVER', $this->Config->DefaultServerImage. "Icons/IconInfraToolsArrowBack28x28Hover.png");

@@ -1,77 +1,75 @@
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))          echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnNotificationIdText)) echo $this->ReturnNotificationIdText; ?>
-		<?php if(isset($this->ReturnText))               echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_NOTIFICATION_ID_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_NOTIFICATION_SEL_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_FORM; ?>" 
-	  id="<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_FORM; ?>" method="post" >
+<form name="{$FM_NOTIFICATION_SEL_FORM}" id="{$FM_NOTIFICATION_SEL_FORM}" method="{$FORM_METHOD}" >
 	<!-- FIELD_NOTIFICATION_ID -->
 	<div class="DivContentBodyContainer">
 		<div class="DivContentBodyContainerLabel">
-			<label> <?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID'); ?> </label>
+			<label> {$FIELD_NOTIFICATION_ID_TEXT} </label>
 			<label class="RequiredField">&nbsp;*</label>
 			<label>:</label>
 		</div>
-		<input type="text" name="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ID; ?>" 
-						   id="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ID; ?>"
-						   class="DivContentBodyContainerInputText <?php echo $this->ReturnCorporationNameClass; ?>"
-						   onkeyup="ValidateNumberOnly('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ID; ?>',
+		<input type="text" name="{$FIELD_NOTIFICATION_ID}" 
+						   id="{$FIELD_NOTIFICATION_ID}"
+						   class="DivContentBodyContainerInputText {$RETURN_NOTIFICATION_ID_CLASS}"
+						   onkeyup="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+										       '{$FIELD_NOTIFICATION_ID}',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+											   '{$FM_NOTIFICATION_SEL_SB}',
 											   '', 'false');
 									ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_FORM; ?>',
+											 '{$FM_NOTIFICATION_SEL_FORM}',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+											 '{$FM_NOTIFICATION_SEL_SB}',
 											 '');"
-						   onblur="ValidateNumberOnly('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ID; ?>',
+						   onblur="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+										       '{$FIELD_NOTIFICATION_ID}',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+											   '{$FM_NOTIFICATION_SEL_SB}',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_FORM; ?>',
+											 '{$FM_NOTIFICATION_SEL_FORM}',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+											 '{$FM_NOTIFICATION_SEL_SB}',
 											 '');"
-						   onchange="ValidateNumberOnly('DivContentBodyContainerInputText', 
-										       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ID; ?>',
+						   onchange="ValidateNumbersOnly('DivContentBodyContainerInputText', 
+										       '{$FIELD_NOTIFICATION_ID}',
 											   'DivContentBodySubmit',
-											   '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+											   '{$FM_NOTIFICATION_SEL_SB}',
 											   '', true);
 								   ValidateMultiplyFields(
-											 '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_FORM; ?>',
+											 '{$FM_NOTIFICATION_SEL_FORM}',
 											 'DivContentBodySubmit',
-											 '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+											 '{$FM_NOTIFICATION_SEL_SB}',
 											 '');"
-						   title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ID'); ?>" 
-						   value="<?php echo $this->InputValueNotificationId; ?>" maxlength="5" />
+						   title="{$FIELD_NOTIFICATION_ID_TEXT}" 
+						   value="{$FIELD_NOTIFICATION_ID_VALUE}" maxlength="5" />
 	</div>
 	<!-- SUBMIT -->
 	<div class="DivContentBodyContainerSubmit"
 		 onmouseover="ValidateNumbersOnly('DivContentBodyContainerInputText', 
-							       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ID; ?>',
+							       '{$FIELD_NOTIFICATION_ID}',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+								   '{$FM_NOTIFICATION_SEL_SB}',
 								   '', true);
 					 ValidateMultiplyFields(
-								   '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_FORM; ?>',
+								   '{$FM_NOTIFICATION_SEL_FORM}',
 								   'DivContentBodySubmit',
-								   '<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>',
+								   '{$FM_NOTIFICATION_SEL_SB}',
 								   '');">
-		<input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>" 
-								 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_SEL_SB; ?>"
-								 class="DivContentBodySubmit <?php echo $this->SubmitClass ?>"
-								 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_SEL'); ?>"
-								 <?php echo $this->SubmitEnabled; ?> />
+		<input type="submit" name="{$FM_NOTIFICATION_SEL_SB}" 
+								 id="{$FM_NOTIFICATION_SEL_SB}"
+								 class="DivContentBodySubmit {$SUBMIT_CLASS}"
+								 value="{$SUBMIT_SEL}" {$SUBMIT_ENABLED} />
 	</div>
 </form>

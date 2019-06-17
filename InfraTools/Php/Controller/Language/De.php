@@ -158,6 +158,7 @@ class De
 	const FIELD_NOTIFICATION_ID                                     = "";
 	const FIELD_NOTIFICATION_TEXT                                   = "";
 	const FIELD_ROLE_DESCRIPTION                                    = "";
+	const FIELD_ROLE_NAME                                           = "";
 	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME      = "";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "";
 	const FIELD_SEL_NONE                                            = "";
@@ -633,9 +634,9 @@ class De
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_ROBOTS           = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_TITLE            = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION                                   = "";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_TITLE              = "InfraTools -";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                   = "";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS            = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE             = "InfraTools -";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools -";
@@ -1046,8 +1047,8 @@ class De
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "";
-	const SUBMIT_ASSOCIATE_USER                                     = "";
-	const SUBMIT_ASSOCIATE_USER_DISASSOCIATE                        = "";
+	const SUBMIT_ASSOCIATE_USERS                                    = "";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "";
 	const SUBMIT_BACK                                               = "";
 	const SUBMIT_CANCEL                                             = "";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "";

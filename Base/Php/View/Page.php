@@ -585,7 +585,7 @@ class Page
 				$_POST[Config::FM_LANGUAGE] == Config::LANGUAGE_PORTUGUESE ||
 				$_POST[Config::FM_LANGUAGE] == Config::LANGUAGE_SPANISH)
 			{
-				header("Location: "  . ProjectConfig::$AddressApplication . "/" . str_replace('Language/', '', 
+				header("Location: http://"  . ProjectConfig::$AddressApplication . "/" . str_replace('Language/', '', 
 									   $_POST[Config::FM_LANGUAGE]) . "/"
 									 . $this->Page);
 			}

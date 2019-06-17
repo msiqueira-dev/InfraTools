@@ -105,11 +105,11 @@
 			<input type="submit" name="{$FM_NOTIFICATION_VIEW_LST_USERS_SB}" id="{$FM_NOTIFICATION_VIEW_LST_USERS_SB}"
 				   class="DivContentBodySubmitBigger" value="{$SUBMIT_LST_USERS}"/>
 		</form>
-		<!-- FM_NOTIFICATION_VIEW_ASSOCIATE_USER -->
-		<form name="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER}" id="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER}" 
+		<!-- FM_NOTIFICATION_VIEW_ASSOCIATE_USERS -->
+		<form name="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USERS}" id="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USERS}" 
 			  class="DivFormHorizontalButtons" method="{$FORM_METHOD}" >
-			<input type="submit" name="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB}" id="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB}"
-				   class="DivContentBodySubmitBigger" value="{$SUBMIT_ASSOCIATE_USER}"/>
+			<input type="submit" name="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB}" id="{$FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB}"
+				   class="DivContentBodySubmitBigger" value="{$SUBMIT_ASSOCIATE_USERS}"/>
 		</form>
 	</div>
 {/if}

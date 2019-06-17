@@ -107,6 +107,12 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('FIELD_NETWORK_NETMASK', ConfigInfraTools::FIELD_NETWORK_NETMASK);
 			$this->Smarty->assign('FIELD_NETWORK_NETMASK_TEXT', $this->InstanceLanguageText->GetText('FIELD_NETWORK_NETMASK'));
 			$this->Smarty->assign('FIELD_NETWORK_NETMASK_VALUE', $this->InputValueNetworkNetmask);
+			$this->Smarty->assign('FIELD_ROLE_NAME', ConfigInfraTools::FIELD_ROLE_NAME);
+			$this->Smarty->assign('FIELD_ROLE_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_ROLE_NAME'));
+			$this->Smarty->assign('FIELD_ROLE_NAME_VALUE', $this->InputValueRoleName);
+			$this->Smarty->assign('FIELD_TEAM_NAME', ConfigInfraTools::FIELD_TEAM_NAME);
+			$this->Smarty->assign('FIELD_TEAM_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_TEAM_NAME'));
+			$this->Smarty->assign('FIELD_TEAM_NAME_VALUE', $this->InputValueTeamName);
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME', ConfigInfraTools::FIELD_TYPE_SERVICE_NAME);
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_SERVICE_NAME'));
 			$this->Smarty->assign('FIELD_TYPE_SERVICE_NAME_VALUE', $this->InputValueTypeServiceName);

@@ -1,238 +1,204 @@
-<!-- DIV_RETURN -->
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
-<!-- FM_NOTIFICATION_ASSOCIATE_USER_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>" method="post">
+<!-- FM_NOTIFICATION_ASSOCIATE_USERS_FORM -->
+<form name="{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}" id="{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}" method="{$FORM_METHOD}">
     <!-- FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL -->
     <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL').":"; ?></label>
+        <div class="DivContentBodyContainerLabelBig">
+            <label>{$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL; ?>" 
-                id="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL; ?>"
-                class="<?php echo $this->ReturnCorporationNameClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL; ?>');
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          ResetOtherSelectValuesByForm('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>',
-                                                       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL; ?>');">
-                <option <?php if ($this->InputValueNotificationForAll == "" 
-                                  || $this->InputValueNotificationForAll == ConfigInfraTools::FIELD_SEL_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
+                name="{$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL}" id="{$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL}"
+                class=""
+                onchange="SetSelectColor('{$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL}');
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          ResetOtherSelectValuesByForm('{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}', '{$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL}');">
+                {if $FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE eq ""}
+                    <option selected='selected' value="{$FIELD_SEL_NONE}" >
+                        {$FIELD_SEL_NONE}
+                    </option>
+                {elseif $FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE eq $FIELD_SEL_NONE}
+                    <option selected='selected' value="{$FIELD_SEL_NONE}" >
+                        {$FIELD_SEL_NONE}
+                    </option>
                 </option>
-				<option <?php if ($this->InputValueNotificationForAll == ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL'); ?> 
-                </option>
+                {elseif $FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE eq $FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL}
+                    <option selected='selected' value="{$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL}" > 
+                        {$FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE_ALL_TEXT} 
+                    </option>
+                {/if}
             </select>
         </div>
     </div>
     <!-- FIELD_CORPORATION_NAME -->
     <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION').":"; ?></label>
+        <div class="DivContentBodyContainerLabelBig">
+            <label>{$FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>" 
-                id="<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>"
-                class="<?php echo $this->ReturnCorporationNameClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          ResetOtherSelectValuesByForm('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>',
-                                                       '<?php echo ConfigInfraTools::FIELD_CORPORATION_NAME; ?>');">
-                <option <?php if ($this->InputValueNotificationByCorporationName == "" 
-                                  || $this->InputValueNotificationByCorporationName == ConfigInfraTools::FIELD_SEL_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-                </option>
-                <?php 
-                if(is_array($this->ArrayInstanceSelectNotificationByCorporation))
-                {
-                    foreach($this->ArrayInstanceSelectNotificationByCorporation as $key=>$selectNotificationByCorporation)
-                    {
-						echo "<option ";
-                          if($this->InputValueNotificationByCorporationName == $selectNotificationByCorporation->GetCorporationName())
-                            echo "selected='selected' ";
-                        echo "value='" . $selectNotificationByCorporation->GetCorporationName() . "'>" 
-							           . $selectNotificationByCorporation->GetCorporationName() . "</option>";
-                    }
-                }
-                ?>
+                name="{$FIELD_CORPORATION_NAME}" id="{$FIELD_CORPORATION_NAME}"
+                class=""
+                onchange="SetSelectColor('{$FIELD_CORPORATION_NAME}');
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          ResetOtherSelectValuesByForm('{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}','{$FIELD_CORPORATION_NAME}');">
+                {if $FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION_VALUE eq ""}
+                    <option selected='selected' value="{$FIELD_SEL_NONE}" >
+                        {$FIELD_SEL_NONE}
+                    </option>
+                {else}
+                    {foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_CORPORATION item=INSTANCE_CORPORATION}
+		                {foreach key=key item=item from=$INSTANCE_CORPORATION}
+                            {if $FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION_VALUE eq {$item->GetCorporationName()}}
+                                <option selected='selected' value="{$item->GetCorporationName()}" >
+                                    $item->GetCorporationName()
+                                </option>
+                            {else}
+                                <option>
+                                    $item->GetCorporationName()
+                                </option>
+                            {/if}
+                        {/foreach}
+	                {/foreach}
+                {/if}
             </select>
         </div>
     </div>
     <!-- FIELD_DEPARTMENT_NAME -->
     <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT').":"; ?></label>
+        <div class="DivContentBodyContainerLabelBig">
+            <label>{$FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>" 
-                id="<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>"
-                class="<?php echo $this->ReturnCorporationNameClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>');
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          ResetOtherSelectValuesByForm('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>',
-                                                       '<?php echo ConfigInfraTools::FIELD_DEPARTMENT_NAME; ?>');">
-                <option <?php if ($this->InputValueNotificationByDepartmentName == "" 
-                                  || $this->InputValueNotificationByDepartmentName == ConfigInfraTools::FIELD_SEL_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-                </option>
-                <?php 
-                if(is_array($this->ArrayInstanceSelectNotificationByDepartment))
-                {
-                    foreach($this->ArrayInstanceSelectNotificationByDepartment as $key=>$selectNotificationByDeparment)
-                    {
-						echo "<option ";
-                          if($this->InputValueNotificationByCorporationName == $selectNotificationByDeparment->GetDepartmentName())
-                            echo "selected='selected' ";
-                        echo "value='" . $selectNotificationByDeparment->GetDepartmentName()            . " - " 
-							           . $selectNotificationByDeparment->GetDepartmentCorporationName() . "'>" 
-							           . $selectNotificationByDeparment->GetDepartmentName()            . " - "
-							           . $selectNotificationByDeparment->GetDepartmentCorporationName() . "</option>";
-                    }
-                }
-                ?>
+                name="{$FIELD_DEPARTMENT_NAME}" id="{$FIELD_DEPARTMENT_NAME}"
+                class=""
+                onchange="SetSelectColor('{$FIELD_DEPARTMENT_NAME}');
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          ResetOtherSelectValuesByForm('{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}', '{$FIELD_DEPARTMENT_NAME}');">
+                {if $FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT_VALUE eq ""}
+                    <option selected='selected' value="{$FIELD_SEL_NONE}" >
+                        {$FIELD_SEL_NONE}
+                    </option>
+                {else}
+                    {foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_DEPARTMENT item=INSTANCE_DEPARTMENT}
+		                {foreach key=key item=item from=$INSTANCE_DEPARTMENT}
+                            {if $FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT_VALUE eq {$item->GetDepartmentName()}}
+                                <option selected='selected' value="{$item->GetDepartmentName() - $item->GetDepartmentCorporationName()}" >
+                                    $item->GetDepartmentName() - $item->GetDepartmentCorporationName()
+                                </option>
+                            {else}
+                                <option>
+                                    $item->GetDepartmentName() - $item->GetDepartmentCorporationName()
+                                </option>
+                            {/if}
+                        {/foreach}
+	                {/foreach}
+                {/if}
             </select>
         </div>
     </div>
     <!-- FIELD_ROLE_NAME -->
     <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE').":"; ?></label>
+        <div class="DivContentBodyContainerLabelBig">
+            <label>{$FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE_TEXT}</label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FIELD_ROLE_NAME; ?>" 
-                id="<?php echo ConfigInfraTools::FIELD_ROLE_NAME; ?>"
-                class="<?php echo $this->ReturnCorporationNameClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ROLE_NAME; ?>');
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          ResetOtherSelectValuesByForm('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>',
-                                                       '<?php echo ConfigInfraTools::FIELD_ROLE_NAME; ?>');">
-                <option <?php if ($this->InputValueNotificationByRole == "" 
-                                  || $this->InputValueNotificationByRole == ConfigInfraTools::FIELD_SEL_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-                </option>
-                <?php 
-                if(is_array($this->ArrayInstanceSelectNotificationByRole))
-                {
-                    foreach($this->ArrayInstanceSelectNotificationByRole as $key=>$selectNotificationByRole)
-                    {
-						echo "<option ";
-                          if($this->InputValueNotificationByCorporationName == $selectNotificationByRole->GetRoleName())
-                            echo "selected='selected' ";
-                        echo "value='" . $selectNotificationByRole->GetRoleName() . "'>" 
-							           . $selectNotificationByRole->GetRoleName() . "</option>";
-                    }
-                }
-                ?>
+                name="{$FIELD_ROLE_NAME}" id="{$FIELD_ROLE_NAME}"
+                class=""
+                onchange="SetSelectColor('{$FIELD_ROLE_NAME}');
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          ResetOtherSelectValuesByForm('{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}', '{$FIELD_ROLE_NAME}');">
+                {if $FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE_VALUE eq ""}
+                    <option selected='selected' value="{$FIELD_SEL_NONE}" >
+                        {$FIELD_SEL_NONE}
+                    </option>
+                {else}
+                    {foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_ROLE item=INSTANCE_ROLE}
+		                {foreach key=key item=item from=$INSTANCE_ROLE}
+                            {if $FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE_VALUE eq {$item->GetRoleName()}}
+                                <option selected='selected' value="{$item->GetRoleName()}" >
+                                    $item->GetRoleName()
+                                </option>
+                            {else}
+                                <option>
+                                    $item->GetRoleName()
+                                </option>
+                            {/if}
+                        {/foreach}
+	                {/foreach}
+                {/if}
             </select>
         </div>
     </div>
     <!-- FIELD_TEAM_NAME -->
     <div class="DivContentBodyContainer">
-        <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM').":"; ?></label>
+        <div class="DivContentBodyContainerLabelBig">
+            <label>{$FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM_TEXT} : </label>
         </div>
         <div class="DivContentBodyContainerValue">
             <select 
-                name="<?php echo ConfigInfraTools::FIELD_TEAM_NAME; ?>" 
-                id="<?php echo ConfigInfraTools::FIELD_TEAM_NAME; ?>"
-                class="<?php echo $this->ReturnNotificationByTeamNameClass; ?>"
-                onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_TEAM_NAME; ?>');
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .disabled = false;
-				          document.getElementById('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>')
-                                         .className = 'DivContentBodySubmitBigger SubmitEnabled;'
-                          ResetOtherSelectValuesByForm('<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_FORM; ?>',
-                                                       '<?php echo ConfigInfraTools::FIELD_TEAM_NAME; ?>');">
-                <option <?php if ($this->InputValueNotificationByTeamName == "" 
-                                  || $this->InputValueNotificationByTeamName == ConfigInfraTools::FIELD_SEL_NONE) 
-                    echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" > 
-                        <?php echo $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'); ?> 
-                </option>
-                <?php 
-                if(is_array($this->ArrayInstanceSelectNotificationByTeam))
-                {
-                    foreach($this->ArrayInstanceSelectNotificationByTeam as $key=>$selectNotificationByTeam)
-                    {
-						echo "<option ";
-                          if($this->InputValueNotificationByTeamName == $selectNotificationByTeam->GetTeamName())
-                            echo "selected='selected' ";
-                        echo "value='" . $selectNotificationByTeam->GetTeamName()   . " - " 
-							           . $selectNotificationByTeam->GetTeamId()     . "'>" 
-							           . $selectNotificationByTeam->GetTeamName()   . " - " 
-							           . $selectNotificationByTeam->GetTeamId() . "</option>";
-                    }
-                }
-                ?>
+                name="{$FIELD_TEAM_NAME}" id="{$FIELD_TEAM_NAME}"
+                class=""
+                onchange="SetSelectColor('{$FIELD_TEAM_NAME}');
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').disabled = false;
+				          document.getElementById('{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}').className = 'DivContentBodySubmitBigger SubmitEnabled;'
+                          ResetOtherSelectValuesByForm('{$FM_NOTIFICATION_ASSOCIATE_USERS_FORM}', '{$FIELD_TEAM_NAME}');">
+                {if $FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM_VALUE eq ""}
+                    <option selected='selected' value="{$FIELD_SEL_NONE}" >
+                        {$FIELD_SEL_NONE}
+                    </option>
+                {else}
+                    {foreach name=outer from=$ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_TEAM item=INSTANCE_TEAM}
+		                {foreach key=key item=item from=$INSTANCE_TEAM}
+                            {if $FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM_VALUE eq {$item->GetTeamName()}}
+                                <option selected='selected' value="{$item->GetTeamName() - $item->GetTeamId()}" >
+                                    $item->GetTeamName() - $item->GetTeamId()
+                                </option>
+                            {else}
+                                <option>
+                                    $item->GetTeamName() - $item->GetTeamId()
+                                </option>
+                            {/if}
+                        {/foreach}
+	                {/foreach}
+                {/if}
             </select>
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer">
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE; ?>"
-                                 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USER'); ?>"
-                                 <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE; ?>"
-                                 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USER_DISASSOCIATE'); ?>"
-                                 <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_CANCEL; ?>"
-                                 class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
+        <input type="submit" name="{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}" id="{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE}"
+               class="DivContentBodySubmitBigger {$SUBMIT_CLASS}" value="{$SUBMIT_ASSOCIATE_USERS}" {$SUBMIT_ENABLED} />
+        <input type="submit" name="{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}" id="{$FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE}"
+               class="DivContentBodySubmitBigger {$SUBMIT_CLASS}"
+               value="{$SUBMIT_ASSOCIATE_USERS_DISASSOCIATE}" {$SUBMIT_ENABLED} />
+        <input type="submit" name="{$FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL}" id="{$FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL}"
+               class="DivContentBodySubmitBigger" value="{$SUBMIT_CANCEL}" />
     </div>
 </form>

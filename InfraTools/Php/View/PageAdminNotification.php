@@ -46,6 +46,7 @@ class PageAdminNotification extends PageAdmin
 	public $InputValueNotificationByDepartmentName       = NULL;
 	public $InputValueNotificationByRole                 = NULL;
 	public $InputValueNotificationByTeamName             = NULL;
+	public $ReturnNotificationForAllClass                = NULL;
 	public $ReturnNotificationByCorporationClass         = NULL;
 	public $ReturnNotificationByDepartmentNameClass      = NULL;
 	public $ReturnNotificationByRoleClass                = NULL;
@@ -97,8 +98,31 @@ class PageAdminNotification extends PageAdmin
 		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
 		{
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION", array($this->ArrayInstanceNotification));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_CORPORATION", array($this->ArrayInstanceSelectNotificationByCorporation));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_DEPARTMENT", array($this->ArrayInstanceSelectNotificationByDepartment));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_ROLE", array($this->ArrayInstanceSelectNotificationByRole));
+			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_NOTIFICATION_BY_TEAM", array($this->ArrayInstanceSelectNotificationByTeam));
 			$this->Smarty->assign("ARRAY_INSTANCE_INFRATOOLS_USER", array($this->ArrayInstanceInfraToolsUser));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION', ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_CORPORATION_VALUE', $this->InputValueNotificationByCorporationName);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT', ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_DEPARTMENT_VALUE', $this->InputValueNotificationByDepartmentName);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE', ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_ROLE_VALUE', $this->InputValueNotificationByRole);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM', ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_BY_TEAM_VALUE', $this->InputValueNotificationByTeamName);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL', ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL);
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL'));
+			$this->Smarty->assign('FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL_VALUE', $this->InputValueNotificationForAll);
 			$this->Smarty->assign('FM_NOTIFICATION', ConfigInfraTools::FM_NOTIFICATION);
+			$this->Smarty->assign('FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL', ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL);
+			$this->Smarty->assign('FM_NOTIFICATION_ASSOCIATE_USERS_FORM', ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_FORM);
+			$this->Smarty->assign('FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE', ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE);
+			$this->Smarty->assign('FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE', ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE);
 			$this->Smarty->assign('FM_NOTIFICATION_REGISTER', ConfigInfraTools::FM_NOTIFICATION_REGISTER);
 			$this->Smarty->assign('FM_NOTIFICATION_REGISTER_CANCEL', ConfigInfraTools::FM_NOTIFICATION_REGISTER_CANCEL);
 			$this->Smarty->assign('FM_NOTIFICATION_REGISTER_FORM', ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM);
@@ -106,6 +130,8 @@ class PageAdminNotification extends PageAdmin
 			$this->Smarty->assign('FM_NOTIFICATION_UPDT_CANCEL', ConfigInfraTools::FM_NOTIFICATION_UPDT_CANCEL);
 			$this->Smarty->assign('FM_NOTIFICATION_UPDT_FORM', ConfigInfraTools::FM_NOTIFICATION_UPDT_FORM);
 			$this->Smarty->assign('FM_NOTIFICATION_UPDT_SB', ConfigInfraTools::FM_NOTIFICATION_UPDT_SB);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_ASSOCIATE_USERS', ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS);
+			$this->Smarty->assign('FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB', ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB);
 			$this->Smarty->assign('FM_NOTIFICATION_VIEW_DEL', ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL);
 			$this->Smarty->assign('FM_NOTIFICATION_VIEW_DEL_SB', ConfigInfraTools::FM_NOTIFICATION_VIEW_DEL_SB);
 			$this->Smarty->assign('FM_NOTIFICATION_VIEW_UPDT', ConfigInfraTools::FM_NOTIFICATION_VIEW_UPDT);
@@ -115,6 +141,8 @@ class PageAdminNotification extends PageAdmin
 			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_SB', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB);
 			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_SB_BACK', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB_BACK);
 			$this->Smarty->assign('FM_NOTIFICATION_VIEW_LST_USERS_SB_FORWARD', ConfigInfraTools::FM_NOTIFICATION_VIEW_LST_USERS_SB_FORWARD);
+			$this->Smarty->assign('SUBMIT_ASSOCIATE_USERS', $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USERS'));
+			$this->Smarty->assign('SUBMIT_ASSOCIATE_USERS_DISASSOCIATE', $this->InstanceLanguageText->GetText('SUBMIT_ASSOCIATE_USERS_DISASSOCIATE'));
 			return ConfigInfraTools::RET_OK;
 		}
 		return ConfigInfraTools::RET_ERROR;
@@ -156,15 +184,15 @@ class PageAdminNotification extends PageAdmin
 					}
 				}
 		}
-		//FM_NOTIFICATION_ASSOCIATE_USER_CANCEL
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_CANCEL) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_CANCEL) == ConfigInfraTools::RET_OK)
 		{
 			if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_NOTIFICATION, "NotificationLoadData", 
 										  $this->InstanceNotification) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
-		//FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_ASSOCIATE) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_ASSOCIATE) == ConfigInfraTools::RET_OK)
 		{
 			$ret = NULL;
 			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL) == ConfigInfraTools::RET_OK)
@@ -287,13 +315,13 @@ class PageAdminNotification extends PageAdmin
 			else 
 			{
 				if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 			}
 			
 		}
-		//FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USER_SB_DISASSOCIATE) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_ASSOCIATE_USERS_SB_DISASSOCIATE) == ConfigInfraTools::RET_OK)
 		{
 			$ret = NULL;
 			if($this->CheckPostContainsKey(ConfigInfraTools::FIELD_NOTIFICATION_ASSOCIATE_FOR_ALL) == ConfigInfraTools::RET_OK)
@@ -416,7 +444,7 @@ class PageAdminNotification extends PageAdmin
 			else 
 			{
 				if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
-					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER;
+					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
 				else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 			}
 			
@@ -457,15 +485,15 @@ class PageAdminNotification extends PageAdmin
 									  $this->InputValueHeaderDebug) == ConfigInfraTools::RET_OK)
 				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
-		//FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB
-		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USER_SB) == ConfigInfraTools::RET_OK)
+		//FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB
+		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_NOTIFICATION_VIEW_ASSOCIATE_USERS_SB) == ConfigInfraTools::RET_OK)
 		{
 			$this->InputValueNotificationByCorporationName = NULL;
 			$this->InputValueNotificationByDepartmentName  = NULL;
 			$this->InputValueNotificationByRole            = NULL;
 			$this->InputValueNotificationByTeamName        = NULL;
 			if($this->LoadAssociationsSelect() == ConfigInfraTools::RET_OK)
-				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER;
+				$this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS;
 			else $this->PageBody = ConfigInfraTools::PAGE_ADMIN_NOTIFICATION_VIEW;
 		}
 		//FM_NOTIFICATION_VIEW_DEL_SB

@@ -162,6 +162,7 @@ class En
 	const FIELD_NOTIFICATION_ID                                     = "Id";
 	const FIELD_NOTIFICATION_TEXT                                   = "Text";
 	const FIELD_ROLE_DESCRIPTION                                    = "Description";
+	const FIELD_ROLE_NAME                                           = "Name";
 	const FIELD_RADIO_DEPARTMENT_INITIALS_AND_CORPORATION_NAME      = "Department initials and corporation name";
 	const FIELD_RADIO_DEPARTMENT_NAME_AND_CORPORATION_NAME          = "Department name and corporation name";
 	const FIELD_SEL_NONE                                            = "Select";
@@ -673,9 +674,9 @@ class En
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_ROBOTS           = "noindex";
 	const PAGE_ADMIN_IP_ADDRESS_VIEW_USERS_NETWORK_TITLE            = "InfraTools - Admin Ip Address";
 	const PAGE_ADMIN_NOTIFICATION                                   = "Admin Notification";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER                    = "Admin Notification - Associate Users";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_ROBOTS             = "noindex";
-	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USER_TITLE              = "InfraTools - Admin Notification";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS                    = "Admin Notification - Associate Users";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_ROBOTS             = "noindex";
+	const PAGE_ADMIN_NOTIFICATION_ASSOCIATE_USERS_TITLE              = "InfraTools - Admin Notification";
 	const PAGE_ADMIN_NOTIFICATION_LST                               = "Admin Notification - List";
 	const PAGE_ADMIN_NOTIFICATION_LST_ROBOTS                        = "noindex";
 	const PAGE_ADMIN_NOTIFICATION_LST_TITLE                         = "InfraTools - Admin Notification";
@@ -1103,8 +1104,8 @@ class En
 	const SERVICE_UPDT_RESTRICT_BY_ID_SUCCESS                       = "Service updated succesfully";
 	const SUBMIT_ACCOUNT_ACTIVATE                                   = "ACTIVATE ACCOUNT";
 	const SUBMIT_ACCOUNT_DEACTIVATE                                 = "DEACTIVATE ACCOUNT";
-	const SUBMIT_ASSOCIATE_USER                                     = "ASSOCIATE TO USERS";
-	const SUBMIT_ASSOCIATE_USER_DISASSOCIATE                        = "DISASSOCIATE TO USERS";
+	const SUBMIT_ASSOCIATE_USERS                                    = "ASSOCIATE TO USERS";
+	const SUBMIT_ASSOCIATE_USERS_DISASSOCIATE                       = "DISASSOCIATE TO USERS";
 	const SUBMIT_BACK                                               = "BACK";
 	const SUBMIT_CANCEL                                             = "CANCEL";
 	const SUBMIT_CHANGE_ASSOC_USER_CORPORATION                      = "CHANGE USER CORPORATION INFO";

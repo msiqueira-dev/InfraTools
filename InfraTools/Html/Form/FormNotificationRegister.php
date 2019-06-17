@@ -1,95 +1,69 @@
-<div id="<?php echo ConfigInfraTools::DIV_RETURN; ?>" class="<?php if(isset($this->ReturnClass)) echo $this->ReturnClass; ?>">
+<div id="{$DIV_RETURN}" class="{$RETURN_CLASS}">
 	<div>
 		<div>
-			<?php if(isset($this->ReturnImage)) echo $this->ReturnImage; ?>
+			{$RETURN_IMAGE}
 		</div>
 	</div>
 	<label>
-		<?php if(isset($this->ReturnEmptyText))              echo $this->ReturnEmptyText; ?>
-		<?php if(isset($this->ReturnNotificationActiveText)) echo $this->ReturnNotificationActiveText; ?>
-		<?php if(isset($this->ReturnNotificationTextText))   echo $this->ReturnNotificationTextText; ?>
-		<?php if(isset($this->ReturnText))                   echo $this->ReturnText; ?>
+		{$RETURN_EMPTY_TEXT}
+		{$RETURN_NOTIFICATION_ACTIVE_TEXT}
+		{$RETURN_NOTIFICATION_TEXT_TEXT}
+		{$RETURN_TEXT}
 	</label>
 </div>
 <!-- FM_NOTIFICATION_REGISTER_FORM -->
-<form name="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>" 
-      id="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>" method="post">
+<form name="{$FM_NOTIFICATION_REGISTER_FORM}" id="{$FM_NOTIFICATION_REGISTER_FORM}" method="{$FORM_METHOD}">
     <!-- FIELD_NOTIFICATION_TEXT -->
     <div class="DivContentBodyContainerTextArea">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_TEXT').":"; ?></label>
+            <label>{$FIELD_NOTIFICATION_TEXT_TEXT} </label>
+            <label class="RequiredField">&nbsp;*</label>
+			<label>:</label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <textarea name="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>" 
-                               id="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>" 
-                               class="DivContentBodyContainerValueTextArea <?php echo $this->ReturnNotificationTextClass; ?>"
-                               onblur="ValidateDescription('DivContentBodyContainerValueTextArea', 
-                                                   '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-                                                   '', true);
-                                       ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
+            <textarea name="{$FIELD_NOTIFICATION_TEXT}" id="{$FIELD_NOTIFICATION_TEXT}" 
+                      class="DivContentBodyContainerValueTextArea {$RETURN_NOTIFICATION_TEXT_CLASS}"
+                      onblur="ValidateDescription('DivContentBodyContainerValueTextArea', 
+                                                  '{$FIELD_NOTIFICATION_TEXT}', 'DivContentBodySubmitBigger ',
+                                                  '{$FM_NOTIFICATION_REGISTER_SB}', '', true);
+                              ValidateMultiplyFields('{$FM_NOTIFICATION_REGISTER_FORM}', 'DivContentBodySubmitBigger ',
+                                                     '{$FM_NOTIFICATION_REGISTER_SB}', '');"
+                      onkeyup="ValidateMultiplyFields('{$FM_NOTIFICATION_REGISTER_FORM}', 'DivContentBodySubmitBigger ',
+                                                      '{$FM_NOTIFICATION_REGISTER_SB}', '');"
+                      onchange="ValidateDescription('DivContentBodyContainerValueTextArea', '{$FIELD_NOTIFICATION_TEXT}',
+                                                    'DivContentBodySubmitBigger ', '{$FM_NOTIFICATION_REGISTER_SB}', '', true);
+                                ValidateMultiplyFields(
+                                                 '{$FM_NOTIFICATION_REGISTER_FORM}',
                                                  'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
+                                                 '{$FM_NOTIFICATION_REGISTER_SB}',
                                                  '');"
-                               onkeyup="ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
-                                                 'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-                                                 '');"
-                               onchange="ValidateDescription('DivContentBodyContainerValueTextArea', 
-                                                   '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
-                                                   'DivContentBodySubmitBigger ',
-                                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-                                                   '', true);
-                                       ValidateMultiplyFields(
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
-                                                 'DivContentBodySubmitBigger ',
-                                                 '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-                                                 '');"
-                               title="<?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_TEXT'); ?>"
-                               maxlength="500"><?php echo $this->InputValueNotificationText; ?></textarea>
+                      title="{$FIELD_NOTIFICATION_TEXT_TEXT}" maxlength="500">{$FIELD_NOTIFICATION_TEXT_VALUE}</textarea>
         </div>
     </div>
     <!-- FIELD_NOTIFICATION_ACTIVE -->
     <div class="DivContentBodyContainer">
         <div class="DivContentBodyContainerLabel">
-            <label><?php echo $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE').":"; ?></label>
+            <label>{$FIELD_NOTIFICATION_ACTIVE_TEXT} </label>
+            <label class="RequiredField">&nbsp;*</label>
+			<label>:</label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <input type="checkbox" 
-			           name="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ACTIVE; ?>" 
-				       value="<?php echo ConfigInfraTools::FIELD_NOTIFICATION_ACTIVE; ?>"
-				        <?php echo $this->InputValueNotificationActive; ?>
-					   onchange="ValidateMultiplyFields(
-									   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
-									   'DivContentBodySubmitBigger',
-									   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-									   '');"
-				        />
+        <input type="checkbox" name="{$FIELD_NOTIFICATION_ACTIVE}" value="{$FIELD_NOTIFICATION_ACTIVE}" {$FIELD_NOTIFICATION_ACTIVE_VALUE}
+				   onchange="ValidateMultiplyFields('{$FM_NOTIFICATION_REGISTER_FORM}',
+									                'DivContentBodySubmitBigger',
+									                '{$FM_NOTIFICATION_REGISTER_SB}','');"/>
         </div>
     </div>
     <!-- SUBMIT -->
     <div class="DivContentBodyContainer"
-         onmouseover="ValidateDescription('DivContentBodyContainerValueTextArea', 
-							       '<?php echo ConfigInfraTools::FIELD_NOTIFICATION_TEXT; ?>',
-								   'DivContentBodySubmitBigger',
-								   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-								   '', true);
-                      ValidateMultiplyFields(
-                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_FORM; ?>',
-                                   'DivContentBodySubmitBigger',
-                                   '<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>',
-                                   '');">
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_SB; ?>"
-                                 class="DivContentBodySubmitBigger <?php echo $this->SubmitClass ?>"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'); ?>"
-                                 <?php echo $this->SubmitEnabled; ?> />
-        <input type="submit" name="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_CANCEL; ?>" 
-                                 id="<?php echo ConfigInfraTools::FM_NOTIFICATION_REGISTER_CANCEL; ?>"
-                                 class="DivContentBodySubmitBigger"
-                                 value="<?php echo $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'); ?>" />
+         onmouseover="ValidateDescription('DivContentBodyContainerValueTextArea', '{$FIELD_NOTIFICATION_TEXT}','DivContentBodySubmitBigger',
+								          '{$FM_NOTIFICATION_REGISTER_SB}', '', true);
+                      ValidateMultiplyFields('{$FM_NOTIFICATION_REGISTER_FORM}', 'DivContentBodySubmitBigger',
+                                             '{$FM_NOTIFICATION_REGISTER_SB}', '');">
+        <input type="submit" name="{$FM_NOTIFICATION_REGISTER_SB}" id="{$FM_NOTIFICATION_REGISTER_SB}"
+               class="DivContentBodySubmitBigger {$SUBMIT_CLASS}"
+               value="{$SUBMIT_REGISTER}" {$SUBMIT_ENABLED} />
+        <input type="submit" name="{$FM_NOTIFICATION_REGISTER_CANCEL}" id="{$FM_NOTIFICATION_REGISTER_CANCEL}"
+               class="DivContentBodySubmitBigger" value="{$SUBMIT_CANCEL}" />
     </div>
 </form>
