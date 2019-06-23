@@ -225,7 +225,10 @@ class PageAdminDepartment extends PageAdmin
 					$this->InstanceInfraToolsDepartment = array_pop($this->ArrayInstanceInfraToolsDepartment);
 					if($this->LoadDataFromSession(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, "DepartmentLoadData", 
 													$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
+					{
+						$this->Session->SetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, $this->InstanceInfraToolsDepartment);
 						$this->PageBody = ConfigInfraTools::PAGE_ADMIN_DEPARTMENT_VIEW;
+					}
 				}
 			}
 		}
@@ -274,7 +277,7 @@ class PageAdminDepartment extends PageAdmin
 		elseif($this->CheckPostContainsKey(ConfigInfraTools::FM_DEPARTMENT_VIEW_LST_USERS_SB) == ConfigInfraTools::RET_OK)
 		{
 			if($this->Session->GetSessionValue(ConfigInfraTools::SESS_ADMIN_DEPARTMENT, 
-														$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
+												$this->InstanceInfraToolsDepartment) == ConfigInfraTools::RET_OK)
 			{
 				if($this->ExecuteFunction($_POST, 'InfraToolsUserSelectByDepartmentName', 
 									  array($this->InstanceInfraToolsDepartment->GetDepartmentCorporationName(),

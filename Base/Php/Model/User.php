@@ -38,21 +38,21 @@ Get / Set:
 			public function GetDepartmentInitials();
 			public function GetDepartmentName();
 			public function GetEmail();
-			public function GetGender();
 			public function GetHashCode();
 			public function GetLoggedIn();
 			public function GetName();
 			public function GetRegion();
 			public function GetRegisterDate();
 			public function GetSessionExpires();
-			public function GetTwoStepVerification();
 			public function GetUserActive();
 			public function GetUserConfirmed();
+			public function GetUserGender();
 			public function GetUserPhonePrimary();
 			public function GetUserPhonePrimaryPrefix();
 			public function GetUserPhoneSecondary();
 			public function GetUserPhoneSecondaryPrefix();
 			public function GetUserTypeDescription();
+			public function GetUserTwoStepVerification();
 			public function GetUserUniqueId();
 			public function SetArrayAssocUserNotification($ArrayAssocUserNotification);
 			public function SetArrayAssocUserTeam($ArrayAssocUserTeam);
@@ -63,14 +63,14 @@ Get / Set:
 			public function SetCountry($Country);
 			public function SetDepartment($DepartmentInstance);
 			public function SetEmail($UserEmail);
-			public function SetGender($Gender);
+			public function SetUserGender($UserGender);
 			public function SetHashCode($HashCode);
 			public function SetLoggedIn($LoggedIn);
 			public function SetName($UserName);
 			public function SetRegion($Region);
 			public function SetRegisterDate($RegisterDate);
 			public function SetSessionExpires($SessionExpires);
-			public function SetTwoStepVerification($TwoStepVerification);
+			public function SetTwoStepVerification($UserTwoStepVerification);
 			public function SetUserActive($UserActive);
 			public function SetUserConfirmed($UserConfirmed);
 			public function SetUserPhonePrimary($UserPhonePrimary)
@@ -80,16 +80,14 @@ Get / Set:
 			public function SetUserType($UserTypeInstance);
 			public function SetUniqueId($UniqueId);
 Methods:
-			public function CheckAssocUserCorporationRegistrationDateActive();
-			public function CheckAssocUserCorporationRegistrationIdActive();
 			public function CheckCorporationActive();
 			public function CheckDepartmentExists();
 			public function CheckSuperUser();
 			public function PushArrayAssocUserTeam($AssocUserTeam);
 			public function UpdateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
-									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
+									   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $UserGender, 
 									   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
-									   $TwoStepVerification, $UserActive, $UserConfirmed, 
+									   $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 									   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 									   $UserTypeInstance, $UserUniqueId);
 **************************************************************************/
@@ -107,14 +105,13 @@ class User
 	protected $Country                          = NULL;
 	protected $Department                       = NULL;
 	protected $UserEmail                        = NULL;
-	protected $Gender                           = NULL;
+	protected $UserGender                       = NULL;
 	protected $HashCode                         = NULL;
 	protected $LoggedIn                         = NULL;
 	protected $UserName                         = NULL;
 	protected $Region                           = NULL;
 	protected $RegisterDate                     = NULL;
 	protected $SessionExpires                   = NULL;
-	protected $TwoStepVerification              = NULL;
 	protected $UserActive                       = NULL;
 	protected $UserConfirmed                    = NULL;
 	protected $UserPhonePrimary                 = NULL;
@@ -122,13 +119,14 @@ class User
 	protected $UserPhoneSecondary               = NULL;
 	protected $UserPhoneSecondaryPrefix         = NULL;
 	protected $UserType                         = NULL;
+	protected $UserTwoStepVerification          = NULL;
 	protected $UserUniqueId                     = NULL;
 	
 	/* Constructor */
 	public function __construct($ArrayAssocUserTeam, $ArrayAssocUserNotification, $AssocUserCorporation,
 								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-								$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-								$TwoStepVerification, $UserActive, $UserConfirmed, 
+								$UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+								$UserTwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
     {
@@ -154,8 +152,8 @@ class User
 		if(!is_null($UserEmail))
 			$this->UserEmail = $UserEmail;
 		else throw new Exception(Config::EXCEPTION_USER_EMAIL);
-		if(!is_null($Gender))
-			$this->Gender = $Gender;
+		if(!is_null($UserGender))
+			$this->UserGender = $UserGender;
 		else throw new Exception(Config::EXCEPTION_USER_GENDER);
 		if(!is_null($HashCode))
 			$this->HashCode = $HashCode;
@@ -171,8 +169,8 @@ class User
 		if(!is_null($SessionExpires))
 			$this->SessionExpires = $SessionExpires;
 		else throw new Exception(Config::EXCEPTION_USER_SESSION_EXPIRES);
-		if(!is_null($TwoStepVerification))
-			$this->TwoStepVerification = $TwoStepVerification;
+		if(!is_null($UserTwoStepVerification))
+			$this->UserTwoStepVerification = $UserTwoStepVerification;
 		else throw new Exception(Config::EXCEPTION_USER_TWO_STEP_VERIFICATION);
 		if(!is_null($UserActive))
 			$this->UserActive = $UserActive;
@@ -435,11 +433,6 @@ class User
 		return $this->UserEmail;
 	}
 	
-	public function GetGender()
-	{
-		return $this->Gender;
-	}
-	
 	public function GetHashCode()
 	{
 		return $this->HashCode;
@@ -473,11 +466,6 @@ class User
 		return $this->SessionExpires;
 	}
 	
-	public function GetTwoStepVerification()
-	{
-		return $this->TwoStepVerification;
-	}
-	
 	public function GetUserActive()
 	{
 		return $this->UserActive;
@@ -486,6 +474,11 @@ class User
 	public function GetUserConfirmed()
 	{
 		return $this->UserConfirmed;
+	}
+
+	public function GetUserGender()
+	{
+		return $this->UserGender;
 	}
 	
 	public function GetUserPhonePrimary()
@@ -513,6 +506,11 @@ class User
 		if(!is_null($this->UserType))
 			return $this->UserType->GetTypeUserDescription();
 		else return NULL;
+	}
+
+	public function GetUserTwoStepVerification()
+	{
+		return $this->UserTwoStepVerification;
 	}
 	
 	public function GetUserUniqueId()
@@ -582,11 +580,6 @@ class User
 		$this->UserEmail = $UserEmail;
 	}
 	
-	public function SetGender($Gender)
-	{
-		$this->Gender = $Gender;
-	}
-	
 	public function SetHashCode($HashCode)
 	{
 		$this->HashCode = $HashCode;
@@ -617,11 +610,6 @@ class User
 		$this->SessionExpires = $SessionExpires;
 	}
 	
-	public function SetTwoStepVerification($TwoStepVerification)
-	{
-		$this->TwoStepVerification = $TwoStepVerification;
-	}
-	
 	public function SetUserActive($UserActive)
 	{
 		$this->UserActive = $UserActive;
@@ -630,6 +618,11 @@ class User
 	public function SetUserConfirmed($UserConfirmed)
 	{
 		$this->UserConfirmed = $UserConfirmed;
+	}
+
+	public function SetUserGender($UserGender)
+	{
+		$this->UserGender = $UserGender;
 	}
 	
 	public function SetUserPhonePrimary($UserPhonePrimary)
@@ -656,6 +649,11 @@ class User
 	{
 		$this->UserType = $UserTypeInstance;
 	}
+
+	public function SetTwoStepVerification($UserTwoStepVerification)
+	{
+		$this->UserTwoStepVerification = $UserTwoStepVerification;
+	}
 	
 	public function SetUniqueId($UniqueId)
 	{
@@ -663,19 +661,7 @@ class User
 	}
 	
 	/* METHODS */
-	public function CheckAssocUserCorporationRegistrationDateActive()
-	{
-		if(!is_null($this->AssocUserCorporation))
-			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationDate();
-		else return NULL;
-	}
-	
-	public function CheckAssocUserCorporationRegistrationIdActive()
-	{
-		if(!is_null($this->AssocUserCorporation))
-			return $this->AssocUserCorporation->GetAssocUserCorporationCorporationRegistrationId();
-		else return NULL;
-	}
+
 	public function CheckCorporationActive()
 	{
 		if(!is_null($this->Corporation))
@@ -717,9 +703,9 @@ class User
 	}
 	
 	public function UpdateUser($ArrayAssocUserTeam, $ArrayAssocUserNotification, $AssocUserCorporation, 
-							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $Gender, 
+							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, $UserGender, 
 							   $HashCode, $LoggedIn, $UserName, $Region, $RegisterDate, $SessionExpires, 
-							   $TwoStepVerification, $UserActive, $UserConfirmed, 
+							   $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 							   $UserTypeInstance, $UserUniqueId)
 	{
@@ -734,8 +720,8 @@ class User
 		$this->Department = $DepartmentInstance;
 		if(!is_null($UserEmail))
 			$this->UserEmail = $UserEmail;
-		if(!is_null($Gender))
-			$this->Gender = $Gender;
+		if(!is_null($UserGender))
+			$this->UserGender = $UserGender;
 		if(!is_null($HashCode))
 			$this->HashCode = $HashCode;
 		if(!is_null($LoggedIn))
@@ -750,10 +736,10 @@ class User
 			if(is_bool($SessionExpires))
 				$this->SessionExpires = $SessionExpires;
 		}
-		if(!is_null($TwoStepVerification))
+		if(!is_null($UserTwoStepVerification))
 		{
-			if(is_bool($TwoStepVerification))
-				$this->TwoStepVerification = $TwoStepVerification;
+			if(is_bool($UserTwoStepVerification))
+				$this->UserTwoStepVerification = $UserTwoStepVerification;
 		}
 		if(!is_null($UserActive))
 		{

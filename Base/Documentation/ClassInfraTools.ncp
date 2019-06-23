@@ -12,20 +12,20 @@
         <Collapsed>False</Collapsed>
         <Member type="Field">Date BirthDate</Member>
         <Member type="Field">String Email</Member>
-        <Member type="Field">Char Gender</Member>
+        <Member type="Field">Char UserGender</Member>
         <Member type="Field">String HashCode</Member>
         <Member type="Field">String Name</Member>
         <Member type="Field">String Password</Member>
         <Member type="Field">String Region</Member>
         <Member type="Field">DateTime RegisterDate</Member>
-        <Member type="Field">Bool SessionExpires</Member>
-        <Member type="Field">Boolean TwoStepVerification</Member>
         <Member type="Field">Bool UserActive</Member>
         <Member type="Field">Boolean UserConfirmed</Member>
         <Member type="Field">String UserPhonePrimary</Member>
         <Member type="Field">String UserPhonePrimaryPrefix</Member>
         <Member type="Field">String UserPhoneSecondary</Member>
         <Member type="Field">String UserPhoneSecondaryPrefix</Member>
+        <Member type="Field">Bool UserSessionExpires</Member>
+        <Member type="Field">Boolean UserTwoStepVerification</Member>
         <Member type="Field">String UserUniqueId</Member>
         <Modifier>None</Modifier>
       </Entity>

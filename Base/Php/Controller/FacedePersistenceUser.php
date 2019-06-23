@@ -17,8 +17,8 @@ Functions:
 			public function UserCheckPasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection);
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, $MySqlConnection);
 			public function UserDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection);
-			public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $Gender, $HashCode, 
-			                           $UserName, $Password, $Region, $SessionExpires, $TwoStepVerification, 
+			public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $UserGender, $HashCode, 
+			                           $UserName, $Password, $Region, $SessionExpires, $UserTwoStepVerification, 
 									   $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 									   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug, $MySqlConnection);
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, $MySqlConnection);
@@ -61,14 +61,14 @@ Functions:
 			                                                         $Debug, $MySqlConnection);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection);
 			public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection);
-			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
-									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $UserGender, $UserName, $Region, $SessionExpires, 
+									              $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug, $MySqlConnection)
 			public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, $MySqlConnection);
 			public function UserUpdateCorporationByUserEmail($Corporation, $UserEmail, $Debug);
 			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $UserEmail, $Debug);
 			public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection);
-			public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug, $MySqlConnection);
+			public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $UserTwoStepVerification, $Debug, $MySqlConnection);
 			public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection);
 			public function UserUpdateUniqueIdByUserEmail($UserEmail, $UniqueId, $Debug, $MySqlConnection);
 **************************************************************************/
@@ -232,8 +232,8 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $Gender, $HashCode, $UserName, $Password, 
-							   $Region, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, 
+	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $UserGender, $HashCode, $UserName, $Password, 
+							   $Region, $SessionExpires, $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 							   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug, $MySqlConnection)
 	{
@@ -245,13 +245,13 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserInsert());
 			if ($stmt)
 			{
-				if($Gender == Config::FIELD_USER_GENDER_FEMALE)
-					$Gender = Config::FIELD_USER_GENDER_FEMALE_VALUE;
-				elseif($Gender ==Config::FIELD_USER_GENDER_MALE)
-					$Gender = Config::FIELD_USER_GENDER_MALE_VALUE;
-				else $Gender = FIELD_USER_GENDER_OTHER_VALUE;
-				$stmt->bind_param("sssssssssiiiissssss", $BirthDate, $Corporation, $Country, $UserEmail, $Gender, 
-								                         $HashCode, $UserName, $Password, $Region, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserType,
+				if($UserGender == Config::FIELD_USER_GENDER_FEMALE)
+					$UserGender = Config::FIELD_USER_GENDER_FEMALE_VALUE;
+				elseif($UserGender ==Config::FIELD_USER_GENDER_MALE)
+					$UserGender = Config::FIELD_USER_GENDER_MALE_VALUE;
+				else $UserGender = FIELD_USER_GENDER_OTHER_VALUE;
+				$stmt->bind_param("sssssssssiiiissssss", $BirthDate, $Corporation, $Country, $UserEmail, $UserGender, 
+								                         $HashCode, $UserName, $Password, $Region, $SessionExpires, $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserType,
 								                         $UserUniqueId);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
@@ -261,9 +261,9 @@ class FacedePersistenceUser
 					if($errorCode == Config::DB_CODE_ERROR_UNIQUE_KEY_DUPLICATE)
 					{
 						$UserUniqueId = NULL;
-						$stmt->bind_param("sssssssssiiiissssss", $BirthDate, $Corporation, $Country, $UserEmail, $Gender, 
+						$stmt->bind_param("sssssssssiiiissssss", $BirthDate, $Corporation, $Country, $UserEmail, $UserGender, 
 										                         $HashCode, $UserName, $Password, $Region, 
-										                         $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserType,
+										                         $SessionExpires, $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserType,
 								                                 $UserUniqueId);
 						$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 						if($errorStr == NULL && $stmt->affected_rows > 0)
@@ -827,7 +827,7 @@ class FacedePersistenceUser
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
-									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
+									   $usrRegion, $usrRegDate, $sessionExpires, $usrTwoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
 									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate,
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
@@ -848,7 +848,7 @@ class FacedePersistenceUser
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
 																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
-																   $twoStepVerification, $usrActive, $usrConfirmed,
+																   $usrTwoStepVerification, $usrActive, $usrConfirmed,
 																   $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix,
 																   $InstaceTypeUser, $usrUniqueId);
 						if($assocUsrCorpRegistrationDate != NULL  && $assocUsrCorpRegistrationId != NULL &&
@@ -1882,7 +1882,7 @@ class FacedePersistenceUser
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
-									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
+									   $usrRegion, $usrRegDate, $sessionExpires, $usrTwoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
 									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate,
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
@@ -1903,7 +1903,7 @@ class FacedePersistenceUser
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
 																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
-																   $twoStepVerification, $usrActive, $usrConfirmed,
+																   $usrTwoStepVerification, $usrActive, $usrConfirmed,
 																   $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix,
 																   $InstaceTypeUser, $usrUniqueId);
 						if($assocUsrCorpRegistrationDate != NULL  && $assocUsrCorpRegistrationId != NULL &&
@@ -1955,7 +1955,7 @@ class FacedePersistenceUser
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
-									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
+									   $usrRegion, $usrRegDate, $sessionExpires, $usrTwoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
 									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate, 
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
@@ -1977,7 +1977,7 @@ class FacedePersistenceUser
 																   $usrBirthDate, $InstanceCorporation, $usrCountry, 
 																   $InstanceDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
-																   $twoStepVerification, $usrActive, $usrConfirmed,
+																   $usrTwoStepVerification, $usrActive, $usrConfirmed,
 																   $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix,
 																   $InstaceTypeUser, $usrUniqueId);
 						if($assocUsrCorpRegistrationDate != NULL  && $assocUsrCorpRegistrationId != NULL &&
@@ -2609,8 +2609,8 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
-									      $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $UserGender, $UserName, $Region, $SessionExpires, 
+									      $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 										  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
@@ -2621,13 +2621,13 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserUpdateByUserEmail());
 			if ($stmt)
 			{
-				if($Gender == Config::FIELD_USER_GENDER_FEMALE)
-					$Gender = Config::FIELD_USER_GENDER_FEMALE_VALUE;
-				elseif($Gender ==Config::FIELD_USER_GENDER_MALE)
-					$Gender = Config::FIELD_USER_GENDER_MALE_VALUE;
-				else $Gender = FIELD_USER_GENDER_OTHER_VALUE;
-				$stmt->bind_param("sssssiiiissssss", $BirthDate, $Country, $Gender, $UserName, $Region, $SessionExpires, 
-								                 $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
+				if($UserGender == Config::FIELD_USER_GENDER_FEMALE)
+					$UserGender = Config::FIELD_USER_GENDER_FEMALE_VALUE;
+				elseif($UserGender ==Config::FIELD_USER_GENDER_MALE)
+					$UserGender = Config::FIELD_USER_GENDER_MALE_VALUE;
+				else $UserGender = FIELD_USER_GENDER_OTHER_VALUE;
+				$stmt->bind_param("sssssiiiissssss", $BirthDate, $Country, $UserGender, $UserName, $Region, $SessionExpires, 
+								                 $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 								                 $UserUniqueId, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
@@ -2805,7 +2805,7 @@ class FacedePersistenceUser
 		else return Config::DB_ERROR_CONNECTION_EMPTY;
 	}
 	
-	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug, $MySqlConnection)
+	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $UserTwoStepVerification, $Debug, $MySqlConnection)
 	{
 		$mySqlError= NULL; $queryResult = NULL; $errorStr = NULL; $errorCode = NULL;
 		if($MySqlConnection != NULL)
@@ -2815,7 +2815,7 @@ class FacedePersistenceUser
 			$stmt = $MySqlConnection->prepare(Persistence::SqlUserUpdateTwoStepVerificationByUserEmail());
 			if ($stmt)
 			{
-				$stmt->bind_param("is", $TwoStepVerification, $UserEmail);
+				$stmt->bind_param("is", $UserTwoStepVerification, $UserEmail);
 				$this->MySqlManager->ExecuteInsertOrUpdate($MySqlConnection, $stmt, $errorCode, $errorStr, $queryResult);
 				if($errorStr == NULL && $stmt->affected_rows > 0)
 					return Config::RET_OK;

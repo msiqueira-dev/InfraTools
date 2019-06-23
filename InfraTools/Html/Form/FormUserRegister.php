@@ -365,25 +365,25 @@
 											 'DivContentBodySubmitBigger',
 											 '<?php echo ConfigInfraTools::FM_USER_REGISTER_SB; ?>',
 											 '');"
-				style=" <?php if($this->InputValueGender != ConfigInfraTools::FIELD_SEL_NONE
-								 && $this->InputValueGender != "") 
+				style=" <?php if($this->InputValueUserGender != ConfigInfraTools::FIELD_SEL_NONE
+								 && $this->InputValueUserGender != "") 
 							echo 'color:black;'
 						?> " >
-			<option <?php if ($this->InputValueGender == "" 
-							  || $this->InputValueGender == ConfigInfraTools::FIELD_SEL_NONE) 
+			<option <?php if ($this->InputValueUserGender == "" 
+							  || $this->InputValueUserGender == ConfigInfraTools::FIELD_SEL_NONE) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_SEL_NONE; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FM_SEL_DEFAULT'); ?> 
 			</option>
-			<option <?php if ($this->InputValueGender == ConfigInfraTools::FIELD_USER_GENDER_MALE) 
+			<option <?php if ($this->InputValueUserGender == ConfigInfraTools::FIELD_USER_GENDER_MALE) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_GENDER_MALE; ?>"> 
 					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER_MALE'); ?> 
 			</option>
-			<option <?php if ($this->InputValueGender == ConfigInfraTools::FIELD_USER_GENDER_FEMALE) 
+			<option <?php if ($this->InputValueUserGender == ConfigInfraTools::FIELD_USER_GENDER_FEMALE) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_GENDER_FEMALE; ?>"> 
 					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER_FEMALE'); ?> 
 			</option>
-			<option <?php if ($this->InputValueGender == ConfigInfraTools::FIELD_USER_GENDER_OTHER) 
+			<option <?php if ($this->InputValueUserGender == ConfigInfraTools::FIELD_USER_GENDER_OTHER) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_USER_GENDER_OTHER; ?>"> 
 					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER_OTHER'); ?> 
 			</option>
@@ -616,7 +616,7 @@
 			<div class="DivContentBodyContainerValue">
 				<input type="checkbox" 
 					   name="<?php echo ConfigInfraTools::FIELD_USER_SESSION_EXPIRES; ?>" 
-					   value="<?php echo ConfigInfraTools::FIELD_USER_SESSION_EXPIRES; ?>" <?php echo $this->InputValueSessionExpires; ?>
+					   value="<?php echo ConfigInfraTools::FIELD_USER_SESSION_EXPIRES; ?>" <?php echo $this->InputValueUserSessionExpires; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FM_USER_REGISTER_FORM; ?>',
 									   'DivContentBodySubmitBigger',
@@ -638,7 +638,7 @@
 				<input type="checkbox" 
 					   name="<?php echo ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
 					   value="<?php echo ConfigInfraTools::FIELD_USER_TWO_STEP_VERIFICATION; ?>" 
-					          <?php echo $this->InputValueTwoStepVerification; ?>
+					          <?php echo $this->InputValueUserTwoStepVerification; ?>
 					   onchange="ValidateMultiplyFields(
 									   '<?php echo ConfigInfraTools::FM_USER_REGISTER_FORM; ?>',
 									   'DivContentBodySubmitBigger',

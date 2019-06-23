@@ -426,14 +426,14 @@ class PageAdminUser extends PageAdmin
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_VIEW;
 				else
 				{
-					if($this->InputValueSessionExpires)
-						$this->InputValueSessionExpires = Config::CHECKBOX_CHECKED;
+					if($this->InputValueUserSessionExpires)
+						$this->InputValueUserSessionExpires = Config::CHECKBOX_CHECKED;
 					if($this->InputValueUserActive)
 						$this->InputValueUserActive = Config::CHECKBOX_CHECKED;
 					if($this->InputValueUserConfirmed)
 						$this->InputValueUserConfirmed = Config::CHECKBOX_CHECKED;
-					if($this->InputValueTwoStepVerification)
-						$this->InputValueTwoStepVerification = Config::CHECKBOX_CHECKED;
+					if($this->InputValueUserTwoStepVerification)
+						$this->InputValueUserTwoStepVerification = Config::CHECKBOX_CHECKED;
 					$this->PageBody = ConfigInfraTools::PAGE_ADMIN_USER_UPDT;
 				}
 				$this->InfraToolsUserLoadData($this->InstanceUserAdmin);

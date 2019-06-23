@@ -49,7 +49,7 @@
             <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
+            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserGender; ?></label>
         </div>
     </div>
     <!-- FIELD_CORPORATION_NAME -->

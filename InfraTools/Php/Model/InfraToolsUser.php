@@ -42,15 +42,15 @@ class InfraToolsUser extends User
 	/* Constructor */
 	public function __construct($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation,
 								$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-								$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-								$TwoStepVerification, $UserActive, $UserConfirmed, 
+								$UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+								$UserTwoStepVerification, $UserActive, $UserConfirmed, 
 								$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								$UserTypeInstance, $UserUniqueId) 
 	{
 		parent::__construct($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation,
 							$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-							$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-							$TwoStepVerification, $UserActive, $UserConfirmed, 
+							$UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+							$UserTwoStepVerification, $UserActive, $UserConfirmed, 
 							$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 							$UserTypeInstance, $UserUniqueId);
 		$this->InfraToolsFactory = InfraToolsFactory::__create();
@@ -81,14 +81,6 @@ class InfraToolsUser extends User
 		if($this->Department == NULL)
 			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
 		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
-	}
-	
-	public function GetTwoStepVerificationImage()
-	{
-		$ConfigInfraTools = $this->InfraToolsFactory->CreateConfigInfraTools();
-		if($this->TwoStepVerification)
-			return $ConfigInfraTools->DefaultServerImage . 'Icons/IconVerified.png';
-		else return $ConfigInfraTools->DefaultServerImage . 'Icons/IconNotVerified.png';
 	}
 	
 	public function GetUserActiveImage()

@@ -126,7 +126,6 @@ class PageAdmin extends PageInfraTools
 			$this->Smarty->assign('FM_TYPE_USER_VIEW', ConfigInfraTools::FM_TYPE_USER_VIEW);
 			$this->Smarty->assign('FM_USER_VIEW', ConfigInfraTools::FM_USER_VIEW);
 			$this->Smarty->assign('FM_SB_BACK', ConfigInfraTools::FM_SB_BACK);
-			$this->Smarty->assign('HREF_PAGE_ADMIN', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN'));
 			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_ADMIN_48x48_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsAdmin48x48Hover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_ARROW_BACK', $this->Config->DefaultServerImage.'Icons/IconInfraToolsArrowBack.png');

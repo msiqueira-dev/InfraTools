@@ -89,21 +89,21 @@ CREATE TABLE IF NOT EXISTS `INFRATOOLS`.`USER` (
   `Corporation` VARCHAR(80) NULL,
   `Country` VARCHAR(3) NOT NULL,
   `Email` VARCHAR(60) NOT NULL,
-  `Gender` CHAR NOT NULL,
   `HashCode` VARCHAR(128) NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
   `Password` VARCHAR(128) NOT NULL,
   `Region` VARCHAR(45) NULL,
   `RegisterDate` DATETIME NOT NULL,
   `SessionExpires` TINYINT(1) NOT NULL DEFAULT 1,
-  `TwoStepVerification` TINYINT(1) NOT NULL,
   `UserActive` TINYINT(1) NOT NULL DEFAULT 1,
   `UserConfirmed` TINYINT(1) NOT NULL DEFAULT 0,
+  `UserGender` CHAR NOT NULL,
   `UserPhonePrimary` VARCHAR(9) NULL,
   `UserPhonePrimaryPrefix` VARCHAR(3) NULL,
   `UserPhoneSecondary` VARCHAR(9) NULL,
   `UserPhoneSecondaryPrefix` VARCHAR(3) NULL,
   `UserType` VARCHAR(45) NOT NULL,
+  `UserTwoStepVerification` TINYINT(1) NOT NULL,
   `UserUniqueID` VARCHAR(25) NULL,
   PRIMARY KEY (`Email`),
   UNIQUE INDEX `UniqueUserEmail` (`Email` ASC),
@@ -1038,9 +1038,9 @@ USE `INFRATOOLS`$$
 CREATE TRIGGER `TriggerUserGenderAfterInsert` AFTER INSERT ON `USER` 
 	FOR EACH ROW BEGIN
 		DECLARE TempVariable INT DEFAULT 0;
-		IF (NEW.Gender != 'F' AND NEW.Gender != 'M' AND NEW.Gender != 'O') 
+		IF (NEW.UserGender != 'F' AND NEW.UserGender != 'M' AND NEW.UserGender != 'O') 
 		THEN
-			SELECT "Wrong Value for Gender into USER Table" INTO TempVariable 
+			SELECT "Wrong Value for UserGender into USER Table" INTO TempVariable 
 				FROM `USER`
 				WHERE `USER`.Email = new.Email;
 		END IF;
@@ -1055,9 +1055,9 @@ USE `INFRATOOLS`$$
 CREATE TRIGGER `TriggerUserGenderAfterUpdate` AFTER UPDATE ON `USER` 
 	FOR EACH ROW BEGIN
 		DECLARE TempVariable INT DEFAULT 0;
-		IF (NEW.Gender != 'F' AND NEW.Gender != 'M' AND NEW.Gender != 'O') 
+		IF (NEW.UserGender != 'F' AND NEW.UserGender != 'M' AND NEW.UserGender != 'O') 
 		THEN
-			SELECT "Wrong Value for Gender into USER Table" INTO TempVariable 
+			SELECT "Wrong Value for UserGender into USER Table" INTO TempVariable 
 				FROM `USER`
 				WHERE `USER`.Email = new.Email;
 		END IF;

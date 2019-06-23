@@ -9,6 +9,8 @@ Dependencies:
 Description: 
 			Class that deals about a user's account information.
 Functions: 
+			protected function BuildSmartyTags();
+			protected function CheckForm();
 			public    function LoadPage();
 **************************************************************************/
 if (!class_exists("InfraToolsFactory"))
@@ -26,6 +28,8 @@ if (!class_exists("PageInfraTools"))
 
 class PageAccount extends PageInfraTools
 {
+	public $PageForm = NULL;
+
 	/* __create */
 	public static function __create($Config, $Language, $Page)
 	{
@@ -47,8 +51,16 @@ class PageAccount extends PageInfraTools
 		}
 	}
 
+	protected function BuildSmartyTags()
+	{
+		if(parent::BuildSmartyTags() == ConfigInfraTools::RET_OK)
+		{
+		}
+	}
+
 	protected function CheckForm()
 	{
+		$this->PageForm = REL_PATH . ConfigInfraTools::PATH_FORM . "UserView" . ".php";
 		//PAGE_CORPORATION
 		if (isset($_POST[ConfigInfraTools::FM_ACCOUNT_VERIFIED_CORPORATION_SB]))
 		{
@@ -60,12 +72,14 @@ class PageAccount extends PageInfraTools
 		{
 			$this->PageBody   = ConfigInfraTools::PAGE_ACCOUNT_UPDT;
 			$this->InputFocus = ConfigInfraTools::FIELD_USER_NAME;
+			$this->PageForm = REL_PATH . ConfigInfraTools::PATH_FORM . "UserUpdate" . ".php";
 		}
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_VIEW_CHANGE_PASSWORD_SB]))
 		{
 			$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_CHANGE_PASSWORD;
 			$this->InputFocus = ConfigInfraTools::FIELD_PASSWORD_NEW;
 			$this->SubmitEnabled = 'disabled="disabled"';
+			$this->PageForm = REL_PATH . ConfigInfraTools::PATH_FORM . "UserChangePassword" . ".php";
 		}
 		//PAGE_ACCOUNT_UPDT
 		elseif(isset($_POST[ConfigInfraTools::FM_USER_UPDT_SB]))
@@ -92,14 +106,14 @@ class PageAccount extends PageInfraTools
 			 	$this->PageBody = ConfigInfraTools::PAGE_ACCOUNT;
 			 else
 			 {
-				 if($this->InputValueSessionExpires)
-					$this->InputValueSessionExpires = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueUserSessionExpires)
+					$this->InputValueUserSessionExpires = Config::CHECKBOX_CHECKED;
 				 if($this->InputValueUserActive)
 					$this->InputValueUserActive = Config::CHECKBOX_CHECKED;
 				 if($this->InputValueUserConfirmed)
 					$this->InputValueUserConfirmed = Config::CHECKBOX_CHECKED;
-				 if($this->InputValueTwoStepVerification)
-					$this->InputValueTwoStepVerification = Config::CHECKBOX_CHECKED;
+				 if($this->InputValueUserTwoStepVerification)
+					$this->InputValueUserTwoStepVerification = Config::CHECKBOX_CHECKED;
 				 $this->PageBody = ConfigInfraTools::PAGE_ACCOUNT_UPDT;
 			 }
 		}
@@ -144,7 +158,7 @@ class PageAccount extends PageInfraTools
 				$this->InputValueDepartmentName       = $this->User->GetDepartmentName();
 			$this->InputValueCountry = $this->User->GetCountry();
 			$this->InputValueUserEmail = $this->User->GetEmail();
-			$this->InputValueGender = $this->User->GetGender();
+			$this->InputValueUserGender = $this->User->GetUserGender();
 			$this->InputValueUserName = $this->User->GetName();
 			$this->InputValueUserPhonePrimary = $this->User->GetUserPhonePrimary();
 			$this->InputValueUserPhonePrimaryPrefix = $this->User->GetUserPhonePrimaryPrefix();
@@ -161,18 +175,12 @@ class PageAccount extends PageInfraTools
 					else $this->InputValueUserTeam .= ", " . $assocUserTeam->GetTeamName();
 				}
 			}
-			$this->InputValueTwoStepVerification = $this->User->GetTwoStepVerification();
+			$this->InputValueUserTwoStepVerification = $this->User->GetUserTwoStepVerification();
 			$this->InputValueUserUniqueId = $this->User->GetUserUniqueId();
 			$this->EnableFieldTwoStepVerification = TRUE;
 			if($this->User->CheckCorporationActive())
 				$this->InputValueCorporationActive = $this->Config->DefaultServerImage .'Icons/IconVerified.png';
 			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
-			if($this->User->CheckAssocUserCorporationRegistrationDateActive())
-				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
-			if($this->User->CheckAssocUserCorporationRegistrationIdActive())
-				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($this->User->CheckDepartmentExists())
 				$this->InputValueDepartmentActive = $this->Config->DefaultServerImage .'Icons/IconVerified.png';
 			else $this->InputValueDepartmentActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
@@ -181,7 +189,8 @@ class PageAccount extends PageInfraTools
 			else $this->InputValueUserUniqueIdActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
 			$this->CheckForm();
 		}
-		$this->LoadHtml(TRUE);
+		$this->BuildSmartyTags();
+		$this->LoadHtmlSmarty(FALSE, $this->InputValueHeaderDebug, $this->PageForm);
 	}
 }
 ?>

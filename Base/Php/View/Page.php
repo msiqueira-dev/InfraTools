@@ -138,12 +138,12 @@ Methods:
 		protected     function        TypeUserSelectByTypeUserDescription($TypeUserDescription, &$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserSelectNoLimit(&$ArrayInstanceTypeUser, $Debug);
 		protected     function        TypeUserUpdateByTypeUserDescription($TypeUserDescriptionNew, &$InstanceTypeUser, $Debug);
-		protected     function        UserChangeTwoStepVerification($InstanceUser, $TwoStepVerification, $Debug);
+		protected     function        UserChangeTwoStepVerification($InstanceUser, $UserTwoStepVerification, $Debug);
 		protected     function        UserDeleteByUserEmail(&$InstanceUser, $Debug);
 		protected     function        UserInsert($Application, $SendEmail, 
 		                                         $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, 
-		                                         $UserEmail, $Gender, $HashCode, $UserName, $PasswordNew, $PasswordRepeat, 
-												 $Region, $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed, 
+		                                         $UserEmail, $UserGender, $HashCode, $UserName, $PasswordNew, $PasswordRepeat, 
+												 $Region, $SessionExpires, $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 												 $UserPhonePrimary, UserPhonePrimaryprefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix,
 												 $UserType, $UserUniqueId, $Debug);
 		protected     function        UserLoadData($InstanceUser);
@@ -289,9 +289,10 @@ class Page
 	public    $EnableFieldUserConfirmed                             = "";
 	public    $InputFocus                                           = "";
 	public    $InputValueAssocUserCorporationRegistrationDate       = "";
-	public    $InputValueAssocUserCorporationRegistrationDateActive = "";
+	public    $InputValueAssocUserCorporationRegistrationDateDay    = "";
+	public    $InputValueAssocUserCorporationRegistrationDateMonth  = "";
+	public    $InputValueAssocUserCorporationRegistrationDateYear   = "";
 	public    $InputValueAssocUserCorporationRegistrationId         = "";
-	public    $InputValueAssocUserCorporationRegistrationIdActive   = "";
 	public    $InputValueAssocUserNotificationNotificationId        = "";
 	public    $InputValueAssocUserNotificationRead                  = "";
 	public    $InputValueAssocUserNotificationUserEmail             = "";
@@ -313,7 +314,6 @@ class Page
 	public    $InputValueDepartmentNameAndCorporationNameRadio      = "";
 	public    $InputValueDepartmentNameRadio                        = "";
 	public    $InputValueFormMethod                                 = "POST";
-	public    $InputValueGender                                     = "";
 	public    $InputValueHeaderDebug                                = Config::CHECKBOX_UNCHECKED;
 	public    $InputValueHeaderLayout                               = Config::CHECKBOX_UNCHECKED;
 	public    $InputValueLimit1                                     = "";
@@ -327,10 +327,6 @@ class Page
 	public    $InputValueNotificationText                           = "";
 	public    $InputValueRegion                                     = "";
 	public    $InputValueRegisterDate                               = "";
-	public    $InputValueRegistrationDateDay                        = "";
-	public    $InputValueRegistrationDateMonth                      = "";
-	public    $InputValueRegistrationDateYear                       = "";
-	public    $InputValueRegistrationId                             = "";
 	public    $InputValueRepeatPassword                             = "";
 	public    $InputValueRoleDescription                            = "";
 	public    $InputValueRoleName                                   = "";
@@ -355,7 +351,6 @@ class Page
 	public    $InputValueTicketTitle                                = "";
 	public    $InputValueTicketTitleRadio                           = "";
 	public    $InputValueTicketType                                 = "";
-	public    $InputValueTwoStepVerification                        = "";
 	public    $InputValueTypeAssocUserServiceDescription            = "";
 	public    $InputValueTypeAssocUserServiceId                     = "";
 	public    $InputValueTypeAssocUserTeamDescription               = "";
@@ -367,12 +362,15 @@ class Page
 	public    $InputValueUserConfirmed                              = "";
 	public    $InputValueUserCorporationName                        = "";
 	public    $InputValueUserEmail                                  = "";
+	public    $InputValueUserGender                                 = "";
 	public    $InputValueUserName                                   = "";
 	public    $InputValueUserPhonePrimary                           = "";
 	public    $InputValueUserPhonePrimaryPrefix                     = "";
 	public    $InputValueUserPhoneSecondary                         = "";
 	public    $InputValueUserPhoneSecondaryPrefix                   = "";
-	public    $InputValueUserTeam                                   = ""; 
+	public    $InputValueUserSessionExpires                         = "";
+	public    $InputValueUserTeam                                   = "";
+	public    $InputValueUserTwoStepVerification                    = ""; 
 	public    $InputValueUserUniqueId                               = "";
 	public    $InputValueUserUniqueIdActive                         = "";
 	public    $Page                                                 = "";
@@ -650,7 +648,7 @@ class Page
 																	Config::SESS_UNLIMITED);
 					$this->Session->SetSessionValue(Config::SESS_USER, 
 																$this->User);
-					if($user->GetTwoStepVerification()) 
+					if($user->GetUserTwoStepVerification()) 
 					{
 						if($this->SendTwoStepVerificationCode($this->Config->DefaultApplicationName, 
 															  $user->GetEmail(),$user->GetName(), $Debug) == Config::RET_OK)
@@ -973,11 +971,117 @@ class Page
 	protected function BuildSmartyTags()
 	{
 		$this->Smarty->assign('CURRENT_PAGE', $this->GetCurrentPage());
-		$this->Smarty->assign('DIV_RADIO', ConfigInfraTools::DIV_RADIO);
+		$this->Smarty->assign('DIV_RADIO', Config::DIV_RADIO);
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY', Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY);
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH', Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH);
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR', Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR);
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_TEXT', $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE'));
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_VALUE', $this->InputValueAssocUserCorporationRegistrationDate);
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID', Config::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID);
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID_TEXT', $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'));
+		$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID_VALUE', $this->InputValueAssocUserCorporationRegistrationId);
+		$this->Smarty->assign('FIELD_COUNTRY_NAME', Config::FIELD_COUNTRY_NAME);
+		$this->Smarty->assign('FIELD_COUNTRY_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_COUNTRY_NAME'));
+		$this->Smarty->assign('FIELD_COUNTRY_NAME_VALUE', $this->InputValueCountry);
+		$this->Smarty->assign('FIELD_CORPORATION_NAME', Config::FIELD_CORPORATION_NAME);
+		$this->Smarty->assign('FIELD_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'));
+		$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
+		$this->Smarty->assign('FIELD_DEPARTMENT_NAME', Config::FIELD_DEPARTMENT_NAME);
+		$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
+		$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
 		$this->Smarty->assign('FIELD_REGISTER_DATE_TEXT', $this->InstanceLanguageText->GetText('REGISTER_DATE'));
 		$this->Smarty->assign('FIELD_REGISTER_DATE_VALUE', $this->InputValueRegisterDate);
-		$this->Smarty->assign('FIELD_SEL_NONE', ConfigInfraTools::FIELD_SEL_NONE);
+		$this->Smarty->assign('FIELD_SEL_NONE', Config::FIELD_SEL_NONE);
 		$this->Smarty->assign('FIELD_SEL_NONE_TEXT', $this->InstanceLanguageText->GetText('FIELD_SEL_NONE'));
+		$this->Smarty->assign('FIELD_TEAM_NAME', Config::FIELD_TEAM_NAME);
+		$this->Smarty->assign('FIELD_TEAM_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_TEAM_NAME'));
+		$this->Smarty->assign('FIELD_TEAM_NAME_VALUE', $this->InputValueTeamName);
+		$this->Smarty->assign('FIELD_USER_ACTIVE', Config::FIELD_USER_ACTIVE);
+		$this->Smarty->assign('FIELD_USER_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_ACTIVE'));
+		$this->Smarty->assign('FIELD_USER_ACTIVE_VALUE', $this->InputValueUserActive);
+		$this->Smarty->assign('FIELD_USER_ACTIVE_VALUE_ENABLE', $this->EnableFieldUserActive);
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_DAY', Config::FIELD_USER_BIRTH_DATE_DAY);
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_DAY_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_DAY'));
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_DAY_VALUE', $this->InputValueBirthDateDay);
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_MONTH', Config::FIELD_USER_BIRTH_DATE_MONTH);
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_MONTH_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_MONTH'));
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_MONTH_VALUE', $this->InputValueBirthDateMonth);
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE'));
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_YEAR', Config::FIELD_USER_BIRTH_DATE_YEAR);
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_YEAR_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_YEAR'));
+		$this->Smarty->assign('FIELD_USER_BIRTH_DATE_YEAR_VALUE', $this->InputValueBirthDateYear);
+		$this->Smarty->assign('FIELD_USER_CORPORATION_NAME_VALUE', $this->InputValueUserCorporationName);
+		$this->Smarty->assign('FIELD_USER_CONFIRMED', Config::FIELD_USER_CONFIRMED);
+		$this->Smarty->assign('FIELD_USER_CONFIRMED_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_ACTIVE'));
+		$this->Smarty->assign('FIELD_USER_CONFIRMED_VALUE', $this->InputValueUserConfirmed);
+		$this->Smarty->assign('FIELD_USER_CONFIRMED_VALUE_ENABLE', $this->EnableFieldUserConfirmed);
+		$this->Smarty->assign('FIELD_USER_EMAIL', Config::FIELD_USER_EMAIL);
+		$this->Smarty->assign('FIELD_USER_EMAIL_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'));
+		$this->Smarty->assign('FIELD_USER_EMAIL_VALUE', $this->InputValueUserEmail);
+		$this->Smarty->assign('FIELD_USER_GENDER', Config::FIELD_USER_GENDER);
+		$this->Smarty->assign('FIELD_USER_GENDER_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_GENDER'));
+		$this->Smarty->assign('FIELD_USER_GENDER_VALUE', $this->InputValueUserGender);
+		$this->Smarty->assign('FIELD_USER_NAME', Config::FIELD_USER_NAME);
+		$this->Smarty->assign('FIELD_USER_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_NAME'));
+		$this->Smarty->assign('FIELD_USER_NAME_VALUE', $this->InputValueUserName);
+		$this->Smarty->assign('FIELD_USER_PHONE_PRIMARY', Config::FIELD_USER_PHONE_PRIMARY);
+		$this->Smarty->assign('FIELD_USER_PHONE_PRIMARY_PREFIX', Config::FIELD_USER_PHONE_PRIMARY_PREFIX);
+		$this->Smarty->assign('FIELD_USER_PHONE_PRIMARY_PREFIX_TEXT', $this->InstanceLanguageText->GetText('PHONE_PREFIX'));
+		$this->Smarty->assign('FIELD_USER_PHONE_PRIMARY_PREFIX_VALUE', $this->InputValueUserPhonePrimaryPrefix);
+		$this->Smarty->assign('FIELD_USER_PHONE_PRIMARY_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_PRIMARY'));
+		$this->Smarty->assign('FIELD_USER_PHONE_PRIMARY_VALUE', $this->InputValueUserPhonePrimary);
+		$this->Smarty->assign('FIELD_USER_PHONE_SECONDARY', Config::FIELD_USER_PHONE_SECONDARY);
+		$this->Smarty->assign('FIELD_USER_PHONE_SECONDARY_PREFIX', Config::FIELD_USER_PHONE_SECONDARY_PREFIX);
+		$this->Smarty->assign('FIELD_USER_PHONE_SECONDARY_PREFIX_TEXT', $this->InstanceLanguageText->GetText('PHONE_PREFIX'));
+		$this->Smarty->assign('FIELD_USER_PHONE_SECONDARY_PREFIX_VALUE', $this->InputValueUserPhoneSecondaryPrefix);
+		$this->Smarty->assign('FIELD_USER_PHONE_SECONDARY_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_PHONE_SECONDARY'));
+		$this->Smarty->assign('FIELD_USER_PHONE_SECONDARY_VALUE', $this->InputValueUserPhoneSecondary);
+		$this->Smarty->assign('FIELD_USER_REGION', Config::FIELD_USER_REGION);
+		$this->Smarty->assign('FIELD_USER_REGION_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_REGION'));
+		$this->Smarty->assign('FIELD_USER_REGION_VALUE', $this->InputValueRegion);
+		$this->Smarty->assign('FIELD_USER_SESSION_EXPIRES', Config::FIELD_USER_SESSION_EXPIRES);
+		$this->Smarty->assign('FIELD_USER_SESSION_EXPIRES_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_SESSION_EXPIRES'));
+		$this->Smarty->assign('FIELD_USER_SESSION_EXPIRES_VALUE', $this->EnableFieldSessionExpires);
+		$this->Smarty->assign('FIELD_USER_SESSION_EXPIRES_VALUE_ENABLE', $this->EnableFieldSessionExpires);
+		$this->Smarty->assign('FIELD_USER_TEAM_VALUE', $this->InputValueUserTeam);
+		$this->Smarty->assign('FIELD_USER_TYPE_USER_DESCRIPTION_VALUE_SHOW', $this->ShowTypeUserDescription);
+		$this->Smarty->assign('FIELD_USER_TWO_STEP_VERIFICATION', Config::FIELD_USER_TWO_STEP_VERIFICATION);
+		$this->Smarty->assign('FIELD_USER_TWO_STEP_VERIFICATION_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_TWO_STEP_VERIFICATION'));
+		$this->Smarty->assign('FIELD_USER_TWO_STEP_VERIFICATION_VALUE', $this->InputValueUserTwoStepVerification);
+		$this->Smarty->assign('FIELD_USER_TWO_STEP_VERIFICATION_VALUE_ENABLE', $this->EnableFieldTwoStepVerification);
+		$this->Smarty->assign('FIELD_USER_UNIQUE_ID', Config::FIELD_USER_UNIQUE_ID);
+		$this->Smarty->assign('FIELD_USER_UNIQUE_ID_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_UNIQUE_ID'));
+		$this->Smarty->assign('FIELD_USER_UNIQUE_ID_VALUE', $this->InputValueUserUniqueId);
+		$this->Smarty->assign('FM_ACCOUNT_VERIFIED_CORPORATION_SB', Config::FM_ACCOUNT_VERIFIED_CORPORATION_SB);
+		$this->Smarty->assign('FM_ACCOUNT_VERIFIED_DEPARTMENT_SB', Config::FM_ACCOUNT_VERIFIED_DEPARTMENT_SB);
+		$this->Smarty->assign('FM_ACCOUNT_VERIFIED_USER_UNIQUE_ID_SB', Config::FM_ACCOUNT_VERIFIED_USER_UNIQUE_ID_SB);
+		$this->Smarty->assign('FM_USER_VIEW_ACTIVATE', Config::FM_USER_VIEW_ACTIVATE);
+		$this->Smarty->assign('FM_USER_VIEW_ACTIVATE_SB', Config::FM_USER_VIEW_ACTIVATE_SB);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION', Config::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SB', Config::FM_USER_VIEW_CHANGE_ASSOC_USER_CORPORATION_SB);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_CORPORATION', Config::FM_USER_VIEW_CHANGE_CORPORATION);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_CORPORATION_SB', Config::FM_USER_VIEW_CHANGE_CORPORATION_SB);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_PASSWORD', Config::FM_USER_VIEW_CHANGE_PASSWORD);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_PASSWORD_SB', Config::FM_USER_VIEW_CHANGE_PASSWORD_SB);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_USER_TYPE', Config::FM_USER_VIEW_CHANGE_USER_TYPE);
+		$this->Smarty->assign('FM_USER_VIEW_CHANGE_USER_TYPE_SB', Config::FM_USER_VIEW_CHANGE_USER_TYPE_SB);
+		$this->Smarty->assign('FM_USER_VIEW_DEACTIVATE', Config::FM_USER_VIEW_DEACTIVATE);
+		$this->Smarty->assign('FM_USER_VIEW_DEACTIVATE_SB', Config::FM_USER_VIEW_DEACTIVATE_SB);
+		$this->Smarty->assign('FM_USER_VIEW_DEL', Config::FM_USER_VIEW_DEL);
+		$this->Smarty->assign('FM_USER_VIEW_DEL_SB', Config::FM_USER_VIEW_DEL_SB);
+		$this->Smarty->assign('FM_USER_VIEW_RESET_PASSWORD', Config::FM_USER_VIEW_RESET_PASSWORD);
+		$this->Smarty->assign('FM_USER_VIEW_RESET_PASSWORD_SB', Config::FM_USER_VIEW_RESET_PASSWORD_SB);
+		$this->Smarty->assign('FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE', Config::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE);
+		$this->Smarty->assign('FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB', Config::FM_USER_VIEW_TWO_STEP_VERIFICATION_ACTIVATE_SB);
+		$this->Smarty->assign('FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE', Config::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE);
+		$this->Smarty->assign('FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB', Config::FM_USER_VIEW_TWO_STEP_VERIFICATION_DEACTIVATE_SB);
+		$this->Smarty->assign('FM_USER_VIEW_UPDT', Config::FM_USER_VIEW_UPDT);
+		$this->Smarty->assign('FM_USER_VIEW_UPDT_SB', Config::FM_USER_VIEW_UPDT_SB);
+		$this->Smarty->assign('HEADER_PAGE_ADMIN_TEXT', $this->InstanceLanguageText->GetText('HEADER_PAGE_ADMIN_TEXT'));
+		$this->Smarty->assign('HREF_PAGE_ADMIN', $this->InstanceLanguageText->GetText('HREF_PAGE_ADMIN'));
+		if($this->CheckInstanceUser() == Config::RET_OK)
+			$this->Smarty->assign('INSTANCE_USER_CHECK', TRUE);
+		else $this->Smarty->assign('INSTANCE_USER_CHECK', FALSE);
 		if(!empty($this->InputValueFormMethod))
 			$this->Smarty->assign('FORM_METHOD', $this->InputValueFormMethod);
 		else $this->Smarty->assign('FORM_METHOD', '$_POST');
@@ -990,6 +1094,9 @@ class Page
 		if(isset($this->ReturnEmptyText)) 
 			$this->Smarty->assign('RETURN_EMPTY_TEXT', $this->ReturnEmptyText);
 		else $this->Smarty->assign('RETURN_EMPTY_TEXT', NULL);
+		if($this->ReturnLoginText == Config::USER_NOT_CONFIRMED)
+			$this->Smarty->assign('USER_NOT_CONFIRMED', $this->InstanceLanguageText->GetText('USER_NOT_CONFIRMED'));
+		else $this->Smarty->assign('USER_NOT_CONFIRMED', NULL);
 		if(isset($this->ReturnText)) 
 			$this->Smarty->assign('RETURN_TEXT', $this->ReturnText);
 		else $this->Smarty->assign('RETURN_TEXT', NULL);
@@ -999,13 +1106,24 @@ class Page
 		if(isset($this->SubmitEnabled)) 
 			$this->Smarty->assign('SUBMIT_ENABLED', $this->SubmitEnabled);
 		else $this->Smarty->assign('SUBMIT_ENABLED', NULL);
+		$this->Smarty->assign('SUBMIT_ACCOUNT_ACTIVATE', $this->InstanceLanguageText->GetText('SUBMIT_ACCOUNT_ACTIVATE'));
+		$this->Smarty->assign('SUBMIT_ACCOUNT_DEACTIVATE', $this->InstanceLanguageText->GetText('SUBMIT_ACCOUNT_DEACTIVATE'));
 		$this->Smarty->assign('SUBMIT_CANCEL', $this->InstanceLanguageText->GetText('SUBMIT_CANCEL'));
+		$this->Smarty->assign('SUBMIT_CHANGE_ASSOC_USER_CORPORATION', $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_ASSOC_USER_CORPORATION'));
+		$this->Smarty->assign('SUBMIT_CHANGE_CORPORATION', $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_CORPORATION'));
+		$this->Smarty->assign('SUBMIT_CHANGE_PASSWORD', $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_PASSWORD'));
+		$this->Smarty->assign('SUBMIT_CHANGE_USER_TYPE', $this->InstanceLanguageText->GetText('SUBMIT_CHANGE_USER_TYPE'));
 		$this->Smarty->assign('SUBMIT_CONFIRM', $this->InstanceLanguageText->GetText('SUBMIT_CONFIRM'));
 		$this->Smarty->assign('SUBMIT_DEL', $this->InstanceLanguageText->GetText('SUBMIT_DEL'));
 		$this->Smarty->assign('SUBMIT_LST_USERS', $this->InstanceLanguageText->GetText('SUBMIT_LST_USERS'));
 		$this->Smarty->assign('SUBMIT_REGISTER', $this->InstanceLanguageText->GetText('SUBMIT_REGISTER'));
+		$this->Smarty->assign('SUBMIT_RESET_PASSWORD', $this->InstanceLanguageText->GetText('SUBMIT_RESET_PASSWORD'));
+		$this->Smarty->assign('SUBMIT_TWO_STEP_VERIFICATION_ACTIVATE', $this->InstanceLanguageText->GetText('SUBMIT_TWO_STEP_VERIFICATION_ACTIVATE'));
+		$this->Smarty->assign('SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE', $this->InstanceLanguageText->GetText('SUBMIT_TWO_STEP_VERIFICATION_DEACTIVATE'));
 		$this->Smarty->assign('SUBMIT_UPDT', $this->InstanceLanguageText->GetText('SUBMIT_UPDT'));
-		$this->Smarty->assign('SUPER_USER', $this->User->CheckSuperUser());
+		if(isset($this->User))
+			$this->Smarty->assign('SUPER_USER', $this->User->CheckSuperUser());
+		else $this->Smarty->assign('SUPER_USER', NULL);
 		return Config::RET_OK;
 	}
 
@@ -1963,25 +2081,25 @@ class Page
 			{
 				echo "<div class='DivBody'><div class='DivContentBody'>";
 				$this->Smarty->display(REL_PATH . Config::PATH_BODY_PAGE . $page . ".php");
-				if(file_exists(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $page) . ".php")))
-					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $page) . ".php"));
-				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $this->PageBody) . ".php")))
-					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $this->PageBody) . ".php"));
-				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php")))
-					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php"));
-				elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php")))
-					$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php"));
-				if($ArrayPageForm != NULL)
-				{
-					if(is_array($ArrayPageForm))
-					{
-						foreach ($ArrayPageForm as $pageForm)
-							$this->Smarty->display($pageForm);
-					}
-					else $this->Smarty->display($ArrayPageForm);
-				}
-				echo "</div></div>";
 			}
+			if(file_exists(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $page) . ".php")))
+				$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $page) . ".php"));
+			elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $this->PageBody) . ".php")))
+				$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("Page", "", str_replace("_", "", $this->PageBody) . ".php"));
+			elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php")))
+				$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $page) . ".php"));
+			elseif(file_exists(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php")))
+				$this->Smarty->display(REL_PATH . Config::PATH_FORM . str_replace("PageAdmin", "", str_replace("_", "", $this->PageBody) . ".php"));	
+			if($ArrayPageForm != NULL)
+			{
+				if(is_array($ArrayPageForm))
+				{
+					foreach ($ArrayPageForm as $pageForm)
+						$this->Smarty->display($pageForm);
+				}
+				else $this->Smarty->display($ArrayPageForm);
+			}
+			echo "</div></div>";
 			if($EnableDivPush)
 			{
 				echo "<div class='DivPush'></div>";
@@ -2642,14 +2760,14 @@ class Page
 		$this->InputValueTicketType    = $TicketType;
 		$this->InputValueUserName  = $UserName;
 		$this->InputValueUserEmail = $UserEmail;
-		$this->Session->GetSessionValue(ConfigInfraTools::FIELD_TICKET_CONTACT_CAPTCHA, $captcha);
+		$this->Session->GetSessionValue(Config::FIELD_TICKET_CONTACT_CAPTCHA, $captcha);
 		$arrayConstants = array(); $arrayOptions = array(); $matrixConstants = array();
 
 		//FIELD_USER_NAME
-		$arrayElements[0]             = ConfigInfraTools::FIELD_USER_NAME;
+		$arrayElements[0]             = Config::FIELD_USER_NAME;
 		$arrayElementsClass[0]        = &$this->ReturnUserNameClass;
 		$arrayElementsDefaultValue[0] = ""; 
-		$arrayElementsForm[0]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_NAME;
+		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_NAME;
 		$arrayElementsInput[0]        = $this->InputValueUserName; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 45; 
@@ -2660,10 +2778,10 @@ class Page
 		array_push($arrayOptions, "");
 
 		//FIELD_USER_EMAIL
-		$arrayElements[1]             = ConfigInfraTools::FIELD_USER_EMAIL;
+		$arrayElements[1]             = Config::FIELD_USER_EMAIL;
 		$arrayElementsClass[1]        = &$this->ReturnUserEmailClass;
 		$arrayElementsDefaultValue[1] = ""; 
-		$arrayElementsForm[1]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_EMAIL;
+		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_EMAIL;
 		$arrayElementsInput[1]        = $this->InputValueUserEmail; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 60; 
@@ -2674,10 +2792,10 @@ class Page
 		array_push($arrayOptions, "");
 
 		//FIELD_TICKET_TYPE
-		$arrayElements[2]             = ConfigInfraTools::FIELD_TICKET_TYPE;
+		$arrayElements[2]             = Config::FIELD_TICKET_TYPE;
 		$arrayElementsClass[2]        = &$this->ReturnTicketTypeClass;
 		$arrayElementsDefaultValue[2] = ""; 
-		$arrayElementsForm[2]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_SUBJECT;
+		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_SUBJECT;
 		$arrayElementsInput[2]        = $this->InputValueTicketType; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 45; 
@@ -2688,10 +2806,10 @@ class Page
 		array_push($arrayOptions, "");
 
 		//FIELD_TICKET_TITLE
-		$arrayElements[3]             = ConfigInfraTools::FIELD_TICKET_TITLE;
+		$arrayElements[3]             = Config::FIELD_TICKET_TITLE;
 		$arrayElementsClass[3]        = &$this->ReturnTickeTitleClass;
 		$arrayElementsDefaultValue[3] = ""; 
-		$arrayElementsForm[3]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_TITLE;
+		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_TITLE;
 		$arrayElementsInput[3]        = $this->InputValueTicketTitle; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 90; 
@@ -2702,10 +2820,10 @@ class Page
 		array_push($arrayOptions, "");
 
 		//FIELD_TICKET_DESCRIPTION
-		$arrayElements[4]             = ConfigInfraTools::FIELD_TICKET_DESCRIPTION;
+		$arrayElements[4]             = Config::FIELD_TICKET_DESCRIPTION;
 		$arrayElementsClass[4]        = &$this->ReturnTicketDescriptionClass;
 		$arrayElementsDefaultValue[4] = ""; 
-		$arrayElementsForm[4]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_MESSAGE;
+		$arrayElementsForm[4]         = Config::FM_VALIDATE_FUNCTION_MESSAGE;
 		$arrayElementsInput[4]        = $this->InputValueTicketDescription; 
 		$arrayElementsMinValue[4]     = 0; 
 		$arrayElementsMaxValue[4]     = 500; 
@@ -2716,10 +2834,10 @@ class Page
 		array_push($arrayOptions, "");
 
 		//FIELD_TICKET_CONTACT_CAPTCHA
-		$arrayElements[5]             = ConfigInfraTools::FIELD_TICKET_CONTACT_CAPTCHA;
+		$arrayElements[5]             = Config::FIELD_TICKET_CONTACT_CAPTCHA;
 		$arrayElementsClass[5]        = &$this->ReturnCaptchaClass;
 		$arrayElementsDefaultValue[5] = ""; 
-		$arrayElementsForm[5]         = ConfigInfraTools::FM_VALIDATE_FUNCTION_COMPARE_STRING;
+		$arrayElementsForm[5]         = Config::FM_VALIDATE_FUNCTION_COMPARE_STRING;
 		$arrayElementsInput[5]        = $this->InputValueCaptcha; 
 		$arrayElementsMinValue[5]     = 0; 
 		$arrayElementsMaxValue[5]     = 0; 
@@ -2735,19 +2853,19 @@ class Page
 											$arrayElementsForm, $this->InstanceLanguageText, $this->Language,
 											$arrayElementsClass, $arrayElementsText, $this->ReturnEmptyText, 
 											$matrixConstants, $this->InputValueHeaderDebug, $arrayOptions);
-		if($return == ConfigInfraTools::RET_OK)
+		if($return == Config::RET_OK)
 		{
-			$this->InstanceInfraToolsFacedeBusiness = $this->Factory->CreateInfraToolsFacedeBusiness($this->InstanceLanguageText);
-			$return = $this->InstanceInfraToolsFacedeBusiness->SendEmailContact($ApplicationName,
-																				$this->InputValueUserEmail,
-																				$this->InputValueTicketDescription,
-																				$this->InputValueUserName, 
-																				$this->InputValueTicketType, 
-																				$this->InputValueTicketTitle,
-																				$this->InputValueHeaderDebug);
-			if($return == ConfigInfraTools::RET_OK)
+			$this->InstanceFacedeBusiness = $this->Factory->CreateFacedeBusiness($this->InstanceLanguageText);
+			$return = $this->InstanceFacedeBusiness->SendEmailContact($ApplicationName,
+																	  $this->InputValueUserEmail,
+																	  $this->InputValueTicketDescription,
+																	  $this->InputValueUserName, 
+																	  $this->InputValueTicketType, 
+																	  $this->InputValueTicketTitle,
+																	  $this->InputValueHeaderDebug);
+			if($return == Config::RET_OK)
 				$this->ShowDivReturnSuccess("CONTACT_SUCCESS");
-			elseif($return == ConfigInfraTools::SEND_EMAIL_ALREADY_SENT)
+			elseif($return == Config::SEND_EMAIL_ALREADY_SENT)
 				$this->ShowDivReturnWarning("CONTACT_EMAIL_ALREADY_SENT");
 			else $this->ShowDivReturnError("CONTACT_EMAIL_ERROR");
 		}
@@ -4123,17 +4241,17 @@ class Page
 		}
 	}
 	
-	protected function UserChangeTwoStepVerification($InstanceUser, $TwoStepVerification, $Debug)
+	protected function UserChangeTwoStepVerification($InstanceUser, $UserTwoStepVerification, $Debug)
 	{
 		if($InstanceUser == NULL)
 			$InstanceUser = $this->User;
 		$instanceFacedePersistence = $this->Factory->CreateFacedePersistence();
 		$return = $instanceFacedePersistence->UserUpdateTwoStepVerificationByUserEmail($InstanceUser->GetEmail(), 
-																				       $TwoStepVerification, $Debug);
+																				       $UserTwoStepVerification, $Debug);
 		if($return == Config::RET_OK)
 		{
-			$InstanceUser->SetTwoStepVerification($TwoStepVerification);
-			$this->InputValueTwoStepVerification = $InstanceUser->GetTwoStepVerification();
+			$InstanceUser->SetTwoStepVerification($UserTwoStepVerification);
+			$this->InputValueUserTwoStepVerification = $InstanceUser->GetUserTwoStepVerification();
 			$this->ShowDivReturnSuccess("USER_TWO_STEP_VERIFICATION_CHANGE_SUCCESS");
 			return Config::RET_OK;
 		}
@@ -4202,8 +4320,8 @@ class Page
 	}
 	
 	protected function UserInsert($Application, $SendEmail, 
-								  $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, $UserEmail, $Gender, 
-								  $HashCode, $UserName, $PasswordNew, $PasswordRepeat, $Region, $SessionExpires, $TwoStepVerification, 
+								  $BirthDateDay, $BirthDateMonth, $BirthDateYear, $Corporation, $Country, $UserEmail, $UserGender, 
+								  $HashCode, $UserName, $PasswordNew, $PasswordRepeat, $Region, $SessionExpires, $UserTwoStepVerification, 
 								  $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 								  $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug)
 	{
@@ -4213,7 +4331,7 @@ class Page
 		$this->InputValueBirthDateDay             = $BirthDateDay;
 		$this->InputValueBirthDateMonth           = $BirthDateMonth;
 		$this->InputValueBirthDateYear            = $BirthDateYear;
-		$this->InputValueGender                   = $Gender;
+		$this->InputValueUserGender               = $UserGender;
 		$this->InputValueUserPhonePrimary         = $UserPhonePrimary;
 		$this->InputValueUserPhonePrimaryPrefix   = $UserPhonePrimaryprefix;
 		$this->InputValueUserPhoneSecondary       = $UserPhoneSecondary;
@@ -4223,11 +4341,11 @@ class Page
 		$this->InputValueNewPassword              = $PasswordNew;
 		$this->InputValueRepeatPassword           = $PasswordRepeat;
 		if(isset($_POST[Config::FIELD_USER_SESSION_EXPIRES]))
-			$this->InputValueSessionExpires = TRUE;
-		else $this->InputValueSessionExpires = FALSE;
+			$this->InputValueUserSessionExpires = TRUE;
+		else $this->InputValueUserSessionExpires = FALSE;
 		if(isset($_POST[Config::FIELD_USER_TWO_STEP_VERIFICATION]))
-			$this->InputValueTwoStepVerification = TRUE;
-		else $this->InputValueTwoStepVerification = FALSE;
+			$this->InputValueUserTwoStepVerification = TRUE;
+		else $this->InputValueUserTwoStepVerification = FALSE;
 		if(is_null($UserActive))
 		{
 			if(isset($_POST[Config::FIELD_USER_ACTIVE]))
@@ -4239,9 +4357,9 @@ class Page
 			$this->InputValueUserConfirmed = TRUE;
 		else $this->InputValueUserConfirmed = FALSE;
 		if ($SessionExpires == NULL)
-			$SessionExpires = $this->InputValueSessionExpires;
-		if($TwoStepVerification == NULL)
-			$TwoStepVerification = $this->InputValueTwoStepVerification;
+			$SessionExpires = $this->InputValueUserSessionExpires;
+		if($UserTwoStepVerification == NULL)
+			$UserTwoStepVerification = $this->InputValueUserTwoStepVerification;
 		if($UserConfirmed == NULL)
 			$UserConfirmed = $this->InputValueUserConfirmed;
 		$this->InputValueUserUniqueId = explode("@", $this->InputValueUserEmail)[0];
@@ -4408,7 +4526,7 @@ class Page
 		$arrayElementsClass[10]        = &$this->ReturnGenderClass;
 		$arrayElementsDefaultValue[10] = ""; 
 		$arrayElementsForm[10]         = Config::FM_VALIDATE_FUNCTION_GENDER;
-		$arrayElementsInput[10]        = $this->InputValueGender; 
+		$arrayElementsInput[10]        = $this->InputValueUserGender; 
 		$arrayElementsMinValue[10]     = 0; 
 		$arrayElementsMaxValue[10]     = 0; 
 		$arrayElementsNullable[10]     = FALSE;
@@ -4497,7 +4615,7 @@ class Page
 				$birthDate = $this->InputValueBirthDateYear . "-" . $this->InputValueBirthDateMonth
 							 . "-" . $this->InputValueBirthDateDay;
 				$hashCode  = hash("sha512", $this->InputValueUserName . $this->InputValueUserEmail . 
-								   $this->InputValueGender . $birthDate);
+								   $this->InputValueUserGender . $birthDate);
 				$this->InputValueUserName = ucwords($this->InputValueUserName);
 				if($this->ReturnUserUniqueIdText != "")
 					$this->InputValueUserUniqueId = NULL;
@@ -4506,13 +4624,13 @@ class Page
 																 NULL,
 																 $this->InputValueCountry,
 																 $this->InputValueUserEmail, 
-																 $this->InputValueGender,
+																 $this->InputValueUserGender,
 																 $hashCode,
 																 $this->InputValueUserName,
 																 $this->InputValueNewPassword,
 																 $this->InputValueRegion,
 																 $SessionExpires,
-																 $TwoStepVerification,
+																 $UserTwoStepVerification,
 																 $this->InputValueUserActive,
 																 $UserConfirmed,
 																 $this->InputValueUserPhonePrimary, 
@@ -4588,7 +4706,7 @@ class Page
 		elseif($InstanceUser->GetDepartmentName() != NULL)
 			$this->InputValueDepartmentName       = $InstanceUser->GetDepartmentName();
 		else $this->InputValueDepartmentName = NULL;
-		$this->InputValueGender                   = $InstanceUser->GetGender();
+		$this->InputValueUserGender               = $InstanceUser->GetUserGender();
 		$this->InputValueUserName                 = $InstanceUser->GetName();
 		$this->InputValueUserEmail                = $InstanceUser->GetEmail();
 		$this->InputValueUserPhonePrimary         = $InstanceUser->GetUserPhonePrimary();
@@ -4599,14 +4717,10 @@ class Page
 		$this->InputValueRegisterDate             = $InstanceUser->GetRegisterDate();
 		$this->InputValueRegistrationDate         = 
 			$InstanceUser->GetAssocUserCorporationUserRegistrationDate();
-		$this->InputValueRegistrationDateDay      = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDateDay();
-		$this->InputValueRegistrationDateMonth    = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDateMonth();
-		$this->InputValueRegistrationDateYear     = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationDateYear();
-		$this->InputValueRegistrationId           = 
-			$InstanceUser->GetAssocUserCorporationUserRegistrationId();
+		$this->InputValueAssocUserCorporationRegistrationDateDay = $InstanceUser->GetAssocUserCorporationUserRegistrationDateDay();
+		$this->InputValueAssocUserCorporationRegistrationDateMonth = $InstanceUser->GetAssocUserCorporationUserRegistrationDateMonth();
+		$this->InputValueAssocUserCorporationRegistrationDateYear = $InstanceUser->GetAssocUserCorporationUserRegistrationDateYear();
+		$this->InputValueAssocUserCorporationRegistrationId = $InstanceUser->GetAssocUserCorporationUserRegistrationId();
 		if($InstanceUser->GetArrayAssocUserTeam() != NULL)
 		{
 			foreach ($InstanceUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
@@ -4618,20 +4732,14 @@ class Page
 		}
 		$this->InputValueUserUniqueId             = $InstanceUser->GetUserUniqueId();
 		if($InstanceUser->GetSessionExpires())
-			$this->InputValueSessionExpires = "checked";
-		if($InstanceUser->GetTwoStepVerification())
-			$this->InputValueTwoStepVerification = "checked";
+			$this->InputValueUserSessionExpires = "checked";
+		if($InstanceUser->GetUserTwoStepVerification())
+			$this->InputValueUserTwoStepVerification = "checked";
 		if($InstanceUser->GetUserActive())
 			$this->InputValueUserActive = "checked";
 		if($InstanceUser->GetUserConfirmed())
 			$this->InputValueUserConfirmed = "checked";
 		$this->InputValueTypeUserDescription = $InstanceUser->GetUserTypeDescription();
-		if($InstanceUser->CheckAssocUserCorporationRegistrationDateActive())
-			$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-		else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
-		if($InstanceUser->CheckAssocUserCorporationRegistrationIdActive())
-			$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-		else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage .'Icons/IconNotVerified.png';
 		if($InstanceUser->CheckCorporationActive())
 			$this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
 		else $this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
@@ -5519,7 +5627,7 @@ class Page
 			elseif($return == Config::DB_ERROR_USER_SEL_NOTIFICATION_BY_USER_EMAIL_EMPTY)
 			{
 				$this->ShowDivReturnWarning("USER_SEL_NOTIFICATION_BY_USER_EMAIL_WARNING");
-				return ConfigInfraTools::RET_WARNING;	
+				return Config::RET_WARNING;	
 			}
 		}
 		$this->ShowDivReturnError("USER_SEL_NOTIFICATION_BY_USER_EMAIL_ERROR");
@@ -5750,10 +5858,10 @@ class Page
 		$PageForm = $this->Factory->CreatePageForm();
 		$instanceFacedePersistence             = $this->Factory->CreateFacedePersistence();
 		$this->InputValueDepartmentName        = $AssocUserCorporationDepartmentNameNew;
-		$this->InputValueRegistrationDateDay   = $AssocUserCorporationRegistrationDateDayNew;
-		$this->InputValueRegistrationDateMonth = $AssocUserCorporationRegistrationDateMonthNew;
-		$this->InputValueRegistrationDateYear  = $AssocUserCorporationRegistrationDateYearNew;
-		$this->InputValueRegistrationId        = $AssocUserCorporationRegistrationIdNew;
+		$this->InputValueAssocUserCorporationRegistrationDateDay   = $AssocUserCorporationRegistrationDateDayNew;
+		$this->InputValueAssocUserCorporationRegistrationDateMonth = $AssocUserCorporationRegistrationDateMonthNew;
+		$this->InputValueAssocUserCorporationRegistrationDateYear  = $AssocUserCorporationRegistrationDateYearNew;
+		$this->InputValueAssocUserCorporationRegistrationId = $AssocUserCorporationRegistrationIdNew;
 		$arrayConstants = array(); $matrixConstants = array();
 		
 		//FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
@@ -5761,7 +5869,7 @@ class Page
 		$arrayElementsClass[0]        = &$this->ReturnRegistrationDateDayClass;
 		$arrayElementsDefaultValue[0] = ""; 
 		$arrayElementsForm[0]         = Config::FM_VALIDATE_FUNCTION_DATE_DAY;
-		$arrayElementsInput[0]        = $this->InputValueRegistrationDateDay; 
+		$arrayElementsInput[0]        = $this->InputValueAssocUserCorporationRegistrationDateDay; 
 		$arrayElementsMinValue[0]     = 0; 
 		$arrayElementsMaxValue[0]     = 0; 
 		$arrayElementsNullable[0]     = TRUE;
@@ -5774,7 +5882,7 @@ class Page
 		$arrayElementsClass[1]        = &$this->ReturnRegistrationDateMonthClass;
 		$arrayElementsDefaultValue[1] = ""; 
 		$arrayElementsForm[1]         = Config::FM_VALIDATE_FUNCTION_DATE_MONTH;
-		$arrayElementsInput[1]        = $this->InputValueRegistrationDateMonth; 
+		$arrayElementsInput[1]        = $this->InputValueAssocUserCorporationRegistrationDateMonth; 
 		$arrayElementsMinValue[1]     = 0; 
 		$arrayElementsMaxValue[1]     = 0; 
 		$arrayElementsNullable[1]     = TRUE;
@@ -5787,7 +5895,7 @@ class Page
 		$arrayElementsClass[2]        = &$this->ReturnRegistrationDateYearClass;
 		$arrayElementsDefaultValue[2] = ""; 
 		$arrayElementsForm[2]         = Config::FM_VALIDATE_FUNCTION_DATE_YEAR;
-		$arrayElementsInput[2]        = $this->InputValueRegistrationDateYear; 
+		$arrayElementsInput[2]        = $this->InputValueAssocUserCorporationRegistrationDateYear; 
 		$arrayElementsMinValue[2]     = 0; 
 		$arrayElementsMaxValue[2]     = 0; 
 		$arrayElementsNullable[2]     = TRUE;
@@ -5800,7 +5908,7 @@ class Page
 		$arrayElementsClass[3]        = &$this->ReturnRegistrationIdClass;
 		$arrayElementsDefaultValue[3] = ""; 
 		$arrayElementsForm[3]         = Config::FM_VALIDATE_FUNCTION_REGISTRATION_ID;
-		$arrayElementsInput[3]        = $this->InputValueRegistrationId; 
+		$arrayElementsInput[3]        = $this->InputValueAssocUserCorporationRegistrationId; 
 		$arrayElementsMinValue[3]     = 0; 
 		$arrayElementsMaxValue[3]     = 12; 
 		$arrayElementsNullable[3]     = TRUE;
@@ -5830,18 +5938,19 @@ class Page
 		{
 			if($this->InputValueDepartmentName == "")
 				$this->InputValueDepartmentName = NULL;
-			if($this->InputValueRegistrationDateYear != "" && $this->InputValueRegistrationDateMonth != "" 
-			   && $this->InputValueRegistrationDateDay != "")
+			if($this->InputValueAssocUserCorporationRegistrationDateYear != "" && $this->InputValueAssocUserCorporationRegistrationDateMonth != "" 
+			   && $this->InputValueAssocUserCorporationRegistrationDateDay != "")
 			{
-				$registrationDate = $this->InputValueRegistrationDateYear . "-" . $this->InputValueRegistrationDateMonth . "-" 
-				         	        . $this->InputValueRegistrationDateDay;
+				$registrationDate = $this->InputValueAssocUserCorporationRegistrationDateYear 
+									. "-" . $this->InputValueAssocUserCorporationRegistrationDateMonth 
+									. "-" . $this->InputValueAssocUserCorporationRegistrationDateDay;
 			}
 			else $registrationDate = NULL;
-			if($this->InputValueRegistrationId == "")
-				$this->InputValueRegistrationId = NULL;
+			if($this->InputValueAssocUserCorporationRegistrationId == "")
+				$this->InputValueAssocUserCorporationRegistrationId = NULL;
 			$return = $instanceFacedePersistence->AssocUserCorporationUpdateByUserEmailAndCorporationName($this->InputValueDepartmentName,
 				                                                                                          $registrationDate,
-															                                              $this->InputValueRegistrationId,
+															                                              $this->InputValueAssocUserCorporationRegistrationId,
 															                                              $InstanceUser->GetCorporationName(),
 															                                              $InstanceUser->GetEmail(),
 															                                              $Debug);
@@ -5871,7 +5980,7 @@ class Page
 		$this->InputValueBirthDateMonth           = $BirthDateMonthNew;
 		$this->InputValueBirthDateYear            = $BirthDateYearNew;
 		$this->InputValueCountry                  = $CountryNew;
-		$this->InputValueGender                   = $GenderNew;
+		$this->InputValueUserGender               = $GenderNew;
 		$this->InputValueRegion                   = $RegionNew;
 		$this->InputValueUserName                 = $UserNameNew;
 		$this->InputValueUserPhonePrimary         = $UserPhonePrimaryNew;
@@ -5882,8 +5991,8 @@ class Page
 		if($OnAdmin)
 		{
 			if(isset($SessionExpiresNew))
-				$this->InputValueSessionExpires = TRUE;
-			else $this->InputValueSessionExpires = FALSE;
+				$this->InputValueUserSessionExpires = TRUE;
+			else $this->InputValueUserSessionExpires = FALSE;
 			if(isset($UserActiveNew))
 				$this->InputValueUserActive = TRUE;
 			else $this->InputValueUserActive = FALSE;
@@ -5893,13 +6002,13 @@ class Page
 		}
 		else
 		{
-			$this->InputValueSessionExpires = $InstanceUser->GetSessionExpires();
+			$this->InputValueUserSessionExpires = $InstanceUser->GetSessionExpires();
 			$this->InputValueUserActive = $InstanceUser->GetUserActive();
 			$this->InputValueUserConfirmed = $InstanceUser->GetUserConfirmed();
 		}
 		if(isset($TwoStepVerificationNew))
-				$this->InputValueTwoStepVerification = TRUE;
-			else $this->InputValueTwoStepVerification = FALSE;
+				$this->InputValueUserTwoStepVerification = TRUE;
+			else $this->InputValueUserTwoStepVerification = FALSE;
 		
 		$this->InputFocus = Config::FIELD_USER_NAME;
 		$arrayConstants = array(); $matrixConstants = array();
@@ -6030,7 +6139,7 @@ class Page
 		$arrayElementsClass[9]        = &$this->ReturnGenderClass;
 		$arrayElementsDefaultValue[9] = ""; 
 		$arrayElementsForm[9]         = Config::FM_VALIDATE_FUNCTION_GENDER;
-		$arrayElementsInput[9]        = $this->InputValueGender; 
+		$arrayElementsInput[9]        = $this->InputValueUserGender; 
 		$arrayElementsMinValue[9]     = 0; 
 		$arrayElementsMaxValue[9]     = 0; 
 		$arrayElementsNullable[9]     = FALSE;
@@ -6078,11 +6187,11 @@ class Page
 			$return = $instanceFacedePersistence->UserUpdateByUserEmail($birthDate,
 																	    $this->InputValueCountry,
 																	    $InstanceUser->GetEmail(),
-																	    $this->InputValueGender,
+																	    $this->InputValueUserGender,
 																	    $this->InputValueUserName,
 																	    $this->InputValueRegion,
-																	    $this->InputValueSessionExpires,
-																	    $this->InputValueTwoStepVerification,
+																	    $this->InputValueUserSessionExpires,
+																	    $this->InputValueUserTwoStepVerification,
 																	    $this->InputValueUserActive,
 																	    $this->InputValueUserConfirmed,
 																	    $this->InputValueUserPhonePrimary,
@@ -6095,8 +6204,8 @@ class Page
 			if($return == Config::RET_OK)
 			{
 				$InstanceUser->UpdateUser(NULL, NULL, NULL, $birthDate, NULL, $this->InputValueCountry, NULL, NULL,
-										  $this->InputValueGender, NULL, NULL, $this->InputValueUserName, $this->InputValueRegion, 
-										  NULL, $this->InputValueSessionExpires, $this->InputValueTwoStepVerification, 
+										  $this->InputValueUserGender, NULL, NULL, $this->InputValueUserName, $this->InputValueRegion, 
+										  NULL, $this->InputValueUserSessionExpires, $this->InputValueUserTwoStepVerification, 
 										  $this->InputValueUserActive, 
 										  $this->InputValueUserConfirmed, $this->InputValueUserPhonePrimary,
 										  $this->InputValueUserPhonePrimaryPrefix, $this->InputValueUserPhoneSecondary,

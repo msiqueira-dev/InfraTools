@@ -1481,7 +1481,7 @@ class InfraToolsFacedePersistenceUser
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
-									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, 
+									   $usrRegion, $usrRegDate, $sessionExpires, $usrTwoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, 
 									   $usrPhonePrimaryPrefix, $usrPhoneSecondary,
 									   $usrPhoneSecondaryPrefix, $usrUniqueId,
 									   $usrTypeDescription, $usrTypeRegDate,
@@ -1504,7 +1504,7 @@ class InfraToolsFacedePersistenceUser
 																   $usrBirthDate, $InstanceInfraToolsCorporation, $usrCountry, 
 																   $InstanceInfraToolsDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
-																   $twoStepVerification, $usrActive, $usrConfirmed,
+																   $usrTwoStepVerification, $usrActive, $usrConfirmed,
 																   $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix,
 																   $InstaceTypeUser, $usrUniqueId);
 						if($assocUsrCorpRegistrationDate != NULL  && $assocUsrCorpRegistrationId != NULL &&
@@ -1556,7 +1556,7 @@ class InfraToolsFacedePersistenceUser
 				{
 					$stmt->bind_result($usrBirthDate, $usrCountry, $usrEmail, 
 									   $usrGender, $usrHashCode, $usrName,
-									   $usrRegion, $usrRegDate, $sessionExpires, $twoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
+									   $usrRegion, $usrRegDate, $sessionExpires, $usrTwoStepVerification, $usrActive, $usrConfirmed, $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix, $usrUniqueId,
 									   $usrTypeDescription, $usrTypeRegDate,
 									   $corpActive, $corpName, $corpRegDate, 
 									   $assocUsrCorpCorpName, $assocUsrCorpDepName, $assocUsrCorpRegistrationDate,
@@ -1577,7 +1577,7 @@ class InfraToolsFacedePersistenceUser
 																   $usrBirthDate, $InstanceInfraToolsCorporation, $usrCountry, 
 																   $InstanceInfraToolsDepartment, $usrEmail, $usrGender, $usrHashCode,
 																   $usrName, $usrRegion, $usrRegDate, $sessionExpires,
-																   $twoStepVerification, $usrActive, $usrConfirmed,
+																   $usrTwoStepVerification, $usrActive, $usrConfirmed,
 																   $usrPhonePrimary, $usrPhonePrimaryPrefix, $usrPhoneSecondary, $usrPhoneSecondaryPrefix,
 																   $InstaceTypeUser, $usrUniqueId);
 						if($assocUsrCorpRegistrationDate != NULL  && $assocUsrCorpRegistrationId != NULL &&

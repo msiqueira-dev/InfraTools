@@ -76,7 +76,7 @@ Methods:
 			public    function CreateTypeUser($TypeUserDescription, $RegisterDate);
 			public    function CreateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 			                              $BirthDate, $CorporationInstance, $Country, $Department, $UserEmail, 
-							              $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $TwoStepVerification, 
+							              $UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, $UserTwoStepVerification, 
 							              $UserActive, $UserConfirmed, $UserTypeInstance, $UserUniqueId)
 **************************************************************************/
 
@@ -785,8 +785,8 @@ class Factory
 	
 	public function CreateUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 							   $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-							   $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-							   $TwoStepVerification, $UserActive, $UserConfirmed, 
+							   $UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+							   $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 							   $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 							   $UserTypeInstance, $UserUniqueId)
 	{
@@ -802,8 +802,8 @@ class Factory
 		
 		return new User($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 						$BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-						$Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-						$TwoStepVerification, $UserActive, $UserConfirmed, 
+						$UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+						$UserTwoStepVerification, $UserActive, $UserConfirmed, 
 						$UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 						$UserTypeInstance, $UserUniqueId);
 	}

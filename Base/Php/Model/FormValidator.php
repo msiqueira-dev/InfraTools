@@ -25,7 +25,6 @@ Functions:
 			public function ValidateDepartmentName($DepartmentName, $DefaultValue);
 			public function ValidateDescription($Description, $DefaultValue);
 			public function ValidateEmail($EmailAddress, $DefaultValue);
-			public function ValidateGender($Gender, $DefaultValue);
 			public function ValidateHost($Host);
 			public function ValidateIsNotNumericValue($NonNumeric, $DefaultValue);
 			public function ValidateIpAddressIpv4(IpAddressIpv4);
@@ -45,6 +44,7 @@ Functions:
 			public function ValidateTypeAssocUserService($TypeAssocUserServiceDescription, $DefaultValue);
 			public function ValidateTypeService($TypeService, $DefaultValue);
 			public function ValidateURL($Url, $DefaultValue);
+			public function ValidateUserGender($UserGender, $DefaultValue);
 			public function ValidateUserUniqueId($UserUniqueId, $DefaultValue);
 **************************************************************************/
 class FormValidator
@@ -108,7 +108,7 @@ class FormValidator
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_EMAIL)
 			return $this->ValidateEmail($Value, $DefaultValue);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_GENDER)
-			return $this->ValidateGender($Value, $DefaultValue);	
+			return $this->ValidateUserGender($Value, $DefaultValue);	
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_HOST)
 			return $this->ValidateHost($Value);
 		elseif($FunctionName == Config::FM_VALIDATE_FUNCTION_IP_ADDRESS_IPV4)
@@ -426,16 +426,16 @@ class FormValidator
 		else return Config::INVALID_NULL;
 	}
 	
-	public function ValidateGender($Gender, $DefaultValue)
+	public function ValidateUserGender($UserGender, $DefaultValue)
 	{
-		if(isset($Gender))
+		if(isset($UserGender))
 		{
-			if(!is_null($Gender) && !empty($Gender) && $Gender != $DefaultValue)
+			if(!is_null($UserGender) && !empty($UserGender) && $UserGender != $DefaultValue)
 			{
-				$arrayGender[0] = Config::FIELD_USER_GENDER_MALE; 
-				$arrayGender[1] = Config::FIELD_USER_GENDER_FEMALE;
-				$arrayGender[2] = Config::FIELD_USER_GENDER_OTHER;
-				if(in_array($Gender, $arrayGender))
+				$arrayUserGender[0] = Config::FIELD_USER_GENDER_MALE; 
+				$arrayUserGender[1] = Config::FIELD_USER_GENDER_FEMALE;
+				$arrayUserGender[2] = Config::FIELD_USER_GENDER_OTHER;
+				if(in_array($UserGender, $arrayUserGender))
 					return Config::RET_OK;
 				else return Config::INVALID_GENDER;
 			}

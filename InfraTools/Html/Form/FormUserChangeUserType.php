@@ -49,7 +49,7 @@
             <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
+            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserGender; ?></label>
         </div>
     </div>
     <!-- FIELD_COUNTRY_NAME -->
@@ -178,13 +178,13 @@
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
-					<?php  if($this->InputValueSessionExpires)
-								$this->InputValueSessionExpires = $this->Config->DefaultServerImage .
+					<?php  if($this->InputValueUserSessionExpires)
+								$this->InputValueUserSessionExpires = $this->Config->DefaultServerImage .
 																		'Icons/IconVerified.png';
-							else $this->InputValueSessionExpires = $this->Config->DefaultServerImage .
+							else $this->InputValueUserSessionExpires = $this->Config->DefaultServerImage .
 																		'Icons/IconNotVerified.png';
 					?>
-					<img	src="<?php echo $this->InputValueSessionExpires; ?>"
+					<img	src="<?php echo $this->InputValueUserSessionExpires; ?>"
                        	    alt="CorporationVerification" width="20" height="20" />
 				</label>
 			</div>

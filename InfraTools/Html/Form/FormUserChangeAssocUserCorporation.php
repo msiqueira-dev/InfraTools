@@ -53,7 +53,7 @@
             <label><?php echo $this->InstanceLanguageText->GetText('FIELD_USER_GENDER').":"; ?></label>
         </div>
         <div class="DivContentBodyContainerValue">
-            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueGender; ?></label>
+            <label class="DivContentBodyContainerValueContent"><?php echo $this->InputValueUserGender; ?></label>
         </div>
     </div>
     <!-- FIELD_COUNTRY_NAME -->
@@ -122,16 +122,16 @@
 		</div>
 		<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY -->
 		<select style="
-					   <?php if($this->InputValueRegistrationDateDay != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
-								 && $this->InputValueRegistrationDateDay != "") 
+					   <?php if($this->InputValueAssocUserCorporationRegistrationDateDay != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+								 && $this->InputValueAssocUserCorporationRegistrationDateDay != "") 
 							echo 'color:black;'
 						?> " 
 				name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>"
 				class="SelectBirthDateDay <?php echo $this->ReturnRegistrationDateDayClass; ?>"
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>');">
-			<option <?php if ($this->InputValueRegistrationDateDay == "" 
-							  || $this->InputValueRegistrationDateDay == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+			<option <?php if ($this->InputValueAssocUserCorporationRegistrationDateDay == "" 
+							  || $this->InputValueAssocUserCorporationRegistrationDateDay == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_DAY'); ?> 
@@ -139,7 +139,7 @@
 			<?php for($i=1; $i<32; $i++)
 				  {
 					  echo "<option ";
-					  if($this->InputValueRegistrationDateDay == $i)
+					  if($this->InputValueAssocUserCorporationRegistrationDateDay == $i)
 						echo "selected='selected' ";
 					   echo "value='$i'> $i </option>";
 				  }
@@ -147,16 +147,16 @@
 		</select>
 		<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH -->
 		<select style="
-						<?php if($this->InputValueRegistrationDateMonth != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
-								 && $this->InputValueRegistrationDateMonth != "") 
+						<?php if($this->InputValueAssocUserCorporationRegistrationDateMonth != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+								 && $this->InputValueAssocUserCorporationRegistrationDateMonth != "") 
 							echo 'color:black;'
 						?> "
 				name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>" 
 				id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>"
 				class="SelectBirthDateMonth <?php echo $this->ReturnRegistrationDateMonthClass; ?>"
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_MONTH; ?>');">
-			<option <?php if ($this->InputValueRegistrationDateMonth == "" 
-							  || $this->InputValueRegistrationDateMonth == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+			<option <?php if ($this->InputValueAssocUserCorporationRegistrationDateMonth == "" 
+							  || $this->InputValueAssocUserCorporationRegistrationDateMonth == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_MONTH'); ?> 
@@ -164,7 +164,7 @@
 			<?php for($i=1; $i<13; $i++)
 				  {
 					  echo "<option ";
-					  if($this->InputValueRegistrationDateMonth == $i)
+					  if($this->InputValueAssocUserCorporationRegistrationDateMonth == $i)
 						echo "selected='selected' ";
 					   echo "value='$i'> $i </option>";
 				  }
@@ -172,16 +172,16 @@
 		</select>
 		<!-- FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR -->
 		<select style=";
-					   <?php if($this->InputValueRegistrationDateYear != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
-								 && $this->InputValueRegistrationDateYear != "") 
+					   <?php if($this->InputValueAssocUserCorporationRegistrationDateYear != ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY
+								 && $this->InputValueAssocUserCorporationRegistrationDateYear != "") 
 							echo 'color:black;'
 						?> "
 				name="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>" 
 				id="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>"
 				class="SelectBirthDateYear <?php echo $this->ReturnRegistrationDateYearClass; ?>"
 				onchange="SetSelectColor('<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_YEAR; ?>');">
-			<option <?php if ($this->InputValueRegistrationDateYear == "" 
-							  || $this->InputValueRegistrationDateYear == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
+			<option <?php if ($this->InputValueAssocUserCorporationRegistrationDateYear == "" 
+							  || $this->InputValueAssocUserCorporationRegistrationDateYear == ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY) 
 				echo "selected='selected' "; ?> value="<?php echo ConfigInfraTools::FIELD_ASSOC_USER_CORPORATION_REGISTRATION_DATE_DAY; ?>" 
 				disabled="disabled"> 
 					<?php echo $this->InstanceLanguageText->GetText('FIELD_USER_BIRTH_DATE_YEAR'); ?> 
@@ -189,7 +189,7 @@
 			<?php for($i=1940; $i<2016; $i++)
 				  {
 					  echo "<option ";
-					  if($this->InputValueRegistrationDateYear == $i)
+					  if($this->InputValueAssocUserCorporationRegistrationDateYear == $i)
 						echo "selected='selected' ";
 					   echo "value='$i'> $i </option>";
 				  }
@@ -214,7 +214,7 @@
                                                '<?php echo ConfigInfraTools::FM_USER_CHANGE_ASSOC_USER_CORPORATION_SB; ?>',
                                                '', true);"
                            title="<?php echo $this->InstanceLanguageText->GetText('FIELD_ASSOC_USER_CORPORATION_REGISTRATION_ID'); ?>"
-                           value="<?php echo $this->InputValueRegistrationId; ?>" maxlength="12" />
+                           value="<?php echo $this->InputValueAssocUserCorporationRegistrationId; ?>" maxlength="12" />
      </div>
      <!-- FIELD_DEPARTMENT_NAME -->
      <div class="DivContentBodyContainer">
@@ -280,13 +280,13 @@
         	</div>
         	<div class="DivContentBodyContainerValue">
 				<label class="DivContentBodyContainerValueContent">
-					<?php  if($this->InputValueSessionExpires)
-								$this->InputValueSessionExpires = $this->Config->DefaultServerImage .
+					<?php  if($this->InputValueUserSessionExpires)
+								$this->InputValueUserSessionExpires = $this->Config->DefaultServerImage .
 																		'Icons/IconVerified.png';
-							else $this->InputValueSessionExpires = $this->Config->DefaultServerImage .
+							else $this->InputValueUserSessionExpires = $this->Config->DefaultServerImage .
 																		'Icons/IconNotVerified.png';
 					?>
-					<img	src="<?php echo $this->InputValueSessionExpires; ?>"
+					<img	src="<?php echo $this->InputValueUserSessionExpires; ?>"
                        	    alt="CorporationVerification" width="20" height="20" />
 				</label>
 			</div>

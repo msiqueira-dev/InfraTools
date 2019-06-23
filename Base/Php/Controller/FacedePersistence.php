@@ -203,8 +203,8 @@ Functions:
 			public function UserCheckPasswordByUserUniqueId($UserUniqueId, $Password, $Debug, 
 			                                                $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserDeleteByUserEmail($UserEmail, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function UserInsert($BirthDate, $Corporation, $Country, $Department, $UserEmail, $Gender, $HashCode, 
-			                           $UserName, $Password, $Region, $SessionExpires, $TwoStepVerification, 
+			public function UserInsert($BirthDate, $Corporation, $Country, $Department, $UserEmail, $UserGender, $HashCode, 
+			                           $UserName, $Password, $Region, $SessionExpires, $UserTwoStepVerification, 
 									   $UserActive, $UserConfirmed, $UserType, $UserUniqueId, $Debug,
 									   $MySqlConnection = NULL, $CloseConnectaion = TRUE, $Commit = TRUE);
 			public function UserSelect($Limit1, $Limit2, &$ArrayInstanceUser, &$RowCount, $Debug, 
@@ -255,8 +255,8 @@ Functions:
 			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserSelectTeamByUserEmail(&$InstanceUser, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserUpdateActiveByUserEmail($UserEmail, $UserActive, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires, 
-									              $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+			public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $UserGender, $UserName, $Region, $SessionExpires, 
+									              $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 												  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug,
 												  $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserUpdateUserConfirmedByHashCode($UserConfirmedNew, $HashCode, $Debug, 
@@ -265,7 +265,7 @@ Functions:
 			public function UserUpdateDepartmentByUserEmailAndCorporation($Corporation, $Department, $UserEmail, $Debug,
 			                                                              $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserUpdatePasswordByUserEmail($UserEmail, $Password, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE);
-			public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug,
+			public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $UserTwoStepVerification, $Debug,
 			                                                         $MySqlConnection = NULL, $CloseConnectaion = TRUE);
 			public function UserUpdateUserTypeByUserEmail($UserEmail, $TypeUserDescription, $Debug, $MySqlConnection = NULL, 
 			                                              $CloseConnectaion = TRUE);
@@ -1822,8 +1822,8 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $Gender, $HashCode, $UserName, $Password, 
-							   $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
+	public function UserInsert($BirthDate, $Corporation, $Country, $UserEmail, $UserGender, $HashCode, $UserName, $Password, 
+							   $Region, $SessionExpires, $UserTwoStepVerification, $UserActive, 
 							   $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix, $UserPhoneSecondary,
 							   $UserPhoneSecondaryPrefix, $UserType, $UserUniqueId, $Debug, $MySqlConnection = NULL, $CloseConnectaion = TRUE,
 							   $Commit = TRUE)
@@ -1833,8 +1833,8 @@ class FacedePersistence
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
 			$return = $instanceFacedePersistenceUser->UserInsert($BirthDate, $Corporation, $Country, 
-												                 $UserEmail, $Gender, $HashCode, $UserName, $Password, 
-							                                     $Region, $SessionExpires, $TwoStepVerification, $UserActive, 
+												                 $UserEmail, $UserGender, $HashCode, $UserName, $Password, 
+							                                     $Region, $SessionExpires, $UserTwoStepVerification, $UserActive, 
 												                 $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryprefix,
 																 $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 																 $UserType, $UserUniqueId, $Debug, $MySqlConnection);
@@ -2248,8 +2248,8 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region, $SessionExpires,
-									      $TwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
+	public function UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $UserGender, $UserName, $Region, $SessionExpires,
+									      $UserTwoStepVerification, $UserActive, $UserConfirmed, $UserPhonePrimary, $UserPhonePrimaryPrefix,
 										  $UserPhoneSecondary, $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug,
 										  $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
@@ -2257,8 +2257,8 @@ class FacedePersistence
 	 	if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $Gender, $UserName, $Region,
-																	        $SessionExpires, $TwoStepVerification, $UserActive, $UserConfirmed,
+			$return = $instanceFacedePersistenceUser->UserUpdateByUserEmail($BirthDate, $Country, $UserEmail, $UserGender, $UserName, $Region,
+																	        $SessionExpires, $UserTwoStepVerification, $UserActive, $UserConfirmed,
 																	        $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary,
 																	        $UserPhoneSecondaryPrefix, $UserUniqueId, $Debug, $MySqlConnection);
 			if($CloseConnectaion)
@@ -2321,14 +2321,14 @@ class FacedePersistence
 		return $return;
 	}
 	
-	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, $Debug, 
+	public function UserUpdateTwoStepVerificationByUserEmail($UserEmail, $UserTwoStepVerification, $Debug, 
 															 $MySqlConnection = NULL, $CloseConnectaion = TRUE)
 	{
 		$return = $this->MySqlManager->OpenDataBaseConnection($MySqlConnection, $mySqlError);
 	 	if($return == Config::RET_OK)
 		{
 			$instanceFacedePersistenceUser = $this->Factory->CreateFacedePersistenceUser();
-			$return = $instanceFacedePersistenceUser->UserUpdateTwoStepVerificationByUserEmail($UserEmail, $TwoStepVerification, 
+			$return = $instanceFacedePersistenceUser->UserUpdateTwoStepVerificationByUserEmail($UserEmail, $UserTwoStepVerification, 
 																							   $Debug, $MySqlConnection);
 			if($CloseConnectaion)
 				$this->MySqlManager->CloseDataBaseConnection($MySqlConnection, NULL);

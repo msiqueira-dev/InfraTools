@@ -1043,7 +1043,7 @@ class Config
 	const TB_USER_FD_USER_CORPORATION                                   = "Corporation";
 	const TB_USER_FD_USER_COUNTRY                                       = "Country";
 	const TB_USER_FD_USER_EMAIL                                         = "Email";
-	const TB_USER_FD_USER_GENDER                                        = "Gender";
+	const TB_USER_FD_USER_GENDER                                        = "UserGender";
 	const TB_USER_FD_USER_HASH_CODE                                     = "HashCode";
 	const TB_USER_FD_USER_NAME                                          = "Name";
 	const TB_USER_FD_USER_PASSWORD                                      = "Password";
@@ -1053,7 +1053,7 @@ class Config
 	const TB_USER_FD_USER_PHONE_SECONDARY_PREFIX                        = "UserPhoneSecondaryPrefix";
 	const TB_USER_FD_USER_REGION                                        = "Region";
 	const TB_USER_FD_USER_SESSION_EXPIRES                               = "SessionExpires";
-	const TB_USER_FD_USER_TWO_STEP_VERIFICATION                         = "TwoStepVerification";
+	const TB_USER_FD_USER_TWO_STEP_VERIFICATION                         = "UserTwoStepVerification";
 	const TB_USER_FD_TYPE                                               = "UserType";
 	const TB_USER_FD_USER_UNIQUE_ID                                     = "UserUniqueID";
 	const TIMEZONE_SAO_PAULO                                            = "America/Sao_Paulo";

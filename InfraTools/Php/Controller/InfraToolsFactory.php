@@ -50,8 +50,8 @@ Methods:
 			public function CreateInfraToolsTypeTimeMonitoring();
 			public function CreateInfraToolsUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 								                 $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-         								         $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-								                 $TwoStepVerification, $UserActive, $UserConfirmed, 
+         								         $UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+								                 $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 								                 $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
   								                 $UserTypeInstance, $UserUniqueId);
 			public  function CreateInfraToolsLanguageDe();
@@ -613,8 +613,8 @@ class InfraToolsFactory extends Factory
 	
 	public function CreateInfraToolsUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 								         $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-								         $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-								         $TwoStepVerification, $UserActive, $UserConfirmed, 
+								         $UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+								         $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 								         $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								         $UserTypeInstance, $UserUniqueId) 
 	{
@@ -635,8 +635,8 @@ class InfraToolsFactory extends Factory
 		else include_once(BASE_PATH_PHP_MODEL . "AssocUserNotification.php");
 		return new InfraToolsUser($ArrayAssocUserNotification, $ArrayAssocUserTeam, $AssocUserCorporation, 
 								  $BirthDate, $CorporationInstance, $Country, $DepartmentInstance, $UserEmail, 
-								  $Gender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
-								  $TwoStepVerification, $UserActive, $UserConfirmed, 
+								  $UserGender, $HashCode, $UserName, $Region, $RegisterDate, $SessionExpires, 
+								  $UserTwoStepVerification, $UserActive, $UserConfirmed, 
 								  $UserPhonePrimary, $UserPhonePrimaryPrefix, $UserPhoneSecondary, $UserPhoneSecondaryPrefix, 
 								  $UserTypeInstance, $UserUniqueId); 
 	}

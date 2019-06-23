@@ -244,7 +244,6 @@ abstract class PageInfraTools extends Page
 	public $InputValueServiceName                                = "";
 	public $InputValueServiceNameRadio                           = "";
 	public $InputValueServiceType                                = "";
-	public $InputValueSessionExpires                             = "";
 	public $InputValueTypeServiceName                            = "";
 	public $InputValueTypeServiceSLA                             = "";
 	public $Language                                             = "";
@@ -343,14 +342,8 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE', ConfigInfraTools::FIELD_CORPORATION_ACTIVE);
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_VALUE', $this->InputValueCorporationActive);
 			$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_ACTIVE'));
-			$this->Smarty->assign('FIELD_CORPORATION_NAME', ConfigInfraTools::FIELD_CORPORATION_NAME);
-			$this->Smarty->assign('FIELD_CORPORATION_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_CORPORATION_NAME'));
-			$this->Smarty->assign('FIELD_CORPORATION_NAME_VALUE', $this->InputValueCorporationName);
 			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_INITIALS'));
 			$this->Smarty->assign('FIELD_DEPARTMENT_INITIALS_VALUE', $this->InputValueDepartmentInitials);
-			$this->Smarty->assign('FIELD_DEPARTMENT_NAME', ConfigInfraTools::FIELD_DEPARTMENT_NAME);
-			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_DEPARTMENT_NAME'));
-			$this->Smarty->assign('FIELD_DEPARTMENT_NAME_VALUE', $this->InputValueDepartmentName);
 			$this->Smarty->assign('FIELD_IP_ADDRESS_IPV4_TEXT', $this->InstanceLanguageText->GetText('FIELD_IP_ADDRESS_IPV4'));
 			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE', ConfigInfraTools::FIELD_NOTIFICATION_ACTIVE);
 			$this->Smarty->assign('FIELD_NOTIFICATION_ACTIVE_TEXT', $this->InstanceLanguageText->GetText('FIELD_NOTIFICATION_ACTIVE'));
@@ -364,11 +357,6 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION', ConfigInfraTools::FIELD_TYPE_USER_DESCRIPTION);
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_TEXT', $this->InstanceLanguageText->GetText('FIELD_TYPE_USER_DESCRIPTION'));
 			$this->Smarty->assign('FIELD_TYPE_USER_DESCRIPTION_VALUE', $this->InputValueTypeUserDescription);
-			$this->Smarty->assign('FIELD_USER_EMAIL', ConfigInfraTools::FIELD_USER_EMAIL);
-			$this->Smarty->assign('FIELD_USER_EMAIL_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_EMAIL'));
-			$this->Smarty->assign('FIELD_USER_EMAIL_VALUE', $this->InputValueUserEmail);
-			$this->Smarty->assign('FIELD_USER_NAME_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_NAME'));
-			$this->Smarty->assign('FIELD_USER_NAME_VALUE', $this->InputValueUserName);
 			$this->Smarty->assign('FIELD_USER_TYPE_TEXT', $this->InstanceLanguageText->GetText('FIELD_USER_TYPE'));
 			$this->Smarty->assign('FM_CORPORATION_SEL_SB', ConfigInfraTools::FM_CORPORATION_SEL_SB);
 			$this->Smarty->assign('FM_DEPARTMENT_SEL_SB', ConfigInfraTools::FM_DEPARTMENT_SEL_SB);
@@ -408,6 +396,7 @@ abstract class PageInfraTools extends Page
 			$this->Smarty->assign('ICON_INFRATOOLS_SEL_HOVER', $this->Config->DefaultServerImage.'Icons/IconInfraToolsFindHover.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
 			$this->Smarty->assign('ICON_INFRATOOLS_VERIFIED_NOT', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			$this->Smarty->assign('PAGE_ACCOUNT', ConfigInfraTools::PAGE_ACCOUNT);
 			$this->Smarty->assign('PAGE_ADMIN_CORPORATION', ConfigInfraTools::PAGE_ADMIN_CORPORATION);
 			$this->Smarty->assign('PAGE_ADMIN_DEPARTMENT', ConfigInfraTools::PAGE_ADMIN_DEPARTMENT);
 			$this->Smarty->assign('PAGE_ADMIN_IP_ADDRESS', ConfigInfraTools::PAGE_ADMIN_IP_ADDRESS);
@@ -427,12 +416,33 @@ abstract class PageInfraTools extends Page
 			if(isset($this->ReturnNotificationIdText)) 
 				$this->Smarty->assign('RETURN_NOTIFICATION_ID_TEXT', $this->ReturnNotificationIdText);
 			else $this->Smarty->assign('RETURN_NOTIFICATION_ID_TEXT', NULL);
+			if($this->InputValueAssocUserCorporationRegistrationDate)
+				$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_USER_REGISTRATION_DATE_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_USER_REGISTRATION_DATE_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueAssocUserCorporationRegistrationId)
+				$this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_USER_REGISTRATION_ID_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_ASSOC_USER_CORPORATION_USER_REGISTRATION_ID_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			if($this->InputValueCorporationActive)
 				$this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
 			else $this->Smarty->assign('FIELD_CORPORATION_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			if($this->InputValueDepartmentActive)
 				$this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
 			else $this->Smarty->assign('FIELD_DEPARTMENT_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueUserActive)
+				$this->Smarty->assign('FIELD_USER_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_USER_ACTIVE_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueUserConfirmed)
+				$this->Smarty->assign('FIELD_USER_CONFIRMED_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_USER_CONFIRMED_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueUserSessionExpires)
+				$this->Smarty->assign('FIELD_USER_SESSION_EXPIRES_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_USER_SESSION_EXPIRES_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueUserTwoStepVerification)
+				$this->Smarty->assign('FIELD_USER_TWO_STEP_VERIFICATION_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_USER_TWO_STEP_VERIFICATION_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
+			if($this->InputValueUserUniqueId)
+				$this->Smarty->assign('FIELD_USER_UNIQUE_ID_ICON', $this->Config->DefaultServerImage.'Icons/IconVerified.png');
+			else $this->Smarty->assign('FIELD_USER_UNIQUE_ID_ICON', $this->Config->DefaultServerImage.'Icons/IconNotVerified.png');
 			if(isset($this->ReturnNotificationActiveClass)) 
 				$this->Smarty->assign('RETURN_NOTIFICATION_ACTIVE_CLASS', $this->ReturnNotificationActiveClass);
 			else $this->Smarty->assign('RETURN_NOTIFICATION_ACTIVE_CLASS', NULL);
@@ -4177,7 +4187,7 @@ abstract class PageInfraTools extends Page
 			elseif($InstanceInfraToolsUser->GetDepartmentName() != NULL)
 				$this->InputValueDepartmentName       = $InstanceInfraToolsUser->GetDepartmentName();
 			else $this->InputValueDepartmentName = NULL;
-			$this->InputValueGender                   = $InstanceInfraToolsUser->GetGender();
+			$this->InputValueUserGender               = $InstanceInfraToolsUser->GetUserGender();
 			$this->InputValueUserName                 = $InstanceInfraToolsUser->GetName();
 			$this->InputValueUserEmail                = $InstanceInfraToolsUser->GetEmail();
 			$this->InputValueUserPhonePrimary         = $InstanceInfraToolsUser->GetUserPhonePrimary();
@@ -4187,10 +4197,10 @@ abstract class PageInfraTools extends Page
 			$this->InputValueRegion                   = $InstanceInfraToolsUser->GetRegion();
 			$this->InputValueRegisterDate             = $InstanceInfraToolsUser->GetRegisterDate();
 			$this->InputValueRegistrationDate         = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDate();
-			$this->InputValueRegistrationDateDay      = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateDay();
-			$this->InputValueRegistrationDateMonth    = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateMonth();
-			$this->InputValueRegistrationDateYear     = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateYear();
-			$this->InputValueRegistrationId           = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationId();
+			$this->InputValueAssocUserCorporationRegistrationDateDay      = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateDay();
+			$this->InputValueAssocUserCorporationRegistrationDateMonth    = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateMonth();
+			$this->InputValueAssocUserCorporationRegistrationDateYear     = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationDateYear();
+			$this->InputValueAssocUserCorporationRegistrationId = $InstanceInfraToolsUser->GetAssocUserCorporationUserRegistrationId();
 			if($InstanceInfraToolsUser->GetArrayAssocUserTeam() != NULL)
 			{
 				foreach ($InstanceInfraToolsUser->GetArrayAssocUserTeam() as $index=>$assocUserTeam)
@@ -4202,20 +4212,14 @@ abstract class PageInfraTools extends Page
 			}
 			$this->InputValueUserUniqueId             = $InstanceInfraToolsUser->GetUserUniqueId();
 			if($InstanceInfraToolsUser->GetSessionExpires())
-				$this->InputValueSessionExpires = "checked";
-			if($InstanceInfraToolsUser->GetTwoStepVerification())
-				$this->InputValueTwoStepVerification = "checked";
+				$this->InputValueUserSessionExpires = "checked";
+			if($InstanceInfraToolsUser->GetUserTwoStepVerification())
+				$this->InputValueUserTwoStepVerification = "checked";
 			if($InstanceInfraToolsUser->GetUserActive())
 				$this->InputValueUserActive = "checked";
 			if($InstanceInfraToolsUser->GetUserConfirmed())
 				$this->InputValueUserConfirmed = "checked";
 			$this->InputValueTypeUserDescription = $InstanceInfraToolsUser->GetUserTypeDescription();
-			if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationDateActive())
-				$this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationDateActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
-			if($InstanceInfraToolsUser->CheckAssocUserCorporationRegistrationIdActive())
-				$this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
-			else $this->InputValueAssocUserCorporationRegistrationIdActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
 			if($InstanceInfraToolsUser->CheckCorporationActive())
 				$this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconVerified.png';
 			else $this->InputValueCorporationActive = $this->Config->DefaultServerImage . 'Icons/IconNotVerified.png';
